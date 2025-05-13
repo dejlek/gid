@@ -26,22 +26,22 @@ class Range : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_range_get_type != &gidSymbolNotFound ? atk_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class Range : gobject.boxed.Boxed
   atk.range.Range copy()
   {
     AtkRange* _cretval;
-    _cretval = atk_range_copy(cast(AtkRange*)cPtr);
+    _cretval = atk_range_copy(cast(AtkRange*)this._cPtr);
     auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -86,7 +86,7 @@ class Range : gobject.boxed.Boxed
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = atk_range_get_description(cast(AtkRange*)cPtr);
+    _cretval = atk_range_get_description(cast(AtkRange*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -98,7 +98,7 @@ class Range : gobject.boxed.Boxed
   double getLowerLimit()
   {
     double _retval;
-    _retval = atk_range_get_lower_limit(cast(AtkRange*)cPtr);
+    _retval = atk_range_get_lower_limit(cast(AtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Range : gobject.boxed.Boxed
   double getUpperLimit()
   {
     double _retval;
-    _retval = atk_range_get_upper_limit(cast(AtkRange*)cPtr);
+    _retval = atk_range_get_upper_limit(cast(AtkRange*)this._cPtr);
     return _retval;
   }
 }

@@ -25,22 +25,22 @@ class Item : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_item_get_type != &gidSymbolNotFound ? pango_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class Item : gobject.boxed.Boxed
   */
   @property int offset()
   {
-    return (cast(PangoItem*)cPtr).offset;
+    return (cast(PangoItem*)this._cPtr).offset;
   }
 
   /**
@@ -65,7 +65,7 @@ class Item : gobject.boxed.Boxed
   */
   @property void offset(int propval)
   {
-    (cast(PangoItem*)cPtr).offset = propval;
+    (cast(PangoItem*)this._cPtr).offset = propval;
   }
 
   /**
@@ -74,7 +74,7 @@ class Item : gobject.boxed.Boxed
   */
   @property int length()
   {
-    return (cast(PangoItem*)cPtr).length;
+    return (cast(PangoItem*)this._cPtr).length;
   }
 
   /**
@@ -84,7 +84,7 @@ class Item : gobject.boxed.Boxed
   */
   @property void length(int propval)
   {
-    (cast(PangoItem*)cPtr).length = propval;
+    (cast(PangoItem*)this._cPtr).length = propval;
   }
 
   /**
@@ -93,7 +93,7 @@ class Item : gobject.boxed.Boxed
   */
   @property int numChars()
   {
-    return (cast(PangoItem*)cPtr).numChars;
+    return (cast(PangoItem*)this._cPtr).numChars;
   }
 
   /**
@@ -103,7 +103,7 @@ class Item : gobject.boxed.Boxed
   */
   @property void numChars(int propval)
   {
-    (cast(PangoItem*)cPtr).numChars = propval;
+    (cast(PangoItem*)this._cPtr).numChars = propval;
   }
 
   /**
@@ -112,7 +112,7 @@ class Item : gobject.boxed.Boxed
   */
   @property pango.analysis.Analysis analysis()
   {
-    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)cPtr).analysis);
+    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis);
   }
 
   /**
@@ -145,7 +145,7 @@ class Item : gobject.boxed.Boxed
   */
   void applyAttrs(pango.attr_iterator.AttrIterator iter)
   {
-    pango_item_apply_attrs(cast(PangoItem*)cPtr, iter ? cast(PangoAttrIterator*)iter.cPtr(No.Dup) : null);
+    pango_item_apply_attrs(cast(PangoItem*)this._cPtr, iter ? cast(PangoAttrIterator*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -155,7 +155,7 @@ class Item : gobject.boxed.Boxed
   pango.item.Item copy()
   {
     PangoItem* _cretval;
-    _cretval = pango_item_copy(cast(PangoItem*)cPtr);
+    _cretval = pango_item_copy(cast(PangoItem*)this._cPtr);
     auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -184,7 +184,7 @@ class Item : gobject.boxed.Boxed
   pango.item.Item split(int splitIndex, int splitOffset)
   {
     PangoItem* _cretval;
-    _cretval = pango_item_split(cast(PangoItem*)cPtr, splitIndex, splitOffset);
+    _cretval = pango_item_split(cast(PangoItem*)this._cPtr, splitIndex, splitOffset);
     auto _retval = _cretval ? new pango.item.Item(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

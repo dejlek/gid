@@ -31,16 +31,16 @@ class ListBase : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scrollable.Sc
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_base_get_type != &gidSymbolNotFound ? gtk_list_base_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

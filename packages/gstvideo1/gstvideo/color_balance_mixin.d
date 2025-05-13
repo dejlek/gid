@@ -26,7 +26,7 @@ template ColorBalanceT()
   override gstvideo.types.ColorBalanceType getBalanceType()
   {
     GstColorBalanceType _cretval;
-    _cretval = gst_color_balance_get_balance_type(cast(GstColorBalance*)cPtr);
+    _cretval = gst_color_balance_get_balance_type(cast(GstColorBalance*)this._cPtr);
     gstvideo.types.ColorBalanceType _retval = cast(gstvideo.types.ColorBalanceType)_cretval;
     return _retval;
   }
@@ -46,7 +46,7 @@ template ColorBalanceT()
   override int getValue(gstvideo.color_balance_channel.ColorBalanceChannel channel)
   {
     int _retval;
-    _retval = gst_color_balance_get_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null);
+    _retval = gst_color_balance_get_value(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ template ColorBalanceT()
   override gstvideo.color_balance_channel.ColorBalanceChannel[] listChannels()
   {
     const(GList)* _cretval;
-    _cretval = gst_color_balance_list_channels(cast(GstColorBalance*)cPtr);
+    _cretval = gst_color_balance_list_channels(cast(GstColorBalance*)this._cPtr);
     auto _retval = gListToD!(gstvideo.color_balance_channel.ColorBalanceChannel, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -79,7 +79,7 @@ template ColorBalanceT()
   */
   override void setValue(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
   {
-    gst_color_balance_set_value(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null, value);
+    gst_color_balance_set_value(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null, value);
   }
 
   /**
@@ -94,7 +94,7 @@ template ColorBalanceT()
   */
   override void valueChanged(gstvideo.color_balance_channel.ColorBalanceChannel channel, int value)
   {
-    gst_color_balance_value_changed(cast(GstColorBalance*)cPtr, channel ? cast(GstColorBalanceChannel*)channel.cPtr(No.Dup) : null, value);
+    gst_color_balance_value_changed(cast(GstColorBalance*)this._cPtr, channel ? cast(GstColorBalanceChannel*)channel._cPtr(No.Dup) : null, value);
   }
 
   /**

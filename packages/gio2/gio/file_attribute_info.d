@@ -26,7 +26,7 @@ class FileAttributeInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class FileAttributeInfo
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GFileAttributeInfo*)this._cPtr).name);
   }
 
   /**
@@ -47,8 +47,8 @@ class FileAttributeInfo
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GFileAttributeInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GFileAttributeInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GFileAttributeInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GFileAttributeInfo*)this._cPtr).name);
   }
 
   /**
@@ -57,7 +57,7 @@ class FileAttributeInfo
   */
   @property gio.types.FileAttributeType type()
   {
-    return cast(gio.types.FileAttributeType)(cast(GFileAttributeInfo*)cPtr).type;
+    return cast(gio.types.FileAttributeType)(cast(GFileAttributeInfo*)this._cPtr).type;
   }
 
   /**
@@ -67,7 +67,7 @@ class FileAttributeInfo
   */
   @property void type(gio.types.FileAttributeType propval)
   {
-    (cast(GFileAttributeInfo*)cPtr).type = cast(GFileAttributeType)propval;
+    (cast(GFileAttributeInfo*)this._cPtr).type = cast(GFileAttributeType)propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class FileAttributeInfo
   */
   @property gio.types.FileAttributeInfoFlags flags()
   {
-    return cast(gio.types.FileAttributeInfoFlags)(cast(GFileAttributeInfo*)cPtr).flags;
+    return cast(gio.types.FileAttributeInfoFlags)(cast(GFileAttributeInfo*)this._cPtr).flags;
   }
 
   /**
@@ -86,6 +86,6 @@ class FileAttributeInfo
   */
   @property void flags(gio.types.FileAttributeInfoFlags propval)
   {
-    (cast(GFileAttributeInfo*)cPtr).flags = cast(GFileAttributeInfoFlags)propval;
+    (cast(GFileAttributeInfo*)this._cPtr).flags = cast(GFileAttributeInfoFlags)propval;
   }
 }

@@ -30,16 +30,16 @@ class Auth : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_get_type != &gidSymbolNotFound ? soup_auth_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -113,7 +113,7 @@ class Auth : gobject.object.ObjectWrap
   {
     SoupAuth* _cretval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
-    _cretval = soup_auth_new(type, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, _authHeader);
+    _cretval = soup_auth_new(type, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     this(_cretval, Yes.Take);
   }
 
@@ -131,7 +131,7 @@ class Auth : gobject.object.ObjectWrap
   {
     const(char)* _username = username.toCString(No.Alloc);
     const(char)* _password = password.toCString(No.Alloc);
-    soup_auth_authenticate(cast(SoupAuth*)cPtr, _username, _password);
+    soup_auth_authenticate(cast(SoupAuth*)this._cPtr, _username, _password);
   }
 
   /**
@@ -142,7 +142,7 @@ class Auth : gobject.object.ObjectWrap
   bool canAuthenticate()
   {
     bool _retval;
-    _retval = soup_auth_can_authenticate(cast(SoupAuth*)cPtr);
+    _retval = soup_auth_can_authenticate(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Auth : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    soup_auth_cancel(cast(SoupAuth*)cPtr);
+    soup_auth_cancel(cast(SoupAuth*)this._cPtr);
   }
 
   /**
@@ -165,7 +165,7 @@ class Auth : gobject.object.ObjectWrap
   string getAuthority()
   {
     const(char)* _cretval;
-    _cretval = soup_auth_get_authority(cast(SoupAuth*)cPtr);
+    _cretval = soup_auth_get_authority(cast(SoupAuth*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,7 +183,7 @@ class Auth : gobject.object.ObjectWrap
   string getAuthorization(soup.message.Message msg)
   {
     char* _cretval;
-    _cretval = soup_auth_get_authorization(cast(SoupAuth*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = soup_auth_get_authorization(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -200,7 +200,7 @@ class Auth : gobject.object.ObjectWrap
   string getInfo()
   {
     char* _cretval;
-    _cretval = soup_auth_get_info(cast(SoupAuth*)cPtr);
+    _cretval = soup_auth_get_info(cast(SoupAuth*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -221,7 +221,7 @@ class Auth : gobject.object.ObjectWrap
   string[] getProtectionSpace(glib.uri.Uri sourceUri)
   {
     GSList* _cretval;
-    _cretval = soup_auth_get_protection_space(cast(SoupAuth*)cPtr, sourceUri ? cast(GUri*)sourceUri.cPtr(No.Dup) : null);
+    _cretval = soup_auth_get_protection_space(cast(SoupAuth*)this._cPtr, sourceUri ? cast(GUri*)sourceUri._cPtr(No.Dup) : null);
     auto _retval = gSListToD!(string, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -237,7 +237,7 @@ class Auth : gobject.object.ObjectWrap
   string getRealm()
   {
     const(char)* _cretval;
-    _cretval = soup_auth_get_realm(cast(SoupAuth*)cPtr);
+    _cretval = soup_auth_get_realm(cast(SoupAuth*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -250,7 +250,7 @@ class Auth : gobject.object.ObjectWrap
   string getSchemeName()
   {
     const(char)* _cretval;
-    _cretval = soup_auth_get_scheme_name(cast(SoupAuth*)cPtr);
+    _cretval = soup_auth_get_scheme_name(cast(SoupAuth*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -262,7 +262,7 @@ class Auth : gobject.object.ObjectWrap
   bool isAuthenticated()
   {
     bool _retval;
-    _retval = soup_auth_is_authenticated(cast(SoupAuth*)cPtr);
+    _retval = soup_auth_is_authenticated(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Auth : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = soup_auth_is_cancelled(cast(SoupAuth*)cPtr);
+    _retval = soup_auth_is_cancelled(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class Auth : gobject.object.ObjectWrap
   bool isForProxy()
   {
     bool _retval;
-    _retval = soup_auth_is_for_proxy(cast(SoupAuth*)cPtr);
+    _retval = soup_auth_is_for_proxy(cast(SoupAuth*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Auth : gobject.object.ObjectWrap
   bool isReady(soup.message.Message msg)
   {
     bool _retval;
-    _retval = soup_auth_is_ready(cast(SoupAuth*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+    _retval = soup_auth_is_ready(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class Auth : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _authHeader = authHeader.toCString(No.Alloc);
-    _retval = soup_auth_update(cast(SoupAuth*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, _authHeader);
+    _retval = soup_auth_update(cast(SoupAuth*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, _authHeader);
     return _retval;
   }
 }

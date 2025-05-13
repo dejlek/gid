@@ -502,154 +502,156 @@ alias gaflight_ticket_equal = c_gaflight_ticket_equal;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // CallOptions
-  gidLink(cast(void**)&gaflight_call_options_get_type, "gaflight_call_options_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_call_options_new, "gaflight_call_options_new", LIBS);
-  gidLink(cast(void**)&gaflight_call_options_add_header, "gaflight_call_options_add_header", LIBS);
-  gidLink(cast(void**)&gaflight_call_options_clear_headers, "gaflight_call_options_clear_headers", LIBS);
-  gidLink(cast(void**)&gaflight_call_options_foreach_header, "gaflight_call_options_foreach_header", LIBS);
+  gidLink(cast(void**)&gaflight_call_options_get_type, "gaflight_call_options_get_type", libs);
+  gidLink(cast(void**)&gaflight_call_options_new, "gaflight_call_options_new", libs);
+  gidLink(cast(void**)&gaflight_call_options_add_header, "gaflight_call_options_add_header", libs);
+  gidLink(cast(void**)&gaflight_call_options_clear_headers, "gaflight_call_options_clear_headers", libs);
+  gidLink(cast(void**)&gaflight_call_options_foreach_header, "gaflight_call_options_foreach_header", libs);
 
   // Client
-  gidLink(cast(void**)&gaflight_client_get_type, "gaflight_client_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_client_new, "gaflight_client_new", LIBS);
-  gidLink(cast(void**)&gaflight_client_authenticate_basic_token, "gaflight_client_authenticate_basic_token", LIBS);
-  gidLink(cast(void**)&gaflight_client_close, "gaflight_client_close", LIBS);
-  gidLink(cast(void**)&gaflight_client_do_get, "gaflight_client_do_get", LIBS);
-  gidLink(cast(void**)&gaflight_client_do_put, "gaflight_client_do_put", LIBS);
-  gidLink(cast(void**)&gaflight_client_get_flight_info, "gaflight_client_get_flight_info", LIBS);
-  gidLink(cast(void**)&gaflight_client_list_flights, "gaflight_client_list_flights", LIBS);
+  gidLink(cast(void**)&gaflight_client_get_type, "gaflight_client_get_type", libs);
+  gidLink(cast(void**)&gaflight_client_new, "gaflight_client_new", libs);
+  gidLink(cast(void**)&gaflight_client_authenticate_basic_token, "gaflight_client_authenticate_basic_token", libs);
+  gidLink(cast(void**)&gaflight_client_close, "gaflight_client_close", libs);
+  gidLink(cast(void**)&gaflight_client_do_get, "gaflight_client_do_get", libs);
+  gidLink(cast(void**)&gaflight_client_do_put, "gaflight_client_do_put", libs);
+  gidLink(cast(void**)&gaflight_client_get_flight_info, "gaflight_client_get_flight_info", libs);
+  gidLink(cast(void**)&gaflight_client_list_flights, "gaflight_client_list_flights", libs);
 
   // ClientOptions
-  gidLink(cast(void**)&gaflight_client_options_get_type, "gaflight_client_options_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_client_options_new, "gaflight_client_options_new", LIBS);
+  gidLink(cast(void**)&gaflight_client_options_get_type, "gaflight_client_options_get_type", libs);
+  gidLink(cast(void**)&gaflight_client_options_new, "gaflight_client_options_new", libs);
 
   // CommandDescriptor
-  gidLink(cast(void**)&gaflight_command_descriptor_get_type, "gaflight_command_descriptor_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_command_descriptor_new, "gaflight_command_descriptor_new", LIBS);
-  gidLink(cast(void**)&gaflight_command_descriptor_get_command, "gaflight_command_descriptor_get_command", LIBS);
+  gidLink(cast(void**)&gaflight_command_descriptor_get_type, "gaflight_command_descriptor_get_type", libs);
+  gidLink(cast(void**)&gaflight_command_descriptor_new, "gaflight_command_descriptor_new", libs);
+  gidLink(cast(void**)&gaflight_command_descriptor_get_command, "gaflight_command_descriptor_get_command", libs);
 
   // Criteria
-  gidLink(cast(void**)&gaflight_criteria_get_type, "gaflight_criteria_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_criteria_new, "gaflight_criteria_new", LIBS);
+  gidLink(cast(void**)&gaflight_criteria_get_type, "gaflight_criteria_get_type", libs);
+  gidLink(cast(void**)&gaflight_criteria_new, "gaflight_criteria_new", libs);
 
   // DataStream
-  gidLink(cast(void**)&gaflight_data_stream_get_type, "gaflight_data_stream_get_type", LIBS);
+  gidLink(cast(void**)&gaflight_data_stream_get_type, "gaflight_data_stream_get_type", libs);
 
   // Descriptor
-  gidLink(cast(void**)&gaflight_descriptor_get_type, "gaflight_descriptor_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_descriptor_equal, "gaflight_descriptor_equal", LIBS);
-  gidLink(cast(void**)&gaflight_descriptor_to_string, "gaflight_descriptor_to_string", LIBS);
+  gidLink(cast(void**)&gaflight_descriptor_get_type, "gaflight_descriptor_get_type", libs);
+  gidLink(cast(void**)&gaflight_descriptor_equal, "gaflight_descriptor_equal", libs);
+  gidLink(cast(void**)&gaflight_descriptor_to_string, "gaflight_descriptor_to_string", libs);
 
   // DoPutResult
-  gidLink(cast(void**)&gaflight_do_put_result_get_type, "gaflight_do_put_result_get_type", LIBS);
+  gidLink(cast(void**)&gaflight_do_put_result_get_type, "gaflight_do_put_result_get_type", libs);
 
   // Endpoint
-  gidLink(cast(void**)&gaflight_endpoint_get_type, "gaflight_endpoint_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_endpoint_new, "gaflight_endpoint_new", LIBS);
-  gidLink(cast(void**)&gaflight_endpoint_equal, "gaflight_endpoint_equal", LIBS);
-  gidLink(cast(void**)&gaflight_endpoint_get_locations, "gaflight_endpoint_get_locations", LIBS);
+  gidLink(cast(void**)&gaflight_endpoint_get_type, "gaflight_endpoint_get_type", libs);
+  gidLink(cast(void**)&gaflight_endpoint_new, "gaflight_endpoint_new", libs);
+  gidLink(cast(void**)&gaflight_endpoint_equal, "gaflight_endpoint_equal", libs);
+  gidLink(cast(void**)&gaflight_endpoint_get_locations, "gaflight_endpoint_get_locations", libs);
 
   // Info
-  gidLink(cast(void**)&gaflight_info_get_type, "gaflight_info_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_info_new, "gaflight_info_new", LIBS);
-  gidLink(cast(void**)&gaflight_info_equal, "gaflight_info_equal", LIBS);
-  gidLink(cast(void**)&gaflight_info_get_descriptor, "gaflight_info_get_descriptor", LIBS);
-  gidLink(cast(void**)&gaflight_info_get_endpoints, "gaflight_info_get_endpoints", LIBS);
-  gidLink(cast(void**)&gaflight_info_get_schema, "gaflight_info_get_schema", LIBS);
-  gidLink(cast(void**)&gaflight_info_get_total_bytes, "gaflight_info_get_total_bytes", LIBS);
-  gidLink(cast(void**)&gaflight_info_get_total_records, "gaflight_info_get_total_records", LIBS);
+  gidLink(cast(void**)&gaflight_info_get_type, "gaflight_info_get_type", libs);
+  gidLink(cast(void**)&gaflight_info_new, "gaflight_info_new", libs);
+  gidLink(cast(void**)&gaflight_info_equal, "gaflight_info_equal", libs);
+  gidLink(cast(void**)&gaflight_info_get_descriptor, "gaflight_info_get_descriptor", libs);
+  gidLink(cast(void**)&gaflight_info_get_endpoints, "gaflight_info_get_endpoints", libs);
+  gidLink(cast(void**)&gaflight_info_get_schema, "gaflight_info_get_schema", libs);
+  gidLink(cast(void**)&gaflight_info_get_total_bytes, "gaflight_info_get_total_bytes", libs);
+  gidLink(cast(void**)&gaflight_info_get_total_records, "gaflight_info_get_total_records", libs);
 
   // Location
-  gidLink(cast(void**)&gaflight_location_get_type, "gaflight_location_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_location_new, "gaflight_location_new", LIBS);
-  gidLink(cast(void**)&gaflight_location_equal, "gaflight_location_equal", LIBS);
-  gidLink(cast(void**)&gaflight_location_get_scheme, "gaflight_location_get_scheme", LIBS);
-  gidLink(cast(void**)&gaflight_location_to_string, "gaflight_location_to_string", LIBS);
+  gidLink(cast(void**)&gaflight_location_get_type, "gaflight_location_get_type", libs);
+  gidLink(cast(void**)&gaflight_location_new, "gaflight_location_new", libs);
+  gidLink(cast(void**)&gaflight_location_equal, "gaflight_location_equal", libs);
+  gidLink(cast(void**)&gaflight_location_get_scheme, "gaflight_location_get_scheme", libs);
+  gidLink(cast(void**)&gaflight_location_to_string, "gaflight_location_to_string", libs);
 
   // MessageReader
-  gidLink(cast(void**)&gaflight_message_reader_get_type, "gaflight_message_reader_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_message_reader_get_descriptor, "gaflight_message_reader_get_descriptor", LIBS);
+  gidLink(cast(void**)&gaflight_message_reader_get_type, "gaflight_message_reader_get_type", libs);
+  gidLink(cast(void**)&gaflight_message_reader_get_descriptor, "gaflight_message_reader_get_descriptor", libs);
 
   // MetadataReader
-  gidLink(cast(void**)&gaflight_metadata_reader_get_type, "gaflight_metadata_reader_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_metadata_reader_read, "gaflight_metadata_reader_read", LIBS);
+  gidLink(cast(void**)&gaflight_metadata_reader_get_type, "gaflight_metadata_reader_get_type", libs);
+  gidLink(cast(void**)&gaflight_metadata_reader_read, "gaflight_metadata_reader_read", libs);
 
   // MetadataWriter
-  gidLink(cast(void**)&gaflight_metadata_writer_get_type, "gaflight_metadata_writer_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_metadata_writer_write, "gaflight_metadata_writer_write", LIBS);
+  gidLink(cast(void**)&gaflight_metadata_writer_get_type, "gaflight_metadata_writer_get_type", libs);
+  gidLink(cast(void**)&gaflight_metadata_writer_write, "gaflight_metadata_writer_write", libs);
 
   // PathDescriptor
-  gidLink(cast(void**)&gaflight_path_descriptor_get_type, "gaflight_path_descriptor_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_path_descriptor_new, "gaflight_path_descriptor_new", LIBS);
-  gidLink(cast(void**)&gaflight_path_descriptor_get_paths, "gaflight_path_descriptor_get_paths", LIBS);
+  gidLink(cast(void**)&gaflight_path_descriptor_get_type, "gaflight_path_descriptor_get_type", libs);
+  gidLink(cast(void**)&gaflight_path_descriptor_new, "gaflight_path_descriptor_new", libs);
+  gidLink(cast(void**)&gaflight_path_descriptor_get_paths, "gaflight_path_descriptor_get_paths", libs);
 
   // RecordBatchReader
-  gidLink(cast(void**)&gaflight_record_batch_reader_get_type, "gaflight_record_batch_reader_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_reader_read_all, "gaflight_record_batch_reader_read_all", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_reader_read_next, "gaflight_record_batch_reader_read_next", LIBS);
+  gidLink(cast(void**)&gaflight_record_batch_reader_get_type, "gaflight_record_batch_reader_get_type", libs);
+  gidLink(cast(void**)&gaflight_record_batch_reader_read_all, "gaflight_record_batch_reader_read_all", libs);
+  gidLink(cast(void**)&gaflight_record_batch_reader_read_next, "gaflight_record_batch_reader_read_next", libs);
 
   // RecordBatchStream
-  gidLink(cast(void**)&gaflight_record_batch_stream_get_type, "gaflight_record_batch_stream_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_stream_new, "gaflight_record_batch_stream_new", LIBS);
+  gidLink(cast(void**)&gaflight_record_batch_stream_get_type, "gaflight_record_batch_stream_get_type", libs);
+  gidLink(cast(void**)&gaflight_record_batch_stream_new, "gaflight_record_batch_stream_new", libs);
 
   // RecordBatchWriter
-  gidLink(cast(void**)&gaflight_record_batch_writer_get_type, "gaflight_record_batch_writer_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_writer_begin, "gaflight_record_batch_writer_begin", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_writer_write_metadata, "gaflight_record_batch_writer_write_metadata", LIBS);
-  gidLink(cast(void**)&gaflight_record_batch_writer_write_record_batch, "gaflight_record_batch_writer_write_record_batch", LIBS);
+  gidLink(cast(void**)&gaflight_record_batch_writer_get_type, "gaflight_record_batch_writer_get_type", libs);
+  gidLink(cast(void**)&gaflight_record_batch_writer_begin, "gaflight_record_batch_writer_begin", libs);
+  gidLink(cast(void**)&gaflight_record_batch_writer_write_metadata, "gaflight_record_batch_writer_write_metadata", libs);
+  gidLink(cast(void**)&gaflight_record_batch_writer_write_record_batch, "gaflight_record_batch_writer_write_record_batch", libs);
 
   // Servable
-  gidLink(cast(void**)&gaflight_servable_get_type, "gaflight_servable_get_type", LIBS);
+  gidLink(cast(void**)&gaflight_servable_get_type, "gaflight_servable_get_type", libs);
 
   // Server
-  gidLink(cast(void**)&gaflight_server_get_type, "gaflight_server_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_do_get, "gaflight_server_do_get", LIBS);
-  gidLink(cast(void**)&gaflight_server_do_put, "gaflight_server_do_put", LIBS);
-  gidLink(cast(void**)&gaflight_server_get_flight_info, "gaflight_server_get_flight_info", LIBS);
-  gidLink(cast(void**)&gaflight_server_get_port, "gaflight_server_get_port", LIBS);
-  gidLink(cast(void**)&gaflight_server_list_flights, "gaflight_server_list_flights", LIBS);
-  gidLink(cast(void**)&gaflight_server_listen, "gaflight_server_listen", LIBS);
-  gidLink(cast(void**)&gaflight_server_shutdown, "gaflight_server_shutdown", LIBS);
-  gidLink(cast(void**)&gaflight_server_wait, "gaflight_server_wait", LIBS);
+  gidLink(cast(void**)&gaflight_server_get_type, "gaflight_server_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_do_get, "gaflight_server_do_get", libs);
+  gidLink(cast(void**)&gaflight_server_do_put, "gaflight_server_do_put", libs);
+  gidLink(cast(void**)&gaflight_server_get_flight_info, "gaflight_server_get_flight_info", libs);
+  gidLink(cast(void**)&gaflight_server_get_port, "gaflight_server_get_port", libs);
+  gidLink(cast(void**)&gaflight_server_list_flights, "gaflight_server_list_flights", libs);
+  gidLink(cast(void**)&gaflight_server_listen, "gaflight_server_listen", libs);
+  gidLink(cast(void**)&gaflight_server_shutdown, "gaflight_server_shutdown", libs);
+  gidLink(cast(void**)&gaflight_server_wait, "gaflight_server_wait", libs);
 
   // ServerAuthHandler
-  gidLink(cast(void**)&gaflight_server_auth_handler_get_type, "gaflight_server_auth_handler_get_type", LIBS);
+  gidLink(cast(void**)&gaflight_server_auth_handler_get_type, "gaflight_server_auth_handler_get_type", libs);
 
   // ServerAuthReader
-  gidLink(cast(void**)&gaflight_server_auth_reader_get_type, "gaflight_server_auth_reader_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_auth_reader_read, "gaflight_server_auth_reader_read", LIBS);
+  gidLink(cast(void**)&gaflight_server_auth_reader_get_type, "gaflight_server_auth_reader_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_auth_reader_read, "gaflight_server_auth_reader_read", libs);
 
   // ServerAuthSender
-  gidLink(cast(void**)&gaflight_server_auth_sender_get_type, "gaflight_server_auth_sender_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_auth_sender_write, "gaflight_server_auth_sender_write", LIBS);
+  gidLink(cast(void**)&gaflight_server_auth_sender_get_type, "gaflight_server_auth_sender_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_auth_sender_write, "gaflight_server_auth_sender_write", libs);
 
   // ServerCallContext
-  gidLink(cast(void**)&gaflight_server_call_context_get_type, "gaflight_server_call_context_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_call_context_foreach_incoming_header, "gaflight_server_call_context_foreach_incoming_header", LIBS);
+  gidLink(cast(void**)&gaflight_server_call_context_get_type, "gaflight_server_call_context_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_call_context_foreach_incoming_header, "gaflight_server_call_context_foreach_incoming_header", libs);
 
   // ServerCustomAuthHandler
-  gidLink(cast(void**)&gaflight_server_custom_auth_handler_get_type, "gaflight_server_custom_auth_handler_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_custom_auth_handler_authenticate, "gaflight_server_custom_auth_handler_authenticate", LIBS);
-  gidLink(cast(void**)&gaflight_server_custom_auth_handler_is_valid, "gaflight_server_custom_auth_handler_is_valid", LIBS);
+  gidLink(cast(void**)&gaflight_server_custom_auth_handler_get_type, "gaflight_server_custom_auth_handler_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_custom_auth_handler_authenticate, "gaflight_server_custom_auth_handler_authenticate", libs);
+  gidLink(cast(void**)&gaflight_server_custom_auth_handler_is_valid, "gaflight_server_custom_auth_handler_is_valid", libs);
 
   // ServerOptions
-  gidLink(cast(void**)&gaflight_server_options_get_type, "gaflight_server_options_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_server_options_new, "gaflight_server_options_new", LIBS);
+  gidLink(cast(void**)&gaflight_server_options_get_type, "gaflight_server_options_get_type", libs);
+  gidLink(cast(void**)&gaflight_server_options_new, "gaflight_server_options_new", libs);
 
   // StreamChunk
-  gidLink(cast(void**)&gaflight_stream_chunk_get_type, "gaflight_stream_chunk_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_stream_chunk_get_data, "gaflight_stream_chunk_get_data", LIBS);
-  gidLink(cast(void**)&gaflight_stream_chunk_get_metadata, "gaflight_stream_chunk_get_metadata", LIBS);
+  gidLink(cast(void**)&gaflight_stream_chunk_get_type, "gaflight_stream_chunk_get_type", libs);
+  gidLink(cast(void**)&gaflight_stream_chunk_get_data, "gaflight_stream_chunk_get_data", libs);
+  gidLink(cast(void**)&gaflight_stream_chunk_get_metadata, "gaflight_stream_chunk_get_metadata", libs);
 
   // StreamReader
-  gidLink(cast(void**)&gaflight_stream_reader_get_type, "gaflight_stream_reader_get_type", LIBS);
+  gidLink(cast(void**)&gaflight_stream_reader_get_type, "gaflight_stream_reader_get_type", libs);
 
   // StreamWriter
-  gidLink(cast(void**)&gaflight_stream_writer_get_type, "gaflight_stream_writer_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_stream_writer_done_writing, "gaflight_stream_writer_done_writing", LIBS);
+  gidLink(cast(void**)&gaflight_stream_writer_get_type, "gaflight_stream_writer_get_type", libs);
+  gidLink(cast(void**)&gaflight_stream_writer_done_writing, "gaflight_stream_writer_done_writing", libs);
 
   // Ticket
-  gidLink(cast(void**)&gaflight_ticket_get_type, "gaflight_ticket_get_type", LIBS);
-  gidLink(cast(void**)&gaflight_ticket_new, "gaflight_ticket_new", LIBS);
-  gidLink(cast(void**)&gaflight_ticket_equal, "gaflight_ticket_equal", LIBS);
+  gidLink(cast(void**)&gaflight_ticket_get_type, "gaflight_ticket_get_type", libs);
+  gidLink(cast(void**)&gaflight_ticket_new, "gaflight_ticket_new", libs);
+  gidLink(cast(void**)&gaflight_ticket_equal, "gaflight_ticket_equal", libs);
 }

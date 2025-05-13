@@ -44,16 +44,16 @@ class PreferencesDialog : adw.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_dialog_get_type != &gidSymbolNotFound ? adw_preferences_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -142,7 +142,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void add(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_dialog_add(cast(AdwPreferencesDialog*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_dialog_add(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -155,7 +155,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void addToast(adw.toast.Toast toast)
   {
-    adw_preferences_dialog_add_toast(cast(AdwPreferencesDialog*)cPtr, toast ? cast(AdwToast*)toast.cPtr(Yes.Dup) : null);
+    adw_preferences_dialog_add_toast(cast(AdwPreferencesDialog*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -165,7 +165,7 @@ class PreferencesDialog : adw.dialog.Dialog
   bool getSearchEnabled()
   {
     bool _retval;
-    _retval = adw_preferences_dialog_get_search_enabled(cast(AdwPreferencesDialog*)cPtr);
+    _retval = adw_preferences_dialog_get_search_enabled(cast(AdwPreferencesDialog*)this._cPtr);
     return _retval;
   }
 
@@ -176,8 +176,8 @@ class PreferencesDialog : adw.dialog.Dialog
   adw.preferences_page.PreferencesPage getVisiblePage()
   {
     AdwPreferencesPage* _cretval;
-    _cretval = adw_preferences_dialog_get_visible_page(cast(AdwPreferencesDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
+    _cretval = adw_preferences_dialog_get_visible_page(cast(AdwPreferencesDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class PreferencesDialog : adw.dialog.Dialog
   string getVisiblePageName()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_dialog_get_visible_page_name(cast(AdwPreferencesDialog*)cPtr);
+    _cretval = adw_preferences_dialog_get_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -200,7 +200,7 @@ class PreferencesDialog : adw.dialog.Dialog
   bool popSubpage()
   {
     bool _retval;
-    _retval = adw_preferences_dialog_pop_subpage(cast(AdwPreferencesDialog*)cPtr);
+    _retval = adw_preferences_dialog_pop_subpage(cast(AdwPreferencesDialog*)this._cPtr);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void pushSubpage(adw.navigation_page.NavigationPage page)
   {
-    adw_preferences_dialog_push_subpage(cast(AdwPreferencesDialog*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_dialog_push_subpage(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -225,7 +225,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void remove(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_dialog_remove(cast(AdwPreferencesDialog*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_dialog_remove(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -236,7 +236,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void setSearchEnabled(bool searchEnabled)
   {
-    adw_preferences_dialog_set_search_enabled(cast(AdwPreferencesDialog*)cPtr, searchEnabled);
+    adw_preferences_dialog_set_search_enabled(cast(AdwPreferencesDialog*)this._cPtr, searchEnabled);
   }
 
   /**
@@ -247,7 +247,7 @@ class PreferencesDialog : adw.dialog.Dialog
   */
   void setVisiblePage(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_dialog_set_visible_page(cast(AdwPreferencesDialog*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_dialog_set_visible_page(cast(AdwPreferencesDialog*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -261,6 +261,6 @@ class PreferencesDialog : adw.dialog.Dialog
   void setVisiblePageName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_preferences_dialog_set_visible_page_name(cast(AdwPreferencesDialog*)cPtr, _name);
+    adw_preferences_dialog_set_visible_page_name(cast(AdwPreferencesDialog*)this._cPtr, _name);
   }
 }

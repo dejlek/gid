@@ -18,7 +18,7 @@ interface TlsFileDatabase
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_file_database_get_type != &gidSymbolNotFound ? g_tls_file_database_get_type() : cast(GType)0;
@@ -63,7 +63,7 @@ interface TlsFileDatabase
     _cretval = g_tls_file_database_new(_anchors, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_file_database.TlsFileDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 }

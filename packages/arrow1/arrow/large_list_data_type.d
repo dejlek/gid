@@ -20,16 +20,16 @@ class LargeListDataType : arrow.data_type.DataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_data_type_get_type != &gidSymbolNotFound ? garrow_large_list_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class LargeListDataType : arrow.data_type.DataType
   this(arrow.field.Field field)
   {
     GArrowLargeListDataType* _cretval;
-    _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field.cPtr(No.Dup) : null);
+    _cretval = garrow_large_list_data_type_new(field ? cast(GArrowField*)field._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -50,8 +50,8 @@ class LargeListDataType : arrow.data_type.DataType
   arrow.field.Field getField()
   {
     GArrowField* _cretval;
-    _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_large_list_data_type_get_field(cast(GArrowLargeListDataType*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 }

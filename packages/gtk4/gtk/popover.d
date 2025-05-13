@@ -109,16 +109,16 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_get_type != &gidSymbolNotFound ? gtk_popover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -307,7 +307,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getAutohide()
   {
     bool _retval;
-    _retval = gtk_popover_get_autohide(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_autohide(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getCascadePopdown()
   {
     bool _retval;
-    _retval = gtk_popover_get_cascade_popdown(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_cascade_popdown(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -329,8 +329,8 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_get_child(cast(GtkPopover*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_get_child(cast(GtkPopover*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getHasArrow()
   {
     bool _retval;
-    _retval = gtk_popover_get_has_arrow(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_has_arrow(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_popover_get_mnemonics_visible(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_mnemonics_visible(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void getOffset(out int xOffset, out int yOffset)
   {
-    gtk_popover_get_offset(cast(GtkPopover*)cPtr, cast(int*)&xOffset, cast(int*)&yOffset);
+    gtk_popover_get_offset(cast(GtkPopover*)this._cPtr, cast(int*)&xOffset, cast(int*)&yOffset);
   }
 
   /**
@@ -386,7 +386,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
+    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -398,7 +398,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   gtk.types.PositionType getPosition()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_popover_get_position(cast(GtkPopover*)cPtr);
+    _cretval = gtk_popover_get_position(cast(GtkPopover*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -411,7 +411,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void popdown()
   {
-    gtk_popover_popdown(cast(GtkPopover*)cPtr);
+    gtk_popover_popdown(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -419,7 +419,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void popup()
   {
-    gtk_popover_popup(cast(GtkPopover*)cPtr);
+    gtk_popover_popup(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -433,7 +433,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void present()
   {
-    gtk_popover_present(cast(GtkPopover*)cPtr);
+    gtk_popover_present(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -452,7 +452,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setAutohide(bool autohide)
   {
-    gtk_popover_set_autohide(cast(GtkPopover*)cPtr, autohide);
+    gtk_popover_set_autohide(cast(GtkPopover*)this._cPtr, autohide);
   }
 
   /**
@@ -466,7 +466,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setCascadePopdown(bool cascadePopdown)
   {
-    gtk_popover_set_cascade_popdown(cast(GtkPopover*)cPtr, cascadePopdown);
+    gtk_popover_set_cascade_popdown(cast(GtkPopover*)this._cPtr, cascadePopdown);
   }
 
   /**
@@ -477,7 +477,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_popover_set_child(cast(GtkPopover*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_popover_set_child(cast(GtkPopover*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -493,7 +493,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setDefaultWidget(gtk.widget.Widget widget = null)
   {
-    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_popover_set_default_widget(cast(GtkPopover*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -505,7 +505,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setHasArrow(bool hasArrow)
   {
-    gtk_popover_set_has_arrow(cast(GtkPopover*)cPtr, hasArrow);
+    gtk_popover_set_has_arrow(cast(GtkPopover*)this._cPtr, hasArrow);
   }
 
   /**
@@ -516,7 +516,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setMnemonicsVisible(bool mnemonicsVisible)
   {
-    gtk_popover_set_mnemonics_visible(cast(GtkPopover*)cPtr, mnemonicsVisible);
+    gtk_popover_set_mnemonics_visible(cast(GtkPopover*)this._cPtr, mnemonicsVisible);
   }
 
   /**
@@ -532,7 +532,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setOffset(int xOffset, int yOffset)
   {
-    gtk_popover_set_offset(cast(GtkPopover*)cPtr, xOffset, yOffset);
+    gtk_popover_set_offset(cast(GtkPopover*)this._cPtr, xOffset, yOffset);
   }
 
   /**
@@ -545,7 +545,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setPointingTo(gdk.rectangle.Rectangle rect = null)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
   }
 
   /**
@@ -563,7 +563,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
   */
   void setPosition(gtk.types.PositionType position)
   {
-    gtk_popover_set_position(cast(GtkPopover*)cPtr, position);
+    gtk_popover_set_position(cast(GtkPopover*)this._cPtr, position);
   }
 
   /**

@@ -22,16 +22,16 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_attribute_iter_get_type != &gidSymbolNotFound ? g_menu_attribute_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,7 +50,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)cPtr);
+    _cretval = g_menu_attribute_iter_get_name(cast(GMenuAttributeIter*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -83,7 +83,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
     bool _retval;
     char* _outName;
     GVariant* _value;
-    _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)cPtr, &_outName, &_value);
+    _retval = g_menu_attribute_iter_get_next(cast(GMenuAttributeIter*)this._cPtr, &_outName, &_value);
     outName = _outName.fromCString(No.Free);
     value = new glib.variant.Variant(cast(void*)_value, Yes.Take);
     return _retval;
@@ -98,7 +98,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   glib.variant.Variant getValue()
   {
     GVariant* _cretval;
-    _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)cPtr);
+    _cretval = g_menu_attribute_iter_get_value(cast(GMenuAttributeIter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -118,7 +118,7 @@ class MenuAttributeIter : gobject.object.ObjectWrap
   bool next()
   {
     bool _retval;
-    _retval = g_menu_attribute_iter_next(cast(GMenuAttributeIter*)cPtr);
+    _retval = g_menu_attribute_iter_next(cast(GMenuAttributeIter*)this._cPtr);
     return _retval;
   }
 }

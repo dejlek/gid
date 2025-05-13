@@ -45,7 +45,7 @@ class ParamSpec
 
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       g_param_spec_ref(cInstancePtr);
@@ -80,7 +80,7 @@ class ParamSpec
   string getBlurb()
   {
     const(char)* _cretval;
-    _cretval = g_param_spec_get_blurb(cast(GParamSpec*)cPtr);
+    _cretval = g_param_spec_get_blurb(cast(GParamSpec*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -94,7 +94,7 @@ class ParamSpec
   gobject.value.Value getDefaultValue()
   {
     const(GValue)* _cretval;
-    _cretval = g_param_spec_get_default_value(cast(GParamSpec*)cPtr);
+    _cretval = g_param_spec_get_default_value(cast(GParamSpec*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -109,7 +109,7 @@ class ParamSpec
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_param_spec_get_name(cast(GParamSpec*)cPtr);
+    _cretval = g_param_spec_get_name(cast(GParamSpec*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -121,7 +121,7 @@ class ParamSpec
   glib.types.Quark getNameQuark()
   {
     glib.types.Quark _retval;
-    _retval = g_param_spec_get_name_quark(cast(GParamSpec*)cPtr);
+    _retval = g_param_spec_get_name_quark(cast(GParamSpec*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class ParamSpec
   string getNick()
   {
     const(char)* _cretval;
-    _cretval = g_param_spec_get_nick(cast(GParamSpec*)cPtr);
+    _cretval = g_param_spec_get_nick(cast(GParamSpec*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -146,7 +146,7 @@ class ParamSpec
   */
   void* getQdata(glib.types.Quark quark)
   {
-    auto _retval = g_param_spec_get_qdata(cast(GParamSpec*)cPtr, quark);
+    auto _retval = g_param_spec_get_qdata(cast(GParamSpec*)this._cPtr, quark);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class ParamSpec
   gobject.param_spec.ParamSpec getRedirectTarget()
   {
     GParamSpec* _cretval;
-    _cretval = g_param_spec_get_redirect_target(cast(GParamSpec*)cPtr);
+    _cretval = g_param_spec_get_redirect_target(cast(GParamSpec*)this._cPtr);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -183,7 +183,7 @@ class ParamSpec
   */
   void setQdata(glib.types.Quark quark, void* data = null)
   {
-    g_param_spec_set_qdata(cast(GParamSpec*)cPtr, quark, data);
+    g_param_spec_set_qdata(cast(GParamSpec*)this._cPtr, quark, data);
   }
 
   /**
@@ -197,7 +197,7 @@ class ParamSpec
   */
   void sink()
   {
-    g_param_spec_sink(cast(GParamSpec*)cPtr);
+    g_param_spec_sink(cast(GParamSpec*)this._cPtr);
   }
 
   /**
@@ -212,7 +212,7 @@ class ParamSpec
   */
   void* stealQdata(glib.types.Quark quark)
   {
-    auto _retval = g_param_spec_steal_qdata(cast(GParamSpec*)cPtr, quark);
+    auto _retval = g_param_spec_steal_qdata(cast(GParamSpec*)this._cPtr, quark);
     return _retval;
   }
 }

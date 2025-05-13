@@ -23,16 +23,16 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mnemonic_trigger_get_type != &gidSymbolNotFound ? gtk_mnemonic_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
   uint getKeyval()
   {
     uint _retval;
-    _retval = gtk_mnemonic_trigger_get_keyval(cast(GtkMnemonicTrigger*)cPtr);
+    _retval = gtk_mnemonic_trigger_get_keyval(cast(GtkMnemonicTrigger*)this._cPtr);
     return _retval;
   }
 }

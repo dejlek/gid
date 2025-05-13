@@ -15,7 +15,7 @@ interface VideoDirection
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_direction_get_type != &gidSymbolNotFound ? gst_video_direction_get_type() : cast(GType)0;

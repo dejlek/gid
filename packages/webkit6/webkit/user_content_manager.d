@@ -38,16 +38,16 @@ class UserContentManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_content_manager_get_type != &gidSymbolNotFound ? webkit_user_content_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void addFilter(webkit.user_content_filter.UserContentFilter filter)
   {
-    webkit_user_content_manager_add_filter(cast(WebKitUserContentManager*)cPtr, filter ? cast(WebKitUserContentFilter*)filter.cPtr(No.Dup) : null);
+    webkit_user_content_manager_add_filter(cast(WebKitUserContentManager*)this._cPtr, filter ? cast(WebKitUserContentFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -94,7 +94,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void addScript(webkit.user_script.UserScript script)
   {
-    webkit_user_content_manager_add_script(cast(WebKitUserContentManager*)cPtr, script ? cast(WebKitUserScript*)script.cPtr(No.Dup) : null);
+    webkit_user_content_manager_add_script(cast(WebKitUserContentManager*)this._cPtr, script ? cast(WebKitUserScript*)script._cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +108,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void addStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet)
   {
-    webkit_user_content_manager_add_style_sheet(cast(WebKitUserContentManager*)cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet.cPtr(No.Dup) : null);
+    webkit_user_content_manager_add_style_sheet(cast(WebKitUserContentManager*)this._cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet._cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class UserContentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
-    _retval = webkit_user_content_manager_register_script_message_handler(cast(WebKitUserContentManager*)cPtr, _name, _worldName);
+    _retval = webkit_user_content_manager_register_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class UserContentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
-    _retval = webkit_user_content_manager_register_script_message_handler_with_reply(cast(WebKitUserContentManager*)cPtr, _name, _worldName);
+    _retval = webkit_user_content_manager_register_script_message_handler_with_reply(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeAllFilters()
   {
-    webkit_user_content_manager_remove_all_filters(cast(WebKitUserContentManager*)cPtr);
+    webkit_user_content_manager_remove_all_filters(cast(WebKitUserContentManager*)this._cPtr);
   }
 
   /**
@@ -199,7 +199,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeAllScripts()
   {
-    webkit_user_content_manager_remove_all_scripts(cast(WebKitUserContentManager*)cPtr);
+    webkit_user_content_manager_remove_all_scripts(cast(WebKitUserContentManager*)this._cPtr);
   }
 
   /**
@@ -207,7 +207,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeAllStyleSheets()
   {
-    webkit_user_content_manager_remove_all_style_sheets(cast(WebKitUserContentManager*)cPtr);
+    webkit_user_content_manager_remove_all_style_sheets(cast(WebKitUserContentManager*)this._cPtr);
   }
 
   /**
@@ -220,7 +220,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeFilter(webkit.user_content_filter.UserContentFilter filter)
   {
-    webkit_user_content_manager_remove_filter(cast(WebKitUserContentManager*)cPtr, filter ? cast(WebKitUserContentFilter*)filter.cPtr(No.Dup) : null);
+    webkit_user_content_manager_remove_filter(cast(WebKitUserContentManager*)this._cPtr, filter ? cast(WebKitUserContentFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -236,7 +236,7 @@ class UserContentManager : gobject.object.ObjectWrap
   void removeFilterById(string filterId)
   {
     const(char)* _filterId = filterId.toCString(No.Alloc);
-    webkit_user_content_manager_remove_filter_by_id(cast(WebKitUserContentManager*)cPtr, _filterId);
+    webkit_user_content_manager_remove_filter_by_id(cast(WebKitUserContentManager*)this._cPtr, _filterId);
   }
 
   /**
@@ -249,7 +249,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeScript(webkit.user_script.UserScript script)
   {
-    webkit_user_content_manager_remove_script(cast(WebKitUserContentManager*)cPtr, script ? cast(WebKitUserScript*)script.cPtr(No.Dup) : null);
+    webkit_user_content_manager_remove_script(cast(WebKitUserContentManager*)this._cPtr, script ? cast(WebKitUserScript*)script._cPtr(No.Dup) : null);
   }
 
   /**
@@ -262,7 +262,7 @@ class UserContentManager : gobject.object.ObjectWrap
   */
   void removeStyleSheet(webkit.user_style_sheet.UserStyleSheet stylesheet)
   {
-    webkit_user_content_manager_remove_style_sheet(cast(WebKitUserContentManager*)cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet.cPtr(No.Dup) : null);
+    webkit_user_content_manager_remove_style_sheet(cast(WebKitUserContentManager*)this._cPtr, stylesheet ? cast(WebKitUserStyleSheet*)stylesheet._cPtr(No.Dup) : null);
   }
 
   /**
@@ -284,7 +284,7 @@ class UserContentManager : gobject.object.ObjectWrap
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _worldName = worldName.toCString(No.Alloc);
-    webkit_user_content_manager_unregister_script_message_handler(cast(WebKitUserContentManager*)cPtr, _name, _worldName);
+    webkit_user_content_manager_unregister_script_message_handler(cast(WebKitUserContentManager*)this._cPtr, _name, _worldName);
   }
 
   /**

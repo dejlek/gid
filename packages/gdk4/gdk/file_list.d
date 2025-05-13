@@ -22,22 +22,22 @@ class FileList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_file_list_get_type != &gidSymbolNotFound ? gdk_file_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class FileList : gobject.boxed.Boxed
 
     GFile*[] _tmpfiles;
     foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
+      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GFile** _files = _tmpfiles.ptr;
     _cretval = gdk_file_list_new_from_array(_files, _nFiles);
     auto _retval = _cretval ? new gdk.file_list.FileList(cast(void*)_cretval, Yes.Take) : null;
@@ -100,7 +100,7 @@ class FileList : gobject.boxed.Boxed
   gio.file.File[] getFiles()
   {
     GSList* _cretval;
-    _cretval = gdk_file_list_get_files(cast(GdkFileList*)cPtr);
+    _cretval = gdk_file_list_get_files(cast(GdkFileList*)this._cPtr);
     auto _retval = gSListToD!(gio.file.File, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }

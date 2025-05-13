@@ -46,7 +46,7 @@ template FrameHeaderT()
   */
   override void addPrefix(int priority, gtk.widget.Widget child)
   {
-    panel_frame_header_add_prefix(cast(PanelFrameHeader*)cPtr, priority, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_frame_header_add_prefix(cast(PanelFrameHeader*)this._cPtr, priority, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -59,7 +59,7 @@ template FrameHeaderT()
   */
   override void addSuffix(int priority, gtk.widget.Widget child)
   {
-    panel_frame_header_add_suffix(cast(PanelFrameHeader*)cPtr, priority, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_frame_header_add_suffix(cast(PanelFrameHeader*)this._cPtr, priority, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -72,7 +72,7 @@ template FrameHeaderT()
   override bool canDrop(panel.widget.Widget widget)
   {
     bool _retval;
-    _retval = panel_frame_header_can_drop(cast(PanelFrameHeader*)cPtr, widget ? cast(PanelWidget*)widget.cPtr(No.Dup) : null);
+    _retval = panel_frame_header_can_drop(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -83,8 +83,8 @@ template FrameHeaderT()
   override panel.frame.Frame getFrame()
   {
     PanelFrame* _cretval;
-    _cretval = panel_frame_header_get_frame(cast(PanelFrameHeader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    _cretval = panel_frame_header_get_frame(cast(PanelFrameHeader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ template FrameHeaderT()
   */
   override void pageChanged(panel.widget.Widget widget = null)
   {
-    panel_frame_header_page_changed(cast(PanelFrameHeader*)cPtr, widget ? cast(PanelWidget*)widget.cPtr(No.Dup) : null);
+    panel_frame_header_page_changed(cast(PanelFrameHeader*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -107,6 +107,6 @@ template FrameHeaderT()
   */
   override void setFrame(panel.frame.Frame frame = null)
   {
-    panel_frame_header_set_frame(cast(PanelFrameHeader*)cPtr, frame ? cast(PanelFrame*)frame.cPtr(No.Dup) : null);
+    panel_frame_header_set_frame(cast(PanelFrameHeader*)this._cPtr, frame ? cast(PanelFrame*)frame._cPtr(No.Dup) : null);
   }
 }

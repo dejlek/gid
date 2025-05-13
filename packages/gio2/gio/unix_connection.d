@@ -36,16 +36,16 @@ class UnixConnection : gio.socket_connection.SocketConnection
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_connection_get_type != &gidSymbolNotFound ? g_unix_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,10 +86,10 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     GCredentials* _cretval;
     GError *_err;
-    _cretval = g_unix_connection_receive_credentials(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_unix_connection_receive_credentials(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,17 +109,17 @@ class UnixConnection : gio.socket_connection.SocketConnection
   */
   void receiveCredentialsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_unix_connection_receive_credentials_async(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_unix_connection_receive_credentials_async(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -136,10 +136,10 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     GCredentials* _cretval;
     GError *_err;
-    _cretval = g_unix_connection_receive_credentials_finish(cast(GUnixConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_unix_connection_receive_credentials_finish(cast(GUnixConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     int _retval;
     GError *_err;
-    _retval = g_unix_connection_receive_fd(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_unix_connection_receive_fd(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -199,7 +199,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_credentials(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_unix_connection_send_credentials(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -221,17 +221,17 @@ class UnixConnection : gio.socket_connection.SocketConnection
   */
   void sendCredentialsAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_unix_connection_send_credentials_async(cast(GUnixConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_unix_connection_send_credentials_async(cast(GUnixConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -247,7 +247,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_credentials_finish(cast(GUnixConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_unix_connection_send_credentials_finish(cast(GUnixConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -272,7 +272,7 @@ class UnixConnection : gio.socket_connection.SocketConnection
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_connection_send_fd(cast(GUnixConnection*)cPtr, fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_unix_connection_send_fd(cast(GUnixConnection*)this._cPtr, fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

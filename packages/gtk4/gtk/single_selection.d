@@ -33,16 +33,16 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_single_selection_get_type != &gidSymbolNotFound ? gtk_single_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -168,7 +168,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   this(gio.list_model.ListModel model = null)
   {
     GtkSingleSelection* _cretval;
-    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_single_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -180,7 +180,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getAutoselect()
   {
     bool _retval;
-    _retval = gtk_single_selection_get_autoselect(cast(GtkSingleSelection*)cPtr);
+    _retval = gtk_single_selection_get_autoselect(cast(GtkSingleSelection*)this._cPtr);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getCanUnselect()
   {
     bool _retval;
-    _retval = gtk_single_selection_get_can_unselect(cast(GtkSingleSelection*)cPtr);
+    _retval = gtk_single_selection_get_can_unselect(cast(GtkSingleSelection*)this._cPtr);
     return _retval;
   }
 
@@ -203,8 +203,8 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_single_selection_get_model(cast(GtkSingleSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   uint getSelected()
   {
     uint _retval;
-    _retval = gtk_single_selection_get_selected(cast(GtkSingleSelection*)cPtr);
+    _retval = gtk_single_selection_get_selected(cast(GtkSingleSelection*)this._cPtr);
     return _retval;
   }
 
@@ -229,9 +229,9 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   gobject.object.ObjectWrap getSelectedItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_single_selection_get_selected_item(cast(GtkSingleSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setAutoselect(bool autoselect)
   {
-    gtk_single_selection_set_autoselect(cast(GtkSingleSelection*)cPtr, autoselect);
+    gtk_single_selection_set_autoselect(cast(GtkSingleSelection*)this._cPtr, autoselect);
   }
 
   /**
@@ -263,7 +263,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setCanUnselect(bool canUnselect)
   {
-    gtk_single_selection_set_can_unselect(cast(GtkSingleSelection*)cPtr, canUnselect);
+    gtk_single_selection_set_can_unselect(cast(GtkSingleSelection*)this._cPtr, canUnselect);
   }
 
   /**
@@ -276,7 +276,7 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_single_selection_set_model(cast(GtkSingleSelection*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_single_selection_set_model(cast(GtkSingleSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -294,6 +294,6 @@ class SingleSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setSelected(uint position)
   {
-    gtk_single_selection_set_selected(cast(GtkSingleSelection*)cPtr, position);
+    gtk_single_selection_set_selected(cast(GtkSingleSelection*)this._cPtr, position);
   }
 }

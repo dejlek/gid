@@ -20,16 +20,16 @@ class StructDataType : arrow.data_type.DataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_data_type_get_type != &gidSymbolNotFound ? garrow_struct_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,8 +52,8 @@ class StructDataType : arrow.data_type.DataType
   arrow.field.Field getField(int i)
   {
     GArrowField* _cretval;
-    _cretval = garrow_struct_data_type_get_field(cast(GArrowStructDataType*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_struct_data_type_get_field(cast(GArrowStructDataType*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,8 +62,8 @@ class StructDataType : arrow.data_type.DataType
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = garrow_struct_data_type_get_field_by_name(cast(GArrowStructDataType*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_struct_data_type_get_field_by_name(cast(GArrowStructDataType*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class StructDataType : arrow.data_type.DataType
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = garrow_struct_data_type_get_field_index(cast(GArrowStructDataType*)cPtr, _name);
+    _retval = garrow_struct_data_type_get_field_index(cast(GArrowStructDataType*)this._cPtr, _name);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class StructDataType : arrow.data_type.DataType
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
-    _cretval = garrow_struct_data_type_get_fields(cast(GArrowStructDataType*)cPtr);
+    _cretval = garrow_struct_data_type_get_fields(cast(GArrowStructDataType*)this._cPtr);
     auto _retval = gListToD!(arrow.field.Field, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -89,7 +89,7 @@ class StructDataType : arrow.data_type.DataType
   int getNFields()
   {
     int _retval;
-    _retval = garrow_struct_data_type_get_n_fields(cast(GArrowStructDataType*)cPtr);
+    _retval = garrow_struct_data_type_get_n_fields(cast(GArrowStructDataType*)this._cPtr);
     return _retval;
   }
 }

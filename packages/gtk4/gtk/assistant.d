@@ -74,16 +74,16 @@ class Assistant : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_assistant_get_type != &gidSymbolNotFound ? gtk_assistant_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class Assistant : gtk.window.Window
   */
   void addActionWidget(gtk.widget.Widget child)
   {
-    gtk_assistant_add_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_assistant_add_action_widget(cast(GtkAssistant*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -139,7 +139,7 @@ class Assistant : gtk.window.Window
   int appendPage(gtk.widget.Widget page)
   {
     int _retval;
-    _retval = gtk_assistant_append_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_append_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class Assistant : gtk.window.Window
   */
   void commit()
   {
-    gtk_assistant_commit(cast(GtkAssistant*)cPtr);
+    gtk_assistant_commit(cast(GtkAssistant*)this._cPtr);
   }
 
   /**
@@ -173,7 +173,7 @@ class Assistant : gtk.window.Window
   int getCurrentPage()
   {
     int _retval;
-    _retval = gtk_assistant_get_current_page(cast(GtkAssistant*)cPtr);
+    _retval = gtk_assistant_get_current_page(cast(GtkAssistant*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Assistant : gtk.window.Window
   int getNPages()
   {
     int _retval;
-    _retval = gtk_assistant_get_n_pages(cast(GtkAssistant*)cPtr);
+    _retval = gtk_assistant_get_n_pages(cast(GtkAssistant*)this._cPtr);
     return _retval;
   }
 
@@ -204,8 +204,8 @@ class Assistant : gtk.window.Window
   gtk.widget.Widget getNthPage(int pageNum)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)cPtr, pageNum);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_assistant_get_nth_page(cast(GtkAssistant*)this._cPtr, pageNum);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,8 +221,8 @@ class Assistant : gtk.window.Window
   gtk.assistant_page.AssistantPage getPage(gtk.widget.Widget child)
   {
     GtkAssistantPage* _cretval;
-    _cretval = gtk_assistant_get_page(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.assistant_page.AssistantPage)(cast(GtkAssistantPage*)_cretval, No.Take);
+    _cretval = gtk_assistant_get_page(cast(GtkAssistant*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.assistant_page.AssistantPage)(cast(GtkAssistantPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class Assistant : gtk.window.Window
   bool getPageComplete(gtk.widget.Widget page)
   {
     bool _retval;
-    _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_get_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class Assistant : gtk.window.Window
   string getPageTitle(gtk.widget.Widget page)
   {
     const(char)* _cretval;
-    _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _cretval = gtk_assistant_get_page_title(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -271,7 +271,7 @@ class Assistant : gtk.window.Window
   gtk.types.AssistantPageType getPageType(gtk.widget.Widget page)
   {
     GtkAssistantPageType _cretval;
-    _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _cretval = gtk_assistant_get_page_type(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     gtk.types.AssistantPageType _retval = cast(gtk.types.AssistantPageType)_cretval;
     return _retval;
   }
@@ -285,8 +285,8 @@ class Assistant : gtk.window.Window
   gio.list_model.ListModel getPages()
   {
     GListModel* _cretval;
-    _cretval = gtk_assistant_get_pages(cast(GtkAssistant*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = gtk_assistant_get_pages(cast(GtkAssistant*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Assistant : gtk.window.Window
   int insertPage(gtk.widget.Widget page, int position)
   {
     int _retval;
-    _retval = gtk_assistant_insert_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, position);
+    _retval = gtk_assistant_insert_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Assistant : gtk.window.Window
   */
   void nextPage()
   {
-    gtk_assistant_next_page(cast(GtkAssistant*)cPtr);
+    gtk_assistant_next_page(cast(GtkAssistant*)this._cPtr);
   }
 
   /**
@@ -336,7 +336,7 @@ class Assistant : gtk.window.Window
   int prependPage(gtk.widget.Widget page)
   {
     int _retval;
-    _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null);
+    _retval = gtk_assistant_prepend_page(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class Assistant : gtk.window.Window
   */
   void previousPage()
   {
-    gtk_assistant_previous_page(cast(GtkAssistant*)cPtr);
+    gtk_assistant_previous_page(cast(GtkAssistant*)this._cPtr);
   }
 
   /**
@@ -366,7 +366,7 @@ class Assistant : gtk.window.Window
   */
   void removeActionWidget(gtk.widget.Widget child)
   {
-    gtk_assistant_remove_action_widget(cast(GtkAssistant*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_assistant_remove_action_widget(cast(GtkAssistant*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -380,7 +380,7 @@ class Assistant : gtk.window.Window
   */
   void removePage(int pageNum)
   {
-    gtk_assistant_remove_page(cast(GtkAssistant*)cPtr, pageNum);
+    gtk_assistant_remove_page(cast(GtkAssistant*)this._cPtr, pageNum);
   }
 
   /**
@@ -400,7 +400,7 @@ class Assistant : gtk.window.Window
   */
   void setCurrentPage(int pageNum)
   {
-    gtk_assistant_set_current_page(cast(GtkAssistant*)cPtr, pageNum);
+    gtk_assistant_set_current_page(cast(GtkAssistant*)this._cPtr, pageNum);
   }
 
   /**
@@ -431,7 +431,7 @@ class Assistant : gtk.window.Window
 
     auto _pageFunc = pageFunc ? freezeDelegate(cast(void*)&pageFunc) : null;
     GDestroyNotify _pageFuncDestroyCB = pageFunc ? &thawDelegate : null;
-    gtk_assistant_set_forward_page_func(cast(GtkAssistant*)cPtr, _pageFuncCB, _pageFunc, _pageFuncDestroyCB);
+    gtk_assistant_set_forward_page_func(cast(GtkAssistant*)this._cPtr, _pageFuncCB, _pageFunc, _pageFuncDestroyCB);
   }
 
   /**
@@ -448,7 +448,7 @@ class Assistant : gtk.window.Window
   */
   void setPageComplete(gtk.widget.Widget page, bool complete)
   {
-    gtk_assistant_set_page_complete(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, complete);
+    gtk_assistant_set_page_complete(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, complete);
   }
 
   /**
@@ -466,7 +466,7 @@ class Assistant : gtk.window.Window
   void setPageTitle(gtk.widget.Widget page, string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_assistant_set_page_title(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, _title);
+    gtk_assistant_set_page_title(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, _title);
   }
 
   /**
@@ -482,7 +482,7 @@ class Assistant : gtk.window.Window
   */
   void setPageType(gtk.widget.Widget page, gtk.types.AssistantPageType type)
   {
-    gtk_assistant_set_page_type(cast(GtkAssistant*)cPtr, page ? cast(GtkWidget*)page.cPtr(No.Dup) : null, type);
+    gtk_assistant_set_page_type(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, type);
   }
 
   /**
@@ -500,7 +500,7 @@ class Assistant : gtk.window.Window
   */
   void updateButtonsState()
   {
-    gtk_assistant_update_buttons_state(cast(GtkAssistant*)cPtr);
+    gtk_assistant_update_buttons_state(cast(GtkAssistant*)this._cPtr);
   }
 
   /**

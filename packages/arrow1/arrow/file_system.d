@@ -24,16 +24,16 @@ class FileSystem : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_system_get_type != &gidSymbolNotFound ? garrow_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class FileSystem : gobject.object.ObjectWrap
     _cretval = garrow_file_system_create(_uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_system.FileSystem)(cast(GArrowFileSystem*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.file_system.FileSystem)(cast(GArrowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char)* _src = src.toCString(No.Alloc);
     const(char)* _dest = dest.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_copy_file(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
+    _retval = garrow_file_system_copy_file(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -103,7 +103,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_create_dir(cast(GArrowFileSystem*)cPtr, _path, recursive, &_err);
+    _retval = garrow_file_system_create_dir(cast(GArrowFileSystem*)this._cPtr, _path, recursive, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -122,7 +122,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_dir(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _retval = garrow_file_system_delete_dir(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -144,7 +144,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _retval = garrow_file_system_delete_dir_contents(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -163,7 +163,7 @@ class FileSystem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_delete_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _retval = garrow_file_system_delete_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -190,7 +190,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char*)* _paths = _tmppaths.ptr;
 
     GError *_err;
-    _retval = garrow_file_system_delete_files(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
+    _retval = garrow_file_system_delete_files(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -215,10 +215,10 @@ class FileSystem : gobject.object.ObjectWrap
     GArrowFileInfo* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _cretval = garrow_file_system_get_file_info(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_info.FileInfo)(cast(GArrowFileInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.file_info.FileInfo)(cast(GArrowFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char*)* _paths = _tmppaths.ptr;
 
     GError *_err;
-    _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)cPtr, _paths, _nPaths, &_err);
+    _cretval = garrow_file_system_get_file_infos_paths(cast(GArrowFileSystem*)this._cPtr, _paths, _nPaths, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
@@ -267,7 +267,7 @@ class FileSystem : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = garrow_file_system_get_file_infos_selector(cast(GArrowFileSystem*)cPtr, fileSelector ? cast(GArrowFileSelector*)fileSelector.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_file_system_get_file_infos_selector(cast(GArrowFileSystem*)this._cPtr, fileSelector ? cast(GArrowFileSelector*)fileSelector._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
@@ -278,7 +278,7 @@ class FileSystem : gobject.object.ObjectWrap
   string getTypeName()
   {
     char* _cretval;
-    _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)cPtr);
+    _cretval = garrow_file_system_get_type_name(cast(GArrowFileSystem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -304,7 +304,7 @@ class FileSystem : gobject.object.ObjectWrap
     const(char)* _src = src.toCString(No.Alloc);
     const(char)* _dest = dest.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_file_system_move(cast(GArrowFileSystem*)cPtr, _src, _dest, &_err);
+    _retval = garrow_file_system_move(cast(GArrowFileSystem*)this._cPtr, _src, _dest, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -325,10 +325,10 @@ class FileSystem : gobject.object.ObjectWrap
     GArrowOutputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _cretval = garrow_file_system_open_append_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -346,10 +346,10 @@ class FileSystem : gobject.object.ObjectWrap
     GArrowSeekableInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _cretval = garrow_file_system_open_input_file(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.seekable_input_stream.SeekableInputStream)(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.seekable_input_stream.SeekableInputStream)(cast(GArrowSeekableInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -367,10 +367,10 @@ class FileSystem : gobject.object.ObjectWrap
     GArrowInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _cretval = garrow_file_system_open_input_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.input_stream.InputStream)(cast(GArrowInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.input_stream.InputStream)(cast(GArrowInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -389,10 +389,10 @@ class FileSystem : gobject.object.ObjectWrap
     GArrowOutputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)cPtr, _path, &_err);
+    _cretval = garrow_file_system_open_output_stream(cast(GArrowFileSystem*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.output_stream.OutputStream)(cast(GArrowOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 }

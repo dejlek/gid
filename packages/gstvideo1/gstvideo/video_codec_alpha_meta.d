@@ -34,7 +34,7 @@ class VideoCodecAlphaMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -45,7 +45,7 @@ class VideoCodecAlphaMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta);
   }
 
   /**
@@ -54,7 +54,7 @@ class VideoCodecAlphaMeta
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
   }
 
   /**
@@ -64,8 +64,8 @@ class VideoCodecAlphaMeta
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecAlphaMeta*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).buffer);
   }
 
   /** */

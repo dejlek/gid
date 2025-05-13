@@ -174,49 +174,51 @@ alias gst_ptp_statistics_callback_remove = c_gst_ptp_statistics_callback_remove;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // NetAddressMeta
-  gidLink(cast(void**)&gst_net_address_meta_get_info, "gst_net_address_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_net_address_meta_get_info, "gst_net_address_meta_get_info", libs);
 
   // NetClientClock
-  gidLink(cast(void**)&gst_net_client_clock_get_type, "gst_net_client_clock_get_type", LIBS);
-  gidLink(cast(void**)&gst_net_client_clock_new, "gst_net_client_clock_new", LIBS);
+  gidLink(cast(void**)&gst_net_client_clock_get_type, "gst_net_client_clock_get_type", libs);
+  gidLink(cast(void**)&gst_net_client_clock_new, "gst_net_client_clock_new", libs);
 
   // NetControlMessageMeta
-  gidLink(cast(void**)&gst_net_control_message_meta_get_info, "gst_net_control_message_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_net_control_message_meta_get_info, "gst_net_control_message_meta_get_info", libs);
 
   // NetTimePacket
-  gidLink(cast(void**)&gst_net_time_packet_get_type, "gst_net_time_packet_get_type", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_new, "gst_net_time_packet_new", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_copy, "gst_net_time_packet_copy", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_free, "gst_net_time_packet_free", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_send, "gst_net_time_packet_send", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_serialize, "gst_net_time_packet_serialize", LIBS);
-  gidLink(cast(void**)&gst_net_time_packet_receive, "gst_net_time_packet_receive", LIBS);
+  gidLink(cast(void**)&gst_net_time_packet_get_type, "gst_net_time_packet_get_type", libs);
+  gidLink(cast(void**)&gst_net_time_packet_new, "gst_net_time_packet_new", libs);
+  gidLink(cast(void**)&gst_net_time_packet_copy, "gst_net_time_packet_copy", libs);
+  gidLink(cast(void**)&gst_net_time_packet_free, "gst_net_time_packet_free", libs);
+  gidLink(cast(void**)&gst_net_time_packet_send, "gst_net_time_packet_send", libs);
+  gidLink(cast(void**)&gst_net_time_packet_serialize, "gst_net_time_packet_serialize", libs);
+  gidLink(cast(void**)&gst_net_time_packet_receive, "gst_net_time_packet_receive", libs);
 
   // NetTimeProvider
-  gidLink(cast(void**)&gst_net_time_provider_get_type, "gst_net_time_provider_get_type", LIBS);
-  gidLink(cast(void**)&gst_net_time_provider_new, "gst_net_time_provider_new", LIBS);
+  gidLink(cast(void**)&gst_net_time_provider_get_type, "gst_net_time_provider_get_type", libs);
+  gidLink(cast(void**)&gst_net_time_provider_new, "gst_net_time_provider_new", libs);
 
   // NtpClock
-  gidLink(cast(void**)&gst_ntp_clock_get_type, "gst_ntp_clock_get_type", LIBS);
-  gidLink(cast(void**)&gst_ntp_clock_new, "gst_ntp_clock_new", LIBS);
+  gidLink(cast(void**)&gst_ntp_clock_get_type, "gst_ntp_clock_get_type", libs);
+  gidLink(cast(void**)&gst_ntp_clock_new, "gst_ntp_clock_new", libs);
 
   // PtpClock
-  gidLink(cast(void**)&gst_ptp_clock_get_type, "gst_ptp_clock_get_type", LIBS);
-  gidLink(cast(void**)&gst_ptp_clock_new, "gst_ptp_clock_new", LIBS);
+  gidLink(cast(void**)&gst_ptp_clock_get_type, "gst_ptp_clock_get_type", libs);
+  gidLink(cast(void**)&gst_ptp_clock_new, "gst_ptp_clock_new", libs);
 
   // global
-  gidLink(cast(void**)&gst_buffer_add_net_address_meta, "gst_buffer_add_net_address_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_net_control_message_meta, "gst_buffer_add_net_control_message_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_net_address_meta, "gst_buffer_get_net_address_meta", LIBS);
-  gidLink(cast(void**)&gst_net_address_meta_api_get_type, "gst_net_address_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_net_control_message_meta_api_get_type, "gst_net_control_message_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_net_utils_set_socket_tos, "gst_net_utils_set_socket_tos", LIBS);
-  gidLink(cast(void**)&gst_ptp_deinit, "gst_ptp_deinit", LIBS);
-  gidLink(cast(void**)&gst_ptp_init, "gst_ptp_init", LIBS);
-  gidLink(cast(void**)&gst_ptp_init_full, "gst_ptp_init_full", LIBS);
-  gidLink(cast(void**)&gst_ptp_is_initialized, "gst_ptp_is_initialized", LIBS);
-  gidLink(cast(void**)&gst_ptp_is_supported, "gst_ptp_is_supported", LIBS);
-  gidLink(cast(void**)&gst_ptp_statistics_callback_add, "gst_ptp_statistics_callback_add", LIBS);
-  gidLink(cast(void**)&gst_ptp_statistics_callback_remove, "gst_ptp_statistics_callback_remove", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_net_address_meta, "gst_buffer_add_net_address_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_net_control_message_meta, "gst_buffer_add_net_control_message_meta", libs);
+  gidLink(cast(void**)&gst_buffer_get_net_address_meta, "gst_buffer_get_net_address_meta", libs);
+  gidLink(cast(void**)&gst_net_address_meta_api_get_type, "gst_net_address_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_net_control_message_meta_api_get_type, "gst_net_control_message_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_net_utils_set_socket_tos, "gst_net_utils_set_socket_tos", libs);
+  gidLink(cast(void**)&gst_ptp_deinit, "gst_ptp_deinit", libs);
+  gidLink(cast(void**)&gst_ptp_init, "gst_ptp_init", libs);
+  gidLink(cast(void**)&gst_ptp_init_full, "gst_ptp_init_full", libs);
+  gidLink(cast(void**)&gst_ptp_is_initialized, "gst_ptp_is_initialized", libs);
+  gidLink(cast(void**)&gst_ptp_is_supported, "gst_ptp_is_supported", libs);
+  gidLink(cast(void**)&gst_ptp_statistics_callback_add, "gst_ptp_statistics_callback_add", libs);
+  gidLink(cast(void**)&gst_ptp_statistics_callback_remove, "gst_ptp_statistics_callback_remove", libs);
 }

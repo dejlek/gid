@@ -63,16 +63,16 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_filter_get_type != &gidSymbolNotFound ? gtk_file_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,8 +114,8 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   static gtk.file_filter.FileFilter newFromGvariant(glib.variant.Variant variant)
   {
     GtkFileFilter* _cretval;
-    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
+    _cretval = gtk_file_filter_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_file_filter_add_custom(cast(GtkFileFilter*)cPtr, needed, _funcCB, _func, _funcDestroyCB);
+    gtk_file_filter_add_custom(cast(GtkFileFilter*)this._cPtr, needed, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -157,7 +157,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   void addMimeType(string mimeType)
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    gtk_file_filter_add_mime_type(cast(GtkFileFilter*)cPtr, _mimeType);
+    gtk_file_filter_add_mime_type(cast(GtkFileFilter*)this._cPtr, _mimeType);
   }
 
   /**
@@ -169,7 +169,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   void addPattern(string pattern)
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
-    gtk_file_filter_add_pattern(cast(GtkFileFilter*)cPtr, _pattern);
+    gtk_file_filter_add_pattern(cast(GtkFileFilter*)this._cPtr, _pattern);
   }
 
   /**
@@ -178,7 +178,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   */
   void addPixbufFormats()
   {
-    gtk_file_filter_add_pixbuf_formats(cast(GtkFileFilter*)cPtr);
+    gtk_file_filter_add_pixbuf_formats(cast(GtkFileFilter*)this._cPtr);
   }
 
   /**
@@ -198,7 +198,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   bool filter(gtk.file_filter_info.FileFilterInfo filterInfo)
   {
     bool _retval;
-    _retval = gtk_file_filter_filter(cast(GtkFileFilter*)cPtr, filterInfo ? cast(const(GtkFileFilterInfo)*)filterInfo.cPtr : null);
+    _retval = gtk_file_filter_filter(cast(GtkFileFilter*)this._cPtr, filterInfo ? cast(const(GtkFileFilterInfo)*)filterInfo._cPtr : null);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)cPtr);
+    _cretval = gtk_file_filter_get_name(cast(GtkFileFilter*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -229,7 +229,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   gtk.types.FileFilterFlags getNeeded()
   {
     GtkFileFilterFlags _cretval;
-    _cretval = gtk_file_filter_get_needed(cast(GtkFileFilter*)cPtr);
+    _cretval = gtk_file_filter_get_needed(cast(GtkFileFilter*)this._cPtr);
     gtk.types.FileFilterFlags _retval = cast(gtk.types.FileFilterFlags)_cretval;
     return _retval;
   }
@@ -246,7 +246,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_file_filter_set_name(cast(GtkFileFilter*)cPtr, _name);
+    gtk_file_filter_set_name(cast(GtkFileFilter*)this._cPtr, _name);
   }
 
   /**
@@ -256,7 +256,7 @@ class FileFilter : gobject.initially_unowned.InitiallyUnowned, gtk.buildable.Bui
   glib.variant.Variant toGvariant()
   {
     GVariant* _cretval;
-    _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)cPtr);
+    _cretval = gtk_file_filter_to_gvariant(cast(GtkFileFilter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }

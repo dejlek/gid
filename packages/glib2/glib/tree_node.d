@@ -26,7 +26,7 @@ class TreeNode
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -37,7 +37,7 @@ class TreeNode
   */
   void* key()
   {
-    auto _retval = g_tree_node_key(cast(GTreeNode*)cPtr);
+    auto _retval = g_tree_node_key(cast(GTreeNode*)this._cPtr);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class TreeNode
   glib.tree_node.TreeNode next()
   {
     GTreeNode* _cretval;
-    _cretval = g_tree_node_next(cast(GTreeNode*)cPtr);
+    _cretval = g_tree_node_next(cast(GTreeNode*)this._cPtr);
     auto _retval = _cretval ? new glib.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -62,7 +62,7 @@ class TreeNode
   glib.tree_node.TreeNode previous()
   {
     GTreeNode* _cretval;
-    _cretval = g_tree_node_previous(cast(GTreeNode*)cPtr);
+    _cretval = g_tree_node_previous(cast(GTreeNode*)this._cPtr);
     auto _retval = _cretval ? new glib.tree_node.TreeNode(cast(GTreeNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -73,7 +73,7 @@ class TreeNode
   */
   void* value()
   {
-    auto _retval = g_tree_node_value(cast(GTreeNode*)cPtr);
+    auto _retval = g_tree_node_value(cast(GTreeNode*)this._cPtr);
     return _retval;
   }
 }

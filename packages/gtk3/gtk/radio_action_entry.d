@@ -27,7 +27,7 @@ class RadioActionEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class RadioActionEntry
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -48,8 +48,8 @@ class RadioActionEntry
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -59,7 +59,7 @@ class RadioActionEntry
   */
   @property string stockId()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).stockId);
+    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -70,8 +70,8 @@ class RadioActionEntry
   */
   @property void stockId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)cPtr).stockId);
+    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -81,7 +81,7 @@ class RadioActionEntry
   */
   @property string label()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).label);
+    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -92,8 +92,8 @@ class RadioActionEntry
   */
   @property void label(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)cPtr).label);
+    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -103,7 +103,7 @@ class RadioActionEntry
   */
   @property string accelerator()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).accelerator);
+    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -114,8 +114,8 @@ class RadioActionEntry
   */
   @property void accelerator(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).accelerator);
-    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)cPtr).accelerator);
+    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).accelerator);
+    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -125,7 +125,7 @@ class RadioActionEntry
   */
   @property string tooltip()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).tooltip);
+    return cToD!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -136,8 +136,8 @@ class RadioActionEntry
   */
   @property void tooltip(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)cPtr).tooltip);
-    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)cPtr).tooltip);
+    cValueFree!(string)(cast(void*)(cast(GtkRadioActionEntry*)this._cPtr).tooltip);
+    dToC(propval, cast(void*)&(cast(GtkRadioActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -147,7 +147,7 @@ class RadioActionEntry
   */
   @property int value()
   {
-    return (cast(GtkRadioActionEntry*)cPtr).value;
+    return (cast(GtkRadioActionEntry*)this._cPtr).value;
   }
 
   /**
@@ -158,6 +158,6 @@ class RadioActionEntry
   */
   @property void value(int propval)
   {
-    (cast(GtkRadioActionEntry*)cPtr).value = propval;
+    (cast(GtkRadioActionEntry*)this._cPtr).value = propval;
   }
 }

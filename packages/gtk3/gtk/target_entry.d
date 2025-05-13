@@ -22,22 +22,22 @@ class TargetEntry : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_target_entry_get_type != &gidSymbolNotFound ? gtk_target_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property string target()
   {
-    return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
+    return cToD!(string)(cast(void*)(cast(GtkTargetEntry*)this._cPtr).target);
   }
 
   /**
@@ -62,8 +62,8 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property void target(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)cPtr).target);
-    dToC(propval, cast(void*)&(cast(GtkTargetEntry*)cPtr).target);
+    cValueFree!(string)(cast(void*)(cast(GtkTargetEntry*)this._cPtr).target);
+    dToC(propval, cast(void*)&(cast(GtkTargetEntry*)this._cPtr).target);
   }
 
   /**
@@ -72,7 +72,7 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property uint flags()
   {
-    return (cast(GtkTargetEntry*)cPtr).flags;
+    return (cast(GtkTargetEntry*)this._cPtr).flags;
   }
 
   /**
@@ -82,7 +82,7 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property void flags(uint propval)
   {
-    (cast(GtkTargetEntry*)cPtr).flags = propval;
+    (cast(GtkTargetEntry*)this._cPtr).flags = propval;
   }
 
   /**
@@ -94,7 +94,7 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property uint info()
   {
-    return (cast(GtkTargetEntry*)cPtr).info;
+    return (cast(GtkTargetEntry*)this._cPtr).info;
   }
 
   /**
@@ -107,7 +107,7 @@ class TargetEntry : gobject.boxed.Boxed
   */
   @property void info(uint propval)
   {
-    (cast(GtkTargetEntry*)cPtr).info = propval;
+    (cast(GtkTargetEntry*)this._cPtr).info = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class TargetEntry : gobject.boxed.Boxed
   gtk.target_entry.TargetEntry copy()
   {
     GtkTargetEntry* _cretval;
-    _cretval = gtk_target_entry_copy(cast(GtkTargetEntry*)cPtr);
+    _cretval = gtk_target_entry_copy(cast(GtkTargetEntry*)this._cPtr);
     auto _retval = _cretval ? new gtk.target_entry.TargetEntry(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

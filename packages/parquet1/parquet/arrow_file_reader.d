@@ -24,16 +24,16 @@ class ArrowFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_arrow_file_reader_get_type != &gidSymbolNotFound ? gparquet_arrow_file_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,10 +47,10 @@ class ArrowFileReader : gobject.object.ObjectWrap
   {
     GParquetArrowFileReader* _cretval;
     GError *_err;
-    _cretval = gparquet_arrow_file_reader_new_arrow(source ? cast(GArrowSeekableInputStream*)source.cPtr(No.Dup) : null, &_err);
+    _cretval = gparquet_arrow_file_reader_new_arrow(source ? cast(GArrowSeekableInputStream*)source._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.arrow_file_reader.ArrowFileReader)(cast(GParquetArrowFileReader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.arrow_file_reader.ArrowFileReader)(cast(GParquetArrowFileReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
     _cretval = gparquet_arrow_file_reader_new_path(_path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.arrow_file_reader.ArrowFileReader)(cast(GParquetArrowFileReader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.arrow_file_reader.ArrowFileReader)(cast(GParquetArrowFileReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -71,8 +71,8 @@ class ArrowFileReader : gobject.object.ObjectWrap
   parquet.file_metadata.FileMetadata getMetadata()
   {
     GParquetFileMetadata* _cretval;
-    _cretval = gparquet_arrow_file_reader_get_metadata(cast(GParquetArrowFileReader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.file_metadata.FileMetadata)(cast(GParquetFileMetadata*)_cretval, Yes.Take);
+    _cretval = gparquet_arrow_file_reader_get_metadata(cast(GParquetArrowFileReader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.file_metadata.FileMetadata)(cast(GParquetFileMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   int getNRowGroups()
   {
     int _retval;
-    _retval = gparquet_arrow_file_reader_get_n_row_groups(cast(GParquetArrowFileReader*)cPtr);
+    _retval = gparquet_arrow_file_reader_get_n_row_groups(cast(GParquetArrowFileReader*)this._cPtr);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ArrowFileReader : gobject.object.ObjectWrap
   long getNRows()
   {
     long _retval;
-    _retval = gparquet_arrow_file_reader_get_n_rows(cast(GParquetArrowFileReader*)cPtr);
+    _retval = gparquet_arrow_file_reader_get_n_rows(cast(GParquetArrowFileReader*)this._cPtr);
     return _retval;
   }
 
@@ -97,10 +97,10 @@ class ArrowFileReader : gobject.object.ObjectWrap
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = gparquet_arrow_file_reader_get_schema(cast(GParquetArrowFileReader*)cPtr, &_err);
+    _cretval = gparquet_arrow_file_reader_get_schema(cast(GParquetArrowFileReader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,10 +109,10 @@ class ArrowFileReader : gobject.object.ObjectWrap
   {
     GArrowChunkedArray* _cretval;
     GError *_err;
-    _cretval = gparquet_arrow_file_reader_read_column_data(cast(GParquetArrowFileReader*)cPtr, i, &_err);
+    _cretval = gparquet_arrow_file_reader_read_column_data(cast(GParquetArrowFileReader*)this._cPtr, i, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,10 +126,10 @@ class ArrowFileReader : gobject.object.ObjectWrap
 
     auto _columnIndices = cast(int*)columnIndices.ptr;
     GError *_err;
-    _cretval = gparquet_arrow_file_reader_read_row_group(cast(GParquetArrowFileReader*)cPtr, rowGroupIndex, _columnIndices, _nColumnIndices, &_err);
+    _cretval = gparquet_arrow_file_reader_read_row_group(cast(GParquetArrowFileReader*)this._cPtr, rowGroupIndex, _columnIndices, _nColumnIndices, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -138,16 +138,16 @@ class ArrowFileReader : gobject.object.ObjectWrap
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = gparquet_arrow_file_reader_read_table(cast(GParquetArrowFileReader*)cPtr, &_err);
+    _cretval = gparquet_arrow_file_reader_read_table(cast(GParquetArrowFileReader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
   /** */
   void setUseThreads(bool useThreads)
   {
-    gparquet_arrow_file_reader_set_use_threads(cast(GParquetArrowFileReader*)cPtr, useThreads);
+    gparquet_arrow_file_reader_set_use_threads(cast(GParquetArrowFileReader*)this._cPtr, useThreads);
   }
 }

@@ -62,16 +62,16 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_password_entry_get_type != &gidSymbolNotFound ? gtk_password_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -180,8 +180,8 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_password_entry_get_extra_menu(cast(GtkPasswordEntry*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   bool getShowPeekIcon()
   {
     bool _retval;
-    _retval = gtk_password_entry_get_show_peek_icon(cast(GtkPasswordEntry*)cPtr);
+    _retval = gtk_password_entry_get_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
-    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_password_entry_set_extra_menu(cast(GtkPasswordEntry*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,7 +220,7 @@ class PasswordEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setShowPeekIcon(bool showPeekIcon)
   {
-    gtk_password_entry_set_show_peek_icon(cast(GtkPasswordEntry*)cPtr, showPeekIcon);
+    gtk_password_entry_set_show_peek_icon(cast(GtkPasswordEntry*)this._cPtr, showPeekIcon);
   }
 
   /**

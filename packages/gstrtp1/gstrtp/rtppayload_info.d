@@ -26,7 +26,7 @@ class RTPPayloadInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class RTPPayloadInfo
   */
   @property ubyte payloadType()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).payloadType;
+    return (cast(GstRTPPayloadInfo*)this._cPtr).payloadType;
   }
 
   /**
@@ -47,7 +47,7 @@ class RTPPayloadInfo
   */
   @property void payloadType(ubyte propval)
   {
-    (cast(GstRTPPayloadInfo*)cPtr).payloadType = propval;
+    (cast(GstRTPPayloadInfo*)this._cPtr).payloadType = propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class RTPPayloadInfo
   */
   @property string media()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).media);
   }
 
   /**
@@ -68,8 +68,8 @@ class RTPPayloadInfo
   */
   @property void media(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).media);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).media);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).media);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).media);
   }
 
   /**
@@ -78,7 +78,7 @@ class RTPPayloadInfo
   */
   @property string encodingName()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
   }
 
   /**
@@ -88,8 +88,8 @@ class RTPPayloadInfo
   */
   @property void encodingName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingName);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingName);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingName);
   }
 
   /**
@@ -98,7 +98,7 @@ class RTPPayloadInfo
   */
   @property uint clockRate()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).clockRate;
+    return (cast(GstRTPPayloadInfo*)this._cPtr).clockRate;
   }
 
   /**
@@ -108,7 +108,7 @@ class RTPPayloadInfo
   */
   @property void clockRate(uint propval)
   {
-    (cast(GstRTPPayloadInfo*)cPtr).clockRate = propval;
+    (cast(GstRTPPayloadInfo*)this._cPtr).clockRate = propval;
   }
 
   /**
@@ -118,7 +118,7 @@ class RTPPayloadInfo
   */
   @property string encodingParameters()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
+    return cToD!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
   }
 
   /**
@@ -129,8 +129,8 @@ class RTPPayloadInfo
   */
   @property void encodingParameters(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
-    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)cPtr).encodingParameters);
+    cValueFree!(string)(cast(void*)(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
+    dToC(propval, cast(void*)&(cast(GstRTPPayloadInfo*)this._cPtr).encodingParameters);
   }
 
   /**
@@ -139,7 +139,7 @@ class RTPPayloadInfo
   */
   @property uint bitrate()
   {
-    return (cast(GstRTPPayloadInfo*)cPtr).bitrate;
+    return (cast(GstRTPPayloadInfo*)this._cPtr).bitrate;
   }
 
   /**
@@ -149,7 +149,7 @@ class RTPPayloadInfo
   */
   @property void bitrate(uint propval)
   {
-    (cast(GstRTPPayloadInfo*)cPtr).bitrate = propval;
+    (cast(GstRTPPayloadInfo*)this._cPtr).bitrate = propval;
   }
 
   /**

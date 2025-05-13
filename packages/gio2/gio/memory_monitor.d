@@ -65,7 +65,7 @@ interface MemoryMonitor
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_monitor_get_type != &gidSymbolNotFound ? g_memory_monitor_get_type() : cast(GType)0;
@@ -79,7 +79,7 @@ interface MemoryMonitor
   {
     GMemoryMonitor* _cretval;
     _cretval = g_memory_monitor_dup_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.memory_monitor.MemoryMonitor)(cast(GMemoryMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

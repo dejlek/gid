@@ -645,7 +645,7 @@ void assertionMessageError(string domain, string file, int line, string func, st
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _func = func.toCString(No.Alloc);
   const(char)* _expr = expr.toCString(No.Alloc);
-  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error.cPtr : null, errorDomain, errorCode);
+  g_assertion_message_error(_domain, _file, line, _func, _expr, error ? cast(const(GError)*)error._cPtr : null, errorDomain, errorCode);
 }
 
 /**
@@ -1897,7 +1897,7 @@ int closefrom(int lowfd)
 string computeChecksumForBytes(glib.types.ChecksumType checksumType, glib.bytes.Bytes data)
 {
   char* _cretval;
-  _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+  _cretval = g_compute_checksum_for_bytes(checksumType, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -1969,7 +1969,7 @@ string computeChecksumForString(glib.types.ChecksumType checksumType, string str
 string computeHmacForBytes(glib.types.ChecksumType digestType, glib.bytes.Bytes key, glib.bytes.Bytes data)
 {
   char* _cretval;
-  _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key.cPtr(No.Dup) : null, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+  _cretval = g_compute_hmac_for_bytes(digestType, key ? cast(GBytes*)key._cPtr(No.Dup) : null, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -3464,7 +3464,7 @@ string getCurrentDir()
 */
 void getCurrentTime(glib.time_val.TimeVal result)
 {
-  g_get_current_time(result ? cast(GTimeVal*)result.cPtr : null);
+  g_get_current_time(result ? cast(GTimeVal*)result._cPtr : null);
 }
 
 /**
@@ -4487,7 +4487,7 @@ uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCon
   uint _retval;
   auto _func = func ? freezeDelegate(cast(void*)&func) : null;
   GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-  _retval = g_io_add_watch_full(channel ? cast(GIOChannel*)channel.cPtr(No.Dup) : null, priority, condition, _funcCB, _func, _funcDestroyCB);
+  _retval = g_io_add_watch_full(channel ? cast(GIOChannel*)channel._cPtr(No.Dup) : null, priority, condition, _funcCB, _func, _funcDestroyCB);
   return _retval;
 }
 
@@ -4515,7 +4515,7 @@ uint ioAddWatch(glib.iochannel.IOChannel channel, int priority, glib.types.IOCon
 glib.source.Source ioCreateWatch(glib.iochannel.IOChannel channel, glib.types.IOCondition condition)
 {
   GSource* _cretval;
-  _cretval = g_io_create_watch(channel ? cast(GIOChannel*)channel.cPtr(No.Dup) : null, condition);
+  _cretval = g_io_create_watch(channel ? cast(GIOChannel*)channel._cPtr(No.Dup) : null, condition);
   auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -4865,7 +4865,7 @@ uint logSetHandler(string logDomain, glib.types.LogLevelFlags logLevels, glib.ty
 void logVariant(string logDomain, glib.types.LogLevelFlags logLevel, glib.variant.Variant fields)
 {
   const(char)* _logDomain = logDomain.toCString(No.Alloc);
-  g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields.cPtr(No.Dup) : null);
+  g_log_variant(_logDomain, logLevel, fields ? cast(GVariant*)fields._cPtr(No.Dup) : null);
 }
 
 /**
@@ -5824,7 +5824,7 @@ int poll(glib.types.PollFD fds, uint nfds, int timeout)
 void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src)
 {
   GError* _dest;
-  g_propagate_error(&_dest, src ? cast(GError*)src.cPtr : null);
+  g_propagate_error(&_dest, src ? cast(GError*)src._cPtr : null);
   dest = new glib.error.ErrorWrap(cast(void*)_dest);
 }
 
@@ -9042,7 +9042,7 @@ int testRun()
 int testRunSuite(glib.test_suite.TestSuite suite)
 {
   int _retval;
-  _retval = g_test_run_suite(suite ? cast(GTestSuite*)suite.cPtr : null);
+  _retval = g_test_run_suite(suite ? cast(GTestSuite*)suite._cPtr : null);
   return _retval;
 }
 

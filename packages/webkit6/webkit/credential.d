@@ -22,22 +22,22 @@ class Credential : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_credential_get_type != &gidSymbolNotFound ? webkit_credential_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -77,7 +77,7 @@ class Credential : gobject.boxed.Boxed
   static webkit.credential.Credential newForCertificate(gio.tls_certificate.TlsCertificate certificate, webkit.types.CredentialPersistence persistence)
   {
     WebKitCredential* _cretval;
-    _cretval = webkit_credential_new_for_certificate(certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, persistence);
+    _cretval = webkit_credential_new_for_certificate(certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, persistence);
     auto _retval = _cretval ? new webkit.credential.Credential(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -108,7 +108,7 @@ class Credential : gobject.boxed.Boxed
   webkit.credential.Credential copy()
   {
     WebKitCredential* _cretval;
-    _cretval = webkit_credential_copy(cast(WebKitCredential*)cPtr);
+    _cretval = webkit_credential_copy(cast(WebKitCredential*)this._cPtr);
     auto _retval = _cretval ? new webkit.credential.Credential(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -120,8 +120,8 @@ class Credential : gobject.boxed.Boxed
   gio.tls_certificate.TlsCertificate getCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = webkit_credential_get_certificate(cast(WebKitCredential*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = webkit_credential_get_certificate(cast(WebKitCredential*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Credential : gobject.boxed.Boxed
   string getPassword()
   {
     const(char)* _cretval;
-    _cretval = webkit_credential_get_password(cast(WebKitCredential*)cPtr);
+    _cretval = webkit_credential_get_password(cast(WebKitCredential*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -144,7 +144,7 @@ class Credential : gobject.boxed.Boxed
   webkit.types.CredentialPersistence getPersistence()
   {
     WebKitCredentialPersistence _cretval;
-    _cretval = webkit_credential_get_persistence(cast(WebKitCredential*)cPtr);
+    _cretval = webkit_credential_get_persistence(cast(WebKitCredential*)this._cPtr);
     webkit.types.CredentialPersistence _retval = cast(webkit.types.CredentialPersistence)_cretval;
     return _retval;
   }
@@ -156,7 +156,7 @@ class Credential : gobject.boxed.Boxed
   string getUsername()
   {
     const(char)* _cretval;
-    _cretval = webkit_credential_get_username(cast(WebKitCredential*)cPtr);
+    _cretval = webkit_credential_get_username(cast(WebKitCredential*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -168,7 +168,7 @@ class Credential : gobject.boxed.Boxed
   bool hasPassword()
   {
     bool _retval;
-    _retval = webkit_credential_has_password(cast(WebKitCredential*)cPtr);
+    _retval = webkit_credential_has_password(cast(WebKitCredential*)this._cPtr);
     return _retval;
   }
 }

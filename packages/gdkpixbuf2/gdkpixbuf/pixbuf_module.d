@@ -74,7 +74,7 @@ class PixbufModule
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -86,7 +86,7 @@ class PixbufModule
   */
   @property string moduleName()
   {
-    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).moduleName);
   }
 
   /**
@@ -97,8 +97,8 @@ class PixbufModule
   */
   @property void moduleName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).moduleName);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).moduleName);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).moduleName);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).moduleName);
   }
 
   /**
@@ -107,7 +107,7 @@ class PixbufModule
   */
   @property string modulePath()
   {
-    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).modulePath);
   }
 
   /**
@@ -117,8 +117,8 @@ class PixbufModule
   */
   @property void modulePath(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)cPtr).modulePath);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).modulePath);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).modulePath);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).modulePath);
   }
 
   /**
@@ -127,7 +127,7 @@ class PixbufModule
   */
   @property gmodule.module_.Module module_()
   {
-    return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)cPtr).module_);
+    return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)this._cPtr).module_);
   }
 
   /**
@@ -136,7 +136,7 @@ class PixbufModule
   */
   @property gdkpixbuf.pixbuf_format.PixbufFormat info()
   {
-    return cToD!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)cPtr).info);
+    return cToD!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).info);
   }
 
   /**
@@ -146,8 +146,8 @@ class PixbufModule
   */
   @property void info(gdkpixbuf.pixbuf_format.PixbufFormat propval)
   {
-    cValueFree!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)cPtr).info);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)cPtr).info);
+    cValueFree!(gdkpixbuf.pixbuf_format.PixbufFormat)(cast(void*)(cast(GdkPixbufModule*)this._cPtr).info);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModule*)this._cPtr).info);
   }
 
   /**
@@ -156,7 +156,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleLoadFunc load()
   {
-    return (cast(GdkPixbufModule*)cPtr).load;
+    return (cast(GdkPixbufModule*)this._cPtr).load;
   }
 
   /**
@@ -167,7 +167,7 @@ class PixbufModule
 
   @property void load(GdkPixbufModuleLoadFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).load = propval;
+    (cast(GdkPixbufModule*)this._cPtr).load = propval;
   }
 
   /**
@@ -176,7 +176,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleLoadXpmDataFunc loadXpmData()
   {
-    return (cast(GdkPixbufModule*)cPtr).loadXpmData;
+    return (cast(GdkPixbufModule*)this._cPtr).loadXpmData;
   }
 
   /**
@@ -187,7 +187,7 @@ class PixbufModule
 
   @property void loadXpmData(GdkPixbufModuleLoadXpmDataFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).loadXpmData = propval;
+    (cast(GdkPixbufModule*)this._cPtr).loadXpmData = propval;
   }
 
   /**
@@ -196,7 +196,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleStopLoadFunc stopLoad()
   {
-    return (cast(GdkPixbufModule*)cPtr).stopLoad;
+    return (cast(GdkPixbufModule*)this._cPtr).stopLoad;
   }
 
   /**
@@ -207,7 +207,7 @@ class PixbufModule
 
   @property void stopLoad(GdkPixbufModuleStopLoadFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).stopLoad = propval;
+    (cast(GdkPixbufModule*)this._cPtr).stopLoad = propval;
   }
 
   /**
@@ -216,7 +216,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleIncrementLoadFunc loadIncrement()
   {
-    return (cast(GdkPixbufModule*)cPtr).loadIncrement;
+    return (cast(GdkPixbufModule*)this._cPtr).loadIncrement;
   }
 
   /**
@@ -227,7 +227,7 @@ class PixbufModule
 
   @property void loadIncrement(GdkPixbufModuleIncrementLoadFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).loadIncrement = propval;
+    (cast(GdkPixbufModule*)this._cPtr).loadIncrement = propval;
   }
 
   /**
@@ -236,7 +236,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleLoadAnimationFunc loadAnimation()
   {
-    return (cast(GdkPixbufModule*)cPtr).loadAnimation;
+    return (cast(GdkPixbufModule*)this._cPtr).loadAnimation;
   }
 
   /**
@@ -247,7 +247,7 @@ class PixbufModule
 
   @property void loadAnimation(GdkPixbufModuleLoadAnimationFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).loadAnimation = propval;
+    (cast(GdkPixbufModule*)this._cPtr).loadAnimation = propval;
   }
 
   /**
@@ -256,7 +256,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleSaveFunc save()
   {
-    return (cast(GdkPixbufModule*)cPtr).save;
+    return (cast(GdkPixbufModule*)this._cPtr).save;
   }
 
   /**
@@ -267,7 +267,7 @@ class PixbufModule
 
   @property void save(GdkPixbufModuleSaveFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).save = propval;
+    (cast(GdkPixbufModule*)this._cPtr).save = propval;
   }
 
   /**
@@ -276,7 +276,7 @@ class PixbufModule
   */
   @property GdkPixbufModuleSaveOptionSupportedFunc isSaveOptionSupported()
   {
-    return (cast(GdkPixbufModule*)cPtr).isSaveOptionSupported;
+    return (cast(GdkPixbufModule*)this._cPtr).isSaveOptionSupported;
   }
 
   /**
@@ -287,6 +287,6 @@ class PixbufModule
 
   @property void isSaveOptionSupported(GdkPixbufModuleSaveOptionSupportedFunc propval)
   {
-    (cast(GdkPixbufModule*)cPtr).isSaveOptionSupported = propval;
+    (cast(GdkPixbufModule*)this._cPtr).isSaveOptionSupported = propval;
   }
 }

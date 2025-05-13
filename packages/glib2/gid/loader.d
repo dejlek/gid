@@ -5,12 +5,14 @@ module gid.loader;
 import std.file : exists;
 import std.path : buildNormalizedPath, buildPath;
 import std.process : environment;
+import std.stdio : stderr, writeln;
 import std.string : fromStringz, toStringz;
+
+__gshared string[] gidUnresolvedLibs; /// Array of unresolved libraries
+__gshared string[] gidUnresolvedSymbols; /// Array of unresolved function symbols (for libs which were resolved)
 
 debug
 {
-  import std.stdio : writeln;
-
   private immutable bool gidLoaderDebug; // Set by GID_LOADER_DEBUG=1 to enable loader debugging
 
   shared static this()
@@ -22,65 +24,46 @@ debug
 
 version(Windows)
 {
-  import core.sys.windows.winbase : LoadLibraryA, GetProcAddress, FreeLibrary, GetLastError, FormatMessageA,
-  FORMAT_MESSAGE_FROM_SYSTEM, FORMAT_MESSAGE_IGNORE_INSERTS;
-  import core.sys.windows.winnt : LANG_NEUTRAL, IMAGE_FILE_MACHINE_AMD64, IMAGE_FILE_MACHINE_I386;
+  import core.sys.windows.winbase : LoadLibraryA, GetProcAddress;
   import std.algorithm : splitter;
 
-  private bool dllPathSet;
-  private void*[string] dllHandles;
-
-  extern(Windows) int SetDllDirectoryA(const(char)* path);
-
-  void gidLink(void** funcPtr, string symbol, immutable(string[]) libs)
+  void*[] gidResolveLibs(immutable(string[]) libs)
   {
-    if (!dllPathSet && libs.length > 0)
-    {
-      outer: foreach (lib; libs[0].splitter(";"))
-      {
-        foreach (path; environment.get("PATH").splitter(';'))
-        {
-          string dllPath = buildNormalizedPath(path, lib);
-
-          if (exists(dllPath) && checkArchitecture(dllPath))
-          {
-            debug
-            {
-              if (gidLoaderDebug)
-                writeln("Found giD DLL path: ", path);
-            }
-
-            SetDllDirectoryA(toStringz(path));
-            dllPathSet = true;
-            break outer;
-          }
-        }
-      }
-
-      if (!dllPathSet)
-        throw new Exception("Failed to find giD DLL library path");
-    }
+    void*[] libHandles;
 
     foreach (libVariations; libs) // Loop on each library
     {
-      auto handle = dllHandles.get(libVariations, null);
+      void* handle;
+
+      foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
+      {
+        handle = LoadLibraryA(cast(char*)toStringz(lib)); // Windows should search the executable directory, PATH, and other system paths
+        if (handle)
+        {
+          libHandles ~= handle;
+          break;
+        }
+      }
 
       if (!handle)
       {
-        foreach (lib; libVariations.splitter(";")) // Loop on library name variations (separated by ';' - windows only)
+        debug
         {
-          handle = LoadLibraryA(cast(char*)toStringz(lib));
-          if (handle)
-          {
-            dllHandles[libVariations] = handle;
-            break;
-          }
+          if (gidLoaderDebug)
+            stderr.writeln("giD library '" ~ libVariations ~ "'not found");
         }
 
-        if (!handle)
-          throw new Exception("Failed to load library " ~ libVariations);
+        gidUnresolvedLibs ~= libVariations;
       }
+    }
 
+    return libHandles;
+  }
+
+  void gidLink(void** funcPtr, string symbol, void*[] libHandles)
+  {
+    foreach (handle; libHandles) // Loop on each library handle
+    {
       if (auto symPtr = GetProcAddress(handle, cast(char*)toStringz(symbol)))
       {
         *funcPtr = symPtr;
@@ -89,79 +72,62 @@ version(Windows)
     }
 
     *funcPtr = &gidSymbolNotFound;
+    gidUnresolvedSymbols ~= symbol;
 
     debug
     {
       if (gidLoaderDebug)
-        writeln("Symbol not found: " ~ symbol);
+        stderr.writeln("giD symbol '" ~ symbol ~ "' not found");
     }
-  }
-
-  private string getErrorMessage()
-  {
-    char[] buffer = new char[2048];
-    buffer[0] = '\0';
-
-    FormatMessageA(FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS, null, GetLastError(), LANG_NEUTRAL,
-    buffer.ptr, cast(uint)buffer.length, null);
-
-    return buffer.ptr.fromStringz.idup;
-  }
-
-  // Verify a DLL matches the current host architecture
-  private bool checkArchitecture(string dllPath)
-  {
-    import std.stdio : File;
-    File dll = File(dllPath);
-    uint[1] ubuf;
-    ushort[1] shbuf;
-
-    dll.seek(0x3c);
-    int offset = dll.rawRead(ubuf)[0];
-    dll.seek(offset);
-    uint peHead = dll.rawRead(ubuf)[0];
-
-    if (peHead != 0x00004550) // Not a PE Header
-      return false;
-
-    ushort type = dll.rawRead(shbuf)[0];
-
-    version(Win32)
-      return type == IMAGE_FILE_MACHINE_I386;
-    else version(Win64)
-      return type == IMAGE_FILE_MACHINE_AMD64;
-    else
-      return false;
   }
 }
 else // Linux or OSX
 {
   import core.sys.posix.dlfcn : dlerror, dlopen, dlsym, RTLD_GLOBAL, RTLD_NOW;
 
-  void gidLink(void** funcPtr, string symbol, immutable(string[]) libs)
+  void*[] gidResolveLibs(immutable(string[]) libs)
   {
+    void*[] libHandles;
+
     foreach (lib; libs)
     {
       version (OSX) lib = lib.buildPath(basePath, lib);
 
       if (auto handle = dlopen(cast(char*)toStringz(lib), RTLD_GLOBAL | RTLD_NOW))
-      {
-        if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
-        {
-          *funcPtr = symPtr;
-          return;
-        }
-      }
+        libHandles ~= handle;
       else
-        throw new Error("Failed to load library '" ~ lib ~ "': " ~ dlerror().fromStringz.idup);
+      {
+        debug
+        {
+          if (gidLoaderDebug)
+            stderr.writeln("giD library '" ~ lib ~ "' not found: " ~ dlerror().fromStringz.idup);
+        }
+
+        gidUnresolvedLibs ~= lib;
+      }
+    }
+
+    return libHandles;
+  }
+
+  void gidLink(void** funcPtr, string symbol, void*[] libHandles)
+  {
+    foreach (handle; libHandles)
+    {
+      if (auto symPtr = dlsym(handle, cast(char*)toStringz(symbol)))
+      {
+        *funcPtr = symPtr;
+        return;
+      }
     }
 
     *funcPtr = &gidSymbolNotFound;
+    gidUnresolvedSymbols ~= symbol;
 
     debug
     {
       if (gidLoaderDebug)
-        writeln("Symbol not found: ", symbol);
+        stderr.writeln("giD symbol '" ~ symbol ~ "' not found");
     }
   }
 
@@ -187,7 +153,7 @@ else // Linux or OSX
       debug
       {
         if (gidLoaderDebug)
-          writeln("Found giD DLL path: ", path);
+          stderr.writeln("Found giD DLL path: ", path);
       }
 
       return path;
@@ -195,9 +161,33 @@ else // Linux or OSX
   }
 }
 
+/// Return a giD unresolved lib/symbol report
+string gidLoaderUnresolvedReport()
+{
+  if (gidUnresolvedLibs.length == 0 && gidUnresolvedSymbols.length == 0)
+    return "All giD symbols have been resolved\n";
+
+  auto s = "giD unresolved symbol report:\n";
+
+  import std.algorithm : sort;
+  import std.array : array;
+  import std.string : join;
+
+  if (gidUnresolvedLibs.length > 0)
+    s ~= "Unresolved libraries: " ~ gidUnresolvedLibs.sort.array.join(", ") ~ "\n";
+
+  if (gidUnresolvedSymbols.length > 0)
+    s ~= "Unresolved symbols: " ~ gidUnresolvedSymbols.sort.array.join(", ") ~ "\n";
+
+  return s;
+}
+
 void gidSymbolNotFound()
 {
-  throw new Error("Attempted to execute a dynamic library function which was not found");
+  if (gidUnresolvedLibs.length > 0 || gidUnresolvedSymbols.length > 0)
+    stderr.writeln(gidLoaderUnresolvedReport);
+
+  throw new Error("Attempt to execute an unresolved giD function");
 }
 /** */
 class loader

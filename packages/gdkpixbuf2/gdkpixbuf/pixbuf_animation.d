@@ -40,16 +40,16 @@ class PixbufAnimation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_animation_get_type != &gidSymbolNotFound ? gdk_pixbuf_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -82,7 +82,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     _cretval = gdk_pixbuf_animation_new_from_file(_filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
     _cretval = gdk_pixbuf_animation_new_from_resource(_resourcePath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -133,10 +133,10 @@ class PixbufAnimation : gobject.object.ObjectWrap
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
-    _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_pixbuf_animation_new_from_stream(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,10 +153,10 @@ class PixbufAnimation : gobject.object.ObjectWrap
   {
     GdkPixbufAnimation* _cretval;
     GError *_err;
-    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_pixbuf_animation_new_from_stream_finish(asyncResult ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)asyncResult)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -177,17 +177,17 @@ class PixbufAnimation : gobject.object.ObjectWrap
   */
   static void newFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gdk_pixbuf_animation_new_from_stream_async(stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gdk_pixbuf_animation_new_from_stream_async(stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -197,7 +197,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   int getHeight()
   {
     int _retval;
-    _retval = gdk_pixbuf_animation_get_height(cast(GdkPixbufAnimation*)cPtr);
+    _retval = gdk_pixbuf_animation_get_height(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -244,8 +244,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter getIter(glib.time_val.TimeVal startTime = null)
   {
     GdkPixbufAnimationIter* _cretval;
-    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)cPtr, startTime ? cast(const(GTimeVal)*)startTime.cPtr : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
+    _cretval = gdk_pixbuf_animation_get_iter(cast(GdkPixbufAnimation*)this._cPtr, startTime ? cast(const(GTimeVal)*)startTime._cPtr : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation_iter.PixbufAnimationIter)(cast(GdkPixbufAnimationIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -266,8 +266,8 @@ class PixbufAnimation : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getStaticImage()
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   int getWidth()
   {
     int _retval;
-    _retval = gdk_pixbuf_animation_get_width(cast(GdkPixbufAnimation*)cPtr);
+    _retval = gdk_pixbuf_animation_get_width(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
   bool isStaticImage()
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)cPtr);
+    _retval = gdk_pixbuf_animation_is_static_image(cast(GdkPixbufAnimation*)this._cPtr);
     return _retval;
   }
 }

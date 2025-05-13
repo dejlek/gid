@@ -26,7 +26,7 @@ class MountOperationHandlerProxy
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

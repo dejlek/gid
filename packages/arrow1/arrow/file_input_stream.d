@@ -24,16 +24,16 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_input_stream_get_type != &gidSymbolNotFound ? garrow_file_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
     _cretval = garrow_file_input_stream_new_file_descriptor(fileDescriptor, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.file_input_stream.FileInputStream)(cast(GArrowFileInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
   int getFileDescriptor()
   {
     int _retval;
-    _retval = garrow_file_input_stream_get_file_descriptor(cast(GArrowFileInputStream*)cPtr);
+    _retval = garrow_file_input_stream_get_file_descriptor(cast(GArrowFileInputStream*)this._cPtr);
     return _retval;
   }
 }

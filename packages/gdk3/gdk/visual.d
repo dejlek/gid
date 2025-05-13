@@ -22,16 +22,16 @@ class Visual : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_visual_get_type != &gidSymbolNotFound ? gdk_visual_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class Visual : gobject.object.ObjectWrap
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Visual : gobject.object.ObjectWrap
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_both(depth, visualType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Visual : gobject.object.ObjectWrap
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_depth(depth);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class Visual : gobject.object.ObjectWrap
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_best_with_type(visualType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Visual : gobject.object.ObjectWrap
   {
     GdkVisual* _cretval;
     _cretval = gdk_visual_get_system();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class Visual : gobject.object.ObjectWrap
   int getBitsPerRgb()
   {
     int _retval;
-    _retval = gdk_visual_get_bits_per_rgb(cast(GdkVisual*)cPtr);
+    _retval = gdk_visual_get_bits_per_rgb(cast(GdkVisual*)this._cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Visual : gobject.object.ObjectWrap
   */
   void getBluePixelDetails(out uint mask, out int shift, out int precision)
   {
-    gdk_visual_get_blue_pixel_details(cast(GdkVisual*)cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
+    gdk_visual_get_blue_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
 
   /**
@@ -212,7 +212,7 @@ class Visual : gobject.object.ObjectWrap
   gdk.types.ByteOrder getByteOrder()
   {
     GdkByteOrder _cretval;
-    _cretval = gdk_visual_get_byte_order(cast(GdkVisual*)cPtr);
+    _cretval = gdk_visual_get_byte_order(cast(GdkVisual*)this._cPtr);
     gdk.types.ByteOrder _retval = cast(gdk.types.ByteOrder)_cretval;
     return _retval;
   }
@@ -229,7 +229,7 @@ class Visual : gobject.object.ObjectWrap
   int getColormapSize()
   {
     int _retval;
-    _retval = gdk_visual_get_colormap_size(cast(GdkVisual*)cPtr);
+    _retval = gdk_visual_get_colormap_size(cast(GdkVisual*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Visual : gobject.object.ObjectWrap
   int getDepth()
   {
     int _retval;
-    _retval = gdk_visual_get_depth(cast(GdkVisual*)cPtr);
+    _retval = gdk_visual_get_depth(cast(GdkVisual*)this._cPtr);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class Visual : gobject.object.ObjectWrap
   */
   void getGreenPixelDetails(out uint mask, out int shift, out int precision)
   {
-    gdk_visual_get_green_pixel_details(cast(GdkVisual*)cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
+    gdk_visual_get_green_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
 
   /**
@@ -275,7 +275,7 @@ class Visual : gobject.object.ObjectWrap
   */
   void getRedPixelDetails(out uint mask, out int shift, out int precision)
   {
-    gdk_visual_get_red_pixel_details(cast(GdkVisual*)cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
+    gdk_visual_get_red_pixel_details(cast(GdkVisual*)this._cPtr, cast(uint*)&mask, cast(int*)&shift, cast(int*)&precision);
   }
 
   /**
@@ -285,8 +285,8 @@ class Visual : gobject.object.ObjectWrap
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gdk_visual_get_screen(cast(GdkVisual*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gdk_visual_get_screen(cast(GdkVisual*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class Visual : gobject.object.ObjectWrap
   gdk.types.VisualType getVisualType()
   {
     GdkVisualType _cretval;
-    _cretval = gdk_visual_get_visual_type(cast(GdkVisual*)cPtr);
+    _cretval = gdk_visual_get_visual_type(cast(GdkVisual*)this._cPtr);
     gdk.types.VisualType _retval = cast(gdk.types.VisualType)_cretval;
     return _retval;
   }

@@ -72,8 +72,8 @@ __gshared extern(C)
 
   // GObjectAccessible
   GType function() c_atk_gobject_accessible_get_type; ///
-  AtkObject* function(ObjectC* obj) c_atk_gobject_accessible_for_object; ///
-  ObjectC* function(AtkGObjectAccessible* obj) c_atk_gobject_accessible_get_object; ///
+  AtkObject* function(GObject* obj) c_atk_gobject_accessible_for_object; ///
+  GObject* function(AtkGObjectAccessible* obj) c_atk_gobject_accessible_get_object; ///
 
   // Hyperlink
   GType function() c_atk_hyperlink_get_type; ///
@@ -118,7 +118,7 @@ __gshared extern(C)
 
   // NoOpObject
   GType function() c_atk_no_op_object_get_type; ///
-  AtkObject* function(ObjectC* obj) c_atk_no_op_object_new; ///
+  AtkObject* function(GObject* obj) c_atk_no_op_object_new; ///
 
   // NoOpObjectFactory
   GType function() c_atk_no_op_object_factory_get_type; ///
@@ -126,7 +126,7 @@ __gshared extern(C)
 
   // ObjectFactory
   GType function() c_atk_object_factory_get_type; ///
-  AtkObject* function(AtkObjectFactory* factory, ObjectC* obj) c_atk_object_factory_create_accessible; ///
+  AtkObject* function(AtkObjectFactory* factory, GObject* obj) c_atk_object_factory_create_accessible; ///
   GType function(AtkObjectFactory* factory) c_atk_object_factory_get_accessible_type; ///
   void function(AtkObjectFactory* factory) c_atk_object_factory_invalidate; ///
 
@@ -1230,341 +1230,343 @@ alias atk_remove_key_event_listener = c_atk_remove_key_event_listener;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // Action
-  gidLink(cast(void**)&atk_action_get_type, "atk_action_get_type", LIBS);
-  gidLink(cast(void**)&atk_action_do_action, "atk_action_do_action", LIBS);
-  gidLink(cast(void**)&atk_action_get_description, "atk_action_get_description", LIBS);
-  gidLink(cast(void**)&atk_action_get_keybinding, "atk_action_get_keybinding", LIBS);
-  gidLink(cast(void**)&atk_action_get_localized_name, "atk_action_get_localized_name", LIBS);
-  gidLink(cast(void**)&atk_action_get_n_actions, "atk_action_get_n_actions", LIBS);
-  gidLink(cast(void**)&atk_action_get_name, "atk_action_get_name", LIBS);
-  gidLink(cast(void**)&atk_action_set_description, "atk_action_set_description", LIBS);
+  gidLink(cast(void**)&atk_action_get_type, "atk_action_get_type", libs);
+  gidLink(cast(void**)&atk_action_do_action, "atk_action_do_action", libs);
+  gidLink(cast(void**)&atk_action_get_description, "atk_action_get_description", libs);
+  gidLink(cast(void**)&atk_action_get_keybinding, "atk_action_get_keybinding", libs);
+  gidLink(cast(void**)&atk_action_get_localized_name, "atk_action_get_localized_name", libs);
+  gidLink(cast(void**)&atk_action_get_n_actions, "atk_action_get_n_actions", libs);
+  gidLink(cast(void**)&atk_action_get_name, "atk_action_get_name", libs);
+  gidLink(cast(void**)&atk_action_set_description, "atk_action_set_description", libs);
 
   // Attribute
-  gidLink(cast(void**)&atk_attribute_set_free, "atk_attribute_set_free", LIBS);
+  gidLink(cast(void**)&atk_attribute_set_free, "atk_attribute_set_free", libs);
 
   // Component
-  gidLink(cast(void**)&atk_component_get_type, "atk_component_get_type", LIBS);
-  gidLink(cast(void**)&atk_component_add_focus_handler, "atk_component_add_focus_handler", LIBS);
-  gidLink(cast(void**)&atk_component_contains, "atk_component_contains", LIBS);
-  gidLink(cast(void**)&atk_component_get_alpha, "atk_component_get_alpha", LIBS);
-  gidLink(cast(void**)&atk_component_get_extents, "atk_component_get_extents", LIBS);
-  gidLink(cast(void**)&atk_component_get_layer, "atk_component_get_layer", LIBS);
-  gidLink(cast(void**)&atk_component_get_mdi_zorder, "atk_component_get_mdi_zorder", LIBS);
-  gidLink(cast(void**)&atk_component_get_position, "atk_component_get_position", LIBS);
-  gidLink(cast(void**)&atk_component_get_size, "atk_component_get_size", LIBS);
-  gidLink(cast(void**)&atk_component_grab_focus, "atk_component_grab_focus", LIBS);
-  gidLink(cast(void**)&atk_component_ref_accessible_at_point, "atk_component_ref_accessible_at_point", LIBS);
-  gidLink(cast(void**)&atk_component_remove_focus_handler, "atk_component_remove_focus_handler", LIBS);
-  gidLink(cast(void**)&atk_component_scroll_to, "atk_component_scroll_to", LIBS);
-  gidLink(cast(void**)&atk_component_scroll_to_point, "atk_component_scroll_to_point", LIBS);
-  gidLink(cast(void**)&atk_component_set_extents, "atk_component_set_extents", LIBS);
-  gidLink(cast(void**)&atk_component_set_position, "atk_component_set_position", LIBS);
-  gidLink(cast(void**)&atk_component_set_size, "atk_component_set_size", LIBS);
+  gidLink(cast(void**)&atk_component_get_type, "atk_component_get_type", libs);
+  gidLink(cast(void**)&atk_component_add_focus_handler, "atk_component_add_focus_handler", libs);
+  gidLink(cast(void**)&atk_component_contains, "atk_component_contains", libs);
+  gidLink(cast(void**)&atk_component_get_alpha, "atk_component_get_alpha", libs);
+  gidLink(cast(void**)&atk_component_get_extents, "atk_component_get_extents", libs);
+  gidLink(cast(void**)&atk_component_get_layer, "atk_component_get_layer", libs);
+  gidLink(cast(void**)&atk_component_get_mdi_zorder, "atk_component_get_mdi_zorder", libs);
+  gidLink(cast(void**)&atk_component_get_position, "atk_component_get_position", libs);
+  gidLink(cast(void**)&atk_component_get_size, "atk_component_get_size", libs);
+  gidLink(cast(void**)&atk_component_grab_focus, "atk_component_grab_focus", libs);
+  gidLink(cast(void**)&atk_component_ref_accessible_at_point, "atk_component_ref_accessible_at_point", libs);
+  gidLink(cast(void**)&atk_component_remove_focus_handler, "atk_component_remove_focus_handler", libs);
+  gidLink(cast(void**)&atk_component_scroll_to, "atk_component_scroll_to", libs);
+  gidLink(cast(void**)&atk_component_scroll_to_point, "atk_component_scroll_to_point", libs);
+  gidLink(cast(void**)&atk_component_set_extents, "atk_component_set_extents", libs);
+  gidLink(cast(void**)&atk_component_set_position, "atk_component_set_position", libs);
+  gidLink(cast(void**)&atk_component_set_size, "atk_component_set_size", libs);
 
   // Document
-  gidLink(cast(void**)&atk_document_get_type, "atk_document_get_type", LIBS);
-  gidLink(cast(void**)&atk_document_get_attribute_value, "atk_document_get_attribute_value", LIBS);
-  gidLink(cast(void**)&atk_document_get_attributes, "atk_document_get_attributes", LIBS);
-  gidLink(cast(void**)&atk_document_get_current_page_number, "atk_document_get_current_page_number", LIBS);
-  gidLink(cast(void**)&atk_document_get_document, "atk_document_get_document", LIBS);
-  gidLink(cast(void**)&atk_document_get_document_type, "atk_document_get_document_type", LIBS);
-  gidLink(cast(void**)&atk_document_get_locale, "atk_document_get_locale", LIBS);
-  gidLink(cast(void**)&atk_document_get_page_count, "atk_document_get_page_count", LIBS);
-  gidLink(cast(void**)&atk_document_get_text_selections, "atk_document_get_text_selections", LIBS);
-  gidLink(cast(void**)&atk_document_set_attribute_value, "atk_document_set_attribute_value", LIBS);
-  gidLink(cast(void**)&atk_document_set_text_selections, "atk_document_set_text_selections", LIBS);
+  gidLink(cast(void**)&atk_document_get_type, "atk_document_get_type", libs);
+  gidLink(cast(void**)&atk_document_get_attribute_value, "atk_document_get_attribute_value", libs);
+  gidLink(cast(void**)&atk_document_get_attributes, "atk_document_get_attributes", libs);
+  gidLink(cast(void**)&atk_document_get_current_page_number, "atk_document_get_current_page_number", libs);
+  gidLink(cast(void**)&atk_document_get_document, "atk_document_get_document", libs);
+  gidLink(cast(void**)&atk_document_get_document_type, "atk_document_get_document_type", libs);
+  gidLink(cast(void**)&atk_document_get_locale, "atk_document_get_locale", libs);
+  gidLink(cast(void**)&atk_document_get_page_count, "atk_document_get_page_count", libs);
+  gidLink(cast(void**)&atk_document_get_text_selections, "atk_document_get_text_selections", libs);
+  gidLink(cast(void**)&atk_document_set_attribute_value, "atk_document_set_attribute_value", libs);
+  gidLink(cast(void**)&atk_document_set_text_selections, "atk_document_set_text_selections", libs);
 
   // EditableText
-  gidLink(cast(void**)&atk_editable_text_get_type, "atk_editable_text_get_type", LIBS);
-  gidLink(cast(void**)&atk_editable_text_copy_text, "atk_editable_text_copy_text", LIBS);
-  gidLink(cast(void**)&atk_editable_text_cut_text, "atk_editable_text_cut_text", LIBS);
-  gidLink(cast(void**)&atk_editable_text_delete_text, "atk_editable_text_delete_text", LIBS);
-  gidLink(cast(void**)&atk_editable_text_insert_text, "atk_editable_text_insert_text", LIBS);
-  gidLink(cast(void**)&atk_editable_text_paste_text, "atk_editable_text_paste_text", LIBS);
-  gidLink(cast(void**)&atk_editable_text_set_run_attributes, "atk_editable_text_set_run_attributes", LIBS);
-  gidLink(cast(void**)&atk_editable_text_set_text_contents, "atk_editable_text_set_text_contents", LIBS);
+  gidLink(cast(void**)&atk_editable_text_get_type, "atk_editable_text_get_type", libs);
+  gidLink(cast(void**)&atk_editable_text_copy_text, "atk_editable_text_copy_text", libs);
+  gidLink(cast(void**)&atk_editable_text_cut_text, "atk_editable_text_cut_text", libs);
+  gidLink(cast(void**)&atk_editable_text_delete_text, "atk_editable_text_delete_text", libs);
+  gidLink(cast(void**)&atk_editable_text_insert_text, "atk_editable_text_insert_text", libs);
+  gidLink(cast(void**)&atk_editable_text_paste_text, "atk_editable_text_paste_text", libs);
+  gidLink(cast(void**)&atk_editable_text_set_run_attributes, "atk_editable_text_set_run_attributes", libs);
+  gidLink(cast(void**)&atk_editable_text_set_text_contents, "atk_editable_text_set_text_contents", libs);
 
   // GObjectAccessible
-  gidLink(cast(void**)&atk_gobject_accessible_get_type, "atk_gobject_accessible_get_type", LIBS);
-  gidLink(cast(void**)&atk_gobject_accessible_for_object, "atk_gobject_accessible_for_object", LIBS);
-  gidLink(cast(void**)&atk_gobject_accessible_get_object, "atk_gobject_accessible_get_object", LIBS);
+  gidLink(cast(void**)&atk_gobject_accessible_get_type, "atk_gobject_accessible_get_type", libs);
+  gidLink(cast(void**)&atk_gobject_accessible_for_object, "atk_gobject_accessible_for_object", libs);
+  gidLink(cast(void**)&atk_gobject_accessible_get_object, "atk_gobject_accessible_get_object", libs);
 
   // Hyperlink
-  gidLink(cast(void**)&atk_hyperlink_get_type, "atk_hyperlink_get_type", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_get_end_index, "atk_hyperlink_get_end_index", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_get_n_anchors, "atk_hyperlink_get_n_anchors", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_get_object, "atk_hyperlink_get_object", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_get_start_index, "atk_hyperlink_get_start_index", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_get_uri, "atk_hyperlink_get_uri", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_is_inline, "atk_hyperlink_is_inline", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_is_selected_link, "atk_hyperlink_is_selected_link", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_is_valid, "atk_hyperlink_is_valid", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_get_type, "atk_hyperlink_get_type", libs);
+  gidLink(cast(void**)&atk_hyperlink_get_end_index, "atk_hyperlink_get_end_index", libs);
+  gidLink(cast(void**)&atk_hyperlink_get_n_anchors, "atk_hyperlink_get_n_anchors", libs);
+  gidLink(cast(void**)&atk_hyperlink_get_object, "atk_hyperlink_get_object", libs);
+  gidLink(cast(void**)&atk_hyperlink_get_start_index, "atk_hyperlink_get_start_index", libs);
+  gidLink(cast(void**)&atk_hyperlink_get_uri, "atk_hyperlink_get_uri", libs);
+  gidLink(cast(void**)&atk_hyperlink_is_inline, "atk_hyperlink_is_inline", libs);
+  gidLink(cast(void**)&atk_hyperlink_is_selected_link, "atk_hyperlink_is_selected_link", libs);
+  gidLink(cast(void**)&atk_hyperlink_is_valid, "atk_hyperlink_is_valid", libs);
 
   // HyperlinkImpl
-  gidLink(cast(void**)&atk_hyperlink_impl_get_type, "atk_hyperlink_impl_get_type", LIBS);
-  gidLink(cast(void**)&atk_hyperlink_impl_get_hyperlink, "atk_hyperlink_impl_get_hyperlink", LIBS);
+  gidLink(cast(void**)&atk_hyperlink_impl_get_type, "atk_hyperlink_impl_get_type", libs);
+  gidLink(cast(void**)&atk_hyperlink_impl_get_hyperlink, "atk_hyperlink_impl_get_hyperlink", libs);
 
   // Hypertext
-  gidLink(cast(void**)&atk_hypertext_get_type, "atk_hypertext_get_type", LIBS);
-  gidLink(cast(void**)&atk_hypertext_get_link, "atk_hypertext_get_link", LIBS);
-  gidLink(cast(void**)&atk_hypertext_get_link_index, "atk_hypertext_get_link_index", LIBS);
-  gidLink(cast(void**)&atk_hypertext_get_n_links, "atk_hypertext_get_n_links", LIBS);
+  gidLink(cast(void**)&atk_hypertext_get_type, "atk_hypertext_get_type", libs);
+  gidLink(cast(void**)&atk_hypertext_get_link, "atk_hypertext_get_link", libs);
+  gidLink(cast(void**)&atk_hypertext_get_link_index, "atk_hypertext_get_link_index", libs);
+  gidLink(cast(void**)&atk_hypertext_get_n_links, "atk_hypertext_get_n_links", libs);
 
   // Image
-  gidLink(cast(void**)&atk_image_get_type, "atk_image_get_type", LIBS);
-  gidLink(cast(void**)&atk_image_get_image_description, "atk_image_get_image_description", LIBS);
-  gidLink(cast(void**)&atk_image_get_image_locale, "atk_image_get_image_locale", LIBS);
-  gidLink(cast(void**)&atk_image_get_image_position, "atk_image_get_image_position", LIBS);
-  gidLink(cast(void**)&atk_image_get_image_size, "atk_image_get_image_size", LIBS);
-  gidLink(cast(void**)&atk_image_set_image_description, "atk_image_set_image_description", LIBS);
+  gidLink(cast(void**)&atk_image_get_type, "atk_image_get_type", libs);
+  gidLink(cast(void**)&atk_image_get_image_description, "atk_image_get_image_description", libs);
+  gidLink(cast(void**)&atk_image_get_image_locale, "atk_image_get_image_locale", libs);
+  gidLink(cast(void**)&atk_image_get_image_position, "atk_image_get_image_position", libs);
+  gidLink(cast(void**)&atk_image_get_image_size, "atk_image_get_image_size", libs);
+  gidLink(cast(void**)&atk_image_set_image_description, "atk_image_set_image_description", libs);
 
   // Implementor
-  gidLink(cast(void**)&atk_implementor_ref_accessible, "atk_implementor_ref_accessible", LIBS);
+  gidLink(cast(void**)&atk_implementor_ref_accessible, "atk_implementor_ref_accessible", libs);
 
   // ImplementorIface
-  gidLink(cast(void**)&atk_implementor_get_type, "atk_implementor_get_type", LIBS);
+  gidLink(cast(void**)&atk_implementor_get_type, "atk_implementor_get_type", libs);
 
   // Misc
-  gidLink(cast(void**)&atk_misc_get_type, "atk_misc_get_type", LIBS);
-  gidLink(cast(void**)&atk_misc_get_instance, "atk_misc_get_instance", LIBS);
-  gidLink(cast(void**)&atk_misc_threads_enter, "atk_misc_threads_enter", LIBS);
-  gidLink(cast(void**)&atk_misc_threads_leave, "atk_misc_threads_leave", LIBS);
+  gidLink(cast(void**)&atk_misc_get_type, "atk_misc_get_type", libs);
+  gidLink(cast(void**)&atk_misc_get_instance, "atk_misc_get_instance", libs);
+  gidLink(cast(void**)&atk_misc_threads_enter, "atk_misc_threads_enter", libs);
+  gidLink(cast(void**)&atk_misc_threads_leave, "atk_misc_threads_leave", libs);
 
   // NoOpObject
-  gidLink(cast(void**)&atk_no_op_object_get_type, "atk_no_op_object_get_type", LIBS);
-  gidLink(cast(void**)&atk_no_op_object_new, "atk_no_op_object_new", LIBS);
+  gidLink(cast(void**)&atk_no_op_object_get_type, "atk_no_op_object_get_type", libs);
+  gidLink(cast(void**)&atk_no_op_object_new, "atk_no_op_object_new", libs);
 
   // NoOpObjectFactory
-  gidLink(cast(void**)&atk_no_op_object_factory_get_type, "atk_no_op_object_factory_get_type", LIBS);
-  gidLink(cast(void**)&atk_no_op_object_factory_new, "atk_no_op_object_factory_new", LIBS);
+  gidLink(cast(void**)&atk_no_op_object_factory_get_type, "atk_no_op_object_factory_get_type", libs);
+  gidLink(cast(void**)&atk_no_op_object_factory_new, "atk_no_op_object_factory_new", libs);
 
   // ObjectFactory
-  gidLink(cast(void**)&atk_object_factory_get_type, "atk_object_factory_get_type", LIBS);
-  gidLink(cast(void**)&atk_object_factory_create_accessible, "atk_object_factory_create_accessible", LIBS);
-  gidLink(cast(void**)&atk_object_factory_get_accessible_type, "atk_object_factory_get_accessible_type", LIBS);
-  gidLink(cast(void**)&atk_object_factory_invalidate, "atk_object_factory_invalidate", LIBS);
+  gidLink(cast(void**)&atk_object_factory_get_type, "atk_object_factory_get_type", libs);
+  gidLink(cast(void**)&atk_object_factory_create_accessible, "atk_object_factory_create_accessible", libs);
+  gidLink(cast(void**)&atk_object_factory_get_accessible_type, "atk_object_factory_get_accessible_type", libs);
+  gidLink(cast(void**)&atk_object_factory_invalidate, "atk_object_factory_invalidate", libs);
 
   // ObjectWrap
-  gidLink(cast(void**)&atk_object_get_type, "atk_object_get_type", LIBS);
-  gidLink(cast(void**)&atk_object_add_relationship, "atk_object_add_relationship", LIBS);
-  gidLink(cast(void**)&atk_object_connect_property_change_handler, "atk_object_connect_property_change_handler", LIBS);
-  gidLink(cast(void**)&atk_object_get_accessible_id, "atk_object_get_accessible_id", LIBS);
-  gidLink(cast(void**)&atk_object_get_attributes, "atk_object_get_attributes", LIBS);
-  gidLink(cast(void**)&atk_object_get_description, "atk_object_get_description", LIBS);
-  gidLink(cast(void**)&atk_object_get_help_text, "atk_object_get_help_text", LIBS);
-  gidLink(cast(void**)&atk_object_get_index_in_parent, "atk_object_get_index_in_parent", LIBS);
-  gidLink(cast(void**)&atk_object_get_layer, "atk_object_get_layer", LIBS);
-  gidLink(cast(void**)&atk_object_get_mdi_zorder, "atk_object_get_mdi_zorder", LIBS);
-  gidLink(cast(void**)&atk_object_get_n_accessible_children, "atk_object_get_n_accessible_children", LIBS);
-  gidLink(cast(void**)&atk_object_get_name, "atk_object_get_name", LIBS);
-  gidLink(cast(void**)&atk_object_get_object_locale, "atk_object_get_object_locale", LIBS);
-  gidLink(cast(void**)&atk_object_get_parent, "atk_object_get_parent", LIBS);
-  gidLink(cast(void**)&atk_object_get_role, "atk_object_get_role", LIBS);
-  gidLink(cast(void**)&atk_object_initialize, "atk_object_initialize", LIBS);
-  gidLink(cast(void**)&atk_object_notify_state_change, "atk_object_notify_state_change", LIBS);
-  gidLink(cast(void**)&atk_object_peek_parent, "atk_object_peek_parent", LIBS);
-  gidLink(cast(void**)&atk_object_ref_accessible_child, "atk_object_ref_accessible_child", LIBS);
-  gidLink(cast(void**)&atk_object_ref_relation_set, "atk_object_ref_relation_set", LIBS);
-  gidLink(cast(void**)&atk_object_ref_state_set, "atk_object_ref_state_set", LIBS);
-  gidLink(cast(void**)&atk_object_remove_property_change_handler, "atk_object_remove_property_change_handler", LIBS);
-  gidLink(cast(void**)&atk_object_remove_relationship, "atk_object_remove_relationship", LIBS);
-  gidLink(cast(void**)&atk_object_set_accessible_id, "atk_object_set_accessible_id", LIBS);
-  gidLink(cast(void**)&atk_object_set_description, "atk_object_set_description", LIBS);
-  gidLink(cast(void**)&atk_object_set_help_text, "atk_object_set_help_text", LIBS);
-  gidLink(cast(void**)&atk_object_set_name, "atk_object_set_name", LIBS);
-  gidLink(cast(void**)&atk_object_set_parent, "atk_object_set_parent", LIBS);
-  gidLink(cast(void**)&atk_object_set_role, "atk_object_set_role", LIBS);
+  gidLink(cast(void**)&atk_object_get_type, "atk_object_get_type", libs);
+  gidLink(cast(void**)&atk_object_add_relationship, "atk_object_add_relationship", libs);
+  gidLink(cast(void**)&atk_object_connect_property_change_handler, "atk_object_connect_property_change_handler", libs);
+  gidLink(cast(void**)&atk_object_get_accessible_id, "atk_object_get_accessible_id", libs);
+  gidLink(cast(void**)&atk_object_get_attributes, "atk_object_get_attributes", libs);
+  gidLink(cast(void**)&atk_object_get_description, "atk_object_get_description", libs);
+  gidLink(cast(void**)&atk_object_get_help_text, "atk_object_get_help_text", libs);
+  gidLink(cast(void**)&atk_object_get_index_in_parent, "atk_object_get_index_in_parent", libs);
+  gidLink(cast(void**)&atk_object_get_layer, "atk_object_get_layer", libs);
+  gidLink(cast(void**)&atk_object_get_mdi_zorder, "atk_object_get_mdi_zorder", libs);
+  gidLink(cast(void**)&atk_object_get_n_accessible_children, "atk_object_get_n_accessible_children", libs);
+  gidLink(cast(void**)&atk_object_get_name, "atk_object_get_name", libs);
+  gidLink(cast(void**)&atk_object_get_object_locale, "atk_object_get_object_locale", libs);
+  gidLink(cast(void**)&atk_object_get_parent, "atk_object_get_parent", libs);
+  gidLink(cast(void**)&atk_object_get_role, "atk_object_get_role", libs);
+  gidLink(cast(void**)&atk_object_initialize, "atk_object_initialize", libs);
+  gidLink(cast(void**)&atk_object_notify_state_change, "atk_object_notify_state_change", libs);
+  gidLink(cast(void**)&atk_object_peek_parent, "atk_object_peek_parent", libs);
+  gidLink(cast(void**)&atk_object_ref_accessible_child, "atk_object_ref_accessible_child", libs);
+  gidLink(cast(void**)&atk_object_ref_relation_set, "atk_object_ref_relation_set", libs);
+  gidLink(cast(void**)&atk_object_ref_state_set, "atk_object_ref_state_set", libs);
+  gidLink(cast(void**)&atk_object_remove_property_change_handler, "atk_object_remove_property_change_handler", libs);
+  gidLink(cast(void**)&atk_object_remove_relationship, "atk_object_remove_relationship", libs);
+  gidLink(cast(void**)&atk_object_set_accessible_id, "atk_object_set_accessible_id", libs);
+  gidLink(cast(void**)&atk_object_set_description, "atk_object_set_description", libs);
+  gidLink(cast(void**)&atk_object_set_help_text, "atk_object_set_help_text", libs);
+  gidLink(cast(void**)&atk_object_set_name, "atk_object_set_name", libs);
+  gidLink(cast(void**)&atk_object_set_parent, "atk_object_set_parent", libs);
+  gidLink(cast(void**)&atk_object_set_role, "atk_object_set_role", libs);
 
   // Plug
-  gidLink(cast(void**)&atk_plug_get_type, "atk_plug_get_type", LIBS);
-  gidLink(cast(void**)&atk_plug_new, "atk_plug_new", LIBS);
-  gidLink(cast(void**)&atk_plug_get_id, "atk_plug_get_id", LIBS);
-  gidLink(cast(void**)&atk_plug_set_child, "atk_plug_set_child", LIBS);
+  gidLink(cast(void**)&atk_plug_get_type, "atk_plug_get_type", libs);
+  gidLink(cast(void**)&atk_plug_new, "atk_plug_new", libs);
+  gidLink(cast(void**)&atk_plug_get_id, "atk_plug_get_id", libs);
+  gidLink(cast(void**)&atk_plug_set_child, "atk_plug_set_child", libs);
 
   // Range
-  gidLink(cast(void**)&atk_range_get_type, "atk_range_get_type", LIBS);
-  gidLink(cast(void**)&atk_range_new, "atk_range_new", LIBS);
-  gidLink(cast(void**)&atk_range_copy, "atk_range_copy", LIBS);
-  gidLink(cast(void**)&atk_range_free, "atk_range_free", LIBS);
-  gidLink(cast(void**)&atk_range_get_description, "atk_range_get_description", LIBS);
-  gidLink(cast(void**)&atk_range_get_lower_limit, "atk_range_get_lower_limit", LIBS);
-  gidLink(cast(void**)&atk_range_get_upper_limit, "atk_range_get_upper_limit", LIBS);
+  gidLink(cast(void**)&atk_range_get_type, "atk_range_get_type", libs);
+  gidLink(cast(void**)&atk_range_new, "atk_range_new", libs);
+  gidLink(cast(void**)&atk_range_copy, "atk_range_copy", libs);
+  gidLink(cast(void**)&atk_range_free, "atk_range_free", libs);
+  gidLink(cast(void**)&atk_range_get_description, "atk_range_get_description", libs);
+  gidLink(cast(void**)&atk_range_get_lower_limit, "atk_range_get_lower_limit", libs);
+  gidLink(cast(void**)&atk_range_get_upper_limit, "atk_range_get_upper_limit", libs);
 
   // Rectangle
-  gidLink(cast(void**)&atk_rectangle_get_type, "atk_rectangle_get_type", LIBS);
+  gidLink(cast(void**)&atk_rectangle_get_type, "atk_rectangle_get_type", libs);
 
   // Registry
-  gidLink(cast(void**)&atk_registry_get_type, "atk_registry_get_type", LIBS);
-  gidLink(cast(void**)&atk_registry_get_factory, "atk_registry_get_factory", LIBS);
-  gidLink(cast(void**)&atk_registry_get_factory_type, "atk_registry_get_factory_type", LIBS);
-  gidLink(cast(void**)&atk_registry_set_factory_type, "atk_registry_set_factory_type", LIBS);
+  gidLink(cast(void**)&atk_registry_get_type, "atk_registry_get_type", libs);
+  gidLink(cast(void**)&atk_registry_get_factory, "atk_registry_get_factory", libs);
+  gidLink(cast(void**)&atk_registry_get_factory_type, "atk_registry_get_factory_type", libs);
+  gidLink(cast(void**)&atk_registry_set_factory_type, "atk_registry_set_factory_type", libs);
 
   // Relation
-  gidLink(cast(void**)&atk_relation_get_type, "atk_relation_get_type", LIBS);
-  gidLink(cast(void**)&atk_relation_new, "atk_relation_new", LIBS);
-  gidLink(cast(void**)&atk_relation_add_target, "atk_relation_add_target", LIBS);
-  gidLink(cast(void**)&atk_relation_get_relation_type, "atk_relation_get_relation_type", LIBS);
-  gidLink(cast(void**)&atk_relation_get_target, "atk_relation_get_target", LIBS);
-  gidLink(cast(void**)&atk_relation_remove_target, "atk_relation_remove_target", LIBS);
+  gidLink(cast(void**)&atk_relation_get_type, "atk_relation_get_type", libs);
+  gidLink(cast(void**)&atk_relation_new, "atk_relation_new", libs);
+  gidLink(cast(void**)&atk_relation_add_target, "atk_relation_add_target", libs);
+  gidLink(cast(void**)&atk_relation_get_relation_type, "atk_relation_get_relation_type", libs);
+  gidLink(cast(void**)&atk_relation_get_target, "atk_relation_get_target", libs);
+  gidLink(cast(void**)&atk_relation_remove_target, "atk_relation_remove_target", libs);
 
   // RelationSet
-  gidLink(cast(void**)&atk_relation_set_get_type, "atk_relation_set_get_type", LIBS);
-  gidLink(cast(void**)&atk_relation_set_new, "atk_relation_set_new", LIBS);
-  gidLink(cast(void**)&atk_relation_set_add, "atk_relation_set_add", LIBS);
-  gidLink(cast(void**)&atk_relation_set_add_relation_by_type, "atk_relation_set_add_relation_by_type", LIBS);
-  gidLink(cast(void**)&atk_relation_set_contains, "atk_relation_set_contains", LIBS);
-  gidLink(cast(void**)&atk_relation_set_contains_target, "atk_relation_set_contains_target", LIBS);
-  gidLink(cast(void**)&atk_relation_set_get_n_relations, "atk_relation_set_get_n_relations", LIBS);
-  gidLink(cast(void**)&atk_relation_set_get_relation, "atk_relation_set_get_relation", LIBS);
-  gidLink(cast(void**)&atk_relation_set_get_relation_by_type, "atk_relation_set_get_relation_by_type", LIBS);
-  gidLink(cast(void**)&atk_relation_set_remove, "atk_relation_set_remove", LIBS);
+  gidLink(cast(void**)&atk_relation_set_get_type, "atk_relation_set_get_type", libs);
+  gidLink(cast(void**)&atk_relation_set_new, "atk_relation_set_new", libs);
+  gidLink(cast(void**)&atk_relation_set_add, "atk_relation_set_add", libs);
+  gidLink(cast(void**)&atk_relation_set_add_relation_by_type, "atk_relation_set_add_relation_by_type", libs);
+  gidLink(cast(void**)&atk_relation_set_contains, "atk_relation_set_contains", libs);
+  gidLink(cast(void**)&atk_relation_set_contains_target, "atk_relation_set_contains_target", libs);
+  gidLink(cast(void**)&atk_relation_set_get_n_relations, "atk_relation_set_get_n_relations", libs);
+  gidLink(cast(void**)&atk_relation_set_get_relation, "atk_relation_set_get_relation", libs);
+  gidLink(cast(void**)&atk_relation_set_get_relation_by_type, "atk_relation_set_get_relation_by_type", libs);
+  gidLink(cast(void**)&atk_relation_set_remove, "atk_relation_set_remove", libs);
 
   // Selection
-  gidLink(cast(void**)&atk_selection_get_type, "atk_selection_get_type", LIBS);
-  gidLink(cast(void**)&atk_selection_add_selection, "atk_selection_add_selection", LIBS);
-  gidLink(cast(void**)&atk_selection_clear_selection, "atk_selection_clear_selection", LIBS);
-  gidLink(cast(void**)&atk_selection_get_selection_count, "atk_selection_get_selection_count", LIBS);
-  gidLink(cast(void**)&atk_selection_is_child_selected, "atk_selection_is_child_selected", LIBS);
-  gidLink(cast(void**)&atk_selection_ref_selection, "atk_selection_ref_selection", LIBS);
-  gidLink(cast(void**)&atk_selection_remove_selection, "atk_selection_remove_selection", LIBS);
-  gidLink(cast(void**)&atk_selection_select_all_selection, "atk_selection_select_all_selection", LIBS);
+  gidLink(cast(void**)&atk_selection_get_type, "atk_selection_get_type", libs);
+  gidLink(cast(void**)&atk_selection_add_selection, "atk_selection_add_selection", libs);
+  gidLink(cast(void**)&atk_selection_clear_selection, "atk_selection_clear_selection", libs);
+  gidLink(cast(void**)&atk_selection_get_selection_count, "atk_selection_get_selection_count", libs);
+  gidLink(cast(void**)&atk_selection_is_child_selected, "atk_selection_is_child_selected", libs);
+  gidLink(cast(void**)&atk_selection_ref_selection, "atk_selection_ref_selection", libs);
+  gidLink(cast(void**)&atk_selection_remove_selection, "atk_selection_remove_selection", libs);
+  gidLink(cast(void**)&atk_selection_select_all_selection, "atk_selection_select_all_selection", libs);
 
   // Socket
-  gidLink(cast(void**)&atk_socket_get_type, "atk_socket_get_type", LIBS);
-  gidLink(cast(void**)&atk_socket_new, "atk_socket_new", LIBS);
-  gidLink(cast(void**)&atk_socket_embed, "atk_socket_embed", LIBS);
-  gidLink(cast(void**)&atk_socket_is_occupied, "atk_socket_is_occupied", LIBS);
+  gidLink(cast(void**)&atk_socket_get_type, "atk_socket_get_type", libs);
+  gidLink(cast(void**)&atk_socket_new, "atk_socket_new", libs);
+  gidLink(cast(void**)&atk_socket_embed, "atk_socket_embed", libs);
+  gidLink(cast(void**)&atk_socket_is_occupied, "atk_socket_is_occupied", libs);
 
   // StateSet
-  gidLink(cast(void**)&atk_state_set_get_type, "atk_state_set_get_type", LIBS);
-  gidLink(cast(void**)&atk_state_set_new, "atk_state_set_new", LIBS);
-  gidLink(cast(void**)&atk_state_set_add_state, "atk_state_set_add_state", LIBS);
-  gidLink(cast(void**)&atk_state_set_add_states, "atk_state_set_add_states", LIBS);
-  gidLink(cast(void**)&atk_state_set_and_sets, "atk_state_set_and_sets", LIBS);
-  gidLink(cast(void**)&atk_state_set_clear_states, "atk_state_set_clear_states", LIBS);
-  gidLink(cast(void**)&atk_state_set_contains_state, "atk_state_set_contains_state", LIBS);
-  gidLink(cast(void**)&atk_state_set_contains_states, "atk_state_set_contains_states", LIBS);
-  gidLink(cast(void**)&atk_state_set_is_empty, "atk_state_set_is_empty", LIBS);
-  gidLink(cast(void**)&atk_state_set_or_sets, "atk_state_set_or_sets", LIBS);
-  gidLink(cast(void**)&atk_state_set_remove_state, "atk_state_set_remove_state", LIBS);
-  gidLink(cast(void**)&atk_state_set_xor_sets, "atk_state_set_xor_sets", LIBS);
+  gidLink(cast(void**)&atk_state_set_get_type, "atk_state_set_get_type", libs);
+  gidLink(cast(void**)&atk_state_set_new, "atk_state_set_new", libs);
+  gidLink(cast(void**)&atk_state_set_add_state, "atk_state_set_add_state", libs);
+  gidLink(cast(void**)&atk_state_set_add_states, "atk_state_set_add_states", libs);
+  gidLink(cast(void**)&atk_state_set_and_sets, "atk_state_set_and_sets", libs);
+  gidLink(cast(void**)&atk_state_set_clear_states, "atk_state_set_clear_states", libs);
+  gidLink(cast(void**)&atk_state_set_contains_state, "atk_state_set_contains_state", libs);
+  gidLink(cast(void**)&atk_state_set_contains_states, "atk_state_set_contains_states", libs);
+  gidLink(cast(void**)&atk_state_set_is_empty, "atk_state_set_is_empty", libs);
+  gidLink(cast(void**)&atk_state_set_or_sets, "atk_state_set_or_sets", libs);
+  gidLink(cast(void**)&atk_state_set_remove_state, "atk_state_set_remove_state", libs);
+  gidLink(cast(void**)&atk_state_set_xor_sets, "atk_state_set_xor_sets", libs);
 
   // StreamableContent
-  gidLink(cast(void**)&atk_streamable_content_get_type, "atk_streamable_content_get_type", LIBS);
-  gidLink(cast(void**)&atk_streamable_content_get_mime_type, "atk_streamable_content_get_mime_type", LIBS);
-  gidLink(cast(void**)&atk_streamable_content_get_n_mime_types, "atk_streamable_content_get_n_mime_types", LIBS);
-  gidLink(cast(void**)&atk_streamable_content_get_stream, "atk_streamable_content_get_stream", LIBS);
-  gidLink(cast(void**)&atk_streamable_content_get_uri, "atk_streamable_content_get_uri", LIBS);
+  gidLink(cast(void**)&atk_streamable_content_get_type, "atk_streamable_content_get_type", libs);
+  gidLink(cast(void**)&atk_streamable_content_get_mime_type, "atk_streamable_content_get_mime_type", libs);
+  gidLink(cast(void**)&atk_streamable_content_get_n_mime_types, "atk_streamable_content_get_n_mime_types", libs);
+  gidLink(cast(void**)&atk_streamable_content_get_stream, "atk_streamable_content_get_stream", libs);
+  gidLink(cast(void**)&atk_streamable_content_get_uri, "atk_streamable_content_get_uri", libs);
 
   // Table
-  gidLink(cast(void**)&atk_table_get_type, "atk_table_get_type", LIBS);
-  gidLink(cast(void**)&atk_table_add_column_selection, "atk_table_add_column_selection", LIBS);
-  gidLink(cast(void**)&atk_table_add_row_selection, "atk_table_add_row_selection", LIBS);
-  gidLink(cast(void**)&atk_table_get_caption, "atk_table_get_caption", LIBS);
-  gidLink(cast(void**)&atk_table_get_column_at_index, "atk_table_get_column_at_index", LIBS);
-  gidLink(cast(void**)&atk_table_get_column_description, "atk_table_get_column_description", LIBS);
-  gidLink(cast(void**)&atk_table_get_column_extent_at, "atk_table_get_column_extent_at", LIBS);
-  gidLink(cast(void**)&atk_table_get_column_header, "atk_table_get_column_header", LIBS);
-  gidLink(cast(void**)&atk_table_get_index_at, "atk_table_get_index_at", LIBS);
-  gidLink(cast(void**)&atk_table_get_n_columns, "atk_table_get_n_columns", LIBS);
-  gidLink(cast(void**)&atk_table_get_n_rows, "atk_table_get_n_rows", LIBS);
-  gidLink(cast(void**)&atk_table_get_row_at_index, "atk_table_get_row_at_index", LIBS);
-  gidLink(cast(void**)&atk_table_get_row_description, "atk_table_get_row_description", LIBS);
-  gidLink(cast(void**)&atk_table_get_row_extent_at, "atk_table_get_row_extent_at", LIBS);
-  gidLink(cast(void**)&atk_table_get_row_header, "atk_table_get_row_header", LIBS);
-  gidLink(cast(void**)&atk_table_get_selected_columns, "atk_table_get_selected_columns", LIBS);
-  gidLink(cast(void**)&atk_table_get_selected_rows, "atk_table_get_selected_rows", LIBS);
-  gidLink(cast(void**)&atk_table_get_summary, "atk_table_get_summary", LIBS);
-  gidLink(cast(void**)&atk_table_is_column_selected, "atk_table_is_column_selected", LIBS);
-  gidLink(cast(void**)&atk_table_is_row_selected, "atk_table_is_row_selected", LIBS);
-  gidLink(cast(void**)&atk_table_is_selected, "atk_table_is_selected", LIBS);
-  gidLink(cast(void**)&atk_table_ref_at, "atk_table_ref_at", LIBS);
-  gidLink(cast(void**)&atk_table_remove_column_selection, "atk_table_remove_column_selection", LIBS);
-  gidLink(cast(void**)&atk_table_remove_row_selection, "atk_table_remove_row_selection", LIBS);
-  gidLink(cast(void**)&atk_table_set_caption, "atk_table_set_caption", LIBS);
-  gidLink(cast(void**)&atk_table_set_column_description, "atk_table_set_column_description", LIBS);
-  gidLink(cast(void**)&atk_table_set_column_header, "atk_table_set_column_header", LIBS);
-  gidLink(cast(void**)&atk_table_set_row_description, "atk_table_set_row_description", LIBS);
-  gidLink(cast(void**)&atk_table_set_row_header, "atk_table_set_row_header", LIBS);
-  gidLink(cast(void**)&atk_table_set_summary, "atk_table_set_summary", LIBS);
+  gidLink(cast(void**)&atk_table_get_type, "atk_table_get_type", libs);
+  gidLink(cast(void**)&atk_table_add_column_selection, "atk_table_add_column_selection", libs);
+  gidLink(cast(void**)&atk_table_add_row_selection, "atk_table_add_row_selection", libs);
+  gidLink(cast(void**)&atk_table_get_caption, "atk_table_get_caption", libs);
+  gidLink(cast(void**)&atk_table_get_column_at_index, "atk_table_get_column_at_index", libs);
+  gidLink(cast(void**)&atk_table_get_column_description, "atk_table_get_column_description", libs);
+  gidLink(cast(void**)&atk_table_get_column_extent_at, "atk_table_get_column_extent_at", libs);
+  gidLink(cast(void**)&atk_table_get_column_header, "atk_table_get_column_header", libs);
+  gidLink(cast(void**)&atk_table_get_index_at, "atk_table_get_index_at", libs);
+  gidLink(cast(void**)&atk_table_get_n_columns, "atk_table_get_n_columns", libs);
+  gidLink(cast(void**)&atk_table_get_n_rows, "atk_table_get_n_rows", libs);
+  gidLink(cast(void**)&atk_table_get_row_at_index, "atk_table_get_row_at_index", libs);
+  gidLink(cast(void**)&atk_table_get_row_description, "atk_table_get_row_description", libs);
+  gidLink(cast(void**)&atk_table_get_row_extent_at, "atk_table_get_row_extent_at", libs);
+  gidLink(cast(void**)&atk_table_get_row_header, "atk_table_get_row_header", libs);
+  gidLink(cast(void**)&atk_table_get_selected_columns, "atk_table_get_selected_columns", libs);
+  gidLink(cast(void**)&atk_table_get_selected_rows, "atk_table_get_selected_rows", libs);
+  gidLink(cast(void**)&atk_table_get_summary, "atk_table_get_summary", libs);
+  gidLink(cast(void**)&atk_table_is_column_selected, "atk_table_is_column_selected", libs);
+  gidLink(cast(void**)&atk_table_is_row_selected, "atk_table_is_row_selected", libs);
+  gidLink(cast(void**)&atk_table_is_selected, "atk_table_is_selected", libs);
+  gidLink(cast(void**)&atk_table_ref_at, "atk_table_ref_at", libs);
+  gidLink(cast(void**)&atk_table_remove_column_selection, "atk_table_remove_column_selection", libs);
+  gidLink(cast(void**)&atk_table_remove_row_selection, "atk_table_remove_row_selection", libs);
+  gidLink(cast(void**)&atk_table_set_caption, "atk_table_set_caption", libs);
+  gidLink(cast(void**)&atk_table_set_column_description, "atk_table_set_column_description", libs);
+  gidLink(cast(void**)&atk_table_set_column_header, "atk_table_set_column_header", libs);
+  gidLink(cast(void**)&atk_table_set_row_description, "atk_table_set_row_description", libs);
+  gidLink(cast(void**)&atk_table_set_row_header, "atk_table_set_row_header", libs);
+  gidLink(cast(void**)&atk_table_set_summary, "atk_table_set_summary", libs);
 
   // TableCell
-  gidLink(cast(void**)&atk_table_cell_get_type, "atk_table_cell_get_type", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_column_header_cells, "atk_table_cell_get_column_header_cells", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_column_span, "atk_table_cell_get_column_span", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_position, "atk_table_cell_get_position", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_row_column_span, "atk_table_cell_get_row_column_span", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_row_header_cells, "atk_table_cell_get_row_header_cells", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_row_span, "atk_table_cell_get_row_span", LIBS);
-  gidLink(cast(void**)&atk_table_cell_get_table, "atk_table_cell_get_table", LIBS);
+  gidLink(cast(void**)&atk_table_cell_get_type, "atk_table_cell_get_type", libs);
+  gidLink(cast(void**)&atk_table_cell_get_column_header_cells, "atk_table_cell_get_column_header_cells", libs);
+  gidLink(cast(void**)&atk_table_cell_get_column_span, "atk_table_cell_get_column_span", libs);
+  gidLink(cast(void**)&atk_table_cell_get_position, "atk_table_cell_get_position", libs);
+  gidLink(cast(void**)&atk_table_cell_get_row_column_span, "atk_table_cell_get_row_column_span", libs);
+  gidLink(cast(void**)&atk_table_cell_get_row_header_cells, "atk_table_cell_get_row_header_cells", libs);
+  gidLink(cast(void**)&atk_table_cell_get_row_span, "atk_table_cell_get_row_span", libs);
+  gidLink(cast(void**)&atk_table_cell_get_table, "atk_table_cell_get_table", libs);
 
   // Text
-  gidLink(cast(void**)&atk_text_get_type, "atk_text_get_type", LIBS);
-  gidLink(cast(void**)&atk_text_free_ranges, "atk_text_free_ranges", LIBS);
-  gidLink(cast(void**)&atk_text_add_selection, "atk_text_add_selection", LIBS);
-  gidLink(cast(void**)&atk_text_get_bounded_ranges, "atk_text_get_bounded_ranges", LIBS);
-  gidLink(cast(void**)&atk_text_get_caret_offset, "atk_text_get_caret_offset", LIBS);
-  gidLink(cast(void**)&atk_text_get_character_at_offset, "atk_text_get_character_at_offset", LIBS);
-  gidLink(cast(void**)&atk_text_get_character_count, "atk_text_get_character_count", LIBS);
-  gidLink(cast(void**)&atk_text_get_character_extents, "atk_text_get_character_extents", LIBS);
-  gidLink(cast(void**)&atk_text_get_default_attributes, "atk_text_get_default_attributes", LIBS);
-  gidLink(cast(void**)&atk_text_get_n_selections, "atk_text_get_n_selections", LIBS);
-  gidLink(cast(void**)&atk_text_get_offset_at_point, "atk_text_get_offset_at_point", LIBS);
-  gidLink(cast(void**)&atk_text_get_range_extents, "atk_text_get_range_extents", LIBS);
-  gidLink(cast(void**)&atk_text_get_run_attributes, "atk_text_get_run_attributes", LIBS);
-  gidLink(cast(void**)&atk_text_get_selection, "atk_text_get_selection", LIBS);
-  gidLink(cast(void**)&atk_text_get_string_at_offset, "atk_text_get_string_at_offset", LIBS);
-  gidLink(cast(void**)&atk_text_get_text, "atk_text_get_text", LIBS);
-  gidLink(cast(void**)&atk_text_get_text_after_offset, "atk_text_get_text_after_offset", LIBS);
-  gidLink(cast(void**)&atk_text_get_text_at_offset, "atk_text_get_text_at_offset", LIBS);
-  gidLink(cast(void**)&atk_text_get_text_before_offset, "atk_text_get_text_before_offset", LIBS);
-  gidLink(cast(void**)&atk_text_remove_selection, "atk_text_remove_selection", LIBS);
-  gidLink(cast(void**)&atk_text_scroll_substring_to, "atk_text_scroll_substring_to", LIBS);
-  gidLink(cast(void**)&atk_text_scroll_substring_to_point, "atk_text_scroll_substring_to_point", LIBS);
-  gidLink(cast(void**)&atk_text_set_caret_offset, "atk_text_set_caret_offset", LIBS);
-  gidLink(cast(void**)&atk_text_set_selection, "atk_text_set_selection", LIBS);
+  gidLink(cast(void**)&atk_text_get_type, "atk_text_get_type", libs);
+  gidLink(cast(void**)&atk_text_free_ranges, "atk_text_free_ranges", libs);
+  gidLink(cast(void**)&atk_text_add_selection, "atk_text_add_selection", libs);
+  gidLink(cast(void**)&atk_text_get_bounded_ranges, "atk_text_get_bounded_ranges", libs);
+  gidLink(cast(void**)&atk_text_get_caret_offset, "atk_text_get_caret_offset", libs);
+  gidLink(cast(void**)&atk_text_get_character_at_offset, "atk_text_get_character_at_offset", libs);
+  gidLink(cast(void**)&atk_text_get_character_count, "atk_text_get_character_count", libs);
+  gidLink(cast(void**)&atk_text_get_character_extents, "atk_text_get_character_extents", libs);
+  gidLink(cast(void**)&atk_text_get_default_attributes, "atk_text_get_default_attributes", libs);
+  gidLink(cast(void**)&atk_text_get_n_selections, "atk_text_get_n_selections", libs);
+  gidLink(cast(void**)&atk_text_get_offset_at_point, "atk_text_get_offset_at_point", libs);
+  gidLink(cast(void**)&atk_text_get_range_extents, "atk_text_get_range_extents", libs);
+  gidLink(cast(void**)&atk_text_get_run_attributes, "atk_text_get_run_attributes", libs);
+  gidLink(cast(void**)&atk_text_get_selection, "atk_text_get_selection", libs);
+  gidLink(cast(void**)&atk_text_get_string_at_offset, "atk_text_get_string_at_offset", libs);
+  gidLink(cast(void**)&atk_text_get_text, "atk_text_get_text", libs);
+  gidLink(cast(void**)&atk_text_get_text_after_offset, "atk_text_get_text_after_offset", libs);
+  gidLink(cast(void**)&atk_text_get_text_at_offset, "atk_text_get_text_at_offset", libs);
+  gidLink(cast(void**)&atk_text_get_text_before_offset, "atk_text_get_text_before_offset", libs);
+  gidLink(cast(void**)&atk_text_remove_selection, "atk_text_remove_selection", libs);
+  gidLink(cast(void**)&atk_text_scroll_substring_to, "atk_text_scroll_substring_to", libs);
+  gidLink(cast(void**)&atk_text_scroll_substring_to_point, "atk_text_scroll_substring_to_point", libs);
+  gidLink(cast(void**)&atk_text_set_caret_offset, "atk_text_set_caret_offset", libs);
+  gidLink(cast(void**)&atk_text_set_selection, "atk_text_set_selection", libs);
 
   // TextRange
-  gidLink(cast(void**)&atk_text_range_get_type, "atk_text_range_get_type", LIBS);
+  gidLink(cast(void**)&atk_text_range_get_type, "atk_text_range_get_type", libs);
 
   // Util
-  gidLink(cast(void**)&atk_util_get_type, "atk_util_get_type", LIBS);
+  gidLink(cast(void**)&atk_util_get_type, "atk_util_get_type", libs);
 
   // Value
-  gidLink(cast(void**)&atk_value_get_type, "atk_value_get_type", LIBS);
-  gidLink(cast(void**)&atk_value_get_current_value, "atk_value_get_current_value", LIBS);
-  gidLink(cast(void**)&atk_value_get_increment, "atk_value_get_increment", LIBS);
-  gidLink(cast(void**)&atk_value_get_maximum_value, "atk_value_get_maximum_value", LIBS);
-  gidLink(cast(void**)&atk_value_get_minimum_increment, "atk_value_get_minimum_increment", LIBS);
-  gidLink(cast(void**)&atk_value_get_minimum_value, "atk_value_get_minimum_value", LIBS);
-  gidLink(cast(void**)&atk_value_get_range, "atk_value_get_range", LIBS);
-  gidLink(cast(void**)&atk_value_get_sub_ranges, "atk_value_get_sub_ranges", LIBS);
-  gidLink(cast(void**)&atk_value_get_value_and_text, "atk_value_get_value_and_text", LIBS);
-  gidLink(cast(void**)&atk_value_set_current_value, "atk_value_set_current_value", LIBS);
-  gidLink(cast(void**)&atk_value_set_value, "atk_value_set_value", LIBS);
+  gidLink(cast(void**)&atk_value_get_type, "atk_value_get_type", libs);
+  gidLink(cast(void**)&atk_value_get_current_value, "atk_value_get_current_value", libs);
+  gidLink(cast(void**)&atk_value_get_increment, "atk_value_get_increment", libs);
+  gidLink(cast(void**)&atk_value_get_maximum_value, "atk_value_get_maximum_value", libs);
+  gidLink(cast(void**)&atk_value_get_minimum_increment, "atk_value_get_minimum_increment", libs);
+  gidLink(cast(void**)&atk_value_get_minimum_value, "atk_value_get_minimum_value", libs);
+  gidLink(cast(void**)&atk_value_get_range, "atk_value_get_range", libs);
+  gidLink(cast(void**)&atk_value_get_sub_ranges, "atk_value_get_sub_ranges", libs);
+  gidLink(cast(void**)&atk_value_get_value_and_text, "atk_value_get_value_and_text", libs);
+  gidLink(cast(void**)&atk_value_set_current_value, "atk_value_set_current_value", libs);
+  gidLink(cast(void**)&atk_value_set_value, "atk_value_set_value", libs);
 
   // Window
-  gidLink(cast(void**)&atk_window_get_type, "atk_window_get_type", LIBS);
+  gidLink(cast(void**)&atk_window_get_type, "atk_window_get_type", libs);
 
   // global
-  gidLink(cast(void**)&atk_add_focus_tracker, "atk_add_focus_tracker", LIBS);
-  gidLink(cast(void**)&atk_add_global_event_listener, "atk_add_global_event_listener", LIBS);
-  gidLink(cast(void**)&atk_add_key_event_listener, "atk_add_key_event_listener", LIBS);
-  gidLink(cast(void**)&atk_focus_tracker_init, "atk_focus_tracker_init", LIBS);
-  gidLink(cast(void**)&atk_focus_tracker_notify, "atk_focus_tracker_notify", LIBS);
-  gidLink(cast(void**)&atk_get_binary_age, "atk_get_binary_age", LIBS);
-  gidLink(cast(void**)&atk_get_default_registry, "atk_get_default_registry", LIBS);
-  gidLink(cast(void**)&atk_get_focus_object, "atk_get_focus_object", LIBS);
-  gidLink(cast(void**)&atk_get_interface_age, "atk_get_interface_age", LIBS);
-  gidLink(cast(void**)&atk_get_major_version, "atk_get_major_version", LIBS);
-  gidLink(cast(void**)&atk_get_micro_version, "atk_get_micro_version", LIBS);
-  gidLink(cast(void**)&atk_get_minor_version, "atk_get_minor_version", LIBS);
-  gidLink(cast(void**)&atk_get_root, "atk_get_root", LIBS);
-  gidLink(cast(void**)&atk_get_toolkit_name, "atk_get_toolkit_name", LIBS);
-  gidLink(cast(void**)&atk_get_toolkit_version, "atk_get_toolkit_version", LIBS);
-  gidLink(cast(void**)&atk_get_version, "atk_get_version", LIBS);
-  gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", LIBS);
-  gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", LIBS);
-  gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", LIBS);
+  gidLink(cast(void**)&atk_add_focus_tracker, "atk_add_focus_tracker", libs);
+  gidLink(cast(void**)&atk_add_global_event_listener, "atk_add_global_event_listener", libs);
+  gidLink(cast(void**)&atk_add_key_event_listener, "atk_add_key_event_listener", libs);
+  gidLink(cast(void**)&atk_focus_tracker_init, "atk_focus_tracker_init", libs);
+  gidLink(cast(void**)&atk_focus_tracker_notify, "atk_focus_tracker_notify", libs);
+  gidLink(cast(void**)&atk_get_binary_age, "atk_get_binary_age", libs);
+  gidLink(cast(void**)&atk_get_default_registry, "atk_get_default_registry", libs);
+  gidLink(cast(void**)&atk_get_focus_object, "atk_get_focus_object", libs);
+  gidLink(cast(void**)&atk_get_interface_age, "atk_get_interface_age", libs);
+  gidLink(cast(void**)&atk_get_major_version, "atk_get_major_version", libs);
+  gidLink(cast(void**)&atk_get_micro_version, "atk_get_micro_version", libs);
+  gidLink(cast(void**)&atk_get_minor_version, "atk_get_minor_version", libs);
+  gidLink(cast(void**)&atk_get_root, "atk_get_root", libs);
+  gidLink(cast(void**)&atk_get_toolkit_name, "atk_get_toolkit_name", libs);
+  gidLink(cast(void**)&atk_get_toolkit_version, "atk_get_toolkit_version", libs);
+  gidLink(cast(void**)&atk_get_version, "atk_get_version", libs);
+  gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", libs);
+  gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", libs);
+  gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", libs);
 }

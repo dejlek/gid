@@ -38,7 +38,7 @@ template SelectionT()
   override bool addSelection(int i)
   {
     bool _retval;
-    _retval = atk_selection_add_selection(cast(AtkSelection*)cPtr, i);
+    _retval = atk_selection_add_selection(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ template SelectionT()
   override bool clearSelection()
   {
     bool _retval;
-    _retval = atk_selection_clear_selection(cast(AtkSelection*)cPtr);
+    _retval = atk_selection_clear_selection(cast(AtkSelection*)this._cPtr);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ template SelectionT()
   override int getSelectionCount()
   {
     int _retval;
-    _retval = atk_selection_get_selection_count(cast(AtkSelection*)cPtr);
+    _retval = atk_selection_get_selection_count(cast(AtkSelection*)this._cPtr);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ template SelectionT()
   override bool isChildSelected(int i)
   {
     bool _retval;
-    _retval = atk_selection_is_child_selected(cast(AtkSelection*)cPtr, i);
+    _retval = atk_selection_is_child_selected(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -107,8 +107,8 @@ template SelectionT()
   override atk.object.ObjectWrap refSelection(int i)
   {
     AtkObject* _cretval;
-    _cretval = atk_selection_ref_selection(cast(AtkSelection*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_selection_ref_selection(cast(AtkSelection*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ template SelectionT()
   override bool removeSelection(int i)
   {
     bool _retval;
-    _retval = atk_selection_remove_selection(cast(AtkSelection*)cPtr, i);
+    _retval = atk_selection_remove_selection(cast(AtkSelection*)this._cPtr, i);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ template SelectionT()
   override bool selectAllSelection()
   {
     bool _retval;
-    _retval = atk_selection_select_all_selection(cast(AtkSelection*)cPtr);
+    _retval = atk_selection_select_all_selection(cast(AtkSelection*)this._cPtr);
     return _retval;
   }
 

@@ -21,16 +21,16 @@ class SpaceDrawer : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_space_drawer_get_type != &gidSymbolNotFound ? gtk_source_space_drawer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -132,14 +132,14 @@ class SpaceDrawer : gobject.object.ObjectWrap
   void bindMatrixSetting(gio.settings.Settings settings, string key, gio.types.SettingsBindFlags flags)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.Dup) : null, _key, flags);
+    gtk_source_space_drawer_bind_matrix_setting(cast(GtkSourceSpaceDrawer*)this._cPtr, settings ? cast(GSettings*)settings._cPtr(No.Dup) : null, _key, flags);
   }
 
   /** */
   bool getEnableMatrix()
   {
     bool _retval;
-    _retval = gtk_source_space_drawer_get_enable_matrix(cast(GtkSourceSpaceDrawer*)cPtr);
+    _retval = gtk_source_space_drawer_get_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   glib.variant.Variant getMatrix()
   {
     GVariant* _cretval;
-    _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)cPtr);
+    _cretval = gtk_source_space_drawer_get_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -177,7 +177,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   gtksource.types.SpaceTypeFlags getTypesForLocations(gtksource.types.SpaceLocationFlags locations)
   {
     GtkSourceSpaceTypeFlags _cretval;
-    _cretval = gtk_source_space_drawer_get_types_for_locations(cast(GtkSourceSpaceDrawer*)cPtr, locations);
+    _cretval = gtk_source_space_drawer_get_types_for_locations(cast(GtkSourceSpaceDrawer*)this._cPtr, locations);
     gtksource.types.SpaceTypeFlags _retval = cast(gtksource.types.SpaceTypeFlags)_cretval;
     return _retval;
   }
@@ -190,7 +190,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   void setEnableMatrix(bool enableMatrix)
   {
-    gtk_source_space_drawer_set_enable_matrix(cast(GtkSourceSpaceDrawer*)cPtr, enableMatrix);
+    gtk_source_space_drawer_set_enable_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr, enableMatrix);
   }
 
   /**
@@ -207,7 +207,7 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   void setMatrix(glib.variant.Variant matrix = null)
   {
-    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)cPtr, matrix ? cast(GVariant*)matrix.cPtr(No.Dup) : null);
+    gtk_source_space_drawer_set_matrix(cast(GtkSourceSpaceDrawer*)this._cPtr, matrix ? cast(GVariant*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,6 +220,6 @@ class SpaceDrawer : gobject.object.ObjectWrap
   */
   void setTypesForLocations(gtksource.types.SpaceLocationFlags locations, gtksource.types.SpaceTypeFlags types)
   {
-    gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)cPtr, locations, types);
+    gtk_source_space_drawer_set_types_for_locations(cast(GtkSourceSpaceDrawer*)this._cPtr, locations, types);
   }
 }

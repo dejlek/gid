@@ -28,7 +28,7 @@ class AttrString
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class AttrString
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrString*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrString*)this._cPtr).attr);
   }
 
   /**
@@ -48,7 +48,7 @@ class AttrString
   */
   @property string value()
   {
-    return cToD!(string)(cast(void*)(cast(PangoAttrString*)cPtr).value);
+    return cToD!(string)(cast(void*)(cast(PangoAttrString*)this._cPtr).value);
   }
 
   /**
@@ -58,7 +58,7 @@ class AttrString
   */
   @property void value(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(PangoAttrString*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(PangoAttrString*)cPtr).value);
+    cValueFree!(string)(cast(void*)(cast(PangoAttrString*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(PangoAttrString*)this._cPtr).value);
   }
 }

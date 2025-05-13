@@ -25,16 +25,16 @@ class LayeredSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_layered_settings_get_type != &gidSymbolNotFound ? panel_layered_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   /** */
   void append(gio.settings.Settings settings)
   {
-    panel_layered_settings_append(cast(PanelLayeredSettings*)cPtr, settings ? cast(GSettings*)settings.cPtr(No.Dup) : null);
+    panel_layered_settings_append(cast(PanelLayeredSettings*)this._cPtr, settings ? cast(GSettings*)settings._cPtr(No.Dup) : null);
   }
 
   /** */
@@ -64,7 +64,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
-    panel_layered_settings_bind(cast(PanelLayeredSettings*)cPtr, _key, object, _property, flags);
+    panel_layered_settings_bind(cast(PanelLayeredSettings*)this._cPtr, _key, object, _property, flags);
   }
 
   /**
@@ -97,7 +97,7 @@ class LayeredSettings : gobject.object.ObjectWrap
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
       _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      GVariant* _retval = cast(GVariant*)_dretval.cPtr(Yes.Dup);
+      GVariant* _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -107,7 +107,7 @@ class LayeredSettings : gobject.object.ObjectWrap
     const(char)* _property = property.toCString(No.Alloc);
     auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;
     GDestroyNotify _setMappingDestroyCB = setMapping ? &thawDelegate : null;
-    panel_layered_settings_bind_with_mapping(cast(PanelLayeredSettings*)cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
+    panel_layered_settings_bind_with_mapping(cast(PanelLayeredSettings*)this._cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
   }
 
   /** */
@@ -115,7 +115,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_layered_settings_get_boolean(cast(PanelLayeredSettings*)cPtr, _key);
+    _retval = panel_layered_settings_get_boolean(cast(PanelLayeredSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_layered_settings_get_default_value(cast(PanelLayeredSettings*)cPtr, _key);
+    _cretval = panel_layered_settings_get_default_value(cast(PanelLayeredSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -134,7 +134,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_layered_settings_get_double(cast(PanelLayeredSettings*)cPtr, _key);
+    _retval = panel_layered_settings_get_double(cast(PanelLayeredSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_layered_settings_get_int(cast(PanelLayeredSettings*)cPtr, _key);
+    _retval = panel_layered_settings_get_int(cast(PanelLayeredSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     GSettingsSchemaKey* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_layered_settings_get_key(cast(PanelLayeredSettings*)cPtr, _key);
+    _cretval = panel_layered_settings_get_key(cast(PanelLayeredSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -170,7 +170,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_layered_settings_get_string(cast(PanelLayeredSettings*)cPtr, _key);
+    _cretval = panel_layered_settings_get_string(cast(PanelLayeredSettings*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -180,7 +180,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     uint _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_layered_settings_get_uint(cast(PanelLayeredSettings*)cPtr, _key);
+    _retval = panel_layered_settings_get_uint(cast(PanelLayeredSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_layered_settings_get_user_value(cast(PanelLayeredSettings*)cPtr, _key);
+    _cretval = panel_layered_settings_get_user_value(cast(PanelLayeredSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -205,7 +205,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_layered_settings_get_value(cast(PanelLayeredSettings*)cPtr, _key);
+    _cretval = panel_layered_settings_get_value(cast(PanelLayeredSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -217,7 +217,7 @@ class LayeredSettings : gobject.object.ObjectWrap
   string[] listKeys()
   {
     char** _cretval;
-    _cretval = panel_layered_settings_list_keys(cast(PanelLayeredSettings*)cPtr);
+    _cretval = panel_layered_settings_list_keys(cast(PanelLayeredSettings*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -236,21 +236,21 @@ class LayeredSettings : gobject.object.ObjectWrap
   void setBoolean(string key, bool val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_boolean(cast(PanelLayeredSettings*)cPtr, _key, val);
+    panel_layered_settings_set_boolean(cast(PanelLayeredSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setDouble(string key, double val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_double(cast(PanelLayeredSettings*)cPtr, _key, val);
+    panel_layered_settings_set_double(cast(PanelLayeredSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setInt(string key, int val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_int(cast(PanelLayeredSettings*)cPtr, _key, val);
+    panel_layered_settings_set_int(cast(PanelLayeredSettings*)this._cPtr, _key, val);
   }
 
   /** */
@@ -258,28 +258,28 @@ class LayeredSettings : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _val = val.toCString(No.Alloc);
-    panel_layered_settings_set_string(cast(PanelLayeredSettings*)cPtr, _key, _val);
+    panel_layered_settings_set_string(cast(PanelLayeredSettings*)this._cPtr, _key, _val);
   }
 
   /** */
   void setUint(string key, uint val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_uint(cast(PanelLayeredSettings*)cPtr, _key, val);
+    panel_layered_settings_set_uint(cast(PanelLayeredSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setValue(string key, glib.variant.Variant value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_layered_settings_set_value(cast(PanelLayeredSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    panel_layered_settings_set_value(cast(PanelLayeredSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /** */
   void unbind(string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    panel_layered_settings_unbind(cast(PanelLayeredSettings*)cPtr, _property);
+    panel_layered_settings_unbind(cast(PanelLayeredSettings*)this._cPtr, _property);
   }
 
   /**

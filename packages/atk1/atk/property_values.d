@@ -29,7 +29,7 @@ class PropertyValues
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class PropertyValues
   */
   @property string propertyName()
   {
-    return cToD!(string)(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
+    return cToD!(string)(cast(void*)(cast(AtkPropertyValues*)this._cPtr).propertyName);
   }
 
   /**
@@ -50,8 +50,8 @@ class PropertyValues
   */
   @property void propertyName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(AtkPropertyValues*)cPtr).propertyName);
-    dToC(propval, cast(void*)&(cast(AtkPropertyValues*)cPtr).propertyName);
+    cValueFree!(string)(cast(void*)(cast(AtkPropertyValues*)this._cPtr).propertyName);
+    dToC(propval, cast(void*)&(cast(AtkPropertyValues*)this._cPtr).propertyName);
   }
 
   /**
@@ -60,7 +60,7 @@ class PropertyValues
   */
   @property gobject.value.Value oldValue()
   {
-    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)cPtr).oldValue);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)this._cPtr).oldValue);
   }
 
   /**
@@ -69,6 +69,6 @@ class PropertyValues
   */
   @property gobject.value.Value newValue()
   {
-    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)cPtr).newValue);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(AtkPropertyValues*)this._cPtr).newValue);
   }
 }

@@ -32,16 +32,16 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_net_time_provider_get_type != &gidSymbolNotFound ? gst_net_time_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -90,7 +90,7 @@ class NetTimeProvider : gst.object.ObjectWrap, gio.initable.Initable
   {
     GstNetTimeProvider* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
-    _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock.cPtr(No.Dup) : null, _address, port);
+    _cretval = gst_net_time_provider_new(clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, _address, port);
     this(_cretval, Yes.Take);
   }
 }

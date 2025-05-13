@@ -24,16 +24,16 @@ class StateSet : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_state_set_get_type != &gidSymbolNotFound ? atk_state_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class StateSet : gobject.object.ObjectWrap
   bool addState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_add_state(cast(AtkStateSet*)cPtr, type);
+    _retval = atk_state_set_add_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class StateSet : gobject.object.ObjectWrap
       _nTypes = cast(int)types.length;
 
     auto _types = cast(AtkStateType*)types.ptr;
-    atk_state_set_add_states(cast(AtkStateSet*)cPtr, _types, _nTypes);
+    atk_state_set_add_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
   }
 
   /**
@@ -106,8 +106,8 @@ class StateSet : gobject.object.ObjectWrap
   atk.state_set.StateSet andSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_and_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_and_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class StateSet : gobject.object.ObjectWrap
   */
   void clearStates()
   {
-    atk_state_set_clear_states(cast(AtkStateSet*)cPtr);
+    atk_state_set_clear_states(cast(AtkStateSet*)this._cPtr);
   }
 
   /**
@@ -129,7 +129,7 @@ class StateSet : gobject.object.ObjectWrap
   bool containsState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_contains_state(cast(AtkStateSet*)cPtr, type);
+    _retval = atk_state_set_contains_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class StateSet : gobject.object.ObjectWrap
       _nTypes = cast(int)types.length;
 
     auto _types = cast(AtkStateType*)types.ptr;
-    _retval = atk_state_set_contains_states(cast(AtkStateSet*)cPtr, _types, _nTypes);
+    _retval = atk_state_set_contains_states(cast(AtkStateSet*)this._cPtr, _types, _nTypes);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class StateSet : gobject.object.ObjectWrap
   bool isEmpty()
   {
     bool _retval;
-    _retval = atk_state_set_is_empty(cast(AtkStateSet*)cPtr);
+    _retval = atk_state_set_is_empty(cast(AtkStateSet*)this._cPtr);
     return _retval;
   }
 
@@ -175,8 +175,8 @@ class StateSet : gobject.object.ObjectWrap
   atk.state_set.StateSet orSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_or_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_or_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class StateSet : gobject.object.ObjectWrap
   bool removeState(atk.types.StateType type)
   {
     bool _retval;
-    _retval = atk_state_set_remove_state(cast(AtkStateSet*)cPtr, type);
+    _retval = atk_state_set_remove_state(cast(AtkStateSet*)this._cPtr, type);
     return _retval;
   }
 
@@ -212,8 +212,8 @@ class StateSet : gobject.object.ObjectWrap
   atk.state_set.StateSet xorSets(atk.state_set.StateSet compareSet)
   {
     AtkStateSet* _cretval;
-    _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)cPtr, compareSet ? cast(AtkStateSet*)compareSet.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_state_set_xor_sets(cast(AtkStateSet*)this._cPtr, compareSet ? cast(AtkStateSet*)compareSet._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 }

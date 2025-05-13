@@ -30,16 +30,16 @@ class Device : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_get_type != &gidSymbolNotFound ? gdk_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -149,7 +149,7 @@ class Device : gobject.object.ObjectWrap
   bool getCapsLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_caps_lock_state(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_caps_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -160,8 +160,8 @@ class Device : gobject.object.ObjectWrap
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
-    _cretval = gdk_device_get_device_tool(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    _cretval = gdk_device_get_device_tool(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class Device : gobject.object.ObjectWrap
   pango.types.Direction getDirection()
   {
     PangoDirection _cretval;
-    _cretval = gdk_device_get_direction(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_direction(cast(GdkDevice*)this._cPtr);
     pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
@@ -191,8 +191,8 @@ class Device : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_device_get_display(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Device : gobject.object.ObjectWrap
   bool getHasCursor()
   {
     bool _retval;
-    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.ModifierType getModifierState()
   {
     GdkModifierType _cretval;
-    _cretval = gdk_device_get_modifier_state(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_modifier_state(cast(GdkDevice*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -231,7 +231,7 @@ class Device : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_name(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -245,7 +245,7 @@ class Device : gobject.object.ObjectWrap
   bool getNumLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_num_lock_state(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_num_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Device : gobject.object.ObjectWrap
   uint getNumTouches()
   {
     uint _retval;
-    _retval = gdk_device_get_num_touches(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_num_touches(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class Device : gobject.object.ObjectWrap
   string getProductId()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_product_id(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -284,7 +284,7 @@ class Device : gobject.object.ObjectWrap
   bool getScrollLockState()
   {
     bool _retval;
-    _retval = gdk_device_get_scroll_lock_state(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_scroll_lock_state(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -295,8 +295,8 @@ class Device : gobject.object.ObjectWrap
   gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
-    _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    _cretval = gdk_device_get_seat(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.InputSource getSource()
   {
     GdkInputSource _cretval;
-    _cretval = gdk_device_get_source(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_source(cast(GdkDevice*)this._cPtr);
     gdk.types.InputSource _retval = cast(gdk.types.InputSource)_cretval;
     return _retval;
   }
@@ -330,8 +330,8 @@ class Device : gobject.object.ObjectWrap
   gdk.surface.Surface getSurfaceAtPosition(out double winX, out double winY)
   {
     GdkSurface* _cretval;
-    _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_device_get_surface_at_position(cast(GdkDevice*)this._cPtr, cast(double*)&winX, cast(double*)&winY);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class Device : gobject.object.ObjectWrap
   uint getTimestamp()
   {
     uint _retval;
-    _retval = gdk_device_get_timestamp(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_timestamp(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class Device : gobject.object.ObjectWrap
   string getVendorId()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -399,7 +399,7 @@ class Device : gobject.object.ObjectWrap
   bool hasBidiLayouts()
   {
     bool _retval;
-    _retval = gdk_device_has_bidi_layouts(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_has_bidi_layouts(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 

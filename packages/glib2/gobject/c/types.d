@@ -739,7 +739,7 @@ struct GInitiallyUnownedClass
        @constructor of the parent class. Overriding @constructor should be rarely
        needed, e.g. to handle construct properties, or to implement singletons.
   */
-  extern(C) ObjectC* function(GType type, uint nConstructProperties, GObjectConstructParam* constructProperties) constructor;
+  extern(C) GObject* function(GType type, uint nConstructProperties, GObjectConstructParam* constructProperties) constructor;
 
   /**
       the generic setter for all properties of this type. Should be
@@ -748,13 +748,13 @@ struct GInitiallyUnownedClass
        be done implicitly by the type system. However, if the notify signal is
        emitted explicitly, the type system will not emit it a second time.
   */
-  extern(C) void function(ObjectC* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) setProperty;
+  extern(C) void function(GObject* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) setProperty;
 
   /**
       the generic getter for all properties of this type. Should be
        overridden for every type with properties.
   */
-  extern(C) void function(ObjectC* object, uint propertyId, GValue* value, GParamSpec* pspec) getProperty;
+  extern(C) void function(GObject* object, uint propertyId, GValue* value, GParamSpec* pspec) getProperty;
 
   /**
       the @dispose function is supposed to drop all references to other
@@ -763,26 +763,26 @@ struct GInitiallyUnownedClass
        loops). Before returning, @dispose should chain up to the @dispose method
        of the parent class.
   */
-  extern(C) void function(ObjectC* object) dispose;
+  extern(C) void function(GObject* object) dispose;
 
   /**
       instance finalization function, should finish the finalization of
        the instance begun in @dispose and chain up to the @finalize method of the
        parent class.
   */
-  extern(C) void function(ObjectC* object) finalize;
+  extern(C) void function(GObject* object) finalize;
 
   /**
       emits property change notification for a bunch
        of properties. Overriding @dispatch_properties_changed should be rarely
        needed.
   */
-  extern(C) void function(ObjectC* object, uint nPspecs, GParamSpec** pspecs) dispatchPropertiesChanged;
+  extern(C) void function(GObject* object, uint nPspecs, GParamSpec** pspecs) dispatchPropertiesChanged;
 
   /**
       the class closure for the notify signal
   */
-  extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
+  extern(C) void function(GObject* object, GParamSpec* pspec) notify;
 
   /**
       the @constructed function is called by [gobject.object.ObjectWrap.new_] as the
@@ -793,7 +793,7 @@ struct GInitiallyUnownedClass
        should chain up to the @constructed call of their parent class to allow it
        to complete its initialisation.
   */
-  extern(C) void function(ObjectC* object) constructed;
+  extern(C) void function(GObject* object) constructed;
 
   /** */
   size_t flags;
@@ -878,7 +878,7 @@ struct GObjectClass
        @constructor of the parent class. Overriding @constructor should be rarely
        needed, e.g. to handle construct properties, or to implement singletons.
   */
-  extern(C) ObjectC* function(GType type, uint nConstructProperties, GObjectConstructParam* constructProperties) constructor;
+  extern(C) GObject* function(GType type, uint nConstructProperties, GObjectConstructParam* constructProperties) constructor;
 
   /**
       the generic setter for all properties of this type. Should be
@@ -887,13 +887,13 @@ struct GObjectClass
        be done implicitly by the type system. However, if the notify signal is
        emitted explicitly, the type system will not emit it a second time.
   */
-  extern(C) void function(ObjectC* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) setProperty;
+  extern(C) void function(GObject* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) setProperty;
 
   /**
       the generic getter for all properties of this type. Should be
        overridden for every type with properties.
   */
-  extern(C) void function(ObjectC* object, uint propertyId, GValue* value, GParamSpec* pspec) getProperty;
+  extern(C) void function(GObject* object, uint propertyId, GValue* value, GParamSpec* pspec) getProperty;
 
   /**
       the @dispose function is supposed to drop all references to other
@@ -902,26 +902,26 @@ struct GObjectClass
        loops). Before returning, @dispose should chain up to the @dispose method
        of the parent class.
   */
-  extern(C) void function(ObjectC* object) dispose;
+  extern(C) void function(GObject* object) dispose;
 
   /**
       instance finalization function, should finish the finalization of
        the instance begun in @dispose and chain up to the @finalize method of the
        parent class.
   */
-  extern(C) void function(ObjectC* object) finalize;
+  extern(C) void function(GObject* object) finalize;
 
   /**
       emits property change notification for a bunch
        of properties. Overriding @dispatch_properties_changed should be rarely
        needed.
   */
-  extern(C) void function(ObjectC* object, uint nPspecs, GParamSpec** pspecs) dispatchPropertiesChanged;
+  extern(C) void function(GObject* object, uint nPspecs, GParamSpec** pspecs) dispatchPropertiesChanged;
 
   /**
       the class closure for the notify signal
   */
-  extern(C) void function(ObjectC* object, GParamSpec* pspec) notify;
+  extern(C) void function(GObject* object, GParamSpec* pspec) notify;
 
   /**
       the @constructed function is called by [gobject.object.ObjectWrap.new_] as the
@@ -932,7 +932,7 @@ struct GObjectClass
        should chain up to the @constructed call of their parent class to allow it
        to complete its initialisation.
   */
-  extern(C) void function(ObjectC* object) constructed;
+  extern(C) void function(GObject* object) constructed;
 
   /** */
   size_t flags;
@@ -991,7 +991,7 @@ struct GObjectConstructParam
     struct, the [gstpbutils.types.ObjectClass] (or derived) struct, and any private data allocated
     by `G_ADD_PRIVATE()`.
 */
-struct ObjectC
+struct GObject
 {
   /** */
   GTypeInstance gTypeInstance;
@@ -2006,7 +2006,7 @@ struct GTypeInterface
 struct GTypeModule
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   uint useCount;
@@ -2398,17 +2398,17 @@ alias extern(C) void function(GTypeInterface* gIface, void* ifaceData) GInterfac
 
 alias extern(C) void function(GTypeInterface* gIface, void* ifaceData) GInterfaceInitFunc;
 
-alias extern(C) void function(ObjectC* object) GObjectFinalizeFunc;
+alias extern(C) void function(GObject* object) GObjectFinalizeFunc;
 
-alias extern(C) void function(ObjectC* object, uint propertyId, GValue* value, GParamSpec* pspec) GObjectGetPropertyFunc;
+alias extern(C) void function(GObject* object, uint propertyId, GValue* value, GParamSpec* pspec) GObjectGetPropertyFunc;
 
-alias extern(C) void function(ObjectC* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) GObjectSetPropertyFunc;
+alias extern(C) void function(GObject* object, uint propertyId, const(GValue)* value, GParamSpec* pspec) GObjectSetPropertyFunc;
 
 alias extern(C) bool function(GSignalInvocationHint* ihint, GValue* returnAccu, const(GValue)* handlerReturn, void* data) GSignalAccumulator;
 
 alias extern(C) bool function(GSignalInvocationHint* ihint, uint nParamValues, const(GValue)* paramValues, void* data) GSignalEmissionHook;
 
-alias extern(C) void function(void* data, ObjectC* object, bool isLastRef) GToggleNotify;
+alias extern(C) void function(void* data, GObject* object, bool isLastRef) GToggleNotify;
 
 alias extern(C) bool function(void* cacheData, GTypeClass* gClass) GTypeClassCacheFunc;
 
@@ -2438,5 +2438,5 @@ alias extern(C) void function(GClosure* closure, GValue* returnValue, GTypeInsta
 
 alias extern(C) void function(const(GValue)* srcValue, GValue* destValue) GValueTransform;
 
-alias extern(C) void function(void* data, ObjectC* whereTheObjectWas) GWeakNotify;
+alias extern(C) void function(void* data, GObject* whereTheObjectWas) GWeakNotify;
 

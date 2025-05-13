@@ -79,16 +79,16 @@ class RecentManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_manager_get_type != &gidSymbolNotFound ? gtk_recent_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -136,7 +136,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     GtkRecentManager* _cretval;
     _cretval = gtk_recent_manager_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_manager.RecentManager)(cast(GtkRecentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData.cPtr : null);
+    _retval = gtk_recent_manager_add_full(cast(GtkRecentManager*)this._cPtr, _uri, recentData ? cast(const(GtkRecentData)*)recentData._cPtr : null);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_add_item(cast(GtkRecentManager*)cPtr, _uri);
+    _retval = gtk_recent_manager_add_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class RecentManager : gobject.object.ObjectWrap
   gtk.recent_info.RecentInfo[] getItems()
   {
     GList* _cretval;
-    _cretval = gtk_recent_manager_get_items(cast(GtkRecentManager*)cPtr);
+    _cretval = gtk_recent_manager_get_items(cast(GtkRecentManager*)this._cPtr);
     auto _retval = gListToD!(gtk.recent_info.RecentInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -226,7 +226,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gtk_recent_manager_has_item(cast(GtkRecentManager*)cPtr, _uri);
+    _retval = gtk_recent_manager_has_item(cast(GtkRecentManager*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class RecentManager : gobject.object.ObjectWrap
     GtkRecentInfo* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
+    _cretval = gtk_recent_manager_lookup_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
@@ -274,7 +274,7 @@ class RecentManager : gobject.object.ObjectWrap
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _newUri = newUri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)cPtr, _uri, _newUri, &_err);
+    _retval = gtk_recent_manager_move_item(cast(GtkRecentManager*)this._cPtr, _uri, _newUri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -290,7 +290,7 @@ class RecentManager : gobject.object.ObjectWrap
   {
     int _retval;
     GError *_err;
-    _retval = gtk_recent_manager_purge_items(cast(GtkRecentManager*)cPtr, &_err);
+    _retval = gtk_recent_manager_purge_items(cast(GtkRecentManager*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -311,7 +311,7 @@ class RecentManager : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)cPtr, _uri, &_err);
+    _retval = gtk_recent_manager_remove_item(cast(GtkRecentManager*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

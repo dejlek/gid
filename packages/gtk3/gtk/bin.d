@@ -31,16 +31,16 @@ class Bin : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bin_get_type != &gidSymbolNotFound ? gtk_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,8 +59,8 @@ class Bin : gtk.container.Container
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_bin_get_child(cast(GtkBin*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_bin_get_child(cast(GtkBin*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

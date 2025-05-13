@@ -18,7 +18,7 @@ import gstrtsp.types;
 */
 void rtspAuthCredentialsFree(gstrtsp.rtspauth_credential.RTSPAuthCredential credentials)
 {
-  gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials.cPtr(No.Dup) : null);
+  gst_rtsp_auth_credentials_free(credentials ? cast(GstRTSPAuthCredential**)credentials._cPtr(No.Dup) : null);
 }
 
 /**
@@ -223,7 +223,7 @@ gstrtsp.types.RTSPResult rtspMessageNewResponse(out gstrtsp.rtspmessage.RTSPMess
   GstRTSPResult _cretval;
   GstRTSPMessage* _msg;
   const(char)* _reason = reason.toCString(No.Alloc);
-  _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request.cPtr(No.Dup) : null);
+  _cretval = gst_rtsp_message_new_response(&_msg, code, _reason, request ? cast(const(GstRTSPMessage)*)request._cPtr(No.Dup) : null);
   gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
   msg = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_msg, Yes.Take);
   return _retval;

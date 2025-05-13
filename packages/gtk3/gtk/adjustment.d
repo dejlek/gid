@@ -27,16 +27,16 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_adjustment_get_type != &gidSymbolNotFound ? gtk_adjustment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -200,7 +200,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void changed()
   {
-    gtk_adjustment_changed(cast(GtkAdjustment*)cPtr);
+    gtk_adjustment_changed(cast(GtkAdjustment*)this._cPtr);
   }
 
   /**
@@ -218,7 +218,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void clampPage(double lower, double upper)
   {
-    gtk_adjustment_clamp_page(cast(GtkAdjustment*)cPtr, lower, upper);
+    gtk_adjustment_clamp_page(cast(GtkAdjustment*)this._cPtr, lower, upper);
   }
 
   /**
@@ -239,7 +239,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void configure(double value, double lower, double upper, double stepIncrement, double pageIncrement, double pageSize)
   {
-    gtk_adjustment_configure(cast(GtkAdjustment*)cPtr, value, lower, upper, stepIncrement, pageIncrement, pageSize);
+    gtk_adjustment_configure(cast(GtkAdjustment*)this._cPtr, value, lower, upper, stepIncrement, pageIncrement, pageSize);
   }
 
   /**
@@ -249,7 +249,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getLower()
   {
     double _retval;
-    _retval = gtk_adjustment_get_lower(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_lower(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getMinimumIncrement()
   {
     double _retval;
-    _retval = gtk_adjustment_get_minimum_increment(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_minimum_increment(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getPageIncrement()
   {
     double _retval;
-    _retval = gtk_adjustment_get_page_increment(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_page_increment(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getPageSize()
   {
     double _retval;
-    _retval = gtk_adjustment_get_page_size(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_page_size(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getStepIncrement()
   {
     double _retval;
-    _retval = gtk_adjustment_get_step_increment(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_step_increment(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getUpper()
   {
     double _retval;
-    _retval = gtk_adjustment_get_upper(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_upper(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   double getValue()
   {
     double _retval;
-    _retval = gtk_adjustment_get_value(cast(GtkAdjustment*)cPtr);
+    _retval = gtk_adjustment_get_value(cast(GtkAdjustment*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setLower(double lower)
   {
-    gtk_adjustment_set_lower(cast(GtkAdjustment*)cPtr, lower);
+    gtk_adjustment_set_lower(cast(GtkAdjustment*)this._cPtr, lower);
   }
 
   /**
@@ -355,7 +355,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setPageIncrement(double pageIncrement)
   {
-    gtk_adjustment_set_page_increment(cast(GtkAdjustment*)cPtr, pageIncrement);
+    gtk_adjustment_set_page_increment(cast(GtkAdjustment*)this._cPtr, pageIncrement);
   }
 
   /**
@@ -370,7 +370,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setPageSize(double pageSize)
   {
-    gtk_adjustment_set_page_size(cast(GtkAdjustment*)cPtr, pageSize);
+    gtk_adjustment_set_page_size(cast(GtkAdjustment*)this._cPtr, pageSize);
   }
 
   /**
@@ -385,7 +385,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setStepIncrement(double stepIncrement)
   {
-    gtk_adjustment_set_step_increment(cast(GtkAdjustment*)cPtr, stepIncrement);
+    gtk_adjustment_set_step_increment(cast(GtkAdjustment*)this._cPtr, stepIncrement);
   }
 
   /**
@@ -403,7 +403,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setUpper(double upper)
   {
-    gtk_adjustment_set_upper(cast(GtkAdjustment*)cPtr, upper);
+    gtk_adjustment_set_upper(cast(GtkAdjustment*)this._cPtr, upper);
   }
 
   /**
@@ -419,7 +419,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void setValue(double value)
   {
-    gtk_adjustment_set_value(cast(GtkAdjustment*)cPtr, value);
+    gtk_adjustment_set_value(cast(GtkAdjustment*)this._cPtr, value);
   }
 
   /**
@@ -432,7 +432,7 @@ class Adjustment : gobject.initially_unowned.InitiallyUnowned
   */
   void valueChanged()
   {
-    gtk_adjustment_value_changed(cast(GtkAdjustment*)cPtr);
+    gtk_adjustment_value_changed(cast(GtkAdjustment*)this._cPtr);
   }
 
   /**

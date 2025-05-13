@@ -51,16 +51,16 @@ class ShortcutAction : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_action_get_type != &gidSymbolNotFound ? gtk_shortcut_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -94,7 +94,7 @@ class ShortcutAction : gobject.object.ObjectWrap
     GtkShortcutAction* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_action_parse_string(_string_);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_action.ShortcutAction)(cast(GtkShortcutAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   bool activate(gtk.types.ShortcutActionFlags flags, gtk.widget.Widget widget, glib.variant.Variant args = null)
   {
     bool _retval;
-    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)cPtr, flags, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, args ? cast(GVariant*)args.cPtr(No.Dup) : null);
+    _retval = gtk_shortcut_action_activate(cast(GtkShortcutAction*)this._cPtr, flags, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, args ? cast(GVariant*)args._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   */
   void print(glib.string_.String string_)
   {
-    gtk_shortcut_action_print(cast(GtkShortcutAction*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    gtk_shortcut_action_print(cast(GtkShortcutAction*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -146,7 +146,7 @@ class ShortcutAction : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)cPtr);
+    _cretval = gtk_shortcut_action_to_string(cast(GtkShortcutAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -28,16 +28,16 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -247,7 +247,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -265,7 +265,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void blockInteractive()
   {
-    gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**
@@ -283,8 +283,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtksource.completion_context.CompletionContext createContext(gtk.text_iter.TextIter position = null)
   {
     GtkSourceCompletionContext* _cretval;
-    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)cPtr, position ? cast(GtkTextIter*)position.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
+    _cretval = gtk_source_completion_create_context(cast(GtkSourceCompletion*)this._cPtr, position ? cast(GtkTextIter*)position._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion_context.CompletionContext)(cast(GtkSourceCompletionContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -297,8 +297,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtksource.completion_info.CompletionInfo getInfoWindow()
   {
     GtkSourceCompletionInfo* _cretval;
-    _cretval = gtk_source_completion_get_info_window(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.Take);
+    _cretval = gtk_source_completion_get_info_window(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion_info.CompletionInfo)(cast(GtkSourceCompletionInfo*)_cretval, No.Take);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtksource.completion_provider.CompletionProvider[] getProviders()
   {
     GList* _cretval;
-    _cretval = gtk_source_completion_get_providers(cast(GtkSourceCompletion*)cPtr);
+    _cretval = gtk_source_completion_get_providers(cast(GtkSourceCompletion*)this._cPtr);
     auto _retval = gListToD!(gtksource.completion_provider.CompletionProvider, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -324,8 +324,8 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void hide()
   {
-    gtk_source_completion_hide(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_hide(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**
@@ -350,7 +350,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -378,7 +378,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
     bool _retval;
     auto _providers = gListFromD!(gtksource.completion_provider.CompletionProvider)(providers);
     scope(exit) containerFree!(GList*, gtksource.completion_provider.CompletionProvider, GidOwnership.None)(_providers);
-    _retval = gtk_source_completion_start(cast(GtkSourceCompletion*)cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_start(cast(GtkSourceCompletion*)this._cPtr, _providers, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class Completion : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void unblockInteractive()
   {
-    gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**

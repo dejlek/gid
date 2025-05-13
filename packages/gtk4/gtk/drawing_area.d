@@ -108,16 +108,16 @@ class DrawingArea : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drawing_area_get_type != &gidSymbolNotFound ? gtk_drawing_area_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,7 +182,7 @@ class DrawingArea : gtk.widget.Widget
   int getContentHeight()
   {
     int _retval;
-    _retval = gtk_drawing_area_get_content_height(cast(GtkDrawingArea*)cPtr);
+    _retval = gtk_drawing_area_get_content_height(cast(GtkDrawingArea*)this._cPtr);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class DrawingArea : gtk.widget.Widget
   int getContentWidth()
   {
     int _retval;
-    _retval = gtk_drawing_area_get_content_width(cast(GtkDrawingArea*)cPtr);
+    _retval = gtk_drawing_area_get_content_width(cast(GtkDrawingArea*)this._cPtr);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class DrawingArea : gtk.widget.Widget
   */
   void setContentHeight(int height)
   {
-    gtk_drawing_area_set_content_height(cast(GtkDrawingArea*)cPtr, height);
+    gtk_drawing_area_set_content_height(cast(GtkDrawingArea*)this._cPtr, height);
   }
 
   /**
@@ -230,7 +230,7 @@ class DrawingArea : gtk.widget.Widget
   */
   void setContentWidth(int width)
   {
-    gtk_drawing_area_set_content_width(cast(GtkDrawingArea*)cPtr, width);
+    gtk_drawing_area_set_content_width(cast(GtkDrawingArea*)this._cPtr, width);
   }
 
   /**
@@ -259,13 +259,13 @@ class DrawingArea : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.DrawingAreaDrawFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.drawing_area.DrawingArea)(cast(void*)drawingArea, No.Take), cr ? new cairo.context.Context(cast(void*)cr, No.Take) : null, width, height);
     }
     auto _drawFuncCB = drawFunc ? &_drawFuncCallback : null;
 
     auto _drawFunc = drawFunc ? freezeDelegate(cast(void*)&drawFunc) : null;
     GDestroyNotify _drawFuncDestroyCB = drawFunc ? &thawDelegate : null;
-    gtk_drawing_area_set_draw_func(cast(GtkDrawingArea*)cPtr, _drawFuncCB, _drawFunc, _drawFuncDestroyCB);
+    gtk_drawing_area_set_draw_func(cast(GtkDrawingArea*)this._cPtr, _drawFuncCB, _drawFunc, _drawFuncDestroyCB);
   }
 
   /**

@@ -28,22 +28,22 @@ class VariantBuilder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_variant_builder_get_type != &gidSymbolNotFound ? g_variant_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class VariantBuilder : gobject.boxed.Boxed
   this(glib.variant_type.VariantType type)
   {
     GVariantBuilder* _cretval;
-    _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
+    _cretval = g_variant_builder_new(type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -91,7 +91,7 @@ class VariantBuilder : gobject.boxed.Boxed
   */
   void addValue(glib.variant.Variant value)
   {
-    g_variant_builder_add_value(cast(GVariantBuilder*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    g_variant_builder_add_value(cast(GVariantBuilder*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -104,7 +104,7 @@ class VariantBuilder : gobject.boxed.Boxed
   */
   void close()
   {
-    g_variant_builder_close(cast(GVariantBuilder*)cPtr);
+    g_variant_builder_close(cast(GVariantBuilder*)this._cPtr);
   }
 
   /**
@@ -130,7 +130,7 @@ class VariantBuilder : gobject.boxed.Boxed
   glib.variant.Variant end()
   {
     GVariant* _cretval;
-    _cretval = g_variant_builder_end(cast(GVariantBuilder*)cPtr);
+    _cretval = g_variant_builder_end(cast(GVariantBuilder*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -178,6 +178,6 @@ class VariantBuilder : gobject.boxed.Boxed
   */
   void open(glib.variant_type.VariantType type)
   {
-    g_variant_builder_open(cast(GVariantBuilder*)cPtr, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null);
+    g_variant_builder_open(cast(GVariantBuilder*)this._cPtr, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null);
   }
 }

@@ -30,7 +30,7 @@ class RTSPWatch
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,7 +45,7 @@ class RTSPWatch
   uint attach(glib.main_context.MainContext context = null)
   {
     uint _retval;
-    _retval = gst_rtsp_watch_attach(cast(GstRTSPWatch*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);
+    _retval = gst_rtsp_watch_attach(cast(GstRTSPWatch*)this._cPtr, context ? cast(GMainContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class RTSPWatch
   */
   void getSendBacklog(out size_t bytes, out uint messages)
   {
-    gst_rtsp_watch_get_send_backlog(cast(GstRTSPWatch*)cPtr, cast(size_t*)&bytes, cast(uint*)&messages);
+    gst_rtsp_watch_get_send_backlog(cast(GstRTSPWatch*)this._cPtr, cast(size_t*)&bytes, cast(uint*)&messages);
   }
 
   /**
@@ -68,7 +68,7 @@ class RTSPWatch
   */
   void reset()
   {
-    gst_rtsp_watch_reset(cast(GstRTSPWatch*)cPtr);
+    gst_rtsp_watch_reset(cast(GstRTSPWatch*)this._cPtr);
   }
 
   /**
@@ -87,7 +87,7 @@ class RTSPWatch
   gstrtsp.types.RTSPResult sendMessage(gstrtsp.rtspmessage.RTSPMessage message, out uint id)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_watch_send_message(cast(GstRTSPWatch*)cPtr, message ? cast(GstRTSPMessage*)message.cPtr(No.Dup) : null, cast(uint*)&id);
+    _cretval = gst_rtsp_watch_send_message(cast(GstRTSPWatch*)this._cPtr, message ? cast(GstRTSPMessage*)message._cPtr(No.Dup) : null, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -115,9 +115,9 @@ class RTSPWatch
 
     GstRTSPMessage[] _tmpmessages;
     foreach (obj; messages)
-      _tmpmessages ~= *cast(GstRTSPMessage*)obj.cPtr;
+      _tmpmessages ~= *cast(GstRTSPMessage*)obj._cPtr;
     GstRTSPMessage* _messages = _tmpmessages.ptr;
-    _cretval = gst_rtsp_watch_send_messages(cast(GstRTSPWatch*)cPtr, _messages, _nMessages, cast(uint*)&id);
+    _cretval = gst_rtsp_watch_send_messages(cast(GstRTSPWatch*)this._cPtr, _messages, _nMessages, cast(uint*)&id);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -132,7 +132,7 @@ class RTSPWatch
   */
   void setFlushing(bool flushing)
   {
-    gst_rtsp_watch_set_flushing(cast(GstRTSPWatch*)cPtr, flushing);
+    gst_rtsp_watch_set_flushing(cast(GstRTSPWatch*)this._cPtr, flushing);
   }
 
   /**
@@ -148,7 +148,7 @@ class RTSPWatch
   */
   void setSendBacklog(size_t bytes, uint messages)
   {
-    gst_rtsp_watch_set_send_backlog(cast(GstRTSPWatch*)cPtr, bytes, messages);
+    gst_rtsp_watch_set_send_backlog(cast(GstRTSPWatch*)this._cPtr, bytes, messages);
   }
 
   /**
@@ -173,7 +173,7 @@ class RTSPWatch
   gstrtsp.types.RTSPResult waitBacklog(glib.time_val.TimeVal timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_watch_wait_backlog(cast(GstRTSPWatch*)cPtr, timeout ? cast(GTimeVal*)timeout.cPtr : null);
+    _cretval = gst_rtsp_watch_wait_backlog(cast(GstRTSPWatch*)this._cPtr, timeout ? cast(GTimeVal*)timeout._cPtr : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -200,7 +200,7 @@ class RTSPWatch
   gstrtsp.types.RTSPResult waitBacklogUsec(long timeout)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_watch_wait_backlog_usec(cast(GstRTSPWatch*)cPtr, timeout);
+    _cretval = gst_rtsp_watch_wait_backlog_usec(cast(GstRTSPWatch*)this._cPtr, timeout);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

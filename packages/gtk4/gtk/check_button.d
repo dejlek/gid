@@ -86,16 +86,16 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_button_get_type != &gidSymbolNotFound ? gtk_check_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -248,7 +248,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_button_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_button.CheckButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_check_button_get_active(cast(GtkCheckButton*)cPtr);
+    _retval = gtk_check_button_get_active(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 
@@ -287,8 +287,8 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_check_button_get_child(cast(GtkCheckButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_check_button_get_inconsistent(cast(GtkCheckButton*)cPtr);
+    _retval = gtk_check_button_get_inconsistent(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)cPtr);
+    _cretval = gtk_check_button_get_label(cast(GtkCheckButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -325,7 +325,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_check_button_get_use_underline(cast(GtkCheckButton*)cPtr);
+    _retval = gtk_check_button_get_use_underline(cast(GtkCheckButton*)this._cPtr);
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setActive(bool setting)
   {
-    gtk_check_button_set_active(cast(GtkCheckButton*)cPtr, setting);
+    gtk_check_button_set_active(cast(GtkCheckButton*)this._cPtr, setting);
   }
 
   /**
@@ -354,7 +354,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_check_button_set_child(cast(GtkCheckButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_check_button_set_child(cast(GtkCheckButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -380,7 +380,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setGroup(gtk.check_button.CheckButton group = null)
   {
-    gtk_check_button_set_group(cast(GtkCheckButton*)cPtr, group ? cast(GtkCheckButton*)group.cPtr(No.Dup) : null);
+    gtk_check_button_set_group(cast(GtkCheckButton*)this._cPtr, group ? cast(GtkCheckButton*)group._cPtr(No.Dup) : null);
   }
 
   /**
@@ -394,7 +394,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setInconsistent(bool inconsistent)
   {
-    gtk_check_button_set_inconsistent(cast(GtkCheckButton*)cPtr, inconsistent);
+    gtk_check_button_set_inconsistent(cast(GtkCheckButton*)this._cPtr, inconsistent);
   }
 
   /**
@@ -411,7 +411,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_check_button_set_label(cast(GtkCheckButton*)cPtr, _label);
+    gtk_check_button_set_label(cast(GtkCheckButton*)this._cPtr, _label);
   }
 
   /**
@@ -426,7 +426,7 @@ class CheckButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setUseUnderline(bool setting)
   {
-    gtk_check_button_set_use_underline(cast(GtkCheckButton*)cPtr, setting);
+    gtk_check_button_set_use_underline(cast(GtkCheckButton*)this._cPtr, setting);
   }
 
   /**

@@ -38,7 +38,7 @@ class MaskNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode source, gsk.render_node.RenderNode mask, gsk.types.MaskMode maskMode)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source.cPtr(No.Dup) : null, mask ? cast(GskRenderNode*)mask.cPtr(No.Dup) : null, maskMode);
+    _cretval = gsk_mask_node_new(source ? cast(GskRenderNode*)source._cPtr(No.Dup) : null, mask ? cast(GskRenderNode*)mask._cPtr(No.Dup) : null, maskMode);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class MaskNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getMask()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_get_mask(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_mask_node_get_mask(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -61,7 +61,7 @@ class MaskNode : gsk.render_node.RenderNode
   gsk.types.MaskMode getMaskMode()
   {
     GskMaskMode _cretval;
-    _cretval = gsk_mask_node_get_mask_mode(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_mask_node_get_mask_mode(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.MaskMode _retval = cast(gsk.types.MaskMode)_cretval;
     return _retval;
   }
@@ -73,7 +73,7 @@ class MaskNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getSource()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_mask_node_get_source(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_mask_node_get_source(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }

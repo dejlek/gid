@@ -27,7 +27,7 @@ class Hook
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class Hook
   */
   @property glib.hook.Hook next()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).next);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next);
   }
 
   /**
@@ -47,7 +47,7 @@ class Hook
   */
   @property glib.hook.Hook prev()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)cPtr).prev);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev);
   }
 
   /**
@@ -56,7 +56,7 @@ class Hook
   */
   @property uint refCount()
   {
-    return (cast(GHook*)cPtr).refCount;
+    return (cast(GHook*)this._cPtr).refCount;
   }
 
   /**
@@ -66,7 +66,7 @@ class Hook
   */
   @property void refCount(uint propval)
   {
-    (cast(GHook*)cPtr).refCount = propval;
+    (cast(GHook*)this._cPtr).refCount = propval;
   }
 
   /**
@@ -75,7 +75,7 @@ class Hook
   */
   @property gulong hookId()
   {
-    return (cast(GHook*)cPtr).hookId;
+    return (cast(GHook*)this._cPtr).hookId;
   }
 
   /**
@@ -85,7 +85,7 @@ class Hook
   */
   @property void hookId(gulong propval)
   {
-    (cast(GHook*)cPtr).hookId = propval;
+    (cast(GHook*)this._cPtr).hookId = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class Hook
   */
   @property uint flags()
   {
-    return (cast(GHook*)cPtr).flags;
+    return (cast(GHook*)this._cPtr).flags;
   }
 
   /**
@@ -106,7 +106,7 @@ class Hook
   */
   @property void flags(uint propval)
   {
-    (cast(GHook*)cPtr).flags = propval;
+    (cast(GHook*)this._cPtr).flags = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class Hook
   */
   @property GDestroyNotify destroy()
   {
-    return (cast(GHook*)cPtr).destroy;
+    return (cast(GHook*)this._cPtr).destroy;
   }
 
   /**
@@ -128,7 +128,7 @@ class Hook
 
   @property void destroy(GDestroyNotify propval)
   {
-    (cast(GHook*)cPtr).destroy = propval;
+    (cast(GHook*)this._cPtr).destroy = propval;
   }
 
   /**
@@ -142,7 +142,7 @@ class Hook
   int compareIds(glib.hook.Hook sibling)
   {
     int _retval;
-    _retval = g_hook_compare_ids(cast(GHook*)cPtr, sibling ? cast(GHook*)sibling.cPtr : null);
+    _retval = g_hook_compare_ids(cast(GHook*)this._cPtr, sibling ? cast(GHook*)sibling._cPtr : null);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Hook
   static bool destroy(glib.hook_list.HookList hookList, gulong hookId)
   {
     bool _retval;
-    _retval = g_hook_destroy(hookList ? cast(GHookList*)hookList.cPtr : null, hookId);
+    _retval = g_hook_destroy(hookList ? cast(GHookList*)hookList._cPtr : null, hookId);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Hook
   */
   static void destroyLink(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
-    g_hook_destroy_link(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
+    g_hook_destroy_link(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
   }
 
   /**
@@ -184,7 +184,7 @@ class Hook
   */
   static void free(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
-    g_hook_free(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
+    g_hook_free(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
   }
 
   /**
@@ -197,7 +197,7 @@ class Hook
   */
   static void insertBefore(glib.hook_list.HookList hookList, glib.hook.Hook sibling, glib.hook.Hook hook)
   {
-    g_hook_insert_before(hookList ? cast(GHookList*)hookList.cPtr : null, sibling ? cast(GHook*)sibling.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
+    g_hook_insert_before(hookList ? cast(GHookList*)hookList._cPtr : null, sibling ? cast(GHook*)sibling._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
   }
 
   /**
@@ -220,7 +220,7 @@ class Hook
     auto _funcCB = func ? &_funcCallback : null;
 
     _static_func = func;
-    g_hook_insert_sorted(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null, _funcCB);
+    g_hook_insert_sorted(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null, _funcCB);
     _static_func = null;
   }
 
@@ -233,7 +233,7 @@ class Hook
   */
   static void prepend(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
-    g_hook_prepend(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
+    g_hook_prepend(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
   }
 
   /**
@@ -247,6 +247,6 @@ class Hook
   */
   static void unref(glib.hook_list.HookList hookList, glib.hook.Hook hook)
   {
-    g_hook_unref(hookList ? cast(GHookList*)hookList.cPtr : null, hook ? cast(GHook*)hook.cPtr : null);
+    g_hook_unref(hookList ? cast(GHookList*)hookList._cPtr : null, hook ? cast(GHook*)hook._cPtr : null);
   }
 }

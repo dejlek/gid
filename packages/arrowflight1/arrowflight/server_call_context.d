@@ -18,16 +18,16 @@ class ServerCallContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_call_context_get_type != &gidSymbolNotFound ? gaflight_server_call_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,6 +55,6 @@ class ServerCallContext : gobject.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)cPtr, _funcCB, _func);
+    gaflight_server_call_context_foreach_incoming_header(cast(GAFlightServerCallContext*)this._cPtr, _funcCB, _func);
   }
 }

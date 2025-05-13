@@ -56,16 +56,16 @@ class IMContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_get_type != &gidSymbolNotFound ? gtk_im_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -134,7 +134,7 @@ class IMContext : gobject.object.ObjectWrap
   bool activateOsk(gdk.event.Event event = null)
   {
     bool _retval;
-    _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    _retval = gtk_im_context_activate_osk(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class IMContext : gobject.object.ObjectWrap
   bool deleteSurrounding(int offset, int nChars)
   {
     bool _retval;
-    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)cPtr, offset, nChars);
+    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKey(bool press, gdk.surface.Surface surface, gdk.device.Device device, uint time, uint keycode, gdk.types.ModifierType state, int group)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_key(cast(GtkIMContext*)cPtr, press, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, time, keycode, state, group);
+    _retval = gtk_im_context_filter_key(cast(GtkIMContext*)this._cPtr, press, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, time, keycode, state, group);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKeypress(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void focusIn()
   {
-    gtk_im_context_focus_in(cast(GtkIMContext*)cPtr);
+    gtk_im_context_focus_in(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -231,7 +231,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void focusOut()
   {
-    gtk_im_context_focus_out(cast(GtkIMContext*)cPtr);
+    gtk_im_context_focus_out(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -253,7 +253,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     char* _str;
     PangoAttrList* _attrs;
-    gtk_im_context_get_preedit_string(cast(GtkIMContext*)cPtr, &_str, &_attrs, cast(int*)&cursorPos);
+    gtk_im_context_get_preedit_string(cast(GtkIMContext*)this._cPtr, &_str, &_attrs, cast(int*)&cursorPos);
     str = _str.fromCString(Yes.Free);
     attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
   }
@@ -291,7 +291,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex);
+    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }
@@ -329,7 +329,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding_with_selection(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex, cast(int*)&anchorIndex);
+    _retval = gtk_im_context_get_surrounding_with_selection(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex, cast(int*)&anchorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }
@@ -342,7 +342,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void reset()
   {
-    gtk_im_context_reset(cast(GtkIMContext*)cPtr);
+    gtk_im_context_reset(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -358,7 +358,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setClientWidget(gtk.widget.Widget widget = null)
   {
-    gtk_im_context_set_client_widget(cast(GtkIMContext*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_im_context_set_client_widget(cast(GtkIMContext*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -372,7 +372,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setCursorLocation(gdk.rectangle.Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)this._cPtr, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
   }
 
   /**
@@ -397,7 +397,7 @@ class IMContext : gobject.object.ObjectWrap
       _len = cast(int)text.length;
 
     auto _text = cast(const(char)*)text.ptr;
-    gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, _len, cursorIndex);
+    gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex);
   }
 
   /**
@@ -419,7 +419,7 @@ class IMContext : gobject.object.ObjectWrap
       _len = cast(int)text.length;
 
     auto _text = cast(const(char)*)text.ptr;
-    gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)cPtr, _text, _len, cursorIndex, anchorIndex);
+    gtk_im_context_set_surrounding_with_selection(cast(GtkIMContext*)this._cPtr, _text, _len, cursorIndex, anchorIndex);
   }
 
   /**
@@ -435,7 +435,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setUsePreedit(bool usePreedit)
   {
-    gtk_im_context_set_use_preedit(cast(GtkIMContext*)cPtr, usePreedit);
+    gtk_im_context_set_use_preedit(cast(GtkIMContext*)this._cPtr, usePreedit);
   }
 
   /**

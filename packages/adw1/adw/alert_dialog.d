@@ -162,16 +162,16 @@ class AlertDialog : adw.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_alert_dialog_get_type != &gidSymbolNotFound ? adw_alert_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -405,7 +405,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    adw_alert_dialog_add_response(cast(AdwAlertDialog*)cPtr, _id, _label);
+    adw_alert_dialog_add_response(cast(AdwAlertDialog*)this._cPtr, _id, _label);
   }
 
   /**
@@ -424,17 +424,17 @@ class AlertDialog : adw.dialog.Dialog
   */
   void choose(gtk.widget.Widget parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    adw_alert_dialog_choose(cast(AdwAlertDialog*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    adw_alert_dialog_choose(cast(AdwAlertDialog*)this._cPtr, parent ? cast(GtkWidget*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -448,7 +448,7 @@ class AlertDialog : adw.dialog.Dialog
   string chooseFinish(gio.async_result.AsyncResult result)
   {
     const(char)* _cretval;
-    _cretval = adw_alert_dialog_choose_finish(cast(AdwAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
+    _cretval = adw_alert_dialog_choose_finish(cast(AdwAlertDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -460,7 +460,7 @@ class AlertDialog : adw.dialog.Dialog
   string getBody()
   {
     const(char)* _cretval;
-    _cretval = adw_alert_dialog_get_body(cast(AdwAlertDialog*)cPtr);
+    _cretval = adw_alert_dialog_get_body(cast(AdwAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -472,7 +472,7 @@ class AlertDialog : adw.dialog.Dialog
   bool getBodyUseMarkup()
   {
     bool _retval;
-    _retval = adw_alert_dialog_get_body_use_markup(cast(AdwAlertDialog*)cPtr);
+    _retval = adw_alert_dialog_get_body_use_markup(cast(AdwAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class AlertDialog : adw.dialog.Dialog
   string getCloseResponse()
   {
     const(char)* _cretval;
-    _cretval = adw_alert_dialog_get_close_response(cast(AdwAlertDialog*)cPtr);
+    _cretval = adw_alert_dialog_get_close_response(cast(AdwAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -495,7 +495,7 @@ class AlertDialog : adw.dialog.Dialog
   string getDefaultResponse()
   {
     const(char)* _cretval;
-    _cretval = adw_alert_dialog_get_default_response(cast(AdwAlertDialog*)cPtr);
+    _cretval = adw_alert_dialog_get_default_response(cast(AdwAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -507,8 +507,8 @@ class AlertDialog : adw.dialog.Dialog
   gtk.widget.Widget getExtraChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_alert_dialog_get_extra_child(cast(AdwAlertDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_alert_dialog_get_extra_child(cast(AdwAlertDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class AlertDialog : adw.dialog.Dialog
   string getHeading()
   {
     const(char)* _cretval;
-    _cretval = adw_alert_dialog_get_heading(cast(AdwAlertDialog*)cPtr);
+    _cretval = adw_alert_dialog_get_heading(cast(AdwAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -531,7 +531,7 @@ class AlertDialog : adw.dialog.Dialog
   bool getHeadingUseMarkup()
   {
     bool _retval;
-    _retval = adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)cPtr);
+    _retval = adw_alert_dialog_get_heading_use_markup(cast(AdwAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -548,7 +548,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     AdwResponseAppearance _cretval;
     const(char)* _response = response.toCString(No.Alloc);
-    _cretval = adw_alert_dialog_get_response_appearance(cast(AdwAlertDialog*)cPtr, _response);
+    _cretval = adw_alert_dialog_get_response_appearance(cast(AdwAlertDialog*)this._cPtr, _response);
     adw.types.ResponseAppearance _retval = cast(adw.types.ResponseAppearance)_cretval;
     return _retval;
   }
@@ -566,7 +566,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_alert_dialog_get_response_enabled(cast(AdwAlertDialog*)cPtr, _response);
+    _retval = adw_alert_dialog_get_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -583,7 +583,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _cretval;
     const(char)* _response = response.toCString(No.Alloc);
-    _cretval = adw_alert_dialog_get_response_label(cast(AdwAlertDialog*)cPtr, _response);
+    _cretval = adw_alert_dialog_get_response_label(cast(AdwAlertDialog*)this._cPtr, _response);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -599,7 +599,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_alert_dialog_has_response(cast(AdwAlertDialog*)cPtr, _response);
+    _retval = adw_alert_dialog_has_response(cast(AdwAlertDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -612,7 +612,7 @@ class AlertDialog : adw.dialog.Dialog
   void removeResponse(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    adw_alert_dialog_remove_response(cast(AdwAlertDialog*)cPtr, _id);
+    adw_alert_dialog_remove_response(cast(AdwAlertDialog*)this._cPtr, _id);
   }
 
   /**
@@ -624,7 +624,7 @@ class AlertDialog : adw.dialog.Dialog
   void setBody(string body_)
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
-    adw_alert_dialog_set_body(cast(AdwAlertDialog*)cPtr, _body_);
+    adw_alert_dialog_set_body(cast(AdwAlertDialog*)this._cPtr, _body_);
   }
 
   /**
@@ -637,7 +637,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setBodyUseMarkup(bool useMarkup)
   {
-    adw_alert_dialog_set_body_use_markup(cast(AdwAlertDialog*)cPtr, useMarkup);
+    adw_alert_dialog_set_body_use_markup(cast(AdwAlertDialog*)this._cPtr, useMarkup);
   }
 
   /**
@@ -656,7 +656,7 @@ class AlertDialog : adw.dialog.Dialog
   void setCloseResponse(string response)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_alert_dialog_set_close_response(cast(AdwAlertDialog*)cPtr, _response);
+    adw_alert_dialog_set_close_response(cast(AdwAlertDialog*)this._cPtr, _response);
   }
 
   /**
@@ -673,7 +673,7 @@ class AlertDialog : adw.dialog.Dialog
   void setDefaultResponse(string response = null)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_alert_dialog_set_default_response(cast(AdwAlertDialog*)cPtr, _response);
+    adw_alert_dialog_set_default_response(cast(AdwAlertDialog*)this._cPtr, _response);
   }
 
   /**
@@ -686,7 +686,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setExtraChild(gtk.widget.Widget child = null)
   {
-    adw_alert_dialog_set_extra_child(cast(AdwAlertDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_alert_dialog_set_extra_child(cast(AdwAlertDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -698,7 +698,7 @@ class AlertDialog : adw.dialog.Dialog
   void setHeading(string heading = null)
   {
     const(char)* _heading = heading.toCString(No.Alloc);
-    adw_alert_dialog_set_heading(cast(AdwAlertDialog*)cPtr, _heading);
+    adw_alert_dialog_set_heading(cast(AdwAlertDialog*)this._cPtr, _heading);
   }
 
   /**
@@ -711,7 +711,7 @@ class AlertDialog : adw.dialog.Dialog
   */
   void setHeadingUseMarkup(bool useMarkup)
   {
-    adw_alert_dialog_set_heading_use_markup(cast(AdwAlertDialog*)cPtr, useMarkup);
+    adw_alert_dialog_set_heading_use_markup(cast(AdwAlertDialog*)this._cPtr, useMarkup);
   }
 
   /**
@@ -740,7 +740,7 @@ class AlertDialog : adw.dialog.Dialog
   void setResponseAppearance(string response, adw.types.ResponseAppearance appearance)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_alert_dialog_set_response_appearance(cast(AdwAlertDialog*)cPtr, _response, appearance);
+    adw_alert_dialog_set_response_appearance(cast(AdwAlertDialog*)this._cPtr, _response, appearance);
   }
 
   /**
@@ -762,7 +762,7 @@ class AlertDialog : adw.dialog.Dialog
   void setResponseEnabled(string response, bool enabled)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_alert_dialog_set_response_enabled(cast(AdwAlertDialog*)cPtr, _response, enabled);
+    adw_alert_dialog_set_response_enabled(cast(AdwAlertDialog*)this._cPtr, _response, enabled);
   }
 
   /**
@@ -779,7 +779,7 @@ class AlertDialog : adw.dialog.Dialog
   {
     const(char)* _response = response.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    adw_alert_dialog_set_response_label(cast(AdwAlertDialog*)cPtr, _response, _label);
+    adw_alert_dialog_set_response_label(cast(AdwAlertDialog*)this._cPtr, _response, _label);
   }
 
   /**

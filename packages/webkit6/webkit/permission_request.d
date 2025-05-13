@@ -21,7 +21,7 @@ interface PermissionRequest
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_permission_request_get_type != &gidSymbolNotFound ? webkit_permission_request_get_type() : cast(GType)0;

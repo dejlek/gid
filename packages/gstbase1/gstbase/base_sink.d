@@ -137,16 +137,16 @@ class BaseSink : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_sink_get_type != &gidSymbolNotFound ? gst_base_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -418,7 +418,7 @@ class BaseSink : gst.element.Element
   gst.types.FlowReturn doPreroll(gst.mini_object.MiniObject obj)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)cPtr, obj ? cast(GstMiniObject*)obj.cPtr(No.Dup) : null);
+    _cretval = gst_base_sink_do_preroll(cast(GstBaseSink*)this._cPtr, obj ? cast(GstMiniObject*)obj._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -431,7 +431,7 @@ class BaseSink : gst.element.Element
   uint getBlocksize()
   {
     uint _retval;
-    _retval = gst_base_sink_get_blocksize(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_blocksize(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class BaseSink : gst.element.Element
   bool getDropOutOfSegment()
   {
     bool _retval;
-    _retval = gst_base_sink_get_drop_out_of_segment(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_drop_out_of_segment(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class BaseSink : gst.element.Element
   gst.sample.Sample getLastSample()
   {
     GstSample* _cretval;
-    _cretval = gst_base_sink_get_last_sample(cast(GstBaseSink*)cPtr);
+    _cretval = gst_base_sink_get_last_sample(cast(GstBaseSink*)this._cPtr);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -474,7 +474,7 @@ class BaseSink : gst.element.Element
   gst.types.ClockTime getLatency()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_base_sink_get_latency(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_latency(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class BaseSink : gst.element.Element
   ulong getMaxBitrate()
   {
     ulong _retval;
-    _retval = gst_base_sink_get_max_bitrate(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_max_bitrate(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -499,7 +499,7 @@ class BaseSink : gst.element.Element
   long getMaxLateness()
   {
     long _retval;
-    _retval = gst_base_sink_get_max_lateness(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_max_lateness(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -512,7 +512,7 @@ class BaseSink : gst.element.Element
   gst.types.ClockTime getProcessingDeadline()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_base_sink_get_processing_deadline(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_processing_deadline(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -524,7 +524,7 @@ class BaseSink : gst.element.Element
   gst.types.ClockTime getRenderDelay()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_base_sink_get_render_delay(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_render_delay(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class BaseSink : gst.element.Element
   gst.structure.Structure getStats()
   {
     GstStructure* _cretval;
-    _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)cPtr);
+    _cretval = gst_base_sink_get_stats(cast(GstBaseSink*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -555,7 +555,7 @@ class BaseSink : gst.element.Element
   bool getSync()
   {
     bool _retval;
-    _retval = gst_base_sink_get_sync(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_sync(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class BaseSink : gst.element.Element
   ulong getThrottleTime()
   {
     ulong _retval;
-    _retval = gst_base_sink_get_throttle_time(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_throttle_time(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class BaseSink : gst.element.Element
   gst.types.ClockTimeDiff getTsOffset()
   {
     gst.types.ClockTimeDiff _retval;
-    _retval = gst_base_sink_get_ts_offset(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_get_ts_offset(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class BaseSink : gst.element.Element
   bool isAsyncEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_async_enabled(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_is_async_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -603,7 +603,7 @@ class BaseSink : gst.element.Element
   bool isLastSampleEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_last_sample_enabled(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_is_last_sample_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class BaseSink : gst.element.Element
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_base_sink_is_qos_enabled(cast(GstBaseSink*)cPtr);
+    _retval = gst_base_sink_is_qos_enabled(cast(GstBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -641,7 +641,7 @@ class BaseSink : gst.element.Element
   bool queryLatency(out bool live, out bool upstreamLive, out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
     bool _retval;
-    _retval = gst_base_sink_query_latency(cast(GstBaseSink*)cPtr, cast(bool*)&live, cast(bool*)&upstreamLive, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    _retval = gst_base_sink_query_latency(cast(GstBaseSink*)this._cPtr, cast(bool*)&live, cast(bool*)&upstreamLive, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class BaseSink : gst.element.Element
   */
   void setAsyncEnabled(bool enabled)
   {
-    gst_base_sink_set_async_enabled(cast(GstBaseSink*)cPtr, enabled);
+    gst_base_sink_set_async_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
 
   /**
@@ -668,7 +668,7 @@ class BaseSink : gst.element.Element
   */
   void setBlocksize(uint blocksize)
   {
-    gst_base_sink_set_blocksize(cast(GstBaseSink*)cPtr, blocksize);
+    gst_base_sink_set_blocksize(cast(GstBaseSink*)this._cPtr, blocksize);
   }
 
   /**
@@ -679,7 +679,7 @@ class BaseSink : gst.element.Element
   */
   void setDropOutOfSegment(bool dropOutOfSegment)
   {
-    gst_base_sink_set_drop_out_of_segment(cast(GstBaseSink*)cPtr, dropOutOfSegment);
+    gst_base_sink_set_drop_out_of_segment(cast(GstBaseSink*)this._cPtr, dropOutOfSegment);
   }
 
   /**
@@ -691,7 +691,7 @@ class BaseSink : gst.element.Element
   */
   void setLastSampleEnabled(bool enabled)
   {
-    gst_base_sink_set_last_sample_enabled(cast(GstBaseSink*)cPtr, enabled);
+    gst_base_sink_set_last_sample_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
 
   /**
@@ -702,7 +702,7 @@ class BaseSink : gst.element.Element
   */
   void setMaxBitrate(ulong maxBitrate)
   {
-    gst_base_sink_set_max_bitrate(cast(GstBaseSink*)cPtr, maxBitrate);
+    gst_base_sink_set_max_bitrate(cast(GstBaseSink*)this._cPtr, maxBitrate);
   }
 
   /**
@@ -716,7 +716,7 @@ class BaseSink : gst.element.Element
   */
   void setMaxLateness(long maxLateness)
   {
-    gst_base_sink_set_max_lateness(cast(GstBaseSink*)cPtr, maxLateness);
+    gst_base_sink_set_max_lateness(cast(GstBaseSink*)this._cPtr, maxLateness);
   }
 
   /**
@@ -731,7 +731,7 @@ class BaseSink : gst.element.Element
   */
   void setProcessingDeadline(gst.types.ClockTime processingDeadline)
   {
-    gst_base_sink_set_processing_deadline(cast(GstBaseSink*)cPtr, processingDeadline);
+    gst_base_sink_set_processing_deadline(cast(GstBaseSink*)this._cPtr, processingDeadline);
   }
 
   /**
@@ -742,7 +742,7 @@ class BaseSink : gst.element.Element
   */
   void setQosEnabled(bool enabled)
   {
-    gst_base_sink_set_qos_enabled(cast(GstBaseSink*)cPtr, enabled);
+    gst_base_sink_set_qos_enabled(cast(GstBaseSink*)this._cPtr, enabled);
   }
 
   /**
@@ -761,7 +761,7 @@ class BaseSink : gst.element.Element
   */
   void setRenderDelay(gst.types.ClockTime delay)
   {
-    gst_base_sink_set_render_delay(cast(GstBaseSink*)cPtr, delay);
+    gst_base_sink_set_render_delay(cast(GstBaseSink*)this._cPtr, delay);
   }
 
   /**
@@ -776,7 +776,7 @@ class BaseSink : gst.element.Element
   */
   void setSync(bool sync)
   {
-    gst_base_sink_set_sync(cast(GstBaseSink*)cPtr, sync);
+    gst_base_sink_set_sync(cast(GstBaseSink*)this._cPtr, sync);
   }
 
   /**
@@ -789,7 +789,7 @@ class BaseSink : gst.element.Element
   */
   void setThrottleTime(ulong throttle)
   {
-    gst_base_sink_set_throttle_time(cast(GstBaseSink*)cPtr, throttle);
+    gst_base_sink_set_throttle_time(cast(GstBaseSink*)this._cPtr, throttle);
   }
 
   /**
@@ -803,7 +803,7 @@ class BaseSink : gst.element.Element
   */
   void setTsOffset(gst.types.ClockTimeDiff offset)
   {
-    gst_base_sink_set_ts_offset(cast(GstBaseSink*)cPtr, offset);
+    gst_base_sink_set_ts_offset(cast(GstBaseSink*)this._cPtr, offset);
   }
 
   /**
@@ -827,7 +827,7 @@ class BaseSink : gst.element.Element
   gst.types.FlowReturn wait(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_wait(cast(GstBaseSink*)cPtr, time, cast(GstClockTimeDiff*)&jitter);
+    _cretval = gst_base_sink_wait(cast(GstBaseSink*)this._cPtr, time, cast(GstClockTimeDiff*)&jitter);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -857,7 +857,7 @@ class BaseSink : gst.element.Element
   gst.types.ClockReturn waitClock(gst.types.ClockTime time, out gst.types.ClockTimeDiff jitter)
   {
     GstClockReturn _cretval;
-    _cretval = gst_base_sink_wait_clock(cast(GstBaseSink*)cPtr, time, cast(GstClockTimeDiff*)&jitter);
+    _cretval = gst_base_sink_wait_clock(cast(GstBaseSink*)this._cPtr, time, cast(GstClockTimeDiff*)&jitter);
     gst.types.ClockReturn _retval = cast(gst.types.ClockReturn)_cretval;
     return _retval;
   }
@@ -887,7 +887,7 @@ class BaseSink : gst.element.Element
   gst.types.FlowReturn waitPreroll()
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_sink_wait_preroll(cast(GstBaseSink*)cPtr);
+    _cretval = gst_base_sink_wait_preroll(cast(GstBaseSink*)this._cPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }

@@ -25,16 +25,16 @@ class WebHitTestResult : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_hit_test_result_get_type != &gidSymbolNotFound ? webkit_web_hit_test_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsEditable()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_editable(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_editable(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsImage()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_image(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_image(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsLink()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_link(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_link(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsMedia()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_media(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_media(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsScrollbar()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_scrollbar(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_scrollbar(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   bool contextIsSelection()
   {
     bool _retval;
-    _retval = webkit_web_hit_test_result_context_is_selection(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_context_is_selection(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   uint getContext()
   {
     uint _retval;
-    _retval = webkit_web_hit_test_result_get_context(cast(WebKitWebHitTestResult*)cPtr);
+    _retval = webkit_web_hit_test_result_get_context(cast(WebKitWebHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   string getImageUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_hit_test_result_get_image_uri(cast(WebKitWebHitTestResult*)cPtr);
+    _cretval = webkit_web_hit_test_result_get_image_uri(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,8 +160,8 @@ class WebHitTestResult : gobject.object.ObjectWrap
   javascriptcore.value.Value getJsNode(webkitwebprocessextension.script_world.ScriptWorld world = null)
   {
     JSCValue* _cretval;
-    _cretval = webkit_web_hit_test_result_get_js_node(cast(WebKitWebHitTestResult*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = webkit_web_hit_test_result_get_js_node(cast(WebKitWebHitTestResult*)this._cPtr, world ? cast(WebKitScriptWorld*)world._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   string getLinkLabel()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_hit_test_result_get_link_label(cast(WebKitWebHitTestResult*)cPtr);
+    _cretval = webkit_web_hit_test_result_get_link_label(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -186,7 +186,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   string getLinkTitle()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_hit_test_result_get_link_title(cast(WebKitWebHitTestResult*)cPtr);
+    _cretval = webkit_web_hit_test_result_get_link_title(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -198,7 +198,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   string getLinkUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_hit_test_result_get_link_uri(cast(WebKitWebHitTestResult*)cPtr);
+    _cretval = webkit_web_hit_test_result_get_link_uri(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -210,7 +210,7 @@ class WebHitTestResult : gobject.object.ObjectWrap
   string getMediaUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_hit_test_result_get_media_uri(cast(WebKitWebHitTestResult*)cPtr);
+    _cretval = webkit_web_hit_test_result_get_media_uri(cast(WebKitWebHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

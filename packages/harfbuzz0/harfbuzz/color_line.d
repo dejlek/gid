@@ -33,22 +33,22 @@ class ColorLine : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_color_line_get_type != &gidSymbolNotFound ? hb_gobject_color_line_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,26 +60,26 @@ class ColorLine : gobject.boxed.Boxed
   /** */
   @property hb_color_line_get_color_stops_func_t getColorStops()
   {
-    return (cast(hb_color_line_t*)cPtr).getColorStops;
+    return (cast(hb_color_line_t*)this._cPtr).getColorStops;
   }
 
   /** */
 
   @property void getColorStops(hb_color_line_get_color_stops_func_t propval)
   {
-    (cast(hb_color_line_t*)cPtr).getColorStops = propval;
+    (cast(hb_color_line_t*)this._cPtr).getColorStops = propval;
   }
 
   /** */
   @property hb_color_line_get_extend_func_t getExtend()
   {
-    return (cast(hb_color_line_t*)cPtr).getExtend;
+    return (cast(hb_color_line_t*)this._cPtr).getExtend;
   }
 
   /** */
 
   @property void getExtend(hb_color_line_get_extend_func_t propval)
   {
-    (cast(hb_color_line_t*)cPtr).getExtend = propval;
+    (cast(hb_color_line_t*)this._cPtr).getExtend = propval;
   }
 }

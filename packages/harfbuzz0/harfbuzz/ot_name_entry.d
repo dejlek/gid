@@ -26,7 +26,7 @@ class OtNameEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class OtNameEntry
   */
   @property harfbuzz.types.OtNameId nameId()
   {
-    return (cast(hb_ot_name_entry_t*)cPtr).nameId;
+    return (cast(hb_ot_name_entry_t*)this._cPtr).nameId;
   }
 
   /**
@@ -47,7 +47,7 @@ class OtNameEntry
   */
   @property void nameId(harfbuzz.types.OtNameId propval)
   {
-    (cast(hb_ot_name_entry_t*)cPtr).nameId = propval;
+    (cast(hb_ot_name_entry_t*)this._cPtr).nameId = propval;
   }
 
   /**
@@ -56,7 +56,7 @@ class OtNameEntry
   */
   @property harfbuzz.types.Language language()
   {
-    return (cast(hb_ot_name_entry_t*)cPtr).language;
+    return (cast(hb_ot_name_entry_t*)this._cPtr).language;
   }
 
   /**
@@ -66,6 +66,6 @@ class OtNameEntry
   */
   @property void language(harfbuzz.types.Language propval)
   {
-    (cast(hb_ot_name_entry_t*)cPtr).language = propval;
+    (cast(hb_ot_name_entry_t*)this._cPtr).language = propval;
   }
 }

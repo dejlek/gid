@@ -31,16 +31,16 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_text_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   void measure(string text, out int width, out int height)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)cPtr, _text, cast(int*)&width, cast(int*)&height);
+    gtk_source_gutter_renderer_text_measure(cast(GtkSourceGutterRendererText*)this._cPtr, _text, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -117,20 +117,20 @@ class GutterRendererText : gtksource.gutter_renderer.GutterRenderer
   void measureMarkup(string markup, out int width, out int height)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_source_gutter_renderer_text_measure_markup(cast(GtkSourceGutterRendererText*)cPtr, _markup, cast(int*)&width, cast(int*)&height);
+    gtk_source_gutter_renderer_text_measure_markup(cast(GtkSourceGutterRendererText*)this._cPtr, _markup, cast(int*)&width, cast(int*)&height);
   }
 
   /** */
   void setMarkup(string markup, int length)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_source_gutter_renderer_text_set_markup(cast(GtkSourceGutterRendererText*)cPtr, _markup, length);
+    gtk_source_gutter_renderer_text_set_markup(cast(GtkSourceGutterRendererText*)this._cPtr, _markup, length);
   }
 
   /** */
   void setText(string text, int length)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_gutter_renderer_text_set_text(cast(GtkSourceGutterRendererText*)cPtr, _text, length);
+    gtk_source_gutter_renderer_text_set_text(cast(GtkSourceGutterRendererText*)this._cPtr, _text, length);
   }
 }

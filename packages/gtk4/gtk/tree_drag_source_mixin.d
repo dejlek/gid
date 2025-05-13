@@ -35,7 +35,7 @@ template TreeDragSourceT()
   override bool dragDataDelete(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_drag_source_drag_data_delete(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_tree_drag_source_drag_data_delete(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -54,8 +54,8 @@ template TreeDragSourceT()
   override gdk.content_provider.ContentProvider dragDataGet(gtk.tree_path.TreePath path)
   {
     GdkContentProvider* _cretval;
-    _cretval = gtk_tree_drag_source_drag_data_get(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
+    _cretval = gtk_tree_drag_source_drag_data_get(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ template TreeDragSourceT()
   override bool rowDraggable(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_tree_drag_source_row_draggable(cast(GtkTreeDragSource*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 }

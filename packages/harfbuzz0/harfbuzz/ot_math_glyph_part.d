@@ -41,22 +41,22 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_ot_math_glyph_part_get_type != &gidSymbolNotFound ? hb_gobject_ot_math_glyph_part_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Codepoint glyph()
   {
-    return (cast(hb_ot_math_glyph_part_t*)cPtr).glyph;
+    return (cast(hb_ot_math_glyph_part_t*)this._cPtr).glyph;
   }
 
   /**
@@ -81,7 +81,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property void glyph(harfbuzz.types.Codepoint propval)
   {
-    (cast(hb_ot_math_glyph_part_t*)cPtr).glyph = propval;
+    (cast(hb_ot_math_glyph_part_t*)this._cPtr).glyph = propval;
   }
 
   /**
@@ -90,7 +90,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position startConnectorLength()
   {
-    return (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength;
+    return (cast(hb_ot_math_glyph_part_t*)this._cPtr).startConnectorLength;
   }
 
   /**
@@ -100,7 +100,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property void startConnectorLength(harfbuzz.types.Position propval)
   {
-    (cast(hb_ot_math_glyph_part_t*)cPtr).startConnectorLength = propval;
+    (cast(hb_ot_math_glyph_part_t*)this._cPtr).startConnectorLength = propval;
   }
 
   /**
@@ -109,7 +109,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position endConnectorLength()
   {
-    return (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength;
+    return (cast(hb_ot_math_glyph_part_t*)this._cPtr).endConnectorLength;
   }
 
   /**
@@ -119,7 +119,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property void endConnectorLength(harfbuzz.types.Position propval)
   {
-    (cast(hb_ot_math_glyph_part_t*)cPtr).endConnectorLength = propval;
+    (cast(hb_ot_math_glyph_part_t*)this._cPtr).endConnectorLength = propval;
   }
 
   /**
@@ -128,7 +128,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position fullAdvance()
   {
-    return (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance;
+    return (cast(hb_ot_math_glyph_part_t*)this._cPtr).fullAdvance;
   }
 
   /**
@@ -138,7 +138,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property void fullAdvance(harfbuzz.types.Position propval)
   {
-    (cast(hb_ot_math_glyph_part_t*)cPtr).fullAdvance = propval;
+    (cast(hb_ot_math_glyph_part_t*)this._cPtr).fullAdvance = propval;
   }
 
   /**
@@ -147,7 +147,7 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property harfbuzz.types.OtMathGlyphPartFlags flags()
   {
-    return cast(harfbuzz.types.OtMathGlyphPartFlags)(cast(hb_ot_math_glyph_part_t*)cPtr).flags;
+    return cast(harfbuzz.types.OtMathGlyphPartFlags)(cast(hb_ot_math_glyph_part_t*)this._cPtr).flags;
   }
 
   /**
@@ -157,6 +157,6 @@ class OtMathGlyphPart : gobject.boxed.Boxed
   */
   @property void flags(harfbuzz.types.OtMathGlyphPartFlags propval)
   {
-    (cast(hb_ot_math_glyph_part_t*)cPtr).flags = cast(hb_ot_math_glyph_part_flags_t)propval;
+    (cast(hb_ot_math_glyph_part_t*)this._cPtr).flags = cast(hb_ot_math_glyph_part_flags_t)propval;
   }
 }

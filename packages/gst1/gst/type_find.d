@@ -29,7 +29,7 @@ class TypeFind
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class TypeFind
   ulong getLength()
   {
     ulong _retval;
-    _retval = gst_type_find_get_length(cast(GstTypeFind*)cPtr);
+    _retval = gst_type_find_get_length(cast(GstTypeFind*)this._cPtr);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class TypeFind
   */
   const(ubyte)* peek(long offset, uint size)
   {
-    auto _retval = gst_type_find_peek(cast(GstTypeFind*)cPtr, offset, size);
+    auto _retval = gst_type_find_peek(cast(GstTypeFind*)this._cPtr, offset, size);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class TypeFind
   */
   void suggest(uint probability, gst.caps.Caps caps)
   {
-    gst_type_find_suggest(cast(GstTypeFind*)cPtr, probability, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_type_find_suggest(cast(GstTypeFind*)this._cPtr, probability, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -93,7 +93,7 @@ class TypeFind
   void suggestEmptySimple(uint probability, string mediaType)
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
-    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)cPtr, probability, _mediaType);
+    gst_type_find_suggest_empty_simple(cast(GstTypeFind*)this._cPtr, probability, _mediaType);
   }
 
   /**
@@ -127,7 +127,7 @@ class TypeFind
     const(char)* _extensions = extensions.toCString(No.Alloc);
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_type_find_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps.cPtr(No.Dup) : null, _func, _funcDestroyCB);
+    _retval = gst_type_find_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, _funcCB, _extensions, possibleCaps ? cast(GstCaps*)possibleCaps._cPtr(No.Dup) : null, _func, _funcDestroyCB);
     return _retval;
   }
 }

@@ -33,22 +33,22 @@ class PaperSize : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paper_size_get_type != &gidSymbolNotFound ? gtk_paper_size_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class PaperSize : gobject.boxed.Boxed
   static gtk.paper_size.PaperSize newFromGvariant(glib.variant.Variant variant)
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    _cretval = gtk_paper_size_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -158,7 +158,7 @@ class PaperSize : gobject.boxed.Boxed
     GtkPaperSize* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _cretval = gtk_paper_size_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
@@ -198,7 +198,7 @@ class PaperSize : gobject.boxed.Boxed
   gtk.paper_size.PaperSize copy()
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_paper_size_copy(cast(GtkPaperSize*)cPtr);
+    _cretval = gtk_paper_size_copy(cast(GtkPaperSize*)this._cPtr);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -213,7 +213,7 @@ class PaperSize : gobject.boxed.Boxed
   double getDefaultBottomMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_default_bottom_margin(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_default_bottom_margin(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class PaperSize : gobject.boxed.Boxed
   double getDefaultLeftMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_default_left_margin(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_default_left_margin(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class PaperSize : gobject.boxed.Boxed
   double getDefaultRightMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_default_right_margin(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_default_right_margin(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class PaperSize : gobject.boxed.Boxed
   double getDefaultTopMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_default_top_margin(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_default_top_margin(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class PaperSize : gobject.boxed.Boxed
   string getDisplayName()
   {
     const(char)* _cretval;
-    _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)cPtr);
+    _cretval = gtk_paper_size_get_display_name(cast(GtkPaperSize*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -282,7 +282,7 @@ class PaperSize : gobject.boxed.Boxed
   double getHeight(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_height(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_height(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class PaperSize : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)cPtr);
+    _cretval = gtk_paper_size_get_name(cast(GtkPaperSize*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -306,7 +306,7 @@ class PaperSize : gobject.boxed.Boxed
   string getPpdName()
   {
     const(char)* _cretval;
-    _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)cPtr);
+    _cretval = gtk_paper_size_get_ppd_name(cast(GtkPaperSize*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -322,7 +322,7 @@ class PaperSize : gobject.boxed.Boxed
   double getWidth(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_paper_size_get_width(cast(GtkPaperSize*)cPtr, unit);
+    _retval = gtk_paper_size_get_width(cast(GtkPaperSize*)this._cPtr, unit);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isCustom()
   {
     bool _retval;
-    _retval = gtk_paper_size_is_custom(cast(GtkPaperSize*)cPtr);
+    _retval = gtk_paper_size_is_custom(cast(GtkPaperSize*)this._cPtr);
     return _retval;
   }
 
@@ -348,7 +348,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isEqual(gtk.paper_size.PaperSize size2)
   {
     bool _retval;
-    _retval = gtk_paper_size_is_equal(cast(GtkPaperSize*)cPtr, size2 ? cast(GtkPaperSize*)size2.cPtr(No.Dup) : null);
+    _retval = gtk_paper_size_is_equal(cast(GtkPaperSize*)this._cPtr, size2 ? cast(GtkPaperSize*)size2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class PaperSize : gobject.boxed.Boxed
   bool isIpp()
   {
     bool _retval;
-    _retval = gtk_paper_size_is_ipp(cast(GtkPaperSize*)cPtr);
+    _retval = gtk_paper_size_is_ipp(cast(GtkPaperSize*)this._cPtr);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class PaperSize : gobject.boxed.Boxed
   */
   void setSize(double width, double height, gtk.types.Unit unit)
   {
-    gtk_paper_size_set_size(cast(GtkPaperSize*)cPtr, width, height, unit);
+    gtk_paper_size_set_size(cast(GtkPaperSize*)this._cPtr, width, height, unit);
   }
 
   /**
@@ -383,7 +383,7 @@ class PaperSize : gobject.boxed.Boxed
   glib.variant.Variant toGvariant()
   {
     GVariant* _cretval;
-    _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)cPtr);
+    _cretval = gtk_paper_size_to_gvariant(cast(GtkPaperSize*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -398,7 +398,7 @@ class PaperSize : gobject.boxed.Boxed
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    gtk_paper_size_to_key_file(cast(GtkPaperSize*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
+    gtk_paper_size_to_key_file(cast(GtkPaperSize*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
   }
 
   /**

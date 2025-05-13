@@ -25,7 +25,7 @@ import gobject.object;
 */
 void focusTrackerNotify(atk.object.ObjectWrap object)
 {
-  atk_focus_tracker_notify(object ? cast(AtkObject*)object.cPtr(No.Dup) : null);
+  atk_focus_tracker_notify(object ? cast(AtkObject*)object._cPtr(No.Dup) : null);
 }
 
 /**
@@ -55,7 +55,7 @@ atk.registry.Registry getDefaultRegistry()
 {
   AtkRegistry* _cretval;
   _cretval = atk_get_default_registry();
-  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(atk.registry.Registry)(cast(AtkRegistry*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -68,7 +68,7 @@ atk.object.ObjectWrap getFocusObject()
 {
   AtkObject* _cretval;
   _cretval = atk_get_focus_object();
-  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
   return _retval;
 }
 
@@ -144,7 +144,7 @@ atk.object.ObjectWrap getRoot()
 {
   AtkObject* _cretval;
   _cretval = atk_get_root();
-  auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
   return _retval;
 }
 

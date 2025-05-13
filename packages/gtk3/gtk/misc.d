@@ -39,16 +39,16 @@ class Misc : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_misc_get_type != &gidSymbolNotFound ? gtk_misc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -179,7 +179,7 @@ class Misc : gtk.widget.Widget
   */
   void getAlignment(out float xalign, out float yalign)
   {
-    gtk_misc_get_alignment(cast(GtkMisc*)cPtr, cast(float*)&xalign, cast(float*)&yalign);
+    gtk_misc_get_alignment(cast(GtkMisc*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
 
   /**
@@ -196,7 +196,7 @@ class Misc : gtk.widget.Widget
   */
   void getPadding(out int xpad, out int ypad)
   {
-    gtk_misc_get_padding(cast(GtkMisc*)cPtr, cast(int*)&xpad, cast(int*)&ypad);
+    gtk_misc_get_padding(cast(GtkMisc*)this._cPtr, cast(int*)&xpad, cast(int*)&ypad);
   }
 
   /**
@@ -210,7 +210,7 @@ class Misc : gtk.widget.Widget
   */
   void setAlignment(float xalign, float yalign)
   {
-    gtk_misc_set_alignment(cast(GtkMisc*)cPtr, xalign, yalign);
+    gtk_misc_set_alignment(cast(GtkMisc*)this._cPtr, xalign, yalign);
   }
 
   /**
@@ -226,6 +226,6 @@ class Misc : gtk.widget.Widget
   */
   void setPadding(int xpad, int ypad)
   {
-    gtk_misc_set_padding(cast(GtkMisc*)cPtr, xpad, ypad);
+    gtk_misc_set_padding(cast(GtkMisc*)this._cPtr, xpad, ypad);
   }
 }

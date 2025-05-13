@@ -107,16 +107,16 @@ class Notebook : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_notebook_get_type != &gidSymbolNotFound ? gtk_notebook_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -240,7 +240,7 @@ class Notebook : gtk.container.Container
   int appendPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_append_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_append_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class Notebook : gtk.container.Container
   int appendPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_append_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Notebook : gtk.container.Container
   */
   void detachTab(gtk.widget.Widget child)
   {
-    gtk_notebook_detach_tab(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_notebook_detach_tab(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -295,8 +295,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getActionWidget(gtk.types.PackType packType)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)cPtr, packType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_action_widget(cast(GtkNotebook*)this._cPtr, packType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class Notebook : gtk.container.Container
   int getCurrentPage()
   {
     int _retval;
-    _retval = gtk_notebook_get_current_page(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_current_page(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class Notebook : gtk.container.Container
   string getGroupName()
   {
     const(char)* _cretval;
-    _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)cPtr);
+    _cretval = gtk_notebook_get_group_name(cast(GtkNotebook*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -337,8 +337,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getMenuLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_menu_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class Notebook : gtk.container.Container
   string getMenuLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
-    _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _cretval = gtk_notebook_get_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -368,7 +368,7 @@ class Notebook : gtk.container.Container
   int getNPages()
   {
     int _retval;
-    _retval = gtk_notebook_get_n_pages(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_n_pages(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -384,8 +384,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getNthPage(int pageNum)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)cPtr, pageNum);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_nth_page(cast(GtkNotebook*)this._cPtr, pageNum);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class Notebook : gtk.container.Container
   bool getScrollable()
   {
     bool _retval;
-    _retval = gtk_notebook_get_scrollable(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_scrollable(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class Notebook : gtk.container.Container
   bool getShowBorder()
   {
     bool _retval;
-    _retval = gtk_notebook_get_show_border(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_show_border(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class Notebook : gtk.container.Container
   bool getShowTabs()
   {
     bool _retval;
-    _retval = gtk_notebook_get_show_tabs(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_show_tabs(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Notebook : gtk.container.Container
   bool getTabDetachable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_get_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -448,7 +448,7 @@ class Notebook : gtk.container.Container
   ushort getTabHborder()
   {
     ushort _retval;
-    _retval = gtk_notebook_get_tab_hborder(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_tab_hborder(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -464,8 +464,8 @@ class Notebook : gtk.container.Container
   gtk.widget.Widget getTabLabel(gtk.widget.Widget child)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_notebook_get_tab_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Notebook : gtk.container.Container
   string getTabLabelText(gtk.widget.Widget child)
   {
     const(char)* _cretval;
-    _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _cretval = gtk_notebook_get_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -495,7 +495,7 @@ class Notebook : gtk.container.Container
   gtk.types.PositionType getTabPos()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_notebook_get_tab_pos(cast(GtkNotebook*)cPtr);
+    _cretval = gtk_notebook_get_tab_pos(cast(GtkNotebook*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -510,7 +510,7 @@ class Notebook : gtk.container.Container
   bool getTabReorderable(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_get_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class Notebook : gtk.container.Container
   ushort getTabVborder()
   {
     ushort _retval;
-    _retval = gtk_notebook_get_tab_vborder(cast(GtkNotebook*)cPtr);
+    _retval = gtk_notebook_get_tab_vborder(cast(GtkNotebook*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class Notebook : gtk.container.Container
   int insertPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel, int position)
   {
     int _retval;
-    _retval = gtk_notebook_insert_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, position);
+    _retval = gtk_notebook_insert_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -568,7 +568,7 @@ class Notebook : gtk.container.Container
   int insertPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel, gtk.widget.Widget menuLabel, int position)
   {
     int _retval;
-    _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null, position);
+    _retval = gtk_notebook_insert_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class Notebook : gtk.container.Container
   */
   void nextPage()
   {
-    gtk_notebook_next_page(cast(GtkNotebook*)cPtr);
+    gtk_notebook_next_page(cast(GtkNotebook*)this._cPtr);
   }
 
   /**
@@ -593,7 +593,7 @@ class Notebook : gtk.container.Container
   int pageNum(gtk.widget.Widget child)
   {
     int _retval;
-    _retval = gtk_notebook_page_num(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_page_num(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -602,7 +602,7 @@ class Notebook : gtk.container.Container
   */
   void popupDisable()
   {
-    gtk_notebook_popup_disable(cast(GtkNotebook*)cPtr);
+    gtk_notebook_popup_disable(cast(GtkNotebook*)this._cPtr);
   }
 
   /**
@@ -612,7 +612,7 @@ class Notebook : gtk.container.Container
   */
   void popupEnable()
   {
-    gtk_notebook_popup_enable(cast(GtkNotebook*)cPtr);
+    gtk_notebook_popup_enable(cast(GtkNotebook*)this._cPtr);
   }
 
   /**
@@ -628,7 +628,7 @@ class Notebook : gtk.container.Container
   int prependPage(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_prepend_page(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -652,7 +652,7 @@ class Notebook : gtk.container.Container
   int prependPageMenu(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null, gtk.widget.Widget menuLabel = null)
   {
     int _retval;
-    _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    _retval = gtk_notebook_prepend_page_menu(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -662,7 +662,7 @@ class Notebook : gtk.container.Container
   */
   void prevPage()
   {
-    gtk_notebook_prev_page(cast(GtkNotebook*)cPtr);
+    gtk_notebook_prev_page(cast(GtkNotebook*)this._cPtr);
   }
 
   /**
@@ -675,7 +675,7 @@ class Notebook : gtk.container.Container
   */
   void removePage(int pageNum)
   {
-    gtk_notebook_remove_page(cast(GtkNotebook*)cPtr, pageNum);
+    gtk_notebook_remove_page(cast(GtkNotebook*)this._cPtr, pageNum);
   }
 
   /**
@@ -690,7 +690,7 @@ class Notebook : gtk.container.Container
   */
   void reorderChild(gtk.widget.Widget child, int position)
   {
-    gtk_notebook_reorder_child(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    gtk_notebook_reorder_child(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -707,7 +707,7 @@ class Notebook : gtk.container.Container
   */
   void setActionWidget(gtk.widget.Widget widget, gtk.types.PackType packType)
   {
-    gtk_notebook_set_action_widget(cast(GtkNotebook*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, packType);
+    gtk_notebook_set_action_widget(cast(GtkNotebook*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, packType);
   }
 
   /**
@@ -726,7 +726,7 @@ class Notebook : gtk.container.Container
   */
   void setCurrentPage(int pageNum)
   {
-    gtk_notebook_set_current_page(cast(GtkNotebook*)cPtr, pageNum);
+    gtk_notebook_set_current_page(cast(GtkNotebook*)this._cPtr, pageNum);
   }
 
   /**
@@ -743,7 +743,7 @@ class Notebook : gtk.container.Container
   void setGroupName(string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    gtk_notebook_set_group_name(cast(GtkNotebook*)cPtr, _groupName);
+    gtk_notebook_set_group_name(cast(GtkNotebook*)this._cPtr, _groupName);
   }
 
   /**
@@ -755,7 +755,7 @@ class Notebook : gtk.container.Container
   */
   void setMenuLabel(gtk.widget.Widget child, gtk.widget.Widget menuLabel = null)
   {
-    gtk_notebook_set_menu_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel.cPtr(No.Dup) : null);
+    gtk_notebook_set_menu_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, menuLabel ? cast(GtkWidget*)menuLabel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -768,7 +768,7 @@ class Notebook : gtk.container.Container
   void setMenuLabelText(gtk.widget.Widget child, string menuText)
   {
     const(char)* _menuText = menuText.toCString(No.Alloc);
-    gtk_notebook_set_menu_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _menuText);
+    gtk_notebook_set_menu_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _menuText);
   }
 
   /**
@@ -780,7 +780,7 @@ class Notebook : gtk.container.Container
   */
   void setScrollable(bool scrollable)
   {
-    gtk_notebook_set_scrollable(cast(GtkNotebook*)cPtr, scrollable);
+    gtk_notebook_set_scrollable(cast(GtkNotebook*)this._cPtr, scrollable);
   }
 
   /**
@@ -793,7 +793,7 @@ class Notebook : gtk.container.Container
   */
   void setShowBorder(bool showBorder)
   {
-    gtk_notebook_set_show_border(cast(GtkNotebook*)cPtr, showBorder);
+    gtk_notebook_set_show_border(cast(GtkNotebook*)this._cPtr, showBorder);
   }
 
   /**
@@ -804,7 +804,7 @@ class Notebook : gtk.container.Container
   */
   void setShowTabs(bool showTabs)
   {
-    gtk_notebook_set_show_tabs(cast(GtkNotebook*)cPtr, showTabs);
+    gtk_notebook_set_show_tabs(cast(GtkNotebook*)this._cPtr, showTabs);
   }
 
   /**
@@ -860,7 +860,7 @@ class Notebook : gtk.container.Container
   */
   void setTabDetachable(gtk.widget.Widget child, bool detachable)
   {
-    gtk_notebook_set_tab_detachable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, detachable);
+    gtk_notebook_set_tab_detachable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, detachable);
   }
 
   /**
@@ -875,7 +875,7 @@ class Notebook : gtk.container.Container
   */
   void setTabLabel(gtk.widget.Widget child, gtk.widget.Widget tabLabel = null)
   {
-    gtk_notebook_set_tab_label(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel.cPtr(No.Dup) : null);
+    gtk_notebook_set_tab_label(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, tabLabel ? cast(GtkWidget*)tabLabel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -889,7 +889,7 @@ class Notebook : gtk.container.Container
   void setTabLabelText(gtk.widget.Widget child, string tabText)
   {
     const(char)* _tabText = tabText.toCString(No.Alloc);
-    gtk_notebook_set_tab_label_text(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _tabText);
+    gtk_notebook_set_tab_label_text(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _tabText);
   }
 
   /**
@@ -901,7 +901,7 @@ class Notebook : gtk.container.Container
   */
   void setTabPos(gtk.types.PositionType pos)
   {
-    gtk_notebook_set_tab_pos(cast(GtkNotebook*)cPtr, pos);
+    gtk_notebook_set_tab_pos(cast(GtkNotebook*)this._cPtr, pos);
   }
 
   /**
@@ -914,7 +914,7 @@ class Notebook : gtk.container.Container
   */
   void setTabReorderable(gtk.widget.Widget child, bool reorderable)
   {
-    gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, reorderable);
+    gtk_notebook_set_tab_reorderable(cast(GtkNotebook*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, reorderable);
   }
 
   /**

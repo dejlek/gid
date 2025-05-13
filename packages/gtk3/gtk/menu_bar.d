@@ -32,16 +32,16 @@ class MenuBar : gtk.menu_shell.MenuShell
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_bar_get_type != &gidSymbolNotFound ? gtk_menu_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -119,8 +119,8 @@ class MenuBar : gtk.menu_shell.MenuShell
   static gtk.menu_bar.MenuBar newFromModel(gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_bar_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_bar.MenuBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   gtk.types.PackDirection getChildPackDirection()
   {
     GtkPackDirection _cretval;
-    _cretval = gtk_menu_bar_get_child_pack_direction(cast(GtkMenuBar*)cPtr);
+    _cretval = gtk_menu_bar_get_child_pack_direction(cast(GtkMenuBar*)this._cPtr);
     gtk.types.PackDirection _retval = cast(gtk.types.PackDirection)_cretval;
     return _retval;
   }
@@ -145,7 +145,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   gtk.types.PackDirection getPackDirection()
   {
     GtkPackDirection _cretval;
-    _cretval = gtk_menu_bar_get_pack_direction(cast(GtkMenuBar*)cPtr);
+    _cretval = gtk_menu_bar_get_pack_direction(cast(GtkMenuBar*)this._cPtr);
     gtk.types.PackDirection _retval = cast(gtk.types.PackDirection)_cretval;
     return _retval;
   }
@@ -158,7 +158,7 @@ class MenuBar : gtk.menu_shell.MenuShell
   */
   void setChildPackDirection(gtk.types.PackDirection childPackDir)
   {
-    gtk_menu_bar_set_child_pack_direction(cast(GtkMenuBar*)cPtr, childPackDir);
+    gtk_menu_bar_set_child_pack_direction(cast(GtkMenuBar*)this._cPtr, childPackDir);
   }
 
   /**
@@ -169,6 +169,6 @@ class MenuBar : gtk.menu_shell.MenuShell
   */
   void setPackDirection(gtk.types.PackDirection packDir)
   {
-    gtk_menu_bar_set_pack_direction(cast(GtkMenuBar*)cPtr, packDir);
+    gtk_menu_bar_set_pack_direction(cast(GtkMenuBar*)this._cPtr, packDir);
   }
 }

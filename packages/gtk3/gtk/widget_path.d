@@ -69,22 +69,22 @@ class WidgetPath : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_path_get_type != &gidSymbolNotFound ? gtk_widget_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,7 +117,7 @@ class WidgetPath : gobject.boxed.Boxed
   int appendForWidget(gtk.widget.Widget widget)
   {
     int _retval;
-    _retval = gtk_widget_path_append_for_widget(cast(GtkWidgetPath*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_widget_path_append_for_widget(cast(GtkWidgetPath*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class WidgetPath : gobject.boxed.Boxed
   int appendType(gobject.types.GType type)
   {
     int _retval;
-    _retval = gtk_widget_path_append_type(cast(GtkWidgetPath*)cPtr, type);
+    _retval = gtk_widget_path_append_type(cast(GtkWidgetPath*)this._cPtr, type);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class WidgetPath : gobject.boxed.Boxed
   int appendWithSiblings(gtk.widget_path.WidgetPath siblings, uint siblingIndex)
   {
     int _retval;
-    _retval = gtk_widget_path_append_with_siblings(cast(GtkWidgetPath*)cPtr, siblings ? cast(GtkWidgetPath*)siblings.cPtr(No.Dup) : null, siblingIndex);
+    _retval = gtk_widget_path_append_with_siblings(cast(GtkWidgetPath*)this._cPtr, siblings ? cast(GtkWidgetPath*)siblings._cPtr(No.Dup) : null, siblingIndex);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class WidgetPath : gobject.boxed.Boxed
   gtk.widget_path.WidgetPath copy()
   {
     GtkWidgetPath* _cretval;
-    _cretval = gtk_widget_path_copy(cast(const(GtkWidgetPath)*)cPtr);
+    _cretval = gtk_widget_path_copy(cast(const(GtkWidgetPath)*)this._cPtr);
     auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -179,7 +179,7 @@ class WidgetPath : gobject.boxed.Boxed
   gobject.types.GType getObjectType()
   {
     gobject.types.GType _retval;
-    _retval = gtk_widget_path_get_object_type(cast(const(GtkWidgetPath)*)cPtr);
+    _retval = gtk_widget_path_get_object_type(cast(const(GtkWidgetPath)*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool hasParent(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gtk_widget_path_has_parent(cast(const(GtkWidgetPath)*)cPtr, type);
+    _retval = gtk_widget_path_has_parent(cast(const(GtkWidgetPath)*)this._cPtr, type);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool isType(gobject.types.GType type)
   {
     bool _retval;
-    _retval = gtk_widget_path_is_type(cast(const(GtkWidgetPath)*)cPtr, type);
+    _retval = gtk_widget_path_is_type(cast(const(GtkWidgetPath)*)this._cPtr, type);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterAddClass(int pos, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_add_class(cast(GtkWidgetPath*)cPtr, pos, _name);
+    gtk_widget_path_iter_add_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
   /**
@@ -246,7 +246,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterAddRegion(int pos, string name, gtk.types.RegionFlags flags)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_add_region(cast(GtkWidgetPath*)cPtr, pos, _name, flags);
+    gtk_widget_path_iter_add_region(cast(GtkWidgetPath*)this._cPtr, pos, _name, flags);
   }
 
   /**
@@ -258,7 +258,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterClearClasses(int pos)
   {
-    gtk_widget_path_iter_clear_classes(cast(GtkWidgetPath*)cPtr, pos);
+    gtk_widget_path_iter_clear_classes(cast(GtkWidgetPath*)this._cPtr, pos);
   }
 
   /**
@@ -272,7 +272,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterClearRegions(int pos)
   {
-    gtk_widget_path_iter_clear_regions(cast(GtkWidgetPath*)cPtr, pos);
+    gtk_widget_path_iter_clear_regions(cast(GtkWidgetPath*)this._cPtr, pos);
   }
 
   /**
@@ -287,7 +287,7 @@ class WidgetPath : gobject.boxed.Boxed
   string iterGetName(int pos)
   {
     const(char)* _cretval;
-    _cretval = gtk_widget_path_iter_get_name(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_get_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -303,7 +303,7 @@ class WidgetPath : gobject.boxed.Boxed
   string iterGetObjectName(int pos)
   {
     const(char)* _cretval;
-    _cretval = gtk_widget_path_iter_get_object_name(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_get_object_name(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -319,7 +319,7 @@ class WidgetPath : gobject.boxed.Boxed
   gobject.types.GType iterGetObjectType(int pos)
   {
     gobject.types.GType _retval;
-    _retval = gtk_widget_path_iter_get_object_type(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _retval = gtk_widget_path_iter_get_object_type(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class WidgetPath : gobject.boxed.Boxed
   uint iterGetSiblingIndex(int pos)
   {
     uint _retval;
-    _retval = gtk_widget_path_iter_get_sibling_index(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _retval = gtk_widget_path_iter_get_sibling_index(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     return _retval;
   }
 
@@ -351,7 +351,7 @@ class WidgetPath : gobject.boxed.Boxed
   gtk.widget_path.WidgetPath iterGetSiblings(int pos)
   {
     const(GtkWidgetPath)* _cretval;
-    _cretval = gtk_widget_path_iter_get_siblings(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_get_siblings(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -368,7 +368,7 @@ class WidgetPath : gobject.boxed.Boxed
   gtk.types.StateFlags iterGetState(int pos)
   {
     GtkStateFlags _cretval;
-    _cretval = gtk_widget_path_iter_get_state(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_get_state(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
@@ -386,7 +386,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_class(cast(const(GtkWidgetPath)*)cPtr, pos, _name);
+    _retval = gtk_widget_path_iter_has_class(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_name(cast(const(GtkWidgetPath)*)cPtr, pos, _name);
+    _retval = gtk_widget_path_iter_has_name(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name);
     return _retval;
   }
 
@@ -419,7 +419,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQclass(int pos, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qclass(cast(const(GtkWidgetPath)*)cPtr, pos, qname);
+    _retval = gtk_widget_path_iter_has_qclass(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQname(int pos, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qname(cast(const(GtkWidgetPath)*)cPtr, pos, qname);
+    _retval = gtk_widget_path_iter_has_qname(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class WidgetPath : gobject.boxed.Boxed
   bool iterHasQregion(int pos, glib.types.Quark qname, out gtk.types.RegionFlags flags)
   {
     bool _retval;
-    _retval = gtk_widget_path_iter_has_qregion(cast(const(GtkWidgetPath)*)cPtr, pos, qname, &flags);
+    _retval = gtk_widget_path_iter_has_qregion(cast(const(GtkWidgetPath)*)this._cPtr, pos, qname, &flags);
     return _retval;
   }
 
@@ -474,7 +474,7 @@ class WidgetPath : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_widget_path_iter_has_region(cast(const(GtkWidgetPath)*)cPtr, pos, _name, &flags);
+    _retval = gtk_widget_path_iter_has_region(cast(const(GtkWidgetPath)*)this._cPtr, pos, _name, &flags);
     return _retval;
   }
 
@@ -492,7 +492,7 @@ class WidgetPath : gobject.boxed.Boxed
   string[] iterListClasses(int pos)
   {
     GSList* _cretval;
-    _cretval = gtk_widget_path_iter_list_classes(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_list_classes(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     auto _retval = gSListToD!(string, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -513,7 +513,7 @@ class WidgetPath : gobject.boxed.Boxed
   string[] iterListRegions(int pos)
   {
     GSList* _cretval;
-    _cretval = gtk_widget_path_iter_list_regions(cast(const(GtkWidgetPath)*)cPtr, pos);
+    _cretval = gtk_widget_path_iter_list_regions(cast(const(GtkWidgetPath)*)this._cPtr, pos);
     auto _retval = gSListToD!(string, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -529,7 +529,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterRemoveClass(int pos, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_remove_class(cast(GtkWidgetPath*)cPtr, pos, _name);
+    gtk_widget_path_iter_remove_class(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
   /**
@@ -545,7 +545,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterRemoveRegion(int pos, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_remove_region(cast(GtkWidgetPath*)cPtr, pos, _name);
+    gtk_widget_path_iter_remove_region(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
   /**
@@ -559,7 +559,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterSetName(int pos, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_set_name(cast(GtkWidgetPath*)cPtr, pos, _name);
+    gtk_widget_path_iter_set_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
   /**
@@ -576,7 +576,7 @@ class WidgetPath : gobject.boxed.Boxed
   void iterSetObjectName(int pos, string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_path_iter_set_object_name(cast(GtkWidgetPath*)cPtr, pos, _name);
+    gtk_widget_path_iter_set_object_name(cast(GtkWidgetPath*)this._cPtr, pos, _name);
   }
 
   /**
@@ -589,7 +589,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterSetObjectType(int pos, gobject.types.GType type)
   {
-    gtk_widget_path_iter_set_object_type(cast(GtkWidgetPath*)cPtr, pos, type);
+    gtk_widget_path_iter_set_object_type(cast(GtkWidgetPath*)this._cPtr, pos, type);
   }
 
   /**
@@ -617,7 +617,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void iterSetState(int pos, gtk.types.StateFlags state)
   {
-    gtk_widget_path_iter_set_state(cast(GtkWidgetPath*)cPtr, pos, state);
+    gtk_widget_path_iter_set_state(cast(GtkWidgetPath*)this._cPtr, pos, state);
   }
 
   /**
@@ -628,7 +628,7 @@ class WidgetPath : gobject.boxed.Boxed
   int length()
   {
     int _retval;
-    _retval = gtk_widget_path_length(cast(const(GtkWidgetPath)*)cPtr);
+    _retval = gtk_widget_path_length(cast(const(GtkWidgetPath)*)this._cPtr);
     return _retval;
   }
 
@@ -640,7 +640,7 @@ class WidgetPath : gobject.boxed.Boxed
   */
   void prependType(gobject.types.GType type)
   {
-    gtk_widget_path_prepend_type(cast(GtkWidgetPath*)cPtr, type);
+    gtk_widget_path_prepend_type(cast(GtkWidgetPath*)this._cPtr, type);
   }
 
   /**
@@ -655,7 +655,7 @@ class WidgetPath : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_widget_path_to_string(cast(const(GtkWidgetPath)*)cPtr);
+    _cretval = gtk_widget_path_to_string(cast(const(GtkWidgetPath)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

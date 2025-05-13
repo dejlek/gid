@@ -76,16 +76,16 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_service_get_type != &gidSymbolNotFound ? secret_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -129,17 +129,17 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   static void get(secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_get(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_get(flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -156,10 +156,10 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     SecretService* _cretval;
     GError *_err;
-    _cretval = secret_service_get_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_get_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -185,10 +185,10 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     SecretService* _cretval;
     GError *_err;
-    _cretval = secret_service_get_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_get_sync(flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -216,18 +216,18 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   static void open(gobject.types.GType serviceGtype, string serviceBusName, secret.types.ServiceFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_open(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_open(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -244,10 +244,10 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     SecretService* _cretval;
     GError *_err;
-    _cretval = secret_service_open_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_open_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -281,10 +281,10 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     SecretService* _cretval;
     const(char)* _serviceBusName = serviceBusName.toCString(No.Alloc);
     GError *_err;
-    _cretval = secret_service_open_sync(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_open_sync(serviceGtype, _serviceBusName, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(secret.service.Service)(cast(SecretService*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -306,19 +306,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void clear(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_clear(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_clear(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -334,7 +334,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_clear_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_clear_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -364,7 +364,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     GError *_err;
-    _retval = secret_service_clear_sync(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_clear_sync(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -386,7 +386,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   secret.value.Value decodeDbusSecret(glib.variant.Variant value)
   {
     SecretValue* _cretval;
-    _cretval = secret_service_decode_dbus_secret(cast(SecretService*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    _cretval = secret_service_decode_dbus_secret(cast(SecretService*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -406,7 +406,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   glib.variant.Variant encodeDbusSecret(secret.value.Value value)
   {
     GVariant* _cretval;
-    _cretval = secret_service_encode_dbus_secret(cast(SecretService*)cPtr, value ? cast(SecretValue*)value.cPtr(No.Dup) : null);
+    _cretval = secret_service_encode_dbus_secret(cast(SecretService*)this._cPtr, value ? cast(SecretValue*)value._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -430,17 +430,17 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void ensureSession(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_ensure_session(cast(SecretService*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_ensure_session(cast(SecretService*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -456,7 +456,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_ensure_session_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_ensure_session_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -485,7 +485,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_ensure_session_sync(cast(SecretService*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_ensure_session_sync(cast(SecretService*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -500,7 +500,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   gobject.types.GType getCollectionGtype()
   {
     gobject.types.GType _retval;
-    _retval = secret_service_get_collection_gtype(cast(SecretService*)cPtr);
+    _retval = secret_service_get_collection_gtype(cast(SecretService*)this._cPtr);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   secret.collection.Collection[] getCollections()
   {
     GList* _cretval;
-    _cretval = secret_service_get_collections(cast(SecretService*)cPtr);
+    _cretval = secret_service_get_collections(cast(SecretService*)this._cPtr);
     auto _retval = gListToD!(secret.collection.Collection, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -535,7 +535,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   secret.types.ServiceFlags getFlags()
   {
     SecretServiceFlags _cretval;
-    _cretval = secret_service_get_flags(cast(SecretService*)cPtr);
+    _cretval = secret_service_get_flags(cast(SecretService*)this._cPtr);
     secret.types.ServiceFlags _retval = cast(secret.types.ServiceFlags)_cretval;
     return _retval;
   }
@@ -549,7 +549,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   gobject.types.GType getItemGtype()
   {
     gobject.types.GType _retval;
-    _retval = secret_service_get_item_gtype(cast(SecretService*)cPtr);
+    _retval = secret_service_get_item_gtype(cast(SecretService*)this._cPtr);
     return _retval;
   }
 
@@ -565,7 +565,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   string getSessionAlgorithms()
   {
     const(char)* _cretval;
-    _cretval = secret_service_get_session_algorithms(cast(SecretService*)cPtr);
+    _cretval = secret_service_get_session_algorithms(cast(SecretService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -582,7 +582,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   string getSessionDbusPath()
   {
     const(char)* _cretval;
-    _cretval = secret_service_get_session_dbus_path(cast(SecretService*)cPtr);
+    _cretval = secret_service_get_session_dbus_path(cast(SecretService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -605,17 +605,17 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void loadCollections(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_load_collections(cast(SecretService*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_load_collections(cast(SecretService*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -631,7 +631,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_load_collections_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_load_collections_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -659,7 +659,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_load_collections_sync(cast(SecretService*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_load_collections_sync(cast(SecretService*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -685,19 +685,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void lock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _objects = gListFromD!(gio.dbus_proxy.DBusProxy)(objects);
     scope(exit) containerFree!(GList*, gio.dbus_proxy.DBusProxy, GidOwnership.None)(_objects);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_lock(cast(SecretService*)cPtr, _objects, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_lock(cast(SecretService*)this._cPtr, _objects, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -718,7 +718,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     int _retval;
     GList* _locked;
     GError *_err;
-    _retval = secret_service_lock_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_locked, &_err);
+    _retval = secret_service_lock_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_locked, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     locked = gListToD!(gio.dbus_proxy.DBusProxy, GidOwnership.Full)(_locked);
@@ -752,7 +752,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     scope(exit) containerFree!(GList*, gio.dbus_proxy.DBusProxy, GidOwnership.None)(_objects);
     GList* _locked;
     GError *_err;
-    _retval = secret_service_lock_sync(cast(SecretService*)cPtr, _objects, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_locked, &_err);
+    _retval = secret_service_lock_sync(cast(SecretService*)this._cPtr, _objects, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_locked, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     locked = gListToD!(gio.dbus_proxy.DBusProxy, GidOwnership.Full)(_locked);
@@ -777,19 +777,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void lookup(secret.schema.Schema schema, string[string] attributes, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_lookup(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_lookup(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -807,7 +807,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_service_lookup_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_lookup_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
@@ -839,7 +839,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     GError *_err;
-    _cretval = secret_service_lookup_sync(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_lookup_sync(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
@@ -864,17 +864,17 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void prompt(secret.prompt.Prompt prompt, glib.variant_type.VariantType returnType = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_prompt(cast(SecretService*)cPtr, prompt ? cast(SecretPrompt*)prompt.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_prompt(cast(SecretService*)this._cPtr, prompt ? cast(SecretPrompt*)prompt._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -894,7 +894,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     GVariant* _cretval;
     GError *_err;
-    _cretval = secret_service_prompt_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_prompt_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
@@ -928,7 +928,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     GVariant* _cretval;
     GError *_err;
-    _cretval = secret_service_prompt_sync(cast(SecretService*)cPtr, prompt ? cast(SecretPrompt*)prompt.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_prompt_sync(cast(SecretService*)this._cPtr, prompt ? cast(SecretPrompt*)prompt._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, returnType ? cast(const(GVariantType)*)returnType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
@@ -966,19 +966,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void search(secret.schema.Schema schema, string[string] attributes, secret.types.SearchFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_search(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_search(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -993,7 +993,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     GList* _cretval;
     GError *_err;
-    _cretval = secret_service_search_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_search_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(secret.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
@@ -1039,7 +1039,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     auto _attributes = gHashTableFromD!(string, string)(attributes);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_attributes);
     GError *_err;
-    _cretval = secret_service_search_sync(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_service_search_sync(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(secret.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
@@ -1064,18 +1064,18 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void setAlias(string alias_, secret.collection.Collection collection = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _alias_ = alias_.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_set_alias(cast(SecretService*)cPtr, _alias_, collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_set_alias(cast(SecretService*)this._cPtr, _alias_, collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1090,7 +1090,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_set_alias_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_set_alias_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1117,7 +1117,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     bool _retval;
     const(char)* _alias_ = alias_.toCString(No.Alloc);
     GError *_err;
-    _retval = secret_service_set_alias_sync(cast(SecretService*)cPtr, _alias_, collection ? cast(SecretCollection*)collection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_set_alias_sync(cast(SecretService*)this._cPtr, _alias_, collection ? cast(SecretCollection*)collection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1152,12 +1152,12 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void store(secret.schema.Schema schema, string[string] attributes, string collection, string label, secret.value.Value value, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -1166,7 +1166,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     const(char)* _collection = collection.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_store(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_store(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1181,7 +1181,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   {
     bool _retval;
     GError *_err;
-    _retval = secret_service_store_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_store_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1224,7 +1224,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     const(char)* _collection = collection.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
     GError *_err;
-    _retval = secret_service_store_sync(cast(SecretService*)cPtr, schema ? cast(const(SecretSchema)*)schema.cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = secret_service_store_sync(cast(SecretService*)this._cPtr, schema ? cast(const(SecretSchema)*)schema._cPtr(No.Dup) : null, _attributes, _collection, _label, value ? cast(SecretValue*)value._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1250,19 +1250,19 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
   */
   void unlock(gio.dbus_proxy.DBusProxy[] objects, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _objects = gListFromD!(gio.dbus_proxy.DBusProxy)(objects);
     scope(exit) containerFree!(GList*, gio.dbus_proxy.DBusProxy, GidOwnership.None)(_objects);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_service_unlock(cast(SecretService*)cPtr, _objects, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_service_unlock(cast(SecretService*)this._cPtr, _objects, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1283,7 +1283,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     int _retval;
     GList* _unlocked;
     GError *_err;
-    _retval = secret_service_unlock_finish(cast(SecretService*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_unlocked, &_err);
+    _retval = secret_service_unlock_finish(cast(SecretService*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_unlocked, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     unlocked = gListToD!(gio.dbus_proxy.DBusProxy, GidOwnership.Full)(_unlocked);
@@ -1317,7 +1317,7 @@ class Service : gio.dbus_proxy.DBusProxy, secret.backend.Backend
     scope(exit) containerFree!(GList*, gio.dbus_proxy.DBusProxy, GidOwnership.None)(_objects);
     GList* _unlocked;
     GError *_err;
-    _retval = secret_service_unlock_sync(cast(SecretService*)cPtr, _objects, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_unlocked, &_err);
+    _retval = secret_service_unlock_sync(cast(SecretService*)this._cPtr, _objects, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_unlocked, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     unlocked = gListToD!(gio.dbus_proxy.DBusProxy, GidOwnership.Full)(_unlocked);

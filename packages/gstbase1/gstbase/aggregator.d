@@ -95,16 +95,16 @@ class Aggregator : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_aggregator_get_type != &gidSymbolNotFound ? gst_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -207,7 +207,7 @@ class Aggregator : gst.element.Element
   gst.types.FlowReturn finishBuffer(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_aggregator_finish_buffer(cast(GstAggregator*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_aggregator_finish_buffer(cast(GstAggregator*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -224,7 +224,7 @@ class Aggregator : gst.element.Element
   gst.types.FlowReturn finishBufferList(gst.buffer_list.BufferList bufferlist)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_aggregator_finish_buffer_list(cast(GstAggregator*)cPtr, bufferlist ? cast(GstBufferList*)bufferlist.cPtr(Yes.Dup) : null);
+    _cretval = gst_aggregator_finish_buffer_list(cast(GstAggregator*)this._cPtr, bufferlist ? cast(GstBufferList*)bufferlist._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -245,7 +245,7 @@ class Aggregator : gst.element.Element
   {
     GstAllocator* _allocator;
     GstAllocationParams _params;
-    gst_aggregator_get_allocator(cast(GstAggregator*)cPtr, &_allocator, &_params);
+    gst_aggregator_get_allocator(cast(GstAggregator*)this._cPtr, &_allocator, &_params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
     params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
@@ -254,8 +254,8 @@ class Aggregator : gst.element.Element
   gst.buffer_pool.BufferPool getBufferPool()
   {
     GstBufferPool* _cretval;
-    _cretval = gst_aggregator_get_buffer_pool(cast(GstAggregator*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    _cretval = gst_aggregator_get_buffer_pool(cast(GstAggregator*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class Aggregator : gst.element.Element
   bool getForceLive()
   {
     bool _retval;
-    _retval = gst_aggregator_get_force_live(cast(GstAggregator*)cPtr);
+    _retval = gst_aggregator_get_force_live(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Aggregator : gst.element.Element
   bool getIgnoreInactivePads()
   {
     bool _retval;
-    _retval = gst_aggregator_get_ignore_inactive_pads(cast(GstAggregator*)cPtr);
+    _retval = gst_aggregator_get_ignore_inactive_pads(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class Aggregator : gst.element.Element
   gst.types.ClockTime getLatency()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_aggregator_get_latency(cast(GstAggregator*)cPtr);
+    _retval = gst_aggregator_get_latency(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class Aggregator : gst.element.Element
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_aggregator_negotiate(cast(GstAggregator*)cPtr);
+    _retval = gst_aggregator_negotiate(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class Aggregator : gst.element.Element
   gst.sample.Sample peekNextSample(gstbase.aggregator_pad.AggregatorPad pad)
   {
     GstSample* _cretval;
-    _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)cPtr, pad ? cast(GstAggregatorPad*)pad.cPtr(No.Dup) : null);
+    _cretval = gst_aggregator_peek_next_sample(cast(GstAggregator*)this._cPtr, pad ? cast(GstAggregatorPad*)pad._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -349,7 +349,7 @@ class Aggregator : gst.element.Element
   */
   void selectedSamples(gst.types.ClockTime pts, gst.types.ClockTime dts, gst.types.ClockTime duration, gst.structure.Structure info = null)
   {
-    gst_aggregator_selected_samples(cast(GstAggregator*)cPtr, pts, dts, duration, info ? cast(GstStructure*)info.cPtr(No.Dup) : null);
+    gst_aggregator_selected_samples(cast(GstAggregator*)this._cPtr, pts, dts, duration, info ? cast(GstStructure*)info._cPtr(No.Dup) : null);
   }
 
   /**
@@ -361,7 +361,7 @@ class Aggregator : gst.element.Element
   */
   void setForceLive(bool forceLive)
   {
-    gst_aggregator_set_force_live(cast(GstAggregator*)cPtr, forceLive);
+    gst_aggregator_set_force_live(cast(GstAggregator*)this._cPtr, forceLive);
   }
 
   /**
@@ -377,7 +377,7 @@ class Aggregator : gst.element.Element
   */
   void setIgnoreInactivePads(bool ignore)
   {
-    gst_aggregator_set_ignore_inactive_pads(cast(GstAggregator*)cPtr, ignore);
+    gst_aggregator_set_ignore_inactive_pads(cast(GstAggregator*)this._cPtr, ignore);
   }
 
   /**
@@ -391,7 +391,7 @@ class Aggregator : gst.element.Element
   */
   void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
   {
-    gst_aggregator_set_latency(cast(GstAggregator*)cPtr, minLatency, maxLatency);
+    gst_aggregator_set_latency(cast(GstAggregator*)this._cPtr, minLatency, maxLatency);
   }
 
   /**
@@ -402,7 +402,7 @@ class Aggregator : gst.element.Element
   */
   void setSrcCaps(gst.caps.Caps caps)
   {
-    gst_aggregator_set_src_caps(cast(GstAggregator*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_aggregator_set_src_caps(cast(GstAggregator*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -417,7 +417,7 @@ class Aggregator : gst.element.Element
   gst.types.ClockTime simpleGetNextTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_aggregator_simple_get_next_time(cast(GstAggregator*)cPtr);
+    _retval = gst_aggregator_simple_get_next_time(cast(GstAggregator*)this._cPtr);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class Aggregator : gst.element.Element
   */
   void updateSegment(gst.segment.Segment segment)
   {
-    gst_aggregator_update_segment(cast(GstAggregator*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
+    gst_aggregator_update_segment(cast(GstAggregator*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
   }
 
   /**

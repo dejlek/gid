@@ -24,16 +24,16 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_plug_get_type != &gidSymbolNotFound ? atk_plug_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   string getId()
   {
     char* _cretval;
-    _cretval = atk_plug_get_id(cast(AtkPlug*)cPtr);
+    _cretval = atk_plug_get_id(cast(AtkPlug*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -90,6 +90,6 @@ class Plug : atk.object.ObjectWrap, atk.component.Component
   */
   void setChild(atk.object.ObjectWrap child)
   {
-    atk_plug_set_child(cast(AtkPlug*)cPtr, child ? cast(AtkObject*)child.cPtr(No.Dup) : null);
+    atk_plug_set_child(cast(AtkPlug*)this._cPtr, child ? cast(AtkObject*)child._cPtr(No.Dup) : null);
   }
 }

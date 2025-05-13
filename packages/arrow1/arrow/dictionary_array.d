@@ -22,16 +22,16 @@ class DictionaryArray : arrow.array.Array
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dictionary_array_get_type != &gidSymbolNotFound ? garrow_dictionary_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,7 +45,7 @@ class DictionaryArray : arrow.array.Array
   {
     GArrowDictionaryArray* _cretval;
     GError *_err;
-    _cretval = garrow_dictionary_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, dictionary ? cast(GArrowArray*)dictionary.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_dictionary_array_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, indices ? cast(GArrowArray*)indices._cPtr(No.Dup) : null, dictionary ? cast(GArrowArray*)dictionary._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,8 +55,8 @@ class DictionaryArray : arrow.array.Array
   arrow.array.Array getDictionary()
   {
     GArrowArray* _cretval;
-    _cretval = garrow_dictionary_array_get_dictionary(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_dictionary_array_get_dictionary(cast(GArrowDictionaryArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -64,8 +64,8 @@ class DictionaryArray : arrow.array.Array
   arrow.dictionary_data_type.DictionaryDataType getDictionaryDataType()
   {
     GArrowDictionaryDataType* _cretval;
-    _cretval = garrow_dictionary_array_get_dictionary_data_type(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.dictionary_data_type.DictionaryDataType)(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
+    _cretval = garrow_dictionary_array_get_dictionary_data_type(cast(GArrowDictionaryArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.dictionary_data_type.DictionaryDataType)(cast(GArrowDictionaryDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,8 +73,8 @@ class DictionaryArray : arrow.array.Array
   arrow.array.Array getIndices()
   {
     GArrowArray* _cretval;
-    _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_dictionary_array_get_indices(cast(GArrowDictionaryArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

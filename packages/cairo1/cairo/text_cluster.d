@@ -44,22 +44,22 @@ class TextCluster : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_text_cluster_get_type != &gidSymbolNotFound ? cairo_gobject_text_cluster_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class TextCluster : gobject.boxed.Boxed
   */
   @property int numBytes()
   {
-    return (cast(cairo_text_cluster_t*)cPtr).numBytes;
+    return (cast(cairo_text_cluster_t*)this._cPtr).numBytes;
   }
 
   /**
@@ -84,7 +84,7 @@ class TextCluster : gobject.boxed.Boxed
   */
   @property void numBytes(int propval)
   {
-    (cast(cairo_text_cluster_t*)cPtr).numBytes = propval;
+    (cast(cairo_text_cluster_t*)this._cPtr).numBytes = propval;
   }
 
   /**
@@ -93,7 +93,7 @@ class TextCluster : gobject.boxed.Boxed
   */
   @property int numGlyphs()
   {
-    return (cast(cairo_text_cluster_t*)cPtr).numGlyphs;
+    return (cast(cairo_text_cluster_t*)this._cPtr).numGlyphs;
   }
 
   /**
@@ -103,6 +103,6 @@ class TextCluster : gobject.boxed.Boxed
   */
   @property void numGlyphs(int propval)
   {
-    (cast(cairo_text_cluster_t*)cPtr).numGlyphs = propval;
+    (cast(cairo_text_cluster_t*)this._cPtr).numGlyphs = propval;
   }
 }

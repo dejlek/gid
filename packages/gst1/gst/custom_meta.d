@@ -33,7 +33,7 @@ class CustomMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -44,7 +44,7 @@ class CustomMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)this._cPtr).meta);
   }
 
   /**
@@ -53,7 +53,7 @@ class CustomMeta
   */
   @property gst.structure.Structure structure()
   {
-    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);
+    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)this._cPtr).structure);
   }
 
   /**
@@ -63,8 +63,8 @@ class CustomMeta
   */
   @property void structure(gst.structure.Structure propval)
   {
-    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)cPtr).structure);
-    dToC(propval, cast(void*)&(cast(GstCustomMeta*)cPtr).structure);
+    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstCustomMeta*)this._cPtr).structure);
+    dToC(propval, cast(void*)&(cast(GstCustomMeta*)this._cPtr).structure);
   }
 
   /**
@@ -75,7 +75,7 @@ class CustomMeta
   gst.structure.Structure getStructure()
   {
     GstStructure* _cretval;
-    _cretval = gst_custom_meta_get_structure(cast(GstCustomMeta*)cPtr);
+    _cretval = gst_custom_meta_get_structure(cast(GstCustomMeta*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -91,7 +91,7 @@ class CustomMeta
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_custom_meta_has_name(cast(GstCustomMeta*)cPtr, _name);
+    _retval = gst_custom_meta_has_name(cast(GstCustomMeta*)this._cPtr, _name);
     return _retval;
   }
 }

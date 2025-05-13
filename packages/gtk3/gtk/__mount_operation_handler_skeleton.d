@@ -26,7 +26,7 @@ class MountOperationHandlerSkeleton
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

@@ -199,7 +199,7 @@ template FontChooserT()
   override string getFont()
   {
     char* _cretval;
-    _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_font(cast(GtkFontChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -224,7 +224,7 @@ template FontChooserT()
   override pango.font_description.FontDescription getFontDesc()
   {
     PangoFontDescription* _cretval;
-    _cretval = gtk_font_chooser_get_font_desc(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_font_desc(cast(GtkFontChooser*)this._cPtr);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -243,8 +243,8 @@ template FontChooserT()
   override pango.font_face.FontFace getFontFace()
   {
     PangoFontFace* _cretval;
-    _cretval = gtk_font_chooser_get_font_face(cast(GtkFontChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    _cretval = gtk_font_chooser_get_font_face(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,8 +263,8 @@ template FontChooserT()
   override pango.font_family.FontFamily getFontFamily()
   {
     PangoFontFamily* _cretval;
-    _cretval = gtk_font_chooser_get_font_family(cast(GtkFontChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    _cretval = gtk_font_chooser_get_font_family(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ template FontChooserT()
   override string getFontFeatures()
   {
     char* _cretval;
-    _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_font_features(cast(GtkFontChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -298,8 +298,8 @@ template FontChooserT()
   override pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
-    _cretval = gtk_font_chooser_get_font_map(cast(GtkFontChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    _cretval = gtk_font_chooser_get_font_map(cast(GtkFontChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ template FontChooserT()
   override int getFontSize()
   {
     int _retval;
-    _retval = gtk_font_chooser_get_font_size(cast(GtkFontChooser*)cPtr);
+    _retval = gtk_font_chooser_get_font_size(cast(GtkFontChooser*)this._cPtr);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ template FontChooserT()
   override string getLanguage()
   {
     char* _cretval;
-    _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_language(cast(GtkFontChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -343,7 +343,7 @@ template FontChooserT()
   override gtk.types.FontChooserLevel getLevel()
   {
     GtkFontChooserLevel _cretval;
-    _cretval = gtk_font_chooser_get_level(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_level(cast(GtkFontChooser*)this._cPtr);
     gtk.types.FontChooserLevel _retval = cast(gtk.types.FontChooserLevel)_cretval;
     return _retval;
   }
@@ -358,7 +358,7 @@ template FontChooserT()
   override string getPreviewText()
   {
     char* _cretval;
-    _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)cPtr);
+    _cretval = gtk_font_chooser_get_preview_text(cast(GtkFontChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -373,7 +373,7 @@ template FontChooserT()
   override bool getShowPreviewEntry()
   {
     bool _retval;
-    _retval = gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)cPtr);
+    _retval = gtk_font_chooser_get_show_preview_entry(cast(GtkFontChooser*)this._cPtr);
     return _retval;
   }
 
@@ -393,14 +393,14 @@ template FontChooserT()
     {
       auto _dlg = cast(gtk.types.FontFilterFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(void*)family, No.Take), gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(void*)face, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
 
     auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
     GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
-    gtk_font_chooser_set_filter_func(cast(GtkFontChooser*)cPtr, _filterCB, _filter, _filterDestroyCB);
+    gtk_font_chooser_set_filter_func(cast(GtkFontChooser*)this._cPtr, _filterCB, _filter, _filterDestroyCB);
   }
 
   /**
@@ -415,7 +415,7 @@ template FontChooserT()
   override void setFont(string fontname)
   {
     const(char)* _fontname = fontname.toCString(No.Alloc);
-    gtk_font_chooser_set_font(cast(GtkFontChooser*)cPtr, _fontname);
+    gtk_font_chooser_set_font(cast(GtkFontChooser*)this._cPtr, _fontname);
   }
 
   /**
@@ -429,7 +429,7 @@ template FontChooserT()
   */
   override void setFontDesc(pango.font_description.FontDescription fontDesc)
   {
-    gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
+    gtk_font_chooser_set_font_desc(cast(GtkFontChooser*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -467,7 +467,7 @@ template FontChooserT()
   */
   override void setFontMap(pango.font_map.FontMap fontmap = null)
   {
-    gtk_font_chooser_set_font_map(cast(GtkFontChooser*)cPtr, fontmap ? cast(PangoFontMap*)fontmap.cPtr(No.Dup) : null);
+    gtk_font_chooser_set_font_map(cast(GtkFontChooser*)this._cPtr, fontmap ? cast(PangoFontMap*)fontmap._cPtr(No.Dup) : null);
   }
 
   /**
@@ -482,7 +482,7 @@ template FontChooserT()
   override void setLanguage(string language)
   {
     const(char)* _language = language.toCString(No.Alloc);
-    gtk_font_chooser_set_language(cast(GtkFontChooser*)cPtr, _language);
+    gtk_font_chooser_set_language(cast(GtkFontChooser*)this._cPtr, _language);
   }
 
   /**
@@ -496,7 +496,7 @@ template FontChooserT()
   */
   override void setLevel(gtk.types.FontChooserLevel level)
   {
-    gtk_font_chooser_set_level(cast(GtkFontChooser*)cPtr, level);
+    gtk_font_chooser_set_level(cast(GtkFontChooser*)this._cPtr, level);
   }
 
   /**
@@ -513,7 +513,7 @@ template FontChooserT()
   override void setPreviewText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_font_chooser_set_preview_text(cast(GtkFontChooser*)cPtr, _text);
+    gtk_font_chooser_set_preview_text(cast(GtkFontChooser*)this._cPtr, _text);
   }
 
   /**
@@ -527,7 +527,7 @@ template FontChooserT()
   */
   override void setShowPreviewEntry(bool showPreviewEntry)
   {
-    gtk_font_chooser_set_show_preview_entry(cast(GtkFontChooser*)cPtr, showPreviewEntry);
+    gtk_font_chooser_set_show_preview_entry(cast(GtkFontChooser*)this._cPtr, showPreviewEntry);
   }
 
   /**

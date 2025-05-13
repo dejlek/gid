@@ -27,7 +27,7 @@ class VideoScaler
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -56,7 +56,7 @@ class VideoScaler
   */
   void _2d(gstvideo.video_scaler.VideoScaler vscale, gstvideo.types.VideoFormat format, void* src, int srcStride, void* dest, int destStride, uint x, uint y, uint width, uint height)
   {
-    gst_video_scaler_2d(cast(GstVideoScaler*)cPtr, vscale ? cast(GstVideoScaler*)vscale.cPtr : null, format, src, srcStride, dest, destStride, x, y, width, height);
+    gst_video_scaler_2d(cast(GstVideoScaler*)this._cPtr, vscale ? cast(GstVideoScaler*)vscale._cPtr : null, format, src, srcStride, dest, destStride, x, y, width, height);
   }
 
   /**
@@ -74,7 +74,7 @@ class VideoScaler
   */
   const(double)* getCoeff(uint outOffset, out uint inOffset, out uint nTaps)
   {
-    auto _retval = gst_video_scaler_get_coeff(cast(GstVideoScaler*)cPtr, outOffset, cast(uint*)&inOffset, cast(uint*)&nTaps);
+    auto _retval = gst_video_scaler_get_coeff(cast(GstVideoScaler*)this._cPtr, outOffset, cast(uint*)&inOffset, cast(uint*)&nTaps);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class VideoScaler
   uint getMaxTaps()
   {
     uint _retval;
-    _retval = gst_video_scaler_get_max_taps(cast(GstVideoScaler*)cPtr);
+    _retval = gst_video_scaler_get_max_taps(cast(GstVideoScaler*)this._cPtr);
     return _retval;
   }
 
@@ -102,6 +102,6 @@ class VideoScaler
   */
   void horizontal(gstvideo.types.VideoFormat format, void* src, void* dest, uint destOffset, uint width)
   {
-    gst_video_scaler_horizontal(cast(GstVideoScaler*)cPtr, format, src, dest, destOffset, width);
+    gst_video_scaler_horizontal(cast(GstVideoScaler*)this._cPtr, format, src, dest, destOffset, width);
   }
 }

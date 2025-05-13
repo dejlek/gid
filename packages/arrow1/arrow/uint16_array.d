@@ -20,16 +20,16 @@ class UInt16Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_uint16_array_get_type != &gidSymbolNotFound ? garrow_uint16_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowUInt16Array* _cretval;
-    _cretval = garrow_uint16_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_uint16_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -50,7 +50,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   ushort getValue(long i)
   {
     ushort _retval;
-    _retval = garrow_uint16_array_get_value(cast(GArrowUInt16Array*)cPtr, i);
+    _retval = garrow_uint16_array_get_value(cast(GArrowUInt16Array*)this._cPtr, i);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   {
     const(ushort)* _cretval;
     long _cretlength;
-    _cretval = garrow_uint16_array_get_values(cast(GArrowUInt16Array*)cPtr, &_cretlength);
+    _cretval = garrow_uint16_array_get_values(cast(GArrowUInt16Array*)this._cPtr, &_cretlength);
     ushort[] _retval;
 
     if (_cretval)
@@ -74,7 +74,7 @@ class UInt16Array : arrow.numeric_array.NumericArray
   {
     ulong _retval;
     GError *_err;
-    _retval = garrow_uint16_array_sum(cast(GArrowUInt16Array*)cPtr, &_err);
+    _retval = garrow_uint16_array_sum(cast(GArrowUInt16Array*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

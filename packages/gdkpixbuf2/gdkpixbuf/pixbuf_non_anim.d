@@ -19,16 +19,16 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_non_anim_get_type != &gidSymbolNotFound ? gdk_pixbuf_non_anim_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   this(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkPixbufAnimation* _cretval;
-    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

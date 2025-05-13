@@ -23,16 +23,16 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_page_get_type != &gidSymbolNotFound ? gtk_stack_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -172,8 +172,8 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_stack_page_get_child(cast(GtkStackPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)cPtr);
+    _cretval = gtk_stack_page_get_icon_name(cast(GtkStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -196,7 +196,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)cPtr);
+    _cretval = gtk_stack_page_get_name(cast(GtkStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -209,7 +209,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_needs_attention(cast(GtkStackPage*)cPtr);
+    _retval = gtk_stack_page_get_needs_attention(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)cPtr);
+    _cretval = gtk_stack_page_get_title(cast(GtkStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -232,7 +232,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_use_underline(cast(GtkStackPage*)cPtr);
+    _retval = gtk_stack_page_get_use_underline(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_stack_page_get_visible(cast(GtkStackPage*)cPtr);
+    _retval = gtk_stack_page_get_visible(cast(GtkStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setIconName(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
-    gtk_stack_page_set_icon_name(cast(GtkStackPage*)cPtr, _setting);
+    gtk_stack_page_set_icon_name(cast(GtkStackPage*)this._cPtr, _setting);
   }
 
   /**
@@ -271,7 +271,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setName(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
-    gtk_stack_page_set_name(cast(GtkStackPage*)cPtr, _setting);
+    gtk_stack_page_set_name(cast(GtkStackPage*)this._cPtr, _setting);
   }
 
   /**
@@ -282,7 +282,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setNeedsAttention(bool setting)
   {
-    gtk_stack_page_set_needs_attention(cast(GtkStackPage*)cPtr, setting);
+    gtk_stack_page_set_needs_attention(cast(GtkStackPage*)this._cPtr, setting);
   }
 
   /**
@@ -294,7 +294,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setTitle(string setting)
   {
     const(char)* _setting = setting.toCString(No.Alloc);
-    gtk_stack_page_set_title(cast(GtkStackPage*)cPtr, _setting);
+    gtk_stack_page_set_title(cast(GtkStackPage*)this._cPtr, _setting);
   }
 
   /**
@@ -305,7 +305,7 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setUseUnderline(bool setting)
   {
-    gtk_stack_page_set_use_underline(cast(GtkStackPage*)cPtr, setting);
+    gtk_stack_page_set_use_underline(cast(GtkStackPage*)this._cPtr, setting);
   }
 
   /**
@@ -316,6 +316,6 @@ class StackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setVisible(bool visible)
   {
-    gtk_stack_page_set_visible(cast(GtkStackPage*)cPtr, visible);
+    gtk_stack_page_set_visible(cast(GtkStackPage*)this._cPtr, visible);
   }
 }

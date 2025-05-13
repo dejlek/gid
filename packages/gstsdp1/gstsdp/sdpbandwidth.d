@@ -27,7 +27,7 @@ class SDPBandwidth
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class SDPBandwidth
   */
   @property string bwtype()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
+    return cToD!(string)(cast(void*)(cast(GstSDPBandwidth*)this._cPtr).bwtype);
   }
 
   /**
@@ -48,8 +48,8 @@ class SDPBandwidth
   */
   @property void bwtype(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)cPtr).bwtype);
-    dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)cPtr).bwtype);
+    cValueFree!(string)(cast(void*)(cast(GstSDPBandwidth*)this._cPtr).bwtype);
+    dToC(propval, cast(void*)&(cast(GstSDPBandwidth*)this._cPtr).bwtype);
   }
 
   /**
@@ -58,7 +58,7 @@ class SDPBandwidth
   */
   @property uint bandwidth()
   {
-    return (cast(GstSDPBandwidth*)cPtr).bandwidth;
+    return (cast(GstSDPBandwidth*)this._cPtr).bandwidth;
   }
 
   /**
@@ -68,7 +68,7 @@ class SDPBandwidth
   */
   @property void bandwidth(uint propval)
   {
-    (cast(GstSDPBandwidth*)cPtr).bandwidth = propval;
+    (cast(GstSDPBandwidth*)this._cPtr).bandwidth = propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class SDPBandwidth
   gstsdp.types.SDPResult clear()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_bandwidth_clear(cast(GstSDPBandwidth*)cPtr);
+    _cretval = gst_sdp_bandwidth_clear(cast(GstSDPBandwidth*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -95,7 +95,7 @@ class SDPBandwidth
   {
     GstSDPResult _cretval;
     const(char)* _bwtype = bwtype.toCString(No.Alloc);
-    _cretval = gst_sdp_bandwidth_set(cast(GstSDPBandwidth*)cPtr, _bwtype, bandwidth);
+    _cretval = gst_sdp_bandwidth_set(cast(GstSDPBandwidth*)this._cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

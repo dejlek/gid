@@ -29,7 +29,7 @@ class AncillaryMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class AncillaryMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)this._cPtr).meta);
   }
 
   /**
@@ -49,7 +49,7 @@ class AncillaryMeta
   */
   @property gstvideo.types.AncillaryMetaField field()
   {
-    return cast(gstvideo.types.AncillaryMetaField)(cast(GstAncillaryMeta*)cPtr).field;
+    return cast(gstvideo.types.AncillaryMetaField)(cast(GstAncillaryMeta*)this._cPtr).field;
   }
 
   /**
@@ -59,7 +59,7 @@ class AncillaryMeta
   */
   @property void field(gstvideo.types.AncillaryMetaField propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).field = cast(GstAncillaryMetaField)propval;
+    (cast(GstAncillaryMeta*)this._cPtr).field = cast(GstAncillaryMetaField)propval;
   }
 
   /**
@@ -70,7 +70,7 @@ class AncillaryMeta
   */
   @property bool cNotYChannel()
   {
-    return (cast(GstAncillaryMeta*)cPtr).cNotYChannel;
+    return (cast(GstAncillaryMeta*)this._cPtr).cNotYChannel;
   }
 
   /**
@@ -82,7 +82,7 @@ class AncillaryMeta
   */
   @property void cNotYChannel(bool propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).cNotYChannel = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).cNotYChannel = propval;
   }
 
   /**
@@ -93,7 +93,7 @@ class AncillaryMeta
   */
   @property ushort line()
   {
-    return (cast(GstAncillaryMeta*)cPtr).line;
+    return (cast(GstAncillaryMeta*)this._cPtr).line;
   }
 
   /**
@@ -105,7 +105,7 @@ class AncillaryMeta
   */
   @property void line(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).line = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).line = propval;
   }
 
   /**
@@ -119,7 +119,7 @@ class AncillaryMeta
   */
   @property ushort offset()
   {
-    return (cast(GstAncillaryMeta*)cPtr).offset;
+    return (cast(GstAncillaryMeta*)this._cPtr).offset;
   }
 
   /**
@@ -134,7 +134,7 @@ class AncillaryMeta
   */
   @property void offset(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).offset = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).offset = propval;
   }
 
   /**
@@ -143,7 +143,7 @@ class AncillaryMeta
   */
   @property ushort DID()
   {
-    return (cast(GstAncillaryMeta*)cPtr).DID;
+    return (cast(GstAncillaryMeta*)this._cPtr).DID;
   }
 
   /**
@@ -153,7 +153,7 @@ class AncillaryMeta
   */
   @property void DID(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).DID = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).DID = propval;
   }
 
   /**
@@ -163,7 +163,7 @@ class AncillaryMeta
   */
   @property ushort SDIDBlockNumber()
   {
-    return (cast(GstAncillaryMeta*)cPtr).SDIDBlockNumber;
+    return (cast(GstAncillaryMeta*)this._cPtr).SDIDBlockNumber;
   }
 
   /**
@@ -174,7 +174,7 @@ class AncillaryMeta
   */
   @property void SDIDBlockNumber(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).SDIDBlockNumber = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).SDIDBlockNumber = propval;
   }
 
   /**
@@ -183,7 +183,7 @@ class AncillaryMeta
   */
   @property ushort dataCount()
   {
-    return (cast(GstAncillaryMeta*)cPtr).dataCount;
+    return (cast(GstAncillaryMeta*)this._cPtr).dataCount;
   }
 
   /**
@@ -193,7 +193,7 @@ class AncillaryMeta
   */
   @property void dataCount(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).dataCount = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).dataCount = propval;
   }
 
   /**
@@ -202,7 +202,7 @@ class AncillaryMeta
   */
   @property ushort checksum()
   {
-    return (cast(GstAncillaryMeta*)cPtr).checksum;
+    return (cast(GstAncillaryMeta*)this._cPtr).checksum;
   }
 
   /**
@@ -212,7 +212,7 @@ class AncillaryMeta
   */
   @property void checksum(ushort propval)
   {
-    (cast(GstAncillaryMeta*)cPtr).checksum = propval;
+    (cast(GstAncillaryMeta*)this._cPtr).checksum = propval;
   }
 
   /** */

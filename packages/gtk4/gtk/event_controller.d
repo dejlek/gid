@@ -35,16 +35,16 @@ class EventController : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_get_type != &gidSymbolNotFound ? gtk_event_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -129,7 +129,7 @@ class EventController : gobject.object.ObjectWrap
   gdk.event.Event getCurrentEvent()
   {
     GdkEvent* _cretval;
-    _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)cPtr);
+    _cretval = gtk_event_controller_get_current_event(cast(GtkEventController*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -145,8 +145,8 @@ class EventController : gobject.object.ObjectWrap
   gdk.device.Device getCurrentEventDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gtk_event_controller_get_current_event_device(cast(GtkEventController*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class EventController : gobject.object.ObjectWrap
   gdk.types.ModifierType getCurrentEventState()
   {
     GdkModifierType _cretval;
-    _cretval = gtk_event_controller_get_current_event_state(cast(GtkEventController*)cPtr);
+    _cretval = gtk_event_controller_get_current_event_state(cast(GtkEventController*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -175,7 +175,7 @@ class EventController : gobject.object.ObjectWrap
   uint getCurrentEventTime()
   {
     uint _retval;
-    _retval = gtk_event_controller_get_current_event_time(cast(GtkEventController*)cPtr);
+    _retval = gtk_event_controller_get_current_event_time(cast(GtkEventController*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class EventController : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_event_controller_get_name(cast(GtkEventController*)cPtr);
+    _cretval = gtk_event_controller_get_name(cast(GtkEventController*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -198,7 +198,7 @@ class EventController : gobject.object.ObjectWrap
   gtk.types.PropagationLimit getPropagationLimit()
   {
     GtkPropagationLimit _cretval;
-    _cretval = gtk_event_controller_get_propagation_limit(cast(GtkEventController*)cPtr);
+    _cretval = gtk_event_controller_get_propagation_limit(cast(GtkEventController*)this._cPtr);
     gtk.types.PropagationLimit _retval = cast(gtk.types.PropagationLimit)_cretval;
     return _retval;
   }
@@ -210,7 +210,7 @@ class EventController : gobject.object.ObjectWrap
   gtk.types.PropagationPhase getPropagationPhase()
   {
     GtkPropagationPhase _cretval;
-    _cretval = gtk_event_controller_get_propagation_phase(cast(GtkEventController*)cPtr);
+    _cretval = gtk_event_controller_get_propagation_phase(cast(GtkEventController*)this._cPtr);
     gtk.types.PropagationPhase _retval = cast(gtk.types.PropagationPhase)_cretval;
     return _retval;
   }
@@ -222,8 +222,8 @@ class EventController : gobject.object.ObjectWrap
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_event_controller_get_widget(cast(GtkEventController*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class EventController : gobject.object.ObjectWrap
   */
   void reset()
   {
-    gtk_event_controller_reset(cast(GtkEventController*)cPtr);
+    gtk_event_controller_reset(cast(GtkEventController*)this._cPtr);
   }
 
   /**
@@ -244,7 +244,7 @@ class EventController : gobject.object.ObjectWrap
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_event_controller_set_name(cast(GtkEventController*)cPtr, _name);
+    gtk_event_controller_set_name(cast(GtkEventController*)this._cPtr, _name);
   }
 
   /**
@@ -259,7 +259,7 @@ class EventController : gobject.object.ObjectWrap
   */
   void setPropagationLimit(gtk.types.PropagationLimit limit)
   {
-    gtk_event_controller_set_propagation_limit(cast(GtkEventController*)cPtr, limit);
+    gtk_event_controller_set_propagation_limit(cast(GtkEventController*)this._cPtr, limit);
   }
 
   /**
@@ -273,7 +273,7 @@ class EventController : gobject.object.ObjectWrap
   */
   void setPropagationPhase(gtk.types.PropagationPhase phase)
   {
-    gtk_event_controller_set_propagation_phase(cast(GtkEventController*)cPtr, phase);
+    gtk_event_controller_set_propagation_phase(cast(GtkEventController*)this._cPtr, phase);
   }
 
   /**
@@ -285,6 +285,6 @@ class EventController : gobject.object.ObjectWrap
   void setStaticName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_event_controller_set_static_name(cast(GtkEventController*)cPtr, _name);
+    gtk_event_controller_set_static_name(cast(GtkEventController*)this._cPtr, _name);
   }
 }

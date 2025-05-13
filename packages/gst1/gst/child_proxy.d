@@ -30,7 +30,7 @@ interface ChildProxy
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_child_proxy_get_type != &gidSymbolNotFound ? gst_child_proxy_get_type() : cast(GType)0;

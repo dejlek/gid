@@ -20,16 +20,16 @@ class FileMetadata : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_file_metadata_get_type != &gidSymbolNotFound ? gparquet_file_metadata_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class FileMetadata : gobject.object.ObjectWrap
   bool canDecompress()
   {
     bool _retval;
-    _retval = gparquet_file_metadata_can_decompress(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_can_decompress(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class FileMetadata : gobject.object.ObjectWrap
   bool equal(parquet.file_metadata.FileMetadata otherMetadata)
   {
     bool _retval;
-    _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata.cPtr(No.Dup) : null);
+    _retval = gparquet_file_metadata_equal(cast(GParquetFileMetadata*)this._cPtr, otherMetadata ? cast(GParquetFileMetadata*)otherMetadata._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class FileMetadata : gobject.object.ObjectWrap
   string getCreatedBy()
   {
     const(char)* _cretval;
-    _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)cPtr);
+    _cretval = gparquet_file_metadata_get_created_by(cast(GParquetFileMetadata*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -67,7 +67,7 @@ class FileMetadata : gobject.object.ObjectWrap
   int getNColumns()
   {
     int _retval;
-    _retval = gparquet_file_metadata_get_n_columns(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_get_n_columns(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class FileMetadata : gobject.object.ObjectWrap
   int getNRowGroups()
   {
     int _retval;
-    _retval = gparquet_file_metadata_get_n_row_groups(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_get_n_row_groups(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class FileMetadata : gobject.object.ObjectWrap
   long getNRows()
   {
     long _retval;
-    _retval = gparquet_file_metadata_get_n_rows(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_get_n_rows(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class FileMetadata : gobject.object.ObjectWrap
   int getNSchemaElements()
   {
     int _retval;
-    _retval = gparquet_file_metadata_get_n_schema_elements(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_get_n_schema_elements(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 
@@ -100,10 +100,10 @@ class FileMetadata : gobject.object.ObjectWrap
   {
     GParquetRowGroupMetadata* _cretval;
     GError *_err;
-    _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)cPtr, index, &_err);
+    _cretval = gparquet_file_metadata_get_row_group(cast(GParquetFileMetadata*)this._cPtr, index, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(parquet.row_group_metadata.RowGroupMetadata)(cast(GParquetRowGroupMetadata*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class FileMetadata : gobject.object.ObjectWrap
   uint getSize()
   {
     uint _retval;
-    _retval = gparquet_file_metadata_get_size(cast(GParquetFileMetadata*)cPtr);
+    _retval = gparquet_file_metadata_get_size(cast(GParquetFileMetadata*)this._cPtr);
     return _retval;
   }
 }

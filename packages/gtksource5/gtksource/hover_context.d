@@ -33,16 +33,16 @@ class HoverContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_context_get_type != &gidSymbolNotFound ? gtk_source_hover_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class HoverContext : gobject.object.ObjectWrap
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
-    _retval = gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)cPtr, &_begin, &_end);
+    _retval = gtk_source_hover_context_get_bounds(cast(GtkSourceHoverContext*)this._cPtr, &_begin, &_end);
     begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -83,8 +83,8 @@ class HoverContext : gobject.object.ObjectWrap
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_hover_context_get_buffer(cast(GtkSourceHoverContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class HoverContext : gobject.object.ObjectWrap
   bool getIter(gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_source_hover_context_get_iter(cast(GtkSourceHoverContext*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -100,8 +100,8 @@ class HoverContext : gobject.object.ObjectWrap
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_hover_context_get_view(cast(GtkSourceHoverContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 }

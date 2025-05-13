@@ -21,16 +21,16 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_array_builder_get_type != &gidSymbolNotFound ? garrow_list_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowListArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_list_array_builder_new(dataType ? cast(GArrowListDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,7 +55,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_list_array_builder_append(cast(GArrowListArrayBuilder*)cPtr, &_err);
+    _retval = garrow_list_array_builder_append(cast(GArrowListArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_list_array_builder_append_value(cast(GArrowListArrayBuilder*)cPtr, &_err);
+    _retval = garrow_list_array_builder_append_value(cast(GArrowListArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -76,8 +76,8 @@ class ListArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_list_array_builder_get_value_builder(cast(GArrowListArrayBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

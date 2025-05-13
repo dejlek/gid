@@ -27,16 +27,16 @@ class GLUpload : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_upload_get_type != &gidSymbolNotFound ? gst_gl_upload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -49,7 +49,7 @@ class GLUpload : gst.object.ObjectWrap
   this(gstgl.glcontext.GLContext context)
   {
     GstGLUpload* _cretval;
-    _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    _cretval = gst_gl_upload_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -74,7 +74,7 @@ class GLUpload : gst.object.ObjectWrap
   gst.caps.Caps fixateCaps(gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps othercaps)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_upload_fixate_caps(cast(GstGLUpload*)cPtr, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps.cPtr(Yes.Dup) : null);
+    _cretval = gst_gl_upload_fixate_caps(cast(GstGLUpload*)this._cPtr, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, othercaps ? cast(GstCaps*)othercaps._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -84,7 +84,7 @@ class GLUpload : gst.object.ObjectWrap
   {
     GstCaps* _inCaps;
     GstCaps* _outCaps;
-    gst_gl_upload_get_caps(cast(GstGLUpload*)cPtr, &_inCaps, &_outCaps);
+    gst_gl_upload_get_caps(cast(GstGLUpload*)this._cPtr, &_inCaps, &_outCaps);
     inCaps = new gst.caps.Caps(cast(void*)_inCaps, Yes.Take);
     outCaps = new gst.caps.Caps(cast(void*)_outCaps, Yes.Take);
   }
@@ -102,7 +102,7 @@ class GLUpload : gst.object.ObjectWrap
   {
     GstGLUploadReturn _cretval;
     GstBuffer* _outbufPtr;
-    _cretval = gst_gl_upload_perform_with_buffer(cast(GstGLUpload*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, &_outbufPtr);
+    _cretval = gst_gl_upload_perform_with_buffer(cast(GstGLUpload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, &_outbufPtr);
     gstgl.types.GLUploadReturn _retval = cast(gstgl.types.GLUploadReturn)_cretval;
     outbufPtr = new gst.buffer.Buffer(cast(void*)_outbufPtr, Yes.Take);
     return _retval;
@@ -117,7 +117,7 @@ class GLUpload : gst.object.ObjectWrap
   */
   void proposeAllocation(gst.query.Query decideQuery, gst.query.Query query)
   {
-    gst_gl_upload_propose_allocation(cast(GstGLUpload*)cPtr, decideQuery ? cast(GstQuery*)decideQuery.cPtr(No.Dup) : null, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    gst_gl_upload_propose_allocation(cast(GstGLUpload*)this._cPtr, decideQuery ? cast(GstQuery*)decideQuery._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
   }
 
   /**
@@ -131,21 +131,21 @@ class GLUpload : gst.object.ObjectWrap
   bool setCaps(gst.caps.Caps inCaps, gst.caps.Caps outCaps)
   {
     bool _retval;
-    _retval = gst_gl_upload_set_caps(cast(GstGLUpload*)cPtr, inCaps ? cast(GstCaps*)inCaps.cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps.cPtr(No.Dup) : null);
+    _retval = gst_gl_upload_set_caps(cast(GstGLUpload*)this._cPtr, inCaps ? cast(GstCaps*)inCaps._cPtr(No.Dup) : null, outCaps ? cast(GstCaps*)outCaps._cPtr(No.Dup) : null);
     return _retval;
   }
 
   /** */
   void setContext(gstgl.glcontext.GLContext context)
   {
-    gst_gl_upload_set_context(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    gst_gl_upload_set_context(cast(GstGLUpload*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /** */
   gst.caps.Caps transformCaps(gstgl.glcontext.GLContext context, gst.types.PadDirection direction, gst.caps.Caps caps, gst.caps.Caps filter)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _cretval = gst_gl_upload_transform_caps(cast(GstGLUpload*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, direction, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -30,7 +30,7 @@ class IOModuleScope
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -46,6 +46,6 @@ class IOModuleScope
   void block(string basename)
   {
     const(char)* _basename = basename.toCString(No.Alloc);
-    g_io_module_scope_block(cast(GIOModuleScope*)cPtr, _basename);
+    g_io_module_scope_block(cast(GIOModuleScope*)this._cPtr, _basename);
   }
 }

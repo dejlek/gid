@@ -21,16 +21,16 @@ class SessionItem : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_session_item_get_type != &gidSymbolNotFound ? panel_session_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class SessionItem : gobject.object.ObjectWrap
   string getId()
   {
     const(char)* _cretval;
-    _cretval = panel_session_item_get_id(cast(PanelSessionItem*)cPtr);
+    _cretval = panel_session_item_get_id(cast(PanelSessionItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -135,7 +135,7 @@ class SessionItem : gobject.object.ObjectWrap
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_session_item_get_metadata_value(cast(PanelSessionItem*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    _cretval = panel_session_item_get_metadata_value(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -147,7 +147,7 @@ class SessionItem : gobject.object.ObjectWrap
   string getModuleName()
   {
     const(char)* _cretval;
-    _cretval = panel_session_item_get_module_name(cast(PanelSessionItem*)cPtr);
+    _cretval = panel_session_item_get_module_name(cast(PanelSessionItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -159,8 +159,8 @@ class SessionItem : gobject.object.ObjectWrap
   panel.position.Position getPosition()
   {
     PanelPosition* _cretval;
-    _cretval = panel_session_item_get_position(cast(PanelSessionItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, No.Take);
+    _cretval = panel_session_item_get_position(cast(PanelSessionItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class SessionItem : gobject.object.ObjectWrap
   string getTypeHint()
   {
     const(char)* _cretval;
-    _cretval = panel_session_item_get_type_hint(cast(PanelSessionItem*)cPtr);
+    _cretval = panel_session_item_get_type_hint(cast(PanelSessionItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,7 +183,7 @@ class SessionItem : gobject.object.ObjectWrap
   string getWorkspace()
   {
     const(char)* _cretval;
-    _cretval = panel_session_item_get_workspace(cast(PanelSessionItem*)cPtr);
+    _cretval = panel_session_item_get_workspace(cast(PanelSessionItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -205,7 +205,7 @@ class SessionItem : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
     const(GVariantType)* _valueType;
-    _retval = panel_session_item_has_metadata(cast(PanelSessionItem*)cPtr, _key, &_valueType);
+    _retval = panel_session_item_has_metadata(cast(PanelSessionItem*)this._cPtr, _key, &_valueType);
     valueType = new glib.variant_type.VariantType(cast(void*)_valueType, Yes.Take);
     return _retval;
   }
@@ -223,7 +223,7 @@ class SessionItem : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_session_item_has_metadata_with_type(cast(PanelSessionItem*)cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    _retval = panel_session_item_has_metadata_with_type(cast(PanelSessionItem*)this._cPtr, _key, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class SessionItem : gobject.object.ObjectWrap
   void setId(string id = null)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    panel_session_item_set_id(cast(PanelSessionItem*)cPtr, _id);
+    panel_session_item_set_id(cast(PanelSessionItem*)this._cPtr, _id);
   }
 
   /**
@@ -254,7 +254,7 @@ class SessionItem : gobject.object.ObjectWrap
   void setMetadataValue(string key, glib.variant.Variant value = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_session_item_set_metadata_value(cast(PanelSessionItem*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    panel_session_item_set_metadata_value(cast(PanelSessionItem*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -269,7 +269,7 @@ class SessionItem : gobject.object.ObjectWrap
   void setModuleName(string moduleName = null)
   {
     const(char)* _moduleName = moduleName.toCString(No.Alloc);
-    panel_session_item_set_module_name(cast(PanelSessionItem*)cPtr, _moduleName);
+    panel_session_item_set_module_name(cast(PanelSessionItem*)this._cPtr, _moduleName);
   }
 
   /**
@@ -280,7 +280,7 @@ class SessionItem : gobject.object.ObjectWrap
   */
   void setPosition(panel.position.Position position = null)
   {
-    panel_session_item_set_position(cast(PanelSessionItem*)cPtr, position ? cast(PanelPosition*)position.cPtr(No.Dup) : null);
+    panel_session_item_set_position(cast(PanelSessionItem*)this._cPtr, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
   }
 
   /**
@@ -295,7 +295,7 @@ class SessionItem : gobject.object.ObjectWrap
   void setTypeHint(string typeHint = null)
   {
     const(char)* _typeHint = typeHint.toCString(No.Alloc);
-    panel_session_item_set_type_hint(cast(PanelSessionItem*)cPtr, _typeHint);
+    panel_session_item_set_type_hint(cast(PanelSessionItem*)this._cPtr, _typeHint);
   }
 
   /**
@@ -309,6 +309,6 @@ class SessionItem : gobject.object.ObjectWrap
   void setWorkspace(string workspace = null)
   {
     const(char)* _workspace = workspace.toCString(No.Alloc);
-    panel_session_item_set_workspace(cast(PanelSessionItem*)cPtr, _workspace);
+    panel_session_item_set_workspace(cast(PanelSessionItem*)this._cPtr, _workspace);
   }
 }

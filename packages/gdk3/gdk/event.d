@@ -86,7 +86,7 @@ class Event
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -97,7 +97,7 @@ class Event
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEvent*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEvent*)this._cPtr).type;
   }
 
   /**
@@ -107,7 +107,7 @@ class Event
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEvent*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEvent*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class Event
   */
   @property gdk.event_any.EventAny any()
   {
-    return new gdk.event_any.EventAny(cast(GdkEventAny*)&(cast(GdkEvent*)cPtr).any);
+    return new gdk.event_any.EventAny(cast(GdkEventAny*)&(cast(GdkEvent*)this._cPtr).any);
   }
 
   /**
@@ -125,7 +125,7 @@ class Event
   */
   @property gdk.event_expose.EventExpose expose()
   {
-    return new gdk.event_expose.EventExpose(cast(GdkEventExpose*)&(cast(GdkEvent*)cPtr).expose);
+    return new gdk.event_expose.EventExpose(cast(GdkEventExpose*)&(cast(GdkEvent*)this._cPtr).expose);
   }
 
   /**
@@ -134,7 +134,7 @@ class Event
   */
   @property gdk.event_visibility.EventVisibility visibility()
   {
-    return new gdk.event_visibility.EventVisibility(cast(GdkEventVisibility*)&(cast(GdkEvent*)cPtr).visibility);
+    return new gdk.event_visibility.EventVisibility(cast(GdkEventVisibility*)&(cast(GdkEvent*)this._cPtr).visibility);
   }
 
   /**
@@ -143,7 +143,7 @@ class Event
   */
   @property gdk.event_motion.EventMotion motion()
   {
-    return new gdk.event_motion.EventMotion(cast(GdkEventMotion*)&(cast(GdkEvent*)cPtr).motion);
+    return new gdk.event_motion.EventMotion(cast(GdkEventMotion*)&(cast(GdkEvent*)this._cPtr).motion);
   }
 
   /**
@@ -152,7 +152,7 @@ class Event
   */
   @property gdk.event_button.EventButton button()
   {
-    return new gdk.event_button.EventButton(cast(GdkEventButton*)&(cast(GdkEvent*)cPtr).button);
+    return new gdk.event_button.EventButton(cast(GdkEventButton*)&(cast(GdkEvent*)this._cPtr).button);
   }
 
   /**
@@ -161,7 +161,7 @@ class Event
   */
   @property gdk.event_touch.EventTouch touch()
   {
-    return new gdk.event_touch.EventTouch(cast(GdkEventTouch*)&(cast(GdkEvent*)cPtr).touch);
+    return new gdk.event_touch.EventTouch(cast(GdkEventTouch*)&(cast(GdkEvent*)this._cPtr).touch);
   }
 
   /**
@@ -170,7 +170,7 @@ class Event
   */
   @property gdk.event_scroll.EventScroll scroll()
   {
-    return new gdk.event_scroll.EventScroll(cast(GdkEventScroll*)&(cast(GdkEvent*)cPtr).scroll);
+    return new gdk.event_scroll.EventScroll(cast(GdkEventScroll*)&(cast(GdkEvent*)this._cPtr).scroll);
   }
 
   /**
@@ -179,7 +179,7 @@ class Event
   */
   @property gdk.event_key.EventKey key()
   {
-    return new gdk.event_key.EventKey(cast(GdkEventKey*)&(cast(GdkEvent*)cPtr).key);
+    return new gdk.event_key.EventKey(cast(GdkEventKey*)&(cast(GdkEvent*)this._cPtr).key);
   }
 
   /**
@@ -188,7 +188,7 @@ class Event
   */
   @property gdk.event_crossing.EventCrossing crossing()
   {
-    return new gdk.event_crossing.EventCrossing(cast(GdkEventCrossing*)&(cast(GdkEvent*)cPtr).crossing);
+    return new gdk.event_crossing.EventCrossing(cast(GdkEventCrossing*)&(cast(GdkEvent*)this._cPtr).crossing);
   }
 
   /**
@@ -197,7 +197,7 @@ class Event
   */
   @property gdk.event_focus.EventFocus focusChange()
   {
-    return new gdk.event_focus.EventFocus(cast(GdkEventFocus*)&(cast(GdkEvent*)cPtr).focusChange);
+    return new gdk.event_focus.EventFocus(cast(GdkEventFocus*)&(cast(GdkEvent*)this._cPtr).focusChange);
   }
 
   /**
@@ -206,7 +206,7 @@ class Event
   */
   @property gdk.event_configure.EventConfigure configure()
   {
-    return new gdk.event_configure.EventConfigure(cast(GdkEventConfigure*)&(cast(GdkEvent*)cPtr).configure);
+    return new gdk.event_configure.EventConfigure(cast(GdkEventConfigure*)&(cast(GdkEvent*)this._cPtr).configure);
   }
 
   /**
@@ -215,7 +215,7 @@ class Event
   */
   @property gdk.event_property.EventProperty property()
   {
-    return new gdk.event_property.EventProperty(cast(GdkEventProperty*)&(cast(GdkEvent*)cPtr).property);
+    return new gdk.event_property.EventProperty(cast(GdkEventProperty*)&(cast(GdkEvent*)this._cPtr).property);
   }
 
   /**
@@ -224,7 +224,7 @@ class Event
   */
   @property gdk.event_selection.EventSelection selection()
   {
-    return new gdk.event_selection.EventSelection(cast(GdkEventSelection*)&(cast(GdkEvent*)cPtr).selection);
+    return new gdk.event_selection.EventSelection(cast(GdkEventSelection*)&(cast(GdkEvent*)this._cPtr).selection);
   }
 
   /**
@@ -233,7 +233,7 @@ class Event
   */
   @property gdk.event_owner_change.EventOwnerChange ownerChange()
   {
-    return new gdk.event_owner_change.EventOwnerChange(cast(GdkEventOwnerChange*)&(cast(GdkEvent*)cPtr).ownerChange);
+    return new gdk.event_owner_change.EventOwnerChange(cast(GdkEventOwnerChange*)&(cast(GdkEvent*)this._cPtr).ownerChange);
   }
 
   /**
@@ -242,7 +242,7 @@ class Event
   */
   @property gdk.event_proximity.EventProximity proximity()
   {
-    return new gdk.event_proximity.EventProximity(cast(GdkEventProximity*)&(cast(GdkEvent*)cPtr).proximity);
+    return new gdk.event_proximity.EventProximity(cast(GdkEventProximity*)&(cast(GdkEvent*)this._cPtr).proximity);
   }
 
   /**
@@ -251,7 +251,7 @@ class Event
   */
   @property gdk.event_dnd.EventDND dnd()
   {
-    return new gdk.event_dnd.EventDND(cast(GdkEventDND*)&(cast(GdkEvent*)cPtr).dnd);
+    return new gdk.event_dnd.EventDND(cast(GdkEventDND*)&(cast(GdkEvent*)this._cPtr).dnd);
   }
 
   /**
@@ -260,7 +260,7 @@ class Event
   */
   @property gdk.event_window_state.EventWindowState windowState()
   {
-    return new gdk.event_window_state.EventWindowState(cast(GdkEventWindowState*)&(cast(GdkEvent*)cPtr).windowState);
+    return new gdk.event_window_state.EventWindowState(cast(GdkEventWindowState*)&(cast(GdkEvent*)this._cPtr).windowState);
   }
 
   /**
@@ -269,7 +269,7 @@ class Event
   */
   @property gdk.event_setting.EventSetting setting()
   {
-    return new gdk.event_setting.EventSetting(cast(GdkEventSetting*)&(cast(GdkEvent*)cPtr).setting);
+    return new gdk.event_setting.EventSetting(cast(GdkEventSetting*)&(cast(GdkEvent*)this._cPtr).setting);
   }
 
   /**
@@ -278,7 +278,7 @@ class Event
   */
   @property gdk.event_grab_broken.EventGrabBroken grabBroken()
   {
-    return new gdk.event_grab_broken.EventGrabBroken(cast(GdkEventGrabBroken*)&(cast(GdkEvent*)cPtr).grabBroken);
+    return new gdk.event_grab_broken.EventGrabBroken(cast(GdkEventGrabBroken*)&(cast(GdkEvent*)this._cPtr).grabBroken);
   }
 
   /**
@@ -287,7 +287,7 @@ class Event
   */
   @property gdk.event_touchpad_swipe.EventTouchpadSwipe touchpadSwipe()
   {
-    return new gdk.event_touchpad_swipe.EventTouchpadSwipe(cast(GdkEventTouchpadSwipe*)&(cast(GdkEvent*)cPtr).touchpadSwipe);
+    return new gdk.event_touchpad_swipe.EventTouchpadSwipe(cast(GdkEventTouchpadSwipe*)&(cast(GdkEvent*)this._cPtr).touchpadSwipe);
   }
 
   /**
@@ -296,7 +296,7 @@ class Event
   */
   @property gdk.event_touchpad_pinch.EventTouchpadPinch touchpadPinch()
   {
-    return new gdk.event_touchpad_pinch.EventTouchpadPinch(cast(GdkEventTouchpadPinch*)&(cast(GdkEvent*)cPtr).touchpadPinch);
+    return new gdk.event_touchpad_pinch.EventTouchpadPinch(cast(GdkEventTouchpadPinch*)&(cast(GdkEvent*)this._cPtr).touchpadPinch);
   }
 
   /**
@@ -305,7 +305,7 @@ class Event
   */
   @property gdk.event_pad_button.EventPadButton padButton()
   {
-    return new gdk.event_pad_button.EventPadButton(cast(GdkEventPadButton*)&(cast(GdkEvent*)cPtr).padButton);
+    return new gdk.event_pad_button.EventPadButton(cast(GdkEventPadButton*)&(cast(GdkEvent*)this._cPtr).padButton);
   }
 
   /**
@@ -314,7 +314,7 @@ class Event
   */
   @property gdk.event_pad_axis.EventPadAxis padAxis()
   {
-    return new gdk.event_pad_axis.EventPadAxis(cast(GdkEventPadAxis*)&(cast(GdkEvent*)cPtr).padAxis);
+    return new gdk.event_pad_axis.EventPadAxis(cast(GdkEventPadAxis*)&(cast(GdkEvent*)this._cPtr).padAxis);
   }
 
   /**
@@ -323,7 +323,7 @@ class Event
   */
   @property gdk.event_pad_group_mode.EventPadGroupMode padGroupMode()
   {
-    return new gdk.event_pad_group_mode.EventPadGroupMode(cast(GdkEventPadGroupMode*)&(cast(GdkEvent*)cPtr).padGroupMode);
+    return new gdk.event_pad_group_mode.EventPadGroupMode(cast(GdkEventPadGroupMode*)&(cast(GdkEvent*)this._cPtr).padGroupMode);
   }
 
   /**
@@ -350,7 +350,7 @@ class Event
   gdk.event.Event copy()
   {
     GdkEvent* _cretval;
-    _cretval = gdk_event_copy(cast(const(GdkEvent)*)cPtr);
+    _cretval = gdk_event_copy(cast(const(GdkEvent)*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
     return _retval;
   }
@@ -367,7 +367,7 @@ class Event
   bool getAxis(gdk.types.AxisUse axisUse, out double value)
   {
     bool _retval;
-    _retval = gdk_event_get_axis(cast(const(GdkEvent)*)cPtr, axisUse, cast(double*)&value);
+    _retval = gdk_event_get_axis(cast(const(GdkEvent)*)this._cPtr, axisUse, cast(double*)&value);
     return _retval;
   }
 
@@ -381,7 +381,7 @@ class Event
   bool getButton(out uint button)
   {
     bool _retval;
-    _retval = gdk_event_get_button(cast(const(GdkEvent)*)cPtr, cast(uint*)&button);
+    _retval = gdk_event_get_button(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&button);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class Event
   bool getClickCount(out uint clickCount)
   {
     bool _retval;
-    _retval = gdk_event_get_click_count(cast(const(GdkEvent)*)cPtr, cast(uint*)&clickCount);
+    _retval = gdk_event_get_click_count(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&clickCount);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class Event
   bool getCoords(out double xWin, out double yWin)
   {
     bool _retval;
-    _retval = gdk_event_get_coords(cast(const(GdkEvent)*)cPtr, cast(double*)&xWin, cast(double*)&yWin);
+    _retval = gdk_event_get_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xWin, cast(double*)&yWin);
     return _retval;
   }
 
@@ -422,8 +422,8 @@ class Event
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_event_get_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_event_get_device(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -441,8 +441,8 @@ class Event
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
-    _cretval = gdk_event_get_device_tool(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    _cretval = gdk_event_get_device_tool(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -455,7 +455,7 @@ class Event
   gdk.event_sequence.EventSequence getEventSequence()
   {
     GdkEventSequence* _cretval;
-    _cretval = gdk_event_get_event_sequence(cast(const(GdkEvent)*)cPtr);
+    _cretval = gdk_event_get_event_sequence(cast(const(GdkEvent)*)this._cPtr);
     auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -467,7 +467,7 @@ class Event
   gdk.types.EventType getEventType()
   {
     GdkEventType _cretval;
-    _cretval = gdk_event_get_event_type(cast(const(GdkEvent)*)cPtr);
+    _cretval = gdk_event_get_event_type(cast(const(GdkEvent)*)this._cPtr);
     gdk.types.EventType _retval = cast(gdk.types.EventType)_cretval;
     return _retval;
   }
@@ -484,7 +484,7 @@ class Event
   bool getKeycode(out ushort keycode)
   {
     bool _retval;
-    _retval = gdk_event_get_keycode(cast(const(GdkEvent)*)cPtr, cast(ushort*)&keycode);
+    _retval = gdk_event_get_keycode(cast(const(GdkEvent)*)this._cPtr, cast(ushort*)&keycode);
     return _retval;
   }
 
@@ -498,7 +498,7 @@ class Event
   bool getKeyval(out uint keyval)
   {
     bool _retval;
-    _retval = gdk_event_get_keyval(cast(const(GdkEvent)*)cPtr, cast(uint*)&keyval);
+    _retval = gdk_event_get_keyval(cast(const(GdkEvent)*)this._cPtr, cast(uint*)&keyval);
     return _retval;
   }
 
@@ -511,7 +511,7 @@ class Event
   bool getPointerEmulated()
   {
     bool _retval;
-    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)cPtr);
+    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class Event
   bool getRootCoords(out double xRoot, out double yRoot)
   {
     bool _retval;
-    _retval = gdk_event_get_root_coords(cast(const(GdkEvent)*)cPtr, cast(double*)&xRoot, cast(double*)&yRoot);
+    _retval = gdk_event_get_root_coords(cast(const(GdkEvent)*)this._cPtr, cast(double*)&xRoot, cast(double*)&yRoot);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class Event
   int getScancode()
   {
     int _retval;
-    _retval = gdk_event_get_scancode(cast(GdkEvent*)cPtr);
+    _retval = gdk_event_get_scancode(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -558,8 +558,8 @@ class Event
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gdk_event_get_screen(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gdk_event_get_screen(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class Event
   bool getScrollDeltas(out double deltaX, out double deltaY)
   {
     bool _retval;
-    _retval = gdk_event_get_scroll_deltas(cast(const(GdkEvent)*)cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
+    _retval = gdk_event_get_scroll_deltas(cast(const(GdkEvent)*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
     return _retval;
   }
 
@@ -629,7 +629,7 @@ class Event
   bool getScrollDirection(out gdk.types.ScrollDirection direction)
   {
     bool _retval;
-    _retval = gdk_event_get_scroll_direction(cast(const(GdkEvent)*)cPtr, &direction);
+    _retval = gdk_event_get_scroll_direction(cast(const(GdkEvent)*)this._cPtr, &direction);
     return _retval;
   }
 
@@ -640,8 +640,8 @@ class Event
   gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
-    _cretval = gdk_event_get_seat(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    _cretval = gdk_event_get_seat(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -660,8 +660,8 @@ class Event
   gdk.device.Device getSourceDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_event_get_source_device(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_event_get_source_device(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Event
   bool getState(out gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gdk_event_get_state(cast(const(GdkEvent)*)cPtr, &state);
+    _retval = gdk_event_get_state(cast(const(GdkEvent)*)this._cPtr, &state);
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class Event
   uint getTime()
   {
     uint _retval;
-    _retval = gdk_event_get_time(cast(const(GdkEvent)*)cPtr);
+    _retval = gdk_event_get_time(cast(const(GdkEvent)*)this._cPtr);
     return _retval;
   }
 
@@ -701,8 +701,8 @@ class Event
   gdk.window.Window getWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_event_get_window(cast(const(GdkEvent)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_event_get_window(cast(const(GdkEvent)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -719,7 +719,7 @@ class Event
   bool isScrollStopEvent()
   {
     bool _retval;
-    _retval = gdk_event_is_scroll_stop_event(cast(const(GdkEvent)*)cPtr);
+    _retval = gdk_event_is_scroll_stop_event(cast(const(GdkEvent)*)this._cPtr);
     return _retval;
   }
 
@@ -730,7 +730,7 @@ class Event
   */
   void put()
   {
-    gdk_event_put(cast(const(GdkEvent)*)cPtr);
+    gdk_event_put(cast(const(GdkEvent)*)this._cPtr);
   }
 
   /**
@@ -743,7 +743,7 @@ class Event
   */
   void setDevice(gdk.device.Device device)
   {
-    gdk_event_set_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gdk_event_set_device(cast(GdkEvent*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -754,7 +754,7 @@ class Event
   */
   void setDeviceTool(gdk.device_tool.DeviceTool tool = null)
   {
-    gdk_event_set_device_tool(cast(GdkEvent*)cPtr, tool ? cast(GdkDeviceTool*)tool.cPtr(No.Dup) : null);
+    gdk_event_set_device_tool(cast(GdkEvent*)this._cPtr, tool ? cast(GdkDeviceTool*)tool._cPtr(No.Dup) : null);
   }
 
   /**
@@ -767,7 +767,7 @@ class Event
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gdk_event_set_screen(cast(GdkEvent*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gdk_event_set_screen(cast(GdkEvent*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
 
   /**
@@ -781,7 +781,7 @@ class Event
   */
   void setSourceDevice(gdk.device.Device device)
   {
-    gdk_event_set_source_device(cast(GdkEvent*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gdk_event_set_source_device(cast(GdkEvent*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -799,7 +799,7 @@ class Event
   bool triggersContextMenu()
   {
     bool _retval;
-    _retval = gdk_event_triggers_context_menu(cast(const(GdkEvent)*)cPtr);
+    _retval = gdk_event_triggers_context_menu(cast(const(GdkEvent)*)this._cPtr);
     return _retval;
   }
 
@@ -884,6 +884,6 @@ class Event
   */
   static void requestMotions(gdk.event_motion.EventMotion event)
   {
-    gdk_event_request_motions(event ? cast(const(GdkEventMotion)*)event.cPtr : null);
+    gdk_event_request_motions(event ? cast(const(GdkEventMotion)*)event._cPtr : null);
   }
 }

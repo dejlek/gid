@@ -28,7 +28,7 @@ class TypeQuery
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class TypeQuery
   */
   @property gobject.types.GType type()
   {
-    return (cast(GTypeQuery*)cPtr).type;
+    return (cast(GTypeQuery*)this._cPtr).type;
   }
 
   /**
@@ -49,7 +49,7 @@ class TypeQuery
   */
   @property void type(gobject.types.GType propval)
   {
-    (cast(GTypeQuery*)cPtr).type = propval;
+    (cast(GTypeQuery*)this._cPtr).type = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class TypeQuery
   */
   @property string typeName()
   {
-    return cToD!(string)(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
+    return cToD!(string)(cast(void*)(cast(GTypeQuery*)this._cPtr).typeName);
   }
 
   /**
@@ -68,8 +68,8 @@ class TypeQuery
   */
   @property void typeName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeQuery*)cPtr).typeName);
-    dToC(propval, cast(void*)&(cast(GTypeQuery*)cPtr).typeName);
+    cValueFree!(string)(cast(void*)(cast(GTypeQuery*)this._cPtr).typeName);
+    dToC(propval, cast(void*)&(cast(GTypeQuery*)this._cPtr).typeName);
   }
 
   /**
@@ -78,7 +78,7 @@ class TypeQuery
   */
   @property uint classSize()
   {
-    return (cast(GTypeQuery*)cPtr).classSize;
+    return (cast(GTypeQuery*)this._cPtr).classSize;
   }
 
   /**
@@ -88,7 +88,7 @@ class TypeQuery
   */
   @property void classSize(uint propval)
   {
-    (cast(GTypeQuery*)cPtr).classSize = propval;
+    (cast(GTypeQuery*)this._cPtr).classSize = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class TypeQuery
   */
   @property uint instanceSize()
   {
-    return (cast(GTypeQuery*)cPtr).instanceSize;
+    return (cast(GTypeQuery*)this._cPtr).instanceSize;
   }
 
   /**
@@ -107,6 +107,6 @@ class TypeQuery
   */
   @property void instanceSize(uint propval)
   {
-    (cast(GTypeQuery*)cPtr).instanceSize = propval;
+    (cast(GTypeQuery*)this._cPtr).instanceSize = propval;
   }
 }

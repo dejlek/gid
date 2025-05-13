@@ -56,7 +56,7 @@ template TableT()
   override bool addColumnSelection(int column)
   {
     bool _retval;
-    _retval = atk_table_add_column_selection(cast(AtkTable*)cPtr, column);
+    _retval = atk_table_add_column_selection(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ template TableT()
   override bool addRowSelection(int row)
   {
     bool _retval;
-    _retval = atk_table_add_row_selection(cast(AtkTable*)cPtr, row);
+    _retval = atk_table_add_row_selection(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -83,8 +83,8 @@ template TableT()
   override atk.object.ObjectWrap getCaption()
   {
     AtkObject* _cretval;
-    _cretval = atk_table_get_caption(cast(AtkTable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_table_get_caption(cast(AtkTable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ template TableT()
   override int getColumnAtIndex(int index)
   {
     int _retval;
-    _retval = atk_table_get_column_at_index(cast(AtkTable*)cPtr, index);
+    _retval = atk_table_get_column_at_index(cast(AtkTable*)this._cPtr, index);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ template TableT()
   override string getColumnDescription(int column)
   {
     const(char)* _cretval;
-    _cretval = atk_table_get_column_description(cast(AtkTable*)cPtr, column);
+    _cretval = atk_table_get_column_description(cast(AtkTable*)this._cPtr, column);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -134,7 +134,7 @@ template TableT()
   override int getColumnExtentAt(int row, int column)
   {
     int _retval;
-    _retval = atk_table_get_column_extent_at(cast(AtkTable*)cPtr, row, column);
+    _retval = atk_table_get_column_extent_at(cast(AtkTable*)this._cPtr, row, column);
     return _retval;
   }
 
@@ -150,8 +150,8 @@ template TableT()
   override atk.object.ObjectWrap getColumnHeader(int column)
   {
     AtkObject* _cretval;
-    _cretval = atk_table_get_column_header(cast(AtkTable*)cPtr, column);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_table_get_column_header(cast(AtkTable*)this._cPtr, column);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ template TableT()
   override int getIndexAt(int row, int column)
   {
     int _retval;
-    _retval = atk_table_get_index_at(cast(AtkTable*)cPtr, row, column);
+    _retval = atk_table_get_index_at(cast(AtkTable*)this._cPtr, row, column);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ template TableT()
   override int getNColumns()
   {
     int _retval;
-    _retval = atk_table_get_n_columns(cast(AtkTable*)cPtr);
+    _retval = atk_table_get_n_columns(cast(AtkTable*)this._cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ template TableT()
   override int getNRows()
   {
     int _retval;
-    _retval = atk_table_get_n_rows(cast(AtkTable*)cPtr);
+    _retval = atk_table_get_n_rows(cast(AtkTable*)this._cPtr);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ template TableT()
   override int getRowAtIndex(int index)
   {
     int _retval;
-    _retval = atk_table_get_row_at_index(cast(AtkTable*)cPtr, index);
+    _retval = atk_table_get_row_at_index(cast(AtkTable*)this._cPtr, index);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ template TableT()
   override string getRowDescription(int row)
   {
     const(char)* _cretval;
-    _cretval = atk_table_get_row_description(cast(AtkTable*)cPtr, row);
+    _cretval = atk_table_get_row_description(cast(AtkTable*)this._cPtr, row);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -246,7 +246,7 @@ template TableT()
   override int getRowExtentAt(int row, int column)
   {
     int _retval;
-    _retval = atk_table_get_row_extent_at(cast(AtkTable*)cPtr, row, column);
+    _retval = atk_table_get_row_extent_at(cast(AtkTable*)this._cPtr, row, column);
     return _retval;
   }
 
@@ -262,8 +262,8 @@ template TableT()
   override atk.object.ObjectWrap getRowHeader(int row)
   {
     AtkObject* _cretval;
-    _cretval = atk_table_get_row_header(cast(AtkTable*)cPtr, row);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_table_get_row_header(cast(AtkTable*)this._cPtr, row);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ template TableT()
   override void getSelectedColumns(out int[] selected)
   {
     int* _selected;
-    auto _ret_length = atk_table_get_selected_columns(cast(AtkTable*)cPtr, &_selected);
+    auto _ret_length = atk_table_get_selected_columns(cast(AtkTable*)this._cPtr, &_selected);
     selected.length = _ret_length;
     selected[0 .. $] = (cast(int*)_selected)[0 .. _ret_length];
     gFree(cast(void*)_selected);
@@ -293,7 +293,7 @@ template TableT()
   override void getSelectedRows(out int[] selected)
   {
     int* _selected;
-    auto _ret_length = atk_table_get_selected_rows(cast(AtkTable*)cPtr, &_selected);
+    auto _ret_length = atk_table_get_selected_rows(cast(AtkTable*)this._cPtr, &_selected);
     selected.length = _ret_length;
     selected[0 .. $] = (cast(int*)_selected)[0 .. _ret_length];
     gFree(cast(void*)_selected);
@@ -307,8 +307,8 @@ template TableT()
   override atk.object.ObjectWrap getSummary()
   {
     AtkObject* _cretval;
-    _cretval = atk_table_get_summary(cast(AtkTable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_table_get_summary(cast(AtkTable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ template TableT()
   override bool isColumnSelected(int column)
   {
     bool _retval;
-    _retval = atk_table_is_column_selected(cast(AtkTable*)cPtr, column);
+    _retval = atk_table_is_column_selected(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ template TableT()
   override bool isRowSelected(int row)
   {
     bool _retval;
-    _retval = atk_table_is_row_selected(cast(AtkTable*)cPtr, row);
+    _retval = atk_table_is_row_selected(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ template TableT()
   override bool isSelected(int row, int column)
   {
     bool _retval;
-    _retval = atk_table_is_selected(cast(AtkTable*)cPtr, row, column);
+    _retval = atk_table_is_selected(cast(AtkTable*)this._cPtr, row, column);
     return _retval;
   }
 
@@ -374,8 +374,8 @@ template TableT()
   override atk.object.ObjectWrap refAt(int row, int column)
   {
     AtkObject* _cretval;
-    _cretval = atk_table_ref_at(cast(AtkTable*)cPtr, row, column);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_table_ref_at(cast(AtkTable*)this._cPtr, row, column);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ template TableT()
   override bool removeColumnSelection(int column)
   {
     bool _retval;
-    _retval = atk_table_remove_column_selection(cast(AtkTable*)cPtr, column);
+    _retval = atk_table_remove_column_selection(cast(AtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ template TableT()
   override bool removeRowSelection(int row)
   {
     bool _retval;
-    _retval = atk_table_remove_row_selection(cast(AtkTable*)cPtr, row);
+    _retval = atk_table_remove_row_selection(cast(AtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ template TableT()
   */
   override void setCaption(atk.object.ObjectWrap caption)
   {
-    atk_table_set_caption(cast(AtkTable*)cPtr, caption ? cast(AtkObject*)caption.cPtr(No.Dup) : null);
+    atk_table_set_caption(cast(AtkTable*)this._cPtr, caption ? cast(AtkObject*)caption._cPtr(No.Dup) : null);
   }
 
   /**
@@ -431,7 +431,7 @@ template TableT()
   override void setColumnDescription(int column, string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    atk_table_set_column_description(cast(AtkTable*)cPtr, column, _description);
+    atk_table_set_column_description(cast(AtkTable*)this._cPtr, column, _description);
   }
 
   /**
@@ -443,7 +443,7 @@ template TableT()
   */
   override void setColumnHeader(int column, atk.object.ObjectWrap header)
   {
-    atk_table_set_column_header(cast(AtkTable*)cPtr, column, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
+    atk_table_set_column_header(cast(AtkTable*)this._cPtr, column, header ? cast(AtkObject*)header._cPtr(No.Dup) : null);
   }
 
   /**
@@ -457,7 +457,7 @@ template TableT()
   override void setRowDescription(int row, string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    atk_table_set_row_description(cast(AtkTable*)cPtr, row, _description);
+    atk_table_set_row_description(cast(AtkTable*)this._cPtr, row, _description);
   }
 
   /**
@@ -469,7 +469,7 @@ template TableT()
   */
   override void setRowHeader(int row, atk.object.ObjectWrap header)
   {
-    atk_table_set_row_header(cast(AtkTable*)cPtr, row, header ? cast(AtkObject*)header.cPtr(No.Dup) : null);
+    atk_table_set_row_header(cast(AtkTable*)this._cPtr, row, header ? cast(AtkObject*)header._cPtr(No.Dup) : null);
   }
 
   /**
@@ -481,7 +481,7 @@ template TableT()
   */
   override void setSummary(atk.object.ObjectWrap accessible)
   {
-    atk_table_set_summary(cast(AtkTable*)cPtr, accessible ? cast(AtkObject*)accessible.cPtr(No.Dup) : null);
+    atk_table_set_summary(cast(AtkTable*)this._cPtr, accessible ? cast(AtkObject*)accessible._cPtr(No.Dup) : null);
   }
 
   /**

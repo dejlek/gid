@@ -26,7 +26,7 @@ class RTSPTimeRange
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class RTSPTimeRange
   */
   @property gstrtsp.types.RTSPRangeUnit unit()
   {
-    return cast(gstrtsp.types.RTSPRangeUnit)(cast(GstRTSPTimeRange*)cPtr).unit;
+    return cast(gstrtsp.types.RTSPRangeUnit)(cast(GstRTSPTimeRange*)this._cPtr).unit;
   }
 
   /**
@@ -47,7 +47,7 @@ class RTSPTimeRange
   */
   @property void unit(gstrtsp.types.RTSPRangeUnit propval)
   {
-    (cast(GstRTSPTimeRange*)cPtr).unit = cast(GstRTSPRangeUnit)propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).unit = cast(GstRTSPRangeUnit)propval;
   }
 
   /**
@@ -56,7 +56,7 @@ class RTSPTimeRange
   */
   @property gstrtsp.types.RTSPTime min()
   {
-    return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)cPtr).min);
+    return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).min);
   }
 
   /**
@@ -66,7 +66,7 @@ class RTSPTimeRange
   */
   @property void min(gstrtsp.types.RTSPTime propval)
   {
-    (cast(GstRTSPTimeRange*)cPtr).min = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).min = propval;
   }
 
   /**
@@ -75,7 +75,7 @@ class RTSPTimeRange
   */
   @property gstrtsp.types.RTSPTime max()
   {
-    return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)cPtr).max);
+    return cToD!(gstrtsp.types.RTSPTime)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).max);
   }
 
   /**
@@ -85,7 +85,7 @@ class RTSPTimeRange
   */
   @property void max(gstrtsp.types.RTSPTime propval)
   {
-    (cast(GstRTSPTimeRange*)cPtr).max = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).max = propval;
   }
 
   /**
@@ -94,7 +94,7 @@ class RTSPTimeRange
   */
   @property gstrtsp.types.RTSPTime2 min2()
   {
-    return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)cPtr).min2);
+    return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).min2);
   }
 
   /**
@@ -104,7 +104,7 @@ class RTSPTimeRange
   */
   @property void min2(gstrtsp.types.RTSPTime2 propval)
   {
-    (cast(GstRTSPTimeRange*)cPtr).min2 = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).min2 = propval;
   }
 
   /**
@@ -113,7 +113,7 @@ class RTSPTimeRange
   */
   @property gstrtsp.types.RTSPTime2 max2()
   {
-    return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)cPtr).max2);
+    return cToD!(gstrtsp.types.RTSPTime2)(cast(void*)&(cast(GstRTSPTimeRange*)this._cPtr).max2);
   }
 
   /**
@@ -123,6 +123,6 @@ class RTSPTimeRange
   */
   @property void max2(gstrtsp.types.RTSPTime2 propval)
   {
-    (cast(GstRTSPTimeRange*)cPtr).max2 = propval;
+    (cast(GstRTSPTimeRange*)this._cPtr).max2 = propval;
   }
 }

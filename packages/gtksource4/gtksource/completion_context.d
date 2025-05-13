@@ -23,16 +23,16 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   {
     auto _proposals = gListFromD!(gtksource.completion_proposal.CompletionProposal)(proposals);
     scope(exit) containerFree!(GList*, gtksource.completion_proposal.CompletionProposal, GidOwnership.None)(_proposals);
-    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, _proposals, finished);
+    gtk_source_completion_context_add_proposals(cast(GtkSourceCompletionContext*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, _proposals, finished);
   }
 
   /**
@@ -106,7 +106,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   gtksource.types.CompletionActivation getActivation()
   {
     GtkSourceCompletionActivation _cretval;
-    _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)cPtr);
+    _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)this._cPtr);
     gtksource.types.CompletionActivation _retval = cast(gtksource.types.CompletionActivation)_cretval;
     return _retval;
   }
@@ -123,7 +123,7 @@ class CompletionContext : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)cPtr, &_iter);
+    _retval = gtk_source_completion_context_get_iter(cast(GtkSourceCompletionContext*)this._cPtr, &_iter);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }

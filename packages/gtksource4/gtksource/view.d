@@ -34,16 +34,16 @@ class View : gtk.text_view.TextView
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_view_get_type != &gidSymbolNotFound ? gtk_source_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -318,8 +318,8 @@ class View : gtk.text_view.TextView
   static gtksource.view.View newWithBuffer(gtksource.buffer.Buffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_source_view_new_with_buffer(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class View : gtk.text_view.TextView
   bool getAutoIndent()
   {
     bool _retval;
-    _retval = gtk_source_view_get_auto_indent(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_auto_indent(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class View : gtk.text_view.TextView
   gtksource.types.BackgroundPatternType getBackgroundPattern()
   {
     GtkSourceBackgroundPatternType _cretval;
-    _cretval = gtk_source_view_get_background_pattern(cast(GtkSourceView*)cPtr);
+    _cretval = gtk_source_view_get_background_pattern(cast(GtkSourceView*)this._cPtr);
     gtksource.types.BackgroundPatternType _retval = cast(gtksource.types.BackgroundPatternType)_cretval;
     return _retval;
   }
@@ -356,8 +356,8 @@ class View : gtk.text_view.TextView
   gtksource.completion.Completion getCompletion()
   {
     GtkSourceCompletion* _cretval;
-    _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
+    _cretval = gtk_source_view_get_completion(cast(GtkSourceView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -374,8 +374,8 @@ class View : gtk.text_view.TextView
   gtksource.gutter.Gutter getGutter(gtk.types.TextWindowType windowType)
   {
     GtkSourceGutter* _cretval;
-    _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)cPtr, windowType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
+    _cretval = gtk_source_view_get_gutter(cast(GtkSourceView*)this._cPtr, windowType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.gutter.Gutter)(cast(GtkSourceGutter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class View : gtk.text_view.TextView
   bool getHighlightCurrentLine()
   {
     bool _retval;
-    _retval = gtk_source_view_get_highlight_current_line(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_highlight_current_line(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class View : gtk.text_view.TextView
   bool getIndentOnTab()
   {
     bool _retval;
-    _retval = gtk_source_view_get_indent_on_tab(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_indent_on_tab(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class View : gtk.text_view.TextView
   int getIndentWidth()
   {
     int _retval;
-    _retval = gtk_source_view_get_indent_width(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_indent_width(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class View : gtk.text_view.TextView
   bool getInsertSpacesInsteadOfTabs()
   {
     bool _retval;
-    _retval = gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -439,8 +439,8 @@ class View : gtk.text_view.TextView
   {
     GtkSourceMarkAttributes* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)cPtr, _category, cast(int*)&priority);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
+    _cretval = gtk_source_view_get_mark_attributes(cast(GtkSourceView*)this._cPtr, _category, cast(int*)&priority);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark_attributes.MarkAttributes)(cast(GtkSourceMarkAttributes*)_cretval, No.Take);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class View : gtk.text_view.TextView
   uint getRightMarginPosition()
   {
     uint _retval;
-    _retval = gtk_source_view_get_right_margin_position(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_right_margin_position(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class View : gtk.text_view.TextView
   bool getShowLineMarks()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_line_marks(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_show_line_marks(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class View : gtk.text_view.TextView
   bool getShowLineNumbers()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_line_numbers(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_show_line_numbers(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -484,7 +484,7 @@ class View : gtk.text_view.TextView
   bool getShowRightMargin()
   {
     bool _retval;
-    _retval = gtk_source_view_get_show_right_margin(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_show_right_margin(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -496,7 +496,7 @@ class View : gtk.text_view.TextView
   bool getSmartBackspace()
   {
     bool _retval;
-    _retval = gtk_source_view_get_smart_backspace(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_smart_backspace(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class View : gtk.text_view.TextView
   gtksource.types.SmartHomeEndType getSmartHomeEnd()
   {
     GtkSourceSmartHomeEndType _cretval;
-    _cretval = gtk_source_view_get_smart_home_end(cast(GtkSourceView*)cPtr);
+    _cretval = gtk_source_view_get_smart_home_end(cast(GtkSourceView*)this._cPtr);
     gtksource.types.SmartHomeEndType _retval = cast(gtksource.types.SmartHomeEndType)_cretval;
     return _retval;
   }
@@ -522,8 +522,8 @@ class View : gtk.text_view.TextView
   gtksource.space_drawer.SpaceDrawer getSpaceDrawer()
   {
     GtkSourceSpaceDrawer* _cretval;
-    _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
+    _cretval = gtk_source_view_get_space_drawer(cast(GtkSourceView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.space_drawer.SpaceDrawer)(cast(GtkSourceSpaceDrawer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -534,7 +534,7 @@ class View : gtk.text_view.TextView
   uint getTabWidth()
   {
     uint _retval;
-    _retval = gtk_source_view_get_tab_width(cast(GtkSourceView*)cPtr);
+    _retval = gtk_source_view_get_tab_width(cast(GtkSourceView*)this._cPtr);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class View : gtk.text_view.TextView
   uint getVisualColumn(gtk.text_iter.TextIter iter)
   {
     uint _retval;
-    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_source_view_get_visual_column(cast(GtkSourceView*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -563,7 +563,7 @@ class View : gtk.text_view.TextView
   */
   void indentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_indent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_source_view_indent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -579,7 +579,7 @@ class View : gtk.text_view.TextView
   */
   void setAutoIndent(bool enable)
   {
-    gtk_source_view_set_auto_indent(cast(GtkSourceView*)cPtr, enable);
+    gtk_source_view_set_auto_indent(cast(GtkSourceView*)this._cPtr, enable);
   }
 
   /**
@@ -590,7 +590,7 @@ class View : gtk.text_view.TextView
   */
   void setBackgroundPattern(gtksource.types.BackgroundPatternType backgroundPattern)
   {
-    gtk_source_view_set_background_pattern(cast(GtkSourceView*)cPtr, backgroundPattern);
+    gtk_source_view_set_background_pattern(cast(GtkSourceView*)this._cPtr, backgroundPattern);
   }
 
   /**
@@ -601,7 +601,7 @@ class View : gtk.text_view.TextView
   */
   void setHighlightCurrentLine(bool highlight)
   {
-    gtk_source_view_set_highlight_current_line(cast(GtkSourceView*)cPtr, highlight);
+    gtk_source_view_set_highlight_current_line(cast(GtkSourceView*)this._cPtr, highlight);
   }
 
   /**
@@ -620,7 +620,7 @@ class View : gtk.text_view.TextView
   */
   void setIndentOnTab(bool enable)
   {
-    gtk_source_view_set_indent_on_tab(cast(GtkSourceView*)cPtr, enable);
+    gtk_source_view_set_indent_on_tab(cast(GtkSourceView*)this._cPtr, enable);
   }
 
   /**
@@ -650,7 +650,7 @@ class View : gtk.text_view.TextView
   */
   void setIndentWidth(int width)
   {
-    gtk_source_view_set_indent_width(cast(GtkSourceView*)cPtr, width);
+    gtk_source_view_set_indent_width(cast(GtkSourceView*)this._cPtr, width);
   }
 
   /**
@@ -663,7 +663,7 @@ class View : gtk.text_view.TextView
   */
   void setInsertSpacesInsteadOfTabs(bool enable)
   {
-    gtk_source_view_set_insert_spaces_instead_of_tabs(cast(GtkSourceView*)cPtr, enable);
+    gtk_source_view_set_insert_spaces_instead_of_tabs(cast(GtkSourceView*)this._cPtr, enable);
   }
 
   /**
@@ -677,7 +677,7 @@ class View : gtk.text_view.TextView
   void setMarkAttributes(string category, gtksource.mark_attributes.MarkAttributes attributes, int priority)
   {
     const(char)* _category = category.toCString(No.Alloc);
-    gtk_source_view_set_mark_attributes(cast(GtkSourceView*)cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes.cPtr(No.Dup) : null, priority);
+    gtk_source_view_set_mark_attributes(cast(GtkSourceView*)this._cPtr, _category, attributes ? cast(GtkSourceMarkAttributes*)attributes._cPtr(No.Dup) : null, priority);
   }
 
   /**
@@ -688,7 +688,7 @@ class View : gtk.text_view.TextView
   */
   void setRightMarginPosition(uint pos)
   {
-    gtk_source_view_set_right_margin_position(cast(GtkSourceView*)cPtr, pos);
+    gtk_source_view_set_right_margin_position(cast(GtkSourceView*)this._cPtr, pos);
   }
 
   /**
@@ -699,7 +699,7 @@ class View : gtk.text_view.TextView
   */
   void setShowLineMarks(bool show)
   {
-    gtk_source_view_set_show_line_marks(cast(GtkSourceView*)cPtr, show);
+    gtk_source_view_set_show_line_marks(cast(GtkSourceView*)this._cPtr, show);
   }
 
   /**
@@ -710,7 +710,7 @@ class View : gtk.text_view.TextView
   */
   void setShowLineNumbers(bool show)
   {
-    gtk_source_view_set_show_line_numbers(cast(GtkSourceView*)cPtr, show);
+    gtk_source_view_set_show_line_numbers(cast(GtkSourceView*)this._cPtr, show);
   }
 
   /**
@@ -721,7 +721,7 @@ class View : gtk.text_view.TextView
   */
   void setShowRightMargin(bool show)
   {
-    gtk_source_view_set_show_right_margin(cast(GtkSourceView*)cPtr, show);
+    gtk_source_view_set_show_right_margin(cast(GtkSourceView*)this._cPtr, show);
   }
 
   /**
@@ -733,7 +733,7 @@ class View : gtk.text_view.TextView
   */
   void setSmartBackspace(bool smartBackspace)
   {
-    gtk_source_view_set_smart_backspace(cast(GtkSourceView*)cPtr, smartBackspace);
+    gtk_source_view_set_smart_backspace(cast(GtkSourceView*)this._cPtr, smartBackspace);
   }
 
   /**
@@ -745,7 +745,7 @@ class View : gtk.text_view.TextView
   */
   void setSmartHomeEnd(gtksource.types.SmartHomeEndType smartHomeEnd)
   {
-    gtk_source_view_set_smart_home_end(cast(GtkSourceView*)cPtr, smartHomeEnd);
+    gtk_source_view_set_smart_home_end(cast(GtkSourceView*)this._cPtr, smartHomeEnd);
   }
 
   /**
@@ -758,7 +758,7 @@ class View : gtk.text_view.TextView
   */
   void setTabWidth(uint width)
   {
-    gtk_source_view_set_tab_width(cast(GtkSourceView*)cPtr, width);
+    gtk_source_view_set_tab_width(cast(GtkSourceView*)this._cPtr, width);
   }
 
   /**
@@ -771,7 +771,7 @@ class View : gtk.text_view.TextView
   */
   void unindentLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_view_unindent_lines(cast(GtkSourceView*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_source_view_unindent_lines(cast(GtkSourceView*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**

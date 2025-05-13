@@ -18,16 +18,16 @@ class Partitioning : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_partitioning_get_type != &gidSymbolNotFound ? gadataset_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class Partitioning : gobject.object.ObjectWrap
   {
     GADatasetPartitioning* _cretval;
     _cretval = gadataset_partitioning_create_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.partitioning.Partitioning)(cast(GADatasetPartitioning*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class Partitioning : gobject.object.ObjectWrap
   string getTypeName()
   {
     char* _cretval;
-    _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)cPtr);
+    _cretval = gadataset_partitioning_get_type_name(cast(GADatasetPartitioning*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

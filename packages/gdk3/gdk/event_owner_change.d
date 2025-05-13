@@ -30,7 +30,7 @@ class EventOwnerChange
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class EventOwnerChange
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventOwnerChange*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventOwnerChange*)this._cPtr).type;
   }
 
   /**
@@ -51,7 +51,7 @@ class EventOwnerChange
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventOwnerChange*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class EventOwnerChange
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).window);
   }
 
   /**
@@ -70,8 +70,8 @@ class EventOwnerChange
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).window);
   }
 
   /**
@@ -80,7 +80,7 @@ class EventOwnerChange
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventOwnerChange*)cPtr).sendEvent;
+    return (cast(GdkEventOwnerChange*)this._cPtr).sendEvent;
   }
 
   /**
@@ -90,7 +90,7 @@ class EventOwnerChange
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventOwnerChange*)cPtr).sendEvent = propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class EventOwnerChange
   */
   @property gdk.window.Window owner()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).owner);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).owner);
   }
 
   /**
@@ -109,8 +109,8 @@ class EventOwnerChange
   */
   @property void owner(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)cPtr).owner);
-    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)cPtr).owner);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventOwnerChange*)this._cPtr).owner);
+    dToC(propval, cast(void*)&(cast(GdkEventOwnerChange*)this._cPtr).owner);
   }
 
   /**
@@ -119,7 +119,7 @@ class EventOwnerChange
   */
   @property gdk.types.OwnerChange reason()
   {
-    return cast(gdk.types.OwnerChange)(cast(GdkEventOwnerChange*)cPtr).reason;
+    return cast(gdk.types.OwnerChange)(cast(GdkEventOwnerChange*)this._cPtr).reason;
   }
 
   /**
@@ -129,7 +129,7 @@ class EventOwnerChange
   */
   @property void reason(gdk.types.OwnerChange propval)
   {
-    (cast(GdkEventOwnerChange*)cPtr).reason = cast(GdkOwnerChange)propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).reason = cast(GdkOwnerChange)propval;
   }
 
   /**
@@ -138,7 +138,7 @@ class EventOwnerChange
   */
   @property gdk.atom.Atom selection()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)cPtr).selection);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)this._cPtr).selection);
   }
 
   /**
@@ -147,7 +147,7 @@ class EventOwnerChange
   */
   @property uint time()
   {
-    return (cast(GdkEventOwnerChange*)cPtr).time;
+    return (cast(GdkEventOwnerChange*)this._cPtr).time;
   }
 
   /**
@@ -157,7 +157,7 @@ class EventOwnerChange
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventOwnerChange*)cPtr).time = propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).time = propval;
   }
 
   /**
@@ -167,7 +167,7 @@ class EventOwnerChange
   */
   @property uint selectionTime()
   {
-    return (cast(GdkEventOwnerChange*)cPtr).selectionTime;
+    return (cast(GdkEventOwnerChange*)this._cPtr).selectionTime;
   }
 
   /**
@@ -178,6 +178,6 @@ class EventOwnerChange
   */
   @property void selectionTime(uint propval)
   {
-    (cast(GdkEventOwnerChange*)cPtr).selectionTime = propval;
+    (cast(GdkEventOwnerChange*)this._cPtr).selectionTime = propval;
   }
 }

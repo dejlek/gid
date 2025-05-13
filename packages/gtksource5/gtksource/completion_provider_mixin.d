@@ -46,7 +46,7 @@ template CompletionProviderT()
   */
   override void activate(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal)
   {
-    gtk_source_completion_provider_activate(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null);
+    gtk_source_completion_provider_activate(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -66,7 +66,7 @@ template CompletionProviderT()
   */
   override void display(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_cell.CompletionCell cell)
   {
-    gtk_source_completion_provider_display(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null, cell ? cast(GtkSourceCompletionCell*)cell.cPtr(No.Dup) : null);
+    gtk_source_completion_provider_display(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, cell ? cast(GtkSourceCompletionCell*)cell._cPtr(No.Dup) : null);
   }
 
   /**
@@ -85,7 +85,7 @@ template CompletionProviderT()
   override int getPriority(gtksource.completion_context.CompletionContext context)
   {
     int _retval;
-    _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ template CompletionProviderT()
   override string getTitle()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_provider_get_title(cast(GtkSourceCompletionProvider*)cPtr);
+    _cretval = gtk_source_completion_provider_get_title(cast(GtkSourceCompletionProvider*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -123,7 +123,7 @@ template CompletionProviderT()
   override bool isTrigger(gtk.text_iter.TextIter iter, dchar ch)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, ch);
+    _retval = gtk_source_completion_provider_is_trigger(cast(GtkSourceCompletionProvider*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, ch);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ template CompletionProviderT()
   override bool keyActivates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal, uint keyval, gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_key_activates(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null, keyval, state);
+    _retval = gtk_source_completion_provider_key_activates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, keyval, state);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ template CompletionProviderT()
   override gtksource.completion_proposal.CompletionProposal[] listAlternates(gtksource.completion_context.CompletionContext context, gtksource.completion_proposal.CompletionProposal proposal)
   {
     GPtrArray* _cretval;
-    _cretval = gtk_source_completion_provider_list_alternates(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null);
+    _cretval = gtk_source_completion_provider_list_alternates(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
     auto _retval = gPtrArrayToD!(gtksource.completion_proposal.CompletionProposal, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -185,17 +185,17 @@ template CompletionProviderT()
   */
   override void populateAsync(gtksource.completion_context.CompletionContext context, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_completion_provider_populate_async(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_source_completion_provider_populate_async(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -210,10 +210,10 @@ template CompletionProviderT()
   {
     GListModel* _cretval;
     GError *_err;
-    _cretval = gtk_source_completion_provider_populate_finish(cast(GtkSourceCompletionProvider*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_source_completion_provider_populate_finish(cast(GtkSourceCompletionProvider*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -231,6 +231,6 @@ template CompletionProviderT()
   */
   override void refilter(gtksource.completion_context.CompletionContext context, gio.list_model.ListModel model)
   {
-    gtk_source_completion_provider_refilter(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_source_completion_provider_refilter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 }

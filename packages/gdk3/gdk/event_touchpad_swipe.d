@@ -27,7 +27,7 @@ class EventTouchpadSwipe
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventTouchpadSwipe
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventTouchpadSwipe*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventTouchpadSwipe*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventTouchpadSwipe
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventTouchpadSwipe
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadSwipe*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadSwipe*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventTouchpadSwipe
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadSwipe*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventTouchpadSwipe*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadSwipe*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventTouchpadSwipe*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventTouchpadSwipe
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).sendEvent;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventTouchpadSwipe
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).sendEvent = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventTouchpadSwipe
   */
   @property byte phase()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).phase;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).phase;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventTouchpadSwipe
   */
   @property void phase(byte propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).phase = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).phase = propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class EventTouchpadSwipe
   */
   @property byte nFingers()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).nFingers;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).nFingers;
   }
 
   /**
@@ -125,7 +125,7 @@ class EventTouchpadSwipe
   */
   @property void nFingers(byte propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).nFingers = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).nFingers = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class EventTouchpadSwipe
   */
   @property uint time()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).time;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).time;
   }
 
   /**
@@ -144,7 +144,7 @@ class EventTouchpadSwipe
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).time = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).time = propval;
   }
 
   /**
@@ -153,7 +153,7 @@ class EventTouchpadSwipe
   */
   @property double x()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).x;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).x;
   }
 
   /**
@@ -163,7 +163,7 @@ class EventTouchpadSwipe
   */
   @property void x(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).x = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).x = propval;
   }
 
   /**
@@ -172,7 +172,7 @@ class EventTouchpadSwipe
   */
   @property double y()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).y;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).y;
   }
 
   /**
@@ -182,7 +182,7 @@ class EventTouchpadSwipe
   */
   @property void y(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).y = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).y = propval;
   }
 
   /**
@@ -191,7 +191,7 @@ class EventTouchpadSwipe
   */
   @property double dx()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).dx;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).dx;
   }
 
   /**
@@ -201,7 +201,7 @@ class EventTouchpadSwipe
   */
   @property void dx(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).dx = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).dx = propval;
   }
 
   /**
@@ -210,7 +210,7 @@ class EventTouchpadSwipe
   */
   @property double dy()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).dy;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).dy;
   }
 
   /**
@@ -220,7 +220,7 @@ class EventTouchpadSwipe
   */
   @property void dy(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).dy = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).dy = propval;
   }
 
   /**
@@ -230,7 +230,7 @@ class EventTouchpadSwipe
   */
   @property double xRoot()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).xRoot;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).xRoot;
   }
 
   /**
@@ -241,7 +241,7 @@ class EventTouchpadSwipe
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).xRoot = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -251,7 +251,7 @@ class EventTouchpadSwipe
   */
   @property double yRoot()
   {
-    return (cast(GdkEventTouchpadSwipe*)cPtr).yRoot;
+    return (cast(GdkEventTouchpadSwipe*)this._cPtr).yRoot;
   }
 
   /**
@@ -262,7 +262,7 @@ class EventTouchpadSwipe
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).yRoot = propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).yRoot = propval;
   }
 
   /**
@@ -273,7 +273,7 @@ class EventTouchpadSwipe
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventTouchpadSwipe*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventTouchpadSwipe*)this._cPtr).state;
   }
 
   /**
@@ -285,6 +285,6 @@ class EventTouchpadSwipe
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventTouchpadSwipe*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventTouchpadSwipe*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 }

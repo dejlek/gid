@@ -205,16 +205,16 @@ class AboutWindow : adw.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_about_window_get_type != &gidSymbolNotFound ? adw_about_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -858,7 +858,7 @@ class AboutWindow : adw.window.Window
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     const(char)* _releaseNotesVersion = releaseNotesVersion.toCString(No.Alloc);
     _cretval = adw_about_window_new_from_appdata(_resourcePath, _releaseNotesVersion);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.about_window.AboutWindow)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.about_window.AboutWindow)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -895,7 +895,7 @@ class AboutWindow : adw.window.Window
       _tmppeople ~= s.toCString(No.Alloc);
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
-    adw_about_window_add_acknowledgement_section(cast(AdwAboutWindow*)cPtr, _name, _people);
+    adw_about_window_add_acknowledgement_section(cast(AdwAboutWindow*)this._cPtr, _name, _people);
   }
 
   /**
@@ -929,7 +929,7 @@ class AboutWindow : adw.window.Window
       _tmppeople ~= s.toCString(No.Alloc);
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
-    adw_about_window_add_credit_section(cast(AdwAboutWindow*)cPtr, _name, _people);
+    adw_about_window_add_credit_section(cast(AdwAboutWindow*)this._cPtr, _name, _people);
   }
 
   /**
@@ -985,7 +985,7 @@ class AboutWindow : adw.window.Window
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _copyright = copyright.toCString(No.Alloc);
     const(char)* _license = license.toCString(No.Alloc);
-    adw_about_window_add_legal_section(cast(AdwAboutWindow*)cPtr, _title, _copyright, licenseType, _license);
+    adw_about_window_add_legal_section(cast(AdwAboutWindow*)this._cPtr, _title, _copyright, licenseType, _license);
   }
 
   /**
@@ -1005,7 +1005,7 @@ class AboutWindow : adw.window.Window
   {
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _url = url.toCString(No.Alloc);
-    adw_about_window_add_link(cast(AdwAboutWindow*)cPtr, _title, _url);
+    adw_about_window_add_link(cast(AdwAboutWindow*)this._cPtr, _title, _url);
   }
 
   /**
@@ -1015,7 +1015,7 @@ class AboutWindow : adw.window.Window
   string getApplicationIcon()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_application_icon(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_application_icon(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1027,7 +1027,7 @@ class AboutWindow : adw.window.Window
   string getApplicationName()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_application_name(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_application_name(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1039,7 +1039,7 @@ class AboutWindow : adw.window.Window
   string[] getArtists()
   {
     const(char*)* _cretval;
-    _cretval = adw_about_window_get_artists(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_artists(cast(AdwAboutWindow*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -1061,7 +1061,7 @@ class AboutWindow : adw.window.Window
   string getComments()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_comments(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_comments(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1073,7 +1073,7 @@ class AboutWindow : adw.window.Window
   string getCopyright()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_copyright(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_copyright(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1085,7 +1085,7 @@ class AboutWindow : adw.window.Window
   string getDebugInfo()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_debug_info(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_debug_info(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1097,7 +1097,7 @@ class AboutWindow : adw.window.Window
   string getDebugInfoFilename()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_debug_info_filename(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_debug_info_filename(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1109,7 +1109,7 @@ class AboutWindow : adw.window.Window
   string[] getDesigners()
   {
     const(char*)* _cretval;
-    _cretval = adw_about_window_get_designers(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_designers(cast(AdwAboutWindow*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -1131,7 +1131,7 @@ class AboutWindow : adw.window.Window
   string getDeveloperName()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_developer_name(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_developer_name(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1143,7 +1143,7 @@ class AboutWindow : adw.window.Window
   string[] getDevelopers()
   {
     const(char*)* _cretval;
-    _cretval = adw_about_window_get_developers(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_developers(cast(AdwAboutWindow*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -1165,7 +1165,7 @@ class AboutWindow : adw.window.Window
   string[] getDocumenters()
   {
     const(char*)* _cretval;
-    _cretval = adw_about_window_get_documenters(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_documenters(cast(AdwAboutWindow*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -1187,7 +1187,7 @@ class AboutWindow : adw.window.Window
   string getIssueUrl()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_issue_url(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_issue_url(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1199,7 +1199,7 @@ class AboutWindow : adw.window.Window
   string getLicense()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_license(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_license(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1211,7 +1211,7 @@ class AboutWindow : adw.window.Window
   gtk.types.License getLicenseType()
   {
     GtkLicense _cretval;
-    _cretval = adw_about_window_get_license_type(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_license_type(cast(AdwAboutWindow*)this._cPtr);
     gtk.types.License _retval = cast(gtk.types.License)_cretval;
     return _retval;
   }
@@ -1223,7 +1223,7 @@ class AboutWindow : adw.window.Window
   string getReleaseNotes()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_release_notes(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_release_notes(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1235,7 +1235,7 @@ class AboutWindow : adw.window.Window
   string getReleaseNotesVersion()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_release_notes_version(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_release_notes_version(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1247,7 +1247,7 @@ class AboutWindow : adw.window.Window
   string getSupportUrl()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_support_url(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_support_url(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1259,7 +1259,7 @@ class AboutWindow : adw.window.Window
   string getTranslatorCredits()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_translator_credits(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_translator_credits(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1271,7 +1271,7 @@ class AboutWindow : adw.window.Window
   string getVersion()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_version(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_version(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1283,7 +1283,7 @@ class AboutWindow : adw.window.Window
   string getWebsite()
   {
     const(char)* _cretval;
-    _cretval = adw_about_window_get_website(cast(AdwAboutWindow*)cPtr);
+    _cretval = adw_about_window_get_website(cast(AdwAboutWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1299,7 +1299,7 @@ class AboutWindow : adw.window.Window
   void setApplicationIcon(string applicationIcon)
   {
     const(char)* _applicationIcon = applicationIcon.toCString(No.Alloc);
-    adw_about_window_set_application_icon(cast(AdwAboutWindow*)cPtr, _applicationIcon);
+    adw_about_window_set_application_icon(cast(AdwAboutWindow*)this._cPtr, _applicationIcon);
   }
 
   /**
@@ -1313,7 +1313,7 @@ class AboutWindow : adw.window.Window
   void setApplicationName(string applicationName)
   {
     const(char)* _applicationName = applicationName.toCString(No.Alloc);
-    adw_about_window_set_application_name(cast(AdwAboutWindow*)cPtr, _applicationName);
+    adw_about_window_set_application_name(cast(AdwAboutWindow*)this._cPtr, _applicationName);
   }
 
   /**
@@ -1345,7 +1345,7 @@ class AboutWindow : adw.window.Window
       _tmpartists ~= s.toCString(No.Alloc);
     _tmpartists ~= null;
     const(char*)* _artists = _tmpartists.ptr;
-    adw_about_window_set_artists(cast(AdwAboutWindow*)cPtr, _artists);
+    adw_about_window_set_artists(cast(AdwAboutWindow*)this._cPtr, _artists);
   }
 
   /**
@@ -1362,7 +1362,7 @@ class AboutWindow : adw.window.Window
   void setComments(string comments)
   {
     const(char)* _comments = comments.toCString(No.Alloc);
-    adw_about_window_set_comments(cast(AdwAboutWindow*)cPtr, _comments);
+    adw_about_window_set_comments(cast(AdwAboutWindow*)this._cPtr, _comments);
   }
 
   /**
@@ -1383,7 +1383,7 @@ class AboutWindow : adw.window.Window
   void setCopyright(string copyright)
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
-    adw_about_window_set_copyright(cast(AdwAboutWindow*)cPtr, _copyright);
+    adw_about_window_set_copyright(cast(AdwAboutWindow*)this._cPtr, _copyright);
   }
 
   /**
@@ -1405,7 +1405,7 @@ class AboutWindow : adw.window.Window
   void setDebugInfo(string debugInfo)
   {
     const(char)* _debugInfo = debugInfo.toCString(No.Alloc);
-    adw_about_window_set_debug_info(cast(AdwAboutWindow*)cPtr, _debugInfo);
+    adw_about_window_set_debug_info(cast(AdwAboutWindow*)this._cPtr, _debugInfo);
   }
 
   /**
@@ -1422,7 +1422,7 @@ class AboutWindow : adw.window.Window
   void setDebugInfoFilename(string filename)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    adw_about_window_set_debug_info_filename(cast(AdwAboutWindow*)cPtr, _filename);
+    adw_about_window_set_debug_info_filename(cast(AdwAboutWindow*)this._cPtr, _filename);
   }
 
   /**
@@ -1454,7 +1454,7 @@ class AboutWindow : adw.window.Window
       _tmpdesigners ~= s.toCString(No.Alloc);
     _tmpdesigners ~= null;
     const(char*)* _designers = _tmpdesigners.ptr;
-    adw_about_window_set_designers(cast(AdwAboutWindow*)cPtr, _designers);
+    adw_about_window_set_designers(cast(AdwAboutWindow*)this._cPtr, _designers);
   }
 
   /**
@@ -1473,7 +1473,7 @@ class AboutWindow : adw.window.Window
   void setDeveloperName(string developerName)
   {
     const(char)* _developerName = developerName.toCString(No.Alloc);
-    adw_about_window_set_developer_name(cast(AdwAboutWindow*)cPtr, _developerName);
+    adw_about_window_set_developer_name(cast(AdwAboutWindow*)this._cPtr, _developerName);
   }
 
   /**
@@ -1505,7 +1505,7 @@ class AboutWindow : adw.window.Window
       _tmpdevelopers ~= s.toCString(No.Alloc);
     _tmpdevelopers ~= null;
     const(char*)* _developers = _tmpdevelopers.ptr;
-    adw_about_window_set_developers(cast(AdwAboutWindow*)cPtr, _developers);
+    adw_about_window_set_developers(cast(AdwAboutWindow*)this._cPtr, _developers);
   }
 
   /**
@@ -1537,7 +1537,7 @@ class AboutWindow : adw.window.Window
       _tmpdocumenters ~= s.toCString(No.Alloc);
     _tmpdocumenters ~= null;
     const(char*)* _documenters = _tmpdocumenters.ptr;
-    adw_about_window_set_documenters(cast(AdwAboutWindow*)cPtr, _documenters);
+    adw_about_window_set_documenters(cast(AdwAboutWindow*)this._cPtr, _documenters);
   }
 
   /**
@@ -1551,7 +1551,7 @@ class AboutWindow : adw.window.Window
   void setIssueUrl(string issueUrl)
   {
     const(char)* _issueUrl = issueUrl.toCString(No.Alloc);
-    adw_about_window_set_issue_url(cast(AdwAboutWindow*)cPtr, _issueUrl);
+    adw_about_window_set_issue_url(cast(AdwAboutWindow*)this._cPtr, _issueUrl);
   }
 
   /**
@@ -1577,7 +1577,7 @@ class AboutWindow : adw.window.Window
   void setLicense(string license)
   {
     const(char)* _license = license.toCString(No.Alloc);
-    adw_about_window_set_license(cast(AdwAboutWindow*)cPtr, _license);
+    adw_about_window_set_license(cast(AdwAboutWindow*)this._cPtr, _license);
   }
 
   /**
@@ -1603,7 +1603,7 @@ class AboutWindow : adw.window.Window
   */
   void setLicenseType(gtk.types.License licenseType)
   {
-    adw_about_window_set_license_type(cast(AdwAboutWindow*)cPtr, licenseType);
+    adw_about_window_set_license_type(cast(AdwAboutWindow*)this._cPtr, licenseType);
   }
 
   /**
@@ -1640,7 +1640,7 @@ class AboutWindow : adw.window.Window
   void setReleaseNotes(string releaseNotes)
   {
     const(char)* _releaseNotes = releaseNotes.toCString(No.Alloc);
-    adw_about_window_set_release_notes(cast(AdwAboutWindow*)cPtr, _releaseNotes);
+    adw_about_window_set_release_notes(cast(AdwAboutWindow*)this._cPtr, _releaseNotes);
   }
 
   /**
@@ -1663,7 +1663,7 @@ class AboutWindow : adw.window.Window
   void setReleaseNotesVersion(string version_)
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
-    adw_about_window_set_release_notes_version(cast(AdwAboutWindow*)cPtr, _version_);
+    adw_about_window_set_release_notes_version(cast(AdwAboutWindow*)this._cPtr, _version_);
   }
 
   /**
@@ -1677,7 +1677,7 @@ class AboutWindow : adw.window.Window
   void setSupportUrl(string supportUrl)
   {
     const(char)* _supportUrl = supportUrl.toCString(No.Alloc);
-    adw_about_window_set_support_url(cast(AdwAboutWindow*)cPtr, _supportUrl);
+    adw_about_window_set_support_url(cast(AdwAboutWindow*)this._cPtr, _supportUrl);
   }
 
   /**
@@ -1708,7 +1708,7 @@ class AboutWindow : adw.window.Window
   void setTranslatorCredits(string translatorCredits)
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
-    adw_about_window_set_translator_credits(cast(AdwAboutWindow*)cPtr, _translatorCredits);
+    adw_about_window_set_translator_credits(cast(AdwAboutWindow*)this._cPtr, _translatorCredits);
   }
 
   /**
@@ -1725,7 +1725,7 @@ class AboutWindow : adw.window.Window
   void setVersion(string version_)
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
-    adw_about_window_set_version(cast(AdwAboutWindow*)cPtr, _version_);
+    adw_about_window_set_version(cast(AdwAboutWindow*)this._cPtr, _version_);
   }
 
   /**
@@ -1742,7 +1742,7 @@ class AboutWindow : adw.window.Window
   void setWebsite(string website)
   {
     const(char)* _website = website.toCString(No.Alloc);
-    adw_about_window_set_website(cast(AdwAboutWindow*)cPtr, _website);
+    adw_about_window_set_website(cast(AdwAboutWindow*)this._cPtr, _website);
   }
 
   /**

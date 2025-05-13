@@ -30,16 +30,16 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_output_stream_get_type != &gidSymbolNotFound ? g_memory_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   {
     GOutputStream* _cretval;
     _cretval = g_memory_output_stream_new_resizable();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.memory_output_stream.MemoryOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   */
   void* getData()
   {
-    auto _retval = g_memory_output_stream_get_data(cast(GMemoryOutputStream*)cPtr);
+    auto _retval = g_memory_output_stream_get_data(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   size_t getDataSize()
   {
     size_t _retval;
-    _retval = g_memory_output_stream_get_data_size(cast(GMemoryOutputStream*)cPtr);
+    _retval = g_memory_output_stream_get_data_size(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   size_t getSize()
   {
     size_t _retval;
-    _retval = g_memory_output_stream_get_size(cast(GMemoryOutputStream*)cPtr);
+    _retval = g_memory_output_stream_get_size(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   glib.bytes.Bytes stealAsBytes()
   {
     GBytes* _cretval;
-    _cretval = g_memory_output_stream_steal_as_bytes(cast(GMemoryOutputStream*)cPtr);
+    _cretval = g_memory_output_stream_steal_as_bytes(cast(GMemoryOutputStream*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -153,7 +153,7 @@ class MemoryOutputStream : gio.output_stream.OutputStream, gio.pollable_output_s
   */
   void* stealData()
   {
-    auto _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)cPtr);
+    auto _retval = g_memory_output_stream_steal_data(cast(GMemoryOutputStream*)this._cPtr);
     return _retval;
   }
 }

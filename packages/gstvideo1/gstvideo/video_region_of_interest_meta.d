@@ -30,7 +30,7 @@ class VideoRegionOfInterestMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class VideoRegionOfInterestMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)this._cPtr).meta);
   }
 
   /**
@@ -50,7 +50,7 @@ class VideoRegionOfInterestMeta
   */
   @property glib.types.Quark roiType()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).roiType;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType;
   }
 
   /**
@@ -60,7 +60,7 @@ class VideoRegionOfInterestMeta
   */
   @property void roiType(glib.types.Quark propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).roiType = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).roiType = propval;
   }
 
   /**
@@ -69,7 +69,7 @@ class VideoRegionOfInterestMeta
   */
   @property int id()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).id;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id;
   }
 
   /**
@@ -79,7 +79,7 @@ class VideoRegionOfInterestMeta
   */
   @property void id(int propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).id = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).id = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class VideoRegionOfInterestMeta
   */
   @property int parentId()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).parentId;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId;
   }
 
   /**
@@ -98,7 +98,7 @@ class VideoRegionOfInterestMeta
   */
   @property void parentId(int propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).parentId = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).parentId = propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class VideoRegionOfInterestMeta
   */
   @property uint x()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).x;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x;
   }
 
   /**
@@ -117,7 +117,7 @@ class VideoRegionOfInterestMeta
   */
   @property void x(uint propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).x = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).x = propval;
   }
 
   /**
@@ -126,7 +126,7 @@ class VideoRegionOfInterestMeta
   */
   @property uint y()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).y;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y;
   }
 
   /**
@@ -136,7 +136,7 @@ class VideoRegionOfInterestMeta
   */
   @property void y(uint propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).y = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).y = propval;
   }
 
   /**
@@ -145,7 +145,7 @@ class VideoRegionOfInterestMeta
   */
   @property uint w()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).w;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w;
   }
 
   /**
@@ -155,7 +155,7 @@ class VideoRegionOfInterestMeta
   */
   @property void w(uint propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).w = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).w = propval;
   }
 
   /**
@@ -164,7 +164,7 @@ class VideoRegionOfInterestMeta
   */
   @property uint h()
   {
-    return (cast(GstVideoRegionOfInterestMeta*)cPtr).h;
+    return (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h;
   }
 
   /**
@@ -174,7 +174,7 @@ class VideoRegionOfInterestMeta
   */
   @property void h(uint propval)
   {
-    (cast(GstVideoRegionOfInterestMeta*)cPtr).h = propval;
+    (cast(GstVideoRegionOfInterestMeta*)this._cPtr).h = propval;
   }
 
   /**
@@ -193,7 +193,7 @@ class VideoRegionOfInterestMeta
   */
   void addParam(gst.structure.Structure s)
   {
-    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.Dup) : null);
+    gst_video_region_of_interest_meta_add_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -210,7 +210,7 @@ class VideoRegionOfInterestMeta
   {
     GstStructure* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_video_region_of_interest_meta_get_param(cast(GstVideoRegionOfInterestMeta*)cPtr, _name);
+    _cretval = gst_video_region_of_interest_meta_get_param(cast(GstVideoRegionOfInterestMeta*)this._cPtr, _name);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

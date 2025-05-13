@@ -23,22 +23,22 @@ class Source : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_source_get_type != &gidSymbolNotFound ? g_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -94,7 +94,7 @@ class Source : gobject.boxed.Boxed
   */
   void addChildSource(glib.source.Source childSource)
   {
-    g_source_add_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
+    g_source_add_child_source(cast(GSource*)this._cPtr, childSource ? cast(GSource*)childSource._cPtr(No.Dup) : null);
   }
 
   /**
@@ -117,7 +117,7 @@ class Source : gobject.boxed.Boxed
   */
   void addPoll(glib.types.PollFD fd)
   {
-    g_source_add_poll(cast(GSource*)cPtr, &fd);
+    g_source_add_poll(cast(GSource*)this._cPtr, &fd);
   }
 
   /**
@@ -142,7 +142,7 @@ class Source : gobject.boxed.Boxed
   */
   void* addUnixFd(int fd, glib.types.IOCondition events)
   {
-    auto _retval = g_source_add_unix_fd(cast(GSource*)cPtr, fd, events);
+    auto _retval = g_source_add_unix_fd(cast(GSource*)this._cPtr, fd, events);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class Source : gobject.boxed.Boxed
   uint attach(glib.main_context.MainContext context = null)
   {
     uint _retval;
-    _retval = g_source_attach(cast(GSource*)cPtr, context ? cast(GMainContext*)context.cPtr(No.Dup) : null);
+    _retval = g_source_attach(cast(GSource*)this._cPtr, context ? cast(GMainContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class Source : gobject.boxed.Boxed
   */
   void destroy()
   {
-    g_source_destroy(cast(GSource*)cPtr);
+    g_source_destroy(cast(GSource*)this._cPtr);
   }
 
   /**
@@ -195,7 +195,7 @@ class Source : gobject.boxed.Boxed
   bool getCanRecurse()
   {
     bool _retval;
-    _retval = g_source_get_can_recurse(cast(GSource*)cPtr);
+    _retval = g_source_get_can_recurse(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Source : gobject.boxed.Boxed
   glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
-    _cretval = g_source_get_context(cast(GSource*)cPtr);
+    _cretval = g_source_get_context(cast(GSource*)this._cPtr);
     auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -231,7 +231,7 @@ class Source : gobject.boxed.Boxed
   */
   void getCurrentTime(glib.time_val.TimeVal timeval)
   {
-    g_source_get_current_time(cast(GSource*)cPtr, timeval ? cast(GTimeVal*)timeval.cPtr : null);
+    g_source_get_current_time(cast(GSource*)this._cPtr, timeval ? cast(GTimeVal*)timeval._cPtr : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class Source : gobject.boxed.Boxed
   uint getId()
   {
     uint _retval;
-    _retval = g_source_get_id(cast(GSource*)cPtr);
+    _retval = g_source_get_id(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Source : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_source_get_name(cast(GSource*)cPtr);
+    _cretval = g_source_get_name(cast(GSource*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -273,7 +273,7 @@ class Source : gobject.boxed.Boxed
   int getPriority()
   {
     int _retval;
-    _retval = g_source_get_priority(cast(GSource*)cPtr);
+    _retval = g_source_get_priority(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class Source : gobject.boxed.Boxed
   long getReadyTime()
   {
     long _retval;
-    _retval = g_source_get_ready_time(cast(GSource*)cPtr);
+    _retval = g_source_get_ready_time(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class Source : gobject.boxed.Boxed
   long getTime()
   {
     long _retval;
-    _retval = g_source_get_time(cast(GSource*)cPtr);
+    _retval = g_source_get_time(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Source : gobject.boxed.Boxed
   bool isDestroyed()
   {
     bool _retval;
-    _retval = g_source_is_destroyed(cast(GSource*)cPtr);
+    _retval = g_source_is_destroyed(cast(GSource*)this._cPtr);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class Source : gobject.boxed.Boxed
   */
   void modifyUnixFd(void* tag, glib.types.IOCondition newEvents)
   {
-    g_source_modify_unix_fd(cast(GSource*)cPtr, tag, newEvents);
+    g_source_modify_unix_fd(cast(GSource*)this._cPtr, tag, newEvents);
   }
 
   /**
@@ -438,7 +438,7 @@ class Source : gobject.boxed.Boxed
   glib.types.IOCondition queryUnixFd(void* tag)
   {
     GIOCondition _cretval;
-    _cretval = g_source_query_unix_fd(cast(GSource*)cPtr, tag);
+    _cretval = g_source_query_unix_fd(cast(GSource*)this._cPtr, tag);
     glib.types.IOCondition _retval = cast(glib.types.IOCondition)_cretval;
     return _retval;
   }
@@ -455,7 +455,7 @@ class Source : gobject.boxed.Boxed
   */
   void removeChildSource(glib.source.Source childSource)
   {
-    g_source_remove_child_source(cast(GSource*)cPtr, childSource ? cast(GSource*)childSource.cPtr(No.Dup) : null);
+    g_source_remove_child_source(cast(GSource*)this._cPtr, childSource ? cast(GSource*)childSource._cPtr(No.Dup) : null);
   }
 
   /**
@@ -470,7 +470,7 @@ class Source : gobject.boxed.Boxed
   */
   void removePoll(glib.types.PollFD fd)
   {
-    g_source_remove_poll(cast(GSource*)cPtr, &fd);
+    g_source_remove_poll(cast(GSource*)this._cPtr, &fd);
   }
 
   /**
@@ -490,7 +490,7 @@ class Source : gobject.boxed.Boxed
   */
   void removeUnixFd(void* tag)
   {
-    g_source_remove_unix_fd(cast(GSource*)cPtr, tag);
+    g_source_remove_unix_fd(cast(GSource*)this._cPtr, tag);
   }
 
   /**
@@ -531,7 +531,7 @@ class Source : gobject.boxed.Boxed
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    g_source_set_callback(cast(GSource*)cPtr, _funcCB, _func, _funcDestroyCB);
+    g_source_set_callback(cast(GSource*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -553,7 +553,7 @@ class Source : gobject.boxed.Boxed
   */
   void setCallbackIndirect(void* callbackData, glib.types.SourceCallbackFuncs callbackFuncs)
   {
-    g_source_set_callback_indirect(cast(GSource*)cPtr, callbackData, &callbackFuncs);
+    g_source_set_callback_indirect(cast(GSource*)this._cPtr, callbackData, &callbackFuncs);
   }
 
   /**
@@ -567,7 +567,7 @@ class Source : gobject.boxed.Boxed
   */
   void setCanRecurse(bool canRecurse)
   {
-    g_source_set_can_recurse(cast(GSource*)cPtr, canRecurse);
+    g_source_set_can_recurse(cast(GSource*)this._cPtr, canRecurse);
   }
 
   /**
@@ -579,7 +579,7 @@ class Source : gobject.boxed.Boxed
   */
   void setFuncs(glib.types.SourceFuncs funcs)
   {
-    g_source_set_funcs(cast(GSource*)cPtr, &funcs);
+    g_source_set_funcs(cast(GSource*)this._cPtr, &funcs);
   }
 
   /**
@@ -608,7 +608,7 @@ class Source : gobject.boxed.Boxed
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    g_source_set_name(cast(GSource*)cPtr, _name);
+    g_source_set_name(cast(GSource*)this._cPtr, _name);
   }
 
   /**
@@ -626,7 +626,7 @@ class Source : gobject.boxed.Boxed
   */
   void setPriority(int priority)
   {
-    g_source_set_priority(cast(GSource*)cPtr, priority);
+    g_source_set_priority(cast(GSource*)this._cPtr, priority);
   }
 
   /**
@@ -659,7 +659,7 @@ class Source : gobject.boxed.Boxed
   */
   void setReadyTime(long readyTime)
   {
-    g_source_set_ready_time(cast(GSource*)cPtr, readyTime);
+    g_source_set_ready_time(cast(GSource*)this._cPtr, readyTime);
   }
 
   /**
@@ -673,7 +673,7 @@ class Source : gobject.boxed.Boxed
   void setStaticName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    g_source_set_static_name(cast(GSource*)cPtr, _name);
+    g_source_set_static_name(cast(GSource*)this._cPtr, _name);
   }
 
   /**

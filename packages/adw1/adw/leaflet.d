@@ -66,16 +66,16 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_leaflet_get_type != &gidSymbolNotFound ? adw_leaflet_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -509,8 +509,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.leaflet_page.LeafletPage append(gtk.widget.Widget child)
   {
     AdwLeafletPage* _cretval;
-    _cretval = adw_leaflet_append(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
+    _cretval = adw_leaflet_append(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -533,8 +533,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   gtk.widget.Widget getAdjacentChild(adw.types.NavigationDirection direction)
   {
     GtkWidget* _cretval;
-    _cretval = adw_leaflet_get_adjacent_child(cast(AdwLeaflet*)cPtr, direction);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_leaflet_get_adjacent_child(cast(AdwLeaflet*)this._cPtr, direction);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -547,7 +547,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanNavigateBack()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_navigate_back(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_can_navigate_back(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -560,7 +560,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanNavigateForward()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_navigate_forward(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_can_navigate_forward(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -573,7 +573,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getCanUnfold()
   {
     bool _retval;
-    _retval = adw_leaflet_get_can_unfold(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_can_unfold(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -594,8 +594,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = adw_leaflet_get_child_by_name(cast(AdwLeaflet*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_leaflet_get_child_by_name(cast(AdwLeaflet*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -608,7 +608,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.spring_params.SpringParams getChildTransitionParams()
   {
     AdwSpringParams* _cretval;
-    _cretval = adw_leaflet_get_child_transition_params(cast(AdwLeaflet*)cPtr);
+    _cretval = adw_leaflet_get_child_transition_params(cast(AdwLeaflet*)this._cPtr);
     auto _retval = _cretval ? new adw.spring_params.SpringParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -622,7 +622,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getChildTransitionRunning()
   {
     bool _retval;
-    _retval = adw_leaflet_get_child_transition_running(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_child_transition_running(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -635,7 +635,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.types.FoldThresholdPolicy getFoldThresholdPolicy()
   {
     AdwFoldThresholdPolicy _cretval;
-    _cretval = adw_leaflet_get_fold_threshold_policy(cast(AdwLeaflet*)cPtr);
+    _cretval = adw_leaflet_get_fold_threshold_policy(cast(AdwLeaflet*)this._cPtr);
     adw.types.FoldThresholdPolicy _retval = cast(adw.types.FoldThresholdPolicy)_cretval;
     return _retval;
   }
@@ -653,7 +653,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getFolded()
   {
     bool _retval;
-    _retval = adw_leaflet_get_folded(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_folded(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -666,7 +666,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = adw_leaflet_get_homogeneous(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_homogeneous(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -679,7 +679,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   uint getModeTransitionDuration()
   {
     uint _retval;
-    _retval = adw_leaflet_get_mode_transition_duration(cast(AdwLeaflet*)cPtr);
+    _retval = adw_leaflet_get_mode_transition_duration(cast(AdwLeaflet*)this._cPtr);
     return _retval;
   }
 
@@ -695,8 +695,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.leaflet_page.LeafletPage getPage(gtk.widget.Widget child)
   {
     AdwLeafletPage* _cretval;
-    _cretval = adw_leaflet_get_page(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
+    _cretval = adw_leaflet_get_page(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -713,8 +713,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
-    _cretval = adw_leaflet_get_pages(cast(AdwLeaflet*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    _cretval = adw_leaflet_get_pages(cast(AdwLeaflet*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -727,7 +727,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.types.LeafletTransitionType getTransitionType()
   {
     AdwLeafletTransitionType _cretval;
-    _cretval = adw_leaflet_get_transition_type(cast(AdwLeaflet*)cPtr);
+    _cretval = adw_leaflet_get_transition_type(cast(AdwLeaflet*)this._cPtr);
     adw.types.LeafletTransitionType _retval = cast(adw.types.LeafletTransitionType)_cretval;
     return _retval;
   }
@@ -741,8 +741,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_leaflet_get_visible_child(cast(AdwLeaflet*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_leaflet_get_visible_child(cast(AdwLeaflet*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -755,7 +755,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   string getVisibleChildName()
   {
     const(char)* _cretval;
-    _cretval = adw_leaflet_get_visible_child_name(cast(AdwLeaflet*)cPtr);
+    _cretval = adw_leaflet_get_visible_child_name(cast(AdwLeaflet*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -775,8 +775,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.leaflet_page.LeafletPage insertChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
     AdwLeafletPage* _cretval;
-    _cretval = adw_leaflet_insert_child_after(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
+    _cretval = adw_leaflet_insert_child_after(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -798,7 +798,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   bool navigate(adw.types.NavigationDirection direction)
   {
     bool _retval;
-    _retval = adw_leaflet_navigate(cast(AdwLeaflet*)cPtr, direction);
+    _retval = adw_leaflet_navigate(cast(AdwLeaflet*)this._cPtr, direction);
     return _retval;
   }
 
@@ -814,8 +814,8 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   adw.leaflet_page.LeafletPage prepend(gtk.widget.Widget child)
   {
     AdwLeafletPage* _cretval;
-    _cretval = adw_leaflet_prepend(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
+    _cretval = adw_leaflet_prepend(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.leaflet_page.LeafletPage)(cast(AdwLeafletPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -829,7 +829,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_leaflet_remove(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_leaflet_remove(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -845,7 +845,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void reorderChildAfter(gtk.widget.Widget child, gtk.widget.Widget sibling = null)
   {
-    adw_leaflet_reorder_child_after(cast(AdwLeaflet*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
+    adw_leaflet_reorder_child_after(cast(AdwLeaflet*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
 
   /**
@@ -876,7 +876,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setCanNavigateBack(bool canNavigateBack)
   {
-    adw_leaflet_set_can_navigate_back(cast(AdwLeaflet*)cPtr, canNavigateBack);
+    adw_leaflet_set_can_navigate_back(cast(AdwLeaflet*)this._cPtr, canNavigateBack);
   }
 
   /**
@@ -907,7 +907,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setCanNavigateForward(bool canNavigateForward)
   {
-    adw_leaflet_set_can_navigate_forward(cast(AdwLeaflet*)cPtr, canNavigateForward);
+    adw_leaflet_set_can_navigate_forward(cast(AdwLeaflet*)this._cPtr, canNavigateForward);
   }
 
   /**
@@ -920,7 +920,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setCanUnfold(bool canUnfold)
   {
-    adw_leaflet_set_can_unfold(cast(AdwLeaflet*)cPtr, canUnfold);
+    adw_leaflet_set_can_unfold(cast(AdwLeaflet*)this._cPtr, canUnfold);
   }
 
   /**
@@ -939,7 +939,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setChildTransitionParams(adw.spring_params.SpringParams params)
   {
-    adw_leaflet_set_child_transition_params(cast(AdwLeaflet*)cPtr, params ? cast(AdwSpringParams*)params.cPtr(No.Dup) : null);
+    adw_leaflet_set_child_transition_params(cast(AdwLeaflet*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
 
   /**
@@ -959,7 +959,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy)
   {
-    adw_leaflet_set_fold_threshold_policy(cast(AdwLeaflet*)cPtr, policy);
+    adw_leaflet_set_fold_threshold_policy(cast(AdwLeaflet*)this._cPtr, policy);
   }
 
   /**
@@ -975,7 +975,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setHomogeneous(bool homogeneous)
   {
-    adw_leaflet_set_homogeneous(cast(AdwLeaflet*)cPtr, homogeneous);
+    adw_leaflet_set_homogeneous(cast(AdwLeaflet*)this._cPtr, homogeneous);
   }
 
   /**
@@ -988,7 +988,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setModeTransitionDuration(uint duration)
   {
-    adw_leaflet_set_mode_transition_duration(cast(AdwLeaflet*)cPtr, duration);
+    adw_leaflet_set_mode_transition_duration(cast(AdwLeaflet*)this._cPtr, duration);
   }
 
   /**
@@ -1005,7 +1005,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setTransitionType(adw.types.LeafletTransitionType transition)
   {
-    adw_leaflet_set_transition_type(cast(AdwLeaflet*)cPtr, transition);
+    adw_leaflet_set_transition_type(cast(AdwLeaflet*)this._cPtr, transition);
   }
 
   /**
@@ -1023,7 +1023,7 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   */
   void setVisibleChild(gtk.widget.Widget visibleChild)
   {
-    adw_leaflet_set_visible_child(cast(AdwLeaflet*)cPtr, visibleChild ? cast(GtkWidget*)visibleChild.cPtr(No.Dup) : null);
+    adw_leaflet_set_visible_child(cast(AdwLeaflet*)this._cPtr, visibleChild ? cast(GtkWidget*)visibleChild._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1039,6 +1039,6 @@ class Leaflet : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orien
   void setVisibleChildName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_leaflet_set_visible_child_name(cast(AdwLeaflet*)cPtr, _name);
+    adw_leaflet_set_visible_child_name(cast(AdwLeaflet*)this._cPtr, _name);
   }
 }

@@ -25,22 +25,22 @@ class TargetList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_target_list_get_type != &gidSymbolNotFound ? gtk_target_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class TargetList : gobject.boxed.Boxed
 
     GtkTargetEntry[] _tmptargets;
     foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
+      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
     _cretval = gtk_target_list_new(_targets, _ntargets);
     this(_cretval, Yes.Take);
@@ -82,7 +82,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void add(gdk.atom.Atom target, uint flags, uint info)
   {
-    gtk_target_list_add(cast(GtkTargetList*)cPtr, target ? cast(GdkAtom)target.cPtr : null, flags, info);
+    gtk_target_list_add(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, flags, info);
   }
 
   /**
@@ -96,7 +96,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void addImageTargets(uint info, bool writable)
   {
-    gtk_target_list_add_image_targets(cast(GtkTargetList*)cPtr, info, writable);
+    gtk_target_list_add_image_targets(cast(GtkTargetList*)this._cPtr, info, writable);
   }
 
   /**
@@ -113,7 +113,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void addRichTextTargets(uint info, bool deserializable, gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_target_list_add_rich_text_targets(cast(GtkTargetList*)this._cPtr, info, deserializable, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -130,9 +130,9 @@ class TargetList : gobject.boxed.Boxed
 
     GtkTargetEntry[] _tmptargets;
     foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
+      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-    gtk_target_list_add_table(cast(GtkTargetList*)cPtr, _targets, _ntargets);
+    gtk_target_list_add_table(cast(GtkTargetList*)this._cPtr, _targets, _ntargets);
   }
 
   /**
@@ -144,7 +144,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void addTextTargets(uint info)
   {
-    gtk_target_list_add_text_targets(cast(GtkTargetList*)cPtr, info);
+    gtk_target_list_add_text_targets(cast(GtkTargetList*)this._cPtr, info);
   }
 
   /**
@@ -160,7 +160,7 @@ class TargetList : gobject.boxed.Boxed
   */
   void addUriTargets(uint info)
   {
-    gtk_target_list_add_uri_targets(cast(GtkTargetList*)cPtr, info);
+    gtk_target_list_add_uri_targets(cast(GtkTargetList*)this._cPtr, info);
   }
 
   /**
@@ -175,7 +175,7 @@ class TargetList : gobject.boxed.Boxed
   bool find(gdk.atom.Atom target, out uint info)
   {
     bool _retval;
-    _retval = gtk_target_list_find(cast(GtkTargetList*)cPtr, target ? cast(GdkAtom)target.cPtr : null, cast(uint*)&info);
+    _retval = gtk_target_list_find(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null, cast(uint*)&info);
     return _retval;
   }
 
@@ -187,6 +187,6 @@ class TargetList : gobject.boxed.Boxed
   */
   void remove(gdk.atom.Atom target)
   {
-    gtk_target_list_remove(cast(GtkTargetList*)cPtr, target ? cast(GdkAtom)target.cPtr : null);
+    gtk_target_list_remove(cast(GtkTargetList*)this._cPtr, target ? cast(GdkAtom)target._cPtr : null);
   }
 }

@@ -33,7 +33,7 @@ class AudioCdSrcTrack
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -44,7 +44,7 @@ class AudioCdSrcTrack
   */
   @property bool isAudio()
   {
-    return (cast(GstAudioCdSrcTrack*)cPtr).isAudio;
+    return (cast(GstAudioCdSrcTrack*)this._cPtr).isAudio;
   }
 
   /**
@@ -54,7 +54,7 @@ class AudioCdSrcTrack
   */
   @property void isAudio(bool propval)
   {
-    (cast(GstAudioCdSrcTrack*)cPtr).isAudio = propval;
+    (cast(GstAudioCdSrcTrack*)this._cPtr).isAudio = propval;
   }
 
   /**
@@ -63,7 +63,7 @@ class AudioCdSrcTrack
   */
   @property uint num()
   {
-    return (cast(GstAudioCdSrcTrack*)cPtr).num;
+    return (cast(GstAudioCdSrcTrack*)this._cPtr).num;
   }
 
   /**
@@ -73,7 +73,7 @@ class AudioCdSrcTrack
   */
   @property void num(uint propval)
   {
-    (cast(GstAudioCdSrcTrack*)cPtr).num = propval;
+    (cast(GstAudioCdSrcTrack*)this._cPtr).num = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class AudioCdSrcTrack
   */
   @property uint start()
   {
-    return (cast(GstAudioCdSrcTrack*)cPtr).start;
+    return (cast(GstAudioCdSrcTrack*)this._cPtr).start;
   }
 
   /**
@@ -92,7 +92,7 @@ class AudioCdSrcTrack
   */
   @property void start(uint propval)
   {
-    (cast(GstAudioCdSrcTrack*)cPtr).start = propval;
+    (cast(GstAudioCdSrcTrack*)this._cPtr).start = propval;
   }
 
   /**
@@ -101,7 +101,7 @@ class AudioCdSrcTrack
   */
   @property uint end()
   {
-    return (cast(GstAudioCdSrcTrack*)cPtr).end;
+    return (cast(GstAudioCdSrcTrack*)this._cPtr).end;
   }
 
   /**
@@ -111,7 +111,7 @@ class AudioCdSrcTrack
   */
   @property void end(uint propval)
   {
-    (cast(GstAudioCdSrcTrack*)cPtr).end = propval;
+    (cast(GstAudioCdSrcTrack*)this._cPtr).end = propval;
   }
 
   /**
@@ -120,7 +120,7 @@ class AudioCdSrcTrack
   */
   @property gst.tag_list.TagList tags()
   {
-    return cToD!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
+    return cToD!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
   }
 
   /**
@@ -130,7 +130,7 @@ class AudioCdSrcTrack
   */
   @property void tags(gst.tag_list.TagList propval)
   {
-    cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)cPtr).tags);
-    dToC(propval, cast(void*)&(cast(GstAudioCdSrcTrack*)cPtr).tags);
+    cValueFree!(gst.tag_list.TagList)(cast(void*)(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
+    dToC(propval, cast(void*)&(cast(GstAudioCdSrcTrack*)this._cPtr).tags);
   }
 }

@@ -21,16 +21,16 @@ class CustomFilter : gtk.filter.Filter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_custom_filter_get_type != &gidSymbolNotFound ? gtk_custom_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,11 +54,11 @@ class CustomFilter : gtk.filter.Filter
   */
   this(gtk.types.CustomFilterFunc matchFunc = null)
   {
-    extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
+    extern(C) bool _matchFuncCallback(GObject* item, void* userData)
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
@@ -86,17 +86,17 @@ class CustomFilter : gtk.filter.Filter
   */
   void setFilterFunc(gtk.types.CustomFilterFunc matchFunc = null)
   {
-    extern(C) bool _matchFuncCallback(ObjectC* item, void* userData)
+    extern(C) bool _matchFuncCallback(GObject* item, void* userData)
     {
       auto _dlg = cast(gtk.types.CustomFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
       return _retval;
     }
     auto _matchFuncCB = matchFunc ? &_matchFuncCallback : null;
 
     auto _matchFunc = matchFunc ? freezeDelegate(cast(void*)&matchFunc) : null;
     GDestroyNotify _matchFuncDestroyCB = matchFunc ? &thawDelegate : null;
-    gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)cPtr, _matchFuncCB, _matchFunc, _matchFuncDestroyCB);
+    gtk_custom_filter_set_filter_func(cast(GtkCustomFilter*)this._cPtr, _matchFuncCB, _matchFunc, _matchFuncDestroyCB);
   }
 }

@@ -29,7 +29,7 @@ class EnumClass
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class EnumClass
   */
   @property gobject.type_class.TypeClass gTypeClass()
   {
-    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)cPtr).gTypeClass);
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)this._cPtr).gTypeClass);
   }
 
   /**
@@ -49,7 +49,7 @@ class EnumClass
   */
   @property int minimum()
   {
-    return (cast(GEnumClass*)cPtr).minimum;
+    return (cast(GEnumClass*)this._cPtr).minimum;
   }
 
   /**
@@ -59,7 +59,7 @@ class EnumClass
   */
   @property void minimum(int propval)
   {
-    (cast(GEnumClass*)cPtr).minimum = propval;
+    (cast(GEnumClass*)this._cPtr).minimum = propval;
   }
 
   /**
@@ -68,7 +68,7 @@ class EnumClass
   */
   @property int maximum()
   {
-    return (cast(GEnumClass*)cPtr).maximum;
+    return (cast(GEnumClass*)this._cPtr).maximum;
   }
 
   /**
@@ -78,7 +78,7 @@ class EnumClass
   */
   @property void maximum(int propval)
   {
-    (cast(GEnumClass*)cPtr).maximum = propval;
+    (cast(GEnumClass*)this._cPtr).maximum = propval;
   }
 
   /**
@@ -87,7 +87,7 @@ class EnumClass
   */
   @property uint nValues()
   {
-    return (cast(GEnumClass*)cPtr).nValues;
+    return (cast(GEnumClass*)this._cPtr).nValues;
   }
 
   /**
@@ -97,7 +97,7 @@ class EnumClass
   */
   @property void nValues(uint propval)
   {
-    (cast(GEnumClass*)cPtr).nValues = propval;
+    (cast(GEnumClass*)this._cPtr).nValues = propval;
   }
 
   /**
@@ -107,6 +107,6 @@ class EnumClass
   */
   @property gobject.enum_value.EnumValue values()
   {
-    return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)cPtr).values);
+    return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)this._cPtr).values);
   }
 }

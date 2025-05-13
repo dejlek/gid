@@ -84,16 +84,16 @@ class DeviceMonitor : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_monitor_get_type != &gidSymbolNotFound ? gst_device_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -148,7 +148,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   {
     uint _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
-    _retval = gst_device_monitor_add_filter(cast(GstDeviceMonitor*)cPtr, _classes, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_device_monitor_add_filter(cast(GstDeviceMonitor*)this._cPtr, _classes, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class DeviceMonitor : gst.object.ObjectWrap
   gst.bus.Bus getBus()
   {
     GstBus* _cretval;
-    _cretval = gst_device_monitor_get_bus(cast(GstDeviceMonitor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    _cretval = gst_device_monitor_get_bus(cast(GstDeviceMonitor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   gst.device.Device[] getDevices()
   {
     GList* _cretval;
-    _cretval = gst_device_monitor_get_devices(cast(GstDeviceMonitor*)cPtr);
+    _cretval = gst_device_monitor_get_devices(cast(GstDeviceMonitor*)this._cPtr);
     auto _retval = gListToD!(gst.device.Device, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -188,7 +188,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   string[] getProviders()
   {
     char** _cretval;
-    _cretval = gst_device_monitor_get_providers(cast(GstDeviceMonitor*)cPtr);
+    _cretval = gst_device_monitor_get_providers(cast(GstDeviceMonitor*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -211,7 +211,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool getShowAllDevices()
   {
     bool _retval;
-    _retval = gst_device_monitor_get_show_all_devices(cast(GstDeviceMonitor*)cPtr);
+    _retval = gst_device_monitor_get_show_all_devices(cast(GstDeviceMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool removeFilter(uint filterId)
   {
     bool _retval;
-    _retval = gst_device_monitor_remove_filter(cast(GstDeviceMonitor*)cPtr, filterId);
+    _retval = gst_device_monitor_remove_filter(cast(GstDeviceMonitor*)this._cPtr, filterId);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   */
   void setShowAllDevices(bool showAll)
   {
-    gst_device_monitor_set_show_all_devices(cast(GstDeviceMonitor*)cPtr, showAll);
+    gst_device_monitor_set_show_all_devices(cast(GstDeviceMonitor*)this._cPtr, showAll);
   }
 
   /**
@@ -252,7 +252,7 @@ class DeviceMonitor : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_device_monitor_start(cast(GstDeviceMonitor*)cPtr);
+    _retval = gst_device_monitor_start(cast(GstDeviceMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -261,6 +261,6 @@ class DeviceMonitor : gst.object.ObjectWrap
   */
   void stop()
   {
-    gst_device_monitor_stop(cast(GstDeviceMonitor*)cPtr);
+    gst_device_monitor_stop(cast(GstDeviceMonitor*)this._cPtr);
   }
 }

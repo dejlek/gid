@@ -38,16 +38,16 @@ class WindowTitle : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_window_title_get_type != &gidSymbolNotFound ? adw_window_title_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -128,7 +128,7 @@ class WindowTitle : gtk.widget.Widget
   string getSubtitle()
   {
     const(char)* _cretval;
-    _cretval = adw_window_title_get_subtitle(cast(AdwWindowTitle*)cPtr);
+    _cretval = adw_window_title_get_subtitle(cast(AdwWindowTitle*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -140,7 +140,7 @@ class WindowTitle : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_window_title_get_title(cast(AdwWindowTitle*)cPtr);
+    _cretval = adw_window_title_get_title(cast(AdwWindowTitle*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -156,7 +156,7 @@ class WindowTitle : gtk.widget.Widget
   void setSubtitle(string subtitle)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
-    adw_window_title_set_subtitle(cast(AdwWindowTitle*)cPtr, _subtitle);
+    adw_window_title_set_subtitle(cast(AdwWindowTitle*)this._cPtr, _subtitle);
   }
 
   /**
@@ -171,6 +171,6 @@ class WindowTitle : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_window_title_set_title(cast(AdwWindowTitle*)cPtr, _title);
+    adw_window_title_set_title(cast(AdwWindowTitle*)this._cPtr, _title);
   }
 }

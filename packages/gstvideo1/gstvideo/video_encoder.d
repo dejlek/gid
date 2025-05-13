@@ -96,16 +96,16 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_encoder_get_type != &gidSymbolNotFound ? gst_video_encoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -160,7 +160,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.buffer.Buffer allocateOutputBuffer(size_t size)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_encoder_allocate_output_buffer(cast(GstVideoEncoder*)cPtr, size);
+    _cretval = gst_video_encoder_allocate_output_buffer(cast(GstVideoEncoder*)this._cPtr, size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -181,7 +181,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn allocateOutputFrame(gstvideo.video_codec_frame.VideoCodecFrame frame, size_t size)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_allocate_output_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null, size);
+    _cretval = gst_video_encoder_allocate_output_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null, size);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn finishFrame(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_finish_frame(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(Yes.Dup) : null);
+    _cretval = gst_video_encoder_finish_frame(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -227,7 +227,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.FlowReturn finishSubframe(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_video_encoder_finish_subframe(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null);
+    _cretval = gst_video_encoder_finish_subframe(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -248,7 +248,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   {
     GstAllocator* _allocator;
     GstAllocationParams _params;
-    gst_video_encoder_get_allocator(cast(GstVideoEncoder*)cPtr, &_allocator, &_params);
+    gst_video_encoder_get_allocator(cast(GstVideoEncoder*)this._cPtr, &_allocator, &_params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
     params = new gst.allocation_params.AllocationParams(cast(void*)&_params, Yes.Take);
   }
@@ -263,7 +263,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_frame.VideoCodecFrame getFrame(int frameNumber)
   {
     GstVideoCodecFrame* _cretval;
-    _cretval = gst_video_encoder_get_frame(cast(GstVideoEncoder*)cPtr, frameNumber);
+    _cretval = gst_video_encoder_get_frame(cast(GstVideoEncoder*)this._cPtr, frameNumber);
     auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -275,7 +275,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_frame.VideoCodecFrame[] getFrames()
   {
     GList* _cretval;
-    _cretval = gst_video_encoder_get_frames(cast(GstVideoEncoder*)cPtr);
+    _cretval = gst_video_encoder_get_frames(cast(GstVideoEncoder*)this._cPtr);
     auto _retval = gListToD!(gstvideo.video_codec_frame.VideoCodecFrame, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -292,7 +292,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void getLatency(out gst.types.ClockTime minLatency, out gst.types.ClockTime maxLatency)
   {
-    gst_video_encoder_get_latency(cast(GstVideoEncoder*)cPtr, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
+    gst_video_encoder_get_latency(cast(GstVideoEncoder*)this._cPtr, cast(GstClockTime*)&minLatency, cast(GstClockTime*)&maxLatency);
   }
 
   /**
@@ -311,7 +311,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.ClockTimeDiff getMaxEncodeTime(gstvideo.video_codec_frame.VideoCodecFrame frame)
   {
     gst.types.ClockTimeDiff _retval;
-    _retval = gst_video_encoder_get_max_encode_time(cast(GstVideoEncoder*)cPtr, frame ? cast(GstVideoCodecFrame*)frame.cPtr(No.Dup) : null);
+    _retval = gst_video_encoder_get_max_encode_time(cast(GstVideoEncoder*)this._cPtr, frame ? cast(GstVideoCodecFrame*)frame._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.types.ClockTime getMinForceKeyUnitInterval()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_video_encoder_get_min_force_key_unit_interval(cast(GstVideoEncoder*)cPtr);
+    _retval = gst_video_encoder_get_min_force_key_unit_interval(cast(GstVideoEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_frame.VideoCodecFrame getOldestFrame()
   {
     GstVideoCodecFrame* _cretval;
-    _cretval = gst_video_encoder_get_oldest_frame(cast(GstVideoEncoder*)cPtr);
+    _cretval = gst_video_encoder_get_oldest_frame(cast(GstVideoEncoder*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_codec_frame.VideoCodecFrame(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -346,7 +346,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_state.VideoCodecState getOutputState()
   {
     GstVideoCodecState* _cretval;
-    _cretval = gst_video_encoder_get_output_state(cast(GstVideoEncoder*)cPtr);
+    _cretval = gst_video_encoder_get_output_state(cast(GstVideoEncoder*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -359,7 +359,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_video_encoder_is_qos_enabled(cast(GstVideoEncoder*)cPtr);
+    _retval = gst_video_encoder_is_qos_enabled(cast(GstVideoEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_video_encoder_merge_tags(cast(GstVideoEncoder*)cPtr, tags ? cast(const(GstTagList)*)tags.cPtr(No.Dup) : null, mode);
+    gst_video_encoder_merge_tags(cast(GstVideoEncoder*)this._cPtr, tags ? cast(const(GstTagList)*)tags._cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -392,7 +392,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   bool negotiate()
   {
     bool _retval;
-    _retval = gst_video_encoder_negotiate(cast(GstVideoEncoder*)cPtr);
+    _retval = gst_video_encoder_negotiate(cast(GstVideoEncoder*)this._cPtr);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gst.caps.Caps proxyGetcaps(gst.caps.Caps caps = null, gst.caps.Caps filter = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _cretval = gst_video_encoder_proxy_getcaps(cast(GstVideoEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -425,7 +425,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
   {
-    gst_video_encoder_set_latency(cast(GstVideoEncoder*)cPtr, minLatency, maxLatency);
+    gst_video_encoder_set_latency(cast(GstVideoEncoder*)this._cPtr, minLatency, maxLatency);
   }
 
   /**
@@ -438,7 +438,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void setMinForceKeyUnitInterval(gst.types.ClockTime interval)
   {
-    gst_video_encoder_set_min_force_key_unit_interval(cast(GstVideoEncoder*)cPtr, interval);
+    gst_video_encoder_set_min_force_key_unit_interval(cast(GstVideoEncoder*)this._cPtr, interval);
   }
 
   /**
@@ -452,7 +452,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void setMinPts(gst.types.ClockTime minPts)
   {
-    gst_video_encoder_set_min_pts(cast(GstVideoEncoder*)cPtr, minPts);
+    gst_video_encoder_set_min_pts(cast(GstVideoEncoder*)this._cPtr, minPts);
   }
 
   /**
@@ -483,7 +483,7 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   gstvideo.video_codec_state.VideoCodecState setOutputState(gst.caps.Caps caps, gstvideo.video_codec_state.VideoCodecState reference = null)
   {
     GstVideoCodecState* _cretval;
-    _cretval = gst_video_encoder_set_output_state(cast(GstVideoEncoder*)cPtr, caps ? cast(GstCaps*)caps.cPtr(Yes.Dup) : null, reference ? cast(GstVideoCodecState*)reference.cPtr(No.Dup) : null);
+    _cretval = gst_video_encoder_set_output_state(cast(GstVideoEncoder*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(Yes.Dup) : null, reference ? cast(GstVideoCodecState*)reference._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gstvideo.video_codec_state.VideoCodecState(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -496,6 +496,6 @@ class VideoEncoder : gst.element.Element, gst.preset.Preset
   */
   void setQosEnabled(bool enabled)
   {
-    gst_video_encoder_set_qos_enabled(cast(GstVideoEncoder*)cPtr, enabled);
+    gst_video_encoder_set_qos_enabled(cast(GstVideoEncoder*)this._cPtr, enabled);
   }
 }

@@ -21,16 +21,16 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_video_profile_get_type != &gidSymbolNotFound ? gst_encoding_video_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   {
     GstEncodingVideoProfile* _cretval;
     const(char)* _preset = preset.toCString(No.Alloc);
-    _cretval = gst_encoding_video_profile_new(format ? cast(GstCaps*)format.cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction.cPtr(No.Dup) : null, presence);
+    _cretval = gst_encoding_video_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
     this(_cretval, Yes.Take);
   }
 
@@ -76,7 +76,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   uint getPass()
   {
     uint _retval;
-    _retval = gst_encoding_video_profile_get_pass(cast(GstEncodingVideoProfile*)cPtr);
+    _retval = gst_encoding_video_profile_get_pass(cast(GstEncodingVideoProfile*)this._cPtr);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   bool getVariableframerate()
   {
     bool _retval;
-    _retval = gst_encoding_video_profile_get_variableframerate(cast(GstEncodingVideoProfile*)cPtr);
+    _retval = gst_encoding_video_profile_get_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   */
   void setPass(uint pass)
   {
-    gst_encoding_video_profile_set_pass(cast(GstEncodingVideoProfile*)cPtr, pass);
+    gst_encoding_video_profile_set_pass(cast(GstEncodingVideoProfile*)this._cPtr, pass);
   }
 
   /**
@@ -116,6 +116,6 @@ class EncodingVideoProfile : gstpbutils.encoding_profile.EncodingProfile
   */
   void setVariableframerate(bool variableframerate)
   {
-    gst_encoding_video_profile_set_variableframerate(cast(GstEncodingVideoProfile*)cPtr, variableframerate);
+    gst_encoding_video_profile_set_variableframerate(cast(GstEncodingVideoProfile*)this._cPtr, variableframerate);
   }
 }

@@ -26,7 +26,7 @@ class DBusErrorEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class DBusErrorEntry
   */
   @property int errorCode()
   {
-    return (cast(GDBusErrorEntry*)cPtr).errorCode;
+    return (cast(GDBusErrorEntry*)this._cPtr).errorCode;
   }
 
   /**
@@ -47,7 +47,7 @@ class DBusErrorEntry
   */
   @property void errorCode(int propval)
   {
-    (cast(GDBusErrorEntry*)cPtr).errorCode = propval;
+    (cast(GDBusErrorEntry*)this._cPtr).errorCode = propval;
   }
 
   /**
@@ -56,7 +56,7 @@ class DBusErrorEntry
   */
   @property string dbusErrorName()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
+    return cToD!(string)(cast(void*)(cast(GDBusErrorEntry*)this._cPtr).dbusErrorName);
   }
 
   /**
@@ -66,7 +66,7 @@ class DBusErrorEntry
   */
   @property void dbusErrorName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
-    dToC(propval, cast(void*)&(cast(GDBusErrorEntry*)cPtr).dbusErrorName);
+    cValueFree!(string)(cast(void*)(cast(GDBusErrorEntry*)this._cPtr).dbusErrorName);
+    dToC(propval, cast(void*)&(cast(GDBusErrorEntry*)this._cPtr).dbusErrorName);
   }
 }

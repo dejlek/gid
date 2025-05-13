@@ -25,7 +25,7 @@ template SwipeableT()
   override double getCancelProgress()
   {
     double _retval;
-    _retval = adw_swipeable_get_cancel_progress(cast(AdwSwipeable*)cPtr);
+    _retval = adw_swipeable_get_cancel_progress(cast(AdwSwipeable*)this._cPtr);
     return _retval;
   }
 
@@ -38,7 +38,7 @@ template SwipeableT()
   override double getDistance()
   {
     double _retval;
-    _retval = adw_swipeable_get_distance(cast(AdwSwipeable*)cPtr);
+    _retval = adw_swipeable_get_distance(cast(AdwSwipeable*)this._cPtr);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ template SwipeableT()
   override double getProgress()
   {
     double _retval;
-    _retval = adw_swipeable_get_progress(cast(AdwSwipeable*)cPtr);
+    _retval = adw_swipeable_get_progress(cast(AdwSwipeable*)this._cPtr);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ template SwipeableT()
   {
     double* _cretval;
     int _cretlength;
-    _cretval = adw_swipeable_get_snap_points(cast(AdwSwipeable*)cPtr, &_cretlength);
+    _cretval = adw_swipeable_get_snap_points(cast(AdwSwipeable*)this._cPtr, &_cretlength);
     double[] _retval;
 
     if (_cretval)
@@ -93,7 +93,7 @@ template SwipeableT()
   override void getSwipeArea(adw.types.NavigationDirection navigationDirection, bool isDrag, out gdk.rectangle.Rectangle rect)
   {
     GdkRectangle _rect;
-    adw_swipeable_get_swipe_area(cast(AdwSwipeable*)cPtr, navigationDirection, isDrag, &_rect);
+    adw_swipeable_get_swipe_area(cast(AdwSwipeable*)this._cPtr, navigationDirection, isDrag, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 }

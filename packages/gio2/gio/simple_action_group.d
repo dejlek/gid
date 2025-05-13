@@ -27,16 +27,16 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_action_group_get_type != &gidSymbolNotFound ? g_simple_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   */
   void insert(gio.action.Action action)
   {
-    g_simple_action_group_insert(cast(GSimpleActionGroup*)cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action).cPtr(No.Dup) : null);
+    g_simple_action_group_insert(cast(GSimpleActionGroup*)this._cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -92,8 +92,8 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)cPtr, _actionName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
+    _cretval = g_simple_action_group_lookup(cast(GSimpleActionGroup*)this._cPtr, _actionName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,6 +110,6 @@ class SimpleActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGrou
   void remove(string actionName)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_simple_action_group_remove(cast(GSimpleActionGroup*)cPtr, _actionName);
+    g_simple_action_group_remove(cast(GSimpleActionGroup*)this._cPtr, _actionName);
   }
 }

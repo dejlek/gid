@@ -37,16 +37,16 @@ class ColorDialog : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_dialog_get_type != &gidSymbolNotFound ? gtk_color_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -147,17 +147,17 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   void chooseRgba(gtk.window.Window parent = null, gdk.rgba.RGBA initialColor = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, initialColor ? cast(const(GdkRGBA)*)initialColor.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_color_dialog_choose_rgba(cast(GtkColorDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, initialColor ? cast(const(GdkRGBA)*)initialColor._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -174,7 +174,7 @@ class ColorDialog : gobject.object.ObjectWrap
   {
     GdkRGBA* _cretval;
     GError *_err;
-    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_color_dialog_choose_rgba_finish(cast(GtkColorDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
@@ -190,7 +190,7 @@ class ColorDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_color_dialog_get_modal(cast(GtkColorDialog*)cPtr);
+    _retval = gtk_color_dialog_get_modal(cast(GtkColorDialog*)this._cPtr);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class ColorDialog : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)cPtr);
+    _cretval = gtk_color_dialog_get_title(cast(GtkColorDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -214,7 +214,7 @@ class ColorDialog : gobject.object.ObjectWrap
   bool getWithAlpha()
   {
     bool _retval;
-    _retval = gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)cPtr);
+    _retval = gtk_color_dialog_get_with_alpha(cast(GtkColorDialog*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   void setModal(bool modal)
   {
-    gtk_color_dialog_set_modal(cast(GtkColorDialog*)cPtr, modal);
+    gtk_color_dialog_set_modal(cast(GtkColorDialog*)this._cPtr, modal);
   }
 
   /**
@@ -241,7 +241,7 @@ class ColorDialog : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_color_dialog_set_title(cast(GtkColorDialog*)cPtr, _title);
+    gtk_color_dialog_set_title(cast(GtkColorDialog*)this._cPtr, _title);
   }
 
   /**
@@ -252,6 +252,6 @@ class ColorDialog : gobject.object.ObjectWrap
   */
   void setWithAlpha(bool withAlpha)
   {
-    gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)cPtr, withAlpha);
+    gtk_color_dialog_set_with_alpha(cast(GtkColorDialog*)this._cPtr, withAlpha);
   }
 }

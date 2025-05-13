@@ -59,16 +59,16 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_get_type != &gidSymbolNotFound ? gtk_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -236,7 +236,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_button_get_can_shrink(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_can_shrink(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -298,8 +298,8 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_button_get_child(cast(GtkButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_button_get_child(cast(GtkButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_button_get_has_frame(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_has_frame(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_button_get_icon_name(cast(GtkButton*)cPtr);
+    _cretval = gtk_button_get_icon_name(cast(GtkButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -342,7 +342,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
+    _cretval = gtk_button_get_label(cast(GtkButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -357,7 +357,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_button_get_use_underline(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setCanShrink(bool canShrink)
   {
-    gtk_button_set_can_shrink(cast(GtkButton*)cPtr, canShrink);
+    gtk_button_set_can_shrink(cast(GtkButton*)this._cPtr, canShrink);
   }
 
   /**
@@ -391,7 +391,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_button_set_child(cast(GtkButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_button_set_child(cast(GtkButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -404,7 +404,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setHasFrame(bool hasFrame)
   {
-    gtk_button_set_has_frame(cast(GtkButton*)cPtr, hasFrame);
+    gtk_button_set_has_frame(cast(GtkButton*)this._cPtr, hasFrame);
   }
 
   /**
@@ -419,7 +419,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_button_set_icon_name(cast(GtkButton*)cPtr, _iconName);
+    gtk_button_set_icon_name(cast(GtkButton*)this._cPtr, _iconName);
   }
 
   /**
@@ -433,7 +433,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_button_set_label(cast(GtkButton*)cPtr, _label);
+    gtk_button_set_label(cast(GtkButton*)this._cPtr, _label);
   }
 
   /**
@@ -447,7 +447,7 @@ class Button : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setUseUnderline(bool useUnderline)
   {
-    gtk_button_set_use_underline(cast(GtkButton*)cPtr, useUnderline);
+    gtk_button_set_use_underline(cast(GtkButton*)this._cPtr, useUnderline);
   }
 
   /**

@@ -23,22 +23,22 @@ class SelectionData : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_data_get_type != &gidSymbolNotFound ? gtk_selection_data_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class SelectionData : gobject.boxed.Boxed
   gtk.selection_data.SelectionData copy()
   {
     GtkSelectionData* _cretval;
-    _cretval = gtk_selection_data_copy(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_copy(cast(const(GtkSelectionData)*)this._cPtr);
     auto _retval = _cretval ? new gtk.selection_data.SelectionData(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -66,7 +66,7 @@ class SelectionData : gobject.boxed.Boxed
   gdk.atom.Atom getDataType()
   {
     GdkAtom _cretval;
-    _cretval = gtk_selection_data_get_data_type(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_get_data_type(cast(const(GtkSelectionData)*)this._cPtr);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
@@ -79,7 +79,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     const(ubyte)* _cretval;
     int _cretlength;
-    _cretval = gtk_selection_data_get_data_with_length(cast(const(GtkSelectionData)*)cPtr, &_cretlength);
+    _cretval = gtk_selection_data_get_data_with_length(cast(const(GtkSelectionData)*)this._cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -96,8 +96,8 @@ class SelectionData : gobject.boxed.Boxed
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gtk_selection_data_get_display(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class SelectionData : gobject.boxed.Boxed
   int getFormat()
   {
     int _retval;
-    _retval = gtk_selection_data_get_format(cast(const(GtkSelectionData)*)cPtr);
+    _retval = gtk_selection_data_get_format(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class SelectionData : gobject.boxed.Boxed
   int getLength()
   {
     int _retval;
-    _retval = gtk_selection_data_get_length(cast(const(GtkSelectionData)*)cPtr);
+    _retval = gtk_selection_data_get_length(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 
@@ -134,8 +134,8 @@ class SelectionData : gobject.boxed.Boxed
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class SelectionData : gobject.boxed.Boxed
   gdk.atom.Atom getSelection()
   {
     GdkAtom _cretval;
-    _cretval = gtk_selection_data_get_selection(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_get_selection(cast(const(GtkSelectionData)*)this._cPtr);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
@@ -158,7 +158,7 @@ class SelectionData : gobject.boxed.Boxed
   gdk.atom.Atom getTarget()
   {
     GdkAtom _cretval;
-    _cretval = gtk_selection_data_get_target(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_get_target(cast(const(GtkSelectionData)*)this._cPtr);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
@@ -173,7 +173,7 @@ class SelectionData : gobject.boxed.Boxed
   string getText()
   {
     ubyte* _cretval;
-    _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_get_text(cast(const(GtkSelectionData)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -192,7 +192,7 @@ class SelectionData : gobject.boxed.Boxed
   string[] getUris()
   {
     char** _cretval;
-    _cretval = gtk_selection_data_get_uris(cast(const(GtkSelectionData)*)cPtr);
+    _cretval = gtk_selection_data_get_uris(cast(const(GtkSelectionData)*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -224,7 +224,7 @@ class SelectionData : gobject.boxed.Boxed
       _length = cast(int)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    gtk_selection_data_set(cast(GtkSelectionData*)cPtr, type ? cast(GdkAtom)type.cPtr : null, format, _data, _length);
+    gtk_selection_data_set(cast(GtkSelectionData*)this._cPtr, type ? cast(GdkAtom)type._cPtr : null, format, _data, _length);
   }
 
   /**
@@ -240,7 +240,7 @@ class SelectionData : gobject.boxed.Boxed
   bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     bool _retval;
-    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class SelectionData : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _str = str.toCString(No.Alloc);
-    _retval = gtk_selection_data_set_text(cast(GtkSelectionData*)cPtr, _str, len);
+    _retval = gtk_selection_data_set_text(cast(GtkSelectionData*)this._cPtr, _str, len);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class SelectionData : gobject.boxed.Boxed
       _tmpuris ~= s.toCString(No.Alloc);
     _tmpuris ~= null;
     char** _uris = _tmpuris.ptr;
-    _retval = gtk_selection_data_set_uris(cast(GtkSelectionData*)cPtr, _uris);
+    _retval = gtk_selection_data_set_uris(cast(GtkSelectionData*)this._cPtr, _uris);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeImage(bool writable)
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)cPtr, writable);
+    _retval = gtk_selection_data_targets_include_image(cast(const(GtkSelectionData)*)this._cPtr, writable);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeRichText(gtk.text_buffer.TextBuffer buffer)
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    _retval = gtk_selection_data_targets_include_rich_text(cast(const(GtkSelectionData)*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeText()
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)cPtr);
+    _retval = gtk_selection_data_targets_include_text(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class SelectionData : gobject.boxed.Boxed
   bool targetsIncludeUri()
   {
     bool _retval;
-    _retval = gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)cPtr);
+    _retval = gtk_selection_data_targets_include_uri(cast(const(GtkSelectionData)*)this._cPtr);
     return _retval;
   }
 }

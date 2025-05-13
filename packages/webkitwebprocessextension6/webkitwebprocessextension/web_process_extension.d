@@ -97,16 +97,16 @@ class WebProcessExtension : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_process_extension_get_type != &gidSymbolNotFound ? webkit_web_process_extension_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -126,8 +126,8 @@ class WebProcessExtension : gobject.object.ObjectWrap
   webkitwebprocessextension.web_page.WebPage getPage(ulong pageId)
   {
     WebKitWebPage* _cretval;
-    _cretval = webkit_web_process_extension_get_page(cast(WebKitWebProcessExtension*)cPtr, pageId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
+    _cretval = webkit_web_process_extension_get_page(cast(WebKitWebProcessExtension*)this._cPtr, pageId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -145,17 +145,17 @@ class WebProcessExtension : gobject.object.ObjectWrap
   */
   void sendMessageToContext(webkitwebprocessextension.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_process_extension_send_message_to_context(cast(WebKitWebProcessExtension*)cPtr, message ? cast(WebKitUserMessage*)message.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_process_extension_send_message_to_context(cast(WebKitWebProcessExtension*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -170,10 +170,10 @@ class WebProcessExtension : gobject.object.ObjectWrap
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_process_extension_send_message_to_context_finish(cast(WebKitWebProcessExtension*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_process_extension_send_message_to_context_finish(cast(WebKitWebProcessExtension*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

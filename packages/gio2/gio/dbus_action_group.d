@@ -29,16 +29,16 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_action_group_get_type != &gidSymbolNotFound ? g_dbus_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -77,8 +77,8 @@ class DBusActionGroup : gobject.object.ObjectWrap, gio.action_group.ActionGroup,
     GDBusActionGroup* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
+    _cretval = g_dbus_action_group_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_action_group.DBusActionGroup)(cast(GDBusActionGroup*)_cretval, Yes.Take);
     return _retval;
   }
 }

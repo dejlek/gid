@@ -38,22 +38,22 @@ class HSTSPolicy : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_policy_get_type != &gidSymbolNotFound ? soup_hsts_policy_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -101,7 +101,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   static soup.hstspolicy.HSTSPolicy newFromResponse(soup.message.Message msg)
   {
     SoupHSTSPolicy* _cretval;
-    _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = soup_hsts_policy_new_from_response(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -123,7 +123,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   {
     SoupHSTSPolicy* _cretval;
     const(char)* _domain = domain.toCString(No.Alloc);
-    _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires.cPtr(No.Dup) : null, includeSubdomains);
+    _cretval = soup_hsts_policy_new_full(_domain, maxAge, expires ? cast(GDateTime*)expires._cPtr(No.Dup) : null, includeSubdomains);
     auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -164,7 +164,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   soup.hstspolicy.HSTSPolicy copy()
   {
     SoupHSTSPolicy* _cretval;
-    _cretval = soup_hsts_policy_copy(cast(SoupHSTSPolicy*)cPtr);
+    _cretval = soup_hsts_policy_copy(cast(SoupHSTSPolicy*)this._cPtr);
     auto _retval = _cretval ? new soup.hstspolicy.HSTSPolicy(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -179,7 +179,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool equal(soup.hstspolicy.HSTSPolicy policy2)
   {
     bool _retval;
-    _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2.cPtr(No.Dup) : null);
+    _retval = soup_hsts_policy_equal(cast(SoupHSTSPolicy*)this._cPtr, policy2 ? cast(SoupHSTSPolicy*)policy2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)cPtr);
+    _cretval = soup_hsts_policy_get_domain(cast(SoupHSTSPolicy*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -202,7 +202,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   glib.date_time.DateTime getExpires()
   {
     GDateTime* _cretval;
-    _cretval = soup_hsts_policy_get_expires(cast(SoupHSTSPolicy*)cPtr);
+    _cretval = soup_hsts_policy_get_expires(cast(SoupHSTSPolicy*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -214,7 +214,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   gulong getMaxAge()
   {
     gulong _retval;
-    _retval = soup_hsts_policy_get_max_age(cast(SoupHSTSPolicy*)cPtr);
+    _retval = soup_hsts_policy_get_max_age(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool includesSubdomains()
   {
     bool _retval;
-    _retval = soup_hsts_policy_includes_subdomains(cast(SoupHSTSPolicy*)cPtr);
+    _retval = soup_hsts_policy_includes_subdomains(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool isExpired()
   {
     bool _retval;
-    _retval = soup_hsts_policy_is_expired(cast(SoupHSTSPolicy*)cPtr);
+    _retval = soup_hsts_policy_is_expired(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class HSTSPolicy : gobject.boxed.Boxed
   bool isSessionPolicy()
   {
     bool _retval;
-    _retval = soup_hsts_policy_is_session_policy(cast(SoupHSTSPolicy*)cPtr);
+    _retval = soup_hsts_policy_is_session_policy(cast(SoupHSTSPolicy*)this._cPtr);
     return _retval;
   }
 }

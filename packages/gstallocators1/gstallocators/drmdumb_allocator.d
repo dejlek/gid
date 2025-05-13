@@ -22,16 +22,16 @@ class DRMDumbAllocator : gst.allocator.Allocator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_drm_dumb_allocator_get_type != &gidSymbolNotFound ? gst_drm_dumb_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
     GstAllocator* _cretval;
     const(char)* _drmDevicePath = drmDevicePath.toCString(No.Alloc);
     _cretval = gst_drm_dumb_allocator_new_with_device_path(_drmDevicePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   {
     GstAllocator* _cretval;
     _cretval = gst_drm_dumb_allocator_new_with_fd(drmFd);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstallocators.drmdumb_allocator.DRMDumbAllocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   gst.memory.Memory alloc(uint drmFourcc, uint width, uint height, out uint outPitch)
   {
     GstMemory* _cretval;
-    _cretval = gst_drm_dumb_allocator_alloc(cast(GstAllocator*)cPtr, drmFourcc, width, height, cast(uint*)&outPitch);
+    _cretval = gst_drm_dumb_allocator_alloc(cast(GstAllocator*)this._cPtr, drmFourcc, width, height, cast(uint*)&outPitch);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -108,7 +108,7 @@ class DRMDumbAllocator : gst.allocator.Allocator
   bool hasPrimeExport()
   {
     bool _retval;
-    _retval = gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)cPtr);
+    _retval = gst_drm_dumb_allocator_has_prime_export(cast(GstAllocator*)this._cPtr);
     return _retval;
   }
 }

@@ -39,7 +39,7 @@ interface PowerProfileMonitor
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_power_profile_monitor_get_type != &gidSymbolNotFound ? g_power_profile_monitor_get_type() : cast(GType)0;
@@ -59,7 +59,7 @@ interface PowerProfileMonitor
   {
     GPowerProfileMonitor* _cretval;
     _cretval = g_power_profile_monitor_dup_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.power_profile_monitor.PowerProfileMonitor)(cast(GPowerProfileMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.power_profile_monitor.PowerProfileMonitor)(cast(GPowerProfileMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -33,16 +33,16 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_action_get_type != &gidSymbolNotFound ? gtk_recent_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -120,8 +120,8 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
+    _cretval = gtk_recent_action_new_for_manager(_name, _label, _tooltip, _stockId, manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_action.RecentAction)(cast(GtkAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   bool getShowNumbers()
   {
     bool _retval;
-    _retval = gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)cPtr);
+    _retval = gtk_recent_action_get_show_numbers(cast(GtkRecentAction*)this._cPtr);
     return _retval;
   }
 
@@ -147,6 +147,6 @@ class RecentAction : gtk.action.Action, gtk.recent_chooser.RecentChooser
   */
   void setShowNumbers(bool showNumbers)
   {
-    gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)cPtr, showNumbers);
+    gtk_recent_action_set_show_numbers(cast(GtkRecentAction*)this._cPtr, showNumbers);
   }
 }

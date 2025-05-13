@@ -27,7 +27,7 @@ class ActionEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class ActionEntry
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -48,8 +48,8 @@ class ActionEntry
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -59,7 +59,7 @@ class ActionEntry
   */
   @property string stockId()
   {
-    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).stockId);
+    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -70,8 +70,8 @@ class ActionEntry
   */
   @property void stockId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).stockId);
+    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -82,7 +82,7 @@ class ActionEntry
   */
   @property string label()
   {
-    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).label);
+    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -94,8 +94,8 @@ class ActionEntry
   */
   @property void label(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).label);
+    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -105,7 +105,7 @@ class ActionEntry
   */
   @property string accelerator()
   {
-    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).accelerator);
+    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -116,8 +116,8 @@ class ActionEntry
   */
   @property void accelerator(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).accelerator);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).accelerator);
+    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).accelerator);
+    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -127,7 +127,7 @@ class ActionEntry
   */
   @property string tooltip()
   {
-    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).tooltip);
+    return cToD!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -138,8 +138,8 @@ class ActionEntry
   */
   @property void tooltip(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)cPtr).tooltip);
-    dToC(propval, cast(void*)&(cast(GtkActionEntry*)cPtr).tooltip);
+    cValueFree!(string)(cast(void*)(cast(GtkActionEntry*)this._cPtr).tooltip);
+    dToC(propval, cast(void*)&(cast(GtkActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -148,7 +148,7 @@ class ActionEntry
   */
   @property GCallback callback()
   {
-    return (cast(GtkActionEntry*)cPtr).callback;
+    return (cast(GtkActionEntry*)this._cPtr).callback;
   }
 
   /**
@@ -159,6 +159,6 @@ class ActionEntry
 
   @property void callback(GCallback propval)
   {
-    (cast(GtkActionEntry*)cPtr).callback = propval;
+    (cast(GtkActionEntry*)this._cPtr).callback = propval;
   }
 }

@@ -25,16 +25,16 @@ class GestureZoom : gtk.gesture.Gesture
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_zoom_get_type != &gidSymbolNotFound ? gtk_gesture_zoom_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class GestureZoom : gtk.gesture.Gesture
   double getScaleDelta()
   {
     double _retval;
-    _retval = gtk_gesture_zoom_get_scale_delta(cast(GtkGestureZoom*)cPtr);
+    _retval = gtk_gesture_zoom_get_scale_delta(cast(GtkGestureZoom*)this._cPtr);
     return _retval;
   }
 

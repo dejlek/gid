@@ -27,7 +27,7 @@ class EventFocus
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventFocus
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventFocus*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventFocus*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventFocus
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventFocus*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventFocus*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventFocus
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventFocus
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventFocus*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventFocus*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventFocus*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventFocus
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventFocus*)cPtr).sendEvent;
+    return (cast(GdkEventFocus*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventFocus
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventFocus*)cPtr).sendEvent = propval;
+    (cast(GdkEventFocus*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class EventFocus
   */
   @property short in_()
   {
-    return (cast(GdkEventFocus*)cPtr).in_;
+    return (cast(GdkEventFocus*)this._cPtr).in_;
   }
 
   /**
@@ -108,6 +108,6 @@ class EventFocus
   */
   @property void in_(short propval)
   {
-    (cast(GdkEventFocus*)cPtr).in_ = propval;
+    (cast(GdkEventFocus*)this._cPtr).in_ = propval;
   }
 }

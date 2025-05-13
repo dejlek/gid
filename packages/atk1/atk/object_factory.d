@@ -29,16 +29,16 @@ class ObjectFactory : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_object_factory_get_type != &gidSymbolNotFound ? atk_object_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,8 +59,8 @@ class ObjectFactory : gobject.object.ObjectWrap
   atk.object.ObjectWrap createAccessible(gobject.object.ObjectWrap obj)
   {
     AtkObject* _cretval;
-    _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)cPtr, obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_object_factory_create_accessible(cast(AtkObjectFactory*)this._cPtr, obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class ObjectFactory : gobject.object.ObjectWrap
   gobject.types.GType getAccessibleType()
   {
     gobject.types.GType _retval;
-    _retval = atk_object_factory_get_accessible_type(cast(AtkObjectFactory*)cPtr);
+    _retval = atk_object_factory_get_accessible_type(cast(AtkObjectFactory*)this._cPtr);
     return _retval;
   }
 
@@ -85,6 +85,6 @@ class ObjectFactory : gobject.object.ObjectWrap
   */
   void invalidate()
   {
-    atk_object_factory_invalidate(cast(AtkObjectFactory*)cPtr);
+    atk_object_factory_invalidate(cast(AtkObjectFactory*)this._cPtr);
   }
 }

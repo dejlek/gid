@@ -33,22 +33,22 @@ class RTSPAuthParam : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_auth_param_get_type != &gidSymbolNotFound ? gst_rtsp_auth_param_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class RTSPAuthParam : gobject.boxed.Boxed
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).name);
   }
 
   /**
@@ -73,8 +73,8 @@ class RTSPAuthParam : gobject.boxed.Boxed
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)this._cPtr).name);
   }
 
   /**
@@ -83,7 +83,7 @@ class RTSPAuthParam : gobject.boxed.Boxed
   */
   @property string value()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
+    return cToD!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).value);
   }
 
   /**
@@ -93,15 +93,15 @@ class RTSPAuthParam : gobject.boxed.Boxed
   */
   @property void value(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)cPtr).value);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthParam*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(GstRTSPAuthParam*)this._cPtr).value);
   }
 
   /** */
   gstrtsp.rtspauth_param.RTSPAuthParam copy()
   {
     GstRTSPAuthParam* _cretval;
-    _cretval = gst_rtsp_auth_param_copy(cast(GstRTSPAuthParam*)cPtr);
+    _cretval = gst_rtsp_auth_param_copy(cast(GstRTSPAuthParam*)this._cPtr);
     auto _retval = _cretval ? new gstrtsp.rtspauth_param.RTSPAuthParam(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

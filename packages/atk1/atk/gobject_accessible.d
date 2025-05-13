@@ -26,16 +26,16 @@ class GObjectAccessible : atk.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_gobject_accessible_get_type != &gidSymbolNotFound ? atk_gobject_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,8 +55,8 @@ class GObjectAccessible : atk.object.ObjectWrap
   static atk.object.ObjectWrap forObject(gobject.object.ObjectWrap obj)
   {
     AtkObject* _cretval;
-    _cretval = atk_gobject_accessible_for_object(obj ? cast(ObjectC*)obj.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_gobject_accessible_for_object(obj ? cast(GObject*)obj._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -67,9 +67,9 @@ class GObjectAccessible : atk.object.ObjectWrap
   */
   gobject.object.ObjectWrap getObject()
   {
-    ObjectC* _cretval;
-    _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = atk_gobject_accessible_get_object(cast(AtkGObjectAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 }

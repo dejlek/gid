@@ -46,16 +46,16 @@ class WebsocketConnection : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_connection_get_type != &gidSymbolNotFound ? soup_websocket_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -140,7 +140,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   void close(ushort code, string data = null)
   {
     const(char)* _data = data.toCString(No.Alloc);
-    soup_websocket_connection_close(cast(SoupWebsocketConnection*)cPtr, code, _data);
+    soup_websocket_connection_close(cast(SoupWebsocketConnection*)this._cPtr, code, _data);
   }
 
   /**
@@ -155,7 +155,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   ushort getCloseCode()
   {
     ushort _retval;
-    _retval = soup_websocket_connection_get_close_code(cast(SoupWebsocketConnection*)cPtr);
+    _retval = soup_websocket_connection_get_close_code(cast(SoupWebsocketConnection*)this._cPtr);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   string getCloseData()
   {
     const(char)* _cretval;
-    _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_close_data(cast(SoupWebsocketConnection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -182,7 +182,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   soup.types.WebsocketConnectionType getConnectionType()
   {
     SoupWebsocketConnectionType _cretval;
-    _cretval = soup_websocket_connection_get_connection_type(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_connection_type(cast(SoupWebsocketConnection*)this._cPtr);
     soup.types.WebsocketConnectionType _retval = cast(soup.types.WebsocketConnectionType)_cretval;
     return _retval;
   }
@@ -194,7 +194,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   soup.websocket_extension.WebsocketExtension[] getExtensions()
   {
     GList* _cretval;
-    _cretval = soup_websocket_connection_get_extensions(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_extensions(cast(SoupWebsocketConnection*)this._cPtr);
     auto _retval = gListToD!(soup.websocket_extension.WebsocketExtension, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -206,8 +206,8 @@ class WebsocketConnection : gobject.object.ObjectWrap
   gio.iostream.IOStream getIoStream()
   {
     GIOStream* _cretval;
-    _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
+    _cretval = soup_websocket_connection_get_io_stream(cast(SoupWebsocketConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   uint getKeepaliveInterval()
   {
     uint _retval;
-    _retval = soup_websocket_connection_get_keepalive_interval(cast(SoupWebsocketConnection*)cPtr);
+    _retval = soup_websocket_connection_get_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   ulong getMaxIncomingPayloadSize()
   {
     ulong _retval;
-    _retval = soup_websocket_connection_get_max_incoming_payload_size(cast(SoupWebsocketConnection*)cPtr);
+    _retval = soup_websocket_connection_get_max_incoming_payload_size(cast(SoupWebsocketConnection*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   string getOrigin()
   {
     const(char)* _cretval;
-    _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_origin(cast(SoupWebsocketConnection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -252,7 +252,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   string getProtocol()
   {
     const(char)* _cretval;
-    _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_protocol(cast(SoupWebsocketConnection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -264,7 +264,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   soup.types.WebsocketState getState()
   {
     SoupWebsocketState _cretval;
-    _cretval = soup_websocket_connection_get_state(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_state(cast(SoupWebsocketConnection*)this._cPtr);
     soup.types.WebsocketState _retval = cast(soup.types.WebsocketState)_cretval;
     return _retval;
   }
@@ -279,7 +279,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   glib.uri.Uri getUri()
   {
     GUri* _cretval;
-    _cretval = soup_websocket_connection_get_uri(cast(SoupWebsocketConnection*)cPtr);
+    _cretval = soup_websocket_connection_get_uri(cast(SoupWebsocketConnection*)this._cPtr);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -302,7 +302,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
       _length = cast(size_t)data.length;
 
     auto _data = cast(const(void)*)data.ptr;
-    soup_websocket_connection_send_binary(cast(SoupWebsocketConnection*)cPtr, _data, _length);
+    soup_websocket_connection_send_binary(cast(SoupWebsocketConnection*)this._cPtr, _data, _length);
   }
 
   /**
@@ -318,7 +318,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   void sendMessage(soup.types.WebsocketDataType type, glib.bytes.Bytes message)
   {
-    soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)cPtr, type, message ? cast(GBytes*)message.cPtr(No.Dup) : null);
+    soup_websocket_connection_send_message(cast(SoupWebsocketConnection*)this._cPtr, type, message ? cast(GBytes*)message._cPtr(No.Dup) : null);
   }
 
   /**
@@ -336,7 +336,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   void sendText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    soup_websocket_connection_send_text(cast(SoupWebsocketConnection*)cPtr, _text);
+    soup_websocket_connection_send_text(cast(SoupWebsocketConnection*)this._cPtr, _text);
   }
 
   /**
@@ -350,7 +350,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   void setKeepaliveInterval(uint interval)
   {
-    soup_websocket_connection_set_keepalive_interval(cast(SoupWebsocketConnection*)cPtr, interval);
+    soup_websocket_connection_set_keepalive_interval(cast(SoupWebsocketConnection*)this._cPtr, interval);
   }
 
   /**
@@ -363,7 +363,7 @@ class WebsocketConnection : gobject.object.ObjectWrap
   */
   void setMaxIncomingPayloadSize(ulong maxIncomingPayloadSize)
   {
-    soup_websocket_connection_set_max_incoming_payload_size(cast(SoupWebsocketConnection*)cPtr, maxIncomingPayloadSize);
+    soup_websocket_connection_set_max_incoming_payload_size(cast(SoupWebsocketConnection*)this._cPtr, maxIncomingPayloadSize);
   }
 
   /**

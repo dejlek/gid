@@ -88,7 +88,7 @@ class RWLock
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -104,7 +104,7 @@ class RWLock
   */
   void clear()
   {
-    g_rw_lock_clear(cast(GRWLock*)cPtr);
+    g_rw_lock_clear(cast(GRWLock*)this._cPtr);
   }
 
   /**
@@ -135,7 +135,7 @@ class RWLock
   */
   void init_()
   {
-    g_rw_lock_init(cast(GRWLock*)cPtr);
+    g_rw_lock_init(cast(GRWLock*)this._cPtr);
   }
 
   /**
@@ -157,7 +157,7 @@ class RWLock
   */
   void readerLock()
   {
-    g_rw_lock_reader_lock(cast(GRWLock*)cPtr);
+    g_rw_lock_reader_lock(cast(GRWLock*)this._cPtr);
   }
 
   /**
@@ -169,7 +169,7 @@ class RWLock
   bool readerTrylock()
   {
     bool _retval;
-    _retval = g_rw_lock_reader_trylock(cast(GRWLock*)cPtr);
+    _retval = g_rw_lock_reader_trylock(cast(GRWLock*)this._cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class RWLock
   */
   void readerUnlock()
   {
-    g_rw_lock_reader_unlock(cast(GRWLock*)cPtr);
+    g_rw_lock_reader_unlock(cast(GRWLock*)this._cPtr);
   }
 
   /**
@@ -194,7 +194,7 @@ class RWLock
   */
   void writerLock()
   {
-    g_rw_lock_writer_lock(cast(GRWLock*)cPtr);
+    g_rw_lock_writer_lock(cast(GRWLock*)this._cPtr);
   }
 
   /**
@@ -207,7 +207,7 @@ class RWLock
   bool writerTrylock()
   {
     bool _retval;
-    _retval = g_rw_lock_writer_trylock(cast(GRWLock*)cPtr);
+    _retval = g_rw_lock_writer_trylock(cast(GRWLock*)this._cPtr);
     return _retval;
   }
 
@@ -219,6 +219,6 @@ class RWLock
   */
   void writerUnlock()
   {
-    g_rw_lock_writer_unlock(cast(GRWLock*)cPtr);
+    g_rw_lock_writer_unlock(cast(GRWLock*)this._cPtr);
   }
 }

@@ -25,16 +25,16 @@ class Frame : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_frame_get_type != &gidSymbolNotFound ? webkit_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class Frame : gobject.object.ObjectWrap
   ulong getId()
   {
     ulong _retval;
-    _retval = webkit_frame_get_id(cast(WebKitFrame*)cPtr);
+    _retval = webkit_frame_get_id(cast(WebKitFrame*)this._cPtr);
     return _retval;
   }
 
@@ -64,8 +64,8 @@ class Frame : gobject.object.ObjectWrap
   javascriptcore.context.Context getJsContext()
   {
     JSCContext* _cretval;
-    _cretval = webkit_frame_get_js_context(cast(WebKitFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    _cretval = webkit_frame_get_js_context(cast(WebKitFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,8 +79,8 @@ class Frame : gobject.object.ObjectWrap
   javascriptcore.context.Context getJsContextForScriptWorld(webkitwebprocessextension.script_world.ScriptWorld world)
   {
     JSCContext* _cretval;
-    _cretval = webkit_frame_get_js_context_for_script_world(cast(WebKitFrame*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    _cretval = webkit_frame_get_js_context_for_script_world(cast(WebKitFrame*)this._cPtr, world ? cast(WebKitScriptWorld*)world._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class Frame : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_frame_get_uri(cast(WebKitFrame*)cPtr);
+    _cretval = webkit_frame_get_uri(cast(WebKitFrame*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -104,7 +104,7 @@ class Frame : gobject.object.ObjectWrap
   bool isMainFrame()
   {
     bool _retval;
-    _retval = webkit_frame_is_main_frame(cast(WebKitFrame*)cPtr);
+    _retval = webkit_frame_is_main_frame(cast(WebKitFrame*)this._cPtr);
     return _retval;
   }
 }

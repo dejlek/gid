@@ -20,16 +20,16 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_time_interval_scalar_get_type != &gidSymbolNotFound ? garrow_day_time_interval_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   this(arrow.day_millisecond.DayMillisecond value)
   {
     GArrowDayTimeIntervalScalar* _cretval;
-    _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_day_time_interval_scalar_new(value ? cast(GArrowDayMillisecond*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -50,8 +50,8 @@ class DayTimeIntervalScalar : arrow.scalar.Scalar
   arrow.day_millisecond.DayMillisecond getValue()
   {
     GArrowDayMillisecond* _cretval;
-    _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
+    _cretval = garrow_day_time_interval_scalar_get_value(cast(GArrowDayTimeIntervalScalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.day_millisecond.DayMillisecond)(cast(GArrowDayMillisecond*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -24,22 +24,22 @@ class TabArray : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_tab_array_get_type != &gidSymbolNotFound ? pango_tab_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class TabArray : gobject.boxed.Boxed
   pango.tab_array.TabArray copy()
   {
     PangoTabArray* _cretval;
-    _cretval = pango_tab_array_copy(cast(PangoTabArray*)cPtr);
+    _cretval = pango_tab_array_copy(cast(PangoTabArray*)this._cPtr);
     auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -97,7 +97,7 @@ class TabArray : gobject.boxed.Boxed
   dchar getDecimalPoint(int tabIndex)
   {
     dchar _retval;
-    _retval = pango_tab_array_get_decimal_point(cast(PangoTabArray*)cPtr, tabIndex);
+    _retval = pango_tab_array_get_decimal_point(cast(PangoTabArray*)this._cPtr, tabIndex);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class TabArray : gobject.boxed.Boxed
   bool getPositionsInPixels()
   {
     bool _retval;
-    _retval = pango_tab_array_get_positions_in_pixels(cast(PangoTabArray*)cPtr);
+    _retval = pango_tab_array_get_positions_in_pixels(cast(PangoTabArray*)this._cPtr);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class TabArray : gobject.boxed.Boxed
   int getSize()
   {
     int _retval;
-    _retval = pango_tab_array_get_size(cast(PangoTabArray*)cPtr);
+    _retval = pango_tab_array_get_size(cast(PangoTabArray*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void getTab(int tabIndex, out pango.types.TabAlign alignment, out int location)
   {
-    pango_tab_array_get_tab(cast(PangoTabArray*)cPtr, tabIndex, &alignment, cast(int*)&location);
+    pango_tab_array_get_tab(cast(PangoTabArray*)this._cPtr, tabIndex, &alignment, cast(int*)&location);
   }
 
   /**
@@ -148,7 +148,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void resize(int newSize)
   {
-    pango_tab_array_resize(cast(PangoTabArray*)cPtr, newSize);
+    pango_tab_array_resize(cast(PangoTabArray*)this._cPtr, newSize);
   }
 
   /**
@@ -167,7 +167,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void setDecimalPoint(int tabIndex, dchar decimalPoint)
   {
-    pango_tab_array_set_decimal_point(cast(PangoTabArray*)cPtr, tabIndex, decimalPoint);
+    pango_tab_array_set_decimal_point(cast(PangoTabArray*)this._cPtr, tabIndex, decimalPoint);
   }
 
   /**
@@ -179,7 +179,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void setPositionsInPixels(bool positionsInPixels)
   {
-    pango_tab_array_set_positions_in_pixels(cast(PangoTabArray*)cPtr, positionsInPixels);
+    pango_tab_array_set_positions_in_pixels(cast(PangoTabArray*)this._cPtr, positionsInPixels);
   }
 
   /**
@@ -192,7 +192,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void setTab(int tabIndex, pango.types.TabAlign alignment, int location)
   {
-    pango_tab_array_set_tab(cast(PangoTabArray*)cPtr, tabIndex, alignment, location);
+    pango_tab_array_set_tab(cast(PangoTabArray*)this._cPtr, tabIndex, alignment, location);
   }
 
   /**
@@ -200,7 +200,7 @@ class TabArray : gobject.boxed.Boxed
   */
   void sort()
   {
-    pango_tab_array_sort(cast(PangoTabArray*)cPtr);
+    pango_tab_array_sort(cast(PangoTabArray*)this._cPtr);
   }
 
   /**
@@ -217,7 +217,7 @@ class TabArray : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_tab_array_to_string(cast(PangoTabArray*)cPtr);
+    _cretval = pango_tab_array_to_string(cast(PangoTabArray*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

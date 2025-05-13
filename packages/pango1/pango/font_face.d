@@ -23,16 +23,16 @@ class FontFace : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_face_get_type != &gidSymbolNotFound ? pango_font_face_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class FontFace : gobject.object.ObjectWrap
   pango.font_description.FontDescription describe()
   {
     PangoFontDescription* _cretval;
-    _cretval = pango_font_face_describe(cast(PangoFontFace*)cPtr);
+    _cretval = pango_font_face_describe(cast(PangoFontFace*)this._cPtr);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -71,7 +71,7 @@ class FontFace : gobject.object.ObjectWrap
   string getFaceName()
   {
     const(char)* _cretval;
-    _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)cPtr);
+    _cretval = pango_font_face_get_face_name(cast(PangoFontFace*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -83,8 +83,8 @@ class FontFace : gobject.object.ObjectWrap
   pango.font_family.FontFamily getFamily()
   {
     PangoFontFamily* _cretval;
-    _cretval = pango_font_face_get_family(cast(PangoFontFace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    _cretval = pango_font_face_get_family(cast(PangoFontFace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class FontFace : gobject.object.ObjectWrap
   bool isSynthesized()
   {
     bool _retval;
-    _retval = pango_font_face_is_synthesized(cast(PangoFontFace*)cPtr);
+    _retval = pango_font_face_is_synthesized(cast(PangoFontFace*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class FontFace : gobject.object.ObjectWrap
   {
     int _nSizes;
     int* _sizes;
-    pango_font_face_list_sizes(cast(PangoFontFace*)cPtr, &_sizes, &_nSizes);
+    pango_font_face_list_sizes(cast(PangoFontFace*)this._cPtr, &_sizes, &_nSizes);
     sizes.length = _nSizes;
     sizes[0 .. $] = (cast(int*)_sizes)[0 .. _nSizes];
     gFree(cast(void*)_sizes);

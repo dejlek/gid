@@ -31,7 +31,7 @@ interface Component
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_component_get_type != &gidSymbolNotFound ? atk_component_get_type() : cast(GType)0;

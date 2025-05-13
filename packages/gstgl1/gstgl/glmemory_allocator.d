@@ -22,16 +22,16 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_allocator_get_type != &gidSymbolNotFound ? gst_gl_memory_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,8 +44,8 @@ class GLMemoryAllocator : gstgl.glbase_memory_allocator.GLBaseMemoryAllocator
   static gstgl.glmemory_allocator.GLMemoryAllocator getDefault(gstgl.glcontext.GLContext context)
   {
     GstGLMemoryAllocator* _cretval;
-    _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
+    _cretval = gst_gl_memory_allocator_get_default(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glmemory_allocator.GLMemoryAllocator)(cast(GstGLMemoryAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 }

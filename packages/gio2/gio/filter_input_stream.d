@@ -24,16 +24,16 @@ class FilterInputStream : gio.input_stream.InputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_filter_input_stream_get_type != &gidSymbolNotFound ? g_filter_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,8 +68,8 @@ class FilterInputStream : gio.input_stream.InputStream
   gio.input_stream.InputStream getBaseStream()
   {
     GInputStream* _cretval;
-    _cretval = g_filter_input_stream_get_base_stream(cast(GFilterInputStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    _cretval = g_filter_input_stream_get_base_stream(cast(GFilterInputStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class FilterInputStream : gio.input_stream.InputStream
   bool getCloseBaseStream()
   {
     bool _retval;
-    _retval = g_filter_input_stream_get_close_base_stream(cast(GFilterInputStream*)cPtr);
+    _retval = g_filter_input_stream_get_close_base_stream(cast(GFilterInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -93,6 +93,6 @@ class FilterInputStream : gio.input_stream.InputStream
   */
   void setCloseBaseStream(bool closeBase)
   {
-    g_filter_input_stream_set_close_base_stream(cast(GFilterInputStream*)cPtr, closeBase);
+    g_filter_input_stream_set_close_base_stream(cast(GFilterInputStream*)this._cPtr, closeBase);
   }
 }

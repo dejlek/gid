@@ -36,7 +36,7 @@ template TocSetterT()
   override gst.toc.Toc getToc()
   {
     GstToc* _cretval;
-    _cretval = gst_toc_setter_get_toc(cast(GstTocSetter*)cPtr);
+    _cretval = gst_toc_setter_get_toc(cast(GstTocSetter*)this._cPtr);
     auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -47,7 +47,7 @@ template TocSetterT()
   */
   override void reset()
   {
-    gst_toc_setter_reset(cast(GstTocSetter*)cPtr);
+    gst_toc_setter_reset(cast(GstTocSetter*)this._cPtr);
   }
 
   /**
@@ -59,6 +59,6 @@ template TocSetterT()
   */
   override void setToc(gst.toc.Toc toc = null)
   {
-    gst_toc_setter_set_toc(cast(GstTocSetter*)cPtr, toc ? cast(GstToc*)toc.cPtr(No.Dup) : null);
+    gst_toc_setter_set_toc(cast(GstTocSetter*)this._cPtr, toc ? cast(GstToc*)toc._cPtr(No.Dup) : null);
   }
 }

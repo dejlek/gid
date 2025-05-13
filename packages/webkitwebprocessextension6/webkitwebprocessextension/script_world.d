@@ -21,16 +21,16 @@ class ScriptWorld : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_script_world_get_type != &gidSymbolNotFound ? webkit_script_world_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class ScriptWorld : gobject.object.ObjectWrap
     WebKitScriptWorld* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = webkit_script_world_new_with_name(_name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   {
     WebKitScriptWorld* _cretval;
     _cretval = webkit_script_world_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.script_world.ScriptWorld)(cast(WebKitScriptWorld*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class ScriptWorld : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_script_world_get_name(cast(WebKitScriptWorld*)cPtr);
+    _cretval = webkit_script_world_get_name(cast(WebKitScriptWorld*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

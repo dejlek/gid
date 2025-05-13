@@ -29,16 +29,16 @@ class Client : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_client_get_type != &gidSymbolNotFound ? gaflight_client_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class Client : gobject.object.ObjectWrap
   {
     GAFlightClient* _cretval;
     GError *_err;
-    _cretval = gaflight_client_new(location ? cast(GAFlightLocation*)location.cPtr(No.Dup) : null, options ? cast(GAFlightClientOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_client_new(location ? cast(GAFlightLocation*)location._cPtr(No.Dup) : null, options ? cast(GAFlightClientOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -78,7 +78,7 @@ class Client : gobject.object.ObjectWrap
     char* _bearerName;
     char* _bearerValue;
     GError *_err;
-    _retval = gaflight_client_authenticate_basic_token(cast(GAFlightClient*)cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
+    _retval = gaflight_client_authenticate_basic_token(cast(GAFlightClient*)this._cPtr, _user, _password, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_bearerName, &_bearerValue, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     bearerName = _bearerName.fromCString(Yes.Free);
@@ -91,7 +91,7 @@ class Client : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_client_close(cast(GAFlightClient*)cPtr, &_err);
+    _retval = gaflight_client_close(cast(GAFlightClient*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -102,10 +102,10 @@ class Client : gobject.object.ObjectWrap
   {
     GAFlightStreamReader* _cretval;
     GError *_err;
-    _cretval = gaflight_client_do_get(cast(GAFlightClient*)cPtr, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_client_do_get(cast(GAFlightClient*)this._cPtr, ticket ? cast(GAFlightTicket*)ticket._cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.stream_reader.StreamReader)(cast(GAFlightStreamReader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.stream_reader.StreamReader)(cast(GAFlightStreamReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,10 +130,10 @@ class Client : gobject.object.ObjectWrap
   {
     GAFlightDoPutResult* _cretval;
     GError *_err;
-    _cretval = gaflight_client_do_put(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_client_do_put(cast(GAFlightClient*)this._cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor._cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.do_put_result.DoPutResult)(cast(GAFlightDoPutResult*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.do_put_result.DoPutResult)(cast(GAFlightDoPutResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -142,10 +142,10 @@ class Client : gobject.object.ObjectWrap
   {
     GAFlightInfo* _cretval;
     GError *_err;
-    _cretval = gaflight_client_get_flight_info(cast(GAFlightClient*)cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_client_get_flight_info(cast(GAFlightClient*)this._cPtr, descriptor ? cast(GAFlightDescriptor*)descriptor._cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Client : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = gaflight_client_list_flights(cast(GAFlightClient*)cPtr, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_client_list_flights(cast(GAFlightClient*)this._cPtr, criteria ? cast(GAFlightCriteria*)criteria._cPtr(No.Dup) : null, options ? cast(GAFlightCallOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);

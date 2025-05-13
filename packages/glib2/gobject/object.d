@@ -89,7 +89,7 @@ string objectMixin()
 */
 class ObjectWrap
 {
-  protected ObjectC* cInstancePtr; // Pointer to wrapped C GObject
+  protected GObject* cInstancePtr; // Pointer to wrapped C GObject
   DClosure[ulong] signalClosures; // References to signal closures keyed by closure ID, so they don't get garbage collected until the object is finalized
 
   /**
@@ -114,7 +114,7 @@ class ObjectWrap
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
 
-    setGObject(cObj, take);
+    _setGObject(cObj, take);
   }
 
   ~this()
@@ -132,11 +132,11 @@ class ObjectWrap
   *   cObj = Pointer to the GObject
   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
   */
-  final void setGObject(void* cObj, Flag!"Take" take = No.Take)
+  final void _setGObject(void* cObj, Flag!"Take" take = No.Take)
   {
     assert(!cInstancePtr);
 
-    cInstancePtr = cast(ObjectC*)cObj;
+    cInstancePtr = cast(GObject*)cObj;
 
     // Add a data pointer to the D object from the C GObject
     g_object_set_qdata(cInstancePtr, gidObjectQuark, cast(void*)this);
@@ -162,7 +162,7 @@ class ObjectWrap
   }
 
   // Toggle ref callback
-  extern(C) static void _cObjToggleNotify(void *dObj, ObjectC* gObj, bool isLastRef)
+  extern(C) static void _cObjToggleNotify(void *dObj, GObject* gObj, bool isLastRef)
   {
     debug
     {
@@ -182,7 +182,7 @@ class ObjectWrap
   *   dup = Yes.Dup to add a reference with g_object_ref(), No.Dup otherwise (default)
   * Returns: The C object (reference added according to addRef parameter)
   */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       g_object_ref(cInstancePtr);
@@ -190,7 +190,7 @@ class ObjectWrap
     debug
     {
       if (dup)
-        objectDebugLog("cPtr(Yes.Dup)");
+        objectDebugLog("_cPtr(Yes.Dup)");
     }
 
     return cast(void*)cInstancePtr;
@@ -202,9 +202,9 @@ class ObjectWrap
   *   gObj = The GObject to reference
   * Returns: The GObject
   */
-  static void* ref_(void* gObj)
+  static void* _ref(void* gObj)
   {
-    return g_object_ref(cast(ObjectC*)gObj);
+    return g_object_ref(cast(GObject*)gObj);
   }
 
   /**
@@ -212,16 +212,16 @@ class ObjectWrap
   * Params:
   *   gObj = The GObject to reference
   */
-  static unref(void* gObj)
+  static _unref(void* gObj)
   {
-    g_object_unref(cast(ObjectC*)gObj);
+    g_object_unref(cast(GObject*)gObj);
   }
 
   /**
   * Get the GType of an object.
   * Returns: The GType
   */
-  static GType getGType()
+  static GType _getGType()
   {
     return g_object_get_type();
   }
@@ -230,9 +230,9 @@ class ObjectWrap
   * GObject GType property.
   * Returns: The GType of the GObject class.
   */
-  @property GType gType()
+  @property GType _gType()
   {
-    return getGType;
+    return _getGType;
   }
 
   /**
@@ -252,16 +252,16 @@ class ObjectWrap
   *   take = If Yes.Take then the D object will consume a GObject reference (No.Take by default).
   * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
   */
-  static T getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
+  static T _getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
   {
     if (!cptr)
       return null;
 
     // Cast return value to ObjectWrap or D pointer resolution will break if T is an interface (cast from void* to Interface not the same as Object to Interface)
-    if (auto dObj = cast(ObjectWrap)g_object_get_qdata(cast(ObjectC*)cptr, gidObjectQuark))
+    if (auto dObj = cast(ObjectWrap)g_object_get_qdata(cast(GObject*)cptr, gidObjectQuark))
     {
       if (take)
-        g_object_unref(cast(ObjectC*)cptr);
+        g_object_unref(cast(GObject*)cptr);
 
       return cast(T)dObj;
     }
@@ -294,7 +294,7 @@ class ObjectWrap
             { // Create object without calling the constructor which could have side effects - FIXME is there a better way to do this?
               auto obj = _d_newclass(c);
 
-              if (auto gType = (cast(ObjectWrap)obj).gType)
+              if (auto gType = (cast(ObjectWrap)obj)._gType)
                 gtypeClasses[gType] = c;
             }
           }
@@ -315,7 +315,7 @@ class ObjectWrap
 
         if (auto obj = _d_newclass(cast()*dClassType))
         {
-          (cast(ObjectWrap)obj).setGObject(cptr, take);
+          (cast(ObjectWrap)obj)._setGObject(cptr, take);
           return cast(T)obj;
         }
 
@@ -329,7 +329,7 @@ class ObjectWrap
       {
         if (auto obj = _d_newclass(cast()*proxyClass)) // Create the object without calling the constructor
         {
-          (cast(ObjectWrap)obj).setGObject(cptr, take); // Assign the C GObject
+          (cast(ObjectWrap)obj)._setGObject(cptr, take); // Assign the C GObject
           return cast(T)obj;
         }
       }
@@ -408,7 +408,7 @@ class ObjectWrap
   */
   ulong connectSignalClosure(string signalDetail, DClosure closure, Flag!"After" after = No.After)
   {
-    auto gclosure = cast(GClosure*)(cast(Closure)closure).cPtr;
+    auto gclosure = cast(GClosure*)(cast(Closure)closure)._cPtr;
     auto retval = g_signal_connect_closure(cInstancePtr, signalDetail.toCString(No.Alloc), gclosure, after == Yes.After);
     g_object_watch_closure(cInstancePtr, gclosure); // Invalidate closure when object is finalized
 
@@ -443,7 +443,7 @@ class ObjectWrap
   {
     GValue value;
     initVal!T(&value);
-    g_object_get_property(cast(ObjectC*)cInstancePtr, toCString(propertyName, No.Alloc), &value);
+    g_object_get_property(cast(GObject*)cInstancePtr, toCString(propertyName, No.Alloc), &value);
     T retval = getVal!T(&value);
     g_value_unset(&value);
     return retval;
@@ -504,8 +504,8 @@ class ObjectWrap
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    _cretval = g_object_bind_property(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    _cretval = g_object_bind_property(cast(GObject*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -536,8 +536,8 @@ class ObjectWrap
     GBinding* _cretval;
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    _cretval = g_object_bind_property_with_closures(cast(ObjectC*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
+    _cretval = g_object_bind_property_with_closures(cast(GObject*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo._cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.binding.Binding)(cast(GBinding*)_cretval, No.Take);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class ObjectWrap
   */
   void forceFloating()
   {
-    g_object_force_floating(cast(ObjectC*)cPtr);
+    g_object_force_floating(cast(GObject*)this._cPtr);
   }
 
   /**
@@ -565,7 +565,7 @@ class ObjectWrap
   */
   void freezeNotify()
   {
-    g_object_freeze_notify(cast(ObjectC*)cPtr);
+    g_object_freeze_notify(cast(GObject*)this._cPtr);
   }
 
   /**
@@ -579,7 +579,7 @@ class ObjectWrap
   void* getData(string key)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    auto _retval = g_object_get_data(cast(ObjectC*)cPtr, _key);
+    auto _retval = g_object_get_data(cast(GObject*)this._cPtr, _key);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class ObjectWrap
   void getProperty(string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_get_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    g_object_get_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -623,7 +623,7 @@ class ObjectWrap
   */
   void* getQdata(glib.types.Quark quark)
   {
-    auto _retval = g_object_get_qdata(cast(ObjectC*)cPtr, quark);
+    auto _retval = g_object_get_qdata(cast(GObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -653,9 +653,9 @@ class ObjectWrap
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    g_object_getv(cast(ObjectC*)cPtr, _nProperties, _names, _values);
+    g_object_getv(cast(GObject*)this._cPtr, _nProperties, _names, _values);
   }
 
   /**
@@ -665,7 +665,7 @@ class ObjectWrap
   bool isFloating()
   {
     bool _retval;
-    _retval = g_object_is_floating(cast(ObjectC*)cPtr);
+    _retval = g_object_is_floating(cast(GObject*)this._cPtr);
     return _retval;
   }
 
@@ -687,7 +687,7 @@ class ObjectWrap
   void notify(string propertyName)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_notify(cast(ObjectC*)cPtr, _propertyName);
+    g_object_notify(cast(GObject*)this._cPtr, _propertyName);
   }
 
   /**
@@ -734,7 +734,7 @@ class ObjectWrap
   */
   void notifyByPspec(gobject.param_spec.ParamSpec pspec)
   {
-    g_object_notify_by_pspec(cast(ObjectC*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    g_object_notify_by_pspec(cast(GObject*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
 
   /**
@@ -753,9 +753,9 @@ class ObjectWrap
   */
   gobject.object.ObjectWrap refSink()
   {
-    ObjectC* _cretval;
-    _cretval = g_object_ref_sink(cast(ObjectC*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_object_ref_sink(cast(GObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -767,7 +767,7 @@ class ObjectWrap
   */
   void runDispose()
   {
-    g_object_run_dispose(cast(ObjectC*)cPtr);
+    g_object_run_dispose(cast(GObject*)this._cPtr);
   }
 
   /**
@@ -789,7 +789,7 @@ class ObjectWrap
   void setData(string key, void* data = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    g_object_set_data(cast(ObjectC*)cPtr, _key, data);
+    g_object_set_data(cast(GObject*)this._cPtr, _key, data);
   }
 
   /**
@@ -802,7 +802,7 @@ class ObjectWrap
   void setProperty(string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    g_object_set_property(cast(ObjectC*)cPtr, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    g_object_set_property(cast(GObject*)this._cPtr, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -817,7 +817,7 @@ class ObjectWrap
   void* stealData(string key)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    auto _retval = g_object_steal_data(cast(ObjectC*)cPtr, _key);
+    auto _retval = g_object_steal_data(cast(GObject*)this._cPtr, _key);
     return _retval;
   }
 
@@ -864,7 +864,7 @@ class ObjectWrap
   */
   void* stealQdata(glib.types.Quark quark)
   {
-    auto _retval = g_object_steal_qdata(cast(ObjectC*)cPtr, quark);
+    auto _retval = g_object_steal_qdata(cast(GObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -881,7 +881,7 @@ class ObjectWrap
   */
   void thawNotify()
   {
-    g_object_thaw_notify(cast(ObjectC*)cPtr);
+    g_object_thaw_notify(cast(GObject*)this._cPtr);
   }
 
   /**
@@ -900,7 +900,7 @@ class ObjectWrap
   */
   void watchClosure(gobject.closure.Closure closure)
   {
-    g_object_watch_closure(cast(ObjectC*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    g_object_watch_closure(cast(GObject*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
 
   /**

@@ -31,8 +31,8 @@ class DNDEvent : gdk.event.Event
   gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
-    _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    _cretval = gdk_dnd_event_get_drop(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 }

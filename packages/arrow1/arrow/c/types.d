@@ -800,7 +800,7 @@ struct GArrowAggregateNodeOptionsClass
 struct GArrowAggregation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -814,14 +814,14 @@ struct GArrowAggregationClass
 struct GArrowArray
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
 struct GArrowArrayBuilder
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1052,7 +1052,7 @@ struct GArrowBooleanScalarClass
 struct GArrowBuffer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1094,7 +1094,7 @@ struct GArrowBufferOutputStreamClass
 struct GArrowCSVReadOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1108,7 +1108,7 @@ struct GArrowCSVReadOptionsClass
 struct GArrowCSVReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1150,7 +1150,7 @@ struct GArrowCastOptionsClass
 struct GArrowChunkedArray
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1178,7 +1178,7 @@ struct GArrowChunkedArrayDatumClass
 struct GArrowCodec
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1234,7 +1234,7 @@ struct GArrowCountOptionsClass
 struct GArrowDataType
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1360,7 +1360,7 @@ struct GArrowDate64ScalarClass
 struct GArrowDatum
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1374,7 +1374,7 @@ struct GArrowDatumClass
 struct GArrowDayMillisecond
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1444,7 +1444,7 @@ struct GArrowDayTimeIntervalScalarClass
 struct GArrowDecimal128
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1514,7 +1514,7 @@ struct GArrowDecimal128ScalarClass
 struct GArrowDecimal256
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1584,7 +1584,7 @@ struct GArrowDecimal256ScalarClass
 struct GArrowDecimal32
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1654,7 +1654,7 @@ struct GArrowDecimal32ScalarClass
 struct GArrowDecimal64
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1878,7 +1878,7 @@ struct GArrowDoubleScalarClass
 struct GArrowEqualOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1892,7 +1892,7 @@ struct GArrowEqualOptionsClass
 struct GArrowExecuteContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1906,7 +1906,7 @@ struct GArrowExecuteContextClass
 struct GArrowExecuteNode
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1920,7 +1920,7 @@ struct GArrowExecuteNodeClass
 struct GArrowExecuteNodeOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1934,7 +1934,7 @@ struct GArrowExecuteNodeOptionsClass
 struct GArrowExecutePlan
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1948,7 +1948,7 @@ struct GArrowExecutePlanClass
 struct GArrowExpression
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2019,7 +2019,7 @@ struct GArrowExtensionDataTypeClass
 struct GArrowExtensionDataTypeRegistry
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2047,7 +2047,7 @@ struct GArrowExtensionScalarClass
 struct GArrowFeatherFileReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2061,7 +2061,7 @@ struct GArrowFeatherFileReaderClass
 struct GArrowFeatherWriteProperties
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2075,7 +2075,7 @@ struct GArrowFeatherWritePropertiesClass
 struct GArrowField
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2106,7 +2106,7 @@ struct GArrowFile;
 struct GArrowFileInfo
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2151,7 +2151,7 @@ struct GArrowFileOutputStreamClass
 struct GArrowFileSelector
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2165,7 +2165,7 @@ struct GArrowFileSelectorClass
 struct GArrowFileSystem
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2347,7 +2347,7 @@ struct GArrowFloatingPointDataTypeClass
 struct GArrowFunction
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2361,7 +2361,7 @@ struct GArrowFunctionClass
 struct GArrowFunctionDoc
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2375,7 +2375,7 @@ struct GArrowFunctionDocClass
 struct GArrowFunctionOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2823,7 +2823,7 @@ struct GArrowIntervalDataTypeClass
 struct GArrowJSONReadOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2837,7 +2837,7 @@ struct GArrowJSONReadOptionsClass
 struct GArrowJSONReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3103,7 +3103,7 @@ struct GArrowLocalFileSystemClass
 struct GArrowLocalFileSystemOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3201,7 +3201,7 @@ struct GArrowMemoryMappedInputStreamClass
 struct GArrowMemoryPool
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3229,7 +3229,7 @@ struct GArrowMockFileSystemClass
 struct GArrowMonthDayNano
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3453,7 +3453,7 @@ struct GArrowNumericDataTypeClass
 struct GArrowOutputStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3523,7 +3523,7 @@ struct GArrowRankOptionsClass
 struct GArrowReadOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3543,14 +3543,14 @@ struct GArrowReadableInterface;
 struct GArrowRecordBatch
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
 struct GArrowRecordBatchBuilder
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3585,7 +3585,7 @@ struct GArrowRecordBatchDatumClass
 struct GArrowRecordBatchFileReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3613,7 +3613,7 @@ struct GArrowRecordBatchFileWriterClass
 struct GArrowRecordBatchIterator
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3627,7 +3627,7 @@ struct GArrowRecordBatchIteratorClass
 struct GArrowRecordBatchReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3669,7 +3669,7 @@ struct GArrowRecordBatchStreamWriterClass
 struct GArrowRecordBatchWriter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3781,7 +3781,7 @@ struct GArrowS3FileSystemClass
 struct GArrowS3GlobalOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3795,7 +3795,7 @@ struct GArrowS3GlobalOptionsClass
 struct GArrowScalar
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3837,7 +3837,7 @@ struct GArrowScalarDatumClass
 struct GArrowSchema
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -3907,7 +3907,7 @@ struct GArrowSlowFileSystemClass
 struct GArrowSortKey
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4019,7 +4019,7 @@ struct GArrowSplitPatternOptionsClass
 struct GArrowStreamDecoder
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4033,7 +4033,7 @@ struct GArrowStreamDecoderClass
 struct GArrowStreamListener
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4266,7 +4266,7 @@ struct GArrowSubTreeFileSystemClass
 struct GArrowTable
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4294,7 +4294,7 @@ struct GArrowTableClass
 struct GArrowTableConcatenateOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4350,7 +4350,7 @@ struct GArrowTemporalDataTypeClass
 struct GArrowTensor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4532,7 +4532,7 @@ struct GArrowTimestampDataTypeClass
 struct GArrowTimestampParser
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -4894,7 +4894,7 @@ struct GArrowWritableInterface;
 struct GArrowWriteOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

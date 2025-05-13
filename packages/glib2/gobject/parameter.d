@@ -30,7 +30,7 @@ class Parameter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class Parameter
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GParameter*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GParameter*)this._cPtr).name);
   }
 
   /**
@@ -51,8 +51,8 @@ class Parameter
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GParameter*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GParameter*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GParameter*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GParameter*)this._cPtr).name);
   }
 
   /**
@@ -61,6 +61,6 @@ class Parameter
   */
   @property gobject.value.Value value()
   {
-    return cToD!(gobject.value.Value)(cast(void*)&(cast(GParameter*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(GParameter*)this._cPtr).value);
   }
 }

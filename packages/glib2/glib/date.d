@@ -59,22 +59,22 @@ class Date : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_date_get_type != &gidSymbolNotFound ? g_date_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint julianDays()
   {
-    return (cast(GDate*)cPtr).julianDays;
+    return (cast(GDate*)this._cPtr).julianDays;
   }
 
   /**
@@ -99,7 +99,7 @@ class Date : gobject.boxed.Boxed
   */
   @property void julianDays(uint propval)
   {
-    (cast(GDate*)cPtr).julianDays = propval;
+    (cast(GDate*)this._cPtr).julianDays = propval;
   }
 
   /**
@@ -108,7 +108,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint julian()
   {
-    return (cast(GDate*)cPtr).julian;
+    return (cast(GDate*)this._cPtr).julian;
   }
 
   /**
@@ -118,7 +118,7 @@ class Date : gobject.boxed.Boxed
   */
   @property void julian(uint propval)
   {
-    (cast(GDate*)cPtr).julian = propval;
+    (cast(GDate*)this._cPtr).julian = propval;
   }
 
   /**
@@ -127,7 +127,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint dmy()
   {
-    return (cast(GDate*)cPtr).dmy;
+    return (cast(GDate*)this._cPtr).dmy;
   }
 
   /**
@@ -137,7 +137,7 @@ class Date : gobject.boxed.Boxed
   */
   @property void dmy(uint propval)
   {
-    (cast(GDate*)cPtr).dmy = propval;
+    (cast(GDate*)this._cPtr).dmy = propval;
   }
 
   /**
@@ -147,7 +147,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint day()
   {
-    return (cast(GDate*)cPtr).day;
+    return (cast(GDate*)this._cPtr).day;
   }
 
   /**
@@ -158,7 +158,7 @@ class Date : gobject.boxed.Boxed
   */
   @property void day(uint propval)
   {
-    (cast(GDate*)cPtr).day = propval;
+    (cast(GDate*)this._cPtr).day = propval;
   }
 
   /**
@@ -168,7 +168,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint month()
   {
-    return (cast(GDate*)cPtr).month;
+    return (cast(GDate*)this._cPtr).month;
   }
 
   /**
@@ -179,7 +179,7 @@ class Date : gobject.boxed.Boxed
   */
   @property void month(uint propval)
   {
-    (cast(GDate*)cPtr).month = propval;
+    (cast(GDate*)this._cPtr).month = propval;
   }
 
   /**
@@ -188,7 +188,7 @@ class Date : gobject.boxed.Boxed
   */
   @property uint year()
   {
-    return (cast(GDate*)cPtr).year;
+    return (cast(GDate*)this._cPtr).year;
   }
 
   /**
@@ -198,7 +198,45 @@ class Date : gobject.boxed.Boxed
   */
   @property void year(uint propval)
   {
-    (cast(GDate*)cPtr).year = propval;
+    (cast(GDate*)this._cPtr).year = propval;
+  }
+
+  /**
+  Generates a printed representation of the date, in a
+  [locale][setlocale]-specific way.
+  Works just like the platform's C library strftime() function,
+  but only accepts date-related formats; time-related formats
+  give undefined results. Date must be valid. Unlike strftime()
+  (which uses the locale encoding), works on a UTF-8 format
+  string and stores a UTF-8 result.
+  
+  This function does not provide any conversion specifiers in
+  addition to those implemented by the platform's C library.
+  For example, don't expect that using [glib.date.Date.strftime] would
+  make the \`F` provided by the C99 strftime() work on Windows
+  where the C library only complies to C89.
+  
+  Params:
+  format = format string
+  Returns: The formatted date string, will be empty if result exceeds 1024 bytes
+  */
+  string strftime(string format)
+  {
+    char[] buf;
+    const(char)* _format = format.toCString(No.Alloc);
+
+    for (buf.length = 32; buf.length <= 1024; buf.length *= 2) // Increase buffer until output fits
+    {
+      auto sizeWritten = g_date_strftime(buf.ptr, buf.length, _format, cast(const(GDate)*)_cPtr(No.Dup));
+
+      if (sizeWritten > 0)
+      {
+        buf.length = sizeWritten;
+        return cast(string)buf;
+      }
+    }
+
+    return null;
   }
 
   /**
@@ -267,7 +305,7 @@ class Date : gobject.boxed.Boxed
   */
   void addDays(uint nDays)
   {
-    g_date_add_days(cast(GDate*)cPtr, nDays);
+    g_date_add_days(cast(GDate*)this._cPtr, nDays);
   }
 
   /**
@@ -282,7 +320,7 @@ class Date : gobject.boxed.Boxed
   */
   void addMonths(uint nMonths)
   {
-    g_date_add_months(cast(GDate*)cPtr, nMonths);
+    g_date_add_months(cast(GDate*)this._cPtr, nMonths);
   }
 
   /**
@@ -296,7 +334,7 @@ class Date : gobject.boxed.Boxed
   */
   void addYears(uint nYears)
   {
-    g_date_add_years(cast(GDate*)cPtr, nYears);
+    g_date_add_years(cast(GDate*)this._cPtr, nYears);
   }
 
   /**
@@ -312,7 +350,7 @@ class Date : gobject.boxed.Boxed
   */
   void clamp(glib.date.Date minDate, glib.date.Date maxDate)
   {
-    g_date_clamp(cast(GDate*)cPtr, minDate ? cast(const(GDate)*)minDate.cPtr(No.Dup) : null, maxDate ? cast(const(GDate)*)maxDate.cPtr(No.Dup) : null);
+    g_date_clamp(cast(GDate*)this._cPtr, minDate ? cast(const(GDate)*)minDate._cPtr(No.Dup) : null, maxDate ? cast(const(GDate)*)maxDate._cPtr(No.Dup) : null);
   }
 
   /**
@@ -326,7 +364,7 @@ class Date : gobject.boxed.Boxed
   */
   void clear(uint nDates)
   {
-    g_date_clear(cast(GDate*)cPtr, nDates);
+    g_date_clear(cast(GDate*)this._cPtr, nDates);
   }
 
   /**
@@ -341,7 +379,7 @@ class Date : gobject.boxed.Boxed
   int compare(glib.date.Date rhs)
   {
     int _retval;
-    _retval = g_date_compare(cast(const(GDate)*)cPtr, rhs ? cast(const(GDate)*)rhs.cPtr(No.Dup) : null);
+    _retval = g_date_compare(cast(const(GDate)*)this._cPtr, rhs ? cast(const(GDate)*)rhs._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -354,7 +392,7 @@ class Date : gobject.boxed.Boxed
   glib.date.Date copy()
   {
     GDate* _cretval;
-    _cretval = g_date_copy(cast(const(GDate)*)cPtr);
+    _cretval = g_date_copy(cast(const(GDate)*)this._cPtr);
     auto _retval = _cretval ? new glib.date.Date(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -371,7 +409,7 @@ class Date : gobject.boxed.Boxed
   int daysBetween(glib.date.Date date2)
   {
     int _retval;
-    _retval = g_date_days_between(cast(const(GDate)*)cPtr, date2 ? cast(const(GDate)*)date2.cPtr(No.Dup) : null);
+    _retval = g_date_days_between(cast(const(GDate)*)this._cPtr, date2 ? cast(const(GDate)*)date2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -382,7 +420,7 @@ class Date : gobject.boxed.Boxed
   glib.types.DateDay getDay()
   {
     glib.types.DateDay _retval;
-    _retval = g_date_get_day(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_day(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +432,7 @@ class Date : gobject.boxed.Boxed
   uint getDayOfYear()
   {
     uint _retval;
-    _retval = g_date_get_day_of_year(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_day_of_year(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -406,7 +444,7 @@ class Date : gobject.boxed.Boxed
   uint getIso8601WeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_iso8601_week_of_year(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_iso8601_week_of_year(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -420,7 +458,7 @@ class Date : gobject.boxed.Boxed
   uint getJulian()
   {
     uint _retval;
-    _retval = g_date_get_julian(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_julian(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -433,7 +471,7 @@ class Date : gobject.boxed.Boxed
   uint getMondayWeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_monday_week_of_year(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_monday_week_of_year(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -444,7 +482,7 @@ class Date : gobject.boxed.Boxed
   glib.types.DateMonth getMonth()
   {
     GDateMonth _cretval;
-    _cretval = g_date_get_month(cast(const(GDate)*)cPtr);
+    _cretval = g_date_get_month(cast(const(GDate)*)this._cPtr);
     glib.types.DateMonth _retval = cast(glib.types.DateMonth)_cretval;
     return _retval;
   }
@@ -458,7 +496,7 @@ class Date : gobject.boxed.Boxed
   uint getSundayWeekOfYear()
   {
     uint _retval;
-    _retval = g_date_get_sunday_week_of_year(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_sunday_week_of_year(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -469,7 +507,7 @@ class Date : gobject.boxed.Boxed
   glib.types.DateWeekday getWeekday()
   {
     GDateWeekday _cretval;
-    _cretval = g_date_get_weekday(cast(const(GDate)*)cPtr);
+    _cretval = g_date_get_weekday(cast(const(GDate)*)this._cPtr);
     glib.types.DateWeekday _retval = cast(glib.types.DateWeekday)_cretval;
     return _retval;
   }
@@ -481,7 +519,7 @@ class Date : gobject.boxed.Boxed
   glib.types.DateYear getYear()
   {
     glib.types.DateYear _retval;
-    _retval = g_date_get_year(cast(const(GDate)*)cPtr);
+    _retval = g_date_get_year(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -493,7 +531,7 @@ class Date : gobject.boxed.Boxed
   bool isFirstOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_first_of_month(cast(const(GDate)*)cPtr);
+    _retval = g_date_is_first_of_month(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -505,7 +543,7 @@ class Date : gobject.boxed.Boxed
   bool isLastOfMonth()
   {
     bool _retval;
-    _retval = g_date_is_last_of_month(cast(const(GDate)*)cPtr);
+    _retval = g_date_is_last_of_month(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -518,7 +556,7 @@ class Date : gobject.boxed.Boxed
   */
   void order(glib.date.Date date2)
   {
-    g_date_order(cast(GDate*)cPtr, date2 ? cast(GDate*)date2.cPtr(No.Dup) : null);
+    g_date_order(cast(GDate*)this._cPtr, date2 ? cast(GDate*)date2._cPtr(No.Dup) : null);
   }
 
   /**
@@ -530,7 +568,7 @@ class Date : gobject.boxed.Boxed
   */
   void setDay(glib.types.DateDay day)
   {
-    g_date_set_day(cast(GDate*)cPtr, day);
+    g_date_set_day(cast(GDate*)this._cPtr, day);
   }
 
   /**
@@ -546,7 +584,7 @@ class Date : gobject.boxed.Boxed
   */
   void setDmy(glib.types.DateDay day, glib.types.DateMonth month, glib.types.DateYear y)
   {
-    g_date_set_dmy(cast(GDate*)cPtr, day, month, y);
+    g_date_set_dmy(cast(GDate*)this._cPtr, day, month, y);
   }
 
   /**
@@ -557,7 +595,7 @@ class Date : gobject.boxed.Boxed
   */
   void setJulian(uint julianDate)
   {
-    g_date_set_julian(cast(GDate*)cPtr, julianDate);
+    g_date_set_julian(cast(GDate*)this._cPtr, julianDate);
   }
 
   /**
@@ -569,7 +607,7 @@ class Date : gobject.boxed.Boxed
   */
   void setMonth(glib.types.DateMonth month)
   {
-    g_date_set_month(cast(GDate*)cPtr, month);
+    g_date_set_month(cast(GDate*)this._cPtr, month);
   }
 
   /**
@@ -591,7 +629,7 @@ class Date : gobject.boxed.Boxed
   void setParse(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    g_date_set_parse(cast(GDate*)cPtr, _str);
+    g_date_set_parse(cast(GDate*)this._cPtr, _str);
   }
 
   /**
@@ -605,7 +643,7 @@ class Date : gobject.boxed.Boxed
   */
   void setTime(glib.types.Time time)
   {
-    g_date_set_time(cast(GDate*)cPtr, time);
+    g_date_set_time(cast(GDate*)this._cPtr, time);
   }
 
   /**
@@ -626,7 +664,7 @@ class Date : gobject.boxed.Boxed
   */
   void setTimeT(long timet)
   {
-    g_date_set_time_t(cast(GDate*)cPtr, timet);
+    g_date_set_time_t(cast(GDate*)this._cPtr, timet);
   }
 
   /**
@@ -644,7 +682,7 @@ class Date : gobject.boxed.Boxed
   */
   void setTimeVal(glib.time_val.TimeVal timeval)
   {
-    g_date_set_time_val(cast(GDate*)cPtr, timeval ? cast(GTimeVal*)timeval.cPtr : null);
+    g_date_set_time_val(cast(GDate*)this._cPtr, timeval ? cast(GTimeVal*)timeval._cPtr : null);
   }
 
   /**
@@ -656,7 +694,7 @@ class Date : gobject.boxed.Boxed
   */
   void setYear(glib.types.DateYear year)
   {
-    g_date_set_year(cast(GDate*)cPtr, year);
+    g_date_set_year(cast(GDate*)this._cPtr, year);
   }
 
   /**
@@ -669,7 +707,7 @@ class Date : gobject.boxed.Boxed
   */
   void subtractDays(uint nDays)
   {
-    g_date_subtract_days(cast(GDate*)cPtr, nDays);
+    g_date_subtract_days(cast(GDate*)this._cPtr, nDays);
   }
 
   /**
@@ -683,7 +721,7 @@ class Date : gobject.boxed.Boxed
   */
   void subtractMonths(uint nMonths)
   {
-    g_date_subtract_months(cast(GDate*)cPtr, nMonths);
+    g_date_subtract_months(cast(GDate*)this._cPtr, nMonths);
   }
 
   /**
@@ -698,7 +736,7 @@ class Date : gobject.boxed.Boxed
   */
   void subtractYears(uint nYears)
   {
-    g_date_subtract_years(cast(GDate*)cPtr, nYears);
+    g_date_subtract_years(cast(GDate*)this._cPtr, nYears);
   }
 
   /**
@@ -710,7 +748,7 @@ class Date : gobject.boxed.Boxed
   */
   void toStructTm(void* tm)
   {
-    g_date_to_struct_tm(cast(const(GDate)*)cPtr, tm);
+    g_date_to_struct_tm(cast(const(GDate)*)this._cPtr, tm);
   }
 
   /**
@@ -722,7 +760,7 @@ class Date : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = g_date_valid(cast(const(GDate)*)cPtr);
+    _retval = g_date_valid(cast(const(GDate)*)this._cPtr);
     return _retval;
   }
 
@@ -798,37 +836,6 @@ class Date : gobject.boxed.Boxed
   {
     bool _retval;
     _retval = g_date_is_leap_year(year);
-    return _retval;
-  }
-
-  /**
-      Generates a printed representation of the date, in a
-      [locale][setlocale]-specific way.
-      Works just like the platform's C library strftime() function,
-      but only accepts date-related formats; time-related formats
-      give undefined results. Date must be valid. Unlike strftime()
-      (which uses the locale encoding), works on a UTF-8 format
-      string and stores a UTF-8 result.
-      
-      This function does not provide any conversion specifiers in
-      addition to those implemented by the platform's C library.
-      For example, don't expect that using [glib.date.Date.strftime] would
-      make the \`F` provided by the C99 strftime() work on Windows
-      where the C library only complies to C89.
-  
-      Params:
-        s = destination buffer
-        slen = buffer size
-        format = format string
-        date = valid #GDate
-      Returns: number of characters written to the buffer, or 0 the buffer was too small
-  */
-  static size_t strftime(string s, size_t slen, string format, glib.date.Date date)
-  {
-    size_t _retval;
-    char* _s = s.toCString(No.Alloc);
-    const(char)* _format = format.toCString(No.Alloc);
-    _retval = g_date_strftime(_s, slen, _format, date ? cast(const(GDate)*)date.cPtr(No.Dup) : null);
     return _retval;
   }
 

@@ -28,7 +28,7 @@ class SequenceIter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -47,7 +47,7 @@ class SequenceIter
   int compare(glib.sequence_iter.SequenceIter b)
   {
     int _retval;
-    _retval = g_sequence_iter_compare(cast(GSequenceIter*)cPtr, b ? cast(GSequenceIter*)b.cPtr : null);
+    _retval = g_sequence_iter_compare(cast(GSequenceIter*)this._cPtr, b ? cast(GSequenceIter*)b._cPtr : null);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class SequenceIter
   int getPosition()
   {
     int _retval;
-    _retval = g_sequence_iter_get_position(cast(GSequenceIter*)cPtr);
+    _retval = g_sequence_iter_get_position(cast(GSequenceIter*)this._cPtr);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class SequenceIter
   glib.sequence.Sequence getSequence()
   {
     GSequence* _cretval;
-    _cretval = g_sequence_iter_get_sequence(cast(GSequenceIter*)cPtr);
+    _cretval = g_sequence_iter_get_sequence(cast(GSequenceIter*)this._cPtr);
     auto _retval = _cretval ? new glib.sequence.Sequence(cast(GSequence*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -81,7 +81,7 @@ class SequenceIter
   bool isBegin()
   {
     bool _retval;
-    _retval = g_sequence_iter_is_begin(cast(GSequenceIter*)cPtr);
+    _retval = g_sequence_iter_is_begin(cast(GSequenceIter*)this._cPtr);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class SequenceIter
   bool isEnd()
   {
     bool _retval;
-    _retval = g_sequence_iter_is_end(cast(GSequenceIter*)cPtr);
+    _retval = g_sequence_iter_is_end(cast(GSequenceIter*)this._cPtr);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class SequenceIter
   glib.sequence_iter.SequenceIter move(int delta)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_iter_move(cast(GSequenceIter*)cPtr, delta);
+    _cretval = g_sequence_iter_move(cast(GSequenceIter*)this._cPtr, delta);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -123,7 +123,7 @@ class SequenceIter
   glib.sequence_iter.SequenceIter next()
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_iter_next(cast(GSequenceIter*)cPtr);
+    _cretval = g_sequence_iter_next(cast(GSequenceIter*)this._cPtr);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -137,7 +137,7 @@ class SequenceIter
   glib.sequence_iter.SequenceIter prev()
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_iter_prev(cast(GSequenceIter*)cPtr);
+    _cretval = g_sequence_iter_prev(cast(GSequenceIter*)this._cPtr);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }

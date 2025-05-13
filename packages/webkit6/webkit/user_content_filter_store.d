@@ -40,16 +40,16 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_content_filter_store_get_type != &gidSymbolNotFound ? webkit_user_content_filter_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,17 +88,17 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   */
   void fetchIdentifiers(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_fetch_identifiers(cast(WebKitUserContentFilterStore*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_fetch_identifiers(cast(WebKitUserContentFilterStore*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -114,7 +114,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   string[] fetchIdentifiersFinish(gio.async_result.AsyncResult result)
   {
     char** _cretval;
-    _cretval = webkit_user_content_filter_store_fetch_identifiers_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
+    _cretval = webkit_user_content_filter_store_fetch_identifiers_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
     string[] _retval;
 
     if (_cretval)
@@ -136,7 +136,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = webkit_user_content_filter_store_get_path(cast(WebKitUserContentFilterStore*)cPtr);
+    _cretval = webkit_user_content_filter_store_get_path(cast(WebKitUserContentFilterStore*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -157,18 +157,18 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   */
   void load(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _identifier = identifier.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_load(cast(WebKitUserContentFilterStore*)cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_load(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -184,7 +184,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_load_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_load_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
@@ -205,18 +205,18 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   */
   void remove(string identifier, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _identifier = identifier.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_remove(cast(WebKitUserContentFilterStore*)cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_remove(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -232,7 +232,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_user_content_filter_store_remove_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -260,18 +260,18 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   */
   void save(string identifier, glib.bytes.Bytes source, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _identifier = identifier.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_save(cast(WebKitUserContentFilterStore*)cPtr, _identifier, source ? cast(GBytes*)source.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_save(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, source ? cast(GBytes*)source._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -287,7 +287,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_save_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_save_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;
@@ -312,18 +312,18 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   */
   void saveFromFile(string identifier, gio.file.File file, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _identifier = identifier.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_user_content_filter_store_save_from_file(cast(WebKitUserContentFilterStore*)cPtr, _identifier, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_user_content_filter_store_save_from_file(cast(WebKitUserContentFilterStore*)this._cPtr, _identifier, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -339,7 +339,7 @@ class UserContentFilterStore : gobject.object.ObjectWrap
   {
     WebKitUserContentFilter* _cretval;
     GError *_err;
-    _cretval = webkit_user_content_filter_store_save_from_file_finish(cast(WebKitUserContentFilterStore*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_user_content_filter_store_save_from_file_finish(cast(WebKitUserContentFilterStore*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new webkit.user_content_filter.UserContentFilter(cast(void*)_cretval, Yes.Take) : null;

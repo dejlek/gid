@@ -91,16 +91,16 @@ class PrintContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_context_get_type != &gidSymbolNotFound ? gtk_print_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,8 +117,8 @@ class PrintContext : gobject.object.ObjectWrap
   pango.context.Context createPangoContext()
   {
     PangoContext* _cretval;
-    _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    _cretval = gtk_print_context_create_pango_context(cast(GtkPrintContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,8 +130,8 @@ class PrintContext : gobject.object.ObjectWrap
   pango.layout.Layout createPangoLayout()
   {
     PangoLayout* _cretval;
-    _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    _cretval = gtk_print_context_create_pango_layout(cast(GtkPrintContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class PrintContext : gobject.object.ObjectWrap
   cairo.context.Context getCairoContext()
   {
     cairo_t* _cretval;
-    _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)cPtr);
+    _cretval = gtk_print_context_get_cairo_context(cast(GtkPrintContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -156,7 +156,7 @@ class PrintContext : gobject.object.ObjectWrap
   double getDpiX()
   {
     double _retval;
-    _retval = gtk_print_context_get_dpi_x(cast(GtkPrintContext*)cPtr);
+    _retval = gtk_print_context_get_dpi_x(cast(GtkPrintContext*)this._cPtr);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class PrintContext : gobject.object.ObjectWrap
   double getDpiY()
   {
     double _retval;
-    _retval = gtk_print_context_get_dpi_y(cast(GtkPrintContext*)cPtr);
+    _retval = gtk_print_context_get_dpi_y(cast(GtkPrintContext*)this._cPtr);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class PrintContext : gobject.object.ObjectWrap
   bool getHardMargins(out double top, out double bottom, out double left, out double right)
   {
     bool _retval;
-    _retval = gtk_print_context_get_hard_margins(cast(GtkPrintContext*)cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
+    _retval = gtk_print_context_get_hard_margins(cast(GtkPrintContext*)this._cPtr, cast(double*)&top, cast(double*)&bottom, cast(double*)&left, cast(double*)&right);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class PrintContext : gobject.object.ObjectWrap
   double getHeight()
   {
     double _retval;
-    _retval = gtk_print_context_get_height(cast(GtkPrintContext*)cPtr);
+    _retval = gtk_print_context_get_height(cast(GtkPrintContext*)this._cPtr);
     return _retval;
   }
 
@@ -208,8 +208,8 @@ class PrintContext : gobject.object.ObjectWrap
   gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    _cretval = gtk_print_context_get_page_setup(cast(GtkPrintContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,8 +221,8 @@ class PrintContext : gobject.object.ObjectWrap
   pango.font_map.FontMap getPangoFontmap()
   {
     PangoFontMap* _cretval;
-    _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    _cretval = gtk_print_context_get_pango_fontmap(cast(GtkPrintContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class PrintContext : gobject.object.ObjectWrap
   double getWidth()
   {
     double _retval;
-    _retval = gtk_print_context_get_width(cast(GtkPrintContext*)cPtr);
+    _retval = gtk_print_context_get_width(cast(GtkPrintContext*)this._cPtr);
     return _retval;
   }
 
@@ -252,6 +252,6 @@ class PrintContext : gobject.object.ObjectWrap
   */
   void setCairoContext(cairo.context.Context cr, double dpiX, double dpiY)
   {
-    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, dpiX, dpiY);
+    gtk_print_context_set_cairo_context(cast(GtkPrintContext*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, dpiX, dpiY);
   }
 }

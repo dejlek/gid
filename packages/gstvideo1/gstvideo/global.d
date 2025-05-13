@@ -55,7 +55,7 @@ gobject.types.GType ancillaryMetaApiGetType()
 gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer buffer)
 {
   GstAncillaryMeta* _cretval;
-  _cretval = gst_buffer_add_ancillary_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_ancillary_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstvideo.ancillary_meta.AncillaryMeta(cast(GstAncillaryMeta*)_cretval) : null;
   return _retval;
 }
@@ -74,7 +74,7 @@ gstvideo.ancillary_meta.AncillaryMeta bufferAddAncillaryMeta(gst.buffer.Buffer b
 gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buffer, ubyte field, gstvideo.types.VideoAFDSpec spec, gstvideo.types.VideoAFDValue afd)
 {
   GstVideoAFDMeta* _cretval;
-  _cretval = gst_buffer_add_video_afd_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, field, spec, afd);
+  _cretval = gst_buffer_add_video_afd_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, spec, afd);
   auto _retval = _cretval ? new gstvideo.video_afdmeta.VideoAFDMeta(cast(GstVideoAFDMeta*)_cretval) : null;
   return _retval;
 }
@@ -90,7 +90,7 @@ gstvideo.video_afdmeta.VideoAFDMeta bufferAddVideoAfdMeta(gst.buffer.Buffer buff
 gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAddVideoAffineTransformationMeta(gst.buffer.Buffer buffer)
 {
   GstVideoAffineTransformationMeta* _cretval;
-  _cretval = gst_buffer_add_video_affine_transformation_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_video_affine_transformation_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta(cast(GstVideoAffineTransformationMeta*)_cretval) : null;
   return _retval;
 }
@@ -120,7 +120,7 @@ gstvideo.video_affine_transformation_meta.VideoAffineTransformationMeta bufferAd
 gstvideo.video_bar_meta.VideoBarMeta bufferAddVideoBarMeta(gst.buffer.Buffer buffer, ubyte field, bool isLetterbox, uint barData1, uint barData2)
 {
   GstVideoBarMeta* _cretval;
-  _cretval = gst_buffer_add_video_bar_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, field, isLetterbox, barData1, barData2);
+  _cretval = gst_buffer_add_video_bar_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, field, isLetterbox, barData1, barData2);
   auto _retval = _cretval ? new gstvideo.video_bar_meta.VideoBarMeta(cast(GstVideoBarMeta*)_cretval) : null;
   return _retval;
 }
@@ -143,7 +143,7 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  _cretval = gst_buffer_add_video_caption_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, captionType, _data, _size);
+  _cretval = gst_buffer_add_video_caption_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, captionType, _data, _size);
   auto _retval = _cretval ? new gstvideo.video_caption_meta.VideoCaptionMeta(cast(GstVideoCaptionMeta*)_cretval) : null;
   return _retval;
 }
@@ -160,7 +160,7 @@ gstvideo.video_caption_meta.VideoCaptionMeta bufferAddVideoCaptionMeta(gst.buffe
 gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta(gst.buffer.Buffer buffer, gst.buffer.Buffer alphaBuffer)
 {
   GstVideoCodecAlphaMeta* _cretval;
-  _cretval = gst_buffer_add_video_codec_alpha_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, alphaBuffer ? cast(GstBuffer*)alphaBuffer.cPtr(Yes.Dup) : null);
+  _cretval = gst_buffer_add_video_codec_alpha_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, alphaBuffer ? cast(GstBuffer*)alphaBuffer._cPtr(Yes.Dup) : null);
   auto _retval = _cretval ? new gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta(cast(GstVideoCodecAlphaMeta*)_cretval) : null;
   return _retval;
 }
@@ -183,7 +183,7 @@ gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta bufferAddVideoCodecAlphaMeta
 gstvideo.video_meta.VideoMeta bufferAddVideoMeta(gst.buffer.Buffer buffer, gstvideo.types.VideoFrameFlags flags, gstvideo.types.VideoFormat format, uint width, uint height)
 {
   GstVideoMeta* _cretval;
-  _cretval = gst_buffer_add_video_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, format, width, height);
+  _cretval = gst_buffer_add_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval) : null;
   return _retval;
 }
@@ -209,7 +209,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
   auto _offset = cast(const(size_t)*)offset.ptr;
   assert(!stride || stride.length == 4);
   auto _stride = cast(const(int)*)stride.ptr;
-  _cretval = gst_buffer_add_video_meta_full(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, format, width, height, nPlanes, _offset, _stride);
+  _cretval = gst_buffer_add_video_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, format, width, height, nPlanes, _offset, _stride);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval) : null;
   return _retval;
 }
@@ -227,7 +227,7 @@ gstvideo.video_meta.VideoMeta bufferAddVideoMetaFull(gst.buffer.Buffer buffer, g
 gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta bufferAddVideoOverlayCompositionMeta(gst.buffer.Buffer buf, gstvideo.video_overlay_composition.VideoOverlayComposition comp = null)
 {
   GstVideoOverlayCompositionMeta* _cretval;
-  _cretval = gst_buffer_add_video_overlay_composition_meta(buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, comp ? cast(GstVideoOverlayComposition*)comp.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_video_overlay_composition_meta(buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, comp ? cast(GstVideoOverlayComposition*)comp._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstvideo.video_overlay_composition_meta.VideoOverlayCompositionMeta(cast(GstVideoOverlayCompositionMeta*)_cretval) : null;
   return _retval;
 }
@@ -249,7 +249,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 {
   GstVideoRegionOfInterestMeta* _cretval;
   const(char)* _roiType = roiType.toCString(No.Alloc);
-  _cretval = gst_buffer_add_video_region_of_interest_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _roiType, x, y, w, h);
+  _cretval = gst_buffer_add_video_region_of_interest_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _roiType, x, y, w, h);
   auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval) : null;
   return _retval;
 }
@@ -270,7 +270,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoR
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferAddVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, glib.types.Quark roiType, uint x, uint y, uint w, uint h)
 {
   GstVideoRegionOfInterestMeta* _cretval;
-  _cretval = gst_buffer_add_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, roiType, x, y, w, h);
+  _cretval = gst_buffer_add_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, roiType, x, y, w, h);
   auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval) : null;
   return _retval;
 }
@@ -295,7 +295,7 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
     _size = cast(size_t)data.length;
 
   auto _data = cast(ubyte*)data.ptr;
-  _cretval = gst_buffer_add_video_sei_user_data_unregistered_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _uuid, _data, _size);
+  _cretval = gst_buffer_add_video_sei_user_data_unregistered_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _uuid, _data, _size);
   auto _retval = _cretval ? new gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta(cast(GstVideoSEIUserDataUnregisteredMeta*)_cretval) : null;
   return _retval;
 }
@@ -313,7 +313,7 @@ gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta b
 gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.buffer.Buffer buffer, gstvideo.video_time_code.VideoTimeCode tc)
 {
   GstVideoTimeCodeMeta* _cretval;
-  _cretval = gst_buffer_add_video_time_code_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, tc ? cast(const(GstVideoTimeCode)*)tc.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_add_video_time_code_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, tc ? cast(const(GstVideoTimeCode)*)tc._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval) : null;
   return _retval;
 }
@@ -339,7 +339,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMeta(gst.b
 gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(gst.buffer.Buffer buffer, uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
 {
   GstVideoTimeCodeMeta* _cretval;
-  _cretval = gst_buffer_add_video_time_code_meta_full(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam.cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
+  _cretval = gst_buffer_add_video_time_code_meta_full(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
   auto _retval = _cretval ? new gstvideo.video_time_code_meta.VideoTimeCodeMeta(cast(GstVideoTimeCodeMeta*)_cretval) : null;
   return _retval;
 }
@@ -358,7 +358,7 @@ gstvideo.video_time_code_meta.VideoTimeCodeMeta bufferAddVideoTimeCodeMetaFull(g
 gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
 {
   GstVideoMeta* _cretval;
-  _cretval = gst_buffer_get_video_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_get_video_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval) : null;
   return _retval;
 }
@@ -378,7 +378,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMeta(gst.buffer.Buffer buffer)
 gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int id)
 {
   GstVideoMeta* _cretval;
-  _cretval = gst_buffer_get_video_meta_id(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, id);
+  _cretval = gst_buffer_get_video_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
   auto _retval = _cretval ? new gstvideo.video_meta.VideoMeta(cast(GstVideoMeta*)_cretval) : null;
   return _retval;
 }
@@ -398,7 +398,7 @@ gstvideo.video_meta.VideoMeta bufferGetVideoMetaId(gst.buffer.Buffer buffer, int
 gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoRegionOfInterestMetaId(gst.buffer.Buffer buffer, int id)
 {
   GstVideoRegionOfInterestMeta* _cretval;
-  _cretval = gst_buffer_get_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, id);
+  _cretval = gst_buffer_get_video_region_of_interest_meta_id(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id);
   auto _retval = _cretval ? new gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta(cast(GstVideoRegionOfInterestMeta*)_cretval) : null;
   return _retval;
 }
@@ -415,7 +415,7 @@ gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta bufferGetVideoR
 bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
   bool _retval;
-  _retval = gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, align_ ? cast(GstVideoAlignment*)align_.cPtr : null);
+  _retval = gst_buffer_pool_config_get_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
   return _retval;
 }
 
@@ -429,7 +429,7 @@ bool bufferPoolConfigGetVideoAlignment(gst.structure.Structure config, gstvideo.
 */
 void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.video_alignment.VideoAlignment align_)
 {
-  gst_buffer_pool_config_set_video_alignment(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, align_ ? cast(const(GstVideoAlignment)*)align_.cPtr : null);
+  gst_buffer_pool_config_set_video_alignment(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, align_ ? cast(const(GstVideoAlignment)*)align_._cPtr : null);
 }
 
 /**
@@ -443,7 +443,7 @@ void bufferPoolConfigSetVideoAlignment(gst.structure.Structure config, gstvideo.
 bool isVideoOverlayPrepareWindowHandleMessage(gst.message.Message msg)
 {
   bool _retval;
-  _retval = gst_is_video_overlay_prepare_window_handle_message(msg ? cast(GstMessage*)msg.cPtr(No.Dup) : null);
+  _retval = gst_is_video_overlay_prepare_window_handle_message(msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -486,7 +486,7 @@ gobject.types.GType videoBarMetaApiGetType()
 bool videoBlend(gstvideo.video_frame.VideoFrame dest, gstvideo.video_frame.VideoFrame src, int x, int y, float globalAlpha)
 {
   bool _retval;
-  _retval = gst_video_blend(dest ? cast(GstVideoFrame*)dest.cPtr : null, src ? cast(GstVideoFrame*)src.cPtr : null, x, y, globalAlpha);
+  _retval = gst_video_blend(dest ? cast(GstVideoFrame*)dest._cPtr : null, src ? cast(GstVideoFrame*)src._cPtr : null, x, y, globalAlpha);
   return _retval;
 }
 
@@ -510,7 +510,7 @@ void videoBlendScaleLinearRGBA(gstvideo.video_info.VideoInfo src, gst.buffer.Buf
 {
   GstVideoInfo _dest;
   GstBuffer* _destBuffer;
-  gst_video_blend_scale_linear_RGBA(src ? cast(GstVideoInfo*)src.cPtr(No.Dup) : null, srcBuffer ? cast(GstBuffer*)srcBuffer.cPtr(No.Dup) : null, destHeight, destWidth, &_dest, &_destBuffer);
+  gst_video_blend_scale_linear_RGBA(src ? cast(GstVideoInfo*)src._cPtr(No.Dup) : null, srcBuffer ? cast(GstBuffer*)srcBuffer._cPtr(No.Dup) : null, destHeight, destWidth, &_dest, &_destBuffer);
   dest = new gstvideo.video_info.VideoInfo(cast(void*)&_dest, No.Take);
   destBuffer = new gst.buffer.Buffer(cast(void*)_destBuffer, Yes.Take);
 }
@@ -643,7 +643,7 @@ gst.sample.Sample videoConvertSample(gst.sample.Sample sample, gst.caps.Caps toC
 {
   GstSample* _cretval;
   GError *_err;
-  _cretval = gst_video_convert_sample(sample ? cast(GstSample*)sample.cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps.cPtr(No.Dup) : null, timeout, &_err);
+  _cretval = gst_video_convert_sample(sample ? cast(GstSample*)sample._cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps._cPtr(No.Dup) : null, timeout, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
@@ -683,7 +683,7 @@ void videoConvertSampleAsync(gst.sample.Sample sample, gst.caps.Caps toCaps, gst
 
   auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
   GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-  gst_video_convert_sample_async(sample ? cast(GstSample*)sample.cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps.cPtr(No.Dup) : null, timeout, _callbackCB, _callback, _callbackDestroyCB);
+  gst_video_convert_sample_async(sample ? cast(GstSample*)sample._cPtr(No.Dup) : null, toCaps ? cast(const(GstCaps)*)toCaps._cPtr(No.Dup) : null, timeout, _callbackCB, _callback, _callbackDestroyCB);
 }
 
 /** */
@@ -774,7 +774,7 @@ string videoDmaDrmFourccToString(uint fourcc, ulong modifier)
 bool videoEventIsForceKeyUnit(gst.event.Event event)
 {
   bool _retval;
-  _retval = gst_video_event_is_force_key_unit(event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
+  _retval = gst_video_event_is_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -868,7 +868,7 @@ gst.event.Event videoEventNewUpstreamForceKeyUnit(gst.types.ClockTime runningTim
 bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime timestamp, out gst.types.ClockTime streamTime, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
   bool _retval;
-  _retval = gst_video_event_parse_downstream_force_key_unit(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&streamTime, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
+  _retval = gst_video_event_parse_downstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&streamTime, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
   return _retval;
 }
 
@@ -890,7 +890,7 @@ bool videoEventParseDownstreamForceKeyUnit(gst.event.Event event, out gst.types.
 bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 {
   bool _retval;
-  _retval = gst_video_event_parse_still_frame(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(bool*)&inStill);
+  _retval = gst_video_event_parse_still_frame(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(bool*)&inStill);
   return _retval;
 }
 
@@ -913,7 +913,7 @@ bool videoEventParseStillFrame(gst.event.Event event, out bool inStill)
 bool videoEventParseUpstreamForceKeyUnit(gst.event.Event event, out gst.types.ClockTime runningTime, out bool allHeaders, out uint count)
 {
   bool _retval;
-  _retval = gst_video_event_parse_upstream_force_key_unit(event ? cast(GstEvent*)event.cPtr(No.Dup) : null, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
+  _retval = gst_video_event_parse_upstream_force_key_unit(event ? cast(GstEvent*)event._cPtr(No.Dup) : null, cast(GstClockTime*)&runningTime, cast(bool*)&allHeaders, cast(uint*)&count);
   return _retval;
 }
 
@@ -1019,7 +1019,7 @@ bool videoIsCommonAspectRatio(int width, int height, int parN, int parD)
 bool videoIsDmaDrmCaps(gst.caps.Caps caps)
 {
   bool _retval;
-  _retval = gst_video_is_dma_drm_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+  _retval = gst_video_is_dma_drm_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1064,7 +1064,7 @@ gst.caps.Caps videoMakeRawCapsWithFeatures(gstvideo.types.VideoFormat[] formats 
     _len = cast(uint)formats.length;
 
   auto _formats = cast(const(GstVideoFormat)*)formats.ptr;
-  _cretval = gst_video_make_raw_caps_with_features(_formats, _len, features ? cast(GstCapsFeatures*)features.cPtr(Yes.Dup) : null);
+  _cretval = gst_video_make_raw_caps_with_features(_formats, _len, features ? cast(GstCapsFeatures*)features._cPtr(Yes.Dup) : null);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1142,7 +1142,7 @@ bool videoMultiviewGuessHalfAspect(gstvideo.types.VideoMultiviewMode mvMode, uin
 */
 void videoMultiviewVideoInfoChangeMode(gstvideo.video_info.VideoInfo info, gstvideo.types.VideoMultiviewMode outMviewMode, gstvideo.types.VideoMultiviewFlags outMviewFlags)
 {
-  gst_video_multiview_video_info_change_mode(info ? cast(GstVideoInfo*)info.cPtr(No.Dup) : null, outMviewMode, outMviewFlags);
+  gst_video_multiview_video_info_change_mode(info ? cast(GstVideoInfo*)info._cPtr(No.Dup) : null, outMviewMode, outMviewFlags);
 }
 
 /** */
@@ -1181,7 +1181,7 @@ gobject.types.GType videoSeiUserDataUnregisteredMetaApiGetType()
 bool videoSeiUserDataUnregisteredParsePrecisionTimeStamp(gstvideo.video_seiuser_data_unregistered_meta.VideoSEIUserDataUnregisteredMeta userData, out ubyte status, out ulong precisionTimeStamp)
 {
   bool _retval;
-  _retval = gst_video_sei_user_data_unregistered_parse_precision_time_stamp(userData ? cast(GstVideoSEIUserDataUnregisteredMeta*)userData.cPtr : null, cast(ubyte*)&status, cast(ulong*)&precisionTimeStamp);
+  _retval = gst_video_sei_user_data_unregistered_parse_precision_time_stamp(userData ? cast(GstVideoSEIUserDataUnregisteredMeta*)userData._cPtr : null, cast(ubyte*)&status, cast(ulong*)&precisionTimeStamp);
   return _retval;
 }
 

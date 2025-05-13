@@ -66,11 +66,11 @@ void init_()
 /** */
 void marshalBOOLEANOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
 {
-  panel_marshal_BOOLEAN__OBJECT_OBJECT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+  panel_marshal_BOOLEAN__OBJECT_OBJECT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
 }
 
 /** */
 void marshalOBJECTOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
 {
-  panel_marshal_OBJECT__OBJECT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+  panel_marshal_OBJECT__OBJECT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
 }

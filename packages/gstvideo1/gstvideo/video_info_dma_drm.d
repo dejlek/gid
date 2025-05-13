@@ -24,22 +24,22 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_info_dma_drm_get_type != &gidSymbolNotFound ? gst_video_info_dma_drm_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   */
   @property gstvideo.video_info.VideoInfo vinfo()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)cPtr).vinfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoInfoDmaDrm*)this._cPtr).vinfo);
   }
 
   /**
@@ -63,7 +63,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   */
   @property uint drmFourcc()
   {
-    return (cast(GstVideoInfoDmaDrm*)cPtr).drmFourcc;
+    return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc;
   }
 
   /**
@@ -73,7 +73,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   */
   @property void drmFourcc(uint propval)
   {
-    (cast(GstVideoInfoDmaDrm*)cPtr).drmFourcc = propval;
+    (cast(GstVideoInfoDmaDrm*)this._cPtr).drmFourcc = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   */
   @property ulong drmModifier()
   {
-    return (cast(GstVideoInfoDmaDrm*)cPtr).drmModifier;
+    return (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier;
   }
 
   /**
@@ -92,7 +92,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   */
   @property void drmModifier(ulong propval)
   {
-    (cast(GstVideoInfoDmaDrm*)cPtr).drmModifier = propval;
+    (cast(GstVideoInfoDmaDrm*)this._cPtr).drmModifier = propval;
   }
 
   /**
@@ -121,7 +121,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   static gstvideo.video_info_dma_drm.VideoInfoDmaDrm newFromCaps(gst.caps.Caps caps)
   {
     GstVideoInfoDmaDrm* _cretval;
-    _cretval = gst_video_info_dma_drm_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_video_info_dma_drm_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gstvideo.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -137,7 +137,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   gst.caps.Caps toCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_video_info_dma_drm_to_caps(cast(const(GstVideoInfoDmaDrm)*)cPtr);
+    _cretval = gst_video_info_dma_drm_to_caps(cast(const(GstVideoInfoDmaDrm)*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -157,7 +157,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfo _info;
-    _retval = gst_video_info_dma_drm_to_video_info(cast(const(GstVideoInfoDmaDrm)*)cPtr, &_info);
+    _retval = gst_video_info_dma_drm_to_video_info(cast(const(GstVideoInfoDmaDrm)*)this._cPtr, &_info);
     info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
@@ -176,7 +176,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
-    _retval = gst_video_info_dma_drm_from_caps(&_drmInfo, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_info_dma_drm_from_caps(&_drmInfo, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     drmInfo = new gstvideo.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)&_drmInfo, No.Take);
     return _retval;
   }
@@ -195,7 +195,7 @@ class VideoInfoDmaDrm : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfoDmaDrm _drmInfo;
-    _retval = gst_video_info_dma_drm_from_video_info(&_drmInfo, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, modifier);
+    _retval = gst_video_info_dma_drm_from_video_info(&_drmInfo, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, modifier);
     drmInfo = new gstvideo.video_info_dma_drm.VideoInfoDmaDrm(cast(void*)&_drmInfo, No.Take);
     return _retval;
   }

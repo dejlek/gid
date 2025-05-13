@@ -26,16 +26,16 @@ class WebEditor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_editor_get_type != &gidSymbolNotFound ? webkit_web_editor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,8 +51,8 @@ class WebEditor : gobject.object.ObjectWrap
   webkitwebprocessextension.web_page.WebPage getPage()
   {
     WebKitWebPage* _cretval;
-    _cretval = webkit_web_editor_get_page(cast(WebKitWebEditor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
+    _cretval = webkit_web_editor_get_page(cast(WebKitWebEditor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.web_page.WebPage)(cast(WebKitWebPage*)_cretval, No.Take);
     return _retval;
   }
 

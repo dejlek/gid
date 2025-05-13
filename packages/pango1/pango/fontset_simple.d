@@ -26,16 +26,16 @@ class FontsetSimple : pango.fontset.Fontset
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_fontset_simple_get_type != &gidSymbolNotFound ? pango_fontset_simple_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class FontsetSimple : pango.fontset.Fontset
   this(pango.language.Language language)
   {
     PangoFontsetSimple* _cretval;
-    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    _cretval = pango_fontset_simple_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -68,7 +68,7 @@ class FontsetSimple : pango.fontset.Fontset
   */
   void append(pango.font.Font font)
   {
-    pango_fontset_simple_append(cast(PangoFontsetSimple*)cPtr, font ? cast(PangoFont*)font.cPtr(Yes.Dup) : null);
+    pango_fontset_simple_append(cast(PangoFontsetSimple*)this._cPtr, font ? cast(PangoFont*)font._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -78,7 +78,7 @@ class FontsetSimple : pango.fontset.Fontset
   int size()
   {
     int _retval;
-    _retval = pango_fontset_simple_size(cast(PangoFontsetSimple*)cPtr);
+    _retval = pango_fontset_simple_size(cast(PangoFontsetSimple*)this._cPtr);
     return _retval;
   }
 }

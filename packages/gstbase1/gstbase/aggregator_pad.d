@@ -25,16 +25,16 @@ class AggregatorPad : gst.pad.Pad
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_aggregator_pad_get_type != &gidSymbolNotFound ? gst_aggregator_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class AggregatorPad : gst.pad.Pad
   bool dropBuffer()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_drop_buffer(cast(GstAggregatorPad*)cPtr);
+    _retval = gst_aggregator_pad_drop_buffer(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class AggregatorPad : gst.pad.Pad
   bool hasBuffer()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_has_buffer(cast(GstAggregatorPad*)cPtr);
+    _retval = gst_aggregator_pad_has_buffer(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class AggregatorPad : gst.pad.Pad
   bool isEos()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_is_eos(cast(GstAggregatorPad*)cPtr);
+    _retval = gst_aggregator_pad_is_eos(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class AggregatorPad : gst.pad.Pad
   bool isInactive()
   {
     bool _retval;
-    _retval = gst_aggregator_pad_is_inactive(cast(GstAggregatorPad*)cPtr);
+    _retval = gst_aggregator_pad_is_inactive(cast(GstAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class AggregatorPad : gst.pad.Pad
   gst.buffer.Buffer peekBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_aggregator_pad_peek_buffer(cast(GstAggregatorPad*)cPtr);
+    _cretval = gst_aggregator_pad_peek_buffer(cast(GstAggregatorPad*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -123,7 +123,7 @@ class AggregatorPad : gst.pad.Pad
   gst.buffer.Buffer popBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_aggregator_pad_pop_buffer(cast(GstAggregatorPad*)cPtr);
+    _cretval = gst_aggregator_pad_pop_buffer(cast(GstAggregatorPad*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

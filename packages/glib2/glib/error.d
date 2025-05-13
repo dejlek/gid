@@ -31,6 +31,12 @@ class ErrorWrap : Exception
     this(g_error_new_literal(domain, code, message.toCString(No.Alloc)));
   }
 
+  /** */
+  this()
+  {
+    super("");
+  }
+
   ~this()
   {
     g_error_free(errPtr);
@@ -39,7 +45,7 @@ class ErrorWrap : Exception
   /**
   * Get wrapped C GError pointer.
   */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)errPtr;
   }

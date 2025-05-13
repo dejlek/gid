@@ -17,23 +17,23 @@ __gshared extern(C)
 {
   // Binding
   GType function() c_g_binding_get_type; ///
-  ObjectC* function(GBinding* binding) c_g_binding_dup_source; ///
-  ObjectC* function(GBinding* binding) c_g_binding_dup_target; ///
+  GObject* function(GBinding* binding) c_g_binding_dup_source; ///
+  GObject* function(GBinding* binding) c_g_binding_dup_target; ///
   GBindingFlags function(GBinding* binding) c_g_binding_get_flags; ///
-  ObjectC* function(GBinding* binding) c_g_binding_get_source; ///
+  GObject* function(GBinding* binding) c_g_binding_get_source; ///
   const(char)* function(GBinding* binding) c_g_binding_get_source_property; ///
-  ObjectC* function(GBinding* binding) c_g_binding_get_target; ///
+  GObject* function(GBinding* binding) c_g_binding_get_target; ///
   const(char)* function(GBinding* binding) c_g_binding_get_target_property; ///
   void function(GBinding* binding) c_g_binding_unbind; ///
 
   // BindingGroup
   GType function() c_g_binding_group_get_type; ///
   GBindingGroup* function() c_g_binding_group_new; ///
-  void function(GBindingGroup* self, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags) c_g_binding_group_bind; ///
-  void function(GBindingGroup* self, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags, GBindingTransformFunc transformTo, GBindingTransformFunc transformFrom, void* userData, GDestroyNotify userDataDestroy) c_g_binding_group_bind_full; ///
-  void function(GBindingGroup* self, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags, GClosure* transformTo, GClosure* transformFrom) c_g_binding_group_bind_with_closures; ///
-  ObjectC* function(GBindingGroup* self) c_g_binding_group_dup_source; ///
-  void function(GBindingGroup* self, ObjectC* source) c_g_binding_group_set_source; ///
+  void function(GBindingGroup* self, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags) c_g_binding_group_bind; ///
+  void function(GBindingGroup* self, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags, GBindingTransformFunc transformTo, GBindingTransformFunc transformFrom, void* userData, GDestroyNotify userDataDestroy) c_g_binding_group_bind_full; ///
+  void function(GBindingGroup* self, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags, GClosure* transformTo, GClosure* transformFrom) c_g_binding_group_bind_with_closures; ///
+  GObject* function(GBindingGroup* self) c_g_binding_group_dup_source; ///
+  void function(GBindingGroup* self, GObject* source) c_g_binding_group_set_source; ///
 
   // CClosure
   void function(GClosure* closure, GValue* returnValue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData) c_g_cclosure_marshal_BOOLEAN__BOXED_BOXED; ///
@@ -83,13 +83,13 @@ __gshared extern(C)
   void function(GClosure* closure, GValue* returnGvalue, uint nParamValues, const(GValue)* paramValues, void* invocationHint, void* marshalData) c_g_cclosure_marshal_generic; ///
   void function(GClosure* closure, GValue* returnValue, GTypeInstance* instance, void* argsList, void* marshalData, int nParams, GType* paramTypes) c_g_cclosure_marshal_generic_va; ///
   GClosure* function(GCallback callbackFunc, void* userData, GClosureNotify destroyData) c_g_cclosure_new; ///
-  GClosure* function(GCallback callbackFunc, ObjectC* object) c_g_cclosure_new_object; ///
-  GClosure* function(GCallback callbackFunc, ObjectC* object) c_g_cclosure_new_object_swap; ///
+  GClosure* function(GCallback callbackFunc, GObject* object) c_g_cclosure_new_object; ///
+  GClosure* function(GCallback callbackFunc, GObject* object) c_g_cclosure_new_object_swap; ///
   GClosure* function(GCallback callbackFunc, void* userData, GClosureNotify destroyData) c_g_cclosure_new_swap; ///
 
   // Closure
   GType function() c_g_closure_get_type; ///
-  GClosure* function(uint sizeofClosure, ObjectC* object) c_g_closure_new_object; ///
+  GClosure* function(uint sizeofClosure, GObject* object) c_g_closure_new_object; ///
   GClosure* function(uint sizeofClosure, void* data) c_g_closure_new_simple; ///
   void function(GClosure* closure, void* notifyData, GClosureNotify notifyFunc) c_g_closure_add_finalize_notifier; ///
   void function(GClosure* closure, void* notifyData, GClosureNotify notifyFunc) c_g_closure_add_invalidate_notifier; ///
@@ -116,57 +116,57 @@ __gshared extern(C)
 
   // ObjectWrap
   GType function() c_g_object_get_type; ///
-  ObjectC* function(GType objectType, const(char)* firstPropertyName,  ...) c_g_object_new; ///
-  ObjectC* function(GType objectType, const(char)* firstPropertyName, void* varArgs) c_g_object_new_valist; ///
-  ObjectC* function(GType objectType, uint nProperties, const(char*)* names, const(GValue)* values) c_g_object_new_with_properties; ///
-  ObjectC* function(GType objectType, uint nParameters, GParameter* parameters) c_g_object_newv; ///
+  GObject* function(GType objectType, const(char)* firstPropertyName,  ...) c_g_object_new; ///
+  GObject* function(GType objectType, const(char)* firstPropertyName, void* varArgs) c_g_object_new_valist; ///
+  GObject* function(GType objectType, uint nProperties, const(char*)* names, const(GValue)* values) c_g_object_new_with_properties; ///
+  GObject* function(GType objectType, uint nParameters, GParameter* parameters) c_g_object_newv; ///
   size_t function(size_t what, void* data) c_g_object_compat_control; ///
   GParamSpec* function(GTypeInterface* gIface, const(char)* propertyName) c_g_object_interface_find_property; ///
   void function(GTypeInterface* gIface, GParamSpec* pspec) c_g_object_interface_install_property; ///
   GParamSpec** function(GTypeInterface* gIface, uint* nPropertiesP) c_g_object_interface_list_properties; ///
-  void function(ObjectC* object, GToggleNotify notify, void* data) c_g_object_add_toggle_ref; ///
-  void function(ObjectC* object, void** weakPointerLocation) c_g_object_add_weak_pointer; ///
-  GBinding* function(ObjectC* source, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags) c_g_object_bind_property; ///
-  GBinding* function(ObjectC* source, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags, GBindingTransformFunc transformTo, GBindingTransformFunc transformFrom, void* userData, GDestroyNotify notify) c_g_object_bind_property_full; ///
-  GBinding* function(ObjectC* source, const(char)* sourceProperty, ObjectC* target, const(char)* targetProperty, GBindingFlags flags, GClosure* transformTo, GClosure* transformFrom) c_g_object_bind_property_with_closures; ///
-  ObjectC* function(ObjectC* object, const(char)* signalSpec,  ...) c_g_object_connect; ///
-  void function(ObjectC* object, const(char)* signalSpec,  ...) c_g_object_disconnect; ///
-  void* function(ObjectC* object, const(char)* key, GDuplicateFunc dupFunc, void* userData) c_g_object_dup_data; ///
-  void* function(ObjectC* object, GQuark quark, GDuplicateFunc dupFunc, void* userData) c_g_object_dup_qdata; ///
-  void function(ObjectC* object) c_g_object_force_floating; ///
-  void function(ObjectC* object) c_g_object_freeze_notify; ///
-  void function(ObjectC* object, const(char)* firstPropertyName,  ...) c_g_object_get; ///
-  void* function(ObjectC* object, const(char)* key) c_g_object_get_data; ///
-  void function(ObjectC* object, const(char)* propertyName, GValue* value) c_g_object_get_property; ///
-  void* function(ObjectC* object, GQuark quark) c_g_object_get_qdata; ///
-  void function(ObjectC* object, const(char)* firstPropertyName, void* varArgs) c_g_object_get_valist; ///
-  void function(ObjectC* object, uint nProperties, const(char*)* names, GValue* values) c_g_object_getv; ///
-  bool function(ObjectC* object) c_g_object_is_floating; ///
-  void function(ObjectC* object, const(char)* propertyName) c_g_object_notify; ///
-  void function(ObjectC* object, GParamSpec* pspec) c_g_object_notify_by_pspec; ///
-  ObjectC* function(ObjectC* object) c_g_object_ref; ///
-  ObjectC* function(ObjectC* object) c_g_object_ref_sink; ///
-  void function(ObjectC* object, GToggleNotify notify, void* data) c_g_object_remove_toggle_ref; ///
-  void function(ObjectC* object, void** weakPointerLocation) c_g_object_remove_weak_pointer; ///
-  bool function(ObjectC* object, const(char)* key, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_data; ///
-  bool function(ObjectC* object, GQuark quark, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_qdata; ///
-  void function(ObjectC* object) c_g_object_run_dispose; ///
-  void function(ObjectC* object, const(char)* firstPropertyName,  ...) c_g_object_set; ///
-  void function(ObjectC* object, const(char)* key, void* data) c_g_object_set_data; ///
-  void function(ObjectC* object, const(char)* key, void* data, GDestroyNotify destroy) c_g_object_set_data_full; ///
-  void function(ObjectC* object, const(char)* propertyName, const(GValue)* value) c_g_object_set_property; ///
-  void function(ObjectC* object, GQuark quark, void* data) c_g_object_set_qdata; ///
-  void function(ObjectC* object, GQuark quark, void* data, GDestroyNotify destroy) c_g_object_set_qdata_full; ///
-  void function(ObjectC* object, const(char)* firstPropertyName, void* varArgs) c_g_object_set_valist; ///
-  void function(ObjectC* object, uint nProperties, const(char*)* names, const(GValue)* values) c_g_object_setv; ///
-  void* function(ObjectC* object, const(char)* key) c_g_object_steal_data; ///
-  void* function(ObjectC* object, GQuark quark) c_g_object_steal_qdata; ///
-  ObjectC* function(ObjectC* object) c_g_object_take_ref; ///
-  void function(ObjectC* object) c_g_object_thaw_notify; ///
-  void function(ObjectC* object) c_g_object_unref; ///
-  void function(ObjectC* object, GClosure* closure) c_g_object_watch_closure; ///
-  void function(ObjectC* object, GWeakNotify notify, void* data) c_g_object_weak_ref; ///
-  void function(ObjectC* object, GWeakNotify notify, void* data) c_g_object_weak_unref; ///
+  void function(GObject* object, GToggleNotify notify, void* data) c_g_object_add_toggle_ref; ///
+  void function(GObject* object, void** weakPointerLocation) c_g_object_add_weak_pointer; ///
+  GBinding* function(GObject* source, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags) c_g_object_bind_property; ///
+  GBinding* function(GObject* source, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags, GBindingTransformFunc transformTo, GBindingTransformFunc transformFrom, void* userData, GDestroyNotify notify) c_g_object_bind_property_full; ///
+  GBinding* function(GObject* source, const(char)* sourceProperty, GObject* target, const(char)* targetProperty, GBindingFlags flags, GClosure* transformTo, GClosure* transformFrom) c_g_object_bind_property_with_closures; ///
+  GObject* function(GObject* object, const(char)* signalSpec,  ...) c_g_object_connect; ///
+  void function(GObject* object, const(char)* signalSpec,  ...) c_g_object_disconnect; ///
+  void* function(GObject* object, const(char)* key, GDuplicateFunc dupFunc, void* userData) c_g_object_dup_data; ///
+  void* function(GObject* object, GQuark quark, GDuplicateFunc dupFunc, void* userData) c_g_object_dup_qdata; ///
+  void function(GObject* object) c_g_object_force_floating; ///
+  void function(GObject* object) c_g_object_freeze_notify; ///
+  void function(GObject* object, const(char)* firstPropertyName,  ...) c_g_object_get; ///
+  void* function(GObject* object, const(char)* key) c_g_object_get_data; ///
+  void function(GObject* object, const(char)* propertyName, GValue* value) c_g_object_get_property; ///
+  void* function(GObject* object, GQuark quark) c_g_object_get_qdata; ///
+  void function(GObject* object, const(char)* firstPropertyName, void* varArgs) c_g_object_get_valist; ///
+  void function(GObject* object, uint nProperties, const(char*)* names, GValue* values) c_g_object_getv; ///
+  bool function(GObject* object) c_g_object_is_floating; ///
+  void function(GObject* object, const(char)* propertyName) c_g_object_notify; ///
+  void function(GObject* object, GParamSpec* pspec) c_g_object_notify_by_pspec; ///
+  GObject* function(GObject* object) c_g_object_ref; ///
+  GObject* function(GObject* object) c_g_object_ref_sink; ///
+  void function(GObject* object, GToggleNotify notify, void* data) c_g_object_remove_toggle_ref; ///
+  void function(GObject* object, void** weakPointerLocation) c_g_object_remove_weak_pointer; ///
+  bool function(GObject* object, const(char)* key, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_data; ///
+  bool function(GObject* object, GQuark quark, void* oldval, void* newval, GDestroyNotify destroy, GDestroyNotify* oldDestroy) c_g_object_replace_qdata; ///
+  void function(GObject* object) c_g_object_run_dispose; ///
+  void function(GObject* object, const(char)* firstPropertyName,  ...) c_g_object_set; ///
+  void function(GObject* object, const(char)* key, void* data) c_g_object_set_data; ///
+  void function(GObject* object, const(char)* key, void* data, GDestroyNotify destroy) c_g_object_set_data_full; ///
+  void function(GObject* object, const(char)* propertyName, const(GValue)* value) c_g_object_set_property; ///
+  void function(GObject* object, GQuark quark, void* data) c_g_object_set_qdata; ///
+  void function(GObject* object, GQuark quark, void* data, GDestroyNotify destroy) c_g_object_set_qdata_full; ///
+  void function(GObject* object, const(char)* firstPropertyName, void* varArgs) c_g_object_set_valist; ///
+  void function(GObject* object, uint nProperties, const(char*)* names, const(GValue)* values) c_g_object_setv; ///
+  void* function(GObject* object, const(char)* key) c_g_object_steal_data; ///
+  void* function(GObject* object, GQuark quark) c_g_object_steal_qdata; ///
+  GObject* function(GObject* object) c_g_object_take_ref; ///
+  void function(GObject* object) c_g_object_thaw_notify; ///
+  void function(GObject* object) c_g_object_unref; ///
+  void function(GObject* object, GClosure* closure) c_g_object_watch_closure; ///
+  void function(GObject* object, GWeakNotify notify, void* data) c_g_object_weak_ref; ///
+  void function(GObject* object, GWeakNotify notify, void* data) c_g_object_weak_unref; ///
 
   // ParamSpec
   GParamSpec* function(GType paramType, const(char)* name, const(char)* nick, const(char)* blurb, GParamFlags flags) c_g_param_spec_internal; ///
@@ -205,8 +205,8 @@ __gshared extern(C)
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data, GClosureNotify notify, GConnectFlags flags) c_g_signal_group_connect_data; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* object, GConnectFlags flags) c_g_signal_group_connect_object; ///
   void function(GSignalGroup* self, const(char)* detailedSignal, GCallback cHandler, void* data) c_g_signal_group_connect_swapped; ///
-  ObjectC* function(GSignalGroup* self) c_g_signal_group_dup_target; ///
-  void function(GSignalGroup* self, ObjectC* target) c_g_signal_group_set_target; ///
+  GObject* function(GSignalGroup* self) c_g_signal_group_dup_target; ///
+  void function(GSignalGroup* self, GObject* target) c_g_signal_group_set_target; ///
   void function(GSignalGroup* self) c_g_signal_group_unblock; ///
 
   // TypeClass
@@ -256,7 +256,7 @@ __gshared extern(C)
   GType function() c_g_value_get_type; ///
   void function(const(GValue)* srcValue, GValue* destValue) c_g_value_copy; ///
   void* function(const(GValue)* value) c_g_value_dup_boxed; ///
-  ObjectC* function(const(GValue)* value) c_g_value_dup_object; ///
+  GObject* function(const(GValue)* value) c_g_value_dup_object; ///
   GParamSpec* function(const(GValue)* value) c_g_value_dup_param; ///
   char* function(const(GValue)* value) c_g_value_dup_string; ///
   GVariant* function(const(GValue)* value) c_g_value_dup_variant; ///
@@ -272,7 +272,7 @@ __gshared extern(C)
   int function(const(GValue)* value) c_g_value_get_int; ///
   long function(const(GValue)* value) c_g_value_get_int64; ///
   glong function(const(GValue)* value) c_g_value_get_long; ///
-  ObjectC* function(const(GValue)* value) c_g_value_get_object; ///
+  GObject* function(const(GValue)* value) c_g_value_get_object; ///
   GParamSpec* function(const(GValue)* value) c_g_value_get_param; ///
   void* function(const(GValue)* value) c_g_value_get_pointer; ///
   byte function(const(GValue)* value) c_g_value_get_schar; ///
@@ -300,7 +300,7 @@ __gshared extern(C)
   void function(GValue* value, long vInt64) c_g_value_set_int64; ///
   void function(GValue* value, const(char)* vString) c_g_value_set_interned_string; ///
   void function(GValue* value, glong vLong) c_g_value_set_long; ///
-  void function(GValue* value, ObjectC* vObject) c_g_value_set_object; ///
+  void function(GValue* value, GObject* vObject) c_g_value_set_object; ///
   void function(GValue* value, void* vObject) c_g_value_set_object_take_ownership; ///
   void function(GValue* value, GParamSpec* param) c_g_value_set_param; ///
   void function(GValue* value, GParamSpec* param) c_g_value_set_param_take_ownership; ///
@@ -342,9 +342,9 @@ __gshared extern(C)
 
   // WeakRef
   void function(GWeakRef* weakRef) c_g_weak_ref_clear; ///
-  ObjectC* function(GWeakRef* weakRef) c_g_weak_ref_get; ///
-  void function(GWeakRef* weakRef, ObjectC* object) c_g_weak_ref_init; ///
-  void function(GWeakRef* weakRef, ObjectC* object) c_g_weak_ref_set; ///
+  GObject* function(GWeakRef* weakRef) c_g_weak_ref_get; ///
+  void function(GWeakRef* weakRef, GObject* object) c_g_weak_ref_init; ///
+  void function(GWeakRef* weakRef, GObject* object) c_g_weak_ref_set; ///
 
   // global
   void function(GSource* source, GClosure* closure) c_g_source_set_closure; ///
@@ -352,8 +352,8 @@ __gshared extern(C)
   void* function(GType boxedType, const(void)* srcBoxed) c_g_boxed_copy; ///
   void function(GType boxedType, void* boxed) c_g_boxed_free; ///
   GType function(const(char)* name, GBoxedCopyFunc boxedCopy, GBoxedFreeFunc boxedFree) c_g_boxed_type_register_static; ///
-  void function(ObjectC** objectPtr) c_g_clear_object; ///
-  void function(gulong* handlerIdPtr, ObjectC* instance) c_g_clear_signal_handler; ///
+  void function(GObject** objectPtr) c_g_clear_object; ///
+  void function(gulong* handlerIdPtr, GObject* instance) c_g_clear_signal_handler; ///
   void function(GType gEnumType, GTypeInfo* info, const(GEnumValue)* constValues) c_g_enum_complete_type_info; ///
   GEnumValue* function(GEnumClass* enumClass, int value) c_g_enum_get_value; ///
   GEnumValue* function(GEnumClass* enumClass, const(char)* name) c_g_enum_get_value_by_name; ///
@@ -403,25 +403,25 @@ __gshared extern(C)
   gulong function(uint signalId, GQuark detail, GSignalEmissionHook hookFunc, void* hookData, GDestroyNotify dataDestroy) c_g_signal_add_emission_hook; ///
   void function(const(GValue)* instanceAndParams, GValue* returnValue) c_g_signal_chain_from_overridden; ///
   void function(GTypeInstance* instance,  ...) c_g_signal_chain_from_overridden_handler; ///
-  gulong function(ObjectC* instance, const(char)* detailedSignal, GClosure* closure, bool after) c_g_signal_connect_closure; ///
-  gulong function(ObjectC* instance, uint signalId, GQuark detail, GClosure* closure, bool after) c_g_signal_connect_closure_by_id; ///
-  gulong function(ObjectC* instance, const(char)* detailedSignal, GCallback cHandler, void* data, GClosureNotify destroyData, GConnectFlags connectFlags) c_g_signal_connect_data; ///
-  gulong function(GTypeInstance* instance, const(char)* detailedSignal, GCallback cHandler, ObjectC* gobject, GConnectFlags connectFlags) c_g_signal_connect_object; ///
-  void function(ObjectC* instance, uint signalId, GQuark detail,  ...) c_g_signal_emit; ///
-  void function(ObjectC* instance, const(char)* detailedSignal,  ...) c_g_signal_emit_by_name; ///
+  gulong function(GObject* instance, const(char)* detailedSignal, GClosure* closure, bool after) c_g_signal_connect_closure; ///
+  gulong function(GObject* instance, uint signalId, GQuark detail, GClosure* closure, bool after) c_g_signal_connect_closure_by_id; ///
+  gulong function(GObject* instance, const(char)* detailedSignal, GCallback cHandler, void* data, GClosureNotify destroyData, GConnectFlags connectFlags) c_g_signal_connect_data; ///
+  gulong function(GTypeInstance* instance, const(char)* detailedSignal, GCallback cHandler, GObject* gobject, GConnectFlags connectFlags) c_g_signal_connect_object; ///
+  void function(GObject* instance, uint signalId, GQuark detail,  ...) c_g_signal_emit; ///
+  void function(GObject* instance, const(char)* detailedSignal,  ...) c_g_signal_emit_by_name; ///
   void function(GTypeInstance* instance, uint signalId, GQuark detail, void* varArgs) c_g_signal_emit_valist; ///
   void function(const(GValue)* instanceAndParams, uint signalId, GQuark detail, GValue* returnValue) c_g_signal_emitv; ///
-  GSignalInvocationHint* function(ObjectC* instance) c_g_signal_get_invocation_hint; ///
-  void function(ObjectC* instance, gulong handlerId) c_g_signal_handler_block; ///
-  void function(ObjectC* instance, gulong handlerId) c_g_signal_handler_disconnect; ///
-  gulong function(ObjectC* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handler_find; ///
-  bool function(ObjectC* instance, gulong handlerId) c_g_signal_handler_is_connected; ///
-  void function(ObjectC* instance, gulong handlerId) c_g_signal_handler_unblock; ///
-  uint function(ObjectC* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_block_matched; ///
-  void function(ObjectC* instance) c_g_signal_handlers_destroy; ///
-  uint function(ObjectC* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_disconnect_matched; ///
-  uint function(ObjectC* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_unblock_matched; ///
-  bool function(ObjectC* instance, uint signalId, GQuark detail, bool mayBeBlocked) c_g_signal_has_handler_pending; ///
+  GSignalInvocationHint* function(GObject* instance) c_g_signal_get_invocation_hint; ///
+  void function(GObject* instance, gulong handlerId) c_g_signal_handler_block; ///
+  void function(GObject* instance, gulong handlerId) c_g_signal_handler_disconnect; ///
+  gulong function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handler_find; ///
+  bool function(GObject* instance, gulong handlerId) c_g_signal_handler_is_connected; ///
+  void function(GObject* instance, gulong handlerId) c_g_signal_handler_unblock; ///
+  uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_block_matched; ///
+  void function(GObject* instance) c_g_signal_handlers_destroy; ///
+  uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_disconnect_matched; ///
+  uint function(GObject* instance, GSignalMatchType mask, uint signalId, GQuark detail, GClosure* closure, void* func, void* data) c_g_signal_handlers_unblock_matched; ///
+  bool function(GObject* instance, uint signalId, GQuark detail, bool mayBeBlocked) c_g_signal_has_handler_pending; ///
   bool function(const(char)* name) c_g_signal_is_valid_name; ///
   uint* function(GType itype, uint* nIds) c_g_signal_list_ids; ///
   uint function(const(char)* name, GType itype) c_g_signal_lookup; ///
@@ -436,8 +436,8 @@ __gshared extern(C)
   void function(uint signalId, GSignalQuery* query) c_g_signal_query; ///
   void function(uint signalId, gulong hookId) c_g_signal_remove_emission_hook; ///
   void function(uint signalId, GType instanceType, GSignalCVaMarshaller vaMarshaller) c_g_signal_set_va_marshaller; ///
-  void function(ObjectC* instance, uint signalId, GQuark detail) c_g_signal_stop_emission; ///
-  void function(ObjectC* instance, const(char)* detailedSignal) c_g_signal_stop_emission_by_name; ///
+  void function(GObject* instance, uint signalId, GQuark detail) c_g_signal_stop_emission; ///
+  void function(GObject* instance, const(char)* detailedSignal) c_g_signal_stop_emission_by_name; ///
   GClosure* function(GType itype, uint structOffset) c_g_signal_type_cclosure_new; ///
   char* function(const(GValue)* value) c_g_strdup_value_contents; ///
   void function(void* cacheData, GTypeClassCacheFunc cacheFunc) c_g_type_add_class_cache_func; ///
@@ -1838,478 +1838,480 @@ alias g_type_test_flags = c_g_type_test_flags;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // Binding
-  gidLink(cast(void**)&g_binding_get_type, "g_binding_get_type", LIBS);
-  gidLink(cast(void**)&g_binding_dup_source, "g_binding_dup_source", LIBS);
-  gidLink(cast(void**)&g_binding_dup_target, "g_binding_dup_target", LIBS);
-  gidLink(cast(void**)&g_binding_get_flags, "g_binding_get_flags", LIBS);
-  gidLink(cast(void**)&g_binding_get_source, "g_binding_get_source", LIBS);
-  gidLink(cast(void**)&g_binding_get_source_property, "g_binding_get_source_property", LIBS);
-  gidLink(cast(void**)&g_binding_get_target, "g_binding_get_target", LIBS);
-  gidLink(cast(void**)&g_binding_get_target_property, "g_binding_get_target_property", LIBS);
-  gidLink(cast(void**)&g_binding_unbind, "g_binding_unbind", LIBS);
+  gidLink(cast(void**)&g_binding_get_type, "g_binding_get_type", libs);
+  gidLink(cast(void**)&g_binding_dup_source, "g_binding_dup_source", libs);
+  gidLink(cast(void**)&g_binding_dup_target, "g_binding_dup_target", libs);
+  gidLink(cast(void**)&g_binding_get_flags, "g_binding_get_flags", libs);
+  gidLink(cast(void**)&g_binding_get_source, "g_binding_get_source", libs);
+  gidLink(cast(void**)&g_binding_get_source_property, "g_binding_get_source_property", libs);
+  gidLink(cast(void**)&g_binding_get_target, "g_binding_get_target", libs);
+  gidLink(cast(void**)&g_binding_get_target_property, "g_binding_get_target_property", libs);
+  gidLink(cast(void**)&g_binding_unbind, "g_binding_unbind", libs);
 
   // BindingGroup
-  gidLink(cast(void**)&g_binding_group_get_type, "g_binding_group_get_type", LIBS);
-  gidLink(cast(void**)&g_binding_group_new, "g_binding_group_new", LIBS);
-  gidLink(cast(void**)&g_binding_group_bind, "g_binding_group_bind", LIBS);
-  gidLink(cast(void**)&g_binding_group_bind_full, "g_binding_group_bind_full", LIBS);
-  gidLink(cast(void**)&g_binding_group_bind_with_closures, "g_binding_group_bind_with_closures", LIBS);
-  gidLink(cast(void**)&g_binding_group_dup_source, "g_binding_group_dup_source", LIBS);
-  gidLink(cast(void**)&g_binding_group_set_source, "g_binding_group_set_source", LIBS);
+  gidLink(cast(void**)&g_binding_group_get_type, "g_binding_group_get_type", libs);
+  gidLink(cast(void**)&g_binding_group_new, "g_binding_group_new", libs);
+  gidLink(cast(void**)&g_binding_group_bind, "g_binding_group_bind", libs);
+  gidLink(cast(void**)&g_binding_group_bind_full, "g_binding_group_bind_full", libs);
+  gidLink(cast(void**)&g_binding_group_bind_with_closures, "g_binding_group_bind_with_closures", libs);
+  gidLink(cast(void**)&g_binding_group_dup_source, "g_binding_group_dup_source", libs);
+  gidLink(cast(void**)&g_binding_group_set_source, "g_binding_group_set_source", libs);
 
   // CClosure
-  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__BOXED_BOXED, "g_cclosure_marshal_BOOLEAN__BOXED_BOXED", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv, "g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__FLAGS, "g_cclosure_marshal_BOOLEAN__FLAGS", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__FLAGSv, "g_cclosure_marshal_BOOLEAN__FLAGSv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_STRING__OBJECT_POINTER, "g_cclosure_marshal_STRING__OBJECT_POINTER", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_STRING__OBJECT_POINTERv, "g_cclosure_marshal_STRING__OBJECT_POINTERv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOOLEAN, "g_cclosure_marshal_VOID__BOOLEAN", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOOLEANv, "g_cclosure_marshal_VOID__BOOLEANv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOXED, "g_cclosure_marshal_VOID__BOXED", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOXEDv, "g_cclosure_marshal_VOID__BOXEDv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__CHAR, "g_cclosure_marshal_VOID__CHAR", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__CHARv, "g_cclosure_marshal_VOID__CHARv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__DOUBLE, "g_cclosure_marshal_VOID__DOUBLE", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__DOUBLEv, "g_cclosure_marshal_VOID__DOUBLEv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__ENUM, "g_cclosure_marshal_VOID__ENUM", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__ENUMv, "g_cclosure_marshal_VOID__ENUMv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLAGS, "g_cclosure_marshal_VOID__FLAGS", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLAGSv, "g_cclosure_marshal_VOID__FLAGSv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLOAT, "g_cclosure_marshal_VOID__FLOAT", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLOATv, "g_cclosure_marshal_VOID__FLOATv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__INT, "g_cclosure_marshal_VOID__INT", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__INTv, "g_cclosure_marshal_VOID__INTv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__LONG, "g_cclosure_marshal_VOID__LONG", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__LONGv, "g_cclosure_marshal_VOID__LONGv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__OBJECT, "g_cclosure_marshal_VOID__OBJECT", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__OBJECTv, "g_cclosure_marshal_VOID__OBJECTv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__PARAM, "g_cclosure_marshal_VOID__PARAM", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__PARAMv, "g_cclosure_marshal_VOID__PARAMv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__POINTER, "g_cclosure_marshal_VOID__POINTER", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__POINTERv, "g_cclosure_marshal_VOID__POINTERv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__STRING, "g_cclosure_marshal_VOID__STRING", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__STRINGv, "g_cclosure_marshal_VOID__STRINGv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UCHAR, "g_cclosure_marshal_VOID__UCHAR", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UCHARv, "g_cclosure_marshal_VOID__UCHARv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT, "g_cclosure_marshal_VOID__UINT", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT_POINTER, "g_cclosure_marshal_VOID__UINT_POINTER", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT_POINTERv, "g_cclosure_marshal_VOID__UINT_POINTERv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINTv, "g_cclosure_marshal_VOID__UINTv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__ULONG, "g_cclosure_marshal_VOID__ULONG", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__ULONGv, "g_cclosure_marshal_VOID__ULONGv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__VARIANT, "g_cclosure_marshal_VOID__VARIANT", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__VARIANTv, "g_cclosure_marshal_VOID__VARIANTv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__VOID, "g_cclosure_marshal_VOID__VOID", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_VOID__VOIDv, "g_cclosure_marshal_VOID__VOIDv", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_generic, "g_cclosure_marshal_generic", LIBS);
-  gidLink(cast(void**)&g_cclosure_marshal_generic_va, "g_cclosure_marshal_generic_va", LIBS);
-  gidLink(cast(void**)&g_cclosure_new, "g_cclosure_new", LIBS);
-  gidLink(cast(void**)&g_cclosure_new_object, "g_cclosure_new_object", LIBS);
-  gidLink(cast(void**)&g_cclosure_new_object_swap, "g_cclosure_new_object_swap", LIBS);
-  gidLink(cast(void**)&g_cclosure_new_swap, "g_cclosure_new_swap", LIBS);
+  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__BOXED_BOXED, "g_cclosure_marshal_BOOLEAN__BOXED_BOXED", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv, "g_cclosure_marshal_BOOLEAN__BOXED_BOXEDv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__FLAGS, "g_cclosure_marshal_BOOLEAN__FLAGS", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_BOOLEAN__FLAGSv, "g_cclosure_marshal_BOOLEAN__FLAGSv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_STRING__OBJECT_POINTER, "g_cclosure_marshal_STRING__OBJECT_POINTER", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_STRING__OBJECT_POINTERv, "g_cclosure_marshal_STRING__OBJECT_POINTERv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOOLEAN, "g_cclosure_marshal_VOID__BOOLEAN", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOOLEANv, "g_cclosure_marshal_VOID__BOOLEANv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOXED, "g_cclosure_marshal_VOID__BOXED", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__BOXEDv, "g_cclosure_marshal_VOID__BOXEDv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__CHAR, "g_cclosure_marshal_VOID__CHAR", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__CHARv, "g_cclosure_marshal_VOID__CHARv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__DOUBLE, "g_cclosure_marshal_VOID__DOUBLE", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__DOUBLEv, "g_cclosure_marshal_VOID__DOUBLEv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__ENUM, "g_cclosure_marshal_VOID__ENUM", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__ENUMv, "g_cclosure_marshal_VOID__ENUMv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLAGS, "g_cclosure_marshal_VOID__FLAGS", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLAGSv, "g_cclosure_marshal_VOID__FLAGSv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLOAT, "g_cclosure_marshal_VOID__FLOAT", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__FLOATv, "g_cclosure_marshal_VOID__FLOATv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__INT, "g_cclosure_marshal_VOID__INT", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__INTv, "g_cclosure_marshal_VOID__INTv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__LONG, "g_cclosure_marshal_VOID__LONG", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__LONGv, "g_cclosure_marshal_VOID__LONGv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__OBJECT, "g_cclosure_marshal_VOID__OBJECT", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__OBJECTv, "g_cclosure_marshal_VOID__OBJECTv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__PARAM, "g_cclosure_marshal_VOID__PARAM", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__PARAMv, "g_cclosure_marshal_VOID__PARAMv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__POINTER, "g_cclosure_marshal_VOID__POINTER", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__POINTERv, "g_cclosure_marshal_VOID__POINTERv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__STRING, "g_cclosure_marshal_VOID__STRING", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__STRINGv, "g_cclosure_marshal_VOID__STRINGv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UCHAR, "g_cclosure_marshal_VOID__UCHAR", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UCHARv, "g_cclosure_marshal_VOID__UCHARv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT, "g_cclosure_marshal_VOID__UINT", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT_POINTER, "g_cclosure_marshal_VOID__UINT_POINTER", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINT_POINTERv, "g_cclosure_marshal_VOID__UINT_POINTERv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__UINTv, "g_cclosure_marshal_VOID__UINTv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__ULONG, "g_cclosure_marshal_VOID__ULONG", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__ULONGv, "g_cclosure_marshal_VOID__ULONGv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__VARIANT, "g_cclosure_marshal_VOID__VARIANT", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__VARIANTv, "g_cclosure_marshal_VOID__VARIANTv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__VOID, "g_cclosure_marshal_VOID__VOID", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_VOID__VOIDv, "g_cclosure_marshal_VOID__VOIDv", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_generic, "g_cclosure_marshal_generic", libs);
+  gidLink(cast(void**)&g_cclosure_marshal_generic_va, "g_cclosure_marshal_generic_va", libs);
+  gidLink(cast(void**)&g_cclosure_new, "g_cclosure_new", libs);
+  gidLink(cast(void**)&g_cclosure_new_object, "g_cclosure_new_object", libs);
+  gidLink(cast(void**)&g_cclosure_new_object_swap, "g_cclosure_new_object_swap", libs);
+  gidLink(cast(void**)&g_cclosure_new_swap, "g_cclosure_new_swap", libs);
 
   // Closure
-  gidLink(cast(void**)&g_closure_get_type, "g_closure_get_type", LIBS);
-  gidLink(cast(void**)&g_closure_new_object, "g_closure_new_object", LIBS);
-  gidLink(cast(void**)&g_closure_new_simple, "g_closure_new_simple", LIBS);
-  gidLink(cast(void**)&g_closure_add_finalize_notifier, "g_closure_add_finalize_notifier", LIBS);
-  gidLink(cast(void**)&g_closure_add_invalidate_notifier, "g_closure_add_invalidate_notifier", LIBS);
-  gidLink(cast(void**)&g_closure_add_marshal_guards, "g_closure_add_marshal_guards", LIBS);
-  gidLink(cast(void**)&g_closure_invalidate, "g_closure_invalidate", LIBS);
-  gidLink(cast(void**)&g_closure_invoke, "g_closure_invoke", LIBS);
-  gidLink(cast(void**)&g_closure_ref, "g_closure_ref", LIBS);
-  gidLink(cast(void**)&g_closure_remove_finalize_notifier, "g_closure_remove_finalize_notifier", LIBS);
-  gidLink(cast(void**)&g_closure_remove_invalidate_notifier, "g_closure_remove_invalidate_notifier", LIBS);
-  gidLink(cast(void**)&g_closure_set_marshal, "g_closure_set_marshal", LIBS);
-  gidLink(cast(void**)&g_closure_set_meta_marshal, "g_closure_set_meta_marshal", LIBS);
-  gidLink(cast(void**)&g_closure_sink, "g_closure_sink", LIBS);
-  gidLink(cast(void**)&g_closure_unref, "g_closure_unref", LIBS);
+  gidLink(cast(void**)&g_closure_get_type, "g_closure_get_type", libs);
+  gidLink(cast(void**)&g_closure_new_object, "g_closure_new_object", libs);
+  gidLink(cast(void**)&g_closure_new_simple, "g_closure_new_simple", libs);
+  gidLink(cast(void**)&g_closure_add_finalize_notifier, "g_closure_add_finalize_notifier", libs);
+  gidLink(cast(void**)&g_closure_add_invalidate_notifier, "g_closure_add_invalidate_notifier", libs);
+  gidLink(cast(void**)&g_closure_add_marshal_guards, "g_closure_add_marshal_guards", libs);
+  gidLink(cast(void**)&g_closure_invalidate, "g_closure_invalidate", libs);
+  gidLink(cast(void**)&g_closure_invoke, "g_closure_invoke", libs);
+  gidLink(cast(void**)&g_closure_ref, "g_closure_ref", libs);
+  gidLink(cast(void**)&g_closure_remove_finalize_notifier, "g_closure_remove_finalize_notifier", libs);
+  gidLink(cast(void**)&g_closure_remove_invalidate_notifier, "g_closure_remove_invalidate_notifier", libs);
+  gidLink(cast(void**)&g_closure_set_marshal, "g_closure_set_marshal", libs);
+  gidLink(cast(void**)&g_closure_set_meta_marshal, "g_closure_set_meta_marshal", libs);
+  gidLink(cast(void**)&g_closure_sink, "g_closure_sink", libs);
+  gidLink(cast(void**)&g_closure_unref, "g_closure_unref", libs);
 
   // InitiallyUnowned
-  gidLink(cast(void**)&g_initially_unowned_get_type, "g_initially_unowned_get_type", LIBS);
+  gidLink(cast(void**)&g_initially_unowned_get_type, "g_initially_unowned_get_type", libs);
 
   // ObjectClass
-  gidLink(cast(void**)&g_object_class_find_property, "g_object_class_find_property", LIBS);
-  gidLink(cast(void**)&g_object_class_install_properties, "g_object_class_install_properties", LIBS);
-  gidLink(cast(void**)&g_object_class_install_property, "g_object_class_install_property", LIBS);
-  gidLink(cast(void**)&g_object_class_list_properties, "g_object_class_list_properties", LIBS);
-  gidLink(cast(void**)&g_object_class_override_property, "g_object_class_override_property", LIBS);
+  gidLink(cast(void**)&g_object_class_find_property, "g_object_class_find_property", libs);
+  gidLink(cast(void**)&g_object_class_install_properties, "g_object_class_install_properties", libs);
+  gidLink(cast(void**)&g_object_class_install_property, "g_object_class_install_property", libs);
+  gidLink(cast(void**)&g_object_class_list_properties, "g_object_class_list_properties", libs);
+  gidLink(cast(void**)&g_object_class_override_property, "g_object_class_override_property", libs);
 
   // ObjectWrap
-  gidLink(cast(void**)&g_object_get_type, "g_object_get_type", LIBS);
-  gidLink(cast(void**)&g_object_new, "g_object_new", LIBS);
-  gidLink(cast(void**)&g_object_new_valist, "g_object_new_valist", LIBS);
-  gidLink(cast(void**)&g_object_new_with_properties, "g_object_new_with_properties", LIBS);
-  gidLink(cast(void**)&g_object_newv, "g_object_newv", LIBS);
-  gidLink(cast(void**)&g_object_compat_control, "g_object_compat_control", LIBS);
-  gidLink(cast(void**)&g_object_interface_find_property, "g_object_interface_find_property", LIBS);
-  gidLink(cast(void**)&g_object_interface_install_property, "g_object_interface_install_property", LIBS);
-  gidLink(cast(void**)&g_object_interface_list_properties, "g_object_interface_list_properties", LIBS);
-  gidLink(cast(void**)&g_object_add_toggle_ref, "g_object_add_toggle_ref", LIBS);
-  gidLink(cast(void**)&g_object_add_weak_pointer, "g_object_add_weak_pointer", LIBS);
-  gidLink(cast(void**)&g_object_bind_property, "g_object_bind_property", LIBS);
-  gidLink(cast(void**)&g_object_bind_property_full, "g_object_bind_property_full", LIBS);
-  gidLink(cast(void**)&g_object_bind_property_with_closures, "g_object_bind_property_with_closures", LIBS);
-  gidLink(cast(void**)&g_object_connect, "g_object_connect", LIBS);
-  gidLink(cast(void**)&g_object_disconnect, "g_object_disconnect", LIBS);
-  gidLink(cast(void**)&g_object_dup_data, "g_object_dup_data", LIBS);
-  gidLink(cast(void**)&g_object_dup_qdata, "g_object_dup_qdata", LIBS);
-  gidLink(cast(void**)&g_object_force_floating, "g_object_force_floating", LIBS);
-  gidLink(cast(void**)&g_object_freeze_notify, "g_object_freeze_notify", LIBS);
-  gidLink(cast(void**)&g_object_get, "g_object_get", LIBS);
-  gidLink(cast(void**)&g_object_get_data, "g_object_get_data", LIBS);
-  gidLink(cast(void**)&g_object_get_property, "g_object_get_property", LIBS);
-  gidLink(cast(void**)&g_object_get_qdata, "g_object_get_qdata", LIBS);
-  gidLink(cast(void**)&g_object_get_valist, "g_object_get_valist", LIBS);
-  gidLink(cast(void**)&g_object_getv, "g_object_getv", LIBS);
-  gidLink(cast(void**)&g_object_is_floating, "g_object_is_floating", LIBS);
-  gidLink(cast(void**)&g_object_notify, "g_object_notify", LIBS);
-  gidLink(cast(void**)&g_object_notify_by_pspec, "g_object_notify_by_pspec", LIBS);
-  gidLink(cast(void**)&g_object_ref, "g_object_ref", LIBS);
-  gidLink(cast(void**)&g_object_ref_sink, "g_object_ref_sink", LIBS);
-  gidLink(cast(void**)&g_object_remove_toggle_ref, "g_object_remove_toggle_ref", LIBS);
-  gidLink(cast(void**)&g_object_remove_weak_pointer, "g_object_remove_weak_pointer", LIBS);
-  gidLink(cast(void**)&g_object_replace_data, "g_object_replace_data", LIBS);
-  gidLink(cast(void**)&g_object_replace_qdata, "g_object_replace_qdata", LIBS);
-  gidLink(cast(void**)&g_object_run_dispose, "g_object_run_dispose", LIBS);
-  gidLink(cast(void**)&g_object_set, "g_object_set", LIBS);
-  gidLink(cast(void**)&g_object_set_data, "g_object_set_data", LIBS);
-  gidLink(cast(void**)&g_object_set_data_full, "g_object_set_data_full", LIBS);
-  gidLink(cast(void**)&g_object_set_property, "g_object_set_property", LIBS);
-  gidLink(cast(void**)&g_object_set_qdata, "g_object_set_qdata", LIBS);
-  gidLink(cast(void**)&g_object_set_qdata_full, "g_object_set_qdata_full", LIBS);
-  gidLink(cast(void**)&g_object_set_valist, "g_object_set_valist", LIBS);
-  gidLink(cast(void**)&g_object_setv, "g_object_setv", LIBS);
-  gidLink(cast(void**)&g_object_steal_data, "g_object_steal_data", LIBS);
-  gidLink(cast(void**)&g_object_steal_qdata, "g_object_steal_qdata", LIBS);
-  gidLink(cast(void**)&g_object_take_ref, "g_object_take_ref", LIBS);
-  gidLink(cast(void**)&g_object_thaw_notify, "g_object_thaw_notify", LIBS);
-  gidLink(cast(void**)&g_object_unref, "g_object_unref", LIBS);
-  gidLink(cast(void**)&g_object_watch_closure, "g_object_watch_closure", LIBS);
-  gidLink(cast(void**)&g_object_weak_ref, "g_object_weak_ref", LIBS);
-  gidLink(cast(void**)&g_object_weak_unref, "g_object_weak_unref", LIBS);
+  gidLink(cast(void**)&g_object_get_type, "g_object_get_type", libs);
+  gidLink(cast(void**)&g_object_new, "g_object_new", libs);
+  gidLink(cast(void**)&g_object_new_valist, "g_object_new_valist", libs);
+  gidLink(cast(void**)&g_object_new_with_properties, "g_object_new_with_properties", libs);
+  gidLink(cast(void**)&g_object_newv, "g_object_newv", libs);
+  gidLink(cast(void**)&g_object_compat_control, "g_object_compat_control", libs);
+  gidLink(cast(void**)&g_object_interface_find_property, "g_object_interface_find_property", libs);
+  gidLink(cast(void**)&g_object_interface_install_property, "g_object_interface_install_property", libs);
+  gidLink(cast(void**)&g_object_interface_list_properties, "g_object_interface_list_properties", libs);
+  gidLink(cast(void**)&g_object_add_toggle_ref, "g_object_add_toggle_ref", libs);
+  gidLink(cast(void**)&g_object_add_weak_pointer, "g_object_add_weak_pointer", libs);
+  gidLink(cast(void**)&g_object_bind_property, "g_object_bind_property", libs);
+  gidLink(cast(void**)&g_object_bind_property_full, "g_object_bind_property_full", libs);
+  gidLink(cast(void**)&g_object_bind_property_with_closures, "g_object_bind_property_with_closures", libs);
+  gidLink(cast(void**)&g_object_connect, "g_object_connect", libs);
+  gidLink(cast(void**)&g_object_disconnect, "g_object_disconnect", libs);
+  gidLink(cast(void**)&g_object_dup_data, "g_object_dup_data", libs);
+  gidLink(cast(void**)&g_object_dup_qdata, "g_object_dup_qdata", libs);
+  gidLink(cast(void**)&g_object_force_floating, "g_object_force_floating", libs);
+  gidLink(cast(void**)&g_object_freeze_notify, "g_object_freeze_notify", libs);
+  gidLink(cast(void**)&g_object_get, "g_object_get", libs);
+  gidLink(cast(void**)&g_object_get_data, "g_object_get_data", libs);
+  gidLink(cast(void**)&g_object_get_property, "g_object_get_property", libs);
+  gidLink(cast(void**)&g_object_get_qdata, "g_object_get_qdata", libs);
+  gidLink(cast(void**)&g_object_get_valist, "g_object_get_valist", libs);
+  gidLink(cast(void**)&g_object_getv, "g_object_getv", libs);
+  gidLink(cast(void**)&g_object_is_floating, "g_object_is_floating", libs);
+  gidLink(cast(void**)&g_object_notify, "g_object_notify", libs);
+  gidLink(cast(void**)&g_object_notify_by_pspec, "g_object_notify_by_pspec", libs);
+  gidLink(cast(void**)&g_object_ref, "g_object_ref", libs);
+  gidLink(cast(void**)&g_object_ref_sink, "g_object_ref_sink", libs);
+  gidLink(cast(void**)&g_object_remove_toggle_ref, "g_object_remove_toggle_ref", libs);
+  gidLink(cast(void**)&g_object_remove_weak_pointer, "g_object_remove_weak_pointer", libs);
+  gidLink(cast(void**)&g_object_replace_data, "g_object_replace_data", libs);
+  gidLink(cast(void**)&g_object_replace_qdata, "g_object_replace_qdata", libs);
+  gidLink(cast(void**)&g_object_run_dispose, "g_object_run_dispose", libs);
+  gidLink(cast(void**)&g_object_set, "g_object_set", libs);
+  gidLink(cast(void**)&g_object_set_data, "g_object_set_data", libs);
+  gidLink(cast(void**)&g_object_set_data_full, "g_object_set_data_full", libs);
+  gidLink(cast(void**)&g_object_set_property, "g_object_set_property", libs);
+  gidLink(cast(void**)&g_object_set_qdata, "g_object_set_qdata", libs);
+  gidLink(cast(void**)&g_object_set_qdata_full, "g_object_set_qdata_full", libs);
+  gidLink(cast(void**)&g_object_set_valist, "g_object_set_valist", libs);
+  gidLink(cast(void**)&g_object_setv, "g_object_setv", libs);
+  gidLink(cast(void**)&g_object_steal_data, "g_object_steal_data", libs);
+  gidLink(cast(void**)&g_object_steal_qdata, "g_object_steal_qdata", libs);
+  gidLink(cast(void**)&g_object_take_ref, "g_object_take_ref", libs);
+  gidLink(cast(void**)&g_object_thaw_notify, "g_object_thaw_notify", libs);
+  gidLink(cast(void**)&g_object_unref, "g_object_unref", libs);
+  gidLink(cast(void**)&g_object_watch_closure, "g_object_watch_closure", libs);
+  gidLink(cast(void**)&g_object_weak_ref, "g_object_weak_ref", libs);
+  gidLink(cast(void**)&g_object_weak_unref, "g_object_weak_unref", libs);
 
   // ParamSpec
-  gidLink(cast(void**)&g_param_spec_internal, "g_param_spec_internal", LIBS);
-  gidLink(cast(void**)&g_param_spec_is_valid_name, "g_param_spec_is_valid_name", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_blurb, "g_param_spec_get_blurb", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_default_value, "g_param_spec_get_default_value", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_name, "g_param_spec_get_name", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_name_quark, "g_param_spec_get_name_quark", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_nick, "g_param_spec_get_nick", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_qdata, "g_param_spec_get_qdata", LIBS);
-  gidLink(cast(void**)&g_param_spec_get_redirect_target, "g_param_spec_get_redirect_target", LIBS);
-  gidLink(cast(void**)&g_param_spec_ref, "g_param_spec_ref", LIBS);
-  gidLink(cast(void**)&g_param_spec_ref_sink, "g_param_spec_ref_sink", LIBS);
-  gidLink(cast(void**)&g_param_spec_set_qdata, "g_param_spec_set_qdata", LIBS);
-  gidLink(cast(void**)&g_param_spec_set_qdata_full, "g_param_spec_set_qdata_full", LIBS);
-  gidLink(cast(void**)&g_param_spec_sink, "g_param_spec_sink", LIBS);
-  gidLink(cast(void**)&g_param_spec_steal_qdata, "g_param_spec_steal_qdata", LIBS);
-  gidLink(cast(void**)&g_param_spec_unref, "g_param_spec_unref", LIBS);
+  gidLink(cast(void**)&g_param_spec_internal, "g_param_spec_internal", libs);
+  gidLink(cast(void**)&g_param_spec_is_valid_name, "g_param_spec_is_valid_name", libs);
+  gidLink(cast(void**)&g_param_spec_get_blurb, "g_param_spec_get_blurb", libs);
+  gidLink(cast(void**)&g_param_spec_get_default_value, "g_param_spec_get_default_value", libs);
+  gidLink(cast(void**)&g_param_spec_get_name, "g_param_spec_get_name", libs);
+  gidLink(cast(void**)&g_param_spec_get_name_quark, "g_param_spec_get_name_quark", libs);
+  gidLink(cast(void**)&g_param_spec_get_nick, "g_param_spec_get_nick", libs);
+  gidLink(cast(void**)&g_param_spec_get_qdata, "g_param_spec_get_qdata", libs);
+  gidLink(cast(void**)&g_param_spec_get_redirect_target, "g_param_spec_get_redirect_target", libs);
+  gidLink(cast(void**)&g_param_spec_ref, "g_param_spec_ref", libs);
+  gidLink(cast(void**)&g_param_spec_ref_sink, "g_param_spec_ref_sink", libs);
+  gidLink(cast(void**)&g_param_spec_set_qdata, "g_param_spec_set_qdata", libs);
+  gidLink(cast(void**)&g_param_spec_set_qdata_full, "g_param_spec_set_qdata_full", libs);
+  gidLink(cast(void**)&g_param_spec_sink, "g_param_spec_sink", libs);
+  gidLink(cast(void**)&g_param_spec_steal_qdata, "g_param_spec_steal_qdata", libs);
+  gidLink(cast(void**)&g_param_spec_unref, "g_param_spec_unref", libs);
 
   // ParamSpecPool
-  gidLink(cast(void**)&g_param_spec_pool_free, "g_param_spec_pool_free", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_insert, "g_param_spec_pool_insert", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_list, "g_param_spec_pool_list", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_list_owned, "g_param_spec_pool_list_owned", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_lookup, "g_param_spec_pool_lookup", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_remove, "g_param_spec_pool_remove", LIBS);
-  gidLink(cast(void**)&g_param_spec_pool_new, "g_param_spec_pool_new", LIBS);
+  gidLink(cast(void**)&g_param_spec_pool_free, "g_param_spec_pool_free", libs);
+  gidLink(cast(void**)&g_param_spec_pool_insert, "g_param_spec_pool_insert", libs);
+  gidLink(cast(void**)&g_param_spec_pool_list, "g_param_spec_pool_list", libs);
+  gidLink(cast(void**)&g_param_spec_pool_list_owned, "g_param_spec_pool_list_owned", libs);
+  gidLink(cast(void**)&g_param_spec_pool_lookup, "g_param_spec_pool_lookup", libs);
+  gidLink(cast(void**)&g_param_spec_pool_remove, "g_param_spec_pool_remove", libs);
+  gidLink(cast(void**)&g_param_spec_pool_new, "g_param_spec_pool_new", libs);
 
   // SignalGroup
-  gidLink(cast(void**)&g_signal_group_get_type, "g_signal_group_get_type", LIBS);
-  gidLink(cast(void**)&g_signal_group_new, "g_signal_group_new", LIBS);
-  gidLink(cast(void**)&g_signal_group_block, "g_signal_group_block", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect, "g_signal_group_connect", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect_after, "g_signal_group_connect_after", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect_closure, "g_signal_group_connect_closure", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect_data, "g_signal_group_connect_data", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect_object, "g_signal_group_connect_object", LIBS);
-  gidLink(cast(void**)&g_signal_group_connect_swapped, "g_signal_group_connect_swapped", LIBS);
-  gidLink(cast(void**)&g_signal_group_dup_target, "g_signal_group_dup_target", LIBS);
-  gidLink(cast(void**)&g_signal_group_set_target, "g_signal_group_set_target", LIBS);
-  gidLink(cast(void**)&g_signal_group_unblock, "g_signal_group_unblock", LIBS);
+  gidLink(cast(void**)&g_signal_group_get_type, "g_signal_group_get_type", libs);
+  gidLink(cast(void**)&g_signal_group_new, "g_signal_group_new", libs);
+  gidLink(cast(void**)&g_signal_group_block, "g_signal_group_block", libs);
+  gidLink(cast(void**)&g_signal_group_connect, "g_signal_group_connect", libs);
+  gidLink(cast(void**)&g_signal_group_connect_after, "g_signal_group_connect_after", libs);
+  gidLink(cast(void**)&g_signal_group_connect_closure, "g_signal_group_connect_closure", libs);
+  gidLink(cast(void**)&g_signal_group_connect_data, "g_signal_group_connect_data", libs);
+  gidLink(cast(void**)&g_signal_group_connect_object, "g_signal_group_connect_object", libs);
+  gidLink(cast(void**)&g_signal_group_connect_swapped, "g_signal_group_connect_swapped", libs);
+  gidLink(cast(void**)&g_signal_group_dup_target, "g_signal_group_dup_target", libs);
+  gidLink(cast(void**)&g_signal_group_set_target, "g_signal_group_set_target", libs);
+  gidLink(cast(void**)&g_signal_group_unblock, "g_signal_group_unblock", libs);
 
   // TypeClass
-  gidLink(cast(void**)&g_type_class_add_private, "g_type_class_add_private", LIBS);
-  gidLink(cast(void**)&g_type_class_get_instance_private_offset, "g_type_class_get_instance_private_offset", LIBS);
-  gidLink(cast(void**)&g_type_class_get_private, "g_type_class_get_private", LIBS);
-  gidLink(cast(void**)&g_type_class_peek_parent, "g_type_class_peek_parent", LIBS);
-  gidLink(cast(void**)&g_type_class_unref, "g_type_class_unref", LIBS);
-  gidLink(cast(void**)&g_type_class_unref_uncached, "g_type_class_unref_uncached", LIBS);
-  gidLink(cast(void**)&g_type_class_adjust_private_offset, "g_type_class_adjust_private_offset", LIBS);
-  gidLink(cast(void**)&g_type_class_peek, "g_type_class_peek", LIBS);
-  gidLink(cast(void**)&g_type_class_peek_static, "g_type_class_peek_static", LIBS);
-  gidLink(cast(void**)&g_type_class_ref, "g_type_class_ref", LIBS);
+  gidLink(cast(void**)&g_type_class_add_private, "g_type_class_add_private", libs);
+  gidLink(cast(void**)&g_type_class_get_instance_private_offset, "g_type_class_get_instance_private_offset", libs);
+  gidLink(cast(void**)&g_type_class_get_private, "g_type_class_get_private", libs);
+  gidLink(cast(void**)&g_type_class_peek_parent, "g_type_class_peek_parent", libs);
+  gidLink(cast(void**)&g_type_class_unref, "g_type_class_unref", libs);
+  gidLink(cast(void**)&g_type_class_unref_uncached, "g_type_class_unref_uncached", libs);
+  gidLink(cast(void**)&g_type_class_adjust_private_offset, "g_type_class_adjust_private_offset", libs);
+  gidLink(cast(void**)&g_type_class_peek, "g_type_class_peek", libs);
+  gidLink(cast(void**)&g_type_class_peek_static, "g_type_class_peek_static", libs);
+  gidLink(cast(void**)&g_type_class_ref, "g_type_class_ref", libs);
 
   // TypeInstance
-  gidLink(cast(void**)&g_type_instance_get_private, "g_type_instance_get_private", LIBS);
+  gidLink(cast(void**)&g_type_instance_get_private, "g_type_instance_get_private", libs);
 
   // TypeInterface
-  gidLink(cast(void**)&g_type_interface_peek_parent, "g_type_interface_peek_parent", LIBS);
-  gidLink(cast(void**)&g_type_interface_add_prerequisite, "g_type_interface_add_prerequisite", LIBS);
-  gidLink(cast(void**)&g_type_interface_get_plugin, "g_type_interface_get_plugin", LIBS);
-  gidLink(cast(void**)&g_type_interface_instantiatable_prerequisite, "g_type_interface_instantiatable_prerequisite", LIBS);
-  gidLink(cast(void**)&g_type_interface_peek, "g_type_interface_peek", LIBS);
-  gidLink(cast(void**)&g_type_interface_prerequisites, "g_type_interface_prerequisites", LIBS);
+  gidLink(cast(void**)&g_type_interface_peek_parent, "g_type_interface_peek_parent", libs);
+  gidLink(cast(void**)&g_type_interface_add_prerequisite, "g_type_interface_add_prerequisite", libs);
+  gidLink(cast(void**)&g_type_interface_get_plugin, "g_type_interface_get_plugin", libs);
+  gidLink(cast(void**)&g_type_interface_instantiatable_prerequisite, "g_type_interface_instantiatable_prerequisite", libs);
+  gidLink(cast(void**)&g_type_interface_peek, "g_type_interface_peek", libs);
+  gidLink(cast(void**)&g_type_interface_prerequisites, "g_type_interface_prerequisites", libs);
 
   // TypeModule
-  gidLink(cast(void**)&g_type_module_get_type, "g_type_module_get_type", LIBS);
-  gidLink(cast(void**)&g_type_module_add_interface, "g_type_module_add_interface", LIBS);
-  gidLink(cast(void**)&g_type_module_register_enum, "g_type_module_register_enum", LIBS);
-  gidLink(cast(void**)&g_type_module_register_flags, "g_type_module_register_flags", LIBS);
-  gidLink(cast(void**)&g_type_module_register_type, "g_type_module_register_type", LIBS);
-  gidLink(cast(void**)&g_type_module_set_name, "g_type_module_set_name", LIBS);
-  gidLink(cast(void**)&g_type_module_unuse, "g_type_module_unuse", LIBS);
-  gidLink(cast(void**)&g_type_module_use, "g_type_module_use", LIBS);
+  gidLink(cast(void**)&g_type_module_get_type, "g_type_module_get_type", libs);
+  gidLink(cast(void**)&g_type_module_add_interface, "g_type_module_add_interface", libs);
+  gidLink(cast(void**)&g_type_module_register_enum, "g_type_module_register_enum", libs);
+  gidLink(cast(void**)&g_type_module_register_flags, "g_type_module_register_flags", libs);
+  gidLink(cast(void**)&g_type_module_register_type, "g_type_module_register_type", libs);
+  gidLink(cast(void**)&g_type_module_set_name, "g_type_module_set_name", libs);
+  gidLink(cast(void**)&g_type_module_unuse, "g_type_module_unuse", libs);
+  gidLink(cast(void**)&g_type_module_use, "g_type_module_use", libs);
 
   // TypePlugin
-  gidLink(cast(void**)&g_type_plugin_get_type, "g_type_plugin_get_type", LIBS);
-  gidLink(cast(void**)&g_type_plugin_complete_interface_info, "g_type_plugin_complete_interface_info", LIBS);
-  gidLink(cast(void**)&g_type_plugin_complete_type_info, "g_type_plugin_complete_type_info", LIBS);
-  gidLink(cast(void**)&g_type_plugin_unuse, "g_type_plugin_unuse", LIBS);
-  gidLink(cast(void**)&g_type_plugin_use, "g_type_plugin_use", LIBS);
+  gidLink(cast(void**)&g_type_plugin_get_type, "g_type_plugin_get_type", libs);
+  gidLink(cast(void**)&g_type_plugin_complete_interface_info, "g_type_plugin_complete_interface_info", libs);
+  gidLink(cast(void**)&g_type_plugin_complete_type_info, "g_type_plugin_complete_type_info", libs);
+  gidLink(cast(void**)&g_type_plugin_unuse, "g_type_plugin_unuse", libs);
+  gidLink(cast(void**)&g_type_plugin_use, "g_type_plugin_use", libs);
 
   // TypeValueTable
-  gidLink(cast(void**)&g_type_value_table_peek, "g_type_value_table_peek", LIBS);
+  gidLink(cast(void**)&g_type_value_table_peek, "g_type_value_table_peek", libs);
 
   // Value
-  gidLink(cast(void**)&g_value_get_type, "g_value_get_type", LIBS);
-  gidLink(cast(void**)&g_value_copy, "g_value_copy", LIBS);
-  gidLink(cast(void**)&g_value_dup_boxed, "g_value_dup_boxed", LIBS);
-  gidLink(cast(void**)&g_value_dup_object, "g_value_dup_object", LIBS);
-  gidLink(cast(void**)&g_value_dup_param, "g_value_dup_param", LIBS);
-  gidLink(cast(void**)&g_value_dup_string, "g_value_dup_string", LIBS);
-  gidLink(cast(void**)&g_value_dup_variant, "g_value_dup_variant", LIBS);
-  gidLink(cast(void**)&g_value_fits_pointer, "g_value_fits_pointer", LIBS);
-  gidLink(cast(void**)&g_value_get_boolean, "g_value_get_boolean", LIBS);
-  gidLink(cast(void**)&g_value_get_boxed, "g_value_get_boxed", LIBS);
-  gidLink(cast(void**)&g_value_get_char, "g_value_get_char", LIBS);
-  gidLink(cast(void**)&g_value_get_double, "g_value_get_double", LIBS);
-  gidLink(cast(void**)&g_value_get_enum, "g_value_get_enum", LIBS);
-  gidLink(cast(void**)&g_value_get_flags, "g_value_get_flags", LIBS);
-  gidLink(cast(void**)&g_value_get_float, "g_value_get_float", LIBS);
-  gidLink(cast(void**)&g_value_get_gtype, "g_value_get_gtype", LIBS);
-  gidLink(cast(void**)&g_value_get_int, "g_value_get_int", LIBS);
-  gidLink(cast(void**)&g_value_get_int64, "g_value_get_int64", LIBS);
-  gidLink(cast(void**)&g_value_get_long, "g_value_get_long", LIBS);
-  gidLink(cast(void**)&g_value_get_object, "g_value_get_object", LIBS);
-  gidLink(cast(void**)&g_value_get_param, "g_value_get_param", LIBS);
-  gidLink(cast(void**)&g_value_get_pointer, "g_value_get_pointer", LIBS);
-  gidLink(cast(void**)&g_value_get_schar, "g_value_get_schar", LIBS);
-  gidLink(cast(void**)&g_value_get_string, "g_value_get_string", LIBS);
-  gidLink(cast(void**)&g_value_get_uchar, "g_value_get_uchar", LIBS);
-  gidLink(cast(void**)&g_value_get_uint, "g_value_get_uint", LIBS);
-  gidLink(cast(void**)&g_value_get_uint64, "g_value_get_uint64", LIBS);
-  gidLink(cast(void**)&g_value_get_ulong, "g_value_get_ulong", LIBS);
-  gidLink(cast(void**)&g_value_get_variant, "g_value_get_variant", LIBS);
-  gidLink(cast(void**)&g_value_init, "g_value_init", LIBS);
-  gidLink(cast(void**)&g_value_init_from_instance, "g_value_init_from_instance", LIBS);
-  gidLink(cast(void**)&g_value_peek_pointer, "g_value_peek_pointer", LIBS);
-  gidLink(cast(void**)&g_value_reset, "g_value_reset", LIBS);
-  gidLink(cast(void**)&g_value_set_boolean, "g_value_set_boolean", LIBS);
-  gidLink(cast(void**)&g_value_set_boxed, "g_value_set_boxed", LIBS);
-  gidLink(cast(void**)&g_value_set_boxed_take_ownership, "g_value_set_boxed_take_ownership", LIBS);
-  gidLink(cast(void**)&g_value_set_char, "g_value_set_char", LIBS);
-  gidLink(cast(void**)&g_value_set_double, "g_value_set_double", LIBS);
-  gidLink(cast(void**)&g_value_set_enum, "g_value_set_enum", LIBS);
-  gidLink(cast(void**)&g_value_set_flags, "g_value_set_flags", LIBS);
-  gidLink(cast(void**)&g_value_set_float, "g_value_set_float", LIBS);
-  gidLink(cast(void**)&g_value_set_gtype, "g_value_set_gtype", LIBS);
-  gidLink(cast(void**)&g_value_set_instance, "g_value_set_instance", LIBS);
-  gidLink(cast(void**)&g_value_set_int, "g_value_set_int", LIBS);
-  gidLink(cast(void**)&g_value_set_int64, "g_value_set_int64", LIBS);
-  gidLink(cast(void**)&g_value_set_interned_string, "g_value_set_interned_string", LIBS);
-  gidLink(cast(void**)&g_value_set_long, "g_value_set_long", LIBS);
-  gidLink(cast(void**)&g_value_set_object, "g_value_set_object", LIBS);
-  gidLink(cast(void**)&g_value_set_object_take_ownership, "g_value_set_object_take_ownership", LIBS);
-  gidLink(cast(void**)&g_value_set_param, "g_value_set_param", LIBS);
-  gidLink(cast(void**)&g_value_set_param_take_ownership, "g_value_set_param_take_ownership", LIBS);
-  gidLink(cast(void**)&g_value_set_pointer, "g_value_set_pointer", LIBS);
-  gidLink(cast(void**)&g_value_set_schar, "g_value_set_schar", LIBS);
-  gidLink(cast(void**)&g_value_set_static_boxed, "g_value_set_static_boxed", LIBS);
-  gidLink(cast(void**)&g_value_set_static_string, "g_value_set_static_string", LIBS);
-  gidLink(cast(void**)&g_value_set_string, "g_value_set_string", LIBS);
-  gidLink(cast(void**)&g_value_set_string_take_ownership, "g_value_set_string_take_ownership", LIBS);
-  gidLink(cast(void**)&g_value_set_uchar, "g_value_set_uchar", LIBS);
-  gidLink(cast(void**)&g_value_set_uint, "g_value_set_uint", LIBS);
-  gidLink(cast(void**)&g_value_set_uint64, "g_value_set_uint64", LIBS);
-  gidLink(cast(void**)&g_value_set_ulong, "g_value_set_ulong", LIBS);
-  gidLink(cast(void**)&g_value_set_variant, "g_value_set_variant", LIBS);
-  gidLink(cast(void**)&g_value_steal_string, "g_value_steal_string", LIBS);
-  gidLink(cast(void**)&g_value_take_boxed, "g_value_take_boxed", LIBS);
-  gidLink(cast(void**)&g_value_take_object, "g_value_take_object", LIBS);
-  gidLink(cast(void**)&g_value_take_param, "g_value_take_param", LIBS);
-  gidLink(cast(void**)&g_value_take_string, "g_value_take_string", LIBS);
-  gidLink(cast(void**)&g_value_take_variant, "g_value_take_variant", LIBS);
-  gidLink(cast(void**)&g_value_transform, "g_value_transform", LIBS);
-  gidLink(cast(void**)&g_value_unset, "g_value_unset", LIBS);
-  gidLink(cast(void**)&g_value_register_transform_func, "g_value_register_transform_func", LIBS);
-  gidLink(cast(void**)&g_value_type_compatible, "g_value_type_compatible", LIBS);
-  gidLink(cast(void**)&g_value_type_transformable, "g_value_type_transformable", LIBS);
+  gidLink(cast(void**)&g_value_get_type, "g_value_get_type", libs);
+  gidLink(cast(void**)&g_value_copy, "g_value_copy", libs);
+  gidLink(cast(void**)&g_value_dup_boxed, "g_value_dup_boxed", libs);
+  gidLink(cast(void**)&g_value_dup_object, "g_value_dup_object", libs);
+  gidLink(cast(void**)&g_value_dup_param, "g_value_dup_param", libs);
+  gidLink(cast(void**)&g_value_dup_string, "g_value_dup_string", libs);
+  gidLink(cast(void**)&g_value_dup_variant, "g_value_dup_variant", libs);
+  gidLink(cast(void**)&g_value_fits_pointer, "g_value_fits_pointer", libs);
+  gidLink(cast(void**)&g_value_get_boolean, "g_value_get_boolean", libs);
+  gidLink(cast(void**)&g_value_get_boxed, "g_value_get_boxed", libs);
+  gidLink(cast(void**)&g_value_get_char, "g_value_get_char", libs);
+  gidLink(cast(void**)&g_value_get_double, "g_value_get_double", libs);
+  gidLink(cast(void**)&g_value_get_enum, "g_value_get_enum", libs);
+  gidLink(cast(void**)&g_value_get_flags, "g_value_get_flags", libs);
+  gidLink(cast(void**)&g_value_get_float, "g_value_get_float", libs);
+  gidLink(cast(void**)&g_value_get_gtype, "g_value_get_gtype", libs);
+  gidLink(cast(void**)&g_value_get_int, "g_value_get_int", libs);
+  gidLink(cast(void**)&g_value_get_int64, "g_value_get_int64", libs);
+  gidLink(cast(void**)&g_value_get_long, "g_value_get_long", libs);
+  gidLink(cast(void**)&g_value_get_object, "g_value_get_object", libs);
+  gidLink(cast(void**)&g_value_get_param, "g_value_get_param", libs);
+  gidLink(cast(void**)&g_value_get_pointer, "g_value_get_pointer", libs);
+  gidLink(cast(void**)&g_value_get_schar, "g_value_get_schar", libs);
+  gidLink(cast(void**)&g_value_get_string, "g_value_get_string", libs);
+  gidLink(cast(void**)&g_value_get_uchar, "g_value_get_uchar", libs);
+  gidLink(cast(void**)&g_value_get_uint, "g_value_get_uint", libs);
+  gidLink(cast(void**)&g_value_get_uint64, "g_value_get_uint64", libs);
+  gidLink(cast(void**)&g_value_get_ulong, "g_value_get_ulong", libs);
+  gidLink(cast(void**)&g_value_get_variant, "g_value_get_variant", libs);
+  gidLink(cast(void**)&g_value_init, "g_value_init", libs);
+  gidLink(cast(void**)&g_value_init_from_instance, "g_value_init_from_instance", libs);
+  gidLink(cast(void**)&g_value_peek_pointer, "g_value_peek_pointer", libs);
+  gidLink(cast(void**)&g_value_reset, "g_value_reset", libs);
+  gidLink(cast(void**)&g_value_set_boolean, "g_value_set_boolean", libs);
+  gidLink(cast(void**)&g_value_set_boxed, "g_value_set_boxed", libs);
+  gidLink(cast(void**)&g_value_set_boxed_take_ownership, "g_value_set_boxed_take_ownership", libs);
+  gidLink(cast(void**)&g_value_set_char, "g_value_set_char", libs);
+  gidLink(cast(void**)&g_value_set_double, "g_value_set_double", libs);
+  gidLink(cast(void**)&g_value_set_enum, "g_value_set_enum", libs);
+  gidLink(cast(void**)&g_value_set_flags, "g_value_set_flags", libs);
+  gidLink(cast(void**)&g_value_set_float, "g_value_set_float", libs);
+  gidLink(cast(void**)&g_value_set_gtype, "g_value_set_gtype", libs);
+  gidLink(cast(void**)&g_value_set_instance, "g_value_set_instance", libs);
+  gidLink(cast(void**)&g_value_set_int, "g_value_set_int", libs);
+  gidLink(cast(void**)&g_value_set_int64, "g_value_set_int64", libs);
+  gidLink(cast(void**)&g_value_set_interned_string, "g_value_set_interned_string", libs);
+  gidLink(cast(void**)&g_value_set_long, "g_value_set_long", libs);
+  gidLink(cast(void**)&g_value_set_object, "g_value_set_object", libs);
+  gidLink(cast(void**)&g_value_set_object_take_ownership, "g_value_set_object_take_ownership", libs);
+  gidLink(cast(void**)&g_value_set_param, "g_value_set_param", libs);
+  gidLink(cast(void**)&g_value_set_param_take_ownership, "g_value_set_param_take_ownership", libs);
+  gidLink(cast(void**)&g_value_set_pointer, "g_value_set_pointer", libs);
+  gidLink(cast(void**)&g_value_set_schar, "g_value_set_schar", libs);
+  gidLink(cast(void**)&g_value_set_static_boxed, "g_value_set_static_boxed", libs);
+  gidLink(cast(void**)&g_value_set_static_string, "g_value_set_static_string", libs);
+  gidLink(cast(void**)&g_value_set_string, "g_value_set_string", libs);
+  gidLink(cast(void**)&g_value_set_string_take_ownership, "g_value_set_string_take_ownership", libs);
+  gidLink(cast(void**)&g_value_set_uchar, "g_value_set_uchar", libs);
+  gidLink(cast(void**)&g_value_set_uint, "g_value_set_uint", libs);
+  gidLink(cast(void**)&g_value_set_uint64, "g_value_set_uint64", libs);
+  gidLink(cast(void**)&g_value_set_ulong, "g_value_set_ulong", libs);
+  gidLink(cast(void**)&g_value_set_variant, "g_value_set_variant", libs);
+  gidLink(cast(void**)&g_value_steal_string, "g_value_steal_string", libs);
+  gidLink(cast(void**)&g_value_take_boxed, "g_value_take_boxed", libs);
+  gidLink(cast(void**)&g_value_take_object, "g_value_take_object", libs);
+  gidLink(cast(void**)&g_value_take_param, "g_value_take_param", libs);
+  gidLink(cast(void**)&g_value_take_string, "g_value_take_string", libs);
+  gidLink(cast(void**)&g_value_take_variant, "g_value_take_variant", libs);
+  gidLink(cast(void**)&g_value_transform, "g_value_transform", libs);
+  gidLink(cast(void**)&g_value_unset, "g_value_unset", libs);
+  gidLink(cast(void**)&g_value_register_transform_func, "g_value_register_transform_func", libs);
+  gidLink(cast(void**)&g_value_type_compatible, "g_value_type_compatible", libs);
+  gidLink(cast(void**)&g_value_type_transformable, "g_value_type_transformable", libs);
 
   // ValueArray
-  gidLink(cast(void**)&g_value_array_get_type, "g_value_array_get_type", LIBS);
-  gidLink(cast(void**)&g_value_array_new, "g_value_array_new", LIBS);
-  gidLink(cast(void**)&g_value_array_append, "g_value_array_append", LIBS);
-  gidLink(cast(void**)&g_value_array_copy, "g_value_array_copy", LIBS);
-  gidLink(cast(void**)&g_value_array_free, "g_value_array_free", LIBS);
-  gidLink(cast(void**)&g_value_array_get_nth, "g_value_array_get_nth", LIBS);
-  gidLink(cast(void**)&g_value_array_insert, "g_value_array_insert", LIBS);
-  gidLink(cast(void**)&g_value_array_prepend, "g_value_array_prepend", LIBS);
-  gidLink(cast(void**)&g_value_array_remove, "g_value_array_remove", LIBS);
-  gidLink(cast(void**)&g_value_array_sort, "g_value_array_sort", LIBS);
-  gidLink(cast(void**)&g_value_array_sort_with_data, "g_value_array_sort_with_data", LIBS);
+  gidLink(cast(void**)&g_value_array_get_type, "g_value_array_get_type", libs);
+  gidLink(cast(void**)&g_value_array_new, "g_value_array_new", libs);
+  gidLink(cast(void**)&g_value_array_append, "g_value_array_append", libs);
+  gidLink(cast(void**)&g_value_array_copy, "g_value_array_copy", libs);
+  gidLink(cast(void**)&g_value_array_free, "g_value_array_free", libs);
+  gidLink(cast(void**)&g_value_array_get_nth, "g_value_array_get_nth", libs);
+  gidLink(cast(void**)&g_value_array_insert, "g_value_array_insert", libs);
+  gidLink(cast(void**)&g_value_array_prepend, "g_value_array_prepend", libs);
+  gidLink(cast(void**)&g_value_array_remove, "g_value_array_remove", libs);
+  gidLink(cast(void**)&g_value_array_sort, "g_value_array_sort", libs);
+  gidLink(cast(void**)&g_value_array_sort_with_data, "g_value_array_sort_with_data", libs);
 
   // WeakRef
-  gidLink(cast(void**)&g_weak_ref_clear, "g_weak_ref_clear", LIBS);
-  gidLink(cast(void**)&g_weak_ref_get, "g_weak_ref_get", LIBS);
-  gidLink(cast(void**)&g_weak_ref_init, "g_weak_ref_init", LIBS);
-  gidLink(cast(void**)&g_weak_ref_set, "g_weak_ref_set", LIBS);
+  gidLink(cast(void**)&g_weak_ref_clear, "g_weak_ref_clear", libs);
+  gidLink(cast(void**)&g_weak_ref_get, "g_weak_ref_get", libs);
+  gidLink(cast(void**)&g_weak_ref_init, "g_weak_ref_init", libs);
+  gidLink(cast(void**)&g_weak_ref_set, "g_weak_ref_set", libs);
 
   // global
-  gidLink(cast(void**)&g_source_set_closure, "g_source_set_closure", LIBS);
-  gidLink(cast(void**)&g_source_set_dummy_callback, "g_source_set_dummy_callback", LIBS);
-  gidLink(cast(void**)&g_boxed_copy, "g_boxed_copy", LIBS);
-  gidLink(cast(void**)&g_boxed_free, "g_boxed_free", LIBS);
-  gidLink(cast(void**)&g_boxed_type_register_static, "g_boxed_type_register_static", LIBS);
-  gidLink(cast(void**)&g_clear_object, "g_clear_object", LIBS);
-  gidLink(cast(void**)&g_clear_signal_handler, "g_clear_signal_handler", LIBS);
-  gidLink(cast(void**)&g_enum_complete_type_info, "g_enum_complete_type_info", LIBS);
-  gidLink(cast(void**)&g_enum_get_value, "g_enum_get_value", LIBS);
-  gidLink(cast(void**)&g_enum_get_value_by_name, "g_enum_get_value_by_name", LIBS);
-  gidLink(cast(void**)&g_enum_get_value_by_nick, "g_enum_get_value_by_nick", LIBS);
-  gidLink(cast(void**)&g_enum_register_static, "g_enum_register_static", LIBS);
-  gidLink(cast(void**)&g_enum_to_string, "g_enum_to_string", LIBS);
-  gidLink(cast(void**)&g_flags_complete_type_info, "g_flags_complete_type_info", LIBS);
-  gidLink(cast(void**)&g_flags_get_first_value, "g_flags_get_first_value", LIBS);
-  gidLink(cast(void**)&g_flags_get_value_by_name, "g_flags_get_value_by_name", LIBS);
-  gidLink(cast(void**)&g_flags_get_value_by_nick, "g_flags_get_value_by_nick", LIBS);
-  gidLink(cast(void**)&g_flags_register_static, "g_flags_register_static", LIBS);
-  gidLink(cast(void**)&g_flags_to_string, "g_flags_to_string", LIBS);
-  gidLink(cast(void**)&g_gtype_get_type, "g_gtype_get_type", LIBS);
-  gidLink(cast(void**)&g_param_spec_boolean, "g_param_spec_boolean", LIBS);
-  gidLink(cast(void**)&g_param_spec_boxed, "g_param_spec_boxed", LIBS);
-  gidLink(cast(void**)&g_param_spec_char, "g_param_spec_char", LIBS);
-  gidLink(cast(void**)&g_param_spec_double, "g_param_spec_double", LIBS);
-  gidLink(cast(void**)&g_param_spec_enum, "g_param_spec_enum", LIBS);
-  gidLink(cast(void**)&g_param_spec_flags, "g_param_spec_flags", LIBS);
-  gidLink(cast(void**)&g_param_spec_float, "g_param_spec_float", LIBS);
-  gidLink(cast(void**)&g_param_spec_gtype, "g_param_spec_gtype", LIBS);
-  gidLink(cast(void**)&g_param_spec_int, "g_param_spec_int", LIBS);
-  gidLink(cast(void**)&g_param_spec_int64, "g_param_spec_int64", LIBS);
-  gidLink(cast(void**)&g_param_spec_long, "g_param_spec_long", LIBS);
-  gidLink(cast(void**)&g_param_spec_object, "g_param_spec_object", LIBS);
-  gidLink(cast(void**)&g_param_spec_override, "g_param_spec_override", LIBS);
-  gidLink(cast(void**)&g_param_spec_param, "g_param_spec_param", LIBS);
-  gidLink(cast(void**)&g_param_spec_pointer, "g_param_spec_pointer", LIBS);
-  gidLink(cast(void**)&g_param_spec_string, "g_param_spec_string", LIBS);
-  gidLink(cast(void**)&g_param_spec_uchar, "g_param_spec_uchar", LIBS);
-  gidLink(cast(void**)&g_param_spec_uint, "g_param_spec_uint", LIBS);
-  gidLink(cast(void**)&g_param_spec_uint64, "g_param_spec_uint64", LIBS);
-  gidLink(cast(void**)&g_param_spec_ulong, "g_param_spec_ulong", LIBS);
-  gidLink(cast(void**)&g_param_spec_unichar, "g_param_spec_unichar", LIBS);
-  gidLink(cast(void**)&g_param_spec_value_array, "g_param_spec_value_array", LIBS);
-  gidLink(cast(void**)&g_param_spec_variant, "g_param_spec_variant", LIBS);
-  gidLink(cast(void**)&g_param_type_register_static, "g_param_type_register_static", LIBS);
-  gidLink(cast(void**)&g_param_value_convert, "g_param_value_convert", LIBS);
-  gidLink(cast(void**)&g_param_value_defaults, "g_param_value_defaults", LIBS);
-  gidLink(cast(void**)&g_param_value_is_valid, "g_param_value_is_valid", LIBS);
-  gidLink(cast(void**)&g_param_value_set_default, "g_param_value_set_default", LIBS);
-  gidLink(cast(void**)&g_param_value_validate, "g_param_value_validate", LIBS);
-  gidLink(cast(void**)&g_param_values_cmp, "g_param_values_cmp", LIBS);
-  gidLink(cast(void**)&g_pointer_type_register_static, "g_pointer_type_register_static", LIBS);
-  gidLink(cast(void**)&g_signal_accumulator_first_wins, "g_signal_accumulator_first_wins", LIBS);
-  gidLink(cast(void**)&g_signal_accumulator_true_handled, "g_signal_accumulator_true_handled", LIBS);
-  gidLink(cast(void**)&g_signal_add_emission_hook, "g_signal_add_emission_hook", LIBS);
-  gidLink(cast(void**)&g_signal_chain_from_overridden, "g_signal_chain_from_overridden", LIBS);
-  gidLink(cast(void**)&g_signal_chain_from_overridden_handler, "g_signal_chain_from_overridden_handler", LIBS);
-  gidLink(cast(void**)&g_signal_connect_closure, "g_signal_connect_closure", LIBS);
-  gidLink(cast(void**)&g_signal_connect_closure_by_id, "g_signal_connect_closure_by_id", LIBS);
-  gidLink(cast(void**)&g_signal_connect_data, "g_signal_connect_data", LIBS);
-  gidLink(cast(void**)&g_signal_connect_object, "g_signal_connect_object", LIBS);
-  gidLink(cast(void**)&g_signal_emit, "g_signal_emit", LIBS);
-  gidLink(cast(void**)&g_signal_emit_by_name, "g_signal_emit_by_name", LIBS);
-  gidLink(cast(void**)&g_signal_emit_valist, "g_signal_emit_valist", LIBS);
-  gidLink(cast(void**)&g_signal_emitv, "g_signal_emitv", LIBS);
-  gidLink(cast(void**)&g_signal_get_invocation_hint, "g_signal_get_invocation_hint", LIBS);
-  gidLink(cast(void**)&g_signal_handler_block, "g_signal_handler_block", LIBS);
-  gidLink(cast(void**)&g_signal_handler_disconnect, "g_signal_handler_disconnect", LIBS);
-  gidLink(cast(void**)&g_signal_handler_find, "g_signal_handler_find", LIBS);
-  gidLink(cast(void**)&g_signal_handler_is_connected, "g_signal_handler_is_connected", LIBS);
-  gidLink(cast(void**)&g_signal_handler_unblock, "g_signal_handler_unblock", LIBS);
-  gidLink(cast(void**)&g_signal_handlers_block_matched, "g_signal_handlers_block_matched", LIBS);
-  gidLink(cast(void**)&g_signal_handlers_destroy, "g_signal_handlers_destroy", LIBS);
-  gidLink(cast(void**)&g_signal_handlers_disconnect_matched, "g_signal_handlers_disconnect_matched", LIBS);
-  gidLink(cast(void**)&g_signal_handlers_unblock_matched, "g_signal_handlers_unblock_matched", LIBS);
-  gidLink(cast(void**)&g_signal_has_handler_pending, "g_signal_has_handler_pending", LIBS);
-  gidLink(cast(void**)&g_signal_is_valid_name, "g_signal_is_valid_name", LIBS);
-  gidLink(cast(void**)&g_signal_list_ids, "g_signal_list_ids", LIBS);
-  gidLink(cast(void**)&g_signal_lookup, "g_signal_lookup", LIBS);
-  gidLink(cast(void**)&g_signal_name, "g_signal_name", LIBS);
-  gidLink(cast(void**)&g_signal_new, "g_signal_new", LIBS);
-  gidLink(cast(void**)&g_signal_new_class_handler, "g_signal_new_class_handler", LIBS);
-  gidLink(cast(void**)&g_signal_new_valist, "g_signal_new_valist", LIBS);
-  gidLink(cast(void**)&g_signal_newv, "g_signal_newv", LIBS);
-  gidLink(cast(void**)&g_signal_override_class_closure, "g_signal_override_class_closure", LIBS);
-  gidLink(cast(void**)&g_signal_override_class_handler, "g_signal_override_class_handler", LIBS);
-  gidLink(cast(void**)&g_signal_parse_name, "g_signal_parse_name", LIBS);
-  gidLink(cast(void**)&g_signal_query, "g_signal_query", LIBS);
-  gidLink(cast(void**)&g_signal_remove_emission_hook, "g_signal_remove_emission_hook", LIBS);
-  gidLink(cast(void**)&g_signal_set_va_marshaller, "g_signal_set_va_marshaller", LIBS);
-  gidLink(cast(void**)&g_signal_stop_emission, "g_signal_stop_emission", LIBS);
-  gidLink(cast(void**)&g_signal_stop_emission_by_name, "g_signal_stop_emission_by_name", LIBS);
-  gidLink(cast(void**)&g_signal_type_cclosure_new, "g_signal_type_cclosure_new", LIBS);
-  gidLink(cast(void**)&g_strdup_value_contents, "g_strdup_value_contents", LIBS);
-  gidLink(cast(void**)&g_type_add_class_cache_func, "g_type_add_class_cache_func", LIBS);
-  gidLink(cast(void**)&g_type_add_class_private, "g_type_add_class_private", LIBS);
-  gidLink(cast(void**)&g_type_add_instance_private, "g_type_add_instance_private", LIBS);
-  gidLink(cast(void**)&g_type_add_interface_check, "g_type_add_interface_check", LIBS);
-  gidLink(cast(void**)&g_type_add_interface_dynamic, "g_type_add_interface_dynamic", LIBS);
-  gidLink(cast(void**)&g_type_add_interface_static, "g_type_add_interface_static", LIBS);
-  gidLink(cast(void**)&g_type_check_class_cast, "g_type_check_class_cast", LIBS);
-  gidLink(cast(void**)&g_type_check_class_is_a, "g_type_check_class_is_a", LIBS);
-  gidLink(cast(void**)&g_type_check_instance, "g_type_check_instance", LIBS);
-  gidLink(cast(void**)&g_type_check_instance_cast, "g_type_check_instance_cast", LIBS);
-  gidLink(cast(void**)&g_type_check_instance_is_a, "g_type_check_instance_is_a", LIBS);
-  gidLink(cast(void**)&g_type_check_instance_is_fundamentally_a, "g_type_check_instance_is_fundamentally_a", LIBS);
-  gidLink(cast(void**)&g_type_check_is_value_type, "g_type_check_is_value_type", LIBS);
-  gidLink(cast(void**)&g_type_check_value, "g_type_check_value", LIBS);
-  gidLink(cast(void**)&g_type_check_value_holds, "g_type_check_value_holds", LIBS);
-  gidLink(cast(void**)&g_type_children, "g_type_children", LIBS);
-  gidLink(cast(void**)&g_type_create_instance, "g_type_create_instance", LIBS);
-  gidLink(cast(void**)&g_type_default_interface_peek, "g_type_default_interface_peek", LIBS);
-  gidLink(cast(void**)&g_type_default_interface_ref, "g_type_default_interface_ref", LIBS);
-  gidLink(cast(void**)&g_type_default_interface_unref, "g_type_default_interface_unref", LIBS);
-  gidLink(cast(void**)&g_type_depth, "g_type_depth", LIBS);
-  gidLink(cast(void**)&g_type_ensure, "g_type_ensure", LIBS);
-  gidLink(cast(void**)&g_type_free_instance, "g_type_free_instance", LIBS);
-  gidLink(cast(void**)&g_type_from_name, "g_type_from_name", LIBS);
-  gidLink(cast(void**)&g_type_fundamental, "g_type_fundamental", LIBS);
-  gidLink(cast(void**)&g_type_fundamental_next, "g_type_fundamental_next", LIBS);
-  gidLink(cast(void**)&g_type_get_instance_count, "g_type_get_instance_count", LIBS);
-  gidLink(cast(void**)&g_type_get_plugin, "g_type_get_plugin", LIBS);
-  gidLink(cast(void**)&g_type_get_qdata, "g_type_get_qdata", LIBS);
-  gidLink(cast(void**)&g_type_get_type_registration_serial, "g_type_get_type_registration_serial", LIBS);
-  gidLink(cast(void**)&g_type_init, "g_type_init", LIBS);
-  gidLink(cast(void**)&g_type_init_with_debug_flags, "g_type_init_with_debug_flags", LIBS);
-  gidLink(cast(void**)&g_type_interfaces, "g_type_interfaces", LIBS);
-  gidLink(cast(void**)&g_type_is_a, "g_type_is_a", LIBS);
-  gidLink(cast(void**)&g_type_name, "g_type_name", LIBS);
-  gidLink(cast(void**)&g_type_name_from_class, "g_type_name_from_class", LIBS);
-  gidLink(cast(void**)&g_type_name_from_instance, "g_type_name_from_instance", LIBS);
-  gidLink(cast(void**)&g_type_next_base, "g_type_next_base", LIBS);
-  gidLink(cast(void**)&g_type_parent, "g_type_parent", LIBS);
-  gidLink(cast(void**)&g_type_qname, "g_type_qname", LIBS);
-  gidLink(cast(void**)&g_type_query, "g_type_query", LIBS);
-  gidLink(cast(void**)&g_type_register_dynamic, "g_type_register_dynamic", LIBS);
-  gidLink(cast(void**)&g_type_register_fundamental, "g_type_register_fundamental", LIBS);
-  gidLink(cast(void**)&g_type_register_static, "g_type_register_static", LIBS);
-  gidLink(cast(void**)&g_type_register_static_simple, "g_type_register_static_simple", LIBS);
-  gidLink(cast(void**)&g_type_remove_class_cache_func, "g_type_remove_class_cache_func", LIBS);
-  gidLink(cast(void**)&g_type_remove_interface_check, "g_type_remove_interface_check", LIBS);
-  gidLink(cast(void**)&g_type_set_qdata, "g_type_set_qdata", LIBS);
-  gidLink(cast(void**)&g_type_test_flags, "g_type_test_flags", LIBS);
+  gidLink(cast(void**)&g_source_set_closure, "g_source_set_closure", libs);
+  gidLink(cast(void**)&g_source_set_dummy_callback, "g_source_set_dummy_callback", libs);
+  gidLink(cast(void**)&g_boxed_copy, "g_boxed_copy", libs);
+  gidLink(cast(void**)&g_boxed_free, "g_boxed_free", libs);
+  gidLink(cast(void**)&g_boxed_type_register_static, "g_boxed_type_register_static", libs);
+  gidLink(cast(void**)&g_clear_object, "g_clear_object", libs);
+  gidLink(cast(void**)&g_clear_signal_handler, "g_clear_signal_handler", libs);
+  gidLink(cast(void**)&g_enum_complete_type_info, "g_enum_complete_type_info", libs);
+  gidLink(cast(void**)&g_enum_get_value, "g_enum_get_value", libs);
+  gidLink(cast(void**)&g_enum_get_value_by_name, "g_enum_get_value_by_name", libs);
+  gidLink(cast(void**)&g_enum_get_value_by_nick, "g_enum_get_value_by_nick", libs);
+  gidLink(cast(void**)&g_enum_register_static, "g_enum_register_static", libs);
+  gidLink(cast(void**)&g_enum_to_string, "g_enum_to_string", libs);
+  gidLink(cast(void**)&g_flags_complete_type_info, "g_flags_complete_type_info", libs);
+  gidLink(cast(void**)&g_flags_get_first_value, "g_flags_get_first_value", libs);
+  gidLink(cast(void**)&g_flags_get_value_by_name, "g_flags_get_value_by_name", libs);
+  gidLink(cast(void**)&g_flags_get_value_by_nick, "g_flags_get_value_by_nick", libs);
+  gidLink(cast(void**)&g_flags_register_static, "g_flags_register_static", libs);
+  gidLink(cast(void**)&g_flags_to_string, "g_flags_to_string", libs);
+  gidLink(cast(void**)&g_gtype_get_type, "g_gtype_get_type", libs);
+  gidLink(cast(void**)&g_param_spec_boolean, "g_param_spec_boolean", libs);
+  gidLink(cast(void**)&g_param_spec_boxed, "g_param_spec_boxed", libs);
+  gidLink(cast(void**)&g_param_spec_char, "g_param_spec_char", libs);
+  gidLink(cast(void**)&g_param_spec_double, "g_param_spec_double", libs);
+  gidLink(cast(void**)&g_param_spec_enum, "g_param_spec_enum", libs);
+  gidLink(cast(void**)&g_param_spec_flags, "g_param_spec_flags", libs);
+  gidLink(cast(void**)&g_param_spec_float, "g_param_spec_float", libs);
+  gidLink(cast(void**)&g_param_spec_gtype, "g_param_spec_gtype", libs);
+  gidLink(cast(void**)&g_param_spec_int, "g_param_spec_int", libs);
+  gidLink(cast(void**)&g_param_spec_int64, "g_param_spec_int64", libs);
+  gidLink(cast(void**)&g_param_spec_long, "g_param_spec_long", libs);
+  gidLink(cast(void**)&g_param_spec_object, "g_param_spec_object", libs);
+  gidLink(cast(void**)&g_param_spec_override, "g_param_spec_override", libs);
+  gidLink(cast(void**)&g_param_spec_param, "g_param_spec_param", libs);
+  gidLink(cast(void**)&g_param_spec_pointer, "g_param_spec_pointer", libs);
+  gidLink(cast(void**)&g_param_spec_string, "g_param_spec_string", libs);
+  gidLink(cast(void**)&g_param_spec_uchar, "g_param_spec_uchar", libs);
+  gidLink(cast(void**)&g_param_spec_uint, "g_param_spec_uint", libs);
+  gidLink(cast(void**)&g_param_spec_uint64, "g_param_spec_uint64", libs);
+  gidLink(cast(void**)&g_param_spec_ulong, "g_param_spec_ulong", libs);
+  gidLink(cast(void**)&g_param_spec_unichar, "g_param_spec_unichar", libs);
+  gidLink(cast(void**)&g_param_spec_value_array, "g_param_spec_value_array", libs);
+  gidLink(cast(void**)&g_param_spec_variant, "g_param_spec_variant", libs);
+  gidLink(cast(void**)&g_param_type_register_static, "g_param_type_register_static", libs);
+  gidLink(cast(void**)&g_param_value_convert, "g_param_value_convert", libs);
+  gidLink(cast(void**)&g_param_value_defaults, "g_param_value_defaults", libs);
+  gidLink(cast(void**)&g_param_value_is_valid, "g_param_value_is_valid", libs);
+  gidLink(cast(void**)&g_param_value_set_default, "g_param_value_set_default", libs);
+  gidLink(cast(void**)&g_param_value_validate, "g_param_value_validate", libs);
+  gidLink(cast(void**)&g_param_values_cmp, "g_param_values_cmp", libs);
+  gidLink(cast(void**)&g_pointer_type_register_static, "g_pointer_type_register_static", libs);
+  gidLink(cast(void**)&g_signal_accumulator_first_wins, "g_signal_accumulator_first_wins", libs);
+  gidLink(cast(void**)&g_signal_accumulator_true_handled, "g_signal_accumulator_true_handled", libs);
+  gidLink(cast(void**)&g_signal_add_emission_hook, "g_signal_add_emission_hook", libs);
+  gidLink(cast(void**)&g_signal_chain_from_overridden, "g_signal_chain_from_overridden", libs);
+  gidLink(cast(void**)&g_signal_chain_from_overridden_handler, "g_signal_chain_from_overridden_handler", libs);
+  gidLink(cast(void**)&g_signal_connect_closure, "g_signal_connect_closure", libs);
+  gidLink(cast(void**)&g_signal_connect_closure_by_id, "g_signal_connect_closure_by_id", libs);
+  gidLink(cast(void**)&g_signal_connect_data, "g_signal_connect_data", libs);
+  gidLink(cast(void**)&g_signal_connect_object, "g_signal_connect_object", libs);
+  gidLink(cast(void**)&g_signal_emit, "g_signal_emit", libs);
+  gidLink(cast(void**)&g_signal_emit_by_name, "g_signal_emit_by_name", libs);
+  gidLink(cast(void**)&g_signal_emit_valist, "g_signal_emit_valist", libs);
+  gidLink(cast(void**)&g_signal_emitv, "g_signal_emitv", libs);
+  gidLink(cast(void**)&g_signal_get_invocation_hint, "g_signal_get_invocation_hint", libs);
+  gidLink(cast(void**)&g_signal_handler_block, "g_signal_handler_block", libs);
+  gidLink(cast(void**)&g_signal_handler_disconnect, "g_signal_handler_disconnect", libs);
+  gidLink(cast(void**)&g_signal_handler_find, "g_signal_handler_find", libs);
+  gidLink(cast(void**)&g_signal_handler_is_connected, "g_signal_handler_is_connected", libs);
+  gidLink(cast(void**)&g_signal_handler_unblock, "g_signal_handler_unblock", libs);
+  gidLink(cast(void**)&g_signal_handlers_block_matched, "g_signal_handlers_block_matched", libs);
+  gidLink(cast(void**)&g_signal_handlers_destroy, "g_signal_handlers_destroy", libs);
+  gidLink(cast(void**)&g_signal_handlers_disconnect_matched, "g_signal_handlers_disconnect_matched", libs);
+  gidLink(cast(void**)&g_signal_handlers_unblock_matched, "g_signal_handlers_unblock_matched", libs);
+  gidLink(cast(void**)&g_signal_has_handler_pending, "g_signal_has_handler_pending", libs);
+  gidLink(cast(void**)&g_signal_is_valid_name, "g_signal_is_valid_name", libs);
+  gidLink(cast(void**)&g_signal_list_ids, "g_signal_list_ids", libs);
+  gidLink(cast(void**)&g_signal_lookup, "g_signal_lookup", libs);
+  gidLink(cast(void**)&g_signal_name, "g_signal_name", libs);
+  gidLink(cast(void**)&g_signal_new, "g_signal_new", libs);
+  gidLink(cast(void**)&g_signal_new_class_handler, "g_signal_new_class_handler", libs);
+  gidLink(cast(void**)&g_signal_new_valist, "g_signal_new_valist", libs);
+  gidLink(cast(void**)&g_signal_newv, "g_signal_newv", libs);
+  gidLink(cast(void**)&g_signal_override_class_closure, "g_signal_override_class_closure", libs);
+  gidLink(cast(void**)&g_signal_override_class_handler, "g_signal_override_class_handler", libs);
+  gidLink(cast(void**)&g_signal_parse_name, "g_signal_parse_name", libs);
+  gidLink(cast(void**)&g_signal_query, "g_signal_query", libs);
+  gidLink(cast(void**)&g_signal_remove_emission_hook, "g_signal_remove_emission_hook", libs);
+  gidLink(cast(void**)&g_signal_set_va_marshaller, "g_signal_set_va_marshaller", libs);
+  gidLink(cast(void**)&g_signal_stop_emission, "g_signal_stop_emission", libs);
+  gidLink(cast(void**)&g_signal_stop_emission_by_name, "g_signal_stop_emission_by_name", libs);
+  gidLink(cast(void**)&g_signal_type_cclosure_new, "g_signal_type_cclosure_new", libs);
+  gidLink(cast(void**)&g_strdup_value_contents, "g_strdup_value_contents", libs);
+  gidLink(cast(void**)&g_type_add_class_cache_func, "g_type_add_class_cache_func", libs);
+  gidLink(cast(void**)&g_type_add_class_private, "g_type_add_class_private", libs);
+  gidLink(cast(void**)&g_type_add_instance_private, "g_type_add_instance_private", libs);
+  gidLink(cast(void**)&g_type_add_interface_check, "g_type_add_interface_check", libs);
+  gidLink(cast(void**)&g_type_add_interface_dynamic, "g_type_add_interface_dynamic", libs);
+  gidLink(cast(void**)&g_type_add_interface_static, "g_type_add_interface_static", libs);
+  gidLink(cast(void**)&g_type_check_class_cast, "g_type_check_class_cast", libs);
+  gidLink(cast(void**)&g_type_check_class_is_a, "g_type_check_class_is_a", libs);
+  gidLink(cast(void**)&g_type_check_instance, "g_type_check_instance", libs);
+  gidLink(cast(void**)&g_type_check_instance_cast, "g_type_check_instance_cast", libs);
+  gidLink(cast(void**)&g_type_check_instance_is_a, "g_type_check_instance_is_a", libs);
+  gidLink(cast(void**)&g_type_check_instance_is_fundamentally_a, "g_type_check_instance_is_fundamentally_a", libs);
+  gidLink(cast(void**)&g_type_check_is_value_type, "g_type_check_is_value_type", libs);
+  gidLink(cast(void**)&g_type_check_value, "g_type_check_value", libs);
+  gidLink(cast(void**)&g_type_check_value_holds, "g_type_check_value_holds", libs);
+  gidLink(cast(void**)&g_type_children, "g_type_children", libs);
+  gidLink(cast(void**)&g_type_create_instance, "g_type_create_instance", libs);
+  gidLink(cast(void**)&g_type_default_interface_peek, "g_type_default_interface_peek", libs);
+  gidLink(cast(void**)&g_type_default_interface_ref, "g_type_default_interface_ref", libs);
+  gidLink(cast(void**)&g_type_default_interface_unref, "g_type_default_interface_unref", libs);
+  gidLink(cast(void**)&g_type_depth, "g_type_depth", libs);
+  gidLink(cast(void**)&g_type_ensure, "g_type_ensure", libs);
+  gidLink(cast(void**)&g_type_free_instance, "g_type_free_instance", libs);
+  gidLink(cast(void**)&g_type_from_name, "g_type_from_name", libs);
+  gidLink(cast(void**)&g_type_fundamental, "g_type_fundamental", libs);
+  gidLink(cast(void**)&g_type_fundamental_next, "g_type_fundamental_next", libs);
+  gidLink(cast(void**)&g_type_get_instance_count, "g_type_get_instance_count", libs);
+  gidLink(cast(void**)&g_type_get_plugin, "g_type_get_plugin", libs);
+  gidLink(cast(void**)&g_type_get_qdata, "g_type_get_qdata", libs);
+  gidLink(cast(void**)&g_type_get_type_registration_serial, "g_type_get_type_registration_serial", libs);
+  gidLink(cast(void**)&g_type_init, "g_type_init", libs);
+  gidLink(cast(void**)&g_type_init_with_debug_flags, "g_type_init_with_debug_flags", libs);
+  gidLink(cast(void**)&g_type_interfaces, "g_type_interfaces", libs);
+  gidLink(cast(void**)&g_type_is_a, "g_type_is_a", libs);
+  gidLink(cast(void**)&g_type_name, "g_type_name", libs);
+  gidLink(cast(void**)&g_type_name_from_class, "g_type_name_from_class", libs);
+  gidLink(cast(void**)&g_type_name_from_instance, "g_type_name_from_instance", libs);
+  gidLink(cast(void**)&g_type_next_base, "g_type_next_base", libs);
+  gidLink(cast(void**)&g_type_parent, "g_type_parent", libs);
+  gidLink(cast(void**)&g_type_qname, "g_type_qname", libs);
+  gidLink(cast(void**)&g_type_query, "g_type_query", libs);
+  gidLink(cast(void**)&g_type_register_dynamic, "g_type_register_dynamic", libs);
+  gidLink(cast(void**)&g_type_register_fundamental, "g_type_register_fundamental", libs);
+  gidLink(cast(void**)&g_type_register_static, "g_type_register_static", libs);
+  gidLink(cast(void**)&g_type_register_static_simple, "g_type_register_static_simple", libs);
+  gidLink(cast(void**)&g_type_remove_class_cache_func, "g_type_remove_class_cache_func", libs);
+  gidLink(cast(void**)&g_type_remove_interface_check, "g_type_remove_interface_check", libs);
+  gidLink(cast(void**)&g_type_set_qdata, "g_type_set_qdata", libs);
+  gidLink(cast(void**)&g_type_test_flags, "g_type_test_flags", libs);
 }

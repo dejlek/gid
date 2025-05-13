@@ -50,16 +50,16 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_audio_payload_get_type != &gidSymbolNotFound ? gst_rtp_base_audio_payload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   gst.types.FlowReturn flush(uint payloadLen, gst.types.ClockTime timestamp)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_audio_payload_flush(cast(GstRTPBaseAudioPayload*)cPtr, payloadLen, timestamp);
+    _cretval = gst_rtp_base_audio_payload_flush(cast(GstRTPBaseAudioPayload*)this._cPtr, payloadLen, timestamp);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -108,8 +108,8 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   gstbase.adapter.Adapter getAdapter()
   {
     GstAdapter* _cretval;
-    _cretval = gst_rtp_base_audio_payload_get_adapter(cast(GstRTPBaseAudioPayload*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.Take);
+    _cretval = gst_rtp_base_audio_payload_get_adapter(cast(GstRTPBaseAudioPayload*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstbase.adapter.Adapter)(cast(GstAdapter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
       _payloadLen = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _cretval = gst_rtp_base_audio_payload_push(cast(GstRTPBaseAudioPayload*)cPtr, _data, _payloadLen, timestamp);
+    _cretval = gst_rtp_base_audio_payload_push(cast(GstRTPBaseAudioPayload*)this._cPtr, _data, _payloadLen, timestamp);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -144,7 +144,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   */
   void setFrameBased()
   {
-    gst_rtp_base_audio_payload_set_frame_based(cast(GstRTPBaseAudioPayload*)cPtr);
+    gst_rtp_base_audio_payload_set_frame_based(cast(GstRTPBaseAudioPayload*)this._cPtr);
   }
 
   /**
@@ -156,7 +156,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   */
   void setFrameOptions(int frameDuration, int frameSize)
   {
-    gst_rtp_base_audio_payload_set_frame_options(cast(GstRTPBaseAudioPayload*)cPtr, frameDuration, frameSize);
+    gst_rtp_base_audio_payload_set_frame_options(cast(GstRTPBaseAudioPayload*)this._cPtr, frameDuration, frameSize);
   }
 
   /**
@@ -165,7 +165,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   */
   void setSampleBased()
   {
-    gst_rtp_base_audio_payload_set_sample_based(cast(GstRTPBaseAudioPayload*)cPtr);
+    gst_rtp_base_audio_payload_set_sample_based(cast(GstRTPBaseAudioPayload*)this._cPtr);
   }
 
   /**
@@ -176,7 +176,7 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   */
   void setSampleOptions(int sampleSize)
   {
-    gst_rtp_base_audio_payload_set_sample_options(cast(GstRTPBaseAudioPayload*)cPtr, sampleSize);
+    gst_rtp_base_audio_payload_set_sample_options(cast(GstRTPBaseAudioPayload*)this._cPtr, sampleSize);
   }
 
   /**
@@ -187,6 +187,6 @@ class RTPBaseAudioPayload : gstrtp.rtpbase_payload.RTPBasePayload
   */
   void setSamplebitsOptions(int sampleSize)
   {
-    gst_rtp_base_audio_payload_set_samplebits_options(cast(GstRTPBaseAudioPayload*)cPtr, sampleSize);
+    gst_rtp_base_audio_payload_set_samplebits_options(cast(GstRTPBaseAudioPayload*)this._cPtr, sampleSize);
   }
 }

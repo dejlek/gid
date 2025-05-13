@@ -32,16 +32,16 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_multi_press_get_type != &gidSymbolNotFound ? gtk_gesture_multi_press_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_multi_press_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_multi_press_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -79,7 +79,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)cPtr, &_rect);
+    _retval = gtk_gesture_multi_press_get_area(cast(GtkGestureMultiPress*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -100,7 +100,7 @@ class GestureMultiPress : gtk.gesture_single.GestureSingle
   */
   void setArea(gdk.rectangle.Rectangle rect = null)
   {
-    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_gesture_multi_press_set_area(cast(GtkGestureMultiPress*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
   }
 
   /**

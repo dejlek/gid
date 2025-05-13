@@ -65,16 +65,16 @@ class PageSetup : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_get_type != &gidSymbolNotFound ? gtk_page_setup_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class PageSetup : gobject.object.ObjectWrap
     _cretval = gtk_page_setup_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -131,8 +131,8 @@ class PageSetup : gobject.object.ObjectWrap
   static gtk.page_setup.PageSetup newFromGvariant(glib.variant.Variant variant)
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    _cretval = gtk_page_setup_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -155,10 +155,10 @@ class PageSetup : gobject.object.ObjectWrap
     GtkPageSetup* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _cretval = gtk_page_setup_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,8 +169,8 @@ class PageSetup : gobject.object.ObjectWrap
   gtk.page_setup.PageSetup copy()
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
+    _cretval = gtk_page_setup_copy(cast(GtkPageSetup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getBottomMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_bottom_margin(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_bottom_margin(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getLeftMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_left_margin(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_left_margin(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class PageSetup : gobject.object.ObjectWrap
   gtk.types.PageOrientation getOrientation()
   {
     GtkPageOrientation _cretval;
-    _cretval = gtk_page_setup_get_orientation(cast(GtkPageSetup*)cPtr);
+    _cretval = gtk_page_setup_get_orientation(cast(GtkPageSetup*)this._cPtr);
     gtk.types.PageOrientation _retval = cast(gtk.types.PageOrientation)_cretval;
     return _retval;
   }
@@ -228,7 +228,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getPageHeight(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_page_height(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_page_height(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getPageWidth(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_page_width(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_page_width(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getPaperHeight(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_paper_height(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_paper_height(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class PageSetup : gobject.object.ObjectWrap
   gtk.paper_size.PaperSize getPaperSize()
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_page_setup_get_paper_size(cast(GtkPageSetup*)cPtr);
+    _cretval = gtk_page_setup_get_paper_size(cast(GtkPageSetup*)this._cPtr);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -294,7 +294,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getPaperWidth(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_paper_width(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_paper_width(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getRightMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_right_margin(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_right_margin(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class PageSetup : gobject.object.ObjectWrap
   double getTopMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_page_setup_get_top_margin(cast(GtkPageSetup*)cPtr, unit);
+    _retval = gtk_page_setup_get_top_margin(cast(GtkPageSetup*)this._cPtr, unit);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class PageSetup : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_page_setup_load_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
+    _retval = gtk_page_setup_load_file(cast(GtkPageSetup*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -363,7 +363,7 @@ class PageSetup : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_page_setup_load_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _retval = gtk_page_setup_load_key_file(cast(GtkPageSetup*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -378,7 +378,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setBottomMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_page_setup_set_bottom_margin(cast(GtkPageSetup*)cPtr, margin, unit);
+    gtk_page_setup_set_bottom_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
 
   /**
@@ -390,7 +390,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setLeftMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_page_setup_set_left_margin(cast(GtkPageSetup*)cPtr, margin, unit);
+    gtk_page_setup_set_left_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
 
   /**
@@ -401,7 +401,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setOrientation(gtk.types.PageOrientation orientation)
   {
-    gtk_page_setup_set_orientation(cast(GtkPageSetup*)cPtr, orientation);
+    gtk_page_setup_set_orientation(cast(GtkPageSetup*)this._cPtr, orientation);
   }
 
   /**
@@ -415,7 +415,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setPaperSize(gtk.paper_size.PaperSize size)
   {
-    gtk_page_setup_set_paper_size(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
+    gtk_page_setup_set_paper_size(cast(GtkPageSetup*)this._cPtr, size ? cast(GtkPaperSize*)size._cPtr(No.Dup) : null);
   }
 
   /**
@@ -427,7 +427,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setPaperSizeAndDefaultMargins(gtk.paper_size.PaperSize size)
   {
-    gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)cPtr, size ? cast(GtkPaperSize*)size.cPtr(No.Dup) : null);
+    gtk_page_setup_set_paper_size_and_default_margins(cast(GtkPageSetup*)this._cPtr, size ? cast(GtkPaperSize*)size._cPtr(No.Dup) : null);
   }
 
   /**
@@ -439,7 +439,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setRightMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_page_setup_set_right_margin(cast(GtkPageSetup*)cPtr, margin, unit);
+    gtk_page_setup_set_right_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
 
   /**
@@ -451,7 +451,7 @@ class PageSetup : gobject.object.ObjectWrap
   */
   void setTopMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_page_setup_set_top_margin(cast(GtkPageSetup*)cPtr, margin, unit);
+    gtk_page_setup_set_top_margin(cast(GtkPageSetup*)this._cPtr, margin, unit);
   }
 
   /**
@@ -467,7 +467,7 @@ class PageSetup : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_page_setup_to_file(cast(GtkPageSetup*)cPtr, _fileName, &_err);
+    _retval = gtk_page_setup_to_file(cast(GtkPageSetup*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -480,7 +480,7 @@ class PageSetup : gobject.object.ObjectWrap
   glib.variant.Variant toGvariant()
   {
     GVariant* _cretval;
-    _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)cPtr);
+    _cretval = gtk_page_setup_to_gvariant(cast(GtkPageSetup*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -496,6 +496,6 @@ class PageSetup : gobject.object.ObjectWrap
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    gtk_page_setup_to_key_file(cast(GtkPageSetup*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
+    gtk_page_setup_to_key_file(cast(GtkPageSetup*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
   }
 }

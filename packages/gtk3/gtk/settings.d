@@ -62,16 +62,16 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_settings_get_type != &gidSymbolNotFound ? gtk_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1944,7 +1944,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1958,15 +1958,15 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   static gtk.settings.Settings getForScreen(gdk.screen.Screen screen)
   {
     GtkSettings* _cretval;
-    _cretval = gtk_settings_get_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    _cretval = gtk_settings_get_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   static void installProperty(gobject.param_spec.ParamSpec pspec)
   {
-    gtk_settings_install_property(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    gtk_settings_install_property(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
 
   /** */
@@ -1982,7 +1982,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     auto _parserCB = parser ? &_parserCallback : null;
 
     _static_parser = parser;
-    gtk_settings_install_property_parser(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, _parserCB);
+    gtk_settings_install_property_parser(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _parserCB);
     _static_parser = null;
   }
 
@@ -1998,7 +1998,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void resetProperty(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_settings_reset_property(cast(GtkSettings*)cPtr, _name);
+    gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
   }
 
   /** */
@@ -2006,7 +2006,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
-    gtk_settings_set_double_property(cast(GtkSettings*)cPtr, _name, vDouble, _origin);
+    gtk_settings_set_double_property(cast(GtkSettings*)this._cPtr, _name, vDouble, _origin);
   }
 
   /** */
@@ -2014,14 +2014,14 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
-    gtk_settings_set_long_property(cast(GtkSettings*)cPtr, _name, vLong, _origin);
+    gtk_settings_set_long_property(cast(GtkSettings*)this._cPtr, _name, vLong, _origin);
   }
 
   /** */
   void setPropertyValue(string name, gtk.settings_value.SettingsValue svalue)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_settings_set_property_value(cast(GtkSettings*)cPtr, _name, svalue ? cast(const(GtkSettingsValue)*)svalue.cPtr : null);
+    gtk_settings_set_property_value(cast(GtkSettings*)this._cPtr, _name, svalue ? cast(const(GtkSettingsValue)*)svalue._cPtr : null);
   }
 
   /** */
@@ -2030,6 +2030,6 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _vString = vString.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
-    gtk_settings_set_string_property(cast(GtkSettings*)cPtr, _name, _vString, _origin);
+    gtk_settings_set_string_property(cast(GtkSettings*)this._cPtr, _name, _vString, _origin);
   }
 }

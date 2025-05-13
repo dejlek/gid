@@ -29,7 +29,7 @@ class VideoFrame
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class VideoFrame
   */
   @property gstvideo.video_info.VideoInfo info()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoFrame*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoFrame*)this._cPtr).info);
   }
 
   /**
@@ -49,7 +49,7 @@ class VideoFrame
   */
   @property gstvideo.types.VideoFrameFlags flags()
   {
-    return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoFrame*)cPtr).flags;
+    return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoFrame*)this._cPtr).flags;
   }
 
   /**
@@ -59,7 +59,7 @@ class VideoFrame
   */
   @property void flags(gstvideo.types.VideoFrameFlags propval)
   {
-    (cast(GstVideoFrame*)cPtr).flags = cast(GstVideoFrameFlags)propval;
+    (cast(GstVideoFrame*)this._cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
 
   /**
@@ -68,7 +68,7 @@ class VideoFrame
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)this._cPtr).buffer);
   }
 
   /**
@@ -78,8 +78,8 @@ class VideoFrame
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoFrame*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoFrame*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstVideoFrame*)this._cPtr).buffer);
   }
 
   /**
@@ -89,7 +89,7 @@ class VideoFrame
   */
   @property int id()
   {
-    return (cast(GstVideoFrame*)cPtr).id;
+    return (cast(GstVideoFrame*)this._cPtr).id;
   }
 
   /**
@@ -100,7 +100,7 @@ class VideoFrame
   */
   @property void id(int propval)
   {
-    (cast(GstVideoFrame*)cPtr).id = propval;
+    (cast(GstVideoFrame*)this._cPtr).id = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class VideoFrame
   bool copy(gstvideo.video_frame.VideoFrame src)
   {
     bool _retval;
-    _retval = gst_video_frame_copy(cast(GstVideoFrame*)cPtr, src ? cast(const(GstVideoFrame)*)src.cPtr : null);
+    _retval = gst_video_frame_copy(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class VideoFrame
   bool copyPlane(gstvideo.video_frame.VideoFrame src, uint plane)
   {
     bool _retval;
-    _retval = gst_video_frame_copy_plane(cast(GstVideoFrame*)cPtr, src ? cast(const(GstVideoFrame)*)src.cPtr : null, plane);
+    _retval = gst_video_frame_copy_plane(cast(GstVideoFrame*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, plane);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class VideoFrame
   */
   void unmap()
   {
-    gst_video_frame_unmap(cast(GstVideoFrame*)cPtr);
+    gst_video_frame_unmap(cast(GstVideoFrame*)this._cPtr);
   }
 
   /**
@@ -202,7 +202,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags);
+    _retval = gst_video_frame_map(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame);
     return _retval;
   }
@@ -229,7 +229,7 @@ class VideoFrame
   {
     bool _retval;
     GstVideoFrame _frame;
-    _retval = gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, id, flags);
+    _retval = gst_video_frame_map_id(&_frame, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, id, flags);
     frame = new gstvideo.video_frame.VideoFrame(cast(void*)&_frame);
     return _retval;
   }

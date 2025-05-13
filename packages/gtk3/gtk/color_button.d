@@ -41,16 +41,16 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_button_get_type != &gidSymbolNotFound ? gtk_color_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -222,8 +222,8 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithColor(gdk.color.Color color)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_color(color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_color_button_new_with_color(color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,8 +237,8 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   static gtk.color_button.ColorButton newWithRgba(gdk.rgba.RGBA rgba)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_color_button_new_with_rgba(rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.color_button.ColorButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   ushort getAlpha()
   {
     ushort _retval;
-    _retval = gtk_color_button_get_alpha(cast(GtkColorButton*)cPtr);
+    _retval = gtk_color_button_get_alpha(cast(GtkColorButton*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   void getColor(out gdk.color.Color color)
   {
     GdkColor _color;
-    gtk_color_button_get_color(cast(GtkColorButton*)cPtr, &_color);
+    gtk_color_button_get_color(cast(GtkColorButton*)this._cPtr, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
   }
 
@@ -277,7 +277,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_color_button_get_title(cast(GtkColorButton*)cPtr);
+    _cretval = gtk_color_button_get_title(cast(GtkColorButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -291,7 +291,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   bool getUseAlpha()
   {
     bool _retval;
-    _retval = gtk_color_button_get_use_alpha(cast(GtkColorButton*)cPtr);
+    _retval = gtk_color_button_get_use_alpha(cast(GtkColorButton*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   void setAlpha(ushort alpha)
   {
-    gtk_color_button_set_alpha(cast(GtkColorButton*)cPtr, alpha);
+    gtk_color_button_set_alpha(cast(GtkColorButton*)this._cPtr, alpha);
   }
 
   /**
@@ -318,7 +318,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   void setColor(gdk.color.Color color)
   {
-    gtk_color_button_set_color(cast(GtkColorButton*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_color_button_set_color(cast(GtkColorButton*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -330,7 +330,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_color_button_set_title(cast(GtkColorButton*)cPtr, _title);
+    gtk_color_button_set_title(cast(GtkColorButton*)this._cPtr, _title);
   }
 
   /**
@@ -343,7 +343,7 @@ class ColorButton : gtk.button.Button, gtk.color_chooser.ColorChooser
   */
   void setUseAlpha(bool useAlpha)
   {
-    gtk_color_button_set_use_alpha(cast(GtkColorButton*)cPtr, useAlpha);
+    gtk_color_button_set_use_alpha(cast(GtkColorButton*)this._cPtr, useAlpha);
   }
 
   /**

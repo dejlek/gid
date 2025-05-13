@@ -62,9 +62,9 @@ class GLShaderNode : gsk.render_node.RenderNode
 
     GskRenderNode*[] _tmpchildren;
     foreach (obj; children)
-      _tmpchildren ~= obj ? cast(GskRenderNode*)obj.cPtr : null;
+      _tmpchildren ~= obj ? cast(GskRenderNode*)obj._cPtr : null;
     GskRenderNode** _children = cast(GskRenderNode**)_tmpchildren.ptr;
-    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, args ? cast(GBytes*)args.cPtr(No.Dup) : null, _children, _nChildren);
+    _cretval = gsk_gl_shader_node_new(shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, args ? cast(GBytes*)args._cPtr(No.Dup) : null, _children, _nChildren);
     this(_cretval, Yes.Take);
   }
 
@@ -75,7 +75,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   glib.bytes.Bytes getArgs()
   {
     GBytes* _cretval;
-    _cretval = gsk_gl_shader_node_get_args(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_gl_shader_node_get_args(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -90,7 +90,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild(uint idx)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_gl_shader_node_get_child(cast(const(GskRenderNode)*)cPtr, idx);
+    _cretval = gsk_gl_shader_node_get_child(cast(const(GskRenderNode)*)this._cPtr, idx);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -102,7 +102,7 @@ class GLShaderNode : gsk.render_node.RenderNode
   uint getNChildren()
   {
     uint _retval;
-    _retval = gsk_gl_shader_node_get_n_children(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_gl_shader_node_get_n_children(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -113,8 +113,8 @@ class GLShaderNode : gsk.render_node.RenderNode
   gsk.glshader.GLShader getShader()
   {
     GskGLShader* _cretval;
-    _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
+    _cretval = gsk_gl_shader_node_get_shader(cast(const(GskRenderNode)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gsk.glshader.GLShader)(cast(GskGLShader*)_cretval, No.Take);
     return _retval;
   }
 }

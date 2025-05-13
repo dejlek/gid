@@ -70,16 +70,16 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_aggregator_get_type != &gidSymbolNotFound ? gst_audio_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -160,6 +160,6 @@ class AudioAggregator : gstbase.aggregator.Aggregator
   /** */
   void setSinkCaps(gstaudio.audio_aggregator_pad.AudioAggregatorPad pad, gst.caps.Caps caps)
   {
-    gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)cPtr, pad ? cast(GstAudioAggregatorPad*)pad.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_audio_aggregator_set_sink_caps(cast(GstAudioAggregator*)this._cPtr, pad ? cast(GstAudioAggregatorPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 }

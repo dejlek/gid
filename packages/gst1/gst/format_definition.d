@@ -27,7 +27,7 @@ class FormatDefinition
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class FormatDefinition
   */
   @property gst.types.Format value()
   {
-    return cast(gst.types.Format)(cast(GstFormatDefinition*)cPtr).value;
+    return cast(gst.types.Format)(cast(GstFormatDefinition*)this._cPtr).value;
   }
 
   /**
@@ -48,7 +48,7 @@ class FormatDefinition
   */
   @property void value(gst.types.Format propval)
   {
-    (cast(GstFormatDefinition*)cPtr).value = cast(GstFormat)propval;
+    (cast(GstFormatDefinition*)this._cPtr).value = cast(GstFormat)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class FormatDefinition
   */
   @property string nick()
   {
-    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
+    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).nick);
   }
 
   /**
@@ -67,8 +67,8 @@ class FormatDefinition
   */
   @property void nick(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).nick);
-    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).nick);
+    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).nick);
+    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).nick);
   }
 
   /**
@@ -77,7 +77,7 @@ class FormatDefinition
   */
   @property string description()
   {
-    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
+    return cToD!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).description);
   }
 
   /**
@@ -87,8 +87,8 @@ class FormatDefinition
   */
   @property void description(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)cPtr).description);
+    cValueFree!(string)(cast(void*)(cast(GstFormatDefinition*)this._cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstFormatDefinition*)this._cPtr).description);
   }
 
   /**
@@ -97,7 +97,7 @@ class FormatDefinition
   */
   @property glib.types.Quark quark()
   {
-    return (cast(GstFormatDefinition*)cPtr).quark;
+    return (cast(GstFormatDefinition*)this._cPtr).quark;
   }
 
   /**
@@ -107,6 +107,6 @@ class FormatDefinition
   */
   @property void quark(glib.types.Quark propval)
   {
-    (cast(GstFormatDefinition*)cPtr).quark = propval;
+    (cast(GstFormatDefinition*)this._cPtr).quark = propval;
   }
 }

@@ -28,16 +28,16 @@ class StringSorter : gtk.sorter.Sorter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_sorter_get_type != &gidSymbolNotFound ? gtk_string_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -129,7 +129,7 @@ class StringSorter : gtk.sorter.Sorter
   this(gtk.expression.Expression expression = null)
   {
     GtkStringSorter* _cretval;
-    _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    _cretval = gtk_string_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -140,7 +140,7 @@ class StringSorter : gtk.sorter.Sorter
   gtk.types.Collation getCollation()
   {
     GtkCollation _cretval;
-    _cretval = gtk_string_sorter_get_collation(cast(GtkStringSorter*)cPtr);
+    _cretval = gtk_string_sorter_get_collation(cast(GtkStringSorter*)this._cPtr);
     gtk.types.Collation _retval = cast(gtk.types.Collation)_cretval;
     return _retval;
   }
@@ -152,7 +152,7 @@ class StringSorter : gtk.sorter.Sorter
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_string_sorter_get_expression(cast(GtkStringSorter*)cPtr);
+    _cretval = gtk_string_sorter_get_expression(cast(GtkStringSorter*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -164,7 +164,7 @@ class StringSorter : gtk.sorter.Sorter
   bool getIgnoreCase()
   {
     bool _retval;
-    _retval = gtk_string_sorter_get_ignore_case(cast(GtkStringSorter*)cPtr);
+    _retval = gtk_string_sorter_get_ignore_case(cast(GtkStringSorter*)this._cPtr);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class StringSorter : gtk.sorter.Sorter
   */
   void setCollation(gtk.types.Collation collation)
   {
-    gtk_string_sorter_set_collation(cast(GtkStringSorter*)cPtr, collation);
+    gtk_string_sorter_set_collation(cast(GtkStringSorter*)this._cPtr, collation);
   }
 
   /**
@@ -189,7 +189,7 @@ class StringSorter : gtk.sorter.Sorter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_string_sorter_set_expression(cast(GtkStringSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_string_sorter_set_expression(cast(GtkStringSorter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -200,6 +200,6 @@ class StringSorter : gtk.sorter.Sorter
   */
   void setIgnoreCase(bool ignoreCase)
   {
-    gtk_string_sorter_set_ignore_case(cast(GtkStringSorter*)cPtr, ignoreCase);
+    gtk_string_sorter_set_ignore_case(cast(GtkStringSorter*)this._cPtr, ignoreCase);
   }
 }

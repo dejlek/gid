@@ -35,22 +35,22 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_annotation_info_get_type != &gidSymbolNotFound ? g_dbus_annotation_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property int refCount()
   {
-    return (cast(GDBusAnnotationInfo*)cPtr).refCount;
+    return (cast(GDBusAnnotationInfo*)this._cPtr).refCount;
   }
 
   /**
@@ -75,7 +75,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property void refCount(int propval)
   {
-    (cast(GDBusAnnotationInfo*)cPtr).refCount = propval;
+    (cast(GDBusAnnotationInfo*)this._cPtr).refCount = propval;
   }
 
   /**
@@ -84,7 +84,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property string key()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
+    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).key);
   }
 
   /**
@@ -94,8 +94,8 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property void key(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).key);
-    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)cPtr).key);
+    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).key);
+    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).key);
   }
 
   /**
@@ -104,7 +104,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property string value()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
+    return cToD!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).value);
   }
 
   /**
@@ -114,8 +114,8 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
   */
   @property void value(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)cPtr).value);
+    cValueFree!(string)(cast(void*)(cast(GDBusAnnotationInfo*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(GDBusAnnotationInfo*)this._cPtr).value);
   }
 
   /**
@@ -133,7 +133,7 @@ class DBusAnnotationInfo : gobject.boxed.Boxed
     const(char)* _cretval;
     GDBusAnnotationInfo*[] _tmpannotations;
     foreach (obj; annotations)
-      _tmpannotations ~= cast(GDBusAnnotationInfo*)obj.cPtr;
+      _tmpannotations ~= cast(GDBusAnnotationInfo*)obj._cPtr;
     _tmpannotations.length++;
     GDBusAnnotationInfo** _annotations = _tmpannotations.ptr;
 

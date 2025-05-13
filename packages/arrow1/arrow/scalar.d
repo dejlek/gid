@@ -22,16 +22,16 @@ class Scalar : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_scalar_get_type != &gidSymbolNotFound ? garrow_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,10 +50,10 @@ class Scalar : gobject.object.ObjectWrap
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, _data, _size, &_err);
+    _cretval = garrow_scalar_parse(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, _data, _size, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,10 +62,10 @@ class Scalar : gobject.object.ObjectWrap
   {
     GArrowScalar* _cretval;
     GError *_err;
-    _cretval = garrow_scalar_cast(cast(GArrowScalar*)cPtr, dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_scalar_cast(cast(GArrowScalar*)this._cPtr, dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, options ? cast(GArrowCastOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class Scalar : gobject.object.ObjectWrap
   bool equal(arrow.scalar.Scalar otherScalar)
   {
     bool _retval;
-    _retval = garrow_scalar_equal(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.Dup) : null);
+    _retval = garrow_scalar_equal(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class Scalar : gobject.object.ObjectWrap
   bool equalOptions(arrow.scalar.Scalar otherScalar, arrow.equal_options.EqualOptions options = null)
   {
     bool _retval;
-    _retval = garrow_scalar_equal_options(cast(GArrowScalar*)cPtr, otherScalar ? cast(GArrowScalar*)otherScalar.cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options.cPtr(No.Dup) : null);
+    _retval = garrow_scalar_equal_options(cast(GArrowScalar*)this._cPtr, otherScalar ? cast(GArrowScalar*)otherScalar._cPtr(No.Dup) : null, options ? cast(GArrowEqualOptions*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -89,8 +89,8 @@ class Scalar : gobject.object.ObjectWrap
   arrow.data_type.DataType getDataType()
   {
     GArrowDataType* _cretval;
-    _cretval = garrow_scalar_get_data_type(cast(GArrowScalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
+    _cretval = garrow_scalar_get_data_type(cast(GArrowScalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Scalar : gobject.object.ObjectWrap
   bool isValid()
   {
     bool _retval;
-    _retval = garrow_scalar_is_valid(cast(GArrowScalar*)cPtr);
+    _retval = garrow_scalar_is_valid(cast(GArrowScalar*)this._cPtr);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Scalar : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_scalar_to_string(cast(GArrowScalar*)cPtr);
+    _cretval = garrow_scalar_to_string(cast(GArrowScalar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

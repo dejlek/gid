@@ -46,16 +46,16 @@ class GLContext : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_context_get_type != &gidSymbolNotFound ? gst_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class GLContext : gst.object.ObjectWrap
   this(gstgl.gldisplay.GLDisplay display)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
+    _cretval = gst_gl_context_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -99,8 +99,8 @@ class GLContext : gst.object.ObjectWrap
   static gstgl.glcontext.GLContext newWrapped(gstgl.gldisplay.GLDisplay display, size_t handle, gstgl.types.GLPlatform contextType, gstgl.types.GLAPI availableApis)
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null, handle, contextType, availableApis);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    _cretval = gst_gl_context_new_wrapped(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null, handle, contextType, availableApis);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class GLContext : gst.object.ObjectWrap
   {
     GstGLContext* _cretval;
     _cretval = gst_gl_context_get_current();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class GLContext : gst.object.ObjectWrap
   bool activate(bool activate)
   {
     bool _retval;
-    _retval = gst_gl_context_activate(cast(GstGLContext*)cPtr, activate);
+    _retval = gst_gl_context_activate(cast(GstGLContext*)this._cPtr, activate);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class GLContext : gst.object.ObjectWrap
   bool canShare(gstgl.glcontext.GLContext otherContext)
   {
     bool _retval;
-    _retval = gst_gl_context_can_share(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null);
+    _retval = gst_gl_context_can_share(cast(GstGLContext*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class GLContext : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _feature = feature.toCString(No.Alloc);
-    _retval = gst_gl_context_check_feature(cast(GstGLContext*)cPtr, _feature);
+    _retval = gst_gl_context_check_feature(cast(GstGLContext*)this._cPtr, _feature);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class GLContext : gst.object.ObjectWrap
   bool checkFramebufferStatus(uint fboTarget)
   {
     bool _retval;
-    _retval = gst_gl_context_check_framebuffer_status(cast(GstGLContext*)cPtr, fboTarget);
+    _retval = gst_gl_context_check_framebuffer_status(cast(GstGLContext*)this._cPtr, fboTarget);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class GLContext : gst.object.ObjectWrap
   bool checkGlVersion(gstgl.types.GLAPI api, int maj, int min)
   {
     bool _retval;
-    _retval = gst_gl_context_check_gl_version(cast(GstGLContext*)cPtr, api, maj, min);
+    _retval = gst_gl_context_check_gl_version(cast(GstGLContext*)this._cPtr, api, maj, min);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void clearFramebuffer()
   {
-    gst_gl_context_clear_framebuffer(cast(GstGLContext*)cPtr);
+    gst_gl_context_clear_framebuffer(cast(GstGLContext*)this._cPtr);
   }
 
   /**
@@ -269,7 +269,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void clearShader()
   {
-    gst_gl_context_clear_shader(cast(GstGLContext*)cPtr);
+    gst_gl_context_clear_shader(cast(GstGLContext*)this._cPtr);
   }
 
   /**
@@ -302,7 +302,7 @@ class GLContext : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_context_create(cast(GstGLContext*)cPtr, otherContext ? cast(GstGLContext*)otherContext.cPtr(No.Dup) : null, &_err);
+    _retval = gst_gl_context_create(cast(GstGLContext*)this._cPtr, otherContext ? cast(GstGLContext*)otherContext._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -316,7 +316,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void destroy()
   {
-    gst_gl_context_destroy(cast(GstGLContext*)cPtr);
+    gst_gl_context_destroy(cast(GstGLContext*)this._cPtr);
   }
 
   /**
@@ -330,7 +330,7 @@ class GLContext : gst.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_gl_context_fill_info(cast(GstGLContext*)cPtr, &_err);
+    _retval = gst_gl_context_fill_info(cast(GstGLContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -347,7 +347,7 @@ class GLContext : gst.object.ObjectWrap
   gst.structure.Structure getConfig()
   {
     GstStructure* _cretval;
-    _cretval = gst_gl_context_get_config(cast(GstGLContext*)cPtr);
+    _cretval = gst_gl_context_get_config(cast(GstGLContext*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -356,8 +356,8 @@ class GLContext : gst.object.ObjectWrap
   gstgl.gldisplay.GLDisplay getDisplay()
   {
     GstGLDisplay* _cretval;
-    _cretval = gst_gl_context_get_display(cast(GstGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
+    _cretval = gst_gl_context_get_display(cast(GstGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.gldisplay.GLDisplay)(cast(GstGLDisplay*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class GLContext : gst.object.ObjectWrap
   gstgl.types.GLAPI getGlApi()
   {
     GstGLAPI _cretval;
-    _cretval = gst_gl_context_get_gl_api(cast(GstGLContext*)cPtr);
+    _cretval = gst_gl_context_get_gl_api(cast(GstGLContext*)this._cPtr);
     gstgl.types.GLAPI _retval = cast(gstgl.types.GLAPI)_cretval;
     return _retval;
   }
@@ -383,7 +383,7 @@ class GLContext : gst.object.ObjectWrap
   size_t getGlContext()
   {
     size_t _retval;
-    _retval = gst_gl_context_get_gl_context(cast(GstGLContext*)cPtr);
+    _retval = gst_gl_context_get_gl_context(cast(GstGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class GLContext : gst.object.ObjectWrap
   gstgl.types.GLPlatform getGlPlatform()
   {
     GstGLPlatform _cretval;
-    _cretval = gst_gl_context_get_gl_platform(cast(GstGLContext*)cPtr);
+    _cretval = gst_gl_context_get_gl_platform(cast(GstGLContext*)this._cPtr);
     gstgl.types.GLPlatform _retval = cast(gstgl.types.GLPlatform)_cretval;
     return _retval;
   }
@@ -409,7 +409,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void getGlPlatformVersion(out int major, out int minor)
   {
-    gst_gl_context_get_gl_platform_version(cast(GstGLContext*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gst_gl_context_get_gl_platform_version(cast(GstGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -423,7 +423,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void getGlVersion(out int maj, out int min)
   {
-    gst_gl_context_get_gl_version(cast(GstGLContext*)cPtr, cast(int*)&maj, cast(int*)&min);
+    gst_gl_context_get_gl_version(cast(GstGLContext*)this._cPtr, cast(int*)&maj, cast(int*)&min);
   }
 
   /**
@@ -454,7 +454,7 @@ class GLContext : gst.object.ObjectWrap
   void* getProcAddress(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    auto _retval = gst_gl_context_get_proc_address(cast(GstGLContext*)cPtr, _name);
+    auto _retval = gst_gl_context_get_proc_address(cast(GstGLContext*)this._cPtr, _name);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class GLContext : gst.object.ObjectWrap
   glib.thread.Thread getThread()
   {
     GThread* _cretval;
-    _cretval = gst_gl_context_get_thread(cast(GstGLContext*)cPtr);
+    _cretval = gst_gl_context_get_thread(cast(GstGLContext*)this._cPtr);
     auto _retval = _cretval ? new glib.thread.Thread(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -471,8 +471,8 @@ class GLContext : gst.object.ObjectWrap
   gstgl.glwindow.GLWindow getWindow()
   {
     GstGLWindow* _cretval;
-    _cretval = gst_gl_context_get_window(cast(GstGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
+    _cretval = gst_gl_context_get_window(cast(GstGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glwindow.GLWindow)(cast(GstGLWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class GLContext : gst.object.ObjectWrap
   bool isShared()
   {
     bool _retval;
-    _retval = gst_gl_context_is_shared(cast(GstGLContext*)cPtr);
+    _retval = gst_gl_context_is_shared(cast(GstGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -506,7 +506,7 @@ class GLContext : gst.object.ObjectWrap
   bool requestConfig(gst.structure.Structure glConfig = null)
   {
     bool _retval;
-    _retval = gst_gl_context_request_config(cast(GstGLContext*)cPtr, glConfig ? cast(GstStructure*)glConfig.cPtr(Yes.Dup) : null);
+    _retval = gst_gl_context_request_config(cast(GstGLContext*)this._cPtr, glConfig ? cast(GstStructure*)glConfig._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -518,7 +518,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void setSharedWith(gstgl.glcontext.GLContext share)
   {
-    gst_gl_context_set_shared_with(cast(GstGLContext*)cPtr, share ? cast(GstGLContext*)share.cPtr(No.Dup) : null);
+    gst_gl_context_set_shared_with(cast(GstGLContext*)this._cPtr, share ? cast(GstGLContext*)share._cPtr(No.Dup) : null);
   }
 
   /**
@@ -533,7 +533,7 @@ class GLContext : gst.object.ObjectWrap
   bool setWindow(gstgl.glwindow.GLWindow window)
   {
     bool _retval;
-    _retval = gst_gl_context_set_window(cast(GstGLContext*)cPtr, window ? cast(GstGLWindow*)window.cPtr(Yes.Dup) : null);
+    _retval = gst_gl_context_set_window(cast(GstGLContext*)this._cPtr, window ? cast(GstGLWindow*)window._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class GLContext : gst.object.ObjectWrap
   bool supportsGlslProfileVersion(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     bool _retval;
-    _retval = gst_gl_context_supports_glsl_profile_version(cast(GstGLContext*)cPtr, version_, profile);
+    _retval = gst_gl_context_supports_glsl_profile_version(cast(GstGLContext*)this._cPtr, version_, profile);
     return _retval;
   }
 
@@ -549,7 +549,7 @@ class GLContext : gst.object.ObjectWrap
   bool supportsPrecision(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     bool _retval;
-    _retval = gst_gl_context_supports_precision(cast(GstGLContext*)cPtr, version_, profile);
+    _retval = gst_gl_context_supports_precision(cast(GstGLContext*)this._cPtr, version_, profile);
     return _retval;
   }
 
@@ -557,7 +557,7 @@ class GLContext : gst.object.ObjectWrap
   bool supportsPrecisionHighp(gstgl.types.GLSLVersion version_, gstgl.types.GLSLProfile profile)
   {
     bool _retval;
-    _retval = gst_gl_context_supports_precision_highp(cast(GstGLContext*)cPtr, version_, profile);
+    _retval = gst_gl_context_supports_precision_highp(cast(GstGLContext*)this._cPtr, version_, profile);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class GLContext : gst.object.ObjectWrap
   */
   void swapBuffers()
   {
-    gst_gl_context_swap_buffers(cast(GstGLContext*)cPtr);
+    gst_gl_context_swap_buffers(cast(GstGLContext*)this._cPtr);
   }
 
   /**
@@ -584,11 +584,11 @@ class GLContext : gst.object.ObjectWrap
     {
       auto _dlg = cast(gstgl.types.GLContextThreadFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(void*)context, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_gl_context_thread_add(cast(GstGLContext*)cPtr, _funcCB, _func);
+    gst_gl_context_thread_add(cast(GstGLContext*)this._cPtr, _funcCB, _func);
   }
 }

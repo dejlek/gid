@@ -28,16 +28,16 @@ class Cancellable : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_cancellable_get_type != &gidSymbolNotFound ? g_cancellable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class Cancellable : gobject.object.ObjectWrap
   {
     GCancellable* _cretval;
     _cretval = g_cancellable_get_current();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    g_cancellable_cancel(cast(GCancellable*)cPtr);
+    g_cancellable_cancel(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -121,7 +121,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void disconnect(gulong handlerId)
   {
-    g_cancellable_disconnect(cast(GCancellable*)cPtr, handlerId);
+    g_cancellable_disconnect(cast(GCancellable*)this._cPtr, handlerId);
   }
 
   /**
@@ -144,7 +144,7 @@ class Cancellable : gobject.object.ObjectWrap
   int getFd()
   {
     int _retval;
-    _retval = g_cancellable_get_fd(cast(GCancellable*)cPtr);
+    _retval = g_cancellable_get_fd(cast(GCancellable*)this._cPtr);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class Cancellable : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = g_cancellable_is_cancelled(cast(GCancellable*)cPtr);
+    _retval = g_cancellable_is_cancelled(cast(GCancellable*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Cancellable : gobject.object.ObjectWrap
   bool makePollfd(glib.types.PollFD pollfd)
   {
     bool _retval;
-    _retval = g_cancellable_make_pollfd(cast(GCancellable*)cPtr, &pollfd);
+    _retval = g_cancellable_make_pollfd(cast(GCancellable*)this._cPtr, &pollfd);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void popCurrent()
   {
-    g_cancellable_pop_current(cast(GCancellable*)cPtr);
+    g_cancellable_pop_current(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -213,7 +213,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void pushCurrent()
   {
-    g_cancellable_push_current(cast(GCancellable*)cPtr);
+    g_cancellable_push_current(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -229,7 +229,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void releaseFd()
   {
-    g_cancellable_release_fd(cast(GCancellable*)cPtr);
+    g_cancellable_release_fd(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -247,7 +247,7 @@ class Cancellable : gobject.object.ObjectWrap
   */
   void reset()
   {
-    g_cancellable_reset(cast(GCancellable*)cPtr);
+    g_cancellable_reset(cast(GCancellable*)this._cPtr);
   }
 
   /**
@@ -260,7 +260,7 @@ class Cancellable : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_cancellable_set_error_if_cancelled(cast(GCancellable*)cPtr, &_err);
+    _retval = g_cancellable_set_error_if_cancelled(cast(GCancellable*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -281,7 +281,7 @@ class Cancellable : gobject.object.ObjectWrap
   glib.source.Source sourceNew()
   {
     GSource* _cretval;
-    _cretval = g_cancellable_source_new(cast(GCancellable*)cPtr);
+    _cretval = g_cancellable_source_new(cast(GCancellable*)this._cPtr);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

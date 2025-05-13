@@ -33,16 +33,16 @@ class Allocator : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_allocator_get_type != &gidSymbolNotFound ? gst_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class Allocator : gst.object.ObjectWrap
     GstAllocator* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_allocator_find(_name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class Allocator : gst.object.ObjectWrap
   static void register(string name, gst.allocator.Allocator allocator)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator.cPtr(Yes.Dup) : null);
+    gst_allocator_register(_name, allocator ? cast(GstAllocator*)allocator._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class Allocator : gst.object.ObjectWrap
   gst.memory.Memory alloc(size_t size, gst.allocation_params.AllocationParams params = null)
   {
     GstMemory* _cretval;
-    _cretval = gst_allocator_alloc(cast(GstAllocator*)cPtr, size, params ? cast(GstAllocationParams*)params.cPtr(No.Dup) : null);
+    _cretval = gst_allocator_alloc(cast(GstAllocator*)this._cPtr, size, params ? cast(GstAllocationParams*)params._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -117,6 +117,6 @@ class Allocator : gst.object.ObjectWrap
   */
   void setDefault()
   {
-    gst_allocator_set_default(cast(GstAllocator*)cPtr);
+    gst_allocator_set_default(cast(GstAllocator*)this._cPtr);
   }
 }

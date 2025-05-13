@@ -27,7 +27,7 @@ class DebugKey
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class DebugKey
   */
   @property string key()
   {
-    return cToD!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
+    return cToD!(string)(cast(void*)(cast(GDebugKey*)this._cPtr).key);
   }
 
   /**
@@ -48,8 +48,8 @@ class DebugKey
   */
   @property void key(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDebugKey*)cPtr).key);
-    dToC(propval, cast(void*)&(cast(GDebugKey*)cPtr).key);
+    cValueFree!(string)(cast(void*)(cast(GDebugKey*)this._cPtr).key);
+    dToC(propval, cast(void*)&(cast(GDebugKey*)this._cPtr).key);
   }
 
   /**
@@ -58,7 +58,7 @@ class DebugKey
   */
   @property uint value()
   {
-    return (cast(GDebugKey*)cPtr).value;
+    return (cast(GDebugKey*)this._cPtr).value;
   }
 
   /**
@@ -68,6 +68,6 @@ class DebugKey
   */
   @property void value(uint propval)
   {
-    (cast(GDebugKey*)cPtr).value = propval;
+    (cast(GDebugKey*)this._cPtr).value = propval;
   }
 }

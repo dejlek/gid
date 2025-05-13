@@ -35,16 +35,16 @@ class ListItem : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_item_get_type != &gidSymbolNotFound ? gtk_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -201,7 +201,7 @@ class ListItem : gobject.object.ObjectWrap
   string getAccessibleDescription()
   {
     const(char)* _cretval;
-    _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)cPtr);
+    _cretval = gtk_list_item_get_accessible_description(cast(GtkListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -213,7 +213,7 @@ class ListItem : gobject.object.ObjectWrap
   string getAccessibleLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)cPtr);
+    _cretval = gtk_list_item_get_accessible_label(cast(GtkListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -226,7 +226,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_activatable(cast(GtkListItem*)cPtr);
+    _retval = gtk_list_item_get_activatable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -238,8 +238,8 @@ class ListItem : gobject.object.ObjectWrap
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_item_get_child(cast(GtkListItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_list_item_get_child(cast(GtkListItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_focusable(cast(GtkListItem*)cPtr);
+    _retval = gtk_list_item_get_focusable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -263,9 +263,9 @@ class ListItem : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_list_item_get_item(cast(GtkListItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_list_item_get_item(cast(GtkListItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class ListItem : gobject.object.ObjectWrap
   uint getPosition()
   {
     uint _retval;
-    _retval = gtk_list_item_get_position(cast(GtkListItem*)cPtr);
+    _retval = gtk_list_item_get_position(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_list_item_get_selectable(cast(GtkListItem*)cPtr);
+    _retval = gtk_list_item_get_selectable(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ListItem : gobject.object.ObjectWrap
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_list_item_get_selected(cast(GtkListItem*)cPtr);
+    _retval = gtk_list_item_get_selected(cast(GtkListItem*)this._cPtr);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class ListItem : gobject.object.ObjectWrap
   void setAccessibleDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    gtk_list_item_set_accessible_description(cast(GtkListItem*)cPtr, _description);
+    gtk_list_item_set_accessible_description(cast(GtkListItem*)this._cPtr, _description);
   }
 
   /**
@@ -333,7 +333,7 @@ class ListItem : gobject.object.ObjectWrap
   void setAccessibleLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_list_item_set_accessible_label(cast(GtkListItem*)cPtr, _label);
+    gtk_list_item_set_accessible_label(cast(GtkListItem*)this._cPtr, _label);
   }
 
   /**
@@ -352,7 +352,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setActivatable(bool activatable)
   {
-    gtk_list_item_set_activatable(cast(GtkListItem*)cPtr, activatable);
+    gtk_list_item_set_activatable(cast(GtkListItem*)this._cPtr, activatable);
   }
 
   /**
@@ -367,7 +367,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_list_item_set_child(cast(GtkListItem*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_list_item_set_child(cast(GtkListItem*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -386,7 +386,7 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setFocusable(bool focusable)
   {
-    gtk_list_item_set_focusable(cast(GtkListItem*)cPtr, focusable);
+    gtk_list_item_set_focusable(cast(GtkListItem*)this._cPtr, focusable);
   }
 
   /**
@@ -408,6 +408,6 @@ class ListItem : gobject.object.ObjectWrap
   */
   void setSelectable(bool selectable)
   {
-    gtk_list_item_set_selectable(cast(GtkListItem*)cPtr, selectable);
+    gtk_list_item_set_selectable(cast(GtkListItem*)this._cPtr, selectable);
   }
 }

@@ -31,7 +31,7 @@ class Tuples
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class Tuples
   */
   @property uint len()
   {
-    return (cast(GTuples*)cPtr).len;
+    return (cast(GTuples*)this._cPtr).len;
   }
 
   /**
@@ -52,7 +52,7 @@ class Tuples
   */
   @property void len(uint propval)
   {
-    (cast(GTuples*)cPtr).len = propval;
+    (cast(GTuples*)this._cPtr).len = propval;
   }
 
   /**
@@ -65,7 +65,7 @@ class Tuples
   */
   void destroy()
   {
-    g_tuples_destroy(cast(GTuples*)cPtr);
+    g_tuples_destroy(cast(GTuples*)this._cPtr);
   }
 
   /**
@@ -82,7 +82,7 @@ class Tuples
   */
   void* index(int index, int field)
   {
-    auto _retval = g_tuples_index(cast(GTuples*)cPtr, index, field);
+    auto _retval = g_tuples_index(cast(GTuples*)this._cPtr, index, field);
     return _retval;
   }
 }

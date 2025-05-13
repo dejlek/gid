@@ -33,16 +33,16 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_pixbuf_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_pixbuf_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,8 +117,8 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_source_gutter_renderer_pixbuf_get_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_pixbuf_get_gicon(cast(GtkSourceGutterRendererPixbuf*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_gutter_renderer_pixbuf_get_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr);
+    _cretval = gtk_source_gutter_renderer_pixbuf_get_icon_name(cast(GtkSourceGutterRendererPixbuf*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -139,8 +139,8 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_source_gutter_renderer_pixbuf_get_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_pixbuf_get_paintable(cast(GtkSourceGutterRendererPixbuf*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,8 +151,8 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_source_gutter_renderer_pixbuf_get_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_pixbuf_get_pixbuf(cast(GtkSourceGutterRendererPixbuf*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,31 +166,31 @@ class GutterRendererPixbuf : gtksource.gutter_renderer.GutterRenderer
   */
   void overlayPaintable(gdk.paintable.Paintable paintable)
   {
-    gtk_source_gutter_renderer_pixbuf_overlay_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_pixbuf_overlay_paintable(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setGicon(gio.icon.Icon icon = null)
   {
-    gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_pixbuf_set_gicon(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)cPtr, _iconName);
+    gtk_source_gutter_renderer_pixbuf_set_icon_name(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, _iconName);
   }
 
   /** */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
-    gtk_source_gutter_renderer_pixbuf_set_paintable(cast(GtkSourceGutterRendererPixbuf*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_pixbuf_set_paintable(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_pixbuf_set_pixbuf(cast(GtkSourceGutterRendererPixbuf*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 }

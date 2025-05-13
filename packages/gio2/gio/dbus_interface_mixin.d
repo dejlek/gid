@@ -28,8 +28,8 @@ template DBusInterfaceT()
   override gio.dbus_object.DBusObject getObject()
   {
     GDBusObject* _cretval;
-    _cretval = g_dbus_interface_dup_object(cast(GDBusInterface*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
+    _cretval = g_dbus_interface_dup_object(cast(GDBusInterface*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -41,7 +41,7 @@ template DBusInterfaceT()
   override gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
     GDBusInterfaceInfo* _cretval;
-    _cretval = g_dbus_interface_get_info(cast(GDBusInterface*)cPtr);
+    _cretval = g_dbus_interface_get_info(cast(GDBusInterface*)this._cPtr);
     auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -56,6 +56,6 @@ template DBusInterfaceT()
   */
   override void setObject(gio.dbus_object.DBusObject object = null)
   {
-    g_dbus_interface_set_object(cast(GDBusInterface*)cPtr, object ? cast(GDBusObject*)(cast(gobject.object.ObjectWrap)object).cPtr(No.Dup) : null);
+    g_dbus_interface_set_object(cast(GDBusInterface*)this._cPtr, object ? cast(GDBusObject*)(cast(gobject.object.ObjectWrap)object)._cPtr(No.Dup) : null);
   }
 }

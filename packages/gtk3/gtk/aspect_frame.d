@@ -35,16 +35,16 @@ class AspectFrame : gtk.frame.Frame
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_aspect_frame_get_type != &gidSymbolNotFound ? gtk_aspect_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -141,6 +141,6 @@ class AspectFrame : gtk.frame.Frame
   */
   void set(float xalign, float yalign, float ratio, bool obeyChild)
   {
-    gtk_aspect_frame_set(cast(GtkAspectFrame*)cPtr, xalign, yalign, ratio, obeyChild);
+    gtk_aspect_frame_set(cast(GtkAspectFrame*)this._cPtr, xalign, yalign, ratio, obeyChild);
   }
 }

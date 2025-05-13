@@ -20,16 +20,16 @@ class ServerOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_options_get_type != &gidSymbolNotFound ? gaflight_server_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class ServerOptions : gobject.object.ObjectWrap
   this(arrowflight.location.Location location)
   {
     GAFlightServerOptions* _cretval;
-    _cretval = gaflight_server_options_new(location ? cast(GAFlightLocation*)location.cPtr(No.Dup) : null);
+    _cretval = gaflight_server_options_new(location ? cast(GAFlightLocation*)location._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

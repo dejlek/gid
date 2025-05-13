@@ -43,16 +43,16 @@ class OffscreenWindow : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_offscreen_window_get_type != &gidSymbolNotFound ? gtk_offscreen_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,8 +83,8 @@ class OffscreenWindow : gtk.window.Window
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_offscreen_window_get_pixbuf(cast(GtkOffscreenWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_offscreen_window_get_pixbuf(cast(GtkOffscreenWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class OffscreenWindow : gtk.window.Window
   cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;
-    _cretval = gtk_offscreen_window_get_surface(cast(GtkOffscreenWindow*)cPtr);
+    _cretval = gtk_offscreen_window_get_surface(cast(GtkOffscreenWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

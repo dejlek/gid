@@ -35,7 +35,7 @@ class AudioDownmixMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -46,7 +46,7 @@ class AudioDownmixMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioDownmixMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioDownmixMeta*)this._cPtr).meta);
   }
 
   /**
@@ -55,7 +55,7 @@ class AudioDownmixMeta
   */
   @property int fromChannels()
   {
-    return (cast(GstAudioDownmixMeta*)cPtr).fromChannels;
+    return (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels;
   }
 
   /**
@@ -65,7 +65,7 @@ class AudioDownmixMeta
   */
   @property void fromChannels(int propval)
   {
-    (cast(GstAudioDownmixMeta*)cPtr).fromChannels = propval;
+    (cast(GstAudioDownmixMeta*)this._cPtr).fromChannels = propval;
   }
 
   /**
@@ -74,7 +74,7 @@ class AudioDownmixMeta
   */
   @property int toChannels()
   {
-    return (cast(GstAudioDownmixMeta*)cPtr).toChannels;
+    return (cast(GstAudioDownmixMeta*)this._cPtr).toChannels;
   }
 
   /**
@@ -84,7 +84,7 @@ class AudioDownmixMeta
   */
   @property void toChannels(int propval)
   {
-    (cast(GstAudioDownmixMeta*)cPtr).toChannels = propval;
+    (cast(GstAudioDownmixMeta*)this._cPtr).toChannels = propval;
   }
 
   /** */

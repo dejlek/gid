@@ -35,7 +35,7 @@ class ClipNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, graphene.rect.Rect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(const(graphene_rect_t)*)clip.cPtr(No.Dup) : null);
+    _cretval = gsk_clip_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, clip ? cast(const(graphene_rect_t)*)clip._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -46,7 +46,7 @@ class ClipNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_clip_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_clip_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -58,7 +58,7 @@ class ClipNode : gsk.render_node.RenderNode
   graphene.rect.Rect getClip()
   {
     const(graphene_rect_t)* _cretval;
-    _cretval = gsk_clip_node_get_clip(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_clip_node_get_clip(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

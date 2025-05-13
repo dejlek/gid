@@ -21,16 +21,16 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_string_dictionary_array_builder_get_type != &gidSymbolNotFound ? garrow_string_dictionary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_string_dictionary_array_builder_append_array(cast(GArrowStringDictionaryArrayBuilder*)cPtr, array ? cast(GArrowStringArray*)array.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_string_dictionary_array_builder_append_array(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, array ? cast(GArrowStringArray*)array._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -84,7 +84,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_string_dictionary_array_builder_append_indices(cast(GArrowStringDictionaryArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_string_dictionary_array_builder_append_indices(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -96,7 +96,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     bool _retval;
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_string_dictionary_array_builder_append_string(cast(GArrowStringDictionaryArrayBuilder*)cPtr, _value, &_err);
+    _retval = garrow_string_dictionary_array_builder_append_string(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -109,7 +109,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
     GArrowArray* _outIndices;
     GArrowArray* _outDelta;
     GError *_err;
-    _retval = garrow_string_dictionary_array_builder_finish_delta(cast(GArrowStringDictionaryArrayBuilder*)cPtr, &_outIndices, &_outDelta, &_err);
+    _retval = garrow_string_dictionary_array_builder_finish_delta(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, &_outIndices, &_outDelta, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     outIndices = new arrow.array.Array(cast(void*)_outIndices, Yes.Take);
@@ -121,7 +121,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   long getDictionaryLength()
   {
     long _retval;
-    _retval = garrow_string_dictionary_array_builder_get_dictionary_length(cast(GArrowStringDictionaryArrayBuilder*)cPtr);
+    _retval = garrow_string_dictionary_array_builder_get_dictionary_length(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_string_dictionary_array_builder_insert_memo_values(cast(GArrowStringDictionaryArrayBuilder*)cPtr, values ? cast(GArrowStringArray*)values.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_string_dictionary_array_builder_insert_memo_values(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr, values ? cast(GArrowStringArray*)values._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -141,6 +141,6 @@ class StringDictionaryArrayBuilder : arrow.array_builder.ArrayBuilder
   */
   void resetFull()
   {
-    garrow_string_dictionary_array_builder_reset_full(cast(GArrowStringDictionaryArrayBuilder*)cPtr);
+    garrow_string_dictionary_array_builder_reset_full(cast(GArrowStringDictionaryArrayBuilder*)this._cPtr);
   }
 }

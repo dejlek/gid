@@ -67,16 +67,16 @@ class Frame : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_frame_get_type != &gidSymbolNotFound ? gtk_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -174,7 +174,7 @@ class Frame : gtk.bin.Bin
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
+    _cretval = gtk_frame_get_label(cast(GtkFrame*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -191,7 +191,7 @@ class Frame : gtk.bin.Bin
   */
   void getLabelAlign(out float xalign, out float yalign)
   {
-    gtk_frame_get_label_align(cast(GtkFrame*)cPtr, cast(float*)&xalign, cast(float*)&yalign);
+    gtk_frame_get_label_align(cast(GtkFrame*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
 
   /**
@@ -203,8 +203,8 @@ class Frame : gtk.bin.Bin
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class Frame : gtk.bin.Bin
   gtk.types.ShadowType getShadowType()
   {
     GtkShadowType _cretval;
-    _cretval = gtk_frame_get_shadow_type(cast(GtkFrame*)cPtr);
+    _cretval = gtk_frame_get_shadow_type(cast(GtkFrame*)this._cPtr);
     gtk.types.ShadowType _retval = cast(gtk.types.ShadowType)_cretval;
     return _retval;
   }
@@ -231,7 +231,7 @@ class Frame : gtk.bin.Bin
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
+    gtk_frame_set_label(cast(GtkFrame*)this._cPtr, _label);
   }
 
   /**
@@ -249,7 +249,7 @@ class Frame : gtk.bin.Bin
   */
   void setLabelAlign(float xalign, float yalign)
   {
-    gtk_frame_set_label_align(cast(GtkFrame*)cPtr, xalign, yalign);
+    gtk_frame_set_label_align(cast(GtkFrame*)this._cPtr, xalign, yalign);
   }
 
   /**
@@ -261,7 +261,7 @@ class Frame : gtk.bin.Bin
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -275,6 +275,6 @@ class Frame : gtk.bin.Bin
   */
   void setShadowType(gtk.types.ShadowType type)
   {
-    gtk_frame_set_shadow_type(cast(GtkFrame*)cPtr, type);
+    gtk_frame_set_shadow_type(cast(GtkFrame*)this._cPtr, type);
   }
 }

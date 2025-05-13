@@ -28,7 +28,7 @@ class AudioResampler
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,7 +45,7 @@ class AudioResampler
   size_t getInFrames(size_t outFrames)
   {
     size_t _retval;
-    _retval = gst_audio_resampler_get_in_frames(cast(GstAudioResampler*)cPtr, outFrames);
+    _retval = gst_audio_resampler_get_in_frames(cast(GstAudioResampler*)this._cPtr, outFrames);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class AudioResampler
   size_t getMaxLatency()
   {
     size_t _retval;
-    _retval = gst_audio_resampler_get_max_latency(cast(GstAudioResampler*)cPtr);
+    _retval = gst_audio_resampler_get_max_latency(cast(GstAudioResampler*)this._cPtr);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class AudioResampler
   size_t getOutFrames(size_t inFrames)
   {
     size_t _retval;
-    _retval = gst_audio_resampler_get_out_frames(cast(GstAudioResampler*)cPtr, inFrames);
+    _retval = gst_audio_resampler_get_out_frames(cast(GstAudioResampler*)this._cPtr, inFrames);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class AudioResampler
   */
   void reset()
   {
-    gst_audio_resampler_reset(cast(GstAudioResampler*)cPtr);
+    gst_audio_resampler_reset(cast(GstAudioResampler*)this._cPtr);
   }
 
   /**
@@ -104,7 +104,7 @@ class AudioResampler
   bool update(int inRate, int outRate, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = gst_audio_resampler_update(cast(GstAudioResampler*)cPtr, inRate, outRate, options ? cast(GstStructure*)options.cPtr(No.Dup) : null);
+    _retval = gst_audio_resampler_update(cast(GstAudioResampler*)this._cPtr, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class AudioResampler
   static gstaudio.audio_resampler.AudioResampler new_(gstaudio.types.AudioResamplerMethod method, gstaudio.types.AudioResamplerFlags flags, gstaudio.types.AudioFormat format, int channels, int inRate, int outRate, gst.structure.Structure options)
   {
     GstAudioResampler* _cretval;
-    _cretval = gst_audio_resampler_new(method, flags, format, channels, inRate, outRate, options ? cast(GstStructure*)options.cPtr(No.Dup) : null);
+    _cretval = gst_audio_resampler_new(method, flags, format, channels, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gstaudio.audio_resampler.AudioResampler(cast(GstAudioResampler*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -142,6 +142,6 @@ class AudioResampler
   */
   static void optionsSetQuality(gstaudio.types.AudioResamplerMethod method, uint quality, int inRate, int outRate, gst.structure.Structure options)
   {
-    gst_audio_resampler_options_set_quality(method, quality, inRate, outRate, options ? cast(GstStructure*)options.cPtr(No.Dup) : null);
+    gst_audio_resampler_options_set_quality(method, quality, inRate, outRate, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
   }
 }

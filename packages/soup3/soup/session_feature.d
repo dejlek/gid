@@ -22,7 +22,7 @@ interface SessionFeature
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_session_feature_get_type != &gidSymbolNotFound ? soup_session_feature_get_type() : cast(GType)0;

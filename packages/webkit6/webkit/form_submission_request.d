@@ -27,16 +27,16 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_form_submission_request_get_type != &gidSymbolNotFound ? webkit_form_submission_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
     bool _retval;
     GPtrArray* _fieldNames;
     GPtrArray* _fieldValues;
-    _retval = webkit_form_submission_request_list_text_fields(cast(WebKitFormSubmissionRequest*)cPtr, &_fieldNames, &_fieldValues);
+    _retval = webkit_form_submission_request_list_text_fields(cast(WebKitFormSubmissionRequest*)this._cPtr, &_fieldNames, &_fieldValues);
     fieldNames = gPtrArrayToD!(string, GidOwnership.None)(_fieldNames);
     fieldValues = gPtrArrayToD!(string, GidOwnership.None)(_fieldValues);
     return _retval;
@@ -76,6 +76,6 @@ class FormSubmissionRequest : gobject.object.ObjectWrap
   */
   void submit()
   {
-    webkit_form_submission_request_submit(cast(WebKitFormSubmissionRequest*)cPtr);
+    webkit_form_submission_request_submit(cast(WebKitFormSubmissionRequest*)this._cPtr);
   }
 }

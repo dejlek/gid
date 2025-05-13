@@ -28,7 +28,7 @@ class Once
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class Once
   */
   @property glib.types.OnceStatus status()
   {
-    return cast(glib.types.OnceStatus)(cast(GOnce*)cPtr).status;
+    return cast(glib.types.OnceStatus)(cast(GOnce*)this._cPtr).status;
   }
 
   /**
@@ -49,7 +49,7 @@ class Once
   */
   @property void status(glib.types.OnceStatus propval)
   {
-    (cast(GOnce*)cPtr).status = cast(GOnceStatus)propval;
+    (cast(GOnce*)this._cPtr).status = cast(GOnceStatus)propval;
   }
 
   /**

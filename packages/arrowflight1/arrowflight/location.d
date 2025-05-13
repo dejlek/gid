@@ -19,16 +19,16 @@ class Location : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_location_get_type != &gidSymbolNotFound ? gaflight_location_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class Location : gobject.object.ObjectWrap
   bool equal(arrowflight.location.Location otherLocation)
   {
     bool _retval;
-    _retval = gaflight_location_equal(cast(GAFlightLocation*)cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation.cPtr(No.Dup) : null);
+    _retval = gaflight_location_equal(cast(GAFlightLocation*)this._cPtr, otherLocation ? cast(GAFlightLocation*)otherLocation._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class Location : gobject.object.ObjectWrap
   string getScheme()
   {
     char* _cretval;
-    _cretval = gaflight_location_get_scheme(cast(GAFlightLocation*)cPtr);
+    _cretval = gaflight_location_get_scheme(cast(GAFlightLocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -70,7 +70,7 @@ class Location : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = gaflight_location_to_string(cast(GAFlightLocation*)cPtr);
+    _cretval = gaflight_location_to_string(cast(GAFlightLocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

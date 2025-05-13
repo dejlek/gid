@@ -31,8 +31,8 @@ class GrabBrokenEvent : gdk.event.Event
   gdk.surface.Surface getGrabSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gdk_grab_broken_event_get_grab_surface(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_grab_broken_event_get_grab_surface(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -43,7 +43,7 @@ class GrabBrokenEvent : gdk.event.Event
   bool getImplicit()
   {
     bool _retval;
-    _retval = gdk_grab_broken_event_get_implicit(cast(GdkEvent*)cPtr);
+    _retval = gdk_grab_broken_event_get_implicit(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

@@ -36,22 +36,22 @@ class ControlPoint : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_point_get_type != &gidSymbolNotFound ? gst_control_point_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class ControlPoint : gobject.boxed.Boxed
   */
   @property gst.types.ClockTime timestamp()
   {
-    return (cast(GstControlPoint*)cPtr).timestamp;
+    return (cast(GstControlPoint*)this._cPtr).timestamp;
   }
 
   /**
@@ -76,7 +76,7 @@ class ControlPoint : gobject.boxed.Boxed
   */
   @property void timestamp(gst.types.ClockTime propval)
   {
-    (cast(GstControlPoint*)cPtr).timestamp = propval;
+    (cast(GstControlPoint*)this._cPtr).timestamp = propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class ControlPoint : gobject.boxed.Boxed
   */
   @property double value()
   {
-    return (cast(GstControlPoint*)cPtr).value;
+    return (cast(GstControlPoint*)this._cPtr).value;
   }
 
   /**
@@ -95,7 +95,7 @@ class ControlPoint : gobject.boxed.Boxed
   */
   @property void value(double propval)
   {
-    (cast(GstControlPoint*)cPtr).value = propval;
+    (cast(GstControlPoint*)this._cPtr).value = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class ControlPoint : gobject.boxed.Boxed
   gstcontroller.control_point.ControlPoint copy()
   {
     GstControlPoint* _cretval;
-    _cretval = gst_control_point_copy(cast(GstControlPoint*)cPtr);
+    _cretval = gst_control_point_copy(cast(GstControlPoint*)this._cPtr);
     auto _retval = _cretval ? new gstcontroller.control_point.ControlPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

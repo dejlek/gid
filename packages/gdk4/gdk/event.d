@@ -44,7 +44,7 @@ class Event
 
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       gdk_event_ref(cInstancePtr);
@@ -67,7 +67,7 @@ class Event
     bool _retval;
     uint _nAxes;
     double* _axes;
-    _retval = gdk_event_get_axes(cast(GdkEvent*)cPtr, &_axes, &_nAxes);
+    _retval = gdk_event_get_axes(cast(GdkEvent*)this._cPtr, &_axes, &_nAxes);
     axes.length = _nAxes;
     axes[0 .. $] = (cast(double*)_axes)[0 .. _nAxes];
     return _retval;
@@ -88,7 +88,7 @@ class Event
   bool getAxis(gdk.types.AxisUse axisUse, out double value)
   {
     bool _retval;
-    _retval = gdk_event_get_axis(cast(GdkEvent*)cPtr, axisUse, cast(double*)&value);
+    _retval = gdk_event_get_axis(cast(GdkEvent*)this._cPtr, axisUse, cast(double*)&value);
     return _retval;
   }
 
@@ -99,8 +99,8 @@ class Event
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_event_get_device(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_event_get_device(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class Event
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
-    _cretval = gdk_event_get_device_tool(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    _cretval = gdk_event_get_device_tool(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,8 +132,8 @@ class Event
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_event_get_display(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_event_get_display(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Event
   gdk.event_sequence.EventSequence getEventSequence()
   {
     GdkEventSequence* _cretval;
-    _cretval = gdk_event_get_event_sequence(cast(GdkEvent*)cPtr);
+    _cretval = gdk_event_get_event_sequence(cast(GdkEvent*)this._cPtr);
     auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -159,7 +159,7 @@ class Event
   gdk.types.EventType getEventType()
   {
     GdkEventType _cretval;
-    _cretval = gdk_event_get_event_type(cast(GdkEvent*)cPtr);
+    _cretval = gdk_event_get_event_type(cast(GdkEvent*)this._cPtr);
     gdk.types.EventType _retval = cast(gdk.types.EventType)_cretval;
     return _retval;
   }
@@ -181,7 +181,7 @@ class Event
   {
     GdkTimeCoord* _cretval;
     uint _cretlength;
-    _cretval = gdk_event_get_history(cast(GdkEvent*)cPtr, &_cretlength);
+    _cretval = gdk_event_get_history(cast(GdkEvent*)this._cPtr, &_cretlength);
     gdk.types.TimeCoord[] _retval;
 
     if (_cretval)
@@ -200,7 +200,7 @@ class Event
   gdk.types.ModifierType getModifierState()
   {
     GdkModifierType _cretval;
-    _cretval = gdk_event_get_modifier_state(cast(GdkEvent*)cPtr);
+    _cretval = gdk_event_get_modifier_state(cast(GdkEvent*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -214,7 +214,7 @@ class Event
   bool getPointerEmulated()
   {
     bool _retval;
-    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)cPtr);
+    _retval = gdk_event_get_pointer_emulated(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class Event
   bool getPosition(out double x, out double y)
   {
     bool _retval;
-    _retval = gdk_event_get_position(cast(GdkEvent*)cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = gdk_event_get_position(cast(GdkEvent*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -242,8 +242,8 @@ class Event
   gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
-    _cretval = gdk_event_get_seat(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    _cretval = gdk_event_get_seat(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,8 +254,8 @@ class Event
   gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gdk_event_get_surface(cast(GdkEvent*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_event_get_surface(cast(GdkEvent*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Event
   uint getTime()
   {
     uint _retval;
-    _retval = gdk_event_get_time(cast(GdkEvent*)cPtr);
+    _retval = gdk_event_get_time(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class Event
   bool triggersContextMenu()
   {
     bool _retval;
-    _retval = gdk_event_triggers_context_menu(cast(GdkEvent*)cPtr);
+    _retval = gdk_event_triggers_context_menu(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

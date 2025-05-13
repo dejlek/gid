@@ -27,7 +27,7 @@ class FileFilterInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class FileFilterInfo
   */
   @property gtk.types.FileFilterFlags contains()
   {
-    return cast(gtk.types.FileFilterFlags)(cast(GtkFileFilterInfo*)cPtr).contains;
+    return cast(gtk.types.FileFilterFlags)(cast(GtkFileFilterInfo*)this._cPtr).contains;
   }
 
   /**
@@ -50,7 +50,7 @@ class FileFilterInfo
   */
   @property void contains(gtk.types.FileFilterFlags propval)
   {
-    (cast(GtkFileFilterInfo*)cPtr).contains = cast(GtkFileFilterFlags)propval;
+    (cast(GtkFileFilterInfo*)this._cPtr).contains = cast(GtkFileFilterFlags)propval;
   }
 
   /**
@@ -59,7 +59,7 @@ class FileFilterInfo
   */
   @property string filename()
   {
-    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).filename);
   }
 
   /**
@@ -69,8 +69,8 @@ class FileFilterInfo
   */
   @property void filename(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).filename);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).filename);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).filename);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).filename);
   }
 
   /**
@@ -79,7 +79,7 @@ class FileFilterInfo
   */
   @property string uri()
   {
-    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).uri);
   }
 
   /**
@@ -89,8 +89,8 @@ class FileFilterInfo
   */
   @property void uri(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).uri);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).uri);
   }
 
   /**
@@ -100,7 +100,7 @@ class FileFilterInfo
   */
   @property string displayName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).displayName);
   }
 
   /**
@@ -111,8 +111,8 @@ class FileFilterInfo
   */
   @property void displayName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).displayName);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).displayName);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).displayName);
   }
 
   /**
@@ -121,7 +121,7 @@ class FileFilterInfo
   */
   @property string mimeType()
   {
-    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
+    return cToD!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).mimeType);
   }
 
   /**
@@ -131,7 +131,7 @@ class FileFilterInfo
   */
   @property void mimeType(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)cPtr).mimeType);
+    cValueFree!(string)(cast(void*)(cast(GtkFileFilterInfo*)this._cPtr).mimeType);
+    dToC(propval, cast(void*)&(cast(GtkFileFilterInfo*)this._cPtr).mimeType);
   }
 }

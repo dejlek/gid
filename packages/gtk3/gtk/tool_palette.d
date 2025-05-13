@@ -104,16 +104,16 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_palette_get_type != &gidSymbolNotFound ? gtk_tool_palette_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -242,7 +242,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void addDragDest(gtk.widget.Widget widget, gtk.types.DestDefaults flags, gtk.types.ToolPaletteDragTargets targets, gdk.types.DragAction actions)
   {
-    gtk_tool_palette_add_drag_dest(cast(GtkToolPalette*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, flags, targets, actions);
+    gtk_tool_palette_add_drag_dest(cast(GtkToolPalette*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, flags, targets, actions);
   }
 
   /**
@@ -256,8 +256,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.widget.Widget getDragItem(gtk.selection_data.SelectionData selection)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tool_palette_get_drag_item(cast(GtkToolPalette*)cPtr, selection ? cast(const(GtkSelectionData)*)selection.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_palette_get_drag_item(cast(GtkToolPalette*)this._cPtr, selection ? cast(const(GtkSelectionData)*)selection._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,8 +273,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.tool_item_group.ToolItemGroup getDropGroup(int x, int y)
   {
     GtkToolItemGroup* _cretval;
-    _cretval = gtk_tool_palette_get_drop_group(cast(GtkToolPalette*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item_group.ToolItemGroup)(cast(GtkToolItemGroup*)_cretval, No.Take);
+    _cretval = gtk_tool_palette_get_drop_group(cast(GtkToolPalette*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_item_group.ToolItemGroup)(cast(GtkToolItemGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -290,8 +290,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.tool_item.ToolItem getDropItem(int x, int y)
   {
     GtkToolItem* _cretval;
-    _cretval = gtk_tool_palette_get_drop_item(cast(GtkToolPalette*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_tool_palette_get_drop_item(cast(GtkToolPalette*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   bool getExclusive(gtk.tool_item_group.ToolItemGroup group)
   {
     bool _retval;
-    _retval = gtk_tool_palette_get_exclusive(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null);
+    _retval = gtk_tool_palette_get_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   bool getExpand(gtk.tool_item_group.ToolItemGroup group)
   {
     bool _retval;
-    _retval = gtk_tool_palette_get_expand(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null);
+    _retval = gtk_tool_palette_get_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   int getGroupPosition(gtk.tool_item_group.ToolItemGroup group)
   {
     int _retval;
-    _retval = gtk_tool_palette_get_group_position(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null);
+    _retval = gtk_tool_palette_get_group_position(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -349,8 +349,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_tool_palette_get_hadjustment(cast(GtkToolPalette*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_tool_palette_get_hadjustment(cast(GtkToolPalette*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -362,7 +362,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_tool_palette_get_icon_size(cast(GtkToolPalette*)cPtr);
+    _cretval = gtk_tool_palette_get_icon_size(cast(GtkToolPalette*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -376,7 +376,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.types.ToolbarStyle getStyle()
   {
     GtkToolbarStyle _cretval;
-    _cretval = gtk_tool_palette_get_style(cast(GtkToolPalette*)cPtr);
+    _cretval = gtk_tool_palette_get_style(cast(GtkToolPalette*)this._cPtr);
     gtk.types.ToolbarStyle _retval = cast(gtk.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -390,8 +390,8 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_tool_palette_get_vadjustment(cast(GtkToolPalette*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_tool_palette_get_vadjustment(cast(GtkToolPalette*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setDragSource(gtk.types.ToolPaletteDragTargets targets)
   {
-    gtk_tool_palette_set_drag_source(cast(GtkToolPalette*)cPtr, targets);
+    gtk_tool_palette_set_drag_source(cast(GtkToolPalette*)this._cPtr, targets);
   }
 
   /**
@@ -420,7 +420,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setExclusive(gtk.tool_item_group.ToolItemGroup group, bool exclusive)
   {
-    gtk_tool_palette_set_exclusive(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null, exclusive);
+    gtk_tool_palette_set_exclusive(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, exclusive);
   }
 
   /**
@@ -432,7 +432,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setExpand(gtk.tool_item_group.ToolItemGroup group, bool expand)
   {
-    gtk_tool_palette_set_expand(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null, expand);
+    gtk_tool_palette_set_expand(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, expand);
   }
 
   /**
@@ -446,7 +446,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setGroupPosition(gtk.tool_item_group.ToolItemGroup group, int position)
   {
-    gtk_tool_palette_set_group_position(cast(GtkToolPalette*)cPtr, group ? cast(GtkToolItemGroup*)group.cPtr(No.Dup) : null, position);
+    gtk_tool_palette_set_group_position(cast(GtkToolPalette*)this._cPtr, group ? cast(GtkToolItemGroup*)group._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -458,7 +458,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setIconSize(gtk.types.IconSize iconSize)
   {
-    gtk_tool_palette_set_icon_size(cast(GtkToolPalette*)cPtr, iconSize);
+    gtk_tool_palette_set_icon_size(cast(GtkToolPalette*)this._cPtr, iconSize);
   }
 
   alias setStyle = gtk.widget.Widget.setStyle;
@@ -471,7 +471,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void setStyle(gtk.types.ToolbarStyle style)
   {
-    gtk_tool_palette_set_style(cast(GtkToolPalette*)cPtr, style);
+    gtk_tool_palette_set_style(cast(GtkToolPalette*)this._cPtr, style);
   }
 
   /**
@@ -480,7 +480,7 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void unsetIconSize()
   {
-    gtk_tool_palette_unset_icon_size(cast(GtkToolPalette*)cPtr);
+    gtk_tool_palette_unset_icon_size(cast(GtkToolPalette*)this._cPtr);
   }
 
   /**
@@ -489,6 +489,6 @@ class ToolPalette : gtk.container.Container, gtk.orientable.Orientable, gtk.scro
   */
   void unsetStyle()
   {
-    gtk_tool_palette_unset_style(cast(GtkToolPalette*)cPtr);
+    gtk_tool_palette_unset_style(cast(GtkToolPalette*)this._cPtr);
   }
 }

@@ -96,16 +96,16 @@ class Application : gio.application.Application
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_get_type != &gidSymbolNotFound ? gtk_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -238,7 +238,7 @@ class Application : gio.application.Application
   */
   void addWindow(gtk.window.Window window)
   {
-    gtk_application_add_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_application_add_window(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -254,7 +254,7 @@ class Application : gio.application.Application
   {
     char** _cretval;
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
-    _cretval = gtk_application_get_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName);
+    _cretval = gtk_application_get_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName);
     string[] _retval;
 
     if (_cretval)
@@ -296,7 +296,7 @@ class Application : gio.application.Application
   {
     char** _cretval;
     const(char)* _accel = accel.toCString(No.Alloc);
-    _cretval = gtk_application_get_actions_for_accel(cast(GtkApplication*)cPtr, _accel);
+    _cretval = gtk_application_get_actions_for_accel(cast(GtkApplication*)this._cPtr, _accel);
     string[] _retval;
 
     if (_cretval)
@@ -323,8 +323,8 @@ class Application : gio.application.Application
   gtk.window.Window getActiveWindow()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_application_get_active_window(cast(GtkApplication*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_application_get_active_window(cast(GtkApplication*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -343,8 +343,8 @@ class Application : gio.application.Application
   {
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
-    _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)cPtr, _id);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    _cretval = gtk_application_get_menu_by_id(cast(GtkApplication*)this._cPtr, _id);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -356,8 +356,8 @@ class Application : gio.application.Application
   gio.menu_model.MenuModel getMenubar()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_application_get_menubar(cast(GtkApplication*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_application_get_menubar(cast(GtkApplication*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -374,8 +374,8 @@ class Application : gio.application.Application
   gtk.window.Window getWindowById(uint id)
   {
     GtkWindow* _cretval;
-    _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)cPtr, id);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_application_get_window_by_id(cast(GtkApplication*)this._cPtr, id);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class Application : gio.application.Application
   gtk.window.Window[] getWindows()
   {
     GList* _cretval;
-    _cretval = gtk_application_get_windows(cast(GtkApplication*)cPtr);
+    _cretval = gtk_application_get_windows(cast(GtkApplication*)this._cPtr);
     auto _retval = gListToD!(gtk.window.Window, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -439,7 +439,7 @@ class Application : gio.application.Application
   {
     uint _retval;
     const(char)* _reason = reason.toCString(No.Alloc);
-    _retval = gtk_application_inhibit(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, flags, _reason);
+    _retval = gtk_application_inhibit(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null, flags, _reason);
     return _retval;
   }
 
@@ -452,7 +452,7 @@ class Application : gio.application.Application
   string[] listActionDescriptions()
   {
     char** _cretval;
-    _cretval = gtk_application_list_action_descriptions(cast(GtkApplication*)cPtr);
+    _cretval = gtk_application_list_action_descriptions(cast(GtkApplication*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -482,7 +482,7 @@ class Application : gio.application.Application
   */
   void removeWindow(gtk.window.Window window)
   {
-    gtk_application_remove_window(cast(GtkApplication*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_application_remove_window(cast(GtkApplication*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -512,7 +512,7 @@ class Application : gio.application.Application
       _tmpaccels ~= s.toCString(No.Alloc);
     _tmpaccels ~= null;
     const(char*)* _accels = _tmpaccels.ptr;
-    gtk_application_set_accels_for_action(cast(GtkApplication*)cPtr, _detailedActionName, _accels);
+    gtk_application_set_accels_for_action(cast(GtkApplication*)this._cPtr, _detailedActionName, _accels);
   }
 
   /**
@@ -540,7 +540,7 @@ class Application : gio.application.Application
   */
   void setMenubar(gio.menu_model.MenuModel menubar = null)
   {
-    gtk_application_set_menubar(cast(GtkApplication*)cPtr, menubar ? cast(GMenuModel*)menubar.cPtr(No.Dup) : null);
+    gtk_application_set_menubar(cast(GtkApplication*)this._cPtr, menubar ? cast(GMenuModel*)menubar._cPtr(No.Dup) : null);
   }
 
   /**
@@ -555,7 +555,7 @@ class Application : gio.application.Application
   */
   void uninhibit(uint cookie)
   {
-    gtk_application_uninhibit(cast(GtkApplication*)cPtr, cookie);
+    gtk_application_uninhibit(cast(GtkApplication*)this._cPtr, cookie);
   }
 
   /**

@@ -66,16 +66,16 @@ class Fixed : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_get_type != &gidSymbolNotFound ? gtk_fixed_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,7 +105,7 @@ class Fixed : gtk.container.Container
   */
   void move(gtk.widget.Widget widget, int x, int y)
   {
-    gtk_fixed_move(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_move(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -118,6 +118,6 @@ class Fixed : gtk.container.Container
   */
   void put(gtk.widget.Widget widget, int x, int y)
   {
-    gtk_fixed_put(cast(GtkFixed*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, x, y);
+    gtk_fixed_put(cast(GtkFixed*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, x, y);
   }
 }

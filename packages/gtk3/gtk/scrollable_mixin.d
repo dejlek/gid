@@ -143,7 +143,7 @@ template ScrollableT()
   {
     bool _retval;
     GtkBorder _border;
-    _retval = gtk_scrollable_get_border(cast(GtkScrollable*)cPtr, &_border);
+    _retval = gtk_scrollable_get_border(cast(GtkScrollable*)this._cPtr, &_border);
     border = new gtk.border.Border(cast(void*)&_border, No.Take);
     return _retval;
   }
@@ -155,8 +155,8 @@ template ScrollableT()
   override gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scrollable_get_hadjustment(cast(GtkScrollable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ template ScrollableT()
   override gtk.types.ScrollablePolicy getHscrollPolicy()
   {
     GtkScrollablePolicy _cretval;
-    _cretval = gtk_scrollable_get_hscroll_policy(cast(GtkScrollable*)cPtr);
+    _cretval = gtk_scrollable_get_hscroll_policy(cast(GtkScrollable*)this._cPtr);
     gtk.types.ScrollablePolicy _retval = cast(gtk.types.ScrollablePolicy)_cretval;
     return _retval;
   }
@@ -179,8 +179,8 @@ template ScrollableT()
   override gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scrollable_get_vadjustment(cast(GtkScrollable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ template ScrollableT()
   override gtk.types.ScrollablePolicy getVscrollPolicy()
   {
     GtkScrollablePolicy _cretval;
-    _cretval = gtk_scrollable_get_vscroll_policy(cast(GtkScrollable*)cPtr);
+    _cretval = gtk_scrollable_get_vscroll_policy(cast(GtkScrollable*)this._cPtr);
     gtk.types.ScrollablePolicy _retval = cast(gtk.types.ScrollablePolicy)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ template ScrollableT()
   */
   override void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
-    gtk_scrollable_set_hadjustment(cast(GtkScrollable*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
+    gtk_scrollable_set_hadjustment(cast(GtkScrollable*)this._cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -217,7 +217,7 @@ template ScrollableT()
   */
   override void setHscrollPolicy(gtk.types.ScrollablePolicy policy)
   {
-    gtk_scrollable_set_hscroll_policy(cast(GtkScrollable*)cPtr, policy);
+    gtk_scrollable_set_hscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
   }
 
   /**
@@ -228,7 +228,7 @@ template ScrollableT()
   */
   override void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
-    gtk_scrollable_set_vadjustment(cast(GtkScrollable*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    gtk_scrollable_set_vadjustment(cast(GtkScrollable*)this._cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -241,6 +241,6 @@ template ScrollableT()
   */
   override void setVscrollPolicy(gtk.types.ScrollablePolicy policy)
   {
-    gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)cPtr, policy);
+    gtk_scrollable_set_vscroll_policy(cast(GtkScrollable*)this._cPtr, policy);
   }
 }

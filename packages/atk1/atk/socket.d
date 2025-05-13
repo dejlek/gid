@@ -47,16 +47,16 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_socket_get_type != &gidSymbolNotFound ? atk_socket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   void embed(string plugId)
   {
     const(char)* _plugId = plugId.toCString(No.Alloc);
-    atk_socket_embed(cast(AtkSocket*)cPtr, _plugId);
+    atk_socket_embed(cast(AtkSocket*)this._cPtr, _plugId);
   }
 
   /**
@@ -106,7 +106,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
   bool isOccupied()
   {
     bool _retval;
-    _retval = atk_socket_is_occupied(cast(AtkSocket*)cPtr);
+    _retval = atk_socket_is_occupied(cast(AtkSocket*)this._cPtr);
     return _retval;
   }
 }

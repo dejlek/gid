@@ -75,16 +75,16 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_group_get_type != &gidSymbolNotFound ? gtk_action_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,7 +182,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addAction(gtk.action.Action action)
   {
-    gtk_action_group_add_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_action_group_add_action(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 
   /**
@@ -202,7 +202,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void addActionWithAccel(gtk.action.Action action, string accelerator = null)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
-    gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null, _accelerator);
+    gtk_action_group_add_action_with_accel(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null, _accelerator);
   }
 
   /**
@@ -213,8 +213,8 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.accel_group.AccelGroup getAccelGroup()
   {
     GtkAccelGroup* _cretval;
-    _cretval = gtk_action_group_get_accel_group(cast(GtkActionGroup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    _cretval = gtk_action_group_get_accel_group(cast(GtkActionGroup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,8 +229,8 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     GtkAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _cretval = gtk_action_group_get_action(cast(GtkActionGroup*)cPtr, _actionName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    _cretval = gtk_action_group_get_action(cast(GtkActionGroup*)this._cPtr, _actionName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_action_group_get_name(cast(GtkActionGroup*)cPtr);
+    _cretval = gtk_action_group_get_name(cast(GtkActionGroup*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -256,7 +256,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_action_group_get_sensitive(cast(GtkActionGroup*)cPtr);
+    _retval = gtk_action_group_get_sensitive(cast(GtkActionGroup*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_action_group_get_visible(cast(GtkActionGroup*)cPtr);
+    _retval = gtk_action_group_get_visible(cast(GtkActionGroup*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.action.Action[] listActions()
   {
     GList* _cretval;
-    _cretval = gtk_action_group_list_actions(cast(GtkActionGroup*)cPtr);
+    _cretval = gtk_action_group_list_actions(cast(GtkActionGroup*)this._cPtr);
     auto _retval = gListToD!(gtk.action.Action, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -294,7 +294,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void removeAction(gtk.action.Action action)
   {
-    gtk_action_group_remove_action(cast(GtkActionGroup*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_action_group_remove_action(cast(GtkActionGroup*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 
   /**
@@ -305,7 +305,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup = null)
   {
-    gtk_action_group_set_accel_group(cast(GtkActionGroup*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_action_group_set_accel_group(cast(GtkActionGroup*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -316,7 +316,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setSensitive(bool sensitive)
   {
-    gtk_action_group_set_sensitive(cast(GtkActionGroup*)cPtr, sensitive);
+    gtk_action_group_set_sensitive(cast(GtkActionGroup*)this._cPtr, sensitive);
   }
 
   /**
@@ -346,7 +346,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_action_group_set_translate_func(cast(GtkActionGroup*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_action_group_set_translate_func(cast(GtkActionGroup*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -364,7 +364,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void setTranslationDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    gtk_action_group_set_translation_domain(cast(GtkActionGroup*)cPtr, _domain);
+    gtk_action_group_set_translation_domain(cast(GtkActionGroup*)this._cPtr, _domain);
   }
 
   /**
@@ -375,7 +375,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setVisible(bool visible)
   {
-    gtk_action_group_set_visible(cast(GtkActionGroup*)cPtr, visible);
+    gtk_action_group_set_visible(cast(GtkActionGroup*)this._cPtr, visible);
   }
 
   /**
@@ -391,7 +391,7 @@ class ActionGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     const(char)* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = gtk_action_group_translate_string(cast(GtkActionGroup*)cPtr, _string_);
+    _cretval = gtk_action_group_translate_string(cast(GtkActionGroup*)this._cPtr, _string_);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

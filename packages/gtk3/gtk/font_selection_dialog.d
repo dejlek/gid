@@ -24,16 +24,16 @@ class FontSelectionDialog : gtk.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_selection_dialog_get_type != &gidSymbolNotFound ? gtk_font_selection_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,8 +69,8 @@ class FontSelectionDialog : gtk.dialog.Dialog
   gtk.widget.Widget getCancelButton()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_dialog_get_cancel_button(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_dialog_get_cancel_button(cast(GtkFontSelectionDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   string getFontName()
   {
     char* _cretval;
-    _cretval = gtk_font_selection_dialog_get_font_name(cast(GtkFontSelectionDialog*)cPtr);
+    _cretval = gtk_font_selection_dialog_get_font_name(cast(GtkFontSelectionDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -105,8 +105,8 @@ class FontSelectionDialog : gtk.dialog.Dialog
   gtk.widget.Widget getFontSelection()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_dialog_get_font_selection(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_dialog_get_font_selection(cast(GtkFontSelectionDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class FontSelectionDialog : gtk.dialog.Dialog
   gtk.widget.Widget getOkButton()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_dialog_get_ok_button(cast(GtkFontSelectionDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_dialog_get_ok_button(cast(GtkFontSelectionDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   string getPreviewText()
   {
     const(char)* _cretval;
-    _cretval = gtk_font_selection_dialog_get_preview_text(cast(GtkFontSelectionDialog*)cPtr);
+    _cretval = gtk_font_selection_dialog_get_preview_text(cast(GtkFontSelectionDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class FontSelectionDialog : gtk.dialog.Dialog
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
-    _retval = gtk_font_selection_dialog_set_font_name(cast(GtkFontSelectionDialog*)cPtr, _fontname);
+    _retval = gtk_font_selection_dialog_set_font_name(cast(GtkFontSelectionDialog*)this._cPtr, _fontname);
     return _retval;
   }
 
@@ -170,6 +170,6 @@ class FontSelectionDialog : gtk.dialog.Dialog
   void setPreviewText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_font_selection_dialog_set_preview_text(cast(GtkFontSelectionDialog*)cPtr, _text);
+    gtk_font_selection_dialog_set_preview_text(cast(GtkFontSelectionDialog*)this._cPtr, _text);
   }
 }

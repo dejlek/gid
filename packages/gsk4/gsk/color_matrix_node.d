@@ -44,7 +44,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset.cPtr(No.Dup) : null);
+    _cretval = gsk_color_matrix_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix._cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -55,7 +55,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_color_matrix_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_color_matrix_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -67,7 +67,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   graphene.matrix.Matrix getColorMatrix()
   {
     const(graphene_matrix_t)* _cretval;
-    _cretval = gsk_color_matrix_node_get_color_matrix(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_color_matrix_node_get_color_matrix(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -79,7 +79,7 @@ class ColorMatrixNode : gsk.render_node.RenderNode
   graphene.vec4.Vec4 getColorOffset()
   {
     const(graphene_vec4_t)* _cretval;
-    _cretval = gsk_color_matrix_node_get_color_offset(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_color_matrix_node_get_color_offset(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.vec4.Vec4(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

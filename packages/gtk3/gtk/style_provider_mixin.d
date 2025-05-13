@@ -33,8 +33,8 @@ template StyleProviderT()
   override gtk.icon_factory.IconFactory getIconFactory(gtk.widget_path.WidgetPath path)
   {
     GtkIconFactory* _cretval;
-    _cretval = gtk_style_provider_get_icon_factory(cast(GtkStyleProvider*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_factory.IconFactory)(cast(GtkIconFactory*)_cretval, No.Take);
+    _cretval = gtk_style_provider_get_icon_factory(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_factory.IconFactory)(cast(GtkIconFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -53,8 +53,8 @@ template StyleProviderT()
   override gtk.style_properties.StyleProperties getStyle(gtk.widget_path.WidgetPath path)
   {
     GtkStyleProperties* _cretval;
-    _cretval = gtk_style_provider_get_style(cast(GtkStyleProvider*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_properties.StyleProperties)(cast(GtkStyleProperties*)_cretval, Yes.Take);
+    _cretval = gtk_style_provider_get_style(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style_properties.StyleProperties)(cast(GtkStyleProperties*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ template StyleProviderT()
   {
     bool _retval;
     GValue _value;
-    _retval = gtk_style_provider_get_style_property(cast(GtkStyleProvider*)cPtr, path ? cast(GtkWidgetPath*)path.cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, &_value);
+    _retval = gtk_style_provider_get_style_property(cast(GtkStyleProvider*)this._cPtr, path ? cast(GtkWidgetPath*)path._cPtr(No.Dup) : null, state, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
     return _retval;
   }

@@ -35,22 +35,22 @@ class TreeIter : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_iter_get_type != &gidSymbolNotFound ? gtk_tree_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class TreeIter : gobject.boxed.Boxed
   */
   @property int stamp()
   {
-    return (cast(GtkTreeIter*)cPtr).stamp;
+    return (cast(GtkTreeIter*)this._cPtr).stamp;
   }
 
   /**
@@ -75,7 +75,7 @@ class TreeIter : gobject.boxed.Boxed
   */
   @property void stamp(int propval)
   {
-    (cast(GtkTreeIter*)cPtr).stamp = propval;
+    (cast(GtkTreeIter*)this._cPtr).stamp = propval;
   }
 
   /**
@@ -90,7 +90,7 @@ class TreeIter : gobject.boxed.Boxed
   gtk.tree_iter.TreeIter copy()
   {
     GtkTreeIter* _cretval;
-    _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)cPtr);
+    _cretval = gtk_tree_iter_copy(cast(GtkTreeIter*)this._cPtr);
     auto _retval = _cretval ? new gtk.tree_iter.TreeIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

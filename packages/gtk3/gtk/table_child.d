@@ -25,7 +25,7 @@ class TableChild
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -33,157 +33,157 @@ class TableChild
   /** */
   @property gtk.widget.Widget widget()
   {
-    return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkTableChild*)cPtr).widget);
+    return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkTableChild*)this._cPtr).widget);
   }
 
   /** */
   @property void widget(gtk.widget.Widget propval)
   {
-    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkTableChild*)cPtr).widget);
-    dToC(propval, cast(void*)&(cast(GtkTableChild*)cPtr).widget);
+    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkTableChild*)this._cPtr).widget);
+    dToC(propval, cast(void*)&(cast(GtkTableChild*)this._cPtr).widget);
   }
 
   /** */
   @property ushort leftAttach()
   {
-    return (cast(GtkTableChild*)cPtr).leftAttach;
+    return (cast(GtkTableChild*)this._cPtr).leftAttach;
   }
 
   /** */
   @property void leftAttach(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).leftAttach = propval;
+    (cast(GtkTableChild*)this._cPtr).leftAttach = propval;
   }
 
   /** */
   @property ushort rightAttach()
   {
-    return (cast(GtkTableChild*)cPtr).rightAttach;
+    return (cast(GtkTableChild*)this._cPtr).rightAttach;
   }
 
   /** */
   @property void rightAttach(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).rightAttach = propval;
+    (cast(GtkTableChild*)this._cPtr).rightAttach = propval;
   }
 
   /** */
   @property ushort topAttach()
   {
-    return (cast(GtkTableChild*)cPtr).topAttach;
+    return (cast(GtkTableChild*)this._cPtr).topAttach;
   }
 
   /** */
   @property void topAttach(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).topAttach = propval;
+    (cast(GtkTableChild*)this._cPtr).topAttach = propval;
   }
 
   /** */
   @property ushort bottomAttach()
   {
-    return (cast(GtkTableChild*)cPtr).bottomAttach;
+    return (cast(GtkTableChild*)this._cPtr).bottomAttach;
   }
 
   /** */
   @property void bottomAttach(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).bottomAttach = propval;
+    (cast(GtkTableChild*)this._cPtr).bottomAttach = propval;
   }
 
   /** */
   @property ushort xpadding()
   {
-    return (cast(GtkTableChild*)cPtr).xpadding;
+    return (cast(GtkTableChild*)this._cPtr).xpadding;
   }
 
   /** */
   @property void xpadding(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).xpadding = propval;
+    (cast(GtkTableChild*)this._cPtr).xpadding = propval;
   }
 
   /** */
   @property ushort ypadding()
   {
-    return (cast(GtkTableChild*)cPtr).ypadding;
+    return (cast(GtkTableChild*)this._cPtr).ypadding;
   }
 
   /** */
   @property void ypadding(ushort propval)
   {
-    (cast(GtkTableChild*)cPtr).ypadding = propval;
+    (cast(GtkTableChild*)this._cPtr).ypadding = propval;
   }
 
   /** */
   @property uint xexpand()
   {
-    return (cast(GtkTableChild*)cPtr).xexpand;
+    return (cast(GtkTableChild*)this._cPtr).xexpand;
   }
 
   /** */
   @property void xexpand(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).xexpand = propval;
+    (cast(GtkTableChild*)this._cPtr).xexpand = propval;
   }
 
   /** */
   @property uint yexpand()
   {
-    return (cast(GtkTableChild*)cPtr).yexpand;
+    return (cast(GtkTableChild*)this._cPtr).yexpand;
   }
 
   /** */
   @property void yexpand(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).yexpand = propval;
+    (cast(GtkTableChild*)this._cPtr).yexpand = propval;
   }
 
   /** */
   @property uint xshrink()
   {
-    return (cast(GtkTableChild*)cPtr).xshrink;
+    return (cast(GtkTableChild*)this._cPtr).xshrink;
   }
 
   /** */
   @property void xshrink(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).xshrink = propval;
+    (cast(GtkTableChild*)this._cPtr).xshrink = propval;
   }
 
   /** */
   @property uint yshrink()
   {
-    return (cast(GtkTableChild*)cPtr).yshrink;
+    return (cast(GtkTableChild*)this._cPtr).yshrink;
   }
 
   /** */
   @property void yshrink(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).yshrink = propval;
+    (cast(GtkTableChild*)this._cPtr).yshrink = propval;
   }
 
   /** */
   @property uint xfill()
   {
-    return (cast(GtkTableChild*)cPtr).xfill;
+    return (cast(GtkTableChild*)this._cPtr).xfill;
   }
 
   /** */
   @property void xfill(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).xfill = propval;
+    (cast(GtkTableChild*)this._cPtr).xfill = propval;
   }
 
   /** */
   @property uint yfill()
   {
-    return (cast(GtkTableChild*)cPtr).yfill;
+    return (cast(GtkTableChild*)this._cPtr).yfill;
   }
 
   /** */
   @property void yfill(uint propval)
   {
-    (cast(GtkTableChild*)cPtr).yfill = propval;
+    (cast(GtkTableChild*)this._cPtr).yfill = propval;
   }
 }

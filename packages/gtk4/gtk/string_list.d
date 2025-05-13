@@ -51,16 +51,16 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_list_get_type != &gidSymbolNotFound ? gtk_string_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -121,7 +121,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   void append(string string_)
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
-    gtk_string_list_append(cast(GtkStringList*)cPtr, _string_);
+    gtk_string_list_append(cast(GtkStringList*)this._cPtr, _string_);
   }
 
   /**
@@ -139,7 +139,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   string getString(uint position)
   {
     const(char)* _cretval;
-    _cretval = gtk_string_list_get_string(cast(GtkStringList*)cPtr, position);
+    _cretval = gtk_string_list_get_string(cast(GtkStringList*)this._cPtr, position);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   */
   void remove(uint position)
   {
-    gtk_string_list_remove(cast(GtkStringList*)cPtr, position);
+    gtk_string_list_remove(cast(GtkStringList*)this._cPtr, position);
   }
 
   /**
@@ -184,7 +184,7 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
       _tmpadditions ~= s.toCString(No.Alloc);
     _tmpadditions ~= null;
     const(char*)* _additions = _tmpadditions.ptr;
-    gtk_string_list_splice(cast(GtkStringList*)cPtr, position, nRemovals, _additions);
+    gtk_string_list_splice(cast(GtkStringList*)this._cPtr, position, nRemovals, _additions);
   }
 
   /**
@@ -204,6 +204,6 @@ class StringList : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.buil
   void take(string string_)
   {
     char* _string_ = string_.toCString(Yes.Alloc);
-    gtk_string_list_take(cast(GtkStringList*)cPtr, _string_);
+    gtk_string_list_take(cast(GtkStringList*)this._cPtr, _string_);
   }
 }

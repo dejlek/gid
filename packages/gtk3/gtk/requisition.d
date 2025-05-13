@@ -22,22 +22,22 @@ class Requisition : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_requisition_get_type != &gidSymbolNotFound ? gtk_requisition_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class Requisition : gobject.boxed.Boxed
   */
   @property int width()
   {
-    return (cast(GtkRequisition*)cPtr).width;
+    return (cast(GtkRequisition*)this._cPtr).width;
   }
 
   /**
@@ -62,7 +62,7 @@ class Requisition : gobject.boxed.Boxed
   */
   @property void width(int propval)
   {
-    (cast(GtkRequisition*)cPtr).width = propval;
+    (cast(GtkRequisition*)this._cPtr).width = propval;
   }
 
   /**
@@ -71,7 +71,7 @@ class Requisition : gobject.boxed.Boxed
   */
   @property int height()
   {
-    return (cast(GtkRequisition*)cPtr).height;
+    return (cast(GtkRequisition*)this._cPtr).height;
   }
 
   /**
@@ -81,7 +81,7 @@ class Requisition : gobject.boxed.Boxed
   */
   @property void height(int propval)
   {
-    (cast(GtkRequisition*)cPtr).height = propval;
+    (cast(GtkRequisition*)this._cPtr).height = propval;
   }
 
   /**
@@ -103,7 +103,7 @@ class Requisition : gobject.boxed.Boxed
   gtk.requisition.Requisition copy()
   {
     GtkRequisition* _cretval;
-    _cretval = gtk_requisition_copy(cast(const(GtkRequisition)*)cPtr);
+    _cretval = gtk_requisition_copy(cast(const(GtkRequisition)*)this._cPtr);
     auto _retval = _cretval ? new gtk.requisition.Requisition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

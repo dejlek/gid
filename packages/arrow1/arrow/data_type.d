@@ -19,16 +19,16 @@ class DataType : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_data_type_get_type != &gidSymbolNotFound ? garrow_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,7 +45,7 @@ class DataType : gobject.object.ObjectWrap
     _cretval = garrow_data_type_import(cAbiSchema, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.data_type.DataType)(cast(GArrowDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ class DataType : gobject.object.ObjectWrap
   bool equal(arrow.data_type.DataType otherDataType)
   {
     bool _retval;
-    _retval = garrow_data_type_equal(cast(GArrowDataType*)cPtr, otherDataType ? cast(GArrowDataType*)otherDataType.cPtr(No.Dup) : null);
+    _retval = garrow_data_type_equal(cast(GArrowDataType*)this._cPtr, otherDataType ? cast(GArrowDataType*)otherDataType._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ class DataType : gobject.object.ObjectWrap
   void* export_()
   {
     GError *_err;
-    auto _retval = garrow_data_type_export(cast(GArrowDataType*)cPtr, &_err);
+    auto _retval = garrow_data_type_export(cast(GArrowDataType*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -71,7 +71,7 @@ class DataType : gobject.object.ObjectWrap
   arrow.types.Type getId()
   {
     GArrowType _cretval;
-    _cretval = garrow_data_type_get_id(cast(GArrowDataType*)cPtr);
+    _cretval = garrow_data_type_get_id(cast(GArrowDataType*)this._cPtr);
     arrow.types.Type _retval = cast(arrow.types.Type)_cretval;
     return _retval;
   }
@@ -80,7 +80,7 @@ class DataType : gobject.object.ObjectWrap
   string getName()
   {
     char* _cretval;
-    _cretval = garrow_data_type_get_name(cast(GArrowDataType*)cPtr);
+    _cretval = garrow_data_type_get_name(cast(GArrowDataType*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -89,7 +89,7 @@ class DataType : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_data_type_to_string(cast(GArrowDataType*)cPtr);
+    _cretval = garrow_data_type_to_string(cast(GArrowDataType*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

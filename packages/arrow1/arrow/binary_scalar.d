@@ -19,16 +19,16 @@ class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_scalar_get_type != &gidSymbolNotFound ? garrow_binary_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class BinaryScalar : arrow.base_binary_scalar.BaseBinaryScalar
   this(arrow.buffer.Buffer value)
   {
     GArrowBinaryScalar* _cretval;
-    _cretval = garrow_binary_scalar_new(value ? cast(GArrowBuffer*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_binary_scalar_new(value ? cast(GArrowBuffer*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

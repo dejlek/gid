@@ -157,46 +157,48 @@ alias gst_timed_value_control_invalidate_cache = c_gst_timed_value_control_inval
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // ARGBControlBinding
-  gidLink(cast(void**)&gst_argb_control_binding_get_type, "gst_argb_control_binding_get_type", LIBS);
-  gidLink(cast(void**)&gst_argb_control_binding_new, "gst_argb_control_binding_new", LIBS);
+  gidLink(cast(void**)&gst_argb_control_binding_get_type, "gst_argb_control_binding_get_type", libs);
+  gidLink(cast(void**)&gst_argb_control_binding_new, "gst_argb_control_binding_new", libs);
 
   // ControlPoint
-  gidLink(cast(void**)&gst_control_point_get_type, "gst_control_point_get_type", LIBS);
-  gidLink(cast(void**)&gst_control_point_copy, "gst_control_point_copy", LIBS);
-  gidLink(cast(void**)&gst_control_point_free, "gst_control_point_free", LIBS);
+  gidLink(cast(void**)&gst_control_point_get_type, "gst_control_point_get_type", libs);
+  gidLink(cast(void**)&gst_control_point_copy, "gst_control_point_copy", libs);
+  gidLink(cast(void**)&gst_control_point_free, "gst_control_point_free", libs);
 
   // DirectControlBinding
-  gidLink(cast(void**)&gst_direct_control_binding_get_type, "gst_direct_control_binding_get_type", LIBS);
-  gidLink(cast(void**)&gst_direct_control_binding_new, "gst_direct_control_binding_new", LIBS);
-  gidLink(cast(void**)&gst_direct_control_binding_new_absolute, "gst_direct_control_binding_new_absolute", LIBS);
+  gidLink(cast(void**)&gst_direct_control_binding_get_type, "gst_direct_control_binding_get_type", libs);
+  gidLink(cast(void**)&gst_direct_control_binding_new, "gst_direct_control_binding_new", libs);
+  gidLink(cast(void**)&gst_direct_control_binding_new_absolute, "gst_direct_control_binding_new_absolute", libs);
 
   // InterpolationControlSource
-  gidLink(cast(void**)&gst_interpolation_control_source_get_type, "gst_interpolation_control_source_get_type", LIBS);
-  gidLink(cast(void**)&gst_interpolation_control_source_new, "gst_interpolation_control_source_new", LIBS);
+  gidLink(cast(void**)&gst_interpolation_control_source_get_type, "gst_interpolation_control_source_get_type", libs);
+  gidLink(cast(void**)&gst_interpolation_control_source_new, "gst_interpolation_control_source_new", libs);
 
   // LFOControlSource
-  gidLink(cast(void**)&gst_lfo_control_source_get_type, "gst_lfo_control_source_get_type", LIBS);
-  gidLink(cast(void**)&gst_lfo_control_source_new, "gst_lfo_control_source_new", LIBS);
+  gidLink(cast(void**)&gst_lfo_control_source_get_type, "gst_lfo_control_source_get_type", libs);
+  gidLink(cast(void**)&gst_lfo_control_source_new, "gst_lfo_control_source_new", libs);
 
   // ProxyControlBinding
-  gidLink(cast(void**)&gst_proxy_control_binding_get_type, "gst_proxy_control_binding_get_type", LIBS);
-  gidLink(cast(void**)&gst_proxy_control_binding_new, "gst_proxy_control_binding_new", LIBS);
+  gidLink(cast(void**)&gst_proxy_control_binding_get_type, "gst_proxy_control_binding_get_type", libs);
+  gidLink(cast(void**)&gst_proxy_control_binding_new, "gst_proxy_control_binding_new", libs);
 
   // TimedValueControlSource
-  gidLink(cast(void**)&gst_timed_value_control_source_get_type, "gst_timed_value_control_source_get_type", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_find_control_point_iter, "gst_timed_value_control_source_find_control_point_iter", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_get_all, "gst_timed_value_control_source_get_all", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_get_count, "gst_timed_value_control_source_get_count", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_set, "gst_timed_value_control_source_set", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_set_from_list, "gst_timed_value_control_source_set_from_list", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_unset, "gst_timed_value_control_source_unset", LIBS);
-  gidLink(cast(void**)&gst_timed_value_control_source_unset_all, "gst_timed_value_control_source_unset_all", LIBS);
+  gidLink(cast(void**)&gst_timed_value_control_source_get_type, "gst_timed_value_control_source_get_type", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_find_control_point_iter, "gst_timed_value_control_source_find_control_point_iter", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_get_all, "gst_timed_value_control_source_get_all", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_get_count, "gst_timed_value_control_source_get_count", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_set, "gst_timed_value_control_source_set", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_set_from_list, "gst_timed_value_control_source_set_from_list", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_unset, "gst_timed_value_control_source_unset", libs);
+  gidLink(cast(void**)&gst_timed_value_control_source_unset_all, "gst_timed_value_control_source_unset_all", libs);
 
   // TriggerControlSource
-  gidLink(cast(void**)&gst_trigger_control_source_get_type, "gst_trigger_control_source_get_type", LIBS);
-  gidLink(cast(void**)&gst_trigger_control_source_new, "gst_trigger_control_source_new", LIBS);
+  gidLink(cast(void**)&gst_trigger_control_source_get_type, "gst_trigger_control_source_get_type", libs);
+  gidLink(cast(void**)&gst_trigger_control_source_new, "gst_trigger_control_source_new", libs);
 
   // global
-  gidLink(cast(void**)&gst_timed_value_control_invalidate_cache, "gst_timed_value_control_invalidate_cache", LIBS);
+  gidLink(cast(void**)&gst_timed_value_control_invalidate_cache, "gst_timed_value_control_invalidate_cache", libs);
 }

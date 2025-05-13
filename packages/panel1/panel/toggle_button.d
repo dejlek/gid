@@ -37,16 +37,16 @@ class ToggleButton : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_toggle_button_get_type != &gidSymbolNotFound ? panel_toggle_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,7 +86,7 @@ class ToggleButton : gtk.widget.Widget
   this(panel.dock.Dock dock, panel.types.Area area)
   {
     GtkWidget* _cretval;
-    _cretval = panel_toggle_button_new(dock ? cast(PanelDock*)dock.cPtr(No.Dup) : null, area);
+    _cretval = panel_toggle_button_new(dock ? cast(PanelDock*)dock._cPtr(No.Dup) : null, area);
     this(_cretval, No.Take);
   }
 }

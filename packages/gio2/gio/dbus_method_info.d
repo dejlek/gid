@@ -33,22 +33,22 @@ class DBusMethodInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_method_info_get_type != &gidSymbolNotFound ? g_dbus_method_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class DBusMethodInfo : gobject.boxed.Boxed
   */
   @property int refCount()
   {
-    return (cast(GDBusMethodInfo*)cPtr).refCount;
+    return (cast(GDBusMethodInfo*)this._cPtr).refCount;
   }
 
   /**
@@ -73,7 +73,7 @@ class DBusMethodInfo : gobject.boxed.Boxed
   */
   @property void refCount(int propval)
   {
-    (cast(GDBusMethodInfo*)cPtr).refCount = propval;
+    (cast(GDBusMethodInfo*)this._cPtr).refCount = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class DBusMethodInfo : gobject.boxed.Boxed
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusMethodInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).name);
   }
 
   /**
@@ -92,7 +92,7 @@ class DBusMethodInfo : gobject.boxed.Boxed
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusMethodInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusMethodInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GDBusMethodInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusMethodInfo*)this._cPtr).name);
   }
 }

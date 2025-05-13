@@ -281,7 +281,7 @@ template VideoOverlayT()
   */
   override void expose()
   {
-    gst_video_overlay_expose(cast(GstVideoOverlay*)cPtr);
+    gst_video_overlay_expose(cast(GstVideoOverlay*)this._cPtr);
   }
 
   /**
@@ -294,7 +294,7 @@ template VideoOverlayT()
   */
   override void gotWindowHandle(size_t handle)
   {
-    gst_video_overlay_got_window_handle(cast(GstVideoOverlay*)cPtr, handle);
+    gst_video_overlay_got_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
   }
 
   /**
@@ -309,7 +309,7 @@ template VideoOverlayT()
   */
   override void handleEvents(bool handleEvents)
   {
-    gst_video_overlay_handle_events(cast(GstVideoOverlay*)cPtr, handleEvents);
+    gst_video_overlay_handle_events(cast(GstVideoOverlay*)this._cPtr, handleEvents);
   }
 
   /**
@@ -322,7 +322,7 @@ template VideoOverlayT()
   */
   override void prepareWindowHandle()
   {
-    gst_video_overlay_prepare_window_handle(cast(GstVideoOverlay*)cPtr);
+    gst_video_overlay_prepare_window_handle(cast(GstVideoOverlay*)this._cPtr);
   }
 
   /**
@@ -347,7 +347,7 @@ template VideoOverlayT()
   override bool setRenderRectangle(int x, int y, int width, int height)
   {
     bool _retval;
-    _retval = gst_video_overlay_set_render_rectangle(cast(GstVideoOverlay*)cPtr, x, y, width, height);
+    _retval = gst_video_overlay_set_render_rectangle(cast(GstVideoOverlay*)this._cPtr, x, y, width, height);
     return _retval;
   }
 
@@ -362,6 +362,6 @@ template VideoOverlayT()
   */
   override void setWindowHandle(size_t handle)
   {
-    gst_video_overlay_set_window_handle(cast(GstVideoOverlay*)cPtr, handle);
+    gst_video_overlay_set_window_handle(cast(GstVideoOverlay*)this._cPtr, handle);
   }
 }

@@ -48,16 +48,16 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_viewport_get_type != &gidSymbolNotFound ? gtk_viewport_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -128,7 +128,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -139,8 +139,8 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_viewport_get_child(cast(GtkViewport*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_viewport_get_child(cast(GtkViewport*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollToFocus()
   {
     bool _retval;
-    _retval = gtk_viewport_get_scroll_to_focus(cast(GtkViewport*)cPtr);
+    _retval = gtk_viewport_get_scroll_to_focus(cast(GtkViewport*)this._cPtr);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void scrollTo(gtk.widget.Widget descendant, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_viewport_scroll_to(cast(GtkViewport*)cPtr, descendant ? cast(GtkWidget*)descendant.cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_viewport_scroll_to(cast(GtkViewport*)this._cPtr, descendant ? cast(GtkWidget*)descendant._cPtr(No.Dup) : null, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -180,7 +180,7 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_viewport_set_child(cast(GtkViewport*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_viewport_set_child(cast(GtkViewport*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,6 +192,6 @@ class Viewport : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollToFocus(bool scrollToFocus)
   {
-    gtk_viewport_set_scroll_to_focus(cast(GtkViewport*)cPtr, scrollToFocus);
+    gtk_viewport_set_scroll_to_focus(cast(GtkViewport*)this._cPtr, scrollToFocus);
   }
 }

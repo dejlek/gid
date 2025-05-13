@@ -22,16 +22,16 @@ class JSONReader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_json_reader_get_type != &gidSymbolNotFound ? garrow_json_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,7 +45,7 @@ class JSONReader : gobject.object.ObjectWrap
   {
     GArrowJSONReader* _cretval;
     GError *_err;
-    _cretval = garrow_json_reader_new(input ? cast(GArrowInputStream*)input.cPtr(No.Dup) : null, options ? cast(GArrowJSONReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_json_reader_new(input ? cast(GArrowInputStream*)input._cPtr(No.Dup) : null, options ? cast(GArrowJSONReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -56,10 +56,10 @@ class JSONReader : gobject.object.ObjectWrap
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_json_reader_read(cast(GArrowJSONReader*)cPtr, &_err);
+    _cretval = garrow_json_reader_read(cast(GArrowJSONReader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

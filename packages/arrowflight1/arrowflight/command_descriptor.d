@@ -18,16 +18,16 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_command_descriptor_get_type != &gidSymbolNotFound ? gaflight_command_descriptor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -49,7 +49,7 @@ class CommandDescriptor : arrowflight.descriptor.Descriptor
   string getCommand()
   {
     char* _cretval;
-    _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)cPtr);
+    _cretval = gaflight_command_descriptor_get_command(cast(GAFlightCommandDescriptor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -21,22 +21,22 @@ class InstallPluginsContext : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_install_plugins_context_get_type != &gidSymbolNotFound ? gst_install_plugins_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   gstpbutils.install_plugins_context.InstallPluginsContext copy()
   {
     GstInstallPluginsContext* _cretval;
-    _cretval = gst_install_plugins_context_copy(cast(GstInstallPluginsContext*)cPtr);
+    _cretval = gst_install_plugins_context_copy(cast(GstInstallPluginsContext*)this._cPtr);
     auto _retval = _cretval ? new gstpbutils.install_plugins_context.InstallPluginsContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -81,7 +81,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setConfirmSearch(bool confirmSearch)
   {
-    gst_install_plugins_context_set_confirm_search(cast(GstInstallPluginsContext*)cPtr, confirmSearch);
+    gst_install_plugins_context_set_confirm_search(cast(GstInstallPluginsContext*)this._cPtr, confirmSearch);
   }
 
   /**
@@ -100,7 +100,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   void setDesktopId(string desktopId)
   {
     const(char)* _desktopId = desktopId.toCString(No.Alloc);
-    gst_install_plugins_context_set_desktop_id(cast(GstInstallPluginsContext*)cPtr, _desktopId);
+    gst_install_plugins_context_set_desktop_id(cast(GstInstallPluginsContext*)this._cPtr, _desktopId);
   }
 
   /**
@@ -129,7 +129,7 @@ class InstallPluginsContext : gobject.boxed.Boxed
   void setStartupNotificationId(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gst_install_plugins_context_set_startup_notification_id(cast(GstInstallPluginsContext*)cPtr, _startupId);
+    gst_install_plugins_context_set_startup_notification_id(cast(GstInstallPluginsContext*)this._cPtr, _startupId);
   }
 
   /**
@@ -161,6 +161,6 @@ class InstallPluginsContext : gobject.boxed.Boxed
   */
   void setXid(uint xid)
   {
-    gst_install_plugins_context_set_xid(cast(GstInstallPluginsContext*)cPtr, xid);
+    gst_install_plugins_context_set_xid(cast(GstInstallPluginsContext*)this._cPtr, xid);
   }
 }

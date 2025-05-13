@@ -42,16 +42,16 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_terminal_get_type != &gidSymbolNotFound ? vte_terminal_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -909,7 +909,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string checkHyperlinkAt(double x, double y)
   {
     char* _cretval;
-    _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)cPtr, x, y);
+    _cretval = vte_terminal_check_hyperlink_at(cast(VteTerminal*)this._cPtr, x, y);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -934,7 +934,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string checkMatchAt(double x, double y, out int tag)
   {
     char* _cretval;
-    _cretval = vte_terminal_check_match_at(cast(VteTerminal*)cPtr, x, y, cast(int*)&tag);
+    _cretval = vte_terminal_check_match_at(cast(VteTerminal*)this._cPtr, x, y, cast(int*)&tag);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -965,9 +965,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     VteRegex*[] _tmpregexes;
     foreach (obj; regexes)
-      _tmpregexes ~= cast(VteRegex*)obj.cPtr;
+      _tmpregexes ~= cast(VteRegex*)obj._cPtr;
     VteRegex** _regexes = _tmpregexes.ptr;
-    _cretval = vte_terminal_check_regex_array_at(cast(VteTerminal*)cPtr, x, y, _regexes, _nRegexes, matchFlags, &_cretlength);
+    _cretval = vte_terminal_check_regex_array_at(cast(VteTerminal*)this._cPtr, x, y, _regexes, _nRegexes, matchFlags, &_cretlength);
     string[] _retval;
 
     if (_cretval)
@@ -988,7 +988,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void copyClipboard()
   {
-    vte_terminal_copy_clipboard(cast(VteTerminal*)cPtr);
+    vte_terminal_copy_clipboard(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1007,7 +1007,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void copyClipboardFormat(vte.types.Format format)
   {
-    vte_terminal_copy_clipboard_format(cast(VteTerminal*)cPtr, format);
+    vte_terminal_copy_clipboard_format(cast(VteTerminal*)this._cPtr, format);
   }
 
   /**
@@ -1016,7 +1016,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void copyPrimary()
   {
-    vte_terminal_copy_primary(cast(VteTerminal*)cPtr);
+    vte_terminal_copy_primary(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       _length = cast(ptrdiff_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    vte_terminal_feed(cast(VteTerminal*)cPtr, _data, _length);
+    vte_terminal_feed(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
   /**
@@ -1049,7 +1049,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       _length = cast(ptrdiff_t)text.length;
 
     auto _text = cast(const(ubyte)*)text.ptr;
-    vte_terminal_feed_child(cast(VteTerminal*)cPtr, _text, _length);
+    vte_terminal_feed_child(cast(VteTerminal*)this._cPtr, _text, _length);
   }
 
   /**
@@ -1068,7 +1068,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       _length = cast(size_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    vte_terminal_feed_child_binary(cast(VteTerminal*)cPtr, _data, _length);
+    vte_terminal_feed_child_binary(cast(VteTerminal*)this._cPtr, _data, _length);
   }
 
   /**
@@ -1081,7 +1081,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAllowBold()
   {
     bool _retval;
-    _retval = vte_terminal_get_allow_bold(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_allow_bold(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1092,7 +1092,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAllowHyperlink()
   {
     bool _retval;
-    _retval = vte_terminal_get_allow_hyperlink(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_allow_hyperlink(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1104,7 +1104,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getAudibleBell()
   {
     bool _retval;
-    _retval = vte_terminal_get_audible_bell(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_audible_bell(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1117,7 +1117,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getBoldIsBright()
   {
     bool _retval;
-    _retval = vte_terminal_get_bold_is_bright(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_bold_is_bright(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1125,7 +1125,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   double getCellHeightScale()
   {
     double _retval;
-    _retval = vte_terminal_get_cell_height_scale(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_cell_height_scale(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1133,7 +1133,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   double getCellWidthScale()
   {
     double _retval;
-    _retval = vte_terminal_get_cell_width_scale(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_cell_width_scale(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1141,7 +1141,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   glong getCharHeight()
   {
     glong _retval;
-    _retval = vte_terminal_get_char_height(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_char_height(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1149,7 +1149,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   glong getCharWidth()
   {
     glong _retval;
-    _retval = vte_terminal_get_char_width(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_char_width(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1163,7 +1163,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   int getCjkAmbiguousWidth()
   {
     int _retval;
-    _retval = vte_terminal_get_cjk_ambiguous_width(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_cjk_ambiguous_width(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1185,7 +1185,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void getColorBackgroundForDraw(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
-    vte_terminal_get_color_background_for_draw(cast(VteTerminal*)cPtr, &_color);
+    vte_terminal_get_color_background_for_draw(cast(VteTerminal*)this._cPtr, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
@@ -1193,7 +1193,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   glong getColumnCount()
   {
     glong _retval;
-    _retval = vte_terminal_get_column_count(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_column_count(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1201,8 +1201,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.widget.Widget getContextMenu()
   {
     GtkWidget* _cretval;
-    _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = vte_terminal_get_context_menu(cast(VteTerminal*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1210,8 +1210,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   gio.menu_model.MenuModel getContextMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = vte_terminal_get_context_menu_model(cast(VteTerminal*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1219,7 +1219,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getCurrentDirectoryUri()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_current_directory_uri(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1228,7 +1228,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getCurrentFileUri()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_current_file_uri(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1240,7 +1240,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.types.CursorBlinkMode getCursorBlinkMode()
   {
     VteCursorBlinkMode _cretval;
-    _cretval = vte_terminal_get_cursor_blink_mode(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_cursor_blink_mode(cast(VteTerminal*)this._cPtr);
     vte.types.CursorBlinkMode _retval = cast(vte.types.CursorBlinkMode)_cretval;
     return _retval;
   }
@@ -1257,7 +1257,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void getCursorPosition(out glong column, out glong row)
   {
-    vte_terminal_get_cursor_position(cast(VteTerminal*)cPtr, cast(glong*)&column, cast(glong*)&row);
+    vte_terminal_get_cursor_position(cast(VteTerminal*)this._cPtr, cast(glong*)&column, cast(glong*)&row);
   }
 
   /**
@@ -1267,7 +1267,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.types.CursorShape getCursorShape()
   {
     VteCursorShape _cretval;
-    _cretval = vte_terminal_get_cursor_shape(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_cursor_shape(cast(VteTerminal*)this._cPtr);
     vte.types.CursorShape _retval = cast(vte.types.CursorShape)_cretval;
     return _retval;
   }
@@ -1279,7 +1279,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableBidi()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_bidi(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_enable_bidi(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1287,7 +1287,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableFallbackScrolling()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1298,7 +1298,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableShaping()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_shaping(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_enable_shaping(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1306,7 +1306,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableSixel()
   {
     bool _retval;
-    _retval = vte_terminal_get_enable_sixel(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_enable_sixel(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1320,7 +1320,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getEncoding()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_encoding(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_encoding(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1336,7 +1336,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   pango.font_description.FontDescription getFont()
   {
     const(PangoFontDescription)* _cretval;
-    _cretval = vte_terminal_get_font(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_font(cast(VteTerminal*)this._cPtr);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1345,7 +1345,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   override cairo.font_options.FontOptions getFontOptions()
   {
     const(cairo_font_options_t)* _cretval;
-    _cretval = vte_terminal_get_font_options(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_font_options(cast(VteTerminal*)this._cPtr);
     auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1354,7 +1354,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   double getFontScale()
   {
     double _retval;
-    _retval = vte_terminal_get_font_scale(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_font_scale(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1367,7 +1367,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getHasSelection()
   {
     bool _retval;
-    _retval = vte_terminal_get_has_selection(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_has_selection(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1375,7 +1375,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getIconTitle()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_icon_title(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1387,7 +1387,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getInputEnabled()
   {
     bool _retval;
-    _retval = vte_terminal_get_input_enabled(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_input_enabled(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1401,7 +1401,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getMouseAutohide()
   {
     bool _retval;
-    _retval = vte_terminal_get_mouse_autohide(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_mouse_autohide(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1412,8 +1412,8 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.pty.Pty getPty()
   {
     VtePty* _cretval;
-    _cretval = vte_terminal_get_pty(cast(VteTerminal*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
+    _cretval = vte_terminal_get_pty(cast(VteTerminal*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1424,7 +1424,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getRewrapOnResize()
   {
     bool _retval;
-    _retval = vte_terminal_get_rewrap_on_resize(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_rewrap_on_resize(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1432,7 +1432,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   glong getRowCount()
   {
     glong _retval;
-    _retval = vte_terminal_get_row_count(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_row_count(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1440,7 +1440,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnInsert()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_insert(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_scroll_on_insert(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1448,7 +1448,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnKeystroke()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_keystroke(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_scroll_on_keystroke(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1456,7 +1456,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollOnOutput()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_on_output(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_scroll_on_output(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1464,7 +1464,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getScrollUnitIsPixels()
   {
     bool _retval;
-    _retval = vte_terminal_get_scroll_unit_is_pixels(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1472,7 +1472,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   glong getScrollbackLines()
   {
     glong _retval;
-    _retval = vte_terminal_get_scrollback_lines(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_scrollback_lines(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1483,7 +1483,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.types.TextBlinkMode getTextBlinkMode()
   {
     VteTextBlinkMode _cretval;
-    _cretval = vte_terminal_get_text_blink_mode(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_text_blink_mode(cast(VteTerminal*)this._cPtr);
     vte.types.TextBlinkMode _retval = cast(vte.types.TextBlinkMode)_cretval;
     return _retval;
   }
@@ -1501,7 +1501,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getTextFormat(vte.types.Format format)
   {
     char* _cretval;
-    _cretval = vte_terminal_get_text_format(cast(VteTerminal*)cPtr, format);
+    _cretval = vte_terminal_get_text_format(cast(VteTerminal*)this._cPtr, format);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1521,7 +1521,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getTextRangeFormat(vte.types.Format format, glong startRow, glong startCol, glong endRow, glong endCol, out size_t length)
   {
     char* _cretval;
-    _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
+    _cretval = vte_terminal_get_text_range_format(cast(VteTerminal*)this._cPtr, format, startRow, startCol, endRow, endCol, cast(size_t*)&length);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1537,7 +1537,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getTextSelected(vte.types.Format format)
   {
     char* _cretval;
-    _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)cPtr, format);
+    _cretval = vte_terminal_get_text_selected(cast(VteTerminal*)this._cPtr, format);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1553,7 +1553,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getTextSelectedFull(vte.types.Format format, out size_t length)
   {
     char* _cretval;
-    _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)cPtr, format, cast(size_t*)&length);
+    _cretval = vte_terminal_get_text_selected_full(cast(VteTerminal*)this._cPtr, format, cast(size_t*)&length);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1562,7 +1562,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getWindowTitle()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_window_title(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_window_title(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1578,7 +1578,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string getWordCharExceptions()
   {
     const(char)* _cretval;
-    _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_word_char_exceptions(cast(VteTerminal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1587,7 +1587,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.types.Align getXalign()
   {
     VteAlign _cretval;
-    _cretval = vte_terminal_get_xalign(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_xalign(cast(VteTerminal*)this._cPtr);
     vte.types.Align _retval = cast(vte.types.Align)_cretval;
     return _retval;
   }
@@ -1596,7 +1596,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getXfill()
   {
     bool _retval;
-    _retval = vte_terminal_get_xfill(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_xfill(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1604,7 +1604,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.types.Align getYalign()
   {
     VteAlign _cretval;
-    _cretval = vte_terminal_get_yalign(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_get_yalign(cast(VteTerminal*)this._cPtr);
     vte.types.Align _retval = cast(vte.types.Align)_cretval;
     return _retval;
   }
@@ -1613,7 +1613,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getYfill()
   {
     bool _retval;
-    _retval = vte_terminal_get_yfill(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_get_yfill(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1633,7 +1633,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   int matchAddRegex(vte.regex.Regex regex, uint flags)
   {
     int _retval;
-    _retval = vte_terminal_match_add_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
+    _retval = vte_terminal_match_add_regex(cast(VteTerminal*)this._cPtr, regex ? cast(VteRegex*)regex._cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -1659,7 +1659,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   string matchCheck(glong column, glong row, out int tag)
   {
     char* _cretval;
-    _cretval = vte_terminal_match_check(cast(VteTerminal*)cPtr, column, row, cast(int*)&tag);
+    _cretval = vte_terminal_match_check(cast(VteTerminal*)this._cPtr, column, row, cast(int*)&tag);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1674,7 +1674,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchRemove(int tag)
   {
-    vte_terminal_match_remove(cast(VteTerminal*)cPtr, tag);
+    vte_terminal_match_remove(cast(VteTerminal*)this._cPtr, tag);
   }
 
   /**
@@ -1683,7 +1683,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchRemoveAll()
   {
-    vte_terminal_match_remove_all(cast(VteTerminal*)cPtr);
+    vte_terminal_match_remove_all(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1699,7 +1699,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void matchSetCursor(int tag, gdk.cursor.Cursor cursor = null)
   {
-    vte_terminal_match_set_cursor(cast(VteTerminal*)cPtr, tag, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
+    vte_terminal_match_set_cursor(cast(VteTerminal*)this._cPtr, tag, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1713,7 +1713,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void matchSetCursorName(int tag, string cursorName)
   {
     const(char)* _cursorName = cursorName.toCString(No.Alloc);
-    vte_terminal_match_set_cursor_name(cast(VteTerminal*)cPtr, tag, _cursorName);
+    vte_terminal_match_set_cursor_name(cast(VteTerminal*)this._cPtr, tag, _cursorName);
   }
 
   /**
@@ -1723,7 +1723,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void pasteClipboard()
   {
-    vte_terminal_paste_clipboard(cast(VteTerminal*)cPtr);
+    vte_terminal_paste_clipboard(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1734,7 +1734,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void pastePrimary()
   {
-    vte_terminal_paste_primary(cast(VteTerminal*)cPtr);
+    vte_terminal_paste_primary(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1748,7 +1748,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void pasteText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    vte_terminal_paste_text(cast(VteTerminal*)cPtr, _text);
+    vte_terminal_paste_text(cast(VteTerminal*)this._cPtr, _text);
   }
 
   /**
@@ -1768,10 +1768,10 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = vte_terminal_pty_new_sync(cast(VteTerminal*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1787,7 +1787,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void reset(bool clearTabstops, bool clearHistory)
   {
-    vte_terminal_reset(cast(VteTerminal*)cPtr, clearTabstops, clearHistory);
+    vte_terminal_reset(cast(VteTerminal*)this._cPtr, clearTabstops, clearHistory);
   }
 
   /**
@@ -1798,7 +1798,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchFindNext()
   {
     bool _retval;
-    _retval = vte_terminal_search_find_next(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_search_find_next(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1810,7 +1810,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchFindPrevious()
   {
     bool _retval;
-    _retval = vte_terminal_search_find_previous(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_search_find_previous(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1818,7 +1818,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   vte.regex.Regex searchGetRegex()
   {
     VteRegex* _cretval;
-    _cretval = vte_terminal_search_get_regex(cast(VteTerminal*)cPtr);
+    _cretval = vte_terminal_search_get_regex(cast(VteTerminal*)this._cPtr);
     auto _retval = _cretval ? new vte.regex.Regex(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1827,7 +1827,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool searchGetWrapAround()
   {
     bool _retval;
-    _retval = vte_terminal_search_get_wrap_around(cast(VteTerminal*)cPtr);
+    _retval = vte_terminal_search_get_wrap_around(cast(VteTerminal*)this._cPtr);
     return _retval;
   }
 
@@ -1843,7 +1843,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void searchSetRegex(vte.regex.Regex regex, uint flags)
   {
-    vte_terminal_search_set_regex(cast(VteTerminal*)cPtr, regex ? cast(VteRegex*)regex.cPtr(No.Dup) : null, flags);
+    vte_terminal_search_set_regex(cast(VteTerminal*)this._cPtr, regex ? cast(VteRegex*)regex._cPtr(No.Dup) : null, flags);
   }
 
   /**
@@ -1855,7 +1855,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void searchSetWrapAround(bool wrapAround)
   {
-    vte_terminal_search_set_wrap_around(cast(VteTerminal*)cPtr, wrapAround);
+    vte_terminal_search_set_wrap_around(cast(VteTerminal*)this._cPtr, wrapAround);
   }
 
   /**
@@ -1863,7 +1863,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void selectAll()
   {
-    vte_terminal_select_all(cast(VteTerminal*)cPtr);
+    vte_terminal_select_all(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -1877,7 +1877,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setAllowBold(bool allowBold)
   {
-    vte_terminal_set_allow_bold(cast(VteTerminal*)cPtr, allowBold);
+    vte_terminal_set_allow_bold(cast(VteTerminal*)this._cPtr, allowBold);
   }
 
   /**
@@ -1888,7 +1888,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setAllowHyperlink(bool allowHyperlink)
   {
-    vte_terminal_set_allow_hyperlink(cast(VteTerminal*)cPtr, allowHyperlink);
+    vte_terminal_set_allow_hyperlink(cast(VteTerminal*)this._cPtr, allowHyperlink);
   }
 
   /**
@@ -1900,7 +1900,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setAudibleBell(bool isAudible)
   {
-    vte_terminal_set_audible_bell(cast(VteTerminal*)cPtr, isAudible);
+    vte_terminal_set_audible_bell(cast(VteTerminal*)this._cPtr, isAudible);
   }
 
   /**
@@ -1913,7 +1913,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setBackspaceBinding(vte.types.EraseBinding binding)
   {
-    vte_terminal_set_backspace_binding(cast(VteTerminal*)cPtr, binding);
+    vte_terminal_set_backspace_binding(cast(VteTerminal*)this._cPtr, binding);
   }
 
   /**
@@ -1926,7 +1926,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setBoldIsBright(bool boldIsBright)
   {
-    vte_terminal_set_bold_is_bright(cast(VteTerminal*)cPtr, boldIsBright);
+    vte_terminal_set_bold_is_bright(cast(VteTerminal*)this._cPtr, boldIsBright);
   }
 
   /**
@@ -1940,7 +1940,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setCellHeightScale(double scale)
   {
-    vte_terminal_set_cell_height_scale(cast(VteTerminal*)cPtr, scale);
+    vte_terminal_set_cell_height_scale(cast(VteTerminal*)this._cPtr, scale);
   }
 
   /**
@@ -1954,7 +1954,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setCellWidthScale(double scale)
   {
-    vte_terminal_set_cell_width_scale(cast(VteTerminal*)cPtr, scale);
+    vte_terminal_set_cell_width_scale(cast(VteTerminal*)this._cPtr, scale);
   }
 
   /**
@@ -1968,7 +1968,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setCjkAmbiguousWidth(int width)
   {
-    vte_terminal_set_cjk_ambiguous_width(cast(VteTerminal*)cPtr, width);
+    vte_terminal_set_cjk_ambiguous_width(cast(VteTerminal*)this._cPtr, width);
   }
 
   /**
@@ -1983,7 +1983,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setClearBackground(bool setting)
   {
-    vte_terminal_set_clear_background(cast(VteTerminal*)cPtr, setting);
+    vte_terminal_set_clear_background(cast(VteTerminal*)this._cPtr, setting);
   }
 
   /**
@@ -1996,7 +1996,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorBackground(gdk.rgba.RGBA background)
   {
-    vte_terminal_set_color_background(cast(VteTerminal*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
+    vte_terminal_set_color_background(cast(VteTerminal*)this._cPtr, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2008,7 +2008,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorBold(gdk.rgba.RGBA bold = null)
   {
-    vte_terminal_set_color_bold(cast(VteTerminal*)cPtr, bold ? cast(const(GdkRGBA)*)bold.cPtr(No.Dup) : null);
+    vte_terminal_set_color_bold(cast(VteTerminal*)this._cPtr, bold ? cast(const(GdkRGBA)*)bold._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2021,7 +2021,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorCursor(gdk.rgba.RGBA cursorBackground = null)
   {
-    vte_terminal_set_color_cursor(cast(VteTerminal*)cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor(cast(VteTerminal*)this._cPtr, cursorBackground ? cast(const(GdkRGBA)*)cursorBackground._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2034,7 +2034,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorCursorForeground(gdk.rgba.RGBA cursorForeground = null)
   {
-    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_cursor_foreground(cast(VteTerminal*)this._cPtr, cursorForeground ? cast(const(GdkRGBA)*)cursorForeground._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2045,7 +2045,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorForeground(gdk.rgba.RGBA foreground)
   {
-    vte_terminal_set_color_foreground(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_foreground(cast(VteTerminal*)this._cPtr, foreground ? cast(const(GdkRGBA)*)foreground._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2059,7 +2059,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorHighlight(gdk.rgba.RGBA highlightBackground = null)
   {
-    vte_terminal_set_color_highlight(cast(VteTerminal*)cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight(cast(VteTerminal*)this._cPtr, highlightBackground ? cast(const(GdkRGBA)*)highlightBackground._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2073,7 +2073,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setColorHighlightForeground(gdk.rgba.RGBA highlightForeground = null)
   {
-    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground.cPtr(No.Dup) : null);
+    vte_terminal_set_color_highlight_foreground(cast(VteTerminal*)this._cPtr, highlightForeground ? cast(const(GdkRGBA)*)highlightForeground._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2100,9 +2100,9 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     GdkRGBA[] _tmppalette;
     foreach (obj; palette)
-      _tmppalette ~= *cast(GdkRGBA*)obj.cPtr;
+      _tmppalette ~= *cast(GdkRGBA*)obj._cPtr;
     const(GdkRGBA)* _palette = _tmppalette.ptr;
-    vte_terminal_set_colors(cast(VteTerminal*)cPtr, foreground ? cast(const(GdkRGBA)*)foreground.cPtr(No.Dup) : null, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null, _palette, _paletteSize);
+    vte_terminal_set_colors(cast(VteTerminal*)this._cPtr, foreground ? cast(const(GdkRGBA)*)foreground._cPtr(No.Dup) : null, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null, _palette, _paletteSize);
   }
 
   /**
@@ -2117,7 +2117,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setContextMenu(gtk.widget.Widget menu = null)
   {
-    vte_terminal_set_context_menu(cast(VteTerminal*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
+    vte_terminal_set_context_menu(cast(VteTerminal*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2129,7 +2129,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setContextMenuModel(gio.menu_model.MenuModel model = null)
   {
-    vte_terminal_set_context_menu_model(cast(VteTerminal*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    vte_terminal_set_context_menu_model(cast(VteTerminal*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2141,7 +2141,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setCursorBlinkMode(vte.types.CursorBlinkMode mode)
   {
-    vte_terminal_set_cursor_blink_mode(cast(VteTerminal*)cPtr, mode);
+    vte_terminal_set_cursor_blink_mode(cast(VteTerminal*)this._cPtr, mode);
   }
 
   /**
@@ -2152,7 +2152,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setCursorShape(vte.types.CursorShape shape)
   {
-    vte_terminal_set_cursor_shape(cast(VteTerminal*)cPtr, shape);
+    vte_terminal_set_cursor_shape(cast(VteTerminal*)this._cPtr, shape);
   }
 
   /**
@@ -2160,7 +2160,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setDefaultColors()
   {
-    vte_terminal_set_default_colors(cast(VteTerminal*)cPtr);
+    vte_terminal_set_default_colors(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -2173,7 +2173,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setDeleteBinding(vte.types.EraseBinding binding)
   {
-    vte_terminal_set_delete_binding(cast(VteTerminal*)cPtr, binding);
+    vte_terminal_set_delete_binding(cast(VteTerminal*)this._cPtr, binding);
   }
 
   /**
@@ -2184,7 +2184,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setEnableBidi(bool enableBidi)
   {
-    vte_terminal_set_enable_bidi(cast(VteTerminal*)cPtr, enableBidi);
+    vte_terminal_set_enable_bidi(cast(VteTerminal*)this._cPtr, enableBidi);
   }
 
   /**
@@ -2200,7 +2200,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setEnableFallbackScrolling(bool enable)
   {
-    vte_terminal_set_enable_fallback_scrolling(cast(VteTerminal*)cPtr, enable);
+    vte_terminal_set_enable_fallback_scrolling(cast(VteTerminal*)this._cPtr, enable);
   }
 
   /**
@@ -2211,7 +2211,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setEnableShaping(bool enableShaping)
   {
-    vte_terminal_set_enable_shaping(cast(VteTerminal*)cPtr, enableShaping);
+    vte_terminal_set_enable_shaping(cast(VteTerminal*)this._cPtr, enableShaping);
   }
 
   /**
@@ -2222,7 +2222,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setEnableSixel(bool enabled)
   {
-    vte_terminal_set_enable_sixel(cast(VteTerminal*)cPtr, enabled);
+    vte_terminal_set_enable_sixel(cast(VteTerminal*)this._cPtr, enabled);
   }
 
   /**
@@ -2247,7 +2247,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     bool _retval;
     const(char)* _codeset = codeset.toCString(No.Alloc);
     GError *_err;
-    _retval = vte_terminal_set_encoding(cast(VteTerminal*)cPtr, _codeset, &_err);
+    _retval = vte_terminal_set_encoding(cast(VteTerminal*)this._cPtr, _codeset, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2265,7 +2265,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setFont(pango.font_description.FontDescription fontDesc = null)
   {
-    vte_terminal_set_font(cast(VteTerminal*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
+    vte_terminal_set_font(cast(VteTerminal*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2281,7 +2281,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   override void setFontOptions(cairo.font_options.FontOptions fontOptions = null)
   {
-    vte_terminal_set_font_options(cast(VteTerminal*)cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions.cPtr(No.Dup) : null);
+    vte_terminal_set_font_options(cast(VteTerminal*)this._cPtr, fontOptions ? cast(const(cairo_font_options_t)*)fontOptions._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2292,7 +2292,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setFontScale(double scale)
   {
-    vte_terminal_set_font_scale(cast(VteTerminal*)cPtr, scale);
+    vte_terminal_set_font_scale(cast(VteTerminal*)this._cPtr, scale);
   }
 
   /**
@@ -2305,7 +2305,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setInputEnabled(bool enabled)
   {
-    vte_terminal_set_input_enabled(cast(VteTerminal*)cPtr, enabled);
+    vte_terminal_set_input_enabled(cast(VteTerminal*)this._cPtr, enabled);
   }
 
   /**
@@ -2319,7 +2319,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setMouseAutohide(bool setting)
   {
-    vte_terminal_set_mouse_autohide(cast(VteTerminal*)cPtr, setting);
+    vte_terminal_set_mouse_autohide(cast(VteTerminal*)this._cPtr, setting);
   }
 
   /**
@@ -2331,7 +2331,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setPty(vte.pty.Pty pty = null)
   {
-    vte_terminal_set_pty(cast(VteTerminal*)cPtr, pty ? cast(VtePty*)pty.cPtr(No.Dup) : null);
+    vte_terminal_set_pty(cast(VteTerminal*)this._cPtr, pty ? cast(VtePty*)pty._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2343,7 +2343,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setRewrapOnResize(bool rewrap)
   {
-    vte_terminal_set_rewrap_on_resize(cast(VteTerminal*)cPtr, rewrap);
+    vte_terminal_set_rewrap_on_resize(cast(VteTerminal*)this._cPtr, rewrap);
   }
 
   /**
@@ -2355,7 +2355,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollOnInsert(bool scroll)
   {
-    vte_terminal_set_scroll_on_insert(cast(VteTerminal*)cPtr, scroll);
+    vte_terminal_set_scroll_on_insert(cast(VteTerminal*)this._cPtr, scroll);
   }
 
   /**
@@ -2368,7 +2368,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollOnKeystroke(bool scroll)
   {
-    vte_terminal_set_scroll_on_keystroke(cast(VteTerminal*)cPtr, scroll);
+    vte_terminal_set_scroll_on_keystroke(cast(VteTerminal*)this._cPtr, scroll);
   }
 
   /**
@@ -2380,7 +2380,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollOnOutput(bool scroll)
   {
-    vte_terminal_set_scroll_on_output(cast(VteTerminal*)cPtr, scroll);
+    vte_terminal_set_scroll_on_output(cast(VteTerminal*)this._cPtr, scroll);
   }
 
   /**
@@ -2394,7 +2394,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollUnitIsPixels(bool enable)
   {
-    vte_terminal_set_scroll_unit_is_pixels(cast(VteTerminal*)cPtr, enable);
+    vte_terminal_set_scroll_unit_is_pixels(cast(VteTerminal*)this._cPtr, enable);
   }
 
   /**
@@ -2416,7 +2416,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setScrollbackLines(glong lines)
   {
-    vte_terminal_set_scrollback_lines(cast(VteTerminal*)cPtr, lines);
+    vte_terminal_set_scrollback_lines(cast(VteTerminal*)this._cPtr, lines);
   }
 
   /**
@@ -2429,7 +2429,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setSize(glong columns, glong rows)
   {
-    vte_terminal_set_size(cast(VteTerminal*)cPtr, columns, rows);
+    vte_terminal_set_size(cast(VteTerminal*)this._cPtr, columns, rows);
   }
 
   /**
@@ -2440,7 +2440,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setTextBlinkMode(vte.types.TextBlinkMode textBlinkMode)
   {
-    vte_terminal_set_text_blink_mode(cast(VteTerminal*)cPtr, textBlinkMode);
+    vte_terminal_set_text_blink_mode(cast(VteTerminal*)this._cPtr, textBlinkMode);
   }
 
   /**
@@ -2461,7 +2461,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   void setWordCharExceptions(string exceptions)
   {
     const(char)* _exceptions = exceptions.toCString(No.Alloc);
-    vte_terminal_set_word_char_exceptions(cast(VteTerminal*)cPtr, _exceptions);
+    vte_terminal_set_word_char_exceptions(cast(VteTerminal*)this._cPtr, _exceptions);
   }
 
   /**
@@ -2475,7 +2475,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setXalign(vte.types.Align align_)
   {
-    vte_terminal_set_xalign(cast(VteTerminal*)cPtr, align_);
+    vte_terminal_set_xalign(cast(VteTerminal*)this._cPtr, align_);
   }
 
   /**
@@ -2489,7 +2489,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setXfill(bool fill)
   {
-    vte_terminal_set_xfill(cast(VteTerminal*)cPtr, fill);
+    vte_terminal_set_xfill(cast(VteTerminal*)this._cPtr, fill);
   }
 
   /**
@@ -2500,7 +2500,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setYalign(vte.types.Align align_)
   {
-    vte_terminal_set_yalign(cast(VteTerminal*)cPtr, align_);
+    vte_terminal_set_yalign(cast(VteTerminal*)this._cPtr, align_);
   }
 
   /**
@@ -2513,7 +2513,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setYfill(bool fill)
   {
-    vte_terminal_set_yfill(cast(VteTerminal*)cPtr, fill);
+    vte_terminal_set_yfill(cast(VteTerminal*)this._cPtr, fill);
   }
 
   /**
@@ -2551,7 +2551,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2571,7 +2571,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_terminal_spawn_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_terminal_spawn_async(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2641,7 +2641,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
 
     auto _childSetup = childSetup ? cast(void*)&(childSetup) : null;
     GError *_err;
-    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = vte_terminal_spawn_sync(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, cast(GPid*)&childPid, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2723,7 +2723,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
       ptrThawGC(userData);
       auto _dlg = cast(vte.types.TerminalSpawnAsyncCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(vte.terminal.Terminal)(cast(void*)terminal, No.Take), pid, error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -2753,7 +2753,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_terminal_spawn_with_fds_async(cast(VteTerminal*)this._cPtr, ptyFlags, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -2761,7 +2761,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void unselectAll()
   {
-    vte_terminal_unselect_all(cast(VteTerminal*)cPtr);
+    vte_terminal_unselect_all(cast(VteTerminal*)this._cPtr);
   }
 
   /**
@@ -2784,7 +2784,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void watchChild(glib.types.Pid childPid)
   {
-    vte_terminal_watch_child(cast(VteTerminal*)cPtr, childPid);
+    vte_terminal_watch_child(cast(VteTerminal*)this._cPtr, childPid);
   }
 
   /**
@@ -2810,7 +2810,7 @@ class Terminal : gtk.widget.Widget, gtk.scrollable.Scrollable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = vte_terminal_write_contents_sync(cast(VteTerminal*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

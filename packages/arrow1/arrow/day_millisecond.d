@@ -18,16 +18,16 @@ class DayMillisecond : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_millisecond_get_type != &gidSymbolNotFound ? garrow_day_millisecond_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,7 +86,7 @@ class DayMillisecond : gobject.object.ObjectWrap
   bool equal(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
-    _retval = garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);
+    _retval = garrow_day_millisecond_equal(cast(GArrowDayMillisecond*)this._cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class DayMillisecond : gobject.object.ObjectWrap
   bool lessThan(arrow.day_millisecond.DayMillisecond otherDayMillisecond)
   {
     bool _retval;
-    _retval = garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond.cPtr(No.Dup) : null);
+    _retval = garrow_day_millisecond_less_than(cast(GArrowDayMillisecond*)this._cPtr, otherDayMillisecond ? cast(GArrowDayMillisecond*)otherDayMillisecond._cPtr(No.Dup) : null);
     return _retval;
   }
 }

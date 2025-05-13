@@ -79,16 +79,16 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_item_get_type != &gidSymbolNotFound ? gtk_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -224,7 +224,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_menu_item_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_item.MenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void activate()
   {
-    gtk_menu_item_activate(cast(GtkMenuItem*)cPtr);
+    gtk_menu_item_activate(cast(GtkMenuItem*)this._cPtr);
   }
 
   /**
@@ -263,7 +263,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void deselect()
   {
-    gtk_menu_item_deselect(cast(GtkMenuItem*)cPtr);
+    gtk_menu_item_deselect(cast(GtkMenuItem*)this._cPtr);
   }
 
   /**
@@ -276,7 +276,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   string getAccelPath()
   {
     const(char)* _cretval;
-    _cretval = gtk_menu_item_get_accel_path(cast(GtkMenuItem*)cPtr);
+    _cretval = gtk_menu_item_get_accel_path(cast(GtkMenuItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -289,7 +289,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_menu_item_get_label(cast(GtkMenuItem*)cPtr);
+    _cretval = gtk_menu_item_get_label(cast(GtkMenuItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -304,7 +304,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getReserveIndicator()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_reserve_indicator(cast(GtkMenuItem*)cPtr);
+    _retval = gtk_menu_item_get_reserve_indicator(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getRightJustified()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_right_justified(cast(GtkMenuItem*)cPtr);
+    _retval = gtk_menu_item_get_right_justified(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -331,8 +331,8 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   gtk.widget.Widget getSubmenu()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_item_get_submenu(cast(GtkMenuItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_item_get_submenu(cast(GtkMenuItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_menu_item_get_use_underline(cast(GtkMenuItem*)cPtr);
+    _retval = gtk_menu_item_get_use_underline(cast(GtkMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void select()
   {
-    gtk_menu_item_select(cast(GtkMenuItem*)cPtr);
+    gtk_menu_item_select(cast(GtkMenuItem*)this._cPtr);
   }
 
   alias setAccelPath = gtk.widget.Widget.setAccelPath;
@@ -387,7 +387,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   void setAccelPath(string accelPath = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
-    gtk_menu_item_set_accel_path(cast(GtkMenuItem*)cPtr, _accelPath);
+    gtk_menu_item_set_accel_path(cast(GtkMenuItem*)this._cPtr, _accelPath);
   }
 
   /**
@@ -399,7 +399,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_menu_item_set_label(cast(GtkMenuItem*)cPtr, _label);
+    gtk_menu_item_set_label(cast(GtkMenuItem*)this._cPtr, _label);
   }
 
   /**
@@ -415,7 +415,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setReserveIndicator(bool reserve)
   {
-    gtk_menu_item_set_reserve_indicator(cast(GtkMenuItem*)cPtr, reserve);
+    gtk_menu_item_set_reserve_indicator(cast(GtkMenuItem*)this._cPtr, reserve);
   }
 
   /**
@@ -434,7 +434,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setRightJustified(bool rightJustified)
   {
-    gtk_menu_item_set_right_justified(cast(GtkMenuItem*)cPtr, rightJustified);
+    gtk_menu_item_set_right_justified(cast(GtkMenuItem*)this._cPtr, rightJustified);
   }
 
   /**
@@ -446,7 +446,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setSubmenu(gtk.menu.Menu submenu = null)
   {
-    gtk_menu_item_set_submenu(cast(GtkMenuItem*)cPtr, submenu ? cast(GtkWidget*)submenu.cPtr(No.Dup) : null);
+    gtk_menu_item_set_submenu(cast(GtkMenuItem*)this._cPtr, submenu ? cast(GtkWidget*)submenu._cPtr(No.Dup) : null);
   }
 
   /**
@@ -458,7 +458,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void setUseUnderline(bool setting)
   {
-    gtk_menu_item_set_use_underline(cast(GtkMenuItem*)cPtr, setting);
+    gtk_menu_item_set_use_underline(cast(GtkMenuItem*)this._cPtr, setting);
   }
 
   /**
@@ -469,7 +469,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void toggleSizeAllocate(int allocation)
   {
-    gtk_menu_item_toggle_size_allocate(cast(GtkMenuItem*)cPtr, allocation);
+    gtk_menu_item_toggle_size_allocate(cast(GtkMenuItem*)this._cPtr, allocation);
   }
 
   /**
@@ -480,7 +480,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
   */
   void toggleSizeRequest(ref int requisition)
   {
-    gtk_menu_item_toggle_size_request(cast(GtkMenuItem*)cPtr, cast(int*)&requisition);
+    gtk_menu_item_toggle_size_request(cast(GtkMenuItem*)this._cPtr, cast(int*)&requisition);
   }
 
   /**

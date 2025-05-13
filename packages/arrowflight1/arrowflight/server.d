@@ -30,16 +30,16 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_server_get_type != &gidSymbolNotFound ? gaflight_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,10 +55,10 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     GAFlightDataStream* _cretval;
     GError *_err;
-    _cretval = gaflight_server_do_get(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, ticket ? cast(GAFlightTicket*)ticket.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_server_do_get(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, ticket ? cast(GAFlightTicket*)ticket._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.data_stream.DataStream)(cast(GAFlightDataStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.data_stream.DataStream)(cast(GAFlightDataStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_do_put(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, reader ? cast(GAFlightMessageReader*)reader.cPtr(No.Dup) : null, writer ? cast(GAFlightMetadataWriter*)writer.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_server_do_put(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, reader ? cast(GAFlightMessageReader*)reader._cPtr(No.Dup) : null, writer ? cast(GAFlightMetadataWriter*)writer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -87,10 +87,10 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     GAFlightInfo* _cretval;
     GError *_err;
-    _cretval = gaflight_server_get_flight_info(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, request ? cast(GAFlightDescriptor*)request.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_server_get_flight_info(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, request ? cast(GAFlightDescriptor*)request._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.info.Info)(cast(GAFlightInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   int getPort()
   {
     int _retval;
-    _retval = gaflight_server_get_port(cast(GAFlightServer*)cPtr);
+    _retval = gaflight_server_get_port(cast(GAFlightServer*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     GList* _cretval;
     GError *_err;
-    _cretval = gaflight_server_list_flights(cast(GAFlightServer*)cPtr, context ? cast(GAFlightServerCallContext*)context.cPtr(No.Dup) : null, criteria ? cast(GAFlightCriteria*)criteria.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_server_list_flights(cast(GAFlightServer*)this._cPtr, context ? cast(GAFlightServerCallContext*)context._cPtr(No.Dup) : null, criteria ? cast(GAFlightCriteria*)criteria._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrowflight.info.Info, GidOwnership.Full)(cast(GList*)_cretval);
@@ -119,7 +119,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_listen(cast(GAFlightServer*)cPtr, options ? cast(GAFlightServerOptions*)options.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_server_listen(cast(GAFlightServer*)this._cPtr, options ? cast(GAFlightServerOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -135,7 +135,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_shutdown(cast(GAFlightServer*)cPtr, &_err);
+    _retval = gaflight_server_shutdown(cast(GAFlightServer*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -146,7 +146,7 @@ class Server : gobject.object.ObjectWrap, arrowflight.servable.Servable
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_server_wait(cast(GAFlightServer*)cPtr, &_err);
+    _retval = gaflight_server_wait(cast(GAFlightServer*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

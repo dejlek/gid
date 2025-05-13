@@ -41,16 +41,16 @@ class ServerMessage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_server_message_get_type != &gidSymbolNotFound ? soup_server_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,7 +84,7 @@ class ServerMessage : gobject.object.ObjectWrap
   soup.types.HTTPVersion getHttpVersion()
   {
     SoupHTTPVersion _cretval;
-    _cretval = soup_server_message_get_http_version(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_http_version(cast(SoupServerMessage*)this._cPtr);
     soup.types.HTTPVersion _retval = cast(soup.types.HTTPVersion)_cretval;
     return _retval;
   }
@@ -99,8 +99,8 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.socket_address.SocketAddress getLocalAddress()
   {
     GSocketAddress* _cretval;
-    _cretval = soup_server_message_get_local_address(cast(SoupServerMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    _cretval = soup_server_message_get_local_address(cast(SoupServerMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class ServerMessage : gobject.object.ObjectWrap
   string getMethod()
   {
     const(char)* _cretval;
-    _cretval = soup_server_message_get_method(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_method(cast(SoupServerMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -123,7 +123,7 @@ class ServerMessage : gobject.object.ObjectWrap
   string getReasonPhrase()
   {
     const(char)* _cretval;
-    _cretval = soup_server_message_get_reason_phrase(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_reason_phrase(cast(SoupServerMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -138,8 +138,8 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.socket_address.SocketAddress getRemoteAddress()
   {
     GSocketAddress* _cretval;
-    _cretval = soup_server_message_get_remote_address(cast(SoupServerMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    _cretval = soup_server_message_get_remote_address(cast(SoupServerMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class ServerMessage : gobject.object.ObjectWrap
   string getRemoteHost()
   {
     const(char)* _cretval;
-    _cretval = soup_server_message_get_remote_host(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_remote_host(cast(SoupServerMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -165,7 +165,7 @@ class ServerMessage : gobject.object.ObjectWrap
   soup.message_body.MessageBody getRequestBody()
   {
     SoupMessageBody* _cretval;
-    _cretval = soup_server_message_get_request_body(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_request_body(cast(SoupServerMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -177,7 +177,7 @@ class ServerMessage : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getRequestHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = soup_server_message_get_request_headers(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_request_headers(cast(SoupServerMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -189,7 +189,7 @@ class ServerMessage : gobject.object.ObjectWrap
   soup.message_body.MessageBody getResponseBody()
   {
     SoupMessageBody* _cretval;
-    _cretval = soup_server_message_get_response_body(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_response_body(cast(SoupServerMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_body.MessageBody(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -201,7 +201,7 @@ class ServerMessage : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getResponseHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = soup_server_message_get_response_headers(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_response_headers(cast(SoupServerMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -221,8 +221,8 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.socket.Socket getSocket()
   {
     GSocket* _cretval;
-    _cretval = soup_server_message_get_socket(cast(SoupServerMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
+    _cretval = soup_server_message_get_socket(cast(SoupServerMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class ServerMessage : gobject.object.ObjectWrap
   uint getStatus()
   {
     uint _retval;
-    _retval = soup_server_message_get_status(cast(SoupServerMessage*)cPtr);
+    _retval = soup_server_message_get_status(cast(SoupServerMessage*)this._cPtr);
     return _retval;
   }
 
@@ -247,8 +247,8 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = soup_server_message_get_tls_peer_certificate(cast(SoupServerMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = soup_server_message_get_tls_peer_certificate(cast(SoupServerMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
-    _cretval = soup_server_message_get_tls_peer_certificate_errors(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_tls_peer_certificate_errors(cast(SoupServerMessage*)this._cPtr);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -273,7 +273,7 @@ class ServerMessage : gobject.object.ObjectWrap
   glib.uri.Uri getUri()
   {
     GUri* _cretval;
-    _cretval = soup_server_message_get_uri(cast(SoupServerMessage*)cPtr);
+    _cretval = soup_server_message_get_uri(cast(SoupServerMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -285,7 +285,7 @@ class ServerMessage : gobject.object.ObjectWrap
   bool isOptionsPing()
   {
     bool _retval;
-    _retval = soup_server_message_is_options_ping(cast(SoupServerMessage*)cPtr);
+    _retval = soup_server_message_is_options_ping(cast(SoupServerMessage*)this._cPtr);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void pause()
   {
-    soup_server_message_pause(cast(SoupServerMessage*)cPtr);
+    soup_server_message_pause(cast(SoupServerMessage*)this._cPtr);
   }
 
   /**
@@ -309,7 +309,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void setHttpVersion(soup.types.HTTPVersion version_)
   {
-    soup_server_message_set_http_version(cast(SoupServerMessage*)cPtr, version_);
+    soup_server_message_set_http_version(cast(SoupServerMessage*)this._cPtr, version_);
   }
 
   /**
@@ -329,7 +329,7 @@ class ServerMessage : gobject.object.ObjectWrap
   void setRedirect(uint statusCode, string redirectUri)
   {
     const(char)* _redirectUri = redirectUri.toCString(No.Alloc);
-    soup_server_message_set_redirect(cast(SoupServerMessage*)cPtr, statusCode, _redirectUri);
+    soup_server_message_set_redirect(cast(SoupServerMessage*)this._cPtr, statusCode, _redirectUri);
   }
 
   /**
@@ -349,7 +349,7 @@ class ServerMessage : gobject.object.ObjectWrap
       _respLength = cast(size_t)respBody.length;
 
     auto _respBody = cast(const(ubyte)*)respBody.ptr;
-    soup_server_message_set_response(cast(SoupServerMessage*)cPtr, _contentType, respUse, _respBody, _respLength);
+    soup_server_message_set_response(cast(SoupServerMessage*)this._cPtr, _contentType, respUse, _respBody, _respLength);
   }
 
   /**
@@ -365,7 +365,7 @@ class ServerMessage : gobject.object.ObjectWrap
   void setStatus(uint statusCode, string reasonPhrase = null)
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
-    soup_server_message_set_status(cast(SoupServerMessage*)cPtr, statusCode, _reasonPhrase);
+    soup_server_message_set_status(cast(SoupServerMessage*)this._cPtr, statusCode, _reasonPhrase);
   }
 
   /**
@@ -387,8 +387,8 @@ class ServerMessage : gobject.object.ObjectWrap
   gio.iostream.IOStream stealConnection()
   {
     GIOStream* _cretval;
-    _cretval = soup_server_message_steal_connection(cast(SoupServerMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
+    _cretval = soup_server_message_steal_connection(cast(SoupServerMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class ServerMessage : gobject.object.ObjectWrap
   */
   void unpause()
   {
-    soup_server_message_unpause(cast(SoupServerMessage*)cPtr);
+    soup_server_message_unpause(cast(SoupServerMessage*)this._cPtr);
   }
 
   /**

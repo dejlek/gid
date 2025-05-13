@@ -39,7 +39,7 @@ class VideoBarMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -50,7 +50,7 @@ class VideoBarMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoBarMeta*)this._cPtr).meta);
   }
 
   /**
@@ -59,7 +59,7 @@ class VideoBarMeta
   */
   @property ubyte field()
   {
-    return (cast(GstVideoBarMeta*)cPtr).field;
+    return (cast(GstVideoBarMeta*)this._cPtr).field;
   }
 
   /**
@@ -69,7 +69,7 @@ class VideoBarMeta
   */
   @property void field(ubyte propval)
   {
-    (cast(GstVideoBarMeta*)cPtr).field = propval;
+    (cast(GstVideoBarMeta*)this._cPtr).field = propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class VideoBarMeta
   */
   @property bool isLetterbox()
   {
-    return (cast(GstVideoBarMeta*)cPtr).isLetterbox;
+    return (cast(GstVideoBarMeta*)this._cPtr).isLetterbox;
   }
 
   /**
@@ -88,7 +88,7 @@ class VideoBarMeta
   */
   @property void isLetterbox(bool propval)
   {
-    (cast(GstVideoBarMeta*)cPtr).isLetterbox = propval;
+    (cast(GstVideoBarMeta*)this._cPtr).isLetterbox = propval;
   }
 
   /**
@@ -100,7 +100,7 @@ class VideoBarMeta
   */
   @property uint barData1()
   {
-    return (cast(GstVideoBarMeta*)cPtr).barData1;
+    return (cast(GstVideoBarMeta*)this._cPtr).barData1;
   }
 
   /**
@@ -113,7 +113,7 @@ class VideoBarMeta
   */
   @property void barData1(uint propval)
   {
-    (cast(GstVideoBarMeta*)cPtr).barData1 = propval;
+    (cast(GstVideoBarMeta*)this._cPtr).barData1 = propval;
   }
 
   /**
@@ -125,7 +125,7 @@ class VideoBarMeta
   */
   @property uint barData2()
   {
-    return (cast(GstVideoBarMeta*)cPtr).barData2;
+    return (cast(GstVideoBarMeta*)this._cPtr).barData2;
   }
 
   /**
@@ -138,7 +138,7 @@ class VideoBarMeta
   */
   @property void barData2(uint propval)
   {
-    (cast(GstVideoBarMeta*)cPtr).barData2 = propval;
+    (cast(GstVideoBarMeta*)this._cPtr).barData2 = propval;
   }
 
   /** */

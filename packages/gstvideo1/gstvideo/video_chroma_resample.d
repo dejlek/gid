@@ -24,7 +24,7 @@ class VideoChromaResample
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -39,6 +39,6 @@ class VideoChromaResample
   */
   void getInfo(out uint nLines, out int offset)
   {
-    gst_video_chroma_resample_get_info(cast(GstVideoChromaResample*)cPtr, cast(uint*)&nLines, cast(int*)&offset);
+    gst_video_chroma_resample_get_info(cast(GstVideoChromaResample*)this._cPtr, cast(uint*)&nLines, cast(int*)&offset);
   }
 }

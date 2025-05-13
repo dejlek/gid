@@ -98,16 +98,16 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_get_type != &gidSymbolNotFound ? gtk_text_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -518,8 +518,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   static gtk.text.Text newWithBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_text_new_with_buffer(buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text.Text)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -544,7 +544,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   {
     graphene_rect_t _strong;
     graphene_rect_t _weak;
-    gtk_text_compute_cursor_extents(cast(GtkText*)cPtr, position, &_strong, &_weak);
+    gtk_text_compute_cursor_extents(cast(GtkText*)this._cPtr, position, &_strong, &_weak);
     strong = new graphene.rect.Rect(cast(void*)&_strong, No.Take);
     weak = new graphene.rect.Rect(cast(void*)&_weak, No.Take);
   }
@@ -559,7 +559,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = gtk_text_get_activates_default(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_activates_default(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
-    _cretval = gtk_text_get_attributes(cast(GtkText*)cPtr);
+    _cretval = gtk_text_get_attributes(cast(GtkText*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -585,8 +585,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   gtk.entry_buffer.EntryBuffer getBuffer()
   {
     GtkEntryBuffer* _cretval;
-    _cretval = gtk_text_get_buffer(cast(GtkText*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
+    _cretval = gtk_text_get_buffer(cast(GtkText*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.entry_buffer.EntryBuffer)(cast(GtkEntryBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getEnableEmojiCompletion()
   {
     bool _retval;
-    _retval = gtk_text_get_enable_emoji_completion(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_enable_emoji_completion(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -611,8 +611,8 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   gio.menu_model.MenuModel getExtraMenu()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_text_get_extra_menu(cast(GtkText*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_text_get_extra_menu(cast(GtkText*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -623,7 +623,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
-    _cretval = gtk_text_get_input_hints(cast(GtkText*)cPtr);
+    _cretval = gtk_text_get_input_hints(cast(GtkText*)this._cPtr);
     gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
@@ -635,7 +635,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
-    _cretval = gtk_text_get_input_purpose(cast(GtkText*)cPtr);
+    _cretval = gtk_text_get_input_purpose(cast(GtkText*)this._cPtr);
     gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
@@ -652,7 +652,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   dchar getInvisibleChar()
   {
     dchar _retval;
-    _retval = gtk_text_get_invisible_char(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_invisible_char(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   int getMaxLength()
   {
     int _retval;
-    _retval = gtk_text_get_max_length(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_max_length(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -682,7 +682,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getOverwriteMode()
   {
     bool _retval;
-    _retval = gtk_text_get_overwrite_mode(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_overwrite_mode(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -696,7 +696,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   string getPlaceholderText()
   {
     const(char)* _cretval;
-    _cretval = gtk_text_get_placeholder_text(cast(GtkText*)cPtr);
+    _cretval = gtk_text_get_placeholder_text(cast(GtkText*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -709,7 +709,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getPropagateTextWidth()
   {
     bool _retval;
-    _retval = gtk_text_get_propagate_text_width(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_propagate_text_width(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -722,7 +722,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   pango.tab_array.TabArray getTabs()
   {
     PangoTabArray* _cretval;
-    _cretval = gtk_text_get_tabs(cast(GtkText*)cPtr);
+    _cretval = gtk_text_get_tabs(cast(GtkText*)this._cPtr);
     auto _retval = _cretval ? new pango.tab_array.TabArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -738,7 +738,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   ushort getTextLength()
   {
     ushort _retval;
-    _retval = gtk_text_get_text_length(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_text_length(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getTruncateMultiline()
   {
     bool _retval;
-    _retval = gtk_text_get_truncate_multiline(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_truncate_multiline(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -761,7 +761,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool getVisibility()
   {
     bool _retval;
-    _retval = gtk_text_get_visibility(cast(GtkText*)cPtr);
+    _retval = gtk_text_get_visibility(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -778,7 +778,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   bool grabFocusWithoutSelecting()
   {
     bool _retval;
-    _retval = gtk_text_grab_focus_without_selecting(cast(GtkText*)cPtr);
+    _retval = gtk_text_grab_focus_without_selecting(cast(GtkText*)this._cPtr);
     return _retval;
   }
 
@@ -795,7 +795,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setActivatesDefault(bool activates)
   {
-    gtk_text_set_activates_default(cast(GtkText*)cPtr, activates);
+    gtk_text_set_activates_default(cast(GtkText*)this._cPtr, activates);
   }
 
   /**
@@ -806,7 +806,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_text_set_attributes(cast(GtkText*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_text_set_attributes(cast(GtkText*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
 
   /**
@@ -818,7 +818,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setBuffer(gtk.entry_buffer.EntryBuffer buffer)
   {
-    gtk_text_set_buffer(cast(GtkText*)cPtr, buffer ? cast(GtkEntryBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_text_set_buffer(cast(GtkText*)this._cPtr, buffer ? cast(GtkEntryBuffer*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -833,7 +833,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setEnableEmojiCompletion(bool enableEmojiCompletion)
   {
-    gtk_text_set_enable_emoji_completion(cast(GtkText*)cPtr, enableEmojiCompletion);
+    gtk_text_set_enable_emoji_completion(cast(GtkText*)this._cPtr, enableEmojiCompletion);
   }
 
   /**
@@ -845,7 +845,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setExtraMenu(gio.menu_model.MenuModel model = null)
   {
-    gtk_text_set_extra_menu(cast(GtkText*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_text_set_extra_menu(cast(GtkText*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
 
   /**
@@ -857,7 +857,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setInputHints(gtk.types.InputHints hints)
   {
-    gtk_text_set_input_hints(cast(GtkText*)cPtr, hints);
+    gtk_text_set_input_hints(cast(GtkText*)this._cPtr, hints);
   }
 
   /**
@@ -871,7 +871,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setInputPurpose(gtk.types.InputPurpose purpose)
   {
-    gtk_text_set_input_purpose(cast(GtkText*)cPtr, purpose);
+    gtk_text_set_input_purpose(cast(GtkText*)this._cPtr, purpose);
   }
 
   /**
@@ -887,7 +887,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setInvisibleChar(dchar ch)
   {
-    gtk_text_set_invisible_char(cast(GtkText*)cPtr, ch);
+    gtk_text_set_invisible_char(cast(GtkText*)this._cPtr, ch);
   }
 
   /**
@@ -906,7 +906,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setMaxLength(int length)
   {
-    gtk_text_set_max_length(cast(GtkText*)cPtr, length);
+    gtk_text_set_max_length(cast(GtkText*)this._cPtr, length);
   }
 
   /**
@@ -918,7 +918,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setOverwriteMode(bool overwrite)
   {
-    gtk_text_set_overwrite_mode(cast(GtkText*)cPtr, overwrite);
+    gtk_text_set_overwrite_mode(cast(GtkText*)this._cPtr, overwrite);
   }
 
   /**
@@ -934,7 +934,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_text_set_placeholder_text(cast(GtkText*)cPtr, _text);
+    gtk_text_set_placeholder_text(cast(GtkText*)this._cPtr, _text);
   }
 
   /**
@@ -945,7 +945,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setPropagateTextWidth(bool propagateTextWidth)
   {
-    gtk_text_set_propagate_text_width(cast(GtkText*)cPtr, propagateTextWidth);
+    gtk_text_set_propagate_text_width(cast(GtkText*)this._cPtr, propagateTextWidth);
   }
 
   /**
@@ -956,7 +956,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setTabs(pango.tab_array.TabArray tabs = null)
   {
-    gtk_text_set_tabs(cast(GtkText*)cPtr, tabs ? cast(PangoTabArray*)tabs.cPtr(No.Dup) : null);
+    gtk_text_set_tabs(cast(GtkText*)this._cPtr, tabs ? cast(PangoTabArray*)tabs._cPtr(No.Dup) : null);
   }
 
   /**
@@ -968,7 +968,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setTruncateMultiline(bool truncateMultiline)
   {
-    gtk_text_set_truncate_multiline(cast(GtkText*)cPtr, truncateMultiline);
+    gtk_text_set_truncate_multiline(cast(GtkText*)this._cPtr, truncateMultiline);
   }
 
   /**
@@ -993,7 +993,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void setVisibility(bool visible)
   {
-    gtk_text_set_visibility(cast(GtkText*)cPtr, visible);
+    gtk_text_set_visibility(cast(GtkText*)this._cPtr, visible);
   }
 
   /**
@@ -1004,7 +1004,7 @@ class Text : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.editable
   */
   void unsetInvisibleChar()
   {
-    gtk_text_unset_invisible_char(cast(GtkText*)cPtr);
+    gtk_text_unset_invisible_char(cast(GtkText*)this._cPtr);
   }
 
   /**

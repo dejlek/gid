@@ -27,7 +27,7 @@ template TlsBackendT()
   override gobject.types.GType getCertificateType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_certificate_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_certificate_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -39,7 +39,7 @@ template TlsBackendT()
   override gobject.types.GType getClientConnectionType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_client_connection_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_client_connection_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -51,8 +51,8 @@ template TlsBackendT()
   override gio.tls_database.TlsDatabase getDefaultDatabase()
   {
     GTlsDatabase* _cretval;
-    _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
+    _cretval = g_tls_backend_get_default_database(cast(GTlsBackend*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ template TlsBackendT()
   override gobject.types.GType getDtlsClientConnectionType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_dtls_client_connection_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_dtls_client_connection_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ template TlsBackendT()
   override gobject.types.GType getDtlsServerConnectionType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_dtls_server_connection_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_dtls_server_connection_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ template TlsBackendT()
   override gobject.types.GType getFileDatabaseType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_file_database_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_file_database_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ template TlsBackendT()
   override gobject.types.GType getServerConnectionType()
   {
     gobject.types.GType _retval;
-    _retval = g_tls_backend_get_server_connection_type(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_get_server_connection_type(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ template TlsBackendT()
   */
   override void setDefaultDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    g_tls_backend_set_default_database(cast(GTlsBackend*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
+    g_tls_backend_set_default_database(cast(GTlsBackend*)this._cPtr, database ? cast(GTlsDatabase*)database._cPtr(No.Dup) : null);
   }
 
   /**
@@ -129,7 +129,7 @@ template TlsBackendT()
   override bool supportsDtls()
   {
     bool _retval;
-    _retval = g_tls_backend_supports_dtls(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_supports_dtls(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ template TlsBackendT()
   override bool supportsTls()
   {
     bool _retval;
-    _retval = g_tls_backend_supports_tls(cast(GTlsBackend*)cPtr);
+    _retval = g_tls_backend_supports_tls(cast(GTlsBackend*)this._cPtr);
     return _retval;
   }
 }

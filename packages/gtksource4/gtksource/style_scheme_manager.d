@@ -19,16 +19,16 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_manager_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   {
     GtkSourceStyleSchemeManager* _cretval;
     _cretval = gtk_source_style_scheme_manager_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme_manager.StyleSchemeManager)(cast(GtkSourceStyleSchemeManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   void appendSearchPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    gtk_source_style_scheme_manager_append_search_path(cast(GtkSourceStyleSchemeManager*)cPtr, _path);
+    gtk_source_style_scheme_manager_append_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 
   /**
@@ -83,7 +83,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   */
   void forceRescan()
   {
-    gtk_source_style_scheme_manager_force_rescan(cast(GtkSourceStyleSchemeManager*)cPtr);
+    gtk_source_style_scheme_manager_force_rescan(cast(GtkSourceStyleSchemeManager*)this._cPtr);
   }
 
   /**
@@ -98,8 +98,8 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   {
     GtkSourceStyleScheme* _cretval;
     const(char)* _schemeId = schemeId.toCString(No.Alloc);
-    _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)cPtr, _schemeId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    _cretval = gtk_source_style_scheme_manager_get_scheme(cast(GtkSourceStyleSchemeManager*)this._cPtr, _schemeId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   string[] getSchemeIds()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_style_scheme_manager_get_scheme_ids(cast(GtkSourceStyleSchemeManager*)cPtr);
+    _cretval = gtk_source_style_scheme_manager_get_scheme_ids(cast(GtkSourceStyleSchemeManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -138,7 +138,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   string[] getSearchPath()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_style_scheme_manager_get_search_path(cast(GtkSourceStyleSchemeManager*)cPtr);
+    _cretval = gtk_source_style_scheme_manager_get_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -164,7 +164,7 @@ class StyleSchemeManager : gobject.object.ObjectWrap
   void prependSearchPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)cPtr, _path);
+    gtk_source_style_scheme_manager_prepend_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 
   /**
@@ -182,6 +182,6 @@ class StyleSchemeManager : gobject.object.ObjectWrap
       _tmppath ~= s.toCString(No.Alloc);
     _tmppath ~= null;
     char** _path = _tmppath.ptr;
-    gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)cPtr, _path);
+    gtk_source_style_scheme_manager_set_search_path(cast(GtkSourceStyleSchemeManager*)this._cPtr, _path);
   }
 }

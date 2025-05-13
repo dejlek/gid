@@ -18,16 +18,16 @@ class Datum : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_datum_get_type != &gidSymbolNotFound ? garrow_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class Datum : gobject.object.ObjectWrap
   bool equal(arrow.datum.Datum otherDatum)
   {
     bool _retval;
-    _retval = garrow_datum_equal(cast(GArrowDatum*)cPtr, otherDatum ? cast(GArrowDatum*)otherDatum.cPtr(No.Dup) : null);
+    _retval = garrow_datum_equal(cast(GArrowDatum*)this._cPtr, otherDatum ? cast(GArrowDatum*)otherDatum._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class Datum : gobject.object.ObjectWrap
   bool isArray()
   {
     bool _retval;
-    _retval = garrow_datum_is_array(cast(GArrowDatum*)cPtr);
+    _retval = garrow_datum_is_array(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class Datum : gobject.object.ObjectWrap
   bool isArrayLike()
   {
     bool _retval;
-    _retval = garrow_datum_is_array_like(cast(GArrowDatum*)cPtr);
+    _retval = garrow_datum_is_array_like(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class Datum : gobject.object.ObjectWrap
   bool isScalar()
   {
     bool _retval;
-    _retval = garrow_datum_is_scalar(cast(GArrowDatum*)cPtr);
+    _retval = garrow_datum_is_scalar(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class Datum : gobject.object.ObjectWrap
   bool isValue()
   {
     bool _retval;
-    _retval = garrow_datum_is_value(cast(GArrowDatum*)cPtr);
+    _retval = garrow_datum_is_value(cast(GArrowDatum*)this._cPtr);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class Datum : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_datum_to_string(cast(GArrowDatum*)cPtr);
+    _cretval = garrow_datum_to_string(cast(GArrowDatum*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

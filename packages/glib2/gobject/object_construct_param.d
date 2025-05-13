@@ -29,7 +29,7 @@ class ObjectConstructParam
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class ObjectConstructParam
   */
   @property gobject.param_spec.ParamSpec pspec()
   {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)cPtr).pspec);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).pspec);
   }
 
   /**
@@ -50,8 +50,8 @@ class ObjectConstructParam
   */
   @property void pspec(gobject.param_spec.ParamSpec propval)
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)cPtr).pspec);
-    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)cPtr).pspec);
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).pspec);
+    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).pspec);
   }
 
   /**
@@ -60,7 +60,7 @@ class ObjectConstructParam
   */
   @property gobject.value.Value value()
   {
-    return cToD!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).value);
   }
 
   /**
@@ -70,7 +70,7 @@ class ObjectConstructParam
   */
   @property void value(gobject.value.Value propval)
   {
-    cValueFree!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)cPtr).value);
+    cValueFree!(gobject.value.Value)(cast(void*)(cast(GObjectConstructParam*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(GObjectConstructParam*)this._cPtr).value);
   }
 }

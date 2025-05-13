@@ -70,16 +70,16 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_get_type != &gidSymbolNotFound ? adw_breakpoint_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -119,7 +119,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   this(adw.breakpoint_condition.BreakpointCondition condition)
   {
     AdwBreakpoint* _cretval;
-    _cretval = adw_breakpoint_new(condition ? cast(AdwBreakpointCondition*)condition.cPtr(Yes.Dup) : null);
+    _cretval = adw_breakpoint_new(condition ? cast(AdwBreakpointCondition*)condition._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -169,7 +169,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void addSetter(gobject.object.ObjectWrap object, string property, gobject.value.Value value = null)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    adw_breakpoint_add_setter(cast(AdwBreakpoint*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    adw_breakpoint_add_setter(cast(AdwBreakpoint*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,10 +192,10 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
     if (objects)
       _nSetters = cast(int)objects.length;
 
-    ObjectC*[] _tmpobjects;
+    GObject*[] _tmpobjects;
     foreach (obj; objects)
-      _tmpobjects ~= obj ? cast(ObjectC*)obj.cPtr : null;
-    ObjectC** _objects = cast(ObjectC**)_tmpobjects.ptr;
+      _tmpobjects ~= obj ? cast(GObject*)obj._cPtr : null;
+    GObject** _objects = cast(GObject**)_tmpobjects.ptr;
 
     if (names)
       _nSetters = cast(int)names.length;
@@ -210,9 +210,9 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
 
     GValue*[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= cast(GValue*)obj.cPtr;
+      _tmpvalues ~= cast(GValue*)obj._cPtr;
     const(GValue*)* _values = _tmpvalues.ptr;
-    adw_breakpoint_add_settersv(cast(AdwBreakpoint*)cPtr, _nSetters, _objects, _names, _values);
+    adw_breakpoint_add_settersv(cast(AdwBreakpoint*)this._cPtr, _nSetters, _objects, _names, _values);
   }
 
   /**
@@ -222,7 +222,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   adw.breakpoint_condition.BreakpointCondition getCondition()
   {
     AdwBreakpointCondition* _cretval;
-    _cretval = adw_breakpoint_get_condition(cast(AdwBreakpoint*)cPtr);
+    _cretval = adw_breakpoint_get_condition(cast(AdwBreakpoint*)this._cPtr);
     auto _retval = _cretval ? new adw.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -235,7 +235,7 @@ class Breakpoint : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setCondition(adw.breakpoint_condition.BreakpointCondition condition = null)
   {
-    adw_breakpoint_set_condition(cast(AdwBreakpoint*)cPtr, condition ? cast(AdwBreakpointCondition*)condition.cPtr(No.Dup) : null);
+    adw_breakpoint_set_condition(cast(AdwBreakpoint*)this._cPtr, condition ? cast(AdwBreakpointCondition*)condition._cPtr(No.Dup) : null);
   }
 
   /**

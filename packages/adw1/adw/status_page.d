@@ -44,16 +44,16 @@ class StatusPage : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_status_page_get_type != &gidSymbolNotFound ? adw_status_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -187,8 +187,8 @@ class StatusPage : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_status_page_get_child(cast(AdwStatusPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_status_page_get_child(cast(AdwStatusPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class StatusPage : gtk.widget.Widget
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = adw_status_page_get_description(cast(AdwStatusPage*)cPtr);
+    _cretval = adw_status_page_get_description(cast(AdwStatusPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -211,7 +211,7 @@ class StatusPage : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_status_page_get_icon_name(cast(AdwStatusPage*)cPtr);
+    _cretval = adw_status_page_get_icon_name(cast(AdwStatusPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -223,8 +223,8 @@ class StatusPage : gtk.widget.Widget
   gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
-    _cretval = adw_status_page_get_paintable(cast(AdwStatusPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = adw_status_page_get_paintable(cast(AdwStatusPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class StatusPage : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_status_page_get_title(cast(AdwStatusPage*)cPtr);
+    _cretval = adw_status_page_get_title(cast(AdwStatusPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -248,7 +248,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_status_page_set_child(cast(AdwStatusPage*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_status_page_set_child(cast(AdwStatusPage*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -262,7 +262,7 @@ class StatusPage : gtk.widget.Widget
   void setDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    adw_status_page_set_description(cast(AdwStatusPage*)cPtr, _description);
+    adw_status_page_set_description(cast(AdwStatusPage*)this._cPtr, _description);
   }
 
   /**
@@ -276,7 +276,7 @@ class StatusPage : gtk.widget.Widget
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_status_page_set_icon_name(cast(AdwStatusPage*)cPtr, _iconName);
+    adw_status_page_set_icon_name(cast(AdwStatusPage*)this._cPtr, _iconName);
   }
 
   /**
@@ -289,7 +289,7 @@ class StatusPage : gtk.widget.Widget
   */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
-    adw_status_page_set_paintable(cast(AdwStatusPage*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    adw_status_page_set_paintable(cast(AdwStatusPage*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,6 +303,6 @@ class StatusPage : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_status_page_set_title(cast(AdwStatusPage*)cPtr, _title);
+    adw_status_page_set_title(cast(AdwStatusPage*)this._cPtr, _title);
   }
 }

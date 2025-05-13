@@ -29,7 +29,7 @@ class EventAny
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class EventAny
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventAny*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventAny*)this._cPtr).type;
   }
 
   /**
@@ -50,7 +50,7 @@ class EventAny
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventAny*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventAny*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -59,7 +59,7 @@ class EventAny
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)this._cPtr).window);
   }
 
   /**
@@ -69,8 +69,8 @@ class EventAny
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventAny*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventAny*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventAny*)this._cPtr).window);
   }
 
   /**
@@ -79,7 +79,7 @@ class EventAny
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventAny*)cPtr).sendEvent;
+    return (cast(GdkEventAny*)this._cPtr).sendEvent;
   }
 
   /**
@@ -89,6 +89,6 @@ class EventAny
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventAny*)cPtr).sendEvent = propval;
+    (cast(GdkEventAny*)this._cPtr).sendEvent = propval;
   }
 }

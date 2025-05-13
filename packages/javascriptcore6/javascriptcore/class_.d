@@ -24,16 +24,16 @@ class Class : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_class_get_type != &gidSymbolNotFound ? jsc_class_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -49,7 +49,7 @@ class Class : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = jsc_class_get_name(cast(JSCClass*)cPtr);
+    _cretval = jsc_class_get_name(cast(JSCClass*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -61,8 +61,8 @@ class Class : gobject.object.ObjectWrap
   javascriptcore.class_.Class getParent()
   {
     JSCClass* _cretval;
-    _cretval = jsc_class_get_parent(cast(JSCClass*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
+    _cretval = jsc_class_get_parent(cast(JSCClass*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
   }
 }

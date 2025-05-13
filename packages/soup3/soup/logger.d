@@ -80,16 +80,16 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_logger_get_type != &gidSymbolNotFound ? soup_logger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -167,7 +167,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   int getMaxBodySize()
   {
     int _retval;
-    _retval = soup_logger_get_max_body_size(cast(SoupLogger*)cPtr);
+    _retval = soup_logger_get_max_body_size(cast(SoupLogger*)this._cPtr);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void setMaxBodySize(int maxBodySize)
   {
-    soup_logger_set_max_body_size(cast(SoupLogger*)cPtr, maxBodySize);
+    soup_logger_set_max_body_size(cast(SoupLogger*)this._cPtr, maxBodySize);
   }
 
   /**
@@ -196,13 +196,13 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       auto _dlg = cast(soup.types.LoggerPrinter*)userData;
       string _data = data.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), level, direction, _data);
     }
     auto _printerCB = printer ? &_printerCallback : null;
 
     auto _printer = printer ? freezeDelegate(cast(void*)&printer) : null;
     GDestroyNotify _printerDestroyCB = printer ? &thawDelegate : null;
-    soup_logger_set_printer(cast(SoupLogger*)cPtr, _printerCB, _printer, _printerDestroyCB);
+    soup_logger_set_printer(cast(SoupLogger*)this._cPtr, _printerCB, _printer, _printerDestroyCB);
   }
 
   /**
@@ -223,7 +223,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -232,7 +232,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 
     auto _requestFilter = requestFilter ? freezeDelegate(cast(void*)&requestFilter) : null;
     GDestroyNotify _requestFilterDestroyCB = requestFilter ? &thawDelegate : null;
-    soup_logger_set_request_filter(cast(SoupLogger*)cPtr, _requestFilterCB, _requestFilter, _requestFilterDestroyCB);
+    soup_logger_set_request_filter(cast(SoupLogger*)this._cPtr, _requestFilterCB, _requestFilter, _requestFilterDestroyCB);
   }
 
   /**
@@ -253,7 +253,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
       soup.types.LoggerLogLevel _dretval;
       auto _dlg = cast(soup.types.LoggerFilter*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.logger.Logger)(cast(void*)logger, No.Take), gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(void*)msg, No.Take));
       auto _retval = cast(SoupLoggerLogLevel)_dretval;
 
       return _retval;
@@ -262,6 +262,6 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 
     auto _responseFilter = responseFilter ? freezeDelegate(cast(void*)&responseFilter) : null;
     GDestroyNotify _responseFilterDestroyCB = responseFilter ? &thawDelegate : null;
-    soup_logger_set_response_filter(cast(SoupLogger*)cPtr, _responseFilterCB, _responseFilter, _responseFilterDestroyCB);
+    soup_logger_set_response_filter(cast(SoupLogger*)this._cPtr, _responseFilterCB, _responseFilter, _responseFilterDestroyCB);
   }
 }

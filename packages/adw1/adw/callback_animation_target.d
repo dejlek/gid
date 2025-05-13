@@ -21,16 +21,16 @@ class CallbackAnimationTarget : adw.animation_target.AnimationTarget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_callback_animation_target_get_type != &gidSymbolNotFound ? adw_callback_animation_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

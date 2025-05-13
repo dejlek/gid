@@ -27,16 +27,16 @@ class Buffer : gtk.text_buffer.TextBuffer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_buffer_get_type != &gidSymbolNotFound ? gtk_source_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,7 +182,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   this(gtk.text_tag_table.TextTagTable table = null)
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table.cPtr(No.Dup) : null);
+    _cretval = gtk_source_buffer_new(table ? cast(GtkTextTagTable*)table._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -199,8 +199,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   static gtksource.buffer.Buffer newWithLanguage(gtksource.language.Language language)
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_buffer_new_with_language(language ? cast(GtkSourceLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, Yes.Take);
+    _cretval = gtk_source_buffer_new_with_language(language ? cast(GtkSourceLanguage*)language._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
-    _retval = gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _category);
+    _retval = gtk_source_buffer_backward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void beginNotUndoableAction()
   {
-    gtk_source_buffer_begin_not_undoable_action(cast(GtkSourceBuffer*)cPtr);
+    gtk_source_buffer_begin_not_undoable_action(cast(GtkSourceBuffer*)this._cPtr);
   }
 
   /**
@@ -244,7 +244,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool canRedo()
   {
     bool _retval;
-    _retval = gtk_source_buffer_can_redo(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_can_redo(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool canUndo()
   {
     bool _retval;
-    _retval = gtk_source_buffer_can_undo(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_can_undo(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void changeCase(gtksource.types.ChangeCaseType caseType, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_change_case(cast(GtkSourceBuffer*)cPtr, caseType, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_source_buffer_change_case(cast(GtkSourceBuffer*)this._cPtr, caseType, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -298,8 +298,8 @@ class Buffer : gtk.text_buffer.TextBuffer
     GtkSourceMark* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)cPtr, _name, _category, where ? cast(const(GtkTextIter)*)where.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    _cretval = gtk_source_buffer_create_source_mark(cast(GtkSourceBuffer*)this._cPtr, _name, _category, where ? cast(const(GtkTextIter)*)where._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void endNotUndoableAction()
   {
-    gtk_source_buffer_end_not_undoable_action(cast(GtkSourceBuffer*)cPtr);
+    gtk_source_buffer_end_not_undoable_action(cast(GtkSourceBuffer*)this._cPtr);
   }
 
   /**
@@ -331,7 +331,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void ensureHighlight(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null);
+    gtk_source_buffer_ensure_highlight(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -348,7 +348,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _category = category.toCString(No.Alloc);
-    _retval = gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _category);
+    _retval = gtk_source_buffer_forward_iter_to_source_mark(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   string[] getContextClassesAtIter(gtk.text_iter.TextIter iter)
   {
     char** _cretval;
-    _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
+    _cretval = gtk_source_buffer_get_context_classes_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     string[] _retval;
 
     if (_cretval)
@@ -390,7 +390,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool getHighlightMatchingBrackets()
   {
     bool _retval;
-    _retval = gtk_source_buffer_get_highlight_matching_brackets(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_get_highlight_matching_brackets(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool getHighlightSyntax()
   {
     bool _retval;
-    _retval = gtk_source_buffer_get_highlight_syntax(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_get_highlight_syntax(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   bool getImplicitTrailingNewline()
   {
     bool _retval;
-    _retval = gtk_source_buffer_get_implicit_trailing_newline(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_get_implicit_trailing_newline(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -424,8 +424,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.language.Language getLanguage()
   {
     GtkSourceLanguage* _cretval;
-    _cretval = gtk_source_buffer_get_language(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    _cretval = gtk_source_buffer_get_language(cast(GtkSourceBuffer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   int getMaxUndoLevels()
   {
     int _retval;
-    _retval = gtk_source_buffer_get_max_undo_levels(cast(GtkSourceBuffer*)cPtr);
+    _retval = gtk_source_buffer_get_max_undo_levels(cast(GtkSourceBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_buffer_get_source_marks_at_iter(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _category);
+    _cretval = gtk_source_buffer_get_source_marks_at_iter(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _category);
     auto _retval = gSListToD!(gtksource.mark.Mark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -471,7 +471,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     GSList* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_buffer_get_source_marks_at_line(cast(GtkSourceBuffer*)cPtr, line, _category);
+    _cretval = gtk_source_buffer_get_source_marks_at_line(cast(GtkSourceBuffer*)this._cPtr, line, _category);
     auto _retval = gSListToD!(gtksource.mark.Mark, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -486,8 +486,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.style_scheme.StyleScheme getStyleScheme()
   {
     GtkSourceStyleScheme* _cretval;
-    _cretval = gtk_source_buffer_get_style_scheme(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    _cretval = gtk_source_buffer_get_style_scheme(cast(GtkSourceBuffer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -501,8 +501,8 @@ class Buffer : gtk.text_buffer.TextBuffer
   gtksource.undo_manager.UndoManager getUndoManager()
   {
     GtkSourceUndoManager* _cretval;
-    _cretval = gtk_source_buffer_get_undo_manager(cast(GtkSourceBuffer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.undo_manager.UndoManager)(cast(GtkSourceUndoManager*)_cretval, No.Take);
+    _cretval = gtk_source_buffer_get_undo_manager(cast(GtkSourceBuffer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.undo_manager.UndoManager)(cast(GtkSourceUndoManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -524,7 +524,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _contextClass);
+    _retval = gtk_source_buffer_iter_backward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
 
@@ -546,7 +546,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, _contextClass);
+    _retval = gtk_source_buffer_iter_forward_to_context_class_toggle(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   {
     bool _retval;
     const(char)* _contextClass = contextClass.toCString(No.Alloc);
-    _retval = gtk_source_buffer_iter_has_context_class(cast(GtkSourceBuffer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, _contextClass);
+    _retval = gtk_source_buffer_iter_has_context_class(cast(GtkSourceBuffer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, _contextClass);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void joinLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_buffer_join_lines(cast(GtkSourceBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_source_buffer_join_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -588,7 +588,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void redo()
   {
-    gtk_source_buffer_redo(cast(GtkSourceBuffer*)cPtr);
+    gtk_source_buffer_redo(cast(GtkSourceBuffer*)this._cPtr);
   }
 
   /**
@@ -603,7 +603,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   void removeSourceMarks(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
-    gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)cPtr, start ? cast(const(GtkTextIter)*)start.cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end.cPtr(No.Dup) : null, _category);
+    gtk_source_buffer_remove_source_marks(cast(GtkSourceBuffer*)this._cPtr, start ? cast(const(GtkTextIter)*)start._cPtr(No.Dup) : null, end ? cast(const(GtkTextIter)*)end._cPtr(No.Dup) : null, _category);
   }
 
   /**
@@ -617,7 +617,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setHighlightMatchingBrackets(bool highlight)
   {
-    gtk_source_buffer_set_highlight_matching_brackets(cast(GtkSourceBuffer*)cPtr, highlight);
+    gtk_source_buffer_set_highlight_matching_brackets(cast(GtkSourceBuffer*)this._cPtr, highlight);
   }
 
   /**
@@ -636,7 +636,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setHighlightSyntax(bool highlight)
   {
-    gtk_source_buffer_set_highlight_syntax(cast(GtkSourceBuffer*)cPtr, highlight);
+    gtk_source_buffer_set_highlight_syntax(cast(GtkSourceBuffer*)this._cPtr, highlight);
   }
 
   /**
@@ -663,7 +663,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setImplicitTrailingNewline(bool implicitTrailingNewline)
   {
-    gtk_source_buffer_set_implicit_trailing_newline(cast(GtkSourceBuffer*)cPtr, implicitTrailingNewline);
+    gtk_source_buffer_set_implicit_trailing_newline(cast(GtkSourceBuffer*)this._cPtr, implicitTrailingNewline);
   }
 
   /**
@@ -680,7 +680,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setLanguage(gtksource.language.Language language = null)
   {
-    gtk_source_buffer_set_language(cast(GtkSourceBuffer*)cPtr, language ? cast(GtkSourceLanguage*)language.cPtr(No.Dup) : null);
+    gtk_source_buffer_set_language(cast(GtkSourceBuffer*)this._cPtr, language ? cast(GtkSourceLanguage*)language._cPtr(No.Dup) : null);
   }
 
   /**
@@ -697,7 +697,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setMaxUndoLevels(int maxUndoLevels)
   {
-    gtk_source_buffer_set_max_undo_levels(cast(GtkSourceBuffer*)cPtr, maxUndoLevels);
+    gtk_source_buffer_set_max_undo_levels(cast(GtkSourceBuffer*)this._cPtr, maxUndoLevels);
   }
 
   /**
@@ -720,7 +720,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setStyleScheme(gtksource.style_scheme.StyleScheme scheme = null)
   {
-    gtk_source_buffer_set_style_scheme(cast(GtkSourceBuffer*)cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
+    gtk_source_buffer_set_style_scheme(cast(GtkSourceBuffer*)this._cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
   }
 
   /**
@@ -732,7 +732,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void setUndoManager(gtksource.undo_manager.UndoManager manager = null)
   {
-    gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)cPtr, manager ? cast(GtkSourceUndoManager*)(cast(gobject.object.ObjectWrap)manager).cPtr(No.Dup) : null);
+    gtk_source_buffer_set_undo_manager(cast(GtkSourceBuffer*)this._cPtr, manager ? cast(GtkSourceUndoManager*)(cast(gobject.object.ObjectWrap)manager)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -746,7 +746,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void sortLines(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.SortFlags flags, int column)
   {
-    gtk_source_buffer_sort_lines(cast(GtkSourceBuffer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, flags, column);
+    gtk_source_buffer_sort_lines(cast(GtkSourceBuffer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, flags, column);
   }
 
   /**
@@ -758,7 +758,7 @@ class Buffer : gtk.text_buffer.TextBuffer
   */
   void undo()
   {
-    gtk_source_buffer_undo(cast(GtkSourceBuffer*)cPtr);
+    gtk_source_buffer_undo(cast(GtkSourceBuffer*)this._cPtr);
   }
 
   /**

@@ -19,7 +19,7 @@ interface Swipeable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_swipeable_get_type != &gidSymbolNotFound ? adw_swipeable_get_type() : cast(GType)0;

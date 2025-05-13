@@ -97,16 +97,16 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_get_type != &gidSymbolNotFound ? gtk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -667,7 +667,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   {
     GListModel* _cretval;
     _cretval = gtk_window_get_toplevels();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -753,7 +753,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void close()
   {
-    gtk_window_close(cast(GtkWindow*)cPtr);
+    gtk_window_close(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -761,7 +761,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void destroy()
   {
-    gtk_window_destroy(cast(GtkWindow*)cPtr);
+    gtk_window_destroy(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -778,7 +778,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void fullscreen()
   {
-    gtk_window_fullscreen(cast(GtkWindow*)cPtr);
+    gtk_window_fullscreen(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -797,7 +797,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void fullscreenOnMonitor(gdk.monitor.MonitorWrap monitor)
   {
-    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
+    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)this._cPtr, monitor ? cast(GdkMonitor*)monitor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -807,8 +807,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.application.Application getApplication()
   {
     GtkApplication* _cretval;
-    _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
+    _cretval = gtk_window_get_application(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -819,8 +819,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_child(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_child(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -831,7 +831,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDecorated()
   {
     bool _retval;
-    _retval = gtk_window_get_decorated(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -851,7 +851,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void getDefaultSize(out int width, out int height)
   {
-    gtk_window_get_default_size(cast(GtkWindow*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_window_get_default_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -861,8 +861,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.widget.Widget getDefaultWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_default_widget(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -873,7 +873,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDeletable()
   {
     bool _retval;
-    _retval = gtk_window_get_deletable(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -884,7 +884,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getDestroyWithParent()
   {
     bool _retval;
-    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -900,8 +900,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.widget.Widget getFocus()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_focus(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -913,7 +913,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getFocusVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -927,8 +927,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.window_group.WindowGroup getGroup()
   {
     GtkWindowGroup* _cretval;
-    _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
+    _cretval = gtk_window_get_group(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -940,7 +940,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getHandleMenubarAccel()
   {
     bool _retval;
-    _retval = gtk_window_get_handle_menubar_accel(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_handle_menubar_accel(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -951,7 +951,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getHideOnClose()
   {
     bool _retval;
-    _retval = gtk_window_get_hide_on_close(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_hide_on_close(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -962,7 +962,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_icon_name(cast(GtkWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -975,7 +975,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -987,7 +987,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_window_get_modal(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -998,7 +998,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_window_get_resizable(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1009,7 +1009,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_title(cast(GtkWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1022,8 +1022,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.widget.Widget getTitlebar()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_titlebar(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1034,8 +1034,8 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   gtk.window.Window getTransientFor()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_window_get_transient_for(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1046,7 +1046,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool hasGroup()
   {
     bool _retval;
-    _retval = gtk_window_has_group(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_has_group(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1063,7 +1063,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_window_is_active(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_active(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1083,7 +1083,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isFullscreen()
   {
     bool _retval;
-    _retval = gtk_window_is_fullscreen(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_fullscreen(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1103,7 +1103,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isMaximized()
   {
     bool _retval;
-    _retval = gtk_window_is_maximized(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1117,7 +1117,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   bool isSuspended()
   {
     bool _retval;
-    _retval = gtk_window_is_suspended(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_suspended(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1140,7 +1140,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void maximize()
   {
-    gtk_window_maximize(cast(GtkWindow*)cPtr);
+    gtk_window_maximize(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1161,7 +1161,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void minimize()
   {
-    gtk_window_minimize(cast(GtkWindow*)cPtr);
+    gtk_window_minimize(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1176,7 +1176,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void present()
   {
-    gtk_window_present(cast(GtkWindow*)cPtr);
+    gtk_window_present(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1196,7 +1196,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void presentWithTime(uint timestamp)
   {
-    gtk_window_present_with_time(cast(GtkWindow*)cPtr, timestamp);
+    gtk_window_present_with_time(cast(GtkWindow*)this._cPtr, timestamp);
   }
 
   /**
@@ -1219,7 +1219,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setApplication(gtk.application.Application application = null)
   {
-    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
+    gtk_window_set_application(cast(GtkWindow*)this._cPtr, application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1230,7 +1230,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_window_set_child(cast(GtkWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_window_set_child(cast(GtkWindow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1253,7 +1253,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDecorated(bool setting)
   {
-    gtk_window_set_decorated(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_decorated(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1293,7 +1293,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDefaultSize(int width, int height)
   {
-    gtk_window_set_default_size(cast(GtkWindow*)cPtr, width, height);
+    gtk_window_set_default_size(cast(GtkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -1308,7 +1308,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
   {
-    gtk_window_set_default_widget(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
+    gtk_window_set_default_widget(cast(GtkWindow*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1330,7 +1330,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDeletable(bool setting)
   {
-    gtk_window_set_deletable(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_deletable(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1345,7 +1345,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDestroyWithParent(bool setting)
   {
-    gtk_window_set_destroy_with_parent(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_destroy_with_parent(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1359,7 +1359,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setDisplay(gdk.display.Display display)
   {
-    gtk_window_set_display(cast(GtkWindow*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    gtk_window_set_display(cast(GtkWindow*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1377,7 +1377,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setFocus(gtk.widget.Widget focus = null)
   {
-    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
+    gtk_window_set_focus(cast(GtkWindow*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1391,7 +1391,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setFocusVisible(bool setting)
   {
-    gtk_window_set_focus_visible(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_focus_visible(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1403,7 +1403,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setHandleMenubarAccel(bool handleMenubarAccel)
   {
-    gtk_window_set_handle_menubar_accel(cast(GtkWindow*)cPtr, handleMenubarAccel);
+    gtk_window_set_handle_menubar_accel(cast(GtkWindow*)this._cPtr, handleMenubarAccel);
   }
 
   /**
@@ -1415,7 +1415,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setHideOnClose(bool setting)
   {
-    gtk_window_set_hide_on_close(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_hide_on_close(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1433,7 +1433,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
+    gtk_window_set_icon_name(cast(GtkWindow*)this._cPtr, _name);
   }
 
   /**
@@ -1447,7 +1447,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setMnemonicsVisible(bool setting)
   {
-    gtk_window_set_mnemonics_visible(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_mnemonics_visible(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1464,7 +1464,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setModal(bool modal)
   {
-    gtk_window_set_modal(cast(GtkWindow*)cPtr, modal);
+    gtk_window_set_modal(cast(GtkWindow*)this._cPtr, modal);
   }
 
   /**
@@ -1477,7 +1477,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setResizable(bool resizable)
   {
-    gtk_window_set_resizable(cast(GtkWindow*)cPtr, resizable);
+    gtk_window_set_resizable(cast(GtkWindow*)this._cPtr, resizable);
   }
 
   /**
@@ -1502,7 +1502,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   void setStartupId(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gtk_window_set_startup_id(cast(GtkWindow*)cPtr, _startupId);
+    gtk_window_set_startup_id(cast(GtkWindow*)this._cPtr, _startupId);
   }
 
   /**
@@ -1523,7 +1523,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
+    gtk_window_set_title(cast(GtkWindow*)this._cPtr, _title);
   }
 
   /**
@@ -1544,7 +1544,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setTitlebar(gtk.widget.Widget titlebar = null)
   {
-    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
+    gtk_window_set_titlebar(cast(GtkWindow*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1565,7 +1565,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_window_set_transient_for(cast(GtkWindow*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1585,7 +1585,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void unfullscreen()
   {
-    gtk_window_unfullscreen(cast(GtkWindow*)cPtr);
+    gtk_window_unfullscreen(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1602,7 +1602,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void unmaximize()
   {
-    gtk_window_unmaximize(cast(GtkWindow*)cPtr);
+    gtk_window_unmaximize(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1619,7 +1619,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
   */
   void unminimize()
   {
-    gtk_window_unminimize(cast(GtkWindow*)cPtr);
+    gtk_window_unminimize(cast(GtkWindow*)this._cPtr);
   }
 
   /**

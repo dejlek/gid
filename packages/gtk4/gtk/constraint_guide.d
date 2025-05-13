@@ -33,16 +33,16 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_guide_get_type != &gidSymbolNotFound ? gtk_constraint_guide_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -227,7 +227,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void getMaxSize(out int width, out int height)
   {
-    gtk_constraint_guide_get_max_size(cast(GtkConstraintGuide*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_constraint_guide_get_max_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -239,7 +239,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void getMinSize(out int width, out int height)
   {
-    gtk_constraint_guide_get_min_size(cast(GtkConstraintGuide*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_constraint_guide_get_min_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -249,7 +249,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)cPtr);
+    _cretval = gtk_constraint_guide_get_name(cast(GtkConstraintGuide*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -263,7 +263,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void getNatSize(out int width, out int height)
   {
-    gtk_constraint_guide_get_nat_size(cast(GtkConstraintGuide*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_constraint_guide_get_nat_size(cast(GtkConstraintGuide*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -273,7 +273,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   gtk.types.ConstraintStrength getStrength()
   {
     GtkConstraintStrength _cretval;
-    _cretval = gtk_constraint_guide_get_strength(cast(GtkConstraintGuide*)cPtr);
+    _cretval = gtk_constraint_guide_get_strength(cast(GtkConstraintGuide*)this._cPtr);
     gtk.types.ConstraintStrength _retval = cast(gtk.types.ConstraintStrength)_cretval;
     return _retval;
   }
@@ -290,7 +290,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void setMaxSize(int width, int height)
   {
-    gtk_constraint_guide_set_max_size(cast(GtkConstraintGuide*)cPtr, width, height);
+    gtk_constraint_guide_set_max_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
 
   /**
@@ -305,7 +305,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void setMinSize(int width, int height)
   {
-    gtk_constraint_guide_set_min_size(cast(GtkConstraintGuide*)cPtr, width, height);
+    gtk_constraint_guide_set_min_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
 
   /**
@@ -319,7 +319,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)cPtr, _name);
+    gtk_constraint_guide_set_name(cast(GtkConstraintGuide*)this._cPtr, _name);
   }
 
   /**
@@ -334,7 +334,7 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void setNatSize(int width, int height)
   {
-    gtk_constraint_guide_set_nat_size(cast(GtkConstraintGuide*)cPtr, width, height);
+    gtk_constraint_guide_set_nat_size(cast(GtkConstraintGuide*)this._cPtr, width, height);
   }
 
   /**
@@ -346,6 +346,6 @@ class ConstraintGuide : gobject.object.ObjectWrap, gtk.constraint_target.Constra
   */
   void setStrength(gtk.types.ConstraintStrength strength)
   {
-    gtk_constraint_guide_set_strength(cast(GtkConstraintGuide*)cPtr, strength);
+    gtk_constraint_guide_set_strength(cast(GtkConstraintGuide*)this._cPtr, strength);
   }
 }

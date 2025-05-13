@@ -24,16 +24,16 @@ class CompressedInputStream : arrow.input_stream.InputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_compressed_input_stream_get_type != &gidSymbolNotFound ? garrow_compressed_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class CompressedInputStream : arrow.input_stream.InputStream
   {
     GArrowCompressedInputStream* _cretval;
     GError *_err;
-    _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec.cPtr(No.Dup) : null, raw ? cast(GArrowInputStream*)raw.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_compressed_input_stream_new(codec ? cast(GArrowCodec*)codec._cPtr(No.Dup) : null, raw ? cast(GArrowInputStream*)raw._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);

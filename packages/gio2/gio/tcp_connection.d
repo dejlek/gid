@@ -21,16 +21,16 @@ class TcpConnection : gio.socket_connection.SocketConnection
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tcp_connection_get_type != &gidSymbolNotFound ? g_tcp_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class TcpConnection : gio.socket_connection.SocketConnection
   bool getGracefulDisconnect()
   {
     bool _retval;
-    _retval = g_tcp_connection_get_graceful_disconnect(cast(GTcpConnection*)cPtr);
+    _retval = g_tcp_connection_get_graceful_disconnect(cast(GTcpConnection*)this._cPtr);
     return _retval;
   }
 
@@ -86,6 +86,6 @@ class TcpConnection : gio.socket_connection.SocketConnection
   */
   void setGracefulDisconnect(bool gracefulDisconnect)
   {
-    g_tcp_connection_set_graceful_disconnect(cast(GTcpConnection*)cPtr, gracefulDisconnect);
+    g_tcp_connection_set_graceful_disconnect(cast(GTcpConnection*)this._cPtr, gracefulDisconnect);
   }
 }

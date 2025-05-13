@@ -47,22 +47,22 @@ class ValueArray : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_array_get_type != &gidSymbolNotFound ? g_value_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -77,7 +77,7 @@ class ValueArray : gobject.boxed.Boxed
   */
   @property uint nValues()
   {
-    return (cast(GValueArray*)cPtr).nValues;
+    return (cast(GValueArray*)this._cPtr).nValues;
   }
 
   /**
@@ -87,7 +87,7 @@ class ValueArray : gobject.boxed.Boxed
   */
   @property void nValues(uint propval)
   {
-    (cast(GValueArray*)cPtr).nValues = propval;
+    (cast(GValueArray*)this._cPtr).nValues = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class ValueArray : gobject.boxed.Boxed
   */
   @property gobject.value.Value values()
   {
-    return cToD!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);
+    return cToD!(gobject.value.Value)(cast(void*)(cast(GValueArray*)this._cPtr).values);
   }
 
   /**
@@ -106,8 +106,8 @@ class ValueArray : gobject.boxed.Boxed
   */
   @property void values(gobject.value.Value propval)
   {
-    cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)cPtr).values);
-    dToC(propval, cast(void*)&(cast(GValueArray*)cPtr).values);
+    cValueFree!(gobject.value.Value)(cast(void*)(cast(GValueArray*)this._cPtr).values);
+    dToC(propval, cast(void*)&(cast(GValueArray*)this._cPtr).values);
   }
 
   /**
@@ -141,7 +141,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray append(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_append(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _cretval = g_value_array_append(cast(GValueArray*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -156,7 +156,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray copy()
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_copy(cast(const(GValueArray)*)cPtr);
+    _cretval = g_value_array_copy(cast(const(GValueArray)*)this._cPtr);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -173,7 +173,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value.Value getNth(uint index)
   {
     GValue* _cretval;
-    _cretval = g_value_array_get_nth(cast(GValueArray*)cPtr, index);
+    _cretval = g_value_array_get_nth(cast(GValueArray*)this._cPtr, index);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -192,7 +192,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray insert(uint index, gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_insert(cast(GValueArray*)cPtr, index, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _cretval = g_value_array_insert(cast(GValueArray*)this._cPtr, index, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -210,7 +210,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray prepend(gobject.value.Value value = null)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_prepend(cast(GValueArray*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _cretval = g_value_array_prepend(cast(GValueArray*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -228,7 +228,7 @@ class ValueArray : gobject.boxed.Boxed
   gobject.value_array.ValueArray remove(uint index)
   {
     GValueArray* _cretval;
-    _cretval = g_value_array_remove(cast(GValueArray*)cPtr, index);
+    _cretval = g_value_array_remove(cast(GValueArray*)this._cPtr, index);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -259,7 +259,7 @@ class ValueArray : gobject.boxed.Boxed
 
     GValueArray* _cretval;
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
-    _cretval = g_value_array_sort_with_data(cast(GValueArray*)cPtr, _compareFuncCB, _compareFunc);
+    _cretval = g_value_array_sort_with_data(cast(GValueArray*)this._cPtr, _compareFuncCB, _compareFunc);
     auto _retval = _cretval ? new gobject.value_array.ValueArray(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

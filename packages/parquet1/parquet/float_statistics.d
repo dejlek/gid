@@ -18,16 +18,16 @@ class FloatStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_float_statistics_get_type != &gidSymbolNotFound ? gparquet_float_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class FloatStatistics : parquet.statistics.Statistics
   float getMax()
   {
     float _retval;
-    _retval = gparquet_float_statistics_get_max(cast(GParquetFloatStatistics*)cPtr);
+    _retval = gparquet_float_statistics_get_max(cast(GParquetFloatStatistics*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class FloatStatistics : parquet.statistics.Statistics
   float getMin()
   {
     float _retval;
-    _retval = gparquet_float_statistics_get_min(cast(GParquetFloatStatistics*)cPtr);
+    _retval = gparquet_float_statistics_get_min(cast(GParquetFloatStatistics*)this._cPtr);
     return _retval;
   }
 }

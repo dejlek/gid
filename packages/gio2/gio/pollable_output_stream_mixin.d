@@ -37,7 +37,7 @@ template PollableOutputStreamT()
   override bool canPoll()
   {
     bool _retval;
-    _retval = g_pollable_output_stream_can_poll(cast(GPollableOutputStream*)cPtr);
+    _retval = g_pollable_output_stream_can_poll(cast(GPollableOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template PollableOutputStreamT()
   override glib.source.Source createSource(gio.cancellable.Cancellable cancellable = null)
   {
     GSource* _cretval;
-    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null);
+    _cretval = g_pollable_output_stream_create_source(cast(GPollableOutputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -86,7 +86,7 @@ template PollableOutputStreamT()
   override bool isWritable()
   {
     bool _retval;
-    _retval = g_pollable_output_stream_is_writable(cast(GPollableOutputStream*)cPtr);
+    _retval = g_pollable_output_stream_is_writable(cast(GPollableOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ template PollableOutputStreamT()
 
     auto _buffer = cast(void*)buffer.ptr;
     GError *_err;
-    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_pollable_output_stream_write_nonblocking(cast(GPollableOutputStream*)this._cPtr, _buffer, _count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -174,7 +174,7 @@ template PollableOutputStreamT()
 
     auto _vectors = cast(const(GOutputVector)*)vectors.ptr;
     GError *_err;
-    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_pollable_output_stream_writev_nonblocking(cast(GPollableOutputStream*)this._cPtr, _vectors, _nVectors, cast(size_t*)&bytesWritten, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.PollableReturn _retval = cast(gio.types.PollableReturn)_cretval;

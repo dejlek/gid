@@ -22,7 +22,7 @@ template CompletionProposalT()
   */
   override void changed()
   {
-    gtk_source_completion_proposal_changed(cast(GtkSourceCompletionProposal*)cPtr);
+    gtk_source_completion_proposal_changed(cast(GtkSourceCompletionProposal*)this._cPtr);
   }
 
   /**
@@ -37,7 +37,7 @@ template CompletionProposalT()
   override bool equal(gtksource.completion_proposal.CompletionProposal other)
   {
     bool _retval;
-    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other).cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_proposal_equal(cast(GtkSourceCompletionProposal*)this._cPtr, other ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)other)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -48,8 +48,8 @@ template CompletionProposalT()
   override gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_source_completion_proposal_get_gicon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_source_completion_proposal_get_gicon(cast(GtkSourceCompletionProposal*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -60,8 +60,8 @@ template CompletionProposalT()
   override gdkpixbuf.pixbuf.Pixbuf getIcon()
   {
     PixbufC* _cretval;
-    _cretval = gtk_source_completion_proposal_get_icon(cast(GtkSourceCompletionProposal*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_source_completion_proposal_get_icon(cast(GtkSourceCompletionProposal*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ template CompletionProposalT()
   override string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_completion_proposal_get_icon_name(cast(GtkSourceCompletionProposal*)cPtr);
+    _cretval = gtk_source_completion_proposal_get_icon_name(cast(GtkSourceCompletionProposal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -88,7 +88,7 @@ template CompletionProposalT()
   override string getInfo()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_proposal_get_info(cast(GtkSourceCompletionProposal*)cPtr);
+    _cretval = gtk_source_completion_proposal_get_info(cast(GtkSourceCompletionProposal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -103,7 +103,7 @@ template CompletionProposalT()
   override string getLabel()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_proposal_get_label(cast(GtkSourceCompletionProposal*)cPtr);
+    _cretval = gtk_source_completion_proposal_get_label(cast(GtkSourceCompletionProposal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -118,7 +118,7 @@ template CompletionProposalT()
   override string getMarkup()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_proposal_get_markup(cast(GtkSourceCompletionProposal*)cPtr);
+    _cretval = gtk_source_completion_proposal_get_markup(cast(GtkSourceCompletionProposal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -135,7 +135,7 @@ template CompletionProposalT()
   override string getText()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_proposal_get_text(cast(GtkSourceCompletionProposal*)cPtr);
+    _cretval = gtk_source_completion_proposal_get_text(cast(GtkSourceCompletionProposal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -149,7 +149,7 @@ template CompletionProposalT()
   override uint hash()
   {
     uint _retval;
-    _retval = gtk_source_completion_proposal_hash(cast(GtkSourceCompletionProposal*)cPtr);
+    _retval = gtk_source_completion_proposal_hash(cast(GtkSourceCompletionProposal*)this._cPtr);
     return _retval;
   }
 

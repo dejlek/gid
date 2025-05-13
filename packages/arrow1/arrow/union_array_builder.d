@@ -19,16 +19,16 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_array_builder_get_type != &gidSymbolNotFound ? garrow_union_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     byte _retval;
     const(char)* _fieldName = fieldName.toCString(No.Alloc);
-    _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)cPtr, child ? cast(GArrowArrayBuilder*)child.cPtr(No.Dup) : null, _fieldName);
+    _retval = garrow_union_array_builder_append_child(cast(GArrowUnionArrayBuilder*)this._cPtr, child ? cast(GArrowArrayBuilder*)child._cPtr(No.Dup) : null, _fieldName);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ class UnionArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)cPtr, value, &_err);
+    _retval = garrow_union_array_builder_append_value(cast(GArrowUnionArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

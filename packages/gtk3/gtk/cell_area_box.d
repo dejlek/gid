@@ -43,16 +43,16 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_box_get_type != &gidSymbolNotFound ? gtk_cell_area_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   int getSpacing()
   {
     int _retval;
-    _retval = gtk_cell_area_box_get_spacing(cast(GtkCellAreaBox*)cPtr);
+    _retval = gtk_cell_area_box_get_spacing(cast(GtkCellAreaBox*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   void packEnd(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_end(cast(GtkCellAreaBox*)this._cPtr, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**
@@ -137,7 +137,7 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   void packStart(gtk.cell_renderer.CellRenderer renderer, bool expand, bool align_, bool fixed)
   {
-    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)cPtr, renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null, expand, align_, fixed);
+    gtk_cell_area_box_pack_start(cast(GtkCellAreaBox*)this._cPtr, renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null, expand, align_, fixed);
   }
 
   /**
@@ -148,6 +148,6 @@ class CellAreaBox : gtk.cell_area.CellArea, gtk.orientable.Orientable
   */
   void setSpacing(int spacing)
   {
-    gtk_cell_area_box_set_spacing(cast(GtkCellAreaBox*)cPtr, spacing);
+    gtk_cell_area_box_set_spacing(cast(GtkCellAreaBox*)this._cPtr, spacing);
   }
 }

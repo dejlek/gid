@@ -22,22 +22,22 @@ class NavigationAction : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_navigation_action_get_type != &gidSymbolNotFound ? webkit_navigation_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class NavigationAction : gobject.boxed.Boxed
   webkit.navigation_action.NavigationAction copy()
   {
     WebKitNavigationAction* _cretval;
-    _cretval = webkit_navigation_action_copy(cast(WebKitNavigationAction*)cPtr);
+    _cretval = webkit_navigation_action_copy(cast(WebKitNavigationAction*)this._cPtr);
     auto _retval = _cretval ? new webkit.navigation_action.NavigationAction(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -67,7 +67,7 @@ class NavigationAction : gobject.boxed.Boxed
   string getFrameName()
   {
     const(char)* _cretval;
-    _cretval = webkit_navigation_action_get_frame_name(cast(WebKitNavigationAction*)cPtr);
+    _cretval = webkit_navigation_action_get_frame_name(cast(WebKitNavigationAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -82,7 +82,7 @@ class NavigationAction : gobject.boxed.Boxed
   uint getModifiers()
   {
     uint _retval;
-    _retval = webkit_navigation_action_get_modifiers(cast(WebKitNavigationAction*)cPtr);
+    _retval = webkit_navigation_action_get_modifiers(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class NavigationAction : gobject.boxed.Boxed
   uint getMouseButton()
   {
     uint _retval;
-    _retval = webkit_navigation_action_get_mouse_button(cast(WebKitNavigationAction*)cPtr);
+    _retval = webkit_navigation_action_get_mouse_button(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class NavigationAction : gobject.boxed.Boxed
   webkit.types.NavigationType getNavigationType()
   {
     WebKitNavigationType _cretval;
-    _cretval = webkit_navigation_action_get_navigation_type(cast(WebKitNavigationAction*)cPtr);
+    _cretval = webkit_navigation_action_get_navigation_type(cast(WebKitNavigationAction*)this._cPtr);
     webkit.types.NavigationType _retval = cast(webkit.types.NavigationType)_cretval;
     return _retval;
   }
@@ -125,8 +125,8 @@ class NavigationAction : gobject.boxed.Boxed
   webkit.urirequest.URIRequest getRequest()
   {
     WebKitURIRequest* _cretval;
-    _cretval = webkit_navigation_action_get_request(cast(WebKitNavigationAction*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    _cretval = webkit_navigation_action_get_request(cast(WebKitNavigationAction*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class NavigationAction : gobject.boxed.Boxed
   bool isRedirect()
   {
     bool _retval;
-    _retval = webkit_navigation_action_is_redirect(cast(WebKitNavigationAction*)cPtr);
+    _retval = webkit_navigation_action_is_redirect(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class NavigationAction : gobject.boxed.Boxed
   bool isUserGesture()
   {
     bool _retval;
-    _retval = webkit_navigation_action_is_user_gesture(cast(WebKitNavigationAction*)cPtr);
+    _retval = webkit_navigation_action_is_user_gesture(cast(WebKitNavigationAction*)this._cPtr);
     return _retval;
   }
 }

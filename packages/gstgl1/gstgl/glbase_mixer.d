@@ -24,16 +24,16 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_base_mixer_get_type != &gidSymbolNotFound ? gst_gl_base_mixer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,8 +55,8 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
   gstgl.glcontext.GLContext getGlContext()
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    _cretval = gst_gl_base_mixer_get_gl_context(cast(GstGLBaseMixer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 }

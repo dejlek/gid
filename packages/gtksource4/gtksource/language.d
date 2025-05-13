@@ -18,16 +18,16 @@ class Language : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_language_get_type != &gidSymbolNotFound ? gtk_source_language_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class Language : gobject.object.ObjectWrap
   string[] getGlobs()
   {
     char** _cretval;
-    _cretval = gtk_source_language_get_globs(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_globs(cast(GtkSourceLanguage*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -93,7 +93,7 @@ class Language : gobject.object.ObjectWrap
   bool getHidden()
   {
     bool _retval;
-    _retval = gtk_source_language_get_hidden(cast(GtkSourceLanguage*)cPtr);
+    _retval = gtk_source_language_get_hidden(cast(GtkSourceLanguage*)this._cPtr);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Language : gobject.object.ObjectWrap
   string getId()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_language_get_id(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_id(cast(GtkSourceLanguage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -116,7 +116,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_source_language_get_metadata(cast(GtkSourceLanguage*)cPtr, _name);
+    _cretval = gtk_source_language_get_metadata(cast(GtkSourceLanguage*)this._cPtr, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -133,7 +133,7 @@ class Language : gobject.object.ObjectWrap
   string[] getMimeTypes()
   {
     char** _cretval;
-    _cretval = gtk_source_language_get_mime_types(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_mime_types(cast(GtkSourceLanguage*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -157,7 +157,7 @@ class Language : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_language_get_name(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_name(cast(GtkSourceLanguage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -173,7 +173,7 @@ class Language : gobject.object.ObjectWrap
   string getSection()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_language_get_section(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_section(cast(GtkSourceLanguage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -193,7 +193,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
-    _cretval = gtk_source_language_get_style_fallback(cast(GtkSourceLanguage*)cPtr, _styleId);
+    _cretval = gtk_source_language_get_style_fallback(cast(GtkSourceLanguage*)this._cPtr, _styleId);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -207,7 +207,7 @@ class Language : gobject.object.ObjectWrap
   string[] getStyleIds()
   {
     char** _cretval;
-    _cretval = gtk_source_language_get_style_ids(cast(GtkSourceLanguage*)cPtr);
+    _cretval = gtk_source_language_get_style_ids(cast(GtkSourceLanguage*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -236,7 +236,7 @@ class Language : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
-    _cretval = gtk_source_language_get_style_name(cast(GtkSourceLanguage*)cPtr, _styleId);
+    _cretval = gtk_source_language_get_style_name(cast(GtkSourceLanguage*)this._cPtr, _styleId);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

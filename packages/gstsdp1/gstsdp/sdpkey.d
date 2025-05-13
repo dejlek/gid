@@ -27,7 +27,7 @@ class SDPKey
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class SDPKey
   */
   @property string type()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
+    return cToD!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).type);
   }
 
   /**
@@ -48,8 +48,8 @@ class SDPKey
   */
   @property void type(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).type);
-    dToC(propval, cast(void*)&(cast(GstSDPKey*)cPtr).type);
+    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).type);
+    dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).type);
   }
 
   /**
@@ -58,7 +58,7 @@ class SDPKey
   */
   @property string data()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);
+    return cToD!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).data);
   }
 
   /**
@@ -68,7 +68,7 @@ class SDPKey
   */
   @property void data(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)cPtr).data);
-    dToC(propval, cast(void*)&(cast(GstSDPKey*)cPtr).data);
+    cValueFree!(string)(cast(void*)(cast(GstSDPKey*)this._cPtr).data);
+    dToC(propval, cast(void*)&(cast(GstSDPKey*)this._cPtr).data);
   }
 }

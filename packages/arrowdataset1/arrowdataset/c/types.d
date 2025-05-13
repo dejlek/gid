@@ -38,7 +38,7 @@ struct GADatasetCSVFileFormatClass
 struct GADatasetDataset
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -52,7 +52,7 @@ struct GADatasetDatasetClass
 struct GADatasetDatasetFactory
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -80,7 +80,7 @@ struct GADatasetDirectoryPartitioningClass
 struct GADatasetFileFormat
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -122,7 +122,7 @@ struct GADatasetFileSystemDatasetFactoryClass
 struct GADatasetFileSystemDatasetWriteOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -136,7 +136,7 @@ struct GADatasetFileSystemDatasetWriteOptionsClass
 struct GADatasetFileWriteOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -150,7 +150,7 @@ struct GADatasetFileWriteOptionsClass
 struct GADatasetFileWriter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -164,7 +164,7 @@ struct GADatasetFileWriterClass
 struct GADatasetFinishOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -178,7 +178,7 @@ struct GADatasetFinishOptionsClass
 struct GADatasetFragment
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -262,7 +262,7 @@ struct GADatasetKeyValuePartitioningClass
 struct GADatasetKeyValuePartitioningOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -290,7 +290,7 @@ struct GADatasetParquetFileFormatClass
 struct GADatasetPartitioning
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -304,7 +304,7 @@ struct GADatasetPartitioningClass
 struct GADatasetPartitioningFactoryOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -318,14 +318,14 @@ struct GADatasetPartitioningFactoryOptionsClass
 struct GADatasetScanner
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
 struct GADatasetScannerBuilder
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

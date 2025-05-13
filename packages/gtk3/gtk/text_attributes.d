@@ -27,22 +27,22 @@ class TextAttributes : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_attributes_get_type != &gidSymbolNotFound ? gtk_text_attributes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property gtk.text_appearance.TextAppearance appearance()
   {
-    return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)cPtr).appearance);
+    return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)this._cPtr).appearance);
   }
 
   /**
@@ -66,7 +66,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property gtk.types.Justification justification()
   {
-    return cast(gtk.types.Justification)(cast(GtkTextAttributes*)cPtr).justification;
+    return cast(gtk.types.Justification)(cast(GtkTextAttributes*)this._cPtr).justification;
   }
 
   /**
@@ -76,7 +76,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void justification(gtk.types.Justification propval)
   {
-    (cast(GtkTextAttributes*)cPtr).justification = cast(GtkJustification)propval;
+    (cast(GtkTextAttributes*)this._cPtr).justification = cast(GtkJustification)propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property gtk.types.TextDirection direction()
   {
-    return cast(gtk.types.TextDirection)(cast(GtkTextAttributes*)cPtr).direction;
+    return cast(gtk.types.TextDirection)(cast(GtkTextAttributes*)this._cPtr).direction;
   }
 
   /**
@@ -95,7 +95,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void direction(gtk.types.TextDirection propval)
   {
-    (cast(GtkTextAttributes*)cPtr).direction = cast(GtkTextDirection)propval;
+    (cast(GtkTextAttributes*)this._cPtr).direction = cast(GtkTextDirection)propval;
   }
 
   /**
@@ -104,7 +104,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property pango.font_description.FontDescription font()
   {
-    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)cPtr).font);
+    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).font);
   }
 
   /**
@@ -114,8 +114,8 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void font(pango.font_description.FontDescription propval)
   {
-    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)cPtr).font);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).font);
+    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).font);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).font);
   }
 
   /**
@@ -124,7 +124,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property double fontScale()
   {
-    return (cast(GtkTextAttributes*)cPtr).fontScale;
+    return (cast(GtkTextAttributes*)this._cPtr).fontScale;
   }
 
   /**
@@ -134,7 +134,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void fontScale(double propval)
   {
-    (cast(GtkTextAttributes*)cPtr).fontScale = propval;
+    (cast(GtkTextAttributes*)this._cPtr).fontScale = propval;
   }
 
   /**
@@ -143,7 +143,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int leftMargin()
   {
-    return (cast(GtkTextAttributes*)cPtr).leftMargin;
+    return (cast(GtkTextAttributes*)this._cPtr).leftMargin;
   }
 
   /**
@@ -153,7 +153,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void leftMargin(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).leftMargin = propval;
+    (cast(GtkTextAttributes*)this._cPtr).leftMargin = propval;
   }
 
   /**
@@ -162,7 +162,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int rightMargin()
   {
-    return (cast(GtkTextAttributes*)cPtr).rightMargin;
+    return (cast(GtkTextAttributes*)this._cPtr).rightMargin;
   }
 
   /**
@@ -172,7 +172,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void rightMargin(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).rightMargin = propval;
+    (cast(GtkTextAttributes*)this._cPtr).rightMargin = propval;
   }
 
   /**
@@ -181,7 +181,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int indent()
   {
-    return (cast(GtkTextAttributes*)cPtr).indent;
+    return (cast(GtkTextAttributes*)this._cPtr).indent;
   }
 
   /**
@@ -191,7 +191,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void indent(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).indent = propval;
+    (cast(GtkTextAttributes*)this._cPtr).indent = propval;
   }
 
   /**
@@ -200,7 +200,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int pixelsAboveLines()
   {
-    return (cast(GtkTextAttributes*)cPtr).pixelsAboveLines;
+    return (cast(GtkTextAttributes*)this._cPtr).pixelsAboveLines;
   }
 
   /**
@@ -210,7 +210,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void pixelsAboveLines(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).pixelsAboveLines = propval;
+    (cast(GtkTextAttributes*)this._cPtr).pixelsAboveLines = propval;
   }
 
   /**
@@ -219,7 +219,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int pixelsBelowLines()
   {
-    return (cast(GtkTextAttributes*)cPtr).pixelsBelowLines;
+    return (cast(GtkTextAttributes*)this._cPtr).pixelsBelowLines;
   }
 
   /**
@@ -229,7 +229,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void pixelsBelowLines(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).pixelsBelowLines = propval;
+    (cast(GtkTextAttributes*)this._cPtr).pixelsBelowLines = propval;
   }
 
   /**
@@ -239,7 +239,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int pixelsInsideWrap()
   {
-    return (cast(GtkTextAttributes*)cPtr).pixelsInsideWrap;
+    return (cast(GtkTextAttributes*)this._cPtr).pixelsInsideWrap;
   }
 
   /**
@@ -250,7 +250,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void pixelsInsideWrap(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).pixelsInsideWrap = propval;
+    (cast(GtkTextAttributes*)this._cPtr).pixelsInsideWrap = propval;
   }
 
   /**
@@ -259,7 +259,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property pango.tab_array.TabArray tabs()
   {
-    return cToD!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)cPtr).tabs);
+    return cToD!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).tabs);
   }
 
   /**
@@ -269,8 +269,8 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void tabs(pango.tab_array.TabArray propval)
   {
-    cValueFree!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)cPtr).tabs);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).tabs);
+    cValueFree!(pango.tab_array.TabArray)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).tabs);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).tabs);
   }
 
   /**
@@ -279,7 +279,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property gtk.types.WrapMode wrapMode()
   {
-    return cast(gtk.types.WrapMode)(cast(GtkTextAttributes*)cPtr).wrapMode;
+    return cast(gtk.types.WrapMode)(cast(GtkTextAttributes*)this._cPtr).wrapMode;
   }
 
   /**
@@ -289,7 +289,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void wrapMode(gtk.types.WrapMode propval)
   {
-    (cast(GtkTextAttributes*)cPtr).wrapMode = cast(GtkWrapMode)propval;
+    (cast(GtkTextAttributes*)this._cPtr).wrapMode = cast(GtkWrapMode)propval;
   }
 
   /**
@@ -298,7 +298,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property pango.language.Language language()
   {
-    return cToD!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)cPtr).language);
+    return cToD!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
   }
 
   /**
@@ -308,8 +308,8 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void language(pango.language.Language propval)
   {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)cPtr).language);
-    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)cPtr).language);
+    cValueFree!(pango.language.Language)(cast(void*)(cast(GtkTextAttributes*)this._cPtr).language);
+    dToC(propval, cast(void*)&(cast(GtkTextAttributes*)this._cPtr).language);
   }
 
   /**
@@ -318,7 +318,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property uint invisible()
   {
-    return (cast(GtkTextAttributes*)cPtr).invisible;
+    return (cast(GtkTextAttributes*)this._cPtr).invisible;
   }
 
   /**
@@ -328,7 +328,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void invisible(uint propval)
   {
-    (cast(GtkTextAttributes*)cPtr).invisible = propval;
+    (cast(GtkTextAttributes*)this._cPtr).invisible = propval;
   }
 
   /**
@@ -338,7 +338,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property uint bgFullHeight()
   {
-    return (cast(GtkTextAttributes*)cPtr).bgFullHeight;
+    return (cast(GtkTextAttributes*)this._cPtr).bgFullHeight;
   }
 
   /**
@@ -349,7 +349,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void bgFullHeight(uint propval)
   {
-    (cast(GtkTextAttributes*)cPtr).bgFullHeight = propval;
+    (cast(GtkTextAttributes*)this._cPtr).bgFullHeight = propval;
   }
 
   /**
@@ -358,7 +358,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property uint editable()
   {
-    return (cast(GtkTextAttributes*)cPtr).editable;
+    return (cast(GtkTextAttributes*)this._cPtr).editable;
   }
 
   /**
@@ -368,7 +368,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void editable(uint propval)
   {
-    (cast(GtkTextAttributes*)cPtr).editable = propval;
+    (cast(GtkTextAttributes*)this._cPtr).editable = propval;
   }
 
   /**
@@ -377,7 +377,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property uint noFallback()
   {
-    return (cast(GtkTextAttributes*)cPtr).noFallback;
+    return (cast(GtkTextAttributes*)this._cPtr).noFallback;
   }
 
   /**
@@ -387,7 +387,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void noFallback(uint propval)
   {
-    (cast(GtkTextAttributes*)cPtr).noFallback = propval;
+    (cast(GtkTextAttributes*)this._cPtr).noFallback = propval;
   }
 
   /**
@@ -396,7 +396,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property int letterSpacing()
   {
-    return (cast(GtkTextAttributes*)cPtr).letterSpacing;
+    return (cast(GtkTextAttributes*)this._cPtr).letterSpacing;
   }
 
   /**
@@ -406,7 +406,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property void letterSpacing(int propval)
   {
-    (cast(GtkTextAttributes*)cPtr).letterSpacing = propval;
+    (cast(GtkTextAttributes*)this._cPtr).letterSpacing = propval;
   }
 
   /**
@@ -430,7 +430,7 @@ class TextAttributes : gobject.boxed.Boxed
   gtk.text_attributes.TextAttributes copy()
   {
     GtkTextAttributes* _cretval;
-    _cretval = gtk_text_attributes_copy(cast(GtkTextAttributes*)cPtr);
+    _cretval = gtk_text_attributes_copy(cast(GtkTextAttributes*)this._cPtr);
     auto _retval = _cretval ? new gtk.text_attributes.TextAttributes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -444,6 +444,6 @@ class TextAttributes : gobject.boxed.Boxed
   */
   void copyValues(gtk.text_attributes.TextAttributes dest)
   {
-    gtk_text_attributes_copy_values(cast(GtkTextAttributes*)cPtr, dest ? cast(GtkTextAttributes*)dest.cPtr(No.Dup) : null);
+    gtk_text_attributes_copy_values(cast(GtkTextAttributes*)this._cPtr, dest ? cast(GtkTextAttributes*)dest._cPtr(No.Dup) : null);
   }
 }

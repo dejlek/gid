@@ -43,7 +43,7 @@ class TextNode : gsk.render_node.RenderNode
   this(pango.font.Font font, pango.glyph_string.GlyphString glyphs, gdk.rgba.RGBA color, graphene.point.Point offset)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, offset ? cast(const(graphene_point_t)*)offset.cPtr(No.Dup) : null);
+    _cretval = gsk_text_node_new(font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, offset ? cast(const(graphene_point_t)*)offset._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -54,7 +54,7 @@ class TextNode : gsk.render_node.RenderNode
   gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_text_node_get_color(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_text_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -66,8 +66,8 @@ class TextNode : gsk.render_node.RenderNode
   pango.font.Font getFont()
   {
     PangoFont* _cretval;
-    _cretval = gsk_text_node_get_font(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.Take);
+    _cretval = gsk_text_node_get_font(cast(const(GskRenderNode)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class TextNode : gsk.render_node.RenderNode
   uint getNumGlyphs()
   {
     uint _retval;
-    _retval = gsk_text_node_get_num_glyphs(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_text_node_get_num_glyphs(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class TextNode : gsk.render_node.RenderNode
   graphene.point.Point getOffset()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_text_node_get_offset(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_text_node_get_offset(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -101,7 +101,7 @@ class TextNode : gsk.render_node.RenderNode
   bool hasColorGlyphs()
   {
     bool _retval;
-    _retval = gsk_text_node_has_color_glyphs(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_text_node_has_color_glyphs(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 }

@@ -28,16 +28,16 @@ class GLTexture : gdk.texture.Texture
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_texture_get_type != &gidSymbolNotFound ? gdk_gl_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class GLTexture : gdk.texture.Texture
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null, id, width, height, _destroyCB, data);
+    _cretval = gdk_gl_texture_new(context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null, id, width, height, _destroyCB, data);
     this(_cretval, Yes.Take);
   }
 
@@ -92,6 +92,6 @@ class GLTexture : gdk.texture.Texture
   */
   void release()
   {
-    gdk_gl_texture_release(cast(GdkGLTexture*)cPtr);
+    gdk_gl_texture_release(cast(GdkGLTexture*)this._cPtr);
   }
 }

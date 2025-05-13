@@ -28,7 +28,7 @@ class AttrSize
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class AttrSize
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrSize*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrSize*)this._cPtr).attr);
   }
 
   /**
@@ -49,7 +49,7 @@ class AttrSize
   */
   @property int size()
   {
-    return (cast(PangoAttrSize*)cPtr).size;
+    return (cast(PangoAttrSize*)this._cPtr).size;
   }
 
   /**
@@ -60,7 +60,7 @@ class AttrSize
   */
   @property void size(int propval)
   {
-    (cast(PangoAttrSize*)cPtr).size = propval;
+    (cast(PangoAttrSize*)this._cPtr).size = propval;
   }
 
   /**
@@ -72,7 +72,7 @@ class AttrSize
   */
   @property uint absolute()
   {
-    return (cast(PangoAttrSize*)cPtr).absolute;
+    return (cast(PangoAttrSize*)this._cPtr).absolute;
   }
 
   /**
@@ -85,7 +85,7 @@ class AttrSize
   */
   @property void absolute(uint propval)
   {
-    (cast(PangoAttrSize*)cPtr).absolute = propval;
+    (cast(PangoAttrSize*)this._cPtr).absolute = propval;
   }
 
   /**

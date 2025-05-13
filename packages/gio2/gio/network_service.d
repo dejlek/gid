@@ -30,16 +30,16 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_service_get_type != &gidSymbolNotFound ? g_network_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = g_network_service_get_domain(cast(GNetworkService*)cPtr);
+    _cretval = g_network_service_get_domain(cast(GNetworkService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -110,7 +110,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getProtocol()
   {
     const(char)* _cretval;
-    _cretval = g_network_service_get_protocol(cast(GNetworkService*)cPtr);
+    _cretval = g_network_service_get_protocol(cast(GNetworkService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -123,7 +123,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getScheme()
   {
     const(char)* _cretval;
-    _cretval = g_network_service_get_scheme(cast(GNetworkService*)cPtr);
+    _cretval = g_network_service_get_scheme(cast(GNetworkService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -135,7 +135,7 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getService()
   {
     const(char)* _cretval;
-    _cretval = g_network_service_get_service(cast(GNetworkService*)cPtr);
+    _cretval = g_network_service_get_service(cast(GNetworkService*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -150,6 +150,6 @@ class NetworkService : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   void setScheme(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    g_network_service_set_scheme(cast(GNetworkService*)cPtr, _scheme);
+    g_network_service_set_scheme(cast(GNetworkService*)this._cPtr, _scheme);
   }
 }

@@ -31,7 +31,7 @@ class AudioMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class AudioMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioMeta*)this._cPtr).meta);
   }
 
   /**
@@ -51,7 +51,7 @@ class AudioMeta
   */
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioMeta*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioMeta*)this._cPtr).info);
   }
 
   /**
@@ -60,7 +60,7 @@ class AudioMeta
   */
   @property size_t samples()
   {
-    return (cast(GstAudioMeta*)cPtr).samples;
+    return (cast(GstAudioMeta*)this._cPtr).samples;
   }
 
   /**
@@ -70,7 +70,7 @@ class AudioMeta
   */
   @property void samples(size_t propval)
   {
-    (cast(GstAudioMeta*)cPtr).samples = propval;
+    (cast(GstAudioMeta*)this._cPtr).samples = propval;
   }
 
   /** */

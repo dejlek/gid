@@ -58,16 +58,16 @@ class BufferPool : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_buffer_pool_get_type != &gidSymbolNotFound ? gst_buffer_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class BufferPool : gst.object.ObjectWrap
   static void configAddOption(gst.structure.Structure config, string option)
   {
     const(char)* _option = option.toCString(No.Alloc);
-    gst_buffer_pool_config_add_option(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, _option);
+    gst_buffer_pool_config_add_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, _option);
   }
 
   /**
@@ -117,7 +117,7 @@ class BufferPool : gst.object.ObjectWrap
     bool _retval;
     GstAllocator* _allocator;
     GstAllocationParams _params;
-    _retval = gst_buffer_pool_config_get_allocator(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, &_allocator, &_params);
+    _retval = gst_buffer_pool_config_get_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, &_allocator, &_params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, No.Take);
     params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
     return _retval;
@@ -135,7 +135,7 @@ class BufferPool : gst.object.ObjectWrap
   static string configGetOption(gst.structure.Structure config, uint index)
   {
     const(char)* _cretval;
-    _cretval = gst_buffer_pool_config_get_option(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, index);
+    _cretval = gst_buffer_pool_config_get_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, index);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class BufferPool : gst.object.ObjectWrap
   {
     bool _retval;
     GstCaps* _caps;
-    _retval = gst_buffer_pool_config_get_params(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, &_caps, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
+    _retval = gst_buffer_pool_config_get_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, &_caps, cast(uint*)&size, cast(uint*)&minBuffers, cast(uint*)&maxBuffers);
     caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
     return _retval;
   }
@@ -172,7 +172,7 @@ class BufferPool : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _option = option.toCString(No.Alloc);
-    _retval = gst_buffer_pool_config_has_option(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, _option);
+    _retval = gst_buffer_pool_config_has_option(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, _option);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class BufferPool : gst.object.ObjectWrap
   static uint configNOptions(gst.structure.Structure config)
   {
     uint _retval;
-    _retval = gst_buffer_pool_config_n_options(config ? cast(GstStructure*)config.cPtr(No.Dup) : null);
+    _retval = gst_buffer_pool_config_n_options(config ? cast(GstStructure*)config._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class BufferPool : gst.object.ObjectWrap
   */
   static void configSetAllocator(gst.structure.Structure config, gst.allocator.Allocator allocator = null, gst.allocation_params.AllocationParams params = null)
   {
-    gst_buffer_pool_config_set_allocator(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null);
+    gst_buffer_pool_config_set_allocator(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null);
   }
 
   /**
@@ -227,7 +227,7 @@ class BufferPool : gst.object.ObjectWrap
   */
   static void configSetParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
   {
-    gst_buffer_pool_config_set_params(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
+    gst_buffer_pool_config_set_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
   }
 
   /**
@@ -251,7 +251,7 @@ class BufferPool : gst.object.ObjectWrap
   static bool configValidateParams(gst.structure.Structure config, gst.caps.Caps caps, uint size, uint minBuffers, uint maxBuffers)
   {
     bool _retval;
-    _retval = gst_buffer_pool_config_validate_params(config ? cast(GstStructure*)config.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
+    _retval = gst_buffer_pool_config_validate_params(config ? cast(GstStructure*)config._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, size, minBuffers, maxBuffers);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class BufferPool : gst.object.ObjectWrap
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_buffer_pool_acquire_buffer(cast(GstBufferPool*)cPtr, &_buffer, &params);
+    _cretval = gst_buffer_pool_acquire_buffer(cast(GstBufferPool*)this._cPtr, &_buffer, &params);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
@@ -287,7 +287,7 @@ class BufferPool : gst.object.ObjectWrap
   gst.structure.Structure getConfig()
   {
     GstStructure* _cretval;
-    _cretval = gst_buffer_pool_get_config(cast(GstBufferPool*)cPtr);
+    _cretval = gst_buffer_pool_get_config(cast(GstBufferPool*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -302,7 +302,7 @@ class BufferPool : gst.object.ObjectWrap
   string[] getOptions()
   {
     const(char*)* _cretval;
-    _cretval = gst_buffer_pool_get_options(cast(GstBufferPool*)cPtr);
+    _cretval = gst_buffer_pool_get_options(cast(GstBufferPool*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -328,7 +328,7 @@ class BufferPool : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _option = option.toCString(No.Alloc);
-    _retval = gst_buffer_pool_has_option(cast(GstBufferPool*)cPtr, _option);
+    _retval = gst_buffer_pool_has_option(cast(GstBufferPool*)this._cPtr, _option);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class BufferPool : gst.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = gst_buffer_pool_is_active(cast(GstBufferPool*)cPtr);
+    _retval = gst_buffer_pool_is_active(cast(GstBufferPool*)this._cPtr);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class BufferPool : gst.object.ObjectWrap
   */
   void releaseBuffer(gst.buffer.Buffer buffer)
   {
-    gst_buffer_pool_release_buffer(cast(GstBufferPool*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    gst_buffer_pool_release_buffer(cast(GstBufferPool*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -378,7 +378,7 @@ class BufferPool : gst.object.ObjectWrap
   bool setActive(bool active)
   {
     bool _retval;
-    _retval = gst_buffer_pool_set_active(cast(GstBufferPool*)cPtr, active);
+    _retval = gst_buffer_pool_set_active(cast(GstBufferPool*)this._cPtr, active);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class BufferPool : gst.object.ObjectWrap
   bool setConfig(gst.structure.Structure config)
   {
     bool _retval;
-    _retval = gst_buffer_pool_set_config(cast(GstBufferPool*)cPtr, config ? cast(GstStructure*)config.cPtr(Yes.Dup) : null);
+    _retval = gst_buffer_pool_set_config(cast(GstBufferPool*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -420,6 +420,6 @@ class BufferPool : gst.object.ObjectWrap
   */
   void setFlushing(bool flushing)
   {
-    gst_buffer_pool_set_flushing(cast(GstBufferPool*)cPtr, flushing);
+    gst_buffer_pool_set_flushing(cast(GstBufferPool*)this._cPtr, flushing);
   }
 }

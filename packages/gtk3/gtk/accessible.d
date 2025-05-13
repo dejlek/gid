@@ -32,16 +32,16 @@ class Accessible : atk.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_get_type != &gidSymbolNotFound ? gtk_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class Accessible : atk.object.ObjectWrap
   */
   void connectWidgetDestroyed()
   {
-    gtk_accessible_connect_widget_destroyed(cast(GtkAccessible*)cPtr);
+    gtk_accessible_connect_widget_destroyed(cast(GtkAccessible*)this._cPtr);
   }
 
   /**
@@ -83,8 +83,8 @@ class Accessible : atk.object.ObjectWrap
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_accessible_get_widget(cast(GtkAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_accessible_get_widget(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,6 +101,6 @@ class Accessible : atk.object.ObjectWrap
   */
   void setWidget(gtk.widget.Widget widget = null)
   {
-    gtk_accessible_set_widget(cast(GtkAccessible*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_accessible_set_widget(cast(GtkAccessible*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 }

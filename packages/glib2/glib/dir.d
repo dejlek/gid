@@ -21,22 +21,22 @@ class Dir : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dir_get_type != &gidSymbolNotFound ? g_dir_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -92,7 +92,7 @@ class Dir : gobject.boxed.Boxed
   string readName()
   {
     const(char)* _cretval;
-    _cretval = g_dir_read_name(cast(GDir*)cPtr);
+    _cretval = g_dir_read_name(cast(GDir*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -103,7 +103,7 @@ class Dir : gobject.boxed.Boxed
   */
   void rewind()
   {
-    g_dir_rewind(cast(GDir*)cPtr);
+    g_dir_rewind(cast(GDir*)this._cPtr);
   }
 
   /**

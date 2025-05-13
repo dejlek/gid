@@ -53,16 +53,16 @@ class TextMark : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_mark_get_type != &gidSymbolNotFound ? gtk_text_mark_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -106,8 +106,8 @@ class TextMark : gobject.object.ObjectWrap
   gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
-    _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    _cretval = gtk_text_mark_get_buffer(cast(GtkTextMark*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class TextMark : gobject.object.ObjectWrap
   bool getDeleted()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_deleted(cast(GtkTextMark*)cPtr);
+    _retval = gtk_text_mark_get_deleted(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class TextMark : gobject.object.ObjectWrap
   bool getLeftGravity()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_left_gravity(cast(GtkTextMark*)cPtr);
+    _retval = gtk_text_mark_get_left_gravity(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class TextMark : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)cPtr);
+    _cretval = gtk_text_mark_get_name(cast(GtkTextMark*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -159,13 +159,13 @@ class TextMark : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_text_mark_get_visible(cast(GtkTextMark*)cPtr);
+    _retval = gtk_text_mark_get_visible(cast(GtkTextMark*)this._cPtr);
     return _retval;
   }
 
   /** */
   void setVisible(bool setting)
   {
-    gtk_text_mark_set_visible(cast(GtkTextMark*)cPtr, setting);
+    gtk_text_mark_set_visible(cast(GtkTextMark*)this._cPtr, setting);
   }
 }

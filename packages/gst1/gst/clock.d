@@ -93,16 +93,16 @@ class Clock : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_clock_get_type != &gidSymbolNotFound ? gst_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -175,7 +175,7 @@ class Clock : gst.object.ObjectWrap
   {
     GstClock* _cretval;
     _cretval = gst_clock_id_get_clock(id);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Clock : gst.object.ObjectWrap
   static bool idUsesClock(gst.types.ClockID id, gst.clock.Clock clock)
   {
     bool _retval;
-    _retval = gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    _retval = gst_clock_id_uses_clock(id, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Clock : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.ClockCallback*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take), time, id);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -339,7 +339,7 @@ class Clock : gst.object.ObjectWrap
   bool addObservation(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared)
   {
     bool _retval;
-    _retval = gst_clock_add_observation(cast(GstClock*)cPtr, slave, master, cast(double*)&rSquared);
+    _retval = gst_clock_add_observation(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class Clock : gst.object.ObjectWrap
   bool addObservationUnapplied(gst.types.ClockTime slave, gst.types.ClockTime master, out double rSquared, out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom)
   {
     bool _retval;
-    _retval = gst_clock_add_observation_unapplied(cast(GstClock*)cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+    _retval = gst_clock_add_observation_unapplied(cast(GstClock*)this._cPtr, slave, master, cast(double*)&rSquared, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
     return _retval;
   }
 
@@ -384,7 +384,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime adjustUnlocked(gst.types.ClockTime internal)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_adjust_unlocked(cast(GstClock*)cPtr, internal);
+    _retval = gst_clock_adjust_unlocked(cast(GstClock*)this._cPtr, internal);
     return _retval;
   }
 
@@ -409,7 +409,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime adjustWithCalibration(gst.types.ClockTime internalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_adjust_with_calibration(cast(GstClock*)cPtr, internalTarget, cinternal, cexternal, cnum, cdenom);
+    _retval = gst_clock_adjust_with_calibration(cast(GstClock*)this._cPtr, internalTarget, cinternal, cexternal, cnum, cdenom);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class Clock : gst.object.ObjectWrap
   */
   void getCalibration(out gst.types.ClockTime internal, out gst.types.ClockTime external, out gst.types.ClockTime rateNum, out gst.types.ClockTime rateDenom)
   {
-    gst_clock_get_calibration(cast(GstClock*)cPtr, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
+    gst_clock_get_calibration(cast(GstClock*)this._cPtr, cast(GstClockTime*)&internal, cast(GstClockTime*)&external, cast(GstClockTime*)&rateNum, cast(GstClockTime*)&rateDenom);
   }
 
   /**
@@ -440,7 +440,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime getInternalTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_get_internal_time(cast(GstClock*)cPtr);
+    _retval = gst_clock_get_internal_time(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -453,8 +453,8 @@ class Clock : gst.object.ObjectWrap
   gst.clock.Clock getMaster()
   {
     GstClock* _cretval;
-    _cretval = gst_clock_get_master(cast(GstClock*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    _cretval = gst_clock_get_master(cast(GstClock*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -466,7 +466,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime getResolution()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_get_resolution(cast(GstClock*)cPtr);
+    _retval = gst_clock_get_resolution(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -480,7 +480,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime getTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_get_time(cast(GstClock*)cPtr);
+    _retval = gst_clock_get_time(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -491,7 +491,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime getTimeout()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_get_timeout(cast(GstClock*)cPtr);
+    _retval = gst_clock_get_timeout(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class Clock : gst.object.ObjectWrap
   bool isSynced()
   {
     bool _retval;
-    _retval = gst_clock_is_synced(cast(GstClock*)cPtr);
+    _retval = gst_clock_is_synced(cast(GstClock*)this._cPtr);
     return _retval;
   }
 
@@ -521,7 +521,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockID newPeriodicId(gst.types.ClockTime startTime, gst.types.ClockTime interval)
   {
     gst.types.ClockID _retval;
-    _retval = gst_clock_new_periodic_id(cast(GstClock*)cPtr, startTime, interval);
+    _retval = gst_clock_new_periodic_id(cast(GstClock*)this._cPtr, startTime, interval);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockID newSingleShotId(gst.types.ClockTime time)
   {
     gst.types.ClockID _retval;
-    _retval = gst_clock_new_single_shot_id(cast(GstClock*)cPtr, time);
+    _retval = gst_clock_new_single_shot_id(cast(GstClock*)this._cPtr, time);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class Clock : gst.object.ObjectWrap
   bool periodicIdReinit(gst.types.ClockID id, gst.types.ClockTime startTime, gst.types.ClockTime interval)
   {
     bool _retval;
-    _retval = gst_clock_periodic_id_reinit(cast(GstClock*)cPtr, id, startTime, interval);
+    _retval = gst_clock_periodic_id_reinit(cast(GstClock*)this._cPtr, id, startTime, interval);
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class Clock : gst.object.ObjectWrap
   */
   void setCalibration(gst.types.ClockTime internal, gst.types.ClockTime external, gst.types.ClockTime rateNum, gst.types.ClockTime rateDenom)
   {
-    gst_clock_set_calibration(cast(GstClock*)cPtr, internal, external, rateNum, rateDenom);
+    gst_clock_set_calibration(cast(GstClock*)this._cPtr, internal, external, rateNum, rateDenom);
   }
 
   /**
@@ -615,7 +615,7 @@ class Clock : gst.object.ObjectWrap
   bool setMaster(gst.clock.Clock master = null)
   {
     bool _retval;
-    _retval = gst_clock_set_master(cast(GstClock*)cPtr, master ? cast(GstClock*)master.cPtr(No.Dup) : null);
+    _retval = gst_clock_set_master(cast(GstClock*)this._cPtr, master ? cast(GstClock*)master._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -633,7 +633,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime setResolution(gst.types.ClockTime resolution)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_set_resolution(cast(GstClock*)cPtr, resolution);
+    _retval = gst_clock_set_resolution(cast(GstClock*)this._cPtr, resolution);
     return _retval;
   }
 
@@ -649,7 +649,7 @@ class Clock : gst.object.ObjectWrap
   */
   void setSynced(bool synced)
   {
-    gst_clock_set_synced(cast(GstClock*)cPtr, synced);
+    gst_clock_set_synced(cast(GstClock*)this._cPtr, synced);
   }
 
   /**
@@ -661,7 +661,7 @@ class Clock : gst.object.ObjectWrap
   */
   void setTimeout(gst.types.ClockTime timeout)
   {
-    gst_clock_set_timeout(cast(GstClock*)cPtr, timeout);
+    gst_clock_set_timeout(cast(GstClock*)this._cPtr, timeout);
   }
 
   /**
@@ -677,7 +677,7 @@ class Clock : gst.object.ObjectWrap
   bool singleShotIdReinit(gst.types.ClockID id, gst.types.ClockTime time)
   {
     bool _retval;
-    _retval = gst_clock_single_shot_id_reinit(cast(GstClock*)cPtr, id, time);
+    _retval = gst_clock_single_shot_id_reinit(cast(GstClock*)this._cPtr, id, time);
     return _retval;
   }
 
@@ -696,7 +696,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime unadjustUnlocked(gst.types.ClockTime external)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_unadjust_unlocked(cast(GstClock*)cPtr, external);
+    _retval = gst_clock_unadjust_unlocked(cast(GstClock*)this._cPtr, external);
     return _retval;
   }
 
@@ -720,7 +720,7 @@ class Clock : gst.object.ObjectWrap
   gst.types.ClockTime unadjustWithCalibration(gst.types.ClockTime externalTarget, gst.types.ClockTime cinternal, gst.types.ClockTime cexternal, gst.types.ClockTime cnum, gst.types.ClockTime cdenom)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_clock_unadjust_with_calibration(cast(GstClock*)cPtr, externalTarget, cinternal, cexternal, cnum, cdenom);
+    _retval = gst_clock_unadjust_with_calibration(cast(GstClock*)this._cPtr, externalTarget, cinternal, cexternal, cnum, cdenom);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class Clock : gst.object.ObjectWrap
   bool waitForSync(gst.types.ClockTime timeout)
   {
     bool _retval;
-    _retval = gst_clock_wait_for_sync(cast(GstClock*)cPtr, timeout);
+    _retval = gst_clock_wait_for_sync(cast(GstClock*)this._cPtr, timeout);
     return _retval;
   }
 

@@ -43,16 +43,16 @@ class MountOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mount_operation_get_type != &gidSymbolNotFound ? g_mount_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -269,7 +269,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getAnonymous()
   {
     bool _retval;
-    _retval = g_mount_operation_get_anonymous(cast(GMountOperation*)cPtr);
+    _retval = g_mount_operation_get_anonymous(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class MountOperation : gobject.object.ObjectWrap
   int getChoice()
   {
     int _retval;
-    _retval = g_mount_operation_get_choice(cast(GMountOperation*)cPtr);
+    _retval = g_mount_operation_get_choice(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class MountOperation : gobject.object.ObjectWrap
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = g_mount_operation_get_domain(cast(GMountOperation*)cPtr);
+    _cretval = g_mount_operation_get_domain(cast(GMountOperation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -305,7 +305,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getIsTcryptHiddenVolume()
   {
     bool _retval;
-    _retval = g_mount_operation_get_is_tcrypt_hidden_volume(cast(GMountOperation*)cPtr);
+    _retval = g_mount_operation_get_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class MountOperation : gobject.object.ObjectWrap
   bool getIsTcryptSystemVolume()
   {
     bool _retval;
-    _retval = g_mount_operation_get_is_tcrypt_system_volume(cast(GMountOperation*)cPtr);
+    _retval = g_mount_operation_get_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ class MountOperation : gobject.object.ObjectWrap
   string getPassword()
   {
     const(char)* _cretval;
-    _cretval = g_mount_operation_get_password(cast(GMountOperation*)cPtr);
+    _cretval = g_mount_operation_get_password(cast(GMountOperation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -340,7 +340,7 @@ class MountOperation : gobject.object.ObjectWrap
   gio.types.PasswordSave getPasswordSave()
   {
     GPasswordSave _cretval;
-    _cretval = g_mount_operation_get_password_save(cast(GMountOperation*)cPtr);
+    _cretval = g_mount_operation_get_password_save(cast(GMountOperation*)this._cPtr);
     gio.types.PasswordSave _retval = cast(gio.types.PasswordSave)_cretval;
     return _retval;
   }
@@ -352,7 +352,7 @@ class MountOperation : gobject.object.ObjectWrap
   uint getPim()
   {
     uint _retval;
-    _retval = g_mount_operation_get_pim(cast(GMountOperation*)cPtr);
+    _retval = g_mount_operation_get_pim(cast(GMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class MountOperation : gobject.object.ObjectWrap
   string getUsername()
   {
     const(char)* _cretval;
-    _cretval = g_mount_operation_get_username(cast(GMountOperation*)cPtr);
+    _cretval = g_mount_operation_get_username(cast(GMountOperation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -376,7 +376,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void reply(gio.types.MountOperationResult result)
   {
-    g_mount_operation_reply(cast(GMountOperation*)cPtr, result);
+    g_mount_operation_reply(cast(GMountOperation*)this._cPtr, result);
   }
 
   /**
@@ -387,7 +387,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setAnonymous(bool anonymous)
   {
-    g_mount_operation_set_anonymous(cast(GMountOperation*)cPtr, anonymous);
+    g_mount_operation_set_anonymous(cast(GMountOperation*)this._cPtr, anonymous);
   }
 
   /**
@@ -398,7 +398,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setChoice(int choice)
   {
-    g_mount_operation_set_choice(cast(GMountOperation*)cPtr, choice);
+    g_mount_operation_set_choice(cast(GMountOperation*)this._cPtr, choice);
   }
 
   /**
@@ -410,7 +410,7 @@ class MountOperation : gobject.object.ObjectWrap
   void setDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    g_mount_operation_set_domain(cast(GMountOperation*)cPtr, _domain);
+    g_mount_operation_set_domain(cast(GMountOperation*)this._cPtr, _domain);
   }
 
   /**
@@ -421,7 +421,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setIsTcryptHiddenVolume(bool hiddenVolume)
   {
-    g_mount_operation_set_is_tcrypt_hidden_volume(cast(GMountOperation*)cPtr, hiddenVolume);
+    g_mount_operation_set_is_tcrypt_hidden_volume(cast(GMountOperation*)this._cPtr, hiddenVolume);
   }
 
   /**
@@ -432,7 +432,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setIsTcryptSystemVolume(bool systemVolume)
   {
-    g_mount_operation_set_is_tcrypt_system_volume(cast(GMountOperation*)cPtr, systemVolume);
+    g_mount_operation_set_is_tcrypt_system_volume(cast(GMountOperation*)this._cPtr, systemVolume);
   }
 
   /**
@@ -444,7 +444,7 @@ class MountOperation : gobject.object.ObjectWrap
   void setPassword(string password = null)
   {
     const(char)* _password = password.toCString(No.Alloc);
-    g_mount_operation_set_password(cast(GMountOperation*)cPtr, _password);
+    g_mount_operation_set_password(cast(GMountOperation*)this._cPtr, _password);
   }
 
   /**
@@ -455,7 +455,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setPasswordSave(gio.types.PasswordSave save)
   {
-    g_mount_operation_set_password_save(cast(GMountOperation*)cPtr, save);
+    g_mount_operation_set_password_save(cast(GMountOperation*)this._cPtr, save);
   }
 
   /**
@@ -466,7 +466,7 @@ class MountOperation : gobject.object.ObjectWrap
   */
   void setPim(uint pim)
   {
-    g_mount_operation_set_pim(cast(GMountOperation*)cPtr, pim);
+    g_mount_operation_set_pim(cast(GMountOperation*)this._cPtr, pim);
   }
 
   /**
@@ -478,7 +478,7 @@ class MountOperation : gobject.object.ObjectWrap
   void setUsername(string username = null)
   {
     const(char)* _username = username.toCString(No.Alloc);
-    g_mount_operation_set_username(cast(GMountOperation*)cPtr, _username);
+    g_mount_operation_set_username(cast(GMountOperation*)this._cPtr, _username);
   }
 
   /**

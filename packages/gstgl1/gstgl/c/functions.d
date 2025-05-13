@@ -30,8 +30,8 @@ __gshared extern(C)
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_freeze; ///
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_init; ///
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_output_log_msg; ///
-  void function(GstGLAsyncDebug* ad, GstDebugCategory* cat, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, const(char)* format,  ...) c_gst_gl_async_debug_store_log_msg; ///
-  void function(GstGLAsyncDebug* ad, GstDebugCategory* cat, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, const(char)* format, void* varargs) c_gst_gl_async_debug_store_log_msg_valist; ///
+  void function(GstGLAsyncDebug* ad, GstDebugCategory* cat, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format,  ...) c_gst_gl_async_debug_store_log_msg; ///
+  void function(GstGLAsyncDebug* ad, GstDebugCategory* cat, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, const(char)* format, void* varargs) c_gst_gl_async_debug_store_log_msg_valist; ///
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_thaw; ///
   void function(GstGLAsyncDebug* ad) c_gst_gl_async_debug_unset; ///
   GstGLAsyncDebug* function() c_gst_gl_async_debug_new; ///
@@ -1432,393 +1432,395 @@ alias gst_is_gl_renderbuffer = c_gst_is_gl_renderbuffer;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // GLAllocationParams
-  gidLink(cast(void**)&gst_gl_allocation_params_get_type, "gst_gl_allocation_params_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_allocation_params_copy, "gst_gl_allocation_params_copy", LIBS);
-  gidLink(cast(void**)&gst_gl_allocation_params_copy_data, "gst_gl_allocation_params_copy_data", LIBS);
-  gidLink(cast(void**)&gst_gl_allocation_params_free, "gst_gl_allocation_params_free", LIBS);
-  gidLink(cast(void**)&gst_gl_allocation_params_free_data, "gst_gl_allocation_params_free_data", LIBS);
-  gidLink(cast(void**)&gst_gl_allocation_params_init, "gst_gl_allocation_params_init", LIBS);
+  gidLink(cast(void**)&gst_gl_allocation_params_get_type, "gst_gl_allocation_params_get_type", libs);
+  gidLink(cast(void**)&gst_gl_allocation_params_copy, "gst_gl_allocation_params_copy", libs);
+  gidLink(cast(void**)&gst_gl_allocation_params_copy_data, "gst_gl_allocation_params_copy_data", libs);
+  gidLink(cast(void**)&gst_gl_allocation_params_free, "gst_gl_allocation_params_free", libs);
+  gidLink(cast(void**)&gst_gl_allocation_params_free_data, "gst_gl_allocation_params_free_data", libs);
+  gidLink(cast(void**)&gst_gl_allocation_params_init, "gst_gl_allocation_params_init", libs);
 
   // GLAsyncDebug
-  gidLink(cast(void**)&gst_gl_async_debug_free, "gst_gl_async_debug_free", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_freeze, "gst_gl_async_debug_freeze", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_init, "gst_gl_async_debug_init", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_output_log_msg, "gst_gl_async_debug_output_log_msg", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_store_log_msg, "gst_gl_async_debug_store_log_msg", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_store_log_msg_valist, "gst_gl_async_debug_store_log_msg_valist", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_thaw, "gst_gl_async_debug_thaw", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_unset, "gst_gl_async_debug_unset", LIBS);
-  gidLink(cast(void**)&gst_gl_async_debug_new, "gst_gl_async_debug_new", LIBS);
+  gidLink(cast(void**)&gst_gl_async_debug_free, "gst_gl_async_debug_free", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_freeze, "gst_gl_async_debug_freeze", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_init, "gst_gl_async_debug_init", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_output_log_msg, "gst_gl_async_debug_output_log_msg", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_store_log_msg, "gst_gl_async_debug_store_log_msg", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_store_log_msg_valist, "gst_gl_async_debug_store_log_msg_valist", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_thaw, "gst_gl_async_debug_thaw", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_unset, "gst_gl_async_debug_unset", libs);
+  gidLink(cast(void**)&gst_gl_async_debug_new, "gst_gl_async_debug_new", libs);
 
   // GLBaseFilter
-  gidLink(cast(void**)&gst_gl_base_filter_get_type, "gst_gl_base_filter_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_base_filter_find_gl_context, "gst_gl_base_filter_find_gl_context", LIBS);
-  gidLink(cast(void**)&gst_gl_base_filter_get_gl_context, "gst_gl_base_filter_get_gl_context", LIBS);
+  gidLink(cast(void**)&gst_gl_base_filter_get_type, "gst_gl_base_filter_get_type", libs);
+  gidLink(cast(void**)&gst_gl_base_filter_find_gl_context, "gst_gl_base_filter_find_gl_context", libs);
+  gidLink(cast(void**)&gst_gl_base_filter_get_gl_context, "gst_gl_base_filter_get_gl_context", libs);
 
   // GLBaseMemory
-  gidLink(cast(void**)&gst_gl_base_memory_get_type, "gst_gl_base_memory_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_base_memory_alloc_data, "gst_gl_base_memory_alloc_data", LIBS);
-  gidLink(cast(void**)&gst_gl_base_memory_init, "gst_gl_base_memory_init", LIBS);
-  gidLink(cast(void**)&gst_gl_base_memory_memcpy, "gst_gl_base_memory_memcpy", LIBS);
-  gidLink(cast(void**)&gst_gl_base_memory_alloc, "gst_gl_base_memory_alloc", LIBS);
-  gidLink(cast(void**)&gst_gl_base_memory_init_once, "gst_gl_base_memory_init_once", LIBS);
+  gidLink(cast(void**)&gst_gl_base_memory_get_type, "gst_gl_base_memory_get_type", libs);
+  gidLink(cast(void**)&gst_gl_base_memory_alloc_data, "gst_gl_base_memory_alloc_data", libs);
+  gidLink(cast(void**)&gst_gl_base_memory_init, "gst_gl_base_memory_init", libs);
+  gidLink(cast(void**)&gst_gl_base_memory_memcpy, "gst_gl_base_memory_memcpy", libs);
+  gidLink(cast(void**)&gst_gl_base_memory_alloc, "gst_gl_base_memory_alloc", libs);
+  gidLink(cast(void**)&gst_gl_base_memory_init_once, "gst_gl_base_memory_init_once", libs);
 
   // GLBaseMemoryAllocator
-  gidLink(cast(void**)&gst_gl_base_memory_allocator_get_type, "gst_gl_base_memory_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_base_memory_allocator_get_type, "gst_gl_base_memory_allocator_get_type", libs);
 
   // GLBaseMixer
-  gidLink(cast(void**)&gst_gl_base_mixer_get_type, "gst_gl_base_mixer_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_base_mixer_get_gl_context, "gst_gl_base_mixer_get_gl_context", LIBS);
+  gidLink(cast(void**)&gst_gl_base_mixer_get_type, "gst_gl_base_mixer_get_type", libs);
+  gidLink(cast(void**)&gst_gl_base_mixer_get_gl_context, "gst_gl_base_mixer_get_gl_context", libs);
 
   // GLBaseMixerPad
-  gidLink(cast(void**)&gst_gl_base_mixer_pad_get_type, "gst_gl_base_mixer_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_base_mixer_pad_get_type, "gst_gl_base_mixer_pad_get_type", libs);
 
   // GLBaseSrc
-  gidLink(cast(void**)&gst_gl_base_src_get_type, "gst_gl_base_src_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_base_src_get_type, "gst_gl_base_src_get_type", libs);
 
   // GLBuffer
-  gidLink(cast(void**)&gst_gl_buffer_get_type, "gst_gl_buffer_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_buffer_init_once, "gst_gl_buffer_init_once", LIBS);
+  gidLink(cast(void**)&gst_gl_buffer_get_type, "gst_gl_buffer_get_type", libs);
+  gidLink(cast(void**)&gst_gl_buffer_init_once, "gst_gl_buffer_init_once", libs);
 
   // GLBufferAllocationParams
-  gidLink(cast(void**)&gst_gl_buffer_allocation_params_get_type, "gst_gl_buffer_allocation_params_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_buffer_allocation_params_new, "gst_gl_buffer_allocation_params_new", LIBS);
+  gidLink(cast(void**)&gst_gl_buffer_allocation_params_get_type, "gst_gl_buffer_allocation_params_get_type", libs);
+  gidLink(cast(void**)&gst_gl_buffer_allocation_params_new, "gst_gl_buffer_allocation_params_new", libs);
 
   // GLBufferAllocator
-  gidLink(cast(void**)&gst_gl_buffer_allocator_get_type, "gst_gl_buffer_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_buffer_allocator_get_type, "gst_gl_buffer_allocator_get_type", libs);
 
   // GLBufferPool
-  gidLink(cast(void**)&gst_gl_buffer_pool_get_type, "gst_gl_buffer_pool_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_buffer_pool_new, "gst_gl_buffer_pool_new", LIBS);
-  gidLink(cast(void**)&gst_gl_buffer_pool_get_gl_allocation_params, "gst_gl_buffer_pool_get_gl_allocation_params", LIBS);
+  gidLink(cast(void**)&gst_gl_buffer_pool_get_type, "gst_gl_buffer_pool_get_type", libs);
+  gidLink(cast(void**)&gst_gl_buffer_pool_new, "gst_gl_buffer_pool_new", libs);
+  gidLink(cast(void**)&gst_gl_buffer_pool_get_gl_allocation_params, "gst_gl_buffer_pool_get_gl_allocation_params", libs);
 
   // GLColorConvert
-  gidLink(cast(void**)&gst_gl_color_convert_get_type, "gst_gl_color_convert_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_new, "gst_gl_color_convert_new", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_fixate_caps, "gst_gl_color_convert_fixate_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_swizzle_shader_string, "gst_gl_color_convert_swizzle_shader_string", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_transform_caps, "gst_gl_color_convert_transform_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_yuv_to_rgb_shader_string, "gst_gl_color_convert_yuv_to_rgb_shader_string", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_decide_allocation, "gst_gl_color_convert_decide_allocation", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_perform, "gst_gl_color_convert_perform", LIBS);
-  gidLink(cast(void**)&gst_gl_color_convert_set_caps, "gst_gl_color_convert_set_caps", LIBS);
+  gidLink(cast(void**)&gst_gl_color_convert_get_type, "gst_gl_color_convert_get_type", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_new, "gst_gl_color_convert_new", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_fixate_caps, "gst_gl_color_convert_fixate_caps", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_swizzle_shader_string, "gst_gl_color_convert_swizzle_shader_string", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_transform_caps, "gst_gl_color_convert_transform_caps", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_yuv_to_rgb_shader_string, "gst_gl_color_convert_yuv_to_rgb_shader_string", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_decide_allocation, "gst_gl_color_convert_decide_allocation", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_perform, "gst_gl_color_convert_perform", libs);
+  gidLink(cast(void**)&gst_gl_color_convert_set_caps, "gst_gl_color_convert_set_caps", libs);
 
   // GLContext
-  gidLink(cast(void**)&gst_gl_context_get_type, "gst_gl_context_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_context_new, "gst_gl_context_new", LIBS);
-  gidLink(cast(void**)&gst_gl_context_new_wrapped, "gst_gl_context_new_wrapped", LIBS);
-  gidLink(cast(void**)&gst_gl_context_default_get_proc_address, "gst_gl_context_default_get_proc_address", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_current, "gst_gl_context_get_current", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_current_gl_api, "gst_gl_context_get_current_gl_api", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_current_gl_context, "gst_gl_context_get_current_gl_context", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_proc_address_with_platform, "gst_gl_context_get_proc_address_with_platform", LIBS);
-  gidLink(cast(void**)&gst_gl_context_activate, "gst_gl_context_activate", LIBS);
-  gidLink(cast(void**)&gst_gl_context_can_share, "gst_gl_context_can_share", LIBS);
-  gidLink(cast(void**)&gst_gl_context_check_feature, "gst_gl_context_check_feature", LIBS);
-  gidLink(cast(void**)&gst_gl_context_check_framebuffer_status, "gst_gl_context_check_framebuffer_status", LIBS);
-  gidLink(cast(void**)&gst_gl_context_check_gl_version, "gst_gl_context_check_gl_version", LIBS);
-  gidLink(cast(void**)&gst_gl_context_clear_framebuffer, "gst_gl_context_clear_framebuffer", LIBS);
-  gidLink(cast(void**)&gst_gl_context_clear_shader, "gst_gl_context_clear_shader", LIBS);
-  gidLink(cast(void**)&gst_gl_context_create, "gst_gl_context_create", LIBS);
-  gidLink(cast(void**)&gst_gl_context_destroy, "gst_gl_context_destroy", LIBS);
-  gidLink(cast(void**)&gst_gl_context_fill_info, "gst_gl_context_fill_info", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_config, "gst_gl_context_get_config", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_display, "gst_gl_context_get_display", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_gl_api, "gst_gl_context_get_gl_api", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_gl_context, "gst_gl_context_get_gl_context", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_gl_platform, "gst_gl_context_get_gl_platform", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_gl_platform_version, "gst_gl_context_get_gl_platform_version", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_gl_version, "gst_gl_context_get_gl_version", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_proc_address, "gst_gl_context_get_proc_address", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_thread, "gst_gl_context_get_thread", LIBS);
-  gidLink(cast(void**)&gst_gl_context_get_window, "gst_gl_context_get_window", LIBS);
-  gidLink(cast(void**)&gst_gl_context_is_shared, "gst_gl_context_is_shared", LIBS);
-  gidLink(cast(void**)&gst_gl_context_request_config, "gst_gl_context_request_config", LIBS);
-  gidLink(cast(void**)&gst_gl_context_set_shared_with, "gst_gl_context_set_shared_with", LIBS);
-  gidLink(cast(void**)&gst_gl_context_set_window, "gst_gl_context_set_window", LIBS);
-  gidLink(cast(void**)&gst_gl_context_supports_glsl_profile_version, "gst_gl_context_supports_glsl_profile_version", LIBS);
-  gidLink(cast(void**)&gst_gl_context_supports_precision, "gst_gl_context_supports_precision", LIBS);
-  gidLink(cast(void**)&gst_gl_context_supports_precision_highp, "gst_gl_context_supports_precision_highp", LIBS);
-  gidLink(cast(void**)&gst_gl_context_swap_buffers, "gst_gl_context_swap_buffers", LIBS);
-  gidLink(cast(void**)&gst_gl_context_thread_add, "gst_gl_context_thread_add", LIBS);
+  gidLink(cast(void**)&gst_gl_context_get_type, "gst_gl_context_get_type", libs);
+  gidLink(cast(void**)&gst_gl_context_new, "gst_gl_context_new", libs);
+  gidLink(cast(void**)&gst_gl_context_new_wrapped, "gst_gl_context_new_wrapped", libs);
+  gidLink(cast(void**)&gst_gl_context_default_get_proc_address, "gst_gl_context_default_get_proc_address", libs);
+  gidLink(cast(void**)&gst_gl_context_get_current, "gst_gl_context_get_current", libs);
+  gidLink(cast(void**)&gst_gl_context_get_current_gl_api, "gst_gl_context_get_current_gl_api", libs);
+  gidLink(cast(void**)&gst_gl_context_get_current_gl_context, "gst_gl_context_get_current_gl_context", libs);
+  gidLink(cast(void**)&gst_gl_context_get_proc_address_with_platform, "gst_gl_context_get_proc_address_with_platform", libs);
+  gidLink(cast(void**)&gst_gl_context_activate, "gst_gl_context_activate", libs);
+  gidLink(cast(void**)&gst_gl_context_can_share, "gst_gl_context_can_share", libs);
+  gidLink(cast(void**)&gst_gl_context_check_feature, "gst_gl_context_check_feature", libs);
+  gidLink(cast(void**)&gst_gl_context_check_framebuffer_status, "gst_gl_context_check_framebuffer_status", libs);
+  gidLink(cast(void**)&gst_gl_context_check_gl_version, "gst_gl_context_check_gl_version", libs);
+  gidLink(cast(void**)&gst_gl_context_clear_framebuffer, "gst_gl_context_clear_framebuffer", libs);
+  gidLink(cast(void**)&gst_gl_context_clear_shader, "gst_gl_context_clear_shader", libs);
+  gidLink(cast(void**)&gst_gl_context_create, "gst_gl_context_create", libs);
+  gidLink(cast(void**)&gst_gl_context_destroy, "gst_gl_context_destroy", libs);
+  gidLink(cast(void**)&gst_gl_context_fill_info, "gst_gl_context_fill_info", libs);
+  gidLink(cast(void**)&gst_gl_context_get_config, "gst_gl_context_get_config", libs);
+  gidLink(cast(void**)&gst_gl_context_get_display, "gst_gl_context_get_display", libs);
+  gidLink(cast(void**)&gst_gl_context_get_gl_api, "gst_gl_context_get_gl_api", libs);
+  gidLink(cast(void**)&gst_gl_context_get_gl_context, "gst_gl_context_get_gl_context", libs);
+  gidLink(cast(void**)&gst_gl_context_get_gl_platform, "gst_gl_context_get_gl_platform", libs);
+  gidLink(cast(void**)&gst_gl_context_get_gl_platform_version, "gst_gl_context_get_gl_platform_version", libs);
+  gidLink(cast(void**)&gst_gl_context_get_gl_version, "gst_gl_context_get_gl_version", libs);
+  gidLink(cast(void**)&gst_gl_context_get_proc_address, "gst_gl_context_get_proc_address", libs);
+  gidLink(cast(void**)&gst_gl_context_get_thread, "gst_gl_context_get_thread", libs);
+  gidLink(cast(void**)&gst_gl_context_get_window, "gst_gl_context_get_window", libs);
+  gidLink(cast(void**)&gst_gl_context_is_shared, "gst_gl_context_is_shared", libs);
+  gidLink(cast(void**)&gst_gl_context_request_config, "gst_gl_context_request_config", libs);
+  gidLink(cast(void**)&gst_gl_context_set_shared_with, "gst_gl_context_set_shared_with", libs);
+  gidLink(cast(void**)&gst_gl_context_set_window, "gst_gl_context_set_window", libs);
+  gidLink(cast(void**)&gst_gl_context_supports_glsl_profile_version, "gst_gl_context_supports_glsl_profile_version", libs);
+  gidLink(cast(void**)&gst_gl_context_supports_precision, "gst_gl_context_supports_precision", libs);
+  gidLink(cast(void**)&gst_gl_context_supports_precision_highp, "gst_gl_context_supports_precision_highp", libs);
+  gidLink(cast(void**)&gst_gl_context_swap_buffers, "gst_gl_context_swap_buffers", libs);
+  gidLink(cast(void**)&gst_gl_context_thread_add, "gst_gl_context_thread_add", libs);
 
   // GLDisplay
-  gidLink(cast(void**)&gst_gl_display_get_type, "gst_gl_display_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_display_new, "gst_gl_display_new", LIBS);
-  gidLink(cast(void**)&gst_gl_display_new_with_type, "gst_gl_display_new_with_type", LIBS);
-  gidLink(cast(void**)&gst_gl_display_add_context, "gst_gl_display_add_context", LIBS);
-  gidLink(cast(void**)&gst_gl_display_create_context, "gst_gl_display_create_context", LIBS);
-  gidLink(cast(void**)&gst_gl_display_create_window, "gst_gl_display_create_window", LIBS);
-  gidLink(cast(void**)&gst_gl_display_ensure_context, "gst_gl_display_ensure_context", LIBS);
-  gidLink(cast(void**)&gst_gl_display_filter_gl_api, "gst_gl_display_filter_gl_api", LIBS);
-  gidLink(cast(void**)&gst_gl_display_find_window, "gst_gl_display_find_window", LIBS);
-  gidLink(cast(void**)&gst_gl_display_get_gl_api, "gst_gl_display_get_gl_api", LIBS);
-  gidLink(cast(void**)&gst_gl_display_get_gl_api_unlocked, "gst_gl_display_get_gl_api_unlocked", LIBS);
-  gidLink(cast(void**)&gst_gl_display_get_gl_context_for_thread, "gst_gl_display_get_gl_context_for_thread", LIBS);
-  gidLink(cast(void**)&gst_gl_display_get_handle, "gst_gl_display_get_handle", LIBS);
-  gidLink(cast(void**)&gst_gl_display_get_handle_type, "gst_gl_display_get_handle_type", LIBS);
-  gidLink(cast(void**)&gst_gl_display_remove_context, "gst_gl_display_remove_context", LIBS);
-  gidLink(cast(void**)&gst_gl_display_remove_window, "gst_gl_display_remove_window", LIBS);
-  gidLink(cast(void**)&gst_gl_display_retrieve_window, "gst_gl_display_retrieve_window", LIBS);
+  gidLink(cast(void**)&gst_gl_display_get_type, "gst_gl_display_get_type", libs);
+  gidLink(cast(void**)&gst_gl_display_new, "gst_gl_display_new", libs);
+  gidLink(cast(void**)&gst_gl_display_new_with_type, "gst_gl_display_new_with_type", libs);
+  gidLink(cast(void**)&gst_gl_display_add_context, "gst_gl_display_add_context", libs);
+  gidLink(cast(void**)&gst_gl_display_create_context, "gst_gl_display_create_context", libs);
+  gidLink(cast(void**)&gst_gl_display_create_window, "gst_gl_display_create_window", libs);
+  gidLink(cast(void**)&gst_gl_display_ensure_context, "gst_gl_display_ensure_context", libs);
+  gidLink(cast(void**)&gst_gl_display_filter_gl_api, "gst_gl_display_filter_gl_api", libs);
+  gidLink(cast(void**)&gst_gl_display_find_window, "gst_gl_display_find_window", libs);
+  gidLink(cast(void**)&gst_gl_display_get_gl_api, "gst_gl_display_get_gl_api", libs);
+  gidLink(cast(void**)&gst_gl_display_get_gl_api_unlocked, "gst_gl_display_get_gl_api_unlocked", libs);
+  gidLink(cast(void**)&gst_gl_display_get_gl_context_for_thread, "gst_gl_display_get_gl_context_for_thread", libs);
+  gidLink(cast(void**)&gst_gl_display_get_handle, "gst_gl_display_get_handle", libs);
+  gidLink(cast(void**)&gst_gl_display_get_handle_type, "gst_gl_display_get_handle_type", libs);
+  gidLink(cast(void**)&gst_gl_display_remove_context, "gst_gl_display_remove_context", libs);
+  gidLink(cast(void**)&gst_gl_display_remove_window, "gst_gl_display_remove_window", libs);
+  gidLink(cast(void**)&gst_gl_display_retrieve_window, "gst_gl_display_retrieve_window", libs);
 
   // GLFilter
-  gidLink(cast(void**)&gst_gl_filter_get_type, "gst_gl_filter_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_filter_add_rgba_pad_templates, "gst_gl_filter_add_rgba_pad_templates", LIBS);
-  gidLink(cast(void**)&gst_gl_filter_draw_fullscreen_quad, "gst_gl_filter_draw_fullscreen_quad", LIBS);
-  gidLink(cast(void**)&gst_gl_filter_filter_texture, "gst_gl_filter_filter_texture", LIBS);
-  gidLink(cast(void**)&gst_gl_filter_render_to_target, "gst_gl_filter_render_to_target", LIBS);
-  gidLink(cast(void**)&gst_gl_filter_render_to_target_with_shader, "gst_gl_filter_render_to_target_with_shader", LIBS);
+  gidLink(cast(void**)&gst_gl_filter_get_type, "gst_gl_filter_get_type", libs);
+  gidLink(cast(void**)&gst_gl_filter_add_rgba_pad_templates, "gst_gl_filter_add_rgba_pad_templates", libs);
+  gidLink(cast(void**)&gst_gl_filter_draw_fullscreen_quad, "gst_gl_filter_draw_fullscreen_quad", libs);
+  gidLink(cast(void**)&gst_gl_filter_filter_texture, "gst_gl_filter_filter_texture", libs);
+  gidLink(cast(void**)&gst_gl_filter_render_to_target, "gst_gl_filter_render_to_target", libs);
+  gidLink(cast(void**)&gst_gl_filter_render_to_target_with_shader, "gst_gl_filter_render_to_target_with_shader", libs);
 
   // GLFramebuffer
-  gidLink(cast(void**)&gst_gl_framebuffer_get_type, "gst_gl_framebuffer_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_new, "gst_gl_framebuffer_new", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_new_with_default_depth, "gst_gl_framebuffer_new_with_default_depth", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_attach, "gst_gl_framebuffer_attach", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_bind, "gst_gl_framebuffer_bind", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_draw_to_texture, "gst_gl_framebuffer_draw_to_texture", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_get_effective_dimensions, "gst_gl_framebuffer_get_effective_dimensions", LIBS);
-  gidLink(cast(void**)&gst_gl_framebuffer_get_id, "gst_gl_framebuffer_get_id", LIBS);
+  gidLink(cast(void**)&gst_gl_framebuffer_get_type, "gst_gl_framebuffer_get_type", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_new, "gst_gl_framebuffer_new", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_new_with_default_depth, "gst_gl_framebuffer_new_with_default_depth", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_attach, "gst_gl_framebuffer_attach", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_bind, "gst_gl_framebuffer_bind", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_draw_to_texture, "gst_gl_framebuffer_draw_to_texture", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_get_effective_dimensions, "gst_gl_framebuffer_get_effective_dimensions", libs);
+  gidLink(cast(void**)&gst_gl_framebuffer_get_id, "gst_gl_framebuffer_get_id", libs);
 
   // GLMemory
-  gidLink(cast(void**)&gst_gl_memory_get_type, "gst_gl_memory_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_copy_into, "gst_gl_memory_copy_into", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_copy_teximage, "gst_gl_memory_copy_teximage", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_get_texture_format, "gst_gl_memory_get_texture_format", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_get_texture_height, "gst_gl_memory_get_texture_height", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_get_texture_id, "gst_gl_memory_get_texture_id", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_get_texture_target, "gst_gl_memory_get_texture_target", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_get_texture_width, "gst_gl_memory_get_texture_width", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_init, "gst_gl_memory_init", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_read_pixels, "gst_gl_memory_read_pixels", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_texsubimage, "gst_gl_memory_texsubimage", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_init_once, "gst_gl_memory_init_once", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_setup_buffer, "gst_gl_memory_setup_buffer", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_get_type, "gst_gl_memory_get_type", libs);
+  gidLink(cast(void**)&gst_gl_memory_copy_into, "gst_gl_memory_copy_into", libs);
+  gidLink(cast(void**)&gst_gl_memory_copy_teximage, "gst_gl_memory_copy_teximage", libs);
+  gidLink(cast(void**)&gst_gl_memory_get_texture_format, "gst_gl_memory_get_texture_format", libs);
+  gidLink(cast(void**)&gst_gl_memory_get_texture_height, "gst_gl_memory_get_texture_height", libs);
+  gidLink(cast(void**)&gst_gl_memory_get_texture_id, "gst_gl_memory_get_texture_id", libs);
+  gidLink(cast(void**)&gst_gl_memory_get_texture_target, "gst_gl_memory_get_texture_target", libs);
+  gidLink(cast(void**)&gst_gl_memory_get_texture_width, "gst_gl_memory_get_texture_width", libs);
+  gidLink(cast(void**)&gst_gl_memory_init, "gst_gl_memory_init", libs);
+  gidLink(cast(void**)&gst_gl_memory_read_pixels, "gst_gl_memory_read_pixels", libs);
+  gidLink(cast(void**)&gst_gl_memory_texsubimage, "gst_gl_memory_texsubimage", libs);
+  gidLink(cast(void**)&gst_gl_memory_init_once, "gst_gl_memory_init_once", libs);
+  gidLink(cast(void**)&gst_gl_memory_setup_buffer, "gst_gl_memory_setup_buffer", libs);
 
   // GLMemoryAllocator
-  gidLink(cast(void**)&gst_gl_memory_allocator_get_type, "gst_gl_memory_allocator_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_allocator_get_default, "gst_gl_memory_allocator_get_default", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_allocator_get_type, "gst_gl_memory_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_gl_memory_allocator_get_default, "gst_gl_memory_allocator_get_default", libs);
 
   // GLMemoryPBO
-  gidLink(cast(void**)&gst_gl_memory_pbo_get_type, "gst_gl_memory_pbo_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_pbo_copy_into_texture, "gst_gl_memory_pbo_copy_into_texture", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_pbo_download_transfer, "gst_gl_memory_pbo_download_transfer", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_pbo_upload_transfer, "gst_gl_memory_pbo_upload_transfer", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_pbo_init_once, "gst_gl_memory_pbo_init_once", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_pbo_get_type, "gst_gl_memory_pbo_get_type", libs);
+  gidLink(cast(void**)&gst_gl_memory_pbo_copy_into_texture, "gst_gl_memory_pbo_copy_into_texture", libs);
+  gidLink(cast(void**)&gst_gl_memory_pbo_download_transfer, "gst_gl_memory_pbo_download_transfer", libs);
+  gidLink(cast(void**)&gst_gl_memory_pbo_upload_transfer, "gst_gl_memory_pbo_upload_transfer", libs);
+  gidLink(cast(void**)&gst_gl_memory_pbo_init_once, "gst_gl_memory_pbo_init_once", libs);
 
   // GLMemoryPBOAllocator
-  gidLink(cast(void**)&gst_gl_memory_pbo_allocator_get_type, "gst_gl_memory_pbo_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_pbo_allocator_get_type, "gst_gl_memory_pbo_allocator_get_type", libs);
 
   // GLMixer
-  gidLink(cast(void**)&gst_gl_mixer_get_type, "gst_gl_mixer_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_mixer_get_framebuffer, "gst_gl_mixer_get_framebuffer", LIBS);
-  gidLink(cast(void**)&gst_gl_mixer_process_textures, "gst_gl_mixer_process_textures", LIBS);
+  gidLink(cast(void**)&gst_gl_mixer_get_type, "gst_gl_mixer_get_type", libs);
+  gidLink(cast(void**)&gst_gl_mixer_get_framebuffer, "gst_gl_mixer_get_framebuffer", libs);
+  gidLink(cast(void**)&gst_gl_mixer_process_textures, "gst_gl_mixer_process_textures", libs);
 
   // GLMixerClass
-  gidLink(cast(void**)&gst_gl_mixer_class_add_rgba_pad_templates, "gst_gl_mixer_class_add_rgba_pad_templates", LIBS);
+  gidLink(cast(void**)&gst_gl_mixer_class_add_rgba_pad_templates, "gst_gl_mixer_class_add_rgba_pad_templates", libs);
 
   // GLMixerPad
-  gidLink(cast(void**)&gst_gl_mixer_pad_get_type, "gst_gl_mixer_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_mixer_pad_get_type, "gst_gl_mixer_pad_get_type", libs);
 
   // GLOverlayCompositor
-  gidLink(cast(void**)&gst_gl_overlay_compositor_get_type, "gst_gl_overlay_compositor_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_overlay_compositor_new, "gst_gl_overlay_compositor_new", LIBS);
-  gidLink(cast(void**)&gst_gl_overlay_compositor_add_caps, "gst_gl_overlay_compositor_add_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_overlay_compositor_draw_overlays, "gst_gl_overlay_compositor_draw_overlays", LIBS);
-  gidLink(cast(void**)&gst_gl_overlay_compositor_free_overlays, "gst_gl_overlay_compositor_free_overlays", LIBS);
-  gidLink(cast(void**)&gst_gl_overlay_compositor_upload_overlays, "gst_gl_overlay_compositor_upload_overlays", LIBS);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_get_type, "gst_gl_overlay_compositor_get_type", libs);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_new, "gst_gl_overlay_compositor_new", libs);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_add_caps, "gst_gl_overlay_compositor_add_caps", libs);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_draw_overlays, "gst_gl_overlay_compositor_draw_overlays", libs);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_free_overlays, "gst_gl_overlay_compositor_free_overlays", libs);
+  gidLink(cast(void**)&gst_gl_overlay_compositor_upload_overlays, "gst_gl_overlay_compositor_upload_overlays", libs);
 
   // GLQuery
-  gidLink(cast(void**)&gst_gl_query_counter, "gst_gl_query_counter", LIBS);
-  gidLink(cast(void**)&gst_gl_query_end, "gst_gl_query_end", LIBS);
-  gidLink(cast(void**)&gst_gl_query_free, "gst_gl_query_free", LIBS);
-  gidLink(cast(void**)&gst_gl_query_init, "gst_gl_query_init", LIBS);
-  gidLink(cast(void**)&gst_gl_query_result, "gst_gl_query_result", LIBS);
-  gidLink(cast(void**)&gst_gl_query_start, "gst_gl_query_start", LIBS);
-  gidLink(cast(void**)&gst_gl_query_unset, "gst_gl_query_unset", LIBS);
-  gidLink(cast(void**)&gst_gl_query_local_gl_context, "gst_gl_query_local_gl_context", LIBS);
-  gidLink(cast(void**)&gst_gl_query_new, "gst_gl_query_new", LIBS);
+  gidLink(cast(void**)&gst_gl_query_counter, "gst_gl_query_counter", libs);
+  gidLink(cast(void**)&gst_gl_query_end, "gst_gl_query_end", libs);
+  gidLink(cast(void**)&gst_gl_query_free, "gst_gl_query_free", libs);
+  gidLink(cast(void**)&gst_gl_query_init, "gst_gl_query_init", libs);
+  gidLink(cast(void**)&gst_gl_query_result, "gst_gl_query_result", libs);
+  gidLink(cast(void**)&gst_gl_query_start, "gst_gl_query_start", libs);
+  gidLink(cast(void**)&gst_gl_query_unset, "gst_gl_query_unset", libs);
+  gidLink(cast(void**)&gst_gl_query_local_gl_context, "gst_gl_query_local_gl_context", libs);
+  gidLink(cast(void**)&gst_gl_query_new, "gst_gl_query_new", libs);
 
   // GLRenderbuffer
-  gidLink(cast(void**)&gst_gl_renderbuffer_get_type, "gst_gl_renderbuffer_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_get_format, "gst_gl_renderbuffer_get_format", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_get_height, "gst_gl_renderbuffer_get_height", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_get_id, "gst_gl_renderbuffer_get_id", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_get_width, "gst_gl_renderbuffer_get_width", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_init_once, "gst_gl_renderbuffer_init_once", LIBS);
+  gidLink(cast(void**)&gst_gl_renderbuffer_get_type, "gst_gl_renderbuffer_get_type", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_get_format, "gst_gl_renderbuffer_get_format", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_get_height, "gst_gl_renderbuffer_get_height", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_get_id, "gst_gl_renderbuffer_get_id", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_get_width, "gst_gl_renderbuffer_get_width", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_init_once, "gst_gl_renderbuffer_init_once", libs);
 
   // GLRenderbufferAllocationParams
-  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_get_type, "gst_gl_renderbuffer_allocation_params_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_new, "gst_gl_renderbuffer_allocation_params_new", LIBS);
-  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_new_wrapped, "gst_gl_renderbuffer_allocation_params_new_wrapped", LIBS);
+  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_get_type, "gst_gl_renderbuffer_allocation_params_get_type", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_new, "gst_gl_renderbuffer_allocation_params_new", libs);
+  gidLink(cast(void**)&gst_gl_renderbuffer_allocation_params_new_wrapped, "gst_gl_renderbuffer_allocation_params_new_wrapped", libs);
 
   // GLRenderbufferAllocator
-  gidLink(cast(void**)&gst_gl_renderbuffer_allocator_get_type, "gst_gl_renderbuffer_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_renderbuffer_allocator_get_type, "gst_gl_renderbuffer_allocator_get_type", libs);
 
   // GLSLStage
-  gidLink(cast(void**)&gst_glsl_stage_get_type, "gst_glsl_stage_get_type", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_new, "gst_glsl_stage_new", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_new_default_fragment, "gst_glsl_stage_new_default_fragment", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_new_default_vertex, "gst_glsl_stage_new_default_vertex", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_new_with_string, "gst_glsl_stage_new_with_string", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_new_with_strings, "gst_glsl_stage_new_with_strings", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_compile, "gst_glsl_stage_compile", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_get_handle, "gst_glsl_stage_get_handle", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_get_profile, "gst_glsl_stage_get_profile", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_get_shader_type, "gst_glsl_stage_get_shader_type", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_get_version, "gst_glsl_stage_get_version", LIBS);
-  gidLink(cast(void**)&gst_glsl_stage_set_strings, "gst_glsl_stage_set_strings", LIBS);
+  gidLink(cast(void**)&gst_glsl_stage_get_type, "gst_glsl_stage_get_type", libs);
+  gidLink(cast(void**)&gst_glsl_stage_new, "gst_glsl_stage_new", libs);
+  gidLink(cast(void**)&gst_glsl_stage_new_default_fragment, "gst_glsl_stage_new_default_fragment", libs);
+  gidLink(cast(void**)&gst_glsl_stage_new_default_vertex, "gst_glsl_stage_new_default_vertex", libs);
+  gidLink(cast(void**)&gst_glsl_stage_new_with_string, "gst_glsl_stage_new_with_string", libs);
+  gidLink(cast(void**)&gst_glsl_stage_new_with_strings, "gst_glsl_stage_new_with_strings", libs);
+  gidLink(cast(void**)&gst_glsl_stage_compile, "gst_glsl_stage_compile", libs);
+  gidLink(cast(void**)&gst_glsl_stage_get_handle, "gst_glsl_stage_get_handle", libs);
+  gidLink(cast(void**)&gst_glsl_stage_get_profile, "gst_glsl_stage_get_profile", libs);
+  gidLink(cast(void**)&gst_glsl_stage_get_shader_type, "gst_glsl_stage_get_shader_type", libs);
+  gidLink(cast(void**)&gst_glsl_stage_get_version, "gst_glsl_stage_get_version", libs);
+  gidLink(cast(void**)&gst_glsl_stage_set_strings, "gst_glsl_stage_set_strings", libs);
 
   // GLShader
-  gidLink(cast(void**)&gst_gl_shader_get_type, "gst_gl_shader_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_new, "gst_gl_shader_new", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_new_default, "gst_gl_shader_new_default", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_new_link_with_stages, "gst_gl_shader_new_link_with_stages", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_new_with_stages, "gst_gl_shader_new_with_stages", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_string_fragment_external_oes_get_default, "gst_gl_shader_string_fragment_external_oes_get_default", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_string_fragment_get_default, "gst_gl_shader_string_fragment_get_default", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_string_get_highest_precision, "gst_gl_shader_string_get_highest_precision", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_attach, "gst_gl_shader_attach", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_attach_unlocked, "gst_gl_shader_attach_unlocked", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_bind_attribute_location, "gst_gl_shader_bind_attribute_location", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_bind_frag_data_location, "gst_gl_shader_bind_frag_data_location", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_compile_attach_stage, "gst_gl_shader_compile_attach_stage", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_detach, "gst_gl_shader_detach", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_detach_unlocked, "gst_gl_shader_detach_unlocked", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_get_attribute_location, "gst_gl_shader_get_attribute_location", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_get_program_handle, "gst_gl_shader_get_program_handle", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_is_linked, "gst_gl_shader_is_linked", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_link, "gst_gl_shader_link", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_release, "gst_gl_shader_release", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_release_unlocked, "gst_gl_shader_release_unlocked", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_1f, "gst_gl_shader_set_uniform_1f", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_1fv, "gst_gl_shader_set_uniform_1fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_1i, "gst_gl_shader_set_uniform_1i", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_1iv, "gst_gl_shader_set_uniform_1iv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_2f, "gst_gl_shader_set_uniform_2f", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_2fv, "gst_gl_shader_set_uniform_2fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_2i, "gst_gl_shader_set_uniform_2i", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_2iv, "gst_gl_shader_set_uniform_2iv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_3f, "gst_gl_shader_set_uniform_3f", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_3fv, "gst_gl_shader_set_uniform_3fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_3i, "gst_gl_shader_set_uniform_3i", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_3iv, "gst_gl_shader_set_uniform_3iv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_4f, "gst_gl_shader_set_uniform_4f", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_4fv, "gst_gl_shader_set_uniform_4fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_4i, "gst_gl_shader_set_uniform_4i", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_4iv, "gst_gl_shader_set_uniform_4iv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2fv, "gst_gl_shader_set_uniform_matrix_2fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2x3fv, "gst_gl_shader_set_uniform_matrix_2x3fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2x4fv, "gst_gl_shader_set_uniform_matrix_2x4fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3fv, "gst_gl_shader_set_uniform_matrix_3fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3x2fv, "gst_gl_shader_set_uniform_matrix_3x2fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3x4fv, "gst_gl_shader_set_uniform_matrix_3x4fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4fv, "gst_gl_shader_set_uniform_matrix_4fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4x2fv, "gst_gl_shader_set_uniform_matrix_4x2fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4x3fv, "gst_gl_shader_set_uniform_matrix_4x3fv", LIBS);
-  gidLink(cast(void**)&gst_gl_shader_use, "gst_gl_shader_use", LIBS);
+  gidLink(cast(void**)&gst_gl_shader_get_type, "gst_gl_shader_get_type", libs);
+  gidLink(cast(void**)&gst_gl_shader_new, "gst_gl_shader_new", libs);
+  gidLink(cast(void**)&gst_gl_shader_new_default, "gst_gl_shader_new_default", libs);
+  gidLink(cast(void**)&gst_gl_shader_new_link_with_stages, "gst_gl_shader_new_link_with_stages", libs);
+  gidLink(cast(void**)&gst_gl_shader_new_with_stages, "gst_gl_shader_new_with_stages", libs);
+  gidLink(cast(void**)&gst_gl_shader_string_fragment_external_oes_get_default, "gst_gl_shader_string_fragment_external_oes_get_default", libs);
+  gidLink(cast(void**)&gst_gl_shader_string_fragment_get_default, "gst_gl_shader_string_fragment_get_default", libs);
+  gidLink(cast(void**)&gst_gl_shader_string_get_highest_precision, "gst_gl_shader_string_get_highest_precision", libs);
+  gidLink(cast(void**)&gst_gl_shader_attach, "gst_gl_shader_attach", libs);
+  gidLink(cast(void**)&gst_gl_shader_attach_unlocked, "gst_gl_shader_attach_unlocked", libs);
+  gidLink(cast(void**)&gst_gl_shader_bind_attribute_location, "gst_gl_shader_bind_attribute_location", libs);
+  gidLink(cast(void**)&gst_gl_shader_bind_frag_data_location, "gst_gl_shader_bind_frag_data_location", libs);
+  gidLink(cast(void**)&gst_gl_shader_compile_attach_stage, "gst_gl_shader_compile_attach_stage", libs);
+  gidLink(cast(void**)&gst_gl_shader_detach, "gst_gl_shader_detach", libs);
+  gidLink(cast(void**)&gst_gl_shader_detach_unlocked, "gst_gl_shader_detach_unlocked", libs);
+  gidLink(cast(void**)&gst_gl_shader_get_attribute_location, "gst_gl_shader_get_attribute_location", libs);
+  gidLink(cast(void**)&gst_gl_shader_get_program_handle, "gst_gl_shader_get_program_handle", libs);
+  gidLink(cast(void**)&gst_gl_shader_is_linked, "gst_gl_shader_is_linked", libs);
+  gidLink(cast(void**)&gst_gl_shader_link, "gst_gl_shader_link", libs);
+  gidLink(cast(void**)&gst_gl_shader_release, "gst_gl_shader_release", libs);
+  gidLink(cast(void**)&gst_gl_shader_release_unlocked, "gst_gl_shader_release_unlocked", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_1f, "gst_gl_shader_set_uniform_1f", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_1fv, "gst_gl_shader_set_uniform_1fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_1i, "gst_gl_shader_set_uniform_1i", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_1iv, "gst_gl_shader_set_uniform_1iv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_2f, "gst_gl_shader_set_uniform_2f", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_2fv, "gst_gl_shader_set_uniform_2fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_2i, "gst_gl_shader_set_uniform_2i", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_2iv, "gst_gl_shader_set_uniform_2iv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_3f, "gst_gl_shader_set_uniform_3f", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_3fv, "gst_gl_shader_set_uniform_3fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_3i, "gst_gl_shader_set_uniform_3i", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_3iv, "gst_gl_shader_set_uniform_3iv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_4f, "gst_gl_shader_set_uniform_4f", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_4fv, "gst_gl_shader_set_uniform_4fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_4i, "gst_gl_shader_set_uniform_4i", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_4iv, "gst_gl_shader_set_uniform_4iv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2fv, "gst_gl_shader_set_uniform_matrix_2fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2x3fv, "gst_gl_shader_set_uniform_matrix_2x3fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_2x4fv, "gst_gl_shader_set_uniform_matrix_2x4fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3fv, "gst_gl_shader_set_uniform_matrix_3fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3x2fv, "gst_gl_shader_set_uniform_matrix_3x2fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_3x4fv, "gst_gl_shader_set_uniform_matrix_3x4fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4fv, "gst_gl_shader_set_uniform_matrix_4fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4x2fv, "gst_gl_shader_set_uniform_matrix_4x2fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_set_uniform_matrix_4x3fv, "gst_gl_shader_set_uniform_matrix_4x3fv", libs);
+  gidLink(cast(void**)&gst_gl_shader_use, "gst_gl_shader_use", libs);
 
   // GLSyncMeta
-  gidLink(cast(void**)&gst_gl_sync_meta_set_sync_point, "gst_gl_sync_meta_set_sync_point", LIBS);
-  gidLink(cast(void**)&gst_gl_sync_meta_wait, "gst_gl_sync_meta_wait", LIBS);
-  gidLink(cast(void**)&gst_gl_sync_meta_wait_cpu, "gst_gl_sync_meta_wait_cpu", LIBS);
-  gidLink(cast(void**)&gst_gl_sync_meta_get_info, "gst_gl_sync_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_gl_sync_meta_set_sync_point, "gst_gl_sync_meta_set_sync_point", libs);
+  gidLink(cast(void**)&gst_gl_sync_meta_wait, "gst_gl_sync_meta_wait", libs);
+  gidLink(cast(void**)&gst_gl_sync_meta_wait_cpu, "gst_gl_sync_meta_wait_cpu", libs);
+  gidLink(cast(void**)&gst_gl_sync_meta_get_info, "gst_gl_sync_meta_get_info", libs);
 
   // GLUpload
-  gidLink(cast(void**)&gst_gl_upload_get_type, "gst_gl_upload_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_new, "gst_gl_upload_new", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_get_input_template_caps, "gst_gl_upload_get_input_template_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_fixate_caps, "gst_gl_upload_fixate_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_get_caps, "gst_gl_upload_get_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_perform_with_buffer, "gst_gl_upload_perform_with_buffer", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_propose_allocation, "gst_gl_upload_propose_allocation", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_set_caps, "gst_gl_upload_set_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_set_context, "gst_gl_upload_set_context", LIBS);
-  gidLink(cast(void**)&gst_gl_upload_transform_caps, "gst_gl_upload_transform_caps", LIBS);
+  gidLink(cast(void**)&gst_gl_upload_get_type, "gst_gl_upload_get_type", libs);
+  gidLink(cast(void**)&gst_gl_upload_new, "gst_gl_upload_new", libs);
+  gidLink(cast(void**)&gst_gl_upload_get_input_template_caps, "gst_gl_upload_get_input_template_caps", libs);
+  gidLink(cast(void**)&gst_gl_upload_fixate_caps, "gst_gl_upload_fixate_caps", libs);
+  gidLink(cast(void**)&gst_gl_upload_get_caps, "gst_gl_upload_get_caps", libs);
+  gidLink(cast(void**)&gst_gl_upload_perform_with_buffer, "gst_gl_upload_perform_with_buffer", libs);
+  gidLink(cast(void**)&gst_gl_upload_propose_allocation, "gst_gl_upload_propose_allocation", libs);
+  gidLink(cast(void**)&gst_gl_upload_set_caps, "gst_gl_upload_set_caps", libs);
+  gidLink(cast(void**)&gst_gl_upload_set_context, "gst_gl_upload_set_context", libs);
+  gidLink(cast(void**)&gst_gl_upload_transform_caps, "gst_gl_upload_transform_caps", libs);
 
   // GLVideoAllocationParams
-  gidLink(cast(void**)&gst_gl_video_allocation_params_get_type, "gst_gl_video_allocation_params_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_new, "gst_gl_video_allocation_params_new", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_data, "gst_gl_video_allocation_params_new_wrapped_data", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_gl_handle, "gst_gl_video_allocation_params_new_wrapped_gl_handle", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_texture, "gst_gl_video_allocation_params_new_wrapped_texture", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_copy_data, "gst_gl_video_allocation_params_copy_data", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_free_data, "gst_gl_video_allocation_params_free_data", LIBS);
-  gidLink(cast(void**)&gst_gl_video_allocation_params_init_full, "gst_gl_video_allocation_params_init_full", LIBS);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_get_type, "gst_gl_video_allocation_params_get_type", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_new, "gst_gl_video_allocation_params_new", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_data, "gst_gl_video_allocation_params_new_wrapped_data", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_gl_handle, "gst_gl_video_allocation_params_new_wrapped_gl_handle", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_new_wrapped_texture, "gst_gl_video_allocation_params_new_wrapped_texture", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_copy_data, "gst_gl_video_allocation_params_copy_data", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_free_data, "gst_gl_video_allocation_params_free_data", libs);
+  gidLink(cast(void**)&gst_gl_video_allocation_params_init_full, "gst_gl_video_allocation_params_init_full", libs);
 
   // GLViewConvert
-  gidLink(cast(void**)&gst_gl_view_convert_get_type, "gst_gl_view_convert_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_new, "gst_gl_view_convert_new", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_fixate_caps, "gst_gl_view_convert_fixate_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_get_output, "gst_gl_view_convert_get_output", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_perform, "gst_gl_view_convert_perform", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_reset, "gst_gl_view_convert_reset", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_set_caps, "gst_gl_view_convert_set_caps", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_set_context, "gst_gl_view_convert_set_context", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_submit_input_buffer, "gst_gl_view_convert_submit_input_buffer", LIBS);
-  gidLink(cast(void**)&gst_gl_view_convert_transform_caps, "gst_gl_view_convert_transform_caps", LIBS);
+  gidLink(cast(void**)&gst_gl_view_convert_get_type, "gst_gl_view_convert_get_type", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_new, "gst_gl_view_convert_new", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_fixate_caps, "gst_gl_view_convert_fixate_caps", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_get_output, "gst_gl_view_convert_get_output", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_perform, "gst_gl_view_convert_perform", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_reset, "gst_gl_view_convert_reset", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_set_caps, "gst_gl_view_convert_set_caps", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_set_context, "gst_gl_view_convert_set_context", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_submit_input_buffer, "gst_gl_view_convert_submit_input_buffer", libs);
+  gidLink(cast(void**)&gst_gl_view_convert_transform_caps, "gst_gl_view_convert_transform_caps", libs);
 
   // GLWindow
-  gidLink(cast(void**)&gst_gl_window_get_type, "gst_gl_window_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_window_new, "gst_gl_window_new", LIBS);
-  gidLink(cast(void**)&gst_gl_window_controls_viewport, "gst_gl_window_controls_viewport", LIBS);
-  gidLink(cast(void**)&gst_gl_window_draw, "gst_gl_window_draw", LIBS);
-  gidLink(cast(void**)&gst_gl_window_get_context, "gst_gl_window_get_context", LIBS);
-  gidLink(cast(void**)&gst_gl_window_get_display, "gst_gl_window_get_display", LIBS);
-  gidLink(cast(void**)&gst_gl_window_get_surface_dimensions, "gst_gl_window_get_surface_dimensions", LIBS);
-  gidLink(cast(void**)&gst_gl_window_get_window_handle, "gst_gl_window_get_window_handle", LIBS);
-  gidLink(cast(void**)&gst_gl_window_handle_events, "gst_gl_window_handle_events", LIBS);
-  gidLink(cast(void**)&gst_gl_window_has_output_surface, "gst_gl_window_has_output_surface", LIBS);
-  gidLink(cast(void**)&gst_gl_window_queue_resize, "gst_gl_window_queue_resize", LIBS);
-  gidLink(cast(void**)&gst_gl_window_quit, "gst_gl_window_quit", LIBS);
-  gidLink(cast(void**)&gst_gl_window_resize, "gst_gl_window_resize", LIBS);
-  gidLink(cast(void**)&gst_gl_window_run, "gst_gl_window_run", LIBS);
-  gidLink(cast(void**)&gst_gl_window_send_key_event, "gst_gl_window_send_key_event", LIBS);
-  gidLink(cast(void**)&gst_gl_window_send_message, "gst_gl_window_send_message", LIBS);
-  gidLink(cast(void**)&gst_gl_window_send_message_async, "gst_gl_window_send_message_async", LIBS);
-  gidLink(cast(void**)&gst_gl_window_send_mouse_event, "gst_gl_window_send_mouse_event", LIBS);
-  gidLink(cast(void**)&gst_gl_window_send_scroll_event, "gst_gl_window_send_scroll_event", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_close_callback, "gst_gl_window_set_close_callback", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_draw_callback, "gst_gl_window_set_draw_callback", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_preferred_size, "gst_gl_window_set_preferred_size", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_render_rectangle, "gst_gl_window_set_render_rectangle", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_resize_callback, "gst_gl_window_set_resize_callback", LIBS);
-  gidLink(cast(void**)&gst_gl_window_set_window_handle, "gst_gl_window_set_window_handle", LIBS);
-  gidLink(cast(void**)&gst_gl_window_show, "gst_gl_window_show", LIBS);
+  gidLink(cast(void**)&gst_gl_window_get_type, "gst_gl_window_get_type", libs);
+  gidLink(cast(void**)&gst_gl_window_new, "gst_gl_window_new", libs);
+  gidLink(cast(void**)&gst_gl_window_controls_viewport, "gst_gl_window_controls_viewport", libs);
+  gidLink(cast(void**)&gst_gl_window_draw, "gst_gl_window_draw", libs);
+  gidLink(cast(void**)&gst_gl_window_get_context, "gst_gl_window_get_context", libs);
+  gidLink(cast(void**)&gst_gl_window_get_display, "gst_gl_window_get_display", libs);
+  gidLink(cast(void**)&gst_gl_window_get_surface_dimensions, "gst_gl_window_get_surface_dimensions", libs);
+  gidLink(cast(void**)&gst_gl_window_get_window_handle, "gst_gl_window_get_window_handle", libs);
+  gidLink(cast(void**)&gst_gl_window_handle_events, "gst_gl_window_handle_events", libs);
+  gidLink(cast(void**)&gst_gl_window_has_output_surface, "gst_gl_window_has_output_surface", libs);
+  gidLink(cast(void**)&gst_gl_window_queue_resize, "gst_gl_window_queue_resize", libs);
+  gidLink(cast(void**)&gst_gl_window_quit, "gst_gl_window_quit", libs);
+  gidLink(cast(void**)&gst_gl_window_resize, "gst_gl_window_resize", libs);
+  gidLink(cast(void**)&gst_gl_window_run, "gst_gl_window_run", libs);
+  gidLink(cast(void**)&gst_gl_window_send_key_event, "gst_gl_window_send_key_event", libs);
+  gidLink(cast(void**)&gst_gl_window_send_message, "gst_gl_window_send_message", libs);
+  gidLink(cast(void**)&gst_gl_window_send_message_async, "gst_gl_window_send_message_async", libs);
+  gidLink(cast(void**)&gst_gl_window_send_mouse_event, "gst_gl_window_send_mouse_event", libs);
+  gidLink(cast(void**)&gst_gl_window_send_scroll_event, "gst_gl_window_send_scroll_event", libs);
+  gidLink(cast(void**)&gst_gl_window_set_close_callback, "gst_gl_window_set_close_callback", libs);
+  gidLink(cast(void**)&gst_gl_window_set_draw_callback, "gst_gl_window_set_draw_callback", libs);
+  gidLink(cast(void**)&gst_gl_window_set_preferred_size, "gst_gl_window_set_preferred_size", libs);
+  gidLink(cast(void**)&gst_gl_window_set_render_rectangle, "gst_gl_window_set_render_rectangle", libs);
+  gidLink(cast(void**)&gst_gl_window_set_resize_callback, "gst_gl_window_set_resize_callback", libs);
+  gidLink(cast(void**)&gst_gl_window_set_window_handle, "gst_gl_window_set_window_handle", libs);
+  gidLink(cast(void**)&gst_gl_window_show, "gst_gl_window_show", libs);
 
   // global
-  gidLink(cast(void**)&gst_buffer_add_gl_sync_meta, "gst_buffer_add_gl_sync_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_gl_sync_meta_full, "gst_buffer_add_gl_sync_meta_full", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_get_gl_allocation_params, "gst_buffer_pool_config_get_gl_allocation_params", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_get_gl_min_free_queue_size, "gst_buffer_pool_config_get_gl_min_free_queue_size", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_set_gl_allocation_params, "gst_buffer_pool_config_set_gl_allocation_params", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_set_gl_min_free_queue_size, "gst_buffer_pool_config_set_gl_min_free_queue_size", LIBS);
-  gidLink(cast(void**)&gst_context_get_gl_display, "gst_context_get_gl_display", LIBS);
-  gidLink(cast(void**)&gst_context_set_gl_display, "gst_context_set_gl_display", LIBS);
-  gidLink(cast(void**)&gst_gl_check_extension, "gst_gl_check_extension", LIBS);
-  gidLink(cast(void**)&gst_gl_element_propagate_display_context, "gst_gl_element_propagate_display_context", LIBS);
-  gidLink(cast(void**)&gst_gl_ensure_element_data, "gst_gl_ensure_element_data", LIBS);
-  gidLink(cast(void**)&gst_gl_get_affine_transformation_meta_as_ndc, "gst_gl_get_affine_transformation_meta_as_ndc", LIBS);
-  gidLink(cast(void**)&gst_gl_get_plane_data_size, "gst_gl_get_plane_data_size", LIBS);
-  gidLink(cast(void**)&gst_gl_get_plane_start, "gst_gl_get_plane_start", LIBS);
-  gidLink(cast(void**)&gst_gl_handle_context_query, "gst_gl_handle_context_query", LIBS);
-  gidLink(cast(void**)&gst_gl_handle_set_context, "gst_gl_handle_set_context", LIBS);
-  gidLink(cast(void**)&gst_gl_insert_debug_marker, "gst_gl_insert_debug_marker", LIBS);
-  gidLink(cast(void**)&gst_gl_multiply_matrix4, "gst_gl_multiply_matrix4", LIBS);
-  gidLink(cast(void**)&gst_gl_set_affine_transformation_meta_from_ndc, "gst_gl_set_affine_transformation_meta_from_ndc", LIBS);
-  gidLink(cast(void**)&gst_gl_sized_gl_format_from_gl_format_type, "gst_gl_sized_gl_format_from_gl_format_type", LIBS);
-  gidLink(cast(void**)&gst_gl_stereo_downmix_mode_get_type, "gst_gl_stereo_downmix_mode_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_swizzle_invert, "gst_gl_swizzle_invert", LIBS);
-  gidLink(cast(void**)&gst_gl_sync_meta_api_get_type, "gst_gl_sync_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_value_get_texture_target_mask, "gst_gl_value_get_texture_target_mask", LIBS);
-  gidLink(cast(void**)&gst_gl_value_set_texture_target, "gst_gl_value_set_texture_target", LIBS);
-  gidLink(cast(void**)&gst_gl_value_set_texture_target_from_mask, "gst_gl_value_set_texture_target_from_mask", LIBS);
-  gidLink(cast(void**)&gst_gl_version_to_glsl_version, "gst_gl_version_to_glsl_version", LIBS);
-  gidLink(cast(void**)&gst_gl_video_format_swizzle, "gst_gl_video_format_swizzle", LIBS);
-  gidLink(cast(void**)&gst_glsl_string_get_version_profile, "gst_glsl_string_get_version_profile", LIBS);
-  gidLink(cast(void**)&gst_is_gl_base_memory, "gst_is_gl_base_memory", LIBS);
-  gidLink(cast(void**)&gst_is_gl_buffer, "gst_is_gl_buffer", LIBS);
-  gidLink(cast(void**)&gst_is_gl_memory, "gst_is_gl_memory", LIBS);
-  gidLink(cast(void**)&gst_is_gl_memory_pbo, "gst_is_gl_memory_pbo", LIBS);
-  gidLink(cast(void**)&gst_is_gl_renderbuffer, "gst_is_gl_renderbuffer", LIBS);
+  gidLink(cast(void**)&gst_buffer_add_gl_sync_meta, "gst_buffer_add_gl_sync_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_gl_sync_meta_full, "gst_buffer_add_gl_sync_meta_full", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_gl_allocation_params, "gst_buffer_pool_config_get_gl_allocation_params", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_gl_min_free_queue_size, "gst_buffer_pool_config_get_gl_min_free_queue_size", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_set_gl_allocation_params, "gst_buffer_pool_config_set_gl_allocation_params", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_set_gl_min_free_queue_size, "gst_buffer_pool_config_set_gl_min_free_queue_size", libs);
+  gidLink(cast(void**)&gst_context_get_gl_display, "gst_context_get_gl_display", libs);
+  gidLink(cast(void**)&gst_context_set_gl_display, "gst_context_set_gl_display", libs);
+  gidLink(cast(void**)&gst_gl_check_extension, "gst_gl_check_extension", libs);
+  gidLink(cast(void**)&gst_gl_element_propagate_display_context, "gst_gl_element_propagate_display_context", libs);
+  gidLink(cast(void**)&gst_gl_ensure_element_data, "gst_gl_ensure_element_data", libs);
+  gidLink(cast(void**)&gst_gl_get_affine_transformation_meta_as_ndc, "gst_gl_get_affine_transformation_meta_as_ndc", libs);
+  gidLink(cast(void**)&gst_gl_get_plane_data_size, "gst_gl_get_plane_data_size", libs);
+  gidLink(cast(void**)&gst_gl_get_plane_start, "gst_gl_get_plane_start", libs);
+  gidLink(cast(void**)&gst_gl_handle_context_query, "gst_gl_handle_context_query", libs);
+  gidLink(cast(void**)&gst_gl_handle_set_context, "gst_gl_handle_set_context", libs);
+  gidLink(cast(void**)&gst_gl_insert_debug_marker, "gst_gl_insert_debug_marker", libs);
+  gidLink(cast(void**)&gst_gl_multiply_matrix4, "gst_gl_multiply_matrix4", libs);
+  gidLink(cast(void**)&gst_gl_set_affine_transformation_meta_from_ndc, "gst_gl_set_affine_transformation_meta_from_ndc", libs);
+  gidLink(cast(void**)&gst_gl_sized_gl_format_from_gl_format_type, "gst_gl_sized_gl_format_from_gl_format_type", libs);
+  gidLink(cast(void**)&gst_gl_stereo_downmix_mode_get_type, "gst_gl_stereo_downmix_mode_get_type", libs);
+  gidLink(cast(void**)&gst_gl_swizzle_invert, "gst_gl_swizzle_invert", libs);
+  gidLink(cast(void**)&gst_gl_sync_meta_api_get_type, "gst_gl_sync_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_gl_value_get_texture_target_mask, "gst_gl_value_get_texture_target_mask", libs);
+  gidLink(cast(void**)&gst_gl_value_set_texture_target, "gst_gl_value_set_texture_target", libs);
+  gidLink(cast(void**)&gst_gl_value_set_texture_target_from_mask, "gst_gl_value_set_texture_target_from_mask", libs);
+  gidLink(cast(void**)&gst_gl_version_to_glsl_version, "gst_gl_version_to_glsl_version", libs);
+  gidLink(cast(void**)&gst_gl_video_format_swizzle, "gst_gl_video_format_swizzle", libs);
+  gidLink(cast(void**)&gst_glsl_string_get_version_profile, "gst_glsl_string_get_version_profile", libs);
+  gidLink(cast(void**)&gst_is_gl_base_memory, "gst_is_gl_base_memory", libs);
+  gidLink(cast(void**)&gst_is_gl_buffer, "gst_is_gl_buffer", libs);
+  gidLink(cast(void**)&gst_is_gl_memory, "gst_is_gl_memory", libs);
+  gidLink(cast(void**)&gst_is_gl_memory_pbo, "gst_is_gl_memory_pbo", libs);
+  gidLink(cast(void**)&gst_is_gl_renderbuffer, "gst_is_gl_renderbuffer", libs);
 }

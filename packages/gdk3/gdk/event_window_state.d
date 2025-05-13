@@ -27,7 +27,7 @@ class EventWindowState
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventWindowState
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventWindowState*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventWindowState*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventWindowState
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventWindowState*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventWindowState*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventWindowState
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventWindowState
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventWindowState*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventWindowState*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventWindowState*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventWindowState
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventWindowState*)cPtr).sendEvent;
+    return (cast(GdkEventWindowState*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventWindowState
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventWindowState*)cPtr).sendEvent = propval;
+    (cast(GdkEventWindowState*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventWindowState
   */
   @property gdk.types.WindowState changedMask()
   {
-    return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)cPtr).changedMask;
+    return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)this._cPtr).changedMask;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventWindowState
   */
   @property void changedMask(gdk.types.WindowState propval)
   {
-    (cast(GdkEventWindowState*)cPtr).changedMask = cast(GdkWindowState)propval;
+    (cast(GdkEventWindowState*)this._cPtr).changedMask = cast(GdkWindowState)propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class EventWindowState
   */
   @property gdk.types.WindowState newWindowState()
   {
-    return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)cPtr).newWindowState;
+    return cast(gdk.types.WindowState)(cast(GdkEventWindowState*)this._cPtr).newWindowState;
   }
 
   /**
@@ -127,6 +127,6 @@ class EventWindowState
   */
   @property void newWindowState(gdk.types.WindowState propval)
   {
-    (cast(GdkEventWindowState*)cPtr).newWindowState = cast(GdkWindowState)propval;
+    (cast(GdkEventWindowState*)this._cPtr).newWindowState = cast(GdkWindowState)propval;
   }
 }

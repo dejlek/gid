@@ -28,7 +28,7 @@ class RTSPRange
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class RTSPRange
   */
   @property int min()
   {
-    return (cast(GstRTSPRange*)cPtr).min;
+    return (cast(GstRTSPRange*)this._cPtr).min;
   }
 
   /**
@@ -49,7 +49,7 @@ class RTSPRange
   */
   @property void min(int propval)
   {
-    (cast(GstRTSPRange*)cPtr).min = propval;
+    (cast(GstRTSPRange*)this._cPtr).min = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class RTSPRange
   */
   @property int max()
   {
-    return (cast(GstRTSPRange*)cPtr).max;
+    return (cast(GstRTSPRange*)this._cPtr).max;
   }
 
   /**
@@ -68,7 +68,7 @@ class RTSPRange
   */
   @property void max(int propval)
   {
-    (cast(GstRTSPRange*)cPtr).max = propval;
+    (cast(GstRTSPRange*)this._cPtr).max = propval;
   }
 
   /**
@@ -84,7 +84,7 @@ class RTSPRange
   static bool convertUnits(gstrtsp.rtsptime_range.RTSPTimeRange range, gstrtsp.types.RTSPRangeUnit unit)
   {
     bool _retval;
-    _retval = gst_rtsp_range_convert_units(range ? cast(GstRTSPTimeRange*)range.cPtr : null, unit);
+    _retval = gst_rtsp_range_convert_units(range ? cast(GstRTSPTimeRange*)range._cPtr : null, unit);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class RTSPRange
   */
   static void free(gstrtsp.rtsptime_range.RTSPTimeRange range)
   {
-    gst_rtsp_range_free(range ? cast(GstRTSPTimeRange*)range.cPtr : null);
+    gst_rtsp_range_free(range ? cast(GstRTSPTimeRange*)range._cPtr : null);
   }
 
   /**
@@ -117,7 +117,7 @@ class RTSPRange
   static bool getTimes(gstrtsp.rtsptime_range.RTSPTimeRange range, out gst.types.ClockTime min, out gst.types.ClockTime max)
   {
     bool _retval;
-    _retval = gst_rtsp_range_get_times(range ? cast(const(GstRTSPTimeRange)*)range.cPtr : null, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
+    _retval = gst_rtsp_range_get_times(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null, cast(GstClockTime*)&min, cast(GstClockTime*)&max);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class RTSPRange
   static string toString_(gstrtsp.rtsptime_range.RTSPTimeRange range)
   {
     char* _cretval;
-    _cretval = gst_rtsp_range_to_string(range ? cast(const(GstRTSPTimeRange)*)range.cPtr : null);
+    _cretval = gst_rtsp_range_to_string(range ? cast(const(GstRTSPTimeRange)*)range._cPtr : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

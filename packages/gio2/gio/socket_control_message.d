@@ -39,16 +39,16 @@ class SocketControlMessage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_control_message_get_type != &gidSymbolNotFound ? g_socket_control_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
 
     auto _data = cast(void*)data.ptr;
     _cretval = g_socket_control_message_deserialize(level, type, _size, _data);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_control_message.SocketControlMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
   int getLevel()
   {
     int _retval;
-    _retval = g_socket_control_message_get_level(cast(GSocketControlMessage*)cPtr);
+    _retval = g_socket_control_message_get_level(cast(GSocketControlMessage*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
   int getMsgType()
   {
     int _retval;
-    _retval = g_socket_control_message_get_msg_type(cast(GSocketControlMessage*)cPtr);
+    _retval = g_socket_control_message_get_msg_type(cast(GSocketControlMessage*)this._cPtr);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class SocketControlMessage : gobject.object.ObjectWrap
   size_t getSize()
   {
     size_t _retval;
-    _retval = g_socket_control_message_get_size(cast(GSocketControlMessage*)cPtr);
+    _retval = g_socket_control_message_get_size(cast(GSocketControlMessage*)this._cPtr);
     return _retval;
   }
 
@@ -134,6 +134,6 @@ class SocketControlMessage : gobject.object.ObjectWrap
   */
   void serialize(void* data)
   {
-    g_socket_control_message_serialize(cast(GSocketControlMessage*)cPtr, data);
+    g_socket_control_message_serialize(cast(GSocketControlMessage*)this._cPtr, data);
   }
 }

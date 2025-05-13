@@ -26,16 +26,16 @@ class RadioAction : gtk.toggle_action.ToggleAction
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_action_get_type != &gidSymbolNotFound ? gtk_radio_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -137,7 +137,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   int getCurrentValue()
   {
     int _retval;
-    _retval = gtk_radio_action_get_current_value(cast(GtkRadioAction*)cPtr);
+    _retval = gtk_radio_action_get_current_value(cast(GtkRadioAction*)this._cPtr);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   gtk.radio_action.RadioAction[] getGroup()
   {
     GSList* _cretval;
-    _cretval = gtk_radio_action_get_group(cast(GtkRadioAction*)cPtr);
+    _cretval = gtk_radio_action_get_group(cast(GtkRadioAction*)this._cPtr);
     auto _retval = gSListToD!(gtk.radio_action.RadioAction, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -195,7 +195,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   */
   void joinGroup(gtk.radio_action.RadioAction groupSource = null)
   {
-    gtk_radio_action_join_group(cast(GtkRadioAction*)cPtr, groupSource ? cast(GtkRadioAction*)groupSource.cPtr(No.Dup) : null);
+    gtk_radio_action_join_group(cast(GtkRadioAction*)this._cPtr, groupSource ? cast(GtkRadioAction*)groupSource._cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   */
   void setCurrentValue(int currentValue)
   {
-    gtk_radio_action_set_current_value(cast(GtkRadioAction*)cPtr, currentValue);
+    gtk_radio_action_set_current_value(cast(GtkRadioAction*)this._cPtr, currentValue);
   }
 
   /**
@@ -220,7 +220,7 @@ class RadioAction : gtk.toggle_action.ToggleAction
   {
     auto _group = gSListFromD!(gtk.radio_action.RadioAction)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_action.RadioAction, GidOwnership.None)(_group);
-    gtk_radio_action_set_group(cast(GtkRadioAction*)cPtr, _group);
+    gtk_radio_action_set_group(cast(GtkRadioAction*)this._cPtr, _group);
   }
 
   /**

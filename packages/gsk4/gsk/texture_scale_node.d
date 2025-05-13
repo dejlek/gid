@@ -48,7 +48,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
   this(gdk.texture.Texture texture, graphene.rect.Rect bounds, gsk.types.ScalingFilter filter)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, filter);
+    _cretval = gsk_texture_scale_node_new(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, filter);
     this(_cretval, Yes.Take);
   }
 
@@ -59,7 +59,7 @@ class TextureScaleNode : gsk.render_node.RenderNode
   gsk.types.ScalingFilter getFilter()
   {
     GskScalingFilter _cretval;
-    _cretval = gsk_texture_scale_node_get_filter(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_texture_scale_node_get_filter(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.ScalingFilter _retval = cast(gsk.types.ScalingFilter)_cretval;
     return _retval;
   }
@@ -71,8 +71,8 @@ class TextureScaleNode : gsk.render_node.RenderNode
   gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gsk_texture_scale_node_get_texture(cast(const(GskRenderNode)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gsk_texture_scale_node_get_texture(cast(const(GskRenderNode)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

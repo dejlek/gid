@@ -29,16 +29,16 @@ class EventControllerMotion : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_motion_get_type != &gidSymbolNotFound ? gtk_event_controller_motion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class EventControllerMotion : gtk.event_controller.EventController
   bool containsPointer()
   {
     bool _retval;
-    _retval = gtk_event_controller_motion_contains_pointer(cast(GtkEventControllerMotion*)cPtr);
+    _retval = gtk_event_controller_motion_contains_pointer(cast(GtkEventControllerMotion*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class EventControllerMotion : gtk.event_controller.EventController
   bool isPointer()
   {
     bool _retval;
-    _retval = gtk_event_controller_motion_is_pointer(cast(GtkEventControllerMotion*)cPtr);
+    _retval = gtk_event_controller_motion_is_pointer(cast(GtkEventControllerMotion*)this._cPtr);
     return _retval;
   }
 

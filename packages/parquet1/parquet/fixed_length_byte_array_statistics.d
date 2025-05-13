@@ -19,16 +19,16 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_fixed_length_byte_array_statistics_get_type != &gidSymbolNotFound ? gparquet_fixed_length_byte_array_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   glib.bytes.Bytes getMax()
   {
     GBytes* _cretval;
-    _cretval = gparquet_fixed_length_byte_array_statistics_get_max(cast(GParquetFixedLengthByteArrayStatistics*)cPtr);
+    _cretval = gparquet_fixed_length_byte_array_statistics_get_max(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -50,7 +50,7 @@ class FixedLengthByteArrayStatistics : parquet.statistics.Statistics
   glib.bytes.Bytes getMin()
   {
     GBytes* _cretval;
-    _cretval = gparquet_fixed_length_byte_array_statistics_get_min(cast(GParquetFixedLengthByteArrayStatistics*)cPtr);
+    _cretval = gparquet_fixed_length_byte_array_statistics_get_min(cast(GParquetFixedLengthByteArrayStatistics*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

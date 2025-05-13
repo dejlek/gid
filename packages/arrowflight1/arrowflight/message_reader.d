@@ -20,16 +20,16 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_message_reader_get_type != &gidSymbolNotFound ? gaflight_message_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,8 +42,8 @@ class MessageReader : arrowflight.record_batch_reader.RecordBatchReader
   arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;
-    _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    _cretval = gaflight_message_reader_get_descriptor(cast(GAFlightMessageReader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 }

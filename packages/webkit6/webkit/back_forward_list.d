@@ -36,16 +36,16 @@ class BackForwardList : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_back_forward_list_get_type != &gidSymbolNotFound ? webkit_back_forward_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,8 +62,8 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem getBackItem()
   {
     WebKitBackForwardListItem* _cretval;
-    _cretval = webkit_back_forward_list_get_back_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    _cretval = webkit_back_forward_list_get_back_item(cast(WebKitBackForwardList*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem[] getBackList()
   {
     GList* _cretval;
-    _cretval = webkit_back_forward_list_get_back_list(cast(WebKitBackForwardList*)cPtr);
+    _cretval = webkit_back_forward_list_get_back_list(cast(WebKitBackForwardList*)this._cPtr);
     auto _retval = gListToD!(webkit.back_forward_list_item.BackForwardListItem, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -91,7 +91,7 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem[] getBackListWithLimit(uint limit)
   {
     GList* _cretval;
-    _cretval = webkit_back_forward_list_get_back_list_with_limit(cast(WebKitBackForwardList*)cPtr, limit);
+    _cretval = webkit_back_forward_list_get_back_list_with_limit(cast(WebKitBackForwardList*)this._cPtr, limit);
     auto _retval = gListToD!(webkit.back_forward_list_item.BackForwardListItem, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -104,8 +104,8 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem getCurrentItem()
   {
     WebKitBackForwardListItem* _cretval;
-    _cretval = webkit_back_forward_list_get_current_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    _cretval = webkit_back_forward_list_get_current_item(cast(WebKitBackForwardList*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -117,8 +117,8 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem getForwardItem()
   {
     WebKitBackForwardListItem* _cretval;
-    _cretval = webkit_back_forward_list_get_forward_item(cast(WebKitBackForwardList*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    _cretval = webkit_back_forward_list_get_forward_item(cast(WebKitBackForwardList*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem[] getForwardList()
   {
     GList* _cretval;
-    _cretval = webkit_back_forward_list_get_forward_list(cast(WebKitBackForwardList*)cPtr);
+    _cretval = webkit_back_forward_list_get_forward_list(cast(WebKitBackForwardList*)this._cPtr);
     auto _retval = gListToD!(webkit.back_forward_list_item.BackForwardListItem, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -146,7 +146,7 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem[] getForwardListWithLimit(uint limit)
   {
     GList* _cretval;
-    _cretval = webkit_back_forward_list_get_forward_list_with_limit(cast(WebKitBackForwardList*)cPtr, limit);
+    _cretval = webkit_back_forward_list_get_forward_list_with_limit(cast(WebKitBackForwardList*)this._cPtr, limit);
     auto _retval = gListToD!(webkit.back_forward_list_item.BackForwardListItem, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -158,7 +158,7 @@ class BackForwardList : gobject.object.ObjectWrap
   uint getLength()
   {
     uint _retval;
-    _retval = webkit_back_forward_list_get_length(cast(WebKitBackForwardList*)cPtr);
+    _retval = webkit_back_forward_list_get_length(cast(WebKitBackForwardList*)this._cPtr);
     return _retval;
   }
 
@@ -173,8 +173,8 @@ class BackForwardList : gobject.object.ObjectWrap
   webkit.back_forward_list_item.BackForwardListItem getNthItem(int index)
   {
     WebKitBackForwardListItem* _cretval;
-    _cretval = webkit_back_forward_list_get_nth_item(cast(WebKitBackForwardList*)cPtr, index);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
+    _cretval = webkit_back_forward_list_get_nth_item(cast(WebKitBackForwardList*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.back_forward_list_item.BackForwardListItem)(cast(WebKitBackForwardListItem*)_cretval, No.Take);
     return _retval;
   }
 

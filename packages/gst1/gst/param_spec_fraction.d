@@ -28,7 +28,7 @@ class ParamSpecFraction
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class ParamSpecFraction
   */
   @property gobject.param_spec.ParamSpec parentInstance()
   {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
   }
 
   /**
@@ -49,8 +49,8 @@ class ParamSpecFraction
   */
   @property void parentInstance(gobject.param_spec.ParamSpec propval)
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
-    dToC(propval, cast(void*)&(cast(GstParamSpecFraction*)cPtr).parentInstance);
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
+    dToC(propval, cast(void*)&(cast(GstParamSpecFraction*)this._cPtr).parentInstance);
   }
 
   /**
@@ -59,7 +59,7 @@ class ParamSpecFraction
   */
   @property int minNum()
   {
-    return (cast(GstParamSpecFraction*)cPtr).minNum;
+    return (cast(GstParamSpecFraction*)this._cPtr).minNum;
   }
 
   /**
@@ -69,7 +69,7 @@ class ParamSpecFraction
   */
   @property void minNum(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).minNum = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).minNum = propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class ParamSpecFraction
   */
   @property int minDen()
   {
-    return (cast(GstParamSpecFraction*)cPtr).minDen;
+    return (cast(GstParamSpecFraction*)this._cPtr).minDen;
   }
 
   /**
@@ -88,7 +88,7 @@ class ParamSpecFraction
   */
   @property void minDen(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).minDen = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).minDen = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class ParamSpecFraction
   */
   @property int maxNum()
   {
-    return (cast(GstParamSpecFraction*)cPtr).maxNum;
+    return (cast(GstParamSpecFraction*)this._cPtr).maxNum;
   }
 
   /**
@@ -107,7 +107,7 @@ class ParamSpecFraction
   */
   @property void maxNum(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).maxNum = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).maxNum = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class ParamSpecFraction
   */
   @property int maxDen()
   {
-    return (cast(GstParamSpecFraction*)cPtr).maxDen;
+    return (cast(GstParamSpecFraction*)this._cPtr).maxDen;
   }
 
   /**
@@ -126,7 +126,7 @@ class ParamSpecFraction
   */
   @property void maxDen(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).maxDen = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).maxDen = propval;
   }
 
   /**
@@ -135,7 +135,7 @@ class ParamSpecFraction
   */
   @property int defNum()
   {
-    return (cast(GstParamSpecFraction*)cPtr).defNum;
+    return (cast(GstParamSpecFraction*)this._cPtr).defNum;
   }
 
   /**
@@ -145,7 +145,7 @@ class ParamSpecFraction
   */
   @property void defNum(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).defNum = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).defNum = propval;
   }
 
   /**
@@ -154,7 +154,7 @@ class ParamSpecFraction
   */
   @property int defDen()
   {
-    return (cast(GstParamSpecFraction*)cPtr).defDen;
+    return (cast(GstParamSpecFraction*)this._cPtr).defDen;
   }
 
   /**
@@ -164,6 +164,6 @@ class ParamSpecFraction
   */
   @property void defDen(int propval)
   {
-    (cast(GstParamSpecFraction*)cPtr).defDen = propval;
+    (cast(GstParamSpecFraction*)this._cPtr).defDen = propval;
   }
 }

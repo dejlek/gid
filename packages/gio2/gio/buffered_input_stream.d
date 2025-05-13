@@ -39,16 +39,16 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_buffered_input_stream_get_type != &gidSymbolNotFound ? g_buffered_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   this(gio.input_stream.InputStream baseStream)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null);
+    _cretval = g_buffered_input_stream_new(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -105,8 +105,8 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   static gio.buffered_input_stream.BufferedInputStream newSized(gio.input_stream.InputStream baseStream, size_t size)
   {
     GInputStream* _cretval;
-    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    _cretval = g_buffered_input_stream_new_sized(baseStream ? cast(GInputStream*)baseStream._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.buffered_input_stream.BufferedInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)cPtr, count, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_buffered_input_stream_fill(cast(GBufferedInputStream*)this._cPtr, count, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -169,17 +169,17 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   */
   void fillAsync(ptrdiff_t count, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_buffered_input_stream_fill_async(cast(GBufferedInputStream*)this._cPtr, count, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -194,7 +194,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_buffered_input_stream_fill_finish(cast(GBufferedInputStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -207,7 +207,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   size_t getAvailable()
   {
     size_t _retval;
-    _retval = g_buffered_input_stream_get_available(cast(GBufferedInputStream*)cPtr);
+    _retval = g_buffered_input_stream_get_available(cast(GBufferedInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -218,7 +218,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   size_t getBufferSize()
   {
     size_t _retval;
-    _retval = g_buffered_input_stream_get_buffer_size(cast(GBufferedInputStream*)cPtr);
+    _retval = g_buffered_input_stream_get_buffer_size(cast(GBufferedInputStream*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
       _count = cast(size_t)buffer.length;
 
     auto _buffer = cast(void*)buffer.ptr;
-    _retval = g_buffered_input_stream_peek(cast(GBufferedInputStream*)cPtr, _buffer, offset, _count);
+    _retval = g_buffered_input_stream_peek(cast(GBufferedInputStream*)this._cPtr, _buffer, offset, _count);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     void* _cretval;
     size_t _cretlength;
-    _cretval = g_buffered_input_stream_peek_buffer(cast(GBufferedInputStream*)cPtr, &_cretlength);
+    _cretval = g_buffered_input_stream_peek_buffer(cast(GBufferedInputStream*)this._cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -288,7 +288,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   {
     int _retval;
     GError *_err;
-    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_buffered_input_stream_read_byte(cast(GBufferedInputStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -304,6 +304,6 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
   */
   void setBufferSize(size_t size)
   {
-    g_buffered_input_stream_set_buffer_size(cast(GBufferedInputStream*)cPtr, size);
+    g_buffered_input_stream_set_buffer_size(cast(GBufferedInputStream*)this._cPtr, size);
   }
 }

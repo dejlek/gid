@@ -40,7 +40,7 @@ template CompletionProviderT()
   override bool activateProposal(gtksource.completion_proposal.CompletionProposal proposal, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_activate_proposal(cast(GtkSourceCompletionProvider*)cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_provider_activate_proposal(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ template CompletionProviderT()
   override gtksource.types.CompletionActivation getActivation()
   {
     GtkSourceCompletionActivation _cretval;
-    _cretval = gtk_source_completion_provider_get_activation(cast(GtkSourceCompletionProvider*)cPtr);
+    _cretval = gtk_source_completion_provider_get_activation(cast(GtkSourceCompletionProvider*)this._cPtr);
     gtksource.types.CompletionActivation _retval = cast(gtksource.types.CompletionActivation)_cretval;
     return _retval;
   }
@@ -64,8 +64,8 @@ template CompletionProviderT()
   override gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_source_completion_provider_get_gicon(cast(GtkSourceCompletionProvider*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_source_completion_provider_get_gicon(cast(GtkSourceCompletionProvider*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,8 +77,8 @@ template CompletionProviderT()
   override gdkpixbuf.pixbuf.Pixbuf getIcon()
   {
     PixbufC* _cretval;
-    _cretval = gtk_source_completion_provider_get_icon(cast(GtkSourceCompletionProvider*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_source_completion_provider_get_icon(cast(GtkSourceCompletionProvider*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ template CompletionProviderT()
   override string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_completion_provider_get_icon_name(cast(GtkSourceCompletionProvider*)cPtr);
+    _cretval = gtk_source_completion_provider_get_icon_name(cast(GtkSourceCompletionProvider*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -121,8 +121,8 @@ template CompletionProviderT()
   override gtk.widget.Widget getInfoWidget(gtksource.completion_proposal.CompletionProposal proposal)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_completion_provider_get_info_widget(cast(GtkSourceCompletionProvider*)cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_source_completion_provider_get_info_widget(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ template CompletionProviderT()
   override int getInteractiveDelay()
   {
     int _retval;
-    _retval = gtk_source_completion_provider_get_interactive_delay(cast(GtkSourceCompletionProvider*)cPtr);
+    _retval = gtk_source_completion_provider_get_interactive_delay(cast(GtkSourceCompletionProvider*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ template CompletionProviderT()
   override string getName()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_provider_get_name(cast(GtkSourceCompletionProvider*)cPtr);
+    _cretval = gtk_source_completion_provider_get_name(cast(GtkSourceCompletionProvider*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -162,7 +162,7 @@ template CompletionProviderT()
   override int getPriority()
   {
     int _retval;
-    _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)cPtr);
+    _retval = gtk_source_completion_provider_get_priority(cast(GtkSourceCompletionProvider*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ template CompletionProviderT()
   {
     bool _retval;
     GtkTextIter _iter;
-    _retval = gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null, &_iter);
+    _retval = gtk_source_completion_provider_get_start_iter(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, &_iter);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -206,7 +206,7 @@ template CompletionProviderT()
   override bool match(gtksource.completion_context.CompletionContext context)
   {
     bool _retval;
-    _retval = gtk_source_completion_provider_match(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null);
+    _retval = gtk_source_completion_provider_match(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ template CompletionProviderT()
   */
   override void populate(gtksource.completion_context.CompletionContext context)
   {
-    gtk_source_completion_provider_populate(cast(GtkSourceCompletionProvider*)cPtr, context ? cast(GtkSourceCompletionContext*)context.cPtr(No.Dup) : null);
+    gtk_source_completion_provider_populate(cast(GtkSourceCompletionProvider*)this._cPtr, context ? cast(GtkSourceCompletionContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -238,6 +238,6 @@ template CompletionProviderT()
   */
   override void updateInfo(gtksource.completion_proposal.CompletionProposal proposal, gtksource.completion_info.CompletionInfo info)
   {
-    gtk_source_completion_provider_update_info(cast(GtkSourceCompletionProvider*)cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal).cPtr(No.Dup) : null, info ? cast(GtkSourceCompletionInfo*)info.cPtr(No.Dup) : null);
+    gtk_source_completion_provider_update_info(cast(GtkSourceCompletionProvider*)this._cPtr, proposal ? cast(GtkSourceCompletionProposal*)(cast(gobject.object.ObjectWrap)proposal)._cPtr(No.Dup) : null, info ? cast(GtkSourceCompletionInfo*)info._cPtr(No.Dup) : null);
   }
 }

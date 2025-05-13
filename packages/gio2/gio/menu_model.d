@@ -142,16 +142,16 @@ class MenuModel : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_model_get_type != &gidSymbolNotFound ? g_menu_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -184,7 +184,7 @@ class MenuModel : gobject.object.ObjectWrap
   {
     GVariant* _cretval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType.cPtr(No.Dup) : null);
+    _cretval = g_menu_model_get_item_attribute_value(cast(GMenuModel*)this._cPtr, itemIndex, _attribute, expectedType ? cast(const(GVariantType)*)expectedType._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -205,8 +205,8 @@ class MenuModel : gobject.object.ObjectWrap
   {
     GMenuModel* _cretval;
     const(char)* _link = link.toCString(No.Alloc);
-    _cretval = g_menu_model_get_item_link(cast(GMenuModel*)cPtr, itemIndex, _link);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    _cretval = g_menu_model_get_item_link(cast(GMenuModel*)this._cPtr, itemIndex, _link);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class MenuModel : gobject.object.ObjectWrap
   int getNItems()
   {
     int _retval;
-    _retval = g_menu_model_get_n_items(cast(GMenuModel*)cPtr);
+    _retval = g_menu_model_get_n_items(cast(GMenuModel*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class MenuModel : gobject.object.ObjectWrap
   bool isMutable()
   {
     bool _retval;
-    _retval = g_menu_model_is_mutable(cast(GMenuModel*)cPtr);
+    _retval = g_menu_model_is_mutable(cast(GMenuModel*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class MenuModel : gobject.object.ObjectWrap
   */
   void itemsChanged(int position, int removed, int added)
   {
-    g_menu_model_items_changed(cast(GMenuModel*)cPtr, position, removed, added);
+    g_menu_model_items_changed(cast(GMenuModel*)this._cPtr, position, removed, added);
   }
 
   /**
@@ -276,8 +276,8 @@ class MenuModel : gobject.object.ObjectWrap
   gio.menu_attribute_iter.MenuAttributeIter iterateItemAttributes(int itemIndex)
   {
     GMenuAttributeIter* _cretval;
-    _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
+    _cretval = g_menu_model_iterate_item_attributes(cast(GMenuModel*)this._cPtr, itemIndex);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_attribute_iter.MenuAttributeIter)(cast(GMenuAttributeIter*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -294,8 +294,8 @@ class MenuModel : gobject.object.ObjectWrap
   gio.menu_link_iter.MenuLinkIter iterateItemLinks(int itemIndex)
   {
     GMenuLinkIter* _cretval;
-    _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)cPtr, itemIndex);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
+    _cretval = g_menu_model_iterate_item_links(cast(GMenuModel*)this._cPtr, itemIndex);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_link_iter.MenuLinkIter)(cast(GMenuLinkIter*)_cretval, Yes.Take);
     return _retval;
   }
 

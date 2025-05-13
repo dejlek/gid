@@ -48,16 +48,16 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_page_setup_unix_dialog_get_type != &gidSymbolNotFound ? gtk_page_setup_unix_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = gtk_page_setup_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    _cretval = gtk_page_setup_unix_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -89,8 +89,8 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_page_setup_unix_dialog_get_page_setup(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    _cretval = gtk_page_setup_unix_dialog_get_page_setup(cast(GtkPageSetupUnixDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,8 +101,8 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_page_setup_unix_dialog_get_print_settings(cast(GtkPageSetupUnixDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    _cretval = gtk_page_setup_unix_dialog_get_print_settings(cast(GtkPageSetupUnixDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
-    gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
+    gtk_page_setup_unix_dialog_set_page_setup(cast(GtkPageSetupUnixDialog*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -127,6 +127,6 @@ class PageSetupUnixDialog : gtk.dialog.Dialog
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
-    gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
+    gtk_page_setup_unix_dialog_set_print_settings(cast(GtkPageSetupUnixDialog*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
 }

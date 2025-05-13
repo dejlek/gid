@@ -69,16 +69,16 @@ class LayoutManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_manager_get_type != &gidSymbolNotFound ? gtk_layout_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class LayoutManager : gobject.object.ObjectWrap
   */
   void allocate(gtk.widget.Widget widget, int width, int height, int baseline)
   {
-    gtk_layout_manager_allocate(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, width, height, baseline);
+    gtk_layout_manager_allocate(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, width, height, baseline);
   }
 
   /**
@@ -120,8 +120,8 @@ class LayoutManager : gobject.object.ObjectWrap
   gtk.layout_child.LayoutChild getLayoutChild(gtk.widget.Widget child)
   {
     GtkLayoutChild* _cretval;
-    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
+    _cretval = gtk_layout_manager_get_layout_child(cast(GtkLayoutManager*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.layout_child.LayoutChild)(cast(GtkLayoutChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class LayoutManager : gobject.object.ObjectWrap
   gtk.types.SizeRequestMode getRequestMode()
   {
     GtkSizeRequestMode _cretval;
-    _cretval = gtk_layout_manager_get_request_mode(cast(GtkLayoutManager*)cPtr);
+    _cretval = gtk_layout_manager_get_request_mode(cast(GtkLayoutManager*)this._cPtr);
     gtk.types.SizeRequestMode _retval = cast(gtk.types.SizeRequestMode)_cretval;
     return _retval;
   }
@@ -144,8 +144,8 @@ class LayoutManager : gobject.object.ObjectWrap
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_layout_manager_get_widget(cast(GtkLayoutManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class LayoutManager : gobject.object.ObjectWrap
   */
   void layoutChanged()
   {
-    gtk_layout_manager_layout_changed(cast(GtkLayoutManager*)cPtr);
+    gtk_layout_manager_layout_changed(cast(GtkLayoutManager*)this._cPtr);
   }
 
   /**
@@ -187,6 +187,6 @@ class LayoutManager : gobject.object.ObjectWrap
   */
   void measure(gtk.widget.Widget widget, gtk.types.Orientation orientation, int forSize, out int minimum, out int natural, out int minimumBaseline, out int naturalBaseline)
   {
-    gtk_layout_manager_measure(cast(GtkLayoutManager*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+    gtk_layout_manager_measure(cast(GtkLayoutManager*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, orientation, forSize, cast(int*)&minimum, cast(int*)&natural, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
 }

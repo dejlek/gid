@@ -39,16 +39,16 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_scrollable_get_type != &gidSymbolNotFound ? adw_clamp_scrollable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -188,8 +188,8 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_clamp_scrollable_get_child(cast(AdwClampScrollable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_clamp_scrollable_get_child(cast(AdwClampScrollable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   int getMaximumSize()
   {
     int _retval;
-    _retval = adw_clamp_scrollable_get_maximum_size(cast(AdwClampScrollable*)cPtr);
+    _retval = adw_clamp_scrollable_get_maximum_size(cast(AdwClampScrollable*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   int getTighteningThreshold()
   {
     int _retval;
-    _retval = adw_clamp_scrollable_get_tightening_threshold(cast(AdwClampScrollable*)cPtr);
+    _retval = adw_clamp_scrollable_get_tightening_threshold(cast(AdwClampScrollable*)this._cPtr);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   adw.types.LengthUnit getUnit()
   {
     AdwLengthUnit _cretval;
-    _cretval = adw_clamp_scrollable_get_unit(cast(AdwClampScrollable*)cPtr);
+    _cretval = adw_clamp_scrollable_get_unit(cast(AdwClampScrollable*)this._cPtr);
     adw.types.LengthUnit _retval = cast(adw.types.LengthUnit)_cretval;
     return _retval;
   }
@@ -235,7 +235,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_clamp_scrollable_set_child(cast(AdwClampScrollable*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_clamp_scrollable_set_child(cast(AdwClampScrollable*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -248,7 +248,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   */
   void setMaximumSize(int maximumSize)
   {
-    adw_clamp_scrollable_set_maximum_size(cast(AdwClampScrollable*)cPtr, maximumSize);
+    adw_clamp_scrollable_set_maximum_size(cast(AdwClampScrollable*)this._cPtr, maximumSize);
   }
 
   /**
@@ -272,7 +272,7 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   */
   void setTighteningThreshold(int tighteningThreshold)
   {
-    adw_clamp_scrollable_set_tightening_threshold(cast(AdwClampScrollable*)cPtr, tighteningThreshold);
+    adw_clamp_scrollable_set_tightening_threshold(cast(AdwClampScrollable*)this._cPtr, tighteningThreshold);
   }
 
   /**
@@ -285,6 +285,6 @@ class ClampScrollable : gtk.widget.Widget, gtk.orientable.Orientable, gtk.scroll
   */
   void setUnit(adw.types.LengthUnit unit)
   {
-    adw_clamp_scrollable_set_unit(cast(AdwClampScrollable*)cPtr, unit);
+    adw_clamp_scrollable_set_unit(cast(AdwClampScrollable*)this._cPtr, unit);
   }
 }

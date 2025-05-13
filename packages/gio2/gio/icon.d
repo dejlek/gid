@@ -46,7 +46,7 @@ interface Icon
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_icon_get_type != &gidSymbolNotFound ? g_icon_get_type() : cast(GType)0;
@@ -62,8 +62,8 @@ interface Icon
   static gio.icon.Icon deserialize(glib.variant.Variant value)
   {
     GIcon* _cretval;
-    _cretval = g_icon_deserialize(value ? cast(GVariant*)value.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_icon_deserialize(value ? cast(GVariant*)value._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ interface Icon
     _cretval = g_icon_new_for_string(_str, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 

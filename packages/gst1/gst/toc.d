@@ -66,22 +66,22 @@ class Toc : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_toc_get_type != &gidSymbolNotFound ? gst_toc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -113,13 +113,13 @@ class Toc : gobject.boxed.Boxed
   */
   void appendEntry(gst.toc_entry.TocEntry entry)
   {
-    gst_toc_append_entry(cast(GstToc*)cPtr, entry ? cast(GstTocEntry*)entry.cPtr(Yes.Dup) : null);
+    gst_toc_append_entry(cast(GstToc*)this._cPtr, entry ? cast(GstTocEntry*)entry._cPtr(Yes.Dup) : null);
   }
 
   /** */
   void dump()
   {
-    gst_toc_dump(cast(GstToc*)cPtr);
+    gst_toc_dump(cast(GstToc*)this._cPtr);
   }
 
   /**
@@ -134,7 +134,7 @@ class Toc : gobject.boxed.Boxed
   {
     GstTocEntry* _cretval;
     const(char)* _uid = uid.toCString(No.Alloc);
-    _cretval = gst_toc_find_entry(cast(const(GstToc)*)cPtr, _uid);
+    _cretval = gst_toc_find_entry(cast(const(GstToc)*)this._cPtr, _uid);
     auto _retval = _cretval ? new gst.toc_entry.TocEntry(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -146,7 +146,7 @@ class Toc : gobject.boxed.Boxed
   gst.toc_entry.TocEntry[] getEntries()
   {
     GList* _cretval;
-    _cretval = gst_toc_get_entries(cast(const(GstToc)*)cPtr);
+    _cretval = gst_toc_get_entries(cast(const(GstToc)*)this._cPtr);
     auto _retval = gListToD!(gst.toc_entry.TocEntry, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -155,7 +155,7 @@ class Toc : gobject.boxed.Boxed
   gst.types.TocScope getScope()
   {
     GstTocScope _cretval;
-    _cretval = gst_toc_get_scope(cast(const(GstToc)*)cPtr);
+    _cretval = gst_toc_get_scope(cast(const(GstToc)*)this._cPtr);
     gst.types.TocScope _retval = cast(gst.types.TocScope)_cretval;
     return _retval;
   }
@@ -167,7 +167,7 @@ class Toc : gobject.boxed.Boxed
   gst.tag_list.TagList getTags()
   {
     GstTagList* _cretval;
-    _cretval = gst_toc_get_tags(cast(const(GstToc)*)cPtr);
+    _cretval = gst_toc_get_tags(cast(const(GstToc)*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -181,7 +181,7 @@ class Toc : gobject.boxed.Boxed
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_toc_merge_tags(cast(GstToc*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null, mode);
+    gst_toc_merge_tags(cast(GstToc*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -192,6 +192,6 @@ class Toc : gobject.boxed.Boxed
   */
   void setTags(gst.tag_list.TagList tags = null)
   {
-    gst_toc_set_tags(cast(GstToc*)cPtr, tags ? cast(GstTagList*)tags.cPtr(Yes.Dup) : null);
+    gst_toc_set_tags(cast(GstToc*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(Yes.Dup) : null);
   }
 }

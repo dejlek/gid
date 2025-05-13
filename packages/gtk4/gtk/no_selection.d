@@ -33,16 +33,16 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_no_selection_get_type != &gidSymbolNotFound ? gtk_no_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,7 +102,7 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   this(gio.list_model.ListModel model = null)
   {
     GtkNoSelection* _cretval;
-    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_no_selection_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -113,8 +113,8 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_no_selection_get_model(cast(GtkNoSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,6 +128,6 @@ class NoSelection : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.sec
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_no_selection_set_model(cast(GtkNoSelection*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_no_selection_set_model(cast(GtkNoSelection*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 }

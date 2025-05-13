@@ -29,7 +29,7 @@ class FlagsClass
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class FlagsClass
   */
   @property gobject.type_class.TypeClass gTypeClass()
   {
-    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)cPtr).gTypeClass);
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)this._cPtr).gTypeClass);
   }
 
   /**
@@ -49,7 +49,7 @@ class FlagsClass
   */
   @property uint mask()
   {
-    return (cast(GFlagsClass*)cPtr).mask;
+    return (cast(GFlagsClass*)this._cPtr).mask;
   }
 
   /**
@@ -59,7 +59,7 @@ class FlagsClass
   */
   @property void mask(uint propval)
   {
-    (cast(GFlagsClass*)cPtr).mask = propval;
+    (cast(GFlagsClass*)this._cPtr).mask = propval;
   }
 
   /**
@@ -68,7 +68,7 @@ class FlagsClass
   */
   @property uint nValues()
   {
-    return (cast(GFlagsClass*)cPtr).nValues;
+    return (cast(GFlagsClass*)this._cPtr).nValues;
   }
 
   /**
@@ -78,7 +78,7 @@ class FlagsClass
   */
   @property void nValues(uint propval)
   {
-    (cast(GFlagsClass*)cPtr).nValues = propval;
+    (cast(GFlagsClass*)this._cPtr).nValues = propval;
   }
 
   /**
@@ -88,6 +88,6 @@ class FlagsClass
   */
   @property gobject.flags_value.FlagsValue values()
   {
-    return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)cPtr).values);
+    return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)this._cPtr).values);
   }
 }

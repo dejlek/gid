@@ -24,16 +24,16 @@ class ToggleAction : gtk.action.Action
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_action_get_type != &gidSymbolNotFound ? gtk_toggle_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -118,7 +118,7 @@ class ToggleAction : gtk.action.Action
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_action_get_active(cast(GtkToggleAction*)cPtr);
+    _retval = gtk_toggle_action_get_active(cast(GtkToggleAction*)this._cPtr);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class ToggleAction : gtk.action.Action
   bool getDrawAsRadio()
   {
     bool _retval;
-    _retval = gtk_toggle_action_get_draw_as_radio(cast(GtkToggleAction*)cPtr);
+    _retval = gtk_toggle_action_get_draw_as_radio(cast(GtkToggleAction*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ToggleAction : gtk.action.Action
   */
   void setActive(bool isActive)
   {
-    gtk_toggle_action_set_active(cast(GtkToggleAction*)cPtr, isActive);
+    gtk_toggle_action_set_active(cast(GtkToggleAction*)this._cPtr, isActive);
   }
 
   /**
@@ -153,7 +153,7 @@ class ToggleAction : gtk.action.Action
   */
   void setDrawAsRadio(bool drawAsRadio)
   {
-    gtk_toggle_action_set_draw_as_radio(cast(GtkToggleAction*)cPtr, drawAsRadio);
+    gtk_toggle_action_set_draw_as_radio(cast(GtkToggleAction*)this._cPtr, drawAsRadio);
   }
 
   /**
@@ -161,7 +161,7 @@ class ToggleAction : gtk.action.Action
   */
   void toggled()
   {
-    gtk_toggle_action_toggled(cast(GtkToggleAction*)cPtr);
+    gtk_toggle_action_toggled(cast(GtkToggleAction*)this._cPtr);
   }
 
   /**

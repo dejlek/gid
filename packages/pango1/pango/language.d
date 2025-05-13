@@ -24,22 +24,22 @@ class Language : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_language_get_type != &gidSymbolNotFound ? pango_language_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class Language : gobject.boxed.Boxed
   string getSampleString()
   {
     const(char)* _cretval;
-    _cretval = pango_language_get_sample_string(cast(PangoLanguage*)cPtr);
+    _cretval = pango_language_get_sample_string(cast(PangoLanguage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -111,7 +111,7 @@ class Language : gobject.boxed.Boxed
   {
     const(PangoScript)* _cretval;
     int _cretlength;
-    _cretval = pango_language_get_scripts(cast(PangoLanguage*)cPtr, &_cretlength);
+    _cretval = pango_language_get_scripts(cast(PangoLanguage*)this._cPtr, &_cretlength);
     pango.types.Script[] _retval;
 
     if (_cretval)
@@ -145,7 +145,7 @@ class Language : gobject.boxed.Boxed
   bool includesScript(pango.types.Script script)
   {
     bool _retval;
-    _retval = pango_language_includes_script(cast(PangoLanguage*)cPtr, script);
+    _retval = pango_language_includes_script(cast(PangoLanguage*)this._cPtr, script);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class Language : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _rangeList = rangeList.toCString(No.Alloc);
-    _retval = pango_language_matches(cast(PangoLanguage*)cPtr, _rangeList);
+    _retval = pango_language_matches(cast(PangoLanguage*)this._cPtr, _rangeList);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Language : gobject.boxed.Boxed
   string toString_()
   {
     const(char)* _cretval;
-    _cretval = pango_language_to_string(cast(PangoLanguage*)cPtr);
+    _cretval = pango_language_to_string(cast(PangoLanguage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

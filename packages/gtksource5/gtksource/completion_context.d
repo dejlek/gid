@@ -44,16 +44,16 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_context_get_type != &gidSymbolNotFound ? gtk_source_completion_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtksource.types.CompletionActivation getActivation()
   {
     GtkSourceCompletionActivation _cretval;
-    _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)cPtr);
+    _cretval = gtk_source_completion_context_get_activation(cast(GtkSourceCompletionContext*)this._cPtr);
     gtksource.types.CompletionActivation _retval = cast(gtksource.types.CompletionActivation)_cretval;
     return _retval;
   }
@@ -119,7 +119,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
     bool _retval;
     GtkTextIter _begin;
     GtkTextIter _end;
-    _retval = gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)cPtr, &_begin, &_end);
+    _retval = gtk_source_completion_context_get_bounds(cast(GtkSourceCompletionContext*)this._cPtr, &_begin, &_end);
     begin = new gtk.text_iter.TextIter(cast(void*)&_begin, No.Take);
     end = new gtk.text_iter.TextIter(cast(void*)&_end, No.Take);
     return _retval;
@@ -135,8 +135,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_completion_context_get_buffer(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_completion_context_get_buffer(cast(GtkSourceCompletionContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getBusy()
   {
     bool _retval;
-    _retval = gtk_source_completion_context_get_busy(cast(GtkSourceCompletionContext*)cPtr);
+    _retval = gtk_source_completion_context_get_busy(cast(GtkSourceCompletionContext*)this._cPtr);
     return _retval;
   }
 
@@ -160,8 +160,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtksource.completion.Completion getCompletion()
   {
     GtkSourceCompletion* _cretval;
-    _cretval = gtk_source_completion_context_get_completion(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
+    _cretval = gtk_source_completion_context_get_completion(cast(GtkSourceCompletionContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.completion.Completion)(cast(GtkSourceCompletion*)_cretval, No.Take);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getEmpty()
   {
     bool _retval;
-    _retval = gtk_source_completion_context_get_empty(cast(GtkSourceCompletionContext*)cPtr);
+    _retval = gtk_source_completion_context_get_empty(cast(GtkSourceCompletionContext*)this._cPtr);
     return _retval;
   }
 
@@ -185,8 +185,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtksource.language.Language getLanguage()
   {
     GtkSourceLanguage* _cretval;
-    _cretval = gtk_source_completion_context_get_language(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    _cretval = gtk_source_completion_context_get_language(cast(GtkSourceCompletionContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -203,8 +203,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gio.list_model.ListModel getProposalsForProvider(gtksource.completion_provider.CompletionProvider provider)
   {
     GListModel* _cretval;
-    _cretval = gtk_source_completion_context_get_proposals_for_provider(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_source_completion_context_get_proposals_for_provider(cast(GtkSourceCompletionContext*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,8 +215,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_completion_context_get_view(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_completion_context_get_view(cast(GtkSourceCompletionContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   string getWord()
   {
     char* _cretval;
-    _cretval = gtk_source_completion_context_get_word(cast(GtkSourceCompletionContext*)cPtr);
+    _cretval = gtk_source_completion_context_get_word(cast(GtkSourceCompletionContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -239,8 +239,8 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   gio.list_model.ListModel listProviders()
   {
     GListModel* _cretval;
-    _cretval = gtk_source_completion_context_list_providers(cast(GtkSourceCompletionContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = gtk_source_completion_context_list_providers(cast(GtkSourceCompletionContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class CompletionContext : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setProposalsForProvider(gtksource.completion_provider.CompletionProvider provider, gio.list_model.ListModel results = null)
   {
-    gtk_source_completion_context_set_proposals_for_provider(cast(GtkSourceCompletionContext*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null, results ? cast(GListModel*)(cast(gobject.object.ObjectWrap)results).cPtr(No.Dup) : null);
+    gtk_source_completion_context_set_proposals_for_provider(cast(GtkSourceCompletionContext*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null, results ? cast(GListModel*)(cast(gobject.object.ObjectWrap)results)._cPtr(No.Dup) : null);
   }
 
   /**

@@ -19,16 +19,16 @@ class Time64Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time64_scalar_get_type != &gidSymbolNotFound ? garrow_time64_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class Time64Scalar : arrow.scalar.Scalar
   this(arrow.time64_data_type.Time64DataType dataType, long value)
   {
     GArrowTime64Scalar* _cretval;
-    _cretval = garrow_time64_scalar_new(dataType ? cast(GArrowTime64DataType*)dataType.cPtr(No.Dup) : null, value);
+    _cretval = garrow_time64_scalar_new(dataType ? cast(GArrowTime64DataType*)dataType._cPtr(No.Dup) : null, value);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class Time64Scalar : arrow.scalar.Scalar
   long getValue()
   {
     long _retval;
-    _retval = garrow_time64_scalar_get_value(cast(GArrowTime64Scalar*)cPtr);
+    _retval = garrow_time64_scalar_get_value(cast(GArrowTime64Scalar*)this._cPtr);
     return _retval;
   }
 }

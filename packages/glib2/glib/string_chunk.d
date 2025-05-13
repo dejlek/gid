@@ -54,7 +54,7 @@ class StringChunk
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -66,7 +66,7 @@ class StringChunk
   */
   void clear()
   {
-    g_string_chunk_clear(cast(GStringChunk*)cPtr);
+    g_string_chunk_clear(cast(GStringChunk*)this._cPtr);
   }
 
   /**
@@ -91,7 +91,7 @@ class StringChunk
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = g_string_chunk_insert(cast(GStringChunk*)cPtr, _string_);
+    _cretval = g_string_chunk_insert(cast(GStringChunk*)this._cPtr, _string_);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -120,7 +120,7 @@ class StringChunk
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = g_string_chunk_insert_const(cast(GStringChunk*)cPtr, _string_);
+    _cretval = g_string_chunk_insert_const(cast(GStringChunk*)this._cPtr, _string_);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -146,7 +146,7 @@ class StringChunk
   {
     char* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _cretval = g_string_chunk_insert_len(cast(GStringChunk*)cPtr, _string_, len);
+    _cretval = g_string_chunk_insert_len(cast(GStringChunk*)this._cPtr, _string_, len);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

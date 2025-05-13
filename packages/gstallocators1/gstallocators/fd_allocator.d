@@ -21,16 +21,16 @@ class FdAllocator : gst.allocator.Allocator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_fd_allocator_get_type != &gidSymbolNotFound ? gst_fd_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class FdAllocator : gst.allocator.Allocator
   static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
   {
     GstMemory* _cretval;
-    _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, fd, size, flags);
+    _cretval = gst_fd_allocator_alloc(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

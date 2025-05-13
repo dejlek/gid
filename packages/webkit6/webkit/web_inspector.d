@@ -44,16 +44,16 @@ class WebInspector : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_inspector_get_type != &gidSymbolNotFound ? webkit_web_inspector_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class WebInspector : gobject.object.ObjectWrap
   */
   void attach()
   {
-    webkit_web_inspector_attach(cast(WebKitWebInspector*)cPtr);
+    webkit_web_inspector_attach(cast(WebKitWebInspector*)this._cPtr);
   }
 
   /**
@@ -106,7 +106,7 @@ class WebInspector : gobject.object.ObjectWrap
   */
   void close()
   {
-    webkit_web_inspector_close(cast(WebKitWebInspector*)cPtr);
+    webkit_web_inspector_close(cast(WebKitWebInspector*)this._cPtr);
   }
 
   /**
@@ -117,7 +117,7 @@ class WebInspector : gobject.object.ObjectWrap
   */
   void detach()
   {
-    webkit_web_inspector_detach(cast(WebKitWebInspector*)cPtr);
+    webkit_web_inspector_detach(cast(WebKitWebInspector*)this._cPtr);
   }
 
   /**
@@ -131,7 +131,7 @@ class WebInspector : gobject.object.ObjectWrap
   uint getAttachedHeight()
   {
     uint _retval;
-    _retval = webkit_web_inspector_get_attached_height(cast(WebKitWebInspector*)cPtr);
+    _retval = webkit_web_inspector_get_attached_height(cast(WebKitWebInspector*)this._cPtr);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class WebInspector : gobject.object.ObjectWrap
   bool getCanAttach()
   {
     bool _retval;
-    _retval = webkit_web_inspector_get_can_attach(cast(WebKitWebInspector*)cPtr);
+    _retval = webkit_web_inspector_get_can_attach(cast(WebKitWebInspector*)this._cPtr);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class WebInspector : gobject.object.ObjectWrap
   string getInspectedUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_inspector_get_inspected_uri(cast(WebKitWebInspector*)cPtr);
+    _cretval = webkit_web_inspector_get_inspected_uri(cast(WebKitWebInspector*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -175,8 +175,8 @@ class WebInspector : gobject.object.ObjectWrap
   webkit.web_view_base.WebViewBase getWebView()
   {
     WebKitWebViewBase* _cretval;
-    _cretval = webkit_web_inspector_get_web_view(cast(WebKitWebInspector*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view_base.WebViewBase)(cast(WebKitWebViewBase*)_cretval, No.Take);
+    _cretval = webkit_web_inspector_get_web_view(cast(WebKitWebInspector*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_view_base.WebViewBase)(cast(WebKitWebViewBase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class WebInspector : gobject.object.ObjectWrap
   bool isAttached()
   {
     bool _retval;
-    _retval = webkit_web_inspector_is_attached(cast(WebKitWebInspector*)cPtr);
+    _retval = webkit_web_inspector_is_attached(cast(WebKitWebInspector*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class WebInspector : gobject.object.ObjectWrap
   */
   void show()
   {
-    webkit_web_inspector_show(cast(WebKitWebInspector*)cPtr);
+    webkit_web_inspector_show(cast(WebKitWebInspector*)this._cPtr);
   }
 
   /**

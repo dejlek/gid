@@ -26,7 +26,7 @@ class TypeInstance
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -34,7 +34,7 @@ class TypeInstance
   /** */
   void* getPrivate(gobject.types.GType privateType)
   {
-    auto _retval = g_type_instance_get_private(cast(GTypeInstance*)cPtr, privateType);
+    auto _retval = g_type_instance_get_private(cast(GTypeInstance*)this._cPtr, privateType);
     return _retval;
   }
 }

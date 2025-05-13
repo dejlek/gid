@@ -57,7 +57,7 @@ template IconT()
   override bool equal(gio.icon.Icon icon2 = null)
   {
     bool _retval;
-    _retval = g_icon_equal(cast(GIcon*)cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2).cPtr(No.Dup) : null);
+    _retval = g_icon_equal(cast(GIcon*)this._cPtr, icon2 ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon2)._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ template IconT()
   override uint hash()
   {
     uint _retval;
-    _retval = g_icon_hash(cast(GIcon*)cPtr);
+    _retval = g_icon_hash(cast(GIcon*)this._cPtr);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ template IconT()
   override glib.variant.Variant serialize()
   {
     GVariant* _cretval;
-    _cretval = g_icon_serialize(cast(GIcon*)cPtr);
+    _cretval = g_icon_serialize(cast(GIcon*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -114,7 +114,7 @@ template IconT()
   override string toString_()
   {
     char* _cretval;
-    _cretval = g_icon_to_string(cast(GIcon*)cPtr);
+    _cretval = g_icon_to_string(cast(GIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

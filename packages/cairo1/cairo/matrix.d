@@ -47,22 +47,22 @@ class Matrix : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_matrix_get_type != &gidSymbolNotFound ? cairo_gobject_matrix_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -77,7 +77,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double xx()
   {
-    return (cast(cairo_matrix_t*)cPtr).xx;
+    return (cast(cairo_matrix_t*)this._cPtr).xx;
   }
 
   /**
@@ -87,7 +87,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void xx(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).xx = propval;
+    (cast(cairo_matrix_t*)this._cPtr).xx = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double yx()
   {
-    return (cast(cairo_matrix_t*)cPtr).yx;
+    return (cast(cairo_matrix_t*)this._cPtr).yx;
   }
 
   /**
@@ -106,7 +106,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void yx(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).yx = propval;
+    (cast(cairo_matrix_t*)this._cPtr).yx = propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double xy()
   {
-    return (cast(cairo_matrix_t*)cPtr).xy;
+    return (cast(cairo_matrix_t*)this._cPtr).xy;
   }
 
   /**
@@ -125,7 +125,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void xy(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).xy = propval;
+    (cast(cairo_matrix_t*)this._cPtr).xy = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double yy()
   {
-    return (cast(cairo_matrix_t*)cPtr).yy;
+    return (cast(cairo_matrix_t*)this._cPtr).yy;
   }
 
   /**
@@ -144,7 +144,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void yy(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).yy = propval;
+    (cast(cairo_matrix_t*)this._cPtr).yy = propval;
   }
 
   /**
@@ -153,7 +153,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double x0()
   {
-    return (cast(cairo_matrix_t*)cPtr).x0;
+    return (cast(cairo_matrix_t*)this._cPtr).x0;
   }
 
   /**
@@ -163,7 +163,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void x0(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).x0 = propval;
+    (cast(cairo_matrix_t*)this._cPtr).x0 = propval;
   }
 
   /**
@@ -172,7 +172,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double y0()
   {
-    return (cast(cairo_matrix_t*)cPtr).y0;
+    return (cast(cairo_matrix_t*)this._cPtr).y0;
   }
 
   /**
@@ -182,7 +182,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void y0(double propval)
   {
-    (cast(cairo_matrix_t*)cPtr).y0 = propval;
+    (cast(cairo_matrix_t*)this._cPtr).y0 = propval;
   }
 
   /**
@@ -204,7 +204,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void init_(double xx, double yx, double xy, double yy, double x0, double y0)
   {
-    cairo_matrix_init(cast(cairo_matrix_t*)cPtr, xx, yx, xy, yy, x0, y0);
+    cairo_matrix_init(cast(cairo_matrix_t*)this._cPtr, xx, yx, xy, yy, x0, y0);
   }
 
   /**
@@ -212,7 +212,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initIdentity()
   {
-    cairo_matrix_init_identity(cast(cairo_matrix_t*)cPtr);
+    cairo_matrix_init_identity(cast(cairo_matrix_t*)this._cPtr);
   }
 
   /**
@@ -227,7 +227,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initRotate(double radians)
   {
-    cairo_matrix_init_rotate(cast(cairo_matrix_t*)cPtr, radians);
+    cairo_matrix_init_rotate(cast(cairo_matrix_t*)this._cPtr, radians);
   }
 
   /**
@@ -240,7 +240,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initScale(double sx, double sy)
   {
-    cairo_matrix_init_scale(cast(cairo_matrix_t*)cPtr, sx, sy);
+    cairo_matrix_init_scale(cast(cairo_matrix_t*)this._cPtr, sx, sy);
   }
 
   /**
@@ -253,7 +253,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void initTranslate(double tx, double ty)
   {
-    cairo_matrix_init_translate(cast(cairo_matrix_t*)cPtr, tx, ty);
+    cairo_matrix_init_translate(cast(cairo_matrix_t*)this._cPtr, tx, ty);
   }
 
   /**
@@ -268,7 +268,7 @@ class Matrix : gobject.boxed.Boxed
   cairo.types.Status invert()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)cPtr);
+    _cretval = cairo_matrix_invert(cast(cairo_matrix_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -288,7 +288,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void multiply(cairo.matrix.Matrix a, cairo.matrix.Matrix b)
   {
-    cairo_matrix_multiply(cast(cairo_matrix_t*)cPtr, a ? cast(const(cairo_matrix_t)*)a.cPtr(No.Dup) : null, b ? cast(const(cairo_matrix_t)*)b.cPtr(No.Dup) : null);
+    cairo_matrix_multiply(cast(cairo_matrix_t*)this._cPtr, a ? cast(const(cairo_matrix_t)*)a._cPtr(No.Dup) : null, b ? cast(const(cairo_matrix_t)*)b._cPtr(No.Dup) : null);
   }
 
   /**
@@ -306,7 +306,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void rotate(double radians)
   {
-    cairo_matrix_rotate(cast(cairo_matrix_t*)cPtr, radians);
+    cairo_matrix_rotate(cast(cairo_matrix_t*)this._cPtr, radians);
   }
 
   /**
@@ -320,7 +320,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void scale(double sx, double sy)
   {
-    cairo_matrix_scale(cast(cairo_matrix_t*)cPtr, sx, sy);
+    cairo_matrix_scale(cast(cairo_matrix_t*)this._cPtr, sx, sy);
   }
 
   /**
@@ -340,7 +340,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformDistance(out double dx, out double dy)
   {
-    cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    cairo_matrix_transform_distance(cast(const(cairo_matrix_t)*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -352,7 +352,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPoint(out double x, out double y)
   {
-    cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_matrix_transform_point(cast(const(cairo_matrix_t)*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -367,6 +367,6 @@ class Matrix : gobject.boxed.Boxed
   */
   void translate(double tx, double ty)
   {
-    cairo_matrix_translate(cast(cairo_matrix_t*)cPtr, tx, ty);
+    cairo_matrix_translate(cast(cairo_matrix_t*)this._cPtr, tx, ty);
   }
 }

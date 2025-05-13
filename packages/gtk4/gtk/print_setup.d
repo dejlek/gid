@@ -32,22 +32,22 @@ class PrintSetup : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_setup_get_type != &gidSymbolNotFound ? gtk_print_setup_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,8 +66,8 @@ class PrintSetup : gobject.boxed.Boxed
   gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    _cretval = gtk_print_setup_get_page_setup(cast(GtkPrintSetup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,8 +81,8 @@ class PrintSetup : gobject.boxed.Boxed
   gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    _cretval = gtk_print_setup_get_print_settings(cast(GtkPrintSetup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 }

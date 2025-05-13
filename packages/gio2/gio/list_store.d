@@ -27,16 +27,16 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_list_store_get_type != &gidSymbolNotFound ? g_list_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -76,14 +76,14 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      bool _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_equalFunc = equalFunc;
     bool _retval;
-    _retval = g_list_store_find_with_equal_func(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_equalFuncCallback, cast(uint*)&position);
+    _retval = g_list_store_find_with_equal_func(cast(GListStore*)_cPtr, item ? cast(GObject*)item._cPtr : null, &_equalFuncCallback, cast(uint*)&position);
     _static_equalFunc = null;
     return _retval;
   }
@@ -106,14 +106,14 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
     uint _retval;
-    _retval = g_list_store_insert_sorted(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr : null, &_compareFuncCallback, null);
+    _retval = g_list_store_insert_sorted(cast(GListStore*)_cPtr, item ? cast(GObject*)item._cPtr : null, &_compareFuncCallback, null);
     _static_compareFunc = null;
     return _retval;
   }
@@ -129,13 +129,13 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
       return _retval;
     }
 
     _static_compareFunc = compareFunc;
-    g_list_store_sort(cast(GListStore*)cPtr, &_compareFuncCallback, null);
+    g_list_store_sort(cast(GListStore*)_cPtr, &_compareFuncCallback, null);
     _static_compareFunc = null;
   }
 
@@ -167,7 +167,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void append(gobject.object.ObjectWrap item)
   {
-    g_list_store_append(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    g_list_store_append(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -187,7 +187,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool find(gobject.object.ObjectWrap item, out uint position)
   {
     bool _retval;
-    _retval = g_list_store_find(cast(GListStore*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null, cast(uint*)&position);
+    _retval = g_list_store_find(cast(GListStore*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null, cast(uint*)&position);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void insert(uint position, gobject.object.ObjectWrap item)
   {
-    g_list_store_insert(cast(GListStore*)cPtr, position, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    g_list_store_insert(cast(GListStore*)this._cPtr, position, item ? cast(GObject*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -222,7 +222,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void remove(uint position)
   {
-    g_list_store_remove(cast(GListStore*)cPtr, position);
+    g_list_store_remove(cast(GListStore*)this._cPtr, position);
   }
 
   /**
@@ -230,7 +230,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void removeAll()
   {
-    g_list_store_remove_all(cast(GListStore*)cPtr);
+    g_list_store_remove_all(cast(GListStore*)this._cPtr);
   }
 
   /**
@@ -259,10 +259,10 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
     if (additions)
       _nAdditions = cast(uint)additions.length;
 
-    ObjectC*[] _tmpadditions;
+    GObject*[] _tmpadditions;
     foreach (obj; additions)
-      _tmpadditions ~= obj ? cast(ObjectC*)obj.cPtr : null;
+      _tmpadditions ~= obj ? cast(GObject*)obj._cPtr : null;
     void** _additions = cast(void**)_tmpadditions.ptr;
-    g_list_store_splice(cast(GListStore*)cPtr, position, nRemovals, _additions, _nAdditions);
+    g_list_store_splice(cast(GListStore*)this._cPtr, position, nRemovals, _additions, _nAdditions);
   }
 }

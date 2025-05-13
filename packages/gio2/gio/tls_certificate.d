@@ -29,16 +29,16 @@ class TlsCertificate : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_certificate_get_type != &gidSymbolNotFound ? g_tls_certificate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -111,7 +111,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_file(_file, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_file_with_password(_file, _password, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_files(_certFile, _keyFile, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_pem(_data, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_pkcs11_uris(_pkcs11Uri, _privateKeyPkcs11Uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class TlsCertificate : gobject.object.ObjectWrap
     _cretval = g_tls_certificate_new_from_pkcs12(_data, _length, _password, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   glib.bytes.Bytes[] getDnsNames()
   {
     GPtrArray* _cretval;
-    _cretval = g_tls_certificate_get_dns_names(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_dns_names(cast(GTlsCertificate*)this._cPtr);
     auto _retval = gPtrArrayToD!(glib.bytes.Bytes, GidOwnership.Container)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -349,7 +349,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   gio.inet_address.InetAddress[] getIpAddresses()
   {
     GPtrArray* _cretval;
-    _cretval = g_tls_certificate_get_ip_addresses(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_ip_addresses(cast(GTlsCertificate*)this._cPtr);
     auto _retval = gPtrArrayToD!(gio.inet_address.InetAddress, GidOwnership.Container)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -363,8 +363,8 @@ class TlsCertificate : gobject.object.ObjectWrap
   gio.tls_certificate.TlsCertificate getIssuer()
   {
     GTlsCertificate* _cretval;
-    _cretval = g_tls_certificate_get_issuer(cast(GTlsCertificate*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = g_tls_certificate_get_issuer(cast(GTlsCertificate*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   string getIssuerName()
   {
     char* _cretval;
-    _cretval = g_tls_certificate_get_issuer_name(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_issuer_name(cast(GTlsCertificate*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -387,7 +387,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   glib.date_time.DateTime getNotValidAfter()
   {
     GDateTime* _cretval;
-    _cretval = g_tls_certificate_get_not_valid_after(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_not_valid_after(cast(GTlsCertificate*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -399,7 +399,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   glib.date_time.DateTime getNotValidBefore()
   {
     GDateTime* _cretval;
-    _cretval = g_tls_certificate_get_not_valid_before(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_not_valid_before(cast(GTlsCertificate*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -411,7 +411,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   string getSubjectName()
   {
     char* _cretval;
-    _cretval = g_tls_certificate_get_subject_name(cast(GTlsCertificate*)cPtr);
+    _cretval = g_tls_certificate_get_subject_name(cast(GTlsCertificate*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -430,7 +430,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   bool isSame(gio.tls_certificate.TlsCertificate certTwo)
   {
     bool _retval;
-    _retval = g_tls_certificate_is_same(cast(GTlsCertificate*)cPtr, certTwo ? cast(GTlsCertificate*)certTwo.cPtr(No.Dup) : null);
+    _retval = g_tls_certificate_is_same(cast(GTlsCertificate*)this._cPtr, certTwo ? cast(GTlsCertificate*)certTwo._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -477,7 +477,7 @@ class TlsCertificate : gobject.object.ObjectWrap
   gio.types.TlsCertificateFlags verify(gio.socket_connectable.SocketConnectable identity = null, gio.tls_certificate.TlsCertificate trustedCa = null)
   {
     GTlsCertificateFlags _cretval;
-    _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity).cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa.cPtr(No.Dup) : null);
+    _cretval = g_tls_certificate_verify(cast(GTlsCertificate*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null, trustedCa ? cast(GTlsCertificate*)trustedCa._cPtr(No.Dup) : null);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }

@@ -22,22 +22,22 @@ class Uri : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_uri_get_type != &gidSymbolNotFound ? gst_uri_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _relativePath = relativePath.toCString(No.Alloc);
-    _retval = gst_uri_append_path(cast(GstUri*)cPtr, _relativePath);
+    _retval = gst_uri_append_path(cast(GstUri*)this._cPtr, _relativePath);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _pathSegment = pathSegment.toCString(No.Alloc);
-    _retval = gst_uri_append_path_segment(cast(GstUri*)cPtr, _pathSegment);
+    _retval = gst_uri_append_path_segment(cast(GstUri*)this._cPtr, _pathSegment);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Uri : gobject.boxed.Boxed
   bool equal(gst.uri.Uri second)
   {
     bool _retval;
-    _retval = gst_uri_equal(cast(const(GstUri)*)cPtr, second ? cast(const(GstUri)*)second.cPtr(No.Dup) : null);
+    _retval = gst_uri_equal(cast(const(GstUri)*)this._cPtr, second ? cast(const(GstUri)*)second._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Uri : gobject.boxed.Boxed
   {
     GstUri* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = gst_uri_from_string_with_base(cast(GstUri*)cPtr, _uri);
+    _cretval = gst_uri_from_string_with_base(cast(GstUri*)this._cPtr, _uri);
     auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -147,7 +147,7 @@ class Uri : gobject.boxed.Boxed
   string getFragment()
   {
     const(char)* _cretval;
-    _cretval = gst_uri_get_fragment(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_fragment(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,7 +160,7 @@ class Uri : gobject.boxed.Boxed
   string getHost()
   {
     const(char)* _cretval;
-    _cretval = gst_uri_get_host(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_host(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,7 +183,7 @@ class Uri : gobject.boxed.Boxed
   string[string] getMediaFragmentTable()
   {
     GHashTable* _cretval;
-    _cretval = gst_uri_get_media_fragment_table(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_media_fragment_table(cast(const(GstUri)*)this._cPtr);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
@@ -196,7 +196,7 @@ class Uri : gobject.boxed.Boxed
   string getPath()
   {
     char* _cretval;
-    _cretval = gst_uri_get_path(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_path(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -210,7 +210,7 @@ class Uri : gobject.boxed.Boxed
   string[] getPathSegments()
   {
     GList* _cretval;
-    _cretval = gst_uri_get_path_segments(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_path_segments(cast(const(GstUri)*)this._cPtr);
     auto _retval = gListToD!(string, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -223,7 +223,7 @@ class Uri : gobject.boxed.Boxed
   string getPathString()
   {
     char* _cretval;
-    _cretval = gst_uri_get_path_string(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_path_string(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -236,7 +236,7 @@ class Uri : gobject.boxed.Boxed
   uint getPort()
   {
     uint _retval;
-    _retval = gst_uri_get_port(cast(const(GstUri)*)cPtr);
+    _retval = gst_uri_get_port(cast(const(GstUri)*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Uri : gobject.boxed.Boxed
   string[] getQueryKeys()
   {
     GList* _cretval;
-    _cretval = gst_uri_get_query_keys(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_query_keys(cast(const(GstUri)*)this._cPtr);
     auto _retval = gListToD!(string, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -261,7 +261,7 @@ class Uri : gobject.boxed.Boxed
   string getQueryString()
   {
     char* _cretval;
-    _cretval = gst_uri_get_query_string(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_query_string(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -284,7 +284,7 @@ class Uri : gobject.boxed.Boxed
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
     scope(exit) containerFree!(const(GList)*, string, GidOwnership.None)(_keys);
-    _cretval = gst_uri_get_query_string_ordered(cast(const(GstUri)*)cPtr, _keys);
+    _cretval = gst_uri_get_query_string_ordered(cast(const(GstUri)*)this._cPtr, _keys);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -302,7 +302,7 @@ class Uri : gobject.boxed.Boxed
   string[string] getQueryTable()
   {
     GHashTable* _cretval;
-    _cretval = gst_uri_get_query_table(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_query_table(cast(const(GstUri)*)this._cPtr);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
@@ -322,7 +322,7 @@ class Uri : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
-    _cretval = gst_uri_get_query_value(cast(const(GstUri)*)cPtr, _queryKey);
+    _cretval = gst_uri_get_query_value(cast(const(GstUri)*)this._cPtr, _queryKey);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -335,7 +335,7 @@ class Uri : gobject.boxed.Boxed
   string getScheme()
   {
     const(char)* _cretval;
-    _cretval = gst_uri_get_scheme(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_scheme(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -348,7 +348,7 @@ class Uri : gobject.boxed.Boxed
   string getUserinfo()
   {
     const(char)* _cretval;
-    _cretval = gst_uri_get_userinfo(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_get_userinfo(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -361,7 +361,7 @@ class Uri : gobject.boxed.Boxed
   bool isNormalized()
   {
     bool _retval;
-    _retval = gst_uri_is_normalized(cast(const(GstUri)*)cPtr);
+    _retval = gst_uri_is_normalized(cast(const(GstUri)*)this._cPtr);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class Uri : gobject.boxed.Boxed
   bool isWritable()
   {
     bool _retval;
-    _retval = gst_uri_is_writable(cast(const(GstUri)*)cPtr);
+    _retval = gst_uri_is_writable(cast(const(GstUri)*)this._cPtr);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class Uri : gobject.boxed.Boxed
   gst.uri.Uri join(gst.uri.Uri refUri = null)
   {
     GstUri* _cretval;
-    _cretval = gst_uri_join(cast(GstUri*)cPtr, refUri ? cast(GstUri*)refUri.cPtr(No.Dup) : null);
+    _cretval = gst_uri_join(cast(GstUri*)this._cPtr, refUri ? cast(GstUri*)refUri._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -413,7 +413,7 @@ class Uri : gobject.boxed.Boxed
   gst.uri.Uri makeWritable()
   {
     GstUri* _cretval;
-    _cretval = gst_uri_make_writable(cast(GstUri*)cPtr);
+    _cretval = gst_uri_make_writable(cast(GstUri*)this._cPtr);
     auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -443,7 +443,7 @@ class Uri : gobject.boxed.Boxed
     const(char)* _path = path.toCString(No.Alloc);
     const(char)* _query = query.toCString(No.Alloc);
     const(char)* _fragment = fragment.toCString(No.Alloc);
-    _cretval = gst_uri_new_with_base(cast(GstUri*)cPtr, _scheme, _userinfo, _host, port, _path, _query, _fragment);
+    _cretval = gst_uri_new_with_base(cast(GstUri*)this._cPtr, _scheme, _userinfo, _host, port, _path, _query, _fragment);
     auto _retval = _cretval ? new gst.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -460,7 +460,7 @@ class Uri : gobject.boxed.Boxed
   bool normalize()
   {
     bool _retval;
-    _retval = gst_uri_normalize(cast(GstUri*)cPtr);
+    _retval = gst_uri_normalize(cast(GstUri*)this._cPtr);
     return _retval;
   }
 
@@ -475,7 +475,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
-    _retval = gst_uri_query_has_key(cast(const(GstUri)*)cPtr, _queryKey);
+    _retval = gst_uri_query_has_key(cast(const(GstUri)*)this._cPtr, _queryKey);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
-    _retval = gst_uri_remove_query_key(cast(GstUri*)cPtr, _queryKey);
+    _retval = gst_uri_remove_query_key(cast(GstUri*)this._cPtr, _queryKey);
     return _retval;
   }
 
@@ -506,7 +506,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _fragment = fragment.toCString(No.Alloc);
-    _retval = gst_uri_set_fragment(cast(GstUri*)cPtr, _fragment);
+    _retval = gst_uri_set_fragment(cast(GstUri*)this._cPtr, _fragment);
     return _retval;
   }
 
@@ -521,7 +521,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _host = host.toCString(No.Alloc);
-    _retval = gst_uri_set_host(cast(GstUri*)cPtr, _host);
+    _retval = gst_uri_set_host(cast(GstUri*)this._cPtr, _host);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gst_uri_set_path(cast(GstUri*)cPtr, _path);
+    _retval = gst_uri_set_path(cast(GstUri*)this._cPtr, _path);
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
-    _retval = gst_uri_set_path_string(cast(GstUri*)cPtr, _path);
+    _retval = gst_uri_set_path_string(cast(GstUri*)this._cPtr, _path);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class Uri : gobject.boxed.Boxed
   bool setPort(uint port)
   {
     bool _retval;
-    _retval = gst_uri_set_port(cast(GstUri*)cPtr, port);
+    _retval = gst_uri_set_port(cast(GstUri*)this._cPtr, port);
     return _retval;
   }
 
@@ -583,7 +583,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _query = query.toCString(No.Alloc);
-    _retval = gst_uri_set_query_string(cast(GstUri*)cPtr, _query);
+    _retval = gst_uri_set_query_string(cast(GstUri*)this._cPtr, _query);
     return _retval;
   }
 
@@ -602,7 +602,7 @@ class Uri : gobject.boxed.Boxed
     bool _retval;
     auto _queryTable = gHashTableFromD!(string, string)(queryTable);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_queryTable);
-    _retval = gst_uri_set_query_table(cast(GstUri*)cPtr, _queryTable);
+    _retval = gst_uri_set_query_table(cast(GstUri*)this._cPtr, _queryTable);
     return _retval;
   }
 
@@ -621,7 +621,7 @@ class Uri : gobject.boxed.Boxed
     bool _retval;
     const(char)* _queryKey = queryKey.toCString(No.Alloc);
     const(char)* _queryValue = queryValue.toCString(No.Alloc);
-    _retval = gst_uri_set_query_value(cast(GstUri*)cPtr, _queryKey, _queryValue);
+    _retval = gst_uri_set_query_value(cast(GstUri*)this._cPtr, _queryKey, _queryValue);
     return _retval;
   }
 
@@ -636,7 +636,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = gst_uri_set_scheme(cast(GstUri*)cPtr, _scheme);
+    _retval = gst_uri_set_scheme(cast(GstUri*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -651,7 +651,7 @@ class Uri : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _userinfo = userinfo.toCString(No.Alloc);
-    _retval = gst_uri_set_userinfo(cast(GstUri*)cPtr, _userinfo);
+    _retval = gst_uri_set_userinfo(cast(GstUri*)this._cPtr, _userinfo);
     return _retval;
   }
 
@@ -666,7 +666,7 @@ class Uri : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_uri_to_string(cast(const(GstUri)*)cPtr);
+    _cretval = gst_uri_to_string(cast(const(GstUri)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -689,7 +689,7 @@ class Uri : gobject.boxed.Boxed
     char* _cretval;
     auto _keys = gListFromD!(string)(keys);
     scope(exit) containerFree!(const(GList)*, string, GidOwnership.None)(_keys);
-    _cretval = gst_uri_to_string_with_keys(cast(const(GstUri)*)cPtr, _keys);
+    _cretval = gst_uri_to_string_with_keys(cast(const(GstUri)*)this._cPtr, _keys);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

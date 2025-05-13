@@ -21,16 +21,16 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner.cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _retval = gadataset_file_system_dataset_write_scanner(scanner ? cast(GADatasetScanner*)scanner._cPtr(No.Dup) : null, options ? cast(GADatasetFileSystemDatasetWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

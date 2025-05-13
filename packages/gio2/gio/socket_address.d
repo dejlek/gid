@@ -26,16 +26,16 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_address_get_type != &gidSymbolNotFound ? g_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   {
     GSocketAddress* _cretval;
     _cretval = g_socket_address_new_from_native(native, len);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
-    _cretval = g_socket_address_get_family(cast(GSocketAddress*)cPtr);
+    _cretval = g_socket_address_get_family(cast(GSocketAddress*)this._cPtr);
     gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
     return _retval;
   }
@@ -95,7 +95,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   ptrdiff_t getNativeSize()
   {
     ptrdiff_t _retval;
-    _retval = g_socket_address_get_native_size(cast(GSocketAddress*)cPtr);
+    _retval = g_socket_address_get_native_size(cast(GSocketAddress*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_address_to_native(cast(GSocketAddress*)cPtr, dest, destlen, &_err);
+    _retval = g_socket_address_to_native(cast(GSocketAddress*)this._cPtr, dest, destlen, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

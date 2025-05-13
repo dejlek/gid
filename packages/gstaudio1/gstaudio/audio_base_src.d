@@ -25,16 +25,16 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_base_src_get_type != &gidSymbolNotFound ? gst_audio_base_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -122,8 +122,8 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
   {
     GstAudioRingBuffer* _cretval;
-    _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    _cretval = gst_audio_base_src_create_ringbuffer(cast(GstAudioBaseSrc*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   bool getProvideClock()
   {
     bool _retval;
-    _retval = gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)cPtr);
+    _retval = gst_audio_base_src_get_provide_clock(cast(GstAudioBaseSrc*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   gstaudio.types.AudioBaseSrcSlaveMethod getSlaveMethod()
   {
     GstAudioBaseSrcSlaveMethod _cretval;
-    _cretval = gst_audio_base_src_get_slave_method(cast(GstAudioBaseSrc*)cPtr);
+    _cretval = gst_audio_base_src_get_slave_method(cast(GstAudioBaseSrc*)this._cPtr);
     gstaudio.types.AudioBaseSrcSlaveMethod _retval = cast(gstaudio.types.AudioBaseSrcSlaveMethod)_cretval;
     return _retval;
   }
@@ -161,7 +161,7 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   */
   void setProvideClock(bool provide)
   {
-    gst_audio_base_src_set_provide_clock(cast(GstAudioBaseSrc*)cPtr, provide);
+    gst_audio_base_src_set_provide_clock(cast(GstAudioBaseSrc*)this._cPtr, provide);
   }
 
   /**
@@ -172,6 +172,6 @@ class AudioBaseSrc : gstbase.push_src.PushSrc
   */
   void setSlaveMethod(gstaudio.types.AudioBaseSrcSlaveMethod method)
   {
-    gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)cPtr, method);
+    gst_audio_base_src_set_slave_method(cast(GstAudioBaseSrc*)this._cPtr, method);
   }
 }

@@ -145,7 +145,7 @@ interface Editable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_get_type != &gidSymbolNotFound ? gtk_editable_get_type() : cast(GType)0;
@@ -262,7 +262,7 @@ interface Editable
   static bool delegateGetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_get_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(GValue*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _retval = gtk_editable_delegate_get_property(object ? cast(GObject*)object._cPtr(No.Dup) : null, propId, value ? cast(GValue*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ interface Editable
   static bool delegateSetProperty(gobject.object.ObjectWrap object, uint propId, gobject.value.Value value, gobject.param_spec.ParamSpec pspec)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_set_property(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, propId, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _retval = gtk_editable_delegate_set_property(object ? cast(GObject*)object._cPtr(No.Dup) : null, propId, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
     return _retval;
   }
 

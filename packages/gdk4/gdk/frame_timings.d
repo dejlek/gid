@@ -27,22 +27,22 @@ class FrameTimings : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_frame_timings_get_type != &gidSymbolNotFound ? gdk_frame_timings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class FrameTimings : gobject.boxed.Boxed
   bool getComplete()
   {
     bool _retval;
-    _retval = gdk_frame_timings_get_complete(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_complete(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class FrameTimings : gobject.boxed.Boxed
   long getFrameCounter()
   {
     long _retval;
-    _retval = gdk_frame_timings_get_frame_counter(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_frame_counter(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class FrameTimings : gobject.boxed.Boxed
   long getFrameTime()
   {
     long _retval;
-    _retval = gdk_frame_timings_get_frame_time(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_frame_time(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class FrameTimings : gobject.boxed.Boxed
   long getPredictedPresentationTime()
   {
     long _retval;
-    _retval = gdk_frame_timings_get_predicted_presentation_time(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_predicted_presentation_time(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class FrameTimings : gobject.boxed.Boxed
   long getPresentationTime()
   {
     long _retval;
-    _retval = gdk_frame_timings_get_presentation_time(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_presentation_time(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class FrameTimings : gobject.boxed.Boxed
   long getRefreshInterval()
   {
     long _retval;
-    _retval = gdk_frame_timings_get_refresh_interval(cast(GdkFrameTimings*)cPtr);
+    _retval = gdk_frame_timings_get_refresh_interval(cast(GdkFrameTimings*)this._cPtr);
     return _retval;
   }
 }

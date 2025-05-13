@@ -21,16 +21,16 @@ class ExceptionWrap : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_exception_get_type != &gidSymbolNotFound ? jsc_exception_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   {
     JSCException* _cretval;
     const(char)* _message = message.toCString(No.Alloc);
-    _cretval = jsc_exception_new(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _message);
+    _cretval = jsc_exception_new(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _message);
     this(_cretval, Yes.Take);
   }
 
@@ -69,8 +69,8 @@ class ExceptionWrap : gobject.object.ObjectWrap
     JSCException* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _message = message.toCString(No.Alloc);
-    _cretval = jsc_exception_new_with_name(context ? cast(JSCContext*)context.cPtr(No.Dup) : null, _name, _message);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, Yes.Take);
+    _cretval = jsc_exception_new_with_name(context ? cast(JSCContext*)context._cPtr(No.Dup) : null, _name, _message);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string getBacktraceString()
   {
     const(char)* _cretval;
-    _cretval = jsc_exception_get_backtrace_string(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_get_backtrace_string(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -93,7 +93,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   uint getColumnNumber()
   {
     uint _retval;
-    _retval = jsc_exception_get_column_number(cast(JSCException*)cPtr);
+    _retval = jsc_exception_get_column_number(cast(JSCException*)this._cPtr);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   uint getLineNumber()
   {
     uint _retval;
-    _retval = jsc_exception_get_line_number(cast(JSCException*)cPtr);
+    _retval = jsc_exception_get_line_number(cast(JSCException*)this._cPtr);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string getMessage()
   {
     const(char)* _cretval;
-    _cretval = jsc_exception_get_message(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_get_message(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -127,7 +127,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = jsc_exception_get_name(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_get_name(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -139,7 +139,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string getSourceUri()
   {
     const(char)* _cretval;
-    _cretval = jsc_exception_get_source_uri(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_get_source_uri(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -152,7 +152,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string report()
   {
     char* _cretval;
-    _cretval = jsc_exception_report(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_report(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -164,7 +164,7 @@ class ExceptionWrap : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = jsc_exception_to_string(cast(JSCException*)cPtr);
+    _cretval = jsc_exception_to_string(cast(JSCException*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

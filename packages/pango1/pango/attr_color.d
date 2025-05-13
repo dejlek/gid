@@ -29,7 +29,7 @@ class AttrColor
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class AttrColor
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrColor*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrColor*)this._cPtr).attr);
   }
 
   /**
@@ -49,6 +49,6 @@ class AttrColor
   */
   @property pango.color.Color color()
   {
-    return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)cPtr).color);
+    return cToD!(pango.color.Color)(cast(void*)&(cast(PangoAttrColor*)this._cPtr).color);
   }
 }

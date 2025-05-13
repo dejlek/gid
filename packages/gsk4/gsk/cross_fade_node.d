@@ -35,7 +35,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode start, gsk.render_node.RenderNode end, float progress)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start.cPtr(No.Dup) : null, end ? cast(GskRenderNode*)end.cPtr(No.Dup) : null, progress);
+    _cretval = gsk_cross_fade_node_new(start ? cast(GskRenderNode*)start._cPtr(No.Dup) : null, end ? cast(GskRenderNode*)end._cPtr(No.Dup) : null, progress);
     this(_cretval, Yes.Take);
   }
 
@@ -46,7 +46,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getEndChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_get_end_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_cross_fade_node_get_end_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -58,7 +58,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
   float getProgress()
   {
     float _retval;
-    _retval = gsk_cross_fade_node_get_progress(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_cross_fade_node_get_progress(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class CrossFadeNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getStartChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cross_fade_node_get_start_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_cross_fade_node_get_start_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -23,16 +23,16 @@ class Workbench : gtk.window_group.WindowGroup
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_workbench_get_type != &gidSymbolNotFound ? panel_workbench_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,8 +84,8 @@ class Workbench : gtk.window_group.WindowGroup
   static panel.workbench.Workbench findFromWidget(gtk.widget.Widget widget)
   {
     PanelWorkbench* _cretval;
-    _cretval = panel_workbench_find_from_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
+    _cretval = panel_workbench_find_from_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,19 +93,19 @@ class Workbench : gtk.window_group.WindowGroup
   void actionSetEnabled(string actionName, bool enabled)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    panel_workbench_action_set_enabled(cast(PanelWorkbench*)cPtr, _actionName, enabled);
+    panel_workbench_action_set_enabled(cast(PanelWorkbench*)this._cPtr, _actionName, enabled);
   }
 
   /** */
   void activate()
   {
-    panel_workbench_activate(cast(PanelWorkbench*)cPtr);
+    panel_workbench_activate(cast(PanelWorkbench*)this._cPtr);
   }
 
   /** */
   void addWorkspace(panel.workspace.Workspace workspace)
   {
-    panel_workbench_add_workspace(cast(PanelWorkbench*)cPtr, workspace ? cast(PanelWorkspace*)workspace.cPtr(No.Dup) : null);
+    panel_workbench_add_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
 
   /**
@@ -118,15 +118,15 @@ class Workbench : gtk.window_group.WindowGroup
   panel.workspace.Workspace findWorkspaceTyped(gobject.types.GType workspaceType)
   {
     PanelWorkspace* _cretval;
-    _cretval = panel_workbench_find_workspace_typed(cast(PanelWorkbench*)cPtr, workspaceType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
+    _cretval = panel_workbench_find_workspace_typed(cast(PanelWorkbench*)this._cPtr, workspaceType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   void focusWorkspace(panel.workspace.Workspace workspace)
   {
-    panel_workbench_focus_workspace(cast(PanelWorkbench*)cPtr, workspace ? cast(PanelWorkspace*)workspace.cPtr(No.Dup) : null);
+    panel_workbench_focus_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
 
   /**
@@ -141,19 +141,19 @@ class Workbench : gtk.window_group.WindowGroup
     {
       auto _dlg = cast(panel.types.WorkspaceForeach*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(void*)workspace, No.Take));
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
 
     auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
-    panel_workbench_foreach_workspace(cast(PanelWorkbench*)cPtr, _foreachFuncCB, _foreachFunc);
+    panel_workbench_foreach_workspace(cast(PanelWorkbench*)this._cPtr, _foreachFuncCB, _foreachFunc);
   }
 
   /** */
   string getId()
   {
     const(char)* _cretval;
-    _cretval = panel_workbench_get_id(cast(PanelWorkbench*)cPtr);
+    _cretval = panel_workbench_get_id(cast(PanelWorkbench*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -161,14 +161,14 @@ class Workbench : gtk.window_group.WindowGroup
   /** */
   void removeWorkspace(panel.workspace.Workspace workspace)
   {
-    panel_workbench_remove_workspace(cast(PanelWorkbench*)cPtr, workspace ? cast(PanelWorkspace*)workspace.cPtr(No.Dup) : null);
+    panel_workbench_remove_workspace(cast(PanelWorkbench*)this._cPtr, workspace ? cast(PanelWorkspace*)workspace._cPtr(No.Dup) : null);
   }
 
   /** */
   void setId(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    panel_workbench_set_id(cast(PanelWorkbench*)cPtr, _id);
+    panel_workbench_set_id(cast(PanelWorkbench*)this._cPtr, _id);
   }
 
   /**

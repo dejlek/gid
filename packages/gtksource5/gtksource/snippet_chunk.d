@@ -27,16 +27,16 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_chunk_get_type != &gidSymbolNotFound ? gtk_source_snippet_chunk_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -136,8 +136,8 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   gtksource.snippet_chunk.SnippetChunk copy()
   {
     GtkSourceSnippetChunk* _cretval;
-    _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
+    _cretval = gtk_source_snippet_chunk_copy(cast(GtkSourceSnippetChunk*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.snippet_chunk.SnippetChunk)(cast(GtkSourceSnippetChunk*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,8 +148,8 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   gtksource.snippet_context.SnippetContext getContext()
   {
     GtkSourceSnippetContext* _cretval;
-    _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
+    _cretval = gtk_source_snippet_chunk_get_context(cast(GtkSourceSnippetChunk*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.snippet_context.SnippetContext)(cast(GtkSourceSnippetContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   int getFocusPosition()
   {
     int _retval;
-    _retval = gtk_source_snippet_chunk_get_focus_position(cast(GtkSourceSnippetChunk*)cPtr);
+    _retval = gtk_source_snippet_chunk_get_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   string getSpec()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)cPtr);
+    _cretval = gtk_source_snippet_chunk_get_spec(cast(GtkSourceSnippetChunk*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -200,7 +200,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)cPtr);
+    _cretval = gtk_source_snippet_chunk_get_text(cast(GtkSourceSnippetChunk*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -214,7 +214,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   bool getTextSet()
   {
     bool _retval;
-    _retval = gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)cPtr);
+    _retval = gtk_source_snippet_chunk_get_text_set(cast(GtkSourceSnippetChunk*)this._cPtr);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   string getTooltipText()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)cPtr);
+    _cretval = gtk_source_snippet_chunk_get_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -230,7 +230,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   /** */
   void setContext(gtksource.snippet_context.SnippetContext context)
   {
-    gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)cPtr, context ? cast(GtkSourceSnippetContext*)context.cPtr(No.Dup) : null);
+    gtk_source_snippet_chunk_set_context(cast(GtkSourceSnippetChunk*)this._cPtr, context ? cast(GtkSourceSnippetContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setFocusPosition(int focusPosition)
   {
-    gtk_source_snippet_chunk_set_focus_position(cast(GtkSourceSnippetChunk*)cPtr, focusPosition);
+    gtk_source_snippet_chunk_set_focus_position(cast(GtkSourceSnippetChunk*)this._cPtr, focusPosition);
   }
 
   /**
@@ -266,7 +266,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   void setSpec(string spec)
   {
     const(char)* _spec = spec.toCString(No.Alloc);
-    gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)cPtr, _spec);
+    gtk_source_snippet_chunk_set_spec(cast(GtkSourceSnippetChunk*)this._cPtr, _spec);
   }
 
   /**
@@ -282,7 +282,7 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   void setText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)cPtr, _text);
+    gtk_source_snippet_chunk_set_text(cast(GtkSourceSnippetChunk*)this._cPtr, _text);
   }
 
   /**
@@ -296,13 +296,13 @@ class SnippetChunk : gobject.initially_unowned.InitiallyUnowned
   */
   void setTextSet(bool textSet)
   {
-    gtk_source_snippet_chunk_set_text_set(cast(GtkSourceSnippetChunk*)cPtr, textSet);
+    gtk_source_snippet_chunk_set_text_set(cast(GtkSourceSnippetChunk*)this._cPtr, textSet);
   }
 
   /** */
   void setTooltipText(string tooltipText)
   {
     const(char)* _tooltipText = tooltipText.toCString(No.Alloc);
-    gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)cPtr, _tooltipText);
+    gtk_source_snippet_chunk_set_tooltip_text(cast(GtkSourceSnippetChunk*)this._cPtr, _tooltipText);
   }
 }

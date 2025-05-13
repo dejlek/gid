@@ -536,7 +536,7 @@ struct WebKitWebEditorClass
 struct WebKitWebFormManager
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /** */

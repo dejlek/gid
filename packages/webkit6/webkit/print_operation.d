@@ -31,16 +31,16 @@ class PrintOperation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_print_operation_get_type != &gidSymbolNotFound ? webkit_print_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class PrintOperation : gobject.object.ObjectWrap
   this(webkit.web_view.WebView webView)
   {
     WebKitPrintOperation* _cretval;
-    _cretval = webkit_print_operation_new(webView ? cast(WebKitWebView*)webView.cPtr(No.Dup) : null);
+    _cretval = webkit_print_operation_new(webView ? cast(WebKitWebView*)webView._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -112,8 +112,8 @@ class PrintOperation : gobject.object.ObjectWrap
   gtk.page_setup.PageSetup getPageSetup()
   {
     GtkPageSetup* _cretval;
-    _cretval = webkit_print_operation_get_page_setup(cast(WebKitPrintOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    _cretval = webkit_print_operation_get_page_setup(cast(WebKitPrintOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,8 +128,8 @@ class PrintOperation : gobject.object.ObjectWrap
   gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
-    _cretval = webkit_print_operation_get_print_settings(cast(WebKitPrintOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    _cretval = webkit_print_operation_get_print_settings(cast(WebKitPrintOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class PrintOperation : gobject.object.ObjectWrap
   */
   void print()
   {
-    webkit_print_operation_print(cast(WebKitPrintOperation*)cPtr);
+    webkit_print_operation_print(cast(WebKitPrintOperation*)this._cPtr);
   }
 
   /**
@@ -178,7 +178,7 @@ class PrintOperation : gobject.object.ObjectWrap
   webkit.types.PrintOperationResponse runDialog(gtk.window.Window parent = null)
   {
     WebKitPrintOperationResponse _cretval;
-    _cretval = webkit_print_operation_run_dialog(cast(WebKitPrintOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    _cretval = webkit_print_operation_run_dialog(cast(WebKitPrintOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     webkit.types.PrintOperationResponse _retval = cast(webkit.types.PrintOperationResponse)_cretval;
     return _retval;
   }
@@ -194,7 +194,7 @@ class PrintOperation : gobject.object.ObjectWrap
   */
   void setPageSetup(gtk.page_setup.PageSetup pageSetup)
   {
-    webkit_print_operation_set_page_setup(cast(WebKitPrintOperation*)cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
+    webkit_print_operation_set_page_setup(cast(WebKitPrintOperation*)this._cPtr, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -208,7 +208,7 @@ class PrintOperation : gobject.object.ObjectWrap
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings)
   {
-    webkit_print_operation_set_print_settings(cast(WebKitPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
+    webkit_print_operation_set_print_settings(cast(WebKitPrintOperation*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
 
   /**

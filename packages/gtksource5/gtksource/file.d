@@ -30,16 +30,16 @@ class File : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_get_type != &gidSymbolNotFound ? gtk_source_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -126,14 +126,14 @@ class File : gobject.object.ObjectWrap
   */
   void checkFileOnDisk()
   {
-    gtk_source_file_check_file_on_disk(cast(GtkSourceFile*)cPtr);
+    gtk_source_file_check_file_on_disk(cast(GtkSourceFile*)this._cPtr);
   }
 
   /** */
   gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
-    _cretval = gtk_source_file_get_compression_type(cast(GtkSourceFile*)cPtr);
+    _cretval = gtk_source_file_get_compression_type(cast(GtkSourceFile*)this._cPtr);
     gtksource.types.CompressionType _retval = cast(gtksource.types.CompressionType)_cretval;
     return _retval;
   }
@@ -146,7 +146,7 @@ class File : gobject.object.ObjectWrap
   gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
-    _cretval = gtk_source_file_get_encoding(cast(GtkSourceFile*)cPtr);
+    _cretval = gtk_source_file_get_encoding(cast(GtkSourceFile*)this._cPtr);
     auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -155,8 +155,8 @@ class File : gobject.object.ObjectWrap
   gio.file.File getLocation()
   {
     GFile* _cretval;
-    _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_source_file_get_location(cast(GtkSourceFile*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class File : gobject.object.ObjectWrap
   gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
-    _cretval = gtk_source_file_get_newline_type(cast(GtkSourceFile*)cPtr);
+    _cretval = gtk_source_file_get_newline_type(cast(GtkSourceFile*)this._cPtr);
     gtksource.types.NewlineType _retval = cast(gtksource.types.NewlineType)_cretval;
     return _retval;
   }
@@ -180,7 +180,7 @@ class File : gobject.object.ObjectWrap
   bool isDeleted()
   {
     bool _retval;
-    _retval = gtk_source_file_is_deleted(cast(GtkSourceFile*)cPtr);
+    _retval = gtk_source_file_is_deleted(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class File : gobject.object.ObjectWrap
   bool isExternallyModified()
   {
     bool _retval;
-    _retval = gtk_source_file_is_externally_modified(cast(GtkSourceFile*)cPtr);
+    _retval = gtk_source_file_is_externally_modified(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class File : gobject.object.ObjectWrap
   bool isLocal()
   {
     bool _retval;
-    _retval = gtk_source_file_is_local(cast(GtkSourceFile*)cPtr);
+    _retval = gtk_source_file_is_local(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class File : gobject.object.ObjectWrap
   bool isReadonly()
   {
     bool _retval;
-    _retval = gtk_source_file_is_readonly(cast(GtkSourceFile*)cPtr);
+    _retval = gtk_source_file_is_readonly(cast(GtkSourceFile*)this._cPtr);
     return _retval;
   }
 
@@ -234,6 +234,6 @@ class File : gobject.object.ObjectWrap
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_source_file_set_location(cast(GtkSourceFile*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
+    gtk_source_file_set_location(cast(GtkSourceFile*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
 }

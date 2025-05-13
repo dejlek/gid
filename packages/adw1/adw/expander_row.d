@@ -56,16 +56,16 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_expander_row_get_type != &gidSymbolNotFound ? adw_expander_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -248,7 +248,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void addAction(gtk.widget.Widget widget)
   {
-    adw_expander_row_add_action(cast(AdwExpanderRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_expander_row_add_action(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -259,7 +259,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void addPrefix(gtk.widget.Widget widget)
   {
-    adw_expander_row_add_prefix(cast(AdwExpanderRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_expander_row_add_prefix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -272,7 +272,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void addRow(gtk.widget.Widget child)
   {
-    adw_expander_row_add_row(cast(AdwExpanderRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_expander_row_add_row(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -283,7 +283,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void addSuffix(gtk.widget.Widget widget)
   {
-    adw_expander_row_add_suffix(cast(AdwExpanderRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_expander_row_add_suffix(cast(AdwExpanderRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -293,7 +293,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getEnableExpansion()
   {
     bool _retval;
-    _retval = adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)cPtr);
+    _retval = adw_expander_row_get_enable_expansion(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getExpanded()
   {
     bool _retval;
-    _retval = adw_expander_row_get_expanded(cast(AdwExpanderRow*)cPtr);
+    _retval = adw_expander_row_get_expanded(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_expander_row_get_icon_name(cast(AdwExpanderRow*)cPtr);
+    _cretval = adw_expander_row_get_icon_name(cast(AdwExpanderRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -329,7 +329,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   bool getShowEnableSwitch()
   {
     bool _retval;
-    _retval = adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)cPtr);
+    _retval = adw_expander_row_get_show_enable_switch(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   string getSubtitle()
   {
     const(char)* _cretval;
-    _cretval = adw_expander_row_get_subtitle(cast(AdwExpanderRow*)cPtr);
+    _cretval = adw_expander_row_get_subtitle(cast(AdwExpanderRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -354,7 +354,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   int getSubtitleLines()
   {
     int _retval;
-    _retval = adw_expander_row_get_subtitle_lines(cast(AdwExpanderRow*)cPtr);
+    _retval = adw_expander_row_get_subtitle_lines(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   int getTitleLines()
   {
     int _retval;
-    _retval = adw_expander_row_get_title_lines(cast(AdwExpanderRow*)cPtr);
+    _retval = adw_expander_row_get_title_lines(cast(AdwExpanderRow*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_expander_row_remove(cast(AdwExpanderRow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_expander_row_remove(cast(AdwExpanderRow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -390,7 +390,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setEnableExpansion(bool enableExpansion)
   {
-    adw_expander_row_set_enable_expansion(cast(AdwExpanderRow*)cPtr, enableExpansion);
+    adw_expander_row_set_enable_expansion(cast(AdwExpanderRow*)this._cPtr, enableExpansion);
   }
 
   /**
@@ -401,7 +401,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setExpanded(bool expanded)
   {
-    adw_expander_row_set_expanded(cast(AdwExpanderRow*)cPtr, expanded);
+    adw_expander_row_set_expanded(cast(AdwExpanderRow*)this._cPtr, expanded);
   }
 
   /**
@@ -415,7 +415,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_expander_row_set_icon_name(cast(AdwExpanderRow*)cPtr, _iconName);
+    adw_expander_row_set_icon_name(cast(AdwExpanderRow*)this._cPtr, _iconName);
   }
 
   /**
@@ -426,7 +426,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setShowEnableSwitch(bool showEnableSwitch)
   {
-    adw_expander_row_set_show_enable_switch(cast(AdwExpanderRow*)cPtr, showEnableSwitch);
+    adw_expander_row_set_show_enable_switch(cast(AdwExpanderRow*)this._cPtr, showEnableSwitch);
   }
 
   /**
@@ -441,7 +441,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   void setSubtitle(string subtitle)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
-    adw_expander_row_set_subtitle(cast(AdwExpanderRow*)cPtr, _subtitle);
+    adw_expander_row_set_subtitle(cast(AdwExpanderRow*)this._cPtr, _subtitle);
   }
 
   /**
@@ -455,7 +455,7 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setSubtitleLines(int subtitleLines)
   {
-    adw_expander_row_set_subtitle_lines(cast(AdwExpanderRow*)cPtr, subtitleLines);
+    adw_expander_row_set_subtitle_lines(cast(AdwExpanderRow*)this._cPtr, subtitleLines);
   }
 
   /**
@@ -469,6 +469,6 @@ class ExpanderRow : adw.preferences_row.PreferencesRow
   */
   void setTitleLines(int titleLines)
   {
-    adw_expander_row_set_title_lines(cast(AdwExpanderRow*)cPtr, titleLines);
+    adw_expander_row_set_title_lines(cast(AdwExpanderRow*)this._cPtr, titleLines);
   }
 }

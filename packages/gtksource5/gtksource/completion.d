@@ -54,16 +54,16 @@ class Completion : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_get_type != &gidSymbolNotFound ? gtk_source_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -217,13 +217,13 @@ class Completion : gobject.object.ObjectWrap
   */
   void addProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_add_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
   void blockInteractive()
   {
-    gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_block_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**
@@ -233,8 +233,8 @@ class Completion : gobject.object.ObjectWrap
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_completion_get_buffer(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class Completion : gobject.object.ObjectWrap
   uint getPageSize()
   {
     uint _retval;
-    _retval = gtk_source_completion_get_page_size(cast(GtkSourceCompletion*)cPtr);
+    _retval = gtk_source_completion_get_page_size(cast(GtkSourceCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -253,8 +253,8 @@ class Completion : gobject.object.ObjectWrap
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_completion_get_view(cast(GtkSourceCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Completion : gobject.object.ObjectWrap
   */
   void hide()
   {
-    gtk_source_completion_hide(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_hide(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**
@@ -278,13 +278,13 @@ class Completion : gobject.object.ObjectWrap
   */
   void removeProvider(gtksource.completion_provider.CompletionProvider provider)
   {
-    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
+    gtk_source_completion_remove_provider(cast(GtkSourceCompletion*)this._cPtr, provider ? cast(GtkSourceCompletionProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setPageSize(uint pageSize)
   {
-    gtk_source_completion_set_page_size(cast(GtkSourceCompletion*)cPtr, pageSize);
+    gtk_source_completion_set_page_size(cast(GtkSourceCompletion*)this._cPtr, pageSize);
   }
 
   /**
@@ -295,13 +295,13 @@ class Completion : gobject.object.ObjectWrap
   */
   void show()
   {
-    gtk_source_completion_show(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_show(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /** */
   void unblockInteractive()
   {
-    gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)cPtr);
+    gtk_source_completion_unblock_interactive(cast(GtkSourceCompletion*)this._cPtr);
   }
 
   /**

@@ -29,16 +29,16 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_paned_get_type != &gidSymbolNotFound ? panel_paned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,7 +68,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void append(gtk.widget.Widget child)
   {
-    panel_paned_append(cast(PanelPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_paned_append(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -78,7 +78,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   uint getNChildren()
   {
     uint _retval;
-    _retval = panel_paned_get_n_children(cast(PanelPaned*)cPtr);
+    _retval = panel_paned_get_n_children(cast(PanelPaned*)this._cPtr);
     return _retval;
   }
 
@@ -92,8 +92,8 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getNthChild(uint nth)
   {
     GtkWidget* _cretval;
-    _cretval = panel_paned_get_nth_child(cast(PanelPaned*)cPtr, nth);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = panel_paned_get_nth_child(cast(PanelPaned*)this._cPtr, nth);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void insert(int position, gtk.widget.Widget child)
   {
-    panel_paned_insert(cast(PanelPaned*)cPtr, position, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_paned_insert(cast(PanelPaned*)this._cPtr, position, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -118,7 +118,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   */
   override void insertAfter(gtk.widget.Widget child, gtk.widget.Widget sibling)
   {
-    panel_paned_insert_after(cast(PanelPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null);
+    panel_paned_insert_after(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null);
   }
 
   /**
@@ -129,7 +129,7 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void prepend(gtk.widget.Widget child)
   {
-    panel_paned_prepend(cast(PanelPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_paned_prepend(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -140,6 +140,6 @@ class Paned : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void remove(gtk.widget.Widget child)
   {
-    panel_paned_remove(cast(PanelPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_paned_remove(cast(PanelPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

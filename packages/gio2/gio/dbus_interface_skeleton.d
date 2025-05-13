@@ -28,16 +28,16 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_skeleton_get_type != &gidSymbolNotFound ? g_dbus_interface_skeleton_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,7 +88,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
     bool _retval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     GError *_err;
-    _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _objectPath, &_err);
+    _retval = g_dbus_interface_skeleton_export(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _objectPath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -106,7 +106,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   */
   void flush()
   {
-    g_dbus_interface_skeleton_flush(cast(GDBusInterfaceSkeleton*)cPtr);
+    g_dbus_interface_skeleton_flush(cast(GDBusInterfaceSkeleton*)this._cPtr);
   }
 
   /**
@@ -117,8 +117,8 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    _cretval = g_dbus_interface_skeleton_get_connection(cast(GDBusInterfaceSkeleton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   gio.dbus_connection.DBusConnection[] getConnections()
   {
     GList* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_connections(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_connections(cast(GDBusInterfaceSkeleton*)this._cPtr);
     auto _retval = gListToD!(gio.dbus_connection.DBusConnection, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -145,7 +145,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   gio.types.DBusInterfaceSkeletonFlags getFlags()
   {
     GDBusInterfaceSkeletonFlags _cretval;
-    _cretval = g_dbus_interface_skeleton_get_flags(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_flags(cast(GDBusInterfaceSkeleton*)this._cPtr);
     gio.types.DBusInterfaceSkeletonFlags _retval = cast(gio.types.DBusInterfaceSkeletonFlags)_cretval;
     return _retval;
   }
@@ -158,7 +158,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   gio.dbus_interface_info.DBusInterfaceInfo getInfo()
   {
     GDBusInterfaceInfo* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_info(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_info(cast(GDBusInterfaceSkeleton*)this._cPtr);
     auto _retval = _cretval ? new gio.dbus_interface_info.DBusInterfaceInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -171,7 +171,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   string getObjectPath()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_object_path(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_object_path(cast(GDBusInterfaceSkeleton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -185,7 +185,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   glib.variant.Variant getProperties()
   {
     GVariant* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_properties(cast(GDBusInterfaceSkeleton*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -199,7 +199,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   gio.types.DBusInterfaceVTable getVtable()
   {
     GDBusInterfaceVTable* _cretval;
-    _cretval = g_dbus_interface_skeleton_get_vtable(cast(GDBusInterfaceSkeleton*)cPtr);
+    _cretval = g_dbus_interface_skeleton_get_vtable(cast(GDBusInterfaceSkeleton*)this._cPtr);
     gio.types.DBusInterfaceVTable _retval;
     if (_cretval)
       _retval = *cast(gio.types.DBusInterfaceVTable*)_cretval;
@@ -216,7 +216,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   bool hasConnection(gio.dbus_connection.DBusConnection connection)
   {
     bool _retval;
-    _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
+    _retval = g_dbus_interface_skeleton_has_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   */
   void setFlags(gio.types.DBusInterfaceSkeletonFlags flags)
   {
-    g_dbus_interface_skeleton_set_flags(cast(GDBusInterfaceSkeleton*)cPtr, flags);
+    g_dbus_interface_skeleton_set_flags(cast(GDBusInterfaceSkeleton*)this._cPtr, flags);
   }
 
   /**
@@ -239,7 +239,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   */
   void unexport()
   {
-    g_dbus_interface_skeleton_unexport(cast(GDBusInterfaceSkeleton*)cPtr);
+    g_dbus_interface_skeleton_unexport(cast(GDBusInterfaceSkeleton*)this._cPtr);
   }
 
   /**
@@ -253,7 +253,7 @@ class DBusInterfaceSkeleton : gobject.object.ObjectWrap, gio.dbus_interface.DBus
   */
   void unexportFromConnection(gio.dbus_connection.DBusConnection connection)
   {
-    g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)cPtr, connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null);
+    g_dbus_interface_skeleton_unexport_from_connection(cast(GDBusInterfaceSkeleton*)this._cPtr, connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null);
   }
 
   /**

@@ -27,16 +27,16 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_box_row_get_type != &gidSymbolNotFound ? gtk_list_box_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -118,7 +118,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   */
   void changed()
   {
-    gtk_list_box_row_changed(cast(GtkListBoxRow*)cPtr);
+    gtk_list_box_row_changed(cast(GtkListBoxRow*)this._cPtr);
   }
 
   /**
@@ -129,7 +129,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)cPtr);
+    _retval = gtk_list_box_row_get_activatable(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -142,8 +142,8 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   gtk.widget.Widget getHeader()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_list_box_row_get_header(cast(GtkListBoxRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   int getIndex()
   {
     int _retval;
-    _retval = gtk_list_box_row_get_index(cast(GtkListBoxRow*)cPtr);
+    _retval = gtk_list_box_row_get_index(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)cPtr);
+    _retval = gtk_list_box_row_get_selectable(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   bool isSelected()
   {
     bool _retval;
-    _retval = gtk_list_box_row_is_selected(cast(GtkListBoxRow*)cPtr);
+    _retval = gtk_list_box_row_is_selected(cast(GtkListBoxRow*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   */
   void setActivatable(bool activatable)
   {
-    gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)cPtr, activatable);
+    gtk_list_box_row_set_activatable(cast(GtkListBoxRow*)this._cPtr, activatable);
   }
 
   /**
@@ -203,7 +203,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   */
   void setHeader(gtk.widget.Widget header = null)
   {
-    gtk_list_box_row_set_header(cast(GtkListBoxRow*)cPtr, header ? cast(GtkWidget*)header.cPtr(No.Dup) : null);
+    gtk_list_box_row_set_header(cast(GtkListBoxRow*)this._cPtr, header ? cast(GtkWidget*)header._cPtr(No.Dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class ListBoxRow : gtk.bin.Bin, gtk.actionable.Actionable
   */
   void setSelectable(bool selectable)
   {
-    gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)cPtr, selectable);
+    gtk_list_box_row_set_selectable(cast(GtkListBoxRow*)this._cPtr, selectable);
   }
 
   /**

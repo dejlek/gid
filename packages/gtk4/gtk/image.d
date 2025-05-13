@@ -68,16 +68,16 @@ class Image : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_get_type != &gidSymbolNotFound ? gtk_image_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -308,7 +308,7 @@ class Image : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -326,8 +326,8 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromGicon(gio.icon.Icon icon)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class Image : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -368,8 +368,8 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -397,8 +397,8 @@ class Image : gtk.widget.Widget
   static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -426,7 +426,7 @@ class Image : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Image : gtk.widget.Widget
   */
   void clear()
   {
-    gtk_image_clear(cast(GtkImage*)cPtr);
+    gtk_image_clear(cast(GtkImage*)this._cPtr);
   }
 
   /**
@@ -450,8 +450,8 @@ class Image : gtk.widget.Widget
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_image_get_gicon(cast(GtkImage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_image_get_gicon(cast(GtkImage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Image : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_image_get_icon_name(cast(GtkImage*)cPtr);
+    _cretval = gtk_image_get_icon_name(cast(GtkImage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -479,7 +479,7 @@ class Image : gtk.widget.Widget
   gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_image_get_icon_size(cast(GtkImage*)cPtr);
+    _cretval = gtk_image_get_icon_size(cast(GtkImage*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -496,8 +496,8 @@ class Image : gtk.widget.Widget
   gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_image_get_paintable(cast(GtkImage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = gtk_image_get_paintable(cast(GtkImage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class Image : gtk.widget.Widget
   int getPixelSize()
   {
     int _retval;
-    _retval = gtk_image_get_pixel_size(cast(GtkImage*)cPtr);
+    _retval = gtk_image_get_pixel_size(cast(GtkImage*)this._cPtr);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class Image : gtk.widget.Widget
   gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
-    _cretval = gtk_image_get_storage_type(cast(GtkImage*)cPtr);
+    _cretval = gtk_image_get_storage_type(cast(GtkImage*)this._cPtr);
     gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
     return _retval;
   }
@@ -539,7 +539,7 @@ class Image : gtk.widget.Widget
   void setFromFile(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
+    gtk_image_set_from_file(cast(GtkImage*)this._cPtr, _filename);
   }
 
   /**
@@ -552,7 +552,7 @@ class Image : gtk.widget.Widget
   */
   void setFromGicon(gio.icon.Icon icon)
   {
-    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_image_set_from_gicon(cast(GtkImage*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -566,7 +566,7 @@ class Image : gtk.widget.Widget
   void setFromIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName);
+    gtk_image_set_from_icon_name(cast(GtkImage*)this._cPtr, _iconName);
   }
 
   /**
@@ -579,7 +579,7 @@ class Image : gtk.widget.Widget
   */
   void setFromPaintable(gdk.paintable.Paintable paintable = null)
   {
-    gtk_image_set_from_paintable(cast(GtkImage*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_image_set_from_paintable(cast(GtkImage*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -598,7 +598,7 @@ class Image : gtk.widget.Widget
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_image_set_from_pixbuf(cast(GtkImage*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -612,7 +612,7 @@ class Image : gtk.widget.Widget
   void setFromResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
+    gtk_image_set_from_resource(cast(GtkImage*)this._cPtr, _resourcePath);
   }
 
   /**
@@ -623,7 +623,7 @@ class Image : gtk.widget.Widget
   */
   void setIconSize(gtk.types.IconSize iconSize)
   {
-    gtk_image_set_icon_size(cast(GtkImage*)cPtr, iconSize);
+    gtk_image_set_icon_size(cast(GtkImage*)this._cPtr, iconSize);
   }
 
   /**
@@ -637,6 +637,6 @@ class Image : gtk.widget.Widget
   */
   void setPixelSize(int pixelSize)
   {
-    gtk_image_set_pixel_size(cast(GtkImage*)cPtr, pixelSize);
+    gtk_image_set_pixel_size(cast(GtkImage*)this._cPtr, pixelSize);
   }
 }

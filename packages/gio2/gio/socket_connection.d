@@ -42,16 +42,16 @@ class SocketConnection : gio.iostream.IOStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_connection_get_type != &gidSymbolNotFound ? g_socket_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -109,7 +109,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_connection_connect(cast(GSocketConnection*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -134,17 +134,17 @@ class SocketConnection : gio.iostream.IOStream
   */
   void connectAsync(gio.socket_address.SocketAddress address, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_socket_connection_connect_async(cast(GSocketConnection*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_socket_connection_connect_async(cast(GSocketConnection*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -159,7 +159,7 @@ class SocketConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_socket_connection_connect_finish(cast(GSocketConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_socket_connection_connect_finish(cast(GSocketConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -175,10 +175,10 @@ class SocketConnection : gio.iostream.IOStream
   {
     GSocketAddress* _cretval;
     GError *_err;
-    _cretval = g_socket_connection_get_local_address(cast(GSocketConnection*)cPtr, &_err);
+    _cretval = g_socket_connection_get_local_address(cast(GSocketConnection*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -199,10 +199,10 @@ class SocketConnection : gio.iostream.IOStream
   {
     GSocketAddress* _cretval;
     GError *_err;
-    _cretval = g_socket_connection_get_remote_address(cast(GSocketConnection*)cPtr, &_err);
+    _cretval = g_socket_connection_get_remote_address(cast(GSocketConnection*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -215,8 +215,8 @@ class SocketConnection : gio.iostream.IOStream
   gio.socket.Socket getSocket()
   {
     GSocket* _cretval;
-    _cretval = g_socket_connection_get_socket(cast(GSocketConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
+    _cretval = g_socket_connection_get_socket(cast(GSocketConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket.Socket)(cast(GSocket*)_cretval, No.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class SocketConnection : gio.iostream.IOStream
   bool isConnected()
   {
     bool _retval;
-    _retval = g_socket_connection_is_connected(cast(GSocketConnection*)cPtr);
+    _retval = g_socket_connection_is_connected(cast(GSocketConnection*)this._cPtr);
     return _retval;
   }
 }

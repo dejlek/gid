@@ -48,7 +48,7 @@ class RenderNode
 
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     if (dup)
       gsk_render_node_ref(cInstancePtr);
@@ -78,7 +78,7 @@ class RenderNode
 
     GskRenderNode* _cretval;
     auto _errorFunc = errorFunc ? cast(void*)&(errorFunc) : null;
-    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);
+    _cretval = gsk_render_node_deserialize(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, _errorFuncCB, _errorFunc);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -98,7 +98,7 @@ class RenderNode
   */
   void draw(cairo.context.Context cr)
   {
-    gsk_render_node_draw(cast(GskRenderNode*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_render_node_draw(cast(GskRenderNode*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**
@@ -112,7 +112,7 @@ class RenderNode
   void getBounds(out graphene.rect.Rect bounds)
   {
     graphene_rect_t _bounds;
-    gsk_render_node_get_bounds(cast(GskRenderNode*)cPtr, &_bounds);
+    gsk_render_node_get_bounds(cast(GskRenderNode*)this._cPtr, &_bounds);
     bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
   }
 
@@ -123,7 +123,7 @@ class RenderNode
   gsk.types.RenderNodeType getNodeType()
   {
     GskRenderNodeType _cretval;
-    _cretval = gsk_render_node_get_node_type(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_render_node_get_node_type(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.RenderNodeType _retval = cast(gsk.types.RenderNodeType)_cretval;
     return _retval;
   }
@@ -143,7 +143,7 @@ class RenderNode
   glib.bytes.Bytes serialize()
   {
     GBytes* _cretval;
-    _cretval = gsk_render_node_serialize(cast(GskRenderNode*)cPtr);
+    _cretval = gsk_render_node_serialize(cast(GskRenderNode*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -167,7 +167,7 @@ class RenderNode
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gsk_render_node_write_to_file(cast(GskRenderNode*)cPtr, _filename, &_err);
+    _retval = gsk_render_node_write_to_file(cast(GskRenderNode*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -48,22 +48,22 @@ class SDPMessage : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_sdp_message_get_type != &gidSymbolNotFound ? gst_sdp_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property string version_()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).version_);
   }
 
   /**
@@ -88,8 +88,8 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property void version_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).version_);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).version_);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).version_);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).version_);
   }
 
   /**
@@ -98,7 +98,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property gstsdp.sdporigin.SDPOrigin origin()
   {
-    return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)cPtr).origin);
+    return new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)&(cast(GstSDPMessage*)this._cPtr).origin);
   }
 
   /**
@@ -107,7 +107,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property string sessionName()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).sessionName);
   }
 
   /**
@@ -117,8 +117,8 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property void sessionName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).sessionName);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).sessionName);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).sessionName);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).sessionName);
   }
 
   /**
@@ -127,7 +127,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property string information()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).information);
   }
 
   /**
@@ -137,8 +137,8 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property void information(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).information);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).information);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).information);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).information);
   }
 
   /**
@@ -147,7 +147,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property string uri()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
+    return cToD!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
   }
 
   /**
@@ -157,8 +157,8 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property void uri(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GstSDPMessage*)cPtr).uri);
+    cValueFree!(string)(cast(void*)(cast(GstSDPMessage*)this._cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GstSDPMessage*)this._cPtr).uri);
   }
 
   /**
@@ -167,7 +167,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property gstsdp.sdpconnection.SDPConnection connection()
   {
-    return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)cPtr).connection);
+    return new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)&(cast(GstSDPMessage*)this._cPtr).connection);
   }
 
   /**
@@ -176,7 +176,7 @@ class SDPMessage : gobject.boxed.Boxed
   */
   @property gstsdp.sdpkey.SDPKey key()
   {
-    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)cPtr).key);
+    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMessage*)this._cPtr).key);
   }
 
   /**
@@ -192,7 +192,7 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPResult _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = gst_sdp_message_add_attribute(cast(GstSDPMessage*)cPtr, _key, _value);
+    _cretval = gst_sdp_message_add_attribute(cast(GstSDPMessage*)this._cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -209,7 +209,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _bwtype = bwtype.toCString(No.Alloc);
-    _cretval = gst_sdp_message_add_bandwidth(cast(GstSDPMessage*)cPtr, _bwtype, bandwidth);
+    _cretval = gst_sdp_message_add_bandwidth(cast(GstSDPMessage*)this._cPtr, _bwtype, bandwidth);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -225,7 +225,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
-    _cretval = gst_sdp_message_add_email(cast(GstSDPMessage*)cPtr, _email);
+    _cretval = gst_sdp_message_add_email(cast(GstSDPMessage*)this._cPtr, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -242,7 +242,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult addMedia(gstsdp.sdpmedia.SDPMedia media)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)cPtr, media ? cast(GstSDPMedia*)media.cPtr : null);
+    _cretval = gst_sdp_message_add_media(cast(GstSDPMessage*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -258,7 +258,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
-    _cretval = gst_sdp_message_add_phone(cast(GstSDPMessage*)cPtr, _phone);
+    _cretval = gst_sdp_message_add_phone(cast(GstSDPMessage*)this._cPtr, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -282,7 +282,7 @@ class SDPMessage : gobject.boxed.Boxed
       _tmprepeat ~= s.toCString(No.Alloc);
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
-    _cretval = gst_sdp_message_add_time(cast(GstSDPMessage*)cPtr, _start, _stop, _repeat);
+    _cretval = gst_sdp_message_add_time(cast(GstSDPMessage*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -300,7 +300,7 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPResult _cretval;
     const(char)* _adjTime = adjTime.toCString(No.Alloc);
     const(char)* _typedTime = typedTime.toCString(No.Alloc);
-    _cretval = gst_sdp_message_add_zone(cast(GstSDPMessage*)cPtr, _adjTime, _typedTime);
+    _cretval = gst_sdp_message_add_zone(cast(GstSDPMessage*)this._cPtr, _adjTime, _typedTime);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -312,7 +312,7 @@ class SDPMessage : gobject.boxed.Boxed
   string asText()
   {
     char* _cretval;
-    _cretval = gst_sdp_message_as_text(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_as_text(cast(const(GstSDPMessage)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -324,7 +324,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint attributesLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_attributes_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_attributes_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -338,7 +338,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult attributesToCaps(gst.caps.Caps caps)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_attributes_to_caps(cast(const(GstSDPMessage)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_sdp_message_attributes_to_caps(cast(const(GstSDPMessage)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -350,7 +350,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint bandwidthsLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_bandwidths_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_bandwidths_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     GstSDPMessage* _copy;
-    _cretval = gst_sdp_message_copy(cast(const(GstSDPMessage)*)cPtr, &_copy);
+    _cretval = gst_sdp_message_copy(cast(const(GstSDPMessage)*)this._cPtr, &_copy);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     copy = new gstsdp.sdpmessage.SDPMessage(cast(void*)_copy, Yes.Take);
     return _retval;
@@ -379,7 +379,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult dump()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_dump(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_dump(cast(const(GstSDPMessage)*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -391,7 +391,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint emailsLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_emails_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_emails_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpattribute.SDPAttribute getAttribute(uint idx)
   {
     const(GstSDPAttribute)* _cretval;
-    _cretval = gst_sdp_message_get_attribute(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_attribute(cast(const(GstSDPMessage)*)this._cPtr, idx);
     auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval) : null;
     return _retval;
   }
@@ -421,7 +421,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gst_sdp_message_get_attribute_val(cast(const(GstSDPMessage)*)cPtr, _key);
+    _cretval = gst_sdp_message_get_attribute_val(cast(const(GstSDPMessage)*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -438,7 +438,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gst_sdp_message_get_attribute_val_n(cast(const(GstSDPMessage)*)cPtr, _key, nth);
+    _cretval = gst_sdp_message_get_attribute_val_n(cast(const(GstSDPMessage)*)this._cPtr, _key, nth);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -453,7 +453,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpbandwidth.SDPBandwidth getBandwidth(uint idx)
   {
     const(GstSDPBandwidth)* _cretval;
-    _cretval = gst_sdp_message_get_bandwidth(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_bandwidth(cast(const(GstSDPMessage)*)this._cPtr, idx);
     auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval) : null;
     return _retval;
   }
@@ -465,7 +465,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpconnection.SDPConnection getConnection()
   {
     const(GstSDPConnection)* _cretval;
-    _cretval = gst_sdp_message_get_connection(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_connection(cast(const(GstSDPMessage)*)this._cPtr);
     auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval) : null;
     return _retval;
   }
@@ -480,7 +480,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getEmail(uint idx)
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_email(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_email(cast(const(GstSDPMessage)*)this._cPtr, idx);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -492,7 +492,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getInformation()
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_information(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_information(cast(const(GstSDPMessage)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -504,7 +504,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpkey.SDPKey getKey()
   {
     const(GstSDPKey)* _cretval;
-    _cretval = gst_sdp_message_get_key(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_key(cast(const(GstSDPMessage)*)this._cPtr);
     auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval) : null;
     return _retval;
   }
@@ -519,7 +519,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpmedia.SDPMedia getMedia(uint idx)
   {
     const(GstSDPMedia)* _cretval;
-    _cretval = gst_sdp_message_get_media(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_media(cast(const(GstSDPMessage)*)this._cPtr, idx);
     auto _retval = _cretval ? new gstsdp.sdpmedia.SDPMedia(cast(GstSDPMedia*)_cretval) : null;
     return _retval;
   }
@@ -531,7 +531,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdporigin.SDPOrigin getOrigin()
   {
     const(GstSDPOrigin)* _cretval;
-    _cretval = gst_sdp_message_get_origin(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_origin(cast(const(GstSDPMessage)*)this._cPtr);
     auto _retval = _cretval ? new gstsdp.sdporigin.SDPOrigin(cast(GstSDPOrigin*)_cretval) : null;
     return _retval;
   }
@@ -546,7 +546,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getPhone(uint idx)
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_phone(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_phone(cast(const(GstSDPMessage)*)this._cPtr, idx);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -558,7 +558,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getSessionName()
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_session_name(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_session_name(cast(const(GstSDPMessage)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -573,7 +573,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdptime.SDPTime getTime(uint idx)
   {
     const(GstSDPTime)* _cretval;
-    _cretval = gst_sdp_message_get_time(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_time(cast(const(GstSDPMessage)*)this._cPtr, idx);
     auto _retval = _cretval ? new gstsdp.sdptime.SDPTime(cast(GstSDPTime*)_cretval) : null;
     return _retval;
   }
@@ -585,7 +585,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_uri(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_uri(cast(const(GstSDPMessage)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -597,7 +597,7 @@ class SDPMessage : gobject.boxed.Boxed
   string getVersion()
   {
     const(char)* _cretval;
-    _cretval = gst_sdp_message_get_version(cast(const(GstSDPMessage)*)cPtr);
+    _cretval = gst_sdp_message_get_version(cast(const(GstSDPMessage)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -612,7 +612,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.sdpzone.SDPZone getZone(uint idx)
   {
     const(GstSDPZone)* _cretval;
-    _cretval = gst_sdp_message_get_zone(cast(const(GstSDPMessage)*)cPtr, idx);
+    _cretval = gst_sdp_message_get_zone(cast(const(GstSDPMessage)*)this._cPtr, idx);
     auto _retval = _cretval ? new gstsdp.sdpzone.SDPZone(cast(GstSDPZone*)_cretval) : null;
     return _retval;
   }
@@ -630,7 +630,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertAttribute(int idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_insert_attribute(cast(GstSDPMessage*)cPtr, idx, attr ? cast(GstSDPAttribute*)attr.cPtr : null);
+    _cretval = gst_sdp_message_insert_attribute(cast(GstSDPMessage*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -648,7 +648,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertBandwidth(int idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_insert_bandwidth(cast(GstSDPMessage*)cPtr, idx, bw ? cast(GstSDPBandwidth*)bw.cPtr : null);
+    _cretval = gst_sdp_message_insert_bandwidth(cast(GstSDPMessage*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -666,7 +666,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
-    _cretval = gst_sdp_message_insert_email(cast(GstSDPMessage*)cPtr, idx, _email);
+    _cretval = gst_sdp_message_insert_email(cast(GstSDPMessage*)this._cPtr, idx, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -684,7 +684,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
-    _cretval = gst_sdp_message_insert_phone(cast(GstSDPMessage*)cPtr, idx, _phone);
+    _cretval = gst_sdp_message_insert_phone(cast(GstSDPMessage*)this._cPtr, idx, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -702,7 +702,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertTime(int idx, gstsdp.sdptime.SDPTime t)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_insert_time(cast(GstSDPMessage*)cPtr, idx, t ? cast(GstSDPTime*)t.cPtr : null);
+    _cretval = gst_sdp_message_insert_time(cast(GstSDPMessage*)this._cPtr, idx, t ? cast(GstSDPTime*)t._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -720,7 +720,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult insertZone(int idx, gstsdp.sdpzone.SDPZone zone)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_insert_zone(cast(GstSDPMessage*)cPtr, idx, zone ? cast(GstSDPZone*)zone.cPtr : null);
+    _cretval = gst_sdp_message_insert_zone(cast(GstSDPMessage*)this._cPtr, idx, zone ? cast(GstSDPZone*)zone._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -732,7 +732,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint mediasLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_medias_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_medias_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -748,7 +748,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     GstMIKEYMessage* _mikey;
-    _cretval = gst_sdp_message_parse_keymgmt(cast(const(GstSDPMessage)*)cPtr, &_mikey);
+    _cretval = gst_sdp_message_parse_keymgmt(cast(const(GstSDPMessage)*)this._cPtr, &_mikey);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     mikey = new gstsdp.mikeymessage.MIKEYMessage(cast(void*)_mikey, Yes.Take);
     return _retval;
@@ -761,7 +761,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint phonesLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_phones_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_phones_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -775,7 +775,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeAttribute(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_attribute(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_attribute(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -790,7 +790,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeBandwidth(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_bandwidth(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_bandwidth(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -805,7 +805,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeEmail(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_email(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_email(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -821,7 +821,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeMedia(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_media(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_media(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -836,7 +836,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removePhone(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_phone(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_phone(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -851,7 +851,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeTime(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_time(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_time(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -866,7 +866,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult removeZone(uint idx)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_remove_zone(cast(GstSDPMessage*)cPtr, idx);
+    _cretval = gst_sdp_message_remove_zone(cast(GstSDPMessage*)this._cPtr, idx);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -882,7 +882,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replaceAttribute(uint idx, gstsdp.sdpattribute.SDPAttribute attr)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_replace_attribute(cast(GstSDPMessage*)cPtr, idx, attr ? cast(GstSDPAttribute*)attr.cPtr : null);
+    _cretval = gst_sdp_message_replace_attribute(cast(GstSDPMessage*)this._cPtr, idx, attr ? cast(GstSDPAttribute*)attr._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -898,7 +898,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replaceBandwidth(uint idx, gstsdp.sdpbandwidth.SDPBandwidth bw)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_replace_bandwidth(cast(GstSDPMessage*)cPtr, idx, bw ? cast(GstSDPBandwidth*)bw.cPtr : null);
+    _cretval = gst_sdp_message_replace_bandwidth(cast(GstSDPMessage*)this._cPtr, idx, bw ? cast(GstSDPBandwidth*)bw._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -915,7 +915,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _email = email.toCString(No.Alloc);
-    _cretval = gst_sdp_message_replace_email(cast(GstSDPMessage*)cPtr, idx, _email);
+    _cretval = gst_sdp_message_replace_email(cast(GstSDPMessage*)this._cPtr, idx, _email);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -932,7 +932,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _phone = phone.toCString(No.Alloc);
-    _cretval = gst_sdp_message_replace_phone(cast(GstSDPMessage*)cPtr, idx, _phone);
+    _cretval = gst_sdp_message_replace_phone(cast(GstSDPMessage*)this._cPtr, idx, _phone);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -948,7 +948,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replaceTime(uint idx, gstsdp.sdptime.SDPTime t)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_replace_time(cast(GstSDPMessage*)cPtr, idx, t ? cast(GstSDPTime*)t.cPtr : null);
+    _cretval = gst_sdp_message_replace_time(cast(GstSDPMessage*)this._cPtr, idx, t ? cast(GstSDPTime*)t._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -964,7 +964,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult replaceZone(uint idx, gstsdp.sdpzone.SDPZone zone)
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_replace_zone(cast(GstSDPMessage*)cPtr, idx, zone ? cast(GstSDPZone*)zone.cPtr : null);
+    _cretval = gst_sdp_message_replace_zone(cast(GstSDPMessage*)this._cPtr, idx, zone ? cast(GstSDPZone*)zone._cPtr : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -987,7 +987,7 @@ class SDPMessage : gobject.boxed.Boxed
     const(char)* _nettype = nettype.toCString(No.Alloc);
     const(char)* _addrtype = addrtype.toCString(No.Alloc);
     const(char)* _address = address.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_connection(cast(GstSDPMessage*)cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
+    _cretval = gst_sdp_message_set_connection(cast(GstSDPMessage*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1003,7 +1003,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _information = information.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_information(cast(GstSDPMessage*)cPtr, _information);
+    _cretval = gst_sdp_message_set_information(cast(GstSDPMessage*)this._cPtr, _information);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1021,7 +1021,7 @@ class SDPMessage : gobject.boxed.Boxed
     GstSDPResult _cretval;
     const(char)* _type = type.toCString(No.Alloc);
     const(char)* _data = data.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_key(cast(GstSDPMessage*)cPtr, _type, _data);
+    _cretval = gst_sdp_message_set_key(cast(GstSDPMessage*)this._cPtr, _type, _data);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1047,7 +1047,7 @@ class SDPMessage : gobject.boxed.Boxed
     const(char)* _nettype = nettype.toCString(No.Alloc);
     const(char)* _addrtype = addrtype.toCString(No.Alloc);
     const(char)* _addr = addr.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_origin(cast(GstSDPMessage*)cPtr, _username, _sessId, _sessVersion, _nettype, _addrtype, _addr);
+    _cretval = gst_sdp_message_set_origin(cast(GstSDPMessage*)this._cPtr, _username, _sessId, _sessVersion, _nettype, _addrtype, _addr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1063,7 +1063,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _sessionName = sessionName.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_session_name(cast(GstSDPMessage*)cPtr, _sessionName);
+    _cretval = gst_sdp_message_set_session_name(cast(GstSDPMessage*)this._cPtr, _sessionName);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1079,7 +1079,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_uri(cast(GstSDPMessage*)cPtr, _uri);
+    _cretval = gst_sdp_message_set_uri(cast(GstSDPMessage*)this._cPtr, _uri);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1095,7 +1095,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _version_ = version_.toCString(No.Alloc);
-    _cretval = gst_sdp_message_set_version(cast(GstSDPMessage*)cPtr, _version_);
+    _cretval = gst_sdp_message_set_version(cast(GstSDPMessage*)this._cPtr, _version_);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1107,7 +1107,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint timesLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_times_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_times_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -1120,7 +1120,7 @@ class SDPMessage : gobject.boxed.Boxed
   gstsdp.types.SDPResult uninit()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_message_uninit(cast(GstSDPMessage*)cPtr);
+    _cretval = gst_sdp_message_uninit(cast(GstSDPMessage*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1132,7 +1132,7 @@ class SDPMessage : gobject.boxed.Boxed
   uint zonesLen()
   {
     uint _retval;
-    _retval = gst_sdp_message_zones_len(cast(const(GstSDPMessage)*)cPtr);
+    _retval = gst_sdp_message_zones_len(cast(const(GstSDPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -1152,7 +1152,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     char* _cretval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _cretval = gst_sdp_message_as_uri(_scheme, msg ? cast(const(GstSDPMessage)*)msg.cPtr(No.Dup) : null);
+    _cretval = gst_sdp_message_as_uri(_scheme, msg ? cast(const(GstSDPMessage)*)msg._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1232,7 +1232,7 @@ class SDPMessage : gobject.boxed.Boxed
       _size = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _cretval = gst_sdp_message_parse_buffer(_data, _size, msg ? cast(GstSDPMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = gst_sdp_message_parse_buffer(_data, _size, msg ? cast(GstSDPMessage*)msg._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -1257,7 +1257,7 @@ class SDPMessage : gobject.boxed.Boxed
   {
     GstSDPResult _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = gst_sdp_message_parse_uri(_uri, msg ? cast(GstSDPMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = gst_sdp_message_parse_uri(_uri, msg ? cast(GstSDPMessage*)msg._cPtr(No.Dup) : null);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

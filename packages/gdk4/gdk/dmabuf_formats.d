@@ -39,22 +39,22 @@ class DmabufFormats : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_dmabuf_formats_get_type != &gidSymbolNotFound ? gdk_dmabuf_formats_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class DmabufFormats : gobject.boxed.Boxed
   bool contains(uint fourcc, ulong modifier)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_contains(cast(GdkDmabufFormats*)cPtr, fourcc, modifier);
+    _retval = gdk_dmabuf_formats_contains(cast(GdkDmabufFormats*)this._cPtr, fourcc, modifier);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class DmabufFormats : gobject.boxed.Boxed
   bool equal(gdk.dmabuf_formats.DmabufFormats formats2 = null)
   {
     bool _retval;
-    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2.cPtr(No.Dup) : null);
+    _retval = gdk_dmabuf_formats_equal(cast(const(GdkDmabufFormats)*)this._cPtr, formats2 ? cast(const(GdkDmabufFormats)*)formats2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class DmabufFormats : gobject.boxed.Boxed
   */
   void getFormat(size_t idx, out uint fourcc, out ulong modifier)
   {
-    gdk_dmabuf_formats_get_format(cast(GdkDmabufFormats*)cPtr, idx, cast(uint*)&fourcc, cast(ulong*)&modifier);
+    gdk_dmabuf_formats_get_format(cast(GdkDmabufFormats*)this._cPtr, idx, cast(uint*)&fourcc, cast(ulong*)&modifier);
   }
 
   /**
@@ -120,7 +120,7 @@ class DmabufFormats : gobject.boxed.Boxed
   size_t getNFormats()
   {
     size_t _retval;
-    _retval = gdk_dmabuf_formats_get_n_formats(cast(GdkDmabufFormats*)cPtr);
+    _retval = gdk_dmabuf_formats_get_n_formats(cast(GdkDmabufFormats*)this._cPtr);
     return _retval;
   }
 }

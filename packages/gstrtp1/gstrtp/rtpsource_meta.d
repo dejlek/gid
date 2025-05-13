@@ -28,7 +28,7 @@ class RTPSourceMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class RTPSourceMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstRTPSourceMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstRTPSourceMeta*)this._cPtr).meta);
   }
 
   /**
@@ -48,7 +48,7 @@ class RTPSourceMeta
   */
   @property uint ssrc()
   {
-    return (cast(GstRTPSourceMeta*)cPtr).ssrc;
+    return (cast(GstRTPSourceMeta*)this._cPtr).ssrc;
   }
 
   /**
@@ -58,7 +58,7 @@ class RTPSourceMeta
   */
   @property void ssrc(uint propval)
   {
-    (cast(GstRTPSourceMeta*)cPtr).ssrc = propval;
+    (cast(GstRTPSourceMeta*)this._cPtr).ssrc = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class RTPSourceMeta
   */
   @property bool ssrcValid()
   {
-    return (cast(GstRTPSourceMeta*)cPtr).ssrcValid;
+    return (cast(GstRTPSourceMeta*)this._cPtr).ssrcValid;
   }
 
   /**
@@ -77,7 +77,7 @@ class RTPSourceMeta
   */
   @property void ssrcValid(bool propval)
   {
-    (cast(GstRTPSourceMeta*)cPtr).ssrcValid = propval;
+    (cast(GstRTPSourceMeta*)this._cPtr).ssrcValid = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class RTPSourceMeta
   */
   @property uint csrcCount()
   {
-    return (cast(GstRTPSourceMeta*)cPtr).csrcCount;
+    return (cast(GstRTPSourceMeta*)this._cPtr).csrcCount;
   }
 
   /**
@@ -96,7 +96,7 @@ class RTPSourceMeta
   */
   @property void csrcCount(uint propval)
   {
-    (cast(GstRTPSourceMeta*)cPtr).csrcCount = propval;
+    (cast(GstRTPSourceMeta*)this._cPtr).csrcCount = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class RTPSourceMeta
       _csrcCount = cast(uint)csrc.length;
 
     auto _csrc = cast(const(uint)*)csrc.ptr;
-    _retval = gst_rtp_source_meta_append_csrc(cast(GstRTPSourceMeta*)cPtr, _csrc, _csrcCount);
+    _retval = gst_rtp_source_meta_append_csrc(cast(GstRTPSourceMeta*)this._cPtr, _csrc, _csrcCount);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class RTPSourceMeta
   uint getSourceCount()
   {
     uint _retval;
-    _retval = gst_rtp_source_meta_get_source_count(cast(const(GstRTPSourceMeta)*)cPtr);
+    _retval = gst_rtp_source_meta_get_source_count(cast(const(GstRTPSourceMeta)*)this._cPtr);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class RTPSourceMeta
   bool setSsrc(out uint ssrc)
   {
     bool _retval;
-    _retval = gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)cPtr, cast(uint*)&ssrc);
+    _retval = gst_rtp_source_meta_set_ssrc(cast(GstRTPSourceMeta*)this._cPtr, cast(uint*)&ssrc);
     return _retval;
   }
 

@@ -48,16 +48,16 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_carousel_get_type != &gidSymbolNotFound ? adw_carousel_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -275,7 +275,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void append(gtk.widget.Widget child)
   {
-    adw_carousel_append(cast(AdwCarousel*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_carousel_append(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -285,7 +285,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowLongSwipes()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_allow_long_swipes(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowMouseDrag()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_allow_mouse_drag(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getAllowScrollWheel()
   {
     bool _retval;
-    _retval = adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   bool getInteractive()
   {
     bool _retval;
-    _retval = adw_carousel_get_interactive(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_interactive(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   uint getNPages()
   {
     uint _retval;
-    _retval = adw_carousel_get_n_pages(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_n_pages(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -343,8 +343,8 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   gtk.widget.Widget getNthPage(uint n)
   {
     GtkWidget* _cretval;
-    _cretval = adw_carousel_get_nth_page(cast(AdwCarousel*)cPtr, n);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_carousel_get_nth_page(cast(AdwCarousel*)this._cPtr, n);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   double getPosition()
   {
     double _retval;
-    _retval = adw_carousel_get_position(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_position(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   uint getRevealDuration()
   {
     uint _retval;
-    _retval = adw_carousel_get_reveal_duration(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_reveal_duration(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   adw.spring_params.SpringParams getScrollParams()
   {
     AdwSpringParams* _cretval;
-    _cretval = adw_carousel_get_scroll_params(cast(AdwCarousel*)cPtr);
+    _cretval = adw_carousel_get_scroll_params(cast(AdwCarousel*)this._cPtr);
     auto _retval = _cretval ? new adw.spring_params.SpringParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -391,7 +391,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   uint getSpacing()
   {
     uint _retval;
-    _retval = adw_carousel_get_spacing(cast(AdwCarousel*)cPtr);
+    _retval = adw_carousel_get_spacing(cast(AdwCarousel*)this._cPtr);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void insert(gtk.widget.Widget child, int position)
   {
-    adw_carousel_insert(cast(AdwCarousel*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    adw_carousel_insert(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -418,7 +418,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void prepend(gtk.widget.Widget child)
   {
-    adw_carousel_prepend(cast(AdwCarousel*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_carousel_prepend(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -429,7 +429,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_carousel_remove(cast(AdwCarousel*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_carousel_remove(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -444,7 +444,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void reorder(gtk.widget.Widget child, int position)
   {
-    adw_carousel_reorder(cast(AdwCarousel*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    adw_carousel_reorder(cast(AdwCarousel*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -458,7 +458,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void scrollTo(gtk.widget.Widget widget, bool animate)
   {
-    adw_carousel_scroll_to(cast(AdwCarousel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, animate);
+    adw_carousel_scroll_to(cast(AdwCarousel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, animate);
   }
 
   /**
@@ -472,7 +472,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setAllowLongSwipes(bool allowLongSwipes)
   {
-    adw_carousel_set_allow_long_swipes(cast(AdwCarousel*)cPtr, allowLongSwipes);
+    adw_carousel_set_allow_long_swipes(cast(AdwCarousel*)this._cPtr, allowLongSwipes);
   }
 
   /**
@@ -485,7 +485,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setAllowMouseDrag(bool allowMouseDrag)
   {
-    adw_carousel_set_allow_mouse_drag(cast(AdwCarousel*)cPtr, allowMouseDrag);
+    adw_carousel_set_allow_mouse_drag(cast(AdwCarousel*)this._cPtr, allowMouseDrag);
   }
 
   /**
@@ -498,7 +498,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setAllowScrollWheel(bool allowScrollWheel)
   {
-    adw_carousel_set_allow_scroll_wheel(cast(AdwCarousel*)cPtr, allowScrollWheel);
+    adw_carousel_set_allow_scroll_wheel(cast(AdwCarousel*)this._cPtr, allowScrollWheel);
   }
 
   /**
@@ -512,7 +512,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setInteractive(bool interactive)
   {
-    adw_carousel_set_interactive(cast(AdwCarousel*)cPtr, interactive);
+    adw_carousel_set_interactive(cast(AdwCarousel*)this._cPtr, interactive);
   }
 
   /**
@@ -525,7 +525,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setRevealDuration(uint revealDuration)
   {
-    adw_carousel_set_reveal_duration(cast(AdwCarousel*)cPtr, revealDuration);
+    adw_carousel_set_reveal_duration(cast(AdwCarousel*)this._cPtr, revealDuration);
   }
 
   /**
@@ -542,7 +542,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setScrollParams(adw.spring_params.SpringParams params)
   {
-    adw_carousel_set_scroll_params(cast(AdwCarousel*)cPtr, params ? cast(AdwSpringParams*)params.cPtr(No.Dup) : null);
+    adw_carousel_set_scroll_params(cast(AdwCarousel*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
 
   /**
@@ -553,7 +553,7 @@ class Carousel : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orie
   */
   void setSpacing(uint spacing)
   {
-    adw_carousel_set_spacing(cast(AdwCarousel*)cPtr, spacing);
+    adw_carousel_set_spacing(cast(AdwCarousel*)this._cPtr, spacing);
   }
 
   /**

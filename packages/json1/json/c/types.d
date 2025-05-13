@@ -198,7 +198,7 @@ struct JsonArray;
 struct JsonBuilder
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   JsonBuilderPrivate* priv;
@@ -228,7 +228,7 @@ struct JsonBuilderPrivate;
 struct JsonGenerator
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   JsonGeneratorPrivate* priv;
@@ -380,7 +380,7 @@ struct JsonObject;
 struct JsonParser
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   JsonParserPrivate* priv;
@@ -649,7 +649,7 @@ struct JsonPathClass;
 struct JsonReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   JsonReaderPrivate* priv;

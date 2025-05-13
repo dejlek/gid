@@ -35,16 +35,16 @@ class PrintJob : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_job_get_type != &gidSymbolNotFound ? gtk_print_job_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,7 +88,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     GtkPrintJob* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer.cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings.cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup.cPtr(No.Dup) : null);
+    _cretval = gtk_print_job_new(_title, printer ? cast(GtkPrinter*)printer._cPtr(No.Dup) : null, settings ? cast(GtkPrintSettings*)settings._cPtr(No.Dup) : null, pageSetup ? cast(GtkPageSetup*)pageSetup._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -99,7 +99,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getCollate()
   {
     bool _retval;
-    _retval = gtk_print_job_get_collate(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_collate(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class PrintJob : gobject.object.ObjectWrap
   uint getNUp()
   {
     uint _retval;
-    _retval = gtk_print_job_get_n_up(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_n_up(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.types.NumberUpLayout getNUpLayout()
   {
     GtkNumberUpLayout _cretval;
-    _cretval = gtk_print_job_get_n_up_layout(cast(GtkPrintJob*)cPtr);
+    _cretval = gtk_print_job_get_n_up_layout(cast(GtkPrintJob*)this._cPtr);
     gtk.types.NumberUpLayout _retval = cast(gtk.types.NumberUpLayout)_cretval;
     return _retval;
   }
@@ -133,7 +133,7 @@ class PrintJob : gobject.object.ObjectWrap
   int getNumCopies()
   {
     int _retval;
-    _retval = gtk_print_job_get_num_copies(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_num_copies(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     GtkPageRange* _cretval;
     int _cretlength;
-    _cretval = gtk_print_job_get_page_ranges(cast(GtkPrintJob*)cPtr, &_cretlength);
+    _cretval = gtk_print_job_get_page_ranges(cast(GtkPrintJob*)this._cPtr, &_cretlength);
     gtk.types.PageRange[] _retval;
 
     if (_cretval)
@@ -165,7 +165,7 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.types.PageSet getPageSet()
   {
     GtkPageSet _cretval;
-    _cretval = gtk_print_job_get_page_set(cast(GtkPrintJob*)cPtr);
+    _cretval = gtk_print_job_get_page_set(cast(GtkPrintJob*)this._cPtr);
     gtk.types.PageSet _retval = cast(gtk.types.PageSet)_cretval;
     return _retval;
   }
@@ -177,7 +177,7 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.types.PrintPages getPages()
   {
     GtkPrintPages _cretval;
-    _cretval = gtk_print_job_get_pages(cast(GtkPrintJob*)cPtr);
+    _cretval = gtk_print_job_get_pages(cast(GtkPrintJob*)this._cPtr);
     gtk.types.PrintPages _retval = cast(gtk.types.PrintPages)_cretval;
     return _retval;
   }
@@ -189,8 +189,8 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.printer.Printer getPrinter()
   {
     GtkPrinter* _cretval;
-    _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
+    _cretval = gtk_print_job_get_printer(cast(GtkPrintJob*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.printer.Printer)(cast(GtkPrinter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getReverse()
   {
     bool _retval;
-    _retval = gtk_print_job_get_reverse(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_reverse(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getRotate()
   {
     bool _retval;
-    _retval = gtk_print_job_get_rotate(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_rotate(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class PrintJob : gobject.object.ObjectWrap
   double getScale()
   {
     double _retval;
-    _retval = gtk_print_job_get_scale(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_scale(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -234,8 +234,8 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.print_settings.PrintSettings getSettings()
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    _cretval = gtk_print_job_get_settings(cast(GtkPrintJob*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class PrintJob : gobject.object.ObjectWrap
   gtk.types.PrintStatus getStatus()
   {
     GtkPrintStatus _cretval;
-    _cretval = gtk_print_job_get_status(cast(GtkPrintJob*)cPtr);
+    _cretval = gtk_print_job_get_status(cast(GtkPrintJob*)this._cPtr);
     gtk.types.PrintStatus _retval = cast(gtk.types.PrintStatus)_cretval;
     return _retval;
   }
@@ -261,7 +261,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     cairo_surface_t* _cretval;
     GError *_err;
-    _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)cPtr, &_err);
+    _cretval = gtk_print_job_get_surface(cast(GtkPrintJob*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
@@ -275,7 +275,7 @@ class PrintJob : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)cPtr);
+    _cretval = gtk_print_job_get_title(cast(GtkPrintJob*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -289,7 +289,7 @@ class PrintJob : gobject.object.ObjectWrap
   bool getTrackPrintStatus()
   {
     bool _retval;
-    _retval = gtk_print_job_get_track_print_status(cast(GtkPrintJob*)cPtr);
+    _retval = gtk_print_job_get_track_print_status(cast(GtkPrintJob*)this._cPtr);
     return _retval;
   }
 
@@ -305,13 +305,13 @@ class PrintJob : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gtk.types.PrintJobCompleteFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.print_job.PrintJob)(cast(void*)printJob, No.Take), error ? new glib.error.ErrorWrap(cast(void*)error, No.Take) : null);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gtk_print_job_send(cast(GtkPrintJob*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gtk_print_job_send(cast(GtkPrintJob*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -322,7 +322,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setCollate(bool collate)
   {
-    gtk_print_job_set_collate(cast(GtkPrintJob*)cPtr, collate);
+    gtk_print_job_set_collate(cast(GtkPrintJob*)this._cPtr, collate);
   }
 
   /**
@@ -333,7 +333,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setNUp(uint nUp)
   {
-    gtk_print_job_set_n_up(cast(GtkPrintJob*)cPtr, nUp);
+    gtk_print_job_set_n_up(cast(GtkPrintJob*)this._cPtr, nUp);
   }
 
   /**
@@ -344,7 +344,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setNUpLayout(gtk.types.NumberUpLayout layout)
   {
-    gtk_print_job_set_n_up_layout(cast(GtkPrintJob*)cPtr, layout);
+    gtk_print_job_set_n_up_layout(cast(GtkPrintJob*)this._cPtr, layout);
   }
 
   /**
@@ -355,7 +355,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setNumCopies(int numCopies)
   {
-    gtk_print_job_set_num_copies(cast(GtkPrintJob*)cPtr, numCopies);
+    gtk_print_job_set_num_copies(cast(GtkPrintJob*)this._cPtr, numCopies);
   }
 
   /**
@@ -366,7 +366,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setPageSet(gtk.types.PageSet pageSet)
   {
-    gtk_print_job_set_page_set(cast(GtkPrintJob*)cPtr, pageSet);
+    gtk_print_job_set_page_set(cast(GtkPrintJob*)this._cPtr, pageSet);
   }
 
   /**
@@ -377,7 +377,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setPages(gtk.types.PrintPages pages)
   {
-    gtk_print_job_set_pages(cast(GtkPrintJob*)cPtr, pages);
+    gtk_print_job_set_pages(cast(GtkPrintJob*)this._cPtr, pages);
   }
 
   /**
@@ -388,7 +388,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setReverse(bool reverse)
   {
-    gtk_print_job_set_reverse(cast(GtkPrintJob*)cPtr, reverse);
+    gtk_print_job_set_reverse(cast(GtkPrintJob*)this._cPtr, reverse);
   }
 
   /**
@@ -399,7 +399,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setRotate(bool rotate)
   {
-    gtk_print_job_set_rotate(cast(GtkPrintJob*)cPtr, rotate);
+    gtk_print_job_set_rotate(cast(GtkPrintJob*)this._cPtr, rotate);
   }
 
   /**
@@ -412,7 +412,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setScale(double scale)
   {
-    gtk_print_job_set_scale(cast(GtkPrintJob*)cPtr, scale);
+    gtk_print_job_set_scale(cast(GtkPrintJob*)this._cPtr, scale);
   }
 
   /**
@@ -437,7 +437,7 @@ class PrintJob : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_print_job_set_source_fd(cast(GtkPrintJob*)cPtr, fd, &_err);
+    _retval = gtk_print_job_set_source_fd(cast(GtkPrintJob*)this._cPtr, fd, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -462,7 +462,7 @@ class PrintJob : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)cPtr, _filename, &_err);
+    _retval = gtk_print_job_set_source_file(cast(GtkPrintJob*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -483,7 +483,7 @@ class PrintJob : gobject.object.ObjectWrap
   */
   void setTrackPrintStatus(bool trackStatus)
   {
-    gtk_print_job_set_track_print_status(cast(GtkPrintJob*)cPtr, trackStatus);
+    gtk_print_job_set_track_print_status(cast(GtkPrintJob*)this._cPtr, trackStatus);
   }
 
   /**

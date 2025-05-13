@@ -35,7 +35,7 @@ template ImageT()
   override string getImageDescription()
   {
     const(char)* _cretval;
-    _cretval = atk_image_get_image_description(cast(AtkImage*)cPtr);
+    _cretval = atk_image_get_image_description(cast(AtkImage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -49,7 +49,7 @@ template ImageT()
   override string getImageLocale()
   {
     const(char)* _cretval;
-    _cretval = atk_image_get_image_locale(cast(AtkImage*)cPtr);
+    _cretval = atk_image_get_image_locale(cast(AtkImage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -69,7 +69,7 @@ template ImageT()
   */
   override void getImagePosition(out int x, out int y, atk.types.CoordType coordType)
   {
-    atk_image_get_image_position(cast(AtkImage*)cPtr, cast(int*)&x, cast(int*)&y, coordType);
+    atk_image_get_image_position(cast(AtkImage*)this._cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }
 
   /**
@@ -86,7 +86,7 @@ template ImageT()
   */
   override void getImageSize(out int width, out int height)
   {
-    atk_image_get_image_size(cast(AtkImage*)cPtr, cast(int*)&width, cast(int*)&height);
+    atk_image_get_image_size(cast(AtkImage*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -101,7 +101,7 @@ template ImageT()
   {
     bool _retval;
     const(char)* _description = description.toCString(No.Alloc);
-    _retval = atk_image_set_image_description(cast(AtkImage*)cPtr, _description);
+    _retval = atk_image_set_image_description(cast(AtkImage*)this._cPtr, _description);
     return _retval;
   }
 }

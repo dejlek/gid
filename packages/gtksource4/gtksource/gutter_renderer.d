@@ -28,16 +28,16 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -240,7 +240,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null);
   }
 
   /**
@@ -257,7 +257,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void begin(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end)
   {
-    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_begin(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea._cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -285,7 +285,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void draw(cairo.context.Context cr, gdk.rectangle.Rectangle backgroundArea, gdk.rectangle.Rectangle cellArea, gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea.cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea.cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, state);
+    gtk_source_gutter_renderer_draw(cast(GtkSourceGutterRenderer*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, backgroundArea ? cast(GdkRectangle*)backgroundArea._cPtr(No.Dup) : null, cellArea ? cast(GdkRectangle*)cellArea._cPtr(No.Dup) : null, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -293,7 +293,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void end()
   {
-    gtk_source_gutter_renderer_end(cast(GtkSourceGutterRenderer*)cPtr);
+    gtk_source_gutter_renderer_end(cast(GtkSourceGutterRenderer*)this._cPtr);
   }
 
   /**
@@ -307,7 +307,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getAlignment(out float xalign, out float yalign)
   {
-    gtk_source_gutter_renderer_get_alignment(cast(GtkSourceGutterRenderer*)cPtr, cast(float*)&xalign, cast(float*)&yalign);
+    gtk_source_gutter_renderer_get_alignment(cast(GtkSourceGutterRenderer*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
 
   /**
@@ -318,7 +318,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
   {
     GtkSourceGutterRendererAlignmentMode _cretval;
-    _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr);
+    _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr);
     gtksource.types.GutterRendererAlignmentMode _retval = cast(gtksource.types.GutterRendererAlignmentMode)_cretval;
     return _retval;
   }
@@ -334,7 +334,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     GdkRGBA _color;
-    _retval = gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)cPtr, &_color);
+    _retval = gtk_source_gutter_renderer_get_background(cast(GtkSourceGutterRenderer*)this._cPtr, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
@@ -350,7 +350,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void getPadding(out int xpad, out int ypad)
   {
-    gtk_source_gutter_renderer_get_padding(cast(GtkSourceGutterRenderer*)cPtr, cast(int*)&xpad, cast(int*)&ypad);
+    gtk_source_gutter_renderer_get_padding(cast(GtkSourceGutterRenderer*)this._cPtr, cast(int*)&xpad, cast(int*)&ypad);
   }
 
   /**
@@ -360,7 +360,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   int getSize()
   {
     int _retval;
-    _retval = gtk_source_gutter_renderer_get_size(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_size(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -371,8 +371,8 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   gtk.text_view.TextView getView()
   {
     GtkTextView* _cretval;
-    _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_get_visible(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_visible(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   gtk.types.TextWindowType getWindowType()
   {
     GtkTextWindowType _cretval;
-    _cretval = gtk_source_gutter_renderer_get_window_type(cast(GtkSourceGutterRenderer*)cPtr);
+    _cretval = gtk_source_gutter_renderer_get_window_type(cast(GtkSourceGutterRenderer*)this._cPtr);
     gtk.types.TextWindowType _retval = cast(gtk.types.TextWindowType)_cretval;
     return _retval;
   }
@@ -413,7 +413,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void queryData(gtk.text_iter.TextIter start, gtk.text_iter.TextIter end, gtksource.types.GutterRendererState state)
   {
-    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)cPtr, start ? cast(GtkTextIter*)start.cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end.cPtr(No.Dup) : null, state);
+    gtk_source_gutter_renderer_query_data(cast(GtkSourceGutterRenderer*)this._cPtr, start ? cast(GtkTextIter*)start._cPtr(No.Dup) : null, end ? cast(GtkTextIter*)end._cPtr(No.Dup) : null, state);
   }
 
   /**
@@ -450,7 +450,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   bool queryTooltip(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, int x, int y, gtk.tooltip.Tooltip tooltip)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area.cPtr(No.Dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null);
+    _retval = gtk_source_gutter_renderer_query_tooltip(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, area ? cast(GdkRectangle*)area._cPtr(No.Dup) : null, x, y, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -461,7 +461,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void queueDraw()
   {
-    gtk_source_gutter_renderer_queue_draw(cast(GtkSourceGutterRenderer*)cPtr);
+    gtk_source_gutter_renderer_queue_draw(cast(GtkSourceGutterRenderer*)this._cPtr);
   }
 
   /**
@@ -479,7 +479,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setAlignment(float xalign, float yalign)
   {
-    gtk_source_gutter_renderer_set_alignment(cast(GtkSourceGutterRenderer*)cPtr, xalign, yalign);
+    gtk_source_gutter_renderer_set_alignment(cast(GtkSourceGutterRenderer*)this._cPtr, xalign, yalign);
   }
 
   /**
@@ -491,7 +491,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode)
   {
-    gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr, mode);
+    gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr, mode);
   }
 
   /**
@@ -503,7 +503,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setBackground(gdk.rgba.RGBA color = null)
   {
-    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_source_gutter_renderer_set_background(cast(GtkSourceGutterRenderer*)this._cPtr, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -519,7 +519,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setPadding(int xpad, int ypad)
   {
-    gtk_source_gutter_renderer_set_padding(cast(GtkSourceGutterRenderer*)cPtr, xpad, ypad);
+    gtk_source_gutter_renderer_set_padding(cast(GtkSourceGutterRenderer*)this._cPtr, xpad, ypad);
   }
 
   /**
@@ -531,7 +531,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setSize(int size)
   {
-    gtk_source_gutter_renderer_set_size(cast(GtkSourceGutterRenderer*)cPtr, size);
+    gtk_source_gutter_renderer_set_size(cast(GtkSourceGutterRenderer*)this._cPtr, size);
   }
 
   /**
@@ -542,7 +542,7 @@ class GutterRenderer : gobject.initially_unowned.InitiallyUnowned
   */
   void setVisible(bool visible)
   {
-    gtk_source_gutter_renderer_set_visible(cast(GtkSourceGutterRenderer*)cPtr, visible);
+    gtk_source_gutter_renderer_set_visible(cast(GtkSourceGutterRenderer*)this._cPtr, visible);
   }
 
   /**

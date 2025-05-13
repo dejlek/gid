@@ -53,16 +53,16 @@ class SearchEntry : gtk.entry.Entry
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_entry_get_type != &gidSymbolNotFound ? gtk_search_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,7 +105,7 @@ class SearchEntry : gtk.entry.Entry
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_search_entry_handle_event(cast(GtkSearchEntry*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_search_entry_handle_event(cast(GtkSearchEntry*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 

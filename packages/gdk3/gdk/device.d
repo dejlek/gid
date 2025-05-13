@@ -32,16 +32,16 @@ class Device : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_get_type != &gidSymbolNotFound ? gdk_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -136,7 +136,7 @@ class Device : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkWindow* _grabWindow;
-    _retval = gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, &_grabWindow, cast(bool*)&ownerEvents);
+    _retval = gdk_device_grab_info_libgtk_only(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, &_grabWindow, cast(bool*)&ownerEvents);
     grabWindow = new gdk.window.Window(cast(void*)_grabWindow, No.Take);
     return _retval;
   }
@@ -157,8 +157,8 @@ class Device : gobject.object.ObjectWrap
   gdk.device.Device getAssociatedDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_device_get_associated_device(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_device_get_associated_device(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.AxisFlags getAxes()
   {
     GdkAxisFlags _cretval;
-    _cretval = gdk_device_get_axes(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_axes(cast(GdkDevice*)this._cPtr);
     gdk.types.AxisFlags _retval = cast(gdk.types.AxisFlags)_cretval;
     return _retval;
   }
@@ -184,7 +184,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.AxisUse getAxisUse(uint index)
   {
     GdkAxisUse _cretval;
-    _cretval = gdk_device_get_axis_use(cast(GdkDevice*)cPtr, index);
+    _cretval = gdk_device_get_axis_use(cast(GdkDevice*)this._cPtr, index);
     gdk.types.AxisUse _retval = cast(gdk.types.AxisUse)_cretval;
     return _retval;
   }
@@ -196,7 +196,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.DeviceType getDeviceType()
   {
     GdkDeviceType _cretval;
-    _cretval = gdk_device_get_device_type(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_device_type(cast(GdkDevice*)this._cPtr);
     gdk.types.DeviceType _retval = cast(gdk.types.DeviceType)_cretval;
     return _retval;
   }
@@ -209,8 +209,8 @@ class Device : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_device_get_display(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_device_get_display(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class Device : gobject.object.ObjectWrap
   bool getHasCursor()
   {
     bool _retval;
-    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_has_cursor(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class Device : gobject.object.ObjectWrap
   bool getKey(uint index, out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
-    _retval = gdk_device_get_key(cast(GdkDevice*)cPtr, index, cast(uint*)&keyval, &modifiers);
+    _retval = gdk_device_get_key(cast(GdkDevice*)this._cPtr, index, cast(uint*)&keyval, &modifiers);
     return _retval;
   }
 
@@ -254,8 +254,8 @@ class Device : gobject.object.ObjectWrap
   gdk.window.Window getLastEventWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_device_get_last_event_window(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_device_get_last_event_window(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.InputMode getMode()
   {
     GdkInputMode _cretval;
-    _cretval = gdk_device_get_mode(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_mode(cast(GdkDevice*)this._cPtr);
     gdk.types.InputMode _retval = cast(gdk.types.InputMode)_cretval;
     return _retval;
   }
@@ -278,7 +278,7 @@ class Device : gobject.object.ObjectWrap
   int getNAxes()
   {
     int _retval;
-    _retval = gdk_device_get_n_axes(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_n_axes(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class Device : gobject.object.ObjectWrap
   int getNKeys()
   {
     int _retval;
-    _retval = gdk_device_get_n_keys(cast(GdkDevice*)cPtr);
+    _retval = gdk_device_get_n_keys(cast(GdkDevice*)this._cPtr);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class Device : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_name(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_name(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -320,7 +320,7 @@ class Device : gobject.object.ObjectWrap
   void getPosition(out gdk.screen.Screen screen, out int x, out int y)
   {
     GdkScreen* _screen;
-    gdk_device_get_position(cast(GdkDevice*)cPtr, &_screen, cast(int*)&x, cast(int*)&y);
+    gdk_device_get_position(cast(GdkDevice*)this._cPtr, &_screen, cast(int*)&x, cast(int*)&y);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
   }
 
@@ -339,7 +339,7 @@ class Device : gobject.object.ObjectWrap
   void getPositionDouble(out gdk.screen.Screen screen, out double x, out double y)
   {
     GdkScreen* _screen;
-    gdk_device_get_position_double(cast(GdkDevice*)cPtr, &_screen, cast(double*)&x, cast(double*)&y);
+    gdk_device_get_position_double(cast(GdkDevice*)this._cPtr, &_screen, cast(double*)&x, cast(double*)&y);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
   }
 
@@ -352,7 +352,7 @@ class Device : gobject.object.ObjectWrap
   string getProductId()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_product_id(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_product_id(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -365,8 +365,8 @@ class Device : gobject.object.ObjectWrap
   gdk.seat.Seat getSeat()
   {
     GdkSeat* _cretval;
-    _cretval = gdk_device_get_seat(cast(GdkDevice*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    _cretval = gdk_device_get_seat(cast(GdkDevice*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.InputSource getSource()
   {
     GdkInputSource _cretval;
-    _cretval = gdk_device_get_source(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_source(cast(GdkDevice*)this._cPtr);
     gdk.types.InputSource _retval = cast(gdk.types.InputSource)_cretval;
     return _retval;
   }
@@ -414,7 +414,7 @@ class Device : gobject.object.ObjectWrap
   string getVendorId()
   {
     const(char)* _cretval;
-    _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_get_vendor_id(cast(GdkDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -438,8 +438,8 @@ class Device : gobject.object.ObjectWrap
   gdk.window.Window getWindowAtPosition(out int winX, out int winY)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_device_get_window_at_position(cast(GdkDevice*)cPtr, cast(int*)&winX, cast(int*)&winY);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_device_get_window_at_position(cast(GdkDevice*)this._cPtr, cast(int*)&winX, cast(int*)&winY);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -463,8 +463,8 @@ class Device : gobject.object.ObjectWrap
   gdk.window.Window getWindowAtPositionDouble(out double winX, out double winY)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_device_get_window_at_position_double(cast(GdkDevice*)cPtr, cast(double*)&winX, cast(double*)&winY);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_device_get_window_at_position_double(cast(GdkDevice*)this._cPtr, cast(double*)&winX, cast(double*)&winY);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -516,7 +516,7 @@ class Device : gobject.object.ObjectWrap
   gdk.types.GrabStatus grab(gdk.window.Window window, gdk.types.GrabOwnership grabOwnership, bool ownerEvents, gdk.types.EventMask eventMask, gdk.cursor.Cursor cursor, uint time)
   {
     GdkGrabStatus _cretval;
-    _cretval = gdk_device_grab(cast(GdkDevice*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null, time);
+    _cretval = gdk_device_grab(cast(GdkDevice*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, grabOwnership, ownerEvents, eventMask, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, time);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
     return _retval;
   }
@@ -532,7 +532,7 @@ class Device : gobject.object.ObjectWrap
   gdk.device.Device[] listSlaveDevices()
   {
     GList* _cretval;
-    _cretval = gdk_device_list_slave_devices(cast(GdkDevice*)cPtr);
+    _cretval = gdk_device_list_slave_devices(cast(GdkDevice*)this._cPtr);
     auto _retval = gListToD!(gdk.device.Device, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -546,7 +546,7 @@ class Device : gobject.object.ObjectWrap
   */
   void setAxisUse(uint index, gdk.types.AxisUse use)
   {
-    gdk_device_set_axis_use(cast(GdkDevice*)cPtr, index, use);
+    gdk_device_set_axis_use(cast(GdkDevice*)this._cPtr, index, use);
   }
 
   /**
@@ -560,7 +560,7 @@ class Device : gobject.object.ObjectWrap
   */
   void setKey(uint index, uint keyval, gdk.types.ModifierType modifiers)
   {
-    gdk_device_set_key(cast(GdkDevice*)cPtr, index, keyval, modifiers);
+    gdk_device_set_key(cast(GdkDevice*)this._cPtr, index, keyval, modifiers);
   }
 
   /**
@@ -579,7 +579,7 @@ class Device : gobject.object.ObjectWrap
   bool setMode(gdk.types.InputMode mode)
   {
     bool _retval;
-    _retval = gdk_device_set_mode(cast(GdkDevice*)cPtr, mode);
+    _retval = gdk_device_set_mode(cast(GdkDevice*)this._cPtr, mode);
     return _retval;
   }
 
@@ -593,7 +593,7 @@ class Device : gobject.object.ObjectWrap
   */
   void ungrab(uint time)
   {
-    gdk_device_ungrab(cast(GdkDevice*)cPtr, time);
+    gdk_device_ungrab(cast(GdkDevice*)this._cPtr, time);
   }
 
   /**
@@ -616,7 +616,7 @@ class Device : gobject.object.ObjectWrap
   */
   void warp(gdk.screen.Screen screen, int x, int y)
   {
-    gdk_device_warp(cast(GdkDevice*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, x, y);
+    gdk_device_warp(cast(GdkDevice*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, x, y);
   }
 
   /**

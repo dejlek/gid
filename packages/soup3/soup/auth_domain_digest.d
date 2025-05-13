@@ -25,16 +25,16 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_digest_get_type != &gidSymbolNotFound ? soup_auth_domain_digest_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -139,7 +139,7 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
       auto _dlg = cast(soup.types.AuthDomainDigestAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_digest.AuthDomainDigest)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -148,6 +148,6 @@ class AuthDomainDigest : soup.auth_domain.AuthDomain
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    soup_auth_domain_digest_set_auth_callback(cast(SoupAuthDomain*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    soup_auth_domain_digest_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 }

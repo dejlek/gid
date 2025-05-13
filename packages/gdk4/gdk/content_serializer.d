@@ -39,16 +39,16 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_serializer_get_type != &gidSymbolNotFound ? gdk_content_serializer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,8 +68,8 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
-    _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    _cretval = gdk_content_serializer_get_cancellable(cast(GdkContentSerializer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   gobject.types.GType getGtype()
   {
     gobject.types.GType _retval;
-    _retval = gdk_content_serializer_get_gtype(cast(GdkContentSerializer*)cPtr);
+    _retval = gdk_content_serializer_get_gtype(cast(GdkContentSerializer*)this._cPtr);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   string getMimeType()
   {
     const(char)* _cretval;
-    _cretval = gdk_content_serializer_get_mime_type(cast(GdkContentSerializer*)cPtr);
+    _cretval = gdk_content_serializer_get_mime_type(cast(GdkContentSerializer*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -105,8 +105,8 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   gio.output_stream.OutputStream getOutputStream()
   {
     GOutputStream* _cretval;
-    _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    _cretval = gdk_content_serializer_get_output_stream(cast(GdkContentSerializer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   int getPriority()
   {
     int _retval;
-    _retval = gdk_content_serializer_get_priority(cast(GdkContentSerializer*)cPtr);
+    _retval = gdk_content_serializer_get_priority(cast(GdkContentSerializer*)this._cPtr);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void* getTaskData()
   {
-    auto _retval = gdk_content_serializer_get_task_data(cast(GdkContentSerializer*)cPtr);
+    auto _retval = gdk_content_serializer_get_task_data(cast(GdkContentSerializer*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void* getUserData()
   {
-    auto _retval = gdk_content_serializer_get_user_data(cast(GdkContentSerializer*)cPtr);
+    auto _retval = gdk_content_serializer_get_user_data(cast(GdkContentSerializer*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   gobject.value.Value getValue()
   {
     const(GValue)* _cretval;
-    _cretval = gdk_content_serializer_get_value(cast(GdkContentSerializer*)cPtr);
+    _cretval = gdk_content_serializer_get_value(cast(GdkContentSerializer*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -167,7 +167,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void returnError(glib.error.ErrorWrap error)
   {
-    gdk_content_serializer_return_error(cast(GdkContentSerializer*)cPtr, error ? cast(GError*)error.cPtr : null);
+    gdk_content_serializer_return_error(cast(GdkContentSerializer*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
 
   /**
@@ -175,7 +175,7 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void returnSuccess()
   {
-    gdk_content_serializer_return_success(cast(GdkContentSerializer*)cPtr);
+    gdk_content_serializer_return_success(cast(GdkContentSerializer*)this._cPtr);
   }
 
   /**
@@ -195,6 +195,6 @@ class ContentSerializer : gobject.object.ObjectWrap, gio.async_result.AsyncResul
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gdk_content_serializer_set_task_data(cast(GdkContentSerializer*)cPtr, data, _notifyCB);
+    gdk_content_serializer_set_task_data(cast(GdkContentSerializer*)this._cPtr, data, _notifyCB);
   }
 }

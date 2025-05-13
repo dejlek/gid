@@ -71,16 +71,16 @@ class SearchBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_bar_get_type != &gidSymbolNotFound ? gtk_search_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -192,7 +192,7 @@ class SearchBar : gtk.widget.Widget
   */
   void connectEntry(gtk.editable.Editable entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEditable*)(cast(gobject.object.ObjectWrap)entry).cPtr(No.Dup) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)this._cPtr, entry ? cast(GtkEditable*)(cast(gobject.object.ObjectWrap)entry)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -202,8 +202,8 @@ class SearchBar : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_search_bar_get_child(cast(GtkSearchBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,8 +214,8 @@ class SearchBar : gtk.widget.Widget
   gtk.widget.Widget getKeyCaptureWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_search_bar_get_key_capture_widget(cast(GtkSearchBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class SearchBar : gtk.widget.Widget
   bool getSearchMode()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)cPtr);
+    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class SearchBar : gtk.widget.Widget
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)cPtr);
+    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class SearchBar : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_search_bar_set_child(cast(GtkSearchBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_search_bar_set_child(cast(GtkSearchBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -271,7 +271,7 @@ class SearchBar : gtk.widget.Widget
   */
   void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
-    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_search_bar_set_key_capture_widget(cast(GtkSearchBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -282,7 +282,7 @@ class SearchBar : gtk.widget.Widget
   */
   void setSearchMode(bool searchMode)
   {
-    gtk_search_bar_set_search_mode(cast(GtkSearchBar*)cPtr, searchMode);
+    gtk_search_bar_set_search_mode(cast(GtkSearchBar*)this._cPtr, searchMode);
   }
 
   /**
@@ -297,6 +297,6 @@ class SearchBar : gtk.widget.Widget
   */
   void setShowCloseButton(bool visible)
   {
-    gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)cPtr, visible);
+    gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
   }
 }

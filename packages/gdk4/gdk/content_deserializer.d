@@ -38,16 +38,16 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_deserializer_get_type != &gidSymbolNotFound ? gdk_content_deserializer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,8 +67,8 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
-    _cretval = gdk_content_deserializer_get_cancellable(cast(GdkContentDeserializer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    _cretval = gdk_content_deserializer_get_cancellable(cast(GdkContentDeserializer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   gobject.types.GType getGtype()
   {
     gobject.types.GType _retval;
-    _retval = gdk_content_deserializer_get_gtype(cast(GdkContentDeserializer*)cPtr);
+    _retval = gdk_content_deserializer_get_gtype(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
   }
 
@@ -92,8 +92,8 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
-    _cretval = gdk_content_deserializer_get_input_stream(cast(GdkContentDeserializer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    _cretval = gdk_content_deserializer_get_input_stream(cast(GdkContentDeserializer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   string getMimeType()
   {
     const(char)* _cretval;
-    _cretval = gdk_content_deserializer_get_mime_type(cast(GdkContentDeserializer*)cPtr);
+    _cretval = gdk_content_deserializer_get_mime_type(cast(GdkContentDeserializer*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -118,7 +118,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   int getPriority()
   {
     int _retval;
-    _retval = gdk_content_deserializer_get_priority(cast(GdkContentDeserializer*)cPtr);
+    _retval = gdk_content_deserializer_get_priority(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   */
   void* getTaskData()
   {
-    auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)cPtr);
+    auto _retval = gdk_content_deserializer_get_task_data(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   */
   void* getUserData()
   {
-    auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)cPtr);
+    auto _retval = gdk_content_deserializer_get_user_data(cast(GdkContentDeserializer*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   gobject.value.Value getValue()
   {
     GValue* _cretval;
-    _cretval = gdk_content_deserializer_get_value(cast(GdkContentDeserializer*)cPtr);
+    _cretval = gdk_content_deserializer_get_value(cast(GdkContentDeserializer*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -166,7 +166,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   */
   void returnError(glib.error.ErrorWrap error)
   {
-    gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)cPtr, error ? cast(GError*)error.cPtr : null);
+    gdk_content_deserializer_return_error(cast(GdkContentDeserializer*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
 
   /**
@@ -174,7 +174,7 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
   */
   void returnSuccess()
   {
-    gdk_content_deserializer_return_success(cast(GdkContentDeserializer*)cPtr);
+    gdk_content_deserializer_return_success(cast(GdkContentDeserializer*)this._cPtr);
   }
 
   /**
@@ -194,6 +194,6 @@ class ContentDeserializer : gobject.object.ObjectWrap, gio.async_result.AsyncRes
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)cPtr, data, _notifyCB);
+    gdk_content_deserializer_set_task_data(cast(GdkContentDeserializer*)this._cPtr, data, _notifyCB);
   }
 }

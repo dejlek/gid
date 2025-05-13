@@ -35,16 +35,16 @@ class IMContextSimple : gtk.imcontext.IMContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_simple_get_type != &gidSymbolNotFound ? gtk_im_context_simple_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,6 +73,6 @@ class IMContextSimple : gtk.imcontext.IMContext
   void addComposeFile(string composeFile)
   {
     const(char)* _composeFile = composeFile.toCString(No.Alloc);
-    gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)cPtr, _composeFile);
+    gtk_im_context_simple_add_compose_file(cast(GtkIMContextSimple*)this._cPtr, _composeFile);
   }
 }

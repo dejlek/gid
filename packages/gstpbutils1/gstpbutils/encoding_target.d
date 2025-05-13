@@ -25,16 +25,16 @@ class EncodingTarget : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_target_get_type != &gidSymbolNotFound ? gst_encoding_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     _cretval = gst_encoding_target_load(_name, _category, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     _cretval = gst_encoding_target_load_from_file(_filepath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_target.EncodingTarget)(cast(GstEncodingTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_target_add_profile(cast(GstEncodingTarget*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.Dup) : null);
+    _retval = gst_encoding_target_add_profile(cast(GstEncodingTarget*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   string getCategory()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_target_get_category(cast(GstEncodingTarget*)cPtr);
+    _cretval = gst_encoding_target_get_category(cast(GstEncodingTarget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,7 +160,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_target_get_description(cast(GstEncodingTarget*)cPtr);
+    _cretval = gst_encoding_target_get_description(cast(GstEncodingTarget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -169,7 +169,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_target_get_name(cast(GstEncodingTarget*)cPtr);
+    _cretval = gst_encoding_target_get_name(cast(GstEncodingTarget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -178,7 +178,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_target_get_path(cast(GstEncodingTarget*)cPtr);
+    _cretval = gst_encoding_target_get_path(cast(GstEncodingTarget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -188,8 +188,8 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     GstEncodingProfile* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_encoding_target_get_profile(cast(GstEncodingTarget*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    _cretval = gst_encoding_target_get_profile(cast(GstEncodingTarget*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   gstpbutils.encoding_profile.EncodingProfile[] getProfiles()
   {
     const(GList)* _cretval;
-    _cretval = gst_encoding_target_get_profiles(cast(GstEncodingTarget*)cPtr);
+    _cretval = gst_encoding_target_get_profiles(cast(GstEncodingTarget*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -211,7 +211,7 @@ class EncodingTarget : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gst_encoding_target_save(cast(GstEncodingTarget*)cPtr, &_err);
+    _retval = gst_encoding_target_save(cast(GstEncodingTarget*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -230,7 +230,7 @@ class EncodingTarget : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filepath = filepath.toCString(No.Alloc);
     GError *_err;
-    _retval = gst_encoding_target_save_to_file(cast(GstEncodingTarget*)cPtr, _filepath, &_err);
+    _retval = gst_encoding_target_save_to_file(cast(GstEncodingTarget*)this._cPtr, _filepath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

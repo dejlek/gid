@@ -31,7 +31,7 @@ class ParamSpecPool
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,7 +45,7 @@ class ParamSpecPool
   */
   void insert(gobject.param_spec.ParamSpec pspec, gobject.types.GType ownerType)
   {
-    g_param_spec_pool_insert(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, ownerType);
+    g_param_spec_pool_insert(cast(GParamSpecPool*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, ownerType);
   }
 
   /**
@@ -62,7 +62,7 @@ class ParamSpecPool
   {
     GParamSpec** _cretval;
     uint _cretlength;
-    _cretval = g_param_spec_pool_list(cast(GParamSpecPool*)cPtr, ownerType, &_cretlength);
+    _cretval = g_param_spec_pool_list(cast(GParamSpecPool*)this._cPtr, ownerType, &_cretlength);
     gobject.param_spec.ParamSpec[] _retval;
 
     if (_cretval)
@@ -87,7 +87,7 @@ class ParamSpecPool
   gobject.param_spec.ParamSpec[] listOwned(gobject.types.GType ownerType)
   {
     GList* _cretval;
-    _cretval = g_param_spec_pool_list_owned(cast(GParamSpecPool*)cPtr, ownerType);
+    _cretval = g_param_spec_pool_list_owned(cast(GParamSpecPool*)this._cPtr, ownerType);
     auto _retval = gListToD!(gobject.param_spec.ParamSpec, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -107,7 +107,7 @@ class ParamSpecPool
   {
     GParamSpec* _cretval;
     const(char)* _paramName = paramName.toCString(No.Alloc);
-    _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)cPtr, _paramName, ownerType, walkAncestors);
+    _cretval = g_param_spec_pool_lookup(cast(GParamSpecPool*)this._cPtr, _paramName, ownerType, walkAncestors);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -120,7 +120,7 @@ class ParamSpecPool
   */
   void remove(gobject.param_spec.ParamSpec pspec)
   {
-    g_param_spec_pool_remove(cast(GParamSpecPool*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    g_param_spec_pool_remove(cast(GParamSpecPool*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
 
   /**

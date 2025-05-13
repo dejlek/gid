@@ -40,7 +40,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   this(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    _cretval = gsk_inset_shadow_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
     this(_cretval, Yes.Take);
   }
 
@@ -51,7 +51,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   float getBlurRadius()
   {
     float _retval;
-    _retval = gsk_inset_shadow_node_get_blur_radius(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_inset_shadow_node_get_blur_radius(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   gdk.rgba.RGBA getColor()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_inset_shadow_node_get_color(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_inset_shadow_node_get_color(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -74,7 +74,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   float getDx()
   {
     float _retval;
-    _retval = gsk_inset_shadow_node_get_dx(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_inset_shadow_node_get_dx(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   float getDy()
   {
     float _retval;
-    _retval = gsk_inset_shadow_node_get_dy(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_inset_shadow_node_get_dy(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   gsk.rounded_rect.RoundedRect getOutline()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_inset_shadow_node_get_outline(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_inset_shadow_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -108,7 +108,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   float getSpread()
   {
     float _retval;
-    _retval = gsk_inset_shadow_node_get_spread(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_inset_shadow_node_get_spread(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 }

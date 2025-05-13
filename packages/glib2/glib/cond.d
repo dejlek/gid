@@ -91,7 +91,7 @@ class Cond
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -104,7 +104,7 @@ class Cond
   */
   void broadcast()
   {
-    g_cond_broadcast(cast(GCond*)cPtr);
+    g_cond_broadcast(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -118,7 +118,7 @@ class Cond
   */
   void clear()
   {
-    g_cond_clear(cast(GCond*)cPtr);
+    g_cond_clear(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -136,7 +136,7 @@ class Cond
   */
   void init_()
   {
-    g_cond_init(cast(GCond*)cPtr);
+    g_cond_init(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -147,7 +147,7 @@ class Cond
   */
   void signal()
   {
-    g_cond_signal(cast(GCond*)cPtr);
+    g_cond_signal(cast(GCond*)this._cPtr);
   }
 
   /**
@@ -171,7 +171,7 @@ class Cond
   */
   void wait(glib.mutex.Mutex mutex)
   {
-    g_cond_wait(cast(GCond*)cPtr, mutex ? cast(GMutex*)mutex.cPtr : null);
+    g_cond_wait(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null);
   }
 
   /**
@@ -232,7 +232,7 @@ class Cond
   bool waitUntil(glib.mutex.Mutex mutex, long endTime)
   {
     bool _retval;
-    _retval = g_cond_wait_until(cast(GCond*)cPtr, mutex ? cast(GMutex*)mutex.cPtr : null, endTime);
+    _retval = g_cond_wait_until(cast(GCond*)this._cPtr, mutex ? cast(GMutex*)mutex._cPtr : null, endTime);
     return _retval;
   }
 }

@@ -28,16 +28,16 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_font_family_get_type != &gidSymbolNotFound ? pango_font_family_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,8 +89,8 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     PangoFontFace* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = pango_font_family_get_face(cast(PangoFontFamily*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    _cretval = pango_font_family_get_face(cast(PangoFontFamily*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   string getName()
   {
     const(char)* _cretval;
-    _cretval = pango_font_family_get_name(cast(PangoFontFamily*)cPtr);
+    _cretval = pango_font_family_get_name(cast(PangoFontFamily*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -131,7 +131,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isMonospace()
   {
     bool _retval;
-    _retval = pango_font_family_is_monospace(cast(PangoFontFamily*)cPtr);
+    _retval = pango_font_family_is_monospace(cast(PangoFontFamily*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isVariable()
   {
     bool _retval;
-    _retval = pango_font_family_is_variable(cast(PangoFontFamily*)cPtr);
+    _retval = pango_font_family_is_variable(cast(PangoFontFamily*)this._cPtr);
     return _retval;
   }
 
@@ -171,10 +171,10 @@ class FontFamily : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     int _nFaces;
     PangoFontFace** _faces;
-    pango_font_family_list_faces(cast(PangoFontFamily*)cPtr, &_faces, &_nFaces);
+    pango_font_family_list_faces(cast(PangoFontFamily*)this._cPtr, &_faces, &_nFaces);
     faces.length = _nFaces;
     foreach (i; 0 .. _nFaces)
-      faces[i] = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
+      faces[i] = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(_faces[i], No.Take);
     gFree(cast(void*)_faces);
   }
 }

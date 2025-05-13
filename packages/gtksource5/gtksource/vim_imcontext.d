@@ -70,16 +70,16 @@ class VimIMContext : gtk.imcontext.IMContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_vim_im_context_get_type != &gidSymbolNotFound ? gtk_source_vim_im_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -119,7 +119,7 @@ class VimIMContext : gtk.imcontext.IMContext
   void executeCommand(string command)
   {
     const(char)* _command = command.toCString(No.Alloc);
-    gtk_source_vim_im_context_execute_command(cast(GtkSourceVimIMContext*)cPtr, _command);
+    gtk_source_vim_im_context_execute_command(cast(GtkSourceVimIMContext*)this._cPtr, _command);
   }
 
   /**
@@ -129,7 +129,7 @@ class VimIMContext : gtk.imcontext.IMContext
   string getCommandBarText()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)cPtr);
+    _cretval = gtk_source_vim_im_context_get_command_bar_text(cast(GtkSourceVimIMContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -141,7 +141,7 @@ class VimIMContext : gtk.imcontext.IMContext
   string getCommandText()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)cPtr);
+    _cretval = gtk_source_vim_im_context_get_command_text(cast(GtkSourceVimIMContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

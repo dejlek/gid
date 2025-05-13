@@ -24,7 +24,7 @@ class Simd4X4F
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

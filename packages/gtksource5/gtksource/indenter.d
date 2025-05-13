@@ -44,7 +44,7 @@ interface Indenter
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_indenter_get_type != &gidSymbolNotFound ? gtk_source_indenter_get_type() : cast(GType)0;

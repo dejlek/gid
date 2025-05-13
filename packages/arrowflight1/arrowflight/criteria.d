@@ -19,16 +19,16 @@ class Criteria : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_criteria_get_type != &gidSymbolNotFound ? gaflight_criteria_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class Criteria : gobject.object.ObjectWrap
   this(glib.bytes.Bytes expression)
   {
     GAFlightCriteria* _cretval;
-    _cretval = gaflight_criteria_new(expression ? cast(GBytes*)expression.cPtr(No.Dup) : null);
+    _cretval = gaflight_criteria_new(expression ? cast(GBytes*)expression._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

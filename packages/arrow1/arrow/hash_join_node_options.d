@@ -19,16 +19,16 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_hash_join_node_options_get_type != &gidSymbolNotFound ? garrow_hash_join_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     const(char*)* _outputs = _tmpoutputs.ptr;
 
     GError *_err;
-    _retval = garrow_hash_join_node_options_set_left_outputs(cast(GArrowHashJoinNodeOptions*)cPtr, _outputs, _nOutputs, &_err);
+    _retval = garrow_hash_join_node_options_set_left_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -100,7 +100,7 @@ class HashJoinNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
     const(char*)* _outputs = _tmpoutputs.ptr;
 
     GError *_err;
-    _retval = garrow_hash_join_node_options_set_right_outputs(cast(GArrowHashJoinNodeOptions*)cPtr, _outputs, _nOutputs, &_err);
+    _retval = garrow_hash_join_node_options_set_right_outputs(cast(GArrowHashJoinNodeOptions*)this._cPtr, _outputs, _nOutputs, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

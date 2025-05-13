@@ -20,16 +20,16 @@ class EnumListItem : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_item_get_type != &gidSymbolNotFound ? adw_enum_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -72,7 +72,7 @@ class EnumListItem : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = adw_enum_list_item_get_name(cast(AdwEnumListItem*)cPtr);
+    _cretval = adw_enum_list_item_get_name(cast(AdwEnumListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -84,7 +84,7 @@ class EnumListItem : gobject.object.ObjectWrap
   string getNick()
   {
     const(char)* _cretval;
-    _cretval = adw_enum_list_item_get_nick(cast(AdwEnumListItem*)cPtr);
+    _cretval = adw_enum_list_item_get_nick(cast(AdwEnumListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -96,7 +96,7 @@ class EnumListItem : gobject.object.ObjectWrap
   int getValue()
   {
     int _retval;
-    _retval = adw_enum_list_item_get_value(cast(AdwEnumListItem*)cPtr);
+    _retval = adw_enum_list_item_get_value(cast(AdwEnumListItem*)this._cPtr);
     return _retval;
   }
 }

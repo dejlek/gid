@@ -25,7 +25,7 @@ template PermissionRequestT()
   */
   override void allow()
   {
-    webkit_permission_request_allow(cast(WebKitPermissionRequest*)cPtr);
+    webkit_permission_request_allow(cast(WebKitPermissionRequest*)this._cPtr);
   }
 
   /**
@@ -33,6 +33,6 @@ template PermissionRequestT()
   */
   override void deny()
   {
-    webkit_permission_request_deny(cast(WebKitPermissionRequest*)cPtr);
+    webkit_permission_request_deny(cast(WebKitPermissionRequest*)this._cPtr);
   }
 }

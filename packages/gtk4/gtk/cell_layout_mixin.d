@@ -145,7 +145,7 @@ template CellLayoutT()
   override void addAttribute(gtk.cell_renderer.CellRenderer cell, string attribute, int column)
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    gtk_cell_layout_add_attribute(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, _attribute, column);
+    gtk_cell_layout_add_attribute(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _attribute, column);
   }
 
   /**
@@ -154,7 +154,7 @@ template CellLayoutT()
   */
   override void clear()
   {
-    gtk_cell_layout_clear(cast(GtkCellLayout*)cPtr);
+    gtk_cell_layout_clear(cast(GtkCellLayout*)this._cPtr);
   }
 
   /**
@@ -166,7 +166,7 @@ template CellLayoutT()
   */
   override void clearAttributes(gtk.cell_renderer.CellRenderer cell)
   {
-    gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
+    gtk_cell_layout_clear_attributes(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
   }
 
   /**
@@ -178,8 +178,8 @@ template CellLayoutT()
   override gtk.cell_area.CellArea getArea()
   {
     GtkCellArea* _cretval;
-    _cretval = gtk_cell_layout_get_area(cast(GtkCellLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
+    _cretval = gtk_cell_layout_get_area(cast(GtkCellLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ template CellLayoutT()
   override gtk.cell_renderer.CellRenderer[] getCells()
   {
     GList* _cretval;
-    _cretval = gtk_cell_layout_get_cells(cast(GtkCellLayout*)cPtr);
+    _cretval = gtk_cell_layout_get_cells(cast(GtkCellLayout*)this._cPtr);
     auto _retval = gListToD!(gtk.cell_renderer.CellRenderer, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -210,7 +210,7 @@ template CellLayoutT()
   */
   override void packEnd(gtk.cell_renderer.CellRenderer cell, bool expand)
   {
-    gtk_cell_layout_pack_end(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, expand);
+    gtk_cell_layout_pack_end(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
   }
 
   /**
@@ -226,7 +226,7 @@ template CellLayoutT()
   */
   override void packStart(gtk.cell_renderer.CellRenderer cell, bool expand)
   {
-    gtk_cell_layout_pack_start(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, expand);
+    gtk_cell_layout_pack_start(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, expand);
   }
 
   /**
@@ -241,7 +241,7 @@ template CellLayoutT()
   */
   override void reorder(gtk.cell_renderer.CellRenderer cell, int position)
   {
-    gtk_cell_layout_reorder(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, position);
+    gtk_cell_layout_reorder(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -263,12 +263,12 @@ template CellLayoutT()
     {
       auto _dlg = cast(gtk.types.CellLayoutDataFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.cell_layout.CellLayout)(cast(void*)cellLayout, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.cell_renderer.CellRenderer)(cast(void*)cell, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)treeModel, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)cPtr, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
+    gtk_cell_layout_set_cell_data_func(cast(GtkCellLayout*)this._cPtr, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, _funcCB, _func, _funcDestroyCB);
   }
 }

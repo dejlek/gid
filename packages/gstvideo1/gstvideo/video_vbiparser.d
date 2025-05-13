@@ -21,22 +21,22 @@ class VideoVBIParser : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_vbi_parser_get_type != &gidSymbolNotFound ? gst_video_vbi_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   gstvideo.video_vbiparser.VideoVBIParser copy()
   {
     GstVideoVBIParser* _cretval;
-    _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)cPtr);
+    _cretval = gst_video_vbi_parser_copy(cast(const(GstVideoVBIParser)*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_vbiparser.VideoVBIParser(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -82,7 +82,7 @@ class VideoVBIParser : gobject.boxed.Boxed
   gstvideo.types.VideoVBIParserResult getAncillary(out gstvideo.types.VideoAncillary anc)
   {
     GstVideoVBIParserResult _cretval;
-    _cretval = gst_video_vbi_parser_get_ancillary(cast(GstVideoVBIParser*)cPtr, &anc);
+    _cretval = gst_video_vbi_parser_get_ancillary(cast(GstVideoVBIParser*)this._cPtr, &anc);
     gstvideo.types.VideoVBIParserResult _retval = cast(gstvideo.types.VideoVBIParserResult)_cretval;
     return _retval;
   }

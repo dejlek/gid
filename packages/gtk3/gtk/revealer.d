@@ -37,16 +37,16 @@ class Revealer : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_revealer_get_type != &gidSymbolNotFound ? gtk_revealer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -116,7 +116,7 @@ class Revealer : gtk.bin.Bin
   bool getChildRevealed()
   {
     bool _retval;
-    _retval = gtk_revealer_get_child_revealed(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_child_revealed(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Revealer : gtk.bin.Bin
   bool getRevealChild()
   {
     bool _retval;
-    _retval = gtk_revealer_get_reveal_child(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_reveal_child(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Revealer : gtk.bin.Bin
   uint getTransitionDuration()
   {
     uint _retval;
-    _retval = gtk_revealer_get_transition_duration(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_transition_duration(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class Revealer : gtk.bin.Bin
   gtk.types.RevealerTransitionType getTransitionType()
   {
     GtkRevealerTransitionType _cretval;
-    _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)cPtr);
+    _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)this._cPtr);
     gtk.types.RevealerTransitionType _retval = cast(gtk.types.RevealerTransitionType)_cretval;
     return _retval;
   }
@@ -173,7 +173,7 @@ class Revealer : gtk.bin.Bin
   */
   void setRevealChild(bool revealChild)
   {
-    gtk_revealer_set_reveal_child(cast(GtkRevealer*)cPtr, revealChild);
+    gtk_revealer_set_reveal_child(cast(GtkRevealer*)this._cPtr, revealChild);
   }
 
   /**
@@ -184,7 +184,7 @@ class Revealer : gtk.bin.Bin
   */
   void setTransitionDuration(uint duration)
   {
-    gtk_revealer_set_transition_duration(cast(GtkRevealer*)cPtr, duration);
+    gtk_revealer_set_transition_duration(cast(GtkRevealer*)this._cPtr, duration);
   }
 
   /**
@@ -197,6 +197,6 @@ class Revealer : gtk.bin.Bin
   */
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {
-    gtk_revealer_set_transition_type(cast(GtkRevealer*)cPtr, transition);
+    gtk_revealer_set_transition_type(cast(GtkRevealer*)this._cPtr, transition);
   }
 }

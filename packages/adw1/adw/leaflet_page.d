@@ -23,16 +23,16 @@ class LeafletPage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_leaflet_page_get_type != &gidSymbolNotFound ? adw_leaflet_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -108,8 +108,8 @@ class LeafletPage : gobject.object.ObjectWrap
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_leaflet_page_get_child(cast(AdwLeafletPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_leaflet_page_get_child(cast(AdwLeafletPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class LeafletPage : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = adw_leaflet_page_get_name(cast(AdwLeafletPage*)cPtr);
+    _cretval = adw_leaflet_page_get_name(cast(AdwLeafletPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -136,7 +136,7 @@ class LeafletPage : gobject.object.ObjectWrap
   bool getNavigatable()
   {
     bool _retval;
-    _retval = adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)cPtr);
+    _retval = adw_leaflet_page_get_navigatable(cast(AdwLeafletPage*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class LeafletPage : gobject.object.ObjectWrap
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_leaflet_page_set_name(cast(AdwLeafletPage*)cPtr, _name);
+    adw_leaflet_page_set_name(cast(AdwLeafletPage*)this._cPtr, _name);
   }
 
   /**
@@ -169,6 +169,6 @@ class LeafletPage : gobject.object.ObjectWrap
   */
   void setNavigatable(bool navigatable)
   {
-    adw_leaflet_page_set_navigatable(cast(AdwLeafletPage*)cPtr, navigatable);
+    adw_leaflet_page_set_navigatable(cast(AdwLeafletPage*)this._cPtr, navigatable);
   }
 }

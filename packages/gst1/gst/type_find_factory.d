@@ -70,16 +70,16 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_type_find_factory_get_type != &gidSymbolNotFound ? gst_type_find_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -116,7 +116,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   */
   void callFunction(gst.type_find.TypeFind find)
   {
-    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)cPtr, find ? cast(GstTypeFind*)find.cPtr : null);
+    gst_type_find_factory_call_function(cast(GstTypeFindFactory*)this._cPtr, find ? cast(GstTypeFind*)find._cPtr : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_type_find_factory_get_caps(cast(GstTypeFindFactory*)cPtr);
+    _cretval = gst_type_find_factory_get_caps(cast(GstTypeFindFactory*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -141,7 +141,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   string[] getExtensions()
   {
     const(char*)* _cretval;
-    _cretval = gst_type_find_factory_get_extensions(cast(GstTypeFindFactory*)cPtr);
+    _cretval = gst_type_find_factory_get_extensions(cast(GstTypeFindFactory*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -165,7 +165,7 @@ class TypeFindFactory : gst.plugin_feature.PluginFeature
   bool hasFunction()
   {
     bool _retval;
-    _retval = gst_type_find_factory_has_function(cast(GstTypeFindFactory*)cPtr);
+    _retval = gst_type_find_factory_has_function(cast(GstTypeFindFactory*)this._cPtr);
     return _retval;
   }
 }

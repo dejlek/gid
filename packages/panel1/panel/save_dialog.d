@@ -36,16 +36,16 @@ class SaveDialog : adw.message_dialog.MessageDialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_dialog_get_type != &gidSymbolNotFound ? panel_save_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,31 +91,31 @@ class SaveDialog : adw.message_dialog.MessageDialog
   /** */
   void addDelegate(panel.save_delegate.SaveDelegate delegate_)
   {
-    panel_save_dialog_add_delegate(cast(PanelSaveDialog*)cPtr, delegate_ ? cast(PanelSaveDelegate*)delegate_.cPtr(No.Dup) : null);
+    panel_save_dialog_add_delegate(cast(PanelSaveDialog*)this._cPtr, delegate_ ? cast(PanelSaveDelegate*)delegate_._cPtr(No.Dup) : null);
   }
 
   /** */
   bool getCloseAfterSave()
   {
     bool _retval;
-    _retval = panel_save_dialog_get_close_after_save(cast(PanelSaveDialog*)cPtr);
+    _retval = panel_save_dialog_get_close_after_save(cast(PanelSaveDialog*)this._cPtr);
     return _retval;
   }
 
   /** */
   void runAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    panel_save_dialog_run_async(cast(PanelSaveDialog*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    panel_save_dialog_run_async(cast(PanelSaveDialog*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /** */
@@ -123,7 +123,7 @@ class SaveDialog : adw.message_dialog.MessageDialog
   {
     bool _retval;
     GError *_err;
-    _retval = panel_save_dialog_run_finish(cast(PanelSaveDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = panel_save_dialog_run_finish(cast(PanelSaveDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -132,6 +132,6 @@ class SaveDialog : adw.message_dialog.MessageDialog
   /** */
   void setCloseAfterSave(bool closeAfterSave)
   {
-    panel_save_dialog_set_close_after_save(cast(PanelSaveDialog*)cPtr, closeAfterSave);
+    panel_save_dialog_set_close_after_save(cast(PanelSaveDialog*)this._cPtr, closeAfterSave);
   }
 }

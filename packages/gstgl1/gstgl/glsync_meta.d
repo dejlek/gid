@@ -30,7 +30,7 @@ class GLSyncMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class GLSyncMeta
   */
   @property gst.meta.Meta parent()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)cPtr).parent);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent);
   }
 
   /**
@@ -50,7 +50,7 @@ class GLSyncMeta
   */
   @property gstgl.glcontext.GLContext context()
   {
-    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
+    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)this._cPtr).context);
   }
 
   /**
@@ -60,8 +60,8 @@ class GLSyncMeta
   */
   @property void context(gstgl.glcontext.GLContext propval)
   {
-    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)cPtr).context);
-    dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)cPtr).context);
+    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLSyncMeta*)this._cPtr).context);
+    dToC(propval, cast(void*)&(cast(GstGLSyncMeta*)this._cPtr).context);
   }
 
   /** Function alias for field `setSync` */
@@ -73,7 +73,7 @@ class GLSyncMeta
   */
   @property SetSyncFuncType setSync()
   {
-    return (cast(GstGLSyncMeta*)cPtr).setSync;
+    return (cast(GstGLSyncMeta*)this._cPtr).setSync;
   }
 
   /** Function alias for field `setSyncGl` */
@@ -85,7 +85,7 @@ class GLSyncMeta
   */
   @property SetSyncGlFuncType setSyncGl()
   {
-    return (cast(GstGLSyncMeta*)cPtr).setSyncGl;
+    return (cast(GstGLSyncMeta*)this._cPtr).setSyncGl;
   }
 
   /** Function alias for field `wait` */
@@ -97,7 +97,7 @@ class GLSyncMeta
   */
   @property WaitFuncType wait()
   {
-    return (cast(GstGLSyncMeta*)cPtr).wait;
+    return (cast(GstGLSyncMeta*)this._cPtr).wait;
   }
 
   /** Function alias for field `waitGl` */
@@ -109,7 +109,7 @@ class GLSyncMeta
   */
   @property WaitGlFuncType waitGl()
   {
-    return (cast(GstGLSyncMeta*)cPtr).waitGl;
+    return (cast(GstGLSyncMeta*)this._cPtr).waitGl;
   }
 
   /** Function alias for field `waitCpu` */
@@ -121,7 +121,7 @@ class GLSyncMeta
   */
   @property WaitCpuFuncType waitCpu()
   {
-    return (cast(GstGLSyncMeta*)cPtr).waitCpu;
+    return (cast(GstGLSyncMeta*)this._cPtr).waitCpu;
   }
 
   /** Function alias for field `waitCpuGl` */
@@ -133,7 +133,7 @@ class GLSyncMeta
   */
   @property WaitCpuGlFuncType waitCpuGl()
   {
-    return (cast(GstGLSyncMeta*)cPtr).waitCpuGl;
+    return (cast(GstGLSyncMeta*)this._cPtr).waitCpuGl;
   }
 
   /** Function alias for field `copy` */
@@ -145,7 +145,7 @@ class GLSyncMeta
   */
   @property CopyFuncType copy()
   {
-    return (cast(GstGLSyncMeta*)cPtr).copy;
+    return (cast(GstGLSyncMeta*)this._cPtr).copy;
   }
 
   /** Function alias for field `free` */
@@ -157,7 +157,7 @@ class GLSyncMeta
   */
   @property FreeFuncType free()
   {
-    return (cast(GstGLSyncMeta*)cPtr).free;
+    return (cast(GstGLSyncMeta*)this._cPtr).free;
   }
 
   /** Function alias for field `freeGl` */
@@ -169,7 +169,7 @@ class GLSyncMeta
   */
   @property FreeGlFuncType freeGl()
   {
-    return (cast(GstGLSyncMeta*)cPtr).freeGl;
+    return (cast(GstGLSyncMeta*)this._cPtr).freeGl;
   }
 
   /**
@@ -180,7 +180,7 @@ class GLSyncMeta
   */
   void setSyncPoint(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_set_sync_point(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    gst_gl_sync_meta_set_sync_point(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,7 +192,7 @@ class GLSyncMeta
   */
   void wait(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_wait(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    gst_gl_sync_meta_wait(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -205,7 +205,7 @@ class GLSyncMeta
   */
   void waitCpu(gstgl.glcontext.GLContext context)
   {
-    gst_gl_sync_meta_wait_cpu(cast(GstGLSyncMeta*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    gst_gl_sync_meta_wait_cpu(cast(GstGLSyncMeta*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /** */

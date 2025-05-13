@@ -23,16 +23,16 @@ class FilenameCompleter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_filename_completer_get_type != &gidSymbolNotFound ? g_filename_completer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _initialText = initialText.toCString(No.Alloc);
-    _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)cPtr, _initialText);
+    _cretval = g_filename_completer_get_completion_suffix(cast(GFilenameCompleter*)this._cPtr, _initialText);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -82,7 +82,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
   {
     char** _cretval;
     const(char)* _initialText = initialText.toCString(No.Alloc);
-    _cretval = g_filename_completer_get_completions(cast(GFilenameCompleter*)cPtr, _initialText);
+    _cretval = g_filename_completer_get_completions(cast(GFilenameCompleter*)this._cPtr, _initialText);
     string[] _retval;
 
     if (_cretval)
@@ -106,7 +106,7 @@ class FilenameCompleter : gobject.object.ObjectWrap
   */
   void setDirsOnly(bool dirsOnly)
   {
-    g_filename_completer_set_dirs_only(cast(GFilenameCompleter*)cPtr, dirsOnly);
+    g_filename_completer_set_dirs_only(cast(GFilenameCompleter*)this._cPtr, dirsOnly);
   }
 
   /**

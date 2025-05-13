@@ -24,16 +24,16 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_zlib_decompressor_get_type != &gidSymbolNotFound ? g_zlib_decompressor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,8 +81,8 @@ class ZlibDecompressor : gobject.object.ObjectWrap, gio.converter.Converter
   gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;
-    _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
+    _cretval = g_zlib_decompressor_get_file_info(cast(GZlibDecompressor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 }

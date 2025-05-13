@@ -68,16 +68,16 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spin_row_get_type != &gidSymbolNotFound ? adw_spin_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -256,7 +256,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
     GtkWidget* _cretval;
-    _cretval = adw_spin_row_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    _cretval = adw_spin_row_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
     this(_cretval, No.Take);
   }
 
@@ -283,7 +283,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   {
     GtkWidget* _cretval;
     _cretval = adw_spin_row_new_with_range(min, max, step);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.spin_row.SpinRow)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.spin_row.SpinRow)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
-    adw_spin_row_configure(cast(AdwSpinRow*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    adw_spin_row_configure(cast(AdwSpinRow*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
   }
 
   /**
@@ -310,8 +310,8 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = adw_spin_row_get_adjustment(cast(AdwSpinRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = adw_spin_row_get_adjustment(cast(AdwSpinRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   double getClimbRate()
   {
     double _retval;
-    _retval = adw_spin_row_get_climb_rate(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_climb_rate(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   uint getDigits()
   {
     uint _retval;
-    _retval = adw_spin_row_get_digits(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_digits(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getNumeric()
   {
     bool _retval;
-    _retval = adw_spin_row_get_numeric(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_numeric(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getSnapToTicks()
   {
     bool _retval;
-    _retval = adw_spin_row_get_snap_to_ticks(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_snap_to_ticks(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
   {
     GtkSpinButtonUpdatePolicy _cretval;
-    _cretval = adw_spin_row_get_update_policy(cast(AdwSpinRow*)cPtr);
+    _cretval = adw_spin_row_get_update_policy(cast(AdwSpinRow*)this._cPtr);
     gtk.types.SpinButtonUpdatePolicy _retval = cast(gtk.types.SpinButtonUpdatePolicy)_cretval;
     return _retval;
   }
@@ -378,7 +378,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   double getValue()
   {
     double _retval;
-    _retval = adw_spin_row_get_value(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_value(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   bool getWrap()
   {
     bool _retval;
-    _retval = adw_spin_row_get_wrap(cast(AdwSpinRow*)cPtr);
+    _retval = adw_spin_row_get_wrap(cast(AdwSpinRow*)this._cPtr);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    adw_spin_row_set_adjustment(cast(AdwSpinRow*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    adw_spin_row_set_adjustment(cast(AdwSpinRow*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -412,7 +412,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setClimbRate(double climbRate)
   {
-    adw_spin_row_set_climb_rate(cast(AdwSpinRow*)cPtr, climbRate);
+    adw_spin_row_set_climb_rate(cast(AdwSpinRow*)this._cPtr, climbRate);
   }
 
   /**
@@ -423,7 +423,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setDigits(uint digits)
   {
-    adw_spin_row_set_digits(cast(AdwSpinRow*)cPtr, digits);
+    adw_spin_row_set_digits(cast(AdwSpinRow*)this._cPtr, digits);
   }
 
   /**
@@ -434,7 +434,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setNumeric(bool numeric)
   {
-    adw_spin_row_set_numeric(cast(AdwSpinRow*)cPtr, numeric);
+    adw_spin_row_set_numeric(cast(AdwSpinRow*)this._cPtr, numeric);
   }
 
   /**
@@ -449,7 +449,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setRange(double min, double max)
   {
-    adw_spin_row_set_range(cast(AdwSpinRow*)cPtr, min, max);
+    adw_spin_row_set_range(cast(AdwSpinRow*)this._cPtr, min, max);
   }
 
   /**
@@ -460,7 +460,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setSnapToTicks(bool snapToTicks)
   {
-    adw_spin_row_set_snap_to_ticks(cast(AdwSpinRow*)cPtr, snapToTicks);
+    adw_spin_row_set_snap_to_ticks(cast(AdwSpinRow*)this._cPtr, snapToTicks);
   }
 
   /**
@@ -473,7 +473,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
   {
-    adw_spin_row_set_update_policy(cast(AdwSpinRow*)cPtr, policy);
+    adw_spin_row_set_update_policy(cast(AdwSpinRow*)this._cPtr, policy);
   }
 
   /**
@@ -484,7 +484,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setValue(double value)
   {
-    adw_spin_row_set_value(cast(AdwSpinRow*)cPtr, value);
+    adw_spin_row_set_value(cast(AdwSpinRow*)this._cPtr, value);
   }
 
   /**
@@ -495,7 +495,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void setWrap(bool wrap)
   {
-    adw_spin_row_set_wrap(cast(AdwSpinRow*)cPtr, wrap);
+    adw_spin_row_set_wrap(cast(AdwSpinRow*)this._cPtr, wrap);
   }
 
   /**
@@ -503,7 +503,7 @@ class SpinRow : adw.action_row.ActionRow, gtk.editable.Editable
   */
   void update()
   {
-    adw_spin_row_update(cast(AdwSpinRow*)cPtr);
+    adw_spin_row_update(cast(AdwSpinRow*)this._cPtr);
   }
 
   /**

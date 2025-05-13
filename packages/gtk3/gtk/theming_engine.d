@@ -34,16 +34,16 @@ class ThemingEngine : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_theming_engine_get_type != &gidSymbolNotFound ? gtk_theming_engine_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class ThemingEngine : gobject.object.ObjectWrap
     GtkThemingEngine* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gtk_theming_engine_load(_name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.theming_engine.ThemingEngine)(cast(GtkThemingEngine*)_cretval, No.Take);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getBackgroundColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
-    gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)cPtr, state, &_color);
+    gtk_theming_engine_get_background_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
@@ -94,7 +94,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getBorder(gtk.types.StateFlags state, out gtk.border.Border border)
   {
     GtkBorder _border;
-    gtk_theming_engine_get_border(cast(GtkThemingEngine*)cPtr, state, &_border);
+    gtk_theming_engine_get_border(cast(GtkThemingEngine*)this._cPtr, state, &_border);
     border = new gtk.border.Border(cast(void*)&_border, No.Take);
   }
 
@@ -108,7 +108,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getBorderColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
-    gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)cPtr, state, &_color);
+    gtk_theming_engine_get_border_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
@@ -122,7 +122,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getColor(gtk.types.StateFlags state, out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
-    gtk_theming_engine_get_color(cast(GtkThemingEngine*)cPtr, state, &_color);
+    gtk_theming_engine_get_color(cast(GtkThemingEngine*)this._cPtr, state, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
@@ -137,7 +137,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   gtk.types.TextDirection getDirection()
   {
     GtkTextDirection _cretval;
-    _cretval = gtk_theming_engine_get_direction(cast(GtkThemingEngine*)cPtr);
+    _cretval = gtk_theming_engine_get_direction(cast(GtkThemingEngine*)this._cPtr);
     gtk.types.TextDirection _retval = cast(gtk.types.TextDirection)_cretval;
     return _retval;
   }
@@ -156,7 +156,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   pango.font_description.FontDescription getFont(gtk.types.StateFlags state)
   {
     const(PangoFontDescription)* _cretval;
-    _cretval = gtk_theming_engine_get_font(cast(GtkThemingEngine*)cPtr, state);
+    _cretval = gtk_theming_engine_get_font(cast(GtkThemingEngine*)this._cPtr, state);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -168,7 +168,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   gtk.types.JunctionSides getJunctionSides()
   {
     GtkJunctionSides _cretval;
-    _cretval = gtk_theming_engine_get_junction_sides(cast(GtkThemingEngine*)cPtr);
+    _cretval = gtk_theming_engine_get_junction_sides(cast(GtkThemingEngine*)this._cPtr);
     gtk.types.JunctionSides _retval = cast(gtk.types.JunctionSides)_cretval;
     return _retval;
   }
@@ -183,7 +183,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getMargin(gtk.types.StateFlags state, out gtk.border.Border margin)
   {
     GtkBorder _margin;
-    gtk_theming_engine_get_margin(cast(GtkThemingEngine*)cPtr, state, &_margin);
+    gtk_theming_engine_get_margin(cast(GtkThemingEngine*)this._cPtr, state, &_margin);
     margin = new gtk.border.Border(cast(void*)&_margin, No.Take);
   }
 
@@ -197,7 +197,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   void getPadding(gtk.types.StateFlags state, out gtk.border.Border padding)
   {
     GtkBorder _padding;
-    gtk_theming_engine_get_padding(cast(GtkThemingEngine*)cPtr, state, &_padding);
+    gtk_theming_engine_get_padding(cast(GtkThemingEngine*)this._cPtr, state, &_padding);
     padding = new gtk.border.Border(cast(void*)&_padding, No.Take);
   }
 
@@ -208,7 +208,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   gtk.widget_path.WidgetPath getPath()
   {
     const(GtkWidgetPath)* _cretval;
-    _cretval = gtk_theming_engine_get_path(cast(GtkThemingEngine*)cPtr);
+    _cretval = gtk_theming_engine_get_path(cast(GtkThemingEngine*)this._cPtr);
     auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -230,7 +230,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
-    gtk_theming_engine_get_property(cast(GtkThemingEngine*)cPtr, _property, state, &_value);
+    gtk_theming_engine_get_property(cast(GtkThemingEngine*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
   }
 
@@ -241,8 +241,8 @@ class ThemingEngine : gobject.object.ObjectWrap
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gtk_theming_engine_get_screen(cast(GtkThemingEngine*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gtk_theming_engine_get_screen(cast(GtkThemingEngine*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   gtk.types.StateFlags getState()
   {
     GtkStateFlags _cretval;
-    _cretval = gtk_theming_engine_get_state(cast(GtkThemingEngine*)cPtr);
+    _cretval = gtk_theming_engine_get_state(cast(GtkThemingEngine*)this._cPtr);
     gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
@@ -270,7 +270,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
-    gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)cPtr, _propertyName, &_value);
+    gtk_theming_engine_get_style_property(cast(GtkThemingEngine*)this._cPtr, _propertyName, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -286,7 +286,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _styleClass = styleClass.toCString(No.Alloc);
-    _retval = gtk_theming_engine_has_class(cast(GtkThemingEngine*)cPtr, _styleClass);
+    _retval = gtk_theming_engine_has_class(cast(GtkThemingEngine*)this._cPtr, _styleClass);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _styleRegion = styleRegion.toCString(No.Alloc);
-    _retval = gtk_theming_engine_has_region(cast(GtkThemingEngine*)cPtr, _styleRegion, &flags);
+    _retval = gtk_theming_engine_has_region(cast(GtkThemingEngine*)this._cPtr, _styleRegion, &flags);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class ThemingEngine : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkRGBA _color;
-    _retval = gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)cPtr, _colorName, &_color);
+    _retval = gtk_theming_engine_lookup_color(cast(GtkThemingEngine*)this._cPtr, _colorName, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
     return _retval;
   }
@@ -346,7 +346,7 @@ class ThemingEngine : gobject.object.ObjectWrap
   bool stateIsRunning(gtk.types.StateType state, out double progress)
   {
     bool _retval;
-    _retval = gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)cPtr, state, cast(double*)&progress);
+    _retval = gtk_theming_engine_state_is_running(cast(GtkThemingEngine*)this._cPtr, state, cast(double*)&progress);
     return _retval;
   }
 }

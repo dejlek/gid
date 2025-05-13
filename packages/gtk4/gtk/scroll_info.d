@@ -24,22 +24,22 @@ class ScrollInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scroll_info_get_type != &gidSymbolNotFound ? gtk_scroll_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class ScrollInfo : gobject.boxed.Boxed
   bool getEnableHorizontal()
   {
     bool _retval;
-    _retval = gtk_scroll_info_get_enable_horizontal(cast(GtkScrollInfo*)cPtr);
+    _retval = gtk_scroll_info_get_enable_horizontal(cast(GtkScrollInfo*)this._cPtr);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class ScrollInfo : gobject.boxed.Boxed
   bool getEnableVertical()
   {
     bool _retval;
-    _retval = gtk_scroll_info_get_enable_vertical(cast(GtkScrollInfo*)cPtr);
+    _retval = gtk_scroll_info_get_enable_vertical(cast(GtkScrollInfo*)this._cPtr);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class ScrollInfo : gobject.boxed.Boxed
   */
   void setEnableHorizontal(bool horizontal)
   {
-    gtk_scroll_info_set_enable_horizontal(cast(GtkScrollInfo*)cPtr, horizontal);
+    gtk_scroll_info_set_enable_horizontal(cast(GtkScrollInfo*)this._cPtr, horizontal);
   }
 
   /**
@@ -102,6 +102,6 @@ class ScrollInfo : gobject.boxed.Boxed
   */
   void setEnableVertical(bool vertical)
   {
-    gtk_scroll_info_set_enable_vertical(cast(GtkScrollInfo*)cPtr, vertical);
+    gtk_scroll_info_set_enable_vertical(cast(GtkScrollInfo*)this._cPtr, vertical);
   }
 }

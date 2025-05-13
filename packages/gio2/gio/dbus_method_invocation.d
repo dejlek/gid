@@ -35,16 +35,16 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_method_invocation_get_type != &gidSymbolNotFound ? g_dbus_method_invocation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,8 +60,8 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
-    _cretval = g_dbus_method_invocation_get_connection(cast(GDBusMethodInvocation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    _cretval = g_dbus_method_invocation_get_connection(cast(GDBusMethodInvocation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   string getInterfaceName()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_method_invocation_get_interface_name(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_interface_name(cast(GDBusMethodInvocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -96,8 +96,8 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   gio.dbus_message.DBusMessage getMessage()
   {
     GDBusMessage* _cretval;
-    _cretval = g_dbus_method_invocation_get_message(cast(GDBusMethodInvocation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, No.Take);
+    _cretval = g_dbus_method_invocation_get_message(cast(GDBusMethodInvocation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   gio.dbus_method_info.DBusMethodInfo getMethodInfo()
   {
     const(GDBusMethodInfo)* _cretval;
-    _cretval = g_dbus_method_invocation_get_method_info(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_method_info(cast(GDBusMethodInvocation*)this._cPtr);
     auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -125,7 +125,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   string getMethodName()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_method_invocation_get_method_name(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_method_name(cast(GDBusMethodInvocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -137,7 +137,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   string getObjectPath()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_method_invocation_get_object_path(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_object_path(cast(GDBusMethodInvocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -150,7 +150,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   glib.variant.Variant getParameters()
   {
     GVariant* _cretval;
-    _cretval = g_dbus_method_invocation_get_parameters(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_parameters(cast(GDBusMethodInvocation*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -172,7 +172,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   gio.dbus_property_info.DBusPropertyInfo getPropertyInfo()
   {
     const(GDBusPropertyInfo)* _cretval;
-    _cretval = g_dbus_method_invocation_get_property_info(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_property_info(cast(GDBusMethodInvocation*)this._cPtr);
     auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -184,7 +184,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   string getSender()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_method_invocation_get_sender(cast(GDBusMethodInvocation*)cPtr);
+    _cretval = g_dbus_method_invocation_get_sender(cast(GDBusMethodInvocation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -204,7 +204,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   {
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    g_dbus_method_invocation_return_dbus_error(cast(GDBusMethodInvocation*)cPtr, _errorName, _errorMessage);
+    g_dbus_method_invocation_return_dbus_error(cast(GDBusMethodInvocation*)this._cPtr, _errorName, _errorMessage);
   }
 
   /**
@@ -222,7 +222,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   void returnErrorLiteral(glib.types.Quark domain, int code, string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)cPtr, domain, code, _message);
+    g_dbus_method_invocation_return_error_literal(cast(GDBusMethodInvocation*)this._cPtr, domain, code, _message);
   }
 
   /**
@@ -238,7 +238,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnGerror(glib.error.ErrorWrap error)
   {
-    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
+    g_dbus_method_invocation_return_gerror(cast(GDBusMethodInvocation*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
 
   /**
@@ -280,7 +280,7 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnValue(glib.variant.Variant parameters = null)
   {
-    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
   }
 
   /**
@@ -298,6 +298,6 @@ class DBusMethodInvocation : gobject.object.ObjectWrap
   */
   void returnValueWithUnixFdList(glib.variant.Variant parameters = null, gio.unix_fdlist.UnixFDList fdList = null)
   {
-    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)cPtr, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    g_dbus_method_invocation_return_value_with_unix_fd_list(cast(GDBusMethodInvocation*)this._cPtr, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
   }
 }

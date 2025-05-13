@@ -18,16 +18,16 @@ class FunctionOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_function_options_get_type != &gidSymbolNotFound ? garrow_function_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class FunctionOptions : gobject.object.ObjectWrap
   bool equal(arrow.function_options.FunctionOptions otherOptions = null)
   {
     bool _retval;
-    _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions.cPtr(No.Dup) : null);
+    _retval = garrow_function_options_equal(cast(GArrowFunctionOptions*)this._cPtr, otherOptions ? cast(GArrowFunctionOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class FunctionOptions : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_function_options_to_string(cast(GArrowFunctionOptions*)cPtr);
+    _cretval = garrow_function_options_to_string(cast(GArrowFunctionOptions*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

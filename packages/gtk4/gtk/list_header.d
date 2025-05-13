@@ -26,16 +26,16 @@ class ListHeader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_header_get_type != &gidSymbolNotFound ? gtk_list_header_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -107,8 +107,8 @@ class ListHeader : gobject.object.ObjectWrap
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_header_get_child(cast(GtkListHeader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_list_header_get_child(cast(GtkListHeader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class ListHeader : gobject.object.ObjectWrap
   uint getEnd()
   {
     uint _retval;
-    _retval = gtk_list_header_get_end(cast(GtkListHeader*)cPtr);
+    _retval = gtk_list_header_get_end(cast(GtkListHeader*)this._cPtr);
     return _retval;
   }
 
@@ -136,9 +136,9 @@ class ListHeader : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_list_header_get_item(cast(GtkListHeader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_list_header_get_item(cast(GtkListHeader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class ListHeader : gobject.object.ObjectWrap
   uint getNItems()
   {
     uint _retval;
-    _retval = gtk_list_header_get_n_items(cast(GtkListHeader*)cPtr);
+    _retval = gtk_list_header_get_n_items(cast(GtkListHeader*)this._cPtr);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class ListHeader : gobject.object.ObjectWrap
   uint getStart()
   {
     uint _retval;
-    _retval = gtk_list_header_get_start(cast(GtkListHeader*)cPtr);
+    _retval = gtk_list_header_get_start(cast(GtkListHeader*)this._cPtr);
     return _retval;
   }
 
@@ -181,6 +181,6 @@ class ListHeader : gobject.object.ObjectWrap
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_list_header_set_child(cast(GtkListHeader*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_list_header_set_child(cast(GtkListHeader*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

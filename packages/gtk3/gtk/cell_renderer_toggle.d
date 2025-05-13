@@ -25,16 +25,16 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_renderer_toggle_get_type != &gidSymbolNotFound ? gtk_cell_renderer_toggle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -128,7 +128,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)cPtr);
+    _retval = gtk_cell_renderer_toggle_get_activatable(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)cPtr);
+    _retval = gtk_cell_renderer_toggle_get_active(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   bool getRadio()
   {
     bool _retval;
-    _retval = gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)cPtr);
+    _retval = gtk_cell_renderer_toggle_get_radio(cast(GtkCellRendererToggle*)this._cPtr);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   */
   void setActivatable(bool setting)
   {
-    gtk_cell_renderer_toggle_set_activatable(cast(GtkCellRendererToggle*)cPtr, setting);
+    gtk_cell_renderer_toggle_set_activatable(cast(GtkCellRendererToggle*)this._cPtr, setting);
   }
 
   /**
@@ -174,7 +174,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   */
   void setActive(bool setting)
   {
-    gtk_cell_renderer_toggle_set_active(cast(GtkCellRendererToggle*)cPtr, setting);
+    gtk_cell_renderer_toggle_set_active(cast(GtkCellRendererToggle*)this._cPtr, setting);
   }
 
   /**
@@ -191,7 +191,7 @@ class CellRendererToggle : gtk.cell_renderer.CellRenderer
   */
   void setRadio(bool radio)
   {
-    gtk_cell_renderer_toggle_set_radio(cast(GtkCellRendererToggle*)cPtr, radio);
+    gtk_cell_renderer_toggle_set_radio(cast(GtkCellRendererToggle*)this._cPtr, radio);
   }
 
   /**

@@ -27,16 +27,16 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_words_get_type != &gidSymbolNotFound ? gtk_source_completion_words_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   */
   void register(gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_source_completion_words_register(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -135,6 +135,6 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   */
   void unregister(gtk.text_buffer.TextBuffer buffer)
   {
-    gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)cPtr, buffer ? cast(GtkTextBuffer*)buffer.cPtr(No.Dup) : null);
+    gtk_source_completion_words_unregister(cast(GtkSourceCompletionWords*)this._cPtr, buffer ? cast(GtkTextBuffer*)buffer._cPtr(No.Dup) : null);
   }
 }

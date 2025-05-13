@@ -24,16 +24,16 @@ class WeakValue : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_weak_value_get_type != &gidSymbolNotFound ? jsc_weak_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class WeakValue : gobject.object.ObjectWrap
   this(javascriptcore.value.Value value)
   {
     JSCWeakValue* _cretval;
-    _cretval = jsc_weak_value_new(value ? cast(JSCValue*)value.cPtr(No.Dup) : null);
+    _cretval = jsc_weak_value_new(value ? cast(JSCValue*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -63,8 +63,8 @@ class WeakValue : gobject.object.ObjectWrap
   javascriptcore.value.Value getValue()
   {
     JSCValue* _cretval;
-    _cretval = jsc_weak_value_get_value(cast(JSCWeakValue*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_weak_value_get_value(cast(JSCWeakValue*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -32,16 +32,16 @@ class DrawingContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drawing_context_get_type != &gidSymbolNotFound ? gdk_drawing_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class DrawingContext : gobject.object.ObjectWrap
   cairo.context.Context getCairoContext()
   {
     cairo_t* _cretval;
-    _cretval = gdk_drawing_context_get_cairo_context(cast(GdkDrawingContext*)cPtr);
+    _cretval = gdk_drawing_context_get_cairo_context(cast(GdkDrawingContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -76,7 +76,7 @@ class DrawingContext : gobject.object.ObjectWrap
   cairo.region.Region getClip()
   {
     cairo_region_t* _cretval;
-    _cretval = gdk_drawing_context_get_clip(cast(GdkDrawingContext*)cPtr);
+    _cretval = gdk_drawing_context_get_clip(cast(GdkDrawingContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -88,8 +88,8 @@ class DrawingContext : gobject.object.ObjectWrap
   gdk.window.Window getWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_drawing_context_get_window(cast(GdkDrawingContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class DrawingContext : gobject.object.ObjectWrap
   bool isValid()
   {
     bool _retval;
-    _retval = gdk_drawing_context_is_valid(cast(GdkDrawingContext*)cPtr);
+    _retval = gdk_drawing_context_is_valid(cast(GdkDrawingContext*)this._cPtr);
     return _retval;
   }
 }

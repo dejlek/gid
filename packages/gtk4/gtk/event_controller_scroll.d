@@ -55,16 +55,16 @@ class EventControllerScroll : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_scroll_get_type != &gidSymbolNotFound ? gtk_event_controller_scroll_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -113,7 +113,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   gtk.types.EventControllerScrollFlags getFlags()
   {
     GtkEventControllerScrollFlags _cretval;
-    _cretval = gtk_event_controller_scroll_get_flags(cast(GtkEventControllerScroll*)cPtr);
+    _cretval = gtk_event_controller_scroll_get_flags(cast(GtkEventControllerScroll*)this._cPtr);
     gtk.types.EventControllerScrollFlags _retval = cast(gtk.types.EventControllerScrollFlags)_cretval;
     return _retval;
   }
@@ -129,7 +129,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   gdk.types.ScrollUnit getUnit()
   {
     GdkScrollUnit _cretval;
-    _cretval = gtk_event_controller_scroll_get_unit(cast(GtkEventControllerScroll*)cPtr);
+    _cretval = gtk_event_controller_scroll_get_unit(cast(GtkEventControllerScroll*)this._cPtr);
     gdk.types.ScrollUnit _retval = cast(gdk.types.ScrollUnit)_cretval;
     return _retval;
   }
@@ -142,7 +142,7 @@ class EventControllerScroll : gtk.event_controller.EventController
   */
   void setFlags(gtk.types.EventControllerScrollFlags flags)
   {
-    gtk_event_controller_scroll_set_flags(cast(GtkEventControllerScroll*)cPtr, flags);
+    gtk_event_controller_scroll_set_flags(cast(GtkEventControllerScroll*)this._cPtr, flags);
   }
 
   /**

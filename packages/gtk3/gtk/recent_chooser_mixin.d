@@ -212,7 +212,7 @@ template RecentChooserT()
   */
   override void addFilter(gtk.recent_filter.RecentFilter filter)
   {
-    gtk_recent_chooser_add_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_add_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -223,7 +223,7 @@ template RecentChooserT()
   override gtk.recent_info.RecentInfo getCurrentItem()
   {
     GtkRecentInfo* _cretval;
-    _cretval = gtk_recent_chooser_get_current_item(cast(GtkRecentChooser*)cPtr);
+    _cretval = gtk_recent_chooser_get_current_item(cast(GtkRecentChooser*)this._cPtr);
     auto _retval = _cretval ? new gtk.recent_info.RecentInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -235,7 +235,7 @@ template RecentChooserT()
   override string getCurrentUri()
   {
     char* _cretval;
-    _cretval = gtk_recent_chooser_get_current_uri(cast(GtkRecentChooser*)cPtr);
+    _cretval = gtk_recent_chooser_get_current_uri(cast(GtkRecentChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -248,8 +248,8 @@ template RecentChooserT()
   override gtk.recent_filter.RecentFilter getFilter()
   {
     GtkRecentFilter* _cretval;
-    _cretval = gtk_recent_chooser_get_filter(cast(GtkRecentChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.Take);
+    _cretval = gtk_recent_chooser_get_filter(cast(GtkRecentChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_filter.RecentFilter)(cast(GtkRecentFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ template RecentChooserT()
   override gtk.recent_info.RecentInfo[] getItems()
   {
     GList* _cretval;
-    _cretval = gtk_recent_chooser_get_items(cast(GtkRecentChooser*)cPtr);
+    _cretval = gtk_recent_chooser_get_items(cast(GtkRecentChooser*)this._cPtr);
     auto _retval = gListToD!(gtk.recent_info.RecentInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -280,7 +280,7 @@ template RecentChooserT()
   override int getLimit()
   {
     int _retval;
-    _retval = gtk_recent_chooser_get_limit(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_limit(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ template RecentChooserT()
   override bool getLocalOnly()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_local_only(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_local_only(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ template RecentChooserT()
   override bool getSelectMultiple()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_select_multiple(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_select_multiple(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ template RecentChooserT()
   override bool getShowIcons()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_icons(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_show_icons(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ template RecentChooserT()
   override bool getShowNotFound()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_not_found(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_show_not_found(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ template RecentChooserT()
   override bool getShowPrivate()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_private(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_show_private(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ template RecentChooserT()
   override bool getShowTips()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_get_show_tips(cast(GtkRecentChooser*)cPtr);
+    _retval = gtk_recent_chooser_get_show_tips(cast(GtkRecentChooser*)this._cPtr);
     return _retval;
   }
 
@@ -364,7 +364,7 @@ template RecentChooserT()
   override gtk.types.RecentSortType getSortType()
   {
     GtkRecentSortType _cretval;
-    _cretval = gtk_recent_chooser_get_sort_type(cast(GtkRecentChooser*)cPtr);
+    _cretval = gtk_recent_chooser_get_sort_type(cast(GtkRecentChooser*)this._cPtr);
     gtk.types.RecentSortType _retval = cast(gtk.types.RecentSortType)_cretval;
     return _retval;
   }
@@ -383,7 +383,7 @@ template RecentChooserT()
   {
     char** _cretval;
     size_t _cretlength;
-    _cretval = gtk_recent_chooser_get_uris(cast(GtkRecentChooser*)cPtr, &_cretlength);
+    _cretval = gtk_recent_chooser_get_uris(cast(GtkRecentChooser*)this._cPtr, &_cretlength);
     string[] _retval;
 
     if (_cretval)
@@ -404,7 +404,7 @@ template RecentChooserT()
   override gtk.recent_filter.RecentFilter[] listFilters()
   {
     GSList* _cretval;
-    _cretval = gtk_recent_chooser_list_filters(cast(GtkRecentChooser*)cPtr);
+    _cretval = gtk_recent_chooser_list_filters(cast(GtkRecentChooser*)this._cPtr);
     auto _retval = gSListToD!(gtk.recent_filter.RecentFilter, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -417,7 +417,7 @@ template RecentChooserT()
   */
   override void removeFilter(gtk.recent_filter.RecentFilter filter)
   {
-    gtk_recent_chooser_remove_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_remove_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -426,7 +426,7 @@ template RecentChooserT()
   */
   override void selectAll()
   {
-    gtk_recent_chooser_select_all(cast(GtkRecentChooser*)cPtr);
+    gtk_recent_chooser_select_all(cast(GtkRecentChooser*)this._cPtr);
   }
 
   /**
@@ -442,7 +442,7 @@ template RecentChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
+    _retval = gtk_recent_chooser_select_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -461,7 +461,7 @@ template RecentChooserT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)cPtr, _uri, &_err);
+    _retval = gtk_recent_chooser_set_current_uri(cast(GtkRecentChooser*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -476,7 +476,7 @@ template RecentChooserT()
   */
   override void setFilter(gtk.recent_filter.RecentFilter filter = null)
   {
-    gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)cPtr, filter ? cast(GtkRecentFilter*)filter.cPtr(No.Dup) : null);
+    gtk_recent_chooser_set_filter(cast(GtkRecentChooser*)this._cPtr, filter ? cast(GtkRecentFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -488,7 +488,7 @@ template RecentChooserT()
   */
   override void setLimit(int limit)
   {
-    gtk_recent_chooser_set_limit(cast(GtkRecentChooser*)cPtr, limit);
+    gtk_recent_chooser_set_limit(cast(GtkRecentChooser*)this._cPtr, limit);
   }
 
   /**
@@ -502,7 +502,7 @@ template RecentChooserT()
   */
   override void setLocalOnly(bool localOnly)
   {
-    gtk_recent_chooser_set_local_only(cast(GtkRecentChooser*)cPtr, localOnly);
+    gtk_recent_chooser_set_local_only(cast(GtkRecentChooser*)this._cPtr, localOnly);
   }
 
   /**
@@ -513,7 +513,7 @@ template RecentChooserT()
   */
   override void setSelectMultiple(bool selectMultiple)
   {
-    gtk_recent_chooser_set_select_multiple(cast(GtkRecentChooser*)cPtr, selectMultiple);
+    gtk_recent_chooser_set_select_multiple(cast(GtkRecentChooser*)this._cPtr, selectMultiple);
   }
 
   /**
@@ -525,7 +525,7 @@ template RecentChooserT()
   */
   override void setShowIcons(bool showIcons)
   {
-    gtk_recent_chooser_set_show_icons(cast(GtkRecentChooser*)cPtr, showIcons);
+    gtk_recent_chooser_set_show_icons(cast(GtkRecentChooser*)this._cPtr, showIcons);
   }
 
   /**
@@ -537,7 +537,7 @@ template RecentChooserT()
   */
   override void setShowNotFound(bool showNotFound)
   {
-    gtk_recent_chooser_set_show_not_found(cast(GtkRecentChooser*)cPtr, showNotFound);
+    gtk_recent_chooser_set_show_not_found(cast(GtkRecentChooser*)this._cPtr, showNotFound);
   }
 
   /**
@@ -548,7 +548,7 @@ template RecentChooserT()
   */
   override void setShowPrivate(bool showPrivate)
   {
-    gtk_recent_chooser_set_show_private(cast(GtkRecentChooser*)cPtr, showPrivate);
+    gtk_recent_chooser_set_show_private(cast(GtkRecentChooser*)this._cPtr, showPrivate);
   }
 
   /**
@@ -560,7 +560,7 @@ template RecentChooserT()
   */
   override void setShowTips(bool showTips)
   {
-    gtk_recent_chooser_set_show_tips(cast(GtkRecentChooser*)cPtr, showTips);
+    gtk_recent_chooser_set_show_tips(cast(GtkRecentChooser*)this._cPtr, showTips);
   }
 
   /**
@@ -589,7 +589,7 @@ template RecentChooserT()
 
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
-    gtk_recent_chooser_set_sort_func(cast(GtkRecentChooser*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
+    gtk_recent_chooser_set_sort_func(cast(GtkRecentChooser*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**
@@ -601,7 +601,7 @@ template RecentChooserT()
   */
   override void setSortType(gtk.types.RecentSortType sortType)
   {
-    gtk_recent_chooser_set_sort_type(cast(GtkRecentChooser*)cPtr, sortType);
+    gtk_recent_chooser_set_sort_type(cast(GtkRecentChooser*)this._cPtr, sortType);
   }
 
   /**
@@ -609,7 +609,7 @@ template RecentChooserT()
   */
   override void unselectAll()
   {
-    gtk_recent_chooser_unselect_all(cast(GtkRecentChooser*)cPtr);
+    gtk_recent_chooser_unselect_all(cast(GtkRecentChooser*)this._cPtr);
   }
 
   /**
@@ -621,7 +621,7 @@ template RecentChooserT()
   override void unselectUri(string uri)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
-    gtk_recent_chooser_unselect_uri(cast(GtkRecentChooser*)cPtr, _uri);
+    gtk_recent_chooser_unselect_uri(cast(GtkRecentChooser*)this._cPtr, _uri);
   }
 
   /**

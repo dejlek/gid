@@ -53,16 +53,16 @@ class WebContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_context_get_type != &gidSymbolNotFound ? webkit_web_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -90,7 +90,7 @@ class WebContext : gobject.object.ObjectWrap
   {
     WebKitWebContext* _cretval;
     _cretval = webkit_web_context_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class WebContext : gobject.object.ObjectWrap
   void addPathToSandbox(string path, bool readOnly)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    webkit_web_context_add_path_to_sandbox(cast(WebKitWebContext*)cPtr, _path, readOnly);
+    webkit_web_context_add_path_to_sandbox(cast(WebKitWebContext*)this._cPtr, _path, readOnly);
   }
 
   /**
@@ -127,7 +127,7 @@ class WebContext : gobject.object.ObjectWrap
   webkit.types.CacheModel getCacheModel()
   {
     WebKitCacheModel _cretval;
-    _cretval = webkit_web_context_get_cache_model(cast(WebKitWebContext*)cPtr);
+    _cretval = webkit_web_context_get_cache_model(cast(WebKitWebContext*)this._cPtr);
     webkit.types.CacheModel _retval = cast(webkit.types.CacheModel)_cretval;
     return _retval;
   }
@@ -139,8 +139,8 @@ class WebContext : gobject.object.ObjectWrap
   webkit.geolocation_manager.GeolocationManager getGeolocationManager()
   {
     WebKitGeolocationManager* _cretval;
-    _cretval = webkit_web_context_get_geolocation_manager(cast(WebKitWebContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.geolocation_manager.GeolocationManager)(cast(WebKitGeolocationManager*)_cretval, No.Take);
+    _cretval = webkit_web_context_get_geolocation_manager(cast(WebKitWebContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.geolocation_manager.GeolocationManager)(cast(WebKitGeolocationManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,8 +151,8 @@ class WebContext : gobject.object.ObjectWrap
   webkit.network_session.NetworkSession getNetworkSessionForAutomation()
   {
     WebKitNetworkSession* _cretval;
-    _cretval = webkit_web_context_get_network_session_for_automation(cast(WebKitWebContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    _cretval = webkit_web_context_get_network_session_for_automation(cast(WebKitWebContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,8 +163,8 @@ class WebContext : gobject.object.ObjectWrap
   webkit.security_manager.SecurityManager getSecurityManager()
   {
     WebKitSecurityManager* _cretval;
-    _cretval = webkit_web_context_get_security_manager(cast(WebKitWebContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.security_manager.SecurityManager)(cast(WebKitSecurityManager*)_cretval, No.Take);
+    _cretval = webkit_web_context_get_security_manager(cast(WebKitWebContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.security_manager.SecurityManager)(cast(WebKitSecurityManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class WebContext : gobject.object.ObjectWrap
   bool getSpellCheckingEnabled()
   {
     bool _retval;
-    _retval = webkit_web_context_get_spell_checking_enabled(cast(WebKitWebContext*)cPtr);
+    _retval = webkit_web_context_get_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class WebContext : gobject.object.ObjectWrap
   string[] getSpellCheckingLanguages()
   {
     const(char*)* _cretval;
-    _cretval = webkit_web_context_get_spell_checking_languages(cast(WebKitWebContext*)cPtr);
+    _cretval = webkit_web_context_get_spell_checking_languages(cast(WebKitWebContext*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -215,7 +215,7 @@ class WebContext : gobject.object.ObjectWrap
   string getTimeZoneOverride()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_context_get_time_zone_override(cast(WebKitWebContext*)cPtr);
+    _cretval = webkit_web_context_get_time_zone_override(cast(WebKitWebContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -248,7 +248,7 @@ class WebContext : gobject.object.ObjectWrap
     scope(exit) containerFree!(GList*, webkit.security_origin.SecurityOrigin, GidOwnership.None)(_allowedOrigins);
     auto _disallowedOrigins = gListFromD!(webkit.security_origin.SecurityOrigin)(disallowedOrigins);
     scope(exit) containerFree!(GList*, webkit.security_origin.SecurityOrigin, GidOwnership.None)(_disallowedOrigins);
-    webkit_web_context_initialize_notification_permissions(cast(WebKitWebContext*)cPtr, _allowedOrigins, _disallowedOrigins);
+    webkit_web_context_initialize_notification_permissions(cast(WebKitWebContext*)this._cPtr, _allowedOrigins, _disallowedOrigins);
   }
 
   /**
@@ -260,7 +260,7 @@ class WebContext : gobject.object.ObjectWrap
   bool isAutomationAllowed()
   {
     bool _retval;
-    _retval = webkit_web_context_is_automation_allowed(cast(WebKitWebContext*)cPtr);
+    _retval = webkit_web_context_is_automation_allowed(cast(WebKitWebContext*)this._cPtr);
     return _retval;
   }
 
@@ -313,14 +313,14 @@ class WebContext : gobject.object.ObjectWrap
     {
       auto _dlg = cast(webkit.types.URISchemeRequestCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(webkit.urischeme_request.URISchemeRequest)(cast(void*)request, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _scheme = scheme.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    webkit_web_context_register_uri_scheme(cast(WebKitWebContext*)cPtr, _scheme, _callbackCB, _callback, _callbackDestroyCB);
+    webkit_web_context_register_uri_scheme(cast(WebKitWebContext*)this._cPtr, _scheme, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -333,7 +333,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void sendMessageToAllExtensions(webkit.user_message.UserMessage message)
   {
-    webkit_web_context_send_message_to_all_extensions(cast(WebKitWebContext*)cPtr, message ? cast(WebKitUserMessage*)message.cPtr(No.Dup) : null);
+    webkit_web_context_send_message_to_all_extensions(cast(WebKitWebContext*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null);
   }
 
   /**
@@ -353,7 +353,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setAutomationAllowed(bool allowed)
   {
-    webkit_web_context_set_automation_allowed(cast(WebKitWebContext*)cPtr, allowed);
+    webkit_web_context_set_automation_allowed(cast(WebKitWebContext*)this._cPtr, allowed);
   }
 
   /**
@@ -383,7 +383,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setCacheModel(webkit.types.CacheModel cacheModel)
   {
-    webkit_web_context_set_cache_model(cast(WebKitWebContext*)cPtr, cacheModel);
+    webkit_web_context_set_cache_model(cast(WebKitWebContext*)this._cPtr, cacheModel);
   }
 
   /**
@@ -410,7 +410,7 @@ class WebContext : gobject.object.ObjectWrap
       _tmplanguages ~= s.toCString(No.Alloc);
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
-    webkit_web_context_set_preferred_languages(cast(WebKitWebContext*)cPtr, _languages);
+    webkit_web_context_set_preferred_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
   /**
@@ -421,7 +421,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setSpellCheckingEnabled(bool enabled)
   {
-    webkit_web_context_set_spell_checking_enabled(cast(WebKitWebContext*)cPtr, enabled);
+    webkit_web_context_set_spell_checking_enabled(cast(WebKitWebContext*)this._cPtr, enabled);
   }
 
   /**
@@ -447,7 +447,7 @@ class WebContext : gobject.object.ObjectWrap
       _tmplanguages ~= s.toCString(No.Alloc);
     _tmplanguages ~= null;
     const(char*)* _languages = _tmplanguages.ptr;
-    webkit_web_context_set_spell_checking_languages(cast(WebKitWebContext*)cPtr, _languages);
+    webkit_web_context_set_spell_checking_languages(cast(WebKitWebContext*)this._cPtr, _languages);
   }
 
   /**
@@ -467,7 +467,7 @@ class WebContext : gobject.object.ObjectWrap
   void setWebProcessExtensionsDirectory(string directory)
   {
     const(char)* _directory = directory.toCString(No.Alloc);
-    webkit_web_context_set_web_process_extensions_directory(cast(WebKitWebContext*)cPtr, _directory);
+    webkit_web_context_set_web_process_extensions_directory(cast(WebKitWebContext*)this._cPtr, _directory);
   }
 
   /**
@@ -485,7 +485,7 @@ class WebContext : gobject.object.ObjectWrap
   */
   void setWebProcessExtensionsInitializationUserData(glib.variant.Variant userData)
   {
-    webkit_web_context_set_web_process_extensions_initialization_user_data(cast(WebKitWebContext*)cPtr, userData ? cast(GVariant*)userData.cPtr(No.Dup) : null);
+    webkit_web_context_set_web_process_extensions_initialization_user_data(cast(WebKitWebContext*)this._cPtr, userData ? cast(GVariant*)userData._cPtr(No.Dup) : null);
   }
 
   /**

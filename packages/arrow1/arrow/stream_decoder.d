@@ -24,16 +24,16 @@ class StreamDecoder : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_stream_decoder_get_type != &gidSymbolNotFound ? garrow_stream_decoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -46,7 +46,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   this(arrow.stream_listener.StreamListener listener, arrow.read_options.ReadOptions options = null)
   {
     GArrowStreamDecoder* _cretval;
-    _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null);
+    _cretval = garrow_stream_decoder_new(listener ? cast(GArrowStreamListener*)listener._cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -66,7 +66,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)cPtr, buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_stream_decoder_consume_buffer(cast(GArrowStreamDecoder*)this._cPtr, buffer ? cast(GArrowBuffer*)buffer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -88,7 +88,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_stream_decoder_consume_bytes(cast(GArrowStreamDecoder*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -156,7 +156,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   size_t getNextRequiredSize()
   {
     size_t _retval;
-    _retval = garrow_stream_decoder_get_next_required_size(cast(GArrowStreamDecoder*)cPtr);
+    _retval = garrow_stream_decoder_get_next_required_size(cast(GArrowStreamDecoder*)this._cPtr);
     return _retval;
   }
 
@@ -164,8 +164,8 @@ class StreamDecoder : gobject.object.ObjectWrap
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
-    _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    _cretval = garrow_stream_decoder_get_schema(cast(GArrowStreamDecoder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class StreamDecoder : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_decoder_reset(cast(GArrowStreamDecoder*)cPtr, &_err);
+    _retval = garrow_stream_decoder_reset(cast(GArrowStreamDecoder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

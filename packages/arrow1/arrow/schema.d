@@ -20,16 +20,16 @@ class Schema : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_schema_get_type != &gidSymbolNotFound ? garrow_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class Schema : gobject.object.ObjectWrap
     _cretval = garrow_schema_import(cAbiSchema, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -65,10 +65,10 @@ class Schema : gobject.object.ObjectWrap
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = garrow_schema_add_field(cast(GArrowSchema*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_schema_add_field(cast(GArrowSchema*)this._cPtr, i, field ? cast(GArrowField*)field._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class Schema : gobject.object.ObjectWrap
   bool equal(arrow.schema.Schema otherSchema)
   {
     bool _retval;
-    _retval = garrow_schema_equal(cast(GArrowSchema*)cPtr, otherSchema ? cast(GArrowSchema*)otherSchema.cPtr(No.Dup) : null);
+    _retval = garrow_schema_equal(cast(GArrowSchema*)this._cPtr, otherSchema ? cast(GArrowSchema*)otherSchema._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class Schema : gobject.object.ObjectWrap
   void* export_()
   {
     GError *_err;
-    auto _retval = garrow_schema_export(cast(GArrowSchema*)cPtr, &_err);
+    auto _retval = garrow_schema_export(cast(GArrowSchema*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -94,8 +94,8 @@ class Schema : gobject.object.ObjectWrap
   arrow.field.Field getField(uint i)
   {
     GArrowField* _cretval;
-    _cretval = garrow_schema_get_field(cast(GArrowSchema*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_schema_get_field(cast(GArrowSchema*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,8 +104,8 @@ class Schema : gobject.object.ObjectWrap
   {
     GArrowField* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = garrow_schema_get_field_by_name(cast(GArrowSchema*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_schema_get_field_by_name(cast(GArrowSchema*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class Schema : gobject.object.ObjectWrap
   {
     int _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = garrow_schema_get_field_index(cast(GArrowSchema*)cPtr, _name);
+    _retval = garrow_schema_get_field_index(cast(GArrowSchema*)this._cPtr, _name);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class Schema : gobject.object.ObjectWrap
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
-    _cretval = garrow_schema_get_fields(cast(GArrowSchema*)cPtr);
+    _cretval = garrow_schema_get_fields(cast(GArrowSchema*)this._cPtr);
     auto _retval = gListToD!(arrow.field.Field, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -131,7 +131,7 @@ class Schema : gobject.object.ObjectWrap
   string[string] getMetadata()
   {
     GHashTable* _cretval;
-    _cretval = garrow_schema_get_metadata(cast(GArrowSchema*)cPtr);
+    _cretval = garrow_schema_get_metadata(cast(GArrowSchema*)this._cPtr);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
@@ -140,7 +140,7 @@ class Schema : gobject.object.ObjectWrap
   bool hasMetadata()
   {
     bool _retval;
-    _retval = garrow_schema_has_metadata(cast(GArrowSchema*)cPtr);
+    _retval = garrow_schema_has_metadata(cast(GArrowSchema*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Schema : gobject.object.ObjectWrap
   uint nFields()
   {
     uint _retval;
-    _retval = garrow_schema_n_fields(cast(GArrowSchema*)cPtr);
+    _retval = garrow_schema_n_fields(cast(GArrowSchema*)this._cPtr);
     return _retval;
   }
 
@@ -157,10 +157,10 @@ class Schema : gobject.object.ObjectWrap
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = garrow_schema_remove_field(cast(GArrowSchema*)cPtr, i, &_err);
+    _cretval = garrow_schema_remove_field(cast(GArrowSchema*)this._cPtr, i, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,10 +169,10 @@ class Schema : gobject.object.ObjectWrap
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = garrow_schema_replace_field(cast(GArrowSchema*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_schema_replace_field(cast(GArrowSchema*)this._cPtr, i, field ? cast(GArrowField*)field._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class Schema : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_schema_to_string(cast(GArrowSchema*)cPtr);
+    _cretval = garrow_schema_to_string(cast(GArrowSchema*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -189,7 +189,7 @@ class Schema : gobject.object.ObjectWrap
   string toStringMetadata(bool showMetadata)
   {
     char* _cretval;
-    _cretval = garrow_schema_to_string_metadata(cast(GArrowSchema*)cPtr, showMetadata);
+    _cretval = garrow_schema_to_string_metadata(cast(GArrowSchema*)this._cPtr, showMetadata);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -200,8 +200,8 @@ class Schema : gobject.object.ObjectWrap
     GArrowSchema* _cretval;
     auto _metadata = gHashTableFromD!(string, string)(metadata);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_metadata);
-    _cretval = garrow_schema_with_metadata(cast(GArrowSchema*)cPtr, _metadata);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    _cretval = garrow_schema_with_metadata(cast(GArrowSchema*)this._cPtr, _metadata);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 }

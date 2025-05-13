@@ -51,16 +51,16 @@ class Overlay : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_get_type != &gidSymbolNotFound ? gtk_overlay_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -94,7 +94,7 @@ class Overlay : gtk.bin.Bin
   */
   void addOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_add_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +108,7 @@ class Overlay : gtk.bin.Bin
   bool getOverlayPassThrough(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Overlay : gtk.bin.Bin
   */
   void reorderOverlay(gtk.widget.Widget child, int index)
   {
-    gtk_overlay_reorder_overlay(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, index);
+    gtk_overlay_reorder_overlay(cast(GtkOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, index);
   }
 
   /**
@@ -142,6 +142,6 @@ class Overlay : gtk.bin.Bin
   */
   void setOverlayPassThrough(gtk.widget.Widget widget, bool passThrough)
   {
-    gtk_overlay_set_overlay_pass_through(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, passThrough);
+    gtk_overlay_set_overlay_pass_through(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, passThrough);
   }
 }

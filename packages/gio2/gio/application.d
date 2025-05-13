@@ -158,16 +158,16 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_application_get_type != &gidSymbolNotFound ? g_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -348,7 +348,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     GApplication* _cretval;
     _cretval = g_application_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.application.Application)(cast(GApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void activate()
   {
-    g_application_activate(cast(GApplication*)cPtr);
+    g_application_activate(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -455,7 +455,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     const(char)* _longName = longName.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
     const(char)* _argDescription = argDescription.toCString(No.Alloc);
-    g_application_add_main_option(cast(GApplication*)cPtr, _longName, shortName, flags, arg, _description, _argDescription);
+    g_application_add_main_option(cast(GApplication*)this._cPtr, _longName, shortName, flags, arg, _description, _argDescription);
   }
 
   /**
@@ -525,7 +525,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void addMainOptionEntries(glib.types.OptionEntry[] entries)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
-    g_application_add_main_option_entries(cast(GApplication*)cPtr, _entries);
+    g_application_add_main_option_entries(cast(GApplication*)this._cPtr, _entries);
   }
 
   /**
@@ -560,7 +560,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void addOptionGroup(glib.option_group.OptionGroup group)
   {
-    g_application_add_option_group(cast(GApplication*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
+    g_application_add_option_group(cast(GApplication*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -578,7 +578,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void bindBusyProperty(gobject.object.ObjectWrap object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    g_application_bind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
+    g_application_bind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
   }
 
   /**
@@ -588,7 +588,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   string getApplicationId()
   {
     const(char)* _cretval;
-    _cretval = g_application_get_application_id(cast(GApplication*)cPtr);
+    _cretval = g_application_get_application_id(cast(GApplication*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -612,8 +612,8 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   gio.dbus_connection.DBusConnection getDbusConnection()
   {
     GDBusConnection* _cretval;
-    _cretval = g_application_get_dbus_connection(cast(GApplication*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    _cretval = g_application_get_dbus_connection(cast(GApplication*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -637,7 +637,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   string getDbusObjectPath()
   {
     const(char)* _cretval;
-    _cretval = g_application_get_dbus_object_path(cast(GApplication*)cPtr);
+    _cretval = g_application_get_dbus_object_path(cast(GApplication*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -651,7 +651,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   gio.types.ApplicationFlags getFlags()
   {
     GApplicationFlags _cretval;
-    _cretval = g_application_get_flags(cast(GApplication*)cPtr);
+    _cretval = g_application_get_flags(cast(GApplication*)this._cPtr);
     gio.types.ApplicationFlags _retval = cast(gio.types.ApplicationFlags)_cretval;
     return _retval;
   }
@@ -666,7 +666,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   uint getInactivityTimeout()
   {
     uint _retval;
-    _retval = g_application_get_inactivity_timeout(cast(GApplication*)cPtr);
+    _retval = g_application_get_inactivity_timeout(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsBusy()
   {
     bool _retval;
-    _retval = g_application_get_is_busy(cast(GApplication*)cPtr);
+    _retval = g_application_get_is_busy(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -692,7 +692,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsRegistered()
   {
     bool _retval;
-    _retval = g_application_get_is_registered(cast(GApplication*)cPtr);
+    _retval = g_application_get_is_registered(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -712,7 +712,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   bool getIsRemote()
   {
     bool _retval;
-    _retval = g_application_get_is_remote(cast(GApplication*)cPtr);
+    _retval = g_application_get_is_remote(cast(GApplication*)this._cPtr);
     return _retval;
   }
 
@@ -725,7 +725,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   string getResourceBasePath()
   {
     const(char)* _cretval;
-    _cretval = g_application_get_resource_base_path(cast(GApplication*)cPtr);
+    _cretval = g_application_get_resource_base_path(cast(GApplication*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -737,7 +737,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   string getVersion()
   {
     const(char)* _cretval;
-    _cretval = g_application_get_version(cast(GApplication*)cPtr);
+    _cretval = g_application_get_version(cast(GApplication*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -753,7 +753,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void hold()
   {
-    g_application_hold(cast(GApplication*)cPtr);
+    g_application_hold(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -772,7 +772,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void markBusy()
   {
-    g_application_mark_busy(cast(GApplication*)cPtr);
+    g_application_mark_busy(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -803,11 +803,11 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
 
     GFile*[] _tmpfiles;
     foreach (obj; files)
-      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
+      _tmpfiles ~= obj ? cast(GFile*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GFile** _files = _tmpfiles.ptr;
 
     const(char)* _hint = hint.toCString(No.Alloc);
-    g_application_open(cast(GApplication*)cPtr, _files, _nFiles, _hint);
+    g_application_open(cast(GApplication*)this._cPtr, _files, _nFiles, _hint);
   }
 
   /**
@@ -827,7 +827,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void quit()
   {
-    g_application_quit(cast(GApplication*)cPtr);
+    g_application_quit(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -871,7 +871,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   {
     bool _retval;
     GError *_err;
-    _retval = g_application_register(cast(GApplication*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_application_register(cast(GApplication*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -887,7 +887,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void release()
   {
-    g_application_release(cast(GApplication*)cPtr);
+    g_application_release(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -982,7 +982,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
     foreach (s; argv)
       _tmpargv ~= s.toCString(No.Alloc);
     char** _argv = _tmpargv.ptr;
-    _retval = g_application_run(cast(GApplication*)cPtr, _argc, _argv);
+    _retval = g_application_run(cast(GApplication*)this._cPtr, _argc, _argv);
     return _retval;
   }
 
@@ -1024,7 +1024,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void sendNotification(string id, gio.notification.Notification notification)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    g_application_send_notification(cast(GApplication*)cPtr, _id, notification ? cast(GNotification*)notification.cPtr(No.Dup) : null);
+    g_application_send_notification(cast(GApplication*)this._cPtr, _id, notification ? cast(GNotification*)notification._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1042,7 +1042,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setActionGroup(gio.action_group.ActionGroup actionGroup = null)
   {
-    g_application_set_action_group(cast(GApplication*)cPtr, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup).cPtr(No.Dup) : null);
+    g_application_set_action_group(cast(GApplication*)this._cPtr, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1060,7 +1060,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setApplicationId(string applicationId = null)
   {
     const(char)* _applicationId = applicationId.toCString(No.Alloc);
-    g_application_set_application_id(cast(GApplication*)cPtr, _applicationId);
+    g_application_set_application_id(cast(GApplication*)this._cPtr, _applicationId);
   }
 
   /**
@@ -1073,7 +1073,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setDefault()
   {
-    g_application_set_default(cast(GApplication*)cPtr);
+    g_application_set_default(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -1089,7 +1089,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setFlags(gio.types.ApplicationFlags flags)
   {
-    g_application_set_flags(cast(GApplication*)cPtr, flags);
+    g_application_set_flags(cast(GApplication*)this._cPtr, flags);
   }
 
   /**
@@ -1107,7 +1107,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void setInactivityTimeout(uint inactivityTimeout)
   {
-    g_application_set_inactivity_timeout(cast(GApplication*)cPtr, inactivityTimeout);
+    g_application_set_inactivity_timeout(cast(GApplication*)this._cPtr, inactivityTimeout);
   }
 
   /**
@@ -1122,7 +1122,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setOptionContextDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    g_application_set_option_context_description(cast(GApplication*)cPtr, _description);
+    g_application_set_option_context_description(cast(GApplication*)this._cPtr, _description);
   }
 
   /**
@@ -1140,7 +1140,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setOptionContextParameterString(string parameterString = null)
   {
     const(char)* _parameterString = parameterString.toCString(No.Alloc);
-    g_application_set_option_context_parameter_string(cast(GApplication*)cPtr, _parameterString);
+    g_application_set_option_context_parameter_string(cast(GApplication*)this._cPtr, _parameterString);
   }
 
   /**
@@ -1155,7 +1155,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setOptionContextSummary(string summary = null)
   {
     const(char)* _summary = summary.toCString(No.Alloc);
-    g_application_set_option_context_summary(cast(GApplication*)cPtr, _summary);
+    g_application_set_option_context_summary(cast(GApplication*)this._cPtr, _summary);
   }
 
   /**
@@ -1199,7 +1199,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setResourceBasePath(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    g_application_set_resource_base_path(cast(GApplication*)cPtr, _resourcePath);
+    g_application_set_resource_base_path(cast(GApplication*)this._cPtr, _resourcePath);
   }
 
   /**
@@ -1215,7 +1215,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void setVersion(string version_)
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
-    g_application_set_version(cast(GApplication*)cPtr, _version_);
+    g_application_set_version(cast(GApplication*)this._cPtr, _version_);
   }
 
   /**
@@ -1230,7 +1230,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void unbindBusyProperty(gobject.object.ObjectWrap object, string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    g_application_unbind_busy_property(cast(GApplication*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _property);
+    g_application_unbind_busy_property(cast(GApplication*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, _property);
   }
 
   /**
@@ -1244,7 +1244,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   */
   void unmarkBusy()
   {
-    g_application_unmark_busy(cast(GApplication*)cPtr);
+    g_application_unmark_busy(cast(GApplication*)this._cPtr);
   }
 
   /**
@@ -1268,7 +1268,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
   void withdrawNotification(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    g_application_withdraw_notification(cast(GApplication*)cPtr, _id);
+    g_application_withdraw_notification(cast(GApplication*)this._cPtr, _id);
   }
 
   /**
@@ -1539,7 +1539,7 @@ class Application : gobject.object.ObjectWrap, gio.action_group.ActionGroup, gio
         auto _cArray = getVal!(GFile**)(&_paramVals[1]);
         gio.file.File[] _dArray;
         foreach (i; 0 .. nFiles)
-          _dArray ~= gobject.object.ObjectWrap.getDObject!(gio.file.File)(_cArray[i], No.Take);
+          _dArray ~= gobject.object.ObjectWrap._getDObject!(gio.file.File)(_cArray[i], No.Take);
         _paramTuple[0] = _dArray;
       }
       _dClosure.cb(_paramTuple[]);

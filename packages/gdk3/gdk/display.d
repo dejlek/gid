@@ -49,16 +49,16 @@ class Display : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_display_get_type != &gidSymbolNotFound ? gdk_display_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class Display : gobject.object.ObjectWrap
     GdkDisplay* _cretval;
     const(char)* _displayName = displayName.toCString(No.Alloc);
     _cretval = gdk_display_open(_displayName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkDisplay* _cretval;
     _cretval = gdk_display_open_default_libgtk_only();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Display : gobject.object.ObjectWrap
   */
   void beep()
   {
-    gdk_display_beep(cast(GdkDisplay*)cPtr);
+    gdk_display_beep(cast(GdkDisplay*)this._cPtr);
   }
 
   /**
@@ -133,7 +133,7 @@ class Display : gobject.object.ObjectWrap
   */
   void close()
   {
-    gdk_display_close(cast(GdkDisplay*)cPtr);
+    gdk_display_close(cast(GdkDisplay*)this._cPtr);
   }
 
   /**
@@ -146,7 +146,7 @@ class Display : gobject.object.ObjectWrap
   bool deviceIsGrabbed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _retval = gdk_display_device_is_grabbed(cast(GdkDisplay*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Display : gobject.object.ObjectWrap
   */
   void flush()
   {
-    gdk_display_flush(cast(GdkDisplay*)cPtr);
+    gdk_display_flush(cast(GdkDisplay*)this._cPtr);
   }
 
   /**
@@ -175,8 +175,8 @@ class Display : gobject.object.ObjectWrap
   gdk.app_launch_context.AppLaunchContext getAppLaunchContext()
   {
     GdkAppLaunchContext* _cretval;
-    _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
+    _cretval = gdk_display_get_app_launch_context(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.app_launch_context.AppLaunchContext)(cast(GdkAppLaunchContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Display : gobject.object.ObjectWrap
   uint getDefaultCursorSize()
   {
     uint _retval;
-    _retval = gdk_display_get_default_cursor_size(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_get_default_cursor_size(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -201,8 +201,8 @@ class Display : gobject.object.ObjectWrap
   gdk.window.Window getDefaultGroup()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_display_get_default_group(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_display_get_default_group(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,8 +213,8 @@ class Display : gobject.object.ObjectWrap
   gdk.screen.Screen getDefaultScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gdk_display_get_default_screen(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gdk_display_get_default_screen(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,8 +225,8 @@ class Display : gobject.object.ObjectWrap
   gdk.seat.Seat getDefaultSeat()
   {
     GdkSeat* _cretval;
-    _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
+    _cretval = gdk_display_get_default_seat(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(GdkSeat*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,8 +241,8 @@ class Display : gobject.object.ObjectWrap
   gdk.device_manager.DeviceManager getDeviceManager()
   {
     GdkDeviceManager* _cretval;
-    _cretval = gdk_display_get_device_manager(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_manager.DeviceManager)(cast(GdkDeviceManager*)_cretval, No.Take);
+    _cretval = gdk_display_get_device_manager(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device_manager.DeviceManager)(cast(GdkDeviceManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Display : gobject.object.ObjectWrap
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;
-    _cretval = gdk_display_get_event(cast(GdkDisplay*)cPtr);
+    _cretval = gdk_display_get_event(cast(GdkDisplay*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
     return _retval;
   }
@@ -270,7 +270,7 @@ class Display : gobject.object.ObjectWrap
   */
   void getMaximalCursorSize(out uint width, out uint height)
   {
-    gdk_display_get_maximal_cursor_size(cast(GdkDisplay*)cPtr, cast(uint*)&width, cast(uint*)&height);
+    gdk_display_get_maximal_cursor_size(cast(GdkDisplay*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /**
@@ -284,8 +284,8 @@ class Display : gobject.object.ObjectWrap
   gdk.monitor.MonitorWrap getMonitor(int monitorNum)
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_monitor(cast(GdkDisplay*)cPtr, monitorNum);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_display_get_monitor(cast(GdkDisplay*)this._cPtr, monitorNum);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -301,8 +301,8 @@ class Display : gobject.object.ObjectWrap
   gdk.monitor.MonitorWrap getMonitorAtPoint(int x, int y)
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_monitor_at_point(cast(GdkDisplay*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_display_get_monitor_at_point(cast(GdkDisplay*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -318,8 +318,8 @@ class Display : gobject.object.ObjectWrap
   gdk.monitor.MonitorWrap getMonitorAtWindow(gdk.window.Window window)
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_monitor_at_window(cast(GdkDisplay*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_display_get_monitor_at_window(cast(GdkDisplay*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class Display : gobject.object.ObjectWrap
   int getNMonitors()
   {
     int _retval;
-    _retval = gdk_display_get_n_monitors(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_get_n_monitors(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ class Display : gobject.object.ObjectWrap
   int getNScreens()
   {
     int _retval;
-    _retval = gdk_display_get_n_screens(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_get_n_screens(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -358,7 +358,7 @@ class Display : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gdk_display_get_name(cast(GdkDisplay*)cPtr);
+    _cretval = gdk_display_get_name(cast(GdkDisplay*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -379,7 +379,7 @@ class Display : gobject.object.ObjectWrap
   void getPointer(out gdk.screen.Screen screen, out int x, out int y, out gdk.types.ModifierType mask)
   {
     GdkScreen* _screen;
-    gdk_display_get_pointer(cast(GdkDisplay*)cPtr, &_screen, cast(int*)&x, cast(int*)&y, &mask);
+    gdk_display_get_pointer(cast(GdkDisplay*)this._cPtr, &_screen, cast(int*)&x, cast(int*)&y, &mask);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
   }
 
@@ -396,8 +396,8 @@ class Display : gobject.object.ObjectWrap
   gdk.monitor.MonitorWrap getPrimaryMonitor()
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_display_get_primary_monitor(cast(GdkDisplay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_display_get_primary_monitor(cast(GdkDisplay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -413,8 +413,8 @@ class Display : gobject.object.ObjectWrap
   gdk.screen.Screen getScreen(int screenNum)
   {
     GdkScreen* _cretval;
-    _cretval = gdk_display_get_screen(cast(GdkDisplay*)cPtr, screenNum);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gdk_display_get_screen(cast(GdkDisplay*)this._cPtr, screenNum);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -437,8 +437,8 @@ class Display : gobject.object.ObjectWrap
   gdk.window.Window getWindowAtPointer(out int winX, out int winY)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_display_get_window_at_pointer(cast(GdkDisplay*)cPtr, cast(int*)&winX, cast(int*)&winY);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_display_get_window_at_pointer(cast(GdkDisplay*)this._cPtr, cast(int*)&winX, cast(int*)&winY);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class Display : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = gdk_display_has_pending(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_has_pending(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -461,7 +461,7 @@ class Display : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = gdk_display_is_closed(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_is_closed(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -476,7 +476,7 @@ class Display : gobject.object.ObjectWrap
   */
   void keyboardUngrab(uint time)
   {
-    gdk_display_keyboard_ungrab(cast(GdkDisplay*)cPtr, time);
+    gdk_display_keyboard_ungrab(cast(GdkDisplay*)this._cPtr, time);
   }
 
   /**
@@ -489,7 +489,7 @@ class Display : gobject.object.ObjectWrap
   gdk.device.Device[] listDevices()
   {
     GList* _cretval;
-    _cretval = gdk_display_list_devices(cast(GdkDisplay*)cPtr);
+    _cretval = gdk_display_list_devices(cast(GdkDisplay*)this._cPtr);
     auto _retval = gListToD!(gdk.device.Device, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -502,7 +502,7 @@ class Display : gobject.object.ObjectWrap
   gdk.seat.Seat[] listSeats()
   {
     GList* _cretval;
-    _cretval = gdk_display_list_seats(cast(GdkDisplay*)cPtr);
+    _cretval = gdk_display_list_seats(cast(GdkDisplay*)this._cPtr);
     auto _retval = gListToD!(gdk.seat.Seat, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -523,7 +523,7 @@ class Display : gobject.object.ObjectWrap
   void notifyStartupComplete(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gdk_display_notify_startup_complete(cast(GdkDisplay*)cPtr, _startupId);
+    gdk_display_notify_startup_complete(cast(GdkDisplay*)this._cPtr, _startupId);
   }
 
   /**
@@ -538,7 +538,7 @@ class Display : gobject.object.ObjectWrap
   gdk.event.Event peekEvent()
   {
     GdkEvent* _cretval;
-    _cretval = gdk_display_peek_event(cast(GdkDisplay*)cPtr);
+    _cretval = gdk_display_peek_event(cast(GdkDisplay*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
     return _retval;
   }
@@ -552,7 +552,7 @@ class Display : gobject.object.ObjectWrap
   bool pointerIsGrabbed()
   {
     bool _retval;
-    _retval = gdk_display_pointer_is_grabbed(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_pointer_is_grabbed(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class Display : gobject.object.ObjectWrap
   */
   void pointerUngrab(uint time)
   {
-    gdk_display_pointer_ungrab(cast(GdkDisplay*)cPtr, time);
+    gdk_display_pointer_ungrab(cast(GdkDisplay*)this._cPtr, time);
   }
 
   /**
@@ -579,7 +579,7 @@ class Display : gobject.object.ObjectWrap
   */
   void putEvent(gdk.event.Event event)
   {
-    gdk_display_put_event(cast(GdkDisplay*)cPtr, event ? cast(const(GdkEvent)*)event.cPtr : null);
+    gdk_display_put_event(cast(GdkDisplay*)this._cPtr, event ? cast(const(GdkEvent)*)event._cPtr : null);
   }
 
   /**
@@ -595,7 +595,7 @@ class Display : gobject.object.ObjectWrap
   bool requestSelectionNotification(gdk.atom.Atom selection)
   {
     bool _retval;
-    _retval = gdk_display_request_selection_notification(cast(GdkDisplay*)cPtr, selection ? cast(GdkAtom)selection.cPtr : null);
+    _retval = gdk_display_request_selection_notification(cast(GdkDisplay*)this._cPtr, selection ? cast(GdkAtom)selection._cPtr : null);
     return _retval;
   }
 
@@ -611,7 +611,7 @@ class Display : gobject.object.ObjectWrap
   */
   void setDoubleClickDistance(uint distance)
   {
-    gdk_display_set_double_click_distance(cast(GdkDisplay*)cPtr, distance);
+    gdk_display_set_double_click_distance(cast(GdkDisplay*)this._cPtr, distance);
   }
 
   /**
@@ -625,7 +625,7 @@ class Display : gobject.object.ObjectWrap
   */
   void setDoubleClickTime(uint msec)
   {
-    gdk_display_set_double_click_time(cast(GdkDisplay*)cPtr, msec);
+    gdk_display_set_double_click_time(cast(GdkDisplay*)this._cPtr, msec);
   }
 
   /**
@@ -638,7 +638,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsClipboardPersistence()
   {
     bool _retval;
-    _retval = gdk_display_supports_clipboard_persistence(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_clipboard_persistence(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsComposite()
   {
     bool _retval;
-    _retval = gdk_display_supports_composite(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_composite(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsCursorAlpha()
   {
     bool _retval;
-    _retval = gdk_display_supports_cursor_alpha(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_cursor_alpha(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -682,7 +682,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsCursorColor()
   {
     bool _retval;
-    _retval = gdk_display_supports_cursor_color(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_cursor_color(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsInputShapes()
   {
     bool _retval;
-    _retval = gdk_display_supports_input_shapes(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_input_shapes(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -707,7 +707,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsSelectionNotification()
   {
     bool _retval;
-    _retval = gdk_display_supports_selection_notification(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_selection_notification(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -719,7 +719,7 @@ class Display : gobject.object.ObjectWrap
   bool supportsShapes()
   {
     bool _retval;
-    _retval = gdk_display_supports_shapes(cast(GdkDisplay*)cPtr);
+    _retval = gdk_display_supports_shapes(cast(GdkDisplay*)this._cPtr);
     return _retval;
   }
 
@@ -736,7 +736,7 @@ class Display : gobject.object.ObjectWrap
   */
   void sync()
   {
-    gdk_display_sync(cast(GdkDisplay*)cPtr);
+    gdk_display_sync(cast(GdkDisplay*)this._cPtr);
   }
 
   /**
@@ -761,7 +761,7 @@ class Display : gobject.object.ObjectWrap
   */
   void warpPointer(gdk.screen.Screen screen, int x, int y)
   {
-    gdk_display_warp_pointer(cast(GdkDisplay*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, x, y);
+    gdk_display_warp_pointer(cast(GdkDisplay*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, x, y);
   }
 
   /**

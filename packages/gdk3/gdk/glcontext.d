@@ -73,16 +73,16 @@ class GLContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_context_get_type != &gidSymbolNotFound ? gdk_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -110,7 +110,7 @@ class GLContext : gobject.object.ObjectWrap
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,7 +121,7 @@ class GLContext : gobject.object.ObjectWrap
   bool getDebugEnabled()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -132,8 +132,8 @@ class GLContext : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class GLContext : gobject.object.ObjectWrap
   bool getForwardCompatible()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void getRequiredVersion(out int major, out int minor)
   {
-    gdk_gl_context_get_required_version(cast(GdkGLContext*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gdk_gl_context_get_required_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -168,8 +168,8 @@ class GLContext : gobject.object.ObjectWrap
   gdk.glcontext.GLContext getSharedContext()
   {
     GdkGLContext* _cretval;
-    _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class GLContext : gobject.object.ObjectWrap
   bool getUseEs()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_use_es(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void getVersion(out int major, out int minor)
   {
-    gdk_gl_context_get_version(cast(GdkGLContext*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gdk_gl_context_get_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -205,8 +205,8 @@ class GLContext : gobject.object.ObjectWrap
   gdk.window.Window getWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_gl_context_get_window(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_window(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class GLContext : gobject.object.ObjectWrap
   bool isLegacy()
   {
     bool _retval;
-    _retval = gdk_gl_context_is_legacy(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void makeCurrent()
   {
-    gdk_gl_context_make_current(cast(GdkGLContext*)cPtr);
+    gdk_gl_context_make_current(cast(GdkGLContext*)this._cPtr);
   }
 
   /**
@@ -255,7 +255,7 @@ class GLContext : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_gl_context_realize(cast(GdkGLContext*)cPtr, &_err);
+    _retval = gdk_gl_context_realize(cast(GdkGLContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -274,7 +274,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void setDebugEnabled(bool enabled)
   {
-    gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)cPtr, enabled);
+    gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)this._cPtr, enabled);
   }
 
   /**
@@ -293,7 +293,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void setForwardCompatible(bool compatible)
   {
-    gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)cPtr, compatible);
+    gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)this._cPtr, compatible);
   }
 
   /**
@@ -310,7 +310,7 @@ class GLContext : gobject.object.ObjectWrap
   */
   void setRequiredVersion(int major, int minor)
   {
-    gdk_gl_context_set_required_version(cast(GdkGLContext*)cPtr, major, minor);
+    gdk_gl_context_set_required_version(cast(GdkGLContext*)this._cPtr, major, minor);
   }
 
   /**
@@ -333,6 +333,6 @@ class GLContext : gobject.object.ObjectWrap
   */
   void setUseEs(int useEs)
   {
-    gdk_gl_context_set_use_es(cast(GdkGLContext*)cPtr, useEs);
+    gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
   }
 }

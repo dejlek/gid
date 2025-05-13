@@ -101,16 +101,16 @@ class Scale : gtk.range.Range
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_get_type != &gidSymbolNotFound ? gtk_scale_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -179,7 +179,7 @@ class Scale : gtk.range.Range
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_scale_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -205,7 +205,7 @@ class Scale : gtk.range.Range
   {
     GtkWidget* _cretval;
     _cretval = gtk_scale_new_with_range(orientation, min, max, step);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.scale.Scale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Scale : gtk.range.Range
   void addMark(double value, gtk.types.PositionType position, string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_scale_add_mark(cast(GtkScale*)cPtr, value, position, _markup);
+    gtk_scale_add_mark(cast(GtkScale*)this._cPtr, value, position, _markup);
   }
 
   /**
@@ -240,7 +240,7 @@ class Scale : gtk.range.Range
   */
   void clearMarks()
   {
-    gtk_scale_clear_marks(cast(GtkScale*)cPtr);
+    gtk_scale_clear_marks(cast(GtkScale*)this._cPtr);
   }
 
   /**
@@ -250,7 +250,7 @@ class Scale : gtk.range.Range
   int getDigits()
   {
     int _retval;
-    _retval = gtk_scale_get_digits(cast(GtkScale*)cPtr);
+    _retval = gtk_scale_get_digits(cast(GtkScale*)this._cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Scale : gtk.range.Range
   bool getDrawValue()
   {
     bool _retval;
-    _retval = gtk_scale_get_draw_value(cast(GtkScale*)cPtr);
+    _retval = gtk_scale_get_draw_value(cast(GtkScale*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Scale : gtk.range.Range
   bool getHasOrigin()
   {
     bool _retval;
-    _retval = gtk_scale_get_has_origin(cast(GtkScale*)cPtr);
+    _retval = gtk_scale_get_has_origin(cast(GtkScale*)this._cPtr);
     return _retval;
   }
 
@@ -287,8 +287,8 @@ class Scale : gtk.range.Range
   pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
-    _cretval = gtk_scale_get_layout(cast(GtkScale*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    _cretval = gtk_scale_get_layout(cast(GtkScale*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Scale : gtk.range.Range
   */
   void getLayoutOffsets(out int x, out int y)
   {
-    gtk_scale_get_layout_offsets(cast(GtkScale*)cPtr, cast(int*)&x, cast(int*)&y);
+    gtk_scale_get_layout_offsets(cast(GtkScale*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -317,7 +317,7 @@ class Scale : gtk.range.Range
   gtk.types.PositionType getValuePos()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_scale_get_value_pos(cast(GtkScale*)cPtr);
+    _cretval = gtk_scale_get_value_pos(cast(GtkScale*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -340,7 +340,7 @@ class Scale : gtk.range.Range
   */
   void setDigits(int digits)
   {
-    gtk_scale_set_digits(cast(GtkScale*)cPtr, digits);
+    gtk_scale_set_digits(cast(GtkScale*)this._cPtr, digits);
   }
 
   /**
@@ -352,7 +352,7 @@ class Scale : gtk.range.Range
   */
   void setDrawValue(bool drawValue)
   {
-    gtk_scale_set_draw_value(cast(GtkScale*)cPtr, drawValue);
+    gtk_scale_set_draw_value(cast(GtkScale*)this._cPtr, drawValue);
   }
 
   /**
@@ -365,7 +365,7 @@ class Scale : gtk.range.Range
   */
   void setHasOrigin(bool hasOrigin)
   {
-    gtk_scale_set_has_origin(cast(GtkScale*)cPtr, hasOrigin);
+    gtk_scale_set_has_origin(cast(GtkScale*)this._cPtr, hasOrigin);
   }
 
   /**
@@ -376,7 +376,7 @@ class Scale : gtk.range.Range
   */
   void setValuePos(gtk.types.PositionType pos)
   {
-    gtk_scale_set_value_pos(cast(GtkScale*)cPtr, pos);
+    gtk_scale_set_value_pos(cast(GtkScale*)this._cPtr, pos);
   }
 
   /**

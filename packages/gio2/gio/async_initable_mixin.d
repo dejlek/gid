@@ -165,17 +165,17 @@ template AsyncInitableT()
   */
   override void initAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_async_initable_init_async(cast(GAsyncInitable*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_async_initable_init_async(cast(GAsyncInitable*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -192,7 +192,7 @@ template AsyncInitableT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
+    _retval = g_async_initable_init_finish(cast(GAsyncInitable*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -210,12 +210,12 @@ template AsyncInitableT()
   */
   override gobject.object.ObjectWrap newFinish(gio.async_result.AsyncResult res)
   {
-    ObjectC* _cretval;
+    GObject* _cretval;
     GError *_err;
-    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_async_initable_new_finish(cast(GAsyncInitable*)this._cPtr, res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 }

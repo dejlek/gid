@@ -44,16 +44,16 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_switch_get_type != &gidSymbolNotFound ? gtk_switch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -123,7 +123,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_switch_get_active(cast(GtkSwitch*)cPtr);
+    _retval = gtk_switch_get_active(cast(GtkSwitch*)this._cPtr);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   bool getState()
   {
     bool _retval;
-    _retval = gtk_switch_get_state(cast(GtkSwitch*)cPtr);
+    _retval = gtk_switch_get_state(cast(GtkSwitch*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   */
   void setActive(bool isActive)
   {
-    gtk_switch_set_active(cast(GtkSwitch*)cPtr, isActive);
+    gtk_switch_set_active(cast(GtkSwitch*)this._cPtr, isActive);
   }
 
   alias setState = gtk.widget.Widget.setState;
@@ -167,7 +167,7 @@ class Switch : gtk.widget.Widget, gtk.actionable.Actionable, gtk.activatable.Act
   */
   void setState(bool state)
   {
-    gtk_switch_set_state(cast(GtkSwitch*)cPtr, state);
+    gtk_switch_set_state(cast(GtkSwitch*)this._cPtr, state);
   }
 
   /**

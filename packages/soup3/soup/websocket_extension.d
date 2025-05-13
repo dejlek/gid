@@ -24,16 +24,16 @@ class WebsocketExtension : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_websocket_extension_get_type != &gidSymbolNotFound ? soup_websocket_extension_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
   string getRequestParams()
   {
     char* _cretval;
-    _cretval = soup_websocket_extension_get_request_params(cast(SoupWebsocketExtension*)cPtr);
+    _cretval = soup_websocket_extension_get_request_params(cast(SoupWebsocketExtension*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -67,7 +67,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
   string getResponseParams()
   {
     char* _cretval;
-    _cretval = soup_websocket_extension_get_response_params(cast(SoupWebsocketExtension*)cPtr);
+    _cretval = soup_websocket_extension_get_response_params(cast(SoupWebsocketExtension*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -91,7 +91,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = soup_websocket_extension_process_incoming_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
+    _cretval = soup_websocket_extension_process_incoming_message(cast(SoupWebsocketExtension*)this._cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload._cPtr(Yes.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
@@ -117,7 +117,7 @@ class WebsocketExtension : gobject.object.ObjectWrap
   {
     GBytes* _cretval;
     GError *_err;
-    _cretval = soup_websocket_extension_process_outgoing_message(cast(SoupWebsocketExtension*)cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload.cPtr(Yes.Dup) : null, &_err);
+    _cretval = soup_websocket_extension_process_outgoing_message(cast(SoupWebsocketExtension*)this._cPtr, cast(ubyte*)&header, payload ? cast(GBytes*)payload._cPtr(Yes.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;

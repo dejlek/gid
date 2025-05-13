@@ -32,16 +32,16 @@ class NetworkSession : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_network_session_get_type != &gidSymbolNotFound ? webkit_network_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class NetworkSession : gobject.object.ObjectWrap
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_new_ephemeral();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class NetworkSession : gobject.object.ObjectWrap
   {
     WebKitNetworkSession* _cretval;
     _cretval = webkit_network_session_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   static void setMemoryPressureSettings(webkit.memory_pressure_settings.MemoryPressureSettings settings)
   {
-    webkit_network_session_set_memory_pressure_settings(settings ? cast(WebKitMemoryPressureSettings*)settings.cPtr(No.Dup) : null);
+    webkit_network_session_set_memory_pressure_settings(settings ? cast(WebKitMemoryPressureSettings*)settings._cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class NetworkSession : gobject.object.ObjectWrap
   void allowTlsCertificateForHost(gio.tls_certificate.TlsCertificate certificate, string host)
   {
     const(char)* _host = host.toCString(No.Alloc);
-    webkit_network_session_allow_tls_certificate_for_host(cast(WebKitNetworkSession*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, _host);
+    webkit_network_session_allow_tls_certificate_for_host(cast(WebKitNetworkSession*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, _host);
   }
 
   /**
@@ -155,8 +155,8 @@ class NetworkSession : gobject.object.ObjectWrap
   {
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = webkit_network_session_download_uri(cast(WebKitNetworkSession*)cPtr, _uri);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
+    _cretval = webkit_network_session_download_uri(cast(WebKitNetworkSession*)this._cPtr, _uri);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -167,8 +167,8 @@ class NetworkSession : gobject.object.ObjectWrap
   webkit.cookie_manager.CookieManager getCookieManager()
   {
     WebKitCookieManager* _cretval;
-    _cretval = webkit_network_session_get_cookie_manager(cast(WebKitNetworkSession*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.cookie_manager.CookieManager)(cast(WebKitCookieManager*)_cretval, No.Take);
+    _cretval = webkit_network_session_get_cookie_manager(cast(WebKitNetworkSession*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.cookie_manager.CookieManager)(cast(WebKitCookieManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool getItpEnabled()
   {
     bool _retval;
-    _retval = webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)cPtr);
+    _retval = webkit_network_session_get_itp_enabled(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 
@@ -198,17 +198,17 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_network_session_get_itp_summary(cast(WebKitNetworkSession*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_network_session_get_itp_summary(cast(WebKitNetworkSession*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -225,7 +225,7 @@ class NetworkSession : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_network_session_get_itp_summary_finish(cast(WebKitNetworkSession*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
@@ -241,7 +241,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool getPersistentCredentialStorageEnabled()
   {
     bool _retval;
-    _retval = webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)cPtr);
+    _retval = webkit_network_session_get_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class NetworkSession : gobject.object.ObjectWrap
   webkit.types.TLSErrorsPolicy getTlsErrorsPolicy()
   {
     WebKitTLSErrorsPolicy _cretval;
-    _cretval = webkit_network_session_get_tls_errors_policy(cast(WebKitNetworkSession*)cPtr);
+    _cretval = webkit_network_session_get_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr);
     webkit.types.TLSErrorsPolicy _retval = cast(webkit.types.TLSErrorsPolicy)_cretval;
     return _retval;
   }
@@ -264,8 +264,8 @@ class NetworkSession : gobject.object.ObjectWrap
   webkit.website_data_manager.WebsiteDataManager getWebsiteDataManager()
   {
     WebKitWebsiteDataManager* _cretval;
-    _cretval = webkit_network_session_get_website_data_manager(cast(WebKitNetworkSession*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.website_data_manager.WebsiteDataManager)(cast(WebKitWebsiteDataManager*)_cretval, No.Take);
+    _cretval = webkit_network_session_get_website_data_manager(cast(WebKitNetworkSession*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.website_data_manager.WebsiteDataManager)(cast(WebKitWebsiteDataManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class NetworkSession : gobject.object.ObjectWrap
   bool isEphemeral()
   {
     bool _retval;
-    _retval = webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)cPtr);
+    _retval = webkit_network_session_is_ephemeral(cast(WebKitNetworkSession*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class NetworkSession : gobject.object.ObjectWrap
   void prefetchDns(string hostname)
   {
     const(char)* _hostname = hostname.toCString(No.Alloc);
-    webkit_network_session_prefetch_dns(cast(WebKitNetworkSession*)cPtr, _hostname);
+    webkit_network_session_prefetch_dns(cast(WebKitNetworkSession*)this._cPtr, _hostname);
   }
 
   /**
@@ -308,7 +308,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void setItpEnabled(bool enabled)
   {
-    webkit_network_session_set_itp_enabled(cast(WebKitNetworkSession*)cPtr, enabled);
+    webkit_network_session_set_itp_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
   }
 
   /**
@@ -323,7 +323,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void setPersistentCredentialStorageEnabled(bool enabled)
   {
-    webkit_network_session_set_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)cPtr, enabled);
+    webkit_network_session_set_persistent_credential_storage_enabled(cast(WebKitNetworkSession*)this._cPtr, enabled);
   }
 
   /**
@@ -343,7 +343,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void setProxySettings(webkit.types.NetworkProxyMode proxyMode, webkit.network_proxy_settings.NetworkProxySettings proxySettings = null)
   {
-    webkit_network_session_set_proxy_settings(cast(WebKitNetworkSession*)cPtr, proxyMode, proxySettings ? cast(WebKitNetworkProxySettings*)proxySettings.cPtr(No.Dup) : null);
+    webkit_network_session_set_proxy_settings(cast(WebKitNetworkSession*)this._cPtr, proxyMode, proxySettings ? cast(WebKitNetworkProxySettings*)proxySettings._cPtr(No.Dup) : null);
   }
 
   /**
@@ -354,7 +354,7 @@ class NetworkSession : gobject.object.ObjectWrap
   */
   void setTlsErrorsPolicy(webkit.types.TLSErrorsPolicy policy)
   {
-    webkit_network_session_set_tls_errors_policy(cast(WebKitNetworkSession*)cPtr, policy);
+    webkit_network_session_set_tls_errors_policy(cast(WebKitNetworkSession*)this._cPtr, policy);
   }
 
   /**

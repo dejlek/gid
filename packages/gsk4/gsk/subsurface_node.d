@@ -29,7 +29,7 @@ class SubsurfaceNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_subsurface_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_subsurface_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }

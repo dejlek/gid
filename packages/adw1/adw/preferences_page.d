@@ -43,16 +43,16 @@ class PreferencesPage : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_page_get_type != &gidSymbolNotFound ? adw_preferences_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -175,7 +175,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void add(adw.preferences_group.PreferencesGroup group)
   {
-    adw_preferences_page_add(cast(AdwPreferencesPage*)cPtr, group ? cast(AdwPreferencesGroup*)group.cPtr(No.Dup) : null);
+    adw_preferences_page_add(cast(AdwPreferencesPage*)this._cPtr, group ? cast(AdwPreferencesGroup*)group._cPtr(No.Dup) : null);
   }
 
   /**
@@ -185,7 +185,7 @@ class PreferencesPage : gtk.widget.Widget
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_page_get_description(cast(AdwPreferencesPage*)cPtr);
+    _cretval = adw_preferences_page_get_description(cast(AdwPreferencesPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -197,7 +197,7 @@ class PreferencesPage : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_page_get_icon_name(cast(AdwPreferencesPage*)cPtr);
+    _cretval = adw_preferences_page_get_icon_name(cast(AdwPreferencesPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -209,7 +209,7 @@ class PreferencesPage : gtk.widget.Widget
   override string getName()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_page_get_name(cast(AdwPreferencesPage*)cPtr);
+    _cretval = adw_preferences_page_get_name(cast(AdwPreferencesPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -221,7 +221,7 @@ class PreferencesPage : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_page_get_title(cast(AdwPreferencesPage*)cPtr);
+    _cretval = adw_preferences_page_get_title(cast(AdwPreferencesPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -233,7 +233,7 @@ class PreferencesPage : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_preferences_page_get_use_underline(cast(AdwPreferencesPage*)cPtr);
+    _retval = adw_preferences_page_get_use_underline(cast(AdwPreferencesPage*)this._cPtr);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void remove(adw.preferences_group.PreferencesGroup group)
   {
-    adw_preferences_page_remove(cast(AdwPreferencesPage*)cPtr, group ? cast(AdwPreferencesGroup*)group.cPtr(No.Dup) : null);
+    adw_preferences_page_remove(cast(AdwPreferencesPage*)this._cPtr, group ? cast(AdwPreferencesGroup*)group._cPtr(No.Dup) : null);
   }
 
   /**
@@ -253,7 +253,7 @@ class PreferencesPage : gtk.widget.Widget
   */
   void scrollToTop()
   {
-    adw_preferences_page_scroll_to_top(cast(AdwPreferencesPage*)cPtr);
+    adw_preferences_page_scroll_to_top(cast(AdwPreferencesPage*)this._cPtr);
   }
 
   /**
@@ -267,7 +267,7 @@ class PreferencesPage : gtk.widget.Widget
   void setDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    adw_preferences_page_set_description(cast(AdwPreferencesPage*)cPtr, _description);
+    adw_preferences_page_set_description(cast(AdwPreferencesPage*)this._cPtr, _description);
   }
 
   /**
@@ -279,7 +279,7 @@ class PreferencesPage : gtk.widget.Widget
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_preferences_page_set_icon_name(cast(AdwPreferencesPage*)cPtr, _iconName);
+    adw_preferences_page_set_icon_name(cast(AdwPreferencesPage*)this._cPtr, _iconName);
   }
 
   /**
@@ -291,7 +291,7 @@ class PreferencesPage : gtk.widget.Widget
   override void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_preferences_page_set_name(cast(AdwPreferencesPage*)cPtr, _name);
+    adw_preferences_page_set_name(cast(AdwPreferencesPage*)this._cPtr, _name);
   }
 
   /**
@@ -303,7 +303,7 @@ class PreferencesPage : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_preferences_page_set_title(cast(AdwPreferencesPage*)cPtr, _title);
+    adw_preferences_page_set_title(cast(AdwPreferencesPage*)this._cPtr, _title);
   }
 
   /**
@@ -314,6 +314,6 @@ class PreferencesPage : gtk.widget.Widget
   */
   void setUseUnderline(bool useUnderline)
   {
-    adw_preferences_page_set_use_underline(cast(AdwPreferencesPage*)cPtr, useUnderline);
+    adw_preferences_page_set_use_underline(cast(AdwPreferencesPage*)this._cPtr, useUnderline);
   }
 }

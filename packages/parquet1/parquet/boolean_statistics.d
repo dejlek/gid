@@ -18,16 +18,16 @@ class BooleanStatistics : parquet.statistics.Statistics
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_boolean_statistics_get_type != &gidSymbolNotFound ? gparquet_boolean_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class BooleanStatistics : parquet.statistics.Statistics
   bool getMax()
   {
     bool _retval;
-    _retval = gparquet_boolean_statistics_get_max(cast(GParquetBooleanStatistics*)cPtr);
+    _retval = gparquet_boolean_statistics_get_max(cast(GParquetBooleanStatistics*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class BooleanStatistics : parquet.statistics.Statistics
   bool getMin()
   {
     bool _retval;
-    _retval = gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)cPtr);
+    _retval = gparquet_boolean_statistics_get_min(cast(GParquetBooleanStatistics*)this._cPtr);
     return _retval;
   }
 }

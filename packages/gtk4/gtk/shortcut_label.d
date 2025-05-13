@@ -28,16 +28,16 @@ class ShortcutLabel : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_label_get_type != &gidSymbolNotFound ? gtk_shortcut_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class ShortcutLabel : gtk.widget.Widget
   string getAccelerator()
   {
     const(char)* _cretval;
-    _cretval = gtk_shortcut_label_get_accelerator(cast(GtkShortcutLabel*)cPtr);
+    _cretval = gtk_shortcut_label_get_accelerator(cast(GtkShortcutLabel*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -125,7 +125,7 @@ class ShortcutLabel : gtk.widget.Widget
   string getDisabledText()
   {
     const(char)* _cretval;
-    _cretval = gtk_shortcut_label_get_disabled_text(cast(GtkShortcutLabel*)cPtr);
+    _cretval = gtk_shortcut_label_get_disabled_text(cast(GtkShortcutLabel*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -139,7 +139,7 @@ class ShortcutLabel : gtk.widget.Widget
   void setAccelerator(string accelerator)
   {
     const(char)* _accelerator = accelerator.toCString(No.Alloc);
-    gtk_shortcut_label_set_accelerator(cast(GtkShortcutLabel*)cPtr, _accelerator);
+    gtk_shortcut_label_set_accelerator(cast(GtkShortcutLabel*)this._cPtr, _accelerator);
   }
 
   /**
@@ -151,6 +151,6 @@ class ShortcutLabel : gtk.widget.Widget
   void setDisabledText(string disabledText)
   {
     const(char)* _disabledText = disabledText.toCString(No.Alloc);
-    gtk_shortcut_label_set_disabled_text(cast(GtkShortcutLabel*)cPtr, _disabledText);
+    gtk_shortcut_label_set_disabled_text(cast(GtkShortcutLabel*)this._cPtr, _disabledText);
   }
 }

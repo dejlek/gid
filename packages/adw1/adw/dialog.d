@@ -81,16 +81,16 @@ class Dialog : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_dialog_get_type != &gidSymbolNotFound ? adw_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -360,7 +360,7 @@ class Dialog : gtk.widget.Widget
   */
   void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
-    adw_dialog_add_breakpoint(cast(AdwDialog*)cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint.cPtr(Yes.Dup) : null);
+    adw_dialog_add_breakpoint(cast(AdwDialog*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -375,7 +375,7 @@ class Dialog : gtk.widget.Widget
   bool close()
   {
     bool _retval;
-    _retval = adw_dialog_close(cast(AdwDialog*)cPtr);
+    _retval = adw_dialog_close(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class Dialog : gtk.widget.Widget
   */
   void forceClose()
   {
-    adw_dialog_force_close(cast(AdwDialog*)cPtr);
+    adw_dialog_force_close(cast(AdwDialog*)this._cPtr);
   }
 
   /**
@@ -397,7 +397,7 @@ class Dialog : gtk.widget.Widget
   bool getCanClose()
   {
     bool _retval;
-    _retval = adw_dialog_get_can_close(cast(AdwDialog*)cPtr);
+    _retval = adw_dialog_get_can_close(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -408,8 +408,8 @@ class Dialog : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_dialog_get_child(cast(AdwDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_dialog_get_child(cast(AdwDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class Dialog : gtk.widget.Widget
   int getContentHeight()
   {
     int _retval;
-    _retval = adw_dialog_get_content_height(cast(AdwDialog*)cPtr);
+    _retval = adw_dialog_get_content_height(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class Dialog : gtk.widget.Widget
   int getContentWidth()
   {
     int _retval;
-    _retval = adw_dialog_get_content_width(cast(AdwDialog*)cPtr);
+    _retval = adw_dialog_get_content_width(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -442,8 +442,8 @@ class Dialog : gtk.widget.Widget
   adw.breakpoint.Breakpoint getCurrentBreakpoint()
   {
     AdwBreakpoint* _cretval;
-    _cretval = adw_dialog_get_current_breakpoint(cast(AdwDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    _cretval = adw_dialog_get_current_breakpoint(cast(AdwDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 
@@ -454,8 +454,8 @@ class Dialog : gtk.widget.Widget
   gtk.widget.Widget getDefaultWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_dialog_get_default_widget(cast(AdwDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_dialog_get_default_widget(cast(AdwDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -466,8 +466,8 @@ class Dialog : gtk.widget.Widget
   gtk.widget.Widget getFocus()
   {
     GtkWidget* _cretval;
-    _cretval = adw_dialog_get_focus(cast(AdwDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_dialog_get_focus(cast(AdwDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Dialog : gtk.widget.Widget
   bool getFollowsContentSize()
   {
     bool _retval;
-    _retval = adw_dialog_get_follows_content_size(cast(AdwDialog*)cPtr);
+    _retval = adw_dialog_get_follows_content_size(cast(AdwDialog*)this._cPtr);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ class Dialog : gtk.widget.Widget
   adw.types.DialogPresentationMode getPresentationMode()
   {
     AdwDialogPresentationMode _cretval;
-    _cretval = adw_dialog_get_presentation_mode(cast(AdwDialog*)cPtr);
+    _cretval = adw_dialog_get_presentation_mode(cast(AdwDialog*)this._cPtr);
     adw.types.DialogPresentationMode _retval = cast(adw.types.DialogPresentationMode)_cretval;
     return _retval;
   }
@@ -501,7 +501,7 @@ class Dialog : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_dialog_get_title(cast(AdwDialog*)cPtr);
+    _cretval = adw_dialog_get_title(cast(AdwDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -519,7 +519,7 @@ class Dialog : gtk.widget.Widget
   */
   void present(gtk.widget.Widget parent = null)
   {
-    adw_dialog_present(cast(AdwDialog*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null);
+    adw_dialog_present(cast(AdwDialog*)this._cPtr, parent ? cast(GtkWidget*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -535,7 +535,7 @@ class Dialog : gtk.widget.Widget
   */
   void setCanClose(bool canClose)
   {
-    adw_dialog_set_can_close(cast(AdwDialog*)cPtr, canClose);
+    adw_dialog_set_can_close(cast(AdwDialog*)this._cPtr, canClose);
   }
 
   /**
@@ -546,7 +546,7 @@ class Dialog : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_dialog_set_child(cast(AdwDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_dialog_set_child(cast(AdwDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -561,7 +561,7 @@ class Dialog : gtk.widget.Widget
   */
   void setContentHeight(int contentHeight)
   {
-    adw_dialog_set_content_height(cast(AdwDialog*)cPtr, contentHeight);
+    adw_dialog_set_content_height(cast(AdwDialog*)this._cPtr, contentHeight);
   }
 
   /**
@@ -576,7 +576,7 @@ class Dialog : gtk.widget.Widget
   */
   void setContentWidth(int contentWidth)
   {
-    adw_dialog_set_content_width(cast(AdwDialog*)cPtr, contentWidth);
+    adw_dialog_set_content_width(cast(AdwDialog*)this._cPtr, contentWidth);
   }
 
   /**
@@ -589,7 +589,7 @@ class Dialog : gtk.widget.Widget
   */
   void setDefaultWidget(gtk.widget.Widget defaultWidget = null)
   {
-    adw_dialog_set_default_widget(cast(AdwDialog*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
+    adw_dialog_set_default_widget(cast(AdwDialog*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -607,7 +607,7 @@ class Dialog : gtk.widget.Widget
   */
   void setFocus(gtk.widget.Widget focus = null)
   {
-    adw_dialog_set_focus(cast(AdwDialog*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
+    adw_dialog_set_focus(cast(AdwDialog*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
 
   /**
@@ -624,7 +624,7 @@ class Dialog : gtk.widget.Widget
   */
   void setFollowsContentSize(bool followsContentSize)
   {
-    adw_dialog_set_follows_content_size(cast(AdwDialog*)cPtr, followsContentSize);
+    adw_dialog_set_follows_content_size(cast(AdwDialog*)this._cPtr, followsContentSize);
   }
 
   /**
@@ -645,7 +645,7 @@ class Dialog : gtk.widget.Widget
   */
   void setPresentationMode(adw.types.DialogPresentationMode presentationMode)
   {
-    adw_dialog_set_presentation_mode(cast(AdwDialog*)cPtr, presentationMode);
+    adw_dialog_set_presentation_mode(cast(AdwDialog*)this._cPtr, presentationMode);
   }
 
   /**
@@ -657,7 +657,7 @@ class Dialog : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_dialog_set_title(cast(AdwDialog*)cPtr, _title);
+    adw_dialog_set_title(cast(AdwDialog*)this._cPtr, _title);
   }
 
   /**

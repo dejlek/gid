@@ -28,16 +28,16 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_direct_control_binding_get_type != &gidSymbolNotFound ? gst_direct_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_direct_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.Dup) : null);
+    _cretval = gst_direct_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -92,8 +92,8 @@ class DirectControlBinding : gst.control_binding.ControlBinding
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
+    _cretval = gst_direct_control_binding_new_absolute(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, cs ? cast(GstControlSource*)cs._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstcontroller.direct_control_binding.DirectControlBinding)(cast(GstControlBinding*)_cretval, No.Take);
     return _retval;
   }
 }

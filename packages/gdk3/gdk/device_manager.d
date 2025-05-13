@@ -136,16 +136,16 @@ class DeviceManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_manager_get_type != &gidSymbolNotFound ? gdk_device_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -169,8 +169,8 @@ class DeviceManager : gobject.object.ObjectWrap
   gdk.device.Device getClientPointer()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_device_manager_get_client_pointer(cast(GdkDeviceManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_device_manager_get_client_pointer(cast(GdkDeviceManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,8 +183,8 @@ class DeviceManager : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_device_manager_get_display(cast(GdkDeviceManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_device_manager_get_display(cast(GdkDeviceManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class DeviceManager : gobject.object.ObjectWrap
   gdk.device.Device[] listDevices(gdk.types.DeviceType type)
   {
     GList* _cretval;
-    _cretval = gdk_device_manager_list_devices(cast(GdkDeviceManager*)cPtr, type);
+    _cretval = gdk_device_manager_list_devices(cast(GdkDeviceManager*)this._cPtr, type);
     auto _retval = gListToD!(gdk.device.Device, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }

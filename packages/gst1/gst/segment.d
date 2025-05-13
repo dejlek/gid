@@ -67,22 +67,22 @@ class Segment : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_segment_get_type != &gidSymbolNotFound ? gst_segment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property gst.types.SegmentFlags flags()
   {
-    return cast(gst.types.SegmentFlags)(cast(GstSegment*)cPtr).flags;
+    return cast(gst.types.SegmentFlags)(cast(GstSegment*)this._cPtr).flags;
   }
 
   /**
@@ -107,7 +107,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void flags(gst.types.SegmentFlags propval)
   {
-    (cast(GstSegment*)cPtr).flags = cast(GstSegmentFlags)propval;
+    (cast(GstSegment*)this._cPtr).flags = cast(GstSegmentFlags)propval;
   }
 
   /**
@@ -126,7 +126,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property double rate()
   {
-    return (cast(GstSegment*)cPtr).rate;
+    return (cast(GstSegment*)this._cPtr).rate;
   }
 
   /**
@@ -146,7 +146,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void rate(double propval)
   {
-    (cast(GstSegment*)cPtr).rate = propval;
+    (cast(GstSegment*)this._cPtr).rate = propval;
   }
 
   /**
@@ -166,7 +166,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property double appliedRate()
   {
-    return (cast(GstSegment*)cPtr).appliedRate;
+    return (cast(GstSegment*)this._cPtr).appliedRate;
   }
 
   /**
@@ -187,7 +187,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void appliedRate(double propval)
   {
-    (cast(GstSegment*)cPtr).appliedRate = propval;
+    (cast(GstSegment*)this._cPtr).appliedRate = propval;
   }
 
   /**
@@ -196,7 +196,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property gst.types.Format format()
   {
-    return cast(gst.types.Format)(cast(GstSegment*)cPtr).format;
+    return cast(gst.types.Format)(cast(GstSegment*)this._cPtr).format;
   }
 
   /**
@@ -206,7 +206,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void format(gst.types.Format propval)
   {
-    (cast(GstSegment*)cPtr).format = cast(GstFormat)propval;
+    (cast(GstSegment*)this._cPtr).format = cast(GstFormat)propval;
   }
 
   /**
@@ -217,7 +217,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong base()
   {
-    return (cast(GstSegment*)cPtr).base;
+    return (cast(GstSegment*)this._cPtr).base;
   }
 
   /**
@@ -229,7 +229,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void base(ulong propval)
   {
-    (cast(GstSegment*)cPtr).base = propval;
+    (cast(GstSegment*)this._cPtr).base = propval;
   }
 
   /**
@@ -241,7 +241,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong offset()
   {
-    return (cast(GstSegment*)cPtr).offset;
+    return (cast(GstSegment*)this._cPtr).offset;
   }
 
   /**
@@ -254,7 +254,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void offset(ulong propval)
   {
-    (cast(GstSegment*)cPtr).offset = propval;
+    (cast(GstSegment*)this._cPtr).offset = propval;
   }
 
   /**
@@ -268,7 +268,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong start()
   {
-    return (cast(GstSegment*)cPtr).start;
+    return (cast(GstSegment*)this._cPtr).start;
   }
 
   /**
@@ -283,7 +283,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void start(ulong propval)
   {
-    (cast(GstSegment*)cPtr).start = propval;
+    (cast(GstSegment*)this._cPtr).start = propval;
   }
 
   /**
@@ -296,7 +296,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong stop()
   {
-    return (cast(GstSegment*)cPtr).stop;
+    return (cast(GstSegment*)this._cPtr).stop;
   }
 
   /**
@@ -310,7 +310,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void stop(ulong propval)
   {
-    (cast(GstSegment*)cPtr).stop = propval;
+    (cast(GstSegment*)this._cPtr).stop = propval;
   }
 
   /**
@@ -320,7 +320,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong time()
   {
-    return (cast(GstSegment*)cPtr).time;
+    return (cast(GstSegment*)this._cPtr).time;
   }
 
   /**
@@ -331,7 +331,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void time(ulong propval)
   {
-    (cast(GstSegment*)cPtr).time = propval;
+    (cast(GstSegment*)this._cPtr).time = propval;
   }
 
   /**
@@ -346,7 +346,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong position()
   {
-    return (cast(GstSegment*)cPtr).position;
+    return (cast(GstSegment*)this._cPtr).position;
   }
 
   /**
@@ -362,7 +362,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void position(ulong propval)
   {
-    (cast(GstSegment*)cPtr).position = propval;
+    (cast(GstSegment*)this._cPtr).position = propval;
   }
 
   /**
@@ -376,7 +376,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property ulong duration()
   {
-    return (cast(GstSegment*)cPtr).duration;
+    return (cast(GstSegment*)this._cPtr).duration;
   }
 
   /**
@@ -391,7 +391,7 @@ class Segment : gobject.boxed.Boxed
   */
   @property void duration(ulong propval)
   {
-    (cast(GstSegment*)cPtr).duration = propval;
+    (cast(GstSegment*)this._cPtr).duration = propval;
   }
 
   /**
@@ -436,7 +436,7 @@ class Segment : gobject.boxed.Boxed
   bool clip(gst.types.Format format, ulong start, ulong stop, out ulong clipStart, out ulong clipStop)
   {
     bool _retval;
-    _retval = gst_segment_clip(cast(const(GstSegment)*)cPtr, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
+    _retval = gst_segment_clip(cast(const(GstSegment)*)this._cPtr, format, start, stop, cast(ulong*)&clipStart, cast(ulong*)&clipStop);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class Segment : gobject.boxed.Boxed
   gst.segment.Segment copy()
   {
     GstSegment* _cretval;
-    _cretval = gst_segment_copy(cast(const(GstSegment)*)cPtr);
+    _cretval = gst_segment_copy(cast(const(GstSegment)*)this._cPtr);
     auto _retval = _cretval ? new gst.segment.Segment(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -462,7 +462,7 @@ class Segment : gobject.boxed.Boxed
   */
   void copyInto(gst.segment.Segment dest)
   {
-    gst_segment_copy_into(cast(const(GstSegment)*)cPtr, dest ? cast(GstSegment*)dest.cPtr(No.Dup) : null);
+    gst_segment_copy_into(cast(const(GstSegment)*)this._cPtr, dest ? cast(GstSegment*)dest._cPtr(No.Dup) : null);
   }
 
   /**
@@ -508,7 +508,7 @@ class Segment : gobject.boxed.Boxed
   bool doSeek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, ulong start, gst.types.SeekType stopType, ulong stop, out bool update)
   {
     bool _retval;
-    _retval = gst_segment_do_seek(cast(GstSegment*)cPtr, rate, format, flags, startType, start, stopType, stop, cast(bool*)&update);
+    _retval = gst_segment_do_seek(cast(GstSegment*)this._cPtr, rate, format, flags, startType, start, stopType, stop, cast(bool*)&update);
     return _retval;
   }
 
@@ -524,7 +524,7 @@ class Segment : gobject.boxed.Boxed
   */
   void init_(gst.types.Format format)
   {
-    gst_segment_init(cast(GstSegment*)cPtr, format);
+    gst_segment_init(cast(GstSegment*)this._cPtr, format);
   }
 
   /**
@@ -538,7 +538,7 @@ class Segment : gobject.boxed.Boxed
   bool isEqual(gst.segment.Segment s1)
   {
     bool _retval;
-    _retval = gst_segment_is_equal(cast(const(GstSegment)*)cPtr, s1 ? cast(const(GstSegment)*)s1.cPtr(No.Dup) : null);
+    _retval = gst_segment_is_equal(cast(const(GstSegment)*)this._cPtr, s1 ? cast(const(GstSegment)*)s1._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class Segment : gobject.boxed.Boxed
   bool offsetRunningTime(gst.types.Format format, long offset)
   {
     bool _retval;
-    _retval = gst_segment_offset_running_time(cast(GstSegment*)cPtr, format, offset);
+    _retval = gst_segment_offset_running_time(cast(GstSegment*)this._cPtr, format, offset);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class Segment : gobject.boxed.Boxed
   ulong positionFromRunningTime(gst.types.Format format, ulong runningTime)
   {
     ulong _retval;
-    _retval = gst_segment_position_from_running_time(cast(const(GstSegment)*)cPtr, format, runningTime);
+    _retval = gst_segment_position_from_running_time(cast(const(GstSegment)*)this._cPtr, format, runningTime);
     return _retval;
   }
 
@@ -603,7 +603,7 @@ class Segment : gobject.boxed.Boxed
   int positionFromRunningTimeFull(gst.types.Format format, ulong runningTime, out ulong position)
   {
     int _retval;
-    _retval = gst_segment_position_from_running_time_full(cast(const(GstSegment)*)cPtr, format, runningTime, cast(ulong*)&position);
+    _retval = gst_segment_position_from_running_time_full(cast(const(GstSegment)*)this._cPtr, format, runningTime, cast(ulong*)&position);
     return _retval;
   }
 
@@ -620,7 +620,7 @@ class Segment : gobject.boxed.Boxed
   ulong positionFromStreamTime(gst.types.Format format, ulong streamTime)
   {
     ulong _retval;
-    _retval = gst_segment_position_from_stream_time(cast(const(GstSegment)*)cPtr, format, streamTime);
+    _retval = gst_segment_position_from_stream_time(cast(const(GstSegment)*)this._cPtr, format, streamTime);
     return _retval;
   }
 
@@ -650,7 +650,7 @@ class Segment : gobject.boxed.Boxed
   int positionFromStreamTimeFull(gst.types.Format format, ulong streamTime, out ulong position)
   {
     int _retval;
-    _retval = gst_segment_position_from_stream_time_full(cast(const(GstSegment)*)cPtr, format, streamTime, cast(ulong*)&position);
+    _retval = gst_segment_position_from_stream_time_full(cast(const(GstSegment)*)this._cPtr, format, streamTime, cast(ulong*)&position);
     return _retval;
   }
 
@@ -667,7 +667,7 @@ class Segment : gobject.boxed.Boxed
   bool setRunningTime(gst.types.Format format, ulong runningTime)
   {
     bool _retval;
-    _retval = gst_segment_set_running_time(cast(GstSegment*)cPtr, format, runningTime);
+    _retval = gst_segment_set_running_time(cast(GstSegment*)this._cPtr, format, runningTime);
     return _retval;
   }
 
@@ -686,7 +686,7 @@ class Segment : gobject.boxed.Boxed
   ulong toPosition(gst.types.Format format, ulong runningTime)
   {
     ulong _retval;
-    _retval = gst_segment_to_position(cast(const(GstSegment)*)cPtr, format, runningTime);
+    _retval = gst_segment_to_position(cast(const(GstSegment)*)this._cPtr, format, runningTime);
     return _retval;
   }
 
@@ -710,7 +710,7 @@ class Segment : gobject.boxed.Boxed
   ulong toRunningTime(gst.types.Format format, ulong position)
   {
     ulong _retval;
-    _retval = gst_segment_to_running_time(cast(const(GstSegment)*)cPtr, format, position);
+    _retval = gst_segment_to_running_time(cast(const(GstSegment)*)this._cPtr, format, position);
     return _retval;
   }
 
@@ -740,7 +740,7 @@ class Segment : gobject.boxed.Boxed
   int toRunningTimeFull(gst.types.Format format, ulong position, out ulong runningTime)
   {
     int _retval;
-    _retval = gst_segment_to_running_time_full(cast(const(GstSegment)*)cPtr, format, position, cast(ulong*)&runningTime);
+    _retval = gst_segment_to_running_time_full(cast(const(GstSegment)*)this._cPtr, format, position, cast(ulong*)&runningTime);
     return _retval;
   }
 
@@ -765,7 +765,7 @@ class Segment : gobject.boxed.Boxed
   ulong toStreamTime(gst.types.Format format, ulong position)
   {
     ulong _retval;
-    _retval = gst_segment_to_stream_time(cast(const(GstSegment)*)cPtr, format, position);
+    _retval = gst_segment_to_stream_time(cast(const(GstSegment)*)this._cPtr, format, position);
     return _retval;
   }
 
@@ -795,7 +795,7 @@ class Segment : gobject.boxed.Boxed
   int toStreamTimeFull(gst.types.Format format, ulong position, out ulong streamTime)
   {
     int _retval;
-    _retval = gst_segment_to_stream_time_full(cast(const(GstSegment)*)cPtr, format, position, cast(ulong*)&streamTime);
+    _retval = gst_segment_to_stream_time_full(cast(const(GstSegment)*)this._cPtr, format, position, cast(ulong*)&streamTime);
     return _retval;
   }
 }

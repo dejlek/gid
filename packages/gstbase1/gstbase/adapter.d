@@ -122,16 +122,16 @@ class Adapter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_adapter_get_type != &gidSymbolNotFound ? gst_adapter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -160,7 +160,7 @@ class Adapter : gobject.object.ObjectWrap
   size_t available()
   {
     size_t _retval;
-    _retval = gst_adapter_available(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_available(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class Adapter : gobject.object.ObjectWrap
   size_t availableFast()
   {
     size_t _retval;
-    _retval = gst_adapter_available_fast(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_available_fast(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Adapter : gobject.object.ObjectWrap
   */
   void clear()
   {
-    gst_adapter_clear(cast(GstAdapter*)cPtr);
+    gst_adapter_clear(cast(GstAdapter*)this._cPtr);
   }
 
   /**
@@ -200,7 +200,7 @@ class Adapter : gobject.object.ObjectWrap
   glib.bytes.Bytes copy(size_t offset, size_t size)
   {
     GBytes* _cretval;
-    _cretval = gst_adapter_copy_bytes(cast(GstAdapter*)cPtr, offset, size);
+    _cretval = gst_adapter_copy_bytes(cast(GstAdapter*)this._cPtr, offset, size);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -217,7 +217,7 @@ class Adapter : gobject.object.ObjectWrap
   ulong distanceFromDiscont()
   {
     ulong _retval;
-    _retval = gst_adapter_distance_from_discont(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_distance_from_discont(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime dtsAtDiscont()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_dts_at_discont(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_dts_at_discont(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Adapter : gobject.object.ObjectWrap
   */
   void flush(size_t flush)
   {
-    gst_adapter_flush(cast(GstAdapter*)cPtr, flush);
+    gst_adapter_flush(cast(GstAdapter*)this._cPtr, flush);
   }
 
   /**
@@ -266,7 +266,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer getBuffer(size_t nbytes)
   {
     GstBuffer* _cretval;
-    _cretval = gst_adapter_get_buffer(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_get_buffer(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -290,7 +290,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer getBufferFast(size_t nbytes)
   {
     GstBuffer* _cretval;
-    _cretval = gst_adapter_get_buffer_fast(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_get_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -312,7 +312,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer_list.BufferList getBufferList(size_t nbytes)
   {
     GstBufferList* _cretval;
-    _cretval = gst_adapter_get_buffer_list(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_get_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -334,7 +334,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer[] getList(size_t nbytes)
   {
     GList* _cretval;
-    _cretval = gst_adapter_get_list(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_get_list(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = gListToD!(gst.buffer.Buffer, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -384,7 +384,7 @@ class Adapter : gobject.object.ObjectWrap
   ptrdiff_t maskedScanUint32(uint mask, uint pattern, size_t offset, size_t size)
   {
     ptrdiff_t _retval;
-    _retval = gst_adapter_masked_scan_uint32(cast(GstAdapter*)cPtr, mask, pattern, offset, size);
+    _retval = gst_adapter_masked_scan_uint32(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size);
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class Adapter : gobject.object.ObjectWrap
   ptrdiff_t maskedScanUint32Peek(uint mask, uint pattern, size_t offset, size_t size, out uint value)
   {
     ptrdiff_t _retval;
-    _retval = gst_adapter_masked_scan_uint32_peek(cast(GstAdapter*)cPtr, mask, pattern, offset, size, cast(uint*)&value);
+    _retval = gst_adapter_masked_scan_uint32_peek(cast(GstAdapter*)this._cPtr, mask, pattern, offset, size, cast(uint*)&value);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class Adapter : gobject.object.ObjectWrap
   ulong offsetAtDiscont()
   {
     ulong _retval;
-    _retval = gst_adapter_offset_at_discont(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_offset_at_discont(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime prevDts(out ulong distance)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_prev_dts(cast(GstAdapter*)cPtr, cast(ulong*)&distance);
+    _retval = gst_adapter_prev_dts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime prevDtsAtOffset(size_t offset, out ulong distance)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_prev_dts_at_offset(cast(GstAdapter*)cPtr, offset, cast(ulong*)&distance);
+    _retval = gst_adapter_prev_dts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class Adapter : gobject.object.ObjectWrap
   ulong prevOffset(out ulong distance)
   {
     ulong _retval;
-    _retval = gst_adapter_prev_offset(cast(GstAdapter*)cPtr, cast(ulong*)&distance);
+    _retval = gst_adapter_prev_offset(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime prevPts(out ulong distance)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_prev_pts(cast(GstAdapter*)cPtr, cast(ulong*)&distance);
+    _retval = gst_adapter_prev_pts(cast(GstAdapter*)this._cPtr, cast(ulong*)&distance);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime prevPtsAtOffset(size_t offset, out ulong distance)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_prev_pts_at_offset(cast(GstAdapter*)cPtr, offset, cast(ulong*)&distance);
+    _retval = gst_adapter_prev_pts_at_offset(cast(GstAdapter*)this._cPtr, offset, cast(ulong*)&distance);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.types.ClockTime ptsAtDiscont()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_adapter_pts_at_discont(cast(GstAdapter*)cPtr);
+    _retval = gst_adapter_pts_at_discont(cast(GstAdapter*)this._cPtr);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class Adapter : gobject.object.ObjectWrap
   */
   void push(gst.buffer.Buffer buf)
   {
-    gst_adapter_push(cast(GstAdapter*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(Yes.Dup) : null);
+    gst_adapter_push(cast(GstAdapter*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -589,7 +589,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer takeBuffer(size_t nbytes)
   {
     GstBuffer* _cretval;
-    _cretval = gst_adapter_take_buffer(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_take_buffer(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -628,7 +628,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer takeBufferFast(size_t nbytes)
   {
     GstBuffer* _cretval;
-    _cretval = gst_adapter_take_buffer_fast(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_take_buffer_fast(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -651,7 +651,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer_list.BufferList takeBufferList(size_t nbytes)
   {
     GstBufferList* _cretval;
-    _cretval = gst_adapter_take_buffer_list(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_take_buffer_list(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -674,7 +674,7 @@ class Adapter : gobject.object.ObjectWrap
   gst.buffer.Buffer[] takeList(size_t nbytes)
   {
     GList* _cretval;
-    _cretval = gst_adapter_take_list(cast(GstAdapter*)cPtr, nbytes);
+    _cretval = gst_adapter_take_list(cast(GstAdapter*)this._cPtr, nbytes);
     auto _retval = gListToD!(gst.buffer.Buffer, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -684,6 +684,6 @@ class Adapter : gobject.object.ObjectWrap
   */
   void unmap()
   {
-    gst_adapter_unmap(cast(GstAdapter*)cPtr);
+    gst_adapter_unmap(cast(GstAdapter*)this._cPtr);
   }
 }

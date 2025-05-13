@@ -30,7 +30,7 @@ class EventExpose
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class EventExpose
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventExpose*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventExpose*)this._cPtr).type;
   }
 
   /**
@@ -51,7 +51,7 @@ class EventExpose
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventExpose*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventExpose*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class EventExpose
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)this._cPtr).window);
   }
 
   /**
@@ -70,8 +70,8 @@ class EventExpose
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventExpose*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).window);
   }
 
   /**
@@ -80,7 +80,7 @@ class EventExpose
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventExpose*)cPtr).sendEvent;
+    return (cast(GdkEventExpose*)this._cPtr).sendEvent;
   }
 
   /**
@@ -90,7 +90,7 @@ class EventExpose
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventExpose*)cPtr).sendEvent = propval;
+    (cast(GdkEventExpose*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class EventExpose
   */
   @property gdk.rectangle.Rectangle area()
   {
-    return cToD!(gdk.rectangle.Rectangle)(cast(void*)&(cast(GdkEventExpose*)cPtr).area);
+    return cToD!(gdk.rectangle.Rectangle)(cast(void*)&(cast(GdkEventExpose*)this._cPtr).area);
   }
 
   /**
@@ -108,7 +108,7 @@ class EventExpose
   */
   @property cairo.region.Region region()
   {
-    return cToD!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
+    return cToD!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)this._cPtr).region);
   }
 
   /**
@@ -118,8 +118,8 @@ class EventExpose
   */
   @property void region(cairo.region.Region propval)
   {
-    cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)cPtr).region);
-    dToC(propval, cast(void*)&(cast(GdkEventExpose*)cPtr).region);
+    cValueFree!(cairo.region.Region)(cast(void*)(cast(GdkEventExpose*)this._cPtr).region);
+    dToC(propval, cast(void*)&(cast(GdkEventExpose*)this._cPtr).region);
   }
 
   /**
@@ -131,7 +131,7 @@ class EventExpose
   */
   @property int count()
   {
-    return (cast(GdkEventExpose*)cPtr).count;
+    return (cast(GdkEventExpose*)this._cPtr).count;
   }
 
   /**
@@ -144,6 +144,6 @@ class EventExpose
   */
   @property void count(int propval)
   {
-    (cast(GdkEventExpose*)cPtr).count = propval;
+    (cast(GdkEventExpose*)this._cPtr).count = propval;
   }
 }

@@ -25,7 +25,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult afterSend(gstrtsp.rtspmessage.RTSPMessage req, gstrtsp.rtspmessage.RTSPMessage resp)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_after_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_after_send(cast(GstRTSPExtension*)this._cPtr, req ? cast(GstRTSPMessage*)req._cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -34,7 +34,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult beforeSend(gstrtsp.rtspmessage.RTSPMessage req)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_before_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_before_send(cast(GstRTSPExtension*)this._cPtr, req ? cast(GstRTSPMessage*)req._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -43,7 +43,7 @@ template RTSPExtensionT()
   override bool configureStream(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_rtsp_extension_configure_stream(cast(GstRTSPExtension*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ template RTSPExtensionT()
   override bool detectServer(gstrtsp.rtspmessage.RTSPMessage resp)
   {
     bool _retval;
-    _retval = gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)cPtr, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
+    _retval = gst_rtsp_extension_detect_server(cast(GstRTSPExtension*)this._cPtr, resp ? cast(GstRTSPMessage*)resp._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ template RTSPExtensionT()
   {
     GstRTSPResult _cretval;
     char* _transport = transport.toCString(No.Alloc);
-    _cretval = gst_rtsp_extension_get_transports(cast(GstRTSPExtension*)cPtr, protocols, _transport);
+    _cretval = gst_rtsp_extension_get_transports(cast(GstRTSPExtension*)this._cPtr, protocols, _transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -69,7 +69,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult parseSdp(gstsdp.sdpmessage.SDPMessage sdp, gst.structure.Structure s)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)cPtr, sdp ? cast(GstSDPMessage*)sdp.cPtr(No.Dup) : null, s ? cast(GstStructure*)s.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_parse_sdp(cast(GstRTSPExtension*)this._cPtr, sdp ? cast(GstSDPMessage*)sdp._cPtr(No.Dup) : null, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -78,7 +78,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult receiveRequest(gstrtsp.rtspmessage.RTSPMessage req)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_receive_request(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_receive_request(cast(GstRTSPExtension*)this._cPtr, req ? cast(GstRTSPMessage*)req._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -87,7 +87,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult send(gstrtsp.rtspmessage.RTSPMessage req, gstrtsp.rtspmessage.RTSPMessage resp)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_send(cast(GstRTSPExtension*)cPtr, req ? cast(GstRTSPMessage*)req.cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_send(cast(GstRTSPExtension*)this._cPtr, req ? cast(GstRTSPMessage*)req._cPtr(No.Dup) : null, resp ? cast(GstRTSPMessage*)resp._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -96,7 +96,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult setupMedia(gstsdp.sdpmedia.SDPMedia media)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_setup_media(cast(GstRTSPExtension*)cPtr, media ? cast(GstSDPMedia*)media.cPtr : null);
+    _cretval = gst_rtsp_extension_setup_media(cast(GstRTSPExtension*)this._cPtr, media ? cast(GstSDPMedia*)media._cPtr : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -105,7 +105,7 @@ template RTSPExtensionT()
   override gstrtsp.types.RTSPResult streamSelect(gstrtsp.rtspurl.RTSPUrl url)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_extension_stream_select(cast(GstRTSPExtension*)cPtr, url ? cast(GstRTSPUrl*)url.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_extension_stream_select(cast(GstRTSPExtension*)this._cPtr, url ? cast(GstRTSPUrl*)url._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

@@ -40,7 +40,7 @@ class StrokeNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.stroke.Stroke stroke)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null);
+    _cretval = gsk_stroke_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -51,7 +51,7 @@ class StrokeNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_stroke_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_stroke_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -64,7 +64,7 @@ class StrokeNode : gsk.render_node.RenderNode
   gsk.path.Path getPath()
   {
     GskPath* _cretval;
-    _cretval = gsk_stroke_node_get_path(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_stroke_node_get_path(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -76,7 +76,7 @@ class StrokeNode : gsk.render_node.RenderNode
   gsk.stroke.Stroke getStroke()
   {
     const(GskStroke)* _cretval;
-    _cretval = gsk_stroke_node_get_stroke(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_stroke_node_get_stroke(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

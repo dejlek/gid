@@ -19,16 +19,16 @@ class Ticket : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_ticket_get_type != &gidSymbolNotFound ? gaflight_ticket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class Ticket : gobject.object.ObjectWrap
   this(glib.bytes.Bytes data)
   {
     GAFlightTicket* _cretval;
-    _cretval = gaflight_ticket_new(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+    _cretval = gaflight_ticket_new(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -70,7 +70,7 @@ class Ticket : gobject.object.ObjectWrap
   bool equal(arrowflight.ticket.Ticket otherTicket)
   {
     bool _retval;
-    _retval = gaflight_ticket_equal(cast(GAFlightTicket*)cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket.cPtr(No.Dup) : null);
+    _retval = gaflight_ticket_equal(cast(GAFlightTicket*)this._cPtr, otherTicket ? cast(GAFlightTicket*)otherTicket._cPtr(No.Dup) : null);
     return _retval;
   }
 }

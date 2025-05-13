@@ -46,7 +46,7 @@ class Scanner
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -57,7 +57,7 @@ class Scanner
   */
   @property uint maxParseErrors()
   {
-    return (cast(GScanner*)cPtr).maxParseErrors;
+    return (cast(GScanner*)this._cPtr).maxParseErrors;
   }
 
   /**
@@ -67,7 +67,7 @@ class Scanner
   */
   @property void maxParseErrors(uint propval)
   {
-    (cast(GScanner*)cPtr).maxParseErrors = propval;
+    (cast(GScanner*)this._cPtr).maxParseErrors = propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class Scanner
   */
   @property uint parseErrors()
   {
-    return (cast(GScanner*)cPtr).parseErrors;
+    return (cast(GScanner*)this._cPtr).parseErrors;
   }
 
   /**
@@ -86,7 +86,7 @@ class Scanner
   */
   @property void parseErrors(uint propval)
   {
-    (cast(GScanner*)cPtr).parseErrors = propval;
+    (cast(GScanner*)this._cPtr).parseErrors = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class Scanner
   */
   @property string inputName()
   {
-    return cToD!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
+    return cToD!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
   }
 
   /**
@@ -105,8 +105,8 @@ class Scanner
   */
   @property void inputName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GScanner*)cPtr).inputName);
-    dToC(propval, cast(void*)&(cast(GScanner*)cPtr).inputName);
+    cValueFree!(string)(cast(void*)(cast(GScanner*)this._cPtr).inputName);
+    dToC(propval, cast(void*)&(cast(GScanner*)this._cPtr).inputName);
   }
 
   /**
@@ -115,7 +115,7 @@ class Scanner
   */
   @property glib.types.Data qdata()
   {
-    return (cast(GScanner*)cPtr).qdata;
+    return (cast(GScanner*)this._cPtr).qdata;
   }
 
   /**
@@ -125,7 +125,7 @@ class Scanner
   */
   @property void qdata(glib.types.Data propval)
   {
-    (cast(GScanner*)cPtr).qdata = propval;
+    (cast(GScanner*)this._cPtr).qdata = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class Scanner
   */
   @property glib.scanner_config.ScannerConfig config()
   {
-    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)cPtr).config);
+    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)this._cPtr).config);
   }
 
   /**
@@ -143,7 +143,7 @@ class Scanner
   */
   @property glib.types.TokenType token()
   {
-    return cast(glib.types.TokenType)(cast(GScanner*)cPtr).token;
+    return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).token;
   }
 
   /**
@@ -153,7 +153,7 @@ class Scanner
   */
   @property void token(glib.types.TokenType propval)
   {
-    (cast(GScanner*)cPtr).token = cast(GTokenType)propval;
+    (cast(GScanner*)this._cPtr).token = cast(GTokenType)propval;
   }
 
   /**
@@ -162,7 +162,7 @@ class Scanner
   */
   @property glib.token_value.TokenValue value()
   {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).value);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).value);
   }
 
   /**
@@ -171,7 +171,7 @@ class Scanner
   */
   @property uint line()
   {
-    return (cast(GScanner*)cPtr).line;
+    return (cast(GScanner*)this._cPtr).line;
   }
 
   /**
@@ -181,7 +181,7 @@ class Scanner
   */
   @property void line(uint propval)
   {
-    (cast(GScanner*)cPtr).line = propval;
+    (cast(GScanner*)this._cPtr).line = propval;
   }
 
   /**
@@ -190,7 +190,7 @@ class Scanner
   */
   @property uint position()
   {
-    return (cast(GScanner*)cPtr).position;
+    return (cast(GScanner*)this._cPtr).position;
   }
 
   /**
@@ -200,7 +200,7 @@ class Scanner
   */
   @property void position(uint propval)
   {
-    (cast(GScanner*)cPtr).position = propval;
+    (cast(GScanner*)this._cPtr).position = propval;
   }
 
   /**
@@ -209,7 +209,7 @@ class Scanner
   */
   @property glib.types.TokenType nextToken()
   {
-    return cast(glib.types.TokenType)(cast(GScanner*)cPtr).nextToken;
+    return cast(glib.types.TokenType)(cast(GScanner*)this._cPtr).nextToken;
   }
 
   /**
@@ -219,7 +219,7 @@ class Scanner
   */
   @property void nextToken(glib.types.TokenType propval)
   {
-    (cast(GScanner*)cPtr).nextToken = cast(GTokenType)propval;
+    (cast(GScanner*)this._cPtr).nextToken = cast(GTokenType)propval;
   }
 
   /**
@@ -228,7 +228,7 @@ class Scanner
   */
   @property glib.token_value.TokenValue nextValue()
   {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)cPtr).nextValue);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).nextValue);
   }
 
   /**
@@ -237,7 +237,7 @@ class Scanner
   */
   @property uint nextLine()
   {
-    return (cast(GScanner*)cPtr).nextLine;
+    return (cast(GScanner*)this._cPtr).nextLine;
   }
 
   /**
@@ -247,7 +247,7 @@ class Scanner
   */
   @property void nextLine(uint propval)
   {
-    (cast(GScanner*)cPtr).nextLine = propval;
+    (cast(GScanner*)this._cPtr).nextLine = propval;
   }
 
   /**
@@ -256,7 +256,7 @@ class Scanner
   */
   @property uint nextPosition()
   {
-    return (cast(GScanner*)cPtr).nextPosition;
+    return (cast(GScanner*)this._cPtr).nextPosition;
   }
 
   /**
@@ -266,7 +266,7 @@ class Scanner
   */
   @property void nextPosition(uint propval)
   {
-    (cast(GScanner*)cPtr).nextPosition = propval;
+    (cast(GScanner*)this._cPtr).nextPosition = propval;
   }
 
   /**
@@ -275,7 +275,7 @@ class Scanner
   */
   @property GScannerMsgFunc msgHandler()
   {
-    return (cast(GScanner*)cPtr).msgHandler;
+    return (cast(GScanner*)this._cPtr).msgHandler;
   }
 
   /**
@@ -286,7 +286,7 @@ class Scanner
 
   @property void msgHandler(GScannerMsgFunc propval)
   {
-    (cast(GScanner*)cPtr).msgHandler = propval;
+    (cast(GScanner*)this._cPtr).msgHandler = propval;
   }
 
   /**
@@ -298,7 +298,7 @@ class Scanner
   uint curLine()
   {
     uint _retval;
-    _retval = g_scanner_cur_line(cast(GScanner*)cPtr);
+    _retval = g_scanner_cur_line(cast(GScanner*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class Scanner
   uint curPosition()
   {
     uint _retval;
-    _retval = g_scanner_cur_position(cast(GScanner*)cPtr);
+    _retval = g_scanner_cur_position(cast(GScanner*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class Scanner
   glib.types.TokenType curToken()
   {
     GTokenType _cretval;
-    _cretval = g_scanner_cur_token(cast(GScanner*)cPtr);
+    _cretval = g_scanner_cur_token(cast(GScanner*)this._cPtr);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
@@ -333,7 +333,7 @@ class Scanner
   */
   void destroy()
   {
-    g_scanner_destroy(cast(GScanner*)cPtr);
+    g_scanner_destroy(cast(GScanner*)this._cPtr);
   }
 
   /**
@@ -345,7 +345,7 @@ class Scanner
   bool eof()
   {
     bool _retval;
-    _retval = g_scanner_eof(cast(GScanner*)cPtr);
+    _retval = g_scanner_eof(cast(GScanner*)this._cPtr);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class Scanner
   glib.types.TokenType getNextToken()
   {
     GTokenType _cretval;
-    _cretval = g_scanner_get_next_token(cast(GScanner*)cPtr);
+    _cretval = g_scanner_get_next_token(cast(GScanner*)this._cPtr);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
@@ -372,7 +372,7 @@ class Scanner
   */
   void inputFile(int inputFd)
   {
-    g_scanner_input_file(cast(GScanner*)cPtr, inputFd);
+    g_scanner_input_file(cast(GScanner*)this._cPtr, inputFd);
   }
 
   /**
@@ -385,7 +385,7 @@ class Scanner
   void inputText(string text, uint textLen)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    g_scanner_input_text(cast(GScanner*)cPtr, _text, textLen);
+    g_scanner_input_text(cast(GScanner*)this._cPtr, _text, textLen);
   }
 
   /**
@@ -401,7 +401,7 @@ class Scanner
   void* lookupSymbol(string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    auto _retval = g_scanner_lookup_symbol(cast(GScanner*)cPtr, _symbol);
+    auto _retval = g_scanner_lookup_symbol(cast(GScanner*)this._cPtr, _symbol);
     return _retval;
   }
 
@@ -422,7 +422,7 @@ class Scanner
   glib.types.TokenType peekNextToken()
   {
     GTokenType _cretval;
-    _cretval = g_scanner_peek_next_token(cast(GScanner*)cPtr);
+    _cretval = g_scanner_peek_next_token(cast(GScanner*)this._cPtr);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
@@ -438,7 +438,7 @@ class Scanner
   void scopeAddSymbol(uint scopeId, string symbol, void* value = null)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    g_scanner_scope_add_symbol(cast(GScanner*)cPtr, scopeId, _symbol, value);
+    g_scanner_scope_add_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol, value);
   }
 
   /**
@@ -462,7 +462,7 @@ class Scanner
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_scanner_scope_foreach_symbol(cast(GScanner*)cPtr, scopeId, _funcCB, _func);
+    g_scanner_scope_foreach_symbol(cast(GScanner*)this._cPtr, scopeId, _funcCB, _func);
   }
 
   /**
@@ -478,7 +478,7 @@ class Scanner
   void* scopeLookupSymbol(uint scopeId, string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
+    auto _retval = g_scanner_scope_lookup_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
     return _retval;
   }
 
@@ -492,7 +492,7 @@ class Scanner
   void scopeRemoveSymbol(uint scopeId, string symbol)
   {
     const(char)* _symbol = symbol.toCString(No.Alloc);
-    g_scanner_scope_remove_symbol(cast(GScanner*)cPtr, scopeId, _symbol);
+    g_scanner_scope_remove_symbol(cast(GScanner*)this._cPtr, scopeId, _symbol);
   }
 
   /**
@@ -505,7 +505,7 @@ class Scanner
   uint setScope(uint scopeId)
   {
     uint _retval;
-    _retval = g_scanner_set_scope(cast(GScanner*)cPtr, scopeId);
+    _retval = g_scanner_set_scope(cast(GScanner*)this._cPtr, scopeId);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class Scanner
   */
   void syncFileOffset()
   {
-    g_scanner_sync_file_offset(cast(GScanner*)cPtr);
+    g_scanner_sync_file_offset(cast(GScanner*)this._cPtr);
   }
 
   /**
@@ -552,6 +552,6 @@ class Scanner
     const(char)* _symbolSpec = symbolSpec.toCString(No.Alloc);
     const(char)* _symbolName = symbolName.toCString(No.Alloc);
     const(char)* _message = message.toCString(No.Alloc);
-    g_scanner_unexp_token(cast(GScanner*)cPtr, expectedToken, _identifierSpec, _symbolSpec, _symbolName, _message, isError);
+    g_scanner_unexp_token(cast(GScanner*)this._cPtr, expectedToken, _identifierSpec, _symbolSpec, _symbolName, _message, isError);
   }
 }

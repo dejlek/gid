@@ -37,7 +37,7 @@ class ObjectIter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -67,7 +67,7 @@ class ObjectIter
   */
   void init_(json.object.ObjectWrap object)
   {
-    json_object_iter_init(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
+    json_object_iter_init(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -92,7 +92,7 @@ class ObjectIter
   */
   void initOrdered(json.object.ObjectWrap object)
   {
-    json_object_iter_init_ordered(cast(JsonObjectIter*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
+    json_object_iter_init_ordered(cast(JsonObjectIter*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -125,7 +125,7 @@ class ObjectIter
     bool _retval;
     char* _memberName;
     JsonNode* _memberNode;
-    _retval = json_object_iter_next(cast(JsonObjectIter*)cPtr, &_memberName, &_memberNode);
+    _retval = json_object_iter_next(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
     memberName = _memberName.fromCString(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;
@@ -160,7 +160,7 @@ class ObjectIter
     bool _retval;
     char* _memberName;
     JsonNode* _memberNode;
-    _retval = json_object_iter_next_ordered(cast(JsonObjectIter*)cPtr, &_memberName, &_memberNode);
+    _retval = json_object_iter_next_ordered(cast(JsonObjectIter*)this._cPtr, &_memberName, &_memberNode);
     memberName = _memberName.fromCString(No.Free);
     memberNode = new json.node.Node(cast(void*)_memberNode, No.Take);
     return _retval;

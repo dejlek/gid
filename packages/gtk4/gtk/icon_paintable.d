@@ -27,16 +27,16 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_paintable_get_type != &gidSymbolNotFound ? gtk_icon_paintable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,8 +63,8 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   static gtk.icon_paintable.IconPaintable newForFile(gio.file.File file, int size, int scale)
   {
     GtkIconPaintable* _cretval;
-    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, size, scale);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_icon_paintable_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, size, scale);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_paintable.IconPaintable)(cast(GtkIconPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,8 +77,8 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = gtk_icon_paintable_get_file(cast(GtkIconPaintable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)cPtr);
+    _cretval = gtk_icon_paintable_get_icon_name(cast(GtkIconPaintable*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -116,7 +116,7 @@ class IconPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable, gtk.sy
   bool isSymbolic()
   {
     bool _retval;
-    _retval = gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)cPtr);
+    _retval = gtk_icon_paintable_is_symbolic(cast(GtkIconPaintable*)this._cPtr);
     return _retval;
   }
 }

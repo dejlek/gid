@@ -44,10 +44,10 @@ template ProxyT()
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_proxy_connect(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_proxy_connect(cast(GProxy*)this._cPtr, connection ? cast(GIOStream*)connection._cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,17 +62,17 @@ template ProxyT()
   */
   override void connectAsync(gio.iostream.IOStream connection, gio.proxy_address.ProxyAddress proxyAddress, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_proxy_connect_async(cast(GProxy*)cPtr, connection ? cast(GIOStream*)connection.cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_proxy_connect_async(cast(GProxy*)this._cPtr, connection ? cast(GIOStream*)connection._cPtr(No.Dup) : null, proxyAddress ? cast(GProxyAddress*)proxyAddress._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -87,10 +87,10 @@ template ProxyT()
   {
     GIOStream* _cretval;
     GError *_err;
-    _cretval = g_proxy_connect_finish(cast(GProxy*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_proxy_connect_finish(cast(GProxy*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ template ProxyT()
   override bool supportsHostname()
   {
     bool _retval;
-    _retval = g_proxy_supports_hostname(cast(GProxy*)cPtr);
+    _retval = g_proxy_supports_hostname(cast(GProxy*)this._cPtr);
     return _retval;
   }
 }

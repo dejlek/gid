@@ -32,7 +32,7 @@ class TestSuite
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,7 +45,7 @@ class TestSuite
   */
   void add(glib.types.TestCase testCase)
   {
-    g_test_suite_add(cast(GTestSuite*)cPtr, testCase);
+    g_test_suite_add(cast(GTestSuite*)this._cPtr, testCase);
   }
 
   /**
@@ -56,6 +56,6 @@ class TestSuite
   */
   void addSuite(glib.test_suite.TestSuite nestedsuite)
   {
-    g_test_suite_add_suite(cast(GTestSuite*)cPtr, nestedsuite ? cast(GTestSuite*)nestedsuite.cPtr : null);
+    g_test_suite_add_suite(cast(GTestSuite*)this._cPtr, nestedsuite ? cast(GTestSuite*)nestedsuite._cPtr : null);
   }
 }

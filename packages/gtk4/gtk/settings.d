@@ -50,16 +50,16 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_settings_get_type != &gidSymbolNotFound ? gtk_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1393,7 +1393,7 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     GtkSettings* _cretval;
     _cretval = gtk_settings_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1407,8 +1407,8 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   static gtk.settings.Settings getForDisplay(gdk.display.Display display)
   {
     GtkSettings* _cretval;
-    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    _cretval = gtk_settings_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1425,6 +1425,6 @@ class Settings : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void resetProperty(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_settings_reset_property(cast(GtkSettings*)cPtr, _name);
+    gtk_settings_reset_property(cast(GtkSettings*)this._cPtr, _name);
   }
 }

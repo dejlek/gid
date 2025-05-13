@@ -22,7 +22,7 @@ interface URIHandler
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_uri_handler_get_type != &gidSymbolNotFound ? gst_uri_handler_get_type() : cast(GType)0;

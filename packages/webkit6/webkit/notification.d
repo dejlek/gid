@@ -21,16 +21,16 @@ class Notification : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_notification_get_type != &gidSymbolNotFound ? webkit_notification_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void clicked()
   {
-    webkit_notification_clicked(cast(WebKitNotification*)cPtr);
+    webkit_notification_clicked(cast(WebKitNotification*)this._cPtr);
   }
 
   /**
@@ -91,7 +91,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void close()
   {
-    webkit_notification_close(cast(WebKitNotification*)cPtr);
+    webkit_notification_close(cast(WebKitNotification*)this._cPtr);
   }
 
   /**
@@ -101,7 +101,7 @@ class Notification : gobject.object.ObjectWrap
   string getBody()
   {
     const(char)* _cretval;
-    _cretval = webkit_notification_get_body(cast(WebKitNotification*)cPtr);
+    _cretval = webkit_notification_get_body(cast(WebKitNotification*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -113,7 +113,7 @@ class Notification : gobject.object.ObjectWrap
   ulong getId()
   {
     ulong _retval;
-    _retval = webkit_notification_get_id(cast(WebKitNotification*)cPtr);
+    _retval = webkit_notification_get_id(cast(WebKitNotification*)this._cPtr);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Notification : gobject.object.ObjectWrap
   string getTag()
   {
     const(char)* _cretval;
-    _cretval = webkit_notification_get_tag(cast(WebKitNotification*)cPtr);
+    _cretval = webkit_notification_get_tag(cast(WebKitNotification*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -136,7 +136,7 @@ class Notification : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = webkit_notification_get_title(cast(WebKitNotification*)cPtr);
+    _cretval = webkit_notification_get_title(cast(WebKitNotification*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

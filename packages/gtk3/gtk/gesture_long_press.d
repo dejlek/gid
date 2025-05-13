@@ -29,16 +29,16 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_long_press_get_type != &gidSymbolNotFound ? gtk_gesture_long_press_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_long_press_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_long_press_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 

@@ -89,13 +89,13 @@ template NavigationT()
   */
   override void sendCommand(gstvideo.types.NavigationCommand command)
   {
-    gst_navigation_send_command(cast(GstNavigation*)cPtr, command);
+    gst_navigation_send_command(cast(GstNavigation*)this._cPtr, command);
   }
 
   /** */
   override void sendEvent(gst.structure.Structure structure)
   {
-    gst_navigation_send_event(cast(GstNavigation*)cPtr, structure ? cast(GstStructure*)structure.cPtr(No.Dup) : null);
+    gst_navigation_send_event(cast(GstNavigation*)this._cPtr, structure ? cast(GstStructure*)structure._cPtr(No.Dup) : null);
   }
 
   /**
@@ -106,7 +106,7 @@ template NavigationT()
   */
   override void sendEventSimple(gst.event.Event event)
   {
-    gst_navigation_send_event_simple(cast(GstNavigation*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    gst_navigation_send_event_simple(cast(GstNavigation*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
   }
 
   /** */
@@ -114,7 +114,7 @@ template NavigationT()
   {
     const(char)* _event = event.toCString(No.Alloc);
     const(char)* _key = key.toCString(No.Alloc);
-    gst_navigation_send_key_event(cast(GstNavigation*)cPtr, _event, _key);
+    gst_navigation_send_key_event(cast(GstNavigation*)this._cPtr, _event, _key);
   }
 
   /**
@@ -134,7 +134,7 @@ template NavigationT()
   override void sendMouseEvent(string event, int button, double x, double y)
   {
     const(char)* _event = event.toCString(No.Alloc);
-    gst_navigation_send_mouse_event(cast(GstNavigation*)cPtr, _event, button, x, y);
+    gst_navigation_send_mouse_event(cast(GstNavigation*)this._cPtr, _event, button, x, y);
   }
 
   /**
@@ -151,6 +151,6 @@ template NavigationT()
   */
   override void sendMouseScrollEvent(double x, double y, double deltaX, double deltaY)
   {
-    gst_navigation_send_mouse_scroll_event(cast(GstNavigation*)cPtr, x, y, deltaX, deltaY);
+    gst_navigation_send_mouse_scroll_event(cast(GstNavigation*)this._cPtr, x, y, deltaX, deltaY);
   }
 }

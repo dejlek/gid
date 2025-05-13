@@ -44,7 +44,7 @@ class InputMessage
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -55,7 +55,7 @@ class InputMessage
   */
   @property uint numVectors()
   {
-    return (cast(GInputMessage*)cPtr).numVectors;
+    return (cast(GInputMessage*)this._cPtr).numVectors;
   }
 
   /**
@@ -65,7 +65,7 @@ class InputMessage
   */
   @property void numVectors(uint propval)
   {
-    (cast(GInputMessage*)cPtr).numVectors = propval;
+    (cast(GInputMessage*)this._cPtr).numVectors = propval;
   }
 
   /**
@@ -75,7 +75,7 @@ class InputMessage
   */
   @property size_t bytesReceived()
   {
-    return (cast(GInputMessage*)cPtr).bytesReceived;
+    return (cast(GInputMessage*)this._cPtr).bytesReceived;
   }
 
   /**
@@ -86,7 +86,7 @@ class InputMessage
   */
   @property void bytesReceived(size_t propval)
   {
-    (cast(GInputMessage*)cPtr).bytesReceived = propval;
+    (cast(GInputMessage*)this._cPtr).bytesReceived = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class InputMessage
   */
   @property int flags()
   {
-    return (cast(GInputMessage*)cPtr).flags;
+    return (cast(GInputMessage*)this._cPtr).flags;
   }
 
   /**
@@ -107,6 +107,6 @@ class InputMessage
   */
   @property void flags(int propval)
   {
-    (cast(GInputMessage*)cPtr).flags = propval;
+    (cast(GInputMessage*)this._cPtr).flags = propval;
   }
 }

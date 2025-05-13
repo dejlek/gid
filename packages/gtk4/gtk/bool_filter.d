@@ -22,16 +22,16 @@ class BoolFilter : gtk.filter.Filter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bool_filter_get_type != &gidSymbolNotFound ? gtk_bool_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,7 +88,7 @@ class BoolFilter : gtk.filter.Filter
   this(gtk.expression.Expression expression = null)
   {
     GtkBoolFilter* _cretval;
-    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    _cretval = gtk_bool_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -100,7 +100,7 @@ class BoolFilter : gtk.filter.Filter
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_bool_filter_get_expression(cast(GtkBoolFilter*)cPtr);
+    _cretval = gtk_bool_filter_get_expression(cast(GtkBoolFilter*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -112,7 +112,7 @@ class BoolFilter : gtk.filter.Filter
   bool getInvert()
   {
     bool _retval;
-    _retval = gtk_bool_filter_get_invert(cast(GtkBoolFilter*)cPtr);
+    _retval = gtk_bool_filter_get_invert(cast(GtkBoolFilter*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class BoolFilter : gtk.filter.Filter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_bool_filter_set_expression(cast(GtkBoolFilter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -138,6 +138,6 @@ class BoolFilter : gtk.filter.Filter
   */
   void setInvert(bool invert)
   {
-    gtk_bool_filter_set_invert(cast(GtkBoolFilter*)cPtr, invert);
+    gtk_bool_filter_set_invert(cast(GtkBoolFilter*)this._cPtr, invert);
   }
 }

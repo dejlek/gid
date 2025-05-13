@@ -25,16 +25,16 @@ class URIResponse : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_response_get_type != &gidSymbolNotFound ? webkit_uri_response_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -106,7 +106,7 @@ class URIResponse : gobject.object.ObjectWrap
   ulong getContentLength()
   {
     ulong _retval;
-    _retval = webkit_uri_response_get_content_length(cast(WebKitURIResponse*)cPtr);
+    _retval = webkit_uri_response_get_content_length(cast(WebKitURIResponse*)this._cPtr);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class URIResponse : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getHttpHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = webkit_uri_response_get_http_headers(cast(WebKitURIResponse*)cPtr);
+    _cretval = webkit_uri_response_get_http_headers(cast(WebKitURIResponse*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -130,7 +130,7 @@ class URIResponse : gobject.object.ObjectWrap
   string getMimeType()
   {
     const(char)* _cretval;
-    _cretval = webkit_uri_response_get_mime_type(cast(WebKitURIResponse*)cPtr);
+    _cretval = webkit_uri_response_get_mime_type(cast(WebKitURIResponse*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -147,7 +147,7 @@ class URIResponse : gobject.object.ObjectWrap
   uint getStatusCode()
   {
     uint _retval;
-    _retval = webkit_uri_response_get_status_code(cast(WebKitURIResponse*)cPtr);
+    _retval = webkit_uri_response_get_status_code(cast(WebKitURIResponse*)this._cPtr);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class URIResponse : gobject.object.ObjectWrap
   string getSuggestedFilename()
   {
     const(char)* _cretval;
-    _cretval = webkit_uri_response_get_suggested_filename(cast(WebKitURIResponse*)cPtr);
+    _cretval = webkit_uri_response_get_suggested_filename(cast(WebKitURIResponse*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -175,7 +175,7 @@ class URIResponse : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_uri_response_get_uri(cast(WebKitURIResponse*)cPtr);
+    _cretval = webkit_uri_response_get_uri(cast(WebKitURIResponse*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

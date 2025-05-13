@@ -31,7 +31,7 @@ class EventGrabBroken
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class EventGrabBroken
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventGrabBroken*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventGrabBroken*)this._cPtr).type;
   }
 
   /**
@@ -52,7 +52,7 @@ class EventGrabBroken
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventGrabBroken*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -62,7 +62,7 @@ class EventGrabBroken
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
   }
 
   /**
@@ -73,8 +73,8 @@ class EventGrabBroken
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).window);
   }
 
   /**
@@ -83,7 +83,7 @@ class EventGrabBroken
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventGrabBroken*)cPtr).sendEvent;
+    return (cast(GdkEventGrabBroken*)this._cPtr).sendEvent;
   }
 
   /**
@@ -93,7 +93,7 @@ class EventGrabBroken
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventGrabBroken*)cPtr).sendEvent = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -103,7 +103,7 @@ class EventGrabBroken
   */
   @property bool keyboard()
   {
-    return (cast(GdkEventGrabBroken*)cPtr).keyboard;
+    return (cast(GdkEventGrabBroken*)this._cPtr).keyboard;
   }
 
   /**
@@ -114,7 +114,7 @@ class EventGrabBroken
   */
   @property void keyboard(bool propval)
   {
-    (cast(GdkEventGrabBroken*)cPtr).keyboard = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).keyboard = propval;
   }
 
   /**
@@ -123,7 +123,7 @@ class EventGrabBroken
   */
   @property bool implicit()
   {
-    return (cast(GdkEventGrabBroken*)cPtr).implicit;
+    return (cast(GdkEventGrabBroken*)this._cPtr).implicit;
   }
 
   /**
@@ -133,7 +133,7 @@ class EventGrabBroken
   */
   @property void implicit(bool propval)
   {
-    (cast(GdkEventGrabBroken*)cPtr).implicit = propval;
+    (cast(GdkEventGrabBroken*)this._cPtr).implicit = propval;
   }
 
   /**
@@ -144,7 +144,7 @@ class EventGrabBroken
   */
   @property gdk.window.Window grabWindow()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).grabWindow);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
   }
 
   /**
@@ -156,7 +156,7 @@ class EventGrabBroken
   */
   @property void grabWindow(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)cPtr).grabWindow);
-    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)cPtr).grabWindow);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
+    dToC(propval, cast(void*)&(cast(GdkEventGrabBroken*)this._cPtr).grabWindow);
   }
 }

@@ -36,7 +36,7 @@ interface Preset
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_preset_get_type != &gidSymbolNotFound ? gst_preset_get_type() : cast(GType)0;

@@ -138,16 +138,16 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_debug_controller_dbus_get_type != &gidSymbolNotFound ? g_debug_controller_dbus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -179,7 +179,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   {
     GDebugControllerDBus* _cretval;
     GError *_err;
-    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_debug_controller_dbus_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -205,7 +205,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
   */
   void stop()
   {
-    g_debug_controller_dbus_stop(cast(GDebugControllerDBus*)cPtr);
+    g_debug_controller_dbus_stop(cast(GDebugControllerDBus*)this._cPtr);
   }
 
   /**

@@ -61,16 +61,16 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_signal_list_item_factory_get_type != &gidSymbolNotFound ? gtk_signal_list_item_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

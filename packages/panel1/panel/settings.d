@@ -25,16 +25,16 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_settings_get_type != &gidSymbolNotFound ? panel_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
     const(char)* _pathPrefix = pathPrefix.toCString(No.Alloc);
     const(char)* _pathSuffix = pathSuffix.toCString(No.Alloc);
     _cretval = panel_settings_new_relocatable(_identifier, _schemaId, _schemaIdPrefix, _pathPrefix, _pathSuffix);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = panel_settings_new_with_path(_identifier, _schemaId, _path);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.settings.Settings)(cast(PanelSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _property = property.toCString(No.Alloc);
-    panel_settings_bind(cast(PanelSettings*)cPtr, _key, object, _property, flags);
+    panel_settings_bind(cast(PanelSettings*)this._cPtr, _key, object, _property, flags);
   }
 
   /**
@@ -134,7 +134,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
       auto _dlg = cast(gio.types.SettingsBindSetMapping*)userData;
 
       _dretval = (*_dlg)(value ? new gobject.value.Value(cast(void*)value, No.Take) : null, expectedType ? new glib.variant_type.VariantType(cast(void*)expectedType, No.Take) : null);
-      GVariant* _retval = cast(GVariant*)_dretval.cPtr(Yes.Dup);
+      GVariant* _retval = cast(GVariant*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -144,7 +144,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
     const(char)* _property = property.toCString(No.Alloc);
     auto _setMapping = setMapping ? freezeDelegate(cast(void*)&setMapping) : null;
     GDestroyNotify _setMappingDestroyCB = setMapping ? &thawDelegate : null;
-    panel_settings_bind_with_mapping(cast(PanelSettings*)cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
+    panel_settings_bind_with_mapping(cast(PanelSettings*)this._cPtr, _key, object, _property, flags, _getMappingCB, _setMappingCB, _setMapping, _setMappingDestroyCB);
   }
 
   /** */
@@ -152,7 +152,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_settings_get_boolean(cast(PanelSettings*)cPtr, _key);
+    _retval = panel_settings_get_boolean(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_settings_get_default_value(cast(PanelSettings*)cPtr, _key);
+    _cretval = panel_settings_get_default_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -171,7 +171,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_settings_get_double(cast(PanelSettings*)cPtr, _key);
+    _retval = panel_settings_get_double(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_settings_get_int(cast(PanelSettings*)cPtr, _key);
+    _retval = panel_settings_get_int(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   string getSchemaId()
   {
     const(char)* _cretval;
-    _cretval = panel_settings_get_schema_id(cast(PanelSettings*)cPtr);
+    _cretval = panel_settings_get_schema_id(cast(PanelSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -198,7 +198,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_settings_get_string(cast(PanelSettings*)cPtr, _key);
+    _cretval = panel_settings_get_string(cast(PanelSettings*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -208,7 +208,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     uint _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = panel_settings_get_uint(cast(PanelSettings*)cPtr, _key);
+    _retval = panel_settings_get_uint(cast(PanelSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_settings_get_user_value(cast(PanelSettings*)cPtr, _key);
+    _cretval = panel_settings_get_user_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -227,7 +227,7 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     GVariant* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = panel_settings_get_value(cast(PanelSettings*)cPtr, _key);
+    _cretval = panel_settings_get_value(cast(PanelSettings*)this._cPtr, _key);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -236,21 +236,21 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   void setBoolean(string key, bool val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_boolean(cast(PanelSettings*)cPtr, _key, val);
+    panel_settings_set_boolean(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setDouble(string key, double val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_double(cast(PanelSettings*)cPtr, _key, val);
+    panel_settings_set_double(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setInt(string key, int val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_int(cast(PanelSettings*)cPtr, _key, val);
+    panel_settings_set_int(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
@@ -258,28 +258,28 @@ class Settings : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _val = val.toCString(No.Alloc);
-    panel_settings_set_string(cast(PanelSettings*)cPtr, _key, _val);
+    panel_settings_set_string(cast(PanelSettings*)this._cPtr, _key, _val);
   }
 
   /** */
   void setUint(string key, uint val)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_uint(cast(PanelSettings*)cPtr, _key, val);
+    panel_settings_set_uint(cast(PanelSettings*)this._cPtr, _key, val);
   }
 
   /** */
   void setValue(string key, glib.variant.Variant value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    panel_settings_set_value(cast(PanelSettings*)cPtr, _key, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    panel_settings_set_value(cast(PanelSettings*)this._cPtr, _key, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /** */
   void unbind(string property)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    panel_settings_unbind(cast(PanelSettings*)cPtr, _property);
+    panel_settings_unbind(cast(PanelSettings*)this._cPtr, _property);
   }
 
   /**

@@ -32,7 +32,7 @@ template URIHandlerT()
   override string[] getProtocols()
   {
     const(char*)* _cretval;
-    _cretval = gst_uri_handler_get_protocols(cast(GstURIHandler*)cPtr);
+    _cretval = gst_uri_handler_get_protocols(cast(GstURIHandler*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -57,7 +57,7 @@ template URIHandlerT()
   override string getUri()
   {
     char* _cretval;
-    _cretval = gst_uri_handler_get_uri(cast(GstURIHandler*)cPtr);
+    _cretval = gst_uri_handler_get_uri(cast(GstURIHandler*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -70,7 +70,7 @@ template URIHandlerT()
   override gst.types.URIType getUriType()
   {
     GstURIType _cretval;
-    _cretval = gst_uri_handler_get_uri_type(cast(GstURIHandler*)cPtr);
+    _cretval = gst_uri_handler_get_uri_type(cast(GstURIHandler*)this._cPtr);
     gst.types.URIType _retval = cast(gst.types.URIType)_cretval;
     return _retval;
   }
@@ -88,7 +88,7 @@ template URIHandlerT()
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gst_uri_handler_set_uri(cast(GstURIHandler*)cPtr, _uri, &_err);
+    _retval = gst_uri_handler_set_uri(cast(GstURIHandler*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

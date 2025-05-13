@@ -70,7 +70,7 @@ template VolumeT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_volume_can_eject(cast(GVolume*)cPtr);
+    _retval = g_volume_can_eject(cast(GVolume*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ template VolumeT()
   override bool canMount()
   {
     bool _retval;
-    _retval = g_volume_can_mount(cast(GVolume*)cPtr);
+    _retval = g_volume_can_mount(cast(GVolume*)this._cPtr);
     return _retval;
   }
 
@@ -99,17 +99,17 @@ template VolumeT()
   */
   override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_eject(cast(GVolume*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_volume_eject(cast(GVolume*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -127,7 +127,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_eject_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -147,17 +147,17 @@ template VolumeT()
   */
   override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_eject_with_operation(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_volume_eject_with_operation(cast(GVolume*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -173,7 +173,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_eject_with_operation_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -188,7 +188,7 @@ template VolumeT()
   override string[] enumerateIdentifiers()
   {
     char** _cretval;
-    _cretval = g_volume_enumerate_identifiers(cast(GVolume*)cPtr);
+    _cretval = g_volume_enumerate_identifiers(cast(GVolume*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -236,8 +236,8 @@ template VolumeT()
   override gio.file.File getActivationRoot()
   {
     GFile* _cretval;
-    _cretval = g_volume_get_activation_root(cast(GVolume*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_volume_get_activation_root(cast(GVolume*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -250,8 +250,8 @@ template VolumeT()
   override gio.drive.Drive getDrive()
   {
     GDrive* _cretval;
-    _cretval = g_volume_get_drive(cast(GVolume*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
+    _cretval = g_volume_get_drive(cast(GVolume*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -264,8 +264,8 @@ template VolumeT()
   override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = g_volume_get_icon(cast(GVolume*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_volume_get_icon(cast(GVolume*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ template VolumeT()
   {
     char* _cretval;
     const(char)* _kind = kind.toCString(No.Alloc);
-    _cretval = g_volume_get_identifier(cast(GVolume*)cPtr, _kind);
+    _cretval = g_volume_get_identifier(cast(GVolume*)this._cPtr, _kind);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -298,8 +298,8 @@ template VolumeT()
   override gio.mount.Mount getMount()
   {
     GMount* _cretval;
-    _cretval = g_volume_get_mount(cast(GVolume*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+    _cretval = g_volume_get_mount(cast(GVolume*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ template VolumeT()
   override string getName()
   {
     char* _cretval;
-    _cretval = g_volume_get_name(cast(GVolume*)cPtr);
+    _cretval = g_volume_get_name(cast(GVolume*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -323,7 +323,7 @@ template VolumeT()
   override string getSortKey()
   {
     const(char)* _cretval;
-    _cretval = g_volume_get_sort_key(cast(GVolume*)cPtr);
+    _cretval = g_volume_get_sort_key(cast(GVolume*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -337,8 +337,8 @@ template VolumeT()
   override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
-    _cretval = g_volume_get_symbolic_icon(cast(GVolume*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_volume_get_symbolic_icon(cast(GVolume*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ template VolumeT()
   override string getUuid()
   {
     char* _cretval;
-    _cretval = g_volume_get_uuid(cast(GVolume*)cPtr);
+    _cretval = g_volume_get_uuid(cast(GVolume*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -373,17 +373,17 @@ template VolumeT()
   */
   override void mount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_volume_mount(cast(GVolume*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_volume_mount(cast(GVolume*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -404,7 +404,7 @@ template VolumeT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_volume_mount_finish(cast(GVolume*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_volume_mount_finish(cast(GVolume*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -417,7 +417,7 @@ template VolumeT()
   override bool shouldAutomount()
   {
     bool _retval;
-    _retval = g_volume_should_automount(cast(GVolume*)cPtr);
+    _retval = g_volume_should_automount(cast(GVolume*)this._cPtr);
     return _retval;
   }
 

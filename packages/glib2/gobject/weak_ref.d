@@ -49,7 +49,7 @@ class WeakRef
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

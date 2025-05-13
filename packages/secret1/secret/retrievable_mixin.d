@@ -102,7 +102,7 @@ template RetrievableT()
   override string[string] getAttributes()
   {
     GHashTable* _cretval;
-    _cretval = secret_retrievable_get_attributes(cast(SecretRetrievable*)cPtr);
+    _cretval = secret_retrievable_get_attributes(cast(SecretRetrievable*)this._cPtr);
     auto _retval = gHashTableToD!(string, string, GidOwnership.Full)(cast(GHashTable*)_cretval);
     return _retval;
   }
@@ -117,7 +117,7 @@ template RetrievableT()
   override ulong getCreated()
   {
     ulong _retval;
-    _retval = secret_retrievable_get_created(cast(SecretRetrievable*)cPtr);
+    _retval = secret_retrievable_get_created(cast(SecretRetrievable*)this._cPtr);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ template RetrievableT()
   override string getLabel()
   {
     char* _cretval;
-    _cretval = secret_retrievable_get_label(cast(SecretRetrievable*)cPtr);
+    _cretval = secret_retrievable_get_label(cast(SecretRetrievable*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -143,7 +143,7 @@ template RetrievableT()
   override ulong getModified()
   {
     ulong _retval;
-    _retval = secret_retrievable_get_modified(cast(SecretRetrievable*)cPtr);
+    _retval = secret_retrievable_get_modified(cast(SecretRetrievable*)this._cPtr);
     return _retval;
   }
 
@@ -161,17 +161,17 @@ template RetrievableT()
   */
   override void retrieveSecret(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    secret_retrievable_retrieve_secret(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    secret_retrievable_retrieve_secret(cast(SecretRetrievable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -187,7 +187,7 @@ template RetrievableT()
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = secret_retrievable_retrieve_secret_finish(cast(SecretRetrievable*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;
@@ -213,7 +213,7 @@ template RetrievableT()
   {
     SecretValue* _cretval;
     GError *_err;
-    _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = secret_retrievable_retrieve_secret_sync(cast(SecretRetrievable*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new secret.value.Value(cast(void*)_cretval, Yes.Take) : null;

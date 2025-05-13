@@ -64,7 +64,7 @@ template SelectionModelT()
   override gtk.bitset.Bitset getSelection()
   {
     GtkBitset* _cretval;
-    _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)cPtr);
+    _cretval = gtk_selection_model_get_selection(cast(GtkSelectionModel*)this._cPtr);
     auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -88,7 +88,7 @@ template SelectionModelT()
   override gtk.bitset.Bitset getSelectionInRange(uint position, uint nItems)
   {
     GtkBitset* _cretval;
-    _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)cPtr, position, nItems);
+    _cretval = gtk_selection_model_get_selection_in_range(cast(GtkSelectionModel*)this._cPtr, position, nItems);
     auto _retval = _cretval ? new gtk.bitset.Bitset(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -103,7 +103,7 @@ template SelectionModelT()
   override bool isSelected(uint position)
   {
     bool _retval;
-    _retval = gtk_selection_model_is_selected(cast(GtkSelectionModel*)cPtr, position);
+    _retval = gtk_selection_model_is_selected(cast(GtkSelectionModel*)this._cPtr, position);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ template SelectionModelT()
   override bool selectAll()
   {
     bool _retval;
-    _retval = gtk_selection_model_select_all(cast(GtkSelectionModel*)cPtr);
+    _retval = gtk_selection_model_select_all(cast(GtkSelectionModel*)this._cPtr);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ template SelectionModelT()
   override bool selectItem(uint position, bool unselectRest)
   {
     bool _retval;
-    _retval = gtk_selection_model_select_item(cast(GtkSelectionModel*)cPtr, position, unselectRest);
+    _retval = gtk_selection_model_select_item(cast(GtkSelectionModel*)this._cPtr, position, unselectRest);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ template SelectionModelT()
   override bool selectRange(uint position, uint nItems, bool unselectRest)
   {
     bool _retval;
-    _retval = gtk_selection_model_select_range(cast(GtkSelectionModel*)cPtr, position, nItems, unselectRest);
+    _retval = gtk_selection_model_select_range(cast(GtkSelectionModel*)this._cPtr, position, nItems, unselectRest);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ template SelectionModelT()
   */
   override void selectionChanged(uint position, uint nItems)
   {
-    gtk_selection_model_selection_changed(cast(GtkSelectionModel*)cPtr, position, nItems);
+    gtk_selection_model_selection_changed(cast(GtkSelectionModel*)this._cPtr, position, nItems);
   }
 
   /**
@@ -212,7 +212,7 @@ template SelectionModelT()
   override bool setSelection(gtk.bitset.Bitset selected, gtk.bitset.Bitset mask)
   {
     bool _retval;
-    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)cPtr, selected ? cast(GtkBitset*)selected.cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask.cPtr(No.Dup) : null);
+    _retval = gtk_selection_model_set_selection(cast(GtkSelectionModel*)this._cPtr, selected ? cast(GtkBitset*)selected._cPtr(No.Dup) : null, mask ? cast(GtkBitset*)mask._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ template SelectionModelT()
   override bool unselectAll()
   {
     bool _retval;
-    _retval = gtk_selection_model_unselect_all(cast(GtkSelectionModel*)cPtr);
+    _retval = gtk_selection_model_unselect_all(cast(GtkSelectionModel*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ template SelectionModelT()
   override bool unselectItem(uint position)
   {
     bool _retval;
-    _retval = gtk_selection_model_unselect_item(cast(GtkSelectionModel*)cPtr, position);
+    _retval = gtk_selection_model_unselect_item(cast(GtkSelectionModel*)this._cPtr, position);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ template SelectionModelT()
   override bool unselectRange(uint position, uint nItems)
   {
     bool _retval;
-    _retval = gtk_selection_model_unselect_range(cast(GtkSelectionModel*)cPtr, position, nItems);
+    _retval = gtk_selection_model_unselect_range(cast(GtkSelectionModel*)this._cPtr, position, nItems);
     return _retval;
   }
 

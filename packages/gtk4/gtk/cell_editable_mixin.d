@@ -47,7 +47,7 @@ template CellEditableT()
   */
   override void editingDone()
   {
-    gtk_cell_editable_editing_done(cast(GtkCellEditable*)cPtr);
+    gtk_cell_editable_editing_done(cast(GtkCellEditable*)this._cPtr);
   }
 
   /**
@@ -55,7 +55,7 @@ template CellEditableT()
   */
   override void removeWidget()
   {
-    gtk_cell_editable_remove_widget(cast(GtkCellEditable*)cPtr);
+    gtk_cell_editable_remove_widget(cast(GtkCellEditable*)this._cPtr);
   }
 
   /**
@@ -76,7 +76,7 @@ template CellEditableT()
   */
   override void startEditing(gdk.event.Event event = null)
   {
-    gtk_cell_editable_start_editing(cast(GtkCellEditable*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    gtk_cell_editable_start_editing(cast(GtkCellEditable*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
 
   /**

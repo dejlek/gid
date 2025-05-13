@@ -207,16 +207,16 @@ class Label : gtk.misc.Misc
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_label_get_type != &gidSymbolNotFound ? gtk_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -684,7 +684,7 @@ class Label : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _str = str.toCString(No.Alloc);
     _cretval = gtk_label_new_with_mnemonic(_str);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.label.Label)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -696,7 +696,7 @@ class Label : gtk.misc.Misc
   double getAngle()
   {
     double _retval;
-    _retval = gtk_label_get_angle(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_angle(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -713,7 +713,7 @@ class Label : gtk.misc.Misc
   pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
-    _cretval = gtk_label_get_attributes(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_attributes(cast(GtkLabel*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -732,7 +732,7 @@ class Label : gtk.misc.Misc
   string getCurrentUri()
   {
     const(char)* _cretval;
-    _cretval = gtk_label_get_current_uri(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_current_uri(cast(GtkLabel*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -744,7 +744,7 @@ class Label : gtk.misc.Misc
   pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
-    _cretval = gtk_label_get_ellipsize(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_ellipsize(cast(GtkLabel*)this._cPtr);
     pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
@@ -756,7 +756,7 @@ class Label : gtk.misc.Misc
   gtk.types.Justification getJustify()
   {
     GtkJustification _cretval;
-    _cretval = gtk_label_get_justify(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_justify(cast(GtkLabel*)this._cPtr);
     gtk.types.Justification _retval = cast(gtk.types.Justification)_cretval;
     return _retval;
   }
@@ -771,7 +771,7 @@ class Label : gtk.misc.Misc
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_label_get_label(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_label(cast(GtkLabel*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -788,8 +788,8 @@ class Label : gtk.misc.Misc
   pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
-    _cretval = gtk_label_get_layout(cast(GtkLabel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    _cretval = gtk_label_get_layout(cast(GtkLabel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -810,7 +810,7 @@ class Label : gtk.misc.Misc
   */
   void getLayoutOffsets(out int x, out int y)
   {
-    gtk_label_get_layout_offsets(cast(GtkLabel*)cPtr, cast(int*)&x, cast(int*)&y);
+    gtk_label_get_layout_offsets(cast(GtkLabel*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -821,7 +821,7 @@ class Label : gtk.misc.Misc
   bool getLineWrap()
   {
     bool _retval;
-    _retval = gtk_label_get_line_wrap(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_line_wrap(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -832,7 +832,7 @@ class Label : gtk.misc.Misc
   pango.types.WrapMode getLineWrapMode()
   {
     PangoWrapMode _cretval;
-    _cretval = gtk_label_get_line_wrap_mode(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_line_wrap_mode(cast(GtkLabel*)this._cPtr);
     pango.types.WrapMode _retval = cast(pango.types.WrapMode)_cretval;
     return _retval;
   }
@@ -845,7 +845,7 @@ class Label : gtk.misc.Misc
   int getLines()
   {
     int _retval;
-    _retval = gtk_label_get_lines(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_lines(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -857,7 +857,7 @@ class Label : gtk.misc.Misc
   int getMaxWidthChars()
   {
     int _retval;
-    _retval = gtk_label_get_max_width_chars(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_max_width_chars(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -870,7 +870,7 @@ class Label : gtk.misc.Misc
   uint getMnemonicKeyval()
   {
     uint _retval;
-    _retval = gtk_label_get_mnemonic_keyval(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_mnemonic_keyval(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -883,8 +883,8 @@ class Label : gtk.misc.Misc
   gtk.widget.Widget getMnemonicWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_label_get_mnemonic_widget(cast(GtkLabel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -895,7 +895,7 @@ class Label : gtk.misc.Misc
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_label_get_selectable(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_selectable(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -911,7 +911,7 @@ class Label : gtk.misc.Misc
   bool getSelectionBounds(out int start, out int end)
   {
     bool _retval;
-    _retval = gtk_label_get_selection_bounds(cast(GtkLabel*)cPtr, cast(int*)&start, cast(int*)&end);
+    _retval = gtk_label_get_selection_bounds(cast(GtkLabel*)this._cPtr, cast(int*)&start, cast(int*)&end);
     return _retval;
   }
 
@@ -922,7 +922,7 @@ class Label : gtk.misc.Misc
   bool getSingleLineMode()
   {
     bool _retval;
-    _retval = gtk_label_get_single_line_mode(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_single_line_mode(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -936,7 +936,7 @@ class Label : gtk.misc.Misc
   string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_label_get_text(cast(GtkLabel*)cPtr);
+    _cretval = gtk_label_get_text(cast(GtkLabel*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -949,7 +949,7 @@ class Label : gtk.misc.Misc
   bool getTrackVisitedLinks()
   {
     bool _retval;
-    _retval = gtk_label_get_track_visited_links(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_track_visited_links(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -962,7 +962,7 @@ class Label : gtk.misc.Misc
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = gtk_label_get_use_markup(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_use_markup(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -975,7 +975,7 @@ class Label : gtk.misc.Misc
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_label_get_use_underline(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_use_underline(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -987,7 +987,7 @@ class Label : gtk.misc.Misc
   int getWidthChars()
   {
     int _retval;
-    _retval = gtk_label_get_width_chars(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_width_chars(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -998,7 +998,7 @@ class Label : gtk.misc.Misc
   float getXalign()
   {
     float _retval;
-    _retval = gtk_label_get_xalign(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_xalign(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1009,7 +1009,7 @@ class Label : gtk.misc.Misc
   float getYalign()
   {
     float _retval;
-    _retval = gtk_label_get_yalign(cast(GtkLabel*)cPtr);
+    _retval = gtk_label_get_yalign(cast(GtkLabel*)this._cPtr);
     return _retval;
   }
 
@@ -1025,7 +1025,7 @@ class Label : gtk.misc.Misc
   */
   void selectRegion(int startOffset, int endOffset)
   {
-    gtk_label_select_region(cast(GtkLabel*)cPtr, startOffset, endOffset);
+    gtk_label_select_region(cast(GtkLabel*)this._cPtr, startOffset, endOffset);
   }
 
   /**
@@ -1040,7 +1040,7 @@ class Label : gtk.misc.Misc
   */
   void setAngle(double angle)
   {
-    gtk_label_set_angle(cast(GtkLabel*)cPtr, angle);
+    gtk_label_set_angle(cast(GtkLabel*)this._cPtr, angle);
   }
 
   /**
@@ -1059,7 +1059,7 @@ class Label : gtk.misc.Misc
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_label_set_attributes(cast(GtkLabel*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_label_set_attributes(cast(GtkLabel*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1071,7 +1071,7 @@ class Label : gtk.misc.Misc
   */
   void setEllipsize(pango.types.EllipsizeMode mode)
   {
-    gtk_label_set_ellipsize(cast(GtkLabel*)cPtr, mode);
+    gtk_label_set_ellipsize(cast(GtkLabel*)this._cPtr, mode);
   }
 
   /**
@@ -1087,7 +1087,7 @@ class Label : gtk.misc.Misc
   */
   void setJustify(gtk.types.Justification jtype)
   {
-    gtk_label_set_justify(cast(GtkLabel*)cPtr, jtype);
+    gtk_label_set_justify(cast(GtkLabel*)this._cPtr, jtype);
   }
 
   /**
@@ -1102,7 +1102,7 @@ class Label : gtk.misc.Misc
   void setLabel(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_label_set_label(cast(GtkLabel*)cPtr, _str);
+    gtk_label_set_label(cast(GtkLabel*)this._cPtr, _str);
   }
 
   /**
@@ -1121,7 +1121,7 @@ class Label : gtk.misc.Misc
   */
   void setLineWrap(bool wrap)
   {
-    gtk_label_set_line_wrap(cast(GtkLabel*)cPtr, wrap);
+    gtk_label_set_line_wrap(cast(GtkLabel*)this._cPtr, wrap);
   }
 
   /**
@@ -1134,7 +1134,7 @@ class Label : gtk.misc.Misc
   */
   void setLineWrapMode(pango.types.WrapMode wrapMode)
   {
-    gtk_label_set_line_wrap_mode(cast(GtkLabel*)cPtr, wrapMode);
+    gtk_label_set_line_wrap_mode(cast(GtkLabel*)this._cPtr, wrapMode);
   }
 
   /**
@@ -1148,7 +1148,7 @@ class Label : gtk.misc.Misc
   */
   void setLines(int lines)
   {
-    gtk_label_set_lines(cast(GtkLabel*)cPtr, lines);
+    gtk_label_set_lines(cast(GtkLabel*)this._cPtr, lines);
   }
 
   /**
@@ -1185,7 +1185,7 @@ class Label : gtk.misc.Misc
   void setMarkup(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_label_set_markup(cast(GtkLabel*)cPtr, _str);
+    gtk_label_set_markup(cast(GtkLabel*)this._cPtr, _str);
   }
 
   /**
@@ -1205,7 +1205,7 @@ class Label : gtk.misc.Misc
   void setMarkupWithMnemonic(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)cPtr, _str);
+    gtk_label_set_markup_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
   }
 
   /**
@@ -1216,7 +1216,7 @@ class Label : gtk.misc.Misc
   */
   void setMaxWidthChars(int nChars)
   {
-    gtk_label_set_max_width_chars(cast(GtkLabel*)cPtr, nChars);
+    gtk_label_set_max_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
 
   /**
@@ -1240,7 +1240,7 @@ class Label : gtk.misc.Misc
   */
   void setMnemonicWidget(gtk.widget.Widget widget = null)
   {
-    gtk_label_set_mnemonic_widget(cast(GtkLabel*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_label_set_mnemonic_widget(cast(GtkLabel*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1255,7 +1255,7 @@ class Label : gtk.misc.Misc
   void setPattern(string pattern)
   {
     const(char)* _pattern = pattern.toCString(No.Alloc);
-    gtk_label_set_pattern(cast(GtkLabel*)cPtr, _pattern);
+    gtk_label_set_pattern(cast(GtkLabel*)this._cPtr, _pattern);
   }
 
   /**
@@ -1267,7 +1267,7 @@ class Label : gtk.misc.Misc
   */
   void setSelectable(bool setting)
   {
-    gtk_label_set_selectable(cast(GtkLabel*)cPtr, setting);
+    gtk_label_set_selectable(cast(GtkLabel*)this._cPtr, setting);
   }
 
   /**
@@ -1278,7 +1278,7 @@ class Label : gtk.misc.Misc
   */
   void setSingleLineMode(bool singleLineMode)
   {
-    gtk_label_set_single_line_mode(cast(GtkLabel*)cPtr, singleLineMode);
+    gtk_label_set_single_line_mode(cast(GtkLabel*)this._cPtr, singleLineMode);
   }
 
   /**
@@ -1299,7 +1299,7 @@ class Label : gtk.misc.Misc
   void setText(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_label_set_text(cast(GtkLabel*)cPtr, _str);
+    gtk_label_set_text(cast(GtkLabel*)this._cPtr, _str);
   }
 
   /**
@@ -1315,7 +1315,7 @@ class Label : gtk.misc.Misc
   void setTextWithMnemonic(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_label_set_text_with_mnemonic(cast(GtkLabel*)cPtr, _str);
+    gtk_label_set_text_with_mnemonic(cast(GtkLabel*)this._cPtr, _str);
   }
 
   /**
@@ -1327,7 +1327,7 @@ class Label : gtk.misc.Misc
   */
   void setTrackVisitedLinks(bool trackLinks)
   {
-    gtk_label_set_track_visited_links(cast(GtkLabel*)cPtr, trackLinks);
+    gtk_label_set_track_visited_links(cast(GtkLabel*)this._cPtr, trackLinks);
   }
 
   /**
@@ -1340,7 +1340,7 @@ class Label : gtk.misc.Misc
   */
   void setUseMarkup(bool setting)
   {
-    gtk_label_set_use_markup(cast(GtkLabel*)cPtr, setting);
+    gtk_label_set_use_markup(cast(GtkLabel*)this._cPtr, setting);
   }
 
   /**
@@ -1352,7 +1352,7 @@ class Label : gtk.misc.Misc
   */
   void setUseUnderline(bool setting)
   {
-    gtk_label_set_use_underline(cast(GtkLabel*)cPtr, setting);
+    gtk_label_set_use_underline(cast(GtkLabel*)this._cPtr, setting);
   }
 
   /**
@@ -1363,7 +1363,7 @@ class Label : gtk.misc.Misc
   */
   void setWidthChars(int nChars)
   {
-    gtk_label_set_width_chars(cast(GtkLabel*)cPtr, nChars);
+    gtk_label_set_width_chars(cast(GtkLabel*)this._cPtr, nChars);
   }
 
   /**
@@ -1374,7 +1374,7 @@ class Label : gtk.misc.Misc
   */
   void setXalign(float xalign)
   {
-    gtk_label_set_xalign(cast(GtkLabel*)cPtr, xalign);
+    gtk_label_set_xalign(cast(GtkLabel*)this._cPtr, xalign);
   }
 
   /**
@@ -1385,7 +1385,7 @@ class Label : gtk.misc.Misc
   */
   void setYalign(float yalign)
   {
-    gtk_label_set_yalign(cast(GtkLabel*)cPtr, yalign);
+    gtk_label_set_yalign(cast(GtkLabel*)this._cPtr, yalign);
   }
 
   /**

@@ -45,16 +45,16 @@ class ObjectWrap : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_object_get_type != &gidSymbolNotFound ? atk_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -338,7 +338,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   bool addRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_object_add_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_object_add_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   string getAccessibleId()
   {
     const(char)* _cretval;
-    _cretval = atk_object_get_accessible_id(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_accessible_id(cast(AtkObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -363,7 +363,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = atk_object_get_description(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_description(cast(AtkObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -376,7 +376,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   string getHelpText()
   {
     const(char)* _cretval;
-    _cretval = atk_object_get_help_text(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_help_text(cast(AtkObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -389,7 +389,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   int getIndexInParent()
   {
     int _retval;
-    _retval = atk_object_get_index_in_parent(cast(AtkObject*)cPtr);
+    _retval = atk_object_get_index_in_parent(cast(AtkObject*)this._cPtr);
     return _retval;
   }
 
@@ -402,7 +402,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.types.Layer getLayer()
   {
     AtkLayer _cretval;
-    _cretval = atk_object_get_layer(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_layer(cast(AtkObject*)this._cPtr);
     atk.types.Layer _retval = cast(atk.types.Layer)_cretval;
     return _retval;
   }
@@ -419,7 +419,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   int getMdiZorder()
   {
     int _retval;
-    _retval = atk_object_get_mdi_zorder(cast(AtkObject*)cPtr);
+    _retval = atk_object_get_mdi_zorder(cast(AtkObject*)this._cPtr);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   int getNAccessibleChildren()
   {
     int _retval;
-    _retval = atk_object_get_n_accessible_children(cast(AtkObject*)cPtr);
+    _retval = atk_object_get_n_accessible_children(cast(AtkObject*)this._cPtr);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = atk_object_get_name(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_name(cast(AtkObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -456,7 +456,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   string getObjectLocale()
   {
     const(char)* _cretval;
-    _cretval = atk_object_get_object_locale(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_object_locale(cast(AtkObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -476,8 +476,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.object.ObjectWrap getParent()
   {
     AtkObject* _cretval;
-    _cretval = atk_object_get_parent(cast(AtkObject*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_object_get_parent(cast(AtkObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.types.Role getRole()
   {
     AtkRole _cretval;
-    _cretval = atk_object_get_role(cast(AtkObject*)cPtr);
+    _cretval = atk_object_get_role(cast(AtkObject*)this._cPtr);
     atk.types.Role _retval = cast(atk.types.Role)_cretval;
     return _retval;
   }
@@ -504,7 +504,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void initialize(void* data = null)
   {
-    atk_object_initialize(cast(AtkObject*)cPtr, data);
+    atk_object_initialize(cast(AtkObject*)this._cPtr, data);
   }
 
   /**
@@ -519,7 +519,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void notifyStateChange(atk.types.State state, bool value)
   {
-    atk_object_notify_state_change(cast(AtkObject*)cPtr, state, value);
+    atk_object_notify_state_change(cast(AtkObject*)this._cPtr, state, value);
   }
 
   /**
@@ -536,8 +536,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.object.ObjectWrap peekParent()
   {
     AtkObject* _cretval;
-    _cretval = atk_object_peek_parent(cast(AtkObject*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_object_peek_parent(cast(AtkObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -554,8 +554,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.object.ObjectWrap refAccessibleChild(int i)
   {
     AtkObject* _cretval;
-    _cretval = atk_object_ref_accessible_child(cast(AtkObject*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_object_ref_accessible_child(cast(AtkObject*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -567,8 +567,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.relation_set.RelationSet refRelationSet()
   {
     AtkRelationSet* _cretval;
-    _cretval = atk_object_ref_relation_set(cast(AtkObject*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
+    _cretval = atk_object_ref_relation_set(cast(AtkObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.relation_set.RelationSet)(cast(AtkRelationSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -581,8 +581,8 @@ class ObjectWrap : gobject.object.ObjectWrap
   atk.state_set.StateSet refStateSet()
   {
     AtkStateSet* _cretval;
-    _cretval = atk_object_ref_state_set(cast(AtkObject*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
+    _cretval = atk_object_ref_state_set(cast(AtkObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.state_set.StateSet)(cast(AtkStateSet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -596,7 +596,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void removePropertyChangeHandler(uint handlerId)
   {
-    atk_object_remove_property_change_handler(cast(AtkObject*)cPtr, handlerId);
+    atk_object_remove_property_change_handler(cast(AtkObject*)this._cPtr, handlerId);
   }
 
   /**
@@ -610,7 +610,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   bool removeRelationship(atk.types.RelationType relationship, atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_object_remove_relationship(cast(AtkObject*)cPtr, relationship, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_object_remove_relationship(cast(AtkObject*)this._cPtr, relationship, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -627,7 +627,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   void setAccessibleId(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    atk_object_set_accessible_id(cast(AtkObject*)cPtr, _id);
+    atk_object_set_accessible_id(cast(AtkObject*)this._cPtr, _id);
   }
 
   /**
@@ -642,7 +642,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   void setDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    atk_object_set_description(cast(AtkObject*)cPtr, _description);
+    atk_object_set_description(cast(AtkObject*)this._cPtr, _description);
   }
 
   /**
@@ -656,7 +656,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   void setHelpText(string helpText)
   {
     const(char)* _helpText = helpText.toCString(No.Alloc);
-    atk_object_set_help_text(cast(AtkObject*)cPtr, _helpText);
+    atk_object_set_help_text(cast(AtkObject*)this._cPtr, _helpText);
   }
 
   /**
@@ -671,7 +671,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    atk_object_set_name(cast(AtkObject*)cPtr, _name);
+    atk_object_set_name(cast(AtkObject*)this._cPtr, _name);
   }
 
   /**
@@ -682,7 +682,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setParent(atk.object.ObjectWrap parent)
   {
-    atk_object_set_parent(cast(AtkObject*)cPtr, parent ? cast(AtkObject*)parent.cPtr(No.Dup) : null);
+    atk_object_set_parent(cast(AtkObject*)this._cPtr, parent ? cast(AtkObject*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -693,7 +693,7 @@ class ObjectWrap : gobject.object.ObjectWrap
   */
   void setRole(atk.types.Role role)
   {
-    atk_object_set_role(cast(AtkObject*)cPtr, role);
+    atk_object_set_role(cast(AtkObject*)this._cPtr, role);
   }
 
   /**

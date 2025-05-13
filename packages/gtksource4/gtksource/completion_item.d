@@ -22,16 +22,16 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_item_get_type != &gidSymbolNotFound ? gtk_source_completion_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -190,47 +190,47 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   /** */
   void setGicon(gio.icon.Icon gicon = null)
   {
-    gtk_source_completion_item_set_gicon(cast(GtkSourceCompletionItem*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
+    gtk_source_completion_item_set_gicon(cast(GtkSourceCompletionItem*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
-    gtk_source_completion_item_set_icon(cast(GtkSourceCompletionItem*)cPtr, icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    gtk_source_completion_item_set_icon(cast(GtkSourceCompletionItem*)this._cPtr, icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
   }
 
   /** */
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_source_completion_item_set_icon_name(cast(GtkSourceCompletionItem*)cPtr, _iconName);
+    gtk_source_completion_item_set_icon_name(cast(GtkSourceCompletionItem*)this._cPtr, _iconName);
   }
 
   /** */
   void setInfo(string info = null)
   {
     const(char)* _info = info.toCString(No.Alloc);
-    gtk_source_completion_item_set_info(cast(GtkSourceCompletionItem*)cPtr, _info);
+    gtk_source_completion_item_set_info(cast(GtkSourceCompletionItem*)this._cPtr, _info);
   }
 
   /** */
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_source_completion_item_set_label(cast(GtkSourceCompletionItem*)cPtr, _label);
+    gtk_source_completion_item_set_label(cast(GtkSourceCompletionItem*)this._cPtr, _label);
   }
 
   /** */
   void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_source_completion_item_set_markup(cast(GtkSourceCompletionItem*)cPtr, _markup);
+    gtk_source_completion_item_set_markup(cast(GtkSourceCompletionItem*)this._cPtr, _markup);
   }
 
   /** */
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_completion_item_set_text(cast(GtkSourceCompletionItem*)cPtr, _text);
+    gtk_source_completion_item_set_text(cast(GtkSourceCompletionItem*)this._cPtr, _text);
   }
 }

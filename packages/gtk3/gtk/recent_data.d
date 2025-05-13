@@ -27,7 +27,7 @@ class RecentData
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class RecentData
   */
   @property string displayName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentData*)cPtr).displayName);
+    return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).displayName);
   }
 
   /**
@@ -50,8 +50,8 @@ class RecentData
   */
   @property void displayName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)cPtr).displayName);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).displayName);
+    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).displayName);
   }
 
   /**
@@ -61,7 +61,7 @@ class RecentData
   */
   @property string description()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentData*)cPtr).description);
+    return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).description);
   }
 
   /**
@@ -72,8 +72,8 @@ class RecentData
   */
   @property void description(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)cPtr).description);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)cPtr).description);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).description);
+    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).description);
   }
 
   /**
@@ -82,7 +82,7 @@ class RecentData
   */
   @property string mimeType()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentData*)cPtr).mimeType);
+    return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).mimeType);
   }
 
   /**
@@ -92,8 +92,8 @@ class RecentData
   */
   @property void mimeType(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)cPtr).mimeType);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).mimeType);
+    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).mimeType);
   }
 
   /**
@@ -103,7 +103,7 @@ class RecentData
   */
   @property string appName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentData*)cPtr).appName);
+    return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appName);
   }
 
   /**
@@ -114,8 +114,8 @@ class RecentData
   */
   @property void appName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)cPtr).appName);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)cPtr).appName);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appName);
+    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appName);
   }
 
   /**
@@ -127,7 +127,7 @@ class RecentData
   */
   @property string appExec()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentData*)cPtr).appExec);
+    return cToD!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appExec);
   }
 
   /**
@@ -140,8 +140,8 @@ class RecentData
   */
   @property void appExec(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)cPtr).appExec);
-    dToC(propval, cast(void*)&(cast(GtkRecentData*)cPtr).appExec);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentData*)this._cPtr).appExec);
+    dToC(propval, cast(void*)&(cast(GtkRecentData*)this._cPtr).appExec);
   }
 
   /**
@@ -151,7 +151,7 @@ class RecentData
   */
   @property bool isPrivate()
   {
-    return (cast(GtkRecentData*)cPtr).isPrivate;
+    return (cast(GtkRecentData*)this._cPtr).isPrivate;
   }
 
   /**
@@ -162,6 +162,6 @@ class RecentData
   */
   @property void isPrivate(bool propval)
   {
-    (cast(GtkRecentData*)cPtr).isPrivate = propval;
+    (cast(GtkRecentData*)this._cPtr).isPrivate = propval;
   }
 }

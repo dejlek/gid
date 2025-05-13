@@ -31,16 +31,16 @@ class TreeListRow : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_list_row_get_type != &gidSymbolNotFound ? gtk_tree_list_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -115,8 +115,8 @@ class TreeListRow : gobject.object.ObjectWrap
   gtk.tree_list_row.TreeListRow getChildRow(uint position)
   {
     GtkTreeListRow* _cretval;
-    _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    _cretval = gtk_tree_list_row_get_child_row(cast(GtkTreeListRow*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,8 +132,8 @@ class TreeListRow : gobject.object.ObjectWrap
   gio.list_model.ListModel getChildren()
   {
     GListModel* _cretval;
-    _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_tree_list_row_get_children(cast(GtkTreeListRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class TreeListRow : gobject.object.ObjectWrap
   uint getDepth()
   {
     uint _retval;
-    _retval = gtk_tree_list_row_get_depth(cast(GtkTreeListRow*)cPtr);
+    _retval = gtk_tree_list_row_get_depth(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class TreeListRow : gobject.object.ObjectWrap
   bool getExpanded()
   {
     bool _retval;
-    _retval = gtk_tree_list_row_get_expanded(cast(GtkTreeListRow*)cPtr);
+    _retval = gtk_tree_list_row_get_expanded(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 
@@ -174,9 +174,9 @@ class TreeListRow : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = gtk_tree_list_row_get_item(cast(GtkTreeListRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -197,8 +197,8 @@ class TreeListRow : gobject.object.ObjectWrap
   gtk.tree_list_row.TreeListRow getParent()
   {
     GtkTreeListRow* _cretval;
-    _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
+    _cretval = gtk_tree_list_row_get_parent(cast(GtkTreeListRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class TreeListRow : gobject.object.ObjectWrap
   uint getPosition()
   {
     uint _retval;
-    _retval = gtk_tree_list_row_get_position(cast(GtkTreeListRow*)cPtr);
+    _retval = gtk_tree_list_row_get_position(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class TreeListRow : gobject.object.ObjectWrap
   bool isExpandable()
   {
     bool _retval;
-    _retval = gtk_tree_list_row_is_expandable(cast(GtkTreeListRow*)cPtr);
+    _retval = gtk_tree_list_row_is_expandable(cast(GtkTreeListRow*)this._cPtr);
     return _retval;
   }
 
@@ -246,6 +246,6 @@ class TreeListRow : gobject.object.ObjectWrap
   */
   void setExpanded(bool expanded)
   {
-    gtk_tree_list_row_set_expanded(cast(GtkTreeListRow*)cPtr, expanded);
+    gtk_tree_list_row_set_expanded(cast(GtkTreeListRow*)this._cPtr, expanded);
   }
 }

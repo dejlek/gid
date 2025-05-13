@@ -20,22 +20,22 @@ class MessageHeaders : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_headers_get_type != &gidSymbolNotFound ? soup_message_headers_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    soup_message_headers_append(cast(SoupMessageHeaders*)cPtr, _name, _value);
+    soup_message_headers_append(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
   }
 
   /**
@@ -88,7 +88,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void cleanConnectionHeaders()
   {
-    soup_message_headers_clean_connection_headers(cast(SoupMessageHeaders*)cPtr);
+    soup_message_headers_clean_connection_headers(cast(SoupMessageHeaders*)this._cPtr);
   }
 
   /**
@@ -96,7 +96,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void clear()
   {
-    soup_message_headers_clear(cast(SoupMessageHeaders*)cPtr);
+    soup_message_headers_clear(cast(SoupMessageHeaders*)this._cPtr);
   }
 
   /**
@@ -129,7 +129,7 @@ class MessageHeaders : gobject.boxed.Boxed
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    soup_message_headers_foreach(cast(SoupMessageHeaders*)cPtr, _funcCB, _func);
+    soup_message_headers_foreach(cast(SoupMessageHeaders*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -140,7 +140,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void freeRanges(soup.types.Range ranges)
   {
-    soup_message_headers_free_ranges(cast(SoupMessageHeaders*)cPtr, &ranges);
+    soup_message_headers_free_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges);
   }
 
   /**
@@ -176,7 +176,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     char* _disposition;
     GHashTable* _params;
-    _retval = soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)cPtr, &_disposition, &_params);
+    _retval = soup_message_headers_get_content_disposition(cast(SoupMessageHeaders*)this._cPtr, &_disposition, &_params);
     disposition = _disposition.fromCString(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
@@ -192,7 +192,7 @@ class MessageHeaders : gobject.boxed.Boxed
   long getContentLength()
   {
     long _retval;
-    _retval = soup_message_headers_get_content_length(cast(SoupMessageHeaders*)cPtr);
+    _retval = soup_message_headers_get_content_length(cast(SoupMessageHeaders*)this._cPtr);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class MessageHeaders : gobject.boxed.Boxed
   bool getContentRange(out long start, out long end, out long totalLength)
   {
     bool _retval;
-    _retval = soup_message_headers_get_content_range(cast(SoupMessageHeaders*)cPtr, cast(long*)&start, cast(long*)&end, cast(long*)&totalLength);
+    _retval = soup_message_headers_get_content_range(cast(SoupMessageHeaders*)this._cPtr, cast(long*)&start, cast(long*)&end, cast(long*)&totalLength);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     GHashTable* _params;
-    _cretval = soup_message_headers_get_content_type(cast(SoupMessageHeaders*)cPtr, &_params);
+    _cretval = soup_message_headers_get_content_type(cast(SoupMessageHeaders*)this._cPtr, &_params);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;
@@ -251,7 +251,7 @@ class MessageHeaders : gobject.boxed.Boxed
   soup.types.Encoding getEncoding()
   {
     SoupEncoding _cretval;
-    _cretval = soup_message_headers_get_encoding(cast(SoupMessageHeaders*)cPtr);
+    _cretval = soup_message_headers_get_encoding(cast(SoupMessageHeaders*)this._cPtr);
     soup.types.Encoding _retval = cast(soup.types.Encoding)_cretval;
     return _retval;
   }
@@ -266,7 +266,7 @@ class MessageHeaders : gobject.boxed.Boxed
   soup.types.Expectation getExpectations()
   {
     SoupExpectation _cretval;
-    _cretval = soup_message_headers_get_expectations(cast(SoupMessageHeaders*)cPtr);
+    _cretval = soup_message_headers_get_expectations(cast(SoupMessageHeaders*)this._cPtr);
     soup.types.Expectation _retval = cast(soup.types.Expectation)_cretval;
     return _retval;
   }
@@ -278,7 +278,7 @@ class MessageHeaders : gobject.boxed.Boxed
   soup.types.MessageHeadersType getHeadersType()
   {
     SoupMessageHeadersType _cretval;
-    _cretval = soup_message_headers_get_headers_type(cast(SoupMessageHeaders*)cPtr);
+    _cretval = soup_message_headers_get_headers_type(cast(SoupMessageHeaders*)this._cPtr);
     soup.types.MessageHeadersType _retval = cast(soup.types.MessageHeadersType)_cretval;
     return _retval;
   }
@@ -306,7 +306,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = soup_message_headers_get_list(cast(SoupMessageHeaders*)cPtr, _name);
+    _cretval = soup_message_headers_get_list(cast(SoupMessageHeaders*)this._cPtr, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -331,7 +331,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = soup_message_headers_get_one(cast(SoupMessageHeaders*)cPtr, _name);
+    _cretval = soup_message_headers_get_one(cast(SoupMessageHeaders*)this._cPtr, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -379,7 +379,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     int _length;
     SoupRange* _ranges;
-    _retval = soup_message_headers_get_ranges(cast(SoupMessageHeaders*)cPtr, totalLength, &_ranges, &_length);
+    _retval = soup_message_headers_get_ranges(cast(SoupMessageHeaders*)this._cPtr, totalLength, &_ranges, &_length);
     ranges.length = _length;
     ranges[0 .. $] = (cast(soup.types.Range*)_ranges)[0 .. _length];
     gFree(cast(void*)_ranges);
@@ -404,7 +404,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _token = token.toCString(No.Alloc);
-    _retval = soup_message_headers_header_contains(cast(SoupMessageHeaders*)cPtr, _name, _token);
+    _retval = soup_message_headers_header_contains(cast(SoupMessageHeaders*)this._cPtr, _name, _token);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class MessageHeaders : gobject.boxed.Boxed
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _retval = soup_message_headers_header_equals(cast(SoupMessageHeaders*)cPtr, _name, _value);
+    _retval = soup_message_headers_header_equals(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ class MessageHeaders : gobject.boxed.Boxed
   void remove(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    soup_message_headers_remove(cast(SoupMessageHeaders*)cPtr, _name);
+    soup_message_headers_remove(cast(SoupMessageHeaders*)this._cPtr, _name);
   }
 
   /**
@@ -457,7 +457,7 @@ class MessageHeaders : gobject.boxed.Boxed
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    soup_message_headers_replace(cast(SoupMessageHeaders*)cPtr, _name, _value);
+    soup_message_headers_replace(cast(SoupMessageHeaders*)this._cPtr, _name, _value);
   }
 
   /**
@@ -476,7 +476,7 @@ class MessageHeaders : gobject.boxed.Boxed
     const(char)* _disposition = disposition.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
-    soup_message_headers_set_content_disposition(cast(SoupMessageHeaders*)cPtr, _disposition, _params);
+    soup_message_headers_set_content_disposition(cast(SoupMessageHeaders*)this._cPtr, _disposition, _params);
   }
 
   /**
@@ -497,7 +497,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentLength(long contentLength)
   {
-    soup_message_headers_set_content_length(cast(SoupMessageHeaders*)cPtr, contentLength);
+    soup_message_headers_set_content_length(cast(SoupMessageHeaders*)this._cPtr, contentLength);
   }
 
   /**
@@ -517,7 +517,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setContentRange(long start, long end, long totalLength)
   {
-    soup_message_headers_set_content_range(cast(SoupMessageHeaders*)cPtr, start, end, totalLength);
+    soup_message_headers_set_content_range(cast(SoupMessageHeaders*)this._cPtr, start, end, totalLength);
   }
 
   /**
@@ -534,7 +534,7 @@ class MessageHeaders : gobject.boxed.Boxed
     const(char)* _contentType = contentType.toCString(No.Alloc);
     auto _params = gHashTableFromD!(string, string)(params);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_params);
-    soup_message_headers_set_content_type(cast(SoupMessageHeaders*)cPtr, _contentType, _params);
+    soup_message_headers_set_content_type(cast(SoupMessageHeaders*)this._cPtr, _contentType, _params);
   }
 
   /**
@@ -548,7 +548,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setEncoding(soup.types.Encoding encoding)
   {
-    soup_message_headers_set_encoding(cast(SoupMessageHeaders*)cPtr, encoding);
+    soup_message_headers_set_encoding(cast(SoupMessageHeaders*)this._cPtr, encoding);
   }
 
   /**
@@ -568,7 +568,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setExpectations(soup.types.Expectation expectations)
   {
-    soup_message_headers_set_expectations(cast(SoupMessageHeaders*)cPtr, expectations);
+    soup_message_headers_set_expectations(cast(SoupMessageHeaders*)this._cPtr, expectations);
   }
 
   /**
@@ -585,7 +585,7 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setRange(long start, long end)
   {
-    soup_message_headers_set_range(cast(SoupMessageHeaders*)cPtr, start, end);
+    soup_message_headers_set_range(cast(SoupMessageHeaders*)this._cPtr, start, end);
   }
 
   /**
@@ -600,6 +600,6 @@ class MessageHeaders : gobject.boxed.Boxed
   */
   void setRanges(soup.types.Range ranges, int length)
   {
-    soup_message_headers_set_ranges(cast(SoupMessageHeaders*)cPtr, &ranges, length);
+    soup_message_headers_set_ranges(cast(SoupMessageHeaders*)this._cPtr, &ranges, length);
   }
 }

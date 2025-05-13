@@ -25,16 +25,16 @@ class GLWindow : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_window_get_type != &gidSymbolNotFound ? gst_gl_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class GLWindow : gst.object.ObjectWrap
   this(gstgl.gldisplay.GLDisplay display)
   {
     GstGLWindow* _cretval;
-    _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
+    _cretval = gst_gl_window_new(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -58,7 +58,7 @@ class GLWindow : gst.object.ObjectWrap
   bool controlsViewport()
   {
     bool _retval;
-    _retval = gst_gl_window_controls_viewport(cast(GstGLWindow*)cPtr);
+    _retval = gst_gl_window_controls_viewport(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
@@ -67,15 +67,15 @@ class GLWindow : gst.object.ObjectWrap
   */
   void draw()
   {
-    gst_gl_window_draw(cast(GstGLWindow*)cPtr);
+    gst_gl_window_draw(cast(GstGLWindow*)this._cPtr);
   }
 
   /** */
   gstgl.glcontext.GLContext getContext()
   {
     GstGLContext* _cretval;
-    _cretval = gst_gl_window_get_context(cast(GstGLWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
+    _cretval = gst_gl_window_get_context(cast(GstGLWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glcontext.GLContext)(cast(GstGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -83,21 +83,21 @@ class GLWindow : gst.object.ObjectWrap
   size_t getDisplay()
   {
     size_t _retval;
-    _retval = gst_gl_window_get_display(cast(GstGLWindow*)cPtr);
+    _retval = gst_gl_window_get_display(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
   /** */
   void getSurfaceDimensions(out uint width, out uint height)
   {
-    gst_gl_window_get_surface_dimensions(cast(GstGLWindow*)cPtr, cast(uint*)&width, cast(uint*)&height);
+    gst_gl_window_get_surface_dimensions(cast(GstGLWindow*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /** */
   size_t getWindowHandle()
   {
     size_t _retval;
-    _retval = gst_gl_window_get_window_handle(cast(GstGLWindow*)cPtr);
+    _retval = gst_gl_window_get_window_handle(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void handleEvents(bool handleEvents)
   {
-    gst_gl_window_handle_events(cast(GstGLWindow*)cPtr, handleEvents);
+    gst_gl_window_handle_events(cast(GstGLWindow*)this._cPtr, handleEvents);
   }
 
   /**
@@ -123,7 +123,7 @@ class GLWindow : gst.object.ObjectWrap
   bool hasOutputSurface()
   {
     bool _retval;
-    _retval = gst_gl_window_has_output_surface(cast(GstGLWindow*)cPtr);
+    _retval = gst_gl_window_has_output_surface(cast(GstGLWindow*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void queueResize()
   {
-    gst_gl_window_queue_resize(cast(GstGLWindow*)cPtr);
+    gst_gl_window_queue_resize(cast(GstGLWindow*)this._cPtr);
   }
 
   /**
@@ -140,7 +140,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void quit()
   {
-    gst_gl_window_quit(cast(GstGLWindow*)cPtr);
+    gst_gl_window_quit(cast(GstGLWindow*)this._cPtr);
   }
 
   /**
@@ -152,7 +152,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void resize(uint width, uint height)
   {
-    gst_gl_window_resize(cast(GstGLWindow*)cPtr, width, height);
+    gst_gl_window_resize(cast(GstGLWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -160,7 +160,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void run()
   {
-    gst_gl_window_run(cast(GstGLWindow*)cPtr);
+    gst_gl_window_run(cast(GstGLWindow*)this._cPtr);
   }
 
   /** */
@@ -168,7 +168,7 @@ class GLWindow : gst.object.ObjectWrap
   {
     const(char)* _eventType = eventType.toCString(No.Alloc);
     const(char)* _keyStr = keyStr.toCString(No.Alloc);
-    gst_gl_window_send_key_event(cast(GstGLWindow*)cPtr, _eventType, _keyStr);
+    gst_gl_window_send_key_event(cast(GstGLWindow*)this._cPtr, _eventType, _keyStr);
   }
 
   /**
@@ -190,7 +190,7 @@ class GLWindow : gst.object.ObjectWrap
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gst_gl_window_send_message(cast(GstGLWindow*)cPtr, _callbackCB, _callback);
+    gst_gl_window_send_message(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback);
   }
 
   /**
@@ -212,14 +212,14 @@ class GLWindow : gst.object.ObjectWrap
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gst_gl_window_send_message_async(cast(GstGLWindow*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gst_gl_window_send_message_async(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /** */
   void sendMouseEvent(string eventType, int button, double posx, double posy)
   {
     const(char)* _eventType = eventType.toCString(No.Alloc);
-    gst_gl_window_send_mouse_event(cast(GstGLWindow*)cPtr, _eventType, button, posx, posy);
+    gst_gl_window_send_mouse_event(cast(GstGLWindow*)this._cPtr, _eventType, button, posx, posy);
   }
 
   /**
@@ -234,7 +234,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void sendScrollEvent(double posx, double posy, double deltaX, double deltaY)
   {
-    gst_gl_window_send_scroll_event(cast(GstGLWindow*)cPtr, posx, posy, deltaX, deltaY);
+    gst_gl_window_send_scroll_event(cast(GstGLWindow*)this._cPtr, posx, posy, deltaX, deltaY);
   }
 
   /**
@@ -255,7 +255,7 @@ class GLWindow : gst.object.ObjectWrap
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gst_gl_window_set_close_callback(cast(GstGLWindow*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gst_gl_window_set_close_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -276,7 +276,7 @@ class GLWindow : gst.object.ObjectWrap
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gst_gl_window_set_draw_callback(cast(GstGLWindow*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gst_gl_window_set_draw_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -289,7 +289,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void setPreferredSize(int width, int height)
   {
-    gst_gl_window_set_preferred_size(cast(GstGLWindow*)cPtr, width, height);
+    gst_gl_window_set_preferred_size(cast(GstGLWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -306,7 +306,7 @@ class GLWindow : gst.object.ObjectWrap
   bool setRenderRectangle(int x, int y, int width, int height)
   {
     bool _retval;
-    _retval = gst_gl_window_set_render_rectangle(cast(GstGLWindow*)cPtr, x, y, width, height);
+    _retval = gst_gl_window_set_render_rectangle(cast(GstGLWindow*)this._cPtr, x, y, width, height);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ class GLWindow : gst.object.ObjectWrap
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gst_gl_window_set_resize_callback(cast(GstGLWindow*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gst_gl_window_set_resize_callback(cast(GstGLWindow*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -340,7 +340,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void setWindowHandle(size_t handle)
   {
-    gst_gl_window_set_window_handle(cast(GstGLWindow*)cPtr, handle);
+    gst_gl_window_set_window_handle(cast(GstGLWindow*)this._cPtr, handle);
   }
 
   /**
@@ -348,7 +348,7 @@ class GLWindow : gst.object.ObjectWrap
   */
   void show()
   {
-    gst_gl_window_show(cast(GstGLWindow*)cPtr);
+    gst_gl_window_show(cast(GstGLWindow*)this._cPtr);
   }
 
   /**

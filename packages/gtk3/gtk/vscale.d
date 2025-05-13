@@ -34,16 +34,16 @@ class VScale : gtk.scale.Scale
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_vscale_get_type != &gidSymbolNotFound ? gtk_vscale_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class VScale : gtk.scale.Scale
   this(gtk.adjustment.Adjustment adjustment)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_vscale_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_vscale_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -90,7 +90,7 @@ class VScale : gtk.scale.Scale
   {
     GtkWidget* _cretval;
     _cretval = gtk_vscale_new_with_range(min, max, step);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.vscale.VScale)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

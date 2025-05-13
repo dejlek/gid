@@ -18,16 +18,16 @@ class Int8Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int8_scalar_get_type != &gidSymbolNotFound ? garrow_int8_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class Int8Scalar : arrow.scalar.Scalar
   byte getValue()
   {
     byte _retval;
-    _retval = garrow_int8_scalar_get_value(cast(GArrowInt8Scalar*)cPtr);
+    _retval = garrow_int8_scalar_get_value(cast(GArrowInt8Scalar*)this._cPtr);
     return _retval;
   }
 }

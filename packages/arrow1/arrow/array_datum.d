@@ -19,16 +19,16 @@ class ArrayDatum : arrow.datum.Datum
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_array_datum_get_type != &gidSymbolNotFound ? garrow_array_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class ArrayDatum : arrow.datum.Datum
   this(arrow.array.Array value)
   {
     GArrowArrayDatum* _cretval;
-    _cretval = garrow_array_datum_new(value ? cast(GArrowArray*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_array_datum_new(value ? cast(GArrowArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

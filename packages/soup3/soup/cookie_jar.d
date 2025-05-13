@@ -33,16 +33,16 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_jar_get_type != &gidSymbolNotFound ? soup_cookie_jar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void addCookie(soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_add_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null);
+    soup_cookie_jar_add_cookie(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -125,7 +125,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void addCookieFull(soup.cookie.Cookie cookie, glib.uri.Uri uri = null, glib.uri.Uri firstParty = null)
   {
-    soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
+    soup_cookie_jar_add_cookie_full(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null);
   }
 
   /**
@@ -149,7 +149,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void addCookieWithFirstParty(glib.uri.Uri firstParty, soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_add_cookie_with_first_party(cast(SoupCookieJar*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null, cookie ? cast(SoupCookie*)cookie.cPtr(Yes.Dup) : null);
+    soup_cookie_jar_add_cookie_with_first_party(cast(SoupCookieJar*)this._cPtr, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null, cookie ? cast(SoupCookie*)cookie._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -163,7 +163,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   soup.cookie.Cookie[] allCookies()
   {
     GSList* _cretval;
-    _cretval = soup_cookie_jar_all_cookies(cast(SoupCookieJar*)cPtr);
+    _cretval = soup_cookie_jar_all_cookies(cast(SoupCookieJar*)this._cPtr);
     auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -178,7 +178,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void deleteCookie(soup.cookie.Cookie cookie)
   {
-    soup_cookie_jar_delete_cookie(cast(SoupCookieJar*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(No.Dup) : null);
+    soup_cookie_jar_delete_cookie(cast(SoupCookieJar*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(No.Dup) : null);
   }
 
   /**
@@ -188,7 +188,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   soup.types.CookieJarAcceptPolicy getAcceptPolicy()
   {
     SoupCookieJarAcceptPolicy _cretval;
-    _cretval = soup_cookie_jar_get_accept_policy(cast(SoupCookieJar*)cPtr);
+    _cretval = soup_cookie_jar_get_accept_policy(cast(SoupCookieJar*)this._cPtr);
     soup.types.CookieJarAcceptPolicy _retval = cast(soup.types.CookieJarAcceptPolicy)_cretval;
     return _retval;
   }
@@ -215,7 +215,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   soup.cookie.Cookie[] getCookieList(glib.uri.Uri uri, bool forHttp)
   {
     GSList* _cretval;
-    _cretval = soup_cookie_jar_get_cookie_list(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, forHttp);
+    _cretval = soup_cookie_jar_get_cookie_list(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, forHttp);
     auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -243,7 +243,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   soup.cookie.Cookie[] getCookieListWithSameSiteInfo(glib.uri.Uri uri, glib.uri.Uri topLevel, glib.uri.Uri siteForCookies, bool forHttp, bool isSafeMethod, bool isTopLevelNavigation)
   {
     GSList* _cretval;
-    _cretval = soup_cookie_jar_get_cookie_list_with_same_site_info(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, topLevel ? cast(GUri*)topLevel.cPtr(No.Dup) : null, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null, forHttp, isSafeMethod, isTopLevelNavigation);
+    _cretval = soup_cookie_jar_get_cookie_list_with_same_site_info(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, topLevel ? cast(GUri*)topLevel._cPtr(No.Dup) : null, siteForCookies ? cast(GUri*)siteForCookies._cPtr(No.Dup) : null, forHttp, isSafeMethod, isTopLevelNavigation);
     auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -270,7 +270,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   string getCookies(glib.uri.Uri uri, bool forHttp)
   {
     char* _cretval;
-    _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, forHttp);
+    _cretval = soup_cookie_jar_get_cookies(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, forHttp);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -282,7 +282,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   bool isPersistent()
   {
     bool _retval;
-    _retval = soup_cookie_jar_is_persistent(cast(SoupCookieJar*)cPtr);
+    _retval = soup_cookie_jar_is_persistent(cast(SoupCookieJar*)this._cPtr);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void setAcceptPolicy(soup.types.CookieJarAcceptPolicy policy)
   {
-    soup_cookie_jar_set_accept_policy(cast(SoupCookieJar*)cPtr, policy);
+    soup_cookie_jar_set_accept_policy(cast(SoupCookieJar*)this._cPtr, policy);
   }
 
   /**
@@ -315,7 +315,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   void setCookie(glib.uri.Uri uri, string cookie)
   {
     const(char)* _cookie = cookie.toCString(No.Alloc);
-    soup_cookie_jar_set_cookie(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, _cookie);
+    soup_cookie_jar_set_cookie(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, _cookie);
   }
 
   /**
@@ -333,7 +333,7 @@ class CookieJar : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   void setCookieWithFirstParty(glib.uri.Uri uri, glib.uri.Uri firstParty, string cookie)
   {
     const(char)* _cookie = cookie.toCString(No.Alloc);
-    soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null, _cookie);
+    soup_cookie_jar_set_cookie_with_first_party(cast(SoupCookieJar*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null, _cookie);
   }
 
   /**

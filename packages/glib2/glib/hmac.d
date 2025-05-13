@@ -34,22 +34,22 @@ class Hmac : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_hmac_get_type != &gidSymbolNotFound ? g_hmac_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class Hmac : gobject.boxed.Boxed
   glib.hmac.Hmac copy()
   {
     GHmac* _cretval;
-    _cretval = g_hmac_copy(cast(const(GHmac)*)cPtr);
+    _cretval = g_hmac_copy(cast(const(GHmac)*)this._cPtr);
     auto _retval = _cretval ? new glib.hmac.Hmac(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -122,7 +122,7 @@ class Hmac : gobject.boxed.Boxed
   void getDigest(ref ubyte[] buffer)
   {
     size_t _digestLen;
-    g_hmac_get_digest(cast(GHmac*)cPtr, buffer.ptr, &_digestLen);
+    g_hmac_get_digest(cast(GHmac*)this._cPtr, buffer.ptr, &_digestLen);
   }
 
   /**
@@ -139,7 +139,7 @@ class Hmac : gobject.boxed.Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = g_hmac_get_string(cast(GHmac*)cPtr);
+    _cretval = g_hmac_get_string(cast(GHmac*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,6 +160,6 @@ class Hmac : gobject.boxed.Boxed
       _length = cast(ptrdiff_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    g_hmac_update(cast(GHmac*)cPtr, _data, _length);
+    g_hmac_update(cast(GHmac*)this._cPtr, _data, _length);
   }
 }

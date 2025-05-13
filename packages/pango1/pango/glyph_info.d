@@ -27,7 +27,7 @@ class GlyphInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class GlyphInfo
   */
   @property pango.types.Glyph glyph()
   {
-    return (cast(PangoGlyphInfo*)cPtr).glyph;
+    return (cast(PangoGlyphInfo*)this._cPtr).glyph;
   }
 
   /**
@@ -48,7 +48,7 @@ class GlyphInfo
   */
   @property void glyph(pango.types.Glyph propval)
   {
-    (cast(PangoGlyphInfo*)cPtr).glyph = propval;
+    (cast(PangoGlyphInfo*)this._cPtr).glyph = propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class GlyphInfo
   */
   @property pango.types.GlyphGeometry geometry()
   {
-    return cToD!(pango.types.GlyphGeometry)(cast(void*)&(cast(PangoGlyphInfo*)cPtr).geometry);
+    return cToD!(pango.types.GlyphGeometry)(cast(void*)&(cast(PangoGlyphInfo*)this._cPtr).geometry);
   }
 
   /**
@@ -67,7 +67,7 @@ class GlyphInfo
   */
   @property void geometry(pango.types.GlyphGeometry propval)
   {
-    (cast(PangoGlyphInfo*)cPtr).geometry = propval;
+    (cast(PangoGlyphInfo*)this._cPtr).geometry = propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class GlyphInfo
   */
   @property pango.types.GlyphVisAttr attr()
   {
-    return cToD!(pango.types.GlyphVisAttr)(cast(void*)&(cast(PangoGlyphInfo*)cPtr).attr);
+    return cToD!(pango.types.GlyphVisAttr)(cast(void*)&(cast(PangoGlyphInfo*)this._cPtr).attr);
   }
 
   /**
@@ -86,6 +86,6 @@ class GlyphInfo
   */
   @property void attr(pango.types.GlyphVisAttr propval)
   {
-    (cast(PangoGlyphInfo*)cPtr).attr = propval;
+    (cast(PangoGlyphInfo*)this._cPtr).attr = propval;
   }
 }

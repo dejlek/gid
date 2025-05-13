@@ -29,7 +29,7 @@ class VideoMetaTransform
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class VideoMetaTransform
   */
   @property gstvideo.video_info.VideoInfo inInfo()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
   }
 
   /**
@@ -50,8 +50,8 @@ class VideoMetaTransform
   */
   @property void inInfo(gstvideo.video_info.VideoInfo propval)
   {
-    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).inInfo);
-    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)cPtr).inInfo);
+    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
+    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).inInfo);
   }
 
   /**
@@ -60,7 +60,7 @@ class VideoMetaTransform
   */
   @property gstvideo.video_info.VideoInfo outInfo()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
   }
 
   /**
@@ -70,8 +70,8 @@ class VideoMetaTransform
   */
   @property void outInfo(gstvideo.video_info.VideoInfo propval)
   {
-    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)cPtr).outInfo);
-    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)cPtr).outInfo);
+    cValueFree!(gstvideo.video_info.VideoInfo)(cast(void*)(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
+    dToC(propval, cast(void*)&(cast(GstVideoMetaTransform*)this._cPtr).outInfo);
   }
 
   /**

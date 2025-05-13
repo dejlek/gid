@@ -28,16 +28,16 @@ class ColorSelection : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_selection_get_type != &gidSymbolNotFound ? gtk_color_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -175,7 +175,7 @@ class ColorSelection : gtk.box.Box
 
     GdkColor[] _tmpcolors;
     foreach (obj; colors)
-      _tmpcolors ~= *cast(GdkColor*)obj.cPtr;
+      _tmpcolors ~= *cast(GdkColor*)obj._cPtr;
     const(GdkColor)* _colors = _tmpcolors.ptr;
     _cretval = gtk_color_selection_palette_to_string(_colors, _nColors);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
@@ -189,7 +189,7 @@ class ColorSelection : gtk.box.Box
   ushort getCurrentAlpha()
   {
     ushort _retval;
-    _retval = gtk_color_selection_get_current_alpha(cast(GtkColorSelection*)cPtr);
+    _retval = gtk_color_selection_get_current_alpha(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class ColorSelection : gtk.box.Box
   void getCurrentColor(out gdk.color.Color color)
   {
     GdkColor _color;
-    gtk_color_selection_get_current_color(cast(GtkColorSelection*)cPtr, &_color);
+    gtk_color_selection_get_current_color(cast(GtkColorSelection*)this._cPtr, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
   }
 
@@ -217,7 +217,7 @@ class ColorSelection : gtk.box.Box
   void getCurrentRgba(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
-    gtk_color_selection_get_current_rgba(cast(GtkColorSelection*)cPtr, &_rgba);
+    gtk_color_selection_get_current_rgba(cast(GtkColorSelection*)this._cPtr, &_rgba);
     rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
   }
 
@@ -229,7 +229,7 @@ class ColorSelection : gtk.box.Box
   bool getHasOpacityControl()
   {
     bool _retval;
-    _retval = gtk_color_selection_get_has_opacity_control(cast(GtkColorSelection*)cPtr);
+    _retval = gtk_color_selection_get_has_opacity_control(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class ColorSelection : gtk.box.Box
   bool getHasPalette()
   {
     bool _retval;
-    _retval = gtk_color_selection_get_has_palette(cast(GtkColorSelection*)cPtr);
+    _retval = gtk_color_selection_get_has_palette(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class ColorSelection : gtk.box.Box
   ushort getPreviousAlpha()
   {
     ushort _retval;
-    _retval = gtk_color_selection_get_previous_alpha(cast(GtkColorSelection*)cPtr);
+    _retval = gtk_color_selection_get_previous_alpha(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class ColorSelection : gtk.box.Box
   void getPreviousColor(out gdk.color.Color color)
   {
     GdkColor _color;
-    gtk_color_selection_get_previous_color(cast(GtkColorSelection*)cPtr, &_color);
+    gtk_color_selection_get_previous_color(cast(GtkColorSelection*)this._cPtr, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
   }
 
@@ -279,7 +279,7 @@ class ColorSelection : gtk.box.Box
   void getPreviousRgba(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
-    gtk_color_selection_get_previous_rgba(cast(GtkColorSelection*)cPtr, &_rgba);
+    gtk_color_selection_get_previous_rgba(cast(GtkColorSelection*)this._cPtr, &_rgba);
     rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
   }
 
@@ -291,7 +291,7 @@ class ColorSelection : gtk.box.Box
   bool isAdjusting()
   {
     bool _retval;
-    _retval = gtk_color_selection_is_adjusting(cast(GtkColorSelection*)cPtr);
+    _retval = gtk_color_selection_is_adjusting(cast(GtkColorSelection*)this._cPtr);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class ColorSelection : gtk.box.Box
   */
   void setCurrentAlpha(ushort alpha)
   {
-    gtk_color_selection_set_current_alpha(cast(GtkColorSelection*)cPtr, alpha);
+    gtk_color_selection_set_current_alpha(cast(GtkColorSelection*)this._cPtr, alpha);
   }
 
   /**
@@ -322,7 +322,7 @@ class ColorSelection : gtk.box.Box
   */
   void setCurrentColor(gdk.color.Color color)
   {
-    gtk_color_selection_set_current_color(cast(GtkColorSelection*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_color_selection_set_current_color(cast(GtkColorSelection*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -336,7 +336,7 @@ class ColorSelection : gtk.box.Box
   */
   void setCurrentRgba(gdk.rgba.RGBA rgba)
   {
-    gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    gtk_color_selection_set_current_rgba(cast(GtkColorSelection*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 
   /**
@@ -347,7 +347,7 @@ class ColorSelection : gtk.box.Box
   */
   void setHasOpacityControl(bool hasOpacity)
   {
-    gtk_color_selection_set_has_opacity_control(cast(GtkColorSelection*)cPtr, hasOpacity);
+    gtk_color_selection_set_has_opacity_control(cast(GtkColorSelection*)this._cPtr, hasOpacity);
   }
 
   /**
@@ -358,7 +358,7 @@ class ColorSelection : gtk.box.Box
   */
   void setHasPalette(bool hasPalette)
   {
-    gtk_color_selection_set_has_palette(cast(GtkColorSelection*)cPtr, hasPalette);
+    gtk_color_selection_set_has_palette(cast(GtkColorSelection*)this._cPtr, hasPalette);
   }
 
   /**
@@ -372,7 +372,7 @@ class ColorSelection : gtk.box.Box
   */
   void setPreviousAlpha(ushort alpha)
   {
-    gtk_color_selection_set_previous_alpha(cast(GtkColorSelection*)cPtr, alpha);
+    gtk_color_selection_set_previous_alpha(cast(GtkColorSelection*)this._cPtr, alpha);
   }
 
   /**
@@ -390,7 +390,7 @@ class ColorSelection : gtk.box.Box
   */
   void setPreviousColor(gdk.color.Color color)
   {
-    gtk_color_selection_set_previous_color(cast(GtkColorSelection*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_color_selection_set_previous_color(cast(GtkColorSelection*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -406,7 +406,7 @@ class ColorSelection : gtk.box.Box
   */
   void setPreviousRgba(gdk.rgba.RGBA rgba)
   {
-    gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    gtk_color_selection_set_previous_rgba(cast(GtkColorSelection*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 
   /**

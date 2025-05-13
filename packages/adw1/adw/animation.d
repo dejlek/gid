@@ -67,16 +67,16 @@ class Animation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_animation_get_type != &gidSymbolNotFound ? adw_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -167,7 +167,7 @@ class Animation : gobject.object.ObjectWrap
   bool getFollowEnableAnimationsSetting()
   {
     bool _retval;
-    _retval = adw_animation_get_follow_enable_animations_setting(cast(AdwAnimation*)cPtr);
+    _retval = adw_animation_get_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class Animation : gobject.object.ObjectWrap
   adw.types.AnimationState getState()
   {
     AdwAnimationState _cretval;
-    _cretval = adw_animation_get_state(cast(AdwAnimation*)cPtr);
+    _cretval = adw_animation_get_state(cast(AdwAnimation*)this._cPtr);
     adw.types.AnimationState _retval = cast(adw.types.AnimationState)_cretval;
     return _retval;
   }
@@ -193,8 +193,8 @@ class Animation : gobject.object.ObjectWrap
   adw.animation_target.AnimationTarget getTarget()
   {
     AdwAnimationTarget* _cretval;
-    _cretval = adw_animation_get_target(cast(AdwAnimation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.animation_target.AnimationTarget)(cast(AdwAnimationTarget*)_cretval, No.Take);
+    _cretval = adw_animation_get_target(cast(AdwAnimation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.animation_target.AnimationTarget)(cast(AdwAnimationTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Animation : gobject.object.ObjectWrap
   double getValue()
   {
     double _retval;
-    _retval = adw_animation_get_value(cast(AdwAnimation*)cPtr);
+    _retval = adw_animation_get_value(cast(AdwAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -223,8 +223,8 @@ class Animation : gobject.object.ObjectWrap
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_animation_get_widget(cast(AdwAnimation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_animation_get_widget(cast(AdwAnimation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void pause()
   {
-    adw_animation_pause(cast(AdwAnimation*)cPtr);
+    adw_animation_pause(cast(AdwAnimation*)this._cPtr);
   }
 
   /**
@@ -259,7 +259,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void play()
   {
-    adw_animation_play(cast(AdwAnimation*)cPtr);
+    adw_animation_play(cast(AdwAnimation*)this._cPtr);
   }
 
   /**
@@ -269,7 +269,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void reset()
   {
-    adw_animation_reset(cast(AdwAnimation*)cPtr);
+    adw_animation_reset(cast(AdwAnimation*)this._cPtr);
   }
 
   /**
@@ -282,7 +282,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void resume()
   {
-    adw_animation_resume(cast(AdwAnimation*)cPtr);
+    adw_animation_resume(cast(AdwAnimation*)this._cPtr);
   }
 
   /**
@@ -301,7 +301,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void setFollowEnableAnimationsSetting(bool setting)
   {
-    adw_animation_set_follow_enable_animations_setting(cast(AdwAnimation*)cPtr, setting);
+    adw_animation_set_follow_enable_animations_setting(cast(AdwAnimation*)this._cPtr, setting);
   }
 
   /**
@@ -312,7 +312,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void setTarget(adw.animation_target.AnimationTarget target)
   {
-    adw_animation_set_target(cast(AdwAnimation*)cPtr, target ? cast(AdwAnimationTarget*)target.cPtr(No.Dup) : null);
+    adw_animation_set_target(cast(AdwAnimation*)this._cPtr, target ? cast(AdwAnimationTarget*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -326,7 +326,7 @@ class Animation : gobject.object.ObjectWrap
   */
   void skip()
   {
-    adw_animation_skip(cast(AdwAnimation*)cPtr);
+    adw_animation_skip(cast(AdwAnimation*)this._cPtr);
   }
 
   /**

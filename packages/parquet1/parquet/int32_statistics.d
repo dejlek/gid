@@ -18,16 +18,16 @@ class Int32Statistics : parquet.statistics.Statistics
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_int32_statistics_get_type != &gidSymbolNotFound ? gparquet_int32_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class Int32Statistics : parquet.statistics.Statistics
   int getMax()
   {
     int _retval;
-    _retval = gparquet_int32_statistics_get_max(cast(GParquetInt32Statistics*)cPtr);
+    _retval = gparquet_int32_statistics_get_max(cast(GParquetInt32Statistics*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class Int32Statistics : parquet.statistics.Statistics
   int getMin()
   {
     int _retval;
-    _retval = gparquet_int32_statistics_get_min(cast(GParquetInt32Statistics*)cPtr);
+    _retval = gparquet_int32_statistics_get_min(cast(GParquetInt32Statistics*)this._cPtr);
     return _retval;
   }
 }

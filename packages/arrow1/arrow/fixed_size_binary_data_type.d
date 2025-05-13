@@ -18,16 +18,16 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_size_binary_data_type_get_type != &gidSymbolNotFound ? garrow_fixed_size_binary_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class FixedSizeBinaryDataType : arrow.fixed_width_data_type.FixedWidthDataType
   int getByteWidth()
   {
     int _retval;
-    _retval = garrow_fixed_size_binary_data_type_get_byte_width(cast(GArrowFixedSizeBinaryDataType*)cPtr);
+    _retval = garrow_fixed_size_binary_data_type_get_byte_width(cast(GArrowFixedSizeBinaryDataType*)this._cPtr);
     return _retval;
   }
 }

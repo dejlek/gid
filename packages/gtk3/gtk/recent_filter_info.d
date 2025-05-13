@@ -27,7 +27,7 @@ class RecentFilterInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class RecentFilterInfo
   */
   @property gtk.types.RecentFilterFlags contains()
   {
-    return cast(gtk.types.RecentFilterFlags)(cast(GtkRecentFilterInfo*)cPtr).contains;
+    return cast(gtk.types.RecentFilterFlags)(cast(GtkRecentFilterInfo*)this._cPtr).contains;
   }
 
   /**
@@ -48,7 +48,7 @@ class RecentFilterInfo
   */
   @property void contains(gtk.types.RecentFilterFlags propval)
   {
-    (cast(GtkRecentFilterInfo*)cPtr).contains = cast(GtkRecentFilterFlags)propval;
+    (cast(GtkRecentFilterInfo*)this._cPtr).contains = cast(GtkRecentFilterFlags)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class RecentFilterInfo
   */
   @property string uri()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).uri);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).uri);
   }
 
   /**
@@ -67,8 +67,8 @@ class RecentFilterInfo
   */
   @property void uri(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).uri);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).uri);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).uri);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).uri);
   }
 
   /**
@@ -78,7 +78,7 @@ class RecentFilterInfo
   */
   @property string displayName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).displayName);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
   }
 
   /**
@@ -89,8 +89,8 @@ class RecentFilterInfo
   */
   @property void displayName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).displayName);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).displayName);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).displayName);
   }
 
   /**
@@ -99,7 +99,7 @@ class RecentFilterInfo
   */
   @property string mimeType()
   {
-    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).mimeType);
+    return cToD!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
   }
 
   /**
@@ -109,8 +109,8 @@ class RecentFilterInfo
   */
   @property void mimeType(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)cPtr).mimeType);
-    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)cPtr).mimeType);
+    cValueFree!(string)(cast(void*)(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
+    dToC(propval, cast(void*)&(cast(GtkRecentFilterInfo*)this._cPtr).mimeType);
   }
 
   /**
@@ -120,7 +120,7 @@ class RecentFilterInfo
   */
   @property int age()
   {
-    return (cast(GtkRecentFilterInfo*)cPtr).age;
+    return (cast(GtkRecentFilterInfo*)this._cPtr).age;
   }
 
   /**
@@ -131,6 +131,6 @@ class RecentFilterInfo
   */
   @property void age(int propval)
   {
-    (cast(GtkRecentFilterInfo*)cPtr).age = propval;
+    (cast(GtkRecentFilterInfo*)this._cPtr).age = propval;
   }
 }

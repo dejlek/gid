@@ -26,16 +26,16 @@ class AudioClock : gst.system_clock.SystemClock
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_clock_get_type != &gidSymbolNotFound ? gst_audio_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class AudioClock : gst.system_clock.SystemClock
     {
       auto _dlg = cast(gstaudio.types.AudioClockGetTimeFunc*)userData;
 
-      GstClockTime _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
+      GstClockTime _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(void*)clock, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -83,7 +83,7 @@ class AudioClock : gst.system_clock.SystemClock
   gst.types.ClockTime adjust(gst.types.ClockTime time)
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_clock_adjust(cast(GstAudioClock*)cPtr, time);
+    _retval = gst_audio_clock_adjust(cast(GstAudioClock*)this._cPtr, time);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class AudioClock : gst.system_clock.SystemClock
   override gst.types.ClockTime getTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_clock_get_time(cast(GstAudioClock*)cPtr);
+    _retval = gst_audio_clock_get_time(cast(GstAudioClock*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class AudioClock : gst.system_clock.SystemClock
   */
   void invalidate()
   {
-    gst_audio_clock_invalidate(cast(GstAudioClock*)cPtr);
+    gst_audio_clock_invalidate(cast(GstAudioClock*)this._cPtr);
   }
 
   /**
@@ -123,6 +123,6 @@ class AudioClock : gst.system_clock.SystemClock
   */
   void reset(gst.types.ClockTime time)
   {
-    gst_audio_clock_reset(cast(GstAudioClock*)cPtr, time);
+    gst_audio_clock_reset(cast(GstAudioClock*)this._cPtr, time);
   }
 }

@@ -19,16 +19,16 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_scalar_get_type != &gidSymbolNotFound ? garrow_map_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class MapScalar : arrow.base_list_scalar.BaseListScalar
   this(arrow.struct_array.StructArray value)
   {
     GArrowMapScalar* _cretval;
-    _cretval = garrow_map_scalar_new(value ? cast(GArrowStructArray*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_map_scalar_new(value ? cast(GArrowStructArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

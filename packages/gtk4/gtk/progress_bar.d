@@ -76,16 +76,16 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_progress_bar_get_type != &gidSymbolNotFound ? gtk_progress_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -265,7 +265,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
-    _cretval = gtk_progress_bar_get_ellipsize(cast(GtkProgressBar*)cPtr);
+    _cretval = gtk_progress_bar_get_ellipsize(cast(GtkProgressBar*)this._cPtr);
     pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
@@ -277,7 +277,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   double getFraction()
   {
     double _retval;
-    _retval = gtk_progress_bar_get_fraction(cast(GtkProgressBar*)cPtr);
+    _retval = gtk_progress_bar_get_fraction(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_progress_bar_get_inverted(cast(GtkProgressBar*)cPtr);
+    _retval = gtk_progress_bar_get_inverted(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   double getPulseStep()
   {
     double _retval;
-    _retval = gtk_progress_bar_get_pulse_step(cast(GtkProgressBar*)cPtr);
+    _retval = gtk_progress_bar_get_pulse_step(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   bool getShowText()
   {
     bool _retval;
-    _retval = gtk_progress_bar_get_show_text(cast(GtkProgressBar*)cPtr);
+    _retval = gtk_progress_bar_get_show_text(cast(GtkProgressBar*)this._cPtr);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)cPtr);
+    _cretval = gtk_progress_bar_get_text(cast(GtkProgressBar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -343,7 +343,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void pulse()
   {
-    gtk_progress_bar_pulse(cast(GtkProgressBar*)cPtr);
+    gtk_progress_bar_pulse(cast(GtkProgressBar*)this._cPtr);
   }
 
   /**
@@ -357,7 +357,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setEllipsize(pango.types.EllipsizeMode mode)
   {
-    gtk_progress_bar_set_ellipsize(cast(GtkProgressBar*)cPtr, mode);
+    gtk_progress_bar_set_ellipsize(cast(GtkProgressBar*)this._cPtr, mode);
   }
 
   /**
@@ -371,7 +371,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setFraction(double fraction)
   {
-    gtk_progress_bar_set_fraction(cast(GtkProgressBar*)cPtr, fraction);
+    gtk_progress_bar_set_fraction(cast(GtkProgressBar*)this._cPtr, fraction);
   }
 
   /**
@@ -385,7 +385,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setInverted(bool inverted)
   {
-    gtk_progress_bar_set_inverted(cast(GtkProgressBar*)cPtr, inverted);
+    gtk_progress_bar_set_inverted(cast(GtkProgressBar*)this._cPtr, inverted);
   }
 
   /**
@@ -400,7 +400,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setPulseStep(double fraction)
   {
-    gtk_progress_bar_set_pulse_step(cast(GtkProgressBar*)cPtr, fraction);
+    gtk_progress_bar_set_pulse_step(cast(GtkProgressBar*)this._cPtr, fraction);
   }
 
   /**
@@ -419,7 +419,7 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   */
   void setShowText(bool showText)
   {
-    gtk_progress_bar_set_show_text(cast(GtkProgressBar*)cPtr, showText);
+    gtk_progress_bar_set_show_text(cast(GtkProgressBar*)this._cPtr, showText);
   }
 
   /**
@@ -441,6 +441,6 @@ class ProgressBar : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_progress_bar_set_text(cast(GtkProgressBar*)cPtr, _text);
+    gtk_progress_bar_set_text(cast(GtkProgressBar*)this._cPtr, _text);
   }
 }

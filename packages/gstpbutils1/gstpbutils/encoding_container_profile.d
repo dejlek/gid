@@ -21,16 +21,16 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_container_profile_get_type != &gidSymbolNotFound ? gst_encoding_container_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _description = description.toCString(No.Alloc);
     const(char)* _preset = preset.toCString(No.Alloc);
-    _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format.cPtr(No.Dup) : null, _preset);
+    _cretval = gst_encoding_container_profile_new(_name, _description, format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset);
     this(_cretval, Yes.Take);
   }
 
@@ -73,7 +73,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool addProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(Yes.Dup) : null);
+    _retval = gst_encoding_container_profile_add_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   bool containsProfile(gstpbutils.encoding_profile.EncodingProfile profile)
   {
     bool _retval;
-    _retval = gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)cPtr, profile ? cast(GstEncodingProfile*)profile.cPtr(No.Dup) : null);
+    _retval = gst_encoding_container_profile_contains_profile(cast(GstEncodingContainerProfile*)this._cPtr, profile ? cast(GstEncodingProfile*)profile._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class EncodingContainerProfile : gstpbutils.encoding_profile.EncodingProfile
   gstpbutils.encoding_profile.EncodingProfile[] getProfiles()
   {
     const(GList)* _cretval;
-    _cretval = gst_encoding_container_profile_get_profiles(cast(GstEncodingContainerProfile*)cPtr);
+    _cretval = gst_encoding_container_profile_get_profiles(cast(GstEncodingContainerProfile*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.encoding_profile.EncodingProfile, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }

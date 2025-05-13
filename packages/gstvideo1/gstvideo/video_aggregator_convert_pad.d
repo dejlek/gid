@@ -24,16 +24,16 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_convert_pad_get_type != &gidSymbolNotFound ? gst_video_aggregator_convert_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,6 +60,6 @@ class VideoAggregatorConvertPad : gstvideo.video_aggregator_pad.VideoAggregatorP
   */
   void updateConversionInfo()
   {
-    gst_video_aggregator_convert_pad_update_conversion_info(cast(GstVideoAggregatorConvertPad*)cPtr);
+    gst_video_aggregator_convert_pad_update_conversion_info(cast(GstVideoAggregatorConvertPad*)this._cPtr);
   }
 }

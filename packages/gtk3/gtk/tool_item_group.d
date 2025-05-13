@@ -36,16 +36,16 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_group_get_type != &gidSymbolNotFound ? gtk_tool_item_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -139,7 +139,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   bool getCollapsed()
   {
     bool _retval;
-    _retval = gtk_tool_item_group_get_collapsed(cast(GtkToolItemGroup*)cPtr);
+    _retval = gtk_tool_item_group_get_collapsed(cast(GtkToolItemGroup*)this._cPtr);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   gtk.tool_item.ToolItem getDropItem(int x, int y)
   {
     GtkToolItem* _cretval;
-    _cretval = gtk_tool_item_group_get_drop_item(cast(GtkToolItemGroup*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_tool_item_group_get_drop_item(cast(GtkToolItemGroup*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   pango.types.EllipsizeMode getEllipsize()
   {
     PangoEllipsizeMode _cretval;
-    _cretval = gtk_tool_item_group_get_ellipsize(cast(GtkToolItemGroup*)cPtr);
+    _cretval = gtk_tool_item_group_get_ellipsize(cast(GtkToolItemGroup*)this._cPtr);
     pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
@@ -178,7 +178,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   gtk.types.ReliefStyle getHeaderRelief()
   {
     GtkReliefStyle _cretval;
-    _cretval = gtk_tool_item_group_get_header_relief(cast(GtkToolItemGroup*)cPtr);
+    _cretval = gtk_tool_item_group_get_header_relief(cast(GtkToolItemGroup*)this._cPtr);
     gtk.types.ReliefStyle _retval = cast(gtk.types.ReliefStyle)_cretval;
     return _retval;
   }
@@ -193,7 +193,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   int getItemPosition(gtk.tool_item.ToolItem item)
   {
     int _retval;
-    _retval = gtk_tool_item_group_get_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null);
+    _retval = gtk_tool_item_group_get_item_position(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_tool_item_group_get_label(cast(GtkToolItemGroup*)cPtr);
+    _cretval = gtk_tool_item_group_get_label(cast(GtkToolItemGroup*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -219,8 +219,8 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tool_item_group_get_label_widget(cast(GtkToolItemGroup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_item_group_get_label_widget(cast(GtkToolItemGroup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   uint getNItems()
   {
     uint _retval;
-    _retval = gtk_tool_item_group_get_n_items(cast(GtkToolItemGroup*)cPtr);
+    _retval = gtk_tool_item_group_get_n_items(cast(GtkToolItemGroup*)this._cPtr);
     return _retval;
   }
 
@@ -245,8 +245,8 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   gtk.tool_item.ToolItem getNthItem(uint index)
   {
     GtkToolItem* _cretval;
-    _cretval = gtk_tool_item_group_get_nth_item(cast(GtkToolItemGroup*)cPtr, index);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_tool_item_group_get_nth_item(cast(GtkToolItemGroup*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void insert(gtk.tool_item.ToolItem item, int position)
   {
-    gtk_tool_item_group_insert(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null, position);
+    gtk_tool_item_group_insert(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -271,7 +271,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setCollapsed(bool collapsed)
   {
-    gtk_tool_item_group_set_collapsed(cast(GtkToolItemGroup*)cPtr, collapsed);
+    gtk_tool_item_group_set_collapsed(cast(GtkToolItemGroup*)this._cPtr, collapsed);
   }
 
   /**
@@ -282,7 +282,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setEllipsize(pango.types.EllipsizeMode ellipsize)
   {
-    gtk_tool_item_group_set_ellipsize(cast(GtkToolItemGroup*)cPtr, ellipsize);
+    gtk_tool_item_group_set_ellipsize(cast(GtkToolItemGroup*)this._cPtr, ellipsize);
   }
 
   /**
@@ -294,7 +294,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setHeaderRelief(gtk.types.ReliefStyle style)
   {
-    gtk_tool_item_group_set_header_relief(cast(GtkToolItemGroup*)cPtr, style);
+    gtk_tool_item_group_set_header_relief(cast(GtkToolItemGroup*)this._cPtr, style);
   }
 
   /**
@@ -308,7 +308,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setItemPosition(gtk.tool_item.ToolItem item, int position)
   {
-    gtk_tool_item_group_set_item_position(cast(GtkToolItemGroup*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null, position);
+    gtk_tool_item_group_set_item_position(cast(GtkToolItemGroup*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -321,7 +321,7 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_tool_item_group_set_label(cast(GtkToolItemGroup*)cPtr, _label);
+    gtk_tool_item_group_set_label(cast(GtkToolItemGroup*)this._cPtr, _label);
   }
 
   /**
@@ -334,6 +334,6 @@ class ToolItemGroup : gtk.container.Container, gtk.tool_shell.ToolShell
   */
   void setLabelWidget(gtk.widget.Widget labelWidget)
   {
-    gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_tool_item_group_set_label_widget(cast(GtkToolItemGroup*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
 }

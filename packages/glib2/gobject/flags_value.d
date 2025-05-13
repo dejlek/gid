@@ -27,7 +27,7 @@ class FlagsValue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class FlagsValue
   */
   @property uint value()
   {
-    return (cast(GFlagsValue*)cPtr).value;
+    return (cast(GFlagsValue*)this._cPtr).value;
   }
 
   /**
@@ -48,7 +48,7 @@ class FlagsValue
   */
   @property void value(uint propval)
   {
-    (cast(GFlagsValue*)cPtr).value = propval;
+    (cast(GFlagsValue*)this._cPtr).value = propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class FlagsValue
   */
   @property string valueName()
   {
-    return cToD!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
+    return cToD!(string)(cast(void*)(cast(GFlagsValue*)this._cPtr).valueName);
   }
 
   /**
@@ -67,8 +67,8 @@ class FlagsValue
   */
   @property void valueName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueName);
-    dToC(propval, cast(void*)&(cast(GFlagsValue*)cPtr).valueName);
+    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)this._cPtr).valueName);
+    dToC(propval, cast(void*)&(cast(GFlagsValue*)this._cPtr).valueName);
   }
 
   /**
@@ -77,7 +77,7 @@ class FlagsValue
   */
   @property string valueNick()
   {
-    return cToD!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
+    return cToD!(string)(cast(void*)(cast(GFlagsValue*)this._cPtr).valueNick);
   }
 
   /**
@@ -87,7 +87,7 @@ class FlagsValue
   */
   @property void valueNick(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)cPtr).valueNick);
-    dToC(propval, cast(void*)&(cast(GFlagsValue*)cPtr).valueNick);
+    cValueFree!(string)(cast(void*)(cast(GFlagsValue*)this._cPtr).valueNick);
+    dToC(propval, cast(void*)&(cast(GFlagsValue*)this._cPtr).valueNick);
   }
 }

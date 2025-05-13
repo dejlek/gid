@@ -18,16 +18,16 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_interval_data_type_get_type != &gidSymbolNotFound ? garrow_interval_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class IntervalDataType : arrow.temporal_data_type.TemporalDataType
   arrow.types.IntervalType getIntervalType()
   {
     GArrowIntervalType _cretval;
-    _cretval = garrow_interval_data_type_get_interval_type(cast(GArrowIntervalDataType*)cPtr);
+    _cretval = garrow_interval_data_type_get_interval_type(cast(GArrowIntervalDataType*)this._cPtr);
     arrow.types.IntervalType _retval = cast(arrow.types.IntervalType)_cretval;
     return _retval;
   }

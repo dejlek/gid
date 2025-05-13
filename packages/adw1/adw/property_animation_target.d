@@ -23,16 +23,16 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_property_animation_target_get_type != &gidSymbolNotFound ? adw_property_animation_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   {
     AdwAnimationTarget* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = adw_property_animation_target_new(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _propertyName);
+    _cretval = adw_property_animation_target_new(object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }
 
@@ -70,8 +70,8 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   static adw.property_animation_target.PropertyAnimationTarget newForPspec(gobject.object.ObjectWrap object, gobject.param_spec.ParamSpec pspec)
   {
     AdwAnimationTarget* _cretval;
-    _cretval = adw_property_animation_target_new_for_pspec(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.property_animation_target.PropertyAnimationTarget)(cast(AdwAnimationTarget*)_cretval, Yes.Take);
+    _cretval = adw_property_animation_target_new_for_pspec(object ? cast(GObject*)object._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.property_animation_target.PropertyAnimationTarget)(cast(AdwAnimationTarget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,9 +85,9 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   */
   gobject.object.ObjectWrap getObject()
   {
-    ObjectC* _cretval;
-    _cretval = adw_property_animation_target_get_object(cast(AdwPropertyAnimationTarget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = adw_property_animation_target_get_object(cast(AdwPropertyAnimationTarget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
   gobject.param_spec.ParamSpec getPspec()
   {
     GParamSpec* _cretval;
-    _cretval = adw_property_animation_target_get_pspec(cast(AdwPropertyAnimationTarget*)cPtr);
+    _cretval = adw_property_animation_target_get_pspec(cast(AdwPropertyAnimationTarget*)this._cPtr);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }

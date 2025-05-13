@@ -26,16 +26,16 @@ class AppLaunchContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_app_launch_context_get_type != &gidSymbolNotFound ? g_app_launch_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info).cPtr(No.Dup) : null, _files);
+    _cretval = g_app_launch_context_get_display(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -86,7 +86,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   string[] getEnvironment()
   {
     char** _cretval;
-    _cretval = g_app_launch_context_get_environment(cast(GAppLaunchContext*)cPtr);
+    _cretval = g_app_launch_context_get_environment(cast(GAppLaunchContext*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -127,7 +127,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
     char* _cretval;
     auto _files = gListFromD!(gio.file.File)(files);
     scope(exit) containerFree!(GList*, gio.file.File, GidOwnership.None)(_files);
-    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info).cPtr(No.Dup) : null, _files);
+    _cretval = g_app_launch_context_get_startup_notify_id(cast(GAppLaunchContext*)this._cPtr, info ? cast(GAppInfo*)(cast(gobject.object.ObjectWrap)info)._cPtr(No.Dup) : null, _files);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -142,7 +142,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   void launchFailed(string startupNotifyId)
   {
     const(char)* _startupNotifyId = startupNotifyId.toCString(No.Alloc);
-    g_app_launch_context_launch_failed(cast(GAppLaunchContext*)cPtr, _startupNotifyId);
+    g_app_launch_context_launch_failed(cast(GAppLaunchContext*)this._cPtr, _startupNotifyId);
   }
 
   /**
@@ -157,7 +157,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    g_app_launch_context_setenv(cast(GAppLaunchContext*)cPtr, _variable, _value);
+    g_app_launch_context_setenv(cast(GAppLaunchContext*)this._cPtr, _variable, _value);
   }
 
   /**
@@ -170,7 +170,7 @@ class AppLaunchContext : gobject.object.ObjectWrap
   void unsetenv(string variable)
   {
     const(char)* _variable = variable.toCString(No.Alloc);
-    g_app_launch_context_unsetenv(cast(GAppLaunchContext*)cPtr, _variable);
+    g_app_launch_context_unsetenv(cast(GAppLaunchContext*)this._cPtr, _variable);
   }
 
   /**

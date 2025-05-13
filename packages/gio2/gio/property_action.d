@@ -75,16 +75,16 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_property_action_get_type != &gidSymbolNotFound ? g_property_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -158,7 +158,7 @@ class PropertyAction : gobject.object.ObjectWrap, gio.action.Action
     GPropertyAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = g_property_action_new(_name, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _propertyName);
+    _cretval = g_property_action_new(_name, object ? cast(GObject*)object._cPtr(No.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }
 }

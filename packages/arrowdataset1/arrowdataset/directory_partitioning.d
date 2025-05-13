@@ -22,16 +22,16 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_directory_partitioning_get_type != &gidSymbolNotFound ? gadataset_directory_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
     auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_dictionaries);
     GError *_err;
-    _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_directory_partitioning_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetKeyValuePartitioningOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);

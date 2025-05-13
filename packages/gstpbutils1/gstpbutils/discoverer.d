@@ -40,16 +40,16 @@ class Discoverer : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_get_type != &gidSymbolNotFound ? gst_discoverer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -136,10 +136,10 @@ class Discoverer : gobject.object.ObjectWrap
     GstDiscovererInfo* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)cPtr, _uri, &_err);
+    _cretval = gst_discoverer_discover_uri(cast(GstDiscoverer*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Discoverer : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _retval = gst_discoverer_discover_uri_async(cast(GstDiscoverer*)cPtr, _uri);
+    _retval = gst_discoverer_discover_uri_async(cast(GstDiscoverer*)this._cPtr, _uri);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   void start()
   {
-    gst_discoverer_start(cast(GstDiscoverer*)cPtr);
+    gst_discoverer_start(cast(GstDiscoverer*)this._cPtr);
   }
 
   /**
@@ -180,7 +180,7 @@ class Discoverer : gobject.object.ObjectWrap
   */
   void stop()
   {
-    gst_discoverer_stop(cast(GstDiscoverer*)cPtr);
+    gst_discoverer_stop(cast(GstDiscoverer*)this._cPtr);
   }
 
   /**

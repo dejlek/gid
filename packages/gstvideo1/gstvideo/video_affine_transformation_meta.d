@@ -37,7 +37,7 @@ class VideoAffineTransformationMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -48,7 +48,7 @@ class VideoAffineTransformationMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAffineTransformationMeta*)this._cPtr).meta);
   }
 
   /**
@@ -62,7 +62,7 @@ class VideoAffineTransformationMeta
   {
     assert(!matrix || matrix.length == 16);
     auto _matrix = cast(const(float)*)matrix.ptr;
-    gst_video_affine_transformation_meta_apply_matrix(cast(GstVideoAffineTransformationMeta*)cPtr, _matrix);
+    gst_video_affine_transformation_meta_apply_matrix(cast(GstVideoAffineTransformationMeta*)this._cPtr, _matrix);
   }
 
   /** */

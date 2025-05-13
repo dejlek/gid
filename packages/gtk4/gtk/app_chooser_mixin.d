@@ -47,8 +47,8 @@ template AppChooserT()
   override gio.app_info.AppInfo getAppInfo()
   {
     GAppInfo* _cretval;
-    _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    _cretval = gtk_app_chooser_get_app_info(cast(GtkAppChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template AppChooserT()
   override string getContentType()
   {
     char* _cretval;
-    _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)cPtr);
+    _cretval = gtk_app_chooser_get_content_type(cast(GtkAppChooser*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -74,6 +74,6 @@ template AppChooserT()
   */
   override void refresh()
   {
-    gtk_app_chooser_refresh(cast(GtkAppChooser*)cPtr);
+    gtk_app_chooser_refresh(cast(GtkAppChooser*)this._cPtr);
   }
 }

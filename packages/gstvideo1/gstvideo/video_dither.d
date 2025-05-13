@@ -27,7 +27,7 @@ class VideoDither
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,6 +45,6 @@ class VideoDither
   */
   void line(void* line, uint x, uint y, uint width)
   {
-    gst_video_dither_line(cast(GstVideoDither*)cPtr, line, x, y, width);
+    gst_video_dither_line(cast(GstVideoDither*)this._cPtr, line, x, y, width);
   }
 }

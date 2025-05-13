@@ -30,22 +30,22 @@ class PermissionStateQuery : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_permission_state_query_get_type != &gidSymbolNotFound ? webkit_permission_state_query_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
   */
   void finish(webkit.types.PermissionState state)
   {
-    webkit_permission_state_query_finish(cast(WebKitPermissionStateQuery*)cPtr, state);
+    webkit_permission_state_query_finish(cast(WebKitPermissionStateQuery*)this._cPtr, state);
   }
 
   /**
@@ -73,7 +73,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_permission_state_query_get_name(cast(WebKitPermissionStateQuery*)cPtr);
+    _cretval = webkit_permission_state_query_get_name(cast(WebKitPermissionStateQuery*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -86,7 +86,7 @@ class PermissionStateQuery : gobject.boxed.Boxed
   webkit.security_origin.SecurityOrigin getSecurityOrigin()
   {
     WebKitSecurityOrigin* _cretval;
-    _cretval = webkit_permission_state_query_get_security_origin(cast(WebKitPermissionStateQuery*)cPtr);
+    _cretval = webkit_permission_state_query_get_security_origin(cast(WebKitPermissionStateQuery*)this._cPtr);
     auto _retval = _cretval ? new webkit.security_origin.SecurityOrigin(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

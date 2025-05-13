@@ -18,16 +18,16 @@ class Descriptor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_descriptor_get_type != &gidSymbolNotFound ? gaflight_descriptor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class Descriptor : gobject.object.ObjectWrap
   bool equal(arrowflight.descriptor.Descriptor otherDescriptor)
   {
     bool _retval;
-    _retval = gaflight_descriptor_equal(cast(GAFlightDescriptor*)cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor.cPtr(No.Dup) : null);
+    _retval = gaflight_descriptor_equal(cast(GAFlightDescriptor*)this._cPtr, otherDescriptor ? cast(GAFlightDescriptor*)otherDescriptor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class Descriptor : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = gaflight_descriptor_to_string(cast(GAFlightDescriptor*)cPtr);
+    _cretval = gaflight_descriptor_to_string(cast(GAFlightDescriptor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

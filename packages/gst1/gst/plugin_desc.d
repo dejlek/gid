@@ -30,7 +30,7 @@ class PluginDesc
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class PluginDesc
   */
   @property int majorVersion()
   {
-    return (cast(GstPluginDesc*)cPtr).majorVersion;
+    return (cast(GstPluginDesc*)this._cPtr).majorVersion;
   }
 
   /**
@@ -51,7 +51,7 @@ class PluginDesc
   */
   @property void majorVersion(int propval)
   {
-    (cast(GstPluginDesc*)cPtr).majorVersion = propval;
+    (cast(GstPluginDesc*)this._cPtr).majorVersion = propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class PluginDesc
   */
   @property int minorVersion()
   {
-    return (cast(GstPluginDesc*)cPtr).minorVersion;
+    return (cast(GstPluginDesc*)this._cPtr).minorVersion;
   }
 
   /**
@@ -70,7 +70,7 @@ class PluginDesc
   */
   @property void minorVersion(int propval)
   {
-    (cast(GstPluginDesc*)cPtr).minorVersion = propval;
+    (cast(GstPluginDesc*)this._cPtr).minorVersion = propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class PluginDesc
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
   }
 
   /**
@@ -89,8 +89,8 @@ class PluginDesc
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).name);
   }
 
   /**
@@ -99,7 +99,7 @@ class PluginDesc
   */
   @property string description()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
   }
 
   /**
@@ -109,8 +109,8 @@ class PluginDesc
   */
   @property void description(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).description);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).description);
   }
 
   /**
@@ -119,7 +119,7 @@ class PluginDesc
   */
   @property GstPluginInitFunc pluginInit()
   {
-    return (cast(GstPluginDesc*)cPtr).pluginInit;
+    return (cast(GstPluginDesc*)this._cPtr).pluginInit;
   }
 
   /**
@@ -130,7 +130,7 @@ class PluginDesc
 
   @property void pluginInit(GstPluginInitFunc propval)
   {
-    (cast(GstPluginDesc*)cPtr).pluginInit = propval;
+    (cast(GstPluginDesc*)this._cPtr).pluginInit = propval;
   }
 
   /**
@@ -139,7 +139,7 @@ class PluginDesc
   */
   @property string version_()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
   }
 
   /**
@@ -149,8 +149,8 @@ class PluginDesc
   */
   @property void version_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).version_);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).version_);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).version_);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).version_);
   }
 
   /**
@@ -159,7 +159,7 @@ class PluginDesc
   */
   @property string license()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
   }
 
   /**
@@ -169,8 +169,8 @@ class PluginDesc
   */
   @property void license(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).license);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).license);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).license);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).license);
   }
 
   /**
@@ -179,7 +179,7 @@ class PluginDesc
   */
   @property string source()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
   }
 
   /**
@@ -189,8 +189,8 @@ class PluginDesc
   */
   @property void source(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).source);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).source);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).source);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).source);
   }
 
   /**
@@ -199,7 +199,7 @@ class PluginDesc
   */
   @property string package_()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
   }
 
   /**
@@ -209,8 +209,8 @@ class PluginDesc
   */
   @property void package_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).package_);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).package_);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).package_);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).package_);
   }
 
   /**
@@ -219,7 +219,7 @@ class PluginDesc
   */
   @property string origin()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
   }
 
   /**
@@ -229,8 +229,8 @@ class PluginDesc
   */
   @property void origin(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).origin);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).origin);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).origin);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).origin);
   }
 
   /**
@@ -244,7 +244,7 @@ class PluginDesc
   */
   @property string releaseDatetime()
   {
-    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
+    return cToD!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
   }
 
   /**
@@ -259,7 +259,7 @@ class PluginDesc
   */
   @property void releaseDatetime(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)cPtr).releaseDatetime);
-    dToC(propval, cast(void*)&(cast(GstPluginDesc*)cPtr).releaseDatetime);
+    cValueFree!(string)(cast(void*)(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
+    dToC(propval, cast(void*)&(cast(GstPluginDesc*)this._cPtr).releaseDatetime);
   }
 }

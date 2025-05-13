@@ -22,16 +22,16 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_egl_device_get_type != &gidSymbolNotFound ? gst_gl_display_egl_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class GLDisplayEGLDevice : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGLDevice* _cretval;
     _cretval = gst_gl_display_egl_device_new_with_egl_device(device);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstglegl.gldisplay_egldevice.GLDisplayEGLDevice)(cast(GstGLDisplayEGLDevice*)_cretval, Yes.Take);
     return _retval;
   }
 }

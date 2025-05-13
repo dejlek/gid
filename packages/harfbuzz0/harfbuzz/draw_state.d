@@ -39,22 +39,22 @@ class DrawState : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_draw_state_get_type != &gidSymbolNotFound ? hb_gobject_draw_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Bool pathOpen()
   {
-    return (cast(hb_draw_state_t*)cPtr).pathOpen;
+    return (cast(hb_draw_state_t*)this._cPtr).pathOpen;
   }
 
   /**
@@ -79,7 +79,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property void pathOpen(harfbuzz.types.Bool propval)
   {
-    (cast(hb_draw_state_t*)cPtr).pathOpen = propval;
+    (cast(hb_draw_state_t*)this._cPtr).pathOpen = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property float pathStartX()
   {
-    return (cast(hb_draw_state_t*)cPtr).pathStartX;
+    return (cast(hb_draw_state_t*)this._cPtr).pathStartX;
   }
 
   /**
@@ -98,7 +98,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property void pathStartX(float propval)
   {
-    (cast(hb_draw_state_t*)cPtr).pathStartX = propval;
+    (cast(hb_draw_state_t*)this._cPtr).pathStartX = propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property float pathStartY()
   {
-    return (cast(hb_draw_state_t*)cPtr).pathStartY;
+    return (cast(hb_draw_state_t*)this._cPtr).pathStartY;
   }
 
   /**
@@ -117,7 +117,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property void pathStartY(float propval)
   {
-    (cast(hb_draw_state_t*)cPtr).pathStartY = propval;
+    (cast(hb_draw_state_t*)this._cPtr).pathStartY = propval;
   }
 
   /**
@@ -126,7 +126,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property float currentX()
   {
-    return (cast(hb_draw_state_t*)cPtr).currentX;
+    return (cast(hb_draw_state_t*)this._cPtr).currentX;
   }
 
   /**
@@ -136,7 +136,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property void currentX(float propval)
   {
-    (cast(hb_draw_state_t*)cPtr).currentX = propval;
+    (cast(hb_draw_state_t*)this._cPtr).currentX = propval;
   }
 
   /**
@@ -145,7 +145,7 @@ class DrawState : gobject.boxed.Boxed
   */
   @property float currentY()
   {
-    return (cast(hb_draw_state_t*)cPtr).currentY;
+    return (cast(hb_draw_state_t*)this._cPtr).currentY;
   }
 
   /**
@@ -155,6 +155,6 @@ class DrawState : gobject.boxed.Boxed
   */
   @property void currentY(float propval)
   {
-    (cast(hb_draw_state_t*)cPtr).currentY = propval;
+    (cast(hb_draw_state_t*)this._cPtr).currentY = propval;
   }
 }

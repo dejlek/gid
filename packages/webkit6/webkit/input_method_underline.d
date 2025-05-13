@@ -21,22 +21,22 @@ class InputMethodUnderline : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_input_method_underline_get_type != &gidSymbolNotFound ? webkit_input_method_underline_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class InputMethodUnderline : gobject.boxed.Boxed
   webkit.input_method_underline.InputMethodUnderline copy()
   {
     WebKitInputMethodUnderline* _cretval;
-    _cretval = webkit_input_method_underline_copy(cast(WebKitInputMethodUnderline*)cPtr);
+    _cretval = webkit_input_method_underline_copy(cast(WebKitInputMethodUnderline*)this._cPtr);
     auto _retval = _cretval ? new webkit.input_method_underline.InputMethodUnderline(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -83,6 +83,6 @@ class InputMethodUnderline : gobject.boxed.Boxed
   */
   void setColor(gdk.rgba.RGBA rgba = null)
   {
-    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    webkit_input_method_underline_set_color(cast(WebKitInputMethodUnderline*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 }

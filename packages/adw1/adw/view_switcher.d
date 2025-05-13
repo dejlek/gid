@@ -97,16 +97,16 @@ class ViewSwitcher : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_get_type != &gidSymbolNotFound ? adw_view_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -171,7 +171,7 @@ class ViewSwitcher : gtk.widget.Widget
   adw.types.ViewSwitcherPolicy getPolicy()
   {
     AdwViewSwitcherPolicy _cretval;
-    _cretval = adw_view_switcher_get_policy(cast(AdwViewSwitcher*)cPtr);
+    _cretval = adw_view_switcher_get_policy(cast(AdwViewSwitcher*)this._cPtr);
     adw.types.ViewSwitcherPolicy _retval = cast(adw.types.ViewSwitcherPolicy)_cretval;
     return _retval;
   }
@@ -183,8 +183,8 @@ class ViewSwitcher : gtk.widget.Widget
   adw.view_stack.ViewStack getStack()
   {
     AdwViewStack* _cretval;
-    _cretval = adw_view_switcher_get_stack(cast(AdwViewSwitcher*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    _cretval = adw_view_switcher_get_stack(cast(AdwViewSwitcher*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class ViewSwitcher : gtk.widget.Widget
   */
   void setPolicy(adw.types.ViewSwitcherPolicy policy)
   {
-    adw_view_switcher_set_policy(cast(AdwViewSwitcher*)cPtr, policy);
+    adw_view_switcher_set_policy(cast(AdwViewSwitcher*)this._cPtr, policy);
   }
 
   /**
@@ -207,6 +207,6 @@ class ViewSwitcher : gtk.widget.Widget
   */
   void setStack(adw.view_stack.ViewStack stack = null)
   {
-    adw_view_switcher_set_stack(cast(AdwViewSwitcher*)cPtr, stack ? cast(AdwViewStack*)stack.cPtr(No.Dup) : null);
+    adw_view_switcher_set_stack(cast(AdwViewSwitcher*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
 }

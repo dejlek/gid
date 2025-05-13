@@ -59,16 +59,16 @@ class RTPBaseDepayload : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_depayload_get_type != &gidSymbolNotFound ? gst_rtp_base_depayload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -190,7 +190,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   void delayed()
   {
-    gst_rtp_base_depayload_delayed(cast(GstRTPBaseDepayload*)cPtr);
+    gst_rtp_base_depayload_delayed(cast(GstRTPBaseDepayload*)this._cPtr);
   }
 
   /**
@@ -207,7 +207,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   void dropped()
   {
-    gst_rtp_base_depayload_dropped(cast(GstRTPBaseDepayload*)cPtr);
+    gst_rtp_base_depayload_dropped(cast(GstRTPBaseDepayload*)this._cPtr);
   }
 
   /**
@@ -233,7 +233,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   void flush(bool keepCurrent)
   {
-    gst_rtp_base_depayload_flush(cast(GstRTPBaseDepayload*)cPtr, keepCurrent);
+    gst_rtp_base_depayload_flush(cast(GstRTPBaseDepayload*)this._cPtr, keepCurrent);
   }
 
   /**
@@ -243,7 +243,7 @@ class RTPBaseDepayload : gst.element.Element
   bool isAggregateHdrextEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_depayload_is_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)cPtr);
+    _retval = gst_rtp_base_depayload_is_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class RTPBaseDepayload : gst.element.Element
   bool isSourceInfoEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_depayload_is_source_info_enabled(cast(GstRTPBaseDepayload*)cPtr);
+    _retval = gst_rtp_base_depayload_is_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class RTPBaseDepayload : gst.element.Element
   gst.types.FlowReturn push(gst.buffer.Buffer outBuf)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_depayload_push(cast(GstRTPBaseDepayload*)cPtr, outBuf ? cast(GstBuffer*)outBuf.cPtr(Yes.Dup) : null);
+    _cretval = gst_rtp_base_depayload_push(cast(GstRTPBaseDepayload*)this._cPtr, outBuf ? cast(GstBuffer*)outBuf._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -288,7 +288,7 @@ class RTPBaseDepayload : gst.element.Element
   gst.types.FlowReturn pushList(gst.buffer_list.BufferList outList)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_depayload_push_list(cast(GstRTPBaseDepayload*)cPtr, outList ? cast(GstBufferList*)outList.cPtr(Yes.Dup) : null);
+    _cretval = gst_rtp_base_depayload_push_list(cast(GstRTPBaseDepayload*)this._cPtr, outList ? cast(GstBufferList*)outList._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -301,7 +301,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   void setAggregateHdrextEnabled(bool enable)
   {
-    gst_rtp_base_depayload_set_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)cPtr, enable);
+    gst_rtp_base_depayload_set_aggregate_hdrext_enabled(cast(GstRTPBaseDepayload*)this._cPtr, enable);
   }
 
   /**
@@ -312,7 +312,7 @@ class RTPBaseDepayload : gst.element.Element
   */
   void setSourceInfoEnabled(bool enable)
   {
-    gst_rtp_base_depayload_set_source_info_enabled(cast(GstRTPBaseDepayload*)cPtr, enable);
+    gst_rtp_base_depayload_set_source_info_enabled(cast(GstRTPBaseDepayload*)this._cPtr, enable);
   }
 
   /**

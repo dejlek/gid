@@ -25,7 +25,7 @@ class TextAppearance
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -36,7 +36,7 @@ class TextAppearance
   */
   @property gdk.color.Color bgColor()
   {
-    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)cPtr).bgColor);
+    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)this._cPtr).bgColor);
   }
 
   /**
@@ -45,7 +45,7 @@ class TextAppearance
   */
   @property gdk.color.Color fgColor()
   {
-    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)cPtr).fgColor);
+    return cToD!(gdk.color.Color)(cast(void*)&(cast(GtkTextAppearance*)this._cPtr).fgColor);
   }
 
   /**
@@ -54,7 +54,7 @@ class TextAppearance
   */
   @property int rise()
   {
-    return (cast(GtkTextAppearance*)cPtr).rise;
+    return (cast(GtkTextAppearance*)this._cPtr).rise;
   }
 
   /**
@@ -64,7 +64,7 @@ class TextAppearance
   */
   @property void rise(int propval)
   {
-    (cast(GtkTextAppearance*)cPtr).rise = propval;
+    (cast(GtkTextAppearance*)this._cPtr).rise = propval;
   }
 
   /**
@@ -73,7 +73,7 @@ class TextAppearance
   */
   @property uint underline()
   {
-    return (cast(GtkTextAppearance*)cPtr).underline;
+    return (cast(GtkTextAppearance*)this._cPtr).underline;
   }
 
   /**
@@ -83,7 +83,7 @@ class TextAppearance
   */
   @property void underline(uint propval)
   {
-    (cast(GtkTextAppearance*)cPtr).underline = propval;
+    (cast(GtkTextAppearance*)this._cPtr).underline = propval;
   }
 
   /**
@@ -92,7 +92,7 @@ class TextAppearance
   */
   @property uint strikethrough()
   {
-    return (cast(GtkTextAppearance*)cPtr).strikethrough;
+    return (cast(GtkTextAppearance*)this._cPtr).strikethrough;
   }
 
   /**
@@ -102,7 +102,7 @@ class TextAppearance
   */
   @property void strikethrough(uint propval)
   {
-    (cast(GtkTextAppearance*)cPtr).strikethrough = propval;
+    (cast(GtkTextAppearance*)this._cPtr).strikethrough = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class TextAppearance
   */
   @property uint drawBg()
   {
-    return (cast(GtkTextAppearance*)cPtr).drawBg;
+    return (cast(GtkTextAppearance*)this._cPtr).drawBg;
   }
 
   /**
@@ -127,7 +127,7 @@ class TextAppearance
   */
   @property void drawBg(uint propval)
   {
-    (cast(GtkTextAppearance*)cPtr).drawBg = propval;
+    (cast(GtkTextAppearance*)this._cPtr).drawBg = propval;
   }
 
   /**
@@ -138,7 +138,7 @@ class TextAppearance
   */
   @property uint insideSelection()
   {
-    return (cast(GtkTextAppearance*)cPtr).insideSelection;
+    return (cast(GtkTextAppearance*)this._cPtr).insideSelection;
   }
 
   /**
@@ -150,7 +150,7 @@ class TextAppearance
   */
   @property void insideSelection(uint propval)
   {
-    (cast(GtkTextAppearance*)cPtr).insideSelection = propval;
+    (cast(GtkTextAppearance*)this._cPtr).insideSelection = propval;
   }
 
   /**
@@ -161,7 +161,7 @@ class TextAppearance
   */
   @property uint isText()
   {
-    return (cast(GtkTextAppearance*)cPtr).isText;
+    return (cast(GtkTextAppearance*)this._cPtr).isText;
   }
 
   /**
@@ -173,6 +173,6 @@ class TextAppearance
   */
   @property void isText(uint propval)
   {
-    (cast(GtkTextAppearance*)cPtr).isText = propval;
+    (cast(GtkTextAppearance*)this._cPtr).isText = propval;
   }
 }

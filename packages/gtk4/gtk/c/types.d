@@ -5995,7 +5995,7 @@ struct GtkBuildableIface
         the @type to distinguish between page labels (of type "page-label")
         and normal children.
   */
-  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, ObjectC* child, const(char)* type) addChild;
+  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* type) addChild;
 
   /**
       Sets a property of a buildable object.
@@ -6013,7 +6013,7 @@ struct GtkBuildableIface
        of the normal GtkBuilder UI definition hierarchy.  A reference to the
        constructed object is returned and becomes owned by the caller.
   */
-  extern(C) ObjectC* function(GtkBuildable* buildable, GtkBuilder* builder, const(char)* name) constructChild;
+  extern(C) GObject* function(GtkBuildable* buildable, GtkBuilder* builder, const(char)* name) constructChild;
 
   /**
       Implement this if the buildable needs to parse
@@ -6023,19 +6023,19 @@ struct GtkBuildableIface
        in `<accessibility>` elements.
        Note that @user_data must be freed in @custom_tag_end or @custom_finished.
   */
-  extern(C) bool function(GtkBuildable* buildable, GtkBuilder* builder, ObjectC* child, const(char)* tagname, GtkBuildableParser* parser, void** data) customTagStart;
+  extern(C) bool function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, GtkBuildableParser* parser, void** data) customTagStart;
 
   /**
       Called for the end tag of each custom element that is
        handled by the buildable (see @custom_tag_start).
   */
-  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, ObjectC* child, const(char)* tagname, void* data) customTagEnd;
+  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, void* data) customTagEnd;
 
   /**
       Called for each custom tag handled by the buildable
        when the builder finishes parsing (see @custom_tag_start)
   */
-  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, ObjectC* child, const(char)* tagname, void* data) customFinished;
+  extern(C) void function(GtkBuildable* buildable, GtkBuilder* builder, GObject* child, const(char)* tagname, void* data) customFinished;
 
   /**
       Called when a builder finishes the parsing
@@ -6052,7 +6052,7 @@ struct GtkBuildableIface
        Implement this if the buildable has internal children that may
        need to be accessed from a UI definition.
   */
-  extern(C) ObjectC* function(GtkBuildable* buildable, GtkBuilder* builder, const(char)* childname) getInternalChild;
+  extern(C) GObject* function(GtkBuildable* buildable, GtkBuilder* builder, const(char)* childname) getInternalChild;
 }
 
 /**
@@ -6457,7 +6457,7 @@ struct GtkBuilder;
 struct GtkBuilderCScope
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -6557,7 +6557,7 @@ struct GtkBuilderScopeInterface
         [gobject.cclosure.CClosure.new_] to create a closure for the symbol.
         The default implementation just fails and returns null.
   */
-  extern(C) GClosure* function(GtkBuilderScope* self, GtkBuilder* builder, const(char)* functionName, GtkBuilderClosureFlags flags, ObjectC* object, GError** _err) createClosure;
+  extern(C) GClosure* function(GtkBuilderScope* self, GtkBuilder* builder, const(char)* functionName, GtkBuilderClosureFlags flags, GObject* object, GError** _err) createClosure;
 }
 
 /**
@@ -7213,7 +7213,7 @@ struct GtkCellAreaClass
 struct GtkCellAreaContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -8710,7 +8710,7 @@ struct GtkCssLocation
 struct GtkCssProvider
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -9717,7 +9717,7 @@ struct GtkEntry
 struct GtkEntryBuffer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -10740,7 +10740,7 @@ struct GtkFileLauncherClass
 struct GtkFilter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -10750,7 +10750,7 @@ struct GtkFilterClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) bool function(GtkFilter* self, ObjectC* item) match;
+  extern(C) bool function(GtkFilter* self, GObject* item) match;
 
   /** */
   extern(C) GtkFilterMatch function(GtkFilter* self) getStrictness;
@@ -11968,7 +11968,7 @@ struct GtkHeaderBar;
 struct GtkIMContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -12658,7 +12658,7 @@ struct GtkLabel;
 struct GtkLayoutChild
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -12721,7 +12721,7 @@ struct GtkLayoutChildClass
 struct GtkLayoutManager
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -13240,7 +13240,7 @@ struct GtkListItemFactoryClass;
 struct GtkListStore
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkListStorePrivate* priv;
@@ -13525,7 +13525,7 @@ struct GtkMediaFileClass
 struct GtkMediaStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -13865,7 +13865,7 @@ struct GtkNative;
 struct GtkNativeDialog
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -14952,7 +14952,7 @@ struct GtkPrintJob;
 struct GtkPrintOperation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkPrintOperationPrivate* priv;
@@ -15410,7 +15410,7 @@ struct GtkRecentInfo;
 struct GtkRecentManager
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkRecentManagerPrivate* priv;
@@ -16593,7 +16593,7 @@ struct GtkSingleSelectionClass
 struct GtkSizeGroup
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -16695,7 +16695,7 @@ struct GtkSortListModelClass
 struct GtkSorter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -16709,7 +16709,7 @@ struct GtkSorterClass
   /**
       Compare two items. See [gtk.sorter.Sorter.compare] for details.
   */
-  extern(C) GtkOrdering function(GtkSorter* self, ObjectC* item1, ObjectC* item2) compare;
+  extern(C) GtkOrdering function(GtkSorter* self, GObject* item1, GObject* item2) compare;
 
   /**
       Get the `GtkSorderOrder` that applies to the current sorter.
@@ -17174,7 +17174,7 @@ struct GtkStringSorterClass
 struct GtkStyleContext
 {
   /** */
-  ObjectC parentObject;
+  GObject parentObject;
 }
 
 /** */
@@ -17367,7 +17367,7 @@ struct GtkText
 struct GtkTextBuffer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkTextBufferPrivate* priv;
@@ -17483,7 +17483,7 @@ struct GtkTextBufferPrivate;
 struct GtkTextChildAnchor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   void* segment;
@@ -17599,7 +17599,7 @@ struct GtkTextIter
 struct GtkTextMark
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   void* segment;
@@ -17638,7 +17638,7 @@ struct GtkTextMarkClass
 struct GtkTextTag
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkTextTagPrivate* priv;
@@ -18445,7 +18445,7 @@ struct GtkTreeModel;
 struct GtkTreeModelFilter
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkTreeModelFilterPrivate* priv;
@@ -18686,7 +18686,7 @@ struct GtkTreeModelIface
 struct GtkTreeModelSort
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkTreeModelSortPrivate* priv;
@@ -18843,7 +18843,7 @@ struct GtkTreeSortableIface
 struct GtkTreeStore
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkTreeStorePrivate* priv;
@@ -19932,7 +19932,7 @@ struct GtkWindowControlsClass
 struct GtkWindowGroup
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkWindowGroupPrivate* priv;
@@ -19995,7 +19995,7 @@ alias extern(C) void function(GtkCellLayout* cellLayout, GtkCellRenderer* cell, 
 
 alias extern(C) void function(GtkWidget* widget, int width, int height, int baseline) GtkCustomAllocateFunc;
 
-alias extern(C) bool function(ObjectC* item, void* userData) GtkCustomFilterFunc;
+alias extern(C) bool function(GObject* item, void* userData) GtkCustomFilterFunc;
 
 alias extern(C) void function(GtkWidget* widget, GtkOrientation orientation, int forSize, int* minimum, int* natural, int* minimumBaseline, int* naturalBaseline) GtkCustomMeasureFunc;
 
@@ -20007,7 +20007,7 @@ alias extern(C) bool function(GtkEntryCompletion* completion, const(char)* key, 
 
 alias extern(C) void function(void* userData) GtkExpressionNotify;
 
-alias extern(C) GtkWidget* function(ObjectC* item, void* userData) GtkFlowBoxCreateWidgetFunc;
+alias extern(C) GtkWidget* function(GObject* item, void* userData) GtkFlowBoxCreateWidgetFunc;
 
 alias extern(C) bool function(GtkFlowBoxChild* child, void* userData) GtkFlowBoxFilterFunc;
 
@@ -20019,7 +20019,7 @@ alias extern(C) bool function(const(PangoFontFamily)* family, const(PangoFontFac
 
 alias extern(C) void function(GtkIconView* iconView, GtkTreePath* path, void* data) GtkIconViewForeachFunc;
 
-alias extern(C) GtkWidget* function(ObjectC* item, void* userData) GtkListBoxCreateWidgetFunc;
+alias extern(C) GtkWidget* function(GObject* item, void* userData) GtkListBoxCreateWidgetFunc;
 
 alias extern(C) bool function(GtkListBoxRow* row, void* userData) GtkListBoxFilterFunc;
 
@@ -20029,7 +20029,7 @@ alias extern(C) int function(GtkListBoxRow* row1, GtkListBoxRow* row2, void* use
 
 alias extern(C) void function(GtkListBoxRow* row, GtkListBoxRow* before, void* userData) GtkListBoxUpdateHeaderFunc;
 
-alias extern(C) ObjectC* function(ObjectC* item, void* userData) GtkMapListModelMapFunc;
+alias extern(C) GObject* function(GObject* item, void* userData) GtkMapListModelMapFunc;
 
 alias extern(C) void function(GtkMenuButton* menuButton, void* userData) GtkMenuButtonCreatePopupFunc;
 
@@ -20055,7 +20055,7 @@ alias extern(C) void function(GtkTreeViewColumn* treeColumn, GtkCellRenderer* ce
 
 alias extern(C) int function(GtkTreeModel* model, GtkTreeIter* a, GtkTreeIter* b, void* userData) GtkTreeIterCompareFunc;
 
-alias extern(C) GListModel* function(ObjectC* item, void* userData) GtkTreeListModelCreateModelFunc;
+alias extern(C) GListModel* function(GObject* item, void* userData) GtkTreeListModelCreateModelFunc;
 
 alias extern(C) void function(GtkTreeModel* model, GtkTreeIter* iter, GValue* value, int column, void* data) GtkTreeModelFilterModifyFunc;
 

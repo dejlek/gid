@@ -23,16 +23,16 @@ class Misc : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_misc_get_type != &gidSymbolNotFound ? atk_misc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class Misc : gobject.object.ObjectWrap
   {
     const(AtkMisc)* _cretval;
     _cretval = atk_misc_get_instance();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.misc.Misc)(cast(AtkMisc*)_cretval, No.Take);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ class Misc : gobject.object.ObjectWrap
   */
   void threadsEnter()
   {
-    atk_misc_threads_enter(cast(AtkMisc*)cPtr);
+    atk_misc_threads_enter(cast(AtkMisc*)this._cPtr);
   }
 
   /**
@@ -83,6 +83,6 @@ class Misc : gobject.object.ObjectWrap
   */
   void threadsLeave()
   {
-    atk_misc_threads_leave(cast(AtkMisc*)cPtr);
+    atk_misc_threads_leave(cast(AtkMisc*)this._cPtr);
   }
 }

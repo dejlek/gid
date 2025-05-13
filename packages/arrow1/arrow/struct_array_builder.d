@@ -21,16 +21,16 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_array_builder_get_type != &gidSymbolNotFound ? garrow_struct_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowStructArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_struct_array_builder_new(dataType ? cast(GArrowStructDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_struct_array_builder_new(dataType ? cast(GArrowStructDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,7 +55,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_struct_array_builder_append(cast(GArrowStructArrayBuilder*)cPtr, &_err);
+    _retval = garrow_struct_array_builder_append(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_struct_array_builder_append_value(cast(GArrowStructArrayBuilder*)cPtr, &_err);
+    _retval = garrow_struct_array_builder_append_value(cast(GArrowStructArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -76,8 +76,8 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getFieldBuilder(int i)
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_struct_array_builder_get_field_builder(cast(GArrowStructArrayBuilder*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_struct_array_builder_get_field_builder(cast(GArrowStructArrayBuilder*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class StructArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder[] getFieldBuilders()
   {
     GList* _cretval;
-    _cretval = garrow_struct_array_builder_get_field_builders(cast(GArrowStructArrayBuilder*)cPtr);
+    _cretval = garrow_struct_array_builder_get_field_builders(cast(GArrowStructArrayBuilder*)this._cPtr);
     auto _retval = gListToD!(arrow.array_builder.ArrayBuilder, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }

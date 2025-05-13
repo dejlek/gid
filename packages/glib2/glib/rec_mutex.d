@@ -37,7 +37,7 @@ class RecMutex
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -54,7 +54,7 @@ class RecMutex
   */
   void clear()
   {
-    g_rec_mutex_clear(cast(GRecMutex*)cPtr);
+    g_rec_mutex_clear(cast(GRecMutex*)this._cPtr);
   }
 
   /**
@@ -87,7 +87,7 @@ class RecMutex
   */
   void init_()
   {
-    g_rec_mutex_init(cast(GRecMutex*)cPtr);
+    g_rec_mutex_init(cast(GRecMutex*)this._cPtr);
   }
 
   /**
@@ -100,7 +100,7 @@ class RecMutex
   */
   void lock()
   {
-    g_rec_mutex_lock(cast(GRecMutex*)cPtr);
+    g_rec_mutex_lock(cast(GRecMutex*)this._cPtr);
   }
 
   /**
@@ -112,7 +112,7 @@ class RecMutex
   bool trylock()
   {
     bool _retval;
-    _retval = g_rec_mutex_trylock(cast(GRecMutex*)cPtr);
+    _retval = g_rec_mutex_trylock(cast(GRecMutex*)this._cPtr);
     return _retval;
   }
 
@@ -126,6 +126,6 @@ class RecMutex
   */
   void unlock()
   {
-    g_rec_mutex_unlock(cast(GRecMutex*)cPtr);
+    g_rec_mutex_unlock(cast(GRecMutex*)this._cPtr);
   }
 }

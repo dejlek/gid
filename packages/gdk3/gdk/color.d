@@ -43,22 +43,22 @@ class Color : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_color_get_type != &gidSymbolNotFound ? gdk_color_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class Color : gobject.boxed.Boxed
   */
   @property uint pixel()
   {
-    return (cast(GdkColor*)cPtr).pixel;
+    return (cast(GdkColor*)this._cPtr).pixel;
   }
 
   /**
@@ -85,7 +85,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void pixel(uint propval)
   {
-    (cast(GdkColor*)cPtr).pixel = propval;
+    (cast(GdkColor*)this._cPtr).pixel = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort red()
   {
-    return (cast(GdkColor*)cPtr).red;
+    return (cast(GdkColor*)this._cPtr).red;
   }
 
   /**
@@ -108,7 +108,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void red(ushort propval)
   {
-    (cast(GdkColor*)cPtr).red = propval;
+    (cast(GdkColor*)this._cPtr).red = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort green()
   {
-    return (cast(GdkColor*)cPtr).green;
+    return (cast(GdkColor*)this._cPtr).green;
   }
 
   /**
@@ -127,7 +127,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void green(ushort propval)
   {
-    (cast(GdkColor*)cPtr).green = propval;
+    (cast(GdkColor*)this._cPtr).green = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort blue()
   {
-    return (cast(GdkColor*)cPtr).blue;
+    return (cast(GdkColor*)this._cPtr).blue;
   }
 
   /**
@@ -146,7 +146,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void blue(ushort propval)
   {
-    (cast(GdkColor*)cPtr).blue = propval;
+    (cast(GdkColor*)this._cPtr).blue = propval;
   }
 
   /**
@@ -160,7 +160,7 @@ class Color : gobject.boxed.Boxed
   gdk.color.Color copy()
   {
     GdkColor* _cretval;
-    _cretval = gdk_color_copy(cast(const(GdkColor)*)cPtr);
+    _cretval = gdk_color_copy(cast(const(GdkColor)*)this._cPtr);
     auto _retval = _cretval ? new gdk.color.Color(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -177,7 +177,7 @@ class Color : gobject.boxed.Boxed
   bool equal(gdk.color.Color colorb)
   {
     bool _retval;
-    _retval = gdk_color_equal(cast(const(GdkColor)*)cPtr, colorb ? cast(const(GdkColor)*)colorb.cPtr(No.Dup) : null);
+    _retval = gdk_color_equal(cast(const(GdkColor)*)this._cPtr, colorb ? cast(const(GdkColor)*)colorb._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Color : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = gdk_color_hash(cast(const(GdkColor)*)cPtr);
+    _retval = gdk_color_hash(cast(const(GdkColor)*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Color : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gdk_color_to_string(cast(const(GdkColor)*)cPtr);
+    _cretval = gdk_color_to_string(cast(const(GdkColor)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

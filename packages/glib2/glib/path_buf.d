@@ -55,7 +55,7 @@ class PathBuf
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -69,7 +69,7 @@ class PathBuf
   */
   void clear()
   {
-    g_path_buf_clear(cast(GPathBuf*)cPtr);
+    g_path_buf_clear(cast(GPathBuf*)this._cPtr);
   }
 
   /**
@@ -83,7 +83,7 @@ class PathBuf
   string clearToPath()
   {
     char* _cretval;
-    _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)cPtr);
+    _cretval = g_path_buf_clear_to_path(cast(GPathBuf*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -100,7 +100,7 @@ class PathBuf
   string freeToPath()
   {
     char* _cretval;
-    _cretval = g_path_buf_free_to_path(cast(GPathBuf*)cPtr);
+    _cretval = g_path_buf_free_to_path(cast(GPathBuf*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -112,7 +112,7 @@ class PathBuf
   glib.path_buf.PathBuf init_()
   {
     GPathBuf* _cretval;
-    _cretval = g_path_buf_init(cast(GPathBuf*)cPtr);
+    _cretval = g_path_buf_init(cast(GPathBuf*)this._cPtr);
     auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
@@ -128,7 +128,7 @@ class PathBuf
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = g_path_buf_init_from_path(cast(GPathBuf*)cPtr, _path);
+    _cretval = g_path_buf_init_from_path(cast(GPathBuf*)this._cPtr, _path);
     auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
@@ -162,7 +162,7 @@ class PathBuf
   bool pop()
   {
     bool _retval;
-    _retval = g_path_buf_pop(cast(GPathBuf*)cPtr);
+    _retval = g_path_buf_pop(cast(GPathBuf*)this._cPtr);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class PathBuf
   {
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = g_path_buf_push(cast(GPathBuf*)cPtr, _path);
+    _cretval = g_path_buf_push(cast(GPathBuf*)this._cPtr, _path);
     auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
     return _retval;
   }
@@ -224,7 +224,7 @@ class PathBuf
   {
     bool _retval;
     const(char)* _extension = extension.toCString(No.Alloc);
-    _retval = g_path_buf_set_extension(cast(GPathBuf*)cPtr, _extension);
+    _retval = g_path_buf_set_extension(cast(GPathBuf*)this._cPtr, _extension);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class PathBuf
   {
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
-    _retval = g_path_buf_set_filename(cast(GPathBuf*)cPtr, _fileName);
+    _retval = g_path_buf_set_filename(cast(GPathBuf*)this._cPtr, _fileName);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class PathBuf
   string toPath()
   {
     char* _cretval;
-    _cretval = g_path_buf_to_path(cast(GPathBuf*)cPtr);
+    _cretval = g_path_buf_to_path(cast(GPathBuf*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

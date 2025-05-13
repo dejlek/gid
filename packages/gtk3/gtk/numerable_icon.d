@@ -34,16 +34,16 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_numerable_icon_get_type != &gidSymbolNotFound ? gtk_numerable_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -122,8 +122,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   static gio.icon.Icon new_(gio.icon.Icon baseIcon)
   {
     GIcon* _cretval;
-    _cretval = gtk_numerable_icon_new(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = gtk_numerable_icon_new(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,8 +140,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   static gio.icon.Icon newWithStyleContext(gio.icon.Icon baseIcon, gtk.style_context.StyleContext context)
   {
     GIcon* _cretval;
-    _cretval = gtk_numerable_icon_new_with_style_context(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon).cPtr(No.Dup) : null, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = gtk_numerable_icon_new_with_style_context(baseIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)baseIcon)._cPtr(No.Dup) : null, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   gio.icon.Icon getBackgroundGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_numerable_icon_get_background_gicon(cast(GtkNumerableIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_numerable_icon_get_background_gicon(cast(GtkNumerableIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   string getBackgroundIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_numerable_icon_get_background_icon_name(cast(GtkNumerableIcon*)cPtr);
+    _cretval = gtk_numerable_icon_get_background_icon_name(cast(GtkNumerableIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -179,7 +179,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   int getCount()
   {
     int _retval;
-    _retval = gtk_numerable_icon_get_count(cast(GtkNumerableIcon*)cPtr);
+    _retval = gtk_numerable_icon_get_count(cast(GtkNumerableIcon*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_numerable_icon_get_label(cast(GtkNumerableIcon*)cPtr);
+    _cretval = gtk_numerable_icon_get_label(cast(GtkNumerableIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -205,8 +205,8 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   gtk.style_context.StyleContext getStyleContext()
   {
     GtkStyleContext* _cretval;
-    _cretval = gtk_numerable_icon_get_style_context(cast(GtkNumerableIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    _cretval = gtk_numerable_icon_get_style_context(cast(GtkNumerableIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setBackgroundGicon(gio.icon.Icon icon = null)
   {
-    gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_numerable_icon_set_background_gicon(cast(GtkNumerableIcon*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -245,7 +245,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   void setBackgroundIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_numerable_icon_set_background_icon_name(cast(GtkNumerableIcon*)cPtr, _iconName);
+    gtk_numerable_icon_set_background_icon_name(cast(GtkNumerableIcon*)this._cPtr, _iconName);
   }
 
   /**
@@ -263,7 +263,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setCount(int count)
   {
-    gtk_numerable_icon_set_count(cast(GtkNumerableIcon*)cPtr, count);
+    gtk_numerable_icon_set_count(cast(GtkNumerableIcon*)this._cPtr, count);
   }
 
   /**
@@ -287,7 +287,7 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_numerable_icon_set_label(cast(GtkNumerableIcon*)cPtr, _label);
+    gtk_numerable_icon_set_label(cast(GtkNumerableIcon*)this._cPtr, _label);
   }
 
   /**
@@ -299,6 +299,6 @@ class NumerableIcon : gio.emblemed_icon.EmblemedIcon
   */
   void setStyleContext(gtk.style_context.StyleContext style)
   {
-    gtk_numerable_icon_set_style_context(cast(GtkNumerableIcon*)cPtr, style ? cast(GtkStyleContext*)style.cPtr(No.Dup) : null);
+    gtk_numerable_icon_set_style_context(cast(GtkNumerableIcon*)this._cPtr, style ? cast(GtkStyleContext*)style._cPtr(No.Dup) : null);
   }
 }

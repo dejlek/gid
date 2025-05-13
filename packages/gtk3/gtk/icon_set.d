@@ -26,22 +26,22 @@ class IconSet : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_set_get_type != &gidSymbolNotFound ? gtk_icon_set_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class IconSet : gobject.boxed.Boxed
   static gtk.icon_set.IconSet newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkIconSet* _cretval;
-    _cretval = gtk_icon_set_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    _cretval = gtk_icon_set_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -126,7 +126,7 @@ class IconSet : gobject.boxed.Boxed
   */
   void addSource(gtk.icon_source.IconSource source)
   {
-    gtk_icon_set_add_source(cast(GtkIconSet*)cPtr, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null);
+    gtk_icon_set_add_source(cast(GtkIconSet*)this._cPtr, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null);
   }
 
   /**
@@ -138,7 +138,7 @@ class IconSet : gobject.boxed.Boxed
   gtk.icon_set.IconSet copy()
   {
     GtkIconSet* _cretval;
-    _cretval = gtk_icon_set_copy(cast(GtkIconSet*)cPtr);
+    _cretval = gtk_icon_set_copy(cast(GtkIconSet*)this._cPtr);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -157,7 +157,7 @@ class IconSet : gobject.boxed.Boxed
   {
     int _nSizes;
     GtkIconSize* _sizes;
-    gtk_icon_set_get_sizes(cast(GtkIconSet*)cPtr, &_sizes, &_nSizes);
+    gtk_icon_set_get_sizes(cast(GtkIconSet*)this._cPtr, &_sizes, &_nSizes);
     sizes.length = _nSizes;
     sizes[0 .. $] = (cast(gtk.types.IconSize*)_sizes)[0 .. _nSizes];
     gFree(cast(void*)_sizes);
@@ -191,8 +191,8 @@ class IconSet : gobject.boxed.Boxed
   {
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
-    _cretval = gtk_icon_set_render_icon(cast(GtkIconSet*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_icon_set_render_icon(cast(GtkIconSet*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -215,8 +215,8 @@ class IconSet : gobject.boxed.Boxed
   gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.types.IconSize size)
   {
     PixbufC* _cretval;
-    _cretval = gtk_icon_set_render_icon_pixbuf(cast(GtkIconSet*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_icon_set_render_icon_pixbuf(cast(GtkIconSet*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class IconSet : gobject.boxed.Boxed
   cairo.surface.Surface renderIconSurface(gtk.style_context.StyleContext context, gtk.types.IconSize size, int scale, gdk.window.Window forWindow = null)
   {
     cairo_surface_t* _cretval;
-    _cretval = gtk_icon_set_render_icon_surface(cast(GtkIconSet*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, size, scale, forWindow ? cast(GdkWindow*)forWindow.cPtr(No.Dup) : null);
+    _cretval = gtk_icon_set_render_icon_surface(cast(GtkIconSet*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, size, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

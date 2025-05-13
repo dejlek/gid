@@ -61,7 +61,7 @@ interface Paintable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_paintable_get_type != &gidSymbolNotFound ? gdk_paintable_get_type() : cast(GType)0;
@@ -85,7 +85,7 @@ interface Paintable
   {
     GdkPaintable* _cretval;
     _cretval = gdk_paintable_new_empty(intrinsicWidth, intrinsicHeight);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -34,7 +34,7 @@ class BindingSet
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -45,7 +45,7 @@ class BindingSet
   */
   @property string setName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
+    return cToD!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
   }
 
   /**
@@ -55,8 +55,8 @@ class BindingSet
   */
   @property void setName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)cPtr).setName);
-    dToC(propval, cast(void*)&(cast(GtkBindingSet*)cPtr).setName);
+    cValueFree!(string)(cast(void*)(cast(GtkBindingSet*)this._cPtr).setName);
+    dToC(propval, cast(void*)&(cast(GtkBindingSet*)this._cPtr).setName);
   }
 
   /**
@@ -65,7 +65,7 @@ class BindingSet
   */
   @property int priority()
   {
-    return (cast(GtkBindingSet*)cPtr).priority;
+    return (cast(GtkBindingSet*)this._cPtr).priority;
   }
 
   /**
@@ -75,7 +75,7 @@ class BindingSet
   */
   @property void priority(int propval)
   {
-    (cast(GtkBindingSet*)cPtr).priority = propval;
+    (cast(GtkBindingSet*)this._cPtr).priority = propval;
   }
 
   /**
@@ -84,7 +84,7 @@ class BindingSet
   */
   @property gtk.binding_entry.BindingEntry entries()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)cPtr).entries);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries);
   }
 
   /**
@@ -93,7 +93,7 @@ class BindingSet
   */
   @property gtk.binding_entry.BindingEntry current()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)cPtr).current);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current);
   }
 
   /**
@@ -102,7 +102,7 @@ class BindingSet
   */
   @property uint parsed()
   {
-    return (cast(GtkBindingSet*)cPtr).parsed;
+    return (cast(GtkBindingSet*)this._cPtr).parsed;
   }
 
   /**
@@ -112,7 +112,7 @@ class BindingSet
   */
   @property void parsed(uint propval)
   {
-    (cast(GtkBindingSet*)cPtr).parsed = propval;
+    (cast(GtkBindingSet*)this._cPtr).parsed = propval;
   }
 
   /**
@@ -128,7 +128,7 @@ class BindingSet
   bool activate(uint keyval, gdk.types.ModifierType modifiers, gobject.object.ObjectWrap object)
   {
     bool _retval;
-    _retval = gtk_binding_set_activate(cast(GtkBindingSet*)cPtr, keyval, modifiers, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    _retval = gtk_binding_set_activate(cast(GtkBindingSet*)this._cPtr, keyval, modifiers, object ? cast(GObject*)object._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class BindingSet
   void addPath(gtk.types.PathType pathType, string pathPattern, gtk.types.PathPriorityType priority)
   {
     const(char)* _pathPattern = pathPattern.toCString(No.Alloc);
-    gtk_binding_set_add_path(cast(GtkBindingSet*)cPtr, pathType, _pathPattern, priority);
+    gtk_binding_set_add_path(cast(GtkBindingSet*)this._cPtr, pathType, _pathPattern, priority);
   }
 
   /**

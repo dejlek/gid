@@ -33,22 +33,22 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_auth_credential_get_type != &gidSymbolNotFound ? gst_rtsp_auth_credential_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   */
   @property gstrtsp.types.RTSPAuthMethod scheme()
   {
-    return cast(gstrtsp.types.RTSPAuthMethod)(cast(GstRTSPAuthCredential*)cPtr).scheme;
+    return cast(gstrtsp.types.RTSPAuthMethod)(cast(GstRTSPAuthCredential*)this._cPtr).scheme;
   }
 
   /**
@@ -73,7 +73,7 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   */
   @property void scheme(gstrtsp.types.RTSPAuthMethod propval)
   {
-    (cast(GstRTSPAuthCredential*)cPtr).scheme = cast(GstRTSPAuthMethod)propval;
+    (cast(GstRTSPAuthCredential*)this._cPtr).scheme = cast(GstRTSPAuthMethod)propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   */
   @property string authorization()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPAuthCredential*)cPtr).authorization);
+    return cToD!(string)(cast(void*)(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
   }
 
   /**
@@ -92,7 +92,7 @@ class RTSPAuthCredential : gobject.boxed.Boxed
   */
   @property void authorization(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthCredential*)cPtr).authorization);
-    dToC(propval, cast(void*)&(cast(GstRTSPAuthCredential*)cPtr).authorization);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
+    dToC(propval, cast(void*)&(cast(GstRTSPAuthCredential*)this._cPtr).authorization);
   }
 }

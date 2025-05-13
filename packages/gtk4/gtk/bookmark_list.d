@@ -30,16 +30,16 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_bookmark_list_get_type != &gidSymbolNotFound ? gtk_bookmark_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -139,7 +139,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   string getAttributes()
   {
     const(char)* _cretval;
-    _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)cPtr);
+    _cretval = gtk_bookmark_list_get_attributes(cast(GtkBookmarkList*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -152,7 +152,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   string getFilename()
   {
     const(char)* _cretval;
-    _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)cPtr);
+    _cretval = gtk_bookmark_list_get_filename(cast(GtkBookmarkList*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -164,7 +164,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   int getIoPriority()
   {
     int _retval;
-    _retval = gtk_bookmark_list_get_io_priority(cast(GtkBookmarkList*)cPtr);
+    _retval = gtk_bookmark_list_get_io_priority(cast(GtkBookmarkList*)this._cPtr);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isLoading()
   {
     bool _retval;
-    _retval = gtk_bookmark_list_is_loading(cast(GtkBookmarkList*)cPtr);
+    _retval = gtk_bookmark_list_is_loading(cast(GtkBookmarkList*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setAttributes(string attributes = null)
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
-    gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)cPtr, _attributes);
+    gtk_bookmark_list_set_attributes(cast(GtkBookmarkList*)this._cPtr, _attributes);
   }
 
   /**
@@ -208,6 +208,6 @@ class BookmarkList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setIoPriority(int ioPriority)
   {
-    gtk_bookmark_list_set_io_priority(cast(GtkBookmarkList*)cPtr, ioPriority);
+    gtk_bookmark_list_set_io_priority(cast(GtkBookmarkList*)this._cPtr, ioPriority);
   }
 }

@@ -51,16 +51,16 @@ class Avatar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_avatar_get_type != &gidSymbolNotFound ? adw_avatar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -211,8 +211,8 @@ class Avatar : gtk.widget.Widget
   gdk.texture.Texture drawToTexture(int scaleFactor)
   {
     GdkTexture* _cretval;
-    _cretval = adw_avatar_draw_to_texture(cast(AdwAvatar*)cPtr, scaleFactor);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    _cretval = adw_avatar_draw_to_texture(cast(AdwAvatar*)this._cPtr, scaleFactor);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -223,8 +223,8 @@ class Avatar : gtk.widget.Widget
   gdk.paintable.Paintable getCustomImage()
   {
     GdkPaintable* _cretval;
-    _cretval = adw_avatar_get_custom_image(cast(AdwAvatar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = adw_avatar_get_custom_image(cast(AdwAvatar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Avatar : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_avatar_get_icon_name(cast(AdwAvatar*)cPtr);
+    _cretval = adw_avatar_get_icon_name(cast(AdwAvatar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -247,7 +247,7 @@ class Avatar : gtk.widget.Widget
   bool getShowInitials()
   {
     bool _retval;
-    _retval = adw_avatar_get_show_initials(cast(AdwAvatar*)cPtr);
+    _retval = adw_avatar_get_show_initials(cast(AdwAvatar*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Avatar : gtk.widget.Widget
   int getSize()
   {
     int _retval;
-    _retval = adw_avatar_get_size(cast(AdwAvatar*)cPtr);
+    _retval = adw_avatar_get_size(cast(AdwAvatar*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Avatar : gtk.widget.Widget
   string getText()
   {
     const(char)* _cretval;
-    _cretval = adw_avatar_get_text(cast(AdwAvatar*)cPtr);
+    _cretval = adw_avatar_get_text(cast(AdwAvatar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -287,7 +287,7 @@ class Avatar : gtk.widget.Widget
   */
   void setCustomImage(gdk.paintable.Paintable customImage = null)
   {
-    adw_avatar_set_custom_image(cast(AdwAvatar*)cPtr, customImage ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)customImage).cPtr(No.Dup) : null);
+    adw_avatar_set_custom_image(cast(AdwAvatar*)this._cPtr, customImage ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)customImage)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -301,7 +301,7 @@ class Avatar : gtk.widget.Widget
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_avatar_set_icon_name(cast(AdwAvatar*)cPtr, _iconName);
+    adw_avatar_set_icon_name(cast(AdwAvatar*)this._cPtr, _iconName);
   }
 
   /**
@@ -314,7 +314,7 @@ class Avatar : gtk.widget.Widget
   */
   void setShowInitials(bool showInitials)
   {
-    adw_avatar_set_show_initials(cast(AdwAvatar*)cPtr, showInitials);
+    adw_avatar_set_show_initials(cast(AdwAvatar*)this._cPtr, showInitials);
   }
 
   /**
@@ -325,7 +325,7 @@ class Avatar : gtk.widget.Widget
   */
   void setSize(int size)
   {
-    adw_avatar_set_size(cast(AdwAvatar*)cPtr, size);
+    adw_avatar_set_size(cast(AdwAvatar*)this._cPtr, size);
   }
 
   /**
@@ -340,6 +340,6 @@ class Avatar : gtk.widget.Widget
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    adw_avatar_set_text(cast(AdwAvatar*)cPtr, _text);
+    adw_avatar_set_text(cast(AdwAvatar*)this._cPtr, _text);
   }
 }

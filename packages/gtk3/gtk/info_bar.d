@@ -99,16 +99,16 @@ class InfoBar : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_info_bar_get_type != &gidSymbolNotFound ? gtk_info_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -194,7 +194,7 @@ class InfoBar : gtk.box.Box
   */
   void addActionWidget(gtk.widget.Widget child, int responseId)
   {
-    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
+    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -214,8 +214,8 @@ class InfoBar : gtk.box.Box
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
-    _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)this._cPtr, _buttonText, responseId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,8 +226,8 @@ class InfoBar : gtk.box.Box
   gtk.box.Box getActionArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_info_bar_get_action_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_info_bar_get_action_area(cast(GtkInfoBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,8 +238,8 @@ class InfoBar : gtk.box.Box
   gtk.box.Box getContentArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_info_bar_get_content_area(cast(GtkInfoBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_info_bar_get_content_area(cast(GtkInfoBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class InfoBar : gtk.box.Box
   gtk.types.MessageType getMessageType()
   {
     GtkMessageType _cretval;
-    _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)cPtr);
+    _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)this._cPtr);
     gtk.types.MessageType _retval = cast(gtk.types.MessageType)_cretval;
     return _retval;
   }
@@ -259,7 +259,7 @@ class InfoBar : gtk.box.Box
   bool getRevealed()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_revealed(cast(GtkInfoBar*)cPtr);
+    _retval = gtk_info_bar_get_revealed(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class InfoBar : gtk.box.Box
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)cPtr);
+    _retval = gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class InfoBar : gtk.box.Box
   */
   void response(int responseId)
   {
-    gtk_info_bar_response(cast(GtkInfoBar*)cPtr, responseId);
+    gtk_info_bar_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
 
   /**
@@ -298,7 +298,7 @@ class InfoBar : gtk.box.Box
   */
   void setDefaultResponse(int responseId)
   {
-    gtk_info_bar_set_default_response(cast(GtkInfoBar*)cPtr, responseId);
+    gtk_info_bar_set_default_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
 
   /**
@@ -311,7 +311,7 @@ class InfoBar : gtk.box.Box
   */
   void setMessageType(gtk.types.MessageType messageType)
   {
-    gtk_info_bar_set_message_type(cast(GtkInfoBar*)cPtr, messageType);
+    gtk_info_bar_set_message_type(cast(GtkInfoBar*)this._cPtr, messageType);
   }
 
   /**
@@ -325,7 +325,7 @@ class InfoBar : gtk.box.Box
   */
   void setResponseSensitive(int responseId, bool setting)
   {
-    gtk_info_bar_set_response_sensitive(cast(GtkInfoBar*)cPtr, responseId, setting);
+    gtk_info_bar_set_response_sensitive(cast(GtkInfoBar*)this._cPtr, responseId, setting);
   }
 
   /**
@@ -340,7 +340,7 @@ class InfoBar : gtk.box.Box
   */
   void setRevealed(bool revealed)
   {
-    gtk_info_bar_set_revealed(cast(GtkInfoBar*)cPtr, revealed);
+    gtk_info_bar_set_revealed(cast(GtkInfoBar*)this._cPtr, revealed);
   }
 
   /**
@@ -352,7 +352,7 @@ class InfoBar : gtk.box.Box
   */
   void setShowCloseButton(bool setting)
   {
-    gtk_info_bar_set_show_close_button(cast(GtkInfoBar*)cPtr, setting);
+    gtk_info_bar_set_show_close_button(cast(GtkInfoBar*)this._cPtr, setting);
   }
 
   /**

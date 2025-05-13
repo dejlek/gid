@@ -158,7 +158,7 @@ interface Value
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_value_get_type != &gidSymbolNotFound ? atk_value_get_type() : cast(GType)0;

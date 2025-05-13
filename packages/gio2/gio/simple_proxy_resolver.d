@@ -29,16 +29,16 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_proxy_resolver_get_type != &gidSymbolNotFound ? g_simple_proxy_resolver_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
     _cretval = g_simple_proxy_resolver_new(_defaultProxy, _ignoreHosts);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   void setDefaultProxy(string defaultProxy = null)
   {
     const(char)* _defaultProxy = defaultProxy.toCString(No.Alloc);
-    g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)cPtr, _defaultProxy);
+    g_simple_proxy_resolver_set_default_proxy(cast(GSimpleProxyResolver*)this._cPtr, _defaultProxy);
   }
 
   /**
@@ -142,7 +142,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
       _tmpignoreHosts ~= s.toCString(No.Alloc);
     _tmpignoreHosts ~= null;
     char** _ignoreHosts = _tmpignoreHosts.ptr;
-    g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)cPtr, _ignoreHosts);
+    g_simple_proxy_resolver_set_ignore_hosts(cast(GSimpleProxyResolver*)this._cPtr, _ignoreHosts);
   }
 
   /**
@@ -163,6 +163,6 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
   {
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
     const(char)* _proxy = proxy.toCString(No.Alloc);
-    g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)cPtr, _uriScheme, _proxy);
+    g_simple_proxy_resolver_set_uri_proxy(cast(GSimpleProxyResolver*)this._cPtr, _uriScheme, _proxy);
   }
 }

@@ -34,16 +34,16 @@ class Widget : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_widget_get_type != &gidSymbolNotFound ? panel_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -280,20 +280,20 @@ class Widget : gtk.widget.Widget
   override void actionSetEnabled(string actionName, bool enabled)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    panel_widget_action_set_enabled(cast(PanelWidget*)cPtr, _actionName, enabled);
+    panel_widget_action_set_enabled(cast(PanelWidget*)this._cPtr, _actionName, enabled);
   }
 
   /** */
   void close()
   {
-    panel_widget_close(cast(PanelWidget*)cPtr);
+    panel_widget_close(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   bool focusDefault()
   {
     bool _retval;
-    _retval = panel_widget_focus_default(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_focus_default(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -302,14 +302,14 @@ class Widget : gtk.widget.Widget
   */
   void forceClose()
   {
-    panel_widget_force_close(cast(PanelWidget*)cPtr);
+    panel_widget_force_close(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   bool getBusy()
   {
     bool _retval;
-    _retval = panel_widget_get_busy(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_get_busy(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class Widget : gtk.widget.Widget
   bool getCanMaximize()
   {
     bool _retval;
-    _retval = panel_widget_get_can_maximize(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_get_can_maximize(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -328,8 +328,8 @@ class Widget : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = panel_widget_get_child(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = panel_widget_get_child(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -345,8 +345,8 @@ class Widget : gtk.widget.Widget
   gtk.widget.Widget getDefaultFocus()
   {
     GtkWidget* _cretval;
-    _cretval = panel_widget_get_default_focus(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = panel_widget_get_default_focus(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -357,8 +357,8 @@ class Widget : gtk.widget.Widget
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = panel_widget_get_icon(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = panel_widget_get_icon(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class Widget : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = panel_widget_get_icon_name(cast(PanelWidget*)cPtr);
+    _cretval = panel_widget_get_icon_name(cast(PanelWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -381,7 +381,7 @@ class Widget : gtk.widget.Widget
   string getId()
   {
     const(char)* _cretval;
-    _cretval = panel_widget_get_id(cast(PanelWidget*)cPtr);
+    _cretval = panel_widget_get_id(cast(PanelWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -390,7 +390,7 @@ class Widget : gtk.widget.Widget
   string getKind()
   {
     const(char)* _cretval;
-    _cretval = panel_widget_get_kind(cast(PanelWidget*)cPtr);
+    _cretval = panel_widget_get_kind(cast(PanelWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -405,8 +405,8 @@ class Widget : gtk.widget.Widget
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = panel_widget_get_menu_model(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = panel_widget_get_menu_model(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class Widget : gtk.widget.Widget
   bool getModified()
   {
     bool _retval;
-    _retval = panel_widget_get_modified(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_get_modified(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Widget : gtk.widget.Widget
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = panel_widget_get_needs_attention(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_get_needs_attention(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -437,8 +437,8 @@ class Widget : gtk.widget.Widget
   panel.position.Position getPosition()
   {
     PanelPosition* _cretval;
-    _cretval = panel_widget_get_position(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    _cretval = panel_widget_get_position(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class Widget : gtk.widget.Widget
   bool getReorderable()
   {
     bool _retval;
-    _retval = panel_widget_get_reorderable(cast(PanelWidget*)cPtr);
+    _retval = panel_widget_get_reorderable(cast(PanelWidget*)this._cPtr);
     return _retval;
   }
 
@@ -462,8 +462,8 @@ class Widget : gtk.widget.Widget
   panel.save_delegate.SaveDelegate getSaveDelegate()
   {
     PanelSaveDelegate* _cretval;
-    _cretval = panel_widget_get_save_delegate(cast(PanelWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.save_delegate.SaveDelegate)(cast(PanelSaveDelegate*)_cretval, No.Take);
+    _cretval = panel_widget_get_save_delegate(cast(PanelWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.save_delegate.SaveDelegate)(cast(PanelSaveDelegate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -474,7 +474,7 @@ class Widget : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = panel_widget_get_title(cast(PanelWidget*)cPtr);
+    _cretval = panel_widget_get_title(cast(PanelWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -486,7 +486,7 @@ class Widget : gtk.widget.Widget
   string getTooltip()
   {
     const(char)* _cretval;
-    _cretval = panel_widget_get_tooltip(cast(PanelWidget*)cPtr);
+    _cretval = panel_widget_get_tooltip(cast(PanelWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -495,31 +495,31 @@ class Widget : gtk.widget.Widget
   override void insertActionGroup(string prefix, gio.action_group.ActionGroup group)
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    panel_widget_insert_action_group(cast(PanelWidget*)cPtr, _prefix, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null);
+    panel_widget_insert_action_group(cast(PanelWidget*)this._cPtr, _prefix, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
   /** */
   void markBusy()
   {
-    panel_widget_mark_busy(cast(PanelWidget*)cPtr);
+    panel_widget_mark_busy(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   void maximize()
   {
-    panel_widget_maximize(cast(PanelWidget*)cPtr);
+    panel_widget_maximize(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   void raise()
   {
-    panel_widget_raise(cast(PanelWidget*)cPtr);
+    panel_widget_raise(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   void setCanMaximize(bool canMaximize)
   {
-    panel_widget_set_can_maximize(cast(PanelWidget*)cPtr, canMaximize);
+    panel_widget_set_can_maximize(cast(PanelWidget*)this._cPtr, canMaximize);
   }
 
   /**
@@ -530,7 +530,7 @@ class Widget : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    panel_widget_set_child(cast(PanelWidget*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    panel_widget_set_child(cast(PanelWidget*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -541,7 +541,7 @@ class Widget : gtk.widget.Widget
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    panel_widget_set_icon(cast(PanelWidget*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    panel_widget_set_icon(cast(PanelWidget*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -553,7 +553,7 @@ class Widget : gtk.widget.Widget
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    panel_widget_set_icon_name(cast(PanelWidget*)cPtr, _iconName);
+    panel_widget_set_icon_name(cast(PanelWidget*)this._cPtr, _iconName);
   }
 
   /**
@@ -565,7 +565,7 @@ class Widget : gtk.widget.Widget
   void setId(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    panel_widget_set_id(cast(PanelWidget*)cPtr, _id);
+    panel_widget_set_id(cast(PanelWidget*)this._cPtr, _id);
   }
 
   /**
@@ -577,7 +577,7 @@ class Widget : gtk.widget.Widget
   void setKind(string kind = null)
   {
     const(char)* _kind = kind.toCString(No.Alloc);
-    panel_widget_set_kind(cast(PanelWidget*)cPtr, _kind);
+    panel_widget_set_kind(cast(PanelWidget*)this._cPtr, _kind);
   }
 
   /**
@@ -591,7 +591,7 @@ class Widget : gtk.widget.Widget
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    panel_widget_set_menu_model(cast(PanelWidget*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    panel_widget_set_menu_model(cast(PanelWidget*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -602,19 +602,19 @@ class Widget : gtk.widget.Widget
   */
   void setModified(bool modified)
   {
-    panel_widget_set_modified(cast(PanelWidget*)cPtr, modified);
+    panel_widget_set_modified(cast(PanelWidget*)this._cPtr, modified);
   }
 
   /** */
   void setNeedsAttention(bool needsAttention)
   {
-    panel_widget_set_needs_attention(cast(PanelWidget*)cPtr, needsAttention);
+    panel_widget_set_needs_attention(cast(PanelWidget*)this._cPtr, needsAttention);
   }
 
   /** */
   void setReorderable(bool reorderable)
   {
-    panel_widget_set_reorderable(cast(PanelWidget*)cPtr, reorderable);
+    panel_widget_set_reorderable(cast(PanelWidget*)this._cPtr, reorderable);
   }
 
   /**
@@ -630,7 +630,7 @@ class Widget : gtk.widget.Widget
   */
   void setSaveDelegate(panel.save_delegate.SaveDelegate saveDelegate = null)
   {
-    panel_widget_set_save_delegate(cast(PanelWidget*)cPtr, saveDelegate ? cast(PanelSaveDelegate*)saveDelegate.cPtr(No.Dup) : null);
+    panel_widget_set_save_delegate(cast(PanelWidget*)this._cPtr, saveDelegate ? cast(PanelSaveDelegate*)saveDelegate._cPtr(No.Dup) : null);
   }
 
   /**
@@ -642,7 +642,7 @@ class Widget : gtk.widget.Widget
   void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    panel_widget_set_title(cast(PanelWidget*)cPtr, _title);
+    panel_widget_set_title(cast(PanelWidget*)this._cPtr, _title);
   }
 
   /**
@@ -654,19 +654,19 @@ class Widget : gtk.widget.Widget
   void setTooltip(string tooltip = null)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    panel_widget_set_tooltip(cast(PanelWidget*)cPtr, _tooltip);
+    panel_widget_set_tooltip(cast(PanelWidget*)this._cPtr, _tooltip);
   }
 
   /** */
   void unmarkBusy()
   {
-    panel_widget_unmark_busy(cast(PanelWidget*)cPtr);
+    panel_widget_unmark_busy(cast(PanelWidget*)this._cPtr);
   }
 
   /** */
   void unmaximize()
   {
-    panel_widget_unmaximize(cast(PanelWidget*)cPtr);
+    panel_widget_unmaximize(cast(PanelWidget*)this._cPtr);
   }
 
   /**

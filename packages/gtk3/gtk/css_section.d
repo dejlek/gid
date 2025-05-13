@@ -24,22 +24,22 @@ class CssSection : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_section_get_type != &gidSymbolNotFound ? gtk_css_section_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class CssSection : gobject.boxed.Boxed
   uint getEndLine()
   {
     uint _retval;
-    _retval = gtk_css_section_get_end_line(cast(const(GtkCssSection)*)cPtr);
+    _retval = gtk_css_section_get_end_line(cast(const(GtkCssSection)*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ class CssSection : gobject.boxed.Boxed
   uint getEndPosition()
   {
     uint _retval;
-    _retval = gtk_css_section_get_end_position(cast(const(GtkCssSection)*)cPtr);
+    _retval = gtk_css_section_get_end_position(cast(const(GtkCssSection)*)this._cPtr);
     return _retval;
   }
 
@@ -95,8 +95,8 @@ class CssSection : gobject.boxed.Boxed
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_css_section_get_file(cast(const(GtkCssSection)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class CssSection : gobject.boxed.Boxed
   gtk.css_section.CssSection getParent()
   {
     GtkCssSection* _cretval;
-    _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)cPtr);
+    _cretval = gtk_css_section_get_parent(cast(const(GtkCssSection)*)this._cPtr);
     auto _retval = _cretval ? new gtk.css_section.CssSection(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -125,7 +125,7 @@ class CssSection : gobject.boxed.Boxed
   gtk.types.CssSectionType getSectionType()
   {
     GtkCssSectionType _cretval;
-    _cretval = gtk_css_section_get_section_type(cast(const(GtkCssSection)*)cPtr);
+    _cretval = gtk_css_section_get_section_type(cast(const(GtkCssSection)*)this._cPtr);
     gtk.types.CssSectionType _retval = cast(gtk.types.CssSectionType)_cretval;
     return _retval;
   }
@@ -139,7 +139,7 @@ class CssSection : gobject.boxed.Boxed
   uint getStartLine()
   {
     uint _retval;
-    _retval = gtk_css_section_get_start_line(cast(const(GtkCssSection)*)cPtr);
+    _retval = gtk_css_section_get_start_line(cast(const(GtkCssSection)*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class CssSection : gobject.boxed.Boxed
   uint getStartPosition()
   {
     uint _retval;
-    _retval = gtk_css_section_get_start_position(cast(const(GtkCssSection)*)cPtr);
+    _retval = gtk_css_section_get_start_position(cast(const(GtkCssSection)*)this._cPtr);
     return _retval;
   }
 }

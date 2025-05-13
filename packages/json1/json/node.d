@@ -56,22 +56,22 @@ class Node : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_node_get_type != &gidSymbolNotFound ? json_node_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -129,7 +129,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node copy()
   {
     JsonNode* _cretval;
-    _cretval = json_node_copy(cast(JsonNode*)cPtr);
+    _cretval = json_node_copy(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -147,7 +147,7 @@ class Node : gobject.boxed.Boxed
   json.array.Array dupArray()
   {
     JsonArray* _cretval;
-    _cretval = json_node_dup_array(cast(JsonNode*)cPtr);
+    _cretval = json_node_dup_array(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -164,7 +164,7 @@ class Node : gobject.boxed.Boxed
   json.object.ObjectWrap dupObject()
   {
     JsonObject* _cretval;
-    _cretval = json_node_dup_object(cast(JsonNode*)cPtr);
+    _cretval = json_node_dup_object(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.object.ObjectWrap(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -179,7 +179,7 @@ class Node : gobject.boxed.Boxed
   string dupString()
   {
     char* _cretval;
-    _cretval = json_node_dup_string(cast(JsonNode*)cPtr);
+    _cretval = json_node_dup_string(cast(JsonNode*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -198,7 +198,7 @@ class Node : gobject.boxed.Boxed
   bool equal(json.node.Node b)
   {
     bool _retval;
-    _retval = json_node_equal(cast(JsonNode*)cPtr, b ? cast(JsonNode*)b.cPtr(No.Dup) : null);
+    _retval = json_node_equal(cast(JsonNode*)this._cPtr, b ? cast(JsonNode*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Node : gobject.boxed.Boxed
   json.array.Array getArray()
   {
     JsonArray* _cretval;
-    _cretval = json_node_get_array(cast(JsonNode*)cPtr);
+    _cretval = json_node_get_array(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.array.Array(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -230,7 +230,7 @@ class Node : gobject.boxed.Boxed
   bool getBoolean()
   {
     bool _retval;
-    _retval = json_node_get_boolean(cast(JsonNode*)cPtr);
+    _retval = json_node_get_boolean(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Node : gobject.boxed.Boxed
   double getDouble()
   {
     double _retval;
-    _retval = json_node_get_double(cast(JsonNode*)cPtr);
+    _retval = json_node_get_double(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Node : gobject.boxed.Boxed
   long getInt()
   {
     long _retval;
-    _retval = json_node_get_int(cast(JsonNode*)cPtr);
+    _retval = json_node_get_int(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Node : gobject.boxed.Boxed
   json.types.NodeType getNodeType()
   {
     JsonNodeType _cretval;
-    _cretval = json_node_get_node_type(cast(JsonNode*)cPtr);
+    _cretval = json_node_get_node_type(cast(JsonNode*)this._cPtr);
     json.types.NodeType _retval = cast(json.types.NodeType)_cretval;
     return _retval;
   }
@@ -294,7 +294,7 @@ class Node : gobject.boxed.Boxed
   json.object.ObjectWrap getObject()
   {
     JsonObject* _cretval;
-    _cretval = json_node_get_object(cast(JsonNode*)cPtr);
+    _cretval = json_node_get_object(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.object.ObjectWrap(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -307,7 +307,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node getParent()
   {
     JsonNode* _cretval;
-    _cretval = json_node_get_parent(cast(JsonNode*)cPtr);
+    _cretval = json_node_get_parent(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -321,7 +321,7 @@ class Node : gobject.boxed.Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = json_node_get_string(cast(JsonNode*)cPtr);
+    _cretval = json_node_get_string(cast(JsonNode*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -341,7 +341,7 @@ class Node : gobject.boxed.Boxed
   void getValue(out gobject.value.Value value)
   {
     GValue _value;
-    json_node_get_value(cast(JsonNode*)cPtr, &_value);
+    json_node_get_value(cast(JsonNode*)this._cPtr, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -354,7 +354,7 @@ class Node : gobject.boxed.Boxed
   gobject.types.GType getValueType()
   {
     gobject.types.GType _retval;
-    _retval = json_node_get_value_type(cast(JsonNode*)cPtr);
+    _retval = json_node_get_value_type(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class Node : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = json_node_hash(cast(JsonNode*)cPtr);
+    _retval = json_node_hash(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node init_(json.types.NodeType type)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init(cast(JsonNode*)cPtr, type);
+    _cretval = json_node_init(cast(JsonNode*)this._cPtr, type);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -407,7 +407,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initArray(json.array.Array array = null)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.Dup) : null);
+    _cretval = json_node_init_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -425,7 +425,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initBoolean(bool value)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_boolean(cast(JsonNode*)cPtr, value);
+    _cretval = json_node_init_boolean(cast(JsonNode*)this._cPtr, value);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -443,7 +443,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initDouble(double value)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_double(cast(JsonNode*)cPtr, value);
+    _cretval = json_node_init_double(cast(JsonNode*)this._cPtr, value);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -461,7 +461,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initInt(long value)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_int(cast(JsonNode*)cPtr, value);
+    _cretval = json_node_init_int(cast(JsonNode*)this._cPtr, value);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -476,7 +476,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initNull()
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_null(cast(JsonNode*)cPtr);
+    _cretval = json_node_init_null(cast(JsonNode*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -496,7 +496,7 @@ class Node : gobject.boxed.Boxed
   json.node.Node initObject(json.object.ObjectWrap object = null)
   {
     JsonNode* _cretval;
-    _cretval = json_node_init_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
+    _cretval = json_node_init_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -515,7 +515,7 @@ class Node : gobject.boxed.Boxed
   {
     JsonNode* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = json_node_init_string(cast(JsonNode*)cPtr, _value);
+    _cretval = json_node_init_string(cast(JsonNode*)this._cPtr, _value);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -528,7 +528,7 @@ class Node : gobject.boxed.Boxed
   bool isImmutable()
   {
     bool _retval;
-    _retval = json_node_is_immutable(cast(JsonNode*)cPtr);
+    _retval = json_node_is_immutable(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class Node : gobject.boxed.Boxed
   bool isNull()
   {
     bool _retval;
-    _retval = json_node_is_null(cast(JsonNode*)cPtr);
+    _retval = json_node_is_null(cast(JsonNode*)this._cPtr);
     return _retval;
   }
 
@@ -557,7 +557,7 @@ class Node : gobject.boxed.Boxed
   */
   void seal()
   {
-    json_node_seal(cast(JsonNode*)cPtr);
+    json_node_seal(cast(JsonNode*)this._cPtr);
   }
 
   /**
@@ -573,7 +573,7 @@ class Node : gobject.boxed.Boxed
   */
   void setArray(json.array.Array array)
   {
-    json_node_set_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(No.Dup) : null);
+    json_node_set_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(No.Dup) : null);
   }
 
   /**
@@ -588,7 +588,7 @@ class Node : gobject.boxed.Boxed
   */
   void setBoolean(bool value)
   {
-    json_node_set_boolean(cast(JsonNode*)cPtr, value);
+    json_node_set_boolean(cast(JsonNode*)this._cPtr, value);
   }
 
   /**
@@ -603,7 +603,7 @@ class Node : gobject.boxed.Boxed
   */
   void setDouble(double value)
   {
-    json_node_set_double(cast(JsonNode*)cPtr, value);
+    json_node_set_double(cast(JsonNode*)this._cPtr, value);
   }
 
   /**
@@ -618,7 +618,7 @@ class Node : gobject.boxed.Boxed
   */
   void setInt(long value)
   {
-    json_node_set_int(cast(JsonNode*)cPtr, value);
+    json_node_set_int(cast(JsonNode*)this._cPtr, value);
   }
 
   /**
@@ -636,7 +636,7 @@ class Node : gobject.boxed.Boxed
   */
   void setObject(json.object.ObjectWrap object = null)
   {
-    json_node_set_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(No.Dup) : null);
+    json_node_set_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -651,7 +651,7 @@ class Node : gobject.boxed.Boxed
   */
   void setParent(json.node.Node parent = null)
   {
-    json_node_set_parent(cast(JsonNode*)cPtr, parent ? cast(JsonNode*)parent.cPtr(No.Dup) : null);
+    json_node_set_parent(cast(JsonNode*)this._cPtr, parent ? cast(JsonNode*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -667,7 +667,7 @@ class Node : gobject.boxed.Boxed
   void setString(string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    json_node_set_string(cast(JsonNode*)cPtr, _value);
+    json_node_set_string(cast(JsonNode*)this._cPtr, _value);
   }
 
   /**
@@ -699,7 +699,7 @@ class Node : gobject.boxed.Boxed
   */
   void setValue(gobject.value.Value value)
   {
-    json_node_set_value(cast(JsonNode*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    json_node_set_value(cast(JsonNode*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -715,7 +715,7 @@ class Node : gobject.boxed.Boxed
   */
   void takeArray(json.array.Array array)
   {
-    json_node_take_array(cast(JsonNode*)cPtr, array ? cast(JsonArray*)array.cPtr(Yes.Dup) : null);
+    json_node_take_array(cast(JsonNode*)this._cPtr, array ? cast(JsonArray*)array._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -731,7 +731,7 @@ class Node : gobject.boxed.Boxed
   */
   void takeObject(json.object.ObjectWrap object)
   {
-    json_node_take_object(cast(JsonNode*)cPtr, object ? cast(JsonObject*)object.cPtr(Yes.Dup) : null);
+    json_node_take_object(cast(JsonNode*)this._cPtr, object ? cast(JsonObject*)object._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -744,7 +744,7 @@ class Node : gobject.boxed.Boxed
   string typeName()
   {
     const(char)* _cretval;
-    _cretval = json_node_type_name(cast(JsonNode*)cPtr);
+    _cretval = json_node_type_name(cast(JsonNode*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

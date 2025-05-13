@@ -28,7 +28,7 @@ class BindingSignal
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class BindingSignal
   */
   @property gtk.binding_signal.BindingSignal next()
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)cPtr).next);
+    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next);
   }
 
   /**
@@ -48,7 +48,7 @@ class BindingSignal
   */
   @property string signalName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
+    return cToD!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
   }
 
   /**
@@ -58,8 +58,8 @@ class BindingSignal
   */
   @property void signalName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)cPtr).signalName);
-    dToC(propval, cast(void*)&(cast(GtkBindingSignal*)cPtr).signalName);
+    cValueFree!(string)(cast(void*)(cast(GtkBindingSignal*)this._cPtr).signalName);
+    dToC(propval, cast(void*)&(cast(GtkBindingSignal*)this._cPtr).signalName);
   }
 
   /**
@@ -68,7 +68,7 @@ class BindingSignal
   */
   @property uint nArgs()
   {
-    return (cast(GtkBindingSignal*)cPtr).nArgs;
+    return (cast(GtkBindingSignal*)this._cPtr).nArgs;
   }
 
   /**
@@ -78,6 +78,6 @@ class BindingSignal
   */
   @property void nArgs(uint propval)
   {
-    (cast(GtkBindingSignal*)cPtr).nArgs = propval;
+    (cast(GtkBindingSignal*)this._cPtr).nArgs = propval;
   }
 }

@@ -22,16 +22,16 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_hive_partitioning_get_type != &gidSymbolNotFound ? gadataset_hive_partitioning_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
     auto _dictionaries = gListFromD!(arrow.array.Array)(dictionaries);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_dictionaries);
     GError *_err;
-    _cretval = gadataset_hive_partitioning_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetHivePartitioningOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_hive_partitioning_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _dictionaries, options ? cast(GADatasetHivePartitioningOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -57,7 +57,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
   string getNullFallback()
   {
     char* _cretval;
-    _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)cPtr);
+    _cretval = gadataset_hive_partitioning_get_null_fallback(cast(GADatasetHivePartitioning*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -34,16 +34,16 @@ class CellAreaContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_cell_area_context_get_type != &gidSymbolNotFound ? gtk_cell_area_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -126,7 +126,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void allocate(int width, int height)
   {
-    gtk_cell_area_context_allocate(cast(GtkCellAreaContext*)cPtr, width, height);
+    gtk_cell_area_context_allocate(cast(GtkCellAreaContext*)this._cPtr, width, height);
   }
 
   /**
@@ -144,7 +144,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void getAllocation(out int width, out int height)
   {
-    gtk_cell_area_context_get_allocation(cast(GtkCellAreaContext*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_cell_area_context_get_allocation(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -165,8 +165,8 @@ class CellAreaContext : gobject.object.ObjectWrap
   gtk.cell_area.CellArea getArea()
   {
     GtkCellArea* _cretval;
-    _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
+    _cretval = gtk_cell_area_context_get_area(cast(GtkCellAreaContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_area.CellArea)(cast(GtkCellArea*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void getPreferredHeight(out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_area_context_get_preferred_height(cast(GtkCellAreaContext*)cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_area_context_get_preferred_height(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -204,7 +204,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
   {
-    gtk_cell_area_context_get_preferred_height_for_width(cast(GtkCellAreaContext*)cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_cell_area_context_get_preferred_height_for_width(cast(GtkCellAreaContext*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -222,7 +222,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void getPreferredWidth(out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_area_context_get_preferred_width(cast(GtkCellAreaContext*)cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_area_context_get_preferred_width(cast(GtkCellAreaContext*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -241,7 +241,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
   {
-    gtk_cell_area_context_get_preferred_width_for_height(cast(GtkCellAreaContext*)cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_cell_area_context_get_preferred_width_for_height(cast(GtkCellAreaContext*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -261,7 +261,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void pushPreferredHeight(int minimumHeight, int naturalHeight)
   {
-    gtk_cell_area_context_push_preferred_height(cast(GtkCellAreaContext*)cPtr, minimumHeight, naturalHeight);
+    gtk_cell_area_context_push_preferred_height(cast(GtkCellAreaContext*)this._cPtr, minimumHeight, naturalHeight);
   }
 
   /**
@@ -281,7 +281,7 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void pushPreferredWidth(int minimumWidth, int naturalWidth)
   {
-    gtk_cell_area_context_push_preferred_width(cast(GtkCellAreaContext*)cPtr, minimumWidth, naturalWidth);
+    gtk_cell_area_context_push_preferred_width(cast(GtkCellAreaContext*)this._cPtr, minimumWidth, naturalWidth);
   }
 
   /**
@@ -312,6 +312,6 @@ class CellAreaContext : gobject.object.ObjectWrap
   */
   void reset()
   {
-    gtk_cell_area_context_reset(cast(GtkCellAreaContext*)cPtr);
+    gtk_cell_area_context_reset(cast(GtkCellAreaContext*)this._cPtr);
   }
 }

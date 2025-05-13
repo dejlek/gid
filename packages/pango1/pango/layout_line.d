@@ -45,22 +45,22 @@ class LayoutLine : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_layout_line_get_type != &gidSymbolNotFound ? pango_layout_line_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property pango.layout.Layout layout()
   {
-    return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
+    return cToD!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)this._cPtr).layout);
   }
 
   /**
@@ -85,8 +85,8 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property void layout(pango.layout.Layout propval)
   {
-    cValueFree!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)cPtr).layout);
-    dToC(propval, cast(void*)&(cast(PangoLayoutLine*)cPtr).layout);
+    cValueFree!(pango.layout.Layout)(cast(void*)(cast(PangoLayoutLine*)this._cPtr).layout);
+    dToC(propval, cast(void*)&(cast(PangoLayoutLine*)this._cPtr).layout);
   }
 
   /**
@@ -95,7 +95,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property int startIndex()
   {
-    return (cast(PangoLayoutLine*)cPtr).startIndex;
+    return (cast(PangoLayoutLine*)this._cPtr).startIndex;
   }
 
   /**
@@ -105,7 +105,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property void startIndex(int propval)
   {
-    (cast(PangoLayoutLine*)cPtr).startIndex = propval;
+    (cast(PangoLayoutLine*)this._cPtr).startIndex = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property int length()
   {
-    return (cast(PangoLayoutLine*)cPtr).length;
+    return (cast(PangoLayoutLine*)this._cPtr).length;
   }
 
   /**
@@ -124,7 +124,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property void length(int propval)
   {
-    (cast(PangoLayoutLine*)cPtr).length = propval;
+    (cast(PangoLayoutLine*)this._cPtr).length = propval;
   }
 
   /**
@@ -133,7 +133,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property uint isParagraphStart()
   {
-    return (cast(PangoLayoutLine*)cPtr).isParagraphStart;
+    return (cast(PangoLayoutLine*)this._cPtr).isParagraphStart;
   }
 
   /**
@@ -143,7 +143,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property void isParagraphStart(uint propval)
   {
-    (cast(PangoLayoutLine*)cPtr).isParagraphStart = propval;
+    (cast(PangoLayoutLine*)this._cPtr).isParagraphStart = propval;
   }
 
   /**
@@ -152,7 +152,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property uint resolvedDir()
   {
-    return (cast(PangoLayoutLine*)cPtr).resolvedDir;
+    return (cast(PangoLayoutLine*)this._cPtr).resolvedDir;
   }
 
   /**
@@ -162,7 +162,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   @property void resolvedDir(uint propval)
   {
-    (cast(PangoLayoutLine*)cPtr).resolvedDir = propval;
+    (cast(PangoLayoutLine*)this._cPtr).resolvedDir = propval;
   }
 
   /**
@@ -179,7 +179,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void getExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_line_get_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
+    pango_layout_line_get_extents(cast(PangoLayoutLine*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -196,7 +196,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void getHeight(out int height)
   {
-    pango_layout_line_get_height(cast(PangoLayoutLine*)cPtr, cast(int*)&height);
+    pango_layout_line_get_height(cast(PangoLayoutLine*)this._cPtr, cast(int*)&height);
   }
 
   /**
@@ -206,7 +206,7 @@ class LayoutLine : gobject.boxed.Boxed
   int getLength()
   {
     int _retval;
-    _retval = pango_layout_line_get_length(cast(PangoLayoutLine*)cPtr);
+    _retval = pango_layout_line_get_length(cast(PangoLayoutLine*)this._cPtr);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void getPixelExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)cPtr, &inkRect, &logicalRect);
+    pango_layout_line_get_pixel_extents(cast(PangoLayoutLine*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -236,7 +236,7 @@ class LayoutLine : gobject.boxed.Boxed
   pango.types.Direction getResolvedDirection()
   {
     PangoDirection _cretval;
-    _cretval = pango_layout_line_get_resolved_direction(cast(PangoLayoutLine*)cPtr);
+    _cretval = pango_layout_line_get_resolved_direction(cast(PangoLayoutLine*)this._cPtr);
     pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
@@ -249,7 +249,7 @@ class LayoutLine : gobject.boxed.Boxed
   int getStartIndex()
   {
     int _retval;
-    _retval = pango_layout_line_get_start_index(cast(PangoLayoutLine*)cPtr);
+    _retval = pango_layout_line_get_start_index(cast(PangoLayoutLine*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class LayoutLine : gobject.boxed.Boxed
   {
     int _nRanges;
     int* _ranges;
-    pango_layout_line_get_x_ranges(cast(PangoLayoutLine*)cPtr, startIndex, endIndex, &_ranges, &_nRanges);
+    pango_layout_line_get_x_ranges(cast(PangoLayoutLine*)this._cPtr, startIndex, endIndex, &_ranges, &_nRanges);
     ranges.length = _nRanges;
     ranges[0 .. $] = (cast(int*)_ranges)[0 .. _nRanges];
     gFree(cast(void*)_ranges);
@@ -299,7 +299,7 @@ class LayoutLine : gobject.boxed.Boxed
   */
   void indexToX(int index, bool trailing, out int xPos)
   {
-    pango_layout_line_index_to_x(cast(PangoLayoutLine*)cPtr, index, trailing, cast(int*)&xPos);
+    pango_layout_line_index_to_x(cast(PangoLayoutLine*)this._cPtr, index, trailing, cast(int*)&xPos);
   }
 
   /**
@@ -327,7 +327,7 @@ class LayoutLine : gobject.boxed.Boxed
   bool xToIndex(int xPos, out int index, out int trailing)
   {
     bool _retval;
-    _retval = pango_layout_line_x_to_index(cast(PangoLayoutLine*)cPtr, xPos, cast(int*)&index, cast(int*)&trailing);
+    _retval = pango_layout_line_x_to_index(cast(PangoLayoutLine*)this._cPtr, xPos, cast(int*)&index, cast(int*)&trailing);
     return _retval;
   }
 }

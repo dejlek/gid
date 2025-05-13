@@ -33,16 +33,16 @@ class AlertDialog : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alert_dialog_get_type != &gidSymbolNotFound ? gtk_alert_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -196,17 +196,17 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void choose(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_alert_dialog_choose(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_alert_dialog_choose(cast(GtkAlertDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -224,7 +224,7 @@ class AlertDialog : gobject.object.ObjectWrap
   {
     int _retval;
     GError *_err;
-    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_alert_dialog_choose_finish(cast(GtkAlertDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -237,7 +237,7 @@ class AlertDialog : gobject.object.ObjectWrap
   string[] getButtons()
   {
     const(char*)* _cretval;
-    _cretval = gtk_alert_dialog_get_buttons(cast(GtkAlertDialog*)cPtr);
+    _cretval = gtk_alert_dialog_get_buttons(cast(GtkAlertDialog*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -259,7 +259,7 @@ class AlertDialog : gobject.object.ObjectWrap
   int getCancelButton()
   {
     int _retval;
-    _retval = gtk_alert_dialog_get_cancel_button(cast(GtkAlertDialog*)cPtr);
+    _retval = gtk_alert_dialog_get_cancel_button(cast(GtkAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -270,7 +270,7 @@ class AlertDialog : gobject.object.ObjectWrap
   int getDefaultButton()
   {
     int _retval;
-    _retval = gtk_alert_dialog_get_default_button(cast(GtkAlertDialog*)cPtr);
+    _retval = gtk_alert_dialog_get_default_button(cast(GtkAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class AlertDialog : gobject.object.ObjectWrap
   string getDetail()
   {
     const(char)* _cretval;
-    _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)cPtr);
+    _cretval = gtk_alert_dialog_get_detail(cast(GtkAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -293,7 +293,7 @@ class AlertDialog : gobject.object.ObjectWrap
   string getMessage()
   {
     const(char)* _cretval;
-    _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)cPtr);
+    _cretval = gtk_alert_dialog_get_message(cast(GtkAlertDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -306,7 +306,7 @@ class AlertDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_alert_dialog_get_modal(cast(GtkAlertDialog*)cPtr);
+    _retval = gtk_alert_dialog_get_modal(cast(GtkAlertDialog*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class AlertDialog : gobject.object.ObjectWrap
       _tmplabels ~= s.toCString(No.Alloc);
     _tmplabels ~= null;
     const(char*)* _labels = _tmplabels.ptr;
-    gtk_alert_dialog_set_buttons(cast(GtkAlertDialog*)cPtr, _labels);
+    gtk_alert_dialog_set_buttons(cast(GtkAlertDialog*)this._cPtr, _labels);
   }
 
   /**
@@ -337,7 +337,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setCancelButton(int button)
   {
-    gtk_alert_dialog_set_cancel_button(cast(GtkAlertDialog*)cPtr, button);
+    gtk_alert_dialog_set_cancel_button(cast(GtkAlertDialog*)this._cPtr, button);
   }
 
   /**
@@ -351,7 +351,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setDefaultButton(int button)
   {
-    gtk_alert_dialog_set_default_button(cast(GtkAlertDialog*)cPtr, button);
+    gtk_alert_dialog_set_default_button(cast(GtkAlertDialog*)this._cPtr, button);
   }
 
   /**
@@ -363,7 +363,7 @@ class AlertDialog : gobject.object.ObjectWrap
   void setDetail(string detail)
   {
     const(char)* _detail = detail.toCString(No.Alloc);
-    gtk_alert_dialog_set_detail(cast(GtkAlertDialog*)cPtr, _detail);
+    gtk_alert_dialog_set_detail(cast(GtkAlertDialog*)this._cPtr, _detail);
   }
 
   /**
@@ -375,7 +375,7 @@ class AlertDialog : gobject.object.ObjectWrap
   void setMessage(string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    gtk_alert_dialog_set_message(cast(GtkAlertDialog*)cPtr, _message);
+    gtk_alert_dialog_set_message(cast(GtkAlertDialog*)this._cPtr, _message);
   }
 
   /**
@@ -387,7 +387,7 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void setModal(bool modal)
   {
-    gtk_alert_dialog_set_modal(cast(GtkAlertDialog*)cPtr, modal);
+    gtk_alert_dialog_set_modal(cast(GtkAlertDialog*)this._cPtr, modal);
   }
 
   /**
@@ -404,6 +404,6 @@ class AlertDialog : gobject.object.ObjectWrap
   */
   void show(gtk.window.Window parent = null)
   {
-    gtk_alert_dialog_show(cast(GtkAlertDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_alert_dialog_show(cast(GtkAlertDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
 }

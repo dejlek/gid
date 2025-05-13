@@ -51,22 +51,22 @@ class Glyph : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_glyph_get_type != &gidSymbolNotFound ? cairo_gobject_glyph_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -82,7 +82,7 @@ class Glyph : gobject.boxed.Boxed
   */
   @property gulong index()
   {
-    return (cast(cairo_glyph_t*)cPtr).index;
+    return (cast(cairo_glyph_t*)this._cPtr).index;
   }
 
   /**
@@ -93,7 +93,7 @@ class Glyph : gobject.boxed.Boxed
   */
   @property void index(gulong propval)
   {
-    (cast(cairo_glyph_t*)cPtr).index = propval;
+    (cast(cairo_glyph_t*)this._cPtr).index = propval;
   }
 
   /**
@@ -103,7 +103,7 @@ class Glyph : gobject.boxed.Boxed
   */
   @property double x()
   {
-    return (cast(cairo_glyph_t*)cPtr).x;
+    return (cast(cairo_glyph_t*)this._cPtr).x;
   }
 
   /**
@@ -114,7 +114,7 @@ class Glyph : gobject.boxed.Boxed
   */
   @property void x(double propval)
   {
-    (cast(cairo_glyph_t*)cPtr).x = propval;
+    (cast(cairo_glyph_t*)this._cPtr).x = propval;
   }
 
   /**
@@ -124,7 +124,7 @@ class Glyph : gobject.boxed.Boxed
   */
   @property double y()
   {
-    return (cast(cairo_glyph_t*)cPtr).y;
+    return (cast(cairo_glyph_t*)this._cPtr).y;
   }
 
   /**
@@ -135,6 +135,6 @@ class Glyph : gobject.boxed.Boxed
   */
   @property void y(double propval)
   {
-    (cast(cairo_glyph_t*)cPtr).y = propval;
+    (cast(cairo_glyph_t*)this._cPtr).y = propval;
   }
 }

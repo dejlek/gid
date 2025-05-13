@@ -21,16 +21,16 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_keyval_trigger_get_type != &gidSymbolNotFound ? gtk_keyval_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   uint getKeyval()
   {
     uint _retval;
-    _retval = gtk_keyval_trigger_get_keyval(cast(GtkKeyvalTrigger*)cPtr);
+    _retval = gtk_keyval_trigger_get_keyval(cast(GtkKeyvalTrigger*)this._cPtr);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class KeyvalTrigger : gtk.shortcut_trigger.ShortcutTrigger
   gdk.types.ModifierType getModifiers()
   {
     GdkModifierType _cretval;
-    _cretval = gtk_keyval_trigger_get_modifiers(cast(GtkKeyvalTrigger*)cPtr);
+    _cretval = gtk_keyval_trigger_get_modifiers(cast(GtkKeyvalTrigger*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }

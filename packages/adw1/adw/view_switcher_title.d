@@ -88,16 +88,16 @@ class ViewSwitcherTitle : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_title_get_type != &gidSymbolNotFound ? adw_view_switcher_title_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -258,8 +258,8 @@ class ViewSwitcherTitle : gtk.widget.Widget
   adw.view_stack.ViewStack getStack()
   {
     AdwViewStack* _cretval;
-    _cretval = adw_view_switcher_title_get_stack(cast(AdwViewSwitcherTitle*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    _cretval = adw_view_switcher_title_get_stack(cast(AdwViewSwitcherTitle*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   string getSubtitle()
   {
     const(char)* _cretval;
-    _cretval = adw_view_switcher_title_get_subtitle(cast(AdwViewSwitcherTitle*)cPtr);
+    _cretval = adw_view_switcher_title_get_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -286,7 +286,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_view_switcher_title_get_title(cast(AdwViewSwitcherTitle*)cPtr);
+    _cretval = adw_view_switcher_title_get_title(cast(AdwViewSwitcherTitle*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -303,7 +303,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   bool getTitleVisible()
   {
     bool _retval;
-    _retval = adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)cPtr);
+    _retval = adw_view_switcher_title_get_title_visible(cast(AdwViewSwitcherTitle*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   bool getViewSwitcherEnabled()
   {
     bool _retval;
-    _retval = adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)cPtr);
+    _retval = adw_view_switcher_title_get_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   void setStack(adw.view_stack.ViewStack stack = null)
   {
-    adw_view_switcher_title_set_stack(cast(AdwViewSwitcherTitle*)cPtr, stack ? cast(AdwViewStack*)stack.cPtr(No.Dup) : null);
+    adw_view_switcher_title_set_stack(cast(AdwViewSwitcherTitle*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
 
   /**
@@ -346,7 +346,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   void setSubtitle(string subtitle)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
-    adw_view_switcher_title_set_subtitle(cast(AdwViewSwitcherTitle*)cPtr, _subtitle);
+    adw_view_switcher_title_set_subtitle(cast(AdwViewSwitcherTitle*)this._cPtr, _subtitle);
   }
 
   /**
@@ -363,7 +363,7 @@ class ViewSwitcherTitle : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_view_switcher_title_set_title(cast(AdwViewSwitcherTitle*)cPtr, _title);
+    adw_view_switcher_title_set_title(cast(AdwViewSwitcherTitle*)this._cPtr, _title);
   }
 
   /**
@@ -383,6 +383,6 @@ class ViewSwitcherTitle : gtk.widget.Widget
   */
   void setViewSwitcherEnabled(bool enabled)
   {
-    adw_view_switcher_title_set_view_switcher_enabled(cast(AdwViewSwitcherTitle*)cPtr, enabled);
+    adw_view_switcher_title_set_view_switcher_enabled(cast(AdwViewSwitcherTitle*)this._cPtr, enabled);
   }
 }

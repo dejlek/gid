@@ -120,16 +120,16 @@ class Gesture : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_get_type != &gidSymbolNotFound ? gtk_gesture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -159,7 +159,7 @@ class Gesture : gtk.event_controller.EventController
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_gesture_get_bounding_box(cast(GtkGesture*)cPtr, &_rect);
+    _retval = gtk_gesture_get_bounding_box(cast(GtkGesture*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -179,7 +179,7 @@ class Gesture : gtk.event_controller.EventController
   bool getBoundingBoxCenter(out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_get_bounding_box_center(cast(GtkGesture*)cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = gtk_gesture_get_bounding_box_center(cast(GtkGesture*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -193,8 +193,8 @@ class Gesture : gtk.event_controller.EventController
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gtk_gesture_get_device(cast(GtkGesture*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gtk_gesture_get_device(cast(GtkGesture*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Gesture : gtk.event_controller.EventController
   gtk.gesture.Gesture[] getGroup()
   {
     GList* _cretval;
-    _cretval = gtk_gesture_get_group(cast(GtkGesture*)cPtr);
+    _cretval = gtk_gesture_get_group(cast(GtkGesture*)this._cPtr);
     auto _retval = gListToD!(gtk.gesture.Gesture, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -225,7 +225,7 @@ class Gesture : gtk.event_controller.EventController
   gdk.event.Event getLastEvent(gdk.event_sequence.EventSequence sequence = null)
   {
     GdkEvent* _cretval;
-    _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -237,7 +237,7 @@ class Gesture : gtk.event_controller.EventController
   gdk.event_sequence.EventSequence getLastUpdatedSequence()
   {
     GdkEventSequence* _cretval;
-    _cretval = gtk_gesture_get_last_updated_sequence(cast(GtkGesture*)cPtr);
+    _cretval = gtk_gesture_get_last_updated_sequence(cast(GtkGesture*)this._cPtr);
     auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -258,7 +258,7 @@ class Gesture : gtk.event_controller.EventController
   bool getPoint(gdk.event_sequence.EventSequence sequence, out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_get_point(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
+    _retval = gtk_gesture_get_point(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Gesture : gtk.event_controller.EventController
   gtk.types.EventSequenceState getSequenceState(gdk.event_sequence.EventSequence sequence)
   {
     GtkEventSequenceState _cretval;
-    _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_get_sequence_state(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
     gtk.types.EventSequenceState _retval = cast(gtk.types.EventSequenceState)_cretval;
     return _retval;
   }
@@ -288,7 +288,7 @@ class Gesture : gtk.event_controller.EventController
   gdk.event_sequence.EventSequence[] getSequences()
   {
     GList* _cretval;
-    _cretval = gtk_gesture_get_sequences(cast(GtkGesture*)cPtr);
+    _cretval = gtk_gesture_get_sequences(cast(GtkGesture*)this._cPtr);
     auto _retval = gListToD!(gdk.event_sequence.EventSequence, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -317,7 +317,7 @@ class Gesture : gtk.event_controller.EventController
   */
   void group(gtk.gesture.Gesture gesture)
   {
-    gtk_gesture_group(cast(GtkGesture*)cPtr, gesture ? cast(GtkGesture*)gesture.cPtr(No.Dup) : null);
+    gtk_gesture_group(cast(GtkGesture*)this._cPtr, gesture ? cast(GtkGesture*)gesture._cPtr(No.Dup) : null);
   }
 
   /**
@@ -331,7 +331,7 @@ class Gesture : gtk.event_controller.EventController
   bool handlesSequence(gdk.event_sequence.EventSequence sequence = null)
   {
     bool _retval;
-    _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null);
+    _retval = gtk_gesture_handles_sequence(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class Gesture : gtk.event_controller.EventController
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_gesture_is_active(cast(GtkGesture*)cPtr);
+    _retval = gtk_gesture_is_active(cast(GtkGesture*)this._cPtr);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class Gesture : gtk.event_controller.EventController
   bool isGroupedWith(gtk.gesture.Gesture other)
   {
     bool _retval;
-    _retval = gtk_gesture_is_grouped_with(cast(GtkGesture*)cPtr, other ? cast(GtkGesture*)other.cPtr(No.Dup) : null);
+    _retval = gtk_gesture_is_grouped_with(cast(GtkGesture*)this._cPtr, other ? cast(GtkGesture*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class Gesture : gtk.event_controller.EventController
   bool isRecognized()
   {
     bool _retval;
-    _retval = gtk_gesture_is_recognized(cast(GtkGesture*)cPtr);
+    _retval = gtk_gesture_is_recognized(cast(GtkGesture*)this._cPtr);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class Gesture : gtk.event_controller.EventController
   bool setSequenceState(gdk.event_sequence.EventSequence sequence, gtk.types.EventSequenceState state)
   {
     bool _retval;
-    _retval = gtk_gesture_set_sequence_state(cast(GtkGesture*)cPtr, sequence ? cast(GdkEventSequence*)sequence.cPtr(No.Dup) : null, state);
+    _retval = gtk_gesture_set_sequence_state(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null, state);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ class Gesture : gtk.event_controller.EventController
   bool setState(gtk.types.EventSequenceState state)
   {
     bool _retval;
-    _retval = gtk_gesture_set_state(cast(GtkGesture*)cPtr, state);
+    _retval = gtk_gesture_set_state(cast(GtkGesture*)this._cPtr, state);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class Gesture : gtk.event_controller.EventController
   */
   void ungroup()
   {
-    gtk_gesture_ungroup(cast(GtkGesture*)cPtr);
+    gtk_gesture_ungroup(cast(GtkGesture*)this._cPtr);
   }
 
   /**

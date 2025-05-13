@@ -26,7 +26,7 @@ class Node
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class Node
   */
   @property glib.node.Node next()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).next);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).next);
   }
 
   /**
@@ -47,7 +47,7 @@ class Node
   */
   @property glib.node.Node prev()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).prev);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).prev);
   }
 
   /**
@@ -57,7 +57,7 @@ class Node
   */
   @property glib.node.Node parent()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).parent);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).parent);
   }
 
   /**
@@ -68,7 +68,7 @@ class Node
   */
   @property glib.node.Node children()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)cPtr).children);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).children);
   }
 
   /**
@@ -83,7 +83,7 @@ class Node
   int childIndex(void* data = null)
   {
     int _retval;
-    _retval = g_node_child_index(cast(GNode*)cPtr, data);
+    _retval = g_node_child_index(cast(GNode*)this._cPtr, data);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Node
   int childPosition(glib.node.Node child)
   {
     int _retval;
-    _retval = g_node_child_position(cast(GNode*)cPtr, child ? cast(GNode*)child.cPtr : null);
+    _retval = g_node_child_position(cast(GNode*)this._cPtr, child ? cast(GNode*)child._cPtr : null);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class Node
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_node_children_foreach(cast(GNode*)cPtr, flags, _funcCB, _func);
+    g_node_children_foreach(cast(GNode*)this._cPtr, flags, _funcCB, _func);
   }
 
   /**
@@ -137,7 +137,7 @@ class Node
   uint depth()
   {
     uint _retval;
-    _retval = g_node_depth(cast(GNode*)cPtr);
+    _retval = g_node_depth(cast(GNode*)this._cPtr);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Node
   */
   void destroy()
   {
-    g_node_destroy(cast(GNode*)cPtr);
+    g_node_destroy(cast(GNode*)this._cPtr);
   }
 
   /**
@@ -162,7 +162,7 @@ class Node
   bool isAncestor(glib.node.Node descendant)
   {
     bool _retval;
-    _retval = g_node_is_ancestor(cast(GNode*)cPtr, descendant ? cast(GNode*)descendant.cPtr : null);
+    _retval = g_node_is_ancestor(cast(GNode*)this._cPtr, descendant ? cast(GNode*)descendant._cPtr : null);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Node
   uint maxHeight()
   {
     uint _retval;
-    _retval = g_node_max_height(cast(GNode*)cPtr);
+    _retval = g_node_max_height(cast(GNode*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Node
   uint nChildren()
   {
     uint _retval;
-    _retval = g_node_n_children(cast(GNode*)cPtr);
+    _retval = g_node_n_children(cast(GNode*)this._cPtr);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class Node
   uint nNodes(glib.types.TraverseFlags flags)
   {
     uint _retval;
-    _retval = g_node_n_nodes(cast(GNode*)cPtr, flags);
+    _retval = g_node_n_nodes(cast(GNode*)this._cPtr, flags);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class Node
   */
   void reverseChildren()
   {
-    g_node_reverse_children(cast(GNode*)cPtr);
+    g_node_reverse_children(cast(GNode*)this._cPtr);
   }
 
   /**
@@ -245,7 +245,7 @@ class Node
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_node_traverse(cast(GNode*)cPtr, order, flags, maxDepth, _funcCB, _func);
+    g_node_traverse(cast(GNode*)this._cPtr, order, flags, maxDepth, _funcCB, _func);
   }
 
   /**
@@ -253,7 +253,7 @@ class Node
   */
   void unlink()
   {
-    g_node_unlink(cast(GNode*)cPtr);
+    g_node_unlink(cast(GNode*)this._cPtr);
   }
 
   /** */

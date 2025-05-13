@@ -56,16 +56,16 @@ class Message : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_get_type != &gidSymbolNotFound ? soup_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -373,7 +373,7 @@ class Message : gobject.object.ObjectWrap
     const(char)* _uriString = uriString.toCString(No.Alloc);
     char* _encodedForm = encodedForm.toCString(Yes.Alloc);
     _cretval = soup_message_new_from_encoded_form(_method, _uriString, _encodedForm);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -391,8 +391,8 @@ class Message : gobject.object.ObjectWrap
   {
     SoupMessage* _cretval;
     const(char)* _uriString = uriString.toCString(No.Alloc);
-    _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    _cretval = soup_message_new_from_multipart(_uriString, multipart ? cast(SoupMultipart*)multipart._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -408,8 +408,8 @@ class Message : gobject.object.ObjectWrap
   {
     SoupMessage* _cretval;
     const(char)* _method = method.toCString(No.Alloc);
-    _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    _cretval = soup_message_new_from_uri(_method, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -424,8 +424,8 @@ class Message : gobject.object.ObjectWrap
   static soup.message.Message newOptionsPing(glib.uri.Uri baseUri)
   {
     SoupMessage* _cretval;
-    _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
+    _cretval = soup_message_new_options_ping(baseUri ? cast(GUri*)baseUri._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(soup.message.Message)(cast(SoupMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -437,7 +437,7 @@ class Message : gobject.object.ObjectWrap
   */
   void addFlags(soup.types.MessageFlags flags)
   {
-    soup_message_add_flags(cast(SoupMessage*)cPtr, flags);
+    soup_message_add_flags(cast(SoupMessage*)this._cPtr, flags);
   }
 
   /**
@@ -458,7 +458,7 @@ class Message : gobject.object.ObjectWrap
   */
   void disableFeature(gobject.types.GType featureType)
   {
-    soup_message_disable_feature(cast(SoupMessage*)cPtr, featureType);
+    soup_message_disable_feature(cast(SoupMessage*)this._cPtr, featureType);
   }
 
   /**
@@ -471,7 +471,7 @@ class Message : gobject.object.ObjectWrap
   ulong getConnectionId()
   {
     ulong _retval;
-    _retval = soup_message_get_connection_id(cast(SoupMessage*)cPtr);
+    _retval = soup_message_get_connection_id(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class Message : gobject.object.ObjectWrap
   glib.uri.Uri getFirstParty()
   {
     GUri* _cretval;
-    _cretval = soup_message_get_first_party(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_first_party(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -494,7 +494,7 @@ class Message : gobject.object.ObjectWrap
   soup.types.MessageFlags getFlags()
   {
     SoupMessageFlags _cretval;
-    _cretval = soup_message_get_flags(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_flags(cast(SoupMessage*)this._cPtr);
     soup.types.MessageFlags _retval = cast(soup.types.MessageFlags)_cretval;
     return _retval;
   }
@@ -506,7 +506,7 @@ class Message : gobject.object.ObjectWrap
   bool getForceHttp1()
   {
     bool _retval;
-    _retval = soup_message_get_force_http1(cast(SoupMessage*)cPtr);
+    _retval = soup_message_get_force_http1(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -520,7 +520,7 @@ class Message : gobject.object.ObjectWrap
   soup.types.HTTPVersion getHttpVersion()
   {
     SoupHTTPVersion _cretval;
-    _cretval = soup_message_get_http_version(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_http_version(cast(SoupMessage*)this._cPtr);
     soup.types.HTTPVersion _retval = cast(soup.types.HTTPVersion)_cretval;
     return _retval;
   }
@@ -532,7 +532,7 @@ class Message : gobject.object.ObjectWrap
   bool getIsOptionsPing()
   {
     bool _retval;
-    _retval = soup_message_get_is_options_ping(cast(SoupMessage*)cPtr);
+    _retval = soup_message_get_is_options_ping(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class Message : gobject.object.ObjectWrap
   bool getIsTopLevelNavigation()
   {
     bool _retval;
-    _retval = soup_message_get_is_top_level_navigation(cast(SoupMessage*)cPtr);
+    _retval = soup_message_get_is_top_level_navigation(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class Message : gobject.object.ObjectWrap
   string getMethod()
   {
     const(char)* _cretval;
-    _cretval = soup_message_get_method(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_method(cast(SoupMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -571,7 +571,7 @@ class Message : gobject.object.ObjectWrap
   soup.message_metrics.MessageMetrics getMetrics()
   {
     SoupMessageMetrics* _cretval;
-    _cretval = soup_message_get_metrics(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_metrics(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -585,7 +585,7 @@ class Message : gobject.object.ObjectWrap
   soup.types.MessagePriority getPriority()
   {
     SoupMessagePriority _cretval;
-    _cretval = soup_message_get_priority(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_priority(cast(SoupMessage*)this._cPtr);
     soup.types.MessagePriority _retval = cast(soup.types.MessagePriority)_cretval;
     return _retval;
   }
@@ -597,7 +597,7 @@ class Message : gobject.object.ObjectWrap
   string getReasonPhrase()
   {
     const(char)* _cretval;
-    _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_reason_phrase(cast(SoupMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -617,8 +617,8 @@ class Message : gobject.object.ObjectWrap
   gio.socket_address.SocketAddress getRemoteAddress()
   {
     GSocketAddress* _cretval;
-    _cretval = soup_message_get_remote_address(cast(SoupMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
+    _cretval = soup_message_get_remote_address(cast(SoupMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_address.SocketAddress)(cast(GSocketAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -629,7 +629,7 @@ class Message : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getRequestHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = soup_message_get_request_headers(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_request_headers(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -641,7 +641,7 @@ class Message : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getResponseHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = soup_message_get_response_headers(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_response_headers(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -653,7 +653,7 @@ class Message : gobject.object.ObjectWrap
   glib.uri.Uri getSiteForCookies()
   {
     GUri* _cretval;
-    _cretval = soup_message_get_site_for_cookies(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_site_for_cookies(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -665,7 +665,7 @@ class Message : gobject.object.ObjectWrap
   soup.types.Status getStatus()
   {
     SoupStatus _cretval;
-    _cretval = soup_message_get_status(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_status(cast(SoupMessage*)this._cPtr);
     soup.types.Status _retval = cast(soup.types.Status)_cretval;
     return _retval;
   }
@@ -678,7 +678,7 @@ class Message : gobject.object.ObjectWrap
   string getTlsCiphersuiteName()
   {
     const(char)* _cretval;
-    _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_tls_ciphersuite_name(cast(SoupMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -694,8 +694,8 @@ class Message : gobject.object.ObjectWrap
   gio.tls_certificate.TlsCertificate getTlsPeerCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = soup_message_get_tls_peer_certificate(cast(SoupMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -708,7 +708,7 @@ class Message : gobject.object.ObjectWrap
   gio.types.TlsCertificateFlags getTlsPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
-    _cretval = soup_message_get_tls_peer_certificate_errors(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_tls_peer_certificate_errors(cast(SoupMessage*)this._cPtr);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -722,7 +722,7 @@ class Message : gobject.object.ObjectWrap
   gio.types.TlsProtocolVersion getTlsProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
-    _cretval = soup_message_get_tls_protocol_version(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_tls_protocol_version(cast(SoupMessage*)this._cPtr);
     gio.types.TlsProtocolVersion _retval = cast(gio.types.TlsProtocolVersion)_cretval;
     return _retval;
   }
@@ -734,7 +734,7 @@ class Message : gobject.object.ObjectWrap
   glib.uri.Uri getUri()
   {
     GUri* _cretval;
-    _cretval = soup_message_get_uri(cast(SoupMessage*)cPtr);
+    _cretval = soup_message_get_uri(cast(SoupMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -752,7 +752,7 @@ class Message : gobject.object.ObjectWrap
   bool isFeatureDisabled(gobject.types.GType featureType)
   {
     bool _retval;
-    _retval = soup_message_is_feature_disabled(cast(SoupMessage*)cPtr, featureType);
+    _retval = soup_message_is_feature_disabled(cast(SoupMessage*)this._cPtr, featureType);
     return _retval;
   }
 
@@ -766,7 +766,7 @@ class Message : gobject.object.ObjectWrap
   bool isKeepalive()
   {
     bool _retval;
-    _retval = soup_message_is_keepalive(cast(SoupMessage*)cPtr);
+    _retval = soup_message_is_keepalive(cast(SoupMessage*)this._cPtr);
     return _retval;
   }
 
@@ -780,7 +780,7 @@ class Message : gobject.object.ObjectWrap
   bool queryFlags(soup.types.MessageFlags flags)
   {
     bool _retval;
-    _retval = soup_message_query_flags(cast(SoupMessage*)cPtr, flags);
+    _retval = soup_message_query_flags(cast(SoupMessage*)this._cPtr, flags);
     return _retval;
   }
 
@@ -792,7 +792,7 @@ class Message : gobject.object.ObjectWrap
   */
   void removeFlags(soup.types.MessageFlags flags)
   {
-    soup_message_remove_flags(cast(SoupMessage*)cPtr, flags);
+    soup_message_remove_flags(cast(SoupMessage*)this._cPtr, flags);
   }
 
   /**
@@ -806,7 +806,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setFirstParty(glib.uri.Uri firstParty)
   {
-    soup_message_set_first_party(cast(SoupMessage*)cPtr, firstParty ? cast(GUri*)firstParty.cPtr(No.Dup) : null);
+    soup_message_set_first_party(cast(SoupMessage*)this._cPtr, firstParty ? cast(GUri*)firstParty._cPtr(No.Dup) : null);
   }
 
   /**
@@ -817,7 +817,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setFlags(soup.types.MessageFlags flags)
   {
-    soup_message_set_flags(cast(SoupMessage*)cPtr, flags);
+    soup_message_set_flags(cast(SoupMessage*)this._cPtr, flags);
   }
 
   /**
@@ -831,7 +831,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setForceHttp1(bool value)
   {
-    soup_message_set_force_http1(cast(SoupMessage*)cPtr, value);
+    soup_message_set_force_http1(cast(SoupMessage*)this._cPtr, value);
   }
 
   /**
@@ -845,7 +845,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setIsOptionsPing(bool isOptionsPing)
   {
-    soup_message_set_is_options_ping(cast(SoupMessage*)cPtr, isOptionsPing);
+    soup_message_set_is_options_ping(cast(SoupMessage*)this._cPtr, isOptionsPing);
   }
 
   /**
@@ -859,7 +859,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setIsTopLevelNavigation(bool isTopLevelNavigation)
   {
-    soup_message_set_is_top_level_navigation(cast(SoupMessage*)cPtr, isTopLevelNavigation);
+    soup_message_set_is_top_level_navigation(cast(SoupMessage*)this._cPtr, isTopLevelNavigation);
   }
 
   /**
@@ -871,7 +871,7 @@ class Message : gobject.object.ObjectWrap
   void setMethod(string method)
   {
     const(char)* _method = method.toCString(No.Alloc);
-    soup_message_set_method(cast(SoupMessage*)cPtr, _method);
+    soup_message_set_method(cast(SoupMessage*)this._cPtr, _method);
   }
 
   /**
@@ -893,7 +893,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setPriority(soup.types.MessagePriority priority)
   {
-    soup_message_set_priority(cast(SoupMessage*)cPtr, priority);
+    soup_message_set_priority(cast(SoupMessage*)this._cPtr, priority);
   }
 
   /**
@@ -912,7 +912,7 @@ class Message : gobject.object.ObjectWrap
   void setRequestBody(string contentType, gio.input_stream.InputStream stream, ptrdiff_t contentLength)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    soup_message_set_request_body(cast(SoupMessage*)cPtr, _contentType, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, contentLength);
+    soup_message_set_request_body(cast(SoupMessage*)this._cPtr, _contentType, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, contentLength);
   }
 
   /**
@@ -930,7 +930,7 @@ class Message : gobject.object.ObjectWrap
   void setRequestBodyFromBytes(string contentType = null, glib.bytes.Bytes bytes = null)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    soup_message_set_request_body_from_bytes(cast(SoupMessage*)cPtr, _contentType, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    soup_message_set_request_body_from_bytes(cast(SoupMessage*)this._cPtr, _contentType, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
   }
 
   /**
@@ -949,7 +949,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setSiteForCookies(glib.uri.Uri siteForCookies = null)
   {
-    soup_message_set_site_for_cookies(cast(SoupMessage*)cPtr, siteForCookies ? cast(GUri*)siteForCookies.cPtr(No.Dup) : null);
+    soup_message_set_site_for_cookies(cast(SoupMessage*)this._cPtr, siteForCookies ? cast(GUri*)siteForCookies._cPtr(No.Dup) : null);
   }
 
   /**
@@ -967,7 +967,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setTlsClientCertificate(gio.tls_certificate.TlsCertificate certificate = null)
   {
-    soup_message_set_tls_client_certificate(cast(SoupMessage*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
+    soup_message_set_tls_client_certificate(cast(SoupMessage*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
 
   /**
@@ -981,7 +981,7 @@ class Message : gobject.object.ObjectWrap
   */
   void setUri(glib.uri.Uri uri)
   {
-    soup_message_set_uri(cast(SoupMessage*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
+    soup_message_set_uri(cast(SoupMessage*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
   }
 
   /**
@@ -993,7 +993,7 @@ class Message : gobject.object.ObjectWrap
   */
   void tlsClientCertificatePasswordRequestComplete()
   {
-    soup_message_tls_client_certificate_password_request_complete(cast(SoupMessage*)cPtr);
+    soup_message_tls_client_certificate_password_request_complete(cast(SoupMessage*)this._cPtr);
   }
 
   /**

@@ -21,22 +21,22 @@ class WebViewSessionState : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_view_session_state_get_type != &gidSymbolNotFound ? webkit_web_view_session_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class WebViewSessionState : gobject.boxed.Boxed
   this(glib.bytes.Bytes data)
   {
     WebKitWebViewSessionState* _cretval;
-    _cretval = webkit_web_view_session_state_new(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+    _cretval = webkit_web_view_session_state_new(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -67,7 +67,7 @@ class WebViewSessionState : gobject.boxed.Boxed
   glib.bytes.Bytes serialize()
   {
     GBytes* _cretval;
-    _cretval = webkit_web_view_session_state_serialize(cast(WebKitWebViewSessionState*)cPtr);
+    _cretval = webkit_web_view_session_state_serialize(cast(WebKitWebViewSessionState*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

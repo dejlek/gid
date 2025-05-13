@@ -73,16 +73,16 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_entry_get_type != &gidSymbolNotFound ? gtk_search_entry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -214,7 +214,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
-    _cretval = gtk_search_entry_get_input_hints(cast(GtkSearchEntry*)cPtr);
+    _cretval = gtk_search_entry_get_input_hints(cast(GtkSearchEntry*)this._cPtr);
     gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
@@ -226,7 +226,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
-    _cretval = gtk_search_entry_get_input_purpose(cast(GtkSearchEntry*)cPtr);
+    _cretval = gtk_search_entry_get_input_purpose(cast(GtkSearchEntry*)this._cPtr);
     gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
@@ -238,8 +238,8 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   gtk.widget.Widget getKeyCaptureWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_search_entry_get_key_capture_widget(cast(GtkSearchEntry*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   string getPlaceholderText()
   {
     const(char)* _cretval;
-    _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)cPtr);
+    _cretval = gtk_search_entry_get_placeholder_text(cast(GtkSearchEntry*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -263,7 +263,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   uint getSearchDelay()
   {
     uint _retval;
-    _retval = gtk_search_entry_get_search_delay(cast(GtkSearchEntry*)cPtr);
+    _retval = gtk_search_entry_get_search_delay(cast(GtkSearchEntry*)this._cPtr);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setInputHints(gtk.types.InputHints hints)
   {
-    gtk_search_entry_set_input_hints(cast(GtkSearchEntry*)cPtr, hints);
+    gtk_search_entry_set_input_hints(cast(GtkSearchEntry*)this._cPtr, hints);
   }
 
   /**
@@ -286,7 +286,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setInputPurpose(gtk.types.InputPurpose purpose)
   {
-    gtk_search_entry_set_input_purpose(cast(GtkSearchEntry*)cPtr, purpose);
+    gtk_search_entry_set_input_purpose(cast(GtkSearchEntry*)this._cPtr, purpose);
   }
 
   /**
@@ -313,7 +313,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setKeyCaptureWidget(gtk.widget.Widget widget = null)
   {
-    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_search_entry_set_key_capture_widget(cast(GtkSearchEntry*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -325,7 +325,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   void setPlaceholderText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)cPtr, _text);
+    gtk_search_entry_set_placeholder_text(cast(GtkSearchEntry*)this._cPtr, _text);
   }
 
   /**
@@ -337,7 +337,7 @@ class SearchEntry : gtk.widget.Widget, gtk.editable.Editable
   */
   void setSearchDelay(uint delay)
   {
-    gtk_search_entry_set_search_delay(cast(GtkSearchEntry*)cPtr, delay);
+    gtk_search_entry_set_search_delay(cast(GtkSearchEntry*)this._cPtr, delay);
   }
 
   /**

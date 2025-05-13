@@ -50,22 +50,22 @@ class GlyphItem : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_get_type != &gidSymbolNotFound ? pango_glyph_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property pango.item.Item item()
   {
-    return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
+    return cToD!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).item);
   }
 
   /**
@@ -90,8 +90,8 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property void item(pango.item.Item propval)
   {
-    cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)cPtr).item);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).item);
+    cValueFree!(pango.item.Item)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).item);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).item);
   }
 
   /**
@@ -100,7 +100,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property pango.glyph_string.GlyphString glyphs()
   {
-    return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
+    return cToD!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
   }
 
   /**
@@ -110,8 +110,8 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property void glyphs(pango.glyph_string.GlyphString propval)
   {
-    cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)cPtr).glyphs);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)cPtr).glyphs);
+    cValueFree!(pango.glyph_string.GlyphString)(cast(void*)(cast(PangoGlyphItem*)this._cPtr).glyphs);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItem*)this._cPtr).glyphs);
   }
 
   /**
@@ -121,7 +121,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property int yOffset()
   {
-    return (cast(PangoGlyphItem*)cPtr).yOffset;
+    return (cast(PangoGlyphItem*)this._cPtr).yOffset;
   }
 
   /**
@@ -132,7 +132,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property void yOffset(int propval)
   {
-    (cast(PangoGlyphItem*)cPtr).yOffset = propval;
+    (cast(PangoGlyphItem*)this._cPtr).yOffset = propval;
   }
 
   /**
@@ -142,7 +142,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property int startXOffset()
   {
-    return (cast(PangoGlyphItem*)cPtr).startXOffset;
+    return (cast(PangoGlyphItem*)this._cPtr).startXOffset;
   }
 
   /**
@@ -153,7 +153,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property void startXOffset(int propval)
   {
-    (cast(PangoGlyphItem*)cPtr).startXOffset = propval;
+    (cast(PangoGlyphItem*)this._cPtr).startXOffset = propval;
   }
 
   /**
@@ -163,7 +163,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property int endXOffset()
   {
-    return (cast(PangoGlyphItem*)cPtr).endXOffset;
+    return (cast(PangoGlyphItem*)this._cPtr).endXOffset;
   }
 
   /**
@@ -174,7 +174,7 @@ class GlyphItem : gobject.boxed.Boxed
   */
   @property void endXOffset(int propval)
   {
-    (cast(PangoGlyphItem*)cPtr).endXOffset = propval;
+    (cast(PangoGlyphItem*)this._cPtr).endXOffset = propval;
   }
 
   /**
@@ -208,7 +208,7 @@ class GlyphItem : gobject.boxed.Boxed
   {
     GSList* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
-    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)cPtr, _text, list ? cast(PangoAttrList*)list.cPtr(No.Dup) : null);
+    _cretval = pango_glyph_item_apply_attrs(cast(PangoGlyphItem*)this._cPtr, _text, list ? cast(PangoAttrList*)list._cPtr(No.Dup) : null);
     auto _retval = gSListToD!(pango.glyph_item.GlyphItem, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -220,7 +220,7 @@ class GlyphItem : gobject.boxed.Boxed
   pango.glyph_item.GlyphItem copy()
   {
     PangoGlyphItem* _cretval;
-    _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)cPtr);
+    _cretval = pango_glyph_item_copy(cast(PangoGlyphItem*)this._cPtr);
     auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -250,7 +250,7 @@ class GlyphItem : gobject.boxed.Boxed
   {
     PangoGlyphItem* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
-    _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)cPtr, _text, splitIndex);
+    _cretval = pango_glyph_item_split(cast(PangoGlyphItem*)this._cPtr, _text, splitIndex);
     auto _retval = _cretval ? new pango.glyph_item.GlyphItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

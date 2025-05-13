@@ -42,16 +42,16 @@ class Video : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_video_get_type != &gidSymbolNotFound ? gtk_video_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -176,8 +176,8 @@ class Video : gtk.widget.Widget
   static gtk.video.Video newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_video_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class Video : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_video_new_for_filename(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -210,8 +210,8 @@ class Video : gtk.widget.Widget
   static gtk.video.Video newForMediaStream(gtk.media_stream.MediaStream stream = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_video_new_for_media_stream(stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Video : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_video_new_for_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.video.Video)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Video : gtk.widget.Widget
   bool getAutoplay()
   {
     bool _retval;
-    _retval = gtk_video_get_autoplay(cast(GtkVideo*)cPtr);
+    _retval = gtk_video_get_autoplay(cast(GtkVideo*)this._cPtr);
     return _retval;
   }
 
@@ -253,8 +253,8 @@ class Video : gtk.widget.Widget
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_video_get_file(cast(GtkVideo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_video_get_file(cast(GtkVideo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class Video : gtk.widget.Widget
   gtk.types.GraphicsOffloadEnabled getGraphicsOffload()
   {
     GtkGraphicsOffloadEnabled _cretval;
-    _cretval = gtk_video_get_graphics_offload(cast(GtkVideo*)cPtr);
+    _cretval = gtk_video_get_graphics_offload(cast(GtkVideo*)this._cPtr);
     gtk.types.GraphicsOffloadEnabled _retval = cast(gtk.types.GraphicsOffloadEnabled)_cretval;
     return _retval;
   }
@@ -279,7 +279,7 @@ class Video : gtk.widget.Widget
   bool getLoop()
   {
     bool _retval;
-    _retval = gtk_video_get_loop(cast(GtkVideo*)cPtr);
+    _retval = gtk_video_get_loop(cast(GtkVideo*)this._cPtr);
     return _retval;
   }
 
@@ -290,8 +290,8 @@ class Video : gtk.widget.Widget
   gtk.media_stream.MediaStream getMediaStream()
   {
     GtkMediaStream* _cretval;
-    _cretval = gtk_video_get_media_stream(cast(GtkVideo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
+    _cretval = gtk_video_get_media_stream(cast(GtkVideo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.media_stream.MediaStream)(cast(GtkMediaStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Video : gtk.widget.Widget
   */
   void setAutoplay(bool autoplay)
   {
-    gtk_video_set_autoplay(cast(GtkVideo*)cPtr, autoplay);
+    gtk_video_set_autoplay(cast(GtkVideo*)this._cPtr, autoplay);
   }
 
   /**
@@ -315,7 +315,7 @@ class Video : gtk.widget.Widget
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_video_set_file(cast(GtkVideo*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    gtk_video_set_file(cast(GtkVideo*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -329,7 +329,7 @@ class Video : gtk.widget.Widget
   void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_video_set_filename(cast(GtkVideo*)cPtr, _filename);
+    gtk_video_set_filename(cast(GtkVideo*)this._cPtr, _filename);
   }
 
   /**
@@ -342,7 +342,7 @@ class Video : gtk.widget.Widget
   */
   void setGraphicsOffload(gtk.types.GraphicsOffloadEnabled enabled)
   {
-    gtk_video_set_graphics_offload(cast(GtkVideo*)cPtr, enabled);
+    gtk_video_set_graphics_offload(cast(GtkVideo*)this._cPtr, enabled);
   }
 
   /**
@@ -353,7 +353,7 @@ class Video : gtk.widget.Widget
   */
   void setLoop(bool loop)
   {
-    gtk_video_set_loop(cast(GtkVideo*)cPtr, loop);
+    gtk_video_set_loop(cast(GtkVideo*)this._cPtr, loop);
   }
 
   /**
@@ -371,7 +371,7 @@ class Video : gtk.widget.Widget
   */
   void setMediaStream(gtk.media_stream.MediaStream stream = null)
   {
-    gtk_video_set_media_stream(cast(GtkVideo*)cPtr, stream ? cast(GtkMediaStream*)stream.cPtr(No.Dup) : null);
+    gtk_video_set_media_stream(cast(GtkVideo*)this._cPtr, stream ? cast(GtkMediaStream*)stream._cPtr(No.Dup) : null);
   }
 
   /**
@@ -385,6 +385,6 @@ class Video : gtk.widget.Widget
   void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    gtk_video_set_resource(cast(GtkVideo*)cPtr, _resourcePath);
+    gtk_video_set_resource(cast(GtkVideo*)this._cPtr, _resourcePath);
   }
 }

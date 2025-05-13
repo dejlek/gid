@@ -26,7 +26,7 @@ class TokenValue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class TokenValue
   */
   @property string vIdentifier()
   {
-    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
   }
 
   /**
@@ -47,8 +47,8 @@ class TokenValue
   */
   @property void vIdentifier(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vIdentifier);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vIdentifier);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vIdentifier);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vIdentifier);
   }
 
   /**
@@ -57,7 +57,7 @@ class TokenValue
   */
   @property gulong vBinary()
   {
-    return (cast(GTokenValue*)cPtr).vBinary;
+    return (cast(GTokenValue*)this._cPtr).vBinary;
   }
 
   /**
@@ -67,7 +67,7 @@ class TokenValue
   */
   @property void vBinary(gulong propval)
   {
-    (cast(GTokenValue*)cPtr).vBinary = propval;
+    (cast(GTokenValue*)this._cPtr).vBinary = propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class TokenValue
   */
   @property gulong vOctal()
   {
-    return (cast(GTokenValue*)cPtr).vOctal;
+    return (cast(GTokenValue*)this._cPtr).vOctal;
   }
 
   /**
@@ -86,7 +86,7 @@ class TokenValue
   */
   @property void vOctal(gulong propval)
   {
-    (cast(GTokenValue*)cPtr).vOctal = propval;
+    (cast(GTokenValue*)this._cPtr).vOctal = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class TokenValue
   */
   @property gulong vInt()
   {
-    return (cast(GTokenValue*)cPtr).vInt;
+    return (cast(GTokenValue*)this._cPtr).vInt;
   }
 
   /**
@@ -105,7 +105,7 @@ class TokenValue
   */
   @property void vInt(gulong propval)
   {
-    (cast(GTokenValue*)cPtr).vInt = propval;
+    (cast(GTokenValue*)this._cPtr).vInt = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class TokenValue
   */
   @property ulong vInt64()
   {
-    return (cast(GTokenValue*)cPtr).vInt64;
+    return (cast(GTokenValue*)this._cPtr).vInt64;
   }
 
   /**
@@ -124,7 +124,7 @@ class TokenValue
   */
   @property void vInt64(ulong propval)
   {
-    (cast(GTokenValue*)cPtr).vInt64 = propval;
+    (cast(GTokenValue*)this._cPtr).vInt64 = propval;
   }
 
   /**
@@ -133,7 +133,7 @@ class TokenValue
   */
   @property double vFloat()
   {
-    return (cast(GTokenValue*)cPtr).vFloat;
+    return (cast(GTokenValue*)this._cPtr).vFloat;
   }
 
   /**
@@ -143,7 +143,7 @@ class TokenValue
   */
   @property void vFloat(double propval)
   {
-    (cast(GTokenValue*)cPtr).vFloat = propval;
+    (cast(GTokenValue*)this._cPtr).vFloat = propval;
   }
 
   /**
@@ -152,7 +152,7 @@ class TokenValue
   */
   @property gulong vHex()
   {
-    return (cast(GTokenValue*)cPtr).vHex;
+    return (cast(GTokenValue*)this._cPtr).vHex;
   }
 
   /**
@@ -162,7 +162,7 @@ class TokenValue
   */
   @property void vHex(gulong propval)
   {
-    (cast(GTokenValue*)cPtr).vHex = propval;
+    (cast(GTokenValue*)this._cPtr).vHex = propval;
   }
 
   /**
@@ -171,7 +171,7 @@ class TokenValue
   */
   @property string vString()
   {
-    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vString);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
   }
 
   /**
@@ -181,8 +181,8 @@ class TokenValue
   */
   @property void vString(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vString);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vString);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vString);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vString);
   }
 
   /**
@@ -191,7 +191,7 @@ class TokenValue
   */
   @property string vComment()
   {
-    return cToD!(string)(cast(void*)(cast(GTokenValue*)cPtr).vComment);
+    return cToD!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
   }
 
   /**
@@ -201,8 +201,8 @@ class TokenValue
   */
   @property void vComment(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTokenValue*)cPtr).vComment);
-    dToC(propval, cast(void*)&(cast(GTokenValue*)cPtr).vComment);
+    cValueFree!(string)(cast(void*)(cast(GTokenValue*)this._cPtr).vComment);
+    dToC(propval, cast(void*)&(cast(GTokenValue*)this._cPtr).vComment);
   }
 
   /**
@@ -211,7 +211,7 @@ class TokenValue
   */
   @property ubyte vChar()
   {
-    return (cast(GTokenValue*)cPtr).vChar;
+    return (cast(GTokenValue*)this._cPtr).vChar;
   }
 
   /**
@@ -221,7 +221,7 @@ class TokenValue
   */
   @property void vChar(ubyte propval)
   {
-    (cast(GTokenValue*)cPtr).vChar = propval;
+    (cast(GTokenValue*)this._cPtr).vChar = propval;
   }
 
   /**
@@ -230,7 +230,7 @@ class TokenValue
   */
   @property uint vError()
   {
-    return (cast(GTokenValue*)cPtr).vError;
+    return (cast(GTokenValue*)this._cPtr).vError;
   }
 
   /**
@@ -240,6 +240,6 @@ class TokenValue
   */
   @property void vError(uint propval)
   {
-    (cast(GTokenValue*)cPtr).vError = propval;
+    (cast(GTokenValue*)this._cPtr).vError = propval;
   }
 }

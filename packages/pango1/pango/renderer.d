@@ -32,16 +32,16 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_renderer_get_type != &gidSymbolNotFound ? pango_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void activate()
   {
-    pango_renderer_activate(cast(PangoRenderer*)cPtr);
+    pango_renderer_activate(cast(PangoRenderer*)this._cPtr);
   }
 
   /**
@@ -73,7 +73,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void deactivate()
   {
-    pango_renderer_deactivate(cast(PangoRenderer*)cPtr);
+    pango_renderer_deactivate(cast(PangoRenderer*)this._cPtr);
   }
 
   /**
@@ -95,7 +95,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawErrorUnderline(int x, int y, int width, int height)
   {
-    pango_renderer_draw_error_underline(cast(PangoRenderer*)cPtr, x, y, width, height);
+    pango_renderer_draw_error_underline(cast(PangoRenderer*)this._cPtr, x, y, width, height);
   }
 
   /**
@@ -109,7 +109,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawGlyph(pango.font.Font font, pango.types.Glyph glyph, double x, double y)
   {
-    pango_renderer_draw_glyph(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyph, x, y);
+    pango_renderer_draw_glyph(cast(PangoRenderer*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyph, x, y);
   }
 
   /**
@@ -143,7 +143,7 @@ class Renderer : gobject.object.ObjectWrap
   void drawGlyphItem(string text, pango.glyph_item.GlyphItem glyphItem, int x, int y)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    pango_renderer_draw_glyph_item(cast(PangoRenderer*)cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, x, y);
+    pango_renderer_draw_glyph_item(cast(PangoRenderer*)this._cPtr, _text, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -159,7 +159,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawGlyphs(pango.font.Font font, pango.glyph_string.GlyphString glyphs, int x, int y)
   {
-    pango_renderer_draw_glyphs(cast(PangoRenderer*)cPtr, font ? cast(PangoFont*)font.cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, x, y);
+    pango_renderer_draw_glyphs(cast(PangoRenderer*)this._cPtr, font ? cast(PangoFont*)font._cPtr(No.Dup) : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -177,7 +177,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawLayout(pango.layout.Layout layout, int x, int y)
   {
-    pango_renderer_draw_layout(cast(PangoRenderer*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, x, y);
+    pango_renderer_draw_layout(cast(PangoRenderer*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -196,7 +196,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawLayoutLine(pango.layout_line.LayoutLine line, int x, int y)
   {
-    pango_renderer_draw_layout_line(cast(PangoRenderer*)cPtr, line ? cast(PangoLayoutLine*)line.cPtr(No.Dup) : null, x, y);
+    pango_renderer_draw_layout_line(cast(PangoRenderer*)this._cPtr, line ? cast(PangoLayoutLine*)line._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -217,7 +217,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawRectangle(pango.types.RenderPart part, int x, int y, int width, int height)
   {
-    pango_renderer_draw_rectangle(cast(PangoRenderer*)cPtr, part, x, y, width, height);
+    pango_renderer_draw_rectangle(cast(PangoRenderer*)this._cPtr, part, x, y, width, height);
   }
 
   /**
@@ -235,7 +235,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void drawTrapezoid(pango.types.RenderPart part, double y1, double x11, double x21, double y2, double x12, double x22)
   {
-    pango_renderer_draw_trapezoid(cast(PangoRenderer*)cPtr, part, y1, x11, x21, y2, x12, x22);
+    pango_renderer_draw_trapezoid(cast(PangoRenderer*)this._cPtr, part, y1, x11, x21, y2, x12, x22);
   }
 
   /**
@@ -250,7 +250,7 @@ class Renderer : gobject.object.ObjectWrap
   ushort getAlpha(pango.types.RenderPart part)
   {
     ushort _retval;
-    _retval = pango_renderer_get_alpha(cast(PangoRenderer*)cPtr, part);
+    _retval = pango_renderer_get_alpha(cast(PangoRenderer*)this._cPtr, part);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Renderer : gobject.object.ObjectWrap
   pango.color.Color getColor(pango.types.RenderPart part)
   {
     PangoColor* _cretval;
-    _cretval = pango_renderer_get_color(cast(PangoRenderer*)cPtr, part);
+    _cretval = pango_renderer_get_color(cast(PangoRenderer*)this._cPtr, part);
     auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -285,8 +285,8 @@ class Renderer : gobject.object.ObjectWrap
   pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
-    _cretval = pango_renderer_get_layout(cast(PangoRenderer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    _cretval = pango_renderer_get_layout(cast(PangoRenderer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Renderer : gobject.object.ObjectWrap
   pango.layout_line.LayoutLine getLayoutLine()
   {
     PangoLayoutLine* _cretval;
-    _cretval = pango_renderer_get_layout_line(cast(PangoRenderer*)cPtr);
+    _cretval = pango_renderer_get_layout_line(cast(PangoRenderer*)this._cPtr);
     auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -321,7 +321,7 @@ class Renderer : gobject.object.ObjectWrap
   pango.matrix.Matrix getMatrix()
   {
     const(PangoMatrix)* _cretval;
-    _cretval = pango_renderer_get_matrix(cast(PangoRenderer*)cPtr);
+    _cretval = pango_renderer_get_matrix(cast(PangoRenderer*)this._cPtr);
     auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -348,7 +348,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void partChanged(pango.types.RenderPart part)
   {
-    pango_renderer_part_changed(cast(PangoRenderer*)cPtr, part);
+    pango_renderer_part_changed(cast(PangoRenderer*)this._cPtr, part);
   }
 
   /**
@@ -363,7 +363,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void setAlpha(pango.types.RenderPart part, ushort alpha)
   {
-    pango_renderer_set_alpha(cast(PangoRenderer*)cPtr, part, alpha);
+    pango_renderer_set_alpha(cast(PangoRenderer*)this._cPtr, part, alpha);
   }
 
   /**
@@ -377,7 +377,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void setColor(pango.types.RenderPart part, pango.color.Color color = null)
   {
-    pango_renderer_set_color(cast(PangoRenderer*)cPtr, part, color ? cast(const(PangoColor)*)color.cPtr(No.Dup) : null);
+    pango_renderer_set_color(cast(PangoRenderer*)this._cPtr, part, color ? cast(const(PangoColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -389,6 +389,6 @@ class Renderer : gobject.object.ObjectWrap
   */
   void setMatrix(pango.matrix.Matrix matrix = null)
   {
-    pango_renderer_set_matrix(cast(PangoRenderer*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
+    pango_renderer_set_matrix(cast(PangoRenderer*)this._cPtr, matrix ? cast(const(PangoMatrix)*)matrix._cPtr(No.Dup) : null);
   }
 }

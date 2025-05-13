@@ -28,7 +28,7 @@ class StaticResource
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class StaticResource
   */
   void fini()
   {
-    g_static_resource_fini(cast(GStaticResource*)cPtr);
+    g_static_resource_fini(cast(GStaticResource*)this._cPtr);
   }
 
   /**
@@ -56,7 +56,7 @@ class StaticResource
   gio.resource.Resource getResource()
   {
     GResource* _cretval;
-    _cretval = g_static_resource_get_resource(cast(GStaticResource*)cPtr);
+    _cretval = g_static_resource_get_resource(cast(GStaticResource*)this._cPtr);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -71,6 +71,6 @@ class StaticResource
   */
   void init_()
   {
-    g_static_resource_init(cast(GStaticResource*)cPtr);
+    g_static_resource_init(cast(GStaticResource*)this._cPtr);
   }
 }

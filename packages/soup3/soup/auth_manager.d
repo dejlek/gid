@@ -40,16 +40,16 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_manager_get_type != &gidSymbolNotFound ? soup_auth_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   */
   void clearCachedCredentials()
   {
-    soup_auth_manager_clear_cached_credentials(cast(SoupAuthManager*)cPtr);
+    soup_auth_manager_clear_cached_credentials(cast(SoupAuthManager*)this._cPtr);
   }
 
   /**
@@ -86,6 +86,6 @@ class AuthManager : gobject.object.ObjectWrap, soup.session_feature.SessionFeatu
   */
   void useAuth(glib.uri.Uri uri, soup.auth.Auth auth)
   {
-    soup_auth_manager_use_auth(cast(SoupAuthManager*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth.cPtr(No.Dup) : null);
+    soup_auth_manager_use_auth(cast(SoupAuthManager*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null, auth ? cast(SoupAuth*)auth._cPtr(No.Dup) : null);
   }
 }

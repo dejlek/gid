@@ -33,22 +33,22 @@ class MessageBody : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_body_get_type != &gidSymbolNotFound ? soup_message_body_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   @property long length()
   {
-    return (cast(SoupMessageBody*)cPtr).length;
+    return (cast(SoupMessageBody*)this._cPtr).length;
   }
 
   /**
@@ -73,7 +73,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   @property void length(long propval)
   {
-    (cast(SoupMessageBody*)cPtr).length = propval;
+    (cast(SoupMessageBody*)this._cPtr).length = propval;
   }
 
   /**
@@ -98,7 +98,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void appendBytes(glib.bytes.Bytes buffer)
   {
-    soup_message_body_append_bytes(cast(SoupMessageBody*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null);
+    soup_message_body_append_bytes(cast(SoupMessageBody*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +108,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void complete()
   {
-    soup_message_body_complete(cast(SoupMessageBody*)cPtr);
+    soup_message_body_complete(cast(SoupMessageBody*)this._cPtr);
   }
 
   /**
@@ -123,7 +123,7 @@ class MessageBody : gobject.boxed.Boxed
   glib.bytes.Bytes flatten()
   {
     GBytes* _cretval;
-    _cretval = soup_message_body_flatten(cast(SoupMessageBody*)cPtr);
+    _cretval = soup_message_body_flatten(cast(SoupMessageBody*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -137,7 +137,7 @@ class MessageBody : gobject.boxed.Boxed
   bool getAccumulate()
   {
     bool _retval;
-    _retval = soup_message_body_get_accumulate(cast(SoupMessageBody*)cPtr);
+    _retval = soup_message_body_get_accumulate(cast(SoupMessageBody*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class MessageBody : gobject.boxed.Boxed
   glib.bytes.Bytes getChunk(long offset)
   {
     GBytes* _cretval;
-    _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)cPtr, offset);
+    _cretval = soup_message_body_get_chunk(cast(SoupMessageBody*)this._cPtr, offset);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -187,7 +187,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void gotChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_got_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
+    soup_message_body_got_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }
 
   /**
@@ -210,7 +210,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void setAccumulate(bool accumulate)
   {
-    soup_message_body_set_accumulate(cast(SoupMessageBody*)cPtr, accumulate);
+    soup_message_body_set_accumulate(cast(SoupMessageBody*)this._cPtr, accumulate);
   }
 
   /**
@@ -218,7 +218,7 @@ class MessageBody : gobject.boxed.Boxed
   */
   void truncate()
   {
-    soup_message_body_truncate(cast(SoupMessageBody*)cPtr);
+    soup_message_body_truncate(cast(SoupMessageBody*)this._cPtr);
   }
 
   /**
@@ -237,6 +237,6 @@ class MessageBody : gobject.boxed.Boxed
   */
   void wroteChunk(glib.bytes.Bytes chunk)
   {
-    soup_message_body_wrote_chunk(cast(SoupMessageBody*)cPtr, chunk ? cast(GBytes*)chunk.cPtr(No.Dup) : null);
+    soup_message_body_wrote_chunk(cast(SoupMessageBody*)this._cPtr, chunk ? cast(GBytes*)chunk._cPtr(No.Dup) : null);
   }
 }

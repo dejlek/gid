@@ -111,16 +111,16 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_manager_client_get_type != &gidSymbolNotFound ? g_dbus_object_manager_client_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -158,10 +158,10 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     GDBusObjectManager* _cretval;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -179,10 +179,10 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   {
     GDBusObjectManager* _cretval;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_for_bus_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res).cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_for_bus_finish(res ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)res)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
@@ -225,10 +225,10 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_for_bus_sync(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
@@ -270,10 +270,10 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     GError *_err;
-    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_object_manager_client_new_sync(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(GDBusObjectManager*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -304,17 +304,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -323,7 +323,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_dbus_object_manager_client_new(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_dbus_object_manager_client_new(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -354,17 +354,17 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
       string _objectPath = objectPath.fromCString(No.Free);
       string _interfaceName = interfaceName.fromCString(No.Free);
 
-      GType _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
+      GType _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.dbus_object_manager_client.DBusObjectManagerClient)(cast(void*)manager, No.Take), _objectPath, _interfaceName);
       return _retval;
     }
     auto _getProxyTypeFuncCB = getProxyTypeFunc ? &_getProxyTypeFuncCallback : null;
 
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -373,7 +373,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
     auto _getProxyTypeFunc = getProxyTypeFunc ? freezeDelegate(cast(void*)&getProxyTypeFunc) : null;
     GDestroyNotify _getProxyTypeFuncDestroyCB = getProxyTypeFunc ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_dbus_object_manager_client_new_for_bus(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_dbus_object_manager_client_new_for_bus(busType, flags, _name, _objectPath, _getProxyTypeFuncCB, _getProxyTypeFunc, _getProxyTypeFuncDestroyCB, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -384,8 +384,8 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   gio.dbus_connection.DBusConnection getConnection()
   {
     GDBusConnection* _cretval;
-    _cretval = g_dbus_object_manager_client_get_connection(cast(GDBusObjectManagerClient*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
+    _cretval = g_dbus_object_manager_client_get_connection(cast(GDBusObjectManagerClient*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_connection.DBusConnection)(cast(GDBusConnection*)_cretval, No.Take);
     return _retval;
   }
 
@@ -397,7 +397,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   gio.types.DBusObjectManagerClientFlags getFlags()
   {
     GDBusObjectManagerClientFlags _cretval;
-    _cretval = g_dbus_object_manager_client_get_flags(cast(GDBusObjectManagerClient*)cPtr);
+    _cretval = g_dbus_object_manager_client_get_flags(cast(GDBusObjectManagerClient*)this._cPtr);
     gio.types.DBusObjectManagerClientFlags _retval = cast(gio.types.DBusObjectManagerClientFlags)_cretval;
     return _retval;
   }
@@ -411,7 +411,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_object_manager_client_get_name(cast(GDBusObjectManagerClient*)cPtr);
+    _cretval = g_dbus_object_manager_client_get_name(cast(GDBusObjectManagerClient*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -427,7 +427,7 @@ class DBusObjectManagerClient : gobject.object.ObjectWrap, gio.async_initable.As
   string getNameOwner()
   {
     char* _cretval;
-    _cretval = g_dbus_object_manager_client_get_name_owner(cast(GDBusObjectManagerClient*)cPtr);
+    _cretval = g_dbus_object_manager_client_get_name_owner(cast(GDBusObjectManagerClient*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

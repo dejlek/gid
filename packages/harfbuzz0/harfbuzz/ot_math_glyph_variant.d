@@ -33,22 +33,22 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_ot_math_glyph_variant_get_type != &gidSymbolNotFound ? hb_gobject_ot_math_glyph_variant_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Codepoint glyph()
   {
-    return (cast(hb_ot_math_glyph_variant_t*)cPtr).glyph;
+    return (cast(hb_ot_math_glyph_variant_t*)this._cPtr).glyph;
   }
 
   /**
@@ -73,7 +73,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
   */
   @property void glyph(harfbuzz.types.Codepoint propval)
   {
-    (cast(hb_ot_math_glyph_variant_t*)cPtr).glyph = propval;
+    (cast(hb_ot_math_glyph_variant_t*)this._cPtr).glyph = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position advance()
   {
-    return (cast(hb_ot_math_glyph_variant_t*)cPtr).advance;
+    return (cast(hb_ot_math_glyph_variant_t*)this._cPtr).advance;
   }
 
   /**
@@ -92,6 +92,6 @@ class OtMathGlyphVariant : gobject.boxed.Boxed
   */
   @property void advance(harfbuzz.types.Position propval)
   {
-    (cast(hb_ot_math_glyph_variant_t*)cPtr).advance = propval;
+    (cast(hb_ot_math_glyph_variant_t*)this._cPtr).advance = propval;
   }
 }

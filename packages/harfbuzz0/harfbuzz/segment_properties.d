@@ -37,22 +37,22 @@ class SegmentProperties : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_segment_properties_get_type != &gidSymbolNotFound ? hb_gobject_segment_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Direction direction()
   {
-    return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)cPtr).direction;
+    return cast(harfbuzz.types.Direction)(cast(hb_segment_properties_t*)this._cPtr).direction;
   }
 
   /**
@@ -77,7 +77,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property void direction(harfbuzz.types.Direction propval)
   {
-    (cast(hb_segment_properties_t*)cPtr).direction = cast(hb_direction_t)propval;
+    (cast(hb_segment_properties_t*)this._cPtr).direction = cast(hb_direction_t)propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Script script()
   {
-    return cast(harfbuzz.types.Script)(cast(hb_segment_properties_t*)cPtr).script;
+    return cast(harfbuzz.types.Script)(cast(hb_segment_properties_t*)this._cPtr).script;
   }
 
   /**
@@ -96,7 +96,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property void script(harfbuzz.types.Script propval)
   {
-    (cast(hb_segment_properties_t*)cPtr).script = cast(hb_script_t)propval;
+    (cast(hb_segment_properties_t*)this._cPtr).script = cast(hb_script_t)propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Language language()
   {
-    return (cast(hb_segment_properties_t*)cPtr).language;
+    return (cast(hb_segment_properties_t*)this._cPtr).language;
   }
 
   /**
@@ -115,6 +115,6 @@ class SegmentProperties : gobject.boxed.Boxed
   */
   @property void language(harfbuzz.types.Language propval)
   {
-    (cast(hb_segment_properties_t*)cPtr).language = propval;
+    (cast(hb_segment_properties_t*)this._cPtr).language = propval;
   }
 }

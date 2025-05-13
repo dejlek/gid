@@ -55,16 +55,16 @@ class LinkButton : gtk.button.Button
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_link_button_get_type != &gidSymbolNotFound ? gtk_link_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -144,7 +144,7 @@ class LinkButton : gtk.button.Button
     const(char)* _uri = uri.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_link_button_new_with_label(_uri, _label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.link_button.LinkButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class LinkButton : gtk.button.Button
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)cPtr);
+    _cretval = gtk_link_button_get_uri(cast(GtkLinkButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -173,7 +173,7 @@ class LinkButton : gtk.button.Button
   bool getVisited()
   {
     bool _retval;
-    _retval = gtk_link_button_get_visited(cast(GtkLinkButton*)cPtr);
+    _retval = gtk_link_button_get_visited(cast(GtkLinkButton*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class LinkButton : gtk.button.Button
   void setUri(string uri)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
-    gtk_link_button_set_uri(cast(GtkLinkButton*)cPtr, _uri);
+    gtk_link_button_set_uri(cast(GtkLinkButton*)this._cPtr, _uri);
   }
 
   /**
@@ -201,7 +201,7 @@ class LinkButton : gtk.button.Button
   */
   void setVisited(bool visited)
   {
-    gtk_link_button_set_visited(cast(GtkLinkButton*)cPtr, visited);
+    gtk_link_button_set_visited(cast(GtkLinkButton*)this._cPtr, visited);
   }
 
   /**

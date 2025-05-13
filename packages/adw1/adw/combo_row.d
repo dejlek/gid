@@ -78,16 +78,16 @@ class ComboRow : adw.action_row.ActionRow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_combo_row_get_type != &gidSymbolNotFound ? adw_combo_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -315,7 +315,7 @@ class ComboRow : adw.action_row.ActionRow
   bool getEnableSearch()
   {
     bool _retval;
-    _retval = adw_combo_row_get_enable_search(cast(AdwComboRow*)cPtr);
+    _retval = adw_combo_row_get_enable_search(cast(AdwComboRow*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class ComboRow : adw.action_row.ActionRow
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = adw_combo_row_get_expression(cast(AdwComboRow*)cPtr);
+    _cretval = adw_combo_row_get_expression(cast(AdwComboRow*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -338,8 +338,8 @@ class ComboRow : adw.action_row.ActionRow
   gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = adw_combo_row_get_factory(cast(AdwComboRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = adw_combo_row_get_factory(cast(AdwComboRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -350,8 +350,8 @@ class ComboRow : adw.action_row.ActionRow
   gtk.list_item_factory.ListItemFactory getListFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = adw_combo_row_get_list_factory(cast(AdwComboRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = adw_combo_row_get_list_factory(cast(AdwComboRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -362,8 +362,8 @@ class ComboRow : adw.action_row.ActionRow
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = adw_combo_row_get_model(cast(AdwComboRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = adw_combo_row_get_model(cast(AdwComboRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class ComboRow : adw.action_row.ActionRow
   uint getSelected()
   {
     uint _retval;
-    _retval = adw_combo_row_get_selected(cast(AdwComboRow*)cPtr);
+    _retval = adw_combo_row_get_selected(cast(AdwComboRow*)this._cPtr);
     return _retval;
   }
 
@@ -385,9 +385,9 @@ class ComboRow : adw.action_row.ActionRow
   */
   gobject.object.ObjectWrap getSelectedItem()
   {
-    ObjectC* _cretval;
-    _cretval = adw_combo_row_get_selected_item(cast(AdwComboRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = adw_combo_row_get_selected_item(cast(AdwComboRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class ComboRow : adw.action_row.ActionRow
   bool getUseSubtitle()
   {
     bool _retval;
-    _retval = adw_combo_row_get_use_subtitle(cast(AdwComboRow*)cPtr);
+    _retval = adw_combo_row_get_use_subtitle(cast(AdwComboRow*)this._cPtr);
     return _retval;
   }
 
@@ -415,7 +415,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setEnableSearch(bool enableSearch)
   {
-    adw_combo_row_set_enable_search(cast(AdwComboRow*)cPtr, enableSearch);
+    adw_combo_row_set_enable_search(cast(AdwComboRow*)this._cPtr, enableSearch);
   }
 
   /**
@@ -432,7 +432,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    adw_combo_row_set_expression(cast(AdwComboRow*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    adw_combo_row_set_expression(cast(AdwComboRow*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -446,7 +446,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    adw_combo_row_set_factory(cast(AdwComboRow*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    adw_combo_row_set_factory(cast(AdwComboRow*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -459,7 +459,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    adw_combo_row_set_list_factory(cast(AdwComboRow*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    adw_combo_row_set_list_factory(cast(AdwComboRow*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -470,7 +470,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    adw_combo_row_set_model(cast(AdwComboRow*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    adw_combo_row_set_model(cast(AdwComboRow*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -482,7 +482,7 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setSelected(uint position)
   {
-    adw_combo_row_set_selected(cast(AdwComboRow*)cPtr, position);
+    adw_combo_row_set_selected(cast(AdwComboRow*)this._cPtr, position);
   }
 
   /**
@@ -501,6 +501,6 @@ class ComboRow : adw.action_row.ActionRow
   */
   void setUseSubtitle(bool useSubtitle)
   {
-    adw_combo_row_set_use_subtitle(cast(AdwComboRow*)cPtr, useSubtitle);
+    adw_combo_row_set_use_subtitle(cast(AdwComboRow*)this._cPtr, useSubtitle);
   }
 }

@@ -28,7 +28,7 @@ import gstbase.types;
 gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper(src ? cast(GstPad*)src.cPtr(No.Dup) : null, size);
+  _cretval = gst_type_find_helper(src ? cast(GstPad*)src._cPtr(No.Dup) : null, size);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -59,7 +59,7 @@ gst.caps.Caps typeFindHelper(gst.pad.Pad src, ulong size)
 gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, out gst.types.TypeFindProbability prob)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper_for_buffer(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, &prob);
+  _cretval = gst_type_find_helper_for_buffer(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -92,7 +92,7 @@ gst.caps.Caps typeFindHelperForBuffer(gst.object.ObjectWrap obj, gst.buffer.Buff
 gst.caps.Caps typeFindHelperForBufferWithCaps(gst.object.ObjectWrap obj, gst.buffer.Buffer buf, gst.caps.Caps caps, out gst.types.TypeFindProbability prob)
 {
   GstCaps* _cretval;
-  _cretval = gst_type_find_helper_for_buffer_with_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, &prob);
+  _cretval = gst_type_find_helper_for_buffer_with_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -129,7 +129,7 @@ gst.caps.Caps typeFindHelperForBufferWithExtension(gst.object.ObjectWrap obj, gs
 {
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_buffer_with_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, _extension, &prob);
+  _cretval = gst_type_find_helper_for_buffer_with_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, _extension, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -167,7 +167,7 @@ gst.caps.Caps typeFindHelperForData(gst.object.ObjectWrap obj, ubyte[] data, out
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  _cretval = gst_type_find_helper_for_data(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, &prob);
+  _cretval = gst_type_find_helper_for_data(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -201,7 +201,7 @@ gst.caps.Caps typeFindHelperForDataWithCaps(gst.object.ObjectWrap obj, ubyte[] d
     _size = cast(size_t)data.length;
 
   auto _data = cast(const(ubyte)*)data.ptr;
-  _cretval = gst_type_find_helper_for_data_with_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, &prob);
+  _cretval = gst_type_find_helper_for_data_with_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -245,7 +245,7 @@ gst.caps.Caps typeFindHelperForDataWithExtension(gst.object.ObjectWrap obj, ubyt
 
   auto _data = cast(const(ubyte)*)data.ptr;
   const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _data, _size, _extension, &prob);
+  _cretval = gst_type_find_helper_for_data_with_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _data, _size, _extension, &prob);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -270,7 +270,7 @@ gst.caps.Caps typeFindHelperForExtension(gst.object.ObjectWrap obj, string exten
 {
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_for_extension(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, _extension);
+  _cretval = gst_type_find_helper_for_extension(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, _extension);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -312,9 +312,9 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
     gst.types.FlowReturn _dretval;
     auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-    _dretval = _static_func(gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
     auto _retval = cast(GstFlowReturn)_dretval;
-    *buffer = *cast(GstBuffer**)_buffer.cPtr;
+    *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
     return _retval;
   }
@@ -323,7 +323,7 @@ gst.caps.Caps typeFindHelperGetRange(gst.object.ObjectWrap obj, gst.object.Objec
   _static_func = func;
   GstCaps* _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
-  _cretval = gst_type_find_helper_get_range(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, _funcCB, size, _extension, &prob);
+  _cretval = gst_type_find_helper_get_range(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, _funcCB, size, _extension, &prob);
   _static_func = null;
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
@@ -365,9 +365,9 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
     gst.types.FlowReturn _dretval;
     auto _buffer = new gst.buffer.Buffer(buffer, No.Take);
 
-    _dretval = _static_func(gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
+    _dretval = _static_func(gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)obj, No.Take), gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(void*)parent, No.Take), offset, length, _buffer);
     auto _retval = cast(GstFlowReturn)_dretval;
-    *buffer = *cast(GstBuffer**)_buffer.cPtr;
+    *buffer = *cast(GstBuffer**)_buffer._cPtr;
 
     return _retval;
   }
@@ -377,7 +377,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
   GstFlowReturn _cretval;
   const(char)* _extension = extension.toCString(No.Alloc);
   GstCaps* _caps;
-  _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, _funcCB, size, _extension, &_caps, &prob);
+  _cretval = gst_type_find_helper_get_range_full(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, _funcCB, size, _extension, &_caps, &prob);
   _static_func = null;
   gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
   caps = new gst.caps.Caps(cast(void*)_caps, Yes.Take);
@@ -402,7 +402,7 @@ gst.types.FlowReturn typeFindHelperGetRangeFull(gst.object.ObjectWrap obj, gst.o
 gst.type_find_factory.TypeFindFactory[] typeFindListFactoriesForCaps(gst.object.ObjectWrap obj, gst.caps.Caps caps)
 {
   GList* _cretval;
-  _cretval = gst_type_find_list_factories_for_caps(obj ? cast(GstObject*)obj.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+  _cretval = gst_type_find_list_factories_for_caps(obj ? cast(GstObject*)obj._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   auto _retval = gListToD!(gst.type_find_factory.TypeFindFactory, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }

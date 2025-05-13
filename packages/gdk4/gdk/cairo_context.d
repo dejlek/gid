@@ -26,16 +26,16 @@ class CairoContext : gdk.draw_context.DrawContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cairo_context_get_type != &gidSymbolNotFound ? gdk_cairo_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class CairoContext : gdk.draw_context.DrawContext
   cairo.context.Context cairoCreate()
   {
     cairo_t* _cretval;
-    _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)cPtr);
+    _cretval = gdk_cairo_context_cairo_create(cast(GdkCairoContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

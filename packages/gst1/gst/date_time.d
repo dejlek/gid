@@ -28,22 +28,22 @@ class DateTime : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_date_time_get_type != &gidSymbolNotFound ? gst_date_time_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class DateTime : gobject.boxed.Boxed
   static gst.date_time.DateTime newFromGDateTime(glib.date_time.DateTime dt = null)
   {
     GstDateTime* _cretval;
-    _cretval = gst_date_time_new_from_g_date_time(dt ? cast(GDateTime*)dt.cPtr(Yes.Dup) : null);
+    _cretval = gst_date_time_new_from_g_date_time(dt ? cast(GDateTime*)dt._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -332,7 +332,7 @@ class DateTime : gobject.boxed.Boxed
   int getDay()
   {
     int _retval;
-    _retval = gst_date_time_get_day(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_day(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class DateTime : gobject.boxed.Boxed
   int getHour()
   {
     int _retval;
-    _retval = gst_date_time_get_hour(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_hour(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class DateTime : gobject.boxed.Boxed
   int getMicrosecond()
   {
     int _retval;
-    _retval = gst_date_time_get_microsecond(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_microsecond(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class DateTime : gobject.boxed.Boxed
   int getMinute()
   {
     int _retval;
-    _retval = gst_date_time_get_minute(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_minute(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class DateTime : gobject.boxed.Boxed
   int getMonth()
   {
     int _retval;
-    _retval = gst_date_time_get_month(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_month(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class DateTime : gobject.boxed.Boxed
   int getSecond()
   {
     int _retval;
-    _retval = gst_date_time_get_second(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_second(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class DateTime : gobject.boxed.Boxed
   float getTimeZoneOffset()
   {
     float _retval;
-    _retval = gst_date_time_get_time_zone_offset(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_time_zone_offset(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class DateTime : gobject.boxed.Boxed
   int getYear()
   {
     int _retval;
-    _retval = gst_date_time_get_year(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_get_year(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasDay()
   {
     bool _retval;
-    _retval = gst_date_time_has_day(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_has_day(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -433,7 +433,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasMonth()
   {
     bool _retval;
-    _retval = gst_date_time_has_month(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_has_month(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -441,7 +441,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasSecond()
   {
     bool _retval;
-    _retval = gst_date_time_has_second(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_has_second(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasTime()
   {
     bool _retval;
-    _retval = gst_date_time_has_time(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_has_time(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -457,7 +457,7 @@ class DateTime : gobject.boxed.Boxed
   bool hasYear()
   {
     bool _retval;
-    _retval = gst_date_time_has_year(cast(const(GstDateTime)*)cPtr);
+    _retval = gst_date_time_has_year(cast(const(GstDateTime)*)this._cPtr);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class DateTime : gobject.boxed.Boxed
   glib.date_time.DateTime toGDateTime()
   {
     GDateTime* _cretval;
-    _cretval = gst_date_time_to_g_date_time(cast(GstDateTime*)cPtr);
+    _cretval = gst_date_time_to_g_date_time(cast(GstDateTime*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -486,7 +486,7 @@ class DateTime : gobject.boxed.Boxed
   string toIso8601String()
   {
     char* _cretval;
-    _cretval = gst_date_time_to_iso8601_string(cast(GstDateTime*)cPtr);
+    _cretval = gst_date_time_to_iso8601_string(cast(GstDateTime*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

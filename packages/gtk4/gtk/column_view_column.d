@@ -35,16 +35,16 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_column_get_type != &gidSymbolNotFound ? gtk_column_view_column_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -269,7 +269,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   {
     GtkColumnViewColumn* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    _cretval = gtk_column_view_column_new(_title, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -282,8 +282,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   gtk.column_view.ColumnView getColumnView()
   {
     GtkColumnView* _cretval;
-    _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
+    _cretval = gtk_column_view_column_get_column_view(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.column_view.ColumnView)(cast(GtkColumnView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getExpand()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)cPtr);
+    _retval = gtk_column_view_column_get_expand(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -306,8 +306,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_column_view_column_get_factory(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   int getFixedWidth()
   {
     int _retval;
-    _retval = gtk_column_view_column_get_fixed_width(cast(GtkColumnViewColumn*)cPtr);
+    _retval = gtk_column_view_column_get_fixed_width(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -330,8 +330,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   gio.menu_model.MenuModel getHeaderMenu()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_column_view_column_get_header_menu(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   string getId()
   {
     const(char)* _cretval;
-    _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)cPtr);
+    _cretval = gtk_column_view_column_get_id(cast(GtkColumnViewColumn*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -354,7 +354,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)cPtr);
+    _retval = gtk_column_view_column_get_resizable(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -365,8 +365,8 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
-    _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    _cretval = gtk_column_view_column_get_sorter(cast(GtkColumnViewColumn*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)cPtr);
+    _cretval = gtk_column_view_column_get_title(cast(GtkColumnViewColumn*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -389,7 +389,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)cPtr);
+    _retval = gtk_column_view_column_get_visible(cast(GtkColumnViewColumn*)this._cPtr);
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setExpand(bool expand)
   {
-    gtk_column_view_column_set_expand(cast(GtkColumnViewColumn*)cPtr, expand);
+    gtk_column_view_column_set_expand(cast(GtkColumnViewColumn*)this._cPtr, expand);
   }
 
   /**
@@ -416,7 +416,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_column_view_column_set_factory(cast(GtkColumnViewColumn*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -431,7 +431,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setFixedWidth(int fixedWidth)
   {
-    gtk_column_view_column_set_fixed_width(cast(GtkColumnViewColumn*)cPtr, fixedWidth);
+    gtk_column_view_column_set_fixed_width(cast(GtkColumnViewColumn*)this._cPtr, fixedWidth);
   }
 
   /**
@@ -443,7 +443,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setHeaderMenu(gio.menu_model.MenuModel menu = null)
   {
-    gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)cPtr, menu ? cast(GMenuModel*)menu.cPtr(No.Dup) : null);
+    gtk_column_view_column_set_header_menu(cast(GtkColumnViewColumn*)this._cPtr, menu ? cast(GMenuModel*)menu._cPtr(No.Dup) : null);
   }
 
   /**
@@ -460,7 +460,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   void setId(string id = null)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)cPtr, _id);
+    gtk_column_view_column_set_id(cast(GtkColumnViewColumn*)this._cPtr, _id);
   }
 
   /**
@@ -471,7 +471,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setResizable(bool resizable)
   {
-    gtk_column_view_column_set_resizable(cast(GtkColumnViewColumn*)cPtr, resizable);
+    gtk_column_view_column_set_resizable(cast(GtkColumnViewColumn*)this._cPtr, resizable);
   }
 
   /**
@@ -491,7 +491,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setSorter(gtk.sorter.Sorter sorter = null)
   {
-    gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(No.Dup) : null);
+    gtk_column_view_column_set_sorter(cast(GtkColumnViewColumn*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -507,7 +507,7 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)cPtr, _title);
+    gtk_column_view_column_set_title(cast(GtkColumnViewColumn*)this._cPtr, _title);
   }
 
   /**
@@ -518,6 +518,6 @@ class ColumnViewColumn : gobject.object.ObjectWrap
   */
   void setVisible(bool visible)
   {
-    gtk_column_view_column_set_visible(cast(GtkColumnViewColumn*)cPtr, visible);
+    gtk_column_view_column_set_visible(cast(GtkColumnViewColumn*)this._cPtr, visible);
   }
 }

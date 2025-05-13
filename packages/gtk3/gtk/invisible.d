@@ -30,16 +30,16 @@ class Invisible : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_invisible_get_type != &gidSymbolNotFound ? gtk_invisible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -82,8 +82,8 @@ class Invisible : gtk.widget.Widget
   static gtk.invisible.Invisible newForScreen(gdk.screen.Screen screen)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_invisible_new_for_screen(screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.invisible.Invisible)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,8 +94,8 @@ class Invisible : gtk.widget.Widget
   override gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gtk_invisible_get_screen(cast(GtkInvisible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gtk_invisible_get_screen(cast(GtkInvisible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,6 +107,6 @@ class Invisible : gtk.widget.Widget
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_invisible_set_screen(cast(GtkInvisible*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_invisible_set_screen(cast(GtkInvisible*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
 }

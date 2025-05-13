@@ -38,22 +38,22 @@ class Rectangle : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_rectangle_get_type != &gidSymbolNotFound ? atk_rectangle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,7 +68,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property int x()
   {
-    return (cast(AtkRectangle*)cPtr).x;
+    return (cast(AtkRectangle*)this._cPtr).x;
   }
 
   /**
@@ -78,7 +78,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void x(int propval)
   {
-    (cast(AtkRectangle*)cPtr).x = propval;
+    (cast(AtkRectangle*)this._cPtr).x = propval;
   }
 
   /**
@@ -87,7 +87,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property int y()
   {
-    return (cast(AtkRectangle*)cPtr).y;
+    return (cast(AtkRectangle*)this._cPtr).y;
   }
 
   /**
@@ -97,7 +97,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void y(int propval)
   {
-    (cast(AtkRectangle*)cPtr).y = propval;
+    (cast(AtkRectangle*)this._cPtr).y = propval;
   }
 
   /**
@@ -106,7 +106,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property int width()
   {
-    return (cast(AtkRectangle*)cPtr).width;
+    return (cast(AtkRectangle*)this._cPtr).width;
   }
 
   /**
@@ -116,7 +116,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void width(int propval)
   {
-    (cast(AtkRectangle*)cPtr).width = propval;
+    (cast(AtkRectangle*)this._cPtr).width = propval;
   }
 
   /**
@@ -125,7 +125,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property int height()
   {
-    return (cast(AtkRectangle*)cPtr).height;
+    return (cast(AtkRectangle*)this._cPtr).height;
   }
 
   /**
@@ -135,6 +135,6 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void height(int propval)
   {
-    (cast(AtkRectangle*)cPtr).height = propval;
+    (cast(AtkRectangle*)this._cPtr).height = propval;
   }
 }

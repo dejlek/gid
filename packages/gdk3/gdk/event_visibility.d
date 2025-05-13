@@ -32,7 +32,7 @@ class EventVisibility
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -43,7 +43,7 @@ class EventVisibility
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventVisibility*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventVisibility*)this._cPtr).type;
   }
 
   /**
@@ -53,7 +53,7 @@ class EventVisibility
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventVisibility*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventVisibility*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -62,7 +62,7 @@ class EventVisibility
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)this._cPtr).window);
   }
 
   /**
@@ -72,8 +72,8 @@ class EventVisibility
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventVisibility*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventVisibility*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventVisibility*)this._cPtr).window);
   }
 
   /**
@@ -82,7 +82,7 @@ class EventVisibility
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventVisibility*)cPtr).sendEvent;
+    return (cast(GdkEventVisibility*)this._cPtr).sendEvent;
   }
 
   /**
@@ -92,7 +92,7 @@ class EventVisibility
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventVisibility*)cPtr).sendEvent = propval;
+    (cast(GdkEventVisibility*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -102,7 +102,7 @@ class EventVisibility
   */
   @property gdk.types.VisibilityState state()
   {
-    return cast(gdk.types.VisibilityState)(cast(GdkEventVisibility*)cPtr).state;
+    return cast(gdk.types.VisibilityState)(cast(GdkEventVisibility*)this._cPtr).state;
   }
 
   /**
@@ -113,6 +113,6 @@ class EventVisibility
   */
   @property void state(gdk.types.VisibilityState propval)
   {
-    (cast(GdkEventVisibility*)cPtr).state = cast(GdkVisibilityState)propval;
+    (cast(GdkEventVisibility*)this._cPtr).state = cast(GdkVisibilityState)propval;
   }
 }

@@ -37,16 +37,16 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_tool_button_get_type != &gidSymbolNotFound ? gtk_toggle_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_toggle_tool_button_new_from_stock(_stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_tool_button.ToggleToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_tool_button_get_active(cast(GtkToggleToolButton*)cPtr);
+    _retval = gtk_toggle_tool_button_get_active(cast(GtkToggleToolButton*)this._cPtr);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class ToggleToolButton : gtk.tool_button.ToolButton
   */
   void setActive(bool isActive)
   {
-    gtk_toggle_tool_button_set_active(cast(GtkToggleToolButton*)cPtr, isActive);
+    gtk_toggle_tool_button_set_active(cast(GtkToggleToolButton*)this._cPtr, isActive);
   }
 
   /**

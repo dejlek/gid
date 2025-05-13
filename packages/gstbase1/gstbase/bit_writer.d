@@ -29,7 +29,7 @@ class BitWriter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class BitWriter
   */
   @property uint bitSize()
   {
-    return (cast(GstBitWriter*)cPtr).bitSize;
+    return (cast(GstBitWriter*)this._cPtr).bitSize;
   }
 
   /**
@@ -50,7 +50,7 @@ class BitWriter
   */
   @property void bitSize(uint propval)
   {
-    (cast(GstBitWriter*)cPtr).bitSize = propval;
+    (cast(GstBitWriter*)this._cPtr).bitSize = propval;
   }
 
   /**
@@ -64,7 +64,7 @@ class BitWriter
   bool alignBytes(ubyte trailingBit)
   {
     bool _retval;
-    _retval = gst_bit_writer_align_bytes(cast(GstBitWriter*)cPtr, trailingBit);
+    _retval = gst_bit_writer_align_bytes(cast(GstBitWriter*)this._cPtr, trailingBit);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class BitWriter
   gst.buffer.Buffer freeAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)cPtr);
+    _cretval = gst_bit_writer_free_and_get_buffer(cast(GstBitWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -88,7 +88,7 @@ class BitWriter
   uint getRemaining()
   {
     uint _retval;
-    _retval = gst_bit_writer_get_remaining(cast(const(GstBitWriter)*)cPtr);
+    _retval = gst_bit_writer_get_remaining(cast(const(GstBitWriter)*)this._cPtr);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class BitWriter
   uint getSize()
   {
     uint _retval;
-    _retval = gst_bit_writer_get_size(cast(const(GstBitWriter)*)cPtr);
+    _retval = gst_bit_writer_get_size(cast(const(GstBitWriter)*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class BitWriter
   bool putBitsUint16(ushort value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)cPtr, value, nbits);
+    _retval = gst_bit_writer_put_bits_uint16(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class BitWriter
   bool putBitsUint32(uint value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)cPtr, value, nbits);
+    _retval = gst_bit_writer_put_bits_uint32(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class BitWriter
   bool putBitsUint64(ulong value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)cPtr, value, nbits);
+    _retval = gst_bit_writer_put_bits_uint64(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class BitWriter
   bool putBitsUint8(ubyte value, uint nbits)
   {
     bool _retval;
-    _retval = gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)cPtr, value, nbits);
+    _retval = gst_bit_writer_put_bits_uint8(cast(GstBitWriter*)this._cPtr, value, nbits);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class BitWriter
       _nbytes = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_bit_writer_put_bytes(cast(GstBitWriter*)cPtr, _data, _nbytes);
+    _retval = gst_bit_writer_put_bytes(cast(GstBitWriter*)this._cPtr, _data, _nbytes);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class BitWriter
   */
   void reset()
   {
-    gst_bit_writer_reset(cast(GstBitWriter*)cPtr);
+    gst_bit_writer_reset(cast(GstBitWriter*)this._cPtr);
   }
 
   /**
@@ -200,7 +200,7 @@ class BitWriter
   gst.buffer.Buffer resetAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)cPtr);
+    _cretval = gst_bit_writer_reset_and_get_buffer(cast(GstBitWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -209,7 +209,7 @@ class BitWriter
   bool setPos(uint pos)
   {
     bool _retval;
-    _retval = gst_bit_writer_set_pos(cast(GstBitWriter*)cPtr, pos);
+    _retval = gst_bit_writer_set_pos(cast(GstBitWriter*)this._cPtr, pos);
     return _retval;
   }
 }

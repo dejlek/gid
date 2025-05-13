@@ -43,16 +43,16 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_tag_table_get_type != &gidSymbolNotFound ? gtk_text_tag_table_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool add(gtk.text_tag.TextTag tag)
   {
     bool _retval;
-    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    _retval = gtk_text_tag_table_add(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -107,12 +107,12 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
     {
       auto _dlg = cast(gtk.types.TextTagTableForeach*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.text_tag.TextTag)(cast(void*)tag, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gtk_text_tag_table_foreach(cast(GtkTextTagTable*)cPtr, _funcCB, _func);
+    gtk_text_tag_table_foreach(cast(GtkTextTagTable*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -122,7 +122,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   int getSize()
   {
     int _retval;
-    _retval = gtk_text_tag_table_get_size(cast(GtkTextTagTable*)cPtr);
+    _retval = gtk_text_tag_table_get_size(cast(GtkTextTagTable*)this._cPtr);
     return _retval;
   }
 
@@ -138,8 +138,8 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     GtkTextTag* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
+    _cretval = gtk_text_tag_table_lookup(cast(GtkTextTagTable*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_tag.TextTag)(cast(GtkTextTag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class TextTagTable : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void remove(gtk.text_tag.TextTag tag)
   {
-    gtk_text_tag_table_remove(cast(GtkTextTagTable*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    gtk_text_tag_table_remove(cast(GtkTextTagTable*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
   }
 
   /**

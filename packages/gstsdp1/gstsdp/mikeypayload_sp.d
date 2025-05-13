@@ -28,7 +28,7 @@ class MIKEYPayloadSP
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class MIKEYPayloadSP
   */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadSP*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadSP*)this._cPtr).pt);
   }
 
   /**
@@ -48,7 +48,7 @@ class MIKEYPayloadSP
   */
   @property uint policy()
   {
-    return (cast(GstMIKEYPayloadSP*)cPtr).policy;
+    return (cast(GstMIKEYPayloadSP*)this._cPtr).policy;
   }
 
   /**
@@ -58,7 +58,7 @@ class MIKEYPayloadSP
   */
   @property void policy(uint propval)
   {
-    (cast(GstMIKEYPayloadSP*)cPtr).policy = propval;
+    (cast(GstMIKEYPayloadSP*)this._cPtr).policy = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class MIKEYPayloadSP
   */
   @property gstsdp.types.MIKEYSecProto proto()
   {
-    return cast(gstsdp.types.MIKEYSecProto)(cast(GstMIKEYPayloadSP*)cPtr).proto;
+    return cast(gstsdp.types.MIKEYSecProto)(cast(GstMIKEYPayloadSP*)this._cPtr).proto;
   }
 
   /**
@@ -77,6 +77,6 @@ class MIKEYPayloadSP
   */
   @property void proto(gstsdp.types.MIKEYSecProto propval)
   {
-    (cast(GstMIKEYPayloadSP*)cPtr).proto = cast(GstMIKEYSecProto)propval;
+    (cast(GstMIKEYPayloadSP*)this._cPtr).proto = cast(GstMIKEYSecProto)propval;
   }
 }

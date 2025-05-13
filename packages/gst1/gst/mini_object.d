@@ -70,22 +70,22 @@ class MiniObject : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_mini_object_get_type != &gidSymbolNotFound ? gst_mini_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -100,7 +100,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property gobject.types.GType type()
   {
-    return (cast(GstMiniObject*)cPtr).type;
+    return (cast(GstMiniObject*)this._cPtr).type;
   }
 
   /**
@@ -110,7 +110,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property void type(gobject.types.GType propval)
   {
-    (cast(GstMiniObject*)cPtr).type = propval;
+    (cast(GstMiniObject*)this._cPtr).type = propval;
   }
 
   /**
@@ -119,7 +119,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property int refcount()
   {
-    return (cast(GstMiniObject*)cPtr).refcount;
+    return (cast(GstMiniObject*)this._cPtr).refcount;
   }
 
   /**
@@ -129,7 +129,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property void refcount(int propval)
   {
-    (cast(GstMiniObject*)cPtr).refcount = propval;
+    (cast(GstMiniObject*)this._cPtr).refcount = propval;
   }
 
   /**
@@ -138,7 +138,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property int lockstate()
   {
-    return (cast(GstMiniObject*)cPtr).lockstate;
+    return (cast(GstMiniObject*)this._cPtr).lockstate;
   }
 
   /**
@@ -148,7 +148,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property void lockstate(int propval)
   {
-    (cast(GstMiniObject*)cPtr).lockstate = propval;
+    (cast(GstMiniObject*)this._cPtr).lockstate = propval;
   }
 
   /**
@@ -157,7 +157,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property uint flags()
   {
-    return (cast(GstMiniObject*)cPtr).flags;
+    return (cast(GstMiniObject*)this._cPtr).flags;
   }
 
   /**
@@ -167,7 +167,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property void flags(uint propval)
   {
-    (cast(GstMiniObject*)cPtr).flags = propval;
+    (cast(GstMiniObject*)this._cPtr).flags = propval;
   }
 
   /**
@@ -176,7 +176,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property GstMiniObjectCopyFunction copy()
   {
-    return (cast(GstMiniObject*)cPtr).copy;
+    return (cast(GstMiniObject*)this._cPtr).copy;
   }
 
   /**
@@ -187,7 +187,7 @@ class MiniObject : gobject.boxed.Boxed
 
   @property void copy(GstMiniObjectCopyFunction propval)
   {
-    (cast(GstMiniObject*)cPtr).copy = propval;
+    (cast(GstMiniObject*)this._cPtr).copy = propval;
   }
 
   /**
@@ -196,7 +196,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property GstMiniObjectDisposeFunction dispose()
   {
-    return (cast(GstMiniObject*)cPtr).dispose;
+    return (cast(GstMiniObject*)this._cPtr).dispose;
   }
 
   /**
@@ -207,7 +207,7 @@ class MiniObject : gobject.boxed.Boxed
 
   @property void dispose(GstMiniObjectDisposeFunction propval)
   {
-    (cast(GstMiniObject*)cPtr).dispose = propval;
+    (cast(GstMiniObject*)this._cPtr).dispose = propval;
   }
 
   /**
@@ -216,7 +216,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   @property GstMiniObjectFreeFunction free()
   {
-    return (cast(GstMiniObject*)cPtr).free;
+    return (cast(GstMiniObject*)this._cPtr).free;
   }
 
   /**
@@ -227,7 +227,7 @@ class MiniObject : gobject.boxed.Boxed
 
   @property void free(GstMiniObjectFreeFunction propval)
   {
-    (cast(GstMiniObject*)cPtr).free = propval;
+    (cast(GstMiniObject*)this._cPtr).free = propval;
   }
 
   /**
@@ -245,7 +245,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void addParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_add_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.Dup) : null);
+    gst_mini_object_add_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -259,7 +259,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void* getQdata(glib.types.Quark quark)
   {
-    auto _retval = gst_mini_object_get_qdata(cast(GstMiniObject*)cPtr, quark);
+    auto _retval = gst_mini_object_get_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class MiniObject : gobject.boxed.Boxed
   bool isWritable()
   {
     bool _retval;
-    _retval = gst_mini_object_is_writable(cast(const(GstMiniObject)*)cPtr);
+    _retval = gst_mini_object_is_writable(cast(const(GstMiniObject)*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class MiniObject : gobject.boxed.Boxed
   bool lock(gst.types.LockFlags flags)
   {
     bool _retval;
-    _retval = gst_mini_object_lock(cast(GstMiniObject*)cPtr, flags);
+    _retval = gst_mini_object_lock(cast(GstMiniObject*)this._cPtr, flags);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void removeParent(gst.mini_object.MiniObject parent)
   {
-    gst_mini_object_remove_parent(cast(GstMiniObject*)cPtr, parent ? cast(GstMiniObject*)parent.cPtr(No.Dup) : null);
+    gst_mini_object_remove_parent(cast(GstMiniObject*)this._cPtr, parent ? cast(GstMiniObject*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -339,7 +339,7 @@ class MiniObject : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _destroyCB = destroy ? &_destroyCallback : null;
-    gst_mini_object_set_qdata(cast(GstMiniObject*)cPtr, quark, data, _destroyCB);
+    gst_mini_object_set_qdata(cast(GstMiniObject*)this._cPtr, quark, data, _destroyCB);
   }
 
   /**
@@ -354,7 +354,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void* stealQdata(glib.types.Quark quark)
   {
-    auto _retval = gst_mini_object_steal_qdata(cast(GstMiniObject*)cPtr, quark);
+    auto _retval = gst_mini_object_steal_qdata(cast(GstMiniObject*)this._cPtr, quark);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class MiniObject : gobject.boxed.Boxed
   */
   void unlock(gst.types.LockFlags flags)
   {
-    gst_mini_object_unlock(cast(GstMiniObject*)cPtr, flags);
+    gst_mini_object_unlock(cast(GstMiniObject*)this._cPtr, flags);
   }
 
   /**
@@ -385,7 +385,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool replace(gst.mini_object.MiniObject olddata = null, gst.mini_object.MiniObject newdata = null)
   {
     bool _retval;
-    _retval = gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata.cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.Dup) : null);
+    _retval = gst_mini_object_replace(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class MiniObject : gobject.boxed.Boxed
   static bool take(gst.mini_object.MiniObject olddata, gst.mini_object.MiniObject newdata)
   {
     bool _retval;
-    _retval = gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata.cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata.cPtr(No.Dup) : null);
+    _retval = gst_mini_object_take(olddata ? cast(GstMiniObject**)olddata._cPtr(No.Dup) : null, newdata ? cast(GstMiniObject*)newdata._cPtr(No.Dup) : null);
     return _retval;
   }
 }

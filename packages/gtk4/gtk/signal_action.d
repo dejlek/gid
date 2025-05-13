@@ -23,16 +23,16 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_signal_action_get_type != &gidSymbolNotFound ? gtk_signal_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class SignalAction : gtk.shortcut_action.ShortcutAction
   string getSignalName()
   {
     const(char)* _cretval;
-    _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)cPtr);
+    _cretval = gtk_signal_action_get_signal_name(cast(GtkSignalAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

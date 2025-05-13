@@ -38,16 +38,16 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_widget_get_type != &gidSymbolNotFound ? gtk_recent_chooser_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,8 +83,8 @@ class RecentChooserWidget : gtk.box.Box, gtk.recent_chooser.RecentChooser
   static gtk.recent_chooser_widget.RecentChooserWidget newForManager(gtk.recent_manager.RecentManager manager)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_recent_chooser_widget_new_for_manager(manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_chooser_widget.RecentChooserWidget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

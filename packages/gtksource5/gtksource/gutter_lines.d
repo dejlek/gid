@@ -32,16 +32,16 @@ class GutterLines : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_lines_get_type != &gidSymbolNotFound ? gtk_source_gutter_lines_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class GutterLines : gobject.object.ObjectWrap
   void addClass(uint line, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_source_gutter_lines_add_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
+    gtk_source_gutter_lines_add_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
   }
 
   /**
@@ -83,7 +83,7 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void addQclass(uint line, glib.types.Quark qname)
   {
-    gtk_source_gutter_lines_add_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
+    gtk_source_gutter_lines_add_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
   }
 
   /**
@@ -93,8 +93,8 @@ class GutterLines : gobject.object.ObjectWrap
   gtk.text_buffer.TextBuffer getBuffer()
   {
     GtkTextBuffer* _cretval;
-    _cretval = gtk_source_gutter_lines_get_buffer(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_lines_get_buffer(cast(GtkSourceGutterLines*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_buffer.TextBuffer)(cast(GtkTextBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class GutterLines : gobject.object.ObjectWrap
   uint getFirst()
   {
     uint _retval;
-    _retval = gtk_source_gutter_lines_get_first(cast(GtkSourceGutterLines*)cPtr);
+    _retval = gtk_source_gutter_lines_get_first(cast(GtkSourceGutterLines*)this._cPtr);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class GutterLines : gobject.object.ObjectWrap
   void getIterAtLine(out gtk.text_iter.TextIter iter, uint line)
   {
     GtkTextIter _iter;
-    gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)cPtr, &_iter, line);
+    gtk_source_gutter_lines_get_iter_at_line(cast(GtkSourceGutterLines*)this._cPtr, &_iter, line);
     iter = new gtk.text_iter.TextIter(cast(void*)&_iter, No.Take);
   }
 
@@ -132,7 +132,7 @@ class GutterLines : gobject.object.ObjectWrap
   uint getLast()
   {
     uint _retval;
-    _retval = gtk_source_gutter_lines_get_last(cast(GtkSourceGutterLines*)cPtr);
+    _retval = gtk_source_gutter_lines_get_last(cast(GtkSourceGutterLines*)this._cPtr);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void getLineYrange(uint line, gtksource.types.GutterRendererAlignmentMode mode, out int y, out int height)
   {
-    gtk_source_gutter_lines_get_line_yrange(cast(GtkSourceGutterLines*)cPtr, line, mode, cast(int*)&y, cast(int*)&height);
+    gtk_source_gutter_lines_get_line_yrange(cast(GtkSourceGutterLines*)this._cPtr, line, mode, cast(int*)&y, cast(int*)&height);
   }
 
   /**
@@ -159,8 +159,8 @@ class GutterLines : gobject.object.ObjectWrap
   gtk.text_view.TextView getView()
   {
     GtkTextView* _cretval;
-    _cretval = gtk_source_gutter_lines_get_view(cast(GtkSourceGutterLines*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_lines_get_view(cast(GtkSourceGutterLines*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_view.TextView)(cast(GtkTextView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool hasAnyClass(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_has_any_class(cast(GtkSourceGutterLines*)cPtr, line);
+    _retval = gtk_source_gutter_lines_has_any_class(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class GutterLines : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
+    _retval = gtk_source_gutter_lines_has_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool hasQclass(uint line, glib.types.Quark qname)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_has_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
+    _retval = gtk_source_gutter_lines_has_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isCursor(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_cursor(cast(GtkSourceGutterLines*)cPtr, line);
+    _retval = gtk_source_gutter_lines_is_cursor(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isPrelit(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_prelit(cast(GtkSourceGutterLines*)cPtr, line);
+    _retval = gtk_source_gutter_lines_is_prelit(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class GutterLines : gobject.object.ObjectWrap
   bool isSelected(uint line)
   {
     bool _retval;
-    _retval = gtk_source_gutter_lines_is_selected(cast(GtkSourceGutterLines*)cPtr, line);
+    _retval = gtk_source_gutter_lines_is_selected(cast(GtkSourceGutterLines*)this._cPtr, line);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class GutterLines : gobject.object.ObjectWrap
   void removeClass(uint line, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_source_gutter_lines_remove_class(cast(GtkSourceGutterLines*)cPtr, line, _name);
+    gtk_source_gutter_lines_remove_class(cast(GtkSourceGutterLines*)this._cPtr, line, _name);
   }
 
   /**
@@ -288,6 +288,6 @@ class GutterLines : gobject.object.ObjectWrap
   */
   void removeQclass(uint line, glib.types.Quark qname)
   {
-    gtk_source_gutter_lines_remove_qclass(cast(GtkSourceGutterLines*)cPtr, line, qname);
+    gtk_source_gutter_lines_remove_qclass(cast(GtkSourceGutterLines*)this._cPtr, line, qname);
   }
 }

@@ -47,16 +47,16 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_carousel_indicator_dots_get_type != &gidSymbolNotFound ? adw_carousel_indicator_dots_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,8 +104,8 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   adw.carousel.Carousel getCarousel()
   {
     AdwCarousel* _cretval;
-    _cretval = adw_carousel_indicator_dots_get_carousel(cast(AdwCarouselIndicatorDots*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.carousel.Carousel)(cast(AdwCarousel*)_cretval, No.Take);
+    _cretval = adw_carousel_indicator_dots_get_carousel(cast(AdwCarouselIndicatorDots*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.carousel.Carousel)(cast(AdwCarousel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -117,6 +117,6 @@ class CarouselIndicatorDots : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setCarousel(adw.carousel.Carousel carousel = null)
   {
-    adw_carousel_indicator_dots_set_carousel(cast(AdwCarouselIndicatorDots*)cPtr, carousel ? cast(AdwCarousel*)carousel.cPtr(No.Dup) : null);
+    adw_carousel_indicator_dots_set_carousel(cast(AdwCarouselIndicatorDots*)this._cPtr, carousel ? cast(AdwCarousel*)carousel._cPtr(No.Dup) : null);
   }
 }

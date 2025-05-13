@@ -45,22 +45,22 @@ class GlyphInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_glyph_info_get_type != &gidSymbolNotFound ? hb_gobject_glyph_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -76,7 +76,7 @@ class GlyphInfo : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Codepoint codepoint()
   {
-    return (cast(hb_glyph_info_t*)cPtr).codepoint;
+    return (cast(hb_glyph_info_t*)this._cPtr).codepoint;
   }
 
   /**
@@ -87,7 +87,7 @@ class GlyphInfo : gobject.boxed.Boxed
   */
   @property void codepoint(harfbuzz.types.Codepoint propval)
   {
-    (cast(hb_glyph_info_t*)cPtr).codepoint = propval;
+    (cast(hb_glyph_info_t*)this._cPtr).codepoint = propval;
   }
 
   /**
@@ -106,7 +106,7 @@ class GlyphInfo : gobject.boxed.Boxed
   */
   @property uint cluster()
   {
-    return (cast(hb_glyph_info_t*)cPtr).cluster;
+    return (cast(hb_glyph_info_t*)this._cPtr).cluster;
   }
 
   /**
@@ -126,6 +126,6 @@ class GlyphInfo : gobject.boxed.Boxed
   */
   @property void cluster(uint propval)
   {
-    (cast(hb_glyph_info_t*)cPtr).cluster = propval;
+    (cast(hb_glyph_info_t*)this._cPtr).cluster = propval;
   }
 }

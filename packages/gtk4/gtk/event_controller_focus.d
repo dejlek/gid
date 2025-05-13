@@ -29,16 +29,16 @@ class EventControllerFocus : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_focus_get_type != &gidSymbolNotFound ? gtk_event_controller_focus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   bool containsFocus()
   {
     bool _retval;
-    _retval = gtk_event_controller_focus_contains_focus(cast(GtkEventControllerFocus*)cPtr);
+    _retval = gtk_event_controller_focus_contains_focus(cast(GtkEventControllerFocus*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ class EventControllerFocus : gtk.event_controller.EventController
   bool isFocus()
   {
     bool _retval;
-    _retval = gtk_event_controller_focus_is_focus(cast(GtkEventControllerFocus*)cPtr);
+    _retval = gtk_event_controller_focus_is_focus(cast(GtkEventControllerFocus*)this._cPtr);
     return _retval;
   }
 

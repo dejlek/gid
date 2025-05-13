@@ -39,7 +39,7 @@ template TreeSortableT()
   override bool getSortColumnId(out int sortColumnId, out gtk.types.SortType order)
   {
     bool _retval;
-    _retval = gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)cPtr, cast(int*)&sortColumnId, &order);
+    _retval = gtk_tree_sortable_get_sort_column_id(cast(GtkTreeSortable*)this._cPtr, cast(int*)&sortColumnId, &order);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ template TreeSortableT()
   override bool hasDefaultSortFunc()
   {
     bool _retval;
-    _retval = gtk_tree_sortable_has_default_sort_func(cast(GtkTreeSortable*)cPtr);
+    _retval = gtk_tree_sortable_has_default_sort_func(cast(GtkTreeSortable*)this._cPtr);
     return _retval;
   }
 
@@ -76,14 +76,14 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
-    gtk_tree_sortable_set_default_sort_func(cast(GtkTreeSortable*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
+    gtk_tree_sortable_set_default_sort_func(cast(GtkTreeSortable*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**
@@ -105,7 +105,7 @@ template TreeSortableT()
   */
   override void setSortColumnId(int sortColumnId, gtk.types.SortType order)
   {
-    gtk_tree_sortable_set_sort_column_id(cast(GtkTreeSortable*)cPtr, sortColumnId, order);
+    gtk_tree_sortable_set_sort_column_id(cast(GtkTreeSortable*)this._cPtr, sortColumnId, order);
   }
 
   /**
@@ -123,14 +123,14 @@ template TreeSortableT()
     {
       auto _dlg = cast(gtk.types.TreeIterCompareFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), a ? new gtk.tree_iter.TreeIter(cast(void*)a, No.Take) : null, b ? new gtk.tree_iter.TreeIter(cast(void*)b, No.Take) : null);
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
-    gtk_tree_sortable_set_sort_func(cast(GtkTreeSortable*)cPtr, sortColumnId, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
+    gtk_tree_sortable_set_sort_func(cast(GtkTreeSortable*)this._cPtr, sortColumnId, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**
@@ -138,7 +138,7 @@ template TreeSortableT()
   */
   override void sortColumnChanged()
   {
-    gtk_tree_sortable_sort_column_changed(cast(GtkTreeSortable*)cPtr);
+    gtk_tree_sortable_sort_column_changed(cast(GtkTreeSortable*)this._cPtr);
   }
 
   /**

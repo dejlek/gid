@@ -50,22 +50,22 @@ class Attribute : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attribute_get_type != &gidSymbolNotFound ? pango_attribute_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class Attribute : gobject.boxed.Boxed
   */
   @property uint startIndex()
   {
-    return (cast(PangoAttribute*)cPtr).startIndex;
+    return (cast(PangoAttribute*)this._cPtr).startIndex;
   }
 
   /**
@@ -90,7 +90,7 @@ class Attribute : gobject.boxed.Boxed
   */
   @property void startIndex(uint propval)
   {
-    (cast(PangoAttribute*)cPtr).startIndex = propval;
+    (cast(PangoAttribute*)this._cPtr).startIndex = propval;
   }
 
   /**
@@ -100,7 +100,7 @@ class Attribute : gobject.boxed.Boxed
   */
   @property uint endIndex()
   {
-    return (cast(PangoAttribute*)cPtr).endIndex;
+    return (cast(PangoAttribute*)this._cPtr).endIndex;
   }
 
   /**
@@ -111,7 +111,7 @@ class Attribute : gobject.boxed.Boxed
   */
   @property void endIndex(uint propval)
   {
-    (cast(PangoAttribute*)cPtr).endIndex = propval;
+    (cast(PangoAttribute*)this._cPtr).endIndex = propval;
   }
 
   /**
@@ -124,7 +124,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_color.AttrColor asColor()
   {
     PangoAttrColor* _cretval;
-    _cretval = pango_attribute_as_color(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_color(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_color.AttrColor(cast(PangoAttrColor*)_cretval) : null;
     return _retval;
   }
@@ -139,7 +139,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_float.AttrFloat asFloat()
   {
     PangoAttrFloat* _cretval;
-    _cretval = pango_attribute_as_float(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_float(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_float.AttrFloat(cast(PangoAttrFloat*)_cretval) : null;
     return _retval;
   }
@@ -154,7 +154,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_font_desc.AttrFontDesc asFontDesc()
   {
     PangoAttrFontDesc* _cretval;
-    _cretval = pango_attribute_as_font_desc(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_font_desc(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_font_desc.AttrFontDesc(cast(PangoAttrFontDesc*)_cretval) : null;
     return _retval;
   }
@@ -169,7 +169,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_font_features.AttrFontFeatures asFontFeatures()
   {
     PangoAttrFontFeatures* _cretval;
-    _cretval = pango_attribute_as_font_features(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_font_features(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_font_features.AttrFontFeatures(cast(PangoAttrFontFeatures*)_cretval) : null;
     return _retval;
   }
@@ -184,7 +184,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_int.AttrInt asInt()
   {
     PangoAttrInt* _cretval;
-    _cretval = pango_attribute_as_int(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_int(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_int.AttrInt(cast(PangoAttrInt*)_cretval) : null;
     return _retval;
   }
@@ -199,7 +199,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_language.AttrLanguage asLanguage()
   {
     PangoAttrLanguage* _cretval;
-    _cretval = pango_attribute_as_language(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_language(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_language.AttrLanguage(cast(PangoAttrLanguage*)_cretval) : null;
     return _retval;
   }
@@ -214,7 +214,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_shape.AttrShape asShape()
   {
     PangoAttrShape* _cretval;
-    _cretval = pango_attribute_as_shape(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_shape(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_shape.AttrShape(cast(PangoAttrShape*)_cretval) : null;
     return _retval;
   }
@@ -229,7 +229,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_size.AttrSize asSize()
   {
     PangoAttrSize* _cretval;
-    _cretval = pango_attribute_as_size(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_size(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_size.AttrSize(cast(PangoAttrSize*)_cretval) : null;
     return _retval;
   }
@@ -244,7 +244,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attr_string.AttrString asString()
   {
     PangoAttrString* _cretval;
-    _cretval = pango_attribute_as_string(cast(PangoAttribute*)cPtr);
+    _cretval = pango_attribute_as_string(cast(PangoAttribute*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_string.AttrString(cast(PangoAttrString*)_cretval) : null;
     return _retval;
   }
@@ -258,7 +258,7 @@ class Attribute : gobject.boxed.Boxed
   pango.attribute.Attribute copy()
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attribute_copy(cast(const(PangoAttribute)*)cPtr);
+    _cretval = pango_attribute_copy(cast(const(PangoAttribute)*)this._cPtr);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -268,7 +268,7 @@ class Attribute : gobject.boxed.Boxed
   */
   void destroy()
   {
-    pango_attribute_destroy(cast(PangoAttribute*)cPtr);
+    pango_attribute_destroy(cast(PangoAttribute*)this._cPtr);
   }
 
   /**
@@ -285,7 +285,7 @@ class Attribute : gobject.boxed.Boxed
   bool equal(pango.attribute.Attribute attr2)
   {
     bool _retval;
-    _retval = pango_attribute_equal(cast(const(PangoAttribute)*)cPtr, attr2 ? cast(const(PangoAttribute)*)attr2.cPtr(No.Dup) : null);
+    _retval = pango_attribute_equal(cast(const(PangoAttribute)*)this._cPtr, attr2 ? cast(const(PangoAttribute)*)attr2._cPtr(No.Dup) : null);
     return _retval;
   }
 }

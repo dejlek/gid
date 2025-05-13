@@ -38,22 +38,22 @@ class CapsFeatures : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_caps_features_get_type != &gidSymbolNotFound ? gst_caps_features_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -113,7 +113,7 @@ class CapsFeatures : gobject.boxed.Boxed
   void add(string feature)
   {
     const(char)* _feature = feature.toCString(No.Alloc);
-    gst_caps_features_add(cast(GstCapsFeatures*)cPtr, _feature);
+    gst_caps_features_add(cast(GstCapsFeatures*)this._cPtr, _feature);
   }
 
   /**
@@ -124,7 +124,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void addId(glib.types.Quark feature)
   {
-    gst_caps_features_add_id(cast(GstCapsFeatures*)cPtr, feature);
+    gst_caps_features_add_id(cast(GstCapsFeatures*)this._cPtr, feature);
   }
 
   /**
@@ -138,7 +138,7 @@ class CapsFeatures : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _feature = feature.toCString(No.Alloc);
-    _retval = gst_caps_features_contains(cast(const(GstCapsFeatures)*)cPtr, _feature);
+    _retval = gst_caps_features_contains(cast(const(GstCapsFeatures)*)this._cPtr, _feature);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool containsId(glib.types.Quark feature)
   {
     bool _retval;
-    _retval = gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)cPtr, feature);
+    _retval = gst_caps_features_contains_id(cast(const(GstCapsFeatures)*)this._cPtr, feature);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class CapsFeatures : gobject.boxed.Boxed
   gst.caps_features.CapsFeatures copy()
   {
     GstCapsFeatures* _cretval;
-    _cretval = gst_caps_features_copy(cast(const(GstCapsFeatures)*)cPtr);
+    _cretval = gst_caps_features_copy(cast(const(GstCapsFeatures)*)this._cPtr);
     auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -178,7 +178,7 @@ class CapsFeatures : gobject.boxed.Boxed
   string getNth(uint i)
   {
     const(char)* _cretval;
-    _cretval = gst_caps_features_get_nth(cast(const(GstCapsFeatures)*)cPtr, i);
+    _cretval = gst_caps_features_get_nth(cast(const(GstCapsFeatures)*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -193,7 +193,7 @@ class CapsFeatures : gobject.boxed.Boxed
   glib.types.Quark getNthId(uint i)
   {
     glib.types.Quark _retval;
-    _retval = gst_caps_features_get_nth_id(cast(const(GstCapsFeatures)*)cPtr, i);
+    _retval = gst_caps_features_get_nth_id(cast(const(GstCapsFeatures)*)this._cPtr, i);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class CapsFeatures : gobject.boxed.Boxed
   uint getSize()
   {
     uint _retval;
-    _retval = gst_caps_features_get_size(cast(const(GstCapsFeatures)*)cPtr);
+    _retval = gst_caps_features_get_size(cast(const(GstCapsFeatures)*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool isAny()
   {
     bool _retval;
-    _retval = gst_caps_features_is_any(cast(const(GstCapsFeatures)*)cPtr);
+    _retval = gst_caps_features_is_any(cast(const(GstCapsFeatures)*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class CapsFeatures : gobject.boxed.Boxed
   bool isEqual(gst.caps_features.CapsFeatures features2)
   {
     bool _retval;
-    _retval = gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)cPtr, features2 ? cast(const(GstCapsFeatures)*)features2.cPtr(No.Dup) : null);
+    _retval = gst_caps_features_is_equal(cast(const(GstCapsFeatures)*)this._cPtr, features2 ? cast(const(GstCapsFeatures)*)features2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class CapsFeatures : gobject.boxed.Boxed
   void remove(string feature)
   {
     const(char)* _feature = feature.toCString(No.Alloc);
-    gst_caps_features_remove(cast(GstCapsFeatures*)cPtr, _feature);
+    gst_caps_features_remove(cast(GstCapsFeatures*)this._cPtr, _feature);
   }
 
   /**
@@ -253,7 +253,7 @@ class CapsFeatures : gobject.boxed.Boxed
   */
   void removeId(glib.types.Quark feature)
   {
-    gst_caps_features_remove_id(cast(GstCapsFeatures*)cPtr, feature);
+    gst_caps_features_remove_id(cast(GstCapsFeatures*)this._cPtr, feature);
   }
 
   /**
@@ -271,7 +271,7 @@ class CapsFeatures : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_caps_features_to_string(cast(const(GstCapsFeatures)*)cPtr);
+    _cretval = gst_caps_features_to_string(cast(const(GstCapsFeatures)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

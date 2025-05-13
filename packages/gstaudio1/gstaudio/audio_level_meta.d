@@ -28,7 +28,7 @@ class AudioLevelMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class AudioLevelMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioLevelMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioLevelMeta*)this._cPtr).meta);
   }
 
   /**
@@ -48,7 +48,7 @@ class AudioLevelMeta
   */
   @property ubyte level()
   {
-    return (cast(GstAudioLevelMeta*)cPtr).level;
+    return (cast(GstAudioLevelMeta*)this._cPtr).level;
   }
 
   /**
@@ -58,7 +58,7 @@ class AudioLevelMeta
   */
   @property void level(ubyte propval)
   {
-    (cast(GstAudioLevelMeta*)cPtr).level = propval;
+    (cast(GstAudioLevelMeta*)this._cPtr).level = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class AudioLevelMeta
   */
   @property bool voiceActivity()
   {
-    return (cast(GstAudioLevelMeta*)cPtr).voiceActivity;
+    return (cast(GstAudioLevelMeta*)this._cPtr).voiceActivity;
   }
 
   /**
@@ -77,7 +77,7 @@ class AudioLevelMeta
   */
   @property void voiceActivity(bool propval)
   {
-    (cast(GstAudioLevelMeta*)cPtr).voiceActivity = propval;
+    (cast(GstAudioLevelMeta*)this._cPtr).voiceActivity = propval;
   }
 
   /**

@@ -36,16 +36,16 @@ class UriLauncher : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_uri_launcher_get_type != &gidSymbolNotFound ? gtk_uri_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,7 @@ class UriLauncher : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)cPtr);
+    _cretval = gtk_uri_launcher_get_uri(cast(GtkUriLauncher*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -116,17 +116,17 @@ class UriLauncher : gobject.object.ObjectWrap
   */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_uri_launcher_launch(cast(GtkUriLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_uri_launcher_launch(cast(GtkUriLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -143,7 +143,7 @@ class UriLauncher : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_uri_launcher_launch_finish(cast(GtkUriLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -158,6 +158,6 @@ class UriLauncher : gobject.object.ObjectWrap
   void setUri(string uri = null)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
-    gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)cPtr, _uri);
+    gtk_uri_launcher_set_uri(cast(GtkUriLauncher*)this._cPtr, _uri);
   }
 }

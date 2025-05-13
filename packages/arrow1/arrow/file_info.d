@@ -18,16 +18,16 @@ class FileInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_file_info_get_type != &gidSymbolNotFound ? garrow_file_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -153,7 +153,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool equal(arrow.file_info.FileInfo otherFileInfo)
   {
     bool _retval;
-    _retval = garrow_file_info_equal(cast(GArrowFileInfo*)cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo.cPtr(No.Dup) : null);
+    _retval = garrow_file_info_equal(cast(GArrowFileInfo*)this._cPtr, otherFileInfo ? cast(GArrowFileInfo*)otherFileInfo._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool isDir()
   {
     bool _retval;
-    _retval = garrow_file_info_is_dir(cast(GArrowFileInfo*)cPtr);
+    _retval = garrow_file_info_is_dir(cast(GArrowFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class FileInfo : gobject.object.ObjectWrap
   bool isFile()
   {
     bool _retval;
-    _retval = garrow_file_info_is_file(cast(GArrowFileInfo*)cPtr);
+    _retval = garrow_file_info_is_file(cast(GArrowFileInfo*)this._cPtr);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class FileInfo : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)cPtr);
+    _cretval = garrow_file_info_to_string(cast(GArrowFileInfo*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

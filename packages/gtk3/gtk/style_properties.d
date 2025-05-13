@@ -39,16 +39,16 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_properties_get_type != &gidSymbolNotFound ? gtk_style_properties_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   */
   void clear()
   {
-    gtk_style_properties_clear(cast(GtkStyleProperties*)cPtr);
+    gtk_style_properties_clear(cast(GtkStyleProperties*)this._cPtr);
   }
 
   alias getProperty = gobject.object.ObjectWrap.getProperty;
@@ -101,7 +101,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
     bool _retval;
     const(char)* _property = property.toCString(No.Alloc);
     GValue _value;
-    _retval = gtk_style_properties_get_property(cast(GtkStyleProperties*)cPtr, _property, state, &_value);
+    _retval = gtk_style_properties_get_property(cast(GtkStyleProperties*)this._cPtr, _property, state, &_value);
     value = new gobject.value.Value(cast(void*)&_value, Yes.Take);
     return _retval;
   }
@@ -120,7 +120,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   {
     GtkSymbolicColor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_style_properties_lookup_color(cast(GtkStyleProperties*)cPtr, _name);
+    _cretval = gtk_style_properties_lookup_color(cast(GtkStyleProperties*)this._cPtr, _name);
     auto _retval = _cretval ? new gtk.symbolic_color.SymbolicColor(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -138,7 +138,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   void mapColor(string name, gtk.symbolic_color.SymbolicColor color)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_style_properties_map_color(cast(GtkStyleProperties*)cPtr, _name, color ? cast(GtkSymbolicColor*)color.cPtr(No.Dup) : null);
+    gtk_style_properties_map_color(cast(GtkStyleProperties*)this._cPtr, _name, color ? cast(GtkSymbolicColor*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -155,7 +155,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   */
   void merge(gtk.style_properties.StyleProperties propsToMerge, bool replace)
   {
-    gtk_style_properties_merge(cast(GtkStyleProperties*)cPtr, propsToMerge ? cast(const(GtkStyleProperties)*)propsToMerge.cPtr(No.Dup) : null, replace);
+    gtk_style_properties_merge(cast(GtkStyleProperties*)this._cPtr, propsToMerge ? cast(const(GtkStyleProperties)*)propsToMerge._cPtr(No.Dup) : null, replace);
   }
 
   alias setProperty = gobject.object.ObjectWrap.setProperty;
@@ -173,7 +173,7 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   void setProperty(string property, gtk.types.StateFlags state, gobject.value.Value value)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    gtk_style_properties_set_property(cast(GtkStyleProperties*)cPtr, _property, state, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    gtk_style_properties_set_property(cast(GtkStyleProperties*)this._cPtr, _property, state, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -188,6 +188,6 @@ class StyleProperties : gobject.object.ObjectWrap, gtk.style_provider.StyleProvi
   void unsetProperty(string property, gtk.types.StateFlags state)
   {
     const(char)* _property = property.toCString(No.Alloc);
-    gtk_style_properties_unset_property(cast(GtkStyleProperties*)cPtr, _property, state);
+    gtk_style_properties_unset_property(cast(GtkStyleProperties*)this._cPtr, _property, state);
   }
 }

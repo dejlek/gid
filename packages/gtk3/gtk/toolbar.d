@@ -54,16 +54,16 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toolbar_get_type != &gidSymbolNotFound ? gtk_toolbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -177,7 +177,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   int getDropIndex(int x, int y)
   {
     int _retval;
-    _retval = gtk_toolbar_get_drop_index(cast(GtkToolbar*)cPtr, x, y);
+    _retval = gtk_toolbar_get_drop_index(cast(GtkToolbar*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_toolbar_get_icon_size(cast(GtkToolbar*)cPtr);
+    _cretval = gtk_toolbar_get_icon_size(cast(GtkToolbar*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   int getItemIndex(gtk.tool_item.ToolItem item)
   {
     int _retval;
-    _retval = gtk_toolbar_get_item_index(cast(GtkToolbar*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null);
+    _retval = gtk_toolbar_get_item_index(cast(GtkToolbar*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   int getNItems()
   {
     int _retval;
-    _retval = gtk_toolbar_get_n_items(cast(GtkToolbar*)cPtr);
+    _retval = gtk_toolbar_get_n_items(cast(GtkToolbar*)this._cPtr);
     return _retval;
   }
 
@@ -231,8 +231,8 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   gtk.tool_item.ToolItem getNthItem(int n)
   {
     GtkToolItem* _cretval;
-    _cretval = gtk_toolbar_get_nth_item(cast(GtkToolbar*)cPtr, n);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_toolbar_get_nth_item(cast(GtkToolbar*)this._cPtr, n);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_item.ToolItem)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   gtk.types.ReliefStyle getReliefStyle()
   {
     GtkReliefStyle _cretval;
-    _cretval = gtk_toolbar_get_relief_style(cast(GtkToolbar*)cPtr);
+    _cretval = gtk_toolbar_get_relief_style(cast(GtkToolbar*)this._cPtr);
     gtk.types.ReliefStyle _retval = cast(gtk.types.ReliefStyle)_cretval;
     return _retval;
   }
@@ -257,7 +257,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   bool getShowArrow()
   {
     bool _retval;
-    _retval = gtk_toolbar_get_show_arrow(cast(GtkToolbar*)cPtr);
+    _retval = gtk_toolbar_get_show_arrow(cast(GtkToolbar*)this._cPtr);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   gtk.types.ToolbarStyle getStyle()
   {
     GtkToolbarStyle _cretval;
-    _cretval = gtk_toolbar_get_style(cast(GtkToolbar*)cPtr);
+    _cretval = gtk_toolbar_get_style(cast(GtkToolbar*)this._cPtr);
     gtk.types.ToolbarStyle _retval = cast(gtk.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -287,7 +287,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void insert(gtk.tool_item.ToolItem item, int pos)
   {
-    gtk_toolbar_insert(cast(GtkToolbar*)cPtr, item ? cast(GtkToolItem*)item.cPtr(No.Dup) : null, pos);
+    gtk_toolbar_insert(cast(GtkToolbar*)this._cPtr, item ? cast(GtkToolItem*)item._cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -307,7 +307,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void setDropHighlightItem(gtk.tool_item.ToolItem toolItem, int index)
   {
-    gtk_toolbar_set_drop_highlight_item(cast(GtkToolbar*)cPtr, toolItem ? cast(GtkToolItem*)toolItem.cPtr(No.Dup) : null, index);
+    gtk_toolbar_set_drop_highlight_item(cast(GtkToolbar*)this._cPtr, toolItem ? cast(GtkToolItem*)toolItem._cPtr(No.Dup) : null, index);
   }
 
   /**
@@ -325,7 +325,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void setIconSize(gtk.types.IconSize iconSize)
   {
-    gtk_toolbar_set_icon_size(cast(GtkToolbar*)cPtr, iconSize);
+    gtk_toolbar_set_icon_size(cast(GtkToolbar*)this._cPtr, iconSize);
   }
 
   /**
@@ -341,7 +341,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void setShowArrow(bool showArrow)
   {
-    gtk_toolbar_set_show_arrow(cast(GtkToolbar*)cPtr, showArrow);
+    gtk_toolbar_set_show_arrow(cast(GtkToolbar*)this._cPtr, showArrow);
   }
 
   alias setStyle = gtk.widget.Widget.setStyle;
@@ -354,7 +354,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void setStyle(gtk.types.ToolbarStyle style)
   {
-    gtk_toolbar_set_style(cast(GtkToolbar*)cPtr, style);
+    gtk_toolbar_set_style(cast(GtkToolbar*)this._cPtr, style);
   }
 
   /**
@@ -363,7 +363,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void unsetIconSize()
   {
-    gtk_toolbar_unset_icon_size(cast(GtkToolbar*)cPtr);
+    gtk_toolbar_unset_icon_size(cast(GtkToolbar*)this._cPtr);
   }
 
   /**
@@ -372,7 +372,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
   */
   void unsetStyle()
   {
-    gtk_toolbar_unset_style(cast(GtkToolbar*)cPtr);
+    gtk_toolbar_unset_style(cast(GtkToolbar*)this._cPtr);
   }
 
   /**

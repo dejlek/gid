@@ -35,7 +35,7 @@ class ActionEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -46,7 +46,7 @@ class ActionEntry
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -56,8 +56,8 @@ class ActionEntry
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).name);
   }
 
   /** Function alias for field `activate` */
@@ -75,7 +75,7 @@ class ActionEntry
   */
   @property ActivateFuncType activate()
   {
-    return (cast(GActionEntry*)cPtr).activate;
+    return (cast(GActionEntry*)this._cPtr).activate;
   }
 
   /**
@@ -86,7 +86,7 @@ class ActionEntry
   */
   @property string parameterType()
   {
-    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
   }
 
   /**
@@ -98,8 +98,8 @@ class ActionEntry
   */
   @property void parameterType(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).parameterType);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).parameterType);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).parameterType);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).parameterType);
   }
 
   /**
@@ -112,7 +112,7 @@ class ActionEntry
   */
   @property string state()
   {
-    return cToD!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
+    return cToD!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
   }
 
   /**
@@ -126,8 +126,8 @@ class ActionEntry
   */
   @property void state(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GActionEntry*)cPtr).state);
-    dToC(propval, cast(void*)&(cast(GActionEntry*)cPtr).state);
+    cValueFree!(string)(cast(void*)(cast(GActionEntry*)this._cPtr).state);
+    dToC(propval, cast(void*)&(cast(GActionEntry*)this._cPtr).state);
   }
 
   /** Function alias for field `changeState` */
@@ -141,6 +141,6 @@ class ActionEntry
   */
   @property ChangeStateFuncType changeState()
   {
-    return (cast(GActionEntry*)cPtr).changeState;
+    return (cast(GActionEntry*)this._cPtr).changeState;
   }
 }

@@ -27,7 +27,7 @@ class DebugCategory
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class DebugCategory
   uint getColor()
   {
     uint _retval;
-    _retval = gst_debug_category_get_color(cast(GstDebugCategory*)cPtr);
+    _retval = gst_debug_category_get_color(cast(GstDebugCategory*)this._cPtr);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ class DebugCategory
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = gst_debug_category_get_description(cast(GstDebugCategory*)cPtr);
+    _cretval = gst_debug_category_get_description(cast(GstDebugCategory*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -63,7 +63,7 @@ class DebugCategory
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gst_debug_category_get_name(cast(GstDebugCategory*)cPtr);
+    _cretval = gst_debug_category_get_name(cast(GstDebugCategory*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -75,7 +75,7 @@ class DebugCategory
   gst.types.DebugLevel getThreshold()
   {
     GstDebugLevel _cretval;
-    _cretval = gst_debug_category_get_threshold(cast(GstDebugCategory*)cPtr);
+    _cretval = gst_debug_category_get_threshold(cast(GstDebugCategory*)this._cPtr);
     gst.types.DebugLevel _retval = cast(gst.types.DebugLevel)_cretval;
     return _retval;
   }
@@ -89,7 +89,7 @@ class DebugCategory
   */
   void resetThreshold()
   {
-    gst_debug_category_reset_threshold(cast(GstDebugCategory*)cPtr);
+    gst_debug_category_reset_threshold(cast(GstDebugCategory*)this._cPtr);
   }
 
   /**
@@ -105,6 +105,6 @@ class DebugCategory
   */
   void setThreshold(gst.types.DebugLevel level)
   {
-    gst_debug_category_set_threshold(cast(GstDebugCategory*)cPtr, level);
+    gst_debug_category_set_threshold(cast(GstDebugCategory*)this._cPtr, level);
   }
 }

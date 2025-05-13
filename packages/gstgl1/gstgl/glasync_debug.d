@@ -27,7 +27,7 @@ class GLAsyncDebug
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class GLAsyncDebug
   */
   void freeze()
   {
-    gst_gl_async_debug_freeze(cast(GstGLAsyncDebug*)cPtr);
+    gst_gl_async_debug_freeze(cast(GstGLAsyncDebug*)this._cPtr);
   }
 
   /**
@@ -49,7 +49,7 @@ class GLAsyncDebug
   */
   void init_()
   {
-    gst_gl_async_debug_init(cast(GstGLAsyncDebug*)cPtr);
+    gst_gl_async_debug_init(cast(GstGLAsyncDebug*)this._cPtr);
   }
 
   /**
@@ -57,7 +57,7 @@ class GLAsyncDebug
   */
   void outputLogMsg()
   {
-    gst_gl_async_debug_output_log_msg(cast(GstGLAsyncDebug*)cPtr);
+    gst_gl_async_debug_output_log_msg(cast(GstGLAsyncDebug*)this._cPtr);
   }
 
   /**
@@ -65,7 +65,7 @@ class GLAsyncDebug
   */
   void thaw()
   {
-    gst_gl_async_debug_thaw(cast(GstGLAsyncDebug*)cPtr);
+    gst_gl_async_debug_thaw(cast(GstGLAsyncDebug*)this._cPtr);
   }
 
   /**
@@ -74,6 +74,6 @@ class GLAsyncDebug
   */
   void unset()
   {
-    gst_gl_async_debug_unset(cast(GstGLAsyncDebug*)cPtr);
+    gst_gl_async_debug_unset(cast(GstGLAsyncDebug*)this._cPtr);
   }
 }

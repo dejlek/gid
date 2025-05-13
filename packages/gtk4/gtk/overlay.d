@@ -58,16 +58,16 @@ class Overlay : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_get_type != &gidSymbolNotFound ? gtk_overlay_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -121,7 +121,7 @@ class Overlay : gtk.widget.Widget
   */
   void addOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_add_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_add_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -131,8 +131,8 @@ class Overlay : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_overlay_get_child(cast(GtkOverlay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_overlay_get_child(cast(GtkOverlay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class Overlay : gtk.widget.Widget
   bool getClipOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_clip_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Overlay : gtk.widget.Widget
   bool getMeasureOverlay(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_overlay_get_measure_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class Overlay : gtk.widget.Widget
   */
   void removeOverlay(gtk.widget.Widget widget)
   {
-    gtk_overlay_remove_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_overlay_remove_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -184,7 +184,7 @@ class Overlay : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_overlay_set_child(cast(GtkOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_overlay_set_child(cast(GtkOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -196,7 +196,7 @@ class Overlay : gtk.widget.Widget
   */
   void setClipOverlay(gtk.widget.Widget widget, bool clipOverlay)
   {
-    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, clipOverlay);
+    gtk_overlay_set_clip_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, clipOverlay);
   }
 
   /**
@@ -212,6 +212,6 @@ class Overlay : gtk.widget.Widget
   */
   void setMeasureOverlay(gtk.widget.Widget widget, bool measure)
   {
-    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, measure);
+    gtk_overlay_set_measure_overlay(cast(GtkOverlay*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, measure);
   }
 }

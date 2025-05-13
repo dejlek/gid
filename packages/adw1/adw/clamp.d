@@ -55,16 +55,16 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_get_type != &gidSymbolNotFound ? adw_clamp_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -203,8 +203,8 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_clamp_get_child(cast(AdwClamp*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_clamp_get_child(cast(AdwClamp*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   int getMaximumSize()
   {
     int _retval;
-    _retval = adw_clamp_get_maximum_size(cast(AdwClamp*)cPtr);
+    _retval = adw_clamp_get_maximum_size(cast(AdwClamp*)this._cPtr);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   int getTighteningThreshold()
   {
     int _retval;
-    _retval = adw_clamp_get_tightening_threshold(cast(AdwClamp*)cPtr);
+    _retval = adw_clamp_get_tightening_threshold(cast(AdwClamp*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   adw.types.LengthUnit getUnit()
   {
     AdwLengthUnit _cretval;
-    _cretval = adw_clamp_get_unit(cast(AdwClamp*)cPtr);
+    _cretval = adw_clamp_get_unit(cast(AdwClamp*)this._cPtr);
     adw.types.LengthUnit _retval = cast(adw.types.LengthUnit)_cretval;
     return _retval;
   }
@@ -250,7 +250,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_clamp_set_child(cast(AdwClamp*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_clamp_set_child(cast(AdwClamp*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -263,7 +263,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setMaximumSize(int maximumSize)
   {
-    adw_clamp_set_maximum_size(cast(AdwClamp*)cPtr, maximumSize);
+    adw_clamp_set_maximum_size(cast(AdwClamp*)this._cPtr, maximumSize);
   }
 
   /**
@@ -287,7 +287,7 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setTighteningThreshold(int tighteningThreshold)
   {
-    adw_clamp_set_tightening_threshold(cast(AdwClamp*)cPtr, tighteningThreshold);
+    adw_clamp_set_tightening_threshold(cast(AdwClamp*)this._cPtr, tighteningThreshold);
   }
 
   /**
@@ -300,6 +300,6 @@ class Clamp : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setUnit(adw.types.LengthUnit unit)
   {
-    adw_clamp_set_unit(cast(AdwClamp*)cPtr, unit);
+    adw_clamp_set_unit(cast(AdwClamp*)this._cPtr, unit);
   }
 }

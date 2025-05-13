@@ -69,16 +69,16 @@ class GridView : gtk.list_base.ListBase
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_view_get_type != &gidSymbolNotFound ? gtk_grid_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -245,7 +245,7 @@ class GridView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    _cretval = gtk_grid_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -256,7 +256,7 @@ class GridView : gtk.list_base.ListBase
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_grid_view_get_enable_rubberband(cast(GtkGridView*)cPtr);
+    _retval = gtk_grid_view_get_enable_rubberband(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 
@@ -267,8 +267,8 @@ class GridView : gtk.list_base.ListBase
   gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_grid_view_get_factory(cast(GtkGridView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class GridView : gtk.list_base.ListBase
   uint getMaxColumns()
   {
     uint _retval;
-    _retval = gtk_grid_view_get_max_columns(cast(GtkGridView*)cPtr);
+    _retval = gtk_grid_view_get_max_columns(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class GridView : gtk.list_base.ListBase
   uint getMinColumns()
   {
     uint _retval;
-    _retval = gtk_grid_view_get_min_columns(cast(GtkGridView*)cPtr);
+    _retval = gtk_grid_view_get_min_columns(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 
@@ -301,8 +301,8 @@ class GridView : gtk.list_base.ListBase
   gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
-    _cretval = gtk_grid_view_get_model(cast(GtkGridView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    _cretval = gtk_grid_view_get_model(cast(GtkGridView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class GridView : gtk.list_base.ListBase
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_grid_view_get_single_click_activate(cast(GtkGridView*)cPtr);
+    _retval = gtk_grid_view_get_single_click_activate(cast(GtkGridView*)this._cPtr);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class GridView : gtk.list_base.ListBase
   gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
-    _cretval = gtk_grid_view_get_tab_behavior(cast(GtkGridView*)cPtr);
+    _cretval = gtk_grid_view_get_tab_behavior(cast(GtkGridView*)this._cPtr);
     gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
@@ -345,7 +345,7 @@ class GridView : gtk.list_base.ListBase
   */
   void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_grid_view_scroll_to(cast(GtkGridView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_grid_view_scroll_to(cast(GtkGridView*)this._cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -356,7 +356,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setEnableRubberband(bool enableRubberband)
   {
-    gtk_grid_view_set_enable_rubberband(cast(GtkGridView*)cPtr, enableRubberband);
+    gtk_grid_view_set_enable_rubberband(cast(GtkGridView*)this._cPtr, enableRubberband);
   }
 
   /**
@@ -367,7 +367,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_grid_view_set_factory(cast(GtkGridView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_grid_view_set_factory(cast(GtkGridView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -383,7 +383,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setMaxColumns(uint maxColumns)
   {
-    gtk_grid_view_set_max_columns(cast(GtkGridView*)cPtr, maxColumns);
+    gtk_grid_view_set_max_columns(cast(GtkGridView*)this._cPtr, maxColumns);
   }
 
   /**
@@ -399,7 +399,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setMinColumns(uint minColumns)
   {
-    gtk_grid_view_set_min_columns(cast(GtkGridView*)cPtr, minColumns);
+    gtk_grid_view_set_min_columns(cast(GtkGridView*)this._cPtr, minColumns);
   }
 
   /**
@@ -412,7 +412,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_grid_view_set_model(cast(GtkGridView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_grid_view_set_model(cast(GtkGridView*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -424,7 +424,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setSingleClickActivate(bool singleClickActivate)
   {
-    gtk_grid_view_set_single_click_activate(cast(GtkGridView*)cPtr, singleClickActivate);
+    gtk_grid_view_set_single_click_activate(cast(GtkGridView*)this._cPtr, singleClickActivate);
   }
 
   /**
@@ -435,7 +435,7 @@ class GridView : gtk.list_base.ListBase
   */
   void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
-    gtk_grid_view_set_tab_behavior(cast(GtkGridView*)cPtr, tabBehavior);
+    gtk_grid_view_set_tab_behavior(cast(GtkGridView*)this._cPtr, tabBehavior);
   }
 
   /**

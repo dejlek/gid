@@ -54,16 +54,16 @@ class Snapshot : gdk.snapshot.Snapshot
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_snapshot_get_type != &gidSymbolNotFound ? gtk_snapshot_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,9 +102,9 @@ class Snapshot : gdk.snapshot.Snapshot
     assert(!borderColor || borderColor.length == 4);
     GdkRGBA[] _tmpborderColor;
     foreach (obj; borderColor)
-      _tmpborderColor ~= *cast(GdkRGBA*)obj.cPtr;
+      _tmpborderColor ~= *cast(GdkRGBA*)obj._cPtr;
     const(GdkRGBA)* _borderColor = _tmpborderColor.ptr;
-    gtk_snapshot_append_border(cast(GtkSnapshot*)cPtr, outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, _borderWidth, _borderColor);
+    gtk_snapshot_append_border(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
   }
 
   /**
@@ -119,7 +119,7 @@ class Snapshot : gdk.snapshot.Snapshot
   cairo.context.Context appendCairo(graphene.rect.Rect bounds)
   {
     cairo_t* _cretval;
-    _cretval = gtk_snapshot_append_cairo(cast(GtkSnapshot*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    _cretval = gtk_snapshot_append_cairo(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -138,7 +138,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendColor(gdk.rgba.RGBA color, graphene.rect.Rect bounds)
   {
-    gtk_snapshot_append_color(cast(GtkSnapshot*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    gtk_snapshot_append_color(cast(GtkSnapshot*)this._cPtr, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
   }
 
   /**
@@ -155,7 +155,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendFill(gsk.path.Path path, gsk.types.FillRule fillRule, gdk.rgba.RGBA color)
   {
-    gtk_snapshot_append_fill(cast(GtkSnapshot*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, fillRule, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_snapshot_append_fill(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,13 +171,13 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendInsetShadow(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
-    gtk_snapshot_append_inset_shadow(cast(GtkSnapshot*)cPtr, outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    gtk_snapshot_append_inset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
   }
 
   /** */
   void appendLayout(pango.layout.Layout layout, gdk.rgba.RGBA color)
   {
-    gtk_snapshot_append_layout(cast(GtkSnapshot*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_snapshot_append_layout(cast(GtkSnapshot*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,7 +192,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendNode(gsk.render_node.RenderNode node)
   {
-    gtk_snapshot_append_node(cast(GtkSnapshot*)cPtr, node ? cast(GskRenderNode*)node.cPtr(No.Dup) : null);
+    gtk_snapshot_append_node(cast(GtkSnapshot*)this._cPtr, node ? cast(GskRenderNode*)node._cPtr(No.Dup) : null);
   }
 
   /**
@@ -208,7 +208,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendOutsetShadow(gsk.rounded_rect.RoundedRect outline, gdk.rgba.RGBA color, float dx, float dy, float spread, float blurRadius)
   {
-    gtk_snapshot_append_outset_shadow(cast(GtkSnapshot*)cPtr, outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
+    gtk_snapshot_append_outset_shadow(cast(GtkSnapshot*)this._cPtr, outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null, dx, dy, spread, blurRadius);
   }
 
   /**
@@ -227,7 +227,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendScaledTexture(gdk.texture.Texture texture, gsk.types.ScalingFilter filter, graphene.rect.Rect bounds)
   {
-    gtk_snapshot_append_scaled_texture(cast(GtkSnapshot*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, filter, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    gtk_snapshot_append_scaled_texture(cast(GtkSnapshot*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, filter, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
   }
 
   /**
@@ -244,7 +244,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendStroke(gsk.path.Path path, gsk.stroke.Stroke stroke, gdk.rgba.RGBA color)
   {
-    gtk_snapshot_append_stroke(cast(GtkSnapshot*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_snapshot_append_stroke(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -262,7 +262,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void appendTexture(gdk.texture.Texture texture, graphene.rect.Rect bounds)
   {
-    gtk_snapshot_append_texture(cast(GtkSnapshot*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    gtk_snapshot_append_texture(cast(GtkSnapshot*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
   }
 
   /**
@@ -275,7 +275,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void glShaderPopTexture()
   {
-    gtk_snapshot_gl_shader_pop_texture(cast(GtkSnapshot*)cPtr);
+    gtk_snapshot_gl_shader_pop_texture(cast(GtkSnapshot*)this._cPtr);
   }
 
   /**
@@ -288,7 +288,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void perspective(float depth)
   {
-    gtk_snapshot_perspective(cast(GtkSnapshot*)cPtr, depth);
+    gtk_snapshot_perspective(cast(GtkSnapshot*)this._cPtr, depth);
   }
 
   /**
@@ -297,7 +297,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pop()
   {
-    gtk_snapshot_pop(cast(GtkSnapshot*)cPtr);
+    gtk_snapshot_pop(cast(GtkSnapshot*)this._cPtr);
   }
 
   /**
@@ -316,7 +316,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushBlend(gsk.types.BlendMode blendMode)
   {
-    gtk_snapshot_push_blend(cast(GtkSnapshot*)cPtr, blendMode);
+    gtk_snapshot_push_blend(cast(GtkSnapshot*)this._cPtr, blendMode);
   }
 
   /**
@@ -329,7 +329,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushBlur(double radius)
   {
-    gtk_snapshot_push_blur(cast(GtkSnapshot*)cPtr, radius);
+    gtk_snapshot_push_blur(cast(GtkSnapshot*)this._cPtr, radius);
   }
 
   /**
@@ -342,7 +342,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushClip(graphene.rect.Rect bounds)
   {
-    gtk_snapshot_push_clip(cast(GtkSnapshot*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    gtk_snapshot_push_clip(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
   }
 
   /**
@@ -364,7 +364,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushColorMatrix(graphene.matrix.Matrix colorMatrix, graphene.vec4.Vec4 colorOffset)
   {
-    gtk_snapshot_push_color_matrix(cast(GtkSnapshot*)cPtr, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix.cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset.cPtr(No.Dup) : null);
+    gtk_snapshot_push_color_matrix(cast(GtkSnapshot*)this._cPtr, colorMatrix ? cast(const(graphene_matrix_t)*)colorMatrix._cPtr(No.Dup) : null, colorOffset ? cast(const(graphene_vec4_t)*)colorOffset._cPtr(No.Dup) : null);
   }
 
   /**
@@ -383,7 +383,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushCrossFade(double progress)
   {
-    gtk_snapshot_push_cross_fade(cast(GtkSnapshot*)cPtr, progress);
+    gtk_snapshot_push_cross_fade(cast(GtkSnapshot*)this._cPtr, progress);
   }
 
   /**
@@ -401,7 +401,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushFill(gsk.path.Path path, gsk.types.FillRule fillRule)
   {
-    gtk_snapshot_push_fill(cast(GtkSnapshot*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, fillRule);
+    gtk_snapshot_push_fill(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule);
   }
 
   /**
@@ -447,7 +447,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushGlShader(gsk.glshader.GLShader shader, graphene.rect.Rect bounds, glib.bytes.Bytes takeArgs)
   {
-    gtk_snapshot_push_gl_shader(cast(GtkSnapshot*)cPtr, shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, takeArgs ? cast(GBytes*)takeArgs.cPtr(Yes.Dup) : null);
+    gtk_snapshot_push_gl_shader(cast(GtkSnapshot*)this._cPtr, shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, takeArgs ? cast(GBytes*)takeArgs._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -464,7 +464,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushMask(gsk.types.MaskMode maskMode)
   {
-    gtk_snapshot_push_mask(cast(GtkSnapshot*)cPtr, maskMode);
+    gtk_snapshot_push_mask(cast(GtkSnapshot*)this._cPtr, maskMode);
   }
 
   /**
@@ -477,7 +477,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushOpacity(double opacity)
   {
-    gtk_snapshot_push_opacity(cast(GtkSnapshot*)cPtr, opacity);
+    gtk_snapshot_push_opacity(cast(GtkSnapshot*)this._cPtr, opacity);
   }
 
   /**
@@ -492,7 +492,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushRepeat(graphene.rect.Rect bounds, graphene.rect.Rect childBounds = null)
   {
-    gtk_snapshot_push_repeat(cast(GtkSnapshot*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds.cPtr(No.Dup) : null);
+    gtk_snapshot_push_repeat(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds._cPtr(No.Dup) : null);
   }
 
   /**
@@ -505,7 +505,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushRoundedClip(gsk.rounded_rect.RoundedRect bounds)
   {
-    gtk_snapshot_push_rounded_clip(cast(GtkSnapshot*)cPtr, bounds ? cast(const(GskRoundedRect)*)bounds.cPtr : null);
+    gtk_snapshot_push_rounded_clip(cast(GtkSnapshot*)this._cPtr, bounds ? cast(const(GskRoundedRect)*)bounds._cPtr : null);
   }
 
   /**
@@ -527,7 +527,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void pushStroke(gsk.path.Path path, gsk.stroke.Stroke stroke)
   {
-    gtk_snapshot_push_stroke(cast(GtkSnapshot*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null);
+    gtk_snapshot_push_stroke(cast(GtkSnapshot*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null);
   }
 
   /**
@@ -544,7 +544,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void renderBackground(gtk.style_context.StyleContext context, double x, double y, double width, double height)
   {
-    gtk_snapshot_render_background(cast(GtkSnapshot*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, width, height);
+    gtk_snapshot_render_background(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
   }
 
   /**
@@ -561,7 +561,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void renderFocus(gtk.style_context.StyleContext context, double x, double y, double width, double height)
   {
-    gtk_snapshot_render_focus(cast(GtkSnapshot*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, width, height);
+    gtk_snapshot_render_focus(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
   }
 
   /**
@@ -578,7 +578,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void renderFrame(gtk.style_context.StyleContext context, double x, double y, double width, double height)
   {
-    gtk_snapshot_render_frame(cast(GtkSnapshot*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, width, height);
+    gtk_snapshot_render_frame(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, width, height);
   }
 
   /**
@@ -594,7 +594,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void renderInsertionCursor(gtk.style_context.StyleContext context, double x, double y, pango.layout.Layout layout, int index, pango.types.Direction direction)
   {
-    gtk_snapshot_render_insertion_cursor(cast(GtkSnapshot*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null, index, direction);
+    gtk_snapshot_render_insertion_cursor(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null, index, direction);
   }
 
   /**
@@ -610,7 +610,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void renderLayout(gtk.style_context.StyleContext context, double x, double y, pango.layout.Layout layout)
   {
-    gtk_snapshot_render_layout(cast(GtkSnapshot*)cPtr, context ? cast(GtkStyleContext*)context.cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
+    gtk_snapshot_render_layout(cast(GtkSnapshot*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, x, y, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
   }
 
   /**
@@ -620,7 +620,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void restore()
   {
-    gtk_snapshot_restore(cast(GtkSnapshot*)cPtr);
+    gtk_snapshot_restore(cast(GtkSnapshot*)this._cPtr);
   }
 
   /**
@@ -635,7 +635,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void rotate(float angle)
   {
-    gtk_snapshot_rotate(cast(GtkSnapshot*)cPtr, angle);
+    gtk_snapshot_rotate(cast(GtkSnapshot*)this._cPtr, angle);
   }
 
   /**
@@ -649,7 +649,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void rotate3d(float angle, graphene.vec3.Vec3 axis)
   {
-    gtk_snapshot_rotate_3d(cast(GtkSnapshot*)cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis.cPtr(No.Dup) : null);
+    gtk_snapshot_rotate_3d(cast(GtkSnapshot*)this._cPtr, angle, axis ? cast(const(graphene_vec3_t)*)axis._cPtr(No.Dup) : null);
   }
 
   /**
@@ -668,7 +668,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void save()
   {
-    gtk_snapshot_save(cast(GtkSnapshot*)cPtr);
+    gtk_snapshot_save(cast(GtkSnapshot*)this._cPtr);
   }
 
   /**
@@ -683,7 +683,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void scale(float factorX, float factorY)
   {
-    gtk_snapshot_scale(cast(GtkSnapshot*)cPtr, factorX, factorY);
+    gtk_snapshot_scale(cast(GtkSnapshot*)this._cPtr, factorX, factorY);
   }
 
   /**
@@ -696,7 +696,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void scale3d(float factorX, float factorY, float factorZ)
   {
-    gtk_snapshot_scale_3d(cast(GtkSnapshot*)cPtr, factorX, factorY, factorZ);
+    gtk_snapshot_scale_3d(cast(GtkSnapshot*)this._cPtr, factorX, factorY, factorZ);
   }
 
   /**
@@ -716,7 +716,7 @@ class Snapshot : gdk.snapshot.Snapshot
   gsk.render_node.RenderNode toNode()
   {
     GskRenderNode* _cretval;
-    _cretval = gtk_snapshot_to_node(cast(GtkSnapshot*)cPtr);
+    _cretval = gtk_snapshot_to_node(cast(GtkSnapshot*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -737,8 +737,8 @@ class Snapshot : gdk.snapshot.Snapshot
   gdk.paintable.Paintable toPaintable(graphene.size.Size size = null)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)cPtr, size ? cast(const(graphene_size_t)*)size.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_snapshot_to_paintable(cast(GtkSnapshot*)this._cPtr, size ? cast(const(graphene_size_t)*)size._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void transform(gsk.transform.Transform transform = null)
   {
-    gtk_snapshot_transform(cast(GtkSnapshot*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
+    gtk_snapshot_transform(cast(GtkSnapshot*)this._cPtr, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
   }
 
   /**
@@ -761,7 +761,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void transformMatrix(graphene.matrix.Matrix matrix)
   {
-    gtk_snapshot_transform_matrix(cast(GtkSnapshot*)cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    gtk_snapshot_transform_matrix(cast(GtkSnapshot*)this._cPtr, matrix ? cast(const(graphene_matrix_t)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -772,7 +772,7 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void translate(graphene.point.Point point)
   {
-    gtk_snapshot_translate(cast(GtkSnapshot*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null);
+    gtk_snapshot_translate(cast(GtkSnapshot*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null);
   }
 
   /**
@@ -783,6 +783,6 @@ class Snapshot : gdk.snapshot.Snapshot
   */
   void translate3d(graphene.point3_d.Point3D point)
   {
-    gtk_snapshot_translate_3d(cast(GtkSnapshot*)cPtr, point ? cast(const(graphene_point3d_t)*)point.cPtr(No.Dup) : null);
+    gtk_snapshot_translate_3d(cast(GtkSnapshot*)this._cPtr, point ? cast(const(graphene_point3d_t)*)point._cPtr(No.Dup) : null);
   }
 }

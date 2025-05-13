@@ -23,16 +23,16 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_back_forward_list_item_get_type != &gidSymbolNotFound ? webkit_back_forward_list_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   string getOriginalUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_back_forward_list_item_get_original_uri(cast(WebKitBackForwardListItem*)cPtr);
+    _cretval = webkit_back_forward_list_item_get_original_uri(cast(WebKitBackForwardListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -64,7 +64,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = webkit_back_forward_list_item_get_title(cast(WebKitBackForwardListItem*)cPtr);
+    _cretval = webkit_back_forward_list_item_get_title(cast(WebKitBackForwardListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -81,7 +81,7 @@ class BackForwardListItem : gobject.initially_unowned.InitiallyUnowned
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_back_forward_list_item_get_uri(cast(WebKitBackForwardListItem*)cPtr);
+    _cretval = webkit_back_forward_list_item_get_uri(cast(WebKitBackForwardListItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

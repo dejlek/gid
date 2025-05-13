@@ -30,7 +30,7 @@ class StaticPadTemplate
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class StaticPadTemplate
   */
   @property string nameTemplate()
   {
-    return cToD!(string)(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
+    return cToD!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
   }
 
   /**
@@ -51,8 +51,8 @@ class StaticPadTemplate
   */
   @property void nameTemplate(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
-    dToC(propval, cast(void*)&(cast(GstStaticPadTemplate*)cPtr).nameTemplate);
+    cValueFree!(string)(cast(void*)(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
+    dToC(propval, cast(void*)&(cast(GstStaticPadTemplate*)this._cPtr).nameTemplate);
   }
 
   /**
@@ -61,7 +61,7 @@ class StaticPadTemplate
   */
   @property gst.types.PadDirection direction()
   {
-    return cast(gst.types.PadDirection)(cast(GstStaticPadTemplate*)cPtr).direction;
+    return cast(gst.types.PadDirection)(cast(GstStaticPadTemplate*)this._cPtr).direction;
   }
 
   /**
@@ -71,7 +71,7 @@ class StaticPadTemplate
   */
   @property void direction(gst.types.PadDirection propval)
   {
-    (cast(GstStaticPadTemplate*)cPtr).direction = cast(GstPadDirection)propval;
+    (cast(GstStaticPadTemplate*)this._cPtr).direction = cast(GstPadDirection)propval;
   }
 
   /**
@@ -80,7 +80,7 @@ class StaticPadTemplate
   */
   @property gst.types.PadPresence presence()
   {
-    return cast(gst.types.PadPresence)(cast(GstStaticPadTemplate*)cPtr).presence;
+    return cast(gst.types.PadPresence)(cast(GstStaticPadTemplate*)this._cPtr).presence;
   }
 
   /**
@@ -90,7 +90,7 @@ class StaticPadTemplate
   */
   @property void presence(gst.types.PadPresence propval)
   {
-    (cast(GstStaticPadTemplate*)cPtr).presence = cast(GstPadPresence)propval;
+    (cast(GstStaticPadTemplate*)this._cPtr).presence = cast(GstPadPresence)propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class StaticPadTemplate
   */
   @property gst.static_caps.StaticCaps staticCaps()
   {
-    return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)cPtr).staticCaps);
+    return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps);
   }
 
   /**
@@ -109,8 +109,8 @@ class StaticPadTemplate
   gst.pad_template.PadTemplate get()
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_static_pad_template_get(cast(GstStaticPadTemplate*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_static_pad_template_get(cast(GstStaticPadTemplate*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class StaticPadTemplate
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_static_pad_template_get_caps(cast(GstStaticPadTemplate*)cPtr);
+    _cretval = gst_static_pad_template_get_caps(cast(GstStaticPadTemplate*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

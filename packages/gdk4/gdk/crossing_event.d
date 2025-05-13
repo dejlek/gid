@@ -29,7 +29,7 @@ class CrossingEvent : gdk.event.Event
   gdk.types.NotifyType getDetail()
   {
     GdkNotifyType _cretval;
-    _cretval = gdk_crossing_event_get_detail(cast(GdkEvent*)cPtr);
+    _cretval = gdk_crossing_event_get_detail(cast(GdkEvent*)this._cPtr);
     gdk.types.NotifyType _retval = cast(gdk.types.NotifyType)_cretval;
     return _retval;
   }
@@ -41,7 +41,7 @@ class CrossingEvent : gdk.event.Event
   bool getFocus()
   {
     bool _retval;
-    _retval = gdk_crossing_event_get_focus(cast(GdkEvent*)cPtr);
+    _retval = gdk_crossing_event_get_focus(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class CrossingEvent : gdk.event.Event
   gdk.types.CrossingMode getMode()
   {
     GdkCrossingMode _cretval;
-    _cretval = gdk_crossing_event_get_mode(cast(GdkEvent*)cPtr);
+    _cretval = gdk_crossing_event_get_mode(cast(GdkEvent*)this._cPtr);
     gdk.types.CrossingMode _retval = cast(gdk.types.CrossingMode)_cretval;
     return _retval;
   }

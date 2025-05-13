@@ -25,16 +25,16 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_renderer_cell_accessible_get_type != &gidSymbolNotFound ? gtk_renderer_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
   this(gtk.cell_renderer.CellRenderer renderer)
   {
     AtkObject* _cretval;
-    _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer.cPtr(No.Dup) : null);
+    _cretval = gtk_renderer_cell_accessible_new(renderer ? cast(GtkCellRenderer*)renderer._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

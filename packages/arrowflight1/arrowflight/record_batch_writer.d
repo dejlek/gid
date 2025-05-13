@@ -23,16 +23,16 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_record_batch_writer_get_type != &gidSymbolNotFound ? gaflight_record_batch_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_begin(cast(GAFlightRecordBatchWriter*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -73,7 +73,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_write_metadata(cast(GAFlightRecordBatchWriter*)this._cPtr, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -94,7 +94,7 @@ class RecordBatchWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_record_batch_writer_write_record_batch(cast(GAFlightRecordBatchWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

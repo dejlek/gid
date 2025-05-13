@@ -29,7 +29,7 @@ class AttrLanguage
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class AttrLanguage
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).attr);
   }
 
   /**
@@ -49,7 +49,7 @@ class AttrLanguage
   */
   @property pango.language.Language value()
   {
-    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);
+    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)this._cPtr).value);
   }
 
   /**
@@ -59,8 +59,8 @@ class AttrLanguage
   */
   @property void value(pango.language.Language propval)
   {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(PangoAttrLanguage*)cPtr).value);
+    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAttrLanguage*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(PangoAttrLanguage*)this._cPtr).value);
   }
 
   /**
@@ -75,7 +75,7 @@ class AttrLanguage
   static pango.attribute.Attribute new_(pango.language.Language language)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    _cretval = pango_attr_language_new(language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

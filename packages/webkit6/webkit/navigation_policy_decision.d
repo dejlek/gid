@@ -25,16 +25,16 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_navigation_policy_decision_get_type != &gidSymbolNotFound ? webkit_navigation_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class NavigationPolicyDecision : webkit.policy_decision.PolicyDecision
   webkit.navigation_action.NavigationAction getNavigationAction()
   {
     WebKitNavigationAction* _cretval;
-    _cretval = webkit_navigation_policy_decision_get_navigation_action(cast(WebKitNavigationPolicyDecision*)cPtr);
+    _cretval = webkit_navigation_policy_decision_get_navigation_action(cast(WebKitNavigationPolicyDecision*)this._cPtr);
     auto _retval = _cretval ? new webkit.navigation_action.NavigationAction(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

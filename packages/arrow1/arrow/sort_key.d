@@ -19,16 +19,16 @@ class SortKey : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sort_key_get_type != &gidSymbolNotFound ? garrow_sort_key_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class SortKey : gobject.object.ObjectWrap
   bool equal(arrow.sort_key.SortKey otherSortKey)
   {
     bool _retval;
-    _retval = garrow_sort_key_equal(cast(GArrowSortKey*)cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey.cPtr(No.Dup) : null);
+    _retval = garrow_sort_key_equal(cast(GArrowSortKey*)this._cPtr, otherSortKey ? cast(GArrowSortKey*)otherSortKey._cPtr(No.Dup) : null);
     return _retval;
   }
 }

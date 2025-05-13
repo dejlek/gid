@@ -19,22 +19,22 @@ class Regex : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_regex_get_type != &gidSymbolNotFound ? vte_regex_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -192,7 +192,7 @@ class Regex : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = vte_regex_jit(cast(VteRegex*)cPtr, flags, &_err);
+    _retval = vte_regex_jit(cast(VteRegex*)this._cPtr, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -215,7 +215,7 @@ class Regex : gobject.boxed.Boxed
     const(char)* _subject = subject.toCString(No.Alloc);
     const(char)* _replacement = replacement.toCString(No.Alloc);
     GError *_err;
-    _cretval = vte_regex_substitute(cast(VteRegex*)cPtr, _subject, _replacement, flags, &_err);
+    _cretval = vte_regex_substitute(cast(VteRegex*)this._cPtr, _subject, _replacement, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);

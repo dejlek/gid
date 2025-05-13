@@ -4726,12 +4726,12 @@ struct GstChildProxyInterface
   /**
       Fetch a child object by name
   */
-  extern(C) ObjectC* function(GstChildProxy* parent, const(char)* name) getChildByName;
+  extern(C) GObject* function(GstChildProxy* parent, const(char)* name) getChildByName;
 
   /**
       Fetch a child object by index
   */
-  extern(C) ObjectC* function(GstChildProxy* parent, uint index) getChildByIndex;
+  extern(C) GObject* function(GstChildProxy* parent, uint index) getChildByIndex;
 
   /**
       Get the number of children in @parent
@@ -4741,12 +4741,12 @@ struct GstChildProxyInterface
   /**
       Called when @child is added to @parent
   */
-  extern(C) void function(GstChildProxy* parent, ObjectC* child, const(char)* name) childAdded;
+  extern(C) void function(GstChildProxy* parent, GObject* child, const(char)* name) childAdded;
 
   /**
       Called when @child is removed from @parent
   */
-  extern(C) void function(GstChildProxy* parent, ObjectC* child, const(char)* name) childRemoved;
+  extern(C) void function(GstChildProxy* parent, GObject* child, const(char)* name) childRemoved;
 
   /** */
   void*[4] GstReserved;
@@ -8663,7 +8663,7 @@ alias extern(C) GstIteratorResult function(GstIterator* it, GValue* result) GstI
 
 alias extern(C) void function(GstIterator* it) GstIteratorResyncFunction;
 
-alias extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, GstDebugMessage* message, void* userData) GstLogFunction;
+alias extern(C) void function(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData) GstLogFunction;
 
 alias extern(C) GstMemory* function(GstMemory* mem, ptrdiff_t offset, ptrdiff_t size) GstMemoryCopyFunction;
 

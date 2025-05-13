@@ -38,8 +38,8 @@ template NativeT()
   override gsk.renderer.Renderer getRenderer()
   {
     GskRenderer* _cretval;
-    _cretval = gtk_native_get_renderer(cast(GtkNative*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, No.Take);
+    _cretval = gtk_native_get_renderer(cast(GtkNative*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -50,8 +50,8 @@ template NativeT()
   override gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gtk_native_get_surface(cast(GtkNative*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gtk_native_get_surface(cast(GtkNative*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ template NativeT()
   */
   override void getSurfaceTransform(out double x, out double y)
   {
-    gtk_native_get_surface_transform(cast(GtkNative*)cPtr, cast(double*)&x, cast(double*)&y);
+    gtk_native_get_surface_transform(cast(GtkNative*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -77,7 +77,7 @@ template NativeT()
   */
   override void realize()
   {
-    gtk_native_realize(cast(GtkNative*)cPtr);
+    gtk_native_realize(cast(GtkNative*)this._cPtr);
   }
 
   /**
@@ -87,6 +87,6 @@ template NativeT()
   */
   override void unrealize()
   {
-    gtk_native_unrealize(cast(GtkNative*)cPtr);
+    gtk_native_unrealize(cast(GtkNative*)this._cPtr);
   }
 }

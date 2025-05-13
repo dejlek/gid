@@ -177,7 +177,7 @@ template TlsClientConnectionT()
   */
   override void copySessionState(gio.tls_client_connection.TlsClientConnection source)
   {
-    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)cPtr, source ? cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)source).cPtr(No.Dup) : null);
+    g_tls_client_connection_copy_session_state(cast(GTlsClientConnection*)this._cPtr, source ? cast(GTlsClientConnection*)(cast(gobject.object.ObjectWrap)source)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -189,8 +189,8 @@ template TlsClientConnectionT()
   override gio.socket_connectable.SocketConnectable getServerIdentity()
   {
     GSocketConnectable* _cretval;
-    _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    _cretval = g_tls_client_connection_get_server_identity(cast(GTlsClientConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ template TlsClientConnectionT()
   override bool getUseSsl3()
   {
     bool _retval;
-    _retval = g_tls_client_connection_get_use_ssl3(cast(GTlsClientConnection*)cPtr);
+    _retval = g_tls_client_connection_get_use_ssl3(cast(GTlsClientConnection*)this._cPtr);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ template TlsClientConnectionT()
   override gio.types.TlsCertificateFlags getValidationFlags()
   {
     GTlsCertificateFlags _cretval;
-    _cretval = g_tls_client_connection_get_validation_flags(cast(GTlsClientConnection*)cPtr);
+    _cretval = g_tls_client_connection_get_validation_flags(cast(GTlsClientConnection*)this._cPtr);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -237,7 +237,7 @@ template TlsClientConnectionT()
   */
   override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
-    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity).cPtr(No.Dup) : null);
+    g_tls_client_connection_set_server_identity(cast(GTlsClientConnection*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -259,7 +259,7 @@ template TlsClientConnectionT()
   */
   override void setUseSsl3(bool useSsl3)
   {
-    g_tls_client_connection_set_use_ssl3(cast(GTlsClientConnection*)cPtr, useSsl3);
+    g_tls_client_connection_set_use_ssl3(cast(GTlsClientConnection*)this._cPtr, useSsl3);
   }
 
   /**
@@ -278,6 +278,6 @@ template TlsClientConnectionT()
   */
   override void setValidationFlags(gio.types.TlsCertificateFlags flags)
   {
-    g_tls_client_connection_set_validation_flags(cast(GTlsClientConnection*)cPtr, flags);
+    g_tls_client_connection_set_validation_flags(cast(GTlsClientConnection*)this._cPtr, flags);
   }
 }

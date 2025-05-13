@@ -36,7 +36,7 @@ handlerId = Handler id of the handler to be disconnected.
 */
 void signalHandlerDisconnect(gobject.object.ObjectWrap instance, gulong handlerId)
 {
-  g_signal_handler_disconnect(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
+  g_signal_handler_disconnect(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
   instance.signalClosures.remove(handlerId);
 }
 
@@ -50,7 +50,7 @@ instance = The instance whose signal handlers are destroyed
 */
 void signalHandlersDestroy(gobject.object.ObjectWrap instance)
 {
-  g_signal_handlers_destroy(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
+  g_signal_handlers_destroy(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
   instance.signalClosures.clear;
 }
 
@@ -68,7 +68,7 @@ void signalHandlersDestroy(gobject.object.ObjectWrap instance)
 */
 void setClosure(glib.source.Source source, gobject.closure.Closure closure)
 {
-  g_source_set_closure(source ? cast(GSource*)source.cPtr(No.Dup) : null, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+  g_source_set_closure(source ? cast(GSource*)source._cPtr(No.Dup) : null, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
 }
 
 /**
@@ -88,7 +88,7 @@ void setClosure(glib.source.Source source, gobject.closure.Closure closure)
 */
 void setDummyCallback(glib.source.Source source)
 {
-  g_source_set_dummy_callback(source ? cast(GSource*)source.cPtr(No.Dup) : null);
+  g_source_set_dummy_callback(source ? cast(GSource*)source._cPtr(No.Dup) : null);
 }
 
 /**
@@ -135,7 +135,7 @@ void boxedFree(gobject.types.GType boxedType, void* boxed)
 */
 void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap instance)
 {
-  g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
+  g_clear_signal_handler(cast(gulong*)&handlerIdPtr, instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
 }
 
 /**
@@ -150,7 +150,7 @@ void clearSignalHandler(ref gulong handlerIdPtr, gobject.object.ObjectWrap insta
 gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass, int value)
 {
   GEnumValue* _cretval;
-  _cretval = g_enum_get_value(enumClass ? cast(GEnumClass*)enumClass.cPtr : null, value);
+  _cretval = g_enum_get_value(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, value);
   auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
   return _retval;
 }
@@ -169,7 +169,7 @@ gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enu
 {
   GEnumValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = g_enum_get_value_by_name(enumClass ? cast(GEnumClass*)enumClass.cPtr : null, _name);
+  _cretval = g_enum_get_value_by_name(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _name);
   auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
   return _retval;
 }
@@ -188,7 +188,7 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
 {
   GEnumValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
-  _cretval = g_enum_get_value_by_nick(enumClass ? cast(GEnumClass*)enumClass.cPtr : null, _nick);
+  _cretval = g_enum_get_value_by_nick(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _nick);
   auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
   return _retval;
 }
@@ -212,7 +212,7 @@ gobject.types.GType enumRegisterStatic(string name, gobject.enum_value.EnumValue
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = g_enum_register_static(_name, constStaticValues ? cast(const(GEnumValue)*)constStaticValues.cPtr : null);
+  _retval = g_enum_register_static(_name, constStaticValues ? cast(const(GEnumValue)*)constStaticValues._cPtr : null);
   return _retval;
 }
 
@@ -247,7 +247,7 @@ string enumToString(gobject.types.GType gEnumType, int value)
 gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass flagsClass, uint value)
 {
   GFlagsValue* _cretval;
-  _cretval = g_flags_get_first_value(flagsClass ? cast(GFlagsClass*)flagsClass.cPtr : null, value);
+  _cretval = g_flags_get_first_value(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, value);
   auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
   return _retval;
 }
@@ -265,7 +265,7 @@ gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClas
 {
   GFlagsValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = g_flags_get_value_by_name(flagsClass ? cast(GFlagsClass*)flagsClass.cPtr : null, _name);
+  _cretval = g_flags_get_value_by_name(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _name);
   auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
   return _retval;
 }
@@ -283,7 +283,7 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
 {
   GFlagsValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
-  _cretval = g_flags_get_value_by_nick(flagsClass ? cast(GFlagsClass*)flagsClass.cPtr : null, _nick);
+  _cretval = g_flags_get_value_by_nick(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _nick);
   auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
   return _retval;
 }
@@ -306,7 +306,7 @@ gobject.types.GType flagsRegisterStatic(string name, gobject.flags_value.FlagsVa
 {
   gobject.types.GType _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = g_flags_register_static(_name, constStaticValues ? cast(const(GFlagsValue)*)constStaticValues.cPtr : null);
+  _retval = g_flags_register_static(_name, constStaticValues ? cast(const(GFlagsValue)*)constStaticValues._cPtr : null);
   return _retval;
 }
 
@@ -878,7 +878,7 @@ gobject.param_spec.ParamSpec paramSpecVariant(string name, string nick, string b
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _nick = nick.toCString(No.Alloc);
   const(char)* _blurb = blurb.toCString(No.Alloc);
-  _cretval = g_param_spec_variant(_name, _nick, _blurb, type ? cast(const(GVariantType)*)type.cPtr(No.Dup) : null, defaultValue ? cast(GVariant*)defaultValue.cPtr(Yes.Dup) : null, flags);
+  _cretval = g_param_spec_variant(_name, _nick, _blurb, type ? cast(const(GVariantType)*)type._cPtr(No.Dup) : null, defaultValue ? cast(GVariant*)defaultValue._cPtr(Yes.Dup) : null, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -925,7 +925,7 @@ gobject.types.GType paramTypeRegisterStatic(string name, gobject.types.ParamSpec
 bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value srcValue, gobject.value.Value destValue, bool strictValidation)
 {
   bool _retval;
-  _retval = g_param_value_convert(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, srcValue ? cast(const(GValue)*)srcValue.cPtr(No.Dup) : null, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null, strictValidation);
+  _retval = g_param_value_convert(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, srcValue ? cast(const(GValue)*)srcValue._cPtr(No.Dup) : null, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null, strictValidation);
   return _retval;
 }
 
@@ -940,7 +940,7 @@ bool paramValueConvert(gobject.param_spec.ParamSpec pspec, gobject.value.Value s
 bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_defaults(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = g_param_value_defaults(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -957,7 +957,7 @@ bool paramValueDefaults(gobject.param_spec.ParamSpec pspec, gobject.value.Value 
 bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_is_valid(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = g_param_value_is_valid(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -971,7 +971,7 @@ bool paramValueIsValid(gobject.param_spec.ParamSpec pspec, gobject.value.Value v
 */
 void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
-  g_param_value_set_default(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+  g_param_value_set_default(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
 }
 
 /**
@@ -990,7 +990,7 @@ void paramValueSetDefault(gobject.param_spec.ParamSpec pspec, gobject.value.Valu
 bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_param_value_validate(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+  _retval = g_param_value_validate(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1008,7 +1008,7 @@ bool paramValueValidate(gobject.param_spec.ParamSpec pspec, gobject.value.Value 
 int paramValuesCmp(gobject.param_spec.ParamSpec pspec, gobject.value.Value value1, gobject.value.Value value2)
 {
   int _retval;
-  _retval = g_param_values_cmp(pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = g_param_values_cmp(pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1050,7 +1050,7 @@ gobject.types.GType pointerTypeRegisterStatic(string name)
 bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
-  _retval = g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu.cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn.cPtr(No.Dup) : null, dummy);
+  _retval = g_signal_accumulator_first_wins(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 
@@ -1073,7 +1073,7 @@ bool signalAccumulatorFirstWins(gobject.types.SignalInvocationHint ihint, gobjec
 bool signalAccumulatorTrueHandled(gobject.types.SignalInvocationHint ihint, gobject.value.Value returnAccu, gobject.value.Value handlerReturn, void* dummy = null)
 {
   bool _retval;
-  _retval = g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu.cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn.cPtr(No.Dup) : null, dummy);
+  _retval = g_signal_accumulator_true_handled(&ihint, returnAccu ? cast(GValue*)returnAccu._cPtr(No.Dup) : null, handlerReturn ? cast(const(GValue)*)handlerReturn._cPtr(No.Dup) : null, dummy);
   return _retval;
 }
 
@@ -1131,7 +1131,7 @@ gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedS
 {
   gulong _retval;
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
-  _retval = g_signal_connect_closure(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
+  _retval = g_signal_connect_closure(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, _detailedSignal, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
   return _retval;
 }
 
@@ -1156,7 +1156,7 @@ gulong signalConnectClosure(gobject.object.ObjectWrap instance, string detailedS
 gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure, bool after)
 {
   gulong _retval;
-  _retval = g_signal_connect_closure_by_id(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
+  _retval = g_signal_connect_closure_by_id(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
   return _retval;
 }
 
@@ -1171,7 +1171,7 @@ gulong signalConnectClosureById(gobject.object.ObjectWrap instance, uint signalI
 gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.ObjectWrap instance)
 {
   GSignalInvocationHint* _cretval;
-  _cretval = g_signal_get_invocation_hint(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null);
+  _cretval = g_signal_get_invocation_hint(instance ? cast(GObject*)instance._cPtr(No.Dup) : null);
   gobject.types.SignalInvocationHint _retval;
   if (_cretval)
     _retval = *cast(gobject.types.SignalInvocationHint*)_cretval;
@@ -1194,7 +1194,7 @@ gobject.types.SignalInvocationHint signalGetInvocationHint(gobject.object.Object
 */
 void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId)
 {
-  g_signal_handler_block(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
+  g_signal_handler_block(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
 }
 
 /**
@@ -1217,7 +1217,7 @@ void signalHandlerBlock(gobject.object.ObjectWrap instance, gulong handlerId)
 gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   gulong _retval;
-  _retval = g_signal_handler_find(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handler_find(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
   return _retval;
 }
 
@@ -1232,7 +1232,7 @@ gulong signalHandlerFind(gobject.object.ObjectWrap instance, gobject.types.Signa
 bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handlerId)
 {
   bool _retval;
-  _retval = g_signal_handler_is_connected(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
+  _retval = g_signal_handler_is_connected(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
   return _retval;
 }
 
@@ -1257,7 +1257,7 @@ bool signalHandlerIsConnected(gobject.object.ObjectWrap instance, gulong handler
 */
 void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId)
 {
-  g_signal_handler_unblock(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, handlerId);
+  g_signal_handler_unblock(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, handlerId);
 }
 
 /**
@@ -1288,7 +1288,7 @@ void signalHandlerUnblock(gobject.object.ObjectWrap instance, gulong handlerId)
 uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
-  _retval = g_signal_handlers_block_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_block_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
   return _retval;
 }
 
@@ -1321,7 +1321,7 @@ uint signalHandlersBlockMatched(gobject.object.ObjectWrap instance, gobject.type
 uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
-  _retval = g_signal_handlers_disconnect_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_disconnect_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
   return _retval;
 }
 
@@ -1355,7 +1355,7 @@ uint signalHandlersDisconnectMatched(gobject.object.ObjectWrap instance, gobject
 uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.types.SignalMatchType mask, uint signalId, glib.types.Quark detail, gobject.closure.Closure closure = null, void* func = null)
 {
   uint _retval;
-  _retval = g_signal_handlers_unblock_matched(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, func, null);
+  _retval = g_signal_handlers_unblock_matched(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, mask, signalId, detail, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, func, null);
   return _retval;
 }
 
@@ -1388,7 +1388,7 @@ uint signalHandlersUnblockMatched(gobject.object.ObjectWrap instance, gobject.ty
 bool signalHasHandlerPending(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail, bool mayBeBlocked)
 {
   bool _retval;
-  _retval = g_signal_has_handler_pending(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
+  _retval = g_signal_has_handler_pending(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail, mayBeBlocked);
   return _retval;
 }
 
@@ -1536,7 +1536,7 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
     _nParams = cast(uint)paramTypes.length;
 
   auto _paramTypes = cast(GType*)paramTypes.ptr;
-  _retval = g_signal_newv(_signalName, itype, signalFlags, classClosure ? cast(GClosure*)classClosure.cPtr(No.Dup) : null, _accumulatorCB, _accumulator, _cMarshallerCB, returnType, _nParams, _paramTypes);
+  _retval = g_signal_newv(_signalName, itype, signalFlags, classClosure ? cast(GClosure*)classClosure._cPtr(No.Dup) : null, _accumulatorCB, _accumulator, _cMarshallerCB, returnType, _nParams, _paramTypes);
   return _retval;
 }
 
@@ -1557,7 +1557,7 @@ uint signalNewv(string signalName, gobject.types.GType itype, gobject.types.Sign
 */
 void signalOverrideClassClosure(uint signalId, gobject.types.GType instanceType, gobject.closure.Closure classClosure)
 {
-  g_signal_override_class_closure(signalId, instanceType, classClosure ? cast(GClosure*)classClosure.cPtr(No.Dup) : null);
+  g_signal_override_class_closure(signalId, instanceType, classClosure ? cast(GClosure*)classClosure._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1629,7 +1629,7 @@ void signalRemoveEmissionHook(uint signalId, gulong hookId)
 */
 void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.types.Quark detail)
 {
-  g_signal_stop_emission(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, signalId, detail);
+  g_signal_stop_emission(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, signalId, detail);
 }
 
 /**
@@ -1645,7 +1645,7 @@ void signalStopEmission(gobject.object.ObjectWrap instance, uint signalId, glib.
 void signalStopEmissionByName(gobject.object.ObjectWrap instance, string detailedSignal)
 {
   const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
-  g_signal_stop_emission_by_name(instance ? cast(ObjectC*)instance.cPtr(No.Dup) : null, _detailedSignal);
+  g_signal_stop_emission_by_name(instance ? cast(GObject*)instance._cPtr(No.Dup) : null, _detailedSignal);
 }
 
 /**
@@ -1680,7 +1680,7 @@ gobject.closure.Closure signalTypeCclosureNew(gobject.types.GType itype, uint st
 string strdupValueContents(gobject.value.Value value)
 {
   char* _cretval;
-  _cretval = g_strdup_value_contents(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = g_strdup_value_contents(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -1725,7 +1725,7 @@ int typeAddInstancePrivate(gobject.types.GType classType, size_t privateSize)
 bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
 {
   bool _retval;
-  _retval = g_type_check_instance(instance ? cast(GTypeInstance*)instance.cPtr : null);
+  _retval = g_type_check_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
   return _retval;
 }
 
@@ -1733,7 +1733,7 @@ bool typeCheckInstance(gobject.type_instance.TypeInstance instance)
 bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.types.GType ifaceType)
 {
   bool _retval;
-  _retval = g_type_check_instance_is_a(instance ? cast(GTypeInstance*)instance.cPtr : null, ifaceType);
+  _retval = g_type_check_instance_is_a(instance ? cast(GTypeInstance*)instance._cPtr : null, ifaceType);
   return _retval;
 }
 
@@ -1741,7 +1741,7 @@ bool typeCheckInstanceIsA(gobject.type_instance.TypeInstance instance, gobject.t
 bool typeCheckInstanceIsFundamentallyA(gobject.type_instance.TypeInstance instance, gobject.types.GType fundamentalType)
 {
   bool _retval;
-  _retval = g_type_check_instance_is_fundamentally_a(instance ? cast(GTypeInstance*)instance.cPtr : null, fundamentalType);
+  _retval = g_type_check_instance_is_fundamentally_a(instance ? cast(GTypeInstance*)instance._cPtr : null, fundamentalType);
   return _retval;
 }
 
@@ -1757,7 +1757,7 @@ bool typeCheckIsValueType(gobject.types.GType type)
 bool typeCheckValue(gobject.value.Value value)
 {
   bool _retval;
-  _retval = g_type_check_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = g_type_check_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1765,7 +1765,7 @@ bool typeCheckValue(gobject.value.Value value)
 bool typeCheckValueHolds(gobject.value.Value value, gobject.types.GType type)
 {
   bool _retval;
-  _retval = g_type_check_value_holds(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null, type);
+  _retval = g_type_check_value_holds(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null, type);
   return _retval;
 }
 
@@ -1841,7 +1841,7 @@ void typeEnsure(gobject.types.GType type)
 */
 void typeFreeInstance(gobject.type_instance.TypeInstance instance)
 {
-  g_type_free_instance(instance ? cast(GTypeInstance*)instance.cPtr : null);
+  g_type_free_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
 }
 
 /**
@@ -2039,7 +2039,7 @@ string typeName(gobject.types.GType type)
 string typeNameFromInstance(gobject.type_instance.TypeInstance instance)
 {
   const(char)* _cretval;
-  _cretval = g_type_name_from_instance(instance ? cast(GTypeInstance*)instance.cPtr : null);
+  _cretval = g_type_name_from_instance(instance ? cast(GTypeInstance*)instance._cPtr : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
   return _retval;
 }

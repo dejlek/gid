@@ -34,16 +34,16 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_swipe_tracker_get_type != &gidSymbolNotFound ? adw_swipe_tracker_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -219,7 +219,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   this(adw.swipeable.Swipeable swipeable)
   {
     AdwSwipeTracker* _cretval;
-    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gobject.object.ObjectWrap)swipeable).cPtr(No.Dup) : null);
+    _cretval = adw_swipe_tracker_new(swipeable ? cast(AdwSwipeable*)(cast(gobject.object.ObjectWrap)swipeable)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -230,7 +230,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getAllowLongSwipes()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_allow_long_swipes(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getAllowMouseDrag()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_allow_mouse_drag(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getAllowWindowHandle()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_allow_window_handle(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getEnabled()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_enabled(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_enabled(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getLowerOvershoot()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_lower_overshoot(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getReversed()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_reversed(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_reversed(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -296,8 +296,8 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   adw.swipeable.Swipeable getSwipeable()
   {
     AdwSwipeable* _cretval;
-    _cretval = adw_swipe_tracker_get_swipeable(cast(AdwSwipeTracker*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.swipeable.Swipeable)(cast(AdwSwipeable*)_cretval, No.Take);
+    _cretval = adw_swipe_tracker_get_swipeable(cast(AdwSwipeTracker*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.swipeable.Swipeable)(cast(AdwSwipeable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   bool getUpperOvershoot()
   {
     bool _retval;
-    _retval = adw_swipe_tracker_get_upper_overshoot(cast(AdwSwipeTracker*)cPtr);
+    _retval = adw_swipe_tracker_get_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setAllowLongSwipes(bool allowLongSwipes)
   {
-    adw_swipe_tracker_set_allow_long_swipes(cast(AdwSwipeTracker*)cPtr, allowLongSwipes);
+    adw_swipe_tracker_set_allow_long_swipes(cast(AdwSwipeTracker*)this._cPtr, allowLongSwipes);
   }
 
   /**
@@ -334,7 +334,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setAllowMouseDrag(bool allowMouseDrag)
   {
-    adw_swipe_tracker_set_allow_mouse_drag(cast(AdwSwipeTracker*)cPtr, allowMouseDrag);
+    adw_swipe_tracker_set_allow_mouse_drag(cast(AdwSwipeTracker*)this._cPtr, allowMouseDrag);
   }
 
   /**
@@ -347,7 +347,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setAllowWindowHandle(bool allowWindowHandle)
   {
-    adw_swipe_tracker_set_allow_window_handle(cast(AdwSwipeTracker*)cPtr, allowWindowHandle);
+    adw_swipe_tracker_set_allow_window_handle(cast(AdwSwipeTracker*)this._cPtr, allowWindowHandle);
   }
 
   /**
@@ -361,7 +361,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setEnabled(bool enabled)
   {
-    adw_swipe_tracker_set_enabled(cast(AdwSwipeTracker*)cPtr, enabled);
+    adw_swipe_tracker_set_enabled(cast(AdwSwipeTracker*)this._cPtr, enabled);
   }
 
   /**
@@ -372,7 +372,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setLowerOvershoot(bool overshoot)
   {
-    adw_swipe_tracker_set_lower_overshoot(cast(AdwSwipeTracker*)cPtr, overshoot);
+    adw_swipe_tracker_set_lower_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
   }
 
   /**
@@ -386,7 +386,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setReversed(bool reversed)
   {
-    adw_swipe_tracker_set_reversed(cast(AdwSwipeTracker*)cPtr, reversed);
+    adw_swipe_tracker_set_reversed(cast(AdwSwipeTracker*)this._cPtr, reversed);
   }
 
   /**
@@ -397,7 +397,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void setUpperOvershoot(bool overshoot)
   {
-    adw_swipe_tracker_set_upper_overshoot(cast(AdwSwipeTracker*)cPtr, overshoot);
+    adw_swipe_tracker_set_upper_overshoot(cast(AdwSwipeTracker*)this._cPtr, overshoot);
   }
 
   /**
@@ -411,7 +411,7 @@ class SwipeTracker : gobject.object.ObjectWrap, gtk.orientable.Orientable
   */
   void shiftPosition(double delta)
   {
-    adw_swipe_tracker_shift_position(cast(AdwSwipeTracker*)cPtr, delta);
+    adw_swipe_tracker_shift_position(cast(AdwSwipeTracker*)this._cPtr, delta);
   }
 
   /**

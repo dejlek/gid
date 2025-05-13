@@ -69,7 +69,7 @@ template IndenterT()
   */
   override void indent(gtksource.view.View view, gtk.text_iter.TextIter iter)
   {
-    gtk_source_indenter_indent(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    gtk_source_indenter_indent(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -93,7 +93,7 @@ template IndenterT()
   override bool isTrigger(gtksource.view.View view, gtk.text_iter.TextIter location, gdk.types.ModifierType state, uint keyval)
   {
     bool _retval;
-    _retval = gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)cPtr, view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location.cPtr(No.Dup) : null, state, keyval);
+    _retval = gtk_source_indenter_is_trigger(cast(GtkSourceIndenter*)this._cPtr, view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null, location ? cast(const(GtkTextIter)*)location._cPtr(No.Dup) : null, state, keyval);
     return _retval;
   }
 }

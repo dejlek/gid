@@ -52,16 +52,16 @@ class TabBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_bar_get_type != &gidSymbolNotFound ? adw_tab_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -283,7 +283,7 @@ class TabBar : gtk.widget.Widget
   bool getAutohide()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_autohide(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_autohide(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -294,8 +294,8 @@ class TabBar : gtk.widget.Widget
   gtk.widget.Widget getEndActionWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_tab_bar_get_end_action_widget(cast(AdwTabBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_tab_bar_get_end_action_widget(cast(AdwTabBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class TabBar : gtk.widget.Widget
   bool getExpandTabs()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_expand_tabs(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_expand_tabs(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class TabBar : gtk.widget.Widget
   gdk.types.DragAction getExtraDragPreferredAction()
   {
     GdkDragAction _cretval;
-    _cretval = adw_tab_bar_get_extra_drag_preferred_action(cast(AdwTabBar*)cPtr);
+    _cretval = adw_tab_bar_get_extra_drag_preferred_action(cast(AdwTabBar*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -329,7 +329,7 @@ class TabBar : gtk.widget.Widget
   bool getExtraDragPreload()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_extra_drag_preload(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_extra_drag_preload(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class TabBar : gtk.widget.Widget
   bool getInverted()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_inverted(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_inverted(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class TabBar : gtk.widget.Widget
   bool getIsOverflowing()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_is_overflowing(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_is_overflowing(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -364,8 +364,8 @@ class TabBar : gtk.widget.Widget
   gtk.widget.Widget getStartActionWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_tab_bar_get_start_action_widget(cast(AdwTabBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_tab_bar_get_start_action_widget(cast(AdwTabBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class TabBar : gtk.widget.Widget
   bool getTabsRevealed()
   {
     bool _retval;
-    _retval = adw_tab_bar_get_tabs_revealed(cast(AdwTabBar*)cPtr);
+    _retval = adw_tab_bar_get_tabs_revealed(cast(AdwTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -389,8 +389,8 @@ class TabBar : gtk.widget.Widget
   adw.tab_view.TabView getView()
   {
     AdwTabView* _cretval;
-    _cretval = adw_tab_bar_get_view(cast(AdwTabBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
+    _cretval = adw_tab_bar_get_view(cast(AdwTabBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class TabBar : gtk.widget.Widget
   */
   void setAutohide(bool autohide)
   {
-    adw_tab_bar_set_autohide(cast(AdwTabBar*)cPtr, autohide);
+    adw_tab_bar_set_autohide(cast(AdwTabBar*)this._cPtr, autohide);
   }
 
   /**
@@ -418,7 +418,7 @@ class TabBar : gtk.widget.Widget
   */
   void setEndActionWidget(gtk.widget.Widget widget = null)
   {
-    adw_tab_bar_set_end_action_widget(cast(AdwTabBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_tab_bar_set_end_action_widget(cast(AdwTabBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -432,7 +432,7 @@ class TabBar : gtk.widget.Widget
   */
   void setExpandTabs(bool expandTabs)
   {
-    adw_tab_bar_set_expand_tabs(cast(AdwTabBar*)cPtr, expandTabs);
+    adw_tab_bar_set_expand_tabs(cast(AdwTabBar*)this._cPtr, expandTabs);
   }
 
   /**
@@ -445,7 +445,7 @@ class TabBar : gtk.widget.Widget
   */
   void setExtraDragPreload(bool preload)
   {
-    adw_tab_bar_set_extra_drag_preload(cast(AdwTabBar*)cPtr, preload);
+    adw_tab_bar_set_extra_drag_preload(cast(AdwTabBar*)this._cPtr, preload);
   }
 
   /**
@@ -459,7 +459,7 @@ class TabBar : gtk.widget.Widget
   */
   void setInverted(bool inverted)
   {
-    adw_tab_bar_set_inverted(cast(AdwTabBar*)cPtr, inverted);
+    adw_tab_bar_set_inverted(cast(AdwTabBar*)this._cPtr, inverted);
   }
 
   /**
@@ -470,7 +470,7 @@ class TabBar : gtk.widget.Widget
   */
   void setStartActionWidget(gtk.widget.Widget widget = null)
   {
-    adw_tab_bar_set_start_action_widget(cast(AdwTabBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_tab_bar_set_start_action_widget(cast(AdwTabBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -481,7 +481,7 @@ class TabBar : gtk.widget.Widget
   */
   void setView(adw.tab_view.TabView view = null)
   {
-    adw_tab_bar_set_view(cast(AdwTabBar*)cPtr, view ? cast(AdwTabView*)view.cPtr(No.Dup) : null);
+    adw_tab_bar_set_view(cast(AdwTabBar*)this._cPtr, view ? cast(AdwTabView*)view._cPtr(No.Dup) : null);
   }
 
   /**
@@ -508,7 +508,7 @@ class TabBar : gtk.widget.Widget
       _nTypes = cast(size_t)types.length;
 
     auto _types = cast(GType*)types.ptr;
-    adw_tab_bar_setup_extra_drop_target(cast(AdwTabBar*)cPtr, actions, _types, _nTypes);
+    adw_tab_bar_setup_extra_drop_target(cast(AdwTabBar*)this._cPtr, actions, _types, _nTypes);
   }
 
   /**

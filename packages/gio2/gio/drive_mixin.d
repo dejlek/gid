@@ -53,7 +53,7 @@ template DriveT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_drive_can_eject(cast(GDrive*)cPtr);
+    _retval = g_drive_can_eject(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ template DriveT()
   override bool canPollForMedia()
   {
     bool _retval;
-    _retval = g_drive_can_poll_for_media(cast(GDrive*)cPtr);
+    _retval = g_drive_can_poll_for_media(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -76,7 +76,7 @@ template DriveT()
   override bool canStart()
   {
     bool _retval;
-    _retval = g_drive_can_start(cast(GDrive*)cPtr);
+    _retval = g_drive_can_start(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ template DriveT()
   override bool canStartDegraded()
   {
     bool _retval;
-    _retval = g_drive_can_start_degraded(cast(GDrive*)cPtr);
+    _retval = g_drive_can_start_degraded(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ template DriveT()
   override bool canStop()
   {
     bool _retval;
-    _retval = g_drive_can_stop(cast(GDrive*)cPtr);
+    _retval = g_drive_can_stop(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -118,17 +118,17 @@ template DriveT()
   */
   override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_drive_eject(cast(GDrive*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_drive_eject(cast(GDrive*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -146,7 +146,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_eject_finish(cast(GDrive*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_drive_eject_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -166,17 +166,17 @@ template DriveT()
   */
   override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_drive_eject_with_operation(cast(GDrive*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_drive_eject_with_operation(cast(GDrive*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -192,7 +192,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_eject_with_operation_finish(cast(GDrive*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_drive_eject_with_operation_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -209,7 +209,7 @@ template DriveT()
   override string[] enumerateIdentifiers()
   {
     char** _cretval;
-    _cretval = g_drive_enumerate_identifiers(cast(GDrive*)cPtr);
+    _cretval = g_drive_enumerate_identifiers(cast(GDrive*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -232,8 +232,8 @@ template DriveT()
   override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = g_drive_get_icon(cast(GDrive*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_drive_get_icon(cast(GDrive*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ template DriveT()
   {
     char* _cretval;
     const(char)* _kind = kind.toCString(No.Alloc);
-    _cretval = g_drive_get_identifier(cast(GDrive*)cPtr, _kind);
+    _cretval = g_drive_get_identifier(cast(GDrive*)this._cPtr, _kind);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -265,7 +265,7 @@ template DriveT()
   override string getName()
   {
     char* _cretval;
-    _cretval = g_drive_get_name(cast(GDrive*)cPtr);
+    _cretval = g_drive_get_name(cast(GDrive*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -277,7 +277,7 @@ template DriveT()
   override string getSortKey()
   {
     const(char)* _cretval;
-    _cretval = g_drive_get_sort_key(cast(GDrive*)cPtr);
+    _cretval = g_drive_get_sort_key(cast(GDrive*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -289,7 +289,7 @@ template DriveT()
   override gio.types.DriveStartStopType getStartStopType()
   {
     GDriveStartStopType _cretval;
-    _cretval = g_drive_get_start_stop_type(cast(GDrive*)cPtr);
+    _cretval = g_drive_get_start_stop_type(cast(GDrive*)this._cPtr);
     gio.types.DriveStartStopType _retval = cast(gio.types.DriveStartStopType)_cretval;
     return _retval;
   }
@@ -302,8 +302,8 @@ template DriveT()
   override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
-    _cretval = g_drive_get_symbolic_icon(cast(GDrive*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_drive_get_symbolic_icon(cast(GDrive*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ template DriveT()
   override gio.volume.Volume[] getVolumes()
   {
     GList* _cretval;
-    _cretval = g_drive_get_volumes(cast(GDrive*)cPtr);
+    _cretval = g_drive_get_volumes(cast(GDrive*)this._cPtr);
     auto _retval = gListToD!(gio.volume.Volume, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -331,7 +331,7 @@ template DriveT()
   override bool hasMedia()
   {
     bool _retval;
-    _retval = g_drive_has_media(cast(GDrive*)cPtr);
+    _retval = g_drive_has_media(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ template DriveT()
   override bool hasVolumes()
   {
     bool _retval;
-    _retval = g_drive_has_volumes(cast(GDrive*)cPtr);
+    _retval = g_drive_has_volumes(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ template DriveT()
   override bool isMediaCheckAutomatic()
   {
     bool _retval;
-    _retval = g_drive_is_media_check_automatic(cast(GDrive*)cPtr);
+    _retval = g_drive_is_media_check_automatic(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ template DriveT()
   override bool isMediaRemovable()
   {
     bool _retval;
-    _retval = g_drive_is_media_removable(cast(GDrive*)cPtr);
+    _retval = g_drive_is_media_removable(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ template DriveT()
   override bool isRemovable()
   {
     bool _retval;
-    _retval = g_drive_is_removable(cast(GDrive*)cPtr);
+    _retval = g_drive_is_removable(cast(GDrive*)this._cPtr);
     return _retval;
   }
 
@@ -394,17 +394,17 @@ template DriveT()
   */
   override void pollForMedia(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_drive_poll_for_media(cast(GDrive*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_drive_poll_for_media(cast(GDrive*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -420,7 +420,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_poll_for_media_finish(cast(GDrive*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_drive_poll_for_media_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -442,17 +442,17 @@ template DriveT()
   */
   override void start(gio.types.DriveStartFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_drive_start(cast(GDrive*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_drive_start(cast(GDrive*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -468,7 +468,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_start_finish(cast(GDrive*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_drive_start_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -490,17 +490,17 @@ template DriveT()
   */
   override void stop(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_drive_stop(cast(GDrive*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_drive_stop(cast(GDrive*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -516,7 +516,7 @@ template DriveT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_drive_stop_finish(cast(GDrive*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_drive_stop_finish(cast(GDrive*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

@@ -32,22 +32,22 @@ class AttrList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attr_list_get_type != &gidSymbolNotFound ? pango_attr_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class AttrList : gobject.boxed.Boxed
   */
   void change(pango.attribute.Attribute attr)
   {
-    pango_attr_list_change(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
+    pango_attr_list_change(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -102,7 +102,7 @@ class AttrList : gobject.boxed.Boxed
   pango.attr_list.AttrList copy()
   {
     PangoAttrList* _cretval;
-    _cretval = pango_attr_list_copy(cast(PangoAttrList*)cPtr);
+    _cretval = pango_attr_list_copy(cast(PangoAttrList*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -123,7 +123,7 @@ class AttrList : gobject.boxed.Boxed
   bool equal(pango.attr_list.AttrList otherList)
   {
     bool _retval;
-    _retval = pango_attr_list_equal(cast(PangoAttrList*)cPtr, otherList ? cast(PangoAttrList*)otherList.cPtr(No.Dup) : null);
+    _retval = pango_attr_list_equal(cast(PangoAttrList*)this._cPtr, otherList ? cast(PangoAttrList*)otherList._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class AttrList : gobject.boxed.Boxed
 
     PangoAttrList* _cretval;
     auto _func = func ? cast(void*)&(func) : null;
-    _cretval = pango_attr_list_filter(cast(PangoAttrList*)cPtr, _funcCB, _func);
+    _cretval = pango_attr_list_filter(cast(PangoAttrList*)this._cPtr, _funcCB, _func);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -166,7 +166,7 @@ class AttrList : gobject.boxed.Boxed
   pango.attribute.Attribute[] getAttributes()
   {
     GSList* _cretval;
-    _cretval = pango_attr_list_get_attributes(cast(PangoAttrList*)cPtr);
+    _cretval = pango_attr_list_get_attributes(cast(PangoAttrList*)this._cPtr);
     auto _retval = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -182,7 +182,7 @@ class AttrList : gobject.boxed.Boxed
   pango.attr_iterator.AttrIterator getIterator()
   {
     PangoAttrIterator* _cretval;
-    _cretval = pango_attr_list_get_iterator(cast(PangoAttrList*)cPtr);
+    _cretval = pango_attr_list_get_iterator(cast(PangoAttrList*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -198,7 +198,7 @@ class AttrList : gobject.boxed.Boxed
   */
   void insert(pango.attribute.Attribute attr)
   {
-    pango_attr_list_insert(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
+    pango_attr_list_insert(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -212,7 +212,7 @@ class AttrList : gobject.boxed.Boxed
   */
   void insertBefore(pango.attribute.Attribute attr)
   {
-    pango_attr_list_insert_before(cast(PangoAttrList*)cPtr, attr ? cast(PangoAttribute*)attr.cPtr(Yes.Dup) : null);
+    pango_attr_list_insert_before(cast(PangoAttrList*)this._cPtr, attr ? cast(PangoAttribute*)attr._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -244,7 +244,7 @@ class AttrList : gobject.boxed.Boxed
   */
   void splice(pango.attr_list.AttrList other, int pos, int len)
   {
-    pango_attr_list_splice(cast(PangoAttrList*)cPtr, other ? cast(PangoAttrList*)other.cPtr(No.Dup) : null, pos, len);
+    pango_attr_list_splice(cast(PangoAttrList*)this._cPtr, other ? cast(PangoAttrList*)other._cPtr(No.Dup) : null, pos, len);
   }
 
   /**
@@ -289,7 +289,7 @@ class AttrList : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_attr_list_to_string(cast(PangoAttrList*)cPtr);
+    _cretval = pango_attr_list_to_string(cast(PangoAttrList*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -317,7 +317,7 @@ class AttrList : gobject.boxed.Boxed
   */
   void update(int pos, int remove, int add)
   {
-    pango_attr_list_update(cast(PangoAttrList*)cPtr, pos, remove, add);
+    pango_attr_list_update(cast(PangoAttrList*)this._cPtr, pos, remove, add);
   }
 
   /**

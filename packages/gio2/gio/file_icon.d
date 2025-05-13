@@ -28,16 +28,16 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_icon_get_type != &gidSymbolNotFound ? g_file_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   this(gio.file.File file)
   {
     GIcon* _cretval;
-    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    _cretval = g_file_icon_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,8 +71,8 @@ class FileIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Loa
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = g_file_icon_get_file(cast(GFileIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = g_file_icon_get_file(cast(GFileIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 }

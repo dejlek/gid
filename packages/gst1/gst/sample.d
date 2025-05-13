@@ -26,22 +26,22 @@ class Sample : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_sample_get_type != &gidSymbolNotFound ? gst_sample_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class Sample : gobject.boxed.Boxed
   this(gst.buffer.Buffer buffer = null, gst.caps.Caps caps = null, gst.segment.Segment segment = null, gst.structure.Structure info = null)
   {
     GstSample* _cretval;
-    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null, info ? cast(GstStructure*)info.cPtr(Yes.Dup) : null);
+    _cretval = gst_sample_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -80,7 +80,7 @@ class Sample : gobject.boxed.Boxed
   gst.buffer.Buffer getBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_sample_get_buffer(cast(GstSample*)cPtr);
+    _cretval = gst_sample_get_buffer(cast(GstSample*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -95,7 +95,7 @@ class Sample : gobject.boxed.Boxed
   gst.buffer_list.BufferList getBufferList()
   {
     GstBufferList* _cretval;
-    _cretval = gst_sample_get_buffer_list(cast(GstSample*)cPtr);
+    _cretval = gst_sample_get_buffer_list(cast(GstSample*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -110,7 +110,7 @@ class Sample : gobject.boxed.Boxed
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_sample_get_caps(cast(GstSample*)cPtr);
+    _cretval = gst_sample_get_caps(cast(GstSample*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -123,7 +123,7 @@ class Sample : gobject.boxed.Boxed
   gst.structure.Structure getInfo()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_sample_get_info(cast(GstSample*)cPtr);
+    _cretval = gst_sample_get_info(cast(GstSample*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -136,7 +136,7 @@ class Sample : gobject.boxed.Boxed
   gst.segment.Segment getSegment()
   {
     GstSegment* _cretval;
-    _cretval = gst_sample_get_segment(cast(GstSample*)cPtr);
+    _cretval = gst_sample_get_segment(cast(GstSample*)this._cPtr);
     auto _retval = _cretval ? new gst.segment.Segment(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -149,7 +149,7 @@ class Sample : gobject.boxed.Boxed
   */
   void setBuffer(gst.buffer.Buffer buffer)
   {
-    gst_sample_set_buffer(cast(GstSample*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+    gst_sample_set_buffer(cast(GstSample*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -160,7 +160,7 @@ class Sample : gobject.boxed.Boxed
   */
   void setBufferList(gst.buffer_list.BufferList bufferList)
   {
-    gst_sample_set_buffer_list(cast(GstSample*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(No.Dup) : null);
+    gst_sample_set_buffer_list(cast(GstSample*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class Sample : gobject.boxed.Boxed
   */
   void setCaps(gst.caps.Caps caps)
   {
-    gst_sample_set_caps(cast(GstSample*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_sample_set_caps(cast(GstSample*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -185,7 +185,7 @@ class Sample : gobject.boxed.Boxed
   bool setInfo(gst.structure.Structure info)
   {
     bool _retval;
-    _retval = gst_sample_set_info(cast(GstSample*)cPtr, info ? cast(GstStructure*)info.cPtr(Yes.Dup) : null);
+    _retval = gst_sample_set_info(cast(GstSample*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -197,6 +197,6 @@ class Sample : gobject.boxed.Boxed
   */
   void setSegment(gst.segment.Segment segment)
   {
-    gst_sample_set_segment(cast(GstSample*)cPtr, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
+    gst_sample_set_segment(cast(GstSample*)this._cPtr, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
   }
 }

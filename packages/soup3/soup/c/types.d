@@ -1023,7 +1023,7 @@ enum SoupWebsocketState
 struct SoupAuth
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -1103,7 +1103,7 @@ struct SoupAuthDigest;
 struct SoupAuthDomain
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -1212,7 +1212,7 @@ struct SoupAuthNegotiate;
 struct SoupCache
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1324,7 +1324,7 @@ struct SoupCookie;
 struct SoupCookieJar
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1407,7 +1407,7 @@ struct SoupCookieJarTextClass
 struct SoupHSTSEnforcer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -1804,7 +1804,7 @@ struct SoupRange
 struct SoupServer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1891,7 +1891,7 @@ struct SoupServerMessageClass
 struct SoupSession
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1991,7 +1991,7 @@ struct SoupWebsocketConnectionClass
 struct SoupWebsocketExtension
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**

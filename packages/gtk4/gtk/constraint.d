@@ -35,16 +35,16 @@ class Constraint : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_get_type != &gidSymbolNotFound ? gtk_constraint_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class Constraint : gobject.object.ObjectWrap
   this(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, gtk.constraint_target.ConstraintTarget source, gtk.types.ConstraintAttribute sourceAttribute, double multiplier, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target).cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)source).cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
+    _cretval = gtk_constraint_new(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, source ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)source)._cPtr(No.Dup) : null, sourceAttribute, multiplier, constant, strength);
     this(_cretval, Yes.Take);
   }
 
@@ -90,8 +90,8 @@ class Constraint : gobject.object.ObjectWrap
   static gtk.constraint.Constraint newConstant(gtk.constraint_target.ConstraintTarget target, gtk.types.ConstraintAttribute targetAttribute, gtk.types.ConstraintRelation relation, double constant, int strength)
   {
     GtkConstraint* _cretval;
-    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target).cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint.Constraint)(cast(GtkConstraint*)_cretval, Yes.Take);
+    _cretval = gtk_constraint_new_constant(target ? cast(GtkConstraintTarget*)(cast(gobject.object.ObjectWrap)target)._cPtr(No.Dup) : null, targetAttribute, relation, constant, strength);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.constraint.Constraint)(cast(GtkConstraint*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class Constraint : gobject.object.ObjectWrap
   double getConstant()
   {
     double _retval;
-    _retval = gtk_constraint_get_constant(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_get_constant(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class Constraint : gobject.object.ObjectWrap
   double getMultiplier()
   {
     double _retval;
-    _retval = gtk_constraint_get_multiplier(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_get_multiplier(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Constraint : gobject.object.ObjectWrap
   gtk.types.ConstraintRelation getRelation()
   {
     GtkConstraintRelation _cretval;
-    _cretval = gtk_constraint_get_relation(cast(GtkConstraint*)cPtr);
+    _cretval = gtk_constraint_get_relation(cast(GtkConstraint*)this._cPtr);
     gtk.types.ConstraintRelation _retval = cast(gtk.types.ConstraintRelation)_cretval;
     return _retval;
   }
@@ -141,8 +141,8 @@ class Constraint : gobject.object.ObjectWrap
   gtk.constraint_target.ConstraintTarget getSource()
   {
     GtkConstraintTarget* _cretval;
-    _cretval = gtk_constraint_get_source(cast(GtkConstraint*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
+    _cretval = gtk_constraint_get_source(cast(GtkConstraint*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Constraint : gobject.object.ObjectWrap
   gtk.types.ConstraintAttribute getSourceAttribute()
   {
     GtkConstraintAttribute _cretval;
-    _cretval = gtk_constraint_get_source_attribute(cast(GtkConstraint*)cPtr);
+    _cretval = gtk_constraint_get_source_attribute(cast(GtkConstraint*)this._cPtr);
     gtk.types.ConstraintAttribute _retval = cast(gtk.types.ConstraintAttribute)_cretval;
     return _retval;
   }
@@ -165,7 +165,7 @@ class Constraint : gobject.object.ObjectWrap
   int getStrength()
   {
     int _retval;
-    _retval = gtk_constraint_get_strength(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_get_strength(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -180,8 +180,8 @@ class Constraint : gobject.object.ObjectWrap
   gtk.constraint_target.ConstraintTarget getTarget()
   {
     GtkConstraintTarget* _cretval;
-    _cretval = gtk_constraint_get_target(cast(GtkConstraint*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
+    _cretval = gtk_constraint_get_target(cast(GtkConstraint*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.constraint_target.ConstraintTarget)(cast(GtkConstraintTarget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class Constraint : gobject.object.ObjectWrap
   gtk.types.ConstraintAttribute getTargetAttribute()
   {
     GtkConstraintAttribute _cretval;
-    _cretval = gtk_constraint_get_target_attribute(cast(GtkConstraint*)cPtr);
+    _cretval = gtk_constraint_get_target_attribute(cast(GtkConstraint*)this._cPtr);
     gtk.types.ConstraintAttribute _retval = cast(gtk.types.ConstraintAttribute)_cretval;
     return _retval;
   }
@@ -205,7 +205,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isAttached()
   {
     bool _retval;
-    _retval = gtk_constraint_is_attached(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_is_attached(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isConstant()
   {
     bool _retval;
-    _retval = gtk_constraint_is_constant(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_is_constant(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Constraint : gobject.object.ObjectWrap
   bool isRequired()
   {
     bool _retval;
-    _retval = gtk_constraint_is_required(cast(GtkConstraint*)cPtr);
+    _retval = gtk_constraint_is_required(cast(GtkConstraint*)this._cPtr);
     return _retval;
   }
 }

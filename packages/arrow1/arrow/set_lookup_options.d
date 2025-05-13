@@ -20,16 +20,16 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_set_lookup_options_get_type != &gidSymbolNotFound ? garrow_set_lookup_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class SetLookupOptions : arrow.function_options.FunctionOptions
   this(arrow.datum.Datum valueSet = null)
   {
     GArrowSetLookupOptions* _cretval;
-    _cretval = garrow_set_lookup_options_new(valueSet ? cast(GArrowDatum*)valueSet.cPtr(No.Dup) : null);
+    _cretval = garrow_set_lookup_options_new(valueSet ? cast(GArrowDatum*)valueSet._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

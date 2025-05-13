@@ -27,7 +27,7 @@ class ToplevelSize
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -47,7 +47,7 @@ class ToplevelSize
   */
   void getBounds(out int boundsWidth, out int boundsHeight)
   {
-    gdk_toplevel_size_get_bounds(cast(GdkToplevelSize*)cPtr, cast(int*)&boundsWidth, cast(int*)&boundsHeight);
+    gdk_toplevel_size_get_bounds(cast(GdkToplevelSize*)this._cPtr, cast(int*)&boundsWidth, cast(int*)&boundsHeight);
   }
 
   /**
@@ -67,7 +67,7 @@ class ToplevelSize
   */
   void setMinSize(int minWidth, int minHeight)
   {
-    gdk_toplevel_size_set_min_size(cast(GdkToplevelSize*)cPtr, minWidth, minHeight);
+    gdk_toplevel_size_set_min_size(cast(GdkToplevelSize*)this._cPtr, minWidth, minHeight);
   }
 
   /**
@@ -88,7 +88,7 @@ class ToplevelSize
   */
   void setShadowWidth(int left, int right, int top, int bottom)
   {
-    gdk_toplevel_size_set_shadow_width(cast(GdkToplevelSize*)cPtr, left, right, top, bottom);
+    gdk_toplevel_size_set_shadow_width(cast(GdkToplevelSize*)this._cPtr, left, right, top, bottom);
   }
 
   /**
@@ -105,6 +105,6 @@ class ToplevelSize
   */
   void setSize(int width, int height)
   {
-    gdk_toplevel_size_set_size(cast(GdkToplevelSize*)cPtr, width, height);
+    gdk_toplevel_size_set_size(cast(GdkToplevelSize*)this._cPtr, width, height);
   }
 }

@@ -108,9 +108,9 @@ template ColorChooserT()
 
     GdkRGBA[] _tmpcolors;
     foreach (obj; colors)
-      _tmpcolors ~= *cast(GdkRGBA*)obj.cPtr;
+      _tmpcolors ~= *cast(GdkRGBA*)obj._cPtr;
     GdkRGBA* _colors = _tmpcolors.ptr;
-    gtk_color_chooser_add_palette(cast(GtkColorChooser*)cPtr, orientation, colorsPerLine, _nColors, _colors);
+    gtk_color_chooser_add_palette(cast(GtkColorChooser*)this._cPtr, orientation, colorsPerLine, _nColors, _colors);
   }
 
   /**
@@ -122,7 +122,7 @@ template ColorChooserT()
   override void getRgba(out gdk.rgba.RGBA color)
   {
     GdkRGBA _color;
-    gtk_color_chooser_get_rgba(cast(GtkColorChooser*)cPtr, &_color);
+    gtk_color_chooser_get_rgba(cast(GtkColorChooser*)this._cPtr, &_color);
     color = new gdk.rgba.RGBA(cast(void*)&_color, No.Take);
   }
 
@@ -134,7 +134,7 @@ template ColorChooserT()
   override bool getUseAlpha()
   {
     bool _retval;
-    _retval = gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)cPtr);
+    _retval = gtk_color_chooser_get_use_alpha(cast(GtkColorChooser*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ template ColorChooserT()
   */
   override void setRgba(gdk.rgba.RGBA color)
   {
-    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)cPtr, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_color_chooser_set_rgba(cast(GtkColorChooser*)this._cPtr, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ template ColorChooserT()
   */
   override void setUseAlpha(bool useAlpha)
   {
-    gtk_color_chooser_set_use_alpha(cast(GtkColorChooser*)cPtr, useAlpha);
+    gtk_color_chooser_set_use_alpha(cast(GtkColorChooser*)this._cPtr, useAlpha);
   }
 
   /**

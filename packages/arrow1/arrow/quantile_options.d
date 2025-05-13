@@ -19,16 +19,16 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_quantile_options_get_type != &gidSymbolNotFound ? garrow_quantile_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -111,7 +111,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   {
     const(double)* _cretval;
     size_t _cretlength;
-    _cretval = garrow_quantile_options_get_qs(cast(GArrowQuantileOptions*)cPtr, &_cretlength);
+    _cretval = garrow_quantile_options_get_qs(cast(GArrowQuantileOptions*)this._cPtr, &_cretlength);
     double[] _retval;
 
     if (_cretval)
@@ -124,7 +124,7 @@ class QuantileOptions : arrow.function_options.FunctionOptions
   /** */
   void setQ(double q)
   {
-    garrow_quantile_options_set_q(cast(GArrowQuantileOptions*)cPtr, q);
+    garrow_quantile_options_set_q(cast(GArrowQuantileOptions*)this._cPtr, q);
   }
 
   /** */
@@ -135,6 +135,6 @@ class QuantileOptions : arrow.function_options.FunctionOptions
       _n = cast(size_t)qs.length;
 
     auto _qs = cast(const(double)*)qs.ptr;
-    garrow_quantile_options_set_qs(cast(GArrowQuantileOptions*)cPtr, _qs, _n);
+    garrow_quantile_options_set_qs(cast(GArrowQuantileOptions*)this._cPtr, _qs, _n);
   }
 }

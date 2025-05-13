@@ -31,16 +31,16 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_slice_list_model_get_type != &gidSymbolNotFound ? gtk_slice_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -142,7 +142,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   this(gio.list_model.ListModel model, uint offset, uint size)
   {
     GtkSliceListModel* _cretval;
-    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, offset, size);
+    _cretval = gtk_slice_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, offset, size);
     this(_cretval, Yes.Take);
   }
 
@@ -153,8 +153,8 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_slice_list_model_get_model(cast(GtkSliceListModel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   uint getOffset()
   {
     uint _retval;
-    _retval = gtk_slice_list_model_get_offset(cast(GtkSliceListModel*)cPtr);
+    _retval = gtk_slice_list_model_get_offset(cast(GtkSliceListModel*)this._cPtr);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   uint getSize()
   {
     uint _retval;
-    _retval = gtk_slice_list_model_get_size(cast(GtkSliceListModel*)cPtr);
+    _retval = gtk_slice_list_model_get_size(cast(GtkSliceListModel*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_slice_list_model_set_model(cast(GtkSliceListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -204,7 +204,7 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   void setOffset(uint offset)
   {
-    gtk_slice_list_model_set_offset(cast(GtkSliceListModel*)cPtr, offset);
+    gtk_slice_list_model_set_offset(cast(GtkSliceListModel*)this._cPtr, offset);
   }
 
   /**
@@ -219,6 +219,6 @@ class SliceListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   void setSize(uint size)
   {
-    gtk_slice_list_model_set_size(cast(GtkSliceListModel*)cPtr, size);
+    gtk_slice_list_model_set_size(cast(GtkSliceListModel*)this._cPtr, size);
   }
 }

@@ -22,16 +22,16 @@ class StructArray : arrow.array.Array
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_array_get_type != &gidSymbolNotFound ? garrow_struct_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -46,7 +46,7 @@ class StructArray : arrow.array.Array
     GArrowStructArray* _cretval;
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
-    _cretval = garrow_struct_array_new(dataType ? cast(GArrowDataType*)dataType.cPtr(No.Dup) : null, length, _fields, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_struct_array_new(dataType ? cast(GArrowDataType*)dataType._cPtr(No.Dup) : null, length, _fields, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -55,7 +55,7 @@ class StructArray : arrow.array.Array
   {
     GList* _cretval;
     GError *_err;
-    _cretval = garrow_struct_array_flatten(cast(GArrowStructArray*)cPtr, &_err);
+    _cretval = garrow_struct_array_flatten(cast(GArrowStructArray*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(arrow.array.Array, GidOwnership.Full)(cast(GList*)_cretval);
@@ -66,8 +66,8 @@ class StructArray : arrow.array.Array
   arrow.array.Array getField(int i)
   {
     GArrowArray* _cretval;
-    _cretval = garrow_struct_array_get_field(cast(GArrowStructArray*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_struct_array_get_field(cast(GArrowStructArray*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class StructArray : arrow.array.Array
   arrow.array.Array[] getFields()
   {
     GList* _cretval;
-    _cretval = garrow_struct_array_get_fields(cast(GArrowStructArray*)cPtr);
+    _cretval = garrow_struct_array_get_fields(cast(GArrowStructArray*)this._cPtr);
     auto _retval = gListToD!(arrow.array.Array, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

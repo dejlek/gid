@@ -35,16 +35,16 @@ class PrintSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_settings_get_type != &gidSymbolNotFound ? gtk_print_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class PrintSettings : gobject.object.ObjectWrap
     _cretval = gtk_print_settings_new_from_file(_fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -98,8 +98,8 @@ class PrintSettings : gobject.object.ObjectWrap
   static gtk.print_settings.PrintSettings newFromGvariant(glib.variant.Variant variant)
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    _cretval = gtk_print_settings_new_from_gvariant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,10 +121,10 @@ class PrintSettings : gobject.object.ObjectWrap
     GtkPrintSettings* _cretval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _cretval = gtk_print_settings_new_from_key_file(keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -135,8 +135,8 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.print_settings.PrintSettings copy()
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
+    _cretval = gtk_print_settings_copy(cast(GtkPrintSettings*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class PrintSettings : gobject.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gtk_print_settings_foreach(cast(GtkPrintSettings*)cPtr, _funcCB, _func);
+    gtk_print_settings_foreach(cast(GtkPrintSettings*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -173,7 +173,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)cPtr, _key);
+    _cretval = gtk_print_settings_get(cast(GtkPrintSettings*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -193,7 +193,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_bool(cast(GtkPrintSettings*)cPtr, _key);
+    _retval = gtk_print_settings_get_bool(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getCollate()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_collate(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_collate(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getDefaultSource()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_default_source(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -227,7 +227,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getDither()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_dither(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -243,7 +243,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_double(cast(GtkPrintSettings*)cPtr, _key);
+    _retval = gtk_print_settings_get_double(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_double_with_default(cast(GtkPrintSettings*)cPtr, _key, def);
+    _retval = gtk_print_settings_get_double_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.PrintDuplex getDuplex()
   {
     GtkPrintDuplex _cretval;
-    _cretval = gtk_print_settings_get_duplex(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_duplex(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.PrintDuplex _retval = cast(gtk.types.PrintDuplex)_cretval;
     return _retval;
   }
@@ -286,7 +286,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getFinishings()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_finishings(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -302,7 +302,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_int(cast(GtkPrintSettings*)cPtr, _key);
+    _retval = gtk_print_settings_get_int(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     int _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_int_with_default(cast(GtkPrintSettings*)cPtr, _key, def);
+    _retval = gtk_print_settings_get_int_with_default(cast(GtkPrintSettings*)this._cPtr, _key, def);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     double _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_get_length(cast(GtkPrintSettings*)cPtr, _key, unit);
+    _retval = gtk_print_settings_get_length(cast(GtkPrintSettings*)this._cPtr, _key, unit);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getMediaType()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_media_type(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -361,7 +361,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getNCopies()
   {
     int _retval;
-    _retval = gtk_print_settings_get_n_copies(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_n_copies(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getNumberUp()
   {
     int _retval;
-    _retval = gtk_print_settings_get_number_up(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_number_up(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.NumberUpLayout getNumberUpLayout()
   {
     GtkNumberUpLayout _cretval;
-    _cretval = gtk_print_settings_get_number_up_layout(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_number_up_layout(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.NumberUpLayout _retval = cast(gtk.types.NumberUpLayout)_cretval;
     return _retval;
   }
@@ -396,7 +396,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.PageOrientation getOrientation()
   {
     GtkPageOrientation _cretval;
-    _cretval = gtk_print_settings_get_orientation(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_orientation(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.PageOrientation _retval = cast(gtk.types.PageOrientation)_cretval;
     return _retval;
   }
@@ -408,7 +408,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getOutputBin()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_output_bin(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -423,7 +423,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     GtkPageRange* _cretval;
     int _cretlength;
-    _cretval = gtk_print_settings_get_page_ranges(cast(GtkPrintSettings*)cPtr, &_cretlength);
+    _cretval = gtk_print_settings_get_page_ranges(cast(GtkPrintSettings*)this._cPtr, &_cretlength);
     gtk.types.PageRange[] _retval;
 
     if (_cretval)
@@ -442,7 +442,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.PageSet getPageSet()
   {
     GtkPageSet _cretval;
-    _cretval = gtk_print_settings_get_page_set(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_page_set(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.PageSet _retval = cast(gtk.types.PageSet)_cretval;
     return _retval;
   }
@@ -458,7 +458,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getPaperHeight(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_print_settings_get_paper_height(cast(GtkPrintSettings*)cPtr, unit);
+    _retval = gtk_print_settings_get_paper_height(cast(GtkPrintSettings*)this._cPtr, unit);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.paper_size.PaperSize getPaperSize()
   {
     GtkPaperSize* _cretval;
-    _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_paper_size(cast(GtkPrintSettings*)this._cPtr);
     auto _retval = _cretval ? new gtk.paper_size.PaperSize(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -486,7 +486,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getPaperWidth(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_print_settings_get_paper_width(cast(GtkPrintSettings*)cPtr, unit);
+    _retval = gtk_print_settings_get_paper_width(cast(GtkPrintSettings*)this._cPtr, unit);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.PrintPages getPrintPages()
   {
     GtkPrintPages _cretval;
-    _cretval = gtk_print_settings_get_print_pages(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_print_pages(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.PrintPages _retval = cast(gtk.types.PrintPages)_cretval;
     return _retval;
   }
@@ -510,7 +510,7 @@ class PrintSettings : gobject.object.ObjectWrap
   string getPrinter()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_printer(cast(GtkPrintSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -522,7 +522,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getPrinterLpi()
   {
     double _retval;
-    _retval = gtk_print_settings_get_printer_lpi(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_printer_lpi(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -533,7 +533,7 @@ class PrintSettings : gobject.object.ObjectWrap
   gtk.types.PrintQuality getQuality()
   {
     GtkPrintQuality _cretval;
-    _cretval = gtk_print_settings_get_quality(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_get_quality(cast(GtkPrintSettings*)this._cPtr);
     gtk.types.PrintQuality _retval = cast(gtk.types.PrintQuality)_cretval;
     return _retval;
   }
@@ -545,7 +545,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getResolution()
   {
     int _retval;
-    _retval = gtk_print_settings_get_resolution(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_resolution(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getResolutionX()
   {
     int _retval;
-    _retval = gtk_print_settings_get_resolution_x(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_resolution_x(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class PrintSettings : gobject.object.ObjectWrap
   int getResolutionY()
   {
     int _retval;
-    _retval = gtk_print_settings_get_resolution_y(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_resolution_y(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getReverse()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_reverse(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_reverse(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -589,7 +589,7 @@ class PrintSettings : gobject.object.ObjectWrap
   double getScale()
   {
     double _retval;
-    _retval = gtk_print_settings_get_scale(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_scale(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -600,7 +600,7 @@ class PrintSettings : gobject.object.ObjectWrap
   bool getUseColor()
   {
     bool _retval;
-    _retval = gtk_print_settings_get_use_color(cast(GtkPrintSettings*)cPtr);
+    _retval = gtk_print_settings_get_use_color(cast(GtkPrintSettings*)this._cPtr);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _key = key.toCString(No.Alloc);
-    _retval = gtk_print_settings_has_key(cast(GtkPrintSettings*)cPtr, _key);
+    _retval = gtk_print_settings_has_key(cast(GtkPrintSettings*)this._cPtr, _key);
     return _retval;
   }
 
@@ -634,7 +634,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_load_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
+    _retval = gtk_print_settings_load_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -657,7 +657,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _retval = gtk_print_settings_load_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -674,7 +674,7 @@ class PrintSettings : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    gtk_print_settings_set(cast(GtkPrintSettings*)cPtr, _key, _value);
+    gtk_print_settings_set(cast(GtkPrintSettings*)this._cPtr, _key, _value);
   }
 
   /**
@@ -687,7 +687,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setBool(string key, bool value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_print_settings_set_bool(cast(GtkPrintSettings*)cPtr, _key, value);
+    gtk_print_settings_set_bool(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
   /**
@@ -698,7 +698,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setCollate(bool collate)
   {
-    gtk_print_settings_set_collate(cast(GtkPrintSettings*)cPtr, collate);
+    gtk_print_settings_set_collate(cast(GtkPrintSettings*)this._cPtr, collate);
   }
 
   /**
@@ -710,7 +710,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setDefaultSource(string defaultSource)
   {
     const(char)* _defaultSource = defaultSource.toCString(No.Alloc);
-    gtk_print_settings_set_default_source(cast(GtkPrintSettings*)cPtr, _defaultSource);
+    gtk_print_settings_set_default_source(cast(GtkPrintSettings*)this._cPtr, _defaultSource);
   }
 
   /**
@@ -722,7 +722,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setDither(string dither)
   {
     const(char)* _dither = dither.toCString(No.Alloc);
-    gtk_print_settings_set_dither(cast(GtkPrintSettings*)cPtr, _dither);
+    gtk_print_settings_set_dither(cast(GtkPrintSettings*)this._cPtr, _dither);
   }
 
   /**
@@ -735,7 +735,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setDouble(string key, double value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_print_settings_set_double(cast(GtkPrintSettings*)cPtr, _key, value);
+    gtk_print_settings_set_double(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
   /**
@@ -746,7 +746,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setDuplex(gtk.types.PrintDuplex duplex)
   {
-    gtk_print_settings_set_duplex(cast(GtkPrintSettings*)cPtr, duplex);
+    gtk_print_settings_set_duplex(cast(GtkPrintSettings*)this._cPtr, duplex);
   }
 
   /**
@@ -758,7 +758,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setFinishings(string finishings)
   {
     const(char)* _finishings = finishings.toCString(No.Alloc);
-    gtk_print_settings_set_finishings(cast(GtkPrintSettings*)cPtr, _finishings);
+    gtk_print_settings_set_finishings(cast(GtkPrintSettings*)this._cPtr, _finishings);
   }
 
   /**
@@ -771,7 +771,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setInt(string key, int value)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_print_settings_set_int(cast(GtkPrintSettings*)cPtr, _key, value);
+    gtk_print_settings_set_int(cast(GtkPrintSettings*)this._cPtr, _key, value);
   }
 
   /**
@@ -785,7 +785,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setLength(string key, double value, gtk.types.Unit unit)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_print_settings_set_length(cast(GtkPrintSettings*)cPtr, _key, value, unit);
+    gtk_print_settings_set_length(cast(GtkPrintSettings*)this._cPtr, _key, value, unit);
   }
 
   /**
@@ -799,7 +799,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setMediaType(string mediaType)
   {
     const(char)* _mediaType = mediaType.toCString(No.Alloc);
-    gtk_print_settings_set_media_type(cast(GtkPrintSettings*)cPtr, _mediaType);
+    gtk_print_settings_set_media_type(cast(GtkPrintSettings*)this._cPtr, _mediaType);
   }
 
   /**
@@ -810,7 +810,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setNCopies(int numCopies)
   {
-    gtk_print_settings_set_n_copies(cast(GtkPrintSettings*)cPtr, numCopies);
+    gtk_print_settings_set_n_copies(cast(GtkPrintSettings*)this._cPtr, numCopies);
   }
 
   /**
@@ -821,7 +821,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setNumberUp(int numberUp)
   {
-    gtk_print_settings_set_number_up(cast(GtkPrintSettings*)cPtr, numberUp);
+    gtk_print_settings_set_number_up(cast(GtkPrintSettings*)this._cPtr, numberUp);
   }
 
   /**
@@ -832,7 +832,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setNumberUpLayout(gtk.types.NumberUpLayout numberUpLayout)
   {
-    gtk_print_settings_set_number_up_layout(cast(GtkPrintSettings*)cPtr, numberUpLayout);
+    gtk_print_settings_set_number_up_layout(cast(GtkPrintSettings*)this._cPtr, numberUpLayout);
   }
 
   /**
@@ -843,7 +843,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setOrientation(gtk.types.PageOrientation orientation)
   {
-    gtk_print_settings_set_orientation(cast(GtkPrintSettings*)cPtr, orientation);
+    gtk_print_settings_set_orientation(cast(GtkPrintSettings*)this._cPtr, orientation);
   }
 
   /**
@@ -855,7 +855,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setOutputBin(string outputBin)
   {
     const(char)* _outputBin = outputBin.toCString(No.Alloc);
-    gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)cPtr, _outputBin);
+    gtk_print_settings_set_output_bin(cast(GtkPrintSettings*)this._cPtr, _outputBin);
   }
 
   /**
@@ -871,7 +871,7 @@ class PrintSettings : gobject.object.ObjectWrap
       _numRanges = cast(int)pageRanges.length;
 
     auto _pageRanges = cast(GtkPageRange*)pageRanges.ptr;
-    gtk_print_settings_set_page_ranges(cast(GtkPrintSettings*)cPtr, _pageRanges, _numRanges);
+    gtk_print_settings_set_page_ranges(cast(GtkPrintSettings*)this._cPtr, _pageRanges, _numRanges);
   }
 
   /**
@@ -882,7 +882,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPageSet(gtk.types.PageSet pageSet)
   {
-    gtk_print_settings_set_page_set(cast(GtkPrintSettings*)cPtr, pageSet);
+    gtk_print_settings_set_page_set(cast(GtkPrintSettings*)this._cPtr, pageSet);
   }
 
   /**
@@ -894,7 +894,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPaperHeight(double height, gtk.types.Unit unit)
   {
-    gtk_print_settings_set_paper_height(cast(GtkPrintSettings*)cPtr, height, unit);
+    gtk_print_settings_set_paper_height(cast(GtkPrintSettings*)this._cPtr, height, unit);
   }
 
   /**
@@ -907,7 +907,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPaperSize(gtk.paper_size.PaperSize paperSize)
   {
-    gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)cPtr, paperSize ? cast(GtkPaperSize*)paperSize.cPtr(No.Dup) : null);
+    gtk_print_settings_set_paper_size(cast(GtkPrintSettings*)this._cPtr, paperSize ? cast(GtkPaperSize*)paperSize._cPtr(No.Dup) : null);
   }
 
   /**
@@ -919,7 +919,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPaperWidth(double width, gtk.types.Unit unit)
   {
-    gtk_print_settings_set_paper_width(cast(GtkPrintSettings*)cPtr, width, unit);
+    gtk_print_settings_set_paper_width(cast(GtkPrintSettings*)this._cPtr, width, unit);
   }
 
   /**
@@ -930,7 +930,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPrintPages(gtk.types.PrintPages pages)
   {
-    gtk_print_settings_set_print_pages(cast(GtkPrintSettings*)cPtr, pages);
+    gtk_print_settings_set_print_pages(cast(GtkPrintSettings*)this._cPtr, pages);
   }
 
   /**
@@ -943,7 +943,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void setPrinter(string printer)
   {
     const(char)* _printer = printer.toCString(No.Alloc);
-    gtk_print_settings_set_printer(cast(GtkPrintSettings*)cPtr, _printer);
+    gtk_print_settings_set_printer(cast(GtkPrintSettings*)this._cPtr, _printer);
   }
 
   /**
@@ -954,7 +954,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setPrinterLpi(double lpi)
   {
-    gtk_print_settings_set_printer_lpi(cast(GtkPrintSettings*)cPtr, lpi);
+    gtk_print_settings_set_printer_lpi(cast(GtkPrintSettings*)this._cPtr, lpi);
   }
 
   /**
@@ -965,7 +965,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setQuality(gtk.types.PrintQuality quality)
   {
-    gtk_print_settings_set_quality(cast(GtkPrintSettings*)cPtr, quality);
+    gtk_print_settings_set_quality(cast(GtkPrintSettings*)this._cPtr, quality);
   }
 
   /**
@@ -978,7 +978,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setResolution(int resolution)
   {
-    gtk_print_settings_set_resolution(cast(GtkPrintSettings*)cPtr, resolution);
+    gtk_print_settings_set_resolution(cast(GtkPrintSettings*)this._cPtr, resolution);
   }
 
   /**
@@ -992,7 +992,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setResolutionXy(int resolutionX, int resolutionY)
   {
-    gtk_print_settings_set_resolution_xy(cast(GtkPrintSettings*)cPtr, resolutionX, resolutionY);
+    gtk_print_settings_set_resolution_xy(cast(GtkPrintSettings*)this._cPtr, resolutionX, resolutionY);
   }
 
   /**
@@ -1003,7 +1003,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setReverse(bool reverse)
   {
-    gtk_print_settings_set_reverse(cast(GtkPrintSettings*)cPtr, reverse);
+    gtk_print_settings_set_reverse(cast(GtkPrintSettings*)this._cPtr, reverse);
   }
 
   /**
@@ -1014,7 +1014,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setScale(double scale)
   {
-    gtk_print_settings_set_scale(cast(GtkPrintSettings*)cPtr, scale);
+    gtk_print_settings_set_scale(cast(GtkPrintSettings*)this._cPtr, scale);
   }
 
   /**
@@ -1025,7 +1025,7 @@ class PrintSettings : gobject.object.ObjectWrap
   */
   void setUseColor(bool useColor)
   {
-    gtk_print_settings_set_use_color(cast(GtkPrintSettings*)cPtr, useColor);
+    gtk_print_settings_set_use_color(cast(GtkPrintSettings*)this._cPtr, useColor);
   }
 
   /**
@@ -1043,7 +1043,7 @@ class PrintSettings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _fileName = fileName.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_print_settings_to_file(cast(GtkPrintSettings*)cPtr, _fileName, &_err);
+    _retval = gtk_print_settings_to_file(cast(GtkPrintSettings*)this._cPtr, _fileName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1056,7 +1056,7 @@ class PrintSettings : gobject.object.ObjectWrap
   glib.variant.Variant toGvariant()
   {
     GVariant* _cretval;
-    _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)cPtr);
+    _cretval = gtk_print_settings_to_gvariant(cast(GtkPrintSettings*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1072,7 +1072,7 @@ class PrintSettings : gobject.object.ObjectWrap
   void toKeyFile(glib.key_file.KeyFile keyFile, string groupName = null)
   {
     const(char)* _groupName = groupName.toCString(No.Alloc);
-    gtk_print_settings_to_key_file(cast(GtkPrintSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName);
+    gtk_print_settings_to_key_file(cast(GtkPrintSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName);
   }
 
   /**
@@ -1085,6 +1085,6 @@ class PrintSettings : gobject.object.ObjectWrap
   void unset(string key)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    gtk_print_settings_unset(cast(GtkPrintSettings*)cPtr, _key);
+    gtk_print_settings_unset(cast(GtkPrintSettings*)this._cPtr, _key);
   }
 }

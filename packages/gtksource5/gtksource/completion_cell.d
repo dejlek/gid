@@ -44,16 +44,16 @@ class CompletionCell : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_cell_get_type != &gidSymbolNotFound ? gtk_source_completion_cell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class CompletionCell : gtk.widget.Widget
   gtksource.types.CompletionColumn getColumn()
   {
     GtkSourceCompletionColumn _cretval;
-    _cretval = gtk_source_completion_cell_get_column(cast(GtkSourceCompletionCell*)cPtr);
+    _cretval = gtk_source_completion_cell_get_column(cast(GtkSourceCompletionCell*)this._cPtr);
     gtksource.types.CompletionColumn _retval = cast(gtksource.types.CompletionColumn)_cretval;
     return _retval;
   }
@@ -126,35 +126,35 @@ class CompletionCell : gtk.widget.Widget
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_completion_cell_get_widget(cast(GtkSourceCompletionCell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_source_completion_cell_get_widget(cast(GtkSourceCompletionCell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_gicon(cast(GtkSourceCompletionCell*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /** */
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_source_completion_cell_set_icon_name(cast(GtkSourceCompletionCell*)cPtr, _iconName);
+    gtk_source_completion_cell_set_icon_name(cast(GtkSourceCompletionCell*)this._cPtr, _iconName);
   }
 
   /** */
   void setMarkup(string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_source_completion_cell_set_markup(cast(GtkSourceCompletionCell*)cPtr, _markup);
+    gtk_source_completion_cell_set_markup(cast(GtkSourceCompletionCell*)this._cPtr, _markup);
   }
 
   /** */
   void setPaintable(gdk.paintable.Paintable paintable)
   {
-    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_paintable(cast(GtkSourceCompletionCell*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -166,19 +166,19 @@ class CompletionCell : gtk.widget.Widget
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_completion_cell_set_text(cast(GtkSourceCompletionCell*)cPtr, _text);
+    gtk_source_completion_cell_set_text(cast(GtkSourceCompletionCell*)this._cPtr, _text);
   }
 
   /** */
   void setTextWithAttributes(string text, pango.attr_list.AttrList attrs)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_source_completion_cell_set_text_with_attributes(cast(GtkSourceCompletionCell*)cPtr, _text, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_text_with_attributes(cast(GtkSourceCompletionCell*)this._cPtr, _text, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
 
   /** */
   void setWidget(gtk.widget.Widget child)
   {
-    gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_source_completion_cell_set_widget(cast(GtkSourceCompletionCell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

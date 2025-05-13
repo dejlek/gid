@@ -28,16 +28,16 @@ class TriggerControlSource : gstcontroller.timed_value_control_source.TimedValue
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_trigger_control_source_get_type != &gidSymbolNotFound ? gst_trigger_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

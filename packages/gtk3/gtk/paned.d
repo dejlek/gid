@@ -93,16 +93,16 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_get_type != &gidSymbolNotFound ? gtk_paned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -206,7 +206,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void add1(gtk.widget.Widget child)
   {
-    gtk_paned_add1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_add1(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -219,7 +219,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void add2(gtk.widget.Widget child)
   {
-    gtk_paned_add2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_add2(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -229,8 +229,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   gtk.widget.Widget getChild1()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_paned_get_child1(cast(GtkPaned*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_paned_get_child1(cast(GtkPaned*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -241,8 +241,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   gtk.widget.Widget getChild2()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_paned_get_child2(cast(GtkPaned*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_paned_get_child2(cast(GtkPaned*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -256,8 +256,8 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   gdk.window.Window getHandleWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_paned_get_handle_window(cast(GtkPaned*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_paned_get_handle_window(cast(GtkPaned*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   int getPosition()
   {
     int _retval;
-    _retval = gtk_paned_get_position(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_position(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   bool getWideHandle()
   {
     bool _retval;
-    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void pack1(gtk.widget.Widget child, bool resize, bool shrink)
   {
-    gtk_paned_pack1(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, resize, shrink);
+    gtk_paned_pack1(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, resize, shrink);
   }
 
   /**
@@ -306,7 +306,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void pack2(gtk.widget.Widget child, bool resize, bool shrink)
   {
-    gtk_paned_pack2(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, resize, shrink);
+    gtk_paned_pack2(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, resize, shrink);
   }
 
   /**
@@ -318,7 +318,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void setPosition(int position)
   {
-    gtk_paned_set_position(cast(GtkPaned*)cPtr, position);
+    gtk_paned_set_position(cast(GtkPaned*)this._cPtr, position);
   }
 
   /**
@@ -329,7 +329,7 @@ class Paned : gtk.container.Container, gtk.orientable.Orientable
   */
   void setWideHandle(bool wide)
   {
-    gtk_paned_set_wide_handle(cast(GtkPaned*)cPtr, wide);
+    gtk_paned_set_wide_handle(cast(GtkPaned*)this._cPtr, wide);
   }
 
   /**

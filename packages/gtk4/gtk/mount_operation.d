@@ -35,16 +35,16 @@ class MountOperation : gio.mount_operation.MountOperation
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_mount_operation_get_type != &gidSymbolNotFound ? gtk_mount_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -101,7 +101,7 @@ class MountOperation : gio.mount_operation.MountOperation
   this(gtk.window.Window parent = null)
   {
     GMountOperation* _cretval;
-    _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    _cretval = gtk_mount_operation_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -113,8 +113,8 @@ class MountOperation : gio.mount_operation.MountOperation
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gtk_mount_operation_get_display(cast(GtkMountOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gtk_mount_operation_get_display(cast(GtkMountOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,8 +125,8 @@ class MountOperation : gio.mount_operation.MountOperation
   gtk.window.Window getParent()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_mount_operation_get_parent(cast(GtkMountOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,7 +138,7 @@ class MountOperation : gio.mount_operation.MountOperation
   bool isShowing()
   {
     bool _retval;
-    _retval = gtk_mount_operation_is_showing(cast(GtkMountOperation*)cPtr);
+    _retval = gtk_mount_operation_is_showing(cast(GtkMountOperation*)this._cPtr);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   void setDisplay(gdk.display.Display display)
   {
-    gtk_mount_operation_set_display(cast(GtkMountOperation*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    gtk_mount_operation_set_display(cast(GtkMountOperation*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
 
   /**
@@ -162,6 +162,6 @@ class MountOperation : gio.mount_operation.MountOperation
   */
   void setParent(gtk.window.Window parent = null)
   {
-    gtk_mount_operation_set_parent(cast(GtkMountOperation*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_mount_operation_set_parent(cast(GtkMountOperation*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
 }

@@ -21,16 +21,16 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_never_trigger_get_type != &gidSymbolNotFound ? gtk_never_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class NeverTrigger : gtk.shortcut_trigger.ShortcutTrigger
   {
     GtkShortcutTrigger* _cretval;
     _cretval = gtk_never_trigger_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.never_trigger.NeverTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

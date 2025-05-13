@@ -41,16 +41,16 @@ class TextTag : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_tag_get_type != &gidSymbolNotFound ? gtk_text_tag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1555,7 +1555,7 @@ class TextTag : gobject.object.ObjectWrap
   */
   void changed(bool sizeChanged)
   {
-    gtk_text_tag_changed(cast(GtkTextTag*)cPtr, sizeChanged);
+    gtk_text_tag_changed(cast(GtkTextTag*)this._cPtr, sizeChanged);
   }
 
   /**
@@ -1565,7 +1565,7 @@ class TextTag : gobject.object.ObjectWrap
   int getPriority()
   {
     int _retval;
-    _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)cPtr);
+    _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)this._cPtr);
     return _retval;
   }
 
@@ -1590,6 +1590,6 @@ class TextTag : gobject.object.ObjectWrap
   */
   void setPriority(int priority)
   {
-    gtk_text_tag_set_priority(cast(GtkTextTag*)cPtr, priority);
+    gtk_text_tag_set_priority(cast(GtkTextTag*)this._cPtr, priority);
   }
 }

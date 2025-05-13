@@ -21,16 +21,16 @@ class Session : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_session_get_type != &gidSymbolNotFound ? panel_session_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,17 +62,17 @@ class Session : gobject.object.ObjectWrap
   {
     PanelSession* _cretval;
     GError *_err;
-    _cretval = panel_session_new_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null, &_err);
+    _cretval = panel_session_new_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session.Session)(cast(PanelSession*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.session.Session)(cast(PanelSession*)_cretval, Yes.Take);
     return _retval;
   }
 
   /** */
   void append(panel.session_item.SessionItem item)
   {
-    panel_session_append(cast(PanelSession*)cPtr, item ? cast(PanelSessionItem*)item.cPtr(No.Dup) : null);
+    panel_session_append(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -86,8 +86,8 @@ class Session : gobject.object.ObjectWrap
   panel.session_item.SessionItem getItem(uint position)
   {
     PanelSessionItem* _cretval;
-    _cretval = panel_session_get_item(cast(PanelSession*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, No.Take);
+    _cretval = panel_session_get_item(cast(PanelSession*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,14 +95,14 @@ class Session : gobject.object.ObjectWrap
   uint getNItems()
   {
     uint _retval;
-    _retval = panel_session_get_n_items(cast(PanelSession*)cPtr);
+    _retval = panel_session_get_n_items(cast(PanelSession*)this._cPtr);
     return _retval;
   }
 
   /** */
   void insert(uint position, panel.session_item.SessionItem item)
   {
-    panel_session_insert(cast(PanelSession*)cPtr, position, item ? cast(PanelSessionItem*)item.cPtr(No.Dup) : null);
+    panel_session_insert(cast(PanelSession*)this._cPtr, position, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -116,27 +116,27 @@ class Session : gobject.object.ObjectWrap
   {
     PanelSessionItem* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
-    _cretval = panel_session_lookup_by_id(cast(PanelSession*)cPtr, _id);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, Yes.Take);
+    _cretval = panel_session_lookup_by_id(cast(PanelSession*)this._cPtr, _id);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.session_item.SessionItem)(cast(PanelSessionItem*)_cretval, Yes.Take);
     return _retval;
   }
 
   /** */
   void prepend(panel.session_item.SessionItem item)
   {
-    panel_session_prepend(cast(PanelSession*)cPtr, item ? cast(PanelSessionItem*)item.cPtr(No.Dup) : null);
+    panel_session_prepend(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /** */
   void remove(panel.session_item.SessionItem item)
   {
-    panel_session_remove(cast(PanelSession*)cPtr, item ? cast(PanelSessionItem*)item.cPtr(No.Dup) : null);
+    panel_session_remove(cast(PanelSession*)this._cPtr, item ? cast(PanelSessionItem*)item._cPtr(No.Dup) : null);
   }
 
   /** */
   void removeAt(uint position)
   {
-    panel_session_remove_at(cast(PanelSession*)cPtr, position);
+    panel_session_remove_at(cast(PanelSession*)this._cPtr, position);
   }
 
   /**
@@ -151,7 +151,7 @@ class Session : gobject.object.ObjectWrap
   glib.variant.Variant toVariant()
   {
     GVariant* _cretval;
-    _cretval = panel_session_to_variant(cast(PanelSession*)cPtr);
+    _cretval = panel_session_to_variant(cast(PanelSession*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

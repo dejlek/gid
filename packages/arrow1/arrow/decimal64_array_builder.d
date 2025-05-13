@@ -22,16 +22,16 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal64_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal64_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   this(arrow.decimal64_data_type.Decimal64DataType dataType)
   {
     GArrowDecimal64ArrayBuilder* _cretval;
-    _cretval = garrow_decimal64_array_builder_new(dataType ? cast(GArrowDecimal64DataType*)dataType.cPtr(No.Dup) : null);
+    _cretval = garrow_decimal64_array_builder_new(dataType ? cast(GArrowDecimal64DataType*)dataType._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -55,7 +55,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal64_array_builder_append_value(cast(GArrowDecimal64ArrayBuilder*)cPtr, value ? cast(GArrowDecimal64*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal64_array_builder_append_value(cast(GArrowDecimal64ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal64*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -85,7 +85,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
 
     GArrowDecimal64*[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowDecimal64*)obj.cPtr : null;
+      _tmpvalues ~= obj ? cast(GArrowDecimal64*)obj._cPtr : null;
     GArrowDecimal64** _values = cast(GArrowDecimal64**)_tmpvalues.ptr;
 
     long _isValidsLength;
@@ -94,7 +94,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_decimal64_array_builder_append_values(cast(GArrowDecimal64ArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_decimal64_array_builder_append_values(cast(GArrowDecimal64ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

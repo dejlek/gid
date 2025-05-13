@@ -28,22 +28,22 @@ class LayoutIter : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_layout_iter_get_type != &gidSymbolNotFound ? pango_layout_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool atLastLine()
   {
     bool _retval;
-    _retval = pango_layout_iter_at_last_line(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_at_last_line(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class LayoutIter : gobject.boxed.Boxed
   pango.layout_iter.LayoutIter copy()
   {
     PangoLayoutIter* _cretval;
-    _cretval = pango_layout_iter_copy(cast(PangoLayoutIter*)cPtr);
+    _cretval = pango_layout_iter_copy(cast(PangoLayoutIter*)this._cPtr);
     auto _retval = _cretval ? new pango.layout_iter.LayoutIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -85,7 +85,7 @@ class LayoutIter : gobject.boxed.Boxed
   int getBaseline()
   {
     int _retval;
-    _retval = pango_layout_iter_get_baseline(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_get_baseline(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getCharExtents(out pango.types.Rectangle logicalRect)
   {
-    pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)cPtr, &logicalRect);
+    pango_layout_iter_get_char_extents(cast(PangoLayoutIter*)this._cPtr, &logicalRect);
   }
 
   /**
@@ -117,7 +117,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getClusterExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_cluster_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -132,7 +132,7 @@ class LayoutIter : gobject.boxed.Boxed
   int getIndex()
   {
     int _retval;
-    _retval = pango_layout_iter_get_index(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_get_index(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -143,8 +143,8 @@ class LayoutIter : gobject.boxed.Boxed
   pango.layout.Layout getLayout()
   {
     PangoLayout* _cretval;
-    _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
+    _cretval = pango_layout_iter_get_layout(cast(PangoLayoutIter*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, No.Take);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getLayoutExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_layout_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -171,7 +171,7 @@ class LayoutIter : gobject.boxed.Boxed
   pango.layout_line.LayoutLine getLine()
   {
     PangoLayoutLine* _cretval;
-    _cretval = pango_layout_iter_get_line(cast(PangoLayoutIter*)cPtr);
+    _cretval = pango_layout_iter_get_line(cast(PangoLayoutIter*)this._cPtr);
     auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -190,7 +190,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getLineExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_line_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -205,7 +205,7 @@ class LayoutIter : gobject.boxed.Boxed
   pango.layout_line.LayoutLine getLineReadonly()
   {
     PangoLayoutLine* _cretval;
-    _cretval = pango_layout_iter_get_line_readonly(cast(PangoLayoutIter*)cPtr);
+    _cretval = pango_layout_iter_get_line_readonly(cast(PangoLayoutIter*)this._cPtr);
     auto _retval = _cretval ? new pango.layout_line.LayoutLine(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -229,7 +229,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getLineYrange(out int y0, out int y1)
   {
-    pango_layout_iter_get_line_yrange(cast(PangoLayoutIter*)cPtr, cast(int*)&y0, cast(int*)&y1);
+    pango_layout_iter_get_line_yrange(cast(PangoLayoutIter*)this._cPtr, cast(int*)&y0, cast(int*)&y1);
   }
 
   /**
@@ -247,7 +247,7 @@ class LayoutIter : gobject.boxed.Boxed
   pango.types.LayoutRun getRun()
   {
     PangoLayoutRun* _cretval;
-    _cretval = pango_layout_iter_get_run(cast(PangoLayoutIter*)cPtr);
+    _cretval = pango_layout_iter_get_run(cast(PangoLayoutIter*)this._cPtr);
     auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -265,7 +265,7 @@ class LayoutIter : gobject.boxed.Boxed
   int getRunBaseline()
   {
     int _retval;
-    _retval = pango_layout_iter_get_run_baseline(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_get_run_baseline(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class LayoutIter : gobject.boxed.Boxed
   */
   void getRunExtents(out pango.types.Rectangle inkRect, out pango.types.Rectangle logicalRect)
   {
-    pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)cPtr, &inkRect, &logicalRect);
+    pango_layout_iter_get_run_extents(cast(PangoLayoutIter*)this._cPtr, &inkRect, &logicalRect);
   }
 
   /**
@@ -300,7 +300,7 @@ class LayoutIter : gobject.boxed.Boxed
   pango.types.LayoutRun getRunReadonly()
   {
     PangoLayoutRun* _cretval;
-    _cretval = pango_layout_iter_get_run_readonly(cast(PangoLayoutIter*)cPtr);
+    _cretval = pango_layout_iter_get_run_readonly(cast(PangoLayoutIter*)this._cPtr);
     auto _retval = _cretval ? new pango.types.LayoutRun(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -314,7 +314,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextChar()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_char(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_next_char(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextCluster()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_cluster(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_next_cluster(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextLine()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_line(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_next_line(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class LayoutIter : gobject.boxed.Boxed
   bool nextRun()
   {
     bool _retval;
-    _retval = pango_layout_iter_next_run(cast(PangoLayoutIter*)cPtr);
+    _retval = pango_layout_iter_next_run(cast(PangoLayoutIter*)this._cPtr);
     return _retval;
   }
 }

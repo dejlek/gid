@@ -2041,7 +2041,7 @@ struct AtkGObjectAccessibleClass
 struct AtkHyperlink
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /** */
@@ -2244,7 +2244,7 @@ struct AtkKeyEventStruct
 struct AtkMisc
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /**
@@ -2427,7 +2427,7 @@ struct AtkObjectClass
 struct AtkObjectFactory
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /** */
@@ -2437,7 +2437,7 @@ struct AtkObjectFactoryClass
   GObjectClass parentClass;
 
   /** */
-  extern(C) AtkObject* function(ObjectC* obj) createAccessible;
+  extern(C) AtkObject* function(GObject* obj) createAccessible;
 
   /** */
   extern(C) void function(AtkObjectFactory* factory) invalidate;
@@ -2479,7 +2479,7 @@ struct AtkObjectFactoryClass
 struct AtkObject
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   char* description;
@@ -2597,7 +2597,7 @@ struct AtkRectangle
 struct AtkRegistry
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GHashTable* factoryTypeRegistry;
@@ -2625,7 +2625,7 @@ struct AtkRegistryClass
 struct AtkRelation
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GPtrArray* target;
@@ -2657,7 +2657,7 @@ struct AtkRelationClass
 struct AtkRelationSet
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GPtrArray* relations;
@@ -2780,7 +2780,7 @@ struct AtkSocketClass
 struct AtkStateSet
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /** */
@@ -3293,7 +3293,7 @@ struct AtkTextSelection
 struct AtkUtil
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /** */

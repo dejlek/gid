@@ -110,16 +110,16 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_application_window_get_type != &gidSymbolNotFound ? gtk_application_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -173,7 +173,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   this(gtk.application.Application application)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
+    _cretval = gtk_application_window_new(application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -187,8 +187,8 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   gtk.shortcuts_window.ShortcutsWindow getHelpOverlay()
   {
     GtkShortcutsWindow* _cretval;
-    _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.Take);
+    _cretval = gtk_application_window_get_help_overlay(cast(GtkApplicationWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcuts_window.ShortcutsWindow)(cast(GtkShortcutsWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   uint getId()
   {
     uint _retval;
-    _retval = gtk_application_window_get_id(cast(GtkApplicationWindow*)cPtr);
+    _retval = gtk_application_window_get_id(cast(GtkApplicationWindow*)this._cPtr);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   bool getShowMenubar()
   {
     bool _retval;
-    _retval = gtk_application_window_get_show_menubar(cast(GtkApplicationWindow*)cPtr);
+    _retval = gtk_application_window_get_show_menubar(cast(GtkApplicationWindow*)this._cPtr);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   */
   void setHelpOverlay(gtk.shortcuts_window.ShortcutsWindow helpOverlay = null)
   {
-    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay.cPtr(No.Dup) : null);
+    gtk_application_window_set_help_overlay(cast(GtkApplicationWindow*)this._cPtr, helpOverlay ? cast(GtkShortcutsWindow*)helpOverlay._cPtr(No.Dup) : null);
   }
 
   /**
@@ -243,6 +243,6 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
   */
   void setShowMenubar(bool showMenubar)
   {
-    gtk_application_window_set_show_menubar(cast(GtkApplicationWindow*)cPtr, showMenubar);
+    gtk_application_window_set_show_menubar(cast(GtkApplicationWindow*)this._cPtr, showMenubar);
   }
 }

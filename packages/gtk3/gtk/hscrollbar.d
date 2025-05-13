@@ -34,16 +34,16 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hscrollbar_get_type != &gidSymbolNotFound ? gtk_hscrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class HScrollbar : gtk.scrollbar.Scrollbar
   this(gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_hscrollbar_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 }

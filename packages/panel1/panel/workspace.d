@@ -40,16 +40,16 @@ class Workspace : adw.application_window.ApplicationWindow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_workspace_get_type != &gidSymbolNotFound ? panel_workspace_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,8 +93,8 @@ class Workspace : adw.application_window.ApplicationWindow
   static panel.workspace.Workspace findFromWidget(gtk.widget.Widget widget)
   {
     PanelWorkspace* _cretval;
-    _cretval = panel_workspace_find_from_widget(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
+    _cretval = panel_workspace_find_from_widget(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.workspace.Workspace)(cast(PanelWorkspace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class Workspace : adw.application_window.ApplicationWindow
   override void actionSetEnabled(string actionName, bool enabled)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    panel_workspace_action_set_enabled(cast(PanelWorkspace*)cPtr, _actionName, enabled);
+    panel_workspace_action_set_enabled(cast(PanelWorkspace*)this._cPtr, _actionName, enabled);
   }
 
   alias getId = gtk.application_window.ApplicationWindow.getId;
@@ -111,7 +111,7 @@ class Workspace : adw.application_window.ApplicationWindow
   string getId()
   {
     const(char)* _cretval;
-    _cretval = panel_workspace_get_id(cast(PanelWorkspace*)cPtr);
+    _cretval = panel_workspace_get_id(cast(PanelWorkspace*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -123,8 +123,8 @@ class Workspace : adw.application_window.ApplicationWindow
   panel.workbench.Workbench getWorkbench()
   {
     PanelWorkbench* _cretval;
-    _cretval = panel_workspace_get_workbench(cast(PanelWorkspace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
+    _cretval = panel_workspace_get_workbench(cast(PanelWorkspace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.workbench.Workbench)(cast(PanelWorkbench*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,8 +144,8 @@ class Workspace : adw.application_window.ApplicationWindow
   {
     PanelInhibitor* _cretval;
     const(char)* _reason = reason.toCString(No.Alloc);
-    _cretval = panel_workspace_inhibit(cast(PanelWorkspace*)cPtr, flags, _reason);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.inhibitor.Inhibitor)(cast(PanelInhibitor*)_cretval, Yes.Take);
+    _cretval = panel_workspace_inhibit(cast(PanelWorkspace*)this._cPtr, flags, _reason);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.inhibitor.Inhibitor)(cast(PanelInhibitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,6 +153,6 @@ class Workspace : adw.application_window.ApplicationWindow
   void setId(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    panel_workspace_set_id(cast(PanelWorkspace*)cPtr, _id);
+    panel_workspace_set_id(cast(PanelWorkspace*)this._cPtr, _id);
   }
 }

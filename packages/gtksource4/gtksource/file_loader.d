@@ -27,16 +27,16 @@ class FileLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_file_loader_get_type != &gidSymbolNotFound ? gtk_source_file_loader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class FileLoader : gobject.object.ObjectWrap
   this(gtksource.buffer.Buffer buffer, gtksource.file.File file)
   {
     GtkSourceFileLoader* _cretval;
-    _cretval = gtk_source_file_loader_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null);
+    _cretval = gtk_source_file_loader_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -76,8 +76,8 @@ class FileLoader : gobject.object.ObjectWrap
   static gtksource.file_loader.FileLoader newFromStream(gtksource.buffer.Buffer buffer, gtksource.file.File file, gio.input_stream.InputStream stream)
   {
     GtkSourceFileLoader* _cretval;
-    _cretval = gtk_source_file_loader_new_from_stream(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file.cPtr(No.Dup) : null, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.file_loader.FileLoader)(cast(GtkSourceFileLoader*)_cretval, Yes.Take);
+    _cretval = gtk_source_file_loader_new_from_stream(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null, file ? cast(GtkSourceFile*)file._cPtr(No.Dup) : null, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.file_loader.FileLoader)(cast(GtkSourceFileLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,8 +85,8 @@ class FileLoader : gobject.object.ObjectWrap
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_file_loader_get_buffer(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_file_loader_get_buffer(cast(GtkSourceFileLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class FileLoader : gobject.object.ObjectWrap
   gtksource.types.CompressionType getCompressionType()
   {
     GtkSourceCompressionType _cretval;
-    _cretval = gtk_source_file_loader_get_compression_type(cast(GtkSourceFileLoader*)cPtr);
+    _cretval = gtk_source_file_loader_get_compression_type(cast(GtkSourceFileLoader*)this._cPtr);
     gtksource.types.CompressionType _retval = cast(gtksource.types.CompressionType)_cretval;
     return _retval;
   }
@@ -103,7 +103,7 @@ class FileLoader : gobject.object.ObjectWrap
   gtksource.encoding.Encoding getEncoding()
   {
     const(GtkSourceEncoding)* _cretval;
-    _cretval = gtk_source_file_loader_get_encoding(cast(GtkSourceFileLoader*)cPtr);
+    _cretval = gtk_source_file_loader_get_encoding(cast(GtkSourceFileLoader*)this._cPtr);
     auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -112,8 +112,8 @@ class FileLoader : gobject.object.ObjectWrap
   gtksource.file.File getFile()
   {
     GtkSourceFile* _cretval;
-    _cretval = gtk_source_file_loader_get_file(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.Take);
+    _cretval = gtk_source_file_loader_get_file(cast(GtkSourceFileLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.file.File)(cast(GtkSourceFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -121,8 +121,8 @@ class FileLoader : gobject.object.ObjectWrap
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
-    _cretval = gtk_source_file_loader_get_input_stream(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    _cretval = gtk_source_file_loader_get_input_stream(cast(GtkSourceFileLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,8 +130,8 @@ class FileLoader : gobject.object.ObjectWrap
   gio.file.File getLocation()
   {
     GFile* _cretval;
-    _cretval = gtk_source_file_loader_get_location(cast(GtkSourceFileLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_source_file_loader_get_location(cast(GtkSourceFileLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class FileLoader : gobject.object.ObjectWrap
   gtksource.types.NewlineType getNewlineType()
   {
     GtkSourceNewlineType _cretval;
-    _cretval = gtk_source_file_loader_get_newline_type(cast(GtkSourceFileLoader*)cPtr);
+    _cretval = gtk_source_file_loader_get_newline_type(cast(GtkSourceFileLoader*)this._cPtr);
     gtksource.types.NewlineType _retval = cast(gtksource.types.NewlineType)_cretval;
     return _retval;
   }
@@ -168,19 +168,19 @@ class FileLoader : gobject.object.ObjectWrap
     }
     auto _progressCallbackCB = progressCallback ? &_progressCallbackCallback : null;
 
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _progressCallback = progressCallback ? freezeDelegate(cast(void*)&progressCallback) : null;
     GDestroyNotify _progressCallbackDestroyCB = progressCallback ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_source_file_loader_load_async(cast(GtkSourceFileLoader*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
+    gtk_source_file_loader_load_async(cast(GtkSourceFileLoader*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _progressCallbackCB, _progressCallback, _progressCallbackDestroyCB, _callbackCB, _callback);
   }
 
   /**
@@ -199,7 +199,7 @@ class FileLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_source_file_loader_load_finish(cast(GtkSourceFileLoader*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -226,6 +226,6 @@ class FileLoader : gobject.object.ObjectWrap
   {
     auto _candidateEncodings = gSListFromD!(gtksource.encoding.Encoding)(candidateEncodings);
     scope(exit) containerFree!(GSList*, gtksource.encoding.Encoding, GidOwnership.None)(_candidateEncodings);
-    gtk_source_file_loader_set_candidate_encodings(cast(GtkSourceFileLoader*)cPtr, _candidateEncodings);
+    gtk_source_file_loader_set_candidate_encodings(cast(GtkSourceFileLoader*)this._cPtr, _candidateEncodings);
   }
 }

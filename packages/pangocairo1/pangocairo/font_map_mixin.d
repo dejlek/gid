@@ -30,7 +30,7 @@ template FontMapT()
   override cairo.types.FontType getFontType()
   {
     cairo_font_type_t _cretval;
-    _cretval = pango_cairo_font_map_get_font_type(cast(PangoCairoFontMap*)cPtr);
+    _cretval = pango_cairo_font_map_get_font_type(cast(PangoCairoFontMap*)this._cPtr);
     cairo.types.FontType _retval = cast(cairo.types.FontType)_cretval;
     return _retval;
   }
@@ -44,7 +44,7 @@ template FontMapT()
   override double getResolution()
   {
     double _retval;
-    _retval = pango_cairo_font_map_get_resolution(cast(PangoCairoFontMap*)cPtr);
+    _retval = pango_cairo_font_map_get_resolution(cast(PangoCairoFontMap*)this._cPtr);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ template FontMapT()
   */
   override void setDefault()
   {
-    pango_cairo_font_map_set_default(cast(PangoCairoFontMap*)cPtr);
+    pango_cairo_font_map_set_default(cast(PangoCairoFontMap*)this._cPtr);
   }
 
   /**
@@ -84,6 +84,6 @@ template FontMapT()
   */
   override void setResolution(double dpi)
   {
-    pango_cairo_font_map_set_resolution(cast(PangoCairoFontMap*)cPtr, dpi);
+    pango_cairo_font_map_set_resolution(cast(PangoCairoFontMap*)this._cPtr, dpi);
   }
 }

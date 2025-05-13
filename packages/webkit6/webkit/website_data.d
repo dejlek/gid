@@ -34,22 +34,22 @@ class WebsiteData : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_data_get_type != &gidSymbolNotFound ? webkit_website_data_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class WebsiteData : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_website_data_get_name(cast(WebKitWebsiteData*)cPtr);
+    _cretval = webkit_website_data_get_name(cast(WebKitWebsiteData*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -87,7 +87,7 @@ class WebsiteData : gobject.boxed.Boxed
   ulong getSize(webkit.types.WebsiteDataTypes types)
   {
     ulong _retval;
-    _retval = webkit_website_data_get_size(cast(WebKitWebsiteData*)cPtr, types);
+    _retval = webkit_website_data_get_size(cast(WebKitWebsiteData*)this._cPtr, types);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class WebsiteData : gobject.boxed.Boxed
   webkit.types.WebsiteDataTypes getTypes()
   {
     WebKitWebsiteDataTypes _cretval;
-    _cretval = webkit_website_data_get_types(cast(WebKitWebsiteData*)cPtr);
+    _cretval = webkit_website_data_get_types(cast(WebKitWebsiteData*)this._cPtr);
     webkit.types.WebsiteDataTypes _retval = cast(webkit.types.WebsiteDataTypes)_cretval;
     return _retval;
   }

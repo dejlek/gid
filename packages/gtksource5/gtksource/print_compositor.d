@@ -38,16 +38,16 @@ class PrintCompositor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_print_compositor_get_type != &gidSymbolNotFound ? gtk_source_print_compositor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -388,7 +388,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   this(gtksource.buffer.Buffer buffer)
   {
     GtkSourcePrintCompositor* _cretval;
-    _cretval = gtk_source_print_compositor_new(buffer ? cast(GtkSourceBuffer*)buffer.cPtr(No.Dup) : null);
+    _cretval = gtk_source_print_compositor_new(buffer ? cast(GtkSourceBuffer*)buffer._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -409,8 +409,8 @@ class PrintCompositor : gobject.object.ObjectWrap
   static gtksource.print_compositor.PrintCompositor newFromView(gtksource.view.View view)
   {
     GtkSourcePrintCompositor* _cretval;
-    _cretval = gtk_source_print_compositor_new_from_view(view ? cast(GtkSourceView*)view.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.print_compositor.PrintCompositor)(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
+    _cretval = gtk_source_print_compositor_new_from_view(view ? cast(GtkSourceView*)view._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.print_compositor.PrintCompositor)(cast(GtkSourcePrintCompositor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void drawPage(gtk.print_context.PrintContext context, int pageNr)
   {
-    gtk_source_print_compositor_draw_page(cast(GtkSourcePrintCompositor*)cPtr, context ? cast(GtkPrintContext*)context.cPtr(No.Dup) : null, pageNr);
+    gtk_source_print_compositor_draw_page(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null, pageNr);
   }
 
   /**
@@ -459,7 +459,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   string getBodyFontName()
   {
     char* _cretval;
-    _cretval = gtk_source_print_compositor_get_body_font_name(cast(GtkSourcePrintCompositor*)cPtr);
+    _cretval = gtk_source_print_compositor_get_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -474,7 +474,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   double getBottomMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_source_print_compositor_get_bottom_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
+    _retval = gtk_source_print_compositor_get_bottom_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
     return _retval;
   }
 
@@ -488,8 +488,8 @@ class PrintCompositor : gobject.object.ObjectWrap
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_print_compositor_get_buffer(cast(GtkSourcePrintCompositor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_print_compositor_get_buffer(cast(GtkSourcePrintCompositor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   string getFooterFontName()
   {
     char* _cretval;
-    _cretval = gtk_source_print_compositor_get_footer_font_name(cast(GtkSourcePrintCompositor*)cPtr);
+    _cretval = gtk_source_print_compositor_get_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -518,7 +518,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   string getHeaderFontName()
   {
     char* _cretval;
-    _cretval = gtk_source_print_compositor_get_header_font_name(cast(GtkSourcePrintCompositor*)cPtr);
+    _cretval = gtk_source_print_compositor_get_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -533,7 +533,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getHighlightSyntax()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_highlight_syntax(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -547,7 +547,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   double getLeftMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_source_print_compositor_get_left_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
+    _retval = gtk_source_print_compositor_get_left_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   string getLineNumbersFontName()
   {
     char* _cretval;
-    _cretval = gtk_source_print_compositor_get_line_numbers_font_name(cast(GtkSourcePrintCompositor*)cPtr);
+    _cretval = gtk_source_print_compositor_get_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -575,7 +575,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   int getNPages()
   {
     int _retval;
-    _retval = gtk_source_print_compositor_get_n_pages(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_n_pages(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -586,7 +586,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   double getPaginationProgress()
   {
     double _retval;
-    _retval = gtk_source_print_compositor_get_pagination_progress(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_pagination_progress(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -601,7 +601,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getPrintFooter()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_print_footer(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool getPrintHeader()
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_get_print_header(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_print_header(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -630,7 +630,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   uint getPrintLineNumbers()
   {
     uint _retval;
-    _retval = gtk_source_print_compositor_get_print_line_numbers(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_print_line_numbers(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   double getRightMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_source_print_compositor_get_right_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
+    _retval = gtk_source_print_compositor_get_right_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
     return _retval;
   }
 
@@ -655,7 +655,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   uint getTabWidth()
   {
     uint _retval;
-    _retval = gtk_source_print_compositor_get_tab_width(cast(GtkSourcePrintCompositor*)cPtr);
+    _retval = gtk_source_print_compositor_get_tab_width(cast(GtkSourcePrintCompositor*)this._cPtr);
     return _retval;
   }
 
@@ -669,7 +669,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   double getTopMargin(gtk.types.Unit unit)
   {
     double _retval;
-    _retval = gtk_source_print_compositor_get_top_margin(cast(GtkSourcePrintCompositor*)cPtr, unit);
+    _retval = gtk_source_print_compositor_get_top_margin(cast(GtkSourcePrintCompositor*)this._cPtr, unit);
     return _retval;
   }
 
@@ -680,7 +680,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   gtk.types.WrapMode getWrapMode()
   {
     GtkWrapMode _cretval;
-    _cretval = gtk_source_print_compositor_get_wrap_mode(cast(GtkSourcePrintCompositor*)cPtr);
+    _cretval = gtk_source_print_compositor_get_wrap_mode(cast(GtkSourcePrintCompositor*)this._cPtr);
     gtk.types.WrapMode _retval = cast(gtk.types.WrapMode)_cretval;
     return _retval;
   }
@@ -694,7 +694,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void ignoreTag(gtk.text_tag.TextTag tag)
   {
-    gtk_source_print_compositor_ignore_tag(cast(GtkSourcePrintCompositor*)cPtr, tag ? cast(GtkTextTag*)tag.cPtr(No.Dup) : null);
+    gtk_source_print_compositor_ignore_tag(cast(GtkSourcePrintCompositor*)this._cPtr, tag ? cast(GtkTextTag*)tag._cPtr(No.Dup) : null);
   }
 
   /**
@@ -767,7 +767,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   bool paginate(gtk.print_context.PrintContext context)
   {
     bool _retval;
-    _retval = gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)cPtr, context ? cast(GtkPrintContext*)context.cPtr(No.Dup) : null);
+    _retval = gtk_source_print_compositor_paginate(cast(GtkSourcePrintCompositor*)this._cPtr, context ? cast(GtkPrintContext*)context._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -788,7 +788,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   void setBodyFontName(string fontName)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
-    gtk_source_print_compositor_set_body_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
+    gtk_source_print_compositor_set_body_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
   /**
@@ -800,7 +800,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setBottomMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_source_print_compositor_set_bottom_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
+    gtk_source_print_compositor_set_bottom_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
 
   /**
@@ -823,7 +823,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   void setFooterFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
-    gtk_source_print_compositor_set_footer_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
+    gtk_source_print_compositor_set_footer_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
   /**
@@ -841,7 +841,7 @@ class PrintCompositor : gobject.object.ObjectWrap
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
     const(char)* _right = right.toCString(No.Alloc);
-    gtk_source_print_compositor_set_footer_format(cast(GtkSourcePrintCompositor*)cPtr, separator, _left, _center, _right);
+    gtk_source_print_compositor_set_footer_format(cast(GtkSourcePrintCompositor*)this._cPtr, separator, _left, _center, _right);
   }
 
   /**
@@ -864,7 +864,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   void setHeaderFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
-    gtk_source_print_compositor_set_header_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
+    gtk_source_print_compositor_set_header_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
   /**
@@ -905,7 +905,7 @@ class PrintCompositor : gobject.object.ObjectWrap
     const(char)* _left = left.toCString(No.Alloc);
     const(char)* _center = center.toCString(No.Alloc);
     const(char)* _right = right.toCString(No.Alloc);
-    gtk_source_print_compositor_set_header_format(cast(GtkSourcePrintCompositor*)cPtr, separator, _left, _center, _right);
+    gtk_source_print_compositor_set_header_format(cast(GtkSourcePrintCompositor*)this._cPtr, separator, _left, _center, _right);
   }
 
   /**
@@ -920,7 +920,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setHighlightSyntax(bool highlight)
   {
-    gtk_source_print_compositor_set_highlight_syntax(cast(GtkSourcePrintCompositor*)cPtr, highlight);
+    gtk_source_print_compositor_set_highlight_syntax(cast(GtkSourcePrintCompositor*)this._cPtr, highlight);
   }
 
   /**
@@ -932,7 +932,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setLeftMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_source_print_compositor_set_left_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
+    gtk_source_print_compositor_set_left_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
 
   /**
@@ -955,7 +955,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   void setLineNumbersFontName(string fontName = null)
   {
     const(char)* _fontName = fontName.toCString(No.Alloc);
-    gtk_source_print_compositor_set_line_numbers_font_name(cast(GtkSourcePrintCompositor*)cPtr, _fontName);
+    gtk_source_print_compositor_set_line_numbers_font_name(cast(GtkSourcePrintCompositor*)this._cPtr, _fontName);
   }
 
   /**
@@ -976,7 +976,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setPrintFooter(bool print)
   {
-    gtk_source_print_compositor_set_print_footer(cast(GtkSourcePrintCompositor*)cPtr, print);
+    gtk_source_print_compositor_set_print_footer(cast(GtkSourcePrintCompositor*)this._cPtr, print);
   }
 
   /**
@@ -996,7 +996,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setPrintHeader(bool print)
   {
-    gtk_source_print_compositor_set_print_header(cast(GtkSourcePrintCompositor*)cPtr, print);
+    gtk_source_print_compositor_set_print_header(cast(GtkSourcePrintCompositor*)this._cPtr, print);
   }
 
   /**
@@ -1015,7 +1015,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setPrintLineNumbers(uint interval)
   {
-    gtk_source_print_compositor_set_print_line_numbers(cast(GtkSourcePrintCompositor*)cPtr, interval);
+    gtk_source_print_compositor_set_print_line_numbers(cast(GtkSourcePrintCompositor*)this._cPtr, interval);
   }
 
   /**
@@ -1027,7 +1027,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setRightMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_source_print_compositor_set_right_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
+    gtk_source_print_compositor_set_right_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
 
   /**
@@ -1041,7 +1041,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setTabWidth(uint width)
   {
-    gtk_source_print_compositor_set_tab_width(cast(GtkSourcePrintCompositor*)cPtr, width);
+    gtk_source_print_compositor_set_tab_width(cast(GtkSourcePrintCompositor*)this._cPtr, width);
   }
 
   /**
@@ -1053,7 +1053,7 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setTopMargin(double margin, gtk.types.Unit unit)
   {
-    gtk_source_print_compositor_set_top_margin(cast(GtkSourcePrintCompositor*)cPtr, margin, unit);
+    gtk_source_print_compositor_set_top_margin(cast(GtkSourcePrintCompositor*)this._cPtr, margin, unit);
   }
 
   /**
@@ -1067,6 +1067,6 @@ class PrintCompositor : gobject.object.ObjectWrap
   */
   void setWrapMode(gtk.types.WrapMode wrapMode)
   {
-    gtk_source_print_compositor_set_wrap_mode(cast(GtkSourcePrintCompositor*)cPtr, wrapMode);
+    gtk_source_print_compositor_set_wrap_mode(cast(GtkSourcePrintCompositor*)this._cPtr, wrapMode);
   }
 }

@@ -186,22 +186,22 @@ class Resource : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_resource_get_type != &gidSymbolNotFound ? g_resource_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -233,7 +233,7 @@ class Resource : gobject.boxed.Boxed
   {
     GResource* _cretval;
     GError *_err;
-    _cretval = g_resource_new_from_data(data ? cast(GBytes*)data.cPtr(No.Dup) : null, &_err);
+    _cretval = g_resource_new_from_data(data ? cast(GBytes*)data._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.resource.Resource(cast(void*)_cretval, Yes.Take) : null;
@@ -261,7 +261,7 @@ class Resource : gobject.boxed.Boxed
     char** _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resource_enumerate_children(cast(GResource*)cPtr, _path, lookupFlags, &_err);
+    _cretval = g_resource_enumerate_children(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string[] _retval;
@@ -299,7 +299,7 @@ class Resource : gobject.boxed.Boxed
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = g_resource_get_info(cast(GResource*)cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
+    _retval = g_resource_get_info(cast(GResource*)this._cPtr, _path, lookupFlags, cast(size_t*)&size, cast(uint*)&flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -333,7 +333,7 @@ class Resource : gobject.boxed.Boxed
     GBytes* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resource_lookup_data(cast(GResource*)cPtr, _path, lookupFlags, &_err);
+    _cretval = g_resource_lookup_data(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
@@ -358,10 +358,10 @@ class Resource : gobject.boxed.Boxed
     GInputStream* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_resource_open_stream(cast(GResource*)cPtr, _path, lookupFlags, &_err);
+    _cretval = g_resource_open_stream(cast(GResource*)this._cPtr, _path, lookupFlags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 

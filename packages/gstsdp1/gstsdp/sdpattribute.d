@@ -26,7 +26,7 @@ class SDPAttribute
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class SDPAttribute
   */
   @property string key()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
+    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).key);
   }
 
   /**
@@ -47,8 +47,8 @@ class SDPAttribute
   */
   @property void key(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).key);
-    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)cPtr).key);
+    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).key);
+    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).key);
   }
 
   /**
@@ -57,7 +57,7 @@ class SDPAttribute
   */
   @property string value()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
+    return cToD!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).value);
   }
 
   /**
@@ -67,8 +67,8 @@ class SDPAttribute
   */
   @property void value(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)cPtr).value);
+    cValueFree!(string)(cast(void*)(cast(GstSDPAttribute*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(GstSDPAttribute*)this._cPtr).value);
   }
 
   /**
@@ -78,7 +78,7 @@ class SDPAttribute
   gstsdp.types.SDPResult clear()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_attribute_clear(cast(GstSDPAttribute*)cPtr);
+    _cretval = gst_sdp_attribute_clear(cast(GstSDPAttribute*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -96,7 +96,7 @@ class SDPAttribute
     GstSDPResult _cretval;
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = gst_sdp_attribute_set(cast(GstSDPAttribute*)cPtr, _key, _value);
+    _cretval = gst_sdp_attribute_set(cast(GstSDPAttribute*)this._cPtr, _key, _value);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

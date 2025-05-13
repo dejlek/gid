@@ -126,7 +126,7 @@ string tagFromVorbisTag(string vorbisTag)
 uint tagGetId3v2TagSize(gst.buffer.Buffer buffer)
 {
   uint _retval;
-  _retval = gst_tag_get_id3v2_tag_size(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _retval = gst_tag_get_id3v2_tag_size(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -487,7 +487,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
     _imageDataLen = cast(uint)imageData.length;
 
   auto _imageData = cast(const(ubyte)*)imageData.ptr;
-  _retval = gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList.cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
+  _retval = gst_tag_list_add_id3_image(tagList ? cast(GstTagList*)tagList._cPtr(No.Dup) : null, _imageData, _imageDataLen, id3PictureType);
   return _retval;
 }
 
@@ -506,7 +506,7 @@ bool tagListAddId3Image(gst.tag_list.TagList tagList, ubyte[] imageData, uint id
 gst.tag_list.TagList tagListFromExifBuffer(gst.buffer.Buffer buffer, int byteOrder, uint baseOffset)
 {
   GstTagList* _cretval;
-  _cretval = gst_tag_list_from_exif_buffer(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, byteOrder, baseOffset);
+  _cretval = gst_tag_list_from_exif_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, byteOrder, baseOffset);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -521,7 +521,7 @@ gst.tag_list.TagList tagListFromExifBuffer(gst.buffer.Buffer buffer, int byteOrd
 gst.tag_list.TagList tagListFromExifBufferWithTiffHeader(gst.buffer.Buffer buffer)
 {
   GstTagList* _cretval;
-  _cretval = gst_tag_list_from_exif_buffer_with_tiff_header(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_tag_list_from_exif_buffer_with_tiff_header(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -538,7 +538,7 @@ gst.tag_list.TagList tagListFromExifBufferWithTiffHeader(gst.buffer.Buffer buffe
 gst.tag_list.TagList tagListFromId3v2Tag(gst.buffer.Buffer buffer)
 {
   GstTagList* _cretval;
-  _cretval = gst_tag_list_from_id3v2_tag(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_tag_list_from_id3v2_tag(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -596,7 +596,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
 
   auto _idData = cast(const(ubyte)*)idData.ptr;
   char* _vendorString;
-  _cretval = gst_tag_list_from_vorbiscomment_buffer(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _idData, _idDataLength, &_vendorString);
+  _cretval = gst_tag_list_from_vorbiscomment_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _idData, _idDataLength, &_vendorString);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   vendorString = _vendorString.fromCString(Yes.Free);
   return _retval;
@@ -612,7 +612,7 @@ gst.tag_list.TagList tagListFromVorbiscommentBuffer(gst.buffer.Buffer buffer, ub
 gst.tag_list.TagList tagListFromXmpBuffer(gst.buffer.Buffer buffer)
 {
   GstTagList* _cretval;
-  _cretval = gst_tag_list_from_xmp_buffer(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_tag_list_from_xmp_buffer(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -648,7 +648,7 @@ gst.tag_list.TagList tagListNewFromId3v1(ubyte[] data)
 gst.buffer.Buffer tagListToExifBuffer(gst.tag_list.TagList taglist, int byteOrder, uint baseOffset)
 {
   GstBuffer* _cretval;
-  _cretval = gst_tag_list_to_exif_buffer(taglist ? cast(const(GstTagList)*)taglist.cPtr(No.Dup) : null, byteOrder, baseOffset);
+  _cretval = gst_tag_list_to_exif_buffer(taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null, byteOrder, baseOffset);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -664,7 +664,7 @@ gst.buffer.Buffer tagListToExifBuffer(gst.tag_list.TagList taglist, int byteOrde
 gst.buffer.Buffer tagListToExifBufferWithTiffHeader(gst.tag_list.TagList taglist)
 {
   GstBuffer* _cretval;
-  _cretval = gst_tag_list_to_exif_buffer_with_tiff_header(taglist ? cast(const(GstTagList)*)taglist.cPtr(No.Dup) : null);
+  _cretval = gst_tag_list_to_exif_buffer_with_tiff_header(taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -688,7 +688,7 @@ gst.buffer.Buffer tagListToVorbiscommentBuffer(gst.tag_list.TagList list, ubyte[
 
   auto _idData = cast(const(ubyte)*)idData.ptr;
   const(char)* _vendorString = vendorString.toCString(No.Alloc);
-  _cretval = gst_tag_list_to_vorbiscomment_buffer(list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, _idData, _idDataLength, _vendorString);
+  _cretval = gst_tag_list_to_vorbiscomment_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _idData, _idDataLength, _vendorString);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -712,7 +712,7 @@ gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList list, bool readOnly, s
     _tmpschemas ~= s.toCString(No.Alloc);
   _tmpschemas ~= null;
   const(char*)* _schemas = _tmpschemas.ptr;
-  _cretval = gst_tag_list_to_xmp_buffer(list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, readOnly, _schemas);
+  _cretval = gst_tag_list_to_xmp_buffer(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, readOnly, _schemas);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -789,7 +789,7 @@ string[] tagToVorbisComments(gst.tag_list.TagList list, string tag)
 {
   GList* _cretval;
   const(char)* _tag = tag.toCString(No.Alloc);
-  _cretval = gst_tag_to_vorbis_comments(list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, _tag);
+  _cretval = gst_tag_to_vorbis_comments(list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
   auto _retval = gListToD!(string, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -850,5 +850,5 @@ void vorbisTagAdd(gst.tag_list.TagList list, string tag, string value)
 {
   const(char)* _tag = tag.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  gst_vorbis_tag_add(list ? cast(GstTagList*)list.cPtr(No.Dup) : null, _tag, _value);
+  gst_vorbis_tag_add(list ? cast(GstTagList*)list._cPtr(No.Dup) : null, _tag, _value);
 }

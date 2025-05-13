@@ -20,16 +20,16 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_action_muxer_get_type != &gidSymbolNotFound ? panel_action_muxer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,8 +62,8 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   {
     GActionGroup* _cretval;
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    _cretval = panel_action_muxer_get_action_group(cast(PanelActionMuxer*)cPtr, _prefix);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
+    _cretval = panel_action_muxer_get_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   void insertActionGroup(string prefix, gio.action_group.ActionGroup actionGroup)
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    panel_action_muxer_insert_action_group(cast(PanelActionMuxer*)cPtr, _prefix, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup).cPtr(No.Dup) : null);
+    panel_action_muxer_insert_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix, actionGroup ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)actionGroup)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -81,7 +81,7 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   string[] listGroups()
   {
     char** _cretval;
-    _cretval = panel_action_muxer_list_groups(cast(PanelActionMuxer*)cPtr);
+    _cretval = panel_action_muxer_list_groups(cast(PanelActionMuxer*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -100,12 +100,12 @@ class ActionMuxer : gobject.object.ObjectWrap, gio.action_group.ActionGroup
   void removeActionGroup(string prefix)
   {
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    panel_action_muxer_remove_action_group(cast(PanelActionMuxer*)cPtr, _prefix);
+    panel_action_muxer_remove_action_group(cast(PanelActionMuxer*)this._cPtr, _prefix);
   }
 
   /** */
   void removeAll()
   {
-    panel_action_muxer_remove_all(cast(PanelActionMuxer*)cPtr);
+    panel_action_muxer_remove_all(cast(PanelActionMuxer*)this._cPtr);
   }
 }

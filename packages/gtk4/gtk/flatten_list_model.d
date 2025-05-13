@@ -28,16 +28,16 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flatten_list_model_get_type != &gidSymbolNotFound ? gtk_flatten_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   this(gio.list_model.ListModel model = null)
   {
     GtkFlattenListModel* _cretval;
-    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_flatten_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -107,8 +107,8 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_flatten_list_model_get_model(cast(GtkFlattenListModel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,8 +122,8 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   gio.list_model.ListModel getModelForItem(uint position)
   {
     GListModel* _cretval;
-    _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_flatten_list_model_get_model_for_item(cast(GtkFlattenListModel*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,6 +135,6 @@ class FlattenListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gt
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_flatten_list_model_set_model(cast(GtkFlattenListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 }

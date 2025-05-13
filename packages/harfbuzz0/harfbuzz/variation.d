@@ -28,7 +28,7 @@ class Variation
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class Variation
   */
   @property harfbuzz.types.Tag tag()
   {
-    return (cast(hb_variation_t*)cPtr).tag;
+    return (cast(hb_variation_t*)this._cPtr).tag;
   }
 
   /**
@@ -49,7 +49,7 @@ class Variation
   */
   @property void tag(harfbuzz.types.Tag propval)
   {
-    (cast(hb_variation_t*)cPtr).tag = propval;
+    (cast(hb_variation_t*)this._cPtr).tag = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class Variation
   */
   @property float value()
   {
-    return (cast(hb_variation_t*)cPtr).value;
+    return (cast(hb_variation_t*)this._cPtr).value;
   }
 
   /**
@@ -68,6 +68,6 @@ class Variation
   */
   @property void value(float propval)
   {
-    (cast(hb_variation_t*)cPtr).value = propval;
+    (cast(hb_variation_t*)this._cPtr).value = propval;
   }
 }

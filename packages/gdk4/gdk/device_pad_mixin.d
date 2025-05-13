@@ -42,7 +42,7 @@ template DevicePadT()
   override int getFeatureGroup(gdk.types.DevicePadFeature feature, int featureIdx)
   {
     int _retval;
-    _retval = gdk_device_pad_get_feature_group(cast(GdkDevicePad*)cPtr, feature, featureIdx);
+    _retval = gdk_device_pad_get_feature_group(cast(GdkDevicePad*)this._cPtr, feature, featureIdx);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ template DevicePadT()
   override int getGroupNModes(int groupIdx)
   {
     int _retval;
-    _retval = gdk_device_pad_get_group_n_modes(cast(GdkDevicePad*)cPtr, groupIdx);
+    _retval = gdk_device_pad_get_group_n_modes(cast(GdkDevicePad*)this._cPtr, groupIdx);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ template DevicePadT()
   override int getNFeatures(gdk.types.DevicePadFeature feature)
   {
     int _retval;
-    _retval = gdk_device_pad_get_n_features(cast(GdkDevicePad*)cPtr, feature);
+    _retval = gdk_device_pad_get_n_features(cast(GdkDevicePad*)this._cPtr, feature);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ template DevicePadT()
   override int getNGroups()
   {
     int _retval;
-    _retval = gdk_device_pad_get_n_groups(cast(GdkDevicePad*)cPtr);
+    _retval = gdk_device_pad_get_n_groups(cast(GdkDevicePad*)this._cPtr);
     return _retval;
   }
 }

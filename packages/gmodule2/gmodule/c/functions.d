@@ -62,15 +62,17 @@ alias g_module_supported = c_g_module_supported;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // Module
-  gidLink(cast(void**)&g_module_close, "g_module_close", LIBS);
-  gidLink(cast(void**)&g_module_make_resident, "g_module_make_resident", LIBS);
-  gidLink(cast(void**)&g_module_name, "g_module_name", LIBS);
-  gidLink(cast(void**)&g_module_symbol, "g_module_symbol", LIBS);
-  gidLink(cast(void**)&g_module_build_path, "g_module_build_path", LIBS);
-  gidLink(cast(void**)&g_module_error, "g_module_error", LIBS);
-  gidLink(cast(void**)&g_module_error_quark, "g_module_error_quark", LIBS);
-  gidLink(cast(void**)&g_module_open, "g_module_open", LIBS);
-  gidLink(cast(void**)&g_module_open_full, "g_module_open_full", LIBS);
-  gidLink(cast(void**)&g_module_supported, "g_module_supported", LIBS);
+  gidLink(cast(void**)&g_module_close, "g_module_close", libs);
+  gidLink(cast(void**)&g_module_make_resident, "g_module_make_resident", libs);
+  gidLink(cast(void**)&g_module_name, "g_module_name", libs);
+  gidLink(cast(void**)&g_module_symbol, "g_module_symbol", libs);
+  gidLink(cast(void**)&g_module_build_path, "g_module_build_path", libs);
+  gidLink(cast(void**)&g_module_error, "g_module_error", libs);
+  gidLink(cast(void**)&g_module_error_quark, "g_module_error_quark", libs);
+  gidLink(cast(void**)&g_module_open, "g_module_open", libs);
+  gidLink(cast(void**)&g_module_open_full, "g_module_open_full", libs);
+  gidLink(cast(void**)&g_module_supported, "g_module_supported", libs);
 }

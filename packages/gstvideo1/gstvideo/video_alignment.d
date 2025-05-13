@@ -28,7 +28,7 @@ class VideoAlignment
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class VideoAlignment
   */
   @property uint paddingTop()
   {
-    return (cast(GstVideoAlignment*)cPtr).paddingTop;
+    return (cast(GstVideoAlignment*)this._cPtr).paddingTop;
   }
 
   /**
@@ -49,7 +49,7 @@ class VideoAlignment
   */
   @property void paddingTop(uint propval)
   {
-    (cast(GstVideoAlignment*)cPtr).paddingTop = propval;
+    (cast(GstVideoAlignment*)this._cPtr).paddingTop = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class VideoAlignment
   */
   @property uint paddingBottom()
   {
-    return (cast(GstVideoAlignment*)cPtr).paddingBottom;
+    return (cast(GstVideoAlignment*)this._cPtr).paddingBottom;
   }
 
   /**
@@ -68,7 +68,7 @@ class VideoAlignment
   */
   @property void paddingBottom(uint propval)
   {
-    (cast(GstVideoAlignment*)cPtr).paddingBottom = propval;
+    (cast(GstVideoAlignment*)this._cPtr).paddingBottom = propval;
   }
 
   /**
@@ -77,7 +77,7 @@ class VideoAlignment
   */
   @property uint paddingLeft()
   {
-    return (cast(GstVideoAlignment*)cPtr).paddingLeft;
+    return (cast(GstVideoAlignment*)this._cPtr).paddingLeft;
   }
 
   /**
@@ -87,7 +87,7 @@ class VideoAlignment
   */
   @property void paddingLeft(uint propval)
   {
-    (cast(GstVideoAlignment*)cPtr).paddingLeft = propval;
+    (cast(GstVideoAlignment*)this._cPtr).paddingLeft = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class VideoAlignment
   */
   @property uint paddingRight()
   {
-    return (cast(GstVideoAlignment*)cPtr).paddingRight;
+    return (cast(GstVideoAlignment*)this._cPtr).paddingRight;
   }
 
   /**
@@ -106,7 +106,7 @@ class VideoAlignment
   */
   @property void paddingRight(uint propval)
   {
-    (cast(GstVideoAlignment*)cPtr).paddingRight = propval;
+    (cast(GstVideoAlignment*)this._cPtr).paddingRight = propval;
   }
 
   /**
@@ -114,6 +114,6 @@ class VideoAlignment
   */
   void reset()
   {
-    gst_video_alignment_reset(cast(GstVideoAlignment*)cPtr);
+    gst_video_alignment_reset(cast(GstVideoAlignment*)this._cPtr);
   }
 }

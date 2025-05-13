@@ -26,7 +26,7 @@ class SDPConnection
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class SDPConnection
   */
   @property string nettype()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
   }
 
   /**
@@ -49,8 +49,8 @@ class SDPConnection
   */
   @property void nettype(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).nettype);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).nettype);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).nettype);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).nettype);
   }
 
   /**
@@ -59,7 +59,7 @@ class SDPConnection
   */
   @property string addrtype()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
   }
 
   /**
@@ -69,8 +69,8 @@ class SDPConnection
   */
   @property void addrtype(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).addrtype);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).addrtype);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).addrtype);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).addrtype);
   }
 
   /**
@@ -79,7 +79,7 @@ class SDPConnection
   */
   @property string address()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
+    return cToD!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
   }
 
   /**
@@ -89,8 +89,8 @@ class SDPConnection
   */
   @property void address(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)cPtr).address);
-    dToC(propval, cast(void*)&(cast(GstSDPConnection*)cPtr).address);
+    cValueFree!(string)(cast(void*)(cast(GstSDPConnection*)this._cPtr).address);
+    dToC(propval, cast(void*)&(cast(GstSDPConnection*)this._cPtr).address);
   }
 
   /**
@@ -99,7 +99,7 @@ class SDPConnection
   */
   @property uint ttl()
   {
-    return (cast(GstSDPConnection*)cPtr).ttl;
+    return (cast(GstSDPConnection*)this._cPtr).ttl;
   }
 
   /**
@@ -109,7 +109,7 @@ class SDPConnection
   */
   @property void ttl(uint propval)
   {
-    (cast(GstSDPConnection*)cPtr).ttl = propval;
+    (cast(GstSDPConnection*)this._cPtr).ttl = propval;
   }
 
   /**
@@ -118,7 +118,7 @@ class SDPConnection
   */
   @property uint addrNumber()
   {
-    return (cast(GstSDPConnection*)cPtr).addrNumber;
+    return (cast(GstSDPConnection*)this._cPtr).addrNumber;
   }
 
   /**
@@ -128,7 +128,7 @@ class SDPConnection
   */
   @property void addrNumber(uint propval)
   {
-    (cast(GstSDPConnection*)cPtr).addrNumber = propval;
+    (cast(GstSDPConnection*)this._cPtr).addrNumber = propval;
   }
 
   /**
@@ -138,7 +138,7 @@ class SDPConnection
   gstsdp.types.SDPResult clear()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_connection_clear(cast(GstSDPConnection*)cPtr);
+    _cretval = gst_sdp_connection_clear(cast(GstSDPConnection*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -161,7 +161,7 @@ class SDPConnection
     const(char)* _nettype = nettype.toCString(No.Alloc);
     const(char)* _addrtype = addrtype.toCString(No.Alloc);
     const(char)* _address = address.toCString(No.Alloc);
-    _cretval = gst_sdp_connection_set(cast(GstSDPConnection*)cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
+    _cretval = gst_sdp_connection_set(cast(GstSDPConnection*)this._cPtr, _nettype, _addrtype, _address, ttl, addrNumber);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

@@ -19,16 +19,16 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_string_array_builder_get_type != &gidSymbolNotFound ? garrow_large_string_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     bool _retval;
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_large_string_array_builder_append_string(cast(GArrowLargeStringArrayBuilder*)cPtr, _value, &_err);
+    _retval = garrow_large_string_array_builder_append_string(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -63,7 +63,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
     bool _retval;
     const(char)* _value = value.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_large_string_array_builder_append_string_len(cast(GArrowLargeStringArrayBuilder*)cPtr, _value, length, &_err);
+    _retval = garrow_large_string_array_builder_append_string_len(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _value, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -100,7 +100,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_large_string_array_builder_append_strings(cast(GArrowLargeStringArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_large_string_array_builder_append_strings(cast(GArrowLargeStringArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

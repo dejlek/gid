@@ -60,22 +60,22 @@ class Iterator : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_iterator_get_type != &gidSymbolNotFound ? gst_iterator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class Iterator : gobject.boxed.Boxed
   static gst.iterator.Iterator newSingle(gobject.types.GType type, gobject.value.Value object)
   {
     GstIterator* _cretval;
-    _cretval = gst_iterator_new_single(type, object ? cast(const(GValue)*)object.cPtr(No.Dup) : null);
+    _cretval = gst_iterator_new_single(type, object ? cast(const(GValue)*)object._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -110,7 +110,7 @@ class Iterator : gobject.boxed.Boxed
   gst.iterator.Iterator copy()
   {
     GstIterator* _cretval;
-    _cretval = gst_iterator_copy(cast(const(GstIterator)*)cPtr);
+    _cretval = gst_iterator_copy(cast(const(GstIterator)*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -144,7 +144,7 @@ class Iterator : gobject.boxed.Boxed
 
     _static_func = func;
     GstIterator* _cretval;
-    _cretval = gst_iterator_filter(cast(GstIterator*)cPtr, _funcCB, userData ? cast(const(GValue)*)userData.cPtr(No.Dup) : null);
+    _cretval = gst_iterator_filter(cast(GstIterator*)this._cPtr, _funcCB, userData ? cast(const(GValue)*)userData._cPtr(No.Dup) : null);
     _static_func = null;
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
@@ -187,7 +187,7 @@ class Iterator : gobject.boxed.Boxed
 
     GstIteratorResult _cretval;
     auto _func = func ? cast(void*)&(func) : null;
-    _cretval = gst_iterator_fold(cast(GstIterator*)cPtr, _funcCB, ret ? cast(GValue*)ret.cPtr(No.Dup) : null, _func);
+    _cretval = gst_iterator_fold(cast(GstIterator*)this._cPtr, _funcCB, ret ? cast(GValue*)ret._cPtr(No.Dup) : null, _func);
     gst.types.IteratorResult _retval = cast(gst.types.IteratorResult)_cretval;
     return _retval;
   }
@@ -215,7 +215,7 @@ class Iterator : gobject.boxed.Boxed
 
     GstIteratorResult _cretval;
     auto _func = func ? cast(void*)&(func) : null;
-    _cretval = gst_iterator_foreach(cast(GstIterator*)cPtr, _funcCB, _func);
+    _cretval = gst_iterator_foreach(cast(GstIterator*)this._cPtr, _funcCB, _func);
     gst.types.IteratorResult _retval = cast(gst.types.IteratorResult)_cretval;
     return _retval;
   }
@@ -248,7 +248,7 @@ class Iterator : gobject.boxed.Boxed
   {
     GstIteratorResult _cretval;
     GValue _elem;
-    _cretval = gst_iterator_next(cast(GstIterator*)cPtr, &_elem);
+    _cretval = gst_iterator_next(cast(GstIterator*)this._cPtr, &_elem);
     gst.types.IteratorResult _retval = cast(gst.types.IteratorResult)_cretval;
     elem = new gobject.value.Value(cast(void*)&_elem, No.Take);
     return _retval;
@@ -272,7 +272,7 @@ class Iterator : gobject.boxed.Boxed
   */
   void push(gst.iterator.Iterator other)
   {
-    gst_iterator_push(cast(GstIterator*)cPtr, other ? cast(GstIterator*)other.cPtr(No.Dup) : null);
+    gst_iterator_push(cast(GstIterator*)this._cPtr, other ? cast(GstIterator*)other._cPtr(No.Dup) : null);
   }
 
   /**
@@ -286,6 +286,6 @@ class Iterator : gobject.boxed.Boxed
   */
   void resync()
   {
-    gst_iterator_resync(cast(GstIterator*)cPtr);
+    gst_iterator_resync(cast(GstIterator*)this._cPtr);
   }
 }

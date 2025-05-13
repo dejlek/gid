@@ -21,16 +21,16 @@ class StreamListener : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_stream_listener_get_type != &gidSymbolNotFound ? garrow_stream_listener_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class StreamListener : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_listener_on_eos(cast(GArrowStreamListener*)cPtr, &_err);
+    _retval = garrow_stream_listener_on_eos(cast(GArrowStreamListener*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -69,7 +69,7 @@ class StreamListener : gobject.object.ObjectWrap
     auto _metadata = gHashTableFromD!(string, string)(metadata);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_metadata);
     GError *_err;
-    _retval = garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, _metadata, &_err);
+    _retval = garrow_stream_listener_on_record_batch_decoded(cast(GArrowStreamListener*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, _metadata, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -88,7 +88,7 @@ class StreamListener : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_stream_listener_on_schema_decoded(cast(GArrowStreamListener*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, filteredSchema ? cast(GArrowSchema*)filteredSchema._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

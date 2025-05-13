@@ -40,16 +40,16 @@ class WindowHandle : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_handle_get_type != &gidSymbolNotFound ? gtk_window_handle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,8 +95,8 @@ class WindowHandle : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_handle_get_child(cast(GtkWindowHandle*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -108,6 +108,6 @@ class WindowHandle : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_window_handle_set_child(cast(GtkWindowHandle*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_window_handle_set_child(cast(GtkWindowHandle*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

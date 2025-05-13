@@ -47,16 +47,16 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_check_menu_item_get_type != &gidSymbolNotFound ? gtk_check_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_menu_item_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_check_menu_item_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.check_menu_item.CheckMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_active(cast(GtkCheckMenuItem*)cPtr);
+    _retval = gtk_check_menu_item_get_active(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getDrawAsRadio()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_draw_as_radio(cast(GtkCheckMenuItem*)cPtr);
+    _retval = gtk_check_menu_item_get_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_check_menu_item_get_inconsistent(cast(GtkCheckMenuItem*)cPtr);
+    _retval = gtk_check_menu_item_get_inconsistent(cast(GtkCheckMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   */
   void setActive(bool isActive)
   {
-    gtk_check_menu_item_set_active(cast(GtkCheckMenuItem*)cPtr, isActive);
+    gtk_check_menu_item_set_active(cast(GtkCheckMenuItem*)this._cPtr, isActive);
   }
 
   /**
@@ -200,7 +200,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   */
   void setDrawAsRadio(bool drawAsRadio)
   {
-    gtk_check_menu_item_set_draw_as_radio(cast(GtkCheckMenuItem*)cPtr, drawAsRadio);
+    gtk_check_menu_item_set_draw_as_radio(cast(GtkCheckMenuItem*)this._cPtr, drawAsRadio);
   }
 
   /**
@@ -218,7 +218,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   */
   void setInconsistent(bool setting)
   {
-    gtk_check_menu_item_set_inconsistent(cast(GtkCheckMenuItem*)cPtr, setting);
+    gtk_check_menu_item_set_inconsistent(cast(GtkCheckMenuItem*)this._cPtr, setting);
   }
 
   /**
@@ -226,7 +226,7 @@ class CheckMenuItem : gtk.menu_item.MenuItem
   */
   void toggled()
   {
-    gtk_check_menu_item_toggled(cast(GtkCheckMenuItem*)cPtr);
+    gtk_check_menu_item_toggled(cast(GtkCheckMenuItem*)this._cPtr);
   }
 
   /**

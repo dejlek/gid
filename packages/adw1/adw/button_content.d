@@ -72,16 +72,16 @@ class ButtonContent : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_button_content_get_type != &gidSymbolNotFound ? adw_button_content_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -204,7 +204,7 @@ class ButtonContent : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = adw_button_content_get_can_shrink(cast(AdwButtonContent*)cPtr);
+    _retval = adw_button_content_get_can_shrink(cast(AdwButtonContent*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class ButtonContent : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_button_content_get_icon_name(cast(AdwButtonContent*)cPtr);
+    _cretval = adw_button_content_get_icon_name(cast(AdwButtonContent*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -227,7 +227,7 @@ class ButtonContent : gtk.widget.Widget
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = adw_button_content_get_label(cast(AdwButtonContent*)cPtr);
+    _cretval = adw_button_content_get_label(cast(AdwButtonContent*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -239,7 +239,7 @@ class ButtonContent : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_button_content_get_use_underline(cast(AdwButtonContent*)cPtr);
+    _retval = adw_button_content_get_use_underline(cast(AdwButtonContent*)this._cPtr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class ButtonContent : gtk.widget.Widget
   */
   void setCanShrink(bool canShrink)
   {
-    adw_button_content_set_can_shrink(cast(AdwButtonContent*)cPtr, canShrink);
+    adw_button_content_set_can_shrink(cast(AdwButtonContent*)this._cPtr, canShrink);
   }
 
   /**
@@ -269,7 +269,7 @@ class ButtonContent : gtk.widget.Widget
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_button_content_set_icon_name(cast(AdwButtonContent*)cPtr, _iconName);
+    adw_button_content_set_icon_name(cast(AdwButtonContent*)this._cPtr, _iconName);
   }
 
   /**
@@ -281,7 +281,7 @@ class ButtonContent : gtk.widget.Widget
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    adw_button_content_set_label(cast(AdwButtonContent*)cPtr, _label);
+    adw_button_content_set_label(cast(AdwButtonContent*)this._cPtr, _label);
   }
 
   /**
@@ -296,6 +296,6 @@ class ButtonContent : gtk.widget.Widget
   */
   void setUseUnderline(bool useUnderline)
   {
-    adw_button_content_set_use_underline(cast(AdwButtonContent*)cPtr, useUnderline);
+    adw_button_content_set_use_underline(cast(AdwButtonContent*)this._cPtr, useUnderline);
   }
 }

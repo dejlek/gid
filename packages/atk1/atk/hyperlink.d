@@ -31,16 +31,16 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_hyperlink_get_type != &gidSymbolNotFound ? atk_hyperlink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,7 +88,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   int getEndIndex()
   {
     int _retval;
-    _retval = atk_hyperlink_get_end_index(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_get_end_index(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   int getNAnchors()
   {
     int _retval;
-    _retval = atk_hyperlink_get_n_anchors(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_get_n_anchors(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -119,8 +119,8 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   atk.object.ObjectWrap getObject(int i)
   {
     AtkObject* _cretval;
-    _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = atk_hyperlink_get_object(cast(AtkHyperlink*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   int getStartIndex()
   {
     int _retval;
-    _retval = atk_hyperlink_get_start_index(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_get_start_index(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   string getUri(int i)
   {
     char* _cretval;
-    _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)cPtr, i);
+    _cretval = atk_hyperlink_get_uri(cast(AtkHyperlink*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -163,7 +163,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isInline()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_inline(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_is_inline(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isSelectedLink()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_selected_link(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_is_selected_link(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Hyperlink : gobject.object.ObjectWrap, atk.action.Action
   bool isValid()
   {
     bool _retval;
-    _retval = atk_hyperlink_is_valid(cast(AtkHyperlink*)cPtr);
+    _retval = atk_hyperlink_is_valid(cast(AtkHyperlink*)this._cPtr);
     return _retval;
   }
 

@@ -29,7 +29,7 @@ class Analysis
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class Analysis
   */
   @property pango.font.Font font()
   {
-    return cToD!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)cPtr).font);
+    return cToD!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)this._cPtr).font);
   }
 
   /**
@@ -50,8 +50,8 @@ class Analysis
   */
   @property void font(pango.font.Font propval)
   {
-    cValueFree!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)cPtr).font);
-    dToC(propval, cast(void*)&(cast(PangoAnalysis*)cPtr).font);
+    cValueFree!(pango.font.Font)(cast(void*)(cast(PangoAnalysis*)this._cPtr).font);
+    dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).font);
   }
 
   /**
@@ -60,7 +60,7 @@ class Analysis
   */
   @property ubyte level()
   {
-    return (cast(PangoAnalysis*)cPtr).level;
+    return (cast(PangoAnalysis*)this._cPtr).level;
   }
 
   /**
@@ -70,7 +70,7 @@ class Analysis
   */
   @property void level(ubyte propval)
   {
-    (cast(PangoAnalysis*)cPtr).level = propval;
+    (cast(PangoAnalysis*)this._cPtr).level = propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class Analysis
   */
   @property ubyte gravity()
   {
-    return (cast(PangoAnalysis*)cPtr).gravity;
+    return (cast(PangoAnalysis*)this._cPtr).gravity;
   }
 
   /**
@@ -89,7 +89,7 @@ class Analysis
   */
   @property void gravity(ubyte propval)
   {
-    (cast(PangoAnalysis*)cPtr).gravity = propval;
+    (cast(PangoAnalysis*)this._cPtr).gravity = propval;
   }
 
   /**
@@ -98,7 +98,7 @@ class Analysis
   */
   @property ubyte flags()
   {
-    return (cast(PangoAnalysis*)cPtr).flags;
+    return (cast(PangoAnalysis*)this._cPtr).flags;
   }
 
   /**
@@ -108,7 +108,7 @@ class Analysis
   */
   @property void flags(ubyte propval)
   {
-    (cast(PangoAnalysis*)cPtr).flags = propval;
+    (cast(PangoAnalysis*)this._cPtr).flags = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class Analysis
   */
   @property ubyte script()
   {
-    return (cast(PangoAnalysis*)cPtr).script;
+    return (cast(PangoAnalysis*)this._cPtr).script;
   }
 
   /**
@@ -127,7 +127,7 @@ class Analysis
   */
   @property void script(ubyte propval)
   {
-    (cast(PangoAnalysis*)cPtr).script = propval;
+    (cast(PangoAnalysis*)this._cPtr).script = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class Analysis
   */
   @property pango.language.Language language()
   {
-    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)cPtr).language);
+    return cToD!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
   }
 
   /**
@@ -146,7 +146,7 @@ class Analysis
   */
   @property void language(pango.language.Language propval)
   {
-    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)cPtr).language);
-    dToC(propval, cast(void*)&(cast(PangoAnalysis*)cPtr).language);
+    cValueFree!(pango.language.Language)(cast(void*)(cast(PangoAnalysis*)this._cPtr).language);
+    dToC(propval, cast(void*)&(cast(PangoAnalysis*)this._cPtr).language);
   }
 }

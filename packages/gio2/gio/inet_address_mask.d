@@ -27,16 +27,16 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_address_mask_get_type != &gidSymbolNotFound ? g_inet_address_mask_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -108,7 +108,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   {
     GInetAddressMask* _cretval;
     GError *_err;
-    _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr.cPtr(No.Dup) : null, length, &_err);
+    _cretval = g_inet_address_mask_new(addr ? cast(GInetAddress*)addr._cPtr(No.Dup) : null, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -134,7 +134,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
     _cretval = g_inet_address_mask_new_from_string(_maskString, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address_mask.InetAddressMask)(cast(GInetAddressMask*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   bool equal(gio.inet_address_mask.InetAddressMask mask2)
   {
     bool _retval;
-    _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)cPtr, mask2 ? cast(GInetAddressMask*)mask2.cPtr(No.Dup) : null);
+    _retval = g_inet_address_mask_equal(cast(GInetAddressMask*)this._cPtr, mask2 ? cast(GInetAddressMask*)mask2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
-    _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
+    _cretval = g_inet_address_mask_get_address(cast(GInetAddressMask*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   gio.types.SocketFamily getFamily()
   {
     GSocketFamily _cretval;
-    _cretval = g_inet_address_mask_get_family(cast(GInetAddressMask*)cPtr);
+    _cretval = g_inet_address_mask_get_family(cast(GInetAddressMask*)this._cPtr);
     gio.types.SocketFamily _retval = cast(gio.types.SocketFamily)_cretval;
     return _retval;
   }
@@ -183,7 +183,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   uint getLength()
   {
     uint _retval;
-    _retval = g_inet_address_mask_get_length(cast(GInetAddressMask*)cPtr);
+    _retval = g_inet_address_mask_get_length(cast(GInetAddressMask*)this._cPtr);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   bool matches(gio.inet_address.InetAddress address)
   {
     bool _retval;
-    _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)cPtr, address ? cast(GInetAddress*)address.cPtr(No.Dup) : null);
+    _retval = g_inet_address_mask_matches(cast(GInetAddressMask*)this._cPtr, address ? cast(GInetAddress*)address._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class InetAddressMask : gobject.object.ObjectWrap, gio.initable.Initable
   string toString_()
   {
     char* _cretval;
-    _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)cPtr);
+    _cretval = g_inet_address_mask_to_string(cast(GInetAddressMask*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

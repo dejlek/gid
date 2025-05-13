@@ -21,16 +21,16 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_large_list_array_builder_get_type != &gidSymbolNotFound ? garrow_large_list_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowLargeListArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_large_list_array_builder_new(dataType ? cast(GArrowLargeListDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_large_list_array_builder_new(dataType ? cast(GArrowLargeListDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,7 +55,7 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_large_list_array_builder_append_value(cast(GArrowLargeListArrayBuilder*)cPtr, &_err);
+    _retval = garrow_large_list_array_builder_append_value(cast(GArrowLargeListArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -65,8 +65,8 @@ class LargeListArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_large_list_array_builder_get_value_builder(cast(GArrowLargeListArrayBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_large_list_array_builder_get_value_builder(cast(GArrowLargeListArrayBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

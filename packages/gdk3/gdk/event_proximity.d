@@ -36,7 +36,7 @@ class EventProximity
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -47,7 +47,7 @@ class EventProximity
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventProximity*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventProximity*)this._cPtr).type;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventProximity
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventProximity*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventProximity*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -66,7 +66,7 @@ class EventProximity
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)this._cPtr).window);
   }
 
   /**
@@ -76,8 +76,8 @@ class EventProximity
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventProximity*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventProximity*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventProximity*)this._cPtr).window);
   }
 
   /**
@@ -86,7 +86,7 @@ class EventProximity
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventProximity*)cPtr).sendEvent;
+    return (cast(GdkEventProximity*)this._cPtr).sendEvent;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventProximity
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventProximity*)cPtr).sendEvent = propval;
+    (cast(GdkEventProximity*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class EventProximity
   */
   @property uint time()
   {
-    return (cast(GdkEventProximity*)cPtr).time;
+    return (cast(GdkEventProximity*)this._cPtr).time;
   }
 
   /**
@@ -115,7 +115,7 @@ class EventProximity
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventProximity*)cPtr).time = propval;
+    (cast(GdkEventProximity*)this._cPtr).time = propval;
   }
 
   /**
@@ -125,7 +125,7 @@ class EventProximity
   */
   @property gdk.device.Device device()
   {
-    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)cPtr).device);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)this._cPtr).device);
   }
 
   /**
@@ -136,7 +136,7 @@ class EventProximity
   */
   @property void device(gdk.device.Device propval)
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventProximity*)cPtr).device);
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventProximity*)this._cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventProximity*)this._cPtr).device);
   }
 }

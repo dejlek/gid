@@ -44,16 +44,16 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_clamp_layout_get_type != &gidSymbolNotFound ? adw_clamp_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -175,7 +175,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   int getMaximumSize()
   {
     int _retval;
-    _retval = adw_clamp_layout_get_maximum_size(cast(AdwClampLayout*)cPtr);
+    _retval = adw_clamp_layout_get_maximum_size(cast(AdwClampLayout*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   int getTighteningThreshold()
   {
     int _retval;
-    _retval = adw_clamp_layout_get_tightening_threshold(cast(AdwClampLayout*)cPtr);
+    _retval = adw_clamp_layout_get_tightening_threshold(cast(AdwClampLayout*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   adw.types.LengthUnit getUnit()
   {
     AdwLengthUnit _cretval;
-    _cretval = adw_clamp_layout_get_unit(cast(AdwClampLayout*)cPtr);
+    _cretval = adw_clamp_layout_get_unit(cast(AdwClampLayout*)this._cPtr);
     adw.types.LengthUnit _retval = cast(adw.types.LengthUnit)_cretval;
     return _retval;
   }
@@ -212,7 +212,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setMaximumSize(int maximumSize)
   {
-    adw_clamp_layout_set_maximum_size(cast(AdwClampLayout*)cPtr, maximumSize);
+    adw_clamp_layout_set_maximum_size(cast(AdwClampLayout*)this._cPtr, maximumSize);
   }
 
   /**
@@ -236,7 +236,7 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setTighteningThreshold(int tighteningThreshold)
   {
-    adw_clamp_layout_set_tightening_threshold(cast(AdwClampLayout*)cPtr, tighteningThreshold);
+    adw_clamp_layout_set_tightening_threshold(cast(AdwClampLayout*)this._cPtr, tighteningThreshold);
   }
 
   /**
@@ -249,6 +249,6 @@ class ClampLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setUnit(adw.types.LengthUnit unit)
   {
-    adw_clamp_layout_set_unit(cast(AdwClampLayout*)cPtr, unit);
+    adw_clamp_layout_set_unit(cast(AdwClampLayout*)this._cPtr, unit);
   }
 }

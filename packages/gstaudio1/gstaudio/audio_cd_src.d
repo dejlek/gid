@@ -66,16 +66,16 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_cd_src_get_type != &gidSymbolNotFound ? gst_audio_cd_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -135,7 +135,7 @@ class AudioCdSrc : gstbase.push_src.PushSrc, gst.urihandler.URIHandler
   bool addTrack(gstaudio.audio_cd_src_track.AudioCdSrcTrack track)
   {
     bool _retval;
-    _retval = gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)cPtr, track ? cast(GstAudioCdSrcTrack*)track.cPtr : null);
+    _retval = gst_audio_cd_src_add_track(cast(GstAudioCdSrc*)this._cPtr, track ? cast(GstAudioCdSrcTrack*)track._cPtr : null);
     return _retval;
   }
 }

@@ -28,16 +28,16 @@ class Relation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_relation_get_type != &gidSymbolNotFound ? atk_relation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -90,7 +90,7 @@ class Relation : gobject.object.ObjectWrap
 
     AtkObject*[] _tmptargets;
     foreach (obj; targets)
-      _tmptargets ~= obj ? cast(AtkObject*)obj.cPtr : null;
+      _tmptargets ~= obj ? cast(AtkObject*)obj._cPtr : null;
     AtkObject** _targets = cast(AtkObject**)_tmptargets.ptr;
     _cretval = atk_relation_new(_targets, _nTargets, relationship);
     this(_cretval, Yes.Take);
@@ -105,7 +105,7 @@ class Relation : gobject.object.ObjectWrap
   */
   void addTarget(atk.object.ObjectWrap target)
   {
-    atk_relation_add_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    atk_relation_add_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -115,7 +115,7 @@ class Relation : gobject.object.ObjectWrap
   atk.types.RelationType getRelationType()
   {
     AtkRelationType _cretval;
-    _cretval = atk_relation_get_relation_type(cast(AtkRelation*)cPtr);
+    _cretval = atk_relation_get_relation_type(cast(AtkRelation*)this._cPtr);
     atk.types.RelationType _retval = cast(atk.types.RelationType)_cretval;
     return _retval;
   }
@@ -127,7 +127,7 @@ class Relation : gobject.object.ObjectWrap
   atk.object.ObjectWrap[] getTarget()
   {
     GPtrArray* _cretval;
-    _cretval = atk_relation_get_target(cast(AtkRelation*)cPtr);
+    _cretval = atk_relation_get_target(cast(AtkRelation*)this._cPtr);
     auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.None)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -142,7 +142,7 @@ class Relation : gobject.object.ObjectWrap
   bool removeTarget(atk.object.ObjectWrap target)
   {
     bool _retval;
-    _retval = atk_relation_remove_target(cast(AtkRelation*)cPtr, target ? cast(AtkObject*)target.cPtr(No.Dup) : null);
+    _retval = atk_relation_remove_target(cast(AtkRelation*)this._cPtr, target ? cast(AtkObject*)target._cPtr(No.Dup) : null);
     return _retval;
   }
 }

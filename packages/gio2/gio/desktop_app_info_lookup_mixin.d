@@ -41,8 +41,8 @@ template DesktopAppInfoLookupT()
   {
     GAppInfo* _cretval;
     const(char)* _uriScheme = uriScheme.toCString(No.Alloc);
-    _cretval = g_desktop_app_info_lookup_get_default_for_uri_scheme(cast(GDesktopAppInfoLookup*)cPtr, _uriScheme);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
+    _cretval = g_desktop_app_info_lookup_get_default_for_uri_scheme(cast(GDesktopAppInfoLookup*)this._cPtr, _uriScheme);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.app_info.AppInfo)(cast(GAppInfo*)_cretval, Yes.Take);
     return _retval;
   }
 }

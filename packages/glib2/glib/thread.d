@@ -33,22 +33,22 @@ class Thread : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_thread_get_type != &gidSymbolNotFound ? g_thread_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -167,7 +167,7 @@ class Thread : gobject.boxed.Boxed
   */
   void* join()
   {
-    auto _retval = g_thread_join(cast(GThread*)cPtr);
+    auto _retval = g_thread_join(cast(GThread*)this._cPtr);
     return _retval;
   }
 
@@ -246,5 +246,5 @@ class ThreadException : ErrorWrap
     super(glib.thread.Thread.errorQuark, cast(int)code, msg);
   }
 
-  alias Code = GThreadError;
+  alias Code = ThreadError;
 }

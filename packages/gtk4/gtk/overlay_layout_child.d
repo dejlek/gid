@@ -20,16 +20,16 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_overlay_layout_child_get_type != &gidSymbolNotFound ? gtk_overlay_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -85,7 +85,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   bool getClipOverlay()
   {
     bool _retval;
-    _retval = gtk_overlay_layout_child_get_clip_overlay(cast(GtkOverlayLayoutChild*)cPtr);
+    _retval = gtk_overlay_layout_child_get_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   bool getMeasure()
   {
     bool _retval;
-    _retval = gtk_overlay_layout_child_get_measure(cast(GtkOverlayLayoutChild*)cPtr);
+    _retval = gtk_overlay_layout_child_get_measure(cast(GtkOverlayLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   */
   void setClipOverlay(bool clipOverlay)
   {
-    gtk_overlay_layout_child_set_clip_overlay(cast(GtkOverlayLayoutChild*)cPtr, clipOverlay);
+    gtk_overlay_layout_child_set_clip_overlay(cast(GtkOverlayLayoutChild*)this._cPtr, clipOverlay);
   }
 
   /**
@@ -119,6 +119,6 @@ class OverlayLayoutChild : gtk.layout_child.LayoutChild
   */
   void setMeasure(bool measure)
   {
-    gtk_overlay_layout_child_set_measure(cast(GtkOverlayLayoutChild*)cPtr, measure);
+    gtk_overlay_layout_child_set_measure(cast(GtkOverlayLayoutChild*)this._cPtr, measure);
   }
 }

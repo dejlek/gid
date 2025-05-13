@@ -30,7 +30,7 @@ class VideoTimeCodeConfig
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class VideoTimeCodeConfig
   */
   @property uint fpsN()
   {
-    return (cast(GstVideoTimeCodeConfig*)cPtr).fpsN;
+    return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN;
   }
 
   /**
@@ -51,7 +51,7 @@ class VideoTimeCodeConfig
   */
   @property void fpsN(uint propval)
   {
-    (cast(GstVideoTimeCodeConfig*)cPtr).fpsN = propval;
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsN = propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class VideoTimeCodeConfig
   */
   @property uint fpsD()
   {
-    return (cast(GstVideoTimeCodeConfig*)cPtr).fpsD;
+    return (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD;
   }
 
   /**
@@ -70,7 +70,7 @@ class VideoTimeCodeConfig
   */
   @property void fpsD(uint propval)
   {
-    (cast(GstVideoTimeCodeConfig*)cPtr).fpsD = propval;
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).fpsD = propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class VideoTimeCodeConfig
   */
   @property gstvideo.types.VideoTimeCodeFlags flags()
   {
-    return cast(gstvideo.types.VideoTimeCodeFlags)(cast(GstVideoTimeCodeConfig*)cPtr).flags;
+    return cast(gstvideo.types.VideoTimeCodeFlags)(cast(GstVideoTimeCodeConfig*)this._cPtr).flags;
   }
 
   /**
@@ -89,7 +89,7 @@ class VideoTimeCodeConfig
   */
   @property void flags(gstvideo.types.VideoTimeCodeFlags propval)
   {
-    (cast(GstVideoTimeCodeConfig*)cPtr).flags = cast(GstVideoTimeCodeFlags)propval;
+    (cast(GstVideoTimeCodeConfig*)this._cPtr).flags = cast(GstVideoTimeCodeFlags)propval;
   }
 
   /**
@@ -98,7 +98,7 @@ class VideoTimeCodeConfig
   */
   @property glib.date_time.DateTime latestDailyJam()
   {
-    return cToD!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
+    return cToD!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
   }
 
   /**
@@ -108,7 +108,7 @@ class VideoTimeCodeConfig
   */
   @property void latestDailyJam(glib.date_time.DateTime propval)
   {
-    cValueFree!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
-    dToC(propval, cast(void*)&(cast(GstVideoTimeCodeConfig*)cPtr).latestDailyJam);
+    cValueFree!(glib.date_time.DateTime)(cast(void*)(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
+    dToC(propval, cast(void*)&(cast(GstVideoTimeCodeConfig*)this._cPtr).latestDailyJam);
   }
 }

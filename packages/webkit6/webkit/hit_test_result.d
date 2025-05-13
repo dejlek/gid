@@ -39,16 +39,16 @@ class HitTestResult : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_hit_test_result_get_type != &gidSymbolNotFound ? webkit_hit_test_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsEditable()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_editable(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_editable(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsImage()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_image(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_image(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsLink()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_link(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_link(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsMedia()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_media(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_media(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsScrollbar()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_scrollbar(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_scrollbar(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class HitTestResult : gobject.object.ObjectWrap
   bool contextIsSelection()
   {
     bool _retval;
-    _retval = webkit_hit_test_result_context_is_selection(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_context_is_selection(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class HitTestResult : gobject.object.ObjectWrap
   uint getContext()
   {
     uint _retval;
-    _retval = webkit_hit_test_result_get_context(cast(WebKitHitTestResult*)cPtr);
+    _retval = webkit_hit_test_result_get_context(cast(WebKitHitTestResult*)this._cPtr);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class HitTestResult : gobject.object.ObjectWrap
   string getImageUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_hit_test_result_get_image_uri(cast(WebKitHitTestResult*)cPtr);
+    _cretval = webkit_hit_test_result_get_image_uri(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -168,7 +168,7 @@ class HitTestResult : gobject.object.ObjectWrap
   string getLinkLabel()
   {
     const(char)* _cretval;
-    _cretval = webkit_hit_test_result_get_link_label(cast(WebKitHitTestResult*)cPtr);
+    _cretval = webkit_hit_test_result_get_link_label(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -182,7 +182,7 @@ class HitTestResult : gobject.object.ObjectWrap
   string getLinkTitle()
   {
     const(char)* _cretval;
-    _cretval = webkit_hit_test_result_get_link_title(cast(WebKitHitTestResult*)cPtr);
+    _cretval = webkit_hit_test_result_get_link_title(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -195,7 +195,7 @@ class HitTestResult : gobject.object.ObjectWrap
   string getLinkUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_hit_test_result_get_link_uri(cast(WebKitHitTestResult*)cPtr);
+    _cretval = webkit_hit_test_result_get_link_uri(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -208,7 +208,7 @@ class HitTestResult : gobject.object.ObjectWrap
   string getMediaUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_hit_test_result_get_media_uri(cast(WebKitHitTestResult*)cPtr);
+    _cretval = webkit_hit_test_result_get_media_uri(cast(WebKitHitTestResult*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

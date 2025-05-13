@@ -41,16 +41,16 @@ class Stack : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_get_type != &gidSymbolNotFound ? gtk_stack_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -197,7 +197,7 @@ class Stack : gtk.container.Container
   void addNamed(gtk.widget.Widget child, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_stack_add_named(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
+    gtk_stack_add_named(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name);
   }
 
   /**
@@ -215,7 +215,7 @@ class Stack : gtk.container.Container
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_stack_add_titled(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
+    gtk_stack_add_titled(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title);
   }
 
   /**
@@ -231,8 +231,8 @@ class Stack : gtk.container.Container
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_stack_get_child_by_name(cast(GtkStack*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class Stack : gtk.container.Container
   bool getHhomogeneous()
   {
     bool _retval;
-    _retval = gtk_stack_get_hhomogeneous(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_hhomogeneous(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Stack : gtk.container.Container
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_stack_get_homogeneous(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_homogeneous(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class Stack : gtk.container.Container
   bool getInterpolateSize()
   {
     bool _retval;
-    _retval = gtk_stack_get_interpolate_size(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_interpolate_size(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class Stack : gtk.container.Container
   uint getTransitionDuration()
   {
     uint _retval;
-    _retval = gtk_stack_get_transition_duration(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_transition_duration(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Stack : gtk.container.Container
   bool getTransitionRunning()
   {
     bool _retval;
-    _retval = gtk_stack_get_transition_running(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_transition_running(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Stack : gtk.container.Container
   gtk.types.StackTransitionType getTransitionType()
   {
     GtkStackTransitionType _cretval;
-    _cretval = gtk_stack_get_transition_type(cast(GtkStack*)cPtr);
+    _cretval = gtk_stack_get_transition_type(cast(GtkStack*)this._cPtr);
     gtk.types.StackTransitionType _retval = cast(gtk.types.StackTransitionType)_cretval;
     return _retval;
   }
@@ -317,7 +317,7 @@ class Stack : gtk.container.Container
   bool getVhomogeneous()
   {
     bool _retval;
-    _retval = gtk_stack_get_vhomogeneous(cast(GtkStack*)cPtr);
+    _retval = gtk_stack_get_vhomogeneous(cast(GtkStack*)this._cPtr);
     return _retval;
   }
 
@@ -329,8 +329,8 @@ class Stack : gtk.container.Container
   gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_stack_get_visible_child(cast(GtkStack*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_stack_get_visible_child(cast(GtkStack*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Stack : gtk.container.Container
   string getVisibleChildName()
   {
     const(char)* _cretval;
-    _cretval = gtk_stack_get_visible_child_name(cast(GtkStack*)cPtr);
+    _cretval = gtk_stack_get_visible_child_name(cast(GtkStack*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -358,7 +358,7 @@ class Stack : gtk.container.Container
   */
   void setHhomogeneous(bool hhomogeneous)
   {
-    gtk_stack_set_hhomogeneous(cast(GtkStack*)cPtr, hhomogeneous);
+    gtk_stack_set_hhomogeneous(cast(GtkStack*)this._cPtr, hhomogeneous);
   }
 
   /**
@@ -376,7 +376,7 @@ class Stack : gtk.container.Container
   */
   void setHomogeneous(bool homogeneous)
   {
-    gtk_stack_set_homogeneous(cast(GtkStack*)cPtr, homogeneous);
+    gtk_stack_set_homogeneous(cast(GtkStack*)this._cPtr, homogeneous);
   }
 
   /**
@@ -391,7 +391,7 @@ class Stack : gtk.container.Container
   */
   void setInterpolateSize(bool interpolateSize)
   {
-    gtk_stack_set_interpolate_size(cast(GtkStack*)cPtr, interpolateSize);
+    gtk_stack_set_interpolate_size(cast(GtkStack*)this._cPtr, interpolateSize);
   }
 
   /**
@@ -403,7 +403,7 @@ class Stack : gtk.container.Container
   */
   void setTransitionDuration(uint duration)
   {
-    gtk_stack_set_transition_duration(cast(GtkStack*)cPtr, duration);
+    gtk_stack_set_transition_duration(cast(GtkStack*)this._cPtr, duration);
   }
 
   /**
@@ -420,7 +420,7 @@ class Stack : gtk.container.Container
   */
   void setTransitionType(gtk.types.StackTransitionType transition)
   {
-    gtk_stack_set_transition_type(cast(GtkStack*)cPtr, transition);
+    gtk_stack_set_transition_type(cast(GtkStack*)this._cPtr, transition);
   }
 
   /**
@@ -434,7 +434,7 @@ class Stack : gtk.container.Container
   */
   void setVhomogeneous(bool vhomogeneous)
   {
-    gtk_stack_set_vhomogeneous(cast(GtkStack*)cPtr, vhomogeneous);
+    gtk_stack_set_vhomogeneous(cast(GtkStack*)this._cPtr, vhomogeneous);
   }
 
   /**
@@ -454,7 +454,7 @@ class Stack : gtk.container.Container
   */
   void setVisibleChild(gtk.widget.Widget child)
   {
-    gtk_stack_set_visible_child(cast(GtkStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_stack_set_visible_child(cast(GtkStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -471,7 +471,7 @@ class Stack : gtk.container.Container
   void setVisibleChildFull(string name, gtk.types.StackTransitionType transition)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_stack_set_visible_child_full(cast(GtkStack*)cPtr, _name, transition);
+    gtk_stack_set_visible_child_full(cast(GtkStack*)this._cPtr, _name, transition);
   }
 
   /**
@@ -492,6 +492,6 @@ class Stack : gtk.container.Container
   void setVisibleChildName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_stack_set_visible_child_name(cast(GtkStack*)cPtr, _name);
+    gtk_stack_set_visible_child_name(cast(GtkStack*)this._cPtr, _name);
   }
 }

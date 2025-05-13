@@ -40,16 +40,16 @@ class Spinner : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spinner_get_type != &gidSymbolNotFound ? gtk_spinner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,7 @@ class Spinner : gtk.widget.Widget
   bool getSpinning()
   {
     bool _retval;
-    _retval = gtk_spinner_get_spinning(cast(GtkSpinner*)cPtr);
+    _retval = gtk_spinner_get_spinning(cast(GtkSpinner*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class Spinner : gtk.widget.Widget
   */
   void setSpinning(bool spinning)
   {
-    gtk_spinner_set_spinning(cast(GtkSpinner*)cPtr, spinning);
+    gtk_spinner_set_spinning(cast(GtkSpinner*)this._cPtr, spinning);
   }
 
   /**
@@ -115,7 +115,7 @@ class Spinner : gtk.widget.Widget
   */
   void start()
   {
-    gtk_spinner_start(cast(GtkSpinner*)cPtr);
+    gtk_spinner_start(cast(GtkSpinner*)this._cPtr);
   }
 
   /**
@@ -123,6 +123,6 @@ class Spinner : gtk.widget.Widget
   */
   void stop()
   {
-    gtk_spinner_stop(cast(GtkSpinner*)cPtr);
+    gtk_spinner_stop(cast(GtkSpinner*)this._cPtr);
   }
 }

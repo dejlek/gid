@@ -45,16 +45,16 @@ class Style : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_style_get_type != &gidSymbolNotFound ? gtk_style_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class Style : gobject.object.ObjectWrap
   /** */
   void applyDefaultBackground(cairo.context.Context cr, gdk.window.Window window, gtk.types.StateType stateType, int x, int y, int width, int height)
   {
-    gtk_style_apply_default_background(cast(GtkStyle*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, stateType, x, y, width, height);
+    gtk_style_apply_default_background(cast(GtkStyle*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, stateType, x, y, width, height);
   }
 
   /**
@@ -91,8 +91,8 @@ class Style : gobject.object.ObjectWrap
   gtk.style.Style copy()
   {
     GtkStyle* _cretval;
-    _cretval = gtk_style_copy(cast(GtkStyle*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.Take);
+    _cretval = gtk_style_copy(cast(GtkStyle*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Style : gobject.object.ObjectWrap
   */
   void detach()
   {
-    gtk_style_detach(cast(GtkStyle*)cPtr);
+    gtk_style_detach(cast(GtkStyle*)this._cPtr);
   }
 
   /**
@@ -121,7 +121,7 @@ class Style : gobject.object.ObjectWrap
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     GValue _value;
-    gtk_style_get_style_property(cast(GtkStyle*)cPtr, widgetType, _propertyName, &_value);
+    gtk_style_get_style_property(cast(GtkStyle*)this._cPtr, widgetType, _propertyName, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -132,7 +132,7 @@ class Style : gobject.object.ObjectWrap
   bool hasContext()
   {
     bool _retval;
-    _retval = gtk_style_has_context(cast(GtkStyle*)cPtr);
+    _retval = gtk_style_has_context(cast(GtkStyle*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Style : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _colorName = colorName.toCString(No.Alloc);
     GdkColor _color;
-    _retval = gtk_style_lookup_color(cast(GtkStyle*)cPtr, _colorName, &_color);
+    _retval = gtk_style_lookup_color(cast(GtkStyle*)this._cPtr, _colorName, &_color);
     color = new gdk.color.Color(cast(void*)&_color, No.Take);
     return _retval;
   }
@@ -175,7 +175,7 @@ class Style : gobject.object.ObjectWrap
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_style_lookup_icon_set(cast(GtkStyle*)cPtr, _stockId);
+    _cretval = gtk_style_lookup_icon_set(cast(GtkStyle*)this._cPtr, _stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -203,8 +203,8 @@ class Style : gobject.object.ObjectWrap
   {
     PixbufC* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
-    _cretval = gtk_style_render_icon(cast(GtkStyle*)cPtr, source ? cast(const(GtkIconSource)*)source.cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, _detail);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_style_render_icon(cast(GtkStyle*)this._cPtr, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class Style : gobject.object.ObjectWrap
   */
   void setBackground(gdk.window.Window window, gtk.types.StateType stateType)
   {
-    gtk_style_set_background(cast(GtkStyle*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, stateType);
+    gtk_style_set_background(cast(GtkStyle*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, stateType);
   }
 
   /**

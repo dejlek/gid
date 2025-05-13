@@ -26,16 +26,16 @@ class EventControllerKey : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_controller_key_get_type != &gidSymbolNotFound ? gtk_event_controller_key_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class EventControllerKey : gtk.event_controller.EventController
   bool forward(gtk.widget.Widget widget)
   {
     bool _retval;
-    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_event_controller_key_forward(cast(GtkEventControllerKey*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class EventControllerKey : gtk.event_controller.EventController
   uint getGroup()
   {
     uint _retval;
-    _retval = gtk_event_controller_key_get_group(cast(GtkEventControllerKey*)cPtr);
+    _retval = gtk_event_controller_key_get_group(cast(GtkEventControllerKey*)this._cPtr);
     return _retval;
   }
 
@@ -94,8 +94,8 @@ class EventControllerKey : gtk.event_controller.EventController
   gtk.imcontext.IMContext getImContext()
   {
     GtkIMContext* _cretval;
-    _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.Take);
+    _cretval = gtk_event_controller_key_get_im_context(cast(GtkEventControllerKey*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.imcontext.IMContext)(cast(GtkIMContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class EventControllerKey : gtk.event_controller.EventController
   */
   void setImContext(gtk.imcontext.IMContext imContext = null)
   {
-    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)cPtr, imContext ? cast(GtkIMContext*)imContext.cPtr(No.Dup) : null);
+    gtk_event_controller_key_set_im_context(cast(GtkEventControllerKey*)this._cPtr, imContext ? cast(GtkIMContext*)imContext._cPtr(No.Dup) : null);
   }
 
   /**

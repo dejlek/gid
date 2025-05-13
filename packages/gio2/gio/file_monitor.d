@@ -34,16 +34,16 @@ class FileMonitor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_monitor_get_type != &gidSymbolNotFound ? g_file_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class FileMonitor : gobject.object.ObjectWrap
   bool cancel()
   {
     bool _retval;
-    _retval = g_file_monitor_cancel(cast(GFileMonitor*)cPtr);
+    _retval = g_file_monitor_cancel(cast(GFileMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ class FileMonitor : gobject.object.ObjectWrap
   */
   void emitEvent(gio.file.File child, gio.file.File otherFile, gio.types.FileMonitorEvent eventType)
   {
-    g_file_monitor_emit_event(cast(GFileMonitor*)cPtr, child ? cast(GFile*)(cast(gobject.object.ObjectWrap)child).cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)otherFile).cPtr(No.Dup) : null, eventType);
+    g_file_monitor_emit_event(cast(GFileMonitor*)this._cPtr, child ? cast(GFile*)(cast(gobject.object.ObjectWrap)child)._cPtr(No.Dup) : null, otherFile ? cast(GFile*)(cast(gobject.object.ObjectWrap)otherFile)._cPtr(No.Dup) : null, eventType);
   }
 
   /**
@@ -117,7 +117,7 @@ class FileMonitor : gobject.object.ObjectWrap
   bool isCancelled()
   {
     bool _retval;
-    _retval = g_file_monitor_is_cancelled(cast(GFileMonitor*)cPtr);
+    _retval = g_file_monitor_is_cancelled(cast(GFileMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class FileMonitor : gobject.object.ObjectWrap
   */
   void setRateLimit(int limitMsecs)
   {
-    g_file_monitor_set_rate_limit(cast(GFileMonitor*)cPtr, limitMsecs);
+    g_file_monitor_set_rate_limit(cast(GFileMonitor*)this._cPtr, limitMsecs);
   }
 
   /**

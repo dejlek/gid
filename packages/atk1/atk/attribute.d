@@ -36,7 +36,7 @@ class Attribute
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -47,7 +47,7 @@ class Attribute
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).name);
   }
 
   /**
@@ -57,8 +57,8 @@ class Attribute
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(AtkAttribute*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).name);
   }
 
   /**
@@ -67,7 +67,7 @@ class Attribute
   */
   @property string value()
   {
-    return cToD!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);
+    return cToD!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).value);
   }
 
   /**
@@ -77,7 +77,7 @@ class Attribute
   */
   @property void value(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)cPtr).value);
-    dToC(propval, cast(void*)&(cast(AtkAttribute*)cPtr).value);
+    cValueFree!(string)(cast(void*)(cast(AtkAttribute*)this._cPtr).value);
+    dToC(propval, cast(void*)&(cast(AtkAttribute*)this._cPtr).value);
   }
 }

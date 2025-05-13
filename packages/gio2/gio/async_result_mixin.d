@@ -106,9 +106,9 @@ template AsyncResultT()
   */
   override gobject.object.ObjectWrap getSourceObject()
   {
-    ObjectC* _cretval;
-    _cretval = g_async_result_get_source_object(cast(GAsyncResult*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_async_result_get_source_object(cast(GAsyncResult*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ template AsyncResultT()
   */
   override void* getUserData()
   {
-    auto _retval = g_async_result_get_user_data(cast(GAsyncResult*)cPtr);
+    auto _retval = g_async_result_get_user_data(cast(GAsyncResult*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ template AsyncResultT()
   override bool isTagged(void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_async_result_is_tagged(cast(GAsyncResult*)cPtr, sourceTag);
+    _retval = g_async_result_is_tagged(cast(GAsyncResult*)this._cPtr, sourceTag);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ template AsyncResultT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_async_result_legacy_propagate_error(cast(GAsyncResult*)cPtr, &_err);
+    _retval = g_async_result_legacy_propagate_error(cast(GAsyncResult*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

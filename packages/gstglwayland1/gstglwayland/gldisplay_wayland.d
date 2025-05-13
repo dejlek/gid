@@ -22,16 +22,16 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_wayland_get_type != &gidSymbolNotFound ? gst_gl_display_wayland_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class GLDisplayWayland : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayWayland* _cretval;
     _cretval = gst_gl_display_wayland_new_with_display(display);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstglwayland.gldisplay_wayland.GLDisplayWayland)(cast(GstGLDisplayWayland*)_cretval, Yes.Take);
     return _retval;
   }
 }

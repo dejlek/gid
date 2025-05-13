@@ -36,16 +36,16 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_preview_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_preview_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   this(gtksource.style_scheme.StyleScheme scheme)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
+    _cretval = gtk_source_style_scheme_preview_new(scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -90,8 +90,8 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   gtksource.style_scheme.StyleScheme getScheme()
   {
     GtkSourceStyleScheme* _cretval;
-    _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    _cretval = gtk_source_style_scheme_preview_get_scheme(cast(GtkSourceStyleSchemePreview*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -99,14 +99,14 @@ class StyleSchemePreview : gtk.widget.Widget, gtk.actionable.Actionable
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_source_style_scheme_preview_get_selected(cast(GtkSourceStyleSchemePreview*)cPtr);
+    _retval = gtk_source_style_scheme_preview_get_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr);
     return _retval;
   }
 
   /** */
   void setSelected(bool selected)
   {
-    gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)cPtr, selected);
+    gtk_source_style_scheme_preview_set_selected(cast(GtkSourceStyleSchemePreview*)this._cPtr, selected);
   }
 
   /**

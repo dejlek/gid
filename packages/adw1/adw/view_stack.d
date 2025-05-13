@@ -82,16 +82,16 @@ class ViewStack : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_get_type != &gidSymbolNotFound ? adw_view_stack_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -238,8 +238,8 @@ class ViewStack : gtk.widget.Widget
   adw.view_stack_page.ViewStackPage add(gtk.widget.Widget child)
   {
     AdwViewStackPage* _cretval;
-    _cretval = adw_view_stack_add(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_add(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,8 +257,8 @@ class ViewStack : gtk.widget.Widget
   {
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = adw_view_stack_add_named(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_add_named(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,8 +279,8 @@ class ViewStack : gtk.widget.Widget
     AdwViewStackPage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = adw_view_stack_add_titled(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_add_titled(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,8 +303,8 @@ class ViewStack : gtk.widget.Widget
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    _cretval = adw_view_stack_add_titled_with_icon(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _name, _title, _iconName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_add_titled_with_icon(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _name, _title, _iconName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -319,8 +319,8 @@ class ViewStack : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = adw_view_stack_get_child_by_name(cast(AdwViewStack*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_view_stack_get_child_by_name(cast(AdwViewStack*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class ViewStack : gtk.widget.Widget
   bool getHhomogeneous()
   {
     bool _retval;
-    _retval = adw_view_stack_get_hhomogeneous(cast(AdwViewStack*)cPtr);
+    _retval = adw_view_stack_get_hhomogeneous(cast(AdwViewStack*)this._cPtr);
     return _retval;
   }
 
@@ -345,8 +345,8 @@ class ViewStack : gtk.widget.Widget
   adw.view_stack_page.ViewStackPage getPage(gtk.widget.Widget child)
   {
     AdwViewStackPage* _cretval;
-    _cretval = adw_view_stack_get_page(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_get_page(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -361,8 +361,8 @@ class ViewStack : gtk.widget.Widget
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
-    _cretval = adw_view_stack_get_pages(cast(AdwViewStack*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    _cretval = adw_view_stack_get_pages(cast(AdwViewStack*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class ViewStack : gtk.widget.Widget
   bool getVhomogeneous()
   {
     bool _retval;
-    _retval = adw_view_stack_get_vhomogeneous(cast(AdwViewStack*)cPtr);
+    _retval = adw_view_stack_get_vhomogeneous(cast(AdwViewStack*)this._cPtr);
     return _retval;
   }
 
@@ -384,8 +384,8 @@ class ViewStack : gtk.widget.Widget
   gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_view_stack_get_visible_child(cast(AdwViewStack*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_view_stack_get_visible_child(cast(AdwViewStack*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class ViewStack : gtk.widget.Widget
   string getVisibleChildName()
   {
     const(char)* _cretval;
-    _cretval = adw_view_stack_get_visible_child_name(cast(AdwViewStack*)cPtr);
+    _cretval = adw_view_stack_get_visible_child_name(cast(AdwViewStack*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -409,7 +409,7 @@ class ViewStack : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_view_stack_remove(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_view_stack_remove(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -426,7 +426,7 @@ class ViewStack : gtk.widget.Widget
   */
   void setHhomogeneous(bool hhomogeneous)
   {
-    adw_view_stack_set_hhomogeneous(cast(AdwViewStack*)cPtr, hhomogeneous);
+    adw_view_stack_set_hhomogeneous(cast(AdwViewStack*)this._cPtr, hhomogeneous);
   }
 
   /**
@@ -443,7 +443,7 @@ class ViewStack : gtk.widget.Widget
   */
   void setVhomogeneous(bool vhomogeneous)
   {
-    adw_view_stack_set_vhomogeneous(cast(AdwViewStack*)cPtr, vhomogeneous);
+    adw_view_stack_set_vhomogeneous(cast(AdwViewStack*)this._cPtr, vhomogeneous);
   }
 
   /**
@@ -454,7 +454,7 @@ class ViewStack : gtk.widget.Widget
   */
   void setVisibleChild(gtk.widget.Widget child)
   {
-    adw_view_stack_set_visible_child(cast(AdwViewStack*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_view_stack_set_visible_child(cast(AdwViewStack*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -468,6 +468,6 @@ class ViewStack : gtk.widget.Widget
   void setVisibleChildName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_view_stack_set_visible_child_name(cast(AdwViewStack*)cPtr, _name);
+    adw_view_stack_set_visible_child_name(cast(AdwViewStack*)this._cPtr, _name);
   }
 }

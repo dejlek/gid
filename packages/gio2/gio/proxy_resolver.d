@@ -25,7 +25,7 @@ interface ProxyResolver
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_resolver_get_type != &gidSymbolNotFound ? g_proxy_resolver_get_type() : cast(GType)0;
@@ -40,7 +40,7 @@ interface ProxyResolver
   {
     GProxyResolver* _cretval;
     _cretval = g_proxy_resolver_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy_resolver.ProxyResolver)(cast(GProxyResolver*)_cretval, No.Take);
     return _retval;
   }
 

@@ -23,16 +23,16 @@ class FlowBoxChild : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_child_get_type != &gidSymbolNotFound ? gtk_flow_box_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class FlowBoxChild : gtk.bin.Bin
   */
   void changed()
   {
-    gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)cPtr);
+    gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)this._cPtr);
   }
 
   /**
@@ -84,7 +84,7 @@ class FlowBoxChild : gtk.bin.Bin
   int getIndex()
   {
     int _retval;
-    _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)cPtr);
+    _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class FlowBoxChild : gtk.bin.Bin
   bool isSelected()
   {
     bool _retval;
-    _retval = gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)cPtr);
+    _retval = gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
     return _retval;
   }
 

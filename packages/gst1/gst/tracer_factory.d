@@ -22,16 +22,16 @@ class TracerFactory : gst.plugin_feature.PluginFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tracer_factory_get_type != &gidSymbolNotFound ? gst_tracer_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,7 +68,7 @@ class TracerFactory : gst.plugin_feature.PluginFeature
   gobject.types.GType getTracerType()
   {
     gobject.types.GType _retval;
-    _retval = gst_tracer_factory_get_tracer_type(cast(GstTracerFactory*)cPtr);
+    _retval = gst_tracer_factory_get_tracer_type(cast(GstTracerFactory*)this._cPtr);
     return _retval;
   }
 }

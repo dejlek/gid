@@ -20,16 +20,16 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_named_action_get_type != &gidSymbolNotFound ? gtk_named_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class NamedAction : gtk.shortcut_action.ShortcutAction
   string getActionName()
   {
     const(char)* _cretval;
-    _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)cPtr);
+    _cretval = gtk_named_action_get_action_name(cast(GtkNamedAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

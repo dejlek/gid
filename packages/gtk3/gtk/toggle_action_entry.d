@@ -27,7 +27,7 @@ class ToggleActionEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class ToggleActionEntry
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -48,8 +48,8 @@ class ToggleActionEntry
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).name);
   }
 
   /**
@@ -59,7 +59,7 @@ class ToggleActionEntry
   */
   @property string stockId()
   {
-    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).stockId);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -70,8 +70,8 @@ class ToggleActionEntry
   */
   @property void stockId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).stockId);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).stockId);
   }
 
   /**
@@ -81,7 +81,7 @@ class ToggleActionEntry
   */
   @property string label()
   {
-    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).label);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -92,8 +92,8 @@ class ToggleActionEntry
   */
   @property void label(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).label);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -103,7 +103,7 @@ class ToggleActionEntry
   */
   @property string accelerator()
   {
-    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).accelerator);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -114,8 +114,8 @@ class ToggleActionEntry
   */
   @property void accelerator(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).accelerator);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).accelerator);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).accelerator);
   }
 
   /**
@@ -125,7 +125,7 @@ class ToggleActionEntry
   */
   @property string tooltip()
   {
-    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).tooltip);
+    return cToD!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -136,8 +136,8 @@ class ToggleActionEntry
   */
   @property void tooltip(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)cPtr).tooltip);
-    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)cPtr).tooltip);
+    cValueFree!(string)(cast(void*)(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
+    dToC(propval, cast(void*)&(cast(GtkToggleActionEntry*)this._cPtr).tooltip);
   }
 
   /**
@@ -146,7 +146,7 @@ class ToggleActionEntry
   */
   @property GCallback callback()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).callback;
+    return (cast(GtkToggleActionEntry*)this._cPtr).callback;
   }
 
   /**
@@ -157,7 +157,7 @@ class ToggleActionEntry
 
   @property void callback(GCallback propval)
   {
-    (cast(GtkToggleActionEntry*)cPtr).callback = propval;
+    (cast(GtkToggleActionEntry*)this._cPtr).callback = propval;
   }
 
   /**
@@ -166,7 +166,7 @@ class ToggleActionEntry
   */
   @property bool isActive()
   {
-    return (cast(GtkToggleActionEntry*)cPtr).isActive;
+    return (cast(GtkToggleActionEntry*)this._cPtr).isActive;
   }
 
   /**
@@ -176,6 +176,6 @@ class ToggleActionEntry
   */
   @property void isActive(bool propval)
   {
-    (cast(GtkToggleActionEntry*)cPtr).isActive = propval;
+    (cast(GtkToggleActionEntry*)this._cPtr).isActive = propval;
   }
 }

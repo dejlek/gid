@@ -22,16 +22,16 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_accessible_get_type != &gidSymbolNotFound ? gtk_plug_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class PlugAccessible : gtk.window_accessible.WindowAccessible
   string getId()
   {
     char* _cretval;
-    _cretval = gtk_plug_accessible_get_id(cast(GtkPlugAccessible*)cPtr);
+    _cretval = gtk_plug_accessible_get_id(cast(GtkPlugAccessible*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

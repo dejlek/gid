@@ -524,143 +524,145 @@ alias webkit_web_process_extension_send_message_to_context_finish = c_webkit_web
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // ConsoleMessage
-  gidLink(cast(void**)&webkit_console_message_get_type, "webkit_console_message_get_type", LIBS);
-  gidLink(cast(void**)&webkit_console_message_copy, "webkit_console_message_copy", LIBS);
-  gidLink(cast(void**)&webkit_console_message_free, "webkit_console_message_free", LIBS);
-  gidLink(cast(void**)&webkit_console_message_get_level, "webkit_console_message_get_level", LIBS);
-  gidLink(cast(void**)&webkit_console_message_get_line, "webkit_console_message_get_line", LIBS);
-  gidLink(cast(void**)&webkit_console_message_get_source, "webkit_console_message_get_source", LIBS);
-  gidLink(cast(void**)&webkit_console_message_get_source_id, "webkit_console_message_get_source_id", LIBS);
-  gidLink(cast(void**)&webkit_console_message_get_text, "webkit_console_message_get_text", LIBS);
+  gidLink(cast(void**)&webkit_console_message_get_type, "webkit_console_message_get_type", libs);
+  gidLink(cast(void**)&webkit_console_message_copy, "webkit_console_message_copy", libs);
+  gidLink(cast(void**)&webkit_console_message_free, "webkit_console_message_free", libs);
+  gidLink(cast(void**)&webkit_console_message_get_level, "webkit_console_message_get_level", libs);
+  gidLink(cast(void**)&webkit_console_message_get_line, "webkit_console_message_get_line", libs);
+  gidLink(cast(void**)&webkit_console_message_get_source, "webkit_console_message_get_source", libs);
+  gidLink(cast(void**)&webkit_console_message_get_source_id, "webkit_console_message_get_source_id", libs);
+  gidLink(cast(void**)&webkit_console_message_get_text, "webkit_console_message_get_text", libs);
 
   // ContextMenu
-  gidLink(cast(void**)&webkit_context_menu_get_type, "webkit_context_menu_get_type", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_new, "webkit_context_menu_new", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_new_with_items, "webkit_context_menu_new_with_items", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_append, "webkit_context_menu_append", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_first, "webkit_context_menu_first", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_get_event, "webkit_context_menu_get_event", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_get_item_at_position, "webkit_context_menu_get_item_at_position", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_get_items, "webkit_context_menu_get_items", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_get_n_items, "webkit_context_menu_get_n_items", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_get_user_data, "webkit_context_menu_get_user_data", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_insert, "webkit_context_menu_insert", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_last, "webkit_context_menu_last", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_move_item, "webkit_context_menu_move_item", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_prepend, "webkit_context_menu_prepend", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_remove, "webkit_context_menu_remove", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_remove_all, "webkit_context_menu_remove_all", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_set_user_data, "webkit_context_menu_set_user_data", LIBS);
+  gidLink(cast(void**)&webkit_context_menu_get_type, "webkit_context_menu_get_type", libs);
+  gidLink(cast(void**)&webkit_context_menu_new, "webkit_context_menu_new", libs);
+  gidLink(cast(void**)&webkit_context_menu_new_with_items, "webkit_context_menu_new_with_items", libs);
+  gidLink(cast(void**)&webkit_context_menu_append, "webkit_context_menu_append", libs);
+  gidLink(cast(void**)&webkit_context_menu_first, "webkit_context_menu_first", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_event, "webkit_context_menu_get_event", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_item_at_position, "webkit_context_menu_get_item_at_position", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_items, "webkit_context_menu_get_items", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_n_items, "webkit_context_menu_get_n_items", libs);
+  gidLink(cast(void**)&webkit_context_menu_get_user_data, "webkit_context_menu_get_user_data", libs);
+  gidLink(cast(void**)&webkit_context_menu_insert, "webkit_context_menu_insert", libs);
+  gidLink(cast(void**)&webkit_context_menu_last, "webkit_context_menu_last", libs);
+  gidLink(cast(void**)&webkit_context_menu_move_item, "webkit_context_menu_move_item", libs);
+  gidLink(cast(void**)&webkit_context_menu_prepend, "webkit_context_menu_prepend", libs);
+  gidLink(cast(void**)&webkit_context_menu_remove, "webkit_context_menu_remove", libs);
+  gidLink(cast(void**)&webkit_context_menu_remove_all, "webkit_context_menu_remove_all", libs);
+  gidLink(cast(void**)&webkit_context_menu_set_user_data, "webkit_context_menu_set_user_data", libs);
 
   // ContextMenuItem
-  gidLink(cast(void**)&webkit_context_menu_item_get_type, "webkit_context_menu_item_get_type", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_new_from_gaction, "webkit_context_menu_item_new_from_gaction", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_new_from_stock_action, "webkit_context_menu_item_new_from_stock_action", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_new_from_stock_action_with_label, "webkit_context_menu_item_new_from_stock_action_with_label", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_new_separator, "webkit_context_menu_item_new_separator", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_new_with_submenu, "webkit_context_menu_item_new_with_submenu", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_get_gaction, "webkit_context_menu_item_get_gaction", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_get_stock_action, "webkit_context_menu_item_get_stock_action", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_get_submenu, "webkit_context_menu_item_get_submenu", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_is_separator, "webkit_context_menu_item_is_separator", LIBS);
-  gidLink(cast(void**)&webkit_context_menu_item_set_submenu, "webkit_context_menu_item_set_submenu", LIBS);
+  gidLink(cast(void**)&webkit_context_menu_item_get_type, "webkit_context_menu_item_get_type", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_new_from_gaction, "webkit_context_menu_item_new_from_gaction", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_new_from_stock_action, "webkit_context_menu_item_new_from_stock_action", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_new_from_stock_action_with_label, "webkit_context_menu_item_new_from_stock_action_with_label", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_new_separator, "webkit_context_menu_item_new_separator", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_new_with_submenu, "webkit_context_menu_item_new_with_submenu", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_gaction, "webkit_context_menu_item_get_gaction", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_stock_action, "webkit_context_menu_item_get_stock_action", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_get_submenu, "webkit_context_menu_item_get_submenu", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_is_separator, "webkit_context_menu_item_is_separator", libs);
+  gidLink(cast(void**)&webkit_context_menu_item_set_submenu, "webkit_context_menu_item_set_submenu", libs);
 
   // Frame
-  gidLink(cast(void**)&webkit_frame_get_type, "webkit_frame_get_type", LIBS);
-  gidLink(cast(void**)&webkit_frame_get_id, "webkit_frame_get_id", LIBS);
-  gidLink(cast(void**)&webkit_frame_get_js_context, "webkit_frame_get_js_context", LIBS);
-  gidLink(cast(void**)&webkit_frame_get_js_context_for_script_world, "webkit_frame_get_js_context_for_script_world", LIBS);
-  gidLink(cast(void**)&webkit_frame_get_uri, "webkit_frame_get_uri", LIBS);
-  gidLink(cast(void**)&webkit_frame_is_main_frame, "webkit_frame_is_main_frame", LIBS);
+  gidLink(cast(void**)&webkit_frame_get_type, "webkit_frame_get_type", libs);
+  gidLink(cast(void**)&webkit_frame_get_id, "webkit_frame_get_id", libs);
+  gidLink(cast(void**)&webkit_frame_get_js_context, "webkit_frame_get_js_context", libs);
+  gidLink(cast(void**)&webkit_frame_get_js_context_for_script_world, "webkit_frame_get_js_context_for_script_world", libs);
+  gidLink(cast(void**)&webkit_frame_get_uri, "webkit_frame_get_uri", libs);
+  gidLink(cast(void**)&webkit_frame_is_main_frame, "webkit_frame_is_main_frame", libs);
 
   // HitTestResult
-  gidLink(cast(void**)&webkit_hit_test_result_get_type, "webkit_hit_test_result_get_type", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_editable, "webkit_hit_test_result_context_is_editable", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_image, "webkit_hit_test_result_context_is_image", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_link, "webkit_hit_test_result_context_is_link", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_media, "webkit_hit_test_result_context_is_media", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_scrollbar, "webkit_hit_test_result_context_is_scrollbar", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_context_is_selection, "webkit_hit_test_result_context_is_selection", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_context, "webkit_hit_test_result_get_context", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_image_uri, "webkit_hit_test_result_get_image_uri", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_link_label, "webkit_hit_test_result_get_link_label", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_link_title, "webkit_hit_test_result_get_link_title", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_link_uri, "webkit_hit_test_result_get_link_uri", LIBS);
-  gidLink(cast(void**)&webkit_hit_test_result_get_media_uri, "webkit_hit_test_result_get_media_uri", LIBS);
+  gidLink(cast(void**)&webkit_hit_test_result_get_type, "webkit_hit_test_result_get_type", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_editable, "webkit_hit_test_result_context_is_editable", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_image, "webkit_hit_test_result_context_is_image", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_link, "webkit_hit_test_result_context_is_link", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_media, "webkit_hit_test_result_context_is_media", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_scrollbar, "webkit_hit_test_result_context_is_scrollbar", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_context_is_selection, "webkit_hit_test_result_context_is_selection", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_context, "webkit_hit_test_result_get_context", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_image_uri, "webkit_hit_test_result_get_image_uri", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_link_label, "webkit_hit_test_result_get_link_label", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_link_title, "webkit_hit_test_result_get_link_title", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_link_uri, "webkit_hit_test_result_get_link_uri", libs);
+  gidLink(cast(void**)&webkit_hit_test_result_get_media_uri, "webkit_hit_test_result_get_media_uri", libs);
 
   // ScriptWorld
-  gidLink(cast(void**)&webkit_script_world_get_type, "webkit_script_world_get_type", LIBS);
-  gidLink(cast(void**)&webkit_script_world_new, "webkit_script_world_new", LIBS);
-  gidLink(cast(void**)&webkit_script_world_new_with_name, "webkit_script_world_new_with_name", LIBS);
-  gidLink(cast(void**)&webkit_script_world_get_default, "webkit_script_world_get_default", LIBS);
-  gidLink(cast(void**)&webkit_script_world_get_name, "webkit_script_world_get_name", LIBS);
+  gidLink(cast(void**)&webkit_script_world_get_type, "webkit_script_world_get_type", libs);
+  gidLink(cast(void**)&webkit_script_world_new, "webkit_script_world_new", libs);
+  gidLink(cast(void**)&webkit_script_world_new_with_name, "webkit_script_world_new_with_name", libs);
+  gidLink(cast(void**)&webkit_script_world_get_default, "webkit_script_world_get_default", libs);
+  gidLink(cast(void**)&webkit_script_world_get_name, "webkit_script_world_get_name", libs);
 
   // URIRequest
-  gidLink(cast(void**)&webkit_uri_request_get_type, "webkit_uri_request_get_type", LIBS);
-  gidLink(cast(void**)&webkit_uri_request_new, "webkit_uri_request_new", LIBS);
-  gidLink(cast(void**)&webkit_uri_request_get_http_headers, "webkit_uri_request_get_http_headers", LIBS);
-  gidLink(cast(void**)&webkit_uri_request_get_http_method, "webkit_uri_request_get_http_method", LIBS);
-  gidLink(cast(void**)&webkit_uri_request_get_uri, "webkit_uri_request_get_uri", LIBS);
-  gidLink(cast(void**)&webkit_uri_request_set_uri, "webkit_uri_request_set_uri", LIBS);
+  gidLink(cast(void**)&webkit_uri_request_get_type, "webkit_uri_request_get_type", libs);
+  gidLink(cast(void**)&webkit_uri_request_new, "webkit_uri_request_new", libs);
+  gidLink(cast(void**)&webkit_uri_request_get_http_headers, "webkit_uri_request_get_http_headers", libs);
+  gidLink(cast(void**)&webkit_uri_request_get_http_method, "webkit_uri_request_get_http_method", libs);
+  gidLink(cast(void**)&webkit_uri_request_get_uri, "webkit_uri_request_get_uri", libs);
+  gidLink(cast(void**)&webkit_uri_request_set_uri, "webkit_uri_request_set_uri", libs);
 
   // URIResponse
-  gidLink(cast(void**)&webkit_uri_response_get_type, "webkit_uri_response_get_type", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_content_length, "webkit_uri_response_get_content_length", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_http_headers, "webkit_uri_response_get_http_headers", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_mime_type, "webkit_uri_response_get_mime_type", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_status_code, "webkit_uri_response_get_status_code", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_suggested_filename, "webkit_uri_response_get_suggested_filename", LIBS);
-  gidLink(cast(void**)&webkit_uri_response_get_uri, "webkit_uri_response_get_uri", LIBS);
+  gidLink(cast(void**)&webkit_uri_response_get_type, "webkit_uri_response_get_type", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_content_length, "webkit_uri_response_get_content_length", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_http_headers, "webkit_uri_response_get_http_headers", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_mime_type, "webkit_uri_response_get_mime_type", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_status_code, "webkit_uri_response_get_status_code", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_suggested_filename, "webkit_uri_response_get_suggested_filename", libs);
+  gidLink(cast(void**)&webkit_uri_response_get_uri, "webkit_uri_response_get_uri", libs);
 
   // UserMessage
-  gidLink(cast(void**)&webkit_user_message_get_type, "webkit_user_message_get_type", LIBS);
-  gidLink(cast(void**)&webkit_user_message_new, "webkit_user_message_new", LIBS);
-  gidLink(cast(void**)&webkit_user_message_new_with_fd_list, "webkit_user_message_new_with_fd_list", LIBS);
-  gidLink(cast(void**)&webkit_user_message_get_fd_list, "webkit_user_message_get_fd_list", LIBS);
-  gidLink(cast(void**)&webkit_user_message_get_name, "webkit_user_message_get_name", LIBS);
-  gidLink(cast(void**)&webkit_user_message_get_parameters, "webkit_user_message_get_parameters", LIBS);
-  gidLink(cast(void**)&webkit_user_message_send_reply, "webkit_user_message_send_reply", LIBS);
+  gidLink(cast(void**)&webkit_user_message_get_type, "webkit_user_message_get_type", libs);
+  gidLink(cast(void**)&webkit_user_message_new, "webkit_user_message_new", libs);
+  gidLink(cast(void**)&webkit_user_message_new_with_fd_list, "webkit_user_message_new_with_fd_list", libs);
+  gidLink(cast(void**)&webkit_user_message_get_fd_list, "webkit_user_message_get_fd_list", libs);
+  gidLink(cast(void**)&webkit_user_message_get_name, "webkit_user_message_get_name", libs);
+  gidLink(cast(void**)&webkit_user_message_get_parameters, "webkit_user_message_get_parameters", libs);
+  gidLink(cast(void**)&webkit_user_message_send_reply, "webkit_user_message_send_reply", libs);
 
   // WebEditor
-  gidLink(cast(void**)&webkit_web_editor_get_type, "webkit_web_editor_get_type", LIBS);
-  gidLink(cast(void**)&webkit_web_editor_get_page, "webkit_web_editor_get_page", LIBS);
+  gidLink(cast(void**)&webkit_web_editor_get_type, "webkit_web_editor_get_type", libs);
+  gidLink(cast(void**)&webkit_web_editor_get_page, "webkit_web_editor_get_page", libs);
 
   // WebFormManager
-  gidLink(cast(void**)&webkit_web_form_manager_get_type, "webkit_web_form_manager_get_type", LIBS);
-  gidLink(cast(void**)&webkit_web_form_manager_input_element_auto_fill, "webkit_web_form_manager_input_element_auto_fill", LIBS);
-  gidLink(cast(void**)&webkit_web_form_manager_input_element_is_auto_filled, "webkit_web_form_manager_input_element_is_auto_filled", LIBS);
-  gidLink(cast(void**)&webkit_web_form_manager_input_element_is_user_edited, "webkit_web_form_manager_input_element_is_user_edited", LIBS);
+  gidLink(cast(void**)&webkit_web_form_manager_get_type, "webkit_web_form_manager_get_type", libs);
+  gidLink(cast(void**)&webkit_web_form_manager_input_element_auto_fill, "webkit_web_form_manager_input_element_auto_fill", libs);
+  gidLink(cast(void**)&webkit_web_form_manager_input_element_is_auto_filled, "webkit_web_form_manager_input_element_is_auto_filled", libs);
+  gidLink(cast(void**)&webkit_web_form_manager_input_element_is_user_edited, "webkit_web_form_manager_input_element_is_user_edited", libs);
 
   // WebHitTestResult
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_type, "webkit_web_hit_test_result_get_type", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_editable, "webkit_web_hit_test_result_context_is_editable", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_image, "webkit_web_hit_test_result_context_is_image", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_link, "webkit_web_hit_test_result_context_is_link", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_media, "webkit_web_hit_test_result_context_is_media", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_scrollbar, "webkit_web_hit_test_result_context_is_scrollbar", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_selection, "webkit_web_hit_test_result_context_is_selection", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_context, "webkit_web_hit_test_result_get_context", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_image_uri, "webkit_web_hit_test_result_get_image_uri", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_js_node, "webkit_web_hit_test_result_get_js_node", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_label, "webkit_web_hit_test_result_get_link_label", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_title, "webkit_web_hit_test_result_get_link_title", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_uri, "webkit_web_hit_test_result_get_link_uri", LIBS);
-  gidLink(cast(void**)&webkit_web_hit_test_result_get_media_uri, "webkit_web_hit_test_result_get_media_uri", LIBS);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_type, "webkit_web_hit_test_result_get_type", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_editable, "webkit_web_hit_test_result_context_is_editable", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_image, "webkit_web_hit_test_result_context_is_image", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_link, "webkit_web_hit_test_result_context_is_link", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_media, "webkit_web_hit_test_result_context_is_media", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_scrollbar, "webkit_web_hit_test_result_context_is_scrollbar", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_context_is_selection, "webkit_web_hit_test_result_context_is_selection", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_context, "webkit_web_hit_test_result_get_context", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_image_uri, "webkit_web_hit_test_result_get_image_uri", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_js_node, "webkit_web_hit_test_result_get_js_node", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_label, "webkit_web_hit_test_result_get_link_label", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_title, "webkit_web_hit_test_result_get_link_title", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_link_uri, "webkit_web_hit_test_result_get_link_uri", libs);
+  gidLink(cast(void**)&webkit_web_hit_test_result_get_media_uri, "webkit_web_hit_test_result_get_media_uri", libs);
 
   // WebPage
-  gidLink(cast(void**)&webkit_web_page_get_type, "webkit_web_page_get_type", LIBS);
-  gidLink(cast(void**)&webkit_web_page_get_editor, "webkit_web_page_get_editor", LIBS);
-  gidLink(cast(void**)&webkit_web_page_get_form_manager, "webkit_web_page_get_form_manager", LIBS);
-  gidLink(cast(void**)&webkit_web_page_get_id, "webkit_web_page_get_id", LIBS);
-  gidLink(cast(void**)&webkit_web_page_get_main_frame, "webkit_web_page_get_main_frame", LIBS);
-  gidLink(cast(void**)&webkit_web_page_get_uri, "webkit_web_page_get_uri", LIBS);
-  gidLink(cast(void**)&webkit_web_page_send_message_to_view, "webkit_web_page_send_message_to_view", LIBS);
-  gidLink(cast(void**)&webkit_web_page_send_message_to_view_finish, "webkit_web_page_send_message_to_view_finish", LIBS);
+  gidLink(cast(void**)&webkit_web_page_get_type, "webkit_web_page_get_type", libs);
+  gidLink(cast(void**)&webkit_web_page_get_editor, "webkit_web_page_get_editor", libs);
+  gidLink(cast(void**)&webkit_web_page_get_form_manager, "webkit_web_page_get_form_manager", libs);
+  gidLink(cast(void**)&webkit_web_page_get_id, "webkit_web_page_get_id", libs);
+  gidLink(cast(void**)&webkit_web_page_get_main_frame, "webkit_web_page_get_main_frame", libs);
+  gidLink(cast(void**)&webkit_web_page_get_uri, "webkit_web_page_get_uri", libs);
+  gidLink(cast(void**)&webkit_web_page_send_message_to_view, "webkit_web_page_send_message_to_view", libs);
+  gidLink(cast(void**)&webkit_web_page_send_message_to_view_finish, "webkit_web_page_send_message_to_view_finish", libs);
 
   // WebProcessExtension
-  gidLink(cast(void**)&webkit_web_process_extension_get_type, "webkit_web_process_extension_get_type", LIBS);
-  gidLink(cast(void**)&webkit_web_process_extension_get_page, "webkit_web_process_extension_get_page", LIBS);
-  gidLink(cast(void**)&webkit_web_process_extension_send_message_to_context, "webkit_web_process_extension_send_message_to_context", LIBS);
-  gidLink(cast(void**)&webkit_web_process_extension_send_message_to_context_finish, "webkit_web_process_extension_send_message_to_context_finish", LIBS);
+  gidLink(cast(void**)&webkit_web_process_extension_get_type, "webkit_web_process_extension_get_type", libs);
+  gidLink(cast(void**)&webkit_web_process_extension_get_page, "webkit_web_process_extension_get_page", libs);
+  gidLink(cast(void**)&webkit_web_process_extension_send_message_to_context, "webkit_web_process_extension_send_message_to_context", libs);
+  gidLink(cast(void**)&webkit_web_process_extension_send_message_to_context_finish, "webkit_web_process_extension_send_message_to_context_finish", libs);
 }

@@ -63,16 +63,16 @@ class Bus : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_bus_get_type != &gidSymbolNotFound ? gst_bus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -108,7 +108,7 @@ class Bus : gst.object.ObjectWrap
   */
   void addSignalWatch()
   {
-    gst_bus_add_signal_watch(cast(GstBus*)cPtr);
+    gst_bus_add_signal_watch(cast(GstBus*)this._cPtr);
   }
 
   /**
@@ -133,7 +133,7 @@ class Bus : gst.object.ObjectWrap
   */
   void addSignalWatchFull(int priority)
   {
-    gst_bus_add_signal_watch_full(cast(GstBus*)cPtr, priority);
+    gst_bus_add_signal_watch_full(cast(GstBus*)this._cPtr, priority);
   }
 
   /**
@@ -170,7 +170,7 @@ class Bus : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.BusFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
@@ -178,7 +178,7 @@ class Bus : gst.object.ObjectWrap
     uint _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_bus_add_watch_full(cast(GstBus*)cPtr, priority, _funcCB, _func, _funcDestroyCB);
+    _retval = gst_bus_add_watch_full(cast(GstBus*)this._cPtr, priority, _funcCB, _func, _funcDestroyCB);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class Bus : gst.object.ObjectWrap
   bool asyncSignalFunc(gst.message.Message message, void* data = null)
   {
     bool _retval;
-    _retval = gst_bus_async_signal_func(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.Dup) : null, data);
+    _retval = gst_bus_async_signal_func(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class Bus : gst.object.ObjectWrap
   glib.source.Source createWatch()
   {
     GSource* _cretval;
-    _cretval = gst_bus_create_watch(cast(GstBus*)cPtr);
+    _cretval = gst_bus_create_watch(cast(GstBus*)this._cPtr);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -228,7 +228,7 @@ class Bus : gst.object.ObjectWrap
   */
   void disableSyncMessageEmission()
   {
-    gst_bus_disable_sync_message_emission(cast(GstBus*)cPtr);
+    gst_bus_disable_sync_message_emission(cast(GstBus*)this._cPtr);
   }
 
   /**
@@ -250,7 +250,7 @@ class Bus : gst.object.ObjectWrap
   */
   void enableSyncMessageEmission()
   {
-    gst_bus_enable_sync_message_emission(cast(GstBus*)cPtr);
+    gst_bus_enable_sync_message_emission(cast(GstBus*)this._cPtr);
   }
 
   /**
@@ -268,7 +268,7 @@ class Bus : gst.object.ObjectWrap
   */
   void getPollfd(out glib.types.PollFD fd)
   {
-    gst_bus_get_pollfd(cast(GstBus*)cPtr, &fd);
+    gst_bus_get_pollfd(cast(GstBus*)this._cPtr, &fd);
   }
 
   /**
@@ -280,7 +280,7 @@ class Bus : gst.object.ObjectWrap
   bool havePending()
   {
     bool _retval;
-    _retval = gst_bus_have_pending(cast(GstBus*)cPtr);
+    _retval = gst_bus_have_pending(cast(GstBus*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message peek()
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_peek(cast(GstBus*)cPtr);
+    _cretval = gst_bus_peek(cast(GstBus*)this._cPtr);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -344,7 +344,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message poll(gst.types.MessageType events, gst.types.ClockTime timeout)
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_poll(cast(GstBus*)cPtr, events, timeout);
+    _cretval = gst_bus_poll(cast(GstBus*)this._cPtr, events, timeout);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -357,7 +357,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message pop()
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_pop(cast(GstBus*)cPtr);
+    _cretval = gst_bus_pop(cast(GstBus*)this._cPtr);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -378,7 +378,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message popFiltered(gst.types.MessageType types)
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_pop_filtered(cast(GstBus*)cPtr, types);
+    _cretval = gst_bus_pop_filtered(cast(GstBus*)this._cPtr, types);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -394,7 +394,7 @@ class Bus : gst.object.ObjectWrap
   bool post(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_bus_post(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.Dup) : null);
+    _retval = gst_bus_post(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class Bus : gst.object.ObjectWrap
   */
   void removeSignalWatch()
   {
-    gst_bus_remove_signal_watch(cast(GstBus*)cPtr);
+    gst_bus_remove_signal_watch(cast(GstBus*)this._cPtr);
   }
 
   /**
@@ -413,7 +413,7 @@ class Bus : gst.object.ObjectWrap
   bool removeWatch()
   {
     bool _retval;
-    _retval = gst_bus_remove_watch(cast(GstBus*)cPtr);
+    _retval = gst_bus_remove_watch(cast(GstBus*)this._cPtr);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class Bus : gst.object.ObjectWrap
   */
   void setFlushing(bool flushing)
   {
-    gst_bus_set_flushing(cast(GstBus*)cPtr, flushing);
+    gst_bus_set_flushing(cast(GstBus*)this._cPtr, flushing);
   }
 
   /**
@@ -451,7 +451,7 @@ class Bus : gst.object.ObjectWrap
       gst.types.BusSyncReply _dretval;
       auto _dlg = cast(gst.types.BusSyncHandler*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(void*)bus, No.Take), message ? new gst.message.Message(cast(void*)message, No.Take) : null);
       auto _retval = cast(GstBusSyncReply)_dretval;
 
       return _retval;
@@ -460,7 +460,7 @@ class Bus : gst.object.ObjectWrap
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gst_bus_set_sync_handler(cast(GstBus*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gst_bus_set_sync_handler(cast(GstBus*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -475,7 +475,7 @@ class Bus : gst.object.ObjectWrap
   gst.types.BusSyncReply syncSignalHandler(gst.message.Message message, void* data = null)
   {
     GstBusSyncReply _cretval;
-    _cretval = gst_bus_sync_signal_handler(cast(GstBus*)cPtr, message ? cast(GstMessage*)message.cPtr(No.Dup) : null, data);
+    _cretval = gst_bus_sync_signal_handler(cast(GstBus*)this._cPtr, message ? cast(GstMessage*)message._cPtr(No.Dup) : null, data);
     gst.types.BusSyncReply _retval = cast(gst.types.BusSyncReply)_cretval;
     return _retval;
   }
@@ -496,7 +496,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message timedPop(gst.types.ClockTime timeout)
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_timed_pop(cast(GstBus*)cPtr, timeout);
+    _cretval = gst_bus_timed_pop(cast(GstBus*)this._cPtr, timeout);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -520,7 +520,7 @@ class Bus : gst.object.ObjectWrap
   gst.message.Message timedPopFiltered(gst.types.ClockTime timeout, gst.types.MessageType types)
   {
     GstMessage* _cretval;
-    _cretval = gst_bus_timed_pop_filtered(cast(GstBus*)cPtr, timeout, types);
+    _cretval = gst_bus_timed_pop_filtered(cast(GstBus*)this._cPtr, timeout, types);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

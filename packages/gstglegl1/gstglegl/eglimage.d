@@ -34,22 +34,22 @@ class EGLImage : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_egl_image_get_type != &gidSymbolNotFound ? gst_egl_image_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class EGLImage : gobject.boxed.Boxed
   /** */
   void* getImage()
   {
-    auto _retval = gst_egl_image_get_image(cast(GstEGLImage*)cPtr);
+    auto _retval = gst_egl_image_get_image(cast(GstEGLImage*)this._cPtr);
     return _retval;
   }
 
@@ -85,7 +85,7 @@ class EGLImage : gobject.boxed.Boxed
   static gstglegl.eglimage.EGLImage fromDmabuf(gstgl.glcontext.GLContext context, int dmabuf, gstvideo.video_info.VideoInfo inInfo, int plane, size_t offset)
   {
     GstEGLImage* _cretval;
-    _cretval = gst_egl_image_from_dmabuf(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, dmabuf, inInfo ? cast(const(GstVideoInfo)*)inInfo.cPtr(No.Dup) : null, plane, offset);
+    _cretval = gst_egl_image_from_dmabuf(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, dmabuf, inInfo ? cast(const(GstVideoInfo)*)inInfo._cPtr(No.Dup) : null, plane, offset);
     auto _retval = _cretval ? new gstglegl.eglimage.EGLImage(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

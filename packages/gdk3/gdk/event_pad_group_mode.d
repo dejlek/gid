@@ -27,7 +27,7 @@ class EventPadGroupMode
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventPadGroupMode
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventPadGroupMode*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventPadGroupMode*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventPadGroupMode
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventPadGroupMode*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventPadGroupMode*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventPadGroupMode
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadGroupMode*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadGroupMode*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventPadGroupMode
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadGroupMode*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventPadGroupMode*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadGroupMode*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventPadGroupMode*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventPadGroupMode
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventPadGroupMode*)cPtr).sendEvent;
+    return (cast(GdkEventPadGroupMode*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventPadGroupMode
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventPadGroupMode*)cPtr).sendEvent = propval;
+    (cast(GdkEventPadGroupMode*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventPadGroupMode
   */
   @property uint time()
   {
-    return (cast(GdkEventPadGroupMode*)cPtr).time;
+    return (cast(GdkEventPadGroupMode*)this._cPtr).time;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventPadGroupMode
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventPadGroupMode*)cPtr).time = propval;
+    (cast(GdkEventPadGroupMode*)this._cPtr).time = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class EventPadGroupMode
   */
   @property uint group()
   {
-    return (cast(GdkEventPadGroupMode*)cPtr).group;
+    return (cast(GdkEventPadGroupMode*)this._cPtr).group;
   }
 
   /**
@@ -129,7 +129,7 @@ class EventPadGroupMode
   */
   @property void group(uint propval)
   {
-    (cast(GdkEventPadGroupMode*)cPtr).group = propval;
+    (cast(GdkEventPadGroupMode*)this._cPtr).group = propval;
   }
 
   /**
@@ -139,7 +139,7 @@ class EventPadGroupMode
   */
   @property uint mode()
   {
-    return (cast(GdkEventPadGroupMode*)cPtr).mode;
+    return (cast(GdkEventPadGroupMode*)this._cPtr).mode;
   }
 
   /**
@@ -150,6 +150,6 @@ class EventPadGroupMode
   */
   @property void mode(uint propval)
   {
-    (cast(GdkEventPadGroupMode*)cPtr).mode = propval;
+    (cast(GdkEventPadGroupMode*)this._cPtr).mode = propval;
   }
 }

@@ -101,16 +101,16 @@ class DragSource : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drag_source_get_type != &gidSymbolNotFound ? gtk_drag_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -179,7 +179,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void dragCancel()
   {
-    gtk_drag_source_drag_cancel(cast(GtkDragSource*)cPtr);
+    gtk_drag_source_drag_cancel(cast(GtkDragSource*)this._cPtr);
   }
 
   /**
@@ -189,7 +189,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
-    _cretval = gtk_drag_source_get_actions(cast(GtkDragSource*)cPtr);
+    _cretval = gtk_drag_source_get_actions(cast(GtkDragSource*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -201,8 +201,8 @@ class DragSource : gtk.gesture_single.GestureSingle
   gdk.content_provider.ContentProvider getContent()
   {
     GdkContentProvider* _cretval;
-    _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
+    _cretval = gtk_drag_source_get_content(cast(GtkDragSource*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.content_provider.ContentProvider)(cast(GdkContentProvider*)_cretval, No.Take);
     return _retval;
   }
 
@@ -214,8 +214,8 @@ class DragSource : gtk.gesture_single.GestureSingle
   gdk.drag.Drag getDrag()
   {
     GdkDrag* _cretval;
-    _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
+    _cretval = gtk_drag_source_get_drag(cast(GtkDragSource*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag.Drag)(cast(GdkDrag*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setActions(gdk.types.DragAction actions)
   {
-    gtk_drag_source_set_actions(cast(GtkDragSource*)cPtr, actions);
+    gtk_drag_source_set_actions(cast(GtkDragSource*)this._cPtr, actions);
   }
 
   /**
@@ -255,7 +255,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setContent(gdk.content_provider.ContentProvider content = null)
   {
-    gtk_drag_source_set_content(cast(GtkDragSource*)cPtr, content ? cast(GdkContentProvider*)content.cPtr(No.Dup) : null);
+    gtk_drag_source_set_content(cast(GtkDragSource*)this._cPtr, content ? cast(GdkContentProvider*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -277,7 +277,7 @@ class DragSource : gtk.gesture_single.GestureSingle
   */
   void setIcon(gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_source_set_icon(cast(GtkDragSource*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null, hotX, hotY);
+    gtk_drag_source_set_icon(cast(GtkDragSource*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**

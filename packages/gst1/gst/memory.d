@@ -80,22 +80,22 @@ class Memory : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_memory_get_type != &gidSymbolNotFound ? gst_memory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -110,7 +110,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property gst.mini_object.MiniObject miniObject()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMemory*)this._cPtr).miniObject);
   }
 
   /**
@@ -119,7 +119,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property gst.allocator.Allocator allocator()
   {
-    return cToD!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
+    return cToD!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)this._cPtr).allocator);
   }
 
   /**
@@ -129,8 +129,8 @@ class Memory : gobject.boxed.Boxed
   */
   @property void allocator(gst.allocator.Allocator propval)
   {
-    cValueFree!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)cPtr).allocator);
-    dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).allocator);
+    cValueFree!(gst.allocator.Allocator)(cast(void*)(cast(GstMemory*)this._cPtr).allocator);
+    dToC(propval, cast(void*)&(cast(GstMemory*)this._cPtr).allocator);
   }
 
   /**
@@ -139,7 +139,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property gst.memory.Memory parent()
   {
-    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
+    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)this._cPtr).parent);
   }
 
   /**
@@ -149,8 +149,8 @@ class Memory : gobject.boxed.Boxed
   */
   @property void parent(gst.memory.Memory propval)
   {
-    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)cPtr).parent);
-    dToC(propval, cast(void*)&(cast(GstMemory*)cPtr).parent);
+    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMemory*)this._cPtr).parent);
+    dToC(propval, cast(void*)&(cast(GstMemory*)this._cPtr).parent);
   }
 
   /**
@@ -159,7 +159,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property size_t maxsize()
   {
-    return (cast(GstMemory*)cPtr).maxsize;
+    return (cast(GstMemory*)this._cPtr).maxsize;
   }
 
   /**
@@ -169,7 +169,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property void maxsize(size_t propval)
   {
-    (cast(GstMemory*)cPtr).maxsize = propval;
+    (cast(GstMemory*)this._cPtr).maxsize = propval;
   }
 
   /**
@@ -178,7 +178,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property size_t align_()
   {
-    return (cast(GstMemory*)cPtr).align_;
+    return (cast(GstMemory*)this._cPtr).align_;
   }
 
   /**
@@ -188,7 +188,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property void align_(size_t propval)
   {
-    (cast(GstMemory*)cPtr).align_ = propval;
+    (cast(GstMemory*)this._cPtr).align_ = propval;
   }
 
   /**
@@ -197,7 +197,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property size_t offset()
   {
-    return (cast(GstMemory*)cPtr).offset;
+    return (cast(GstMemory*)this._cPtr).offset;
   }
 
   /**
@@ -207,7 +207,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property void offset(size_t propval)
   {
-    (cast(GstMemory*)cPtr).offset = propval;
+    (cast(GstMemory*)this._cPtr).offset = propval;
   }
 
   /**
@@ -216,7 +216,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property size_t size()
   {
-    return (cast(GstMemory*)cPtr).size;
+    return (cast(GstMemory*)this._cPtr).size;
   }
 
   /**
@@ -226,7 +226,7 @@ class Memory : gobject.boxed.Boxed
   */
   @property void size(size_t propval)
   {
-    (cast(GstMemory*)cPtr).size = propval;
+    (cast(GstMemory*)this._cPtr).size = propval;
   }
 
   /**
@@ -280,7 +280,7 @@ class Memory : gobject.boxed.Boxed
   gst.memory.Memory copy(ptrdiff_t offset, ptrdiff_t size)
   {
     GstMemory* _cretval;
-    _cretval = gst_memory_copy(cast(GstMemory*)cPtr, offset, size);
+    _cretval = gst_memory_copy(cast(GstMemory*)this._cPtr, offset, size);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -296,7 +296,7 @@ class Memory : gobject.boxed.Boxed
   size_t getSizes(out size_t offset, out size_t maxsize)
   {
     size_t _retval;
-    _retval = gst_memory_get_sizes(cast(GstMemory*)cPtr, cast(size_t*)&offset, cast(size_t*)&maxsize);
+    _retval = gst_memory_get_sizes(cast(GstMemory*)this._cPtr, cast(size_t*)&offset, cast(size_t*)&maxsize);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Memory : gobject.boxed.Boxed
   bool isSpan(gst.memory.Memory mem2, out size_t offset)
   {
     bool _retval;
-    _retval = gst_memory_is_span(cast(GstMemory*)cPtr, mem2 ? cast(GstMemory*)mem2.cPtr(No.Dup) : null, cast(size_t*)&offset);
+    _retval = gst_memory_is_span(cast(GstMemory*)this._cPtr, mem2 ? cast(GstMemory*)mem2._cPtr(No.Dup) : null, cast(size_t*)&offset);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class Memory : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _memType = memType.toCString(No.Alloc);
-    _retval = gst_memory_is_type(cast(GstMemory*)cPtr, _memType);
+    _retval = gst_memory_is_type(cast(GstMemory*)this._cPtr, _memType);
     return _retval;
   }
 
@@ -353,7 +353,7 @@ class Memory : gobject.boxed.Boxed
   {
     GstMemory* _cretval;
     GstMapInfo _info;
-    _cretval = gst_memory_make_mapped(cast(GstMemory*)cPtr, &_info, flags);
+    _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr, &_info, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     info = new gst.map_info.MapInfo(cast(void*)&_info);
     return _retval;
@@ -384,7 +384,7 @@ class Memory : gobject.boxed.Boxed
   {
     bool _retval;
     GstMapInfo _info;
-    _retval = gst_memory_map(cast(GstMemory*)cPtr, &_info, flags);
+    _retval = gst_memory_map(cast(GstMemory*)this._cPtr, &_info, flags);
     info = new gst.map_info.MapInfo(cast(void*)&_info);
     return _retval;
   }
@@ -402,7 +402,7 @@ class Memory : gobject.boxed.Boxed
   */
   void resize(ptrdiff_t offset, size_t size)
   {
-    gst_memory_resize(cast(GstMemory*)cPtr, offset, size);
+    gst_memory_resize(cast(GstMemory*)this._cPtr, offset, size);
   }
 
   /**
@@ -419,7 +419,7 @@ class Memory : gobject.boxed.Boxed
   gst.memory.Memory share(ptrdiff_t offset, ptrdiff_t size)
   {
     GstMemory* _cretval;
-    _cretval = gst_memory_share(cast(GstMemory*)cPtr, offset, size);
+    _cretval = gst_memory_share(cast(GstMemory*)this._cPtr, offset, size);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -432,6 +432,6 @@ class Memory : gobject.boxed.Boxed
   */
   void unmap(gst.map_info.MapInfo info)
   {
-    gst_memory_unmap(cast(GstMemory*)cPtr, info ? cast(GstMapInfo*)info.cPtr : null);
+    gst_memory_unmap(cast(GstMemory*)this._cPtr, info ? cast(GstMapInfo*)info._cPtr : null);
   }
 }

@@ -314,7 +314,7 @@ template EditableT()
   override bool delegateGetAccessiblePlatformState(gtk.types.AccessiblePlatformState state)
   {
     bool _retval;
-    _retval = gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)cPtr, state);
+    _retval = gtk_editable_delegate_get_accessible_platform_state(cast(GtkEditable*)this._cPtr, state);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ template EditableT()
   */
   override void deleteSelection()
   {
-    gtk_editable_delete_selection(cast(GtkEditable*)cPtr);
+    gtk_editable_delete_selection(cast(GtkEditable*)this._cPtr);
   }
 
   /**
@@ -344,7 +344,7 @@ template EditableT()
   */
   override void deleteText(int startPos, int endPos)
   {
-    gtk_editable_delete_text(cast(GtkEditable*)cPtr, startPos, endPos);
+    gtk_editable_delete_text(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
 
   /**
@@ -355,7 +355,7 @@ template EditableT()
   */
   override void finishDelegate()
   {
-    gtk_editable_finish_delegate(cast(GtkEditable*)cPtr);
+    gtk_editable_finish_delegate(cast(GtkEditable*)this._cPtr);
   }
 
   /**
@@ -365,7 +365,7 @@ template EditableT()
   override float getAlignment()
   {
     float _retval;
-    _retval = gtk_editable_get_alignment(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_alignment(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -389,7 +389,7 @@ template EditableT()
   override string getChars(int startPos, int endPos)
   {
     char* _cretval;
-    _cretval = gtk_editable_get_chars(cast(GtkEditable*)cPtr, startPos, endPos);
+    _cretval = gtk_editable_get_chars(cast(GtkEditable*)this._cPtr, startPos, endPos);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -404,8 +404,8 @@ template EditableT()
   override gtk.editable.Editable getDelegate()
   {
     GtkEditable* _cretval;
-    _cretval = gtk_editable_get_delegate(cast(GtkEditable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
+    _cretval = gtk_editable_get_delegate(cast(GtkEditable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.editable.Editable)(cast(GtkEditable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ template EditableT()
   override bool getEditable()
   {
     bool _retval;
-    _retval = gtk_editable_get_editable(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_editable(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ template EditableT()
   override bool getEnableUndo()
   {
     bool _retval;
-    _retval = gtk_editable_get_enable_undo(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_enable_undo(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -438,7 +438,7 @@ template EditableT()
   override int getMaxWidthChars()
   {
     int _retval;
-    _retval = gtk_editable_get_max_width_chars(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_max_width_chars(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -452,7 +452,7 @@ template EditableT()
   override int getPosition()
   {
     int _retval;
-    _retval = gtk_editable_get_position(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_position(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ template EditableT()
   override bool getSelectionBounds(out int startPos, out int endPos)
   {
     bool _retval;
-    _retval = gtk_editable_get_selection_bounds(cast(GtkEditable*)cPtr, cast(int*)&startPos, cast(int*)&endPos);
+    _retval = gtk_editable_get_selection_bounds(cast(GtkEditable*)this._cPtr, cast(int*)&startPos, cast(int*)&endPos);
     return _retval;
   }
 
@@ -486,7 +486,7 @@ template EditableT()
   override string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_editable_get_text(cast(GtkEditable*)cPtr);
+    _cretval = gtk_editable_get_text(cast(GtkEditable*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -499,7 +499,7 @@ template EditableT()
   override int getWidthChars()
   {
     int _retval;
-    _retval = gtk_editable_get_width_chars(cast(GtkEditable*)cPtr);
+    _retval = gtk_editable_get_width_chars(cast(GtkEditable*)this._cPtr);
     return _retval;
   }
 
@@ -514,7 +514,7 @@ template EditableT()
   */
   override void initDelegate()
   {
-    gtk_editable_init_delegate(cast(GtkEditable*)cPtr);
+    gtk_editable_init_delegate(cast(GtkEditable*)this._cPtr);
   }
 
   /**
@@ -536,7 +536,7 @@ template EditableT()
       _length = cast(int)text.length;
 
     auto _text = cast(const(char)*)text.ptr;
-    gtk_editable_insert_text(cast(GtkEditable*)cPtr, _text, _length, cast(int*)&position);
+    gtk_editable_insert_text(cast(GtkEditable*)this._cPtr, _text, _length, cast(int*)&position);
   }
 
   /**
@@ -555,7 +555,7 @@ template EditableT()
   */
   override void selectRegion(int startPos, int endPos)
   {
-    gtk_editable_select_region(cast(GtkEditable*)cPtr, startPos, endPos);
+    gtk_editable_select_region(cast(GtkEditable*)this._cPtr, startPos, endPos);
   }
 
   /**
@@ -570,7 +570,7 @@ template EditableT()
   */
   override void setAlignment(float xalign)
   {
-    gtk_editable_set_alignment(cast(GtkEditable*)cPtr, xalign);
+    gtk_editable_set_alignment(cast(GtkEditable*)this._cPtr, xalign);
   }
 
   /**
@@ -582,7 +582,7 @@ template EditableT()
   */
   override void setEditable(bool isEditable)
   {
-    gtk_editable_set_editable(cast(GtkEditable*)cPtr, isEditable);
+    gtk_editable_set_editable(cast(GtkEditable*)this._cPtr, isEditable);
   }
 
   /**
@@ -598,7 +598,7 @@ template EditableT()
   */
   override void setEnableUndo(bool enableUndo)
   {
-    gtk_editable_set_enable_undo(cast(GtkEditable*)cPtr, enableUndo);
+    gtk_editable_set_enable_undo(cast(GtkEditable*)this._cPtr, enableUndo);
   }
 
   /**
@@ -609,7 +609,7 @@ template EditableT()
   */
   override void setMaxWidthChars(int nChars)
   {
-    gtk_editable_set_max_width_chars(cast(GtkEditable*)cPtr, nChars);
+    gtk_editable_set_max_width_chars(cast(GtkEditable*)this._cPtr, nChars);
   }
 
   /**
@@ -626,7 +626,7 @@ template EditableT()
   */
   override void setPosition(int position)
   {
-    gtk_editable_set_position(cast(GtkEditable*)cPtr, position);
+    gtk_editable_set_position(cast(GtkEditable*)this._cPtr, position);
   }
 
   /**
@@ -640,7 +640,7 @@ template EditableT()
   override void setText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_editable_set_text(cast(GtkEditable*)cPtr, _text);
+    gtk_editable_set_text(cast(GtkEditable*)this._cPtr, _text);
   }
 
   /**
@@ -656,7 +656,7 @@ template EditableT()
   */
   override void setWidthChars(int nChars)
   {
-    gtk_editable_set_width_chars(cast(GtkEditable*)cPtr, nChars);
+    gtk_editable_set_width_chars(cast(GtkEditable*)this._cPtr, nChars);
   }
 
   /**

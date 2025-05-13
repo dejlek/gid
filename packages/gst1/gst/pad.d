@@ -91,16 +91,16 @@ class Pad : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pad_get_type != &gidSymbolNotFound ? gst_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,8 +182,8 @@ class Pad : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ.cPtr : null, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
+    _cretval = gst_pad_new_from_static_template(templ ? cast(GstStaticPadTemplate*)templ._cPtr : null, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,8 +202,8 @@ class Pad : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_pad_new_from_template(templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
+    _cretval = gst_pad_new_from_template(templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class Pad : gst.object.ObjectWrap
   bool activateMode(gst.types.PadMode mode, bool active)
   {
     bool _retval;
-    _retval = gst_pad_activate_mode(cast(GstPad*)cPtr, mode, active);
+    _retval = gst_pad_activate_mode(cast(GstPad*)this._cPtr, mode, active);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class Pad : gst.object.ObjectWrap
       gst.types.PadProbeReturn _dretval;
       auto _dlg = cast(gst.types.PadProbeCallback*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), info ? new gst.pad_probe_info.PadProbeInfo(cast(void*)info, No.Take) : null);
       auto _retval = cast(GstPadProbeReturn)_dretval;
 
       return _retval;
@@ -281,7 +281,7 @@ class Pad : gst.object.ObjectWrap
     gulong _retval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    _retval = gst_pad_add_probe(cast(GstPad*)cPtr, mask, _callbackCB, _callback, _callbackDestroyCB);
+    _retval = gst_pad_add_probe(cast(GstPad*)this._cPtr, mask, _callbackCB, _callback, _callbackDestroyCB);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class Pad : gst.object.ObjectWrap
   bool canLink(gst.pad.Pad sinkpad)
   {
     bool _retval;
-    _retval = gst_pad_can_link(cast(GstPad*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.Dup) : null);
+    _retval = gst_pad_can_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn chain(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_chain(cast(GstPad*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_pad_chain(cast(GstPad*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -358,7 +358,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn chainList(gst.buffer_list.BufferList list)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_chain_list(cast(GstPad*)cPtr, list ? cast(GstBufferList*)list.cPtr(Yes.Dup) : null);
+    _cretval = gst_pad_chain_list(cast(GstPad*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -371,7 +371,7 @@ class Pad : gst.object.ObjectWrap
   bool checkReconfigure()
   {
     bool _retval;
-    _retval = gst_pad_check_reconfigure(cast(GstPad*)cPtr);
+    _retval = gst_pad_check_reconfigure(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class Pad : gst.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
-    _cretval = gst_pad_create_stream_id(cast(GstPad*)cPtr, parent ? cast(GstElement*)parent.cPtr(No.Dup) : null, _streamId);
+    _cretval = gst_pad_create_stream_id(cast(GstPad*)this._cPtr, parent ? cast(GstElement*)parent._cPtr(No.Dup) : null, _streamId);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -425,7 +425,7 @@ class Pad : gst.object.ObjectWrap
   bool eventDefault(gst.object.ObjectWrap parent, gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_event_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    _retval = gst_pad_event_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -446,14 +446,14 @@ class Pad : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.PadForwardFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _forwardCB = forward ? &_forwardCallback : null;
 
     bool _retval;
     auto _forward = forward ? cast(void*)&(forward) : null;
-    _retval = gst_pad_forward(cast(GstPad*)cPtr, _forwardCB, _forward);
+    _retval = gst_pad_forward(cast(GstPad*)this._cPtr, _forwardCB, _forward);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class Pad : gst.object.ObjectWrap
   gst.caps.Caps getAllowedCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_get_allowed_caps(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_allowed_caps(cast(GstPad*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -487,7 +487,7 @@ class Pad : gst.object.ObjectWrap
   gst.caps.Caps getCurrentCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_get_current_caps(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_current_caps(cast(GstPad*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -503,7 +503,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.PadDirection getDirection()
   {
     GstPadDirection _cretval;
-    _cretval = gst_pad_get_direction(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_direction(cast(GstPad*)this._cPtr);
     gst.types.PadDirection _retval = cast(gst.types.PadDirection)_cretval;
     return _retval;
   }
@@ -515,7 +515,7 @@ class Pad : gst.object.ObjectWrap
   */
   void* getElementPrivate()
   {
-    auto _retval = gst_pad_get_element_private(cast(GstPad*)cPtr);
+    auto _retval = gst_pad_get_element_private(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn getLastFlowReturn()
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_get_last_flow_return(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_last_flow_return(cast(GstPad*)this._cPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -539,7 +539,7 @@ class Pad : gst.object.ObjectWrap
   long getOffset()
   {
     long _retval;
-    _retval = gst_pad_get_offset(cast(GstPad*)cPtr);
+    _retval = gst_pad_get_offset(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -552,8 +552,8 @@ class Pad : gst.object.ObjectWrap
   gst.pad_template.PadTemplate getPadTemplate()
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_pad_get_pad_template(cast(GstPad*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, Yes.Take);
+    _cretval = gst_pad_get_pad_template(cast(GstPad*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -565,7 +565,7 @@ class Pad : gst.object.ObjectWrap
   gst.caps.Caps getPadTemplateCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_get_pad_template_caps(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_pad_template_caps(cast(GstPad*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -582,8 +582,8 @@ class Pad : gst.object.ObjectWrap
   gst.element.Element getParentElement()
   {
     GstElement* _cretval;
-    _cretval = gst_pad_get_parent_element(cast(GstPad*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    _cretval = gst_pad_get_parent_element(cast(GstPad*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -597,8 +597,8 @@ class Pad : gst.object.ObjectWrap
   gst.pad.Pad getPeer()
   {
     GstPad* _cretval;
-    _cretval = gst_pad_get_peer(cast(GstPad*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_pad_get_peer(cast(GstPad*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -643,7 +643,7 @@ class Pad : gst.object.ObjectWrap
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_pad_get_range(cast(GstPad*)cPtr, offset, size, &_buffer);
+    _cretval = gst_pad_get_range(cast(GstPad*)this._cPtr, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
@@ -659,8 +659,8 @@ class Pad : gst.object.ObjectWrap
   gst.pad.Pad getSingleInternalLink()
   {
     GstPad* _cretval;
-    _cretval = gst_pad_get_single_internal_link(cast(GstPad*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_pad_get_single_internal_link(cast(GstPad*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class Pad : gst.object.ObjectWrap
   gst.event.Event getStickyEvent(gst.types.EventType eventType, uint idx)
   {
     GstEvent* _cretval;
-    _cretval = gst_pad_get_sticky_event(cast(GstPad*)cPtr, eventType, idx);
+    _cretval = gst_pad_get_sticky_event(cast(GstPad*)this._cPtr, eventType, idx);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -695,8 +695,8 @@ class Pad : gst.object.ObjectWrap
   gst.stream.Stream getStream()
   {
     GstStream* _cretval;
-    _cretval = gst_pad_get_stream(cast(GstPad*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
+    _cretval = gst_pad_get_stream(cast(GstPad*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -716,7 +716,7 @@ class Pad : gst.object.ObjectWrap
   string getStreamId()
   {
     char* _cretval;
-    _cretval = gst_pad_get_stream_id(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_stream_id(cast(GstPad*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -729,7 +729,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.TaskState getTaskState()
   {
     GstTaskState _cretval;
-    _cretval = gst_pad_get_task_state(cast(GstPad*)cPtr);
+    _cretval = gst_pad_get_task_state(cast(GstPad*)this._cPtr);
     gst.types.TaskState _retval = cast(gst.types.TaskState)_cretval;
     return _retval;
   }
@@ -741,7 +741,7 @@ class Pad : gst.object.ObjectWrap
   bool hasCurrentCaps()
   {
     bool _retval;
-    _retval = gst_pad_has_current_caps(cast(GstPad*)cPtr);
+    _retval = gst_pad_has_current_caps(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -754,7 +754,7 @@ class Pad : gst.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = gst_pad_is_active(cast(GstPad*)cPtr);
+    _retval = gst_pad_is_active(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -769,7 +769,7 @@ class Pad : gst.object.ObjectWrap
   bool isBlocked()
   {
     bool _retval;
-    _retval = gst_pad_is_blocked(cast(GstPad*)cPtr);
+    _retval = gst_pad_is_blocked(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -783,7 +783,7 @@ class Pad : gst.object.ObjectWrap
   bool isBlocking()
   {
     bool _retval;
-    _retval = gst_pad_is_blocking(cast(GstPad*)cPtr);
+    _retval = gst_pad_is_blocking(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -796,7 +796,7 @@ class Pad : gst.object.ObjectWrap
   bool isLinked()
   {
     bool _retval;
-    _retval = gst_pad_is_linked(cast(GstPad*)cPtr);
+    _retval = gst_pad_is_linked(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -815,7 +815,7 @@ class Pad : gst.object.ObjectWrap
   gst.iterator.Iterator iterateInternalLinks()
   {
     GstIterator* _cretval;
-    _cretval = gst_pad_iterate_internal_links(cast(GstPad*)cPtr);
+    _cretval = gst_pad_iterate_internal_links(cast(GstPad*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -836,7 +836,7 @@ class Pad : gst.object.ObjectWrap
   gst.iterator.Iterator iterateInternalLinksDefault(gst.object.ObjectWrap parent = null)
   {
     GstIterator* _cretval;
-    _cretval = gst_pad_iterate_internal_links_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
+    _cretval = gst_pad_iterate_internal_links_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -854,7 +854,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.PadLinkReturn link(gst.pad.Pad sinkpad)
   {
     GstPadLinkReturn _cretval;
-    _cretval = gst_pad_link(cast(GstPad*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.Dup) : null);
+    _cretval = gst_pad_link(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
     gst.types.PadLinkReturn _retval = cast(gst.types.PadLinkReturn)_cretval;
     return _retval;
   }
@@ -879,7 +879,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.PadLinkReturn linkFull(gst.pad.Pad sinkpad, gst.types.PadLinkCheck flags)
   {
     GstPadLinkReturn _cretval;
-    _cretval = gst_pad_link_full(cast(GstPad*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.Dup) : null, flags);
+    _cretval = gst_pad_link_full(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null, flags);
     gst.types.PadLinkReturn _retval = cast(gst.types.PadLinkReturn)_cretval;
     return _retval;
   }
@@ -900,7 +900,7 @@ class Pad : gst.object.ObjectWrap
   bool linkMaybeGhosting(gst.pad.Pad sink)
   {
     bool _retval;
-    _retval = gst_pad_link_maybe_ghosting(cast(GstPad*)cPtr, sink ? cast(GstPad*)sink.cPtr(No.Dup) : null);
+    _retval = gst_pad_link_maybe_ghosting(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -925,7 +925,7 @@ class Pad : gst.object.ObjectWrap
   bool linkMaybeGhostingFull(gst.pad.Pad sink, gst.types.PadLinkCheck flags)
   {
     bool _retval;
-    _retval = gst_pad_link_maybe_ghosting_full(cast(GstPad*)cPtr, sink ? cast(GstPad*)sink.cPtr(No.Dup) : null, flags);
+    _retval = gst_pad_link_maybe_ghosting_full(cast(GstPad*)this._cPtr, sink ? cast(GstPad*)sink._cPtr(No.Dup) : null, flags);
     return _retval;
   }
 
@@ -935,7 +935,7 @@ class Pad : gst.object.ObjectWrap
   */
   void markReconfigure()
   {
-    gst_pad_mark_reconfigure(cast(GstPad*)cPtr);
+    gst_pad_mark_reconfigure(cast(GstPad*)this._cPtr);
   }
 
   /**
@@ -946,7 +946,7 @@ class Pad : gst.object.ObjectWrap
   bool needsReconfigure()
   {
     bool _retval;
-    _retval = gst_pad_needs_reconfigure(cast(GstPad*)cPtr);
+    _retval = gst_pad_needs_reconfigure(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -960,7 +960,7 @@ class Pad : gst.object.ObjectWrap
   bool pauseTask()
   {
     bool _retval;
-    _retval = gst_pad_pause_task(cast(GstPad*)cPtr);
+    _retval = gst_pad_pause_task(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQuery(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_peer_query(cast(GstPad*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_pad_peer_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -993,7 +993,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryAcceptCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_accept_caps(cast(GstPad*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_pad_peer_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1016,7 +1016,7 @@ class Pad : gst.object.ObjectWrap
   gst.caps.Caps peerQueryCaps(gst.caps.Caps filter = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_peer_query_caps(cast(GstPad*)cPtr, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _cretval = gst_pad_peer_query_caps(cast(GstPad*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1035,7 +1035,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_convert(cast(GstPad*)cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = gst_pad_peer_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1051,7 +1051,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_duration(cast(GstPad*)cPtr, format, cast(long*)&duration);
+    _retval = gst_pad_peer_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1067,7 +1067,7 @@ class Pad : gst.object.ObjectWrap
   bool peerQueryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_pad_peer_query_position(cast(GstPad*)cPtr, format, cast(long*)&cur);
+    _retval = gst_pad_peer_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1086,7 +1086,7 @@ class Pad : gst.object.ObjectWrap
   bool proxyQueryAcceptCaps(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_proxy_query_accept_caps(cast(GstPad*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_pad_proxy_query_accept_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1105,7 +1105,7 @@ class Pad : gst.object.ObjectWrap
   bool proxyQueryCaps(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_proxy_query_caps(cast(GstPad*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_pad_proxy_query_caps(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1149,7 +1149,7 @@ class Pad : gst.object.ObjectWrap
   {
     GstFlowReturn _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_pad_pull_range(cast(GstPad*)cPtr, offset, size, &_buffer);
+    _cretval = gst_pad_pull_range(cast(GstPad*)this._cPtr, offset, size, &_buffer);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
@@ -1178,7 +1178,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn push(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_push(cast(GstPad*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_pad_push(cast(GstPad*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -1200,7 +1200,7 @@ class Pad : gst.object.ObjectWrap
   bool pushEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_push_event(cast(GstPad*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    _retval = gst_pad_push_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1229,7 +1229,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn pushList(gst.buffer_list.BufferList list)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_push_list(cast(GstPad*)cPtr, list ? cast(GstBufferList*)list.cPtr(Yes.Dup) : null);
+    _cretval = gst_pad_push_list(cast(GstPad*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -1253,7 +1253,7 @@ class Pad : gst.object.ObjectWrap
   bool query(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_query(cast(GstPad*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_pad_query(cast(GstPad*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1267,7 +1267,7 @@ class Pad : gst.object.ObjectWrap
   bool queryAcceptCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_pad_query_accept_caps(cast(GstPad*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_pad_query_accept_caps(cast(GstPad*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1295,7 +1295,7 @@ class Pad : gst.object.ObjectWrap
   gst.caps.Caps queryCaps(gst.caps.Caps filter = null)
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_query_caps(cast(GstPad*)cPtr, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _cretval = gst_pad_query_caps(cast(GstPad*)this._cPtr, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1313,7 +1313,7 @@ class Pad : gst.object.ObjectWrap
   bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_pad_query_convert(cast(GstPad*)cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = gst_pad_query_convert(cast(GstPad*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1332,7 +1332,7 @@ class Pad : gst.object.ObjectWrap
   bool queryDefault(gst.object.ObjectWrap parent, gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_pad_query_default(cast(GstPad*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_pad_query_default(cast(GstPad*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1348,7 +1348,7 @@ class Pad : gst.object.ObjectWrap
   bool queryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_pad_query_duration(cast(GstPad*)cPtr, format, cast(long*)&duration);
+    _retval = gst_pad_query_duration(cast(GstPad*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1363,7 +1363,7 @@ class Pad : gst.object.ObjectWrap
   bool queryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_pad_query_position(cast(GstPad*)cPtr, format, cast(long*)&cur);
+    _retval = gst_pad_query_position(cast(GstPad*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1377,7 +1377,7 @@ class Pad : gst.object.ObjectWrap
   */
   void removeProbe(gulong id)
   {
-    gst_pad_remove_probe(cast(GstPad*)cPtr, id);
+    gst_pad_remove_probe(cast(GstPad*)this._cPtr, id);
   }
 
   /**
@@ -1409,7 +1409,7 @@ class Pad : gst.object.ObjectWrap
   bool sendEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_pad_send_event(cast(GstPad*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    _retval = gst_pad_send_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1433,7 +1433,7 @@ class Pad : gst.object.ObjectWrap
   bool setActive(bool active)
   {
     bool _retval;
-    _retval = gst_pad_set_active(cast(GstPad*)cPtr, active);
+    _retval = gst_pad_set_active(cast(GstPad*)this._cPtr, active);
     return _retval;
   }
 
@@ -1447,7 +1447,7 @@ class Pad : gst.object.ObjectWrap
   */
   void setElementPrivate(void* priv = null)
   {
-    gst_pad_set_element_private(cast(GstPad*)cPtr, priv);
+    gst_pad_set_element_private(cast(GstPad*)this._cPtr, priv);
   }
 
   /**
@@ -1458,7 +1458,7 @@ class Pad : gst.object.ObjectWrap
   */
   void setOffset(long offset)
   {
-    gst_pad_set_offset(cast(GstPad*)cPtr, offset);
+    gst_pad_set_offset(cast(GstPad*)this._cPtr, offset);
   }
 
   /**
@@ -1484,7 +1484,7 @@ class Pad : gst.object.ObjectWrap
     bool _retval;
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    _retval = gst_pad_start_task(cast(GstPad*)cPtr, _funcCB, _func, _funcDestroyCB);
+    _retval = gst_pad_start_task(cast(GstPad*)this._cPtr, _funcCB, _func, _funcDestroyCB);
     return _retval;
   }
 
@@ -1502,13 +1502,13 @@ class Pad : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.PadStickyEventsForeachFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take), event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _foreachFuncCB = foreachFunc ? &_foreachFuncCallback : null;
 
     auto _foreachFunc = foreachFunc ? cast(void*)&(foreachFunc) : null;
-    gst_pad_sticky_events_foreach(cast(GstPad*)cPtr, _foreachFuncCB, _foreachFunc);
+    gst_pad_sticky_events_foreach(cast(GstPad*)this._cPtr, _foreachFuncCB, _foreachFunc);
   }
 
   /**
@@ -1526,7 +1526,7 @@ class Pad : gst.object.ObjectWrap
   bool stopTask()
   {
     bool _retval;
-    _retval = gst_pad_stop_task(cast(GstPad*)cPtr);
+    _retval = gst_pad_stop_task(cast(GstPad*)this._cPtr);
     return _retval;
   }
 
@@ -1541,7 +1541,7 @@ class Pad : gst.object.ObjectWrap
   gst.types.FlowReturn storeStickyEvent(gst.event.Event event)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_pad_store_sticky_event(cast(GstPad*)cPtr, event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
+    _cretval = gst_pad_store_sticky_event(cast(GstPad*)this._cPtr, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -1560,7 +1560,7 @@ class Pad : gst.object.ObjectWrap
   bool unlink(gst.pad.Pad sinkpad)
   {
     bool _retval;
-    _retval = gst_pad_unlink(cast(GstPad*)cPtr, sinkpad ? cast(GstPad*)sinkpad.cPtr(No.Dup) : null);
+    _retval = gst_pad_unlink(cast(GstPad*)this._cPtr, sinkpad ? cast(GstPad*)sinkpad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1575,7 +1575,7 @@ class Pad : gst.object.ObjectWrap
   */
   void useFixedCaps()
   {
-    gst_pad_use_fixed_caps(cast(GstPad*)cPtr);
+    gst_pad_use_fixed_caps(cast(GstPad*)this._cPtr);
   }
 
   /**

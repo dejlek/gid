@@ -37,22 +37,22 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_interface_info_get_type != &gidSymbolNotFound ? g_dbus_interface_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   @property int refCount()
   {
-    return (cast(GDBusInterfaceInfo*)cPtr).refCount;
+    return (cast(GDBusInterfaceInfo*)this._cPtr).refCount;
   }
 
   /**
@@ -77,7 +77,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   @property void refCount(int propval)
   {
-    (cast(GDBusInterfaceInfo*)cPtr).refCount = propval;
+    (cast(GDBusInterfaceInfo*)this._cPtr).refCount = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).name);
   }
 
   /**
@@ -96,8 +96,8 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusInterfaceInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusInterfaceInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GDBusInterfaceInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusInterfaceInfo*)this._cPtr).name);
   }
 
   /**
@@ -114,7 +114,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   void cacheBuild()
   {
-    g_dbus_interface_info_cache_build(cast(GDBusInterfaceInfo*)cPtr);
+    g_dbus_interface_info_cache_build(cast(GDBusInterfaceInfo*)this._cPtr);
   }
 
   /**
@@ -124,7 +124,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   void cacheRelease()
   {
-    g_dbus_interface_info_cache_release(cast(GDBusInterfaceInfo*)cPtr);
+    g_dbus_interface_info_cache_release(cast(GDBusInterfaceInfo*)this._cPtr);
   }
 
   /**
@@ -141,7 +141,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   */
   void generateXml(uint indent, glib.string_.String stringBuilder)
   {
-    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)cPtr, indent, stringBuilder ? cast(GString*)stringBuilder.cPtr(No.Dup) : null);
+    g_dbus_interface_info_generate_xml(cast(GDBusInterfaceInfo*)this._cPtr, indent, stringBuilder ? cast(GString*)stringBuilder._cPtr(No.Dup) : null);
   }
 
   /**
@@ -158,7 +158,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   {
     GDBusMethodInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)cPtr, _name);
+    _cretval = g_dbus_interface_info_lookup_method(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_method_info.DBusMethodInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -177,7 +177,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   {
     GDBusPropertyInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)cPtr, _name);
+    _cretval = g_dbus_interface_info_lookup_property(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_property_info.DBusPropertyInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -196,7 +196,7 @@ class DBusInterfaceInfo : gobject.boxed.Boxed
   {
     GDBusSignalInfo* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)cPtr, _name);
+    _cretval = g_dbus_interface_info_lookup_signal(cast(GDBusInterfaceInfo*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.dbus_signal_info.DBusSignalInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

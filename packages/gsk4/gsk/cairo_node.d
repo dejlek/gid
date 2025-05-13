@@ -38,7 +38,7 @@ class CairoNode : gsk.render_node.RenderNode
   this(graphene.rect.Rect bounds)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_cairo_node_new(bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null);
+    _cretval = gsk_cairo_node_new(bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -54,7 +54,7 @@ class CairoNode : gsk.render_node.RenderNode
   cairo.context.Context getDrawContext()
   {
     cairo_t* _cretval;
-    _cretval = gsk_cairo_node_get_draw_context(cast(GskRenderNode*)cPtr);
+    _cretval = gsk_cairo_node_get_draw_context(cast(GskRenderNode*)this._cPtr);
     auto _retval = _cretval ? new cairo.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -66,7 +66,7 @@ class CairoNode : gsk.render_node.RenderNode
   cairo.surface.Surface getSurface()
   {
     cairo_surface_t* _cretval;
-    _cretval = gsk_cairo_node_get_surface(cast(GskRenderNode*)cPtr);
+    _cretval = gsk_cairo_node_get_surface(cast(GskRenderNode*)this._cPtr);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

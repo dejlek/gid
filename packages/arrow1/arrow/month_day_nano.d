@@ -18,16 +18,16 @@ class MonthDayNano : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_get_type != &gidSymbolNotFound ? garrow_month_day_nano_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,7 +105,7 @@ class MonthDayNano : gobject.object.ObjectWrap
   bool equal(arrow.month_day_nano.MonthDayNano otherMonthNanoDay)
   {
     bool _retval;
-    _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay.cPtr(No.Dup) : null);
+    _retval = garrow_month_day_nano_equal(cast(GArrowMonthDayNano*)this._cPtr, otherMonthNanoDay ? cast(GArrowMonthDayNano*)otherMonthNanoDay._cPtr(No.Dup) : null);
     return _retval;
   }
 }

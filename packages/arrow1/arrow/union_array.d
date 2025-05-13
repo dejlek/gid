@@ -19,16 +19,16 @@ class UnionArray : arrow.array.Array
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_array_get_type != &gidSymbolNotFound ? garrow_union_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class UnionArray : arrow.array.Array
   int getChildId(long i)
   {
     int _retval;
-    _retval = garrow_union_array_get_child_id(cast(GArrowUnionArray*)cPtr, i);
+    _retval = garrow_union_array_get_child_id(cast(GArrowUnionArray*)this._cPtr, i);
     return _retval;
   }
 
@@ -49,8 +49,8 @@ class UnionArray : arrow.array.Array
   arrow.array.Array getField(int i)
   {
     GArrowArray* _cretval;
-    _cretval = garrow_union_array_get_field(cast(GArrowUnionArray*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_union_array_get_field(cast(GArrowUnionArray*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class UnionArray : arrow.array.Array
   byte getTypeCode(long i)
   {
     byte _retval;
-    _retval = garrow_union_array_get_type_code(cast(GArrowUnionArray*)cPtr, i);
+    _retval = garrow_union_array_get_type_code(cast(GArrowUnionArray*)this._cPtr, i);
     return _retval;
   }
 }

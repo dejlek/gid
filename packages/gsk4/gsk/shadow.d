@@ -27,7 +27,7 @@ class Shadow
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class Shadow
   */
   @property gdk.rgba.RGBA color()
   {
-    return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskShadow*)cPtr).color);
+    return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskShadow*)this._cPtr).color);
   }
 
   /**
@@ -47,7 +47,7 @@ class Shadow
   */
   @property float dx()
   {
-    return (cast(GskShadow*)cPtr).dx;
+    return (cast(GskShadow*)this._cPtr).dx;
   }
 
   /**
@@ -57,7 +57,7 @@ class Shadow
   */
   @property void dx(float propval)
   {
-    (cast(GskShadow*)cPtr).dx = propval;
+    (cast(GskShadow*)this._cPtr).dx = propval;
   }
 
   /**
@@ -66,7 +66,7 @@ class Shadow
   */
   @property float dy()
   {
-    return (cast(GskShadow*)cPtr).dy;
+    return (cast(GskShadow*)this._cPtr).dy;
   }
 
   /**
@@ -76,7 +76,7 @@ class Shadow
   */
   @property void dy(float propval)
   {
-    (cast(GskShadow*)cPtr).dy = propval;
+    (cast(GskShadow*)this._cPtr).dy = propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class Shadow
   */
   @property float radius()
   {
-    return (cast(GskShadow*)cPtr).radius;
+    return (cast(GskShadow*)this._cPtr).radius;
   }
 
   /**
@@ -95,6 +95,6 @@ class Shadow
   */
   @property void radius(float propval)
   {
-    (cast(GskShadow*)cPtr).radius = propval;
+    (cast(GskShadow*)this._cPtr).radius = propval;
   }
 }

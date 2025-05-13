@@ -23,16 +23,16 @@ class Info : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_info_get_type != &gidSymbolNotFound ? gaflight_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class Info : gobject.object.ObjectWrap
     auto _endpoints = gListFromD!(arrowflight.endpoint.Endpoint)(endpoints);
     scope(exit) containerFree!(GList*, arrowflight.endpoint.Endpoint, GidOwnership.None)(_endpoints);
     GError *_err;
-    _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor.cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
+    _cretval = gaflight_info_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, descriptor ? cast(GAFlightDescriptor*)descriptor._cPtr(No.Dup) : null, _endpoints, totalRecords, totalBytes, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -58,7 +58,7 @@ class Info : gobject.object.ObjectWrap
   bool equal(arrowflight.info.Info otherInfo)
   {
     bool _retval;
-    _retval = gaflight_info_equal(cast(GAFlightInfo*)cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo.cPtr(No.Dup) : null);
+    _retval = gaflight_info_equal(cast(GAFlightInfo*)this._cPtr, otherInfo ? cast(GAFlightInfo*)otherInfo._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -66,8 +66,8 @@ class Info : gobject.object.ObjectWrap
   arrowflight.descriptor.Descriptor getDescriptor()
   {
     GAFlightDescriptor* _cretval;
-    _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
+    _cretval = gaflight_info_get_descriptor(cast(GAFlightInfo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowflight.descriptor.Descriptor)(cast(GAFlightDescriptor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class Info : gobject.object.ObjectWrap
   arrowflight.endpoint.Endpoint[] getEndpoints()
   {
     GList* _cretval;
-    _cretval = gaflight_info_get_endpoints(cast(GAFlightInfo*)cPtr);
+    _cretval = gaflight_info_get_endpoints(cast(GAFlightInfo*)this._cPtr);
     auto _retval = gListToD!(arrowflight.endpoint.Endpoint, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -85,10 +85,10 @@ class Info : gobject.object.ObjectWrap
   {
     GArrowSchema* _cretval;
     GError *_err;
-    _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)cPtr, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gaflight_info_get_schema(cast(GAFlightInfo*)this._cPtr, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Info : gobject.object.ObjectWrap
   long getTotalBytes()
   {
     long _retval;
-    _retval = gaflight_info_get_total_bytes(cast(GAFlightInfo*)cPtr);
+    _retval = gaflight_info_get_total_bytes(cast(GAFlightInfo*)this._cPtr);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class Info : gobject.object.ObjectWrap
   long getTotalRecords()
   {
     long _retval;
-    _retval = gaflight_info_get_total_records(cast(GAFlightInfo*)cPtr);
+    _retval = gaflight_info_get_total_records(cast(GAFlightInfo*)this._cPtr);
     return _retval;
   }
 }

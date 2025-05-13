@@ -26,7 +26,7 @@ template ToolShellT()
   override pango.types.EllipsizeMode getEllipsizeMode()
   {
     PangoEllipsizeMode _cretval;
-    _cretval = gtk_tool_shell_get_ellipsize_mode(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_ellipsize_mode(cast(GtkToolShell*)this._cPtr);
     pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
@@ -39,7 +39,7 @@ template ToolShellT()
   override gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_tool_shell_get_icon_size(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_icon_size(cast(GtkToolShell*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -53,7 +53,7 @@ template ToolShellT()
   override gtk.types.Orientation toolShellGetOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_tool_shell_get_orientation(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_orientation(cast(GtkToolShell*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -66,7 +66,7 @@ template ToolShellT()
   override gtk.types.ReliefStyle getReliefStyle()
   {
     GtkReliefStyle _cretval;
-    _cretval = gtk_tool_shell_get_relief_style(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_relief_style(cast(GtkToolShell*)this._cPtr);
     gtk.types.ReliefStyle _retval = cast(gtk.types.ReliefStyle)_cretval;
     return _retval;
   }
@@ -80,7 +80,7 @@ template ToolShellT()
   override gtk.types.ToolbarStyle getStyle()
   {
     GtkToolbarStyle _cretval;
-    _cretval = gtk_tool_shell_get_style(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_style(cast(GtkToolShell*)this._cPtr);
     gtk.types.ToolbarStyle _retval = cast(gtk.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -94,7 +94,7 @@ template ToolShellT()
   override float getTextAlignment()
   {
     float _retval;
-    _retval = gtk_tool_shell_get_text_alignment(cast(GtkToolShell*)cPtr);
+    _retval = gtk_tool_shell_get_text_alignment(cast(GtkToolShell*)this._cPtr);
     return _retval;
   }
 
@@ -107,7 +107,7 @@ template ToolShellT()
   override gtk.types.Orientation getTextOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_tool_shell_get_text_orientation(cast(GtkToolShell*)cPtr);
+    _cretval = gtk_tool_shell_get_text_orientation(cast(GtkToolShell*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -121,8 +121,8 @@ template ToolShellT()
   override gtk.size_group.SizeGroup getTextSizeGroup()
   {
     GtkSizeGroup* _cretval;
-    _cretval = gtk_tool_shell_get_text_size_group(cast(GtkToolShell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
+    _cretval = gtk_tool_shell_get_text_size_group(cast(GtkToolShell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,6 +136,6 @@ template ToolShellT()
   */
   override void rebuildMenu()
   {
-    gtk_tool_shell_rebuild_menu(cast(GtkToolShell*)cPtr);
+    gtk_tool_shell_rebuild_menu(cast(GtkToolShell*)this._cPtr);
   }
 }

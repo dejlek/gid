@@ -67,16 +67,16 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_controller_get_type != &gidSymbolNotFound ? gtk_shortcut_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -170,8 +170,8 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   static gtk.shortcut_controller.ShortcutController newForModel(gio.list_model.ListModel model)
   {
     GtkEventController* _cretval;
-    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
+    _cretval = gtk_shortcut_controller_new_for_model(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_controller.ShortcutController)(cast(GtkEventController*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void addShortcut(gtk.shortcut.Shortcut shortcut)
   {
-    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(Yes.Dup) : null);
+    gtk_shortcut_controller_add_shortcut(cast(GtkShortcutController*)this._cPtr, shortcut ? cast(GtkShortcut*)shortcut._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -196,7 +196,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   gdk.types.ModifierType getMnemonicsModifiers()
   {
     GdkModifierType _cretval;
-    _cretval = gtk_shortcut_controller_get_mnemonics_modifiers(cast(GtkShortcutController*)cPtr);
+    _cretval = gtk_shortcut_controller_get_mnemonics_modifiers(cast(GtkShortcutController*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -210,7 +210,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   gtk.types.ShortcutScope getScope()
   {
     GtkShortcutScope _cretval;
-    _cretval = gtk_shortcut_controller_get_scope(cast(GtkShortcutController*)cPtr);
+    _cretval = gtk_shortcut_controller_get_scope(cast(GtkShortcutController*)this._cPtr);
     gtk.types.ShortcutScope _retval = cast(gtk.types.ShortcutScope)_cretval;
     return _retval;
   }
@@ -226,7 +226,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void removeShortcut(gtk.shortcut.Shortcut shortcut)
   {
-    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)cPtr, shortcut ? cast(GtkShortcut*)shortcut.cPtr(No.Dup) : null);
+    gtk_shortcut_controller_remove_shortcut(cast(GtkShortcutController*)this._cPtr, shortcut ? cast(GtkShortcut*)shortcut._cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void setMnemonicsModifiers(gdk.types.ModifierType modifiers)
   {
-    gtk_shortcut_controller_set_mnemonics_modifiers(cast(GtkShortcutController*)cPtr, modifiers);
+    gtk_shortcut_controller_set_mnemonics_modifiers(cast(GtkShortcutController*)this._cPtr, modifiers);
   }
 
   /**
@@ -268,6 +268,6 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
   */
   void setScope(gtk.types.ShortcutScope scope_)
   {
-    gtk_shortcut_controller_set_scope(cast(GtkShortcutController*)cPtr, scope_);
+    gtk_shortcut_controller_set_scope(cast(GtkShortcutController*)this._cPtr, scope_);
   }
 }

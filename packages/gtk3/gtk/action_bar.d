@@ -37,16 +37,16 @@ class ActionBar : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_bar_get_type != &gidSymbolNotFound ? gtk_action_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,8 +73,8 @@ class ActionBar : gtk.bin.Bin
   gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,7 +87,7 @@ class ActionBar : gtk.bin.Bin
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_end(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -99,7 +99,7 @@ class ActionBar : gtk.bin.Bin
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_start(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -110,6 +110,6 @@ class ActionBar : gtk.bin.Bin
   */
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
-    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
+    gtk_action_bar_set_center_widget(cast(GtkActionBar*)this._cPtr, centerWidget ? cast(GtkWidget*)centerWidget._cPtr(No.Dup) : null);
   }
 }

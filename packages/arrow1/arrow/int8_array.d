@@ -20,16 +20,16 @@ class Int8Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_int8_array_get_type != &gidSymbolNotFound ? garrow_int8_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowInt8Array* _cretval;
-    _cretval = garrow_int8_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_int8_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -50,7 +50,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   byte getValue(long i)
   {
     byte _retval;
-    _retval = garrow_int8_array_get_value(cast(GArrowInt8Array*)cPtr, i);
+    _retval = garrow_int8_array_get_value(cast(GArrowInt8Array*)this._cPtr, i);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   {
     const(byte)* _cretval;
     long _cretlength;
-    _cretval = garrow_int8_array_get_values(cast(GArrowInt8Array*)cPtr, &_cretlength);
+    _cretval = garrow_int8_array_get_values(cast(GArrowInt8Array*)this._cPtr, &_cretlength);
     byte[] _retval;
 
     if (_cretval)
@@ -74,7 +74,7 @@ class Int8Array : arrow.numeric_array.NumericArray
   {
     long _retval;
     GError *_err;
-    _retval = garrow_int8_array_sum(cast(GArrowInt8Array*)cPtr, &_err);
+    _retval = garrow_int8_array_sum(cast(GArrowInt8Array*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

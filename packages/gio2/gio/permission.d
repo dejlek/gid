@@ -37,16 +37,16 @@ class Permission : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_permission_get_type != &gidSymbolNotFound ? g_permission_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -111,7 +111,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_acquire(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_acquire(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -129,17 +129,17 @@ class Permission : gobject.object.ObjectWrap
   */
   void acquireAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_permission_acquire_async(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_permission_acquire_async(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -158,7 +158,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_acquire_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_acquire_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -173,7 +173,7 @@ class Permission : gobject.object.ObjectWrap
   bool getAllowed()
   {
     bool _retval;
-    _retval = g_permission_get_allowed(cast(GPermission*)cPtr);
+    _retval = g_permission_get_allowed(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Permission : gobject.object.ObjectWrap
   bool getCanAcquire()
   {
     bool _retval;
-    _retval = g_permission_get_can_acquire(cast(GPermission*)cPtr);
+    _retval = g_permission_get_can_acquire(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Permission : gobject.object.ObjectWrap
   bool getCanRelease()
   {
     bool _retval;
-    _retval = g_permission_get_can_release(cast(GPermission*)cPtr);
+    _retval = g_permission_get_can_release(cast(GPermission*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Permission : gobject.object.ObjectWrap
   */
   void implUpdate(bool allowed, bool canAcquire, bool canRelease)
   {
-    g_permission_impl_update(cast(GPermission*)cPtr, allowed, canAcquire, canRelease);
+    g_permission_impl_update(cast(GPermission*)this._cPtr, allowed, canAcquire, canRelease);
   }
 
   /**
@@ -246,7 +246,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_release(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_release(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -264,17 +264,17 @@ class Permission : gobject.object.ObjectWrap
   */
   void releaseAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_permission_release_async(cast(GPermission*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_permission_release_async(cast(GPermission*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -293,7 +293,7 @@ class Permission : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_permission_release_finish(cast(GPermission*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_permission_release_finish(cast(GPermission*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

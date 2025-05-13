@@ -43,13 +43,13 @@ template SectionModelT()
   */
   override void getSection(uint position, out uint outStart, out uint outEnd)
   {
-    gtk_section_model_get_section(cast(GtkSectionModel*)cPtr, position, cast(uint*)&outStart, cast(uint*)&outEnd);
+    gtk_section_model_get_section(cast(GtkSectionModel*)this._cPtr, position, cast(uint*)&outStart, cast(uint*)&outEnd);
   }
 
   /** */
   override void sectionsChanged(uint position, uint nItems)
   {
-    gtk_section_model_sections_changed(cast(GtkSectionModel*)cPtr, position, nItems);
+    gtk_section_model_sections_changed(cast(GtkSectionModel*)this._cPtr, position, nItems);
   }
 
   /**

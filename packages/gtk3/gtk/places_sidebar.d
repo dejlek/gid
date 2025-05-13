@@ -65,16 +65,16 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_places_sidebar_get_type != &gidSymbolNotFound ? gtk_places_sidebar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -256,7 +256,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void addShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_add_shortcut(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -266,7 +266,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getLocalOnly()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_local_only(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_local_only(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -286,8 +286,8 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   gio.file.File getLocation()
   {
     GFile* _cretval;
-    _cretval = gtk_places_sidebar_get_location(cast(GtkPlacesSidebar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = gtk_places_sidebar_get_location(cast(GtkPlacesSidebar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -305,8 +305,8 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   gio.file.File getNthBookmark(int n)
   {
     GFile* _cretval;
-    _cretval = gtk_places_sidebar_get_nth_bookmark(cast(GtkPlacesSidebar*)cPtr, n);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = gtk_places_sidebar_get_nth_bookmark(cast(GtkPlacesSidebar*)this._cPtr, n);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   gtk.types.PlacesOpenFlags getOpenFlags()
   {
     GtkPlacesOpenFlags _cretval;
-    _cretval = gtk_places_sidebar_get_open_flags(cast(GtkPlacesSidebar*)cPtr);
+    _cretval = gtk_places_sidebar_get_open_flags(cast(GtkPlacesSidebar*)this._cPtr);
     gtk.types.PlacesOpenFlags _retval = cast(gtk.types.PlacesOpenFlags)_cretval;
     return _retval;
   }
@@ -332,7 +332,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowConnectToServer()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_connect_to_server(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowDesktop()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_desktop(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_desktop(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowEnterLocation()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_enter_location(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowOtherLocations()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_other_locations(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowRecent()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_recent(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_recent(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowStarredLocation()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_starred_location(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   bool getShowTrash()
   {
     bool _retval;
-    _retval = gtk_places_sidebar_get_show_trash(cast(GtkPlacesSidebar*)cPtr);
+    _retval = gtk_places_sidebar_get_show_trash(cast(GtkPlacesSidebar*)this._cPtr);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   gio.file.File[] listShortcuts()
   {
     GSList* _cretval;
-    _cretval = gtk_places_sidebar_list_shortcuts(cast(GtkPlacesSidebar*)cPtr);
+    _cretval = gtk_places_sidebar_list_shortcuts(cast(GtkPlacesSidebar*)this._cPtr);
     auto _retval = gSListToD!(gio.file.File, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -429,7 +429,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void removeShortcut(gio.file.File location)
   {
-    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_remove_shortcut(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -450,7 +450,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setDropTargetsVisible(bool visible, gdk.drag_context.DragContext context)
   {
-    gtk_places_sidebar_set_drop_targets_visible(cast(GtkPlacesSidebar*)cPtr, visible, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null);
+    gtk_places_sidebar_set_drop_targets_visible(cast(GtkPlacesSidebar*)this._cPtr, visible, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -461,7 +461,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setLocalOnly(bool localOnly)
   {
-    gtk_places_sidebar_set_local_only(cast(GtkPlacesSidebar*)cPtr, localOnly);
+    gtk_places_sidebar_set_local_only(cast(GtkPlacesSidebar*)this._cPtr, localOnly);
   }
 
   /**
@@ -476,7 +476,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setLocation(gio.file.File location = null)
   {
-    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location).cPtr(No.Dup) : null);
+    gtk_places_sidebar_set_location(cast(GtkPlacesSidebar*)this._cPtr, location ? cast(GFile*)(cast(gobject.object.ObjectWrap)location)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -501,7 +501,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setOpenFlags(gtk.types.PlacesOpenFlags flags)
   {
-    gtk_places_sidebar_set_open_flags(cast(GtkPlacesSidebar*)cPtr, flags);
+    gtk_places_sidebar_set_open_flags(cast(GtkPlacesSidebar*)this._cPtr, flags);
   }
 
   /**
@@ -520,7 +520,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowConnectToServer(bool showConnectToServer)
   {
-    gtk_places_sidebar_set_show_connect_to_server(cast(GtkPlacesSidebar*)cPtr, showConnectToServer);
+    gtk_places_sidebar_set_show_connect_to_server(cast(GtkPlacesSidebar*)this._cPtr, showConnectToServer);
   }
 
   /**
@@ -534,7 +534,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowDesktop(bool showDesktop)
   {
-    gtk_places_sidebar_set_show_desktop(cast(GtkPlacesSidebar*)cPtr, showDesktop);
+    gtk_places_sidebar_set_show_desktop(cast(GtkPlacesSidebar*)this._cPtr, showDesktop);
   }
 
   /**
@@ -550,7 +550,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowEnterLocation(bool showEnterLocation)
   {
-    gtk_places_sidebar_set_show_enter_location(cast(GtkPlacesSidebar*)cPtr, showEnterLocation);
+    gtk_places_sidebar_set_show_enter_location(cast(GtkPlacesSidebar*)this._cPtr, showEnterLocation);
   }
 
   /**
@@ -568,7 +568,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowOtherLocations(bool showOtherLocations)
   {
-    gtk_places_sidebar_set_show_other_locations(cast(GtkPlacesSidebar*)cPtr, showOtherLocations);
+    gtk_places_sidebar_set_show_other_locations(cast(GtkPlacesSidebar*)this._cPtr, showOtherLocations);
   }
 
   /**
@@ -582,7 +582,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowRecent(bool showRecent)
   {
-    gtk_places_sidebar_set_show_recent(cast(GtkPlacesSidebar*)cPtr, showRecent);
+    gtk_places_sidebar_set_show_recent(cast(GtkPlacesSidebar*)this._cPtr, showRecent);
   }
 
   /**
@@ -594,7 +594,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowStarredLocation(bool showStarredLocation)
   {
-    gtk_places_sidebar_set_show_starred_location(cast(GtkPlacesSidebar*)cPtr, showStarredLocation);
+    gtk_places_sidebar_set_show_starred_location(cast(GtkPlacesSidebar*)this._cPtr, showStarredLocation);
   }
 
   /**
@@ -605,7 +605,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
   */
   void setShowTrash(bool showTrash)
   {
-    gtk_places_sidebar_set_show_trash(cast(GtkPlacesSidebar*)cPtr, showTrash);
+    gtk_places_sidebar_set_show_trash(cast(GtkPlacesSidebar*)this._cPtr, showTrash);
   }
 
   /**

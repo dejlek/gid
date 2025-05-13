@@ -48,16 +48,16 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_button_get_type != &gidSymbolNotFound ? gtk_font_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -171,7 +171,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
     GtkWidget* _cretval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
     _cretval = gtk_font_button_new_with_font(_fontname);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.font_button.FontButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_font_button_get_modal(cast(GtkFontButton*)cPtr);
+    _retval = gtk_font_button_get_modal(cast(GtkFontButton*)this._cPtr);
     return _retval;
   }
 
@@ -198,7 +198,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_font_button_get_title(cast(GtkFontButton*)cPtr);
+    _cretval = gtk_font_button_get_title(cast(GtkFontButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -212,7 +212,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   bool getUseFont()
   {
     bool _retval;
-    _retval = gtk_font_button_get_use_font(cast(GtkFontButton*)cPtr);
+    _retval = gtk_font_button_get_use_font(cast(GtkFontButton*)this._cPtr);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   bool getUseSize()
   {
     bool _retval;
-    _retval = gtk_font_button_get_use_size(cast(GtkFontButton*)cPtr);
+    _retval = gtk_font_button_get_use_size(cast(GtkFontButton*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   void setModal(bool modal)
   {
-    gtk_font_button_set_modal(cast(GtkFontButton*)cPtr, modal);
+    gtk_font_button_set_modal(cast(GtkFontButton*)this._cPtr, modal);
   }
 
   /**
@@ -253,7 +253,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_font_button_set_title(cast(GtkFontButton*)cPtr, _title);
+    gtk_font_button_set_title(cast(GtkFontButton*)this._cPtr, _title);
   }
 
   /**
@@ -267,7 +267,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   void setUseFont(bool useFont)
   {
-    gtk_font_button_set_use_font(cast(GtkFontButton*)cPtr, useFont);
+    gtk_font_button_set_use_font(cast(GtkFontButton*)this._cPtr, useFont);
   }
 
   /**
@@ -282,7 +282,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
   */
   void setUseSize(bool useSize)
   {
-    gtk_font_button_set_use_size(cast(GtkFontButton*)cPtr, useSize);
+    gtk_font_button_set_use_size(cast(GtkFontButton*)this._cPtr, useSize);
   }
 
   /**

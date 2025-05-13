@@ -438,7 +438,7 @@ struct GtkSourceBufferPrivate;
 struct GtkSourceCompletion
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkSourceCompletionPrivate* priv;
@@ -528,7 +528,7 @@ struct GtkSourceCompletionInfoPrivate;
 struct GtkSourceCompletionItem
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceCompletionItemPrivate* priv;
@@ -651,7 +651,7 @@ struct GtkSourceCompletionProviderIface
 struct GtkSourceCompletionWords
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceCompletionWordsPrivate* priv;
@@ -674,7 +674,7 @@ struct GtkSourceEncoding;
 struct GtkSourceFile
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceFilePrivate* priv;
@@ -694,7 +694,7 @@ struct GtkSourceFileClass
 struct GtkSourceFileLoader
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceFileLoaderPrivate* priv;
@@ -720,7 +720,7 @@ struct GtkSourceFilePrivate;
 struct GtkSourceFileSaver
 {
   /** */
-  ObjectC object;
+  GObject object;
 
   /** */
   GtkSourceFileSaverPrivate* priv;
@@ -743,7 +743,7 @@ struct GtkSourceFileSaverPrivate;
 struct GtkSourceGutter
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceGutterPrivate* priv;
@@ -865,7 +865,7 @@ struct GtkSourceGutterRendererTextPrivate;
 struct GtkSourceLanguage
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkSourceLanguagePrivate* priv;
@@ -885,7 +885,7 @@ struct GtkSourceLanguageClass
 struct GtkSourceLanguageManager
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkSourceLanguageManagerPrivate* priv;
@@ -938,7 +938,7 @@ struct GtkSourceMark
 struct GtkSourceMarkAttributes
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceMarkAttributesPrivate* priv;
@@ -974,7 +974,7 @@ struct GtkSourceMarkPrivate;
 struct GtkSourcePrintCompositor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GtkSourcePrintCompositorPrivate* priv;
@@ -997,7 +997,7 @@ struct GtkSourcePrintCompositorPrivate;
 struct GtkSourceRegion
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1030,7 +1030,7 @@ struct GtkSourceRegionIter
 struct GtkSourceSearchContext
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceSearchContextPrivate* priv;
@@ -1053,7 +1053,7 @@ struct GtkSourceSearchContextPrivate;
 struct GtkSourceSearchSettings
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceSearchSettingsPrivate* priv;
@@ -1076,7 +1076,7 @@ struct GtkSourceSearchSettingsPrivate;
 struct GtkSourceSpaceDrawer
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceSpaceDrawerPrivate* priv;
@@ -1105,7 +1105,7 @@ struct GtkSourceStyleClass;
 struct GtkSourceStyleScheme
 {
   /** */
-  ObjectC base;
+  GObject base;
 
   /** */
   GtkSourceStyleSchemePrivate* priv;
@@ -1178,7 +1178,7 @@ struct GtkSourceStyleSchemeClass
 struct GtkSourceStyleSchemeManager
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GtkSourceStyleSchemeManagerPrivate* priv;

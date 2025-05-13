@@ -72,16 +72,16 @@ class Frame : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_frame_get_type != &gidSymbolNotFound ? gtk_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -190,8 +190,8 @@ class Frame : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_frame_get_child(cast(GtkFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_frame_get_child(cast(GtkFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class Frame : gtk.widget.Widget
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_frame_get_label(cast(GtkFrame*)cPtr);
+    _cretval = gtk_frame_get_label(cast(GtkFrame*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -219,7 +219,7 @@ class Frame : gtk.widget.Widget
   float getLabelAlign()
   {
     float _retval;
-    _retval = gtk_frame_get_label_align(cast(GtkFrame*)cPtr);
+    _retval = gtk_frame_get_label_align(cast(GtkFrame*)this._cPtr);
     return _retval;
   }
 
@@ -230,8 +230,8 @@ class Frame : gtk.widget.Widget
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_frame_get_label_widget(cast(GtkFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Frame : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_frame_set_child(cast(GtkFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_frame_set_child(cast(GtkFrame*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -256,7 +256,7 @@ class Frame : gtk.widget.Widget
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_frame_set_label(cast(GtkFrame*)cPtr, _label);
+    gtk_frame_set_label(cast(GtkFrame*)this._cPtr, _label);
   }
 
   /**
@@ -271,7 +271,7 @@ class Frame : gtk.widget.Widget
   */
   void setLabelAlign(float xalign)
   {
-    gtk_frame_set_label_align(cast(GtkFrame*)cPtr, xalign);
+    gtk_frame_set_label_align(cast(GtkFrame*)this._cPtr, xalign);
   }
 
   /**
@@ -285,6 +285,6 @@ class Frame : gtk.widget.Widget
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_frame_set_label_widget(cast(GtkFrame*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_frame_set_label_widget(cast(GtkFrame*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
 }

@@ -53,16 +53,16 @@ class ColumnViewSorter : gtk.sorter.Sorter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_sorter_get_type != &gidSymbolNotFound ? gtk_column_view_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -110,7 +110,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   uint getNSortColumns()
   {
     uint _retval;
-    _retval = gtk_column_view_sorter_get_n_sort_columns(cast(GtkColumnViewSorter*)cPtr);
+    _retval = gtk_column_view_sorter_get_n_sort_columns(cast(GtkColumnViewSorter*)this._cPtr);
     return _retval;
   }
 
@@ -129,8 +129,8 @@ class ColumnViewSorter : gtk.sorter.Sorter
   gtk.column_view_column.ColumnViewColumn getNthSortColumn(uint position, out gtk.types.SortType sortOrder)
   {
     GtkColumnViewColumn* _cretval;
-    _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)cPtr, position, &sortOrder);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    _cretval = gtk_column_view_sorter_get_nth_sort_column(cast(GtkColumnViewSorter*)this._cPtr, position, &sortOrder);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,8 +144,8 @@ class ColumnViewSorter : gtk.sorter.Sorter
   gtk.column_view_column.ColumnViewColumn getPrimarySortColumn()
   {
     GtkColumnViewColumn* _cretval;
-    _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
+    _cretval = gtk_column_view_sorter_get_primary_sort_column(cast(GtkColumnViewSorter*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.column_view_column.ColumnViewColumn)(cast(GtkColumnViewColumn*)_cretval, No.Take);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class ColumnViewSorter : gtk.sorter.Sorter
   gtk.types.SortType getPrimarySortOrder()
   {
     GtkSortType _cretval;
-    _cretval = gtk_column_view_sorter_get_primary_sort_order(cast(GtkColumnViewSorter*)cPtr);
+    _cretval = gtk_column_view_sorter_get_primary_sort_order(cast(GtkColumnViewSorter*)this._cPtr);
     gtk.types.SortType _retval = cast(gtk.types.SortType)_cretval;
     return _retval;
   }

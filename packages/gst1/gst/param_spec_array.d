@@ -27,7 +27,7 @@ class ParamSpecArray
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class ParamSpecArray
   */
   @property gobject.param_spec.ParamSpec parentInstance()
   {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
   }
 
   /**
@@ -48,8 +48,8 @@ class ParamSpecArray
   */
   @property void parentInstance(gobject.param_spec.ParamSpec propval)
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
-    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)cPtr).parentInstance);
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
+    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).parentInstance);
   }
 
   /**
@@ -58,7 +58,7 @@ class ParamSpecArray
   */
   @property gobject.param_spec.ParamSpec elementSpec()
   {
-    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)cPtr).elementSpec);
+    return cToD!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
   }
 
   /**
@@ -68,7 +68,7 @@ class ParamSpecArray
   */
   @property void elementSpec(gobject.param_spec.ParamSpec propval)
   {
-    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)cPtr).elementSpec);
-    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)cPtr).elementSpec);
+    cValueFree!(gobject.param_spec.ParamSpec)(cast(void*)(cast(GstParamSpecArray*)this._cPtr).elementSpec);
+    dToC(propval, cast(void*)&(cast(GstParamSpecArray*)this._cPtr).elementSpec);
   }
 }

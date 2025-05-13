@@ -29,16 +29,16 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_subprocess_launcher_get_type != &gidSymbolNotFound ? g_subprocess_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void close()
   {
-    g_subprocess_launcher_close(cast(GSubprocessLauncher*)cPtr);
+    g_subprocess_launcher_close(cast(GSubprocessLauncher*)this._cPtr);
   }
 
   /**
@@ -98,7 +98,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _variable = variable.toCString(No.Alloc);
-    _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)cPtr, _variable);
+    _cretval = g_subprocess_launcher_getenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -116,7 +116,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   void setCwd(string cwd)
   {
     const(char)* _cwd = cwd.toCString(No.Alloc);
-    g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)cPtr, _cwd);
+    g_subprocess_launcher_set_cwd(cast(GSubprocessLauncher*)this._cPtr, _cwd);
   }
 
   /**
@@ -150,7 +150,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
       _tmpenv ~= s.toCString(No.Alloc);
     _tmpenv ~= null;
     char** _env = _tmpenv.ptr;
-    g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)cPtr, _env);
+    g_subprocess_launcher_set_environ(cast(GSubprocessLauncher*)this._cPtr, _env);
   }
 
   /**
@@ -172,7 +172,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void setFlags(gio.types.SubprocessFlags flags)
   {
-    g_subprocess_launcher_set_flags(cast(GSubprocessLauncher*)cPtr, flags);
+    g_subprocess_launcher_set_flags(cast(GSubprocessLauncher*)this._cPtr, flags);
   }
 
   /**
@@ -197,7 +197,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   void setStderrFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)cPtr, _path);
+    g_subprocess_launcher_set_stderr_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
   /**
@@ -218,7 +218,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   void setStdinFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)cPtr, _path);
+    g_subprocess_launcher_set_stdin_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
   /**
@@ -240,7 +240,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   void setStdoutFilePath(string path = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)cPtr, _path);
+    g_subprocess_launcher_set_stdout_file_path(cast(GSubprocessLauncher*)this._cPtr, _path);
   }
 
   /**
@@ -261,7 +261,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   {
     const(char)* _variable = variable.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    g_subprocess_launcher_setenv(cast(GSubprocessLauncher*)cPtr, _variable, _value, overwrite);
+    g_subprocess_launcher_setenv(cast(GSubprocessLauncher*)this._cPtr, _variable, _value, overwrite);
   }
 
   /**
@@ -282,10 +282,10 @@ class SubprocessLauncher : gobject.object.ObjectWrap
     const(char*)* _argv = _tmpargv.ptr;
 
     GError *_err;
-    _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)cPtr, _argv, &_err);
+    _cretval = g_subprocess_launcher_spawnv(cast(GSubprocessLauncher*)this._cPtr, _argv, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.subprocess.Subprocess)(cast(GSubprocess*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -309,7 +309,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void takeFd(int sourceFd, int targetFd)
   {
-    g_subprocess_launcher_take_fd(cast(GSubprocessLauncher*)cPtr, sourceFd, targetFd);
+    g_subprocess_launcher_take_fd(cast(GSubprocessLauncher*)this._cPtr, sourceFd, targetFd);
   }
 
   /**
@@ -335,7 +335,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void takeStderrFd(int fd)
   {
-    g_subprocess_launcher_take_stderr_fd(cast(GSubprocessLauncher*)cPtr, fd);
+    g_subprocess_launcher_take_stderr_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
 
   /**
@@ -363,7 +363,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void takeStdinFd(int fd)
   {
-    g_subprocess_launcher_take_stdin_fd(cast(GSubprocessLauncher*)cPtr, fd);
+    g_subprocess_launcher_take_stdin_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
 
   /**
@@ -390,7 +390,7 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   */
   void takeStdoutFd(int fd)
   {
-    g_subprocess_launcher_take_stdout_fd(cast(GSubprocessLauncher*)cPtr, fd);
+    g_subprocess_launcher_take_stdout_fd(cast(GSubprocessLauncher*)this._cPtr, fd);
   }
 
   /**
@@ -407,6 +407,6 @@ class SubprocessLauncher : gobject.object.ObjectWrap
   void unsetenv(string variable)
   {
     const(char)* _variable = variable.toCString(No.Alloc);
-    g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)cPtr, _variable);
+    g_subprocess_launcher_unsetenv(cast(GSubprocessLauncher*)this._cPtr, _variable);
   }
 }

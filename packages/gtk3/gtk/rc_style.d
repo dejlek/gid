@@ -23,16 +23,16 @@ class RcStyle : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_rc_style_get_type != &gidSymbolNotFound ? gtk_rc_style_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,8 +66,8 @@ class RcStyle : gobject.object.ObjectWrap
   gtk.rc_style.RcStyle copy()
   {
     GtkRcStyle* _cretval;
-    _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
+    _cretval = gtk_rc_style_copy(cast(GtkRcStyle*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, Yes.Take);
     return _retval;
   }
 }

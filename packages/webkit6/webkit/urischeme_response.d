@@ -33,16 +33,16 @@ class URISchemeResponse : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_scheme_response_get_type != &gidSymbolNotFound ? webkit_uri_scheme_response_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
   this(gio.input_stream.InputStream inputStream, long streamLength)
   {
     WebKitURISchemeResponse* _cretval;
-    _cretval = webkit_uri_scheme_response_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, streamLength);
+    _cretval = webkit_uri_scheme_response_new(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, streamLength);
     this(_cretval, Yes.Take);
   }
 
@@ -75,7 +75,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
   void setContentType(string contentType)
   {
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    webkit_uri_scheme_response_set_content_type(cast(WebKitURISchemeResponse*)cPtr, _contentType);
+    webkit_uri_scheme_response_set_content_type(cast(WebKitURISchemeResponse*)this._cPtr, _contentType);
   }
 
   /**
@@ -89,7 +89,7 @@ class URISchemeResponse : gobject.object.ObjectWrap
   */
   void setHttpHeaders(soup.message_headers.MessageHeaders headers)
   {
-    webkit_uri_scheme_response_set_http_headers(cast(WebKitURISchemeResponse*)cPtr, headers ? cast(SoupMessageHeaders*)headers.cPtr(Yes.Dup) : null);
+    webkit_uri_scheme_response_set_http_headers(cast(WebKitURISchemeResponse*)this._cPtr, headers ? cast(SoupMessageHeaders*)headers._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -104,6 +104,6 @@ class URISchemeResponse : gobject.object.ObjectWrap
   void setStatus(uint statusCode, string reasonPhrase = null)
   {
     const(char)* _reasonPhrase = reasonPhrase.toCString(No.Alloc);
-    webkit_uri_scheme_response_set_status(cast(WebKitURISchemeResponse*)cPtr, statusCode, _reasonPhrase);
+    webkit_uri_scheme_response_set_status(cast(WebKitURISchemeResponse*)this._cPtr, statusCode, _reasonPhrase);
   }
 }

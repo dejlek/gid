@@ -28,7 +28,7 @@ class VideoResampler
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class VideoResampler
   */
   @property int inSize()
   {
-    return (cast(GstVideoResampler*)cPtr).inSize;
+    return (cast(GstVideoResampler*)this._cPtr).inSize;
   }
 
   /**
@@ -49,7 +49,7 @@ class VideoResampler
   */
   @property void inSize(int propval)
   {
-    (cast(GstVideoResampler*)cPtr).inSize = propval;
+    (cast(GstVideoResampler*)this._cPtr).inSize = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class VideoResampler
   */
   @property int outSize()
   {
-    return (cast(GstVideoResampler*)cPtr).outSize;
+    return (cast(GstVideoResampler*)this._cPtr).outSize;
   }
 
   /**
@@ -68,7 +68,7 @@ class VideoResampler
   */
   @property void outSize(int propval)
   {
-    (cast(GstVideoResampler*)cPtr).outSize = propval;
+    (cast(GstVideoResampler*)this._cPtr).outSize = propval;
   }
 
   /**
@@ -77,7 +77,7 @@ class VideoResampler
   */
   @property uint maxTaps()
   {
-    return (cast(GstVideoResampler*)cPtr).maxTaps;
+    return (cast(GstVideoResampler*)this._cPtr).maxTaps;
   }
 
   /**
@@ -87,7 +87,7 @@ class VideoResampler
   */
   @property void maxTaps(uint propval)
   {
-    (cast(GstVideoResampler*)cPtr).maxTaps = propval;
+    (cast(GstVideoResampler*)this._cPtr).maxTaps = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class VideoResampler
   */
   @property uint nPhases()
   {
-    return (cast(GstVideoResampler*)cPtr).nPhases;
+    return (cast(GstVideoResampler*)this._cPtr).nPhases;
   }
 
   /**
@@ -106,7 +106,7 @@ class VideoResampler
   */
   @property void nPhases(uint propval)
   {
-    (cast(GstVideoResampler*)cPtr).nPhases = propval;
+    (cast(GstVideoResampler*)this._cPtr).nPhases = propval;
   }
 
   /**
@@ -114,14 +114,14 @@ class VideoResampler
   */
   void clear()
   {
-    gst_video_resampler_clear(cast(GstVideoResampler*)cPtr);
+    gst_video_resampler_clear(cast(GstVideoResampler*)this._cPtr);
   }
 
   /** */
   bool init_(gstvideo.types.VideoResamplerMethod method, gstvideo.types.VideoResamplerFlags flags, uint nPhases, uint nTaps, double shift, uint inSize, uint outSize, gst.structure.Structure options)
   {
     bool _retval;
-    _retval = gst_video_resampler_init(cast(GstVideoResampler*)cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options.cPtr(No.Dup) : null);
+    _retval = gst_video_resampler_init(cast(GstVideoResampler*)this._cPtr, method, flags, nPhases, nTaps, shift, inSize, outSize, options ? cast(GstStructure*)options._cPtr(No.Dup) : null);
     return _retval;
   }
 }

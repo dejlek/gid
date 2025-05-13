@@ -27,7 +27,7 @@ class EventSetting
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventSetting
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventSetting*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventSetting*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventSetting
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventSetting*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventSetting*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventSetting
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventSetting
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventSetting*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSetting*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventSetting
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventSetting*)cPtr).sendEvent;
+    return (cast(GdkEventSetting*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventSetting
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventSetting*)cPtr).sendEvent = propval;
+    (cast(GdkEventSetting*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class EventSetting
   */
   @property gdk.types.SettingAction action()
   {
-    return cast(gdk.types.SettingAction)(cast(GdkEventSetting*)cPtr).action;
+    return cast(gdk.types.SettingAction)(cast(GdkEventSetting*)this._cPtr).action;
   }
 
   /**
@@ -108,7 +108,7 @@ class EventSetting
   */
   @property void action(gdk.types.SettingAction propval)
   {
-    (cast(GdkEventSetting*)cPtr).action = cast(GdkSettingAction)propval;
+    (cast(GdkEventSetting*)this._cPtr).action = cast(GdkSettingAction)propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class EventSetting
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GdkEventSetting*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
   }
 
   /**
@@ -127,7 +127,7 @@ class EventSetting
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkEventSetting*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GdkEventSetting*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GdkEventSetting*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GdkEventSetting*)this._cPtr).name);
   }
 }

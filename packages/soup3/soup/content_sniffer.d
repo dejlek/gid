@@ -31,16 +31,16 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_content_sniffer_get_type != &gidSymbolNotFound ? soup_content_sniffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class ContentSniffer : gobject.object.ObjectWrap, soup.session_feature.SessionFe
   {
     char* _cretval;
     GHashTable* _params;
-    _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)cPtr, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_params);
+    _cretval = soup_content_sniffer_sniff(cast(SoupContentSniffer*)this._cPtr, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null, &_params);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     params = gHashTableToD!(string, string, GidOwnership.Full)(_params);
     return _retval;

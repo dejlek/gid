@@ -20,16 +20,16 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_binary_array_builder_get_type != &gidSymbolNotFound ? garrow_binary_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append(cast(GArrowBinaryArrayBuilder*)cPtr, _value, _length, &_err);
+    _retval = garrow_binary_array_builder_append(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -72,7 +72,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _value = cast(const(ubyte)*)value.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_value(cast(GArrowBinaryArrayBuilder*)cPtr, _value, _length, &_err);
+    _retval = garrow_binary_array_builder_append_value(cast(GArrowBinaryArrayBuilder*)this._cPtr, _value, _length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -83,7 +83,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)cPtr, value ? cast(GBytes*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_binary_array_builder_append_value_bytes(cast(GArrowBinaryArrayBuilder*)this._cPtr, value ? cast(GBytes*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -111,7 +111,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     GBytes*[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= cast(GBytes*)obj.cPtr;
+      _tmpvalues ~= cast(GBytes*)obj._cPtr;
     GBytes** _values = _tmpvalues.ptr;
 
     long _isValidsLength;
@@ -120,7 +120,7 @@ class BinaryArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_binary_array_builder_append_values(cast(GArrowBinaryArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_binary_array_builder_append_values(cast(GArrowBinaryArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

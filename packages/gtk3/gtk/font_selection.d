@@ -28,16 +28,16 @@ class FontSelection : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_selection_get_type != &gidSymbolNotFound ? gtk_font_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,8 +95,8 @@ class FontSelection : gtk.box.Box
   pango.font_face.FontFace getFace()
   {
     PangoFontFace* _cretval;
-    _cretval = gtk_font_selection_get_face(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_face(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_face.FontFace)(cast(PangoFontFace*)_cretval, No.Take);
     return _retval;
   }
 
@@ -110,8 +110,8 @@ class FontSelection : gtk.box.Box
   gtk.widget.Widget getFaceList()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_get_face_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_face_list(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,8 +127,8 @@ class FontSelection : gtk.box.Box
   pango.font_family.FontFamily getFamily()
   {
     PangoFontFamily* _cretval;
-    _cretval = gtk_font_selection_get_family(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_family(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(cast(PangoFontFamily*)_cretval, No.Take);
     return _retval;
   }
 
@@ -142,8 +142,8 @@ class FontSelection : gtk.box.Box
   gtk.widget.Widget getFamilyList()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_get_family_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_family_list(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class FontSelection : gtk.box.Box
   string getFontName()
   {
     char* _cretval;
-    _cretval = gtk_font_selection_get_font_name(cast(GtkFontSelection*)cPtr);
+    _cretval = gtk_font_selection_get_font_name(cast(GtkFontSelection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -178,8 +178,8 @@ class FontSelection : gtk.box.Box
   gtk.widget.Widget getPreviewEntry()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_get_preview_entry(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_preview_entry(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class FontSelection : gtk.box.Box
   string getPreviewText()
   {
     const(char)* _cretval;
-    _cretval = gtk_font_selection_get_preview_text(cast(GtkFontSelection*)cPtr);
+    _cretval = gtk_font_selection_get_preview_text(cast(GtkFontSelection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -209,7 +209,7 @@ class FontSelection : gtk.box.Box
   int getSize()
   {
     int _retval;
-    _retval = gtk_font_selection_get_size(cast(GtkFontSelection*)cPtr);
+    _retval = gtk_font_selection_get_size(cast(GtkFontSelection*)this._cPtr);
     return _retval;
   }
 
@@ -223,8 +223,8 @@ class FontSelection : gtk.box.Box
   gtk.widget.Widget getSizeEntry()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_get_size_entry(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_size_entry(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,8 +237,8 @@ class FontSelection : gtk.box.Box
   gtk.widget.Widget getSizeList()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_selection_get_size_list(cast(GtkFontSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_font_selection_get_size_list(cast(GtkFontSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class FontSelection : gtk.box.Box
   {
     bool _retval;
     const(char)* _fontname = fontname.toCString(No.Alloc);
-    _retval = gtk_font_selection_set_font_name(cast(GtkFontSelection*)cPtr, _fontname);
+    _retval = gtk_font_selection_set_font_name(cast(GtkFontSelection*)this._cPtr, _fontname);
     return _retval;
   }
 
@@ -277,6 +277,6 @@ class FontSelection : gtk.box.Box
   void setPreviewText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_font_selection_set_preview_text(cast(GtkFontSelection*)cPtr, _text);
+    gtk_font_selection_set_preview_text(cast(GtkFontSelection*)this._cPtr, _text);
   }
 }

@@ -20,7 +20,7 @@ import gsk.types;
 gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
-  _cretval = gsk_value_dup_render_node(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gsk_value_dup_render_node(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -35,7 +35,7 @@ gsk.render_node.RenderNode valueDupRenderNode(gobject.value.Value value)
 gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value)
 {
   GskRenderNode* _cretval;
-  _cretval = gsk_value_get_render_node(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gsk_value_get_render_node(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -51,7 +51,7 @@ gsk.render_node.RenderNode valueGetRenderNode(gobject.value.Value value)
 */
 void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node)
 {
-  gsk_value_set_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(No.Dup) : null);
+  gsk_value_set_render_node(value ? cast(GValue*)value._cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node._cPtr(No.Dup) : null);
 }
 
 /**
@@ -65,5 +65,5 @@ void valueSetRenderNode(gobject.value.Value value, gsk.render_node.RenderNode no
 */
 void valueTakeRenderNode(gobject.value.Value value, gsk.render_node.RenderNode node = null)
 {
-  gsk_value_take_render_node(value ? cast(GValue*)value.cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node.cPtr(Yes.Dup) : null);
+  gsk_value_take_render_node(value ? cast(GValue*)value._cPtr(No.Dup) : null, node ? cast(GskRenderNode*)node._cPtr(Yes.Dup) : null);
 }

@@ -216,7 +216,7 @@ template ToplevelT()
   */
   override void beginMove(gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_move(cast(GdkToplevel*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_move(cast(GdkToplevel*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -235,7 +235,7 @@ template ToplevelT()
   */
   override void beginResize(gdk.types.SurfaceEdge edge, gdk.device.Device device, int button, double x, double y, uint timestamp)
   {
-    gdk_toplevel_begin_resize(cast(GdkToplevel*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, x, y, timestamp);
+    gdk_toplevel_begin_resize(cast(GdkToplevel*)this._cPtr, edge, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, x, y, timestamp);
   }
 
   /**
@@ -250,7 +250,7 @@ template ToplevelT()
   */
   override void focus(uint timestamp)
   {
-    gdk_toplevel_focus(cast(GdkToplevel*)cPtr, timestamp);
+    gdk_toplevel_focus(cast(GdkToplevel*)this._cPtr, timestamp);
   }
 
   /**
@@ -261,7 +261,7 @@ template ToplevelT()
   override gdk.types.ToplevelState getState()
   {
     GdkToplevelState _cretval;
-    _cretval = gdk_toplevel_get_state(cast(GdkToplevel*)cPtr);
+    _cretval = gdk_toplevel_get_state(cast(GdkToplevel*)this._cPtr);
     gdk.types.ToplevelState _retval = cast(gdk.types.ToplevelState)_cretval;
     return _retval;
   }
@@ -295,7 +295,7 @@ template ToplevelT()
   */
   override void inhibitSystemShortcuts(gdk.event.Event event = null)
   {
-    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    gdk_toplevel_inhibit_system_shortcuts(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
   }
 
   /**
@@ -307,7 +307,7 @@ template ToplevelT()
   override bool lower()
   {
     bool _retval;
-    _retval = gdk_toplevel_lower(cast(GdkToplevel*)cPtr);
+    _retval = gdk_toplevel_lower(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ template ToplevelT()
   override bool minimize()
   {
     bool _retval;
-    _retval = gdk_toplevel_minimize(cast(GdkToplevel*)cPtr);
+    _retval = gdk_toplevel_minimize(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ template ToplevelT()
   */
   override void present(gdk.toplevel_layout.ToplevelLayout layout)
   {
-    gdk_toplevel_present(cast(GdkToplevel*)cPtr, layout ? cast(GdkToplevelLayout*)layout.cPtr(No.Dup) : null);
+    gdk_toplevel_present(cast(GdkToplevel*)this._cPtr, layout ? cast(GdkToplevelLayout*)layout._cPtr(No.Dup) : null);
   }
 
   /**
@@ -353,7 +353,7 @@ template ToplevelT()
   */
   override void restoreSystemShortcuts()
   {
-    gdk_toplevel_restore_system_shortcuts(cast(GdkToplevel*)cPtr);
+    gdk_toplevel_restore_system_shortcuts(cast(GdkToplevel*)this._cPtr);
   }
 
   /**
@@ -368,7 +368,7 @@ template ToplevelT()
   */
   override void setDecorated(bool decorated)
   {
-    gdk_toplevel_set_decorated(cast(GdkToplevel*)cPtr, decorated);
+    gdk_toplevel_set_decorated(cast(GdkToplevel*)this._cPtr, decorated);
   }
 
   /**
@@ -382,7 +382,7 @@ template ToplevelT()
   */
   override void setDeletable(bool deletable)
   {
-    gdk_toplevel_set_deletable(cast(GdkToplevel*)cPtr, deletable);
+    gdk_toplevel_set_deletable(cast(GdkToplevel*)this._cPtr, deletable);
   }
 
   /**
@@ -403,7 +403,7 @@ template ToplevelT()
   {
     auto _surfaces = gListFromD!(gdk.texture.Texture)(surfaces);
     scope(exit) containerFree!(GList*, gdk.texture.Texture, GidOwnership.None)(_surfaces);
-    gdk_toplevel_set_icon_list(cast(GdkToplevel*)cPtr, _surfaces);
+    gdk_toplevel_set_icon_list(cast(GdkToplevel*)this._cPtr, _surfaces);
   }
 
   /**
@@ -422,7 +422,7 @@ template ToplevelT()
   */
   override void setModal(bool modal)
   {
-    gdk_toplevel_set_modal(cast(GdkToplevel*)cPtr, modal);
+    gdk_toplevel_set_modal(cast(GdkToplevel*)this._cPtr, modal);
   }
 
   /**
@@ -438,7 +438,7 @@ template ToplevelT()
   override void setStartupId(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gdk_toplevel_set_startup_id(cast(GdkToplevel*)cPtr, _startupId);
+    gdk_toplevel_set_startup_id(cast(GdkToplevel*)this._cPtr, _startupId);
   }
 
   /**
@@ -453,7 +453,7 @@ template ToplevelT()
   override void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gdk_toplevel_set_title(cast(GdkToplevel*)cPtr, _title);
+    gdk_toplevel_set_title(cast(GdkToplevel*)this._cPtr, _title);
   }
 
   /**
@@ -472,7 +472,7 @@ template ToplevelT()
   */
   override void setTransientFor(gdk.surface.Surface parent)
   {
-    gdk_toplevel_set_transient_for(cast(GdkToplevel*)cPtr, parent ? cast(GdkSurface*)parent.cPtr(No.Dup) : null);
+    gdk_toplevel_set_transient_for(cast(GdkToplevel*)this._cPtr, parent ? cast(GdkSurface*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -490,7 +490,7 @@ template ToplevelT()
   override bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null);
+    _retval = gdk_toplevel_show_window_menu(cast(GdkToplevel*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ template ToplevelT()
   override bool supportsEdgeConstraints()
   {
     bool _retval;
-    _retval = gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)cPtr);
+    _retval = gdk_toplevel_supports_edge_constraints(cast(GdkToplevel*)this._cPtr);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ template ToplevelT()
   override bool titlebarGesture(gdk.types.TitlebarGesture gesture)
   {
     bool _retval;
-    _retval = gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)cPtr, gesture);
+    _retval = gdk_toplevel_titlebar_gesture(cast(GdkToplevel*)this._cPtr, gesture);
     return _retval;
   }
 

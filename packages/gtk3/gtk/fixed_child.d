@@ -25,7 +25,7 @@ class FixedChild
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -33,37 +33,37 @@ class FixedChild
   /** */
   @property gtk.widget.Widget widget()
   {
-    return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)cPtr).widget);
+    return cToD!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)this._cPtr).widget);
   }
 
   /** */
   @property void widget(gtk.widget.Widget propval)
   {
-    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)cPtr).widget);
-    dToC(propval, cast(void*)&(cast(GtkFixedChild*)cPtr).widget);
+    cValueFree!(gtk.widget.Widget)(cast(void*)(cast(GtkFixedChild*)this._cPtr).widget);
+    dToC(propval, cast(void*)&(cast(GtkFixedChild*)this._cPtr).widget);
   }
 
   /** */
   @property int x()
   {
-    return (cast(GtkFixedChild*)cPtr).x;
+    return (cast(GtkFixedChild*)this._cPtr).x;
   }
 
   /** */
   @property void x(int propval)
   {
-    (cast(GtkFixedChild*)cPtr).x = propval;
+    (cast(GtkFixedChild*)this._cPtr).x = propval;
   }
 
   /** */
   @property int y()
   {
-    return (cast(GtkFixedChild*)cPtr).y;
+    return (cast(GtkFixedChild*)this._cPtr).y;
   }
 
   /** */
   @property void y(int propval)
   {
-    (cast(GtkFixedChild*)cPtr).y = propval;
+    (cast(GtkFixedChild*)this._cPtr).y = propval;
   }
 }

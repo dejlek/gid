@@ -66,16 +66,16 @@ class Notification : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_notification_get_type != &gidSymbolNotFound ? g_notification_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -122,7 +122,7 @@ class Notification : gobject.object.ObjectWrap
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
-    g_notification_add_button(cast(GNotification*)cPtr, _label, _detailedAction);
+    g_notification_add_button(cast(GNotification*)this._cPtr, _label, _detailedAction);
   }
 
   /**
@@ -141,7 +141,7 @@ class Notification : gobject.object.ObjectWrap
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
-    g_notification_add_button_with_target_value(cast(GNotification*)cPtr, _label, _action, target ? cast(GVariant*)target.cPtr(No.Dup) : null);
+    g_notification_add_button_with_target_value(cast(GNotification*)this._cPtr, _label, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -153,7 +153,7 @@ class Notification : gobject.object.ObjectWrap
   void setBody(string body_ = null)
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
-    g_notification_set_body(cast(GNotification*)cPtr, _body_);
+    g_notification_set_body(cast(GNotification*)this._cPtr, _body_);
   }
 
   /**
@@ -170,7 +170,7 @@ class Notification : gobject.object.ObjectWrap
   void setCategory(string category = null)
   {
     const(char)* _category = category.toCString(No.Alloc);
-    g_notification_set_category(cast(GNotification*)cPtr, _category);
+    g_notification_set_category(cast(GNotification*)this._cPtr, _category);
   }
 
   /**
@@ -192,7 +192,7 @@ class Notification : gobject.object.ObjectWrap
   void setDefaultAction(string detailedAction)
   {
     const(char)* _detailedAction = detailedAction.toCString(No.Alloc);
-    g_notification_set_default_action(cast(GNotification*)cPtr, _detailedAction);
+    g_notification_set_default_action(cast(GNotification*)this._cPtr, _detailedAction);
   }
 
   /**
@@ -213,7 +213,7 @@ class Notification : gobject.object.ObjectWrap
   void setDefaultActionAndTarget(string action, glib.variant.Variant target = null)
   {
     const(char)* _action = action.toCString(No.Alloc);
-    g_notification_set_default_action_and_target_value(cast(GNotification*)cPtr, _action, target ? cast(GVariant*)target.cPtr(No.Dup) : null);
+    g_notification_set_default_action_and_target_value(cast(GNotification*)this._cPtr, _action, target ? cast(GVariant*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -224,7 +224,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setIcon(gio.icon.Icon icon)
   {
-    g_notification_set_icon(cast(GNotification*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    g_notification_set_icon(cast(GNotification*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -236,7 +236,7 @@ class Notification : gobject.object.ObjectWrap
   */
   void setPriority(gio.types.NotificationPriority priority)
   {
-    g_notification_set_priority(cast(GNotification*)cPtr, priority);
+    g_notification_set_priority(cast(GNotification*)this._cPtr, priority);
   }
 
   /**
@@ -248,7 +248,7 @@ class Notification : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    g_notification_set_title(cast(GNotification*)cPtr, _title);
+    g_notification_set_title(cast(GNotification*)this._cPtr, _title);
   }
 
   /**
@@ -262,6 +262,6 @@ class Notification : gobject.object.ObjectWrap
   */
   void setUrgent(bool urgent)
   {
-    g_notification_set_urgent(cast(GNotification*)cPtr, urgent);
+    g_notification_set_urgent(cast(GNotification*)this._cPtr, urgent);
   }
 }

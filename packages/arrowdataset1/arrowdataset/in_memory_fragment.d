@@ -20,16 +20,16 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_in_memory_fragment_get_type != &gidSymbolNotFound ? gadataset_in_memory_fragment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,9 +48,9 @@ class InMemoryFragment : arrowdataset.fragment.Fragment
 
     GArrowRecordBatch*[] _tmprecordBatches;
     foreach (obj; recordBatches)
-      _tmprecordBatches ~= obj ? cast(GArrowRecordBatch*)obj.cPtr : null;
+      _tmprecordBatches ~= obj ? cast(GArrowRecordBatch*)obj._cPtr : null;
     GArrowRecordBatch** _recordBatches = cast(GArrowRecordBatch**)_tmprecordBatches.ptr;
-    _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, _recordBatches, _nRecordBatches);
+    _cretval = gadataset_in_memory_fragment_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, _recordBatches, _nRecordBatches);
     this(_cretval, Yes.Take);
   }
 }

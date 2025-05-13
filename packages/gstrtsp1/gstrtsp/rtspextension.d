@@ -22,7 +22,7 @@ interface RTSPExtension
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_extension_get_type != &gidSymbolNotFound ? gst_rtsp_extension_get_type() : cast(GType)0;

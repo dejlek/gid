@@ -26,7 +26,7 @@ class AudioFormatInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class AudioFormatInfo
   */
   @property gstaudio.types.AudioFormat format()
   {
-    return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)cPtr).format;
+    return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)this._cPtr).format;
   }
 
   /**
@@ -47,7 +47,7 @@ class AudioFormatInfo
   */
   @property void format(gstaudio.types.AudioFormat propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).format = cast(GstAudioFormat)propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).format = cast(GstAudioFormat)propval;
   }
 
   /**
@@ -56,7 +56,7 @@ class AudioFormatInfo
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).name);
   }
 
   /**
@@ -66,8 +66,8 @@ class AudioFormatInfo
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).name);
   }
 
   /**
@@ -76,7 +76,7 @@ class AudioFormatInfo
   */
   @property string description()
   {
-    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
+    return cToD!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
   }
 
   /**
@@ -86,8 +86,8 @@ class AudioFormatInfo
   */
   @property void description(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)cPtr).description);
+    cValueFree!(string)(cast(void*)(cast(GstAudioFormatInfo*)this._cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstAudioFormatInfo*)this._cPtr).description);
   }
 
   /**
@@ -96,7 +96,7 @@ class AudioFormatInfo
   */
   @property gstaudio.types.AudioFormatFlags flags()
   {
-    return cast(gstaudio.types.AudioFormatFlags)(cast(GstAudioFormatInfo*)cPtr).flags;
+    return cast(gstaudio.types.AudioFormatFlags)(cast(GstAudioFormatInfo*)this._cPtr).flags;
   }
 
   /**
@@ -106,7 +106,7 @@ class AudioFormatInfo
   */
   @property void flags(gstaudio.types.AudioFormatFlags propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).flags = cast(GstAudioFormatFlags)propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).flags = cast(GstAudioFormatFlags)propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class AudioFormatInfo
   */
   @property int endianness()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).endianness;
+    return (cast(GstAudioFormatInfo*)this._cPtr).endianness;
   }
 
   /**
@@ -125,7 +125,7 @@ class AudioFormatInfo
   */
   @property void endianness(int propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).endianness = propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).endianness = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class AudioFormatInfo
   */
   @property int width()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).width;
+    return (cast(GstAudioFormatInfo*)this._cPtr).width;
   }
 
   /**
@@ -144,7 +144,7 @@ class AudioFormatInfo
   */
   @property void width(int propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).width = propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).width = propval;
   }
 
   /**
@@ -153,7 +153,7 @@ class AudioFormatInfo
   */
   @property int depth()
   {
-    return (cast(GstAudioFormatInfo*)cPtr).depth;
+    return (cast(GstAudioFormatInfo*)this._cPtr).depth;
   }
 
   /**
@@ -163,7 +163,7 @@ class AudioFormatInfo
   */
   @property void depth(int propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).depth = propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).depth = propval;
   }
 
   /**
@@ -172,7 +172,7 @@ class AudioFormatInfo
   */
   @property gstaudio.types.AudioFormat unpackFormat()
   {
-    return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)cPtr).unpackFormat;
+    return cast(gstaudio.types.AudioFormat)(cast(GstAudioFormatInfo*)this._cPtr).unpackFormat;
   }
 
   /**
@@ -182,7 +182,7 @@ class AudioFormatInfo
   */
   @property void unpackFormat(gstaudio.types.AudioFormat propval)
   {
-    (cast(GstAudioFormatInfo*)cPtr).unpackFormat = cast(GstAudioFormat)propval;
+    (cast(GstAudioFormatInfo*)this._cPtr).unpackFormat = cast(GstAudioFormat)propval;
   }
 
   /**
@@ -199,6 +199,6 @@ class AudioFormatInfo
       _length = cast(size_t)dest.length;
 
     auto _dest = cast(void*)dest.ptr;
-    gst_audio_format_info_fill_silence(cast(const(GstAudioFormatInfo)*)cPtr, _dest, _length);
+    gst_audio_format_info_fill_silence(cast(const(GstAudioFormatInfo)*)this._cPtr, _dest, _length);
   }
 }

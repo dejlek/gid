@@ -25,7 +25,7 @@ class SettingsValue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class SettingsValue
   */
   @property string origin()
   {
-    return cToD!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
+    return cToD!(string)(cast(void*)(cast(GtkSettingsValue*)this._cPtr).origin);
   }
 
   /**
@@ -48,8 +48,8 @@ class SettingsValue
   */
   @property void origin(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkSettingsValue*)cPtr).origin);
-    dToC(propval, cast(void*)&(cast(GtkSettingsValue*)cPtr).origin);
+    cValueFree!(string)(cast(void*)(cast(GtkSettingsValue*)this._cPtr).origin);
+    dToC(propval, cast(void*)&(cast(GtkSettingsValue*)this._cPtr).origin);
   }
 
   /**
@@ -59,6 +59,6 @@ class SettingsValue
   */
   @property gobject.value.Value value()
   {
-    return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkSettingsValue*)cPtr).value);
+    return cToD!(gobject.value.Value)(cast(void*)&(cast(GtkSettingsValue*)this._cPtr).value);
   }
 }

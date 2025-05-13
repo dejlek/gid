@@ -24,22 +24,22 @@ class ExpressionWatch : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expression_watch_get_type != &gidSymbolNotFound ? gtk_expression_watch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class ExpressionWatch : gobject.boxed.Boxed
   bool evaluate(gobject.value.Value value)
   {
     bool _retval;
-    _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)cPtr, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    _retval = gtk_expression_watch_evaluate(cast(GtkExpressionWatch*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -74,6 +74,6 @@ class ExpressionWatch : gobject.boxed.Boxed
   */
   void unwatch()
   {
-    gtk_expression_watch_unwatch(cast(GtkExpressionWatch*)cPtr);
+    gtk_expression_watch_unwatch(cast(GtkExpressionWatch*)this._cPtr);
   }
 }

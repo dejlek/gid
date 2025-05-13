@@ -26,16 +26,16 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_icon_get_type != &gidSymbolNotFound ? g_bytes_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
   this(glib.bytes.Bytes bytes)
   {
     GIcon* _cretval;
-    _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    _cretval = g_bytes_icon_new(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -72,7 +72,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
   glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
-    _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)cPtr);
+    _cretval = g_bytes_icon_get_bytes(cast(GBytesIcon*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -57,16 +57,16 @@ class PreferencesGroup : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_group_get_type != &gidSymbolNotFound ? adw_preferences_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -161,7 +161,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   void add(gtk.widget.Widget child)
   {
-    adw_preferences_group_add(cast(AdwPreferencesGroup*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_preferences_group_add(cast(AdwPreferencesGroup*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class PreferencesGroup : gtk.widget.Widget
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_group_get_description(cast(AdwPreferencesGroup*)cPtr);
+    _cretval = adw_preferences_group_get_description(cast(AdwPreferencesGroup*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,8 +183,8 @@ class PreferencesGroup : gtk.widget.Widget
   gtk.widget.Widget getHeaderSuffix()
   {
     GtkWidget* _cretval;
-    _cretval = adw_preferences_group_get_header_suffix(cast(AdwPreferencesGroup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_preferences_group_get_header_suffix(cast(AdwPreferencesGroup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class PreferencesGroup : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_group_get_title(cast(AdwPreferencesGroup*)cPtr);
+    _cretval = adw_preferences_group_get_title(cast(AdwPreferencesGroup*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -208,7 +208,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_preferences_group_remove(cast(AdwPreferencesGroup*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_preferences_group_remove(cast(AdwPreferencesGroup*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,7 +220,7 @@ class PreferencesGroup : gtk.widget.Widget
   void setDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    adw_preferences_group_set_description(cast(AdwPreferencesGroup*)cPtr, _description);
+    adw_preferences_group_set_description(cast(AdwPreferencesGroup*)this._cPtr, _description);
   }
 
   /**
@@ -235,7 +235,7 @@ class PreferencesGroup : gtk.widget.Widget
   */
   void setHeaderSuffix(gtk.widget.Widget suffix = null)
   {
-    adw_preferences_group_set_header_suffix(cast(AdwPreferencesGroup*)cPtr, suffix ? cast(GtkWidget*)suffix.cPtr(No.Dup) : null);
+    adw_preferences_group_set_header_suffix(cast(AdwPreferencesGroup*)this._cPtr, suffix ? cast(GtkWidget*)suffix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -247,6 +247,6 @@ class PreferencesGroup : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_preferences_group_set_title(cast(AdwPreferencesGroup*)cPtr, _title);
+    adw_preferences_group_set_title(cast(AdwPreferencesGroup*)this._cPtr, _title);
   }
 }

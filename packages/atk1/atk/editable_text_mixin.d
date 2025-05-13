@@ -33,7 +33,7 @@ template EditableTextT()
   */
   override void copyText(int startPos, int endPos)
   {
-    atk_editable_text_copy_text(cast(AtkEditableText*)cPtr, startPos, endPos);
+    atk_editable_text_copy_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
 
   /**
@@ -46,7 +46,7 @@ template EditableTextT()
   */
   override void cutText(int startPos, int endPos)
   {
-    atk_editable_text_cut_text(cast(AtkEditableText*)cPtr, startPos, endPos);
+    atk_editable_text_cut_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
 
   /**
@@ -58,7 +58,7 @@ template EditableTextT()
   */
   override void deleteText(int startPos, int endPos)
   {
-    atk_editable_text_delete_text(cast(AtkEditableText*)cPtr, startPos, endPos);
+    atk_editable_text_delete_text(cast(AtkEditableText*)this._cPtr, startPos, endPos);
   }
 
   /**
@@ -74,7 +74,7 @@ template EditableTextT()
   override void insertText(string string_, int length, ref int position)
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
-    atk_editable_text_insert_text(cast(AtkEditableText*)cPtr, _string_, length, cast(int*)&position);
+    atk_editable_text_insert_text(cast(AtkEditableText*)this._cPtr, _string_, length, cast(int*)&position);
   }
 
   /**
@@ -85,7 +85,7 @@ template EditableTextT()
   */
   override void pasteText(int position)
   {
-    atk_editable_text_paste_text(cast(AtkEditableText*)cPtr, position);
+    atk_editable_text_paste_text(cast(AtkEditableText*)this._cPtr, position);
   }
 
   /**
@@ -97,6 +97,6 @@ template EditableTextT()
   override void setTextContents(string string_)
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
-    atk_editable_text_set_text_contents(cast(AtkEditableText*)cPtr, _string_);
+    atk_editable_text_set_text_contents(cast(AtkEditableText*)this._cPtr, _string_);
   }
 }

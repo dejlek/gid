@@ -24,22 +24,22 @@ class MainContext : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_main_context_get_type != &gidSymbolNotFound ? g_main_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,7 @@ class MainContext : gobject.boxed.Boxed
   bool acquire()
   {
     bool _retval;
-    _retval = g_main_context_acquire(cast(GMainContext*)cPtr);
+    _retval = g_main_context_acquire(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void addPoll(glib.types.PollFD fd, int priority)
   {
-    g_main_context_add_poll(cast(GMainContext*)cPtr, &fd, priority);
+    g_main_context_add_poll(cast(GMainContext*)this._cPtr, &fd, priority);
   }
 
   /**
@@ -142,7 +142,7 @@ class MainContext : gobject.boxed.Boxed
       _nFds = cast(int)fds.length;
 
     auto _fds = cast(GPollFD*)fds.ptr;
-    _retval = g_main_context_check(cast(GMainContext*)cPtr, maxPriority, _fds, _nFds);
+    _retval = g_main_context_check(cast(GMainContext*)this._cPtr, maxPriority, _fds, _nFds);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void dispatch()
   {
-    g_main_context_dispatch(cast(GMainContext*)cPtr);
+    g_main_context_dispatch(cast(GMainContext*)this._cPtr);
   }
 
   /**
@@ -173,7 +173,7 @@ class MainContext : gobject.boxed.Boxed
   glib.source.Source findSourceByFuncsUserData(glib.types.SourceFuncs funcs, void* userData = null)
   {
     GSource* _cretval;
-    _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)cPtr, &funcs, userData);
+    _cretval = g_main_context_find_source_by_funcs_user_data(cast(GMainContext*)this._cPtr, &funcs, userData);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -199,7 +199,7 @@ class MainContext : gobject.boxed.Boxed
   glib.source.Source findSourceById(uint sourceId)
   {
     GSource* _cretval;
-    _cretval = g_main_context_find_source_by_id(cast(GMainContext*)cPtr, sourceId);
+    _cretval = g_main_context_find_source_by_id(cast(GMainContext*)this._cPtr, sourceId);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -216,7 +216,7 @@ class MainContext : gobject.boxed.Boxed
   glib.source.Source findSourceByUserData(void* userData = null)
   {
     GSource* _cretval;
-    _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)cPtr, userData);
+    _cretval = g_main_context_find_source_by_user_data(cast(GMainContext*)this._cPtr, userData);
     auto _retval = _cretval ? new glib.source.Source(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -249,7 +249,7 @@ class MainContext : gobject.boxed.Boxed
 
     auto _function_ = function_ ? freezeDelegate(cast(void*)&function_) : null;
     GDestroyNotify _function_DestroyCB = function_ ? &thawDelegate : null;
-    g_main_context_invoke_full(cast(GMainContext*)cPtr, priority, _function_CB, _function_, _function_DestroyCB);
+    g_main_context_invoke_full(cast(GMainContext*)this._cPtr, priority, _function_CB, _function_, _function_DestroyCB);
   }
 
   /**
@@ -262,7 +262,7 @@ class MainContext : gobject.boxed.Boxed
   bool isOwner()
   {
     bool _retval;
-    _retval = g_main_context_is_owner(cast(GMainContext*)cPtr);
+    _retval = g_main_context_is_owner(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class MainContext : gobject.boxed.Boxed
   bool iteration(bool mayBlock)
   {
     bool _retval;
-    _retval = g_main_context_iteration(cast(GMainContext*)cPtr, mayBlock);
+    _retval = g_main_context_iteration(cast(GMainContext*)this._cPtr, mayBlock);
     return _retval;
   }
 
@@ -298,7 +298,7 @@ class MainContext : gobject.boxed.Boxed
   bool pending()
   {
     bool _retval;
-    _retval = g_main_context_pending(cast(GMainContext*)cPtr);
+    _retval = g_main_context_pending(cast(GMainContext*)this._cPtr);
     return _retval;
   }
 
@@ -308,7 +308,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void popThreadDefault()
   {
-    g_main_context_pop_thread_default(cast(GMainContext*)cPtr);
+    g_main_context_pop_thread_default(cast(GMainContext*)this._cPtr);
   }
 
   /**
@@ -327,7 +327,7 @@ class MainContext : gobject.boxed.Boxed
   bool prepare(out int priority)
   {
     bool _retval;
-    _retval = g_main_context_prepare(cast(GMainContext*)cPtr, cast(int*)&priority);
+    _retval = g_main_context_prepare(cast(GMainContext*)this._cPtr, cast(int*)&priority);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void pushThreadDefault()
   {
-    g_main_context_push_thread_default(cast(GMainContext*)cPtr);
+    g_main_context_push_thread_default(cast(GMainContext*)this._cPtr);
   }
 
   /**
@@ -398,7 +398,7 @@ class MainContext : gobject.boxed.Boxed
   {
     int _retval;
     int _nFds;
-    _retval = g_main_context_query(cast(GMainContext*)cPtr, maxPriority, cast(int*)&timeout, fds.ptr, _nFds);
+    _retval = g_main_context_query(cast(GMainContext*)this._cPtr, maxPriority, cast(int*)&timeout, fds.ptr, _nFds);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void release()
   {
-    g_main_context_release(cast(GMainContext*)cPtr);
+    g_main_context_release(cast(GMainContext*)this._cPtr);
   }
 
   /**
@@ -425,7 +425,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void removePoll(glib.types.PollFD fd)
   {
-    g_main_context_remove_poll(cast(GMainContext*)cPtr, &fd);
+    g_main_context_remove_poll(cast(GMainContext*)this._cPtr, &fd);
   }
 
   /**
@@ -446,7 +446,7 @@ class MainContext : gobject.boxed.Boxed
   bool wait(glib.cond.Cond cond, glib.mutex.Mutex mutex)
   {
     bool _retval;
-    _retval = g_main_context_wait(cast(GMainContext*)cPtr, cond ? cast(GCond*)cond.cPtr : null, mutex ? cast(GMutex*)mutex.cPtr : null);
+    _retval = g_main_context_wait(cast(GMainContext*)this._cPtr, cond ? cast(GCond*)cond._cPtr : null, mutex ? cast(GMutex*)mutex._cPtr : null);
     return _retval;
   }
 
@@ -482,7 +482,7 @@ class MainContext : gobject.boxed.Boxed
   */
   void wakeup()
   {
-    g_main_context_wakeup(cast(GMainContext*)cPtr);
+    g_main_context_wakeup(cast(GMainContext*)this._cPtr);
   }
 
   /**

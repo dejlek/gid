@@ -45,22 +45,22 @@ class Cookie : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cookie_get_type != &gidSymbolNotFound ? soup_cookie_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -125,7 +125,7 @@ class Cookie : gobject.boxed.Boxed
   bool appliesToUri(glib.uri.Uri uri)
   {
     bool _retval;
-    _retval = soup_cookie_applies_to_uri(cast(SoupCookie*)cPtr, uri ? cast(GUri*)uri.cPtr(No.Dup) : null);
+    _retval = soup_cookie_applies_to_uri(cast(SoupCookie*)this._cPtr, uri ? cast(GUri*)uri._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Cookie : gobject.boxed.Boxed
   soup.cookie.Cookie copy()
   {
     SoupCookie* _cretval;
-    _cretval = soup_cookie_copy(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_copy(cast(SoupCookie*)this._cPtr);
     auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -155,7 +155,7 @@ class Cookie : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _host = host.toCString(No.Alloc);
-    _retval = soup_cookie_domain_matches(cast(SoupCookie*)cPtr, _host);
+    _retval = soup_cookie_domain_matches(cast(SoupCookie*)this._cPtr, _host);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Cookie : gobject.boxed.Boxed
   bool equal(soup.cookie.Cookie cookie2)
   {
     bool _retval;
-    _retval = soup_cookie_equal(cast(SoupCookie*)cPtr, cookie2 ? cast(SoupCookie*)cookie2.cPtr(No.Dup) : null);
+    _retval = soup_cookie_equal(cast(SoupCookie*)this._cPtr, cookie2 ? cast(SoupCookie*)cookie2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Cookie : gobject.boxed.Boxed
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = soup_cookie_get_domain(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_domain(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -196,7 +196,7 @@ class Cookie : gobject.boxed.Boxed
   glib.date_time.DateTime getExpires()
   {
     GDateTime* _cretval;
-    _cretval = soup_cookie_get_expires(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_expires(cast(SoupCookie*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -208,7 +208,7 @@ class Cookie : gobject.boxed.Boxed
   bool getHttpOnly()
   {
     bool _retval;
-    _retval = soup_cookie_get_http_only(cast(SoupCookie*)cPtr);
+    _retval = soup_cookie_get_http_only(cast(SoupCookie*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Cookie : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = soup_cookie_get_name(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_name(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -231,7 +231,7 @@ class Cookie : gobject.boxed.Boxed
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = soup_cookie_get_path(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_path(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -243,7 +243,7 @@ class Cookie : gobject.boxed.Boxed
   soup.types.SameSitePolicy getSameSitePolicy()
   {
     SoupSameSitePolicy _cretval;
-    _cretval = soup_cookie_get_same_site_policy(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_same_site_policy(cast(SoupCookie*)this._cPtr);
     soup.types.SameSitePolicy _retval = cast(soup.types.SameSitePolicy)_cretval;
     return _retval;
   }
@@ -255,7 +255,7 @@ class Cookie : gobject.boxed.Boxed
   bool getSecure()
   {
     bool _retval;
-    _retval = soup_cookie_get_secure(cast(SoupCookie*)cPtr);
+    _retval = soup_cookie_get_secure(cast(SoupCookie*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class Cookie : gobject.boxed.Boxed
   string getValue()
   {
     const(char)* _cretval;
-    _cretval = soup_cookie_get_value(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_get_value(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -280,7 +280,7 @@ class Cookie : gobject.boxed.Boxed
   void setDomain(string domain)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    soup_cookie_set_domain(cast(SoupCookie*)cPtr, _domain);
+    soup_cookie_set_domain(cast(SoupCookie*)this._cPtr, _domain);
   }
 
   /**
@@ -296,7 +296,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setExpires(glib.date_time.DateTime expires)
   {
-    soup_cookie_set_expires(cast(SoupCookie*)cPtr, expires ? cast(GDateTime*)expires.cPtr(No.Dup) : null);
+    soup_cookie_set_expires(cast(SoupCookie*)this._cPtr, expires ? cast(GDateTime*)expires._cPtr(No.Dup) : null);
   }
 
   /**
@@ -310,7 +310,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setHttpOnly(bool httpOnly)
   {
-    soup_cookie_set_http_only(cast(SoupCookie*)cPtr, httpOnly);
+    soup_cookie_set_http_only(cast(SoupCookie*)this._cPtr, httpOnly);
   }
 
   /**
@@ -331,7 +331,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setMaxAge(int maxAge)
   {
-    soup_cookie_set_max_age(cast(SoupCookie*)cPtr, maxAge);
+    soup_cookie_set_max_age(cast(SoupCookie*)this._cPtr, maxAge);
   }
 
   /**
@@ -343,7 +343,7 @@ class Cookie : gobject.boxed.Boxed
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    soup_cookie_set_name(cast(SoupCookie*)cPtr, _name);
+    soup_cookie_set_name(cast(SoupCookie*)this._cPtr, _name);
   }
 
   /**
@@ -355,7 +355,7 @@ class Cookie : gobject.boxed.Boxed
   void setPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    soup_cookie_set_path(cast(SoupCookie*)cPtr, _path);
+    soup_cookie_set_path(cast(SoupCookie*)this._cPtr, _path);
   }
 
   /**
@@ -368,7 +368,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setSameSitePolicy(soup.types.SameSitePolicy policy)
   {
-    soup_cookie_set_same_site_policy(cast(SoupCookie*)cPtr, policy);
+    soup_cookie_set_same_site_policy(cast(SoupCookie*)this._cPtr, policy);
   }
 
   /**
@@ -382,7 +382,7 @@ class Cookie : gobject.boxed.Boxed
   */
   void setSecure(bool secure)
   {
-    soup_cookie_set_secure(cast(SoupCookie*)cPtr, secure);
+    soup_cookie_set_secure(cast(SoupCookie*)this._cPtr, secure);
   }
 
   /**
@@ -394,7 +394,7 @@ class Cookie : gobject.boxed.Boxed
   void setValue(string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    soup_cookie_set_value(cast(SoupCookie*)cPtr, _value);
+    soup_cookie_set_value(cast(SoupCookie*)this._cPtr, _value);
   }
 
   /**
@@ -405,7 +405,7 @@ class Cookie : gobject.boxed.Boxed
   string toCookieHeader()
   {
     char* _cretval;
-    _cretval = soup_cookie_to_cookie_header(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_to_cookie_header(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -419,7 +419,7 @@ class Cookie : gobject.boxed.Boxed
   string toSetCookieHeader()
   {
     char* _cretval;
-    _cretval = soup_cookie_to_set_cookie_header(cast(SoupCookie*)cPtr);
+    _cretval = soup_cookie_to_set_cookie_header(cast(SoupCookie*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -450,7 +450,7 @@ class Cookie : gobject.boxed.Boxed
   {
     SoupCookie* _cretval;
     const(char)* _header = header.toCString(No.Alloc);
-    _cretval = soup_cookie_parse(_header, origin ? cast(GUri*)origin.cPtr(No.Dup) : null);
+    _cretval = soup_cookie_parse(_header, origin ? cast(GUri*)origin._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new soup.cookie.Cookie(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

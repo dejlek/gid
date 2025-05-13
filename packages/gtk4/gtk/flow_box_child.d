@@ -28,16 +28,16 @@ class FlowBoxChild : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_child_get_type != &gidSymbolNotFound ? gtk_flow_box_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -101,7 +101,7 @@ class FlowBoxChild : gtk.widget.Widget
   */
   void changed()
   {
-    gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)cPtr);
+    gtk_flow_box_child_changed(cast(GtkFlowBoxChild*)this._cPtr);
   }
 
   /**
@@ -111,8 +111,8 @@ class FlowBoxChild : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_flow_box_child_get_child(cast(GtkFlowBoxChild*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class FlowBoxChild : gtk.widget.Widget
   int getIndex()
   {
     int _retval;
-    _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)cPtr);
+    _retval = gtk_flow_box_child_get_index(cast(GtkFlowBoxChild*)this._cPtr);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class FlowBoxChild : gtk.widget.Widget
   bool isSelected()
   {
     bool _retval;
-    _retval = gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)cPtr);
+    _retval = gtk_flow_box_child_is_selected(cast(GtkFlowBoxChild*)this._cPtr);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class FlowBoxChild : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_child_set_child(cast(GtkFlowBoxChild*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**

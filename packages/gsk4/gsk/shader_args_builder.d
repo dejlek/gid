@@ -25,22 +25,22 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_shader_args_builder_get_type != &gidSymbolNotFound ? gsk_shader_args_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   this(gsk.glshader.GLShader shader, glib.bytes.Bytes initialValues = null)
   {
     GskShaderArgsBuilder* _cretval;
-    _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader.cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues.cPtr(No.Dup) : null);
+    _cretval = gsk_shader_args_builder_new(shader ? cast(GskGLShader*)shader._cPtr(No.Dup) : null, initialValues ? cast(GBytes*)initialValues._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -77,7 +77,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setBool(int idx, bool value)
   {
-    gsk_shader_args_builder_set_bool(cast(GskShaderArgsBuilder*)cPtr, idx, value);
+    gsk_shader_args_builder_set_bool(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
 
   /**
@@ -91,7 +91,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setFloat(int idx, float value)
   {
-    gsk_shader_args_builder_set_float(cast(GskShaderArgsBuilder*)cPtr, idx, value);
+    gsk_shader_args_builder_set_float(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
 
   /**
@@ -105,7 +105,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setInt(int idx, int value)
   {
-    gsk_shader_args_builder_set_int(cast(GskShaderArgsBuilder*)cPtr, idx, value);
+    gsk_shader_args_builder_set_int(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
 
   /**
@@ -119,7 +119,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setUint(int idx, uint value)
   {
-    gsk_shader_args_builder_set_uint(cast(GskShaderArgsBuilder*)cPtr, idx, value);
+    gsk_shader_args_builder_set_uint(cast(GskShaderArgsBuilder*)this._cPtr, idx, value);
   }
 
   /**
@@ -133,7 +133,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec2(int idx, graphene.vec2.Vec2 value)
   {
-    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec2_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec2(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec2_t)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -147,7 +147,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec3(int idx, graphene.vec3.Vec3 value)
   {
-    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec3_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec3(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec3_t)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -161,7 +161,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   */
   void setVec4(int idx, graphene.vec4.Vec4 value)
   {
-    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)cPtr, idx, value ? cast(const(graphene_vec4_t)*)value.cPtr(No.Dup) : null);
+    gsk_shader_args_builder_set_vec4(cast(GskShaderArgsBuilder*)this._cPtr, idx, value ? cast(const(graphene_vec4_t)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -182,7 +182,7 @@ class ShaderArgsBuilder : gobject.boxed.Boxed
   glib.bytes.Bytes toArgs()
   {
     GBytes* _cretval;
-    _cretval = gsk_shader_args_builder_to_args(cast(GskShaderArgsBuilder*)cPtr);
+    _cretval = gsk_shader_args_builder_to_args(cast(GskShaderArgsBuilder*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

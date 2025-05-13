@@ -438,122 +438,124 @@ alias gparquet_writer_properties_set_max_row_group_length = c_gparquet_writer_pr
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // ArrowFileReader
-  gidLink(cast(void**)&gparquet_arrow_file_reader_get_type, "gparquet_arrow_file_reader_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_new_arrow, "gparquet_arrow_file_reader_new_arrow", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_new_path, "gparquet_arrow_file_reader_new_path", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_get_metadata, "gparquet_arrow_file_reader_get_metadata", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_get_n_row_groups, "gparquet_arrow_file_reader_get_n_row_groups", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_get_n_rows, "gparquet_arrow_file_reader_get_n_rows", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_get_schema, "gparquet_arrow_file_reader_get_schema", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_read_column_data, "gparquet_arrow_file_reader_read_column_data", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_read_row_group, "gparquet_arrow_file_reader_read_row_group", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_read_table, "gparquet_arrow_file_reader_read_table", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_reader_set_use_threads, "gparquet_arrow_file_reader_set_use_threads", LIBS);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_get_type, "gparquet_arrow_file_reader_get_type", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_new_arrow, "gparquet_arrow_file_reader_new_arrow", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_new_path, "gparquet_arrow_file_reader_new_path", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_get_metadata, "gparquet_arrow_file_reader_get_metadata", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_get_n_row_groups, "gparquet_arrow_file_reader_get_n_row_groups", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_get_n_rows, "gparquet_arrow_file_reader_get_n_rows", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_get_schema, "gparquet_arrow_file_reader_get_schema", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_read_column_data, "gparquet_arrow_file_reader_read_column_data", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_read_row_group, "gparquet_arrow_file_reader_read_row_group", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_read_table, "gparquet_arrow_file_reader_read_table", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_reader_set_use_threads, "gparquet_arrow_file_reader_set_use_threads", libs);
 
   // ArrowFileWriter
-  gidLink(cast(void**)&gparquet_arrow_file_writer_get_type, "gparquet_arrow_file_writer_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_new_arrow, "gparquet_arrow_file_writer_new_arrow", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_new_path, "gparquet_arrow_file_writer_new_path", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_close, "gparquet_arrow_file_writer_close", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_get_schema, "gparquet_arrow_file_writer_get_schema", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_new_buffered_row_group, "gparquet_arrow_file_writer_new_buffered_row_group", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_new_row_group, "gparquet_arrow_file_writer_new_row_group", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_write_chunked_array, "gparquet_arrow_file_writer_write_chunked_array", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_write_record_batch, "gparquet_arrow_file_writer_write_record_batch", LIBS);
-  gidLink(cast(void**)&gparquet_arrow_file_writer_write_table, "gparquet_arrow_file_writer_write_table", LIBS);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_get_type, "gparquet_arrow_file_writer_get_type", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_new_arrow, "gparquet_arrow_file_writer_new_arrow", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_new_path, "gparquet_arrow_file_writer_new_path", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_close, "gparquet_arrow_file_writer_close", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_get_schema, "gparquet_arrow_file_writer_get_schema", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_new_buffered_row_group, "gparquet_arrow_file_writer_new_buffered_row_group", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_new_row_group, "gparquet_arrow_file_writer_new_row_group", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_write_chunked_array, "gparquet_arrow_file_writer_write_chunked_array", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_write_record_batch, "gparquet_arrow_file_writer_write_record_batch", libs);
+  gidLink(cast(void**)&gparquet_arrow_file_writer_write_table, "gparquet_arrow_file_writer_write_table", libs);
 
   // BooleanStatistics
-  gidLink(cast(void**)&gparquet_boolean_statistics_get_type, "gparquet_boolean_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_boolean_statistics_get_max, "gparquet_boolean_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_boolean_statistics_get_min, "gparquet_boolean_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_boolean_statistics_get_type, "gparquet_boolean_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_boolean_statistics_get_max, "gparquet_boolean_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_boolean_statistics_get_min, "gparquet_boolean_statistics_get_min", libs);
 
   // ByteArrayStatistics
-  gidLink(cast(void**)&gparquet_byte_array_statistics_get_type, "gparquet_byte_array_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_byte_array_statistics_get_max, "gparquet_byte_array_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_byte_array_statistics_get_min, "gparquet_byte_array_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_byte_array_statistics_get_type, "gparquet_byte_array_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_byte_array_statistics_get_max, "gparquet_byte_array_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_byte_array_statistics_get_min, "gparquet_byte_array_statistics_get_min", libs);
 
   // ColumnChunkMetadata
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_type, "gparquet_column_chunk_metadata_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_can_decompress, "gparquet_column_chunk_metadata_can_decompress", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_equal, "gparquet_column_chunk_metadata_equal", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_file_offset, "gparquet_column_chunk_metadata_get_file_offset", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_statistics, "gparquet_column_chunk_metadata_get_statistics", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_total_compressed_size, "gparquet_column_chunk_metadata_get_total_compressed_size", LIBS);
-  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_total_size, "gparquet_column_chunk_metadata_get_total_size", LIBS);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_type, "gparquet_column_chunk_metadata_get_type", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_can_decompress, "gparquet_column_chunk_metadata_can_decompress", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_equal, "gparquet_column_chunk_metadata_equal", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_file_offset, "gparquet_column_chunk_metadata_get_file_offset", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_statistics, "gparquet_column_chunk_metadata_get_statistics", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_total_compressed_size, "gparquet_column_chunk_metadata_get_total_compressed_size", libs);
+  gidLink(cast(void**)&gparquet_column_chunk_metadata_get_total_size, "gparquet_column_chunk_metadata_get_total_size", libs);
 
   // DoubleStatistics
-  gidLink(cast(void**)&gparquet_double_statistics_get_type, "gparquet_double_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_double_statistics_get_max, "gparquet_double_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_double_statistics_get_min, "gparquet_double_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_double_statistics_get_type, "gparquet_double_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_double_statistics_get_max, "gparquet_double_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_double_statistics_get_min, "gparquet_double_statistics_get_min", libs);
 
   // FileMetadata
-  gidLink(cast(void**)&gparquet_file_metadata_get_type, "gparquet_file_metadata_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_can_decompress, "gparquet_file_metadata_can_decompress", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_equal, "gparquet_file_metadata_equal", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_created_by, "gparquet_file_metadata_get_created_by", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_n_columns, "gparquet_file_metadata_get_n_columns", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_n_row_groups, "gparquet_file_metadata_get_n_row_groups", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_n_rows, "gparquet_file_metadata_get_n_rows", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_n_schema_elements, "gparquet_file_metadata_get_n_schema_elements", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_row_group, "gparquet_file_metadata_get_row_group", LIBS);
-  gidLink(cast(void**)&gparquet_file_metadata_get_size, "gparquet_file_metadata_get_size", LIBS);
+  gidLink(cast(void**)&gparquet_file_metadata_get_type, "gparquet_file_metadata_get_type", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_can_decompress, "gparquet_file_metadata_can_decompress", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_equal, "gparquet_file_metadata_equal", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_created_by, "gparquet_file_metadata_get_created_by", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_n_columns, "gparquet_file_metadata_get_n_columns", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_n_row_groups, "gparquet_file_metadata_get_n_row_groups", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_n_rows, "gparquet_file_metadata_get_n_rows", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_n_schema_elements, "gparquet_file_metadata_get_n_schema_elements", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_row_group, "gparquet_file_metadata_get_row_group", libs);
+  gidLink(cast(void**)&gparquet_file_metadata_get_size, "gparquet_file_metadata_get_size", libs);
 
   // FixedLengthByteArrayStatistics
-  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_type, "gparquet_fixed_length_byte_array_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_max, "gparquet_fixed_length_byte_array_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_min, "gparquet_fixed_length_byte_array_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_type, "gparquet_fixed_length_byte_array_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_max, "gparquet_fixed_length_byte_array_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_fixed_length_byte_array_statistics_get_min, "gparquet_fixed_length_byte_array_statistics_get_min", libs);
 
   // FloatStatistics
-  gidLink(cast(void**)&gparquet_float_statistics_get_type, "gparquet_float_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_float_statistics_get_max, "gparquet_float_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_float_statistics_get_min, "gparquet_float_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_float_statistics_get_type, "gparquet_float_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_float_statistics_get_max, "gparquet_float_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_float_statistics_get_min, "gparquet_float_statistics_get_min", libs);
 
   // Int32Statistics
-  gidLink(cast(void**)&gparquet_int32_statistics_get_type, "gparquet_int32_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_int32_statistics_get_max, "gparquet_int32_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_int32_statistics_get_min, "gparquet_int32_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_int32_statistics_get_type, "gparquet_int32_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_int32_statistics_get_max, "gparquet_int32_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_int32_statistics_get_min, "gparquet_int32_statistics_get_min", libs);
 
   // Int64Statistics
-  gidLink(cast(void**)&gparquet_int64_statistics_get_type, "gparquet_int64_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_int64_statistics_get_max, "gparquet_int64_statistics_get_max", LIBS);
-  gidLink(cast(void**)&gparquet_int64_statistics_get_min, "gparquet_int64_statistics_get_min", LIBS);
+  gidLink(cast(void**)&gparquet_int64_statistics_get_type, "gparquet_int64_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_int64_statistics_get_max, "gparquet_int64_statistics_get_max", libs);
+  gidLink(cast(void**)&gparquet_int64_statistics_get_min, "gparquet_int64_statistics_get_min", libs);
 
   // RowGroupMetadata
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_type, "gparquet_row_group_metadata_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_can_decompress, "gparquet_row_group_metadata_can_decompress", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_equal, "gparquet_row_group_metadata_equal", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_column_chunk, "gparquet_row_group_metadata_get_column_chunk", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_file_offset, "gparquet_row_group_metadata_get_file_offset", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_n_columns, "gparquet_row_group_metadata_get_n_columns", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_n_rows, "gparquet_row_group_metadata_get_n_rows", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_total_compressed_size, "gparquet_row_group_metadata_get_total_compressed_size", LIBS);
-  gidLink(cast(void**)&gparquet_row_group_metadata_get_total_size, "gparquet_row_group_metadata_get_total_size", LIBS);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_type, "gparquet_row_group_metadata_get_type", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_can_decompress, "gparquet_row_group_metadata_can_decompress", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_equal, "gparquet_row_group_metadata_equal", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_column_chunk, "gparquet_row_group_metadata_get_column_chunk", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_file_offset, "gparquet_row_group_metadata_get_file_offset", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_n_columns, "gparquet_row_group_metadata_get_n_columns", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_n_rows, "gparquet_row_group_metadata_get_n_rows", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_total_compressed_size, "gparquet_row_group_metadata_get_total_compressed_size", libs);
+  gidLink(cast(void**)&gparquet_row_group_metadata_get_total_size, "gparquet_row_group_metadata_get_total_size", libs);
 
   // Statistics
-  gidLink(cast(void**)&gparquet_statistics_get_type, "gparquet_statistics_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_equal, "gparquet_statistics_equal", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_get_n_distinct_values, "gparquet_statistics_get_n_distinct_values", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_get_n_nulls, "gparquet_statistics_get_n_nulls", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_get_n_values, "gparquet_statistics_get_n_values", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_has_min_max, "gparquet_statistics_has_min_max", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_has_n_distinct_values, "gparquet_statistics_has_n_distinct_values", LIBS);
-  gidLink(cast(void**)&gparquet_statistics_has_n_nulls, "gparquet_statistics_has_n_nulls", LIBS);
+  gidLink(cast(void**)&gparquet_statistics_get_type, "gparquet_statistics_get_type", libs);
+  gidLink(cast(void**)&gparquet_statistics_equal, "gparquet_statistics_equal", libs);
+  gidLink(cast(void**)&gparquet_statistics_get_n_distinct_values, "gparquet_statistics_get_n_distinct_values", libs);
+  gidLink(cast(void**)&gparquet_statistics_get_n_nulls, "gparquet_statistics_get_n_nulls", libs);
+  gidLink(cast(void**)&gparquet_statistics_get_n_values, "gparquet_statistics_get_n_values", libs);
+  gidLink(cast(void**)&gparquet_statistics_has_min_max, "gparquet_statistics_has_min_max", libs);
+  gidLink(cast(void**)&gparquet_statistics_has_n_distinct_values, "gparquet_statistics_has_n_distinct_values", libs);
+  gidLink(cast(void**)&gparquet_statistics_has_n_nulls, "gparquet_statistics_has_n_nulls", libs);
 
   // WriterProperties
-  gidLink(cast(void**)&gparquet_writer_properties_get_type, "gparquet_writer_properties_get_type", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_new, "gparquet_writer_properties_new", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_disable_dictionary, "gparquet_writer_properties_disable_dictionary", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_enable_dictionary, "gparquet_writer_properties_enable_dictionary", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_get_batch_size, "gparquet_writer_properties_get_batch_size", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_get_compression_path, "gparquet_writer_properties_get_compression_path", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_get_data_page_size, "gparquet_writer_properties_get_data_page_size", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_get_dictionary_page_size_limit, "gparquet_writer_properties_get_dictionary_page_size_limit", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_get_max_row_group_length, "gparquet_writer_properties_get_max_row_group_length", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_is_dictionary_enabled, "gparquet_writer_properties_is_dictionary_enabled", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_set_batch_size, "gparquet_writer_properties_set_batch_size", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_set_compression, "gparquet_writer_properties_set_compression", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_set_data_page_size, "gparquet_writer_properties_set_data_page_size", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_set_dictionary_page_size_limit, "gparquet_writer_properties_set_dictionary_page_size_limit", LIBS);
-  gidLink(cast(void**)&gparquet_writer_properties_set_max_row_group_length, "gparquet_writer_properties_set_max_row_group_length", LIBS);
+  gidLink(cast(void**)&gparquet_writer_properties_get_type, "gparquet_writer_properties_get_type", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_new, "gparquet_writer_properties_new", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_disable_dictionary, "gparquet_writer_properties_disable_dictionary", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_enable_dictionary, "gparquet_writer_properties_enable_dictionary", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_get_batch_size, "gparquet_writer_properties_get_batch_size", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_get_compression_path, "gparquet_writer_properties_get_compression_path", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_get_data_page_size, "gparquet_writer_properties_get_data_page_size", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_get_dictionary_page_size_limit, "gparquet_writer_properties_get_dictionary_page_size_limit", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_get_max_row_group_length, "gparquet_writer_properties_get_max_row_group_length", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_is_dictionary_enabled, "gparquet_writer_properties_is_dictionary_enabled", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_set_batch_size, "gparquet_writer_properties_set_batch_size", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_set_compression, "gparquet_writer_properties_set_compression", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_set_data_page_size, "gparquet_writer_properties_set_data_page_size", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_set_dictionary_page_size_limit, "gparquet_writer_properties_set_dictionary_page_size_limit", libs);
+  gidLink(cast(void**)&gparquet_writer_properties_set_max_row_group_length, "gparquet_writer_properties_set_max_row_group_length", libs);
 }

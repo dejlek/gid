@@ -20,22 +20,22 @@ class IconSource : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_source_get_type != &gidSymbolNotFound ? gtk_icon_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class IconSource : gobject.boxed.Boxed
   gtk.icon_source.IconSource copy()
   {
     GtkIconSource* _cretval;
-    _cretval = gtk_icon_source_copy(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_copy(cast(const(GtkIconSource)*)this._cPtr);
     auto _retval = _cretval ? new gtk.icon_source.IconSource(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -109,7 +109,7 @@ class IconSource : gobject.boxed.Boxed
   gtk.types.TextDirection getDirection()
   {
     GtkTextDirection _cretval;
-    _cretval = gtk_icon_source_get_direction(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_get_direction(cast(const(GtkIconSource)*)this._cPtr);
     gtk.types.TextDirection _retval = cast(gtk.types.TextDirection)_cretval;
     return _retval;
   }
@@ -123,7 +123,7 @@ class IconSource : gobject.boxed.Boxed
   bool getDirectionWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_direction_wildcarded(cast(const(GtkIconSource)*)cPtr);
+    _retval = gtk_icon_source_get_direction_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class IconSource : gobject.boxed.Boxed
   string getFilename()
   {
     const(char)* _cretval;
-    _cretval = gtk_icon_source_get_filename(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_get_filename(cast(const(GtkIconSource)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class IconSource : gobject.boxed.Boxed
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_icon_source_get_icon_name(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_get_icon_name(cast(const(GtkIconSource)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -175,8 +175,8 @@ class IconSource : gobject.boxed.Boxed
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_icon_source_get_pixbuf(cast(const(GtkIconSource)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_icon_source_get_pixbuf(cast(const(GtkIconSource)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class IconSource : gobject.boxed.Boxed
   gtk.types.IconSize getSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_icon_source_get_size(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_get_size(cast(const(GtkIconSource)*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class IconSource : gobject.boxed.Boxed
   bool getSizeWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_size_wildcarded(cast(const(GtkIconSource)*)cPtr);
+    _retval = gtk_icon_source_get_size_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class IconSource : gobject.boxed.Boxed
   gtk.types.StateType getState()
   {
     GtkStateType _cretval;
-    _cretval = gtk_icon_source_get_state(cast(const(GtkIconSource)*)cPtr);
+    _cretval = gtk_icon_source_get_state(cast(const(GtkIconSource)*)this._cPtr);
     gtk.types.StateType _retval = cast(gtk.types.StateType)_cretval;
     return _retval;
   }
@@ -233,7 +233,7 @@ class IconSource : gobject.boxed.Boxed
   bool getStateWildcarded()
   {
     bool _retval;
-    _retval = gtk_icon_source_get_state_wildcarded(cast(const(GtkIconSource)*)cPtr);
+    _retval = gtk_icon_source_get_state_wildcarded(cast(const(GtkIconSource)*)this._cPtr);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setDirection(gtk.types.TextDirection direction)
   {
-    gtk_icon_source_set_direction(cast(GtkIconSource*)cPtr, direction);
+    gtk_icon_source_set_direction(cast(GtkIconSource*)this._cPtr, direction);
   }
 
   /**
@@ -274,7 +274,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setDirectionWildcarded(bool setting)
   {
-    gtk_icon_source_set_direction_wildcarded(cast(GtkIconSource*)cPtr, setting);
+    gtk_icon_source_set_direction_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }
 
   /**
@@ -289,7 +289,7 @@ class IconSource : gobject.boxed.Boxed
   void setFilename(string filename)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_icon_source_set_filename(cast(GtkIconSource*)cPtr, _filename);
+    gtk_icon_source_set_filename(cast(GtkIconSource*)this._cPtr, _filename);
   }
 
   /**
@@ -304,7 +304,7 @@ class IconSource : gobject.boxed.Boxed
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_icon_source_set_icon_name(cast(GtkIconSource*)cPtr, _iconName);
+    gtk_icon_source_set_icon_name(cast(GtkIconSource*)this._cPtr, _iconName);
   }
 
   /**
@@ -318,7 +318,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_icon_source_set_pixbuf(cast(GtkIconSource*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_icon_source_set_pixbuf(cast(GtkIconSource*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -337,7 +337,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setSize(gtk.types.IconSize size)
   {
-    gtk_icon_source_set_size(cast(GtkIconSource*)cPtr, size);
+    gtk_icon_source_set_size(cast(GtkIconSource*)this._cPtr, size);
   }
 
   /**
@@ -361,7 +361,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setSizeWildcarded(bool setting)
   {
-    gtk_icon_source_set_size_wildcarded(cast(GtkIconSource*)cPtr, setting);
+    gtk_icon_source_set_size_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }
 
   /**
@@ -380,7 +380,7 @@ class IconSource : gobject.boxed.Boxed
   */
   void setState(gtk.types.StateType state)
   {
-    gtk_icon_source_set_state(cast(GtkIconSource*)cPtr, state);
+    gtk_icon_source_set_state(cast(GtkIconSource*)this._cPtr, state);
   }
 
   /**
@@ -405,6 +405,6 @@ class IconSource : gobject.boxed.Boxed
   */
   void setStateWildcarded(bool setting)
   {
-    gtk_icon_source_set_state_wildcarded(cast(GtkIconSource*)cPtr, setting);
+    gtk_icon_source_set_state_wildcarded(cast(GtkIconSource*)this._cPtr, setting);
   }
 }

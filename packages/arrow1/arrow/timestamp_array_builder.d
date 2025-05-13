@@ -20,16 +20,16 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_array_builder_get_type != &gidSymbolNotFound ? garrow_timestamp_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
   this(arrow.timestamp_data_type.TimestampDataType dataType)
   {
     GArrowTimestampArrayBuilder* _cretval;
-    _cretval = garrow_timestamp_array_builder_new(dataType ? cast(GArrowTimestampDataType*)dataType.cPtr(No.Dup) : null);
+    _cretval = garrow_timestamp_array_builder_new(dataType ? cast(GArrowTimestampDataType*)dataType._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -51,7 +51,7 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_timestamp_array_builder_append(cast(GArrowTimestampArrayBuilder*)cPtr, value, &_err);
+    _retval = garrow_timestamp_array_builder_append(cast(GArrowTimestampArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -62,7 +62,7 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_timestamp_array_builder_append_value(cast(GArrowTimestampArrayBuilder*)cPtr, value, &_err);
+    _retval = garrow_timestamp_array_builder_append_value(cast(GArrowTimestampArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -96,7 +96,7 @@ class TimestampArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_timestamp_array_builder_append_values(cast(GArrowTimestampArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_timestamp_array_builder_append_values(cast(GArrowTimestampArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

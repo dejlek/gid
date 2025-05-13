@@ -41,16 +41,16 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_socket_address_get_type != &gidSymbolNotFound ? g_unix_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_abstract(_path, _pathLen);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
 
     auto _path = cast(const(char)*)path.ptr;
     _cretval = g_unix_socket_address_new_with_type(_path, _pathLen, type);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_socket_address.UnixSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   gio.types.UnixSocketAddressType getAddressType()
   {
     GUnixSocketAddressType _cretval;
-    _cretval = g_unix_socket_address_get_address_type(cast(GUnixSocketAddress*)cPtr);
+    _cretval = g_unix_socket_address_get_address_type(cast(GUnixSocketAddress*)this._cPtr);
     gio.types.UnixSocketAddressType _retval = cast(gio.types.UnixSocketAddressType)_cretval;
     return _retval;
   }
@@ -183,7 +183,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   bool getIsAbstract()
   {
     bool _retval;
-    _retval = g_unix_socket_address_get_is_abstract(cast(GUnixSocketAddress*)cPtr);
+    _retval = g_unix_socket_address_get_is_abstract(cast(GUnixSocketAddress*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)cPtr);
+    _cretval = g_unix_socket_address_get_path(cast(GUnixSocketAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -213,7 +213,7 @@ class UnixSocketAddress : gio.socket_address.SocketAddress
   size_t getPathLen()
   {
     size_t _retval;
-    _retval = g_unix_socket_address_get_path_len(cast(GUnixSocketAddress*)cPtr);
+    _retval = g_unix_socket_address_get_path_len(cast(GUnixSocketAddress*)this._cPtr);
     return _retval;
   }
 }

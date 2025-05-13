@@ -27,7 +27,7 @@ class VideoConverter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -45,7 +45,7 @@ class VideoConverter
   */
   void frame(gstvideo.video_frame.VideoFrame src, gstvideo.video_frame.VideoFrame dest)
   {
-    gst_video_converter_frame(cast(GstVideoConverter*)cPtr, src ? cast(const(GstVideoFrame)*)src.cPtr : null, dest ? cast(GstVideoFrame*)dest.cPtr : null);
+    gst_video_converter_frame(cast(GstVideoConverter*)this._cPtr, src ? cast(const(GstVideoFrame)*)src._cPtr : null, dest ? cast(GstVideoFrame*)dest._cPtr : null);
   }
 
   /**
@@ -54,7 +54,7 @@ class VideoConverter
   */
   void frameFinish()
   {
-    gst_video_converter_frame_finish(cast(GstVideoConverter*)cPtr);
+    gst_video_converter_frame_finish(cast(GstVideoConverter*)this._cPtr);
   }
 
   /**
@@ -65,7 +65,7 @@ class VideoConverter
   gst.structure.Structure getConfig()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_video_converter_get_config(cast(GstVideoConverter*)cPtr);
+    _cretval = gst_video_converter_get_config(cast(GstVideoConverter*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -77,7 +77,7 @@ class VideoConverter
   gstvideo.video_info.VideoInfo getInInfo()
   {
     const(GstVideoInfo)* _cretval;
-    _cretval = gst_video_converter_get_in_info(cast(GstVideoConverter*)cPtr);
+    _cretval = gst_video_converter_get_in_info(cast(GstVideoConverter*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -89,7 +89,7 @@ class VideoConverter
   gstvideo.video_info.VideoInfo getOutInfo()
   {
     const(GstVideoInfo)* _cretval;
-    _cretval = gst_video_converter_get_out_info(cast(GstVideoConverter*)cPtr);
+    _cretval = gst_video_converter_get_out_info(cast(GstVideoConverter*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -111,7 +111,7 @@ class VideoConverter
   bool setConfig(gst.structure.Structure config)
   {
     bool _retval;
-    _retval = gst_video_converter_set_config(cast(GstVideoConverter*)cPtr, config ? cast(GstStructure*)config.cPtr(Yes.Dup) : null);
+    _retval = gst_video_converter_set_config(cast(GstVideoConverter*)this._cPtr, config ? cast(GstStructure*)config._cPtr(Yes.Dup) : null);
     return _retval;
   }
 }

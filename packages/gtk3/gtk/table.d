@@ -49,16 +49,16 @@ class Table : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_table_get_type != &gidSymbolNotFound ? gtk_table_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,7 +182,7 @@ class Table : gtk.container.Container
   */
   void attach(gtk.widget.Widget child, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach, gtk.types.AttachOptions xoptions, gtk.types.AttachOptions yoptions, uint xpadding, uint ypadding)
   {
-    gtk_table_attach(cast(GtkTable*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding);
+    gtk_table_attach(cast(GtkTable*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach, xoptions, yoptions, xpadding, ypadding);
   }
 
   /**
@@ -203,7 +203,7 @@ class Table : gtk.container.Container
   */
   void attachDefaults(gtk.widget.Widget widget, uint leftAttach, uint rightAttach, uint topAttach, uint bottomAttach)
   {
-    gtk_table_attach_defaults(cast(GtkTable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
+    gtk_table_attach_defaults(cast(GtkTable*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, leftAttach, rightAttach, topAttach, bottomAttach);
   }
 
   /**
@@ -220,7 +220,7 @@ class Table : gtk.container.Container
   uint getColSpacing(uint column)
   {
     uint _retval;
-    _retval = gtk_table_get_col_spacing(cast(GtkTable*)cPtr, column);
+    _retval = gtk_table_get_col_spacing(cast(GtkTable*)this._cPtr, column);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Table : gtk.container.Container
   uint getDefaultColSpacing()
   {
     uint _retval;
-    _retval = gtk_table_get_default_col_spacing(cast(GtkTable*)cPtr);
+    _retval = gtk_table_get_default_col_spacing(cast(GtkTable*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class Table : gtk.container.Container
   uint getDefaultRowSpacing()
   {
     uint _retval;
-    _retval = gtk_table_get_default_row_spacing(cast(GtkTable*)cPtr);
+    _retval = gtk_table_get_default_row_spacing(cast(GtkTable*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class Table : gtk.container.Container
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_table_get_homogeneous(cast(GtkTable*)cPtr);
+    _retval = gtk_table_get_homogeneous(cast(GtkTable*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Table : gtk.container.Container
   uint getRowSpacing(uint row)
   {
     uint _retval;
-    _retval = gtk_table_get_row_spacing(cast(GtkTable*)cPtr, row);
+    _retval = gtk_table_get_row_spacing(cast(GtkTable*)this._cPtr, row);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class Table : gtk.container.Container
   */
   void getSize(out uint rows, out uint columns)
   {
-    gtk_table_get_size(cast(GtkTable*)cPtr, cast(uint*)&rows, cast(uint*)&columns);
+    gtk_table_get_size(cast(GtkTable*)this._cPtr, cast(uint*)&rows, cast(uint*)&columns);
   }
 
   /**
@@ -316,7 +316,7 @@ class Table : gtk.container.Container
   */
   void resize(uint rows, uint columns)
   {
-    gtk_table_resize(cast(GtkTable*)cPtr, rows, columns);
+    gtk_table_resize(cast(GtkTable*)this._cPtr, rows, columns);
   }
 
   /**
@@ -333,7 +333,7 @@ class Table : gtk.container.Container
   */
   void setColSpacing(uint column, uint spacing)
   {
-    gtk_table_set_col_spacing(cast(GtkTable*)cPtr, column, spacing);
+    gtk_table_set_col_spacing(cast(GtkTable*)this._cPtr, column, spacing);
   }
 
   /**
@@ -347,7 +347,7 @@ class Table : gtk.container.Container
   */
   void setColSpacings(uint spacing)
   {
-    gtk_table_set_col_spacings(cast(GtkTable*)cPtr, spacing);
+    gtk_table_set_col_spacings(cast(GtkTable*)this._cPtr, spacing);
   }
 
   /**
@@ -363,7 +363,7 @@ class Table : gtk.container.Container
   */
   void setHomogeneous(bool homogeneous)
   {
-    gtk_table_set_homogeneous(cast(GtkTable*)cPtr, homogeneous);
+    gtk_table_set_homogeneous(cast(GtkTable*)this._cPtr, homogeneous);
   }
 
   /**
@@ -379,7 +379,7 @@ class Table : gtk.container.Container
   */
   void setRowSpacing(uint row, uint spacing)
   {
-    gtk_table_set_row_spacing(cast(GtkTable*)cPtr, row, spacing);
+    gtk_table_set_row_spacing(cast(GtkTable*)this._cPtr, row, spacing);
   }
 
   /**
@@ -392,6 +392,6 @@ class Table : gtk.container.Container
   */
   void setRowSpacings(uint spacing)
   {
-    gtk_table_set_row_spacings(cast(GtkTable*)cPtr, spacing);
+    gtk_table_set_row_spacings(cast(GtkTable*)this._cPtr, spacing);
   }
 }

@@ -20,16 +20,16 @@ class StreamChunk : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_chunk_get_type != &gidSymbolNotFound ? gaflight_stream_chunk_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,8 +44,8 @@ class StreamChunk : gobject.object.ObjectWrap
   arrow.record_batch.RecordBatch getData()
   {
     GArrowRecordBatch* _cretval;
-    _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    _cretval = gaflight_stream_chunk_get_data(cast(GAFlightStreamChunk*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -53,8 +53,8 @@ class StreamChunk : gobject.object.ObjectWrap
   arrow.buffer.Buffer getMetadata()
   {
     GArrowBuffer* _cretval;
-    _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    _cretval = gaflight_stream_chunk_get_metadata(cast(GAFlightStreamChunk*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

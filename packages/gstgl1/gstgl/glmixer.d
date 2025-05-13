@@ -23,16 +23,16 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_mixer_get_type != &gidSymbolNotFound ? gst_gl_mixer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,8 +45,8 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   gstgl.glframebuffer.GLFramebuffer getFramebuffer()
   {
     GstGLFramebuffer* _cretval;
-    _cretval = gst_gl_mixer_get_framebuffer(cast(GstGLMixer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.Take);
+    _cretval = gst_gl_mixer_get_framebuffer(cast(GstGLMixer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
   bool processTextures(gst.buffer.Buffer outbuf)
   {
     bool _retval;
-    _retval = gst_gl_mixer_process_textures(cast(GstGLMixer*)cPtr, outbuf ? cast(GstBuffer*)outbuf.cPtr(No.Dup) : null);
+    _retval = gst_gl_mixer_process_textures(cast(GstGLMixer*)this._cPtr, outbuf ? cast(GstBuffer*)outbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 }

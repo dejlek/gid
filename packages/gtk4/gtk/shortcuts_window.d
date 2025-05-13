@@ -85,16 +85,16 @@ class ShortcutsWindow : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_window_get_type != &gidSymbolNotFound ? gtk_shortcuts_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -173,7 +173,7 @@ class ShortcutsWindow : gtk.window.Window
   */
   void addSection(gtk.shortcuts_section.ShortcutsSection section)
   {
-    gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)cPtr, section ? cast(GtkShortcutsSection*)section.cPtr(No.Dup) : null);
+    gtk_shortcuts_window_add_section(cast(GtkShortcutsWindow*)this._cPtr, section ? cast(GtkShortcutsSection*)section._cPtr(No.Dup) : null);
   }
 
   /**

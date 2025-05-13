@@ -39,7 +39,7 @@ class AudioClippingMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -50,7 +50,7 @@ class AudioClippingMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioClippingMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAudioClippingMeta*)this._cPtr).meta);
   }
 
   /**
@@ -59,7 +59,7 @@ class AudioClippingMeta
   */
   @property gst.types.Format format()
   {
-    return cast(gst.types.Format)(cast(GstAudioClippingMeta*)cPtr).format;
+    return cast(gst.types.Format)(cast(GstAudioClippingMeta*)this._cPtr).format;
   }
 
   /**
@@ -69,7 +69,7 @@ class AudioClippingMeta
   */
   @property void format(gst.types.Format propval)
   {
-    (cast(GstAudioClippingMeta*)cPtr).format = cast(GstFormat)propval;
+    (cast(GstAudioClippingMeta*)this._cPtr).format = cast(GstFormat)propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class AudioClippingMeta
   */
   @property ulong start()
   {
-    return (cast(GstAudioClippingMeta*)cPtr).start;
+    return (cast(GstAudioClippingMeta*)this._cPtr).start;
   }
 
   /**
@@ -88,7 +88,7 @@ class AudioClippingMeta
   */
   @property void start(ulong propval)
   {
-    (cast(GstAudioClippingMeta*)cPtr).start = propval;
+    (cast(GstAudioClippingMeta*)this._cPtr).start = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class AudioClippingMeta
   */
   @property ulong end()
   {
-    return (cast(GstAudioClippingMeta*)cPtr).end;
+    return (cast(GstAudioClippingMeta*)this._cPtr).end;
   }
 
   /**
@@ -107,7 +107,7 @@ class AudioClippingMeta
   */
   @property void end(ulong propval)
   {
-    (cast(GstAudioClippingMeta*)cPtr).end = propval;
+    (cast(GstAudioClippingMeta*)this._cPtr).end = propval;
   }
 
   /** */

@@ -39,22 +39,22 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_memory_pressure_settings_get_type != &gidSymbolNotFound ? webkit_memory_pressure_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   webkit.memory_pressure_settings.MemoryPressureSettings copy()
   {
     WebKitMemoryPressureSettings* _cretval;
-    _cretval = webkit_memory_pressure_settings_copy(cast(WebKitMemoryPressureSettings*)cPtr);
+    _cretval = webkit_memory_pressure_settings_copy(cast(WebKitMemoryPressureSettings*)this._cPtr);
     auto _retval = _cretval ? new webkit.memory_pressure_settings.MemoryPressureSettings(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -93,7 +93,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   double getConservativeThreshold()
   {
     double _retval;
-    _retval = webkit_memory_pressure_settings_get_conservative_threshold(cast(WebKitMemoryPressureSettings*)cPtr);
+    _retval = webkit_memory_pressure_settings_get_conservative_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   double getKillThreshold()
   {
     double _retval;
-    _retval = webkit_memory_pressure_settings_get_kill_threshold(cast(WebKitMemoryPressureSettings*)cPtr);
+    _retval = webkit_memory_pressure_settings_get_kill_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   uint getMemoryLimit()
   {
     uint _retval;
-    _retval = webkit_memory_pressure_settings_get_memory_limit(cast(WebKitMemoryPressureSettings*)cPtr);
+    _retval = webkit_memory_pressure_settings_get_memory_limit(cast(WebKitMemoryPressureSettings*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   double getPollInterval()
   {
     double _retval;
-    _retval = webkit_memory_pressure_settings_get_poll_interval(cast(WebKitMemoryPressureSettings*)cPtr);
+    _retval = webkit_memory_pressure_settings_get_poll_interval(cast(WebKitMemoryPressureSettings*)this._cPtr);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   double getStrictThreshold()
   {
     double _retval;
-    _retval = webkit_memory_pressure_settings_get_strict_threshold(cast(WebKitMemoryPressureSettings*)cPtr);
+    _retval = webkit_memory_pressure_settings_get_strict_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   */
   void setConservativeThreshold(double value)
   {
-    webkit_memory_pressure_settings_set_conservative_threshold(cast(WebKitMemoryPressureSettings*)cPtr, value);
+    webkit_memory_pressure_settings_set_conservative_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
 
   /**
@@ -173,7 +173,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   */
   void setKillThreshold(double value)
   {
-    webkit_memory_pressure_settings_set_kill_threshold(cast(WebKitMemoryPressureSettings*)cPtr, value);
+    webkit_memory_pressure_settings_set_kill_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
 
   /**
@@ -186,7 +186,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   */
   void setMemoryLimit(uint memoryLimit)
   {
-    webkit_memory_pressure_settings_set_memory_limit(cast(WebKitMemoryPressureSettings*)cPtr, memoryLimit);
+    webkit_memory_pressure_settings_set_memory_limit(cast(WebKitMemoryPressureSettings*)this._cPtr, memoryLimit);
   }
 
   /**
@@ -199,7 +199,7 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   */
   void setPollInterval(double value)
   {
-    webkit_memory_pressure_settings_set_poll_interval(cast(WebKitMemoryPressureSettings*)cPtr, value);
+    webkit_memory_pressure_settings_set_poll_interval(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
 
   /**
@@ -218,6 +218,6 @@ class MemoryPressureSettings : gobject.boxed.Boxed
   */
   void setStrictThreshold(double value)
   {
-    webkit_memory_pressure_settings_set_strict_threshold(cast(WebKitMemoryPressureSettings*)cPtr, value);
+    webkit_memory_pressure_settings_set_strict_threshold(cast(WebKitMemoryPressureSettings*)this._cPtr, value);
   }
 }

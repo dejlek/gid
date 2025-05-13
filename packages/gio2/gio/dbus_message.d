@@ -24,16 +24,16 @@ class DBusMessage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_message_get_type != &gidSymbolNotFound ? g_dbus_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,7 +86,7 @@ class DBusMessage : gobject.object.ObjectWrap
     _cretval = g_dbus_message_new_from_blob(_blob, _blobLen, capabilities, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class DBusMessage : gobject.object.ObjectWrap
     const(char)* _interface_ = interface_.toCString(No.Alloc);
     const(char)* _method = method.toCString(No.Alloc);
     _cretval = g_dbus_message_new_method_call(_name, _path, _interface_, _method);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class DBusMessage : gobject.object.ObjectWrap
     const(char)* _interface_ = interface_.toCString(No.Alloc);
     const(char)* _signal = signal.toCString(No.Alloc);
     _cretval = g_dbus_message_new_signal(_path, _interface_, _signal);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -173,10 +173,10 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     GDBusMessage* _cretval;
     GError *_err;
-    _cretval = g_dbus_message_copy(cast(GDBusMessage*)cPtr, &_err);
+    _cretval = g_dbus_message_copy(cast(GDBusMessage*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getArg0()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_arg0(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -206,7 +206,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getArg0Path()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_arg0_path(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -219,7 +219,7 @@ class DBusMessage : gobject.object.ObjectWrap
   glib.variant.Variant getBody()
   {
     GVariant* _cretval;
-    _cretval = g_dbus_message_get_body(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_body(cast(GDBusMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -231,7 +231,7 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.types.DBusMessageByteOrder getByteOrder()
   {
     GDBusMessageByteOrder _cretval;
-    _cretval = g_dbus_message_get_byte_order(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_byte_order(cast(GDBusMessage*)this._cPtr);
     gio.types.DBusMessageByteOrder _retval = cast(gio.types.DBusMessageByteOrder)_cretval;
     return _retval;
   }
@@ -243,7 +243,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getDestination()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_destination(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -255,7 +255,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getErrorName()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_error_name(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -267,7 +267,7 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.types.DBusMessageFlags getFlags()
   {
     GDBusMessageFlags _cretval;
-    _cretval = g_dbus_message_get_flags(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_flags(cast(GDBusMessage*)this._cPtr);
     gio.types.DBusMessageFlags _retval = cast(gio.types.DBusMessageFlags)_cretval;
     return _retval;
   }
@@ -286,7 +286,7 @@ class DBusMessage : gobject.object.ObjectWrap
   glib.variant.Variant getHeader(gio.types.DBusMessageHeaderField headerField)
   {
     GVariant* _cretval;
-    _cretval = g_dbus_message_get_header(cast(GDBusMessage*)cPtr, headerField);
+    _cretval = g_dbus_message_get_header(cast(GDBusMessage*)this._cPtr, headerField);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -300,7 +300,7 @@ class DBusMessage : gobject.object.ObjectWrap
   ubyte[] getHeaderFields()
   {
     ubyte* _cretval;
-    _cretval = g_dbus_message_get_header_fields(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_header_fields(cast(GDBusMessage*)this._cPtr);
     ubyte[] _retval;
 
     if (_cretval)
@@ -320,7 +320,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getInterface()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_interface(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -334,7 +334,7 @@ class DBusMessage : gobject.object.ObjectWrap
   bool getLocked()
   {
     bool _retval;
-    _retval = g_dbus_message_get_locked(cast(GDBusMessage*)cPtr);
+    _retval = g_dbus_message_get_locked(cast(GDBusMessage*)this._cPtr);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getMember()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_member(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_member(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -357,7 +357,7 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.types.DBusMessageType getMessageType()
   {
     GDBusMessageType _cretval;
-    _cretval = g_dbus_message_get_message_type(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_message_type(cast(GDBusMessage*)this._cPtr);
     gio.types.DBusMessageType _retval = cast(gio.types.DBusMessageType)_cretval;
     return _retval;
   }
@@ -369,7 +369,7 @@ class DBusMessage : gobject.object.ObjectWrap
   uint getNumUnixFds()
   {
     uint _retval;
-    _retval = g_dbus_message_get_num_unix_fds(cast(GDBusMessage*)cPtr);
+    _retval = g_dbus_message_get_num_unix_fds(cast(GDBusMessage*)this._cPtr);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_path(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_path(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -392,7 +392,7 @@ class DBusMessage : gobject.object.ObjectWrap
   uint getReplySerial()
   {
     uint _retval;
-    _retval = g_dbus_message_get_reply_serial(cast(GDBusMessage*)cPtr);
+    _retval = g_dbus_message_get_reply_serial(cast(GDBusMessage*)this._cPtr);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getSender()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_sender(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -415,7 +415,7 @@ class DBusMessage : gobject.object.ObjectWrap
   uint getSerial()
   {
     uint _retval;
-    _retval = g_dbus_message_get_serial(cast(GDBusMessage*)cPtr);
+    _retval = g_dbus_message_get_serial(cast(GDBusMessage*)this._cPtr);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string getSignature()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)cPtr);
+    _cretval = g_dbus_message_get_signature(cast(GDBusMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -449,8 +449,8 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.unix_fdlist.UnixFDList getUnixFdList()
   {
     GUnixFDList* _cretval;
-    _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    _cretval = g_dbus_message_get_unix_fd_list(cast(GDBusMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -459,7 +459,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void lock()
   {
-    g_dbus_message_lock(cast(GDBusMessage*)cPtr);
+    g_dbus_message_lock(cast(GDBusMessage*)this._cPtr);
   }
 
   /**
@@ -475,8 +475,8 @@ class DBusMessage : gobject.object.ObjectWrap
     GDBusMessage* _cretval;
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)cPtr, _errorName, _errorMessage);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    _cretval = g_dbus_message_new_method_error_literal(cast(GDBusMessage*)this._cPtr, _errorName, _errorMessage);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -487,8 +487,8 @@ class DBusMessage : gobject.object.ObjectWrap
   gio.dbus_message.DBusMessage newMethodReply()
   {
     GDBusMessage* _cretval;
-    _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
+    _cretval = g_dbus_message_new_method_reply(cast(GDBusMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_message.DBusMessage)(cast(GDBusMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -533,7 +533,7 @@ class DBusMessage : gobject.object.ObjectWrap
   string print(uint indent)
   {
     char* _cretval;
-    _cretval = g_dbus_message_print(cast(GDBusMessage*)cPtr, indent);
+    _cretval = g_dbus_message_print(cast(GDBusMessage*)this._cPtr, indent);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -550,7 +550,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setBody(glib.variant.Variant body_)
   {
-    g_dbus_message_set_body(cast(GDBusMessage*)cPtr, body_ ? cast(GVariant*)body_.cPtr(No.Dup) : null);
+    g_dbus_message_set_body(cast(GDBusMessage*)this._cPtr, body_ ? cast(GVariant*)body_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -561,7 +561,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setByteOrder(gio.types.DBusMessageByteOrder byteOrder)
   {
-    g_dbus_message_set_byte_order(cast(GDBusMessage*)cPtr, byteOrder);
+    g_dbus_message_set_byte_order(cast(GDBusMessage*)this._cPtr, byteOrder);
   }
 
   /**
@@ -573,7 +573,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setDestination(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_destination(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_destination(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -585,7 +585,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setErrorName(string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_error_name(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_error_name(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -597,7 +597,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setFlags(gio.types.DBusMessageFlags flags)
   {
-    g_dbus_message_set_flags(cast(GDBusMessage*)cPtr, flags);
+    g_dbus_message_set_flags(cast(GDBusMessage*)this._cPtr, flags);
   }
 
   /**
@@ -611,7 +611,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setHeader(gio.types.DBusMessageHeaderField headerField, glib.variant.Variant value = null)
   {
-    g_dbus_message_set_header(cast(GDBusMessage*)cPtr, headerField, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    g_dbus_message_set_header(cast(GDBusMessage*)this._cPtr, headerField, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -623,7 +623,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setInterface(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_interface(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_interface(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -635,7 +635,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setMember(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_member(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_member(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -646,7 +646,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setMessageType(gio.types.DBusMessageType type)
   {
-    g_dbus_message_set_message_type(cast(GDBusMessage*)cPtr, type);
+    g_dbus_message_set_message_type(cast(GDBusMessage*)this._cPtr, type);
   }
 
   /**
@@ -657,7 +657,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setNumUnixFds(uint value)
   {
-    g_dbus_message_set_num_unix_fds(cast(GDBusMessage*)cPtr, value);
+    g_dbus_message_set_num_unix_fds(cast(GDBusMessage*)this._cPtr, value);
   }
 
   /**
@@ -669,7 +669,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setPath(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_path(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_path(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -680,7 +680,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setReplySerial(uint value)
   {
-    g_dbus_message_set_reply_serial(cast(GDBusMessage*)cPtr, value);
+    g_dbus_message_set_reply_serial(cast(GDBusMessage*)this._cPtr, value);
   }
 
   /**
@@ -692,7 +692,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setSender(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_sender(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_sender(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -703,7 +703,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setSerial(uint serial)
   {
-    g_dbus_message_set_serial(cast(GDBusMessage*)cPtr, serial);
+    g_dbus_message_set_serial(cast(GDBusMessage*)this._cPtr, serial);
   }
 
   /**
@@ -715,7 +715,7 @@ class DBusMessage : gobject.object.ObjectWrap
   void setSignature(string value = null)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_dbus_message_set_signature(cast(GDBusMessage*)cPtr, _value);
+    g_dbus_message_set_signature(cast(GDBusMessage*)this._cPtr, _value);
   }
 
   /**
@@ -736,7 +736,7 @@ class DBusMessage : gobject.object.ObjectWrap
   */
   void setUnixFdList(gio.unix_fdlist.UnixFDList fdList = null)
   {
-    g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)cPtr, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
+    g_dbus_message_set_unix_fd_list(cast(GDBusMessage*)this._cPtr, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
   }
 
   /**
@@ -755,7 +755,7 @@ class DBusMessage : gobject.object.ObjectWrap
     ubyte* _cretval;
     size_t _cretlength;
     GError *_err;
-    _cretval = g_dbus_message_to_blob(cast(GDBusMessage*)cPtr, &_cretlength, capabilities, &_err);
+    _cretval = g_dbus_message_to_blob(cast(GDBusMessage*)this._cPtr, &_cretlength, capabilities, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     ubyte[] _retval;
@@ -782,7 +782,7 @@ class DBusMessage : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_dbus_message_to_gerror(cast(GDBusMessage*)cPtr, &_err);
+    _retval = g_dbus_message_to_gerror(cast(GDBusMessage*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

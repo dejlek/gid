@@ -49,22 +49,22 @@ class Context : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_context_get_type != &gidSymbolNotFound ? gst_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class Context : gobject.boxed.Boxed
   string getContextType()
   {
     const(char)* _cretval;
-    _cretval = gst_context_get_context_type(cast(const(GstContext)*)cPtr);
+    _cretval = gst_context_get_context_type(cast(const(GstContext)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -110,7 +110,7 @@ class Context : gobject.boxed.Boxed
   gst.structure.Structure getStructure()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_context_get_structure(cast(const(GstContext)*)cPtr);
+    _cretval = gst_context_get_structure(cast(const(GstContext)*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -126,7 +126,7 @@ class Context : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
-    _retval = gst_context_has_context_type(cast(const(GstContext)*)cPtr, _contextType);
+    _retval = gst_context_has_context_type(cast(const(GstContext)*)this._cPtr, _contextType);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class Context : gobject.boxed.Boxed
   bool isPersistent()
   {
     bool _retval;
-    _retval = gst_context_is_persistent(cast(const(GstContext)*)cPtr);
+    _retval = gst_context_is_persistent(cast(const(GstContext)*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Context : gobject.boxed.Boxed
   gst.structure.Structure writableStructure()
   {
     GstStructure* _cretval;
-    _cretval = gst_context_writable_structure(cast(GstContext*)cPtr);
+    _cretval = gst_context_writable_structure(cast(GstContext*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

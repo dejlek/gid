@@ -36,16 +36,16 @@ class WindowGroup : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_group_get_type != &gidSymbolNotFound ? gtk_window_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -76,7 +76,7 @@ class WindowGroup : gobject.object.ObjectWrap
   */
   void addWindow(gtk.window.Window window)
   {
-    gtk_window_group_add_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_window_group_add_window(cast(GtkWindowGroup*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -87,7 +87,7 @@ class WindowGroup : gobject.object.ObjectWrap
   gtk.window.Window[] listWindows()
   {
     GList* _cretval;
-    _cretval = gtk_window_group_list_windows(cast(GtkWindowGroup*)cPtr);
+    _cretval = gtk_window_group_list_windows(cast(GtkWindowGroup*)this._cPtr);
     auto _retval = gListToD!(gtk.window.Window, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -100,6 +100,6 @@ class WindowGroup : gobject.object.ObjectWrap
   */
   void removeWindow(gtk.window.Window window)
   {
-    gtk_window_group_remove_window(cast(GtkWindowGroup*)cPtr, window ? cast(GtkWindow*)window.cPtr(No.Dup) : null);
+    gtk_window_group_remove_window(cast(GtkWindowGroup*)this._cPtr, window ? cast(GtkWindow*)window._cPtr(No.Dup) : null);
   }
 }

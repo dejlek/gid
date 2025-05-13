@@ -28,16 +28,16 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tcp_wrapper_connection_get_type != &gidSymbolNotFound ? g_tcp_wrapper_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   this(gio.iostream.IOStream baseIoStream, gio.socket.Socket socket)
   {
     GSocketConnection* _cretval;
-    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream.cPtr(No.Dup) : null, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null);
+    _cretval = g_tcp_wrapper_connection_new(baseIoStream ? cast(GIOStream*)baseIoStream._cPtr(No.Dup) : null, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -68,8 +68,8 @@ class TcpWrapperConnection : gio.tcp_connection.TcpConnection
   gio.iostream.IOStream getBaseIoStream()
   {
     GIOStream* _cretval;
-    _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
+    _cretval = g_tcp_wrapper_connection_get_base_io_stream(cast(GTcpWrapperConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.iostream.IOStream)(cast(GIOStream*)_cretval, No.Take);
     return _retval;
   }
 }

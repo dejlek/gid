@@ -33,16 +33,16 @@ class StyleScheme : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_style_scheme_get_type != &gidSymbolNotFound ? gtk_source_style_scheme_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -82,7 +82,7 @@ class StyleScheme : gobject.object.ObjectWrap
   string[] getAuthors()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_style_scheme_get_authors(cast(GtkSourceStyleScheme*)cPtr);
+    _cretval = gtk_source_style_scheme_get_authors(cast(GtkSourceStyleScheme*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -101,7 +101,7 @@ class StyleScheme : gobject.object.ObjectWrap
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)cPtr);
+    _cretval = gtk_source_style_scheme_get_description(cast(GtkSourceStyleScheme*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -110,7 +110,7 @@ class StyleScheme : gobject.object.ObjectWrap
   string getFilename()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)cPtr);
+    _cretval = gtk_source_style_scheme_get_filename(cast(GtkSourceStyleScheme*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -119,7 +119,7 @@ class StyleScheme : gobject.object.ObjectWrap
   string getId()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)cPtr);
+    _cretval = gtk_source_style_scheme_get_id(cast(GtkSourceStyleScheme*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -137,7 +137,7 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_source_style_scheme_get_metadata(cast(GtkSourceStyleScheme*)cPtr, _name);
+    _cretval = gtk_source_style_scheme_get_metadata(cast(GtkSourceStyleScheme*)this._cPtr, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -146,7 +146,7 @@ class StyleScheme : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)cPtr);
+    _cretval = gtk_source_style_scheme_get_name(cast(GtkSourceStyleScheme*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -156,8 +156,8 @@ class StyleScheme : gobject.object.ObjectWrap
   {
     GtkSourceStyle* _cretval;
     const(char)* _styleId = styleId.toCString(No.Alloc);
-    _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)cPtr, _styleId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
+    _cretval = gtk_source_style_scheme_get_style(cast(GtkSourceStyleScheme*)this._cPtr, _styleId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style.Style)(cast(GtkSourceStyle*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -33,16 +33,16 @@ class Stream : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_get_type != &gidSymbolNotFound ? gst_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -136,7 +136,7 @@ class Stream : gst.object.ObjectWrap
   {
     GstStream* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
-    _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, type, flags);
+    _cretval = gst_stream_new(_streamId, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, type, flags);
     this(_cretval, Yes.Take);
   }
 
@@ -147,7 +147,7 @@ class Stream : gst.object.ObjectWrap
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_stream_get_caps(cast(GstStream*)cPtr);
+    _cretval = gst_stream_get_caps(cast(GstStream*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -159,7 +159,7 @@ class Stream : gst.object.ObjectWrap
   gst.types.StreamFlags getStreamFlags()
   {
     GstStreamFlags _cretval;
-    _cretval = gst_stream_get_stream_flags(cast(GstStream*)cPtr);
+    _cretval = gst_stream_get_stream_flags(cast(GstStream*)this._cPtr);
     gst.types.StreamFlags _retval = cast(gst.types.StreamFlags)_cretval;
     return _retval;
   }
@@ -172,7 +172,7 @@ class Stream : gst.object.ObjectWrap
   string getStreamId()
   {
     const(char)* _cretval;
-    _cretval = gst_stream_get_stream_id(cast(GstStream*)cPtr);
+    _cretval = gst_stream_get_stream_id(cast(GstStream*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -184,7 +184,7 @@ class Stream : gst.object.ObjectWrap
   gst.types.StreamType getStreamType()
   {
     GstStreamType _cretval;
-    _cretval = gst_stream_get_stream_type(cast(GstStream*)cPtr);
+    _cretval = gst_stream_get_stream_type(cast(GstStream*)this._cPtr);
     gst.types.StreamType _retval = cast(gst.types.StreamType)_cretval;
     return _retval;
   }
@@ -196,7 +196,7 @@ class Stream : gst.object.ObjectWrap
   gst.tag_list.TagList getTags()
   {
     GstTagList* _cretval;
-    _cretval = gst_stream_get_tags(cast(GstStream*)cPtr);
+    _cretval = gst_stream_get_tags(cast(GstStream*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -209,7 +209,7 @@ class Stream : gst.object.ObjectWrap
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_stream_set_caps(cast(GstStream*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_stream_set_caps(cast(GstStream*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -220,7 +220,7 @@ class Stream : gst.object.ObjectWrap
   */
   void setStreamFlags(gst.types.StreamFlags flags)
   {
-    gst_stream_set_stream_flags(cast(GstStream*)cPtr, flags);
+    gst_stream_set_stream_flags(cast(GstStream*)this._cPtr, flags);
   }
 
   /**
@@ -231,7 +231,7 @@ class Stream : gst.object.ObjectWrap
   */
   void setStreamType(gst.types.StreamType streamType)
   {
-    gst_stream_set_stream_type(cast(GstStream*)cPtr, streamType);
+    gst_stream_set_stream_type(cast(GstStream*)this._cPtr, streamType);
   }
 
   /**
@@ -242,6 +242,6 @@ class Stream : gst.object.ObjectWrap
   */
   void setTags(gst.tag_list.TagList tags = null)
   {
-    gst_stream_set_tags(cast(GstStream*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null);
+    gst_stream_set_tags(cast(GstStream*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null);
   }
 }

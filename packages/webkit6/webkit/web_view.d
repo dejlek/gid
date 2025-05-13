@@ -82,16 +82,16 @@ class WebView : webkit.web_view_base.WebViewBase
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_view_get_type != &gidSymbolNotFound ? webkit_web_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -441,12 +441,12 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void callAsyncJavascriptFunction(string body_, ptrdiff_t length, glib.variant.Variant arguments = null, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -454,7 +454,7 @@ class WebView : webkit.web_view_base.WebViewBase
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)cPtr, _body_, length, arguments ? cast(GVariant*)arguments.cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_call_async_javascript_function(cast(WebKitWebView*)this._cPtr, _body_, length, arguments ? cast(GVariant*)arguments._cPtr(No.Dup) : null, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -470,10 +470,10 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     JSCValue* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_call_async_javascript_function_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_call_async_javascript_function_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -490,18 +490,18 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void canExecuteEditingCommand(string command, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _command = command.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_can_execute_editing_command(cast(WebKitWebView*)cPtr, _command, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_can_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -516,7 +516,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_web_view_can_execute_editing_command_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -529,7 +529,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool canGoBack()
   {
     bool _retval;
-    _retval = webkit_web_view_can_go_back(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_can_go_back(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -540,7 +540,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool canGoForward()
   {
     bool _retval;
-    _retval = webkit_web_view_can_go_forward(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_can_go_forward(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    _retval = webkit_web_view_can_show_mime_type(cast(WebKitWebView*)cPtr, _mimeType);
+    _retval = webkit_web_view_can_show_mime_type(cast(WebKitWebView*)this._cPtr, _mimeType);
     return _retval;
   }
 
@@ -571,8 +571,8 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitDownload* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = webkit_web_view_download_uri(cast(WebKitWebView*)cPtr, _uri);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
+    _cretval = webkit_web_view_download_uri(cast(WebKitWebView*)this._cPtr, _uri);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.download.Download)(cast(WebKitDownload*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -642,12 +642,12 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void evaluateJavascript(string script, ptrdiff_t length, string worldName = null, string sourceUri = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -655,7 +655,7 @@ class WebView : webkit.web_view_base.WebViewBase
     const(char)* _worldName = worldName.toCString(No.Alloc);
     const(char)* _sourceUri = sourceUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_evaluate_javascript(cast(WebKitWebView*)cPtr, _script, length, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_evaluate_javascript(cast(WebKitWebView*)this._cPtr, _script, length, _worldName, _sourceUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -671,10 +671,10 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     JSCValue* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_evaluate_javascript_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_evaluate_javascript_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class WebView : webkit.web_view_base.WebViewBase
   void executeEditingCommand(string command)
   {
     const(char)* _command = command.toCString(No.Alloc);
-    webkit_web_view_execute_editing_command(cast(WebKitWebView*)cPtr, _command);
+    webkit_web_view_execute_editing_command(cast(WebKitWebView*)this._cPtr, _command);
   }
 
   /**
@@ -708,7 +708,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _command = command.toCString(No.Alloc);
     const(char)* _argument = argument.toCString(No.Alloc);
-    webkit_web_view_execute_editing_command_with_argument(cast(WebKitWebView*)cPtr, _command, _argument);
+    webkit_web_view_execute_editing_command_with_argument(cast(WebKitWebView*)this._cPtr, _command, _argument);
   }
 
   /**
@@ -718,7 +718,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.types.AutomationBrowsingContextPresentation getAutomationPresentationType()
   {
     WebKitAutomationBrowsingContextPresentation _cretval;
-    _cretval = webkit_web_view_get_automation_presentation_type(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_automation_presentation_type(cast(WebKitWebView*)this._cPtr);
     webkit.types.AutomationBrowsingContextPresentation _retval = cast(webkit.types.AutomationBrowsingContextPresentation)_cretval;
     return _retval;
   }
@@ -732,8 +732,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.back_forward_list.BackForwardList getBackForwardList()
   {
     WebKitBackForwardList* _cretval;
-    _cretval = webkit_web_view_get_back_forward_list(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.back_forward_list.BackForwardList)(cast(WebKitBackForwardList*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_back_forward_list(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.back_forward_list.BackForwardList)(cast(WebKitBackForwardList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -750,7 +750,7 @@ class WebView : webkit.web_view_base.WebViewBase
   void getBackgroundColor(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
-    webkit_web_view_get_background_color(cast(WebKitWebView*)cPtr, &_rgba);
+    webkit_web_view_get_background_color(cast(WebKitWebView*)this._cPtr, &_rgba);
     rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
   }
 
@@ -762,7 +762,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.types.MediaCaptureState getCameraCaptureState()
   {
     WebKitMediaCaptureState _cretval;
-    _cretval = webkit_web_view_get_camera_capture_state(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_camera_capture_state(cast(WebKitWebView*)this._cPtr);
     webkit.types.MediaCaptureState _retval = cast(webkit.types.MediaCaptureState)_cretval;
     return _retval;
   }
@@ -774,8 +774,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.web_context.WebContext getContext()
   {
     WebKitWebContext* _cretval;
-    _cretval = webkit_web_view_get_context(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_context(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_context.WebContext)(cast(WebKitWebContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -787,7 +787,7 @@ class WebView : webkit.web_view_base.WebViewBase
   string getCustomCharset()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_view_get_custom_charset(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_custom_charset(cast(WebKitWebView*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -799,7 +799,7 @@ class WebView : webkit.web_view_base.WebViewBase
   string getDefaultContentSecurityPolicy()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_view_get_default_content_security_policy(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_default_content_security_policy(cast(WebKitWebView*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -812,7 +812,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.types.MediaCaptureState getDisplayCaptureState()
   {
     WebKitMediaCaptureState _cretval;
-    _cretval = webkit_web_view_get_display_capture_state(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_display_capture_state(cast(WebKitWebView*)this._cPtr);
     webkit.types.MediaCaptureState _retval = cast(webkit.types.MediaCaptureState)_cretval;
     return _retval;
   }
@@ -824,8 +824,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.editor_state.EditorState getEditorState()
   {
     WebKitEditorState* _cretval;
-    _cretval = webkit_web_view_get_editor_state(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.editor_state.EditorState)(cast(WebKitEditorState*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_editor_state(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.editor_state.EditorState)(cast(WebKitEditorState*)_cretval, No.Take);
     return _retval;
   }
 
@@ -840,7 +840,7 @@ class WebView : webkit.web_view_base.WebViewBase
   double getEstimatedLoadProgress()
   {
     double _retval;
-    _retval = webkit_web_view_get_estimated_load_progress(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_get_estimated_load_progress(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -856,8 +856,8 @@ class WebView : webkit.web_view_base.WebViewBase
   gdk.texture.Texture getFavicon()
   {
     GdkTexture* _cretval;
-    _cretval = webkit_web_view_get_favicon(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_favicon(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -872,8 +872,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.find_controller.FindController getFindController()
   {
     WebKitFindController* _cretval;
-    _cretval = webkit_web_view_get_find_controller(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.find_controller.FindController)(cast(WebKitFindController*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_find_controller(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.find_controller.FindController)(cast(WebKitFindController*)_cretval, No.Take);
     return _retval;
   }
 
@@ -886,8 +886,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.input_method_context.InputMethodContext getInputMethodContext()
   {
     WebKitInputMethodContext* _cretval;
-    _cretval = webkit_web_view_get_input_method_context(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.input_method_context.InputMethodContext)(cast(WebKitInputMethodContext*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_input_method_context(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.input_method_context.InputMethodContext)(cast(WebKitInputMethodContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -898,8 +898,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.web_inspector.WebInspector getInspector()
   {
     WebKitWebInspector* _cretval;
-    _cretval = webkit_web_view_get_inspector(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_inspector.WebInspector)(cast(WebKitWebInspector*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_inspector(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_inspector.WebInspector)(cast(WebKitWebInspector*)_cretval, No.Take);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool getIsMuted()
   {
     bool _retval;
-    _retval = webkit_web_view_get_is_muted(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_get_is_muted(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -921,7 +921,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool getIsWebProcessResponsive()
   {
     bool _retval;
-    _retval = webkit_web_view_get_is_web_process_responsive(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_get_is_web_process_responsive(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -933,8 +933,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.web_resource.WebResource getMainResource()
   {
     WebKitWebResource* _cretval;
-    _cretval = webkit_web_view_get_main_resource(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_resource.WebResource)(cast(WebKitWebResource*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_main_resource(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_resource.WebResource)(cast(WebKitWebResource*)_cretval, No.Take);
     return _retval;
   }
 
@@ -946,7 +946,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.types.MediaCaptureState getMicrophoneCaptureState()
   {
     WebKitMediaCaptureState _cretval;
-    _cretval = webkit_web_view_get_microphone_capture_state(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_microphone_capture_state(cast(WebKitWebView*)this._cPtr);
     webkit.types.MediaCaptureState _retval = cast(webkit.types.MediaCaptureState)_cretval;
     return _retval;
   }
@@ -958,8 +958,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.network_session.NetworkSession getNetworkSession()
   {
     WebKitNetworkSession* _cretval;
-    _cretval = webkit_web_view_get_network_session(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_network_session(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.network_session.NetworkSession)(cast(WebKitNetworkSession*)_cretval, No.Take);
     return _retval;
   }
 
@@ -971,7 +971,7 @@ class WebView : webkit.web_view_base.WebViewBase
   ulong getPageId()
   {
     ulong _retval;
-    _retval = webkit_web_view_get_page_id(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_get_page_id(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -982,7 +982,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.web_view_session_state.WebViewSessionState getSessionState()
   {
     WebKitWebViewSessionState* _cretval;
-    _cretval = webkit_web_view_get_session_state(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_session_state(cast(WebKitWebView*)this._cPtr);
     auto _retval = _cretval ? new webkit.web_view_session_state.WebViewSessionState(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1009,8 +1009,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.settings.Settings getSettings()
   {
     WebKitSettings* _cretval;
-    _cretval = webkit_web_view_get_settings(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.settings.Settings)(cast(WebKitSettings*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_settings(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.settings.Settings)(cast(WebKitSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1031,17 +1031,17 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void getSnapshot(webkit.types.SnapshotRegion region, webkit.types.SnapshotOptions options, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_get_snapshot(cast(WebKitWebView*)cPtr, region, options, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_get_snapshot(cast(WebKitWebView*)this._cPtr, region, options, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1056,10 +1056,10 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_get_snapshot_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_get_snapshot_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1073,7 +1073,7 @@ class WebView : webkit.web_view_base.WebViewBase
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_view_get_title(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_title(cast(WebKitWebView*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1106,7 +1106,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GTlsCertificate* _certificate;
-    _retval = webkit_web_view_get_tls_info(cast(WebKitWebView*)cPtr, &_certificate, &errors);
+    _retval = webkit_web_view_get_tls_info(cast(WebKitWebView*)this._cPtr, &_certificate, &errors);
     certificate = new gio.tls_certificate.TlsCertificate(cast(void*)_certificate, No.Take);
     return _retval;
   }
@@ -1170,7 +1170,7 @@ class WebView : webkit.web_view_base.WebViewBase
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_view_get_uri(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_uri(cast(WebKitWebView*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1182,8 +1182,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.user_content_manager.UserContentManager getUserContentManager()
   {
     WebKitUserContentManager* _cretval;
-    _cretval = webkit_web_view_get_user_content_manager(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_content_manager.UserContentManager)(cast(WebKitUserContentManager*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_user_content_manager(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.user_content_manager.UserContentManager)(cast(WebKitUserContentManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1194,7 +1194,7 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.types.WebExtensionMode getWebExtensionMode()
   {
     WebKitWebExtensionMode _cretval;
-    _cretval = webkit_web_view_get_web_extension_mode(cast(WebKitWebView*)cPtr);
+    _cretval = webkit_web_view_get_web_extension_mode(cast(WebKitWebView*)this._cPtr);
     webkit.types.WebExtensionMode _retval = cast(webkit.types.WebExtensionMode)_cretval;
     return _retval;
   }
@@ -1213,8 +1213,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.website_policies.WebsitePolicies getWebsitePolicies()
   {
     WebKitWebsitePolicies* _cretval;
-    _cretval = webkit_web_view_get_website_policies(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.website_policies.WebsitePolicies)(cast(WebKitWebsitePolicies*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_website_policies(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.website_policies.WebsitePolicies)(cast(WebKitWebsitePolicies*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1228,8 +1228,8 @@ class WebView : webkit.web_view_base.WebViewBase
   webkit.window_properties.WindowProperties getWindowProperties()
   {
     WebKitWindowProperties* _cretval;
-    _cretval = webkit_web_view_get_window_properties(cast(WebKitWebView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.window_properties.WindowProperties)(cast(WebKitWindowProperties*)_cretval, No.Take);
+    _cretval = webkit_web_view_get_window_properties(cast(WebKitWebView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.window_properties.WindowProperties)(cast(WebKitWindowProperties*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1243,7 +1243,7 @@ class WebView : webkit.web_view_base.WebViewBase
   double getZoomLevel()
   {
     double _retval;
-    _retval = webkit_web_view_get_zoom_level(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_get_zoom_level(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1255,7 +1255,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void goBack()
   {
-    webkit_web_view_go_back(cast(WebKitWebView*)cPtr);
+    webkit_web_view_go_back(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1266,7 +1266,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void goForward()
   {
-    webkit_web_view_go_forward(cast(WebKitWebView*)cPtr);
+    webkit_web_view_go_forward(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1280,7 +1280,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void goToBackForwardListItem(webkit.back_forward_list_item.BackForwardListItem listItem)
   {
-    webkit_web_view_go_to_back_forward_list_item(cast(WebKitWebView*)cPtr, listItem ? cast(WebKitBackForwardListItem*)listItem.cPtr(No.Dup) : null);
+    webkit_web_view_go_to_back_forward_list_item(cast(WebKitWebView*)this._cPtr, listItem ? cast(WebKitBackForwardListItem*)listItem._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1294,7 +1294,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isControlledByAutomation()
   {
     bool _retval;
-    _retval = webkit_web_view_is_controlled_by_automation(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_is_controlled_by_automation(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1309,7 +1309,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isEditable()
   {
     bool _retval;
-    _retval = webkit_web_view_is_editable(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_is_editable(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1326,7 +1326,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isLoading()
   {
     bool _retval;
-    _retval = webkit_web_view_is_loading(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_is_loading(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1342,7 +1342,7 @@ class WebView : webkit.web_view_base.WebViewBase
   bool isPlayingAudio()
   {
     bool _retval;
-    _retval = webkit_web_view_is_playing_audio(cast(WebKitWebView*)cPtr);
+    _retval = webkit_web_view_is_playing_audio(cast(WebKitWebView*)this._cPtr);
     return _retval;
   }
 
@@ -1364,7 +1364,7 @@ class WebView : webkit.web_view_base.WebViewBase
     const(char)* _content = content.toCString(No.Alloc);
     const(char)* _contentUri = contentUri.toCString(No.Alloc);
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
-    webkit_web_view_load_alternate_html(cast(WebKitWebView*)cPtr, _content, _contentUri, _baseUri);
+    webkit_web_view_load_alternate_html(cast(WebKitWebView*)this._cPtr, _content, _contentUri, _baseUri);
   }
 
   /**
@@ -1386,7 +1386,7 @@ class WebView : webkit.web_view_base.WebViewBase
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
     const(char)* _encoding = encoding.toCString(No.Alloc);
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
-    webkit_web_view_load_bytes(cast(WebKitWebView*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, _mimeType, _encoding, _baseUri);
+    webkit_web_view_load_bytes(cast(WebKitWebView*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, _mimeType, _encoding, _baseUri);
   }
 
   /**
@@ -1409,7 +1409,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     const(char)* _content = content.toCString(No.Alloc);
     const(char)* _baseUri = baseUri.toCString(No.Alloc);
-    webkit_web_view_load_html(cast(WebKitWebView*)cPtr, _content, _baseUri);
+    webkit_web_view_load_html(cast(WebKitWebView*)this._cPtr, _content, _baseUri);
   }
 
   /**
@@ -1424,7 +1424,7 @@ class WebView : webkit.web_view_base.WebViewBase
   void loadPlainText(string plainText)
   {
     const(char)* _plainText = plainText.toCString(No.Alloc);
-    webkit_web_view_load_plain_text(cast(WebKitWebView*)cPtr, _plainText);
+    webkit_web_view_load_plain_text(cast(WebKitWebView*)this._cPtr, _plainText);
   }
 
   /**
@@ -1438,7 +1438,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void loadRequest(webkit.urirequest.URIRequest request)
   {
-    webkit_web_view_load_request(cast(WebKitWebView*)cPtr, request ? cast(WebKitURIRequest*)request.cPtr(No.Dup) : null);
+    webkit_web_view_load_request(cast(WebKitWebView*)this._cPtr, request ? cast(WebKitURIRequest*)request._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1453,7 +1453,7 @@ class WebView : webkit.web_view_base.WebViewBase
   void loadUri(string uri)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
-    webkit_web_view_load_uri(cast(WebKitWebView*)cPtr, _uri);
+    webkit_web_view_load_uri(cast(WebKitWebView*)this._cPtr, _uri);
   }
 
   /**
@@ -1463,7 +1463,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void reload()
   {
-    webkit_web_view_reload(cast(WebKitWebView*)cPtr);
+    webkit_web_view_reload(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1472,7 +1472,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void reloadBypassCache()
   {
-    webkit_web_view_reload_bypass_cache(cast(WebKitWebView*)cPtr);
+    webkit_web_view_reload_bypass_cache(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1483,7 +1483,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void restoreSessionState(webkit.web_view_session_state.WebViewSessionState state)
   {
-    webkit_web_view_restore_session_state(cast(WebKitWebView*)cPtr, state ? cast(WebKitWebViewSessionState*)state.cPtr(No.Dup) : null);
+    webkit_web_view_restore_session_state(cast(WebKitWebView*)this._cPtr, state ? cast(WebKitWebViewSessionState*)state._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1504,17 +1504,17 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void save(webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_save(cast(WebKitWebView*)cPtr, saveMode, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_save(cast(WebKitWebView*)this._cPtr, saveMode, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1530,10 +1530,10 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     GInputStream* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_save_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_save_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1556,17 +1556,17 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void saveToFile(gio.file.File file, webkit.types.SaveMode saveMode, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_save_to_file(cast(WebKitWebView*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, saveMode, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_save_to_file(cast(WebKitWebView*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, saveMode, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1581,7 +1581,7 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_web_view_save_to_file_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_web_view_save_to_file_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1602,17 +1602,17 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void sendMessageToPage(webkit.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_view_send_message_to_page(cast(WebKitWebView*)cPtr, message ? cast(WebKitUserMessage*)message.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_view_send_message_to_page(cast(WebKitWebView*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -1627,10 +1627,10 @@ class WebView : webkit.web_view_base.WebViewBase
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_view_send_message_to_page_finish(cast(WebKitWebView*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_view_send_message_to_page_finish(cast(WebKitWebView*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1647,7 +1647,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setBackgroundColor(gdk.rgba.RGBA rgba)
   {
-    webkit_web_view_set_background_color(cast(WebKitWebView*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    webkit_web_view_set_background_color(cast(WebKitWebView*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1662,7 +1662,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setCameraCaptureState(webkit.types.MediaCaptureState state)
   {
-    webkit_web_view_set_camera_capture_state(cast(WebKitWebView*)cPtr, state);
+    webkit_web_view_set_camera_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
 
   /**
@@ -1693,7 +1693,7 @@ class WebView : webkit.web_view_base.WebViewBase
       _tmpallowlist ~= s.toCString(No.Alloc);
     _tmpallowlist ~= null;
     const(char*)* _allowlist = _tmpallowlist.ptr;
-    webkit_web_view_set_cors_allowlist(cast(WebKitWebView*)cPtr, _allowlist);
+    webkit_web_view_set_cors_allowlist(cast(WebKitWebView*)this._cPtr, _allowlist);
   }
 
   /**
@@ -1710,7 +1710,7 @@ class WebView : webkit.web_view_base.WebViewBase
   void setCustomCharset(string charset = null)
   {
     const(char)* _charset = charset.toCString(No.Alloc);
-    webkit_web_view_set_custom_charset(cast(WebKitWebView*)cPtr, _charset);
+    webkit_web_view_set_custom_charset(cast(WebKitWebView*)this._cPtr, _charset);
   }
 
   /**
@@ -1725,7 +1725,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setDisplayCaptureState(webkit.types.MediaCaptureState state)
   {
-    webkit_web_view_set_display_capture_state(cast(WebKitWebView*)cPtr, state);
+    webkit_web_view_set_display_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
 
   /**
@@ -1745,7 +1745,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setEditable(bool editable)
   {
-    webkit_web_view_set_editable(cast(WebKitWebView*)cPtr, editable);
+    webkit_web_view_set_editable(cast(WebKitWebView*)this._cPtr, editable);
   }
 
   /**
@@ -1759,7 +1759,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setInputMethodContext(webkit.input_method_context.InputMethodContext context = null)
   {
-    webkit_web_view_set_input_method_context(cast(WebKitWebView*)cPtr, context ? cast(WebKitInputMethodContext*)context.cPtr(No.Dup) : null);
+    webkit_web_view_set_input_method_context(cast(WebKitWebView*)this._cPtr, context ? cast(WebKitInputMethodContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1770,7 +1770,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setIsMuted(bool muted)
   {
-    webkit_web_view_set_is_muted(cast(WebKitWebView*)cPtr, muted);
+    webkit_web_view_set_is_muted(cast(WebKitWebView*)this._cPtr, muted);
   }
 
   /**
@@ -1785,7 +1785,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setMicrophoneCaptureState(webkit.types.MediaCaptureState state)
   {
-    webkit_web_view_set_microphone_capture_state(cast(WebKitWebView*)cPtr, state);
+    webkit_web_view_set_microphone_capture_state(cast(WebKitWebView*)this._cPtr, state);
   }
 
   /**
@@ -1802,7 +1802,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setSettings(webkit.settings.Settings settings)
   {
-    webkit_web_view_set_settings(cast(WebKitWebView*)cPtr, settings ? cast(WebKitSettings*)settings.cPtr(No.Dup) : null);
+    webkit_web_view_set_settings(cast(WebKitWebView*)this._cPtr, settings ? cast(WebKitSettings*)settings._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1816,7 +1816,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void setZoomLevel(double zoomLevel)
   {
-    webkit_web_view_set_zoom_level(cast(WebKitWebView*)cPtr, zoomLevel);
+    webkit_web_view_set_zoom_level(cast(WebKitWebView*)this._cPtr, zoomLevel);
   }
 
   /**
@@ -1829,7 +1829,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void stopLoading()
   {
-    webkit_web_view_stop_loading(cast(WebKitWebView*)cPtr);
+    webkit_web_view_stop_loading(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1841,7 +1841,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void terminateWebProcess()
   {
-    webkit_web_view_terminate_web_process(cast(WebKitWebView*)cPtr);
+    webkit_web_view_terminate_web_process(cast(WebKitWebView*)this._cPtr);
   }
 
   /**
@@ -1854,7 +1854,7 @@ class WebView : webkit.web_view_base.WebViewBase
   */
   void tryClose()
   {
-    webkit_web_view_try_close(cast(WebKitWebView*)cPtr);
+    webkit_web_view_try_close(cast(WebKitWebView*)this._cPtr);
   }
 
   /**

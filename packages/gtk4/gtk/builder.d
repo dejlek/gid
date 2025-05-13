@@ -368,16 +368,16 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_builder_get_type != &gidSymbolNotFound ? gtk_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -483,7 +483,7 @@ class Builder : gobject.object.ObjectWrap
     GtkBuilder* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_builder_new_from_file(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class Builder : gobject.object.ObjectWrap
     GtkBuilder* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_builder_new_from_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -529,7 +529,7 @@ class Builder : gobject.object.ObjectWrap
 
     auto _string_ = cast(char*)string_.ptr;
     _cretval = gtk_builder_new_from_string(_string_, _length);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder.Builder)(cast(GtkBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -563,7 +563,7 @@ class Builder : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_builder_add_from_file(cast(GtkBuilder*)cPtr, _filename, &_err);
+    _retval = gtk_builder_add_from_file(cast(GtkBuilder*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -596,7 +596,7 @@ class Builder : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_builder_add_from_resource(cast(GtkBuilder*)cPtr, _resourcePath, &_err);
+    _retval = gtk_builder_add_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -630,7 +630,7 @@ class Builder : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _buffer = buffer.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_builder_add_from_string(cast(GtkBuilder*)cPtr, _buffer, length, &_err);
+    _retval = gtk_builder_add_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -666,7 +666,7 @@ class Builder : gobject.object.ObjectWrap
     const(char*)* _objectIds = _tmpobjectIds.ptr;
 
     GError *_err;
-    _retval = gtk_builder_add_objects_from_file(cast(GtkBuilder*)cPtr, _filename, _objectIds, &_err);
+    _retval = gtk_builder_add_objects_from_file(cast(GtkBuilder*)this._cPtr, _filename, _objectIds, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -702,7 +702,7 @@ class Builder : gobject.object.ObjectWrap
     const(char*)* _objectIds = _tmpobjectIds.ptr;
 
     GError *_err;
-    _retval = gtk_builder_add_objects_from_resource(cast(GtkBuilder*)cPtr, _resourcePath, _objectIds, &_err);
+    _retval = gtk_builder_add_objects_from_resource(cast(GtkBuilder*)this._cPtr, _resourcePath, _objectIds, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -738,7 +738,7 @@ class Builder : gobject.object.ObjectWrap
     const(char*)* _objectIds = _tmpobjectIds.ptr;
 
     GError *_err;
-    _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)cPtr, _buffer, length, _objectIds, &_err);
+    _retval = gtk_builder_add_objects_from_string(cast(GtkBuilder*)this._cPtr, _buffer, length, _objectIds, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -765,7 +765,7 @@ class Builder : gobject.object.ObjectWrap
     GClosure* _cretval;
     const(char)* _functionName = functionName.toCString(No.Alloc);
     GError *_err;
-    _cretval = gtk_builder_create_closure(cast(GtkBuilder*)cPtr, _functionName, flags, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_builder_create_closure(cast(GtkBuilder*)this._cPtr, _functionName, flags, object ? cast(GObject*)object._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, Yes.Take) : null;
@@ -788,7 +788,7 @@ class Builder : gobject.object.ObjectWrap
   void exposeObject(string name, gobject.object.ObjectWrap object)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_builder_expose_object(cast(GtkBuilder*)cPtr, _name, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    gtk_builder_expose_object(cast(GtkBuilder*)this._cPtr, _name, object ? cast(GObject*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -811,7 +811,7 @@ class Builder : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _buffer = buffer.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)cPtr, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, templateType, _buffer, length, &_err);
+    _retval = gtk_builder_extend_with_template(cast(GtkBuilder*)this._cPtr, object ? cast(GObject*)object._cPtr(No.Dup) : null, templateType, _buffer, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -823,9 +823,9 @@ class Builder : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getCurrentObject()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_builder_get_current_object(cast(GtkBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_builder_get_current_object(cast(GtkBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -841,10 +841,10 @@ class Builder : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getObject(string name)
   {
-    ObjectC* _cretval;
+    GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_builder_get_object(cast(GtkBuilder*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    _cretval = gtk_builder_get_object(cast(GtkBuilder*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -861,7 +861,7 @@ class Builder : gobject.object.ObjectWrap
   gobject.object.ObjectWrap[] getObjects()
   {
     GSList* _cretval;
-    _cretval = gtk_builder_get_objects(cast(GtkBuilder*)cPtr);
+    _cretval = gtk_builder_get_objects(cast(GtkBuilder*)this._cPtr);
     auto _retval = gSListToD!(gobject.object.ObjectWrap, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -873,8 +873,8 @@ class Builder : gobject.object.ObjectWrap
   gtk.builder_scope.BuilderScope getScope()
   {
     GtkBuilderScope* _cretval;
-    _cretval = gtk_builder_get_scope(cast(GtkBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
+    _cretval = gtk_builder_get_scope(cast(GtkBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.builder_scope.BuilderScope)(cast(GtkBuilderScope*)_cretval, No.Take);
     return _retval;
   }
 
@@ -885,7 +885,7 @@ class Builder : gobject.object.ObjectWrap
   string getTranslationDomain()
   {
     const(char)* _cretval;
-    _cretval = gtk_builder_get_translation_domain(cast(GtkBuilder*)cPtr);
+    _cretval = gtk_builder_get_translation_domain(cast(GtkBuilder*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -906,7 +906,7 @@ class Builder : gobject.object.ObjectWrap
   {
     gobject.types.GType _retval;
     const(char)* _typeName = typeName.toCString(No.Alloc);
-    _retval = gtk_builder_get_type_from_name(cast(GtkBuilder*)cPtr, _typeName);
+    _retval = gtk_builder_get_type_from_name(cast(GtkBuilder*)this._cPtr, _typeName);
     return _retval;
   }
 
@@ -926,7 +926,7 @@ class Builder : gobject.object.ObjectWrap
   */
   void setCurrentObject(gobject.object.ObjectWrap currentObject = null)
   {
-    gtk_builder_set_current_object(cast(GtkBuilder*)cPtr, currentObject ? cast(ObjectC*)currentObject.cPtr(No.Dup) : null);
+    gtk_builder_set_current_object(cast(GtkBuilder*)this._cPtr, currentObject ? cast(GObject*)currentObject._cPtr(No.Dup) : null);
   }
 
   /**
@@ -939,7 +939,7 @@ class Builder : gobject.object.ObjectWrap
   */
   void setScope(gtk.builder_scope.BuilderScope scope_ = null)
   {
-    gtk_builder_set_scope(cast(GtkBuilder*)cPtr, scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_).cPtr(No.Dup) : null);
+    gtk_builder_set_scope(cast(GtkBuilder*)this._cPtr, scope_ ? cast(GtkBuilderScope*)(cast(gobject.object.ObjectWrap)scope_)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -951,7 +951,7 @@ class Builder : gobject.object.ObjectWrap
   void setTranslationDomain(string domain = null)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    gtk_builder_set_translation_domain(cast(GtkBuilder*)cPtr, _domain);
+    gtk_builder_set_translation_domain(cast(GtkBuilder*)this._cPtr, _domain);
   }
 
   /**
@@ -980,7 +980,7 @@ class Builder : gobject.object.ObjectWrap
     const(char)* _string_ = string_.toCString(No.Alloc);
     GValue _value;
     GError *_err;
-    _retval = gtk_builder_value_from_string(cast(GtkBuilder*)cPtr, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, _string_, &_value, &_err);
+    _retval = gtk_builder_value_from_string(cast(GtkBuilder*)this._cPtr, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _string_, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -1012,7 +1012,7 @@ class Builder : gobject.object.ObjectWrap
     const(char)* _string_ = string_.toCString(No.Alloc);
     GValue _value;
     GError *_err;
-    _retval = gtk_builder_value_from_string_type(cast(GtkBuilder*)cPtr, type, _string_, &_value, &_err);
+    _retval = gtk_builder_value_from_string_type(cast(GtkBuilder*)this._cPtr, type, _string_, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);

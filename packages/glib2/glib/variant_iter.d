@@ -33,7 +33,7 @@ class VariantIter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -49,7 +49,7 @@ class VariantIter
   size_t nChildren()
   {
     size_t _retval;
-    _retval = g_variant_iter_n_children(cast(GVariantIter*)cPtr);
+    _retval = g_variant_iter_n_children(cast(GVariantIter*)this._cPtr);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class VariantIter
   glib.variant.Variant nextValue()
   {
     GVariant* _cretval;
-    _cretval = g_variant_iter_next_value(cast(GVariantIter*)cPtr);
+    _cretval = g_variant_iter_next_value(cast(GVariantIter*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

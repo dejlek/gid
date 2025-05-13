@@ -37,22 +37,22 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_property_info_get_type != &gidSymbolNotFound ? g_dbus_property_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property int refCount()
   {
-    return (cast(GDBusPropertyInfo*)cPtr).refCount;
+    return (cast(GDBusPropertyInfo*)this._cPtr).refCount;
   }
 
   /**
@@ -77,7 +77,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property void refCount(int propval)
   {
-    (cast(GDBusPropertyInfo*)cPtr).refCount = propval;
+    (cast(GDBusPropertyInfo*)this._cPtr).refCount = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).name);
   }
 
   /**
@@ -96,8 +96,8 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).name);
   }
 
   /**
@@ -106,7 +106,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property string signature()
   {
-    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
+    return cToD!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).signature);
   }
 
   /**
@@ -116,8 +116,8 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property void signature(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)cPtr).signature);
-    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)cPtr).signature);
+    cValueFree!(string)(cast(void*)(cast(GDBusPropertyInfo*)this._cPtr).signature);
+    dToC(propval, cast(void*)&(cast(GDBusPropertyInfo*)this._cPtr).signature);
   }
 
   /**
@@ -126,7 +126,7 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property gio.types.DBusPropertyInfoFlags flags()
   {
-    return cast(gio.types.DBusPropertyInfoFlags)(cast(GDBusPropertyInfo*)cPtr).flags;
+    return cast(gio.types.DBusPropertyInfoFlags)(cast(GDBusPropertyInfo*)this._cPtr).flags;
   }
 
   /**
@@ -136,6 +136,6 @@ class DBusPropertyInfo : gobject.boxed.Boxed
   */
   @property void flags(gio.types.DBusPropertyInfoFlags propval)
   {
-    (cast(GDBusPropertyInfo*)cPtr).flags = cast(GDBusPropertyInfoFlags)propval;
+    (cast(GDBusPropertyInfo*)this._cPtr).flags = cast(GDBusPropertyInfoFlags)propval;
   }
 }

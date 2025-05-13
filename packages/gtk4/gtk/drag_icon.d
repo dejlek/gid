@@ -44,16 +44,16 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drag_icon_get_type != &gidSymbolNotFound ? gtk_drag_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,8 +104,8 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   static gtk.widget.Widget createWidgetForValue(gobject.value.Value value)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
+    _cretval = gtk_drag_icon_create_widget_for_value(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -122,8 +122,8 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   static gtk.widget.Widget getForDrag(gdk.drag.Drag drag)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_drag_icon_get_for_drag(drag ? cast(GdkDrag*)drag._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   */
   static void setFromPaintable(gdk.drag.Drag drag, gdk.paintable.Paintable paintable, int hotX, int hotY)
   {
-    gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag.cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null, hotX, hotY);
+    gtk_drag_icon_set_from_paintable(drag ? cast(GdkDrag*)drag._cPtr(No.Dup) : null, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null, hotX, hotY);
   }
 
   /**
@@ -152,8 +152,8 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drag_icon_get_child(cast(GtkDragIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_drag_icon_get_child(cast(GtkDragIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -165,6 +165,6 @@ class DragIcon : gtk.widget.Widget, gtk.native.Native, gtk.root.Root
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_drag_icon_set_child(cast(GtkDragIcon*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_drag_icon_set_child(cast(GtkDragIcon*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

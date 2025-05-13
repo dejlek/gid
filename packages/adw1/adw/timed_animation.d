@@ -37,16 +37,16 @@ class TimedAnimation : adw.animation.Animation
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_timed_animation_get_type != &gidSymbolNotFound ? adw_timed_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -249,7 +249,7 @@ class TimedAnimation : adw.animation.Animation
   this(gtk.widget.Widget widget, double from, double to, uint duration, adw.animation_target.AnimationTarget target)
   {
     AdwAnimation* _cretval;
-    _cretval = adw_timed_animation_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, from, to, duration, target ? cast(AdwAnimationTarget*)target.cPtr(Yes.Dup) : null);
+    _cretval = adw_timed_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, duration, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -260,7 +260,7 @@ class TimedAnimation : adw.animation.Animation
   bool getAlternate()
   {
     bool _retval;
-    _retval = adw_timed_animation_get_alternate(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_alternate(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class TimedAnimation : adw.animation.Animation
   uint getDuration()
   {
     uint _retval;
-    _retval = adw_timed_animation_get_duration(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_duration(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class TimedAnimation : adw.animation.Animation
   adw.types.Easing getEasing()
   {
     AdwEasing _cretval;
-    _cretval = adw_timed_animation_get_easing(cast(AdwTimedAnimation*)cPtr);
+    _cretval = adw_timed_animation_get_easing(cast(AdwTimedAnimation*)this._cPtr);
     adw.types.Easing _retval = cast(adw.types.Easing)_cretval;
     return _retval;
   }
@@ -294,7 +294,7 @@ class TimedAnimation : adw.animation.Animation
   uint getRepeatCount()
   {
     uint _retval;
-    _retval = adw_timed_animation_get_repeat_count(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_repeat_count(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class TimedAnimation : adw.animation.Animation
   bool getReverse()
   {
     bool _retval;
-    _retval = adw_timed_animation_get_reverse(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_reverse(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class TimedAnimation : adw.animation.Animation
   double getValueFrom()
   {
     double _retval;
-    _retval = adw_timed_animation_get_value_from(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_value_from(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class TimedAnimation : adw.animation.Animation
   double getValueTo()
   {
     double _retval;
-    _retval = adw_timed_animation_get_value_to(cast(AdwTimedAnimation*)cPtr);
+    _retval = adw_timed_animation_get_value_to(cast(AdwTimedAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setAlternate(bool alternate)
   {
-    adw_timed_animation_set_alternate(cast(AdwTimedAnimation*)cPtr, alternate);
+    adw_timed_animation_set_alternate(cast(AdwTimedAnimation*)this._cPtr, alternate);
   }
 
   /**
@@ -352,7 +352,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setDuration(uint duration)
   {
-    adw_timed_animation_set_duration(cast(AdwTimedAnimation*)cPtr, duration);
+    adw_timed_animation_set_duration(cast(AdwTimedAnimation*)this._cPtr, duration);
   }
 
   /**
@@ -365,7 +365,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setEasing(adw.types.Easing easing)
   {
-    adw_timed_animation_set_easing(cast(AdwTimedAnimation*)cPtr, easing);
+    adw_timed_animation_set_easing(cast(AdwTimedAnimation*)this._cPtr, easing);
   }
 
   /**
@@ -378,7 +378,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setRepeatCount(uint repeatCount)
   {
-    adw_timed_animation_set_repeat_count(cast(AdwTimedAnimation*)cPtr, repeatCount);
+    adw_timed_animation_set_repeat_count(cast(AdwTimedAnimation*)this._cPtr, repeatCount);
   }
 
   /**
@@ -389,7 +389,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setReverse(bool reverse)
   {
-    adw_timed_animation_set_reverse(cast(AdwTimedAnimation*)cPtr, reverse);
+    adw_timed_animation_set_reverse(cast(AdwTimedAnimation*)this._cPtr, reverse);
   }
 
   /**
@@ -406,7 +406,7 @@ class TimedAnimation : adw.animation.Animation
   */
   void setValueFrom(double value)
   {
-    adw_timed_animation_set_value_from(cast(AdwTimedAnimation*)cPtr, value);
+    adw_timed_animation_set_value_from(cast(AdwTimedAnimation*)this._cPtr, value);
   }
 
   /**
@@ -423,6 +423,6 @@ class TimedAnimation : adw.animation.Animation
   */
   void setValueTo(double value)
   {
-    adw_timed_animation_set_value_to(cast(AdwTimedAnimation*)cPtr, value);
+    adw_timed_animation_set_value_to(cast(AdwTimedAnimation*)this._cPtr, value);
   }
 }

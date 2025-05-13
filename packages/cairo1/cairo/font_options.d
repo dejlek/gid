@@ -35,22 +35,22 @@ class FontOptions : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_font_options_get_type != &gidSymbolNotFound ? cairo_gobject_font_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.font_options.FontOptions copy()
   {
     cairo_font_options_t* _cretval;
-    _cretval = cairo_font_options_copy(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_copy(cast(const(cairo_font_options_t)*)this._cPtr);
     auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -88,7 +88,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.Bool equal(cairo.font_options.FontOptions other)
   {
     cairo.types.Bool _retval;
-    _retval = cairo_font_options_equal(cast(const(cairo_font_options_t)*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.Dup) : null);
+    _retval = cairo_font_options_equal(cast(const(cairo_font_options_t)*)this._cPtr, other ? cast(const(cairo_font_options_t)*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.Antialias getAntialias()
   {
     cairo_antialias_t _cretval;
-    _cretval = cairo_font_options_get_antialias(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_get_antialias(cast(const(cairo_font_options_t)*)this._cPtr);
     cairo.types.Antialias _retval = cast(cairo.types.Antialias)_cretval;
     return _retval;
   }
@@ -112,7 +112,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.ColorMode getColorMode()
   {
     cairo_color_mode_t _cretval;
-    _cretval = cairo_font_options_get_color_mode(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_get_color_mode(cast(const(cairo_font_options_t)*)this._cPtr);
     cairo.types.ColorMode _retval = cast(cairo.types.ColorMode)_cretval;
     return _retval;
   }
@@ -124,7 +124,7 @@ class FontOptions : gobject.boxed.Boxed
   uint getColorPalette()
   {
     uint _retval;
-    _retval = cairo_font_options_get_color_palette(cast(const(cairo_font_options_t)*)cPtr);
+    _retval = cairo_font_options_get_color_palette(cast(const(cairo_font_options_t)*)this._cPtr);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.Status getCustomPaletteColor(uint index, out double red, out double green, out double blue, out double alpha)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_font_options_get_custom_palette_color(cast(cairo_font_options_t*)cPtr, index, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
+    _cretval = cairo_font_options_get_custom_palette_color(cast(cairo_font_options_t*)this._cPtr, index, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -157,7 +157,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.HintMetrics getHintMetrics()
   {
     cairo_hint_metrics_t _cretval;
-    _cretval = cairo_font_options_get_hint_metrics(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_get_hint_metrics(cast(const(cairo_font_options_t)*)this._cPtr);
     cairo.types.HintMetrics _retval = cast(cairo.types.HintMetrics)_cretval;
     return _retval;
   }
@@ -170,7 +170,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.HintStyle getHintStyle()
   {
     cairo_hint_style_t _cretval;
-    _cretval = cairo_font_options_get_hint_style(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_get_hint_style(cast(const(cairo_font_options_t)*)this._cPtr);
     cairo.types.HintStyle _retval = cast(cairo.types.HintStyle)_cretval;
     return _retval;
   }
@@ -183,7 +183,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.SubpixelOrder getSubpixelOrder()
   {
     cairo_subpixel_order_t _cretval;
-    _cretval = cairo_font_options_get_subpixel_order(cast(const(cairo_font_options_t)*)cPtr);
+    _cretval = cairo_font_options_get_subpixel_order(cast(const(cairo_font_options_t)*)this._cPtr);
     cairo.types.SubpixelOrder _retval = cast(cairo.types.SubpixelOrder)_cretval;
     return _retval;
   }
@@ -201,7 +201,7 @@ class FontOptions : gobject.boxed.Boxed
   string getVariations()
   {
     const(char)* _cretval;
-    _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)cPtr);
+    _cretval = cairo_font_options_get_variations(cast(cairo_font_options_t*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -217,7 +217,7 @@ class FontOptions : gobject.boxed.Boxed
   gulong hash()
   {
     gulong _retval;
-    _retval = cairo_font_options_hash(cast(const(cairo_font_options_t)*)cPtr);
+    _retval = cairo_font_options_hash(cast(const(cairo_font_options_t)*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void merge(cairo.font_options.FontOptions other)
   {
-    cairo_font_options_merge(cast(cairo_font_options_t*)cPtr, other ? cast(const(cairo_font_options_t)*)other.cPtr(No.Dup) : null);
+    cairo_font_options_merge(cast(cairo_font_options_t*)this._cPtr, other ? cast(const(cairo_font_options_t)*)other._cPtr(No.Dup) : null);
   }
 
   /**
@@ -244,7 +244,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setAntialias(cairo.types.Antialias antialias)
   {
-    cairo_font_options_set_antialias(cast(cairo_font_options_t*)cPtr, antialias);
+    cairo_font_options_set_antialias(cast(cairo_font_options_t*)this._cPtr, antialias);
   }
 
   /**
@@ -257,7 +257,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setColorMode(cairo.types.ColorMode colorMode)
   {
-    cairo_font_options_set_color_mode(cast(cairo_font_options_t*)cPtr, colorMode);
+    cairo_font_options_set_color_mode(cast(cairo_font_options_t*)this._cPtr, colorMode);
   }
 
   /**
@@ -275,7 +275,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setColorPalette(uint paletteIndex)
   {
-    cairo_font_options_set_color_palette(cast(cairo_font_options_t*)cPtr, paletteIndex);
+    cairo_font_options_set_color_palette(cast(cairo_font_options_t*)this._cPtr, paletteIndex);
   }
 
   /**
@@ -297,7 +297,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setCustomPaletteColor(uint index, double red, double green, double blue, double alpha)
   {
-    cairo_font_options_set_custom_palette_color(cast(cairo_font_options_t*)cPtr, index, red, green, blue, alpha);
+    cairo_font_options_set_custom_palette_color(cast(cairo_font_options_t*)this._cPtr, index, red, green, blue, alpha);
   }
 
   /**
@@ -311,7 +311,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setHintMetrics(cairo.types.HintMetrics hintMetrics)
   {
-    cairo_font_options_set_hint_metrics(cast(cairo_font_options_t*)cPtr, hintMetrics);
+    cairo_font_options_set_hint_metrics(cast(cairo_font_options_t*)this._cPtr, hintMetrics);
   }
 
   /**
@@ -325,7 +325,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setHintStyle(cairo.types.HintStyle hintStyle)
   {
-    cairo_font_options_set_hint_style(cast(cairo_font_options_t*)cPtr, hintStyle);
+    cairo_font_options_set_hint_style(cast(cairo_font_options_t*)this._cPtr, hintStyle);
   }
 
   /**
@@ -340,7 +340,7 @@ class FontOptions : gobject.boxed.Boxed
   */
   void setSubpixelOrder(cairo.types.SubpixelOrder subpixelOrder)
   {
-    cairo_font_options_set_subpixel_order(cast(cairo_font_options_t*)cPtr, subpixelOrder);
+    cairo_font_options_set_subpixel_order(cast(cairo_font_options_t*)this._cPtr, subpixelOrder);
   }
 
   /**
@@ -363,7 +363,7 @@ class FontOptions : gobject.boxed.Boxed
   void setVariations(string variations)
   {
     const(char)* _variations = variations.toCString(No.Alloc);
-    cairo_font_options_set_variations(cast(cairo_font_options_t*)cPtr, _variations);
+    cairo_font_options_set_variations(cast(cairo_font_options_t*)this._cPtr, _variations);
   }
 
   /**
@@ -375,7 +375,7 @@ class FontOptions : gobject.boxed.Boxed
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_font_options_status(cast(cairo_font_options_t*)cPtr);
+    _cretval = cairo_font_options_status(cast(cairo_font_options_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }

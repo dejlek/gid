@@ -18,16 +18,16 @@ class Inhibitor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_inhibitor_get_type != &gidSymbolNotFound ? panel_inhibitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -39,6 +39,6 @@ class Inhibitor : gobject.object.ObjectWrap
   /** */
   void uninhibit()
   {
-    panel_inhibitor_uninhibit(cast(PanelInhibitor*)cPtr);
+    panel_inhibitor_uninhibit(cast(PanelInhibitor*)this._cPtr);
   }
 }

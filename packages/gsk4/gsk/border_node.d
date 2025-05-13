@@ -46,9 +46,9 @@ class BorderNode : gsk.render_node.RenderNode
     assert(!borderColor || borderColor.length == 4);
     GdkRGBA[] _tmpborderColor;
     foreach (obj; borderColor)
-      _tmpborderColor ~= *cast(GdkRGBA*)obj.cPtr;
+      _tmpborderColor ~= *cast(GdkRGBA*)obj._cPtr;
     const(GdkRGBA)* _borderColor = _tmpborderColor.ptr;
-    _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline.cPtr : null, _borderWidth, _borderColor);
+    _cretval = gsk_border_node_new(outline ? cast(const(GskRoundedRect)*)outline._cPtr : null, _borderWidth, _borderColor);
     this(_cretval, Yes.Take);
   }
 
@@ -60,7 +60,7 @@ class BorderNode : gsk.render_node.RenderNode
   gdk.rgba.RGBA getColors()
   {
     const(GdkRGBA)* _cretval;
-    _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_border_node_get_colors(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -72,7 +72,7 @@ class BorderNode : gsk.render_node.RenderNode
   gsk.rounded_rect.RoundedRect getOutline()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_border_node_get_outline(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_border_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -86,7 +86,7 @@ class BorderNode : gsk.render_node.RenderNode
   float[] getWidths()
   {
     const(float)* _cretval;
-    _cretval = gsk_border_node_get_widths(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_border_node_get_widths(cast(const(GskRenderNode)*)this._cPtr);
     float[] _retval;
 
     if (_cretval)

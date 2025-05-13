@@ -49,16 +49,16 @@ class SearchBar : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_search_bar_get_type != &gidSymbolNotFound ? gtk_search_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -115,7 +115,7 @@ class SearchBar : gtk.bin.Bin
   */
   void connectEntry(gtk.entry.Entry entry)
   {
-    gtk_search_bar_connect_entry(cast(GtkSearchBar*)cPtr, entry ? cast(GtkEntry*)entry.cPtr(No.Dup) : null);
+    gtk_search_bar_connect_entry(cast(GtkSearchBar*)this._cPtr, entry ? cast(GtkEntry*)entry._cPtr(No.Dup) : null);
   }
 
   /**
@@ -125,7 +125,7 @@ class SearchBar : gtk.bin.Bin
   bool getSearchMode()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)cPtr);
+    _retval = gtk_search_bar_get_search_mode(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class SearchBar : gtk.bin.Bin
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)cPtr);
+    _retval = gtk_search_bar_get_show_close_button(cast(GtkSearchBar*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class SearchBar : gtk.bin.Bin
   bool handleEvent(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_search_bar_handle_event(cast(GtkSearchBar*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_search_bar_handle_event(cast(GtkSearchBar*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class SearchBar : gtk.bin.Bin
   */
   void setSearchMode(bool searchMode)
   {
-    gtk_search_bar_set_search_mode(cast(GtkSearchBar*)cPtr, searchMode);
+    gtk_search_bar_set_search_mode(cast(GtkSearchBar*)this._cPtr, searchMode);
   }
 
   /**
@@ -215,6 +215,6 @@ class SearchBar : gtk.bin.Bin
   */
   void setShowCloseButton(bool visible)
   {
-    gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)cPtr, visible);
+    gtk_search_bar_set_show_close_button(cast(GtkSearchBar*)this._cPtr, visible);
   }
 }

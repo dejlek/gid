@@ -53,7 +53,7 @@ template RemoteActionGroupT()
   override void activateActionFull(string actionName, glib.variant.Variant parameter, glib.variant.Variant platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)cPtr, _actionName, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData.cPtr(No.Dup) : null);
+    g_remote_action_group_activate_action_full(cast(GRemoteActionGroup*)this._cPtr, _actionName, parameter ? cast(GVariant*)parameter._cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
   }
 
   /**
@@ -75,6 +75,6 @@ template RemoteActionGroupT()
   override void changeActionStateFull(string actionName, glib.variant.Variant value, glib.variant.Variant platformData)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)cPtr, _actionName, value ? cast(GVariant*)value.cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData.cPtr(No.Dup) : null);
+    g_remote_action_group_change_action_state_full(cast(GRemoteActionGroup*)this._cPtr, _actionName, value ? cast(GVariant*)value._cPtr(No.Dup) : null, platformData ? cast(GVariant*)platformData._cPtr(No.Dup) : null);
   }
 }

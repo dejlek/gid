@@ -32,16 +32,16 @@ class CookieManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_cookie_manager_get_type != &gidSymbolNotFound ? webkit_cookie_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,17 +63,17 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void addCookie(soup.cookie.Cookie cookie, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_add_cookie(cast(WebKitCookieManager*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_add_cookie(cast(WebKitCookieManager*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -88,7 +88,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_add_cookie_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_cookie_manager_add_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -107,17 +107,17 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void deleteCookie(soup.cookie.Cookie cookie, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_delete_cookie(cast(WebKitCookieManager*)cPtr, cookie ? cast(SoupCookie*)cookie.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_delete_cookie(cast(WebKitCookieManager*)this._cPtr, cookie ? cast(SoupCookie*)cookie._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -132,7 +132,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_delete_cookie_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_cookie_manager_delete_cookie_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -154,17 +154,17 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void getAcceptPolicy(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_get_accept_policy(cast(WebKitCookieManager*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_get_accept_policy(cast(WebKitCookieManager*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -179,7 +179,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     WebKitCookieAcceptPolicy _cretval;
     GError *_err;
-    _cretval = webkit_cookie_manager_get_accept_policy_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_cookie_manager_get_accept_policy_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     webkit.types.CookieAcceptPolicy _retval = cast(webkit.types.CookieAcceptPolicy)_cretval;
@@ -198,17 +198,17 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void getAllCookies(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_get_all_cookies(cast(WebKitCookieManager*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_get_all_cookies(cast(WebKitCookieManager*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -226,7 +226,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_cookie_manager_get_all_cookies_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_cookie_manager_get_all_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GList*)_cretval);
@@ -249,18 +249,18 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void getCookies(string uri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_get_cookies(cast(WebKitCookieManager*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_get_cookies(cast(WebKitCookieManager*)this._cPtr, _uri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -278,7 +278,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_cookie_manager_get_cookies_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_cookie_manager_get_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GList*)_cretval);
@@ -298,19 +298,19 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void replaceCookies(soup.cookie.Cookie[] cookies, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _cookies = gListFromD!(soup.cookie.Cookie)(cookies);
     scope(exit) containerFree!(GList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_cookie_manager_replace_cookies(cast(WebKitCookieManager*)cPtr, _cookies, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_cookie_manager_replace_cookies(cast(WebKitCookieManager*)this._cPtr, _cookies, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -325,7 +325,7 @@ class CookieManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_cookie_manager_replace_cookies_finish(cast(WebKitCookieManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_cookie_manager_replace_cookies_finish(cast(WebKitCookieManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -344,7 +344,7 @@ class CookieManager : gobject.object.ObjectWrap
   */
   void setAcceptPolicy(webkit.types.CookieAcceptPolicy policy)
   {
-    webkit_cookie_manager_set_accept_policy(cast(WebKitCookieManager*)cPtr, policy);
+    webkit_cookie_manager_set_accept_policy(cast(WebKitCookieManager*)this._cPtr, policy);
   }
 
   /**
@@ -367,7 +367,7 @@ class CookieManager : gobject.object.ObjectWrap
   void setPersistentStorage(string filename, webkit.types.CookiePersistentStorage storage)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    webkit_cookie_manager_set_persistent_storage(cast(WebKitCookieManager*)cPtr, _filename, storage);
+    webkit_cookie_manager_set_persistent_storage(cast(WebKitCookieManager*)this._cPtr, _filename, storage);
   }
 
   /**

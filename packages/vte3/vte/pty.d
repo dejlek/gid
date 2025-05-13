@@ -25,16 +25,16 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())vte_pty_get_type != &gidSymbolNotFound ? vte_pty_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,10 +63,10 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = vte_pty_new_foreign_sync(fd, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,17 +109,17 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     VtePty* _cretval;
     GError *_err;
-    _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = vte_pty_new_sync(flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(vte.pty.Pty)(cast(VtePty*)_cretval, Yes.Take);
     return _retval;
   }
 
   /** */
   void childSetup()
   {
-    vte_pty_child_setup(cast(VtePty*)cPtr);
+    vte_pty_child_setup(cast(VtePty*)this._cPtr);
   }
 
   /**
@@ -127,14 +127,14 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   */
   void close()
   {
-    vte_pty_close(cast(VtePty*)cPtr);
+    vte_pty_close(cast(VtePty*)this._cPtr);
   }
 
   /** */
   int getFd()
   {
     int _retval;
-    _retval = vte_pty_get_fd(cast(VtePty*)cPtr);
+    _retval = vte_pty_get_fd(cast(VtePty*)this._cPtr);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_get_size(cast(VtePty*)cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
+    _retval = vte_pty_get_size(cast(VtePty*)this._cPtr, cast(int*)&rows, cast(int*)&columns, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -175,7 +175,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_set_size(cast(VtePty*)cPtr, rows, columns, &_err);
+    _retval = vte_pty_set_size(cast(VtePty*)this._cPtr, rows, columns, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -195,7 +195,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_set_utf8(cast(VtePty*)cPtr, utf8, &_err);
+    _retval = vte_pty_set_utf8(cast(VtePty*)this._cPtr, utf8, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -228,12 +228,12 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -253,7 +253,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_pty_spawn_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_pty_spawn_async(cast(VtePty*)this._cPtr, _workingDirectory, _argv, _envv, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /** */
@@ -261,7 +261,7 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
   {
     bool _retval;
     GError *_err;
-    _retval = vte_pty_spawn_finish(cast(VtePty*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
+    _retval = vte_pty_spawn_finish(cast(VtePty*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, cast(GPid*)&childPid, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -324,12 +324,12 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     }
     auto _childSetupCB = childSetup ? &_childSetupCallback : null;
 
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -359,6 +359,6 @@ class Pty : gobject.object.ObjectWrap, gio.initable.Initable
     auto _childSetup = childSetup ? freezeDelegate(cast(void*)&childSetup) : null;
     GDestroyNotify _childSetupDestroyCB = childSetup ? &thawDelegate : null;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    vte_pty_spawn_with_fds_async(cast(VtePty*)cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    vte_pty_spawn_with_fds_async(cast(VtePty*)this._cPtr, _workingDirectory, _argv, _envv, _fds, _nFds, _mapFds, _nMapFds, spawnFlags, _childSetupCB, _childSetup, _childSetupDestroyCB, timeout, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 }

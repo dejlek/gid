@@ -38,16 +38,16 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_stream_info_get_type != &gidSymbolNotFound ? gst_discoverer_stream_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_discoverer_stream_info_get_caps(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_caps(cast(GstDiscovererStreamInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -83,7 +83,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gst.structure.Structure getMisc()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_discoverer_stream_info_get_misc(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_misc(cast(GstDiscovererStreamInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -92,8 +92,8 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo getNext()
   {
     GstDiscovererStreamInfo* _cretval;
-    _cretval = gst_discoverer_stream_info_get_next(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_stream_info_get_next(cast(GstDiscovererStreamInfo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,8 +101,8 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo getPrevious()
   {
     GstDiscovererStreamInfo* _cretval;
-    _cretval = gst_discoverer_stream_info_get_previous(cast(GstDiscovererStreamInfo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_stream_info_get_previous(cast(GstDiscovererStreamInfo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   string getStreamId()
   {
     const(char)* _cretval;
-    _cretval = gst_discoverer_stream_info_get_stream_id(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_stream_id(cast(GstDiscovererStreamInfo*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -119,7 +119,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   int getStreamNumber()
   {
     int _retval;
-    _retval = gst_discoverer_stream_info_get_stream_number(cast(GstDiscovererStreamInfo*)cPtr);
+    _retval = gst_discoverer_stream_info_get_stream_number(cast(GstDiscovererStreamInfo*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   string getStreamTypeNick()
   {
     const(char)* _cretval;
-    _cretval = gst_discoverer_stream_info_get_stream_type_nick(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_stream_type_nick(cast(GstDiscovererStreamInfo*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -136,7 +136,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gst.tag_list.TagList getTags()
   {
     const(GstTagList)* _cretval;
-    _cretval = gst_discoverer_stream_info_get_tags(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_tags(cast(GstDiscovererStreamInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -145,7 +145,7 @@ class DiscovererStreamInfo : gobject.object.ObjectWrap
   gst.toc.Toc getToc()
   {
     const(GstToc)* _cretval;
-    _cretval = gst_discoverer_stream_info_get_toc(cast(GstDiscovererStreamInfo*)cPtr);
+    _cretval = gst_discoverer_stream_info_get_toc(cast(GstDiscovererStreamInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

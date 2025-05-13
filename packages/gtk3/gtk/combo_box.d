@@ -88,16 +88,16 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_combo_box_get_type != &gidSymbolNotFound ? gtk_combo_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -432,8 +432,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -449,8 +449,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithAreaAndEntry(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_area_and_entry(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_area_and_entry(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     GtkWidget* _cretval;
     _cretval = gtk_combo_box_new_with_entry();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -476,8 +476,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -492,8 +492,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   static gtk.combo_box.ComboBox newWithModelAndEntry(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_combo_box_new_with_model_and_entry(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.combo_box.ComboBox)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getActive()
   {
     int _retval;
-    _retval = gtk_combo_box_get_active(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_active(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -530,7 +530,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   string getActiveId()
   {
     const(char)* _cretval;
-    _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)cPtr);
+    _cretval = gtk_combo_box_get_active_id(cast(GtkComboBox*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -547,7 +547,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     bool _retval;
     GtkTreeIter _iter;
-    _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)cPtr, &_iter);
+    _retval = gtk_combo_box_get_active_iter(cast(GtkComboBox*)this._cPtr, &_iter);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -559,7 +559,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   bool getAddTearoffs()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_add_tearoffs(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_add_tearoffs(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -575,7 +575,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   gtk.types.SensitivityType getButtonSensitivity()
   {
     GtkSensitivityType _cretval;
-    _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)cPtr);
+    _cretval = gtk_combo_box_get_button_sensitivity(cast(GtkComboBox*)this._cPtr);
     gtk.types.SensitivityType _retval = cast(gtk.types.SensitivityType)_cretval;
     return _retval;
   }
@@ -587,7 +587,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getColumnSpanColumn()
   {
     int _retval;
-    _retval = gtk_combo_box_get_column_span_column(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_column_span_column(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -599,7 +599,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getEntryTextColumn()
   {
     int _retval;
-    _retval = gtk_combo_box_get_entry_text_column(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_entry_text_column(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -614,7 +614,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   override bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_focus_on_click(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_focus_on_click(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   bool getHasEntry()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_has_entry(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_has_entry(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -637,7 +637,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getIdColumn()
   {
     int _retval;
-    _retval = gtk_combo_box_get_id_column(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_id_column(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -649,8 +649,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
-    _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    _cretval = gtk_combo_box_get_model(cast(GtkComboBox*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -665,8 +665,8 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   atk.object.ObjectWrap getPopupAccessible()
   {
     AtkObject* _cretval;
-    _cretval = gtk_combo_box_get_popup_accessible(cast(GtkComboBox*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = gtk_combo_box_get_popup_accessible(cast(GtkComboBox*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -678,7 +678,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   bool getPopupFixedWidth()
   {
     bool _retval;
-    _retval = gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_popup_fixed_width(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -689,7 +689,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getRowSpanColumn()
   {
     int _retval;
-    _retval = gtk_combo_box_get_row_span_column(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_row_span_column(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -702,7 +702,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_combo_box_get_title(cast(GtkComboBox*)cPtr);
+    _cretval = gtk_combo_box_get_title(cast(GtkComboBox*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -716,7 +716,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   int getWrapWidth()
   {
     int _retval;
-    _retval = gtk_combo_box_get_wrap_width(cast(GtkComboBox*)cPtr);
+    _retval = gtk_combo_box_get_wrap_width(cast(GtkComboBox*)this._cPtr);
     return _retval;
   }
 
@@ -728,7 +728,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void popdown()
   {
-    gtk_combo_box_popdown(cast(GtkComboBox*)cPtr);
+    gtk_combo_box_popdown(cast(GtkComboBox*)this._cPtr);
   }
 
   /**
@@ -741,7 +741,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void popup()
   {
-    gtk_combo_box_popup(cast(GtkComboBox*)cPtr);
+    gtk_combo_box_popup(cast(GtkComboBox*)this._cPtr);
   }
 
   /**
@@ -754,7 +754,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void popupForDevice(gdk.device.Device device)
   {
-    gtk_combo_box_popup_for_device(cast(GtkComboBox*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gtk_combo_box_popup_for_device(cast(GtkComboBox*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -766,7 +766,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setActive(int index)
   {
-    gtk_combo_box_set_active(cast(GtkComboBox*)cPtr, index);
+    gtk_combo_box_set_active(cast(GtkComboBox*)this._cPtr, index);
   }
 
   /**
@@ -787,7 +787,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   {
     bool _retval;
     const(char)* _activeId = activeId.toCString(No.Alloc);
-    _retval = gtk_combo_box_set_active_id(cast(GtkComboBox*)cPtr, _activeId);
+    _retval = gtk_combo_box_set_active_id(cast(GtkComboBox*)this._cPtr, _activeId);
     return _retval;
   }
 
@@ -800,7 +800,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setActiveIter(gtk.tree_iter.TreeIter iter = null)
   {
-    gtk_combo_box_set_active_iter(cast(GtkComboBox*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    gtk_combo_box_set_active_iter(cast(GtkComboBox*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -812,7 +812,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setAddTearoffs(bool addTearoffs)
   {
-    gtk_combo_box_set_add_tearoffs(cast(GtkComboBox*)cPtr, addTearoffs);
+    gtk_combo_box_set_add_tearoffs(cast(GtkComboBox*)this._cPtr, addTearoffs);
   }
 
   /**
@@ -825,7 +825,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setButtonSensitivity(gtk.types.SensitivityType sensitivity)
   {
-    gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)cPtr, sensitivity);
+    gtk_combo_box_set_button_sensitivity(cast(GtkComboBox*)this._cPtr, sensitivity);
   }
 
   /**
@@ -838,7 +838,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setColumnSpanColumn(int columnSpan)
   {
-    gtk_combo_box_set_column_span_column(cast(GtkComboBox*)cPtr, columnSpan);
+    gtk_combo_box_set_column_span_column(cast(GtkComboBox*)this._cPtr, columnSpan);
   }
 
   /**
@@ -855,7 +855,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setEntryTextColumn(int textColumn)
   {
-    gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)cPtr, textColumn);
+    gtk_combo_box_set_entry_text_column(cast(GtkComboBox*)this._cPtr, textColumn);
   }
 
   /**
@@ -872,7 +872,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   override void setFocusOnClick(bool focusOnClick)
   {
-    gtk_combo_box_set_focus_on_click(cast(GtkComboBox*)cPtr, focusOnClick);
+    gtk_combo_box_set_focus_on_click(cast(GtkComboBox*)this._cPtr, focusOnClick);
   }
 
   /**
@@ -885,7 +885,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setIdColumn(int idColumn)
   {
-    gtk_combo_box_set_id_column(cast(GtkComboBox*)cPtr, idColumn);
+    gtk_combo_box_set_id_column(cast(GtkComboBox*)this._cPtr, idColumn);
   }
 
   /**
@@ -901,7 +901,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_combo_box_set_model(cast(GtkComboBox*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_combo_box_set_model(cast(GtkComboBox*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -913,7 +913,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setPopupFixedWidth(bool fixed)
   {
-    gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)cPtr, fixed);
+    gtk_combo_box_set_popup_fixed_width(cast(GtkComboBox*)this._cPtr, fixed);
   }
 
   /**
@@ -930,14 +930,14 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
     {
       auto _dlg = cast(gtk.types.TreeViewRowSeparatorFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_combo_box_set_row_separator_func(cast(GtkComboBox*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -950,7 +950,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setRowSpanColumn(int rowSpan)
   {
-    gtk_combo_box_set_row_span_column(cast(GtkComboBox*)cPtr, rowSpan);
+    gtk_combo_box_set_row_span_column(cast(GtkComboBox*)this._cPtr, rowSpan);
   }
 
   /**
@@ -962,7 +962,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_combo_box_set_title(cast(GtkComboBox*)cPtr, _title);
+    gtk_combo_box_set_title(cast(GtkComboBox*)this._cPtr, _title);
   }
 
   /**
@@ -975,7 +975,7 @@ class ComboBox : gtk.bin.Bin, gtk.cell_editable.CellEditable, gtk.cell_layout.Ce
   */
   void setWrapWidth(int width)
   {
-    gtk_combo_box_set_wrap_width(cast(GtkComboBox*)cPtr, width);
+    gtk_combo_box_set_wrap_width(cast(GtkComboBox*)this._cPtr, width);
   }
 
   /**

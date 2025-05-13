@@ -47,16 +47,16 @@ class FontDialogButton : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_font_dialog_button_get_type != &gidSymbolNotFound ? gtk_font_dialog_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -252,7 +252,7 @@ class FontDialogButton : gtk.widget.Widget
   this(gtk.font_dialog.FontDialog dialog = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog.cPtr(Yes.Dup) : null);
+    _cretval = gtk_font_dialog_button_new(dialog ? cast(GtkFontDialog*)dialog._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -263,8 +263,8 @@ class FontDialogButton : gtk.widget.Widget
   gtk.font_dialog.FontDialog getDialog()
   {
     GtkFontDialog* _cretval;
-    _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.Take);
+    _cretval = gtk_font_dialog_button_get_dialog(cast(GtkFontDialogButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.font_dialog.FontDialog)(cast(GtkFontDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class FontDialogButton : gtk.widget.Widget
   pango.font_description.FontDescription getFontDesc()
   {
     PangoFontDescription* _cretval;
-    _cretval = gtk_font_dialog_button_get_font_desc(cast(GtkFontDialogButton*)cPtr);
+    _cretval = gtk_font_dialog_button_get_font_desc(cast(GtkFontDialogButton*)this._cPtr);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -299,7 +299,7 @@ class FontDialogButton : gtk.widget.Widget
   string getFontFeatures()
   {
     const(char)* _cretval;
-    _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)cPtr);
+    _cretval = gtk_font_dialog_button_get_font_features(cast(GtkFontDialogButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -311,7 +311,7 @@ class FontDialogButton : gtk.widget.Widget
   pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
-    _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)cPtr);
+    _cretval = gtk_font_dialog_button_get_language(cast(GtkFontDialogButton*)this._cPtr);
     auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -324,7 +324,7 @@ class FontDialogButton : gtk.widget.Widget
   gtk.types.FontLevel getLevel()
   {
     GtkFontLevel _cretval;
-    _cretval = gtk_font_dialog_button_get_level(cast(GtkFontDialogButton*)cPtr);
+    _cretval = gtk_font_dialog_button_get_level(cast(GtkFontDialogButton*)this._cPtr);
     gtk.types.FontLevel _retval = cast(gtk.types.FontLevel)_cretval;
     return _retval;
   }
@@ -336,7 +336,7 @@ class FontDialogButton : gtk.widget.Widget
   bool getUseFont()
   {
     bool _retval;
-    _retval = gtk_font_dialog_button_get_use_font(cast(GtkFontDialogButton*)cPtr);
+    _retval = gtk_font_dialog_button_get_use_font(cast(GtkFontDialogButton*)this._cPtr);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class FontDialogButton : gtk.widget.Widget
   bool getUseSize()
   {
     bool _retval;
-    _retval = gtk_font_dialog_button_get_use_size(cast(GtkFontDialogButton*)cPtr);
+    _retval = gtk_font_dialog_button_get_use_size(cast(GtkFontDialogButton*)this._cPtr);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setDialog(gtk.font_dialog.FontDialog dialog)
   {
-    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)cPtr, dialog ? cast(GtkFontDialog*)dialog.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_dialog(cast(GtkFontDialogButton*)this._cPtr, dialog ? cast(GtkFontDialog*)dialog._cPtr(No.Dup) : null);
   }
 
   /**
@@ -372,7 +372,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setFontDesc(pango.font_description.FontDescription fontDesc)
   {
-    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_font_desc(cast(GtkFontDialogButton*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -384,7 +384,7 @@ class FontDialogButton : gtk.widget.Widget
   void setFontFeatures(string fontFeatures = null)
   {
     const(char)* _fontFeatures = fontFeatures.toCString(No.Alloc);
-    gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)cPtr, _fontFeatures);
+    gtk_font_dialog_button_set_font_features(cast(GtkFontDialogButton*)this._cPtr, _fontFeatures);
   }
 
   /**
@@ -395,7 +395,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setLanguage(pango.language.Language language = null)
   {
-    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    gtk_font_dialog_button_set_language(cast(GtkFontDialogButton*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
   }
 
   /**
@@ -407,7 +407,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setLevel(gtk.types.FontLevel level)
   {
-    gtk_font_dialog_button_set_level(cast(GtkFontDialogButton*)cPtr, level);
+    gtk_font_dialog_button_set_level(cast(GtkFontDialogButton*)this._cPtr, level);
   }
 
   /**
@@ -420,7 +420,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setUseFont(bool useFont)
   {
-    gtk_font_dialog_button_set_use_font(cast(GtkFontDialogButton*)cPtr, useFont);
+    gtk_font_dialog_button_set_use_font(cast(GtkFontDialogButton*)this._cPtr, useFont);
   }
 
   /**
@@ -433,7 +433,7 @@ class FontDialogButton : gtk.widget.Widget
   */
   void setUseSize(bool useSize)
   {
-    gtk_font_dialog_button_set_use_size(cast(GtkFontDialogButton*)cPtr, useSize);
+    gtk_font_dialog_button_set_use_size(cast(GtkFontDialogButton*)this._cPtr, useSize);
   }
 
   /**

@@ -30,7 +30,7 @@ class CollectData
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class CollectData
   */
   @property gstbase.collect_pads.CollectPads collect()
   {
-    return cToD!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)cPtr).collect);
+    return cToD!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)this._cPtr).collect);
   }
 
   /**
@@ -51,8 +51,8 @@ class CollectData
   */
   @property void collect(gstbase.collect_pads.CollectPads propval)
   {
-    cValueFree!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)cPtr).collect);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).collect);
+    cValueFree!(gstbase.collect_pads.CollectPads)(cast(void*)(cast(GstCollectData*)this._cPtr).collect);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).collect);
   }
 
   /**
@@ -61,7 +61,7 @@ class CollectData
   */
   @property gst.pad.Pad pad()
   {
-    return cToD!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)cPtr).pad);
+    return cToD!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)this._cPtr).pad);
   }
 
   /**
@@ -71,8 +71,8 @@ class CollectData
   */
   @property void pad(gst.pad.Pad propval)
   {
-    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)cPtr).pad);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).pad);
+    cValueFree!(gst.pad.Pad)(cast(void*)(cast(GstCollectData*)this._cPtr).pad);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).pad);
   }
 
   /**
@@ -81,7 +81,7 @@ class CollectData
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)this._cPtr).buffer);
   }
 
   /**
@@ -91,8 +91,8 @@ class CollectData
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstCollectData*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstCollectData*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstCollectData*)this._cPtr).buffer);
   }
 
   /**
@@ -101,7 +101,7 @@ class CollectData
   */
   @property uint pos()
   {
-    return (cast(GstCollectData*)cPtr).pos;
+    return (cast(GstCollectData*)this._cPtr).pos;
   }
 
   /**
@@ -111,7 +111,7 @@ class CollectData
   */
   @property void pos(uint propval)
   {
-    (cast(GstCollectData*)cPtr).pos = propval;
+    (cast(GstCollectData*)this._cPtr).pos = propval;
   }
 
   /**
@@ -120,6 +120,6 @@ class CollectData
   */
   @property gst.segment.Segment segment()
   {
-    return cToD!(gst.segment.Segment)(cast(void*)&(cast(GstCollectData*)cPtr).segment);
+    return cToD!(gst.segment.Segment)(cast(void*)&(cast(GstCollectData*)this._cPtr).segment);
   }
 }

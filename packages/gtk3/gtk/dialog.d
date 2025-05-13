@@ -146,16 +146,16 @@ class Dialog : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_dialog_get_type != &gidSymbolNotFound ? gtk_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -192,7 +192,7 @@ class Dialog : gtk.window.Window
   */
   void addActionWidget(gtk.widget.Widget child, int responseId)
   {
-    gtk_dialog_add_action_widget(cast(GtkDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
+    gtk_dialog_add_action_widget(cast(GtkDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -211,8 +211,8 @@ class Dialog : gtk.window.Window
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
-    _cretval = gtk_dialog_add_button(cast(GtkDialog*)cPtr, _buttonText, responseId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_dialog_add_button(cast(GtkDialog*)this._cPtr, _buttonText, responseId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,8 +226,8 @@ class Dialog : gtk.window.Window
   gtk.box.Box getActionArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_dialog_get_action_area(cast(GtkDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_dialog_get_action_area(cast(GtkDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,8 +238,8 @@ class Dialog : gtk.window.Window
   gtk.box.Box getContentArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_dialog_get_content_area(cast(GtkDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -252,8 +252,8 @@ class Dialog : gtk.window.Window
   gtk.header_bar.HeaderBar getHeaderBar()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_dialog_get_header_bar(cast(GtkDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.header_bar.HeaderBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Dialog : gtk.window.Window
   int getResponseForWidget(gtk.widget.Widget widget)
   {
     int _retval;
-    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _retval = gtk_dialog_get_response_for_widget(cast(GtkDialog*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -285,8 +285,8 @@ class Dialog : gtk.window.Window
   gtk.widget.Widget getWidgetForResponse(int responseId)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)cPtr, responseId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_dialog_get_widget_for_response(cast(GtkDialog*)this._cPtr, responseId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class Dialog : gtk.window.Window
   */
   void response(int responseId)
   {
-    gtk_dialog_response(cast(GtkDialog*)cPtr, responseId);
+    gtk_dialog_response(cast(GtkDialog*)this._cPtr, responseId);
   }
 
   /**
@@ -355,7 +355,7 @@ class Dialog : gtk.window.Window
   int run()
   {
     int _retval;
-    _retval = gtk_dialog_run(cast(GtkDialog*)cPtr);
+    _retval = gtk_dialog_run(cast(GtkDialog*)this._cPtr);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class Dialog : gtk.window.Window
       _nParams = cast(int)newOrder.length;
 
     auto _newOrder = cast(int*)newOrder.ptr;
-    gtk_dialog_set_alternative_button_order_from_array(cast(GtkDialog*)cPtr, _nParams, _newOrder);
+    gtk_dialog_set_alternative_button_order_from_array(cast(GtkDialog*)this._cPtr, _nParams, _newOrder);
   }
 
   /**
@@ -395,7 +395,7 @@ class Dialog : gtk.window.Window
   */
   void setDefaultResponse(int responseId)
   {
-    gtk_dialog_set_default_response(cast(GtkDialog*)cPtr, responseId);
+    gtk_dialog_set_default_response(cast(GtkDialog*)this._cPtr, responseId);
   }
 
   /**
@@ -409,7 +409,7 @@ class Dialog : gtk.window.Window
   */
   void setResponseSensitive(int responseId, bool setting)
   {
-    gtk_dialog_set_response_sensitive(cast(GtkDialog*)cPtr, responseId, setting);
+    gtk_dialog_set_response_sensitive(cast(GtkDialog*)this._cPtr, responseId, setting);
   }
 
   /**

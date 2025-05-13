@@ -32,7 +32,7 @@ class MapInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -43,7 +43,7 @@ class MapInfo
   */
   @property gst.memory.Memory memory()
   {
-    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)cPtr).memory);
+    return cToD!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)this._cPtr).memory);
   }
 
   /**
@@ -53,8 +53,8 @@ class MapInfo
   */
   @property void memory(gst.memory.Memory propval)
   {
-    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)cPtr).memory);
-    dToC(propval, cast(void*)&(cast(GstMapInfo*)cPtr).memory);
+    cValueFree!(gst.memory.Memory)(cast(void*)(cast(GstMapInfo*)this._cPtr).memory);
+    dToC(propval, cast(void*)&(cast(GstMapInfo*)this._cPtr).memory);
   }
 
   /**
@@ -63,7 +63,7 @@ class MapInfo
   */
   @property gst.types.MapFlags flags()
   {
-    return cast(gst.types.MapFlags)(cast(GstMapInfo*)cPtr).flags;
+    return cast(gst.types.MapFlags)(cast(GstMapInfo*)this._cPtr).flags;
   }
 
   /**
@@ -73,7 +73,7 @@ class MapInfo
   */
   @property void flags(gst.types.MapFlags propval)
   {
-    (cast(GstMapInfo*)cPtr).flags = cast(GstMapFlags)propval;
+    (cast(GstMapInfo*)this._cPtr).flags = cast(GstMapFlags)propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class MapInfo
   */
   @property size_t size()
   {
-    return (cast(GstMapInfo*)cPtr).size;
+    return (cast(GstMapInfo*)this._cPtr).size;
   }
 
   /**
@@ -92,7 +92,7 @@ class MapInfo
   */
   @property void size(size_t propval)
   {
-    (cast(GstMapInfo*)cPtr).size = propval;
+    (cast(GstMapInfo*)this._cPtr).size = propval;
   }
 
   /**
@@ -101,7 +101,7 @@ class MapInfo
   */
   @property size_t maxsize()
   {
-    return (cast(GstMapInfo*)cPtr).maxsize;
+    return (cast(GstMapInfo*)this._cPtr).maxsize;
   }
 
   /**
@@ -111,6 +111,6 @@ class MapInfo
   */
   @property void maxsize(size_t propval)
   {
-    (cast(GstMapInfo*)cPtr).maxsize = propval;
+    (cast(GstMapInfo*)this._cPtr).maxsize = propval;
   }
 }

@@ -64,16 +64,16 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_app_sink_get_type != &gidSymbolNotFound ? gst_app_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -227,7 +227,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getBufferListSupport()
   {
     bool _retval;
-    _retval = gst_app_sink_get_buffer_list_support(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_buffer_list_support(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_app_sink_get_caps(cast(GstAppSink*)cPtr);
+    _cretval = gst_app_sink_get_caps(cast(GstAppSink*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -252,7 +252,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getDrop()
   {
     bool _retval;
-    _retval = gst_app_sink_get_drop(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_drop(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getEmitSignals()
   {
     bool _retval;
-    _retval = gst_app_sink_get_emit_signals(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_emit_signals(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   uint getMaxBuffers()
   {
     uint _retval;
-    _retval = gst_app_sink_get_max_buffers(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_max_buffers(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -286,7 +286,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   ulong getMaxBytes()
   {
     ulong _retval;
-    _retval = gst_app_sink_get_max_bytes(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_max_bytes(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.types.ClockTime getMaxTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_app_sink_get_max_time(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_max_time(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool getWaitOnEos()
   {
     bool _retval;
-    _retval = gst_app_sink_get_wait_on_eos(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_get_wait_on_eos(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -325,7 +325,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   bool isEos()
   {
     bool _retval;
-    _retval = gst_app_sink_is_eos(cast(GstAppSink*)cPtr);
+    _retval = gst_app_sink_is_eos(cast(GstAppSink*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.sample.Sample pullPreroll()
   {
     GstSample* _cretval;
-    _cretval = gst_app_sink_pull_preroll(cast(GstAppSink*)cPtr);
+    _cretval = gst_app_sink_pull_preroll(cast(GstAppSink*)this._cPtr);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -377,7 +377,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.sample.Sample pullSample()
   {
     GstSample* _cretval;
-    _cretval = gst_app_sink_pull_sample(cast(GstAppSink*)cPtr);
+    _cretval = gst_app_sink_pull_sample(cast(GstAppSink*)this._cPtr);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -393,7 +393,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setBufferListSupport(bool enableLists)
   {
-    gst_app_sink_set_buffer_list_support(cast(GstAppSink*)cPtr, enableLists);
+    gst_app_sink_set_buffer_list_support(cast(GstAppSink*)this._cPtr, enableLists);
   }
 
   /**
@@ -407,7 +407,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_app_sink_set_caps(cast(GstAppSink*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    gst_app_sink_set_caps(cast(GstAppSink*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -419,7 +419,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setDrop(bool drop)
   {
-    gst_app_sink_set_drop(cast(GstAppSink*)cPtr, drop);
+    gst_app_sink_set_drop(cast(GstAppSink*)this._cPtr, drop);
   }
 
   /**
@@ -432,7 +432,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setEmitSignals(bool emit)
   {
-    gst_app_sink_set_emit_signals(cast(GstAppSink*)cPtr, emit);
+    gst_app_sink_set_emit_signals(cast(GstAppSink*)this._cPtr, emit);
   }
 
   /**
@@ -446,7 +446,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setMaxBuffers(uint max)
   {
-    gst_app_sink_set_max_buffers(cast(GstAppSink*)cPtr, max);
+    gst_app_sink_set_max_buffers(cast(GstAppSink*)this._cPtr, max);
   }
 
   /**
@@ -460,7 +460,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setMaxBytes(ulong max)
   {
-    gst_app_sink_set_max_bytes(cast(GstAppSink*)cPtr, max);
+    gst_app_sink_set_max_bytes(cast(GstAppSink*)this._cPtr, max);
   }
 
   /**
@@ -474,7 +474,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setMaxTime(gst.types.ClockTime max)
   {
-    gst_app_sink_set_max_time(cast(GstAppSink*)cPtr, max);
+    gst_app_sink_set_max_time(cast(GstAppSink*)this._cPtr, max);
   }
 
   /**
@@ -485,7 +485,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   */
   void setWaitOnEos(bool wait)
   {
-    gst_app_sink_set_wait_on_eos(cast(GstAppSink*)cPtr, wait);
+    gst_app_sink_set_wait_on_eos(cast(GstAppSink*)this._cPtr, wait);
   }
 
   /**
@@ -517,7 +517,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.sample.Sample tryPullPreroll(gst.types.ClockTime timeout)
   {
     GstSample* _cretval;
-    _cretval = gst_app_sink_try_pull_preroll(cast(GstAppSink*)cPtr, timeout);
+    _cretval = gst_app_sink_try_pull_preroll(cast(GstAppSink*)this._cPtr, timeout);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -544,7 +544,7 @@ class AppSink : gstbase.base_sink.BaseSink, gst.urihandler.URIHandler
   gst.sample.Sample tryPullSample(gst.types.ClockTime timeout)
   {
     GstSample* _cretval;
-    _cretval = gst_app_sink_try_pull_sample(cast(GstAppSink*)cPtr, timeout);
+    _cretval = gst_app_sink_try_pull_sample(cast(GstAppSink*)this._cPtr, timeout);
     auto _retval = _cretval ? new gst.sample.Sample(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

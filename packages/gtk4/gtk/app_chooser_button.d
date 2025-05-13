@@ -61,16 +61,16 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_app_chooser_button_get_type != &gidSymbolNotFound ? gtk_app_chooser_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -207,7 +207,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)cPtr, _name, _label, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_app_chooser_button_append_custom_item(cast(GtkAppChooserButton*)this._cPtr, _name, _label, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -218,7 +218,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void appendSeparator()
   {
-    gtk_app_chooser_button_append_separator(cast(GtkAppChooserButton*)cPtr);
+    gtk_app_chooser_button_append_separator(cast(GtkAppChooserButton*)this._cPtr);
   }
 
   /**
@@ -231,7 +231,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   string getHeading()
   {
     const(char)* _cretval;
-    _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)cPtr);
+    _cretval = gtk_app_chooser_button_get_heading(cast(GtkAppChooserButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -245,7 +245,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_modal(cast(GtkAppChooserButton*)cPtr);
+    _retval = gtk_app_chooser_button_get_modal(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getShowDefaultItem()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)cPtr);
+    _retval = gtk_app_chooser_button_get_show_default_item(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   bool getShowDialogItem()
   {
     bool _retval;
-    _retval = gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)cPtr);
+    _retval = gtk_app_chooser_button_get_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   void setActiveCustomItem(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)cPtr, _name);
+    gtk_app_chooser_button_set_active_custom_item(cast(GtkAppChooserButton*)this._cPtr, _name);
   }
 
   /**
@@ -309,7 +309,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   void setHeading(string heading)
   {
     const(char)* _heading = heading.toCString(No.Alloc);
-    gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)cPtr, _heading);
+    gtk_app_chooser_button_set_heading(cast(GtkAppChooserButton*)this._cPtr, _heading);
   }
 
   /**
@@ -322,7 +322,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void setModal(bool modal)
   {
-    gtk_app_chooser_button_set_modal(cast(GtkAppChooserButton*)cPtr, modal);
+    gtk_app_chooser_button_set_modal(cast(GtkAppChooserButton*)this._cPtr, modal);
   }
 
   /**
@@ -336,7 +336,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void setShowDefaultItem(bool setting)
   {
-    gtk_app_chooser_button_set_show_default_item(cast(GtkAppChooserButton*)cPtr, setting);
+    gtk_app_chooser_button_set_show_default_item(cast(GtkAppChooserButton*)this._cPtr, setting);
   }
 
   /**
@@ -350,7 +350,7 @@ class AppChooserButton : gtk.widget.Widget, gtk.app_chooser.AppChooser
   */
   void setShowDialogItem(bool setting)
   {
-    gtk_app_chooser_button_set_show_dialog_item(cast(GtkAppChooserButton*)cPtr, setting);
+    gtk_app_chooser_button_set_show_dialog_item(cast(GtkAppChooserButton*)this._cPtr, setting);
   }
 
   /**

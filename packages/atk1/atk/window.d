@@ -21,7 +21,7 @@ interface Window
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_window_get_type != &gidSymbolNotFound ? atk_window_get_type() : cast(GType)0;

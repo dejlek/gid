@@ -66,16 +66,16 @@ class ToastOverlay : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toast_overlay_get_type != &gidSymbolNotFound ? adw_toast_overlay_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -131,7 +131,7 @@ class ToastOverlay : gtk.widget.Widget
   */
   void addToast(adw.toast.Toast toast)
   {
-    adw_toast_overlay_add_toast(cast(AdwToastOverlay*)cPtr, toast ? cast(AdwToast*)toast.cPtr(Yes.Dup) : null);
+    adw_toast_overlay_add_toast(cast(AdwToastOverlay*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -141,8 +141,8 @@ class ToastOverlay : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_toast_overlay_get_child(cast(AdwToastOverlay*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_toast_overlay_get_child(cast(AdwToastOverlay*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,6 +154,6 @@ class ToastOverlay : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_toast_overlay_set_child(cast(AdwToastOverlay*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_toast_overlay_set_child(cast(AdwToastOverlay*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

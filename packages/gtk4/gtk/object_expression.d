@@ -39,7 +39,7 @@ class ObjectExpression : gtk.expression.Expression
   this(gobject.object.ObjectWrap object)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_object_expression_new(object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    _cretval = gtk_object_expression_new(object ? cast(GObject*)object._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -49,9 +49,9 @@ class ObjectExpression : gtk.expression.Expression
   */
   gobject.object.ObjectWrap getObject()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_object_expression_get_object(cast(GtkExpression*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_object_expression_get_object(cast(GtkExpression*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 }

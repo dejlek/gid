@@ -21,16 +21,16 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_array_builder_get_type != &gidSymbolNotFound ? garrow_map_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     GArrowMapArrayBuilder* _cretval;
     GError *_err;
-    _cretval = garrow_map_array_builder_new(dataType ? cast(GArrowMapDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_map_array_builder_new(dataType ? cast(GArrowMapDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,7 +55,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_map_array_builder_append_value(cast(GArrowMapArrayBuilder*)cPtr, &_err);
+    _retval = garrow_map_array_builder_append_value(cast(GArrowMapArrayBuilder*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -88,7 +88,7 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_map_array_builder_append_values(cast(GArrowMapArrayBuilder*)cPtr, _offsets, _offsetsLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_map_array_builder_append_values(cast(GArrowMapArrayBuilder*)this._cPtr, _offsets, _offsetsLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -98,8 +98,8 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getItemBuilder()
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_map_array_builder_get_item_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_map_array_builder_get_item_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,8 +107,8 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getKeyBuilder()
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_map_array_builder_get_key_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_map_array_builder_get_key_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,8 +116,8 @@ class MapArrayBuilder : arrow.array_builder.ArrayBuilder
   arrow.array_builder.ArrayBuilder getValueBuilder()
   {
     GArrowArrayBuilder* _cretval;
-    _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
+    _cretval = garrow_map_array_builder_get_value_builder(cast(GArrowMapArrayBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array_builder.ArrayBuilder)(cast(GArrowArrayBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

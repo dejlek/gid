@@ -33,7 +33,7 @@ class OutputMessage
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -44,7 +44,7 @@ class OutputMessage
   */
   @property gio.socket_address.SocketAddress address()
   {
-    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
+    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)this._cPtr).address);
   }
 
   /**
@@ -54,8 +54,8 @@ class OutputMessage
   */
   @property void address(gio.socket_address.SocketAddress propval)
   {
-    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)cPtr).address);
-    dToC(propval, cast(void*)&(cast(GOutputMessage*)cPtr).address);
+    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GOutputMessage*)this._cPtr).address);
+    dToC(propval, cast(void*)&(cast(GOutputMessage*)this._cPtr).address);
   }
 
   /**
@@ -64,7 +64,7 @@ class OutputMessage
   */
   @property gio.types.OutputVector vectors()
   {
-    return cToD!(gio.types.OutputVector)(cast(void*)(cast(GOutputMessage*)cPtr).vectors);
+    return cToD!(gio.types.OutputVector)(cast(void*)(cast(GOutputMessage*)this._cPtr).vectors);
   }
 
   /**
@@ -74,7 +74,7 @@ class OutputMessage
   */
   @property void vectors(gio.types.OutputVector propval)
   {
-    (cast(GOutputMessage*)cPtr).vectors = &propval;
+    (cast(GOutputMessage*)this._cPtr).vectors = &propval;
   }
 
   /**
@@ -83,7 +83,7 @@ class OutputMessage
   */
   @property uint numVectors()
   {
-    return (cast(GOutputMessage*)cPtr).numVectors;
+    return (cast(GOutputMessage*)this._cPtr).numVectors;
   }
 
   /**
@@ -93,7 +93,7 @@ class OutputMessage
   */
   @property void numVectors(uint propval)
   {
-    (cast(GOutputMessage*)cPtr).numVectors = propval;
+    (cast(GOutputMessage*)this._cPtr).numVectors = propval;
   }
 
   /**
@@ -103,7 +103,7 @@ class OutputMessage
   */
   @property uint bytesSent()
   {
-    return (cast(GOutputMessage*)cPtr).bytesSent;
+    return (cast(GOutputMessage*)this._cPtr).bytesSent;
   }
 
   /**
@@ -114,7 +114,7 @@ class OutputMessage
   */
   @property void bytesSent(uint propval)
   {
-    (cast(GOutputMessage*)cPtr).bytesSent = propval;
+    (cast(GOutputMessage*)this._cPtr).bytesSent = propval;
   }
 
   /**
@@ -123,7 +123,7 @@ class OutputMessage
   */
   @property uint numControlMessages()
   {
-    return (cast(GOutputMessage*)cPtr).numControlMessages;
+    return (cast(GOutputMessage*)this._cPtr).numControlMessages;
   }
 
   /**
@@ -133,6 +133,6 @@ class OutputMessage
   */
   @property void numControlMessages(uint propval)
   {
-    (cast(GOutputMessage*)cPtr).numControlMessages = propval;
+    (cast(GOutputMessage*)this._cPtr).numControlMessages = propval;
   }
 }

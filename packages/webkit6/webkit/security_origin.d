@@ -29,22 +29,22 @@ class SecurityOrigin : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_security_origin_get_type != &gidSymbolNotFound ? webkit_security_origin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   string getHost()
   {
     const(char)* _cretval;
-    _cretval = webkit_security_origin_get_host(cast(WebKitSecurityOrigin*)cPtr);
+    _cretval = webkit_security_origin_get_host(cast(WebKitSecurityOrigin*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -121,7 +121,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   ushort getPort()
   {
     ushort _retval;
-    _retval = webkit_security_origin_get_port(cast(WebKitSecurityOrigin*)cPtr);
+    _retval = webkit_security_origin_get_port(cast(WebKitSecurityOrigin*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   string getProtocol()
   {
     const(char)* _cretval;
-    _cretval = webkit_security_origin_get_protocol(cast(WebKitSecurityOrigin*)cPtr);
+    _cretval = webkit_security_origin_get_protocol(cast(WebKitSecurityOrigin*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -148,7 +148,7 @@ class SecurityOrigin : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = webkit_security_origin_to_string(cast(WebKitSecurityOrigin*)cPtr);
+    _cretval = webkit_security_origin_to_string(cast(WebKitSecurityOrigin*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

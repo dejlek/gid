@@ -22,16 +22,16 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_cache_get_type != &gidSymbolNotFound ? soup_cache_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,7 +68,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void clear()
   {
-    soup_cache_clear(cast(SoupCache*)cPtr);
+    soup_cache_clear(cast(SoupCache*)this._cPtr);
   }
 
   /**
@@ -84,7 +84,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void dump()
   {
-    soup_cache_dump(cast(SoupCache*)cPtr);
+    soup_cache_dump(cast(SoupCache*)this._cPtr);
   }
 
   /**
@@ -98,7 +98,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void flush()
   {
-    soup_cache_flush(cast(SoupCache*)cPtr);
+    soup_cache_flush(cast(SoupCache*)this._cPtr);
   }
 
   /**
@@ -108,7 +108,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   uint getMaxSize()
   {
     uint _retval;
-    _retval = soup_cache_get_max_size(cast(SoupCache*)cPtr);
+    _retval = soup_cache_get_max_size(cast(SoupCache*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void load()
   {
-    soup_cache_load(cast(SoupCache*)cPtr);
+    soup_cache_load(cast(SoupCache*)this._cPtr);
   }
 
   /**
@@ -130,6 +130,6 @@ class Cache : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
   */
   void setMaxSize(uint maxSize)
   {
-    soup_cache_set_max_size(cast(SoupCache*)cPtr, maxSize);
+    soup_cache_set_max_size(cast(SoupCache*)this._cPtr, maxSize);
   }
 }

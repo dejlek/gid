@@ -43,22 +43,22 @@ class GLRenderbuffer : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_renderbuffer_get_type != &gidSymbolNotFound ? gst_gl_renderbuffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property uint renderbufferId()
   {
-    return (cast(GstGLRenderbuffer*)cPtr).renderbufferId;
+    return (cast(GstGLRenderbuffer*)this._cPtr).renderbufferId;
   }
 
   /**
@@ -83,7 +83,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property void renderbufferId(uint propval)
   {
-    (cast(GstGLRenderbuffer*)cPtr).renderbufferId = propval;
+    (cast(GstGLRenderbuffer*)this._cPtr).renderbufferId = propval;
   }
 
   /**
@@ -92,7 +92,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property gstgl.types.GLFormat renderbufferFormat()
   {
-    return cast(gstgl.types.GLFormat)(cast(GstGLRenderbuffer*)cPtr).renderbufferFormat;
+    return cast(gstgl.types.GLFormat)(cast(GstGLRenderbuffer*)this._cPtr).renderbufferFormat;
   }
 
   /**
@@ -102,7 +102,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property void renderbufferFormat(gstgl.types.GLFormat propval)
   {
-    (cast(GstGLRenderbuffer*)cPtr).renderbufferFormat = cast(GstGLFormat)propval;
+    (cast(GstGLRenderbuffer*)this._cPtr).renderbufferFormat = cast(GstGLFormat)propval;
   }
 
   /**
@@ -111,7 +111,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property uint width()
   {
-    return (cast(GstGLRenderbuffer*)cPtr).width;
+    return (cast(GstGLRenderbuffer*)this._cPtr).width;
   }
 
   /**
@@ -121,7 +121,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property void width(uint propval)
   {
-    (cast(GstGLRenderbuffer*)cPtr).width = propval;
+    (cast(GstGLRenderbuffer*)this._cPtr).width = propval;
   }
 
   /**
@@ -130,7 +130,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property uint height()
   {
-    return (cast(GstGLRenderbuffer*)cPtr).height;
+    return (cast(GstGLRenderbuffer*)this._cPtr).height;
   }
 
   /**
@@ -140,26 +140,26 @@ class GLRenderbuffer : gobject.boxed.Boxed
   */
   @property void height(uint propval)
   {
-    (cast(GstGLRenderbuffer*)cPtr).height = propval;
+    (cast(GstGLRenderbuffer*)this._cPtr).height = propval;
   }
 
   /** */
   @property bool renderbufferWrapped()
   {
-    return (cast(GstGLRenderbuffer*)cPtr).renderbufferWrapped;
+    return (cast(GstGLRenderbuffer*)this._cPtr).renderbufferWrapped;
   }
 
   /** */
   @property void renderbufferWrapped(bool propval)
   {
-    (cast(GstGLRenderbuffer*)cPtr).renderbufferWrapped = propval;
+    (cast(GstGLRenderbuffer*)this._cPtr).renderbufferWrapped = propval;
   }
 
   /** */
   gstgl.types.GLFormat getFormat()
   {
     GstGLFormat _cretval;
-    _cretval = gst_gl_renderbuffer_get_format(cast(GstGLRenderbuffer*)cPtr);
+    _cretval = gst_gl_renderbuffer_get_format(cast(GstGLRenderbuffer*)this._cPtr);
     gstgl.types.GLFormat _retval = cast(gstgl.types.GLFormat)_cretval;
     return _retval;
   }
@@ -168,7 +168,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   int getHeight()
   {
     int _retval;
-    _retval = gst_gl_renderbuffer_get_height(cast(GstGLRenderbuffer*)cPtr);
+    _retval = gst_gl_renderbuffer_get_height(cast(GstGLRenderbuffer*)this._cPtr);
     return _retval;
   }
 
@@ -176,7 +176,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   uint getId()
   {
     uint _retval;
-    _retval = gst_gl_renderbuffer_get_id(cast(GstGLRenderbuffer*)cPtr);
+    _retval = gst_gl_renderbuffer_get_id(cast(GstGLRenderbuffer*)this._cPtr);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class GLRenderbuffer : gobject.boxed.Boxed
   int getWidth()
   {
     int _retval;
-    _retval = gst_gl_renderbuffer_get_width(cast(GstGLRenderbuffer*)cPtr);
+    _retval = gst_gl_renderbuffer_get_width(cast(GstGLRenderbuffer*)this._cPtr);
     return _retval;
   }
 

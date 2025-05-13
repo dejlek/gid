@@ -20,16 +20,16 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_data_type_registry_get_type != &gidSymbolNotFound ? garrow_extension_data_type_registry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -43,7 +43,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   {
     GArrowExtensionDataTypeRegistry* _cretval;
     _cretval = garrow_extension_data_type_registry_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_data_type_registry.ExtensionDataTypeRegistry)(cast(GArrowExtensionDataTypeRegistry*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -52,8 +52,8 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   {
     GArrowExtensionDataType* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
+    _cretval = garrow_extension_data_type_registry_lookup(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_data_type.ExtensionDataType)(cast(GArrowExtensionDataType*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)cPtr, dataType ? cast(GArrowExtensionDataType*)dataType.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_extension_data_type_registry_register(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, dataType ? cast(GArrowExtensionDataType*)dataType._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -89,7 +89,7 @@ class ExtensionDataTypeRegistry : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
     GError *_err;
-    _retval = garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)cPtr, _name, &_err);
+    _retval = garrow_extension_data_type_registry_unregister(cast(GArrowExtensionDataTypeRegistry*)this._cPtr, _name, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

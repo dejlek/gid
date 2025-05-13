@@ -41,7 +41,7 @@ class RoundedRect
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -52,7 +52,7 @@ class RoundedRect
   */
   @property graphene.rect.Rect bounds()
   {
-    return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)cPtr).bounds);
+    return cToD!(graphene.rect.Rect)(cast(void*)&(cast(GskRoundedRect*)this._cPtr).bounds);
   }
 
   /**
@@ -65,7 +65,7 @@ class RoundedRect
   bool containsPoint(graphene.point.Point point)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null);
+    _retval = gsk_rounded_rect_contains_point(cast(const(GskRoundedRect)*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class RoundedRect
   bool containsRect(graphene.rect.Rect rect)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_contains_rect(cast(const(GskRoundedRect)*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null);
+    _retval = gsk_rounded_rect_contains_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect init_(graphene.rect.Rect bounds, graphene.size.Size topLeft, graphene.size.Size topRight, graphene.size.Size bottomRight, graphene.size.Size bottomLeft)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, topLeft ? cast(const(graphene_size_t)*)topLeft.cPtr(No.Dup) : null, topRight ? cast(const(graphene_size_t)*)topRight.cPtr(No.Dup) : null, bottomRight ? cast(const(graphene_size_t)*)bottomRight.cPtr(No.Dup) : null, bottomLeft ? cast(const(graphene_size_t)*)bottomLeft.cPtr(No.Dup) : null);
+    _cretval = gsk_rounded_rect_init(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, topLeft ? cast(const(graphene_size_t)*)topLeft._cPtr(No.Dup) : null, topRight ? cast(const(graphene_size_t)*)topRight._cPtr(No.Dup) : null, bottomRight ? cast(const(graphene_size_t)*)bottomRight._cPtr(No.Dup) : null, bottomLeft ? cast(const(graphene_size_t)*)bottomLeft._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -118,7 +118,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect initCopy(gsk.rounded_rect.RoundedRect src)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_init_copy(cast(GskRoundedRect*)cPtr, src ? cast(const(GskRoundedRect)*)src.cPtr : null);
+    _cretval = gsk_rounded_rect_init_copy(cast(GskRoundedRect*)this._cPtr, src ? cast(const(GskRoundedRect)*)src._cPtr : null);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -135,7 +135,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect initFromRect(graphene.rect.Rect bounds, float radius)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_init_from_rect(cast(GskRoundedRect*)cPtr, bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, radius);
+    _cretval = gsk_rounded_rect_init_from_rect(cast(GskRoundedRect*)this._cPtr, bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, radius);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -150,7 +150,7 @@ class RoundedRect
   bool intersectsRect(graphene.rect.Rect rect)
   {
     bool _retval;
-    _retval = gsk_rounded_rect_intersects_rect(cast(const(GskRoundedRect)*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null);
+    _retval = gsk_rounded_rect_intersects_rect(cast(const(GskRoundedRect)*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class RoundedRect
   bool isRectilinear()
   {
     bool _retval;
-    _retval = gsk_rounded_rect_is_rectilinear(cast(const(GskRoundedRect)*)cPtr);
+    _retval = gsk_rounded_rect_is_rectilinear(cast(const(GskRoundedRect)*)this._cPtr);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect normalize()
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_normalize(cast(GskRoundedRect*)cPtr);
+    _cretval = gsk_rounded_rect_normalize(cast(GskRoundedRect*)this._cPtr);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -198,7 +198,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect offset(float dx, float dy)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_offset(cast(GskRoundedRect*)cPtr, dx, dy);
+    _cretval = gsk_rounded_rect_offset(cast(GskRoundedRect*)this._cPtr, dx, dy);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }
@@ -223,7 +223,7 @@ class RoundedRect
   gsk.rounded_rect.RoundedRect shrink(float top, float right, float bottom, float left)
   {
     GskRoundedRect* _cretval;
-    _cretval = gsk_rounded_rect_shrink(cast(GskRoundedRect*)cPtr, top, right, bottom, left);
+    _cretval = gsk_rounded_rect_shrink(cast(GskRoundedRect*)this._cPtr, top, right, bottom, left);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }

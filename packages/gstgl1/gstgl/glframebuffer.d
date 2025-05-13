@@ -32,16 +32,16 @@ class GLFramebuffer : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_framebuffer_get_type != &gidSymbolNotFound ? gst_gl_framebuffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class GLFramebuffer : gst.object.ObjectWrap
   this(gstgl.glcontext.GLContext context)
   {
     GstGLFramebuffer* _cretval;
-    _cretval = gst_gl_framebuffer_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    _cretval = gst_gl_framebuffer_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -78,8 +78,8 @@ class GLFramebuffer : gst.object.ObjectWrap
   static gstgl.glframebuffer.GLFramebuffer newWithDefaultDepth(gstgl.glcontext.GLContext context, uint width, uint height)
   {
     GstGLFramebuffer* _cretval;
-    _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, width, height);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.Take);
+    _cretval = gst_gl_framebuffer_new_with_default_depth(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, width, height);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstgl.glframebuffer.GLFramebuffer)(cast(GstGLFramebuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class GLFramebuffer : gst.object.ObjectWrap
   */
   void attach(uint attachmentPoint, gstgl.glbase_memory.GLBaseMemory mem)
   {
-    gst_gl_framebuffer_attach(cast(GstGLFramebuffer*)cPtr, attachmentPoint, mem ? cast(GstGLBaseMemory*)mem.cPtr(No.Dup) : null);
+    gst_gl_framebuffer_attach(cast(GstGLFramebuffer*)this._cPtr, attachmentPoint, mem ? cast(GstGLBaseMemory*)mem._cPtr(No.Dup) : null);
   }
 
   /**
@@ -106,7 +106,7 @@ class GLFramebuffer : gst.object.ObjectWrap
   */
   void bind()
   {
-    gst_gl_framebuffer_bind(cast(GstGLFramebuffer*)cPtr);
+    gst_gl_framebuffer_bind(cast(GstGLFramebuffer*)this._cPtr);
   }
 
   /**
@@ -119,14 +119,14 @@ class GLFramebuffer : gst.object.ObjectWrap
   */
   void getEffectiveDimensions(out uint width, out uint height)
   {
-    gst_gl_framebuffer_get_effective_dimensions(cast(GstGLFramebuffer*)cPtr, cast(uint*)&width, cast(uint*)&height);
+    gst_gl_framebuffer_get_effective_dimensions(cast(GstGLFramebuffer*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /** */
   uint getId()
   {
     uint _retval;
-    _retval = gst_gl_framebuffer_get_id(cast(GstGLFramebuffer*)cPtr);
+    _retval = gst_gl_framebuffer_get_id(cast(GstGLFramebuffer*)this._cPtr);
     return _retval;
   }
 }

@@ -44,16 +44,16 @@ class TlsInteraction : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_interaction_get_type != &gidSymbolNotFound ? g_tls_interaction_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_ask_password(cast(GTlsInteraction*)this._cPtr, password ? cast(GTlsPassword*)password._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -118,17 +118,17 @@ class TlsInteraction : gobject.object.ObjectWrap
   */
   void askPasswordAsync(gio.tls_password.TlsPassword password, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_interaction_ask_password_async(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_interaction_ask_password_async(cast(GTlsInteraction*)this._cPtr, password ? cast(GTlsPassword*)password._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -151,7 +151,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_ask_password_finish(cast(GTlsInteraction*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -189,7 +189,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)cPtr, password ? cast(GTlsPassword*)password.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_invoke_ask_password(cast(GTlsInteraction*)this._cPtr, password ? cast(GTlsPassword*)password._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -229,7 +229,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_invoke_request_certificate(cast(GTlsInteraction*)this._cPtr, connection ? cast(GTlsConnection*)connection._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -265,7 +265,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_request_certificate(cast(GTlsInteraction*)this._cPtr, connection ? cast(GTlsConnection*)connection._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;
@@ -290,17 +290,17 @@ class TlsInteraction : gobject.object.ObjectWrap
   */
   void requestCertificateAsync(gio.tls_connection.TlsConnection connection, gio.types.TlsCertificateRequestFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_interaction_request_certificate_async(cast(GTlsInteraction*)cPtr, connection ? cast(GTlsConnection*)connection.cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_interaction_request_certificate_async(cast(GTlsInteraction*)this._cPtr, connection ? cast(GTlsConnection*)connection._cPtr(No.Dup) : null, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -324,7 +324,7 @@ class TlsInteraction : gobject.object.ObjectWrap
   {
     GTlsInteractionResult _cretval;
     GError *_err;
-    _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_tls_interaction_request_certificate_finish(cast(GTlsInteraction*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.TlsInteractionResult _retval = cast(gio.types.TlsInteractionResult)_cretval;

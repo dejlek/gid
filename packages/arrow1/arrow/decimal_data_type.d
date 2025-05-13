@@ -19,16 +19,16 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal_data_type_get_type != &gidSymbolNotFound ? garrow_decimal_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
   int getPrecision()
   {
     int _retval;
-    _retval = garrow_decimal_data_type_get_precision(cast(GArrowDecimalDataType*)cPtr);
+    _retval = garrow_decimal_data_type_get_precision(cast(GArrowDecimalDataType*)this._cPtr);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
   int getScale()
   {
     int _retval;
-    _retval = garrow_decimal_data_type_get_scale(cast(GArrowDecimalDataType*)cPtr);
+    _retval = garrow_decimal_data_type_get_scale(cast(GArrowDecimalDataType*)this._cPtr);
     return _retval;
   }
 }

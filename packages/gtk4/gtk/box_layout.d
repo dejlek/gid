@@ -36,16 +36,16 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_box_layout_get_type != &gidSymbolNotFound ? gtk_box_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -174,7 +174,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   int getBaselineChild()
   {
     int _retval;
-    _retval = gtk_box_layout_get_baseline_child(cast(GtkBoxLayout*)cPtr);
+    _retval = gtk_box_layout_get_baseline_child(cast(GtkBoxLayout*)this._cPtr);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
-    _cretval = gtk_box_layout_get_baseline_position(cast(GtkBoxLayout*)cPtr);
+    _cretval = gtk_box_layout_get_baseline_position(cast(GtkBoxLayout*)this._cPtr);
     gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
@@ -197,7 +197,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_box_layout_get_homogeneous(cast(GtkBoxLayout*)cPtr);
+    _retval = gtk_box_layout_get_homogeneous(cast(GtkBoxLayout*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   uint getSpacing()
   {
     uint _retval;
-    _retval = gtk_box_layout_get_spacing(cast(GtkBoxLayout*)cPtr);
+    _retval = gtk_box_layout_get_spacing(cast(GtkBoxLayout*)this._cPtr);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setBaselineChild(int child)
   {
-    gtk_box_layout_set_baseline_child(cast(GtkBoxLayout*)cPtr, child);
+    gtk_box_layout_set_baseline_child(cast(GtkBoxLayout*)this._cPtr, child);
   }
 
   /**
@@ -238,7 +238,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setBaselinePosition(gtk.types.BaselinePosition position)
   {
-    gtk_box_layout_set_baseline_position(cast(GtkBoxLayout*)cPtr, position);
+    gtk_box_layout_set_baseline_position(cast(GtkBoxLayout*)this._cPtr, position);
   }
 
   /**
@@ -250,7 +250,7 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setHomogeneous(bool homogeneous)
   {
-    gtk_box_layout_set_homogeneous(cast(GtkBoxLayout*)cPtr, homogeneous);
+    gtk_box_layout_set_homogeneous(cast(GtkBoxLayout*)this._cPtr, homogeneous);
   }
 
   /**
@@ -261,6 +261,6 @@ class BoxLayout : gtk.layout_manager.LayoutManager, gtk.orientable.Orientable
   */
   void setSpacing(uint spacing)
   {
-    gtk_box_layout_set_spacing(cast(GtkBoxLayout*)cPtr, spacing);
+    gtk_box_layout_set_spacing(cast(GtkBoxLayout*)this._cPtr, spacing);
   }
 }

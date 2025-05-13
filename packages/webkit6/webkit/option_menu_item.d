@@ -25,22 +25,22 @@ class OptionMenuItem : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_option_menu_item_get_type != &gidSymbolNotFound ? webkit_option_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   webkit.option_menu_item.OptionMenuItem copy()
   {
     WebKitOptionMenuItem* _cretval;
-    _cretval = webkit_option_menu_item_copy(cast(WebKitOptionMenuItem*)cPtr);
+    _cretval = webkit_option_menu_item_copy(cast(WebKitOptionMenuItem*)this._cPtr);
     auto _retval = _cretval ? new webkit.option_menu_item.OptionMenuItem(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -68,7 +68,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = webkit_option_menu_item_get_label(cast(WebKitOptionMenuItem*)cPtr);
+    _cretval = webkit_option_menu_item_get_label(cast(WebKitOptionMenuItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -80,7 +80,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   string getTooltip()
   {
     const(char)* _cretval;
-    _cretval = webkit_option_menu_item_get_tooltip(cast(WebKitOptionMenuItem*)cPtr);
+    _cretval = webkit_option_menu_item_get_tooltip(cast(WebKitOptionMenuItem*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -92,7 +92,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isEnabled()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_enabled(cast(WebKitOptionMenuItem*)cPtr);
+    _retval = webkit_option_menu_item_is_enabled(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isGroupChild()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_group_child(cast(WebKitOptionMenuItem*)cPtr);
+    _retval = webkit_option_menu_item_is_group_child(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isGroupLabel()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_group_label(cast(WebKitOptionMenuItem*)cPtr);
+    _retval = webkit_option_menu_item_is_group_label(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class OptionMenuItem : gobject.boxed.Boxed
   bool isSelected()
   {
     bool _retval;
-    _retval = webkit_option_menu_item_is_selected(cast(WebKitOptionMenuItem*)cPtr);
+    _retval = webkit_option_menu_item_is_selected(cast(WebKitOptionMenuItem*)this._cPtr);
     return _retval;
   }
 }

@@ -39,16 +39,16 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_separator_tool_item_get_type != &gidSymbolNotFound ? gtk_separator_tool_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -92,7 +92,7 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   bool getDraw()
   {
     bool _retval;
-    _retval = gtk_separator_tool_item_get_draw(cast(GtkSeparatorToolItem*)cPtr);
+    _retval = gtk_separator_tool_item_get_draw(cast(GtkSeparatorToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -106,6 +106,6 @@ class SeparatorToolItem : gtk.tool_item.ToolItem
   */
   void setDraw(bool draw)
   {
-    gtk_separator_tool_item_set_draw(cast(GtkSeparatorToolItem*)cPtr, draw);
+    gtk_separator_tool_item_set_draw(cast(GtkSeparatorToolItem*)this._cPtr, draw);
   }
 }

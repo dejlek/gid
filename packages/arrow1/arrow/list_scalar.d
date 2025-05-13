@@ -19,16 +19,16 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_list_scalar_get_type != &gidSymbolNotFound ? garrow_list_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class ListScalar : arrow.base_list_scalar.BaseListScalar
   this(arrow.list_array.ListArray value)
   {
     GArrowListScalar* _cretval;
-    _cretval = garrow_list_scalar_new(value ? cast(GArrowListArray*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_list_scalar_new(value ? cast(GArrowListArray*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

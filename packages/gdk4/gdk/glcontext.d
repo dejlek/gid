@@ -72,16 +72,16 @@ class GLContext : gdk.draw_context.DrawContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_context_get_type != &gidSymbolNotFound ? gdk_gl_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -137,7 +137,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     GdkGLContext* _cretval;
     _cretval = gdk_gl_context_get_current();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class GLContext : gdk.draw_context.DrawContext
   gdk.types.GLAPI getAllowedApis()
   {
     GdkGLAPI _cretval;
-    _cretval = gdk_gl_context_get_allowed_apis(cast(GdkGLContext*)cPtr);
+    _cretval = gdk_gl_context_get_allowed_apis(cast(GdkGLContext*)this._cPtr);
     gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
@@ -162,7 +162,7 @@ class GLContext : gdk.draw_context.DrawContext
   gdk.types.GLAPI getApi()
   {
     GdkGLAPI _cretval;
-    _cretval = gdk_gl_context_get_api(cast(GdkGLContext*)cPtr);
+    _cretval = gdk_gl_context_get_api(cast(GdkGLContext*)this._cPtr);
     gdk.types.GLAPI _retval = cast(gdk.types.GLAPI)_cretval;
     return _retval;
   }
@@ -176,7 +176,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getDebugEnabled()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_debug_enabled(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -187,8 +187,8 @@ class GLContext : gdk.draw_context.DrawContext
   override gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_display(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getForwardCompatible()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_forward_compatible(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void getRequiredVersion(out int major, out int minor)
   {
-    gdk_gl_context_get_required_version(cast(GdkGLContext*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gdk_gl_context_get_required_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -235,8 +235,8 @@ class GLContext : gdk.draw_context.DrawContext
   gdk.glcontext.GLContext getSharedContext()
   {
     GdkGLContext* _cretval;
-    _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_shared_context(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,8 +247,8 @@ class GLContext : gdk.draw_context.DrawContext
   override gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_gl_context_get_surface(cast(GdkGLContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool getUseEs()
   {
     bool _retval;
-    _retval = gdk_gl_context_get_use_es(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_get_use_es(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void getVersion(out int major, out int minor)
   {
-    gdk_gl_context_get_version(cast(GdkGLContext*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gdk_gl_context_get_version(cast(GdkGLContext*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -301,7 +301,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool isLegacy()
   {
     bool _retval;
-    _retval = gdk_gl_context_is_legacy(cast(GdkGLContext*)cPtr);
+    _retval = gdk_gl_context_is_legacy(cast(GdkGLContext*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class GLContext : gdk.draw_context.DrawContext
   bool isShared(gdk.glcontext.GLContext other)
   {
     bool _retval;
-    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)cPtr, other ? cast(GdkGLContext*)other.cPtr(No.Dup) : null);
+    _retval = gdk_gl_context_is_shared(cast(GdkGLContext*)this._cPtr, other ? cast(GdkGLContext*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void makeCurrent()
   {
-    gdk_gl_context_make_current(cast(GdkGLContext*)cPtr);
+    gdk_gl_context_make_current(cast(GdkGLContext*)this._cPtr);
   }
 
   /**
@@ -349,7 +349,7 @@ class GLContext : gdk.draw_context.DrawContext
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_gl_context_realize(cast(GdkGLContext*)cPtr, &_err);
+    _retval = gdk_gl_context_realize(cast(GdkGLContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -369,7 +369,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void setAllowedApis(gdk.types.GLAPI apis)
   {
-    gdk_gl_context_set_allowed_apis(cast(GdkGLContext*)cPtr, apis);
+    gdk_gl_context_set_allowed_apis(cast(GdkGLContext*)this._cPtr, apis);
   }
 
   /**
@@ -386,7 +386,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void setDebugEnabled(bool enabled)
   {
-    gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)cPtr, enabled);
+    gdk_gl_context_set_debug_enabled(cast(GdkGLContext*)this._cPtr, enabled);
   }
 
   /**
@@ -405,7 +405,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void setForwardCompatible(bool compatible)
   {
-    gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)cPtr, compatible);
+    gdk_gl_context_set_forward_compatible(cast(GdkGLContext*)this._cPtr, compatible);
   }
 
   /**
@@ -425,7 +425,7 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void setRequiredVersion(int major, int minor)
   {
-    gdk_gl_context_set_required_version(cast(GdkGLContext*)cPtr, major, minor);
+    gdk_gl_context_set_required_version(cast(GdkGLContext*)this._cPtr, major, minor);
   }
 
   /**
@@ -449,6 +449,6 @@ class GLContext : gdk.draw_context.DrawContext
   */
   void setUseEs(int useEs)
   {
-    gdk_gl_context_set_use_es(cast(GdkGLContext*)cPtr, useEs);
+    gdk_gl_context_set_use_es(cast(GdkGLContext*)this._cPtr, useEs);
   }
 }

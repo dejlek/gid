@@ -27,7 +27,7 @@ class EnumValue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EnumValue
   */
   @property int value()
   {
-    return (cast(GEnumValue*)cPtr).value;
+    return (cast(GEnumValue*)this._cPtr).value;
   }
 
   /**
@@ -48,7 +48,7 @@ class EnumValue
   */
   @property void value(int propval)
   {
-    (cast(GEnumValue*)cPtr).value = propval;
+    (cast(GEnumValue*)this._cPtr).value = propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EnumValue
   */
   @property string valueName()
   {
-    return cToD!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueName);
+    return cToD!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueName);
   }
 
   /**
@@ -67,8 +67,8 @@ class EnumValue
   */
   @property void valueName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueName);
-    dToC(propval, cast(void*)&(cast(GEnumValue*)cPtr).valueName);
+    cValueFree!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueName);
+    dToC(propval, cast(void*)&(cast(GEnumValue*)this._cPtr).valueName);
   }
 
   /**
@@ -77,7 +77,7 @@ class EnumValue
   */
   @property string valueNick()
   {
-    return cToD!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
+    return cToD!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueNick);
   }
 
   /**
@@ -87,7 +87,7 @@ class EnumValue
   */
   @property void valueNick(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GEnumValue*)cPtr).valueNick);
-    dToC(propval, cast(void*)&(cast(GEnumValue*)cPtr).valueNick);
+    cValueFree!(string)(cast(void*)(cast(GEnumValue*)this._cPtr).valueNick);
+    dToC(propval, cast(void*)&(cast(GEnumValue*)this._cPtr).valueNick);
   }
 }

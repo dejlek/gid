@@ -38,22 +38,22 @@ class Context : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_context_get_type != &gidSymbolNotFound ? cairo_gobject_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class Context : gobject.boxed.Boxed
   */
   void appendPath(cairo.path.Path path)
   {
-    cairo_append_path(cast(cairo_t*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
+    cairo_append_path(cast(cairo_t*)this._cPtr, path ? cast(const(cairo_path_t)*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -127,7 +127,7 @@ class Context : gobject.boxed.Boxed
   */
   void arc(double xc, double yc, double radius, double angle1, double angle2)
   {
-    cairo_arc(cast(cairo_t*)cPtr, xc, yc, radius, angle1, angle2);
+    cairo_arc(cast(cairo_t*)this._cPtr, xc, yc, radius, angle1, angle2);
   }
 
   /**
@@ -149,7 +149,7 @@ class Context : gobject.boxed.Boxed
   */
   void arcNegative(double xc, double yc, double radius, double angle1, double angle2)
   {
-    cairo_arc_negative(cast(cairo_t*)cPtr, xc, yc, radius, angle1, angle2);
+    cairo_arc_negative(cast(cairo_t*)this._cPtr, xc, yc, radius, angle1, angle2);
   }
 
   /**
@@ -173,7 +173,7 @@ class Context : gobject.boxed.Boxed
   */
   void clip()
   {
-    cairo_clip(cast(cairo_t*)cPtr);
+    cairo_clip(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -188,7 +188,7 @@ class Context : gobject.boxed.Boxed
   */
   void clipExtents(out double x1, out double y1, out double x2, out double y2)
   {
-    cairo_clip_extents(cast(cairo_t*)cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
+    cairo_clip_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
 
   /**
@@ -212,7 +212,7 @@ class Context : gobject.boxed.Boxed
   */
   void clipPreserve()
   {
-    cairo_clip_preserve(cast(cairo_t*)cPtr);
+    cairo_clip_preserve(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -240,7 +240,7 @@ class Context : gobject.boxed.Boxed
   */
   void closePath()
   {
-    cairo_close_path(cast(cairo_t*)cPtr);
+    cairo_close_path(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -257,7 +257,7 @@ class Context : gobject.boxed.Boxed
   cairo.rectangle_list.RectangleList copyClipRectangleList()
   {
     cairo_rectangle_list_t* _cretval;
-    _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)cPtr);
+    _cretval = cairo_copy_clip_rectangle_list(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.rectangle_list.RectangleList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -273,7 +273,7 @@ class Context : gobject.boxed.Boxed
   */
   void copyPage()
   {
-    cairo_copy_page(cast(cairo_t*)cPtr);
+    cairo_copy_page(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -301,7 +301,7 @@ class Context : gobject.boxed.Boxed
   cairo.path.Path copyPath()
   {
     cairo_path_t* _cretval;
-    _cretval = cairo_copy_path(cast(cairo_t*)cPtr);
+    _cretval = cairo_copy_path(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -338,7 +338,7 @@ class Context : gobject.boxed.Boxed
   cairo.path.Path copyPathFlat()
   {
     cairo_path_t* _cretval;
-    _cretval = cairo_copy_path_flat(cast(cairo_t*)cPtr);
+    _cretval = cairo_copy_path_flat(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -363,7 +363,7 @@ class Context : gobject.boxed.Boxed
   */
   void curveTo(double x1, double y1, double x2, double y2, double x3, double y3)
   {
-    cairo_curve_to(cast(cairo_t*)cPtr, x1, y1, x2, y2, x3, y3);
+    cairo_curve_to(cast(cairo_t*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
 
   /**
@@ -377,7 +377,7 @@ class Context : gobject.boxed.Boxed
   */
   void deviceToUser(out double x, out double y)
   {
-    cairo_device_to_user(cast(cairo_t*)cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_device_to_user(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -392,7 +392,7 @@ class Context : gobject.boxed.Boxed
   */
   void deviceToUserDistance(out double dx, out double dy)
   {
-    cairo_device_to_user_distance(cast(cairo_t*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    cairo_device_to_user_distance(cast(cairo_t*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -404,7 +404,7 @@ class Context : gobject.boxed.Boxed
   */
   void fill()
   {
-    cairo_fill(cast(cairo_t*)cPtr);
+    cairo_fill(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -433,7 +433,7 @@ class Context : gobject.boxed.Boxed
   */
   void fillExtents(out double x1, out double y1, out double x2, out double y2)
   {
-    cairo_fill_extents(cast(cairo_t*)cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
+    cairo_fill_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
 
   /**
@@ -446,7 +446,7 @@ class Context : gobject.boxed.Boxed
   */
   void fillPreserve()
   {
-    cairo_fill_preserve(cast(cairo_t*)cPtr);
+    cairo_fill_preserve(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -458,7 +458,7 @@ class Context : gobject.boxed.Boxed
   */
   void fontExtents(cairo.types.FontExtents extents)
   {
-    cairo_font_extents(cast(cairo_t*)cPtr, &extents);
+    cairo_font_extents(cast(cairo_t*)this._cPtr, &extents);
   }
 
   /**
@@ -469,7 +469,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Antialias getAntialias()
   {
     cairo_antialias_t _cretval;
-    _cretval = cairo_get_antialias(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_antialias(cast(cairo_t*)this._cPtr);
     cairo.types.Antialias _retval = cast(cairo.types.Antialias)_cretval;
     return _retval;
   }
@@ -505,7 +505,7 @@ class Context : gobject.boxed.Boxed
   */
   void getCurrentPoint(out double x, out double y)
   {
-    cairo_get_current_point(cast(cairo_t*)cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_get_current_point(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -519,7 +519,7 @@ class Context : gobject.boxed.Boxed
   */
   void getDash(out double dashes, out double offset)
   {
-    cairo_get_dash(cast(cairo_t*)cPtr, cast(double*)&dashes, cast(double*)&offset);
+    cairo_get_dash(cast(cairo_t*)this._cPtr, cast(double*)&dashes, cast(double*)&offset);
   }
 
   /**
@@ -532,7 +532,7 @@ class Context : gobject.boxed.Boxed
   int getDashCount()
   {
     int _retval;
-    _retval = cairo_get_dash_count(cast(cairo_t*)cPtr);
+    _retval = cairo_get_dash_count(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -543,7 +543,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.FillRule getFillRule()
   {
     cairo_fill_rule_t _cretval;
-    _cretval = cairo_get_fill_rule(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_fill_rule(cast(cairo_t*)this._cPtr);
     cairo.types.FillRule _retval = cast(cairo.types.FillRule)_cretval;
     return _retval;
   }
@@ -565,7 +565,7 @@ class Context : gobject.boxed.Boxed
   cairo.font_face.FontFace getFontFace()
   {
     cairo_font_face_t* _cretval;
-    _cretval = cairo_get_font_face(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_font_face(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.font_face.FontFace(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -579,7 +579,7 @@ class Context : gobject.boxed.Boxed
   */
   void getFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_get_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_get_font_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -594,7 +594,7 @@ class Context : gobject.boxed.Boxed
   */
   void getFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_get_font_options(cast(cairo_t*)cPtr, options ? cast(cairo_font_options_t*)options.cPtr(No.Dup) : null);
+    cairo_get_font_options(cast(cairo_t*)this._cPtr, options ? cast(cairo_font_options_t*)options._cPtr(No.Dup) : null);
   }
 
   /**
@@ -614,7 +614,7 @@ class Context : gobject.boxed.Boxed
   cairo.surface.Surface getGroupTarget()
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_get_group_target(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_group_target(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -626,7 +626,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Bool getHairline()
   {
     cairo.types.Bool _retval;
-    _retval = cairo_get_hairline(cast(cairo_t*)cPtr);
+    _retval = cairo_get_hairline(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -637,7 +637,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.LineCap getLineCap()
   {
     cairo_line_cap_t _cretval;
-    _cretval = cairo_get_line_cap(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_line_cap(cast(cairo_t*)this._cPtr);
     cairo.types.LineCap _retval = cast(cairo.types.LineCap)_cretval;
     return _retval;
   }
@@ -649,7 +649,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.LineJoin getLineJoin()
   {
     cairo_line_join_t _cretval;
-    _cretval = cairo_get_line_join(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_line_join(cast(cairo_t*)this._cPtr);
     cairo.types.LineJoin _retval = cast(cairo.types.LineJoin)_cretval;
     return _retval;
   }
@@ -664,7 +664,7 @@ class Context : gobject.boxed.Boxed
   double getLineWidth()
   {
     double _retval;
-    _retval = cairo_get_line_width(cast(cairo_t*)cPtr);
+    _retval = cairo_get_line_width(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -676,7 +676,7 @@ class Context : gobject.boxed.Boxed
   */
   void getMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_get_matrix(cast(cairo_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_get_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -686,7 +686,7 @@ class Context : gobject.boxed.Boxed
   double getMiterLimit()
   {
     double _retval;
-    _retval = cairo_get_miter_limit(cast(cairo_t*)cPtr);
+    _retval = cairo_get_miter_limit(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -697,7 +697,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Operator getOperator()
   {
     cairo_operator_t _cretval;
-    _cretval = cairo_get_operator(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_operator(cast(cairo_t*)this._cPtr);
     cairo.types.Operator _retval = cast(cairo.types.Operator)_cretval;
     return _retval;
   }
@@ -719,7 +719,7 @@ class Context : gobject.boxed.Boxed
   cairo.scaled_font.ScaledFont getScaledFont()
   {
     cairo_scaled_font_t* _cretval;
-    _cretval = cairo_get_scaled_font(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_scaled_font(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -733,7 +733,7 @@ class Context : gobject.boxed.Boxed
   cairo.pattern.Pattern getSource()
   {
     cairo_pattern_t* _cretval;
-    _cretval = cairo_get_source(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_source(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -753,7 +753,7 @@ class Context : gobject.boxed.Boxed
   cairo.surface.Surface getTarget()
   {
     cairo_surface_t* _cretval;
-    _cretval = cairo_get_target(cast(cairo_t*)cPtr);
+    _cretval = cairo_get_target(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -765,7 +765,7 @@ class Context : gobject.boxed.Boxed
   double getTolerance()
   {
     double _retval;
-    _retval = cairo_get_tolerance(cast(cairo_t*)cPtr);
+    _retval = cairo_get_tolerance(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -788,7 +788,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphExtents(cairo.glyph.Glyph glyphs, int numGlyphs, cairo.types.TextExtents extents)
   {
-    cairo_glyph_extents(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, &extents);
+    cairo_glyph_extents(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs, &extents);
   }
 
   /**
@@ -802,7 +802,7 @@ class Context : gobject.boxed.Boxed
   */
   void glyphPath(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_glyph_path(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_glyph_path(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -813,7 +813,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Bool hasCurrentPoint()
   {
     cairo.types.Bool _retval;
-    _retval = cairo_has_current_point(cast(cairo_t*)cPtr);
+    _retval = cairo_has_current_point(cast(cairo_t*)this._cPtr);
     return _retval;
   }
 
@@ -825,7 +825,7 @@ class Context : gobject.boxed.Boxed
   */
   void identityMatrix()
   {
-    cairo_identity_matrix(cast(cairo_t*)cPtr);
+    cairo_identity_matrix(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -844,7 +844,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Bool inClip(double x, double y)
   {
     cairo.types.Bool _retval;
-    _retval = cairo_in_clip(cast(cairo_t*)cPtr, x, y);
+    _retval = cairo_in_clip(cast(cairo_t*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -865,7 +865,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Bool inFill(double x, double y)
   {
     cairo.types.Bool _retval;
-    _retval = cairo_in_fill(cast(cairo_t*)cPtr, x, y);
+    _retval = cairo_in_fill(cast(cairo_t*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -888,7 +888,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Bool inStroke(double x, double y)
   {
     cairo.types.Bool _retval;
-    _retval = cairo_in_stroke(cast(cairo_t*)cPtr, x, y);
+    _retval = cairo_in_stroke(cast(cairo_t*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -906,7 +906,7 @@ class Context : gobject.boxed.Boxed
   */
   void lineTo(double x, double y)
   {
-    cairo_line_to(cast(cairo_t*)cPtr, x, y);
+    cairo_line_to(cast(cairo_t*)this._cPtr, x, y);
   }
 
   /**
@@ -920,7 +920,7 @@ class Context : gobject.boxed.Boxed
   */
   void mask(cairo.pattern.Pattern pattern)
   {
-    cairo_mask(cast(cairo_t*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
+    cairo_mask(cast(cairo_t*)this._cPtr, pattern ? cast(cairo_pattern_t*)pattern._cPtr(No.Dup) : null);
   }
 
   /**
@@ -936,7 +936,7 @@ class Context : gobject.boxed.Boxed
   */
   void maskSurface(cairo.surface.Surface surface, double surfaceX, double surfaceY)
   {
-    cairo_mask_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, surfaceX, surfaceY);
+    cairo_mask_surface(cast(cairo_t*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, surfaceX, surfaceY);
   }
 
   /**
@@ -949,7 +949,7 @@ class Context : gobject.boxed.Boxed
   */
   void moveTo(double x, double y)
   {
-    cairo_move_to(cast(cairo_t*)cPtr, x, y);
+    cairo_move_to(cast(cairo_t*)this._cPtr, x, y);
   }
 
   /**
@@ -958,7 +958,7 @@ class Context : gobject.boxed.Boxed
   */
   void newPath()
   {
-    cairo_new_path(cast(cairo_t*)cPtr);
+    cairo_new_path(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -976,7 +976,7 @@ class Context : gobject.boxed.Boxed
   */
   void newSubPath()
   {
-    cairo_new_sub_path(cast(cairo_t*)cPtr);
+    cairo_new_sub_path(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -985,7 +985,7 @@ class Context : gobject.boxed.Boxed
   */
   void paint()
   {
-    cairo_paint(cast(cairo_t*)cPtr);
+    cairo_paint(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -999,7 +999,7 @@ class Context : gobject.boxed.Boxed
   */
   void paintWithAlpha(double alpha)
   {
-    cairo_paint_with_alpha(cast(cairo_t*)cPtr, alpha);
+    cairo_paint_with_alpha(cast(cairo_t*)this._cPtr, alpha);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class Context : gobject.boxed.Boxed
   */
   void pathExtents(out double x1, out double y1, out double x2, out double y2)
   {
-    cairo_path_extents(cast(cairo_t*)cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
+    cairo_path_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
 
   /**
@@ -1053,7 +1053,7 @@ class Context : gobject.boxed.Boxed
   cairo.pattern.Pattern popGroup()
   {
     cairo_pattern_t* _cretval;
-    _cretval = cairo_pop_group(cast(cairo_t*)cPtr);
+    _cretval = cairo_pop_group(cast(cairo_t*)this._cPtr);
     auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1082,7 +1082,7 @@ class Context : gobject.boxed.Boxed
   */
   void popGroupToSource()
   {
-    cairo_pop_group_to_source(cast(cairo_t*)cPtr);
+    cairo_pop_group_to_source(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1126,7 +1126,7 @@ class Context : gobject.boxed.Boxed
   */
   void pushGroup()
   {
-    cairo_push_group(cast(cairo_t*)cPtr);
+    cairo_push_group(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1147,7 +1147,7 @@ class Context : gobject.boxed.Boxed
   */
   void pushGroupWithContent(cairo.types.Content content)
   {
-    cairo_push_group_with_content(cast(cairo_t*)cPtr, content);
+    cairo_push_group_with_content(cast(cairo_t*)this._cPtr, content);
   }
 
   /**
@@ -1171,7 +1171,7 @@ class Context : gobject.boxed.Boxed
   */
   void rectangle(double x, double y, double width, double height)
   {
-    cairo_rectangle(cast(cairo_t*)cPtr, x, y, width, height);
+    cairo_rectangle(cast(cairo_t*)this._cPtr, x, y, width, height);
   }
 
   /**
@@ -1200,7 +1200,7 @@ class Context : gobject.boxed.Boxed
   */
   void relCurveTo(double dx1, double dy1, double dx2, double dy2, double dx3, double dy3)
   {
-    cairo_rel_curve_to(cast(cairo_t*)cPtr, dx1, dy1, dx2, dy2, dx3, dy3);
+    cairo_rel_curve_to(cast(cairo_t*)this._cPtr, dx1, dy1, dx2, dy2, dx3, dy3);
   }
 
   /**
@@ -1222,7 +1222,7 @@ class Context : gobject.boxed.Boxed
   */
   void relLineTo(double dx, double dy)
   {
-    cairo_rel_line_to(cast(cairo_t*)cPtr, dx, dy);
+    cairo_rel_line_to(cast(cairo_t*)this._cPtr, dx, dy);
   }
 
   /**
@@ -1242,7 +1242,7 @@ class Context : gobject.boxed.Boxed
   */
   void relMoveTo(double dx, double dy)
   {
-    cairo_rel_move_to(cast(cairo_t*)cPtr, dx, dy);
+    cairo_rel_move_to(cast(cairo_t*)this._cPtr, dx, dy);
   }
 
   /**
@@ -1260,7 +1260,7 @@ class Context : gobject.boxed.Boxed
   */
   void resetClip()
   {
-    cairo_reset_clip(cast(cairo_t*)cPtr);
+    cairo_reset_clip(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1270,7 +1270,7 @@ class Context : gobject.boxed.Boxed
   */
   void restore()
   {
-    cairo_restore(cast(cairo_t*)cPtr);
+    cairo_restore(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1286,7 +1286,7 @@ class Context : gobject.boxed.Boxed
   */
   void rotate(double angle)
   {
-    cairo_rotate(cast(cairo_t*)cPtr, angle);
+    cairo_rotate(cast(cairo_t*)this._cPtr, angle);
   }
 
   /**
@@ -1304,7 +1304,7 @@ class Context : gobject.boxed.Boxed
   */
   void save()
   {
-    cairo_save(cast(cairo_t*)cPtr);
+    cairo_save(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1319,7 +1319,7 @@ class Context : gobject.boxed.Boxed
   */
   void scale(double sx, double sy)
   {
-    cairo_scale(cast(cairo_t*)cPtr, sx, sy);
+    cairo_scale(cast(cairo_t*)this._cPtr, sx, sy);
   }
 
   /**
@@ -1375,7 +1375,7 @@ class Context : gobject.boxed.Boxed
   void selectFontFace(string family, cairo.types.FontSlant slant, cairo.types.FontWeight weight)
   {
     const(char)* _family = family.toCString(No.Alloc);
-    cairo_select_font_face(cast(cairo_t*)cPtr, _family, slant, weight);
+    cairo_select_font_face(cast(cairo_t*)this._cPtr, _family, slant, weight);
   }
 
   /**
@@ -1392,7 +1392,7 @@ class Context : gobject.boxed.Boxed
   */
   void setAntialias(cairo.types.Antialias antialias)
   {
-    cairo_set_antialias(cast(cairo_t*)cPtr, antialias);
+    cairo_set_antialias(cast(cairo_t*)this._cPtr, antialias);
   }
 
   /**
@@ -1432,7 +1432,7 @@ class Context : gobject.boxed.Boxed
       _numDashes = cast(int)dashes.length;
 
     auto _dashes = cast(const(double)*)dashes.ptr;
-    cairo_set_dash(cast(cairo_t*)cPtr, _dashes, _numDashes, offset);
+    cairo_set_dash(cast(cairo_t*)this._cPtr, _dashes, _numDashes, offset);
   }
 
   /**
@@ -1449,7 +1449,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFillRule(cairo.types.FillRule fillRule)
   {
-    cairo_set_fill_rule(cast(cairo_t*)cPtr, fillRule);
+    cairo_set_fill_rule(cast(cairo_t*)this._cPtr, fillRule);
   }
 
   /**
@@ -1462,7 +1462,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontFace(cairo.font_face.FontFace fontFace)
   {
-    cairo_set_font_face(cast(cairo_t*)cPtr, fontFace ? cast(cairo_font_face_t*)fontFace.cPtr(No.Dup) : null);
+    cairo_set_font_face(cast(cairo_t*)this._cPtr, fontFace ? cast(cairo_font_face_t*)fontFace._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1479,7 +1479,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_font_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_set_font_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1494,7 +1494,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontOptions(cairo.font_options.FontOptions options)
   {
-    cairo_set_font_options(cast(cairo_t*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
+    cairo_set_font_options(cast(cairo_t*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1513,7 +1513,7 @@ class Context : gobject.boxed.Boxed
   */
   void setFontSize(double size)
   {
-    cairo_set_font_size(cast(cairo_t*)cPtr, size);
+    cairo_set_font_size(cast(cairo_t*)this._cPtr, size);
   }
 
   /**
@@ -1544,7 +1544,7 @@ class Context : gobject.boxed.Boxed
   */
   void setHairline(cairo.types.Bool setHairline)
   {
-    cairo_set_hairline(cast(cairo_t*)cPtr, setHairline);
+    cairo_set_hairline(cast(cairo_t*)this._cPtr, setHairline);
   }
 
   /**
@@ -1563,7 +1563,7 @@ class Context : gobject.boxed.Boxed
   */
   void setLineCap(cairo.types.LineCap lineCap)
   {
-    cairo_set_line_cap(cast(cairo_t*)cPtr, lineCap);
+    cairo_set_line_cap(cast(cairo_t*)this._cPtr, lineCap);
   }
 
   /**
@@ -1582,7 +1582,7 @@ class Context : gobject.boxed.Boxed
   */
   void setLineJoin(cairo.types.LineJoin lineJoin)
   {
-    cairo_set_line_join(cast(cairo_t*)cPtr, lineJoin);
+    cairo_set_line_join(cast(cairo_t*)this._cPtr, lineJoin);
   }
 
   /**
@@ -1611,7 +1611,7 @@ class Context : gobject.boxed.Boxed
   */
   void setLineWidth(double width)
   {
-    cairo_set_line_width(cast(cairo_t*)cPtr, width);
+    cairo_set_line_width(cast(cairo_t*)this._cPtr, width);
   }
 
   /**
@@ -1623,7 +1623,7 @@ class Context : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_set_matrix(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_set_matrix(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1654,7 +1654,7 @@ class Context : gobject.boxed.Boxed
   */
   void setMiterLimit(double limit)
   {
-    cairo_set_miter_limit(cast(cairo_t*)cPtr, limit);
+    cairo_set_miter_limit(cast(cairo_t*)this._cPtr, limit);
   }
 
   /**
@@ -1669,7 +1669,7 @@ class Context : gobject.boxed.Boxed
   */
   void setOperator(cairo.types.Operator op)
   {
-    cairo_set_operator(cast(cairo_t*)cPtr, op);
+    cairo_set_operator(cast(cairo_t*)this._cPtr, op);
   }
 
   /**
@@ -1684,7 +1684,7 @@ class Context : gobject.boxed.Boxed
   */
   void setScaledFont(cairo.scaled_font.ScaledFont scaledFont)
   {
-    cairo_set_scaled_font(cast(cairo_t*)cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont.cPtr(No.Dup) : null);
+    cairo_set_scaled_font(cast(cairo_t*)this._cPtr, scaledFont ? cast(const(cairo_scaled_font_t)*)scaledFont._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1707,7 +1707,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSource(cairo.pattern.Pattern source)
   {
-    cairo_set_source(cast(cairo_t*)cPtr, source ? cast(cairo_pattern_t*)source.cPtr(No.Dup) : null);
+    cairo_set_source(cast(cairo_t*)this._cPtr, source ? cast(cairo_pattern_t*)source._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1729,7 +1729,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSourceRgb(double red, double green, double blue)
   {
-    cairo_set_source_rgb(cast(cairo_t*)cPtr, red, green, blue);
+    cairo_set_source_rgb(cast(cairo_t*)this._cPtr, red, green, blue);
   }
 
   /**
@@ -1754,7 +1754,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSourceRgba(double red, double green, double blue, double alpha)
   {
-    cairo_set_source_rgba(cast(cairo_t*)cPtr, red, green, blue, alpha);
+    cairo_set_source_rgba(cast(cairo_t*)this._cPtr, red, green, blue, alpha);
   }
 
   /**
@@ -1781,7 +1781,7 @@ class Context : gobject.boxed.Boxed
   */
   void setSourceSurface(cairo.surface.Surface surface, double x, double y)
   {
-    cairo_set_source_surface(cast(cairo_t*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null, x, y);
+    cairo_set_source_surface(cast(cairo_t*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -1801,7 +1801,7 @@ class Context : gobject.boxed.Boxed
   */
   void setTolerance(double tolerance)
   {
-    cairo_set_tolerance(cast(cairo_t*)cPtr, tolerance);
+    cairo_set_tolerance(cast(cairo_t*)this._cPtr, tolerance);
   }
 
   /**
@@ -1815,7 +1815,7 @@ class Context : gobject.boxed.Boxed
   */
   void showGlyphs(cairo.glyph.Glyph glyphs, int numGlyphs)
   {
-    cairo_show_glyphs(cast(cairo_t*)cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs);
+    cairo_show_glyphs(cast(cairo_t*)this._cPtr, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs);
   }
 
   /**
@@ -1827,7 +1827,7 @@ class Context : gobject.boxed.Boxed
   */
   void showPage()
   {
-    cairo_show_page(cast(cairo_t*)cPtr);
+    cairo_show_page(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1859,7 +1859,7 @@ class Context : gobject.boxed.Boxed
   void showText(string utf8)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text(cast(cairo_t*)cPtr, _utf8);
+    cairo_show_text(cast(cairo_t*)this._cPtr, _utf8);
   }
 
   /**
@@ -1896,7 +1896,7 @@ class Context : gobject.boxed.Boxed
   void showTextGlyphs(string utf8, int utf8Len, cairo.glyph.Glyph glyphs, int numGlyphs, cairo.text_cluster.TextCluster clusters, int numClusters, cairo.types.TextClusterFlags clusterFlags)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_show_text_glyphs(cast(cairo_t*)cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs.cPtr(No.Dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters.cPtr(No.Dup) : null, numClusters, clusterFlags);
+    cairo_show_text_glyphs(cast(cairo_t*)this._cPtr, _utf8, utf8Len, glyphs ? cast(const(cairo_glyph_t)*)glyphs._cPtr(No.Dup) : null, numGlyphs, clusters ? cast(const(cairo_text_cluster_t)*)clusters._cPtr(No.Dup) : null, numClusters, clusterFlags);
   }
 
   /**
@@ -1906,7 +1906,7 @@ class Context : gobject.boxed.Boxed
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_status(cast(cairo_t*)cPtr);
+    _cretval = cairo_status(cast(cairo_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -1942,7 +1942,7 @@ class Context : gobject.boxed.Boxed
   */
   void stroke()
   {
-    cairo_stroke(cast(cairo_t*)cPtr);
+    cairo_stroke(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -1974,7 +1974,7 @@ class Context : gobject.boxed.Boxed
   */
   void strokeExtents(out double x1, out double y1, out double x2, out double y2)
   {
-    cairo_stroke_extents(cast(cairo_t*)cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
+    cairo_stroke_extents(cast(cairo_t*)this._cPtr, cast(double*)&x1, cast(double*)&y1, cast(double*)&x2, cast(double*)&y2);
   }
 
   /**
@@ -1989,7 +1989,7 @@ class Context : gobject.boxed.Boxed
   */
   void strokePreserve()
   {
-    cairo_stroke_preserve(cast(cairo_t*)cPtr);
+    cairo_stroke_preserve(cast(cairo_t*)this._cPtr);
   }
 
   /**
@@ -2029,7 +2029,7 @@ class Context : gobject.boxed.Boxed
   {
     const(char)* _tagName = tagName.toCString(No.Alloc);
     const(char)* _attributes = attributes.toCString(No.Alloc);
-    cairo_tag_begin(cast(cairo_t*)cPtr, _tagName, _attributes);
+    cairo_tag_begin(cast(cairo_t*)this._cPtr, _tagName, _attributes);
   }
 
   /**
@@ -2046,7 +2046,7 @@ class Context : gobject.boxed.Boxed
   void tagEnd(string tagName)
   {
     const(char)* _tagName = tagName.toCString(No.Alloc);
-    cairo_tag_end(cast(cairo_t*)cPtr, _tagName);
+    cairo_tag_end(cast(cairo_t*)this._cPtr, _tagName);
   }
 
   /**
@@ -2071,7 +2071,7 @@ class Context : gobject.boxed.Boxed
   void textExtents(string utf8, cairo.types.TextExtents extents)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_text_extents(cast(cairo_t*)cPtr, _utf8, &extents);
+    cairo_text_extents(cast(cairo_t*)this._cPtr, _utf8, &extents);
   }
 
   /**
@@ -2100,7 +2100,7 @@ class Context : gobject.boxed.Boxed
   void textPath(string utf8)
   {
     const(char)* _utf8 = utf8.toCString(No.Alloc);
-    cairo_text_path(cast(cairo_t*)cPtr, _utf8);
+    cairo_text_path(cast(cairo_t*)this._cPtr, _utf8);
   }
 
   /**
@@ -2113,7 +2113,7 @@ class Context : gobject.boxed.Boxed
   */
   void transform(cairo.matrix.Matrix matrix)
   {
-    cairo_transform(cast(cairo_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_transform(cast(cairo_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2129,7 +2129,7 @@ class Context : gobject.boxed.Boxed
   */
   void translate(double tx, double ty)
   {
-    cairo_translate(cast(cairo_t*)cPtr, tx, ty);
+    cairo_translate(cast(cairo_t*)this._cPtr, tx, ty);
   }
 
   /**
@@ -2143,7 +2143,7 @@ class Context : gobject.boxed.Boxed
   */
   void userToDevice(out double x, out double y)
   {
-    cairo_user_to_device(cast(cairo_t*)cPtr, cast(double*)&x, cast(double*)&y);
+    cairo_user_to_device(cast(cairo_t*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -2158,6 +2158,6 @@ class Context : gobject.boxed.Boxed
   */
   void userToDeviceDistance(out double dx, out double dy)
   {
-    cairo_user_to_device_distance(cast(cairo_t*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    cairo_user_to_device_distance(cast(cairo_t*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 }

@@ -40,16 +40,16 @@ class MenuManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_menu_manager_get_type != &gidSymbolNotFound ? panel_menu_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -72,7 +72,7 @@ class MenuManager : gobject.object.ObjectWrap
     uint _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = panel_menu_manager_add_filename(cast(PanelMenuManager*)cPtr, _filename, &_err);
+    _retval = panel_menu_manager_add_filename(cast(PanelMenuManager*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -84,7 +84,7 @@ class MenuManager : gobject.object.ObjectWrap
     uint _retval;
     const(char)* _resource = resource.toCString(No.Alloc);
     GError *_err;
-    _retval = panel_menu_manager_add_resource(cast(PanelMenuManager*)cPtr, _resource, &_err);
+    _retval = panel_menu_manager_add_resource(cast(PanelMenuManager*)this._cPtr, _resource, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -106,8 +106,8 @@ class MenuManager : gobject.object.ObjectWrap
   {
     GMenu* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
-    _cretval = panel_menu_manager_find_item_by_id(cast(PanelMenuManager*)cPtr, _id, cast(uint*)&position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    _cretval = panel_menu_manager_find_item_by_id(cast(PanelMenuManager*)this._cPtr, _id, cast(uint*)&position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,8 +116,8 @@ class MenuManager : gobject.object.ObjectWrap
   {
     GMenu* _cretval;
     const(char)* _menuId = menuId.toCString(No.Alloc);
-    _cretval = panel_menu_manager_get_menu_by_id(cast(PanelMenuManager*)cPtr, _menuId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
+    _cretval = panel_menu_manager_get_menu_by_id(cast(PanelMenuManager*)this._cPtr, _menuId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu.Menu)(cast(GMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class MenuManager : gobject.object.ObjectWrap
   string[] getMenuIds()
   {
     const(char*)* _cretval;
-    _cretval = panel_menu_manager_get_menu_ids(cast(PanelMenuManager*)cPtr);
+    _cretval = panel_menu_manager_get_menu_ids(cast(PanelMenuManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -155,7 +155,7 @@ class MenuManager : gobject.object.ObjectWrap
   {
     uint _retval;
     const(char)* _menuId = menuId.toCString(No.Alloc);
-    _retval = panel_menu_manager_merge(cast(PanelMenuManager*)cPtr, _menuId, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    _retval = panel_menu_manager_merge(cast(PanelMenuManager*)this._cPtr, _menuId, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class MenuManager : gobject.object.ObjectWrap
   */
   void remove(uint mergeId)
   {
-    panel_menu_manager_remove(cast(PanelMenuManager*)cPtr, mergeId);
+    panel_menu_manager_remove(cast(PanelMenuManager*)this._cPtr, mergeId);
   }
 
   /**
@@ -189,6 +189,6 @@ class MenuManager : gobject.object.ObjectWrap
   {
     const(char)* _attribute = attribute.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    panel_menu_manager_set_attribute_string(cast(PanelMenuManager*)cPtr, menu ? cast(GMenu*)menu.cPtr(No.Dup) : null, position, _attribute, _value);
+    panel_menu_manager_set_attribute_string(cast(PanelMenuManager*)this._cPtr, menu ? cast(GMenu*)menu._cPtr(No.Dup) : null, position, _attribute, _value);
   }
 }

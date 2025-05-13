@@ -29,7 +29,7 @@ class AttrFontDesc
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class AttrFontDesc
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).attr);
   }
 
   /**
@@ -49,7 +49,7 @@ class AttrFontDesc
   */
   @property pango.font_description.FontDescription desc()
   {
-    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);
+    return cToD!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)this._cPtr).desc);
   }
 
   /**
@@ -59,8 +59,8 @@ class AttrFontDesc
   */
   @property void desc(pango.font_description.FontDescription propval)
   {
-    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)cPtr).desc);
-    dToC(propval, cast(void*)&(cast(PangoAttrFontDesc*)cPtr).desc);
+    cValueFree!(pango.font_description.FontDescription)(cast(void*)(cast(PangoAttrFontDesc*)this._cPtr).desc);
+    dToC(propval, cast(void*)&(cast(PangoAttrFontDesc*)this._cPtr).desc);
   }
 
   /**
@@ -78,7 +78,7 @@ class AttrFontDesc
   static pango.attribute.Attribute new_(pango.font_description.FontDescription desc)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    _cretval = pango_attr_font_desc_new(desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -46,7 +46,7 @@ template TextT()
   override bool addSelection(int startOffset, int endOffset)
   {
     bool _retval;
-    _retval = atk_text_add_selection(cast(AtkText*)cPtr, startOffset, endOffset);
+    _retval = atk_text_add_selection(cast(AtkText*)this._cPtr, startOffset, endOffset);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ template TextT()
   override atk.text_range.TextRange[] getBoundedRanges(atk.types.TextRectangle rect, atk.types.CoordType coordType, atk.types.TextClipType xClipType, atk.types.TextClipType yClipType)
   {
     AtkTextRange** _cretval;
-    _cretval = atk_text_get_bounded_ranges(cast(AtkText*)cPtr, &rect, coordType, xClipType, yClipType);
+    _cretval = atk_text_get_bounded_ranges(cast(AtkText*)this._cPtr, &rect, coordType, xClipType, yClipType);
     atk.text_range.TextRange[] _retval;
 
     if (_cretval)
@@ -88,7 +88,7 @@ template TextT()
   override int getCaretOffset()
   {
     int _retval;
-    _retval = atk_text_get_caret_offset(cast(AtkText*)cPtr);
+    _retval = atk_text_get_caret_offset(cast(AtkText*)this._cPtr);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ template TextT()
   override dchar getCharacterAtOffset(int offset)
   {
     dchar _retval;
-    _retval = atk_text_get_character_at_offset(cast(AtkText*)cPtr, offset);
+    _retval = atk_text_get_character_at_offset(cast(AtkText*)this._cPtr, offset);
     return _retval;
   }
 
@@ -113,7 +113,7 @@ template TextT()
   override int getCharacterCount()
   {
     int _retval;
-    _retval = atk_text_get_character_count(cast(AtkText*)cPtr);
+    _retval = atk_text_get_character_count(cast(AtkText*)this._cPtr);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ template TextT()
   */
   override void getCharacterExtents(int offset, out int x, out int y, out int width, out int height, atk.types.CoordType coords)
   {
-    atk_text_get_character_extents(cast(AtkText*)cPtr, offset, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coords);
+    atk_text_get_character_extents(cast(AtkText*)this._cPtr, offset, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coords);
   }
 
   /**
@@ -144,7 +144,7 @@ template TextT()
   override int getNSelections()
   {
     int _retval;
-    _retval = atk_text_get_n_selections(cast(AtkText*)cPtr);
+    _retval = atk_text_get_n_selections(cast(AtkText*)this._cPtr);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ template TextT()
   override int getOffsetAtPoint(int x, int y, atk.types.CoordType coords)
   {
     int _retval;
-    _retval = atk_text_get_offset_at_point(cast(AtkText*)cPtr, x, y, coords);
+    _retval = atk_text_get_offset_at_point(cast(AtkText*)this._cPtr, x, y, coords);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ template TextT()
   */
   override void getRangeExtents(int startOffset, int endOffset, atk.types.CoordType coordType, out atk.types.TextRectangle rect)
   {
-    atk_text_get_range_extents(cast(AtkText*)cPtr, startOffset, endOffset, coordType, &rect);
+    atk_text_get_range_extents(cast(AtkText*)this._cPtr, startOffset, endOffset, coordType, &rect);
   }
 
   /**
@@ -205,7 +205,7 @@ template TextT()
   override string getSelection(int selectionNum, out int startOffset, out int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_selection(cast(AtkText*)cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
+    _cretval = atk_text_get_selection(cast(AtkText*)this._cPtr, selectionNum, cast(int*)&startOffset, cast(int*)&endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -257,7 +257,7 @@ template TextT()
   override string getStringAtOffset(int offset, atk.types.TextGranularity granularity, out int startOffset, out int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_string_at_offset(cast(AtkText*)cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
+    _cretval = atk_text_get_string_at_offset(cast(AtkText*)this._cPtr, offset, granularity, cast(int*)&startOffset, cast(int*)&endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -275,7 +275,7 @@ template TextT()
   override string getText(int startOffset, int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_text(cast(AtkText*)cPtr, startOffset, endOffset);
+    _cretval = atk_text_get_text(cast(AtkText*)this._cPtr, startOffset, endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -298,7 +298,7 @@ template TextT()
   override string getTextAfterOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_text_after_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
+    _cretval = atk_text_get_text_after_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -345,7 +345,7 @@ template TextT()
   override string getTextAtOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_text_at_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
+    _cretval = atk_text_get_text_at_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -368,7 +368,7 @@ template TextT()
   override string getTextBeforeOffset(int offset, atk.types.TextBoundary boundaryType, out int startOffset, out int endOffset)
   {
     char* _cretval;
-    _cretval = atk_text_get_text_before_offset(cast(AtkText*)cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
+    _cretval = atk_text_get_text_before_offset(cast(AtkText*)this._cPtr, offset, boundaryType, cast(int*)&startOffset, cast(int*)&endOffset);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -387,7 +387,7 @@ template TextT()
   override bool textRemoveSelection(int selectionNum)
   {
     bool _retval;
-    _retval = atk_text_remove_selection(cast(AtkText*)cPtr, selectionNum);
+    _retval = atk_text_remove_selection(cast(AtkText*)this._cPtr, selectionNum);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ template TextT()
   override bool scrollSubstringTo(int startOffset, int endOffset, atk.types.ScrollType type)
   {
     bool _retval;
-    _retval = atk_text_scroll_substring_to(cast(AtkText*)cPtr, startOffset, endOffset, type);
+    _retval = atk_text_scroll_substring_to(cast(AtkText*)this._cPtr, startOffset, endOffset, type);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ template TextT()
   override bool scrollSubstringToPoint(int startOffset, int endOffset, atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
-    _retval = atk_text_scroll_substring_to_point(cast(AtkText*)cPtr, startOffset, endOffset, coords, x, y);
+    _retval = atk_text_scroll_substring_to_point(cast(AtkText*)this._cPtr, startOffset, endOffset, coords, x, y);
     return _retval;
   }
 
@@ -453,7 +453,7 @@ template TextT()
   override bool setCaretOffset(int offset)
   {
     bool _retval;
-    _retval = atk_text_set_caret_offset(cast(AtkText*)cPtr, offset);
+    _retval = atk_text_set_caret_offset(cast(AtkText*)this._cPtr, offset);
     return _retval;
   }
 
@@ -474,7 +474,7 @@ template TextT()
   override bool setSelection(int selectionNum, int startOffset, int endOffset)
   {
     bool _retval;
-    _retval = atk_text_set_selection(cast(AtkText*)cPtr, selectionNum, startOffset, endOffset);
+    _retval = atk_text_set_selection(cast(AtkText*)this._cPtr, selectionNum, startOffset, endOffset);
     return _retval;
   }
 

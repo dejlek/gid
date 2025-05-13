@@ -148,16 +148,16 @@ class PopoverMenu : gtk.popover.Popover
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -251,8 +251,8 @@ class PopoverMenu : gtk.popover.Popover
   static gtk.popover_menu.PopoverMenu newFromModel(gio.menu_model.MenuModel model = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_menu_new_from_model(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,8 +273,8 @@ class PopoverMenu : gtk.popover.Popover
   static gtk.popover_menu.PopoverMenu newFromModelFull(gio.menu_model.MenuModel model, gtk.types.PopoverMenuFlags flags)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, flags);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_menu_new_from_model_full(model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, flags);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class PopoverMenu : gtk.popover.Popover
   {
     bool _retval;
     const(char)* _id = id.toCString(No.Alloc);
-    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _id);
+    _retval = gtk_popover_menu_add_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _id);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class PopoverMenu : gtk.popover.Popover
   gtk.types.PopoverMenuFlags getFlags()
   {
     GtkPopoverMenuFlags _cretval;
-    _cretval = gtk_popover_menu_get_flags(cast(GtkPopoverMenu*)cPtr);
+    _cretval = gtk_popover_menu_get_flags(cast(GtkPopoverMenu*)this._cPtr);
     gtk.types.PopoverMenuFlags _retval = cast(gtk.types.PopoverMenuFlags)_cretval;
     return _retval;
   }
@@ -316,8 +316,8 @@ class PopoverMenu : gtk.popover.Popover
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_popover_menu_get_menu_model(cast(GtkPopoverMenu*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class PopoverMenu : gtk.popover.Popover
   bool removeChild(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_popover_menu_remove_child(cast(GtkPopoverMenu*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class PopoverMenu : gtk.popover.Popover
   */
   void setFlags(gtk.types.PopoverMenuFlags flags)
   {
-    gtk_popover_menu_set_flags(cast(GtkPopoverMenu*)cPtr, flags);
+    gtk_popover_menu_set_flags(cast(GtkPopoverMenu*)this._cPtr, flags);
   }
 
   /**
@@ -362,6 +362,6 @@ class PopoverMenu : gtk.popover.Popover
   */
   void setMenuModel(gio.menu_model.MenuModel model = null)
   {
-    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
+    gtk_popover_menu_set_menu_model(cast(GtkPopoverMenu*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
   }
 }

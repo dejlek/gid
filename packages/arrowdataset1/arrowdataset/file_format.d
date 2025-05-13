@@ -24,16 +24,16 @@ class FileFormat : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_format_get_type != &gidSymbolNotFound ? gadataset_file_format_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -46,7 +46,7 @@ class FileFormat : gobject.object.ObjectWrap
   bool equal(arrowdataset.file_format.FileFormat otherFormat)
   {
     bool _retval;
-    _retval = gadataset_file_format_equal(cast(GADatasetFileFormat*)cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat.cPtr(No.Dup) : null);
+    _retval = gadataset_file_format_equal(cast(GADatasetFileFormat*)this._cPtr, otherFormat ? cast(GADatasetFileFormat*)otherFormat._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -54,8 +54,8 @@ class FileFormat : gobject.object.ObjectWrap
   arrowdataset.file_write_options.FileWriteOptions getDefaultWriteOptions()
   {
     GADatasetFileWriteOptions* _cretval;
-    _cretval = gadataset_file_format_get_default_write_options(cast(GADatasetFileFormat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.Take);
+    _cretval = gadataset_file_format_get_default_write_options(cast(GADatasetFileFormat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.file_write_options.FileWriteOptions)(cast(GADatasetFileWriteOptions*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class FileFormat : gobject.object.ObjectWrap
   string getTypeName()
   {
     char* _cretval;
-    _cretval = gadataset_file_format_get_type_name(cast(GADatasetFileFormat*)cPtr);
+    _cretval = gadataset_file_format_get_type_name(cast(GADatasetFileFormat*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -74,10 +74,10 @@ class FileFormat : gobject.object.ObjectWrap
     GADatasetFileWriter* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)cPtr, destination ? cast(GArrowOutputStream*)destination.cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_file_format_open_writer(cast(GADatasetFileFormat*)this._cPtr, destination ? cast(GArrowOutputStream*)destination._cPtr(No.Dup) : null, fileSystem ? cast(GArrowFileSystem*)fileSystem._cPtr(No.Dup) : null, _path, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GADatasetFileWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.file_writer.FileWriter)(cast(GADatasetFileWriter*)_cretval, Yes.Take);
     return _retval;
   }
 }

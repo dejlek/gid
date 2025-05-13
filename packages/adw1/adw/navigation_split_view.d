@@ -165,16 +165,16 @@ class NavigationSplitView : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_split_view_get_type != &gidSymbolNotFound ? adw_navigation_split_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -423,7 +423,7 @@ class NavigationSplitView : gtk.widget.Widget
   bool getCollapsed()
   {
     bool _retval;
-    _retval = adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)cPtr);
+    _retval = adw_navigation_split_view_get_collapsed(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -434,8 +434,8 @@ class NavigationSplitView : gtk.widget.Widget
   adw.navigation_page.NavigationPage getContent()
   {
     AdwNavigationPage* _cretval;
-    _cretval = adw_navigation_split_view_get_content(cast(AdwNavigationSplitView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_split_view_get_content(cast(AdwNavigationSplitView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class NavigationSplitView : gtk.widget.Widget
   double getMaxSidebarWidth()
   {
     double _retval;
-    _retval = adw_navigation_split_view_get_max_sidebar_width(cast(AdwNavigationSplitView*)cPtr);
+    _retval = adw_navigation_split_view_get_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -457,7 +457,7 @@ class NavigationSplitView : gtk.widget.Widget
   double getMinSidebarWidth()
   {
     double _retval;
-    _retval = adw_navigation_split_view_get_min_sidebar_width(cast(AdwNavigationSplitView*)cPtr);
+    _retval = adw_navigation_split_view_get_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ class NavigationSplitView : gtk.widget.Widget
   bool getShowContent()
   {
     bool _retval;
-    _retval = adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)cPtr);
+    _retval = adw_navigation_split_view_get_show_content(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -479,8 +479,8 @@ class NavigationSplitView : gtk.widget.Widget
   adw.navigation_page.NavigationPage getSidebar()
   {
     AdwNavigationPage* _cretval;
-    _cretval = adw_navigation_split_view_get_sidebar(cast(AdwNavigationSplitView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_split_view_get_sidebar(cast(AdwNavigationSplitView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -491,7 +491,7 @@ class NavigationSplitView : gtk.widget.Widget
   double getSidebarWidthFraction()
   {
     double _retval;
-    _retval = adw_navigation_split_view_get_sidebar_width_fraction(cast(AdwNavigationSplitView*)cPtr);
+    _retval = adw_navigation_split_view_get_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class NavigationSplitView : gtk.widget.Widget
   adw.types.LengthUnit getSidebarWidthUnit()
   {
     AdwLengthUnit _cretval;
-    _cretval = adw_navigation_split_view_get_sidebar_width_unit(cast(AdwNavigationSplitView*)cPtr);
+    _cretval = adw_navigation_split_view_get_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr);
     adw.types.LengthUnit _retval = cast(adw.types.LengthUnit)_cretval;
     return _retval;
   }
@@ -521,7 +521,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setCollapsed(bool collapsed)
   {
-    adw_navigation_split_view_set_collapsed(cast(AdwNavigationSplitView*)cPtr, collapsed);
+    adw_navigation_split_view_set_collapsed(cast(AdwNavigationSplitView*)this._cPtr, collapsed);
   }
 
   /**
@@ -532,7 +532,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setContent(adw.navigation_page.NavigationPage content = null)
   {
-    adw_navigation_split_view_set_content(cast(AdwNavigationSplitView*)cPtr, content ? cast(AdwNavigationPage*)content.cPtr(No.Dup) : null);
+    adw_navigation_split_view_set_content(cast(AdwNavigationSplitView*)this._cPtr, content ? cast(AdwNavigationPage*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -549,7 +549,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setMaxSidebarWidth(double width)
   {
-    adw_navigation_split_view_set_max_sidebar_width(cast(AdwNavigationSplitView*)cPtr, width);
+    adw_navigation_split_view_set_max_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
   }
 
   /**
@@ -566,7 +566,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setMinSidebarWidth(double width)
   {
-    adw_navigation_split_view_set_min_sidebar_width(cast(AdwNavigationSplitView*)cPtr, width);
+    adw_navigation_split_view_set_min_sidebar_width(cast(AdwNavigationSplitView*)this._cPtr, width);
   }
 
   /**
@@ -583,7 +583,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setShowContent(bool showContent)
   {
-    adw_navigation_split_view_set_show_content(cast(AdwNavigationSplitView*)cPtr, showContent);
+    adw_navigation_split_view_set_show_content(cast(AdwNavigationSplitView*)this._cPtr, showContent);
   }
 
   /**
@@ -594,7 +594,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setSidebar(adw.navigation_page.NavigationPage sidebar = null)
   {
-    adw_navigation_split_view_set_sidebar(cast(AdwNavigationSplitView*)cPtr, sidebar ? cast(AdwNavigationPage*)sidebar.cPtr(No.Dup) : null);
+    adw_navigation_split_view_set_sidebar(cast(AdwNavigationSplitView*)this._cPtr, sidebar ? cast(AdwNavigationPage*)sidebar._cPtr(No.Dup) : null);
   }
 
   /**
@@ -612,7 +612,7 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setSidebarWidthFraction(double fraction)
   {
-    adw_navigation_split_view_set_sidebar_width_fraction(cast(AdwNavigationSplitView*)cPtr, fraction);
+    adw_navigation_split_view_set_sidebar_width_fraction(cast(AdwNavigationSplitView*)this._cPtr, fraction);
   }
 
   /**
@@ -626,6 +626,6 @@ class NavigationSplitView : gtk.widget.Widget
   */
   void setSidebarWidthUnit(adw.types.LengthUnit unit)
   {
-    adw_navigation_split_view_set_sidebar_width_unit(cast(AdwNavigationSplitView*)cPtr, unit);
+    adw_navigation_split_view_set_sidebar_width_unit(cast(AdwNavigationSplitView*)this._cPtr, unit);
   }
 }

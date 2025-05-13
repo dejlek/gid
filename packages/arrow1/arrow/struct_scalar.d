@@ -19,16 +19,16 @@ class StructScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_scalar_get_type != &gidSymbolNotFound ? garrow_struct_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -43,7 +43,7 @@ class StructScalar : arrow.scalar.Scalar
     GArrowStructScalar* _cretval;
     auto _value = gListFromD!(arrow.scalar.Scalar)(value);
     scope(exit) containerFree!(GList*, arrow.scalar.Scalar, GidOwnership.None)(_value);
-    _cretval = garrow_struct_scalar_new(dataType ? cast(GArrowStructDataType*)dataType.cPtr(No.Dup) : null, _value);
+    _cretval = garrow_struct_scalar_new(dataType ? cast(GArrowStructDataType*)dataType._cPtr(No.Dup) : null, _value);
     this(_cretval, Yes.Take);
   }
 
@@ -51,7 +51,7 @@ class StructScalar : arrow.scalar.Scalar
   arrow.scalar.Scalar[] getValue()
   {
     GList* _cretval;
-    _cretval = garrow_struct_scalar_get_value(cast(GArrowStructScalar*)cPtr);
+    _cretval = garrow_struct_scalar_get_value(cast(GArrowStructScalar*)this._cPtr);
     auto _retval = gListToD!(arrow.scalar.Scalar, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }

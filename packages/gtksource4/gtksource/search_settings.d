@@ -18,16 +18,16 @@ class SearchSettings : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_search_settings_get_type != &gidSymbolNotFound ? gtk_source_search_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -158,7 +158,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getAtWordBoundaries()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_at_word_boundaries(cast(GtkSourceSearchSettings*)cPtr);
+    _retval = gtk_source_search_settings_get_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getCaseSensitive()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_case_sensitive(cast(GtkSourceSearchSettings*)cPtr);
+    _retval = gtk_source_search_settings_get_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getRegexEnabled()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_regex_enabled(cast(GtkSourceSearchSettings*)cPtr);
+    _retval = gtk_source_search_settings_get_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class SearchSettings : gobject.object.ObjectWrap
   string getSearchText()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)cPtr);
+    _cretval = gtk_source_search_settings_get_search_text(cast(GtkSourceSearchSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -197,7 +197,7 @@ class SearchSettings : gobject.object.ObjectWrap
   bool getWrapAround()
   {
     bool _retval;
-    _retval = gtk_source_search_settings_get_wrap_around(cast(GtkSourceSearchSettings*)cPtr);
+    _retval = gtk_source_search_settings_get_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   void setAtWordBoundaries(bool atWordBoundaries)
   {
-    gtk_source_search_settings_set_at_word_boundaries(cast(GtkSourceSearchSettings*)cPtr, atWordBoundaries);
+    gtk_source_search_settings_set_at_word_boundaries(cast(GtkSourceSearchSettings*)this._cPtr, atWordBoundaries);
   }
 
   /**
@@ -223,7 +223,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   void setCaseSensitive(bool caseSensitive)
   {
-    gtk_source_search_settings_set_case_sensitive(cast(GtkSourceSearchSettings*)cPtr, caseSensitive);
+    gtk_source_search_settings_set_case_sensitive(cast(GtkSourceSearchSettings*)this._cPtr, caseSensitive);
   }
 
   /**
@@ -240,7 +240,7 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   void setRegexEnabled(bool regexEnabled)
   {
-    gtk_source_search_settings_set_regex_enabled(cast(GtkSourceSearchSettings*)cPtr, regexEnabled);
+    gtk_source_search_settings_set_regex_enabled(cast(GtkSourceSearchSettings*)this._cPtr, regexEnabled);
   }
 
   /**
@@ -257,7 +257,7 @@ class SearchSettings : gobject.object.ObjectWrap
   void setSearchText(string searchText = null)
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
-    gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)cPtr, _searchText);
+    gtk_source_search_settings_set_search_text(cast(GtkSourceSearchSettings*)this._cPtr, _searchText);
   }
 
   /**
@@ -271,6 +271,6 @@ class SearchSettings : gobject.object.ObjectWrap
   */
   void setWrapAround(bool wrapAround)
   {
-    gtk_source_search_settings_set_wrap_around(cast(GtkSourceSearchSettings*)cPtr, wrapAround);
+    gtk_source_search_settings_set_wrap_around(cast(GtkSourceSearchSettings*)this._cPtr, wrapAround);
   }
 }

@@ -72,16 +72,16 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_window_get_type != &gidSymbolNotFound ? adw_application_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -150,7 +150,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   this(gtk.application.Application app)
   {
     GtkWidget* _cretval;
-    _cretval = adw_application_window_new(app ? cast(GtkApplication*)app.cPtr(No.Dup) : null);
+    _cretval = adw_application_window_new(app ? cast(GtkApplication*)app._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -162,7 +162,7 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   */
   void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
-    adw_application_window_add_breakpoint(cast(AdwApplicationWindow*)cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint.cPtr(Yes.Dup) : null);
+    adw_application_window_add_breakpoint(cast(AdwApplicationWindow*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -174,8 +174,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   gtk.widget.Widget getContent()
   {
     GtkWidget* _cretval;
-    _cretval = adw_application_window_get_content(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_application_window_get_content(cast(AdwApplicationWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,8 +186,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   adw.breakpoint.Breakpoint getCurrentBreakpoint()
   {
     AdwBreakpoint* _cretval;
-    _cretval = adw_application_window_get_current_breakpoint(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    _cretval = adw_application_window_get_current_breakpoint(cast(AdwApplicationWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,8 +200,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   gio.list_model.ListModel getDialogs()
   {
     GListModel* _cretval;
-    _cretval = adw_application_window_get_dialogs(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = adw_application_window_get_dialogs(cast(AdwApplicationWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -212,8 +212,8 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   adw.dialog.Dialog getVisibleDialog()
   {
     AdwDialog* _cretval;
-    _cretval = adw_application_window_get_visible_dialog(cast(AdwApplicationWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.dialog.Dialog)(cast(AdwDialog*)_cretval, No.Take);
+    _cretval = adw_application_window_get_visible_dialog(cast(AdwApplicationWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.dialog.Dialog)(cast(AdwDialog*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,6 +227,6 @@ class ApplicationWindow : gtk.application_window.ApplicationWindow
   */
   void setContent(gtk.widget.Widget content = null)
   {
-    adw_application_window_set_content(cast(AdwApplicationWindow*)cPtr, content ? cast(GtkWidget*)content.cPtr(No.Dup) : null);
+    adw_application_window_set_content(cast(AdwApplicationWindow*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
 }

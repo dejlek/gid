@@ -77,16 +77,16 @@ class AccelMap : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_map_get_type != &gidSymbolNotFound ? gtk_accel_map_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -228,7 +228,7 @@ class AccelMap : gobject.object.ObjectWrap
   {
     GtkAccelMap* _cretval;
     _cretval = gtk_accel_map_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accel_map.AccelMap)(cast(GtkAccelMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class AccelMap : gobject.object.ObjectWrap
   */
   static void loadScanner(glib.scanner.Scanner scanner)
   {
-    gtk_accel_map_load_scanner(scanner ? cast(GScanner*)scanner.cPtr : null);
+    gtk_accel_map_load_scanner(scanner ? cast(GScanner*)scanner._cPtr : null);
   }
 
   /**

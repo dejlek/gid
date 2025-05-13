@@ -80,7 +80,7 @@ interface ListModel
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_list_model_get_type != &gidSymbolNotFound ? g_list_model_get_type() : cast(GType)0;
@@ -104,8 +104,8 @@ interface ListModel
   */
   T getItem(T)(uint position)
   {
-    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this).cPtr, position);
-    return gobject.object.ObjectWrap.getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
+    return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
   }
 
 

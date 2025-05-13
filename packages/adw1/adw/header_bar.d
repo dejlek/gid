@@ -113,16 +113,16 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_header_bar_get_type != &gidSymbolNotFound ? adw_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -368,7 +368,7 @@ class HeaderBar : gtk.widget.Widget
   adw.types.CenteringPolicy getCenteringPolicy()
   {
     AdwCenteringPolicy _cretval;
-    _cretval = adw_header_bar_get_centering_policy(cast(AdwHeaderBar*)cPtr);
+    _cretval = adw_header_bar_get_centering_policy(cast(AdwHeaderBar*)this._cPtr);
     adw.types.CenteringPolicy _retval = cast(adw.types.CenteringPolicy)_cretval;
     return _retval;
   }
@@ -380,7 +380,7 @@ class HeaderBar : gtk.widget.Widget
   string getDecorationLayout()
   {
     const(char)* _cretval;
-    _cretval = adw_header_bar_get_decoration_layout(cast(AdwHeaderBar*)cPtr);
+    _cretval = adw_header_bar_get_decoration_layout(cast(AdwHeaderBar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -392,7 +392,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowBackButton()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_back_button(cast(AdwHeaderBar*)cPtr);
+    _retval = adw_header_bar_get_show_back_button(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -403,7 +403,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowEndTitleButtons()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_end_title_buttons(cast(AdwHeaderBar*)cPtr);
+    _retval = adw_header_bar_get_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowStartTitleButtons()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_start_title_buttons(cast(AdwHeaderBar*)cPtr);
+    _retval = adw_header_bar_get_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowTitle()
   {
     bool _retval;
-    _retval = adw_header_bar_get_show_title(cast(AdwHeaderBar*)cPtr);
+    _retval = adw_header_bar_get_show_title(cast(AdwHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -436,8 +436,8 @@ class HeaderBar : gtk.widget.Widget
   gtk.widget.Widget getTitleWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_header_bar_get_title_widget(cast(AdwHeaderBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_header_bar_get_title_widget(cast(AdwHeaderBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -449,7 +449,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packEnd(gtk.widget.Widget child)
   {
-    adw_header_bar_pack_end(cast(AdwHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_header_bar_pack_end(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -460,7 +460,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packStart(gtk.widget.Widget child)
   {
-    adw_header_bar_pack_start(cast(AdwHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_header_bar_pack_start(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -474,7 +474,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_header_bar_remove(cast(AdwHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_header_bar_remove(cast(AdwHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -485,7 +485,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setCenteringPolicy(adw.types.CenteringPolicy centeringPolicy)
   {
-    adw_header_bar_set_centering_policy(cast(AdwHeaderBar*)cPtr, centeringPolicy);
+    adw_header_bar_set_centering_policy(cast(AdwHeaderBar*)this._cPtr, centeringPolicy);
   }
 
   /**
@@ -508,7 +508,7 @@ class HeaderBar : gtk.widget.Widget
   void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
-    adw_header_bar_set_decoration_layout(cast(AdwHeaderBar*)cPtr, _layout);
+    adw_header_bar_set_decoration_layout(cast(AdwHeaderBar*)this._cPtr, _layout);
   }
 
   /**
@@ -522,7 +522,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setShowBackButton(bool showBackButton)
   {
-    adw_header_bar_set_show_back_button(cast(AdwHeaderBar*)cPtr, showBackButton);
+    adw_header_bar_set_show_back_button(cast(AdwHeaderBar*)this._cPtr, showBackButton);
   }
 
   /**
@@ -539,7 +539,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setShowEndTitleButtons(bool setting)
   {
-    adw_header_bar_set_show_end_title_buttons(cast(AdwHeaderBar*)cPtr, setting);
+    adw_header_bar_set_show_end_title_buttons(cast(AdwHeaderBar*)this._cPtr, setting);
   }
 
   /**
@@ -556,7 +556,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setShowStartTitleButtons(bool setting)
   {
-    adw_header_bar_set_show_start_title_buttons(cast(AdwHeaderBar*)cPtr, setting);
+    adw_header_bar_set_show_start_title_buttons(cast(AdwHeaderBar*)this._cPtr, setting);
   }
 
   /**
@@ -567,7 +567,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setShowTitle(bool showTitle)
   {
-    adw_header_bar_set_show_title(cast(AdwHeaderBar*)cPtr, showTitle);
+    adw_header_bar_set_show_title(cast(AdwHeaderBar*)this._cPtr, showTitle);
   }
 
   /**
@@ -593,6 +593,6 @@ class HeaderBar : gtk.widget.Widget
   */
   void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
-    adw_header_bar_set_title_widget(cast(AdwHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
+    adw_header_bar_set_title_widget(cast(AdwHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
   }
 }

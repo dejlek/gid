@@ -34,16 +34,16 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_gl_texture_builder_get_type != &gidSymbolNotFound ? gdk_gl_texture_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -271,8 +271,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
     auto _destroyCB = destroy ? &_destroyCallback : null;
 
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)cPtr, _destroyCB, data);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    _cretval = gdk_gl_texture_builder_build(cast(GdkGLTextureBuilder*)this._cPtr, _destroyCB, data);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -284,8 +284,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   gdk.glcontext.GLContext getContext()
   {
     GdkGLContext* _cretval;
-    _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    _cretval = gdk_gl_texture_builder_get_context(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -296,7 +296,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
-    _cretval = gdk_gl_texture_builder_get_format(cast(GdkGLTextureBuilder*)cPtr);
+    _cretval = gdk_gl_texture_builder_get_format(cast(GdkGLTextureBuilder*)this._cPtr);
     gdk.types.MemoryFormat _retval = cast(gdk.types.MemoryFormat)_cretval;
     return _retval;
   }
@@ -308,7 +308,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   bool getHasMipmap()
   {
     bool _retval;
-    _retval = gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)cPtr);
+    _retval = gdk_gl_texture_builder_get_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -320,7 +320,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   int getHeight()
   {
     int _retval;
-    _retval = gdk_gl_texture_builder_get_height(cast(GdkGLTextureBuilder*)cPtr);
+    _retval = gdk_gl_texture_builder_get_height(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   uint getId()
   {
     uint _retval;
-    _retval = gdk_gl_texture_builder_get_id(cast(GdkGLTextureBuilder*)cPtr);
+    _retval = gdk_gl_texture_builder_get_id(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void* getSync()
   {
-    auto _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)cPtr);
+    auto _retval = gdk_gl_texture_builder_get_sync(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -354,7 +354,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   cairo.region.Region getUpdateRegion()
   {
     cairo_region_t* _cretval;
-    _cretval = gdk_gl_texture_builder_get_update_region(cast(GdkGLTextureBuilder*)cPtr);
+    _cretval = gdk_gl_texture_builder_get_update_region(cast(GdkGLTextureBuilder*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -367,8 +367,8 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   gdk.texture.Texture getUpdateTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gdk_gl_texture_builder_get_update_texture(cast(GdkGLTextureBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   int getWidth()
   {
     int _retval;
-    _retval = gdk_gl_texture_builder_get_width(cast(GdkGLTextureBuilder*)cPtr);
+    _retval = gdk_gl_texture_builder_get_width(cast(GdkGLTextureBuilder*)this._cPtr);
     return _retval;
   }
 
@@ -395,7 +395,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setContext(gdk.glcontext.GLContext context = null)
   {
-    gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)cPtr, context ? cast(GdkGLContext*)context.cPtr(No.Dup) : null);
+    gdk_gl_texture_builder_set_context(cast(GdkGLTextureBuilder*)this._cPtr, context ? cast(GdkGLContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -421,7 +421,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setFormat(gdk.types.MemoryFormat format)
   {
-    gdk_gl_texture_builder_set_format(cast(GdkGLTextureBuilder*)cPtr, format);
+    gdk_gl_texture_builder_set_format(cast(GdkGLTextureBuilder*)this._cPtr, format);
   }
 
   /**
@@ -435,7 +435,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setHasMipmap(bool hasMipmap)
   {
-    gdk_gl_texture_builder_set_has_mipmap(cast(GdkGLTextureBuilder*)cPtr, hasMipmap);
+    gdk_gl_texture_builder_set_has_mipmap(cast(GdkGLTextureBuilder*)this._cPtr, hasMipmap);
   }
 
   /**
@@ -448,7 +448,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setHeight(int height)
   {
-    gdk_gl_texture_builder_set_height(cast(GdkGLTextureBuilder*)cPtr, height);
+    gdk_gl_texture_builder_set_height(cast(GdkGLTextureBuilder*)this._cPtr, height);
   }
 
   /**
@@ -463,7 +463,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setId(uint id)
   {
-    gdk_gl_texture_builder_set_id(cast(GdkGLTextureBuilder*)cPtr, id);
+    gdk_gl_texture_builder_set_id(cast(GdkGLTextureBuilder*)this._cPtr, id);
   }
 
   /**
@@ -481,7 +481,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setSync(void* sync = null)
   {
-    gdk_gl_texture_builder_set_sync(cast(GdkGLTextureBuilder*)cPtr, sync);
+    gdk_gl_texture_builder_set_sync(cast(GdkGLTextureBuilder*)this._cPtr, sync);
   }
 
   /**
@@ -501,7 +501,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setUpdateRegion(cairo.region.Region region = null)
   {
-    gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gdk_gl_texture_builder_set_update_region(cast(GdkGLTextureBuilder*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -513,7 +513,7 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setUpdateTexture(gdk.texture.Texture texture = null)
   {
-    gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
+    gdk_gl_texture_builder_set_update_texture(cast(GdkGLTextureBuilder*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
   }
 
   /**
@@ -526,6 +526,6 @@ class GLTextureBuilder : gobject.object.ObjectWrap
   */
   void setWidth(int width)
   {
-    gdk_gl_texture_builder_set_width(cast(GdkGLTextureBuilder*)cPtr, width);
+    gdk_gl_texture_builder_set_width(cast(GdkGLTextureBuilder*)this._cPtr, width);
   }
 }

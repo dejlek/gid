@@ -24,16 +24,16 @@ class GestureRotate : gtk.gesture.Gesture
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_rotate_get_type != &gidSymbolNotFound ? gtk_gesture_rotate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class GestureRotate : gtk.gesture.Gesture
   double getAngleDelta()
   {
     double _retval;
-    _retval = gtk_gesture_rotate_get_angle_delta(cast(GtkGestureRotate*)cPtr);
+    _retval = gtk_gesture_rotate_get_angle_delta(cast(GtkGestureRotate*)this._cPtr);
     return _retval;
   }
 

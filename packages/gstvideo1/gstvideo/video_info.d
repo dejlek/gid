@@ -30,22 +30,22 @@ class VideoInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_info_get_type != &gidSymbolNotFound ? gst_video_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.video_format_info.VideoFormatInfo finfo()
   {
-    return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)cPtr).finfo);
+    return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo);
   }
 
   /**
@@ -69,7 +69,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.types.VideoInterlaceMode interlaceMode()
   {
-    return cast(gstvideo.types.VideoInterlaceMode)(cast(GstVideoInfo*)cPtr).interlaceMode;
+    return cast(gstvideo.types.VideoInterlaceMode)(cast(GstVideoInfo*)this._cPtr).interlaceMode;
   }
 
   /**
@@ -79,7 +79,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void interlaceMode(gstvideo.types.VideoInterlaceMode propval)
   {
-    (cast(GstVideoInfo*)cPtr).interlaceMode = cast(GstVideoInterlaceMode)propval;
+    (cast(GstVideoInfo*)this._cPtr).interlaceMode = cast(GstVideoInterlaceMode)propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.types.VideoFlags flags()
   {
-    return cast(gstvideo.types.VideoFlags)(cast(GstVideoInfo*)cPtr).flags;
+    return cast(gstvideo.types.VideoFlags)(cast(GstVideoInfo*)this._cPtr).flags;
   }
 
   /**
@@ -98,7 +98,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void flags(gstvideo.types.VideoFlags propval)
   {
-    (cast(GstVideoInfo*)cPtr).flags = cast(GstVideoFlags)propval;
+    (cast(GstVideoInfo*)this._cPtr).flags = cast(GstVideoFlags)propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int width()
   {
-    return (cast(GstVideoInfo*)cPtr).width;
+    return (cast(GstVideoInfo*)this._cPtr).width;
   }
 
   /**
@@ -117,7 +117,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void width(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).width = propval;
+    (cast(GstVideoInfo*)this._cPtr).width = propval;
   }
 
   /**
@@ -126,7 +126,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int height()
   {
-    return (cast(GstVideoInfo*)cPtr).height;
+    return (cast(GstVideoInfo*)this._cPtr).height;
   }
 
   /**
@@ -136,7 +136,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void height(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).height = propval;
+    (cast(GstVideoInfo*)this._cPtr).height = propval;
   }
 
   /**
@@ -145,7 +145,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property size_t size()
   {
-    return (cast(GstVideoInfo*)cPtr).size;
+    return (cast(GstVideoInfo*)this._cPtr).size;
   }
 
   /**
@@ -155,7 +155,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void size(size_t propval)
   {
-    (cast(GstVideoInfo*)cPtr).size = propval;
+    (cast(GstVideoInfo*)this._cPtr).size = propval;
   }
 
   /**
@@ -164,7 +164,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int views()
   {
-    return (cast(GstVideoInfo*)cPtr).views;
+    return (cast(GstVideoInfo*)this._cPtr).views;
   }
 
   /**
@@ -174,7 +174,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void views(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).views = propval;
+    (cast(GstVideoInfo*)this._cPtr).views = propval;
   }
 
   /**
@@ -183,7 +183,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.types.VideoChromaSite chromaSite()
   {
-    return cast(gstvideo.types.VideoChromaSite)(cast(GstVideoInfo*)cPtr).chromaSite;
+    return cast(gstvideo.types.VideoChromaSite)(cast(GstVideoInfo*)this._cPtr).chromaSite;
   }
 
   /**
@@ -193,7 +193,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void chromaSite(gstvideo.types.VideoChromaSite propval)
   {
-    (cast(GstVideoInfo*)cPtr).chromaSite = cast(GstVideoChromaSite)propval;
+    (cast(GstVideoInfo*)this._cPtr).chromaSite = cast(GstVideoChromaSite)propval;
   }
 
   /**
@@ -202,7 +202,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.video_colorimetry.VideoColorimetry colorimetry()
   {
-    return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)cPtr).colorimetry);
+    return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)this._cPtr).colorimetry);
   }
 
   /**
@@ -211,7 +211,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int parN()
   {
-    return (cast(GstVideoInfo*)cPtr).parN;
+    return (cast(GstVideoInfo*)this._cPtr).parN;
   }
 
   /**
@@ -221,7 +221,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void parN(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).parN = propval;
+    (cast(GstVideoInfo*)this._cPtr).parN = propval;
   }
 
   /**
@@ -230,7 +230,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int parD()
   {
-    return (cast(GstVideoInfo*)cPtr).parD;
+    return (cast(GstVideoInfo*)this._cPtr).parD;
   }
 
   /**
@@ -240,7 +240,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void parD(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).parD = propval;
+    (cast(GstVideoInfo*)this._cPtr).parD = propval;
   }
 
   /**
@@ -249,7 +249,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int fpsN()
   {
-    return (cast(GstVideoInfo*)cPtr).fpsN;
+    return (cast(GstVideoInfo*)this._cPtr).fpsN;
   }
 
   /**
@@ -259,7 +259,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void fpsN(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).fpsN = propval;
+    (cast(GstVideoInfo*)this._cPtr).fpsN = propval;
   }
 
   /**
@@ -268,7 +268,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property int fpsD()
   {
-    return (cast(GstVideoInfo*)cPtr).fpsD;
+    return (cast(GstVideoInfo*)this._cPtr).fpsD;
   }
 
   /**
@@ -278,7 +278,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property void fpsD(int propval)
   {
-    (cast(GstVideoInfo*)cPtr).fpsD = propval;
+    (cast(GstVideoInfo*)this._cPtr).fpsD = propval;
   }
 
   /**
@@ -303,7 +303,7 @@ class VideoInfo : gobject.boxed.Boxed
   static gstvideo.video_info.VideoInfo newFromCaps(gst.caps.Caps caps)
   {
     GstVideoInfo* _cretval;
-    _cretval = gst_video_info_new_from_caps(caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_video_info_new_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -323,7 +323,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool align_(gstvideo.video_alignment.VideoAlignment align_)
   {
     bool _retval;
-    _retval = gst_video_info_align(cast(GstVideoInfo*)cPtr, align_ ? cast(GstVideoAlignment*)align_.cPtr : null);
+    _retval = gst_video_info_align(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool alignFull(gstvideo.video_alignment.VideoAlignment align_, out size_t planeSize)
   {
     bool _retval;
-    _retval = gst_video_info_align_full(cast(GstVideoInfo*)cPtr, align_ ? cast(GstVideoAlignment*)align_.cPtr : null, cast(size_t*)&planeSize);
+    _retval = gst_video_info_align_full(cast(GstVideoInfo*)this._cPtr, align_ ? cast(GstVideoAlignment*)align_._cPtr : null, cast(size_t*)&planeSize);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool convert(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
   {
     bool _retval;
-    _retval = gst_video_info_convert(cast(const(GstVideoInfo)*)cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
+    _retval = gst_video_info_convert(cast(const(GstVideoInfo)*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
     return _retval;
   }
 
@@ -378,7 +378,7 @@ class VideoInfo : gobject.boxed.Boxed
   gstvideo.video_info.VideoInfo copy()
   {
     GstVideoInfo* _cretval;
-    _cretval = gst_video_info_copy(cast(const(GstVideoInfo)*)cPtr);
+    _cretval = gst_video_info_copy(cast(const(GstVideoInfo)*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_info.VideoInfo(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -393,7 +393,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool isEqual(gstvideo.video_info.VideoInfo other)
   {
     bool _retval;
-    _retval = gst_video_info_is_equal(cast(const(GstVideoInfo)*)cPtr, other ? cast(const(GstVideoInfo)*)other.cPtr(No.Dup) : null);
+    _retval = gst_video_info_is_equal(cast(const(GstVideoInfo)*)this._cPtr, other ? cast(const(GstVideoInfo)*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool setFormat(gstvideo.types.VideoFormat format, uint width, uint height)
   {
     bool _retval;
-    _retval = gst_video_info_set_format(cast(GstVideoInfo*)cPtr, format, width, height);
+    _retval = gst_video_info_set_format(cast(GstVideoInfo*)this._cPtr, format, width, height);
     return _retval;
   }
 
@@ -433,7 +433,7 @@ class VideoInfo : gobject.boxed.Boxed
   bool setInterlacedFormat(gstvideo.types.VideoFormat format, gstvideo.types.VideoInterlaceMode mode, uint width, uint height)
   {
     bool _retval;
-    _retval = gst_video_info_set_interlaced_format(cast(GstVideoInfo*)cPtr, format, mode, width, height);
+    _retval = gst_video_info_set_interlaced_format(cast(GstVideoInfo*)this._cPtr, format, mode, width, height);
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class VideoInfo : gobject.boxed.Boxed
   gst.caps.Caps toCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_video_info_to_caps(cast(const(GstVideoInfo)*)cPtr);
+    _cretval = gst_video_info_to_caps(cast(const(GstVideoInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -461,7 +461,7 @@ class VideoInfo : gobject.boxed.Boxed
   {
     bool _retval;
     GstVideoInfo _info;
-    _retval = gst_video_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_info_from_caps(&_info, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     info = new gstvideo.video_info.VideoInfo(cast(void*)&_info, No.Take);
     return _retval;
   }

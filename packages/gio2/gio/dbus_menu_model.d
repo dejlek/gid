@@ -24,16 +24,16 @@ class DBusMenuModel : gio.menu_model.MenuModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_menu_model_get_type != &gidSymbolNotFound ? g_dbus_menu_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,8 +65,8 @@ class DBusMenuModel : gio.menu_model.MenuModel
     GDBusMenuModel* _cretval;
     const(char)* _busName = busName.toCString(No.Alloc);
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection.cPtr(No.Dup) : null, _busName, _objectPath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
+    _cretval = g_dbus_menu_model_get(connection ? cast(GDBusConnection*)connection._cPtr(No.Dup) : null, _busName, _objectPath);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_menu_model.DBusMenuModel)(cast(GDBusMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 }

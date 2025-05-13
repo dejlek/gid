@@ -87,7 +87,7 @@ template AccessibleT()
   override void announce(string message, gtk.types.AccessibleAnnouncementPriority priority)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    gtk_accessible_announce(cast(GtkAccessible*)cPtr, _message, priority);
+    gtk_accessible_announce(cast(GtkAccessible*)this._cPtr, _message, priority);
   }
 
   /**
@@ -99,8 +99,8 @@ template AccessibleT()
   override gtk.accessible.Accessible getAccessibleParent()
   {
     GtkAccessible* _cretval;
-    _cretval = gtk_accessible_get_accessible_parent(cast(GtkAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    _cretval = gtk_accessible_get_accessible_parent(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ template AccessibleT()
   override gtk.types.AccessibleRole getAccessibleRole()
   {
     GtkAccessibleRole _cretval;
-    _cretval = gtk_accessible_get_accessible_role(cast(GtkAccessible*)cPtr);
+    _cretval = gtk_accessible_get_accessible_role(cast(GtkAccessible*)this._cPtr);
     gtk.types.AccessibleRole _retval = cast(gtk.types.AccessibleRole)_cretval;
     return _retval;
   }
@@ -123,8 +123,8 @@ template AccessibleT()
   override gtk.atcontext.ATContext getAtContext()
   {
     GtkATContext* _cretval;
-    _cretval = gtk_accessible_get_at_context(cast(GtkAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
+    _cretval = gtk_accessible_get_at_context(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ template AccessibleT()
   override bool getBounds(out int x, out int y, out int width, out int height)
   {
     bool _retval;
-    _retval = gtk_accessible_get_bounds(cast(GtkAccessible*)cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
+    _retval = gtk_accessible_get_bounds(cast(GtkAccessible*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
     return _retval;
   }
 
@@ -156,8 +156,8 @@ template AccessibleT()
   override gtk.accessible.Accessible getFirstAccessibleChild()
   {
     GtkAccessible* _cretval;
-    _cretval = gtk_accessible_get_first_accessible_child(cast(GtkAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    _cretval = gtk_accessible_get_first_accessible_child(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -168,8 +168,8 @@ template AccessibleT()
   override gtk.accessible.Accessible getNextAccessibleSibling()
   {
     GtkAccessible* _cretval;
-    _cretval = gtk_accessible_get_next_accessible_sibling(cast(GtkAccessible*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
+    _cretval = gtk_accessible_get_next_accessible_sibling(cast(GtkAccessible*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ template AccessibleT()
   override bool getPlatformState(gtk.types.AccessiblePlatformState state)
   {
     bool _retval;
-    _retval = gtk_accessible_get_platform_state(cast(GtkAccessible*)cPtr, state);
+    _retval = gtk_accessible_get_platform_state(cast(GtkAccessible*)this._cPtr, state);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ template AccessibleT()
   */
   override void resetProperty(gtk.types.AccessibleProperty property)
   {
-    gtk_accessible_reset_property(cast(GtkAccessible*)cPtr, property);
+    gtk_accessible_reset_property(cast(GtkAccessible*)this._cPtr, property);
   }
 
   /**
@@ -212,7 +212,7 @@ template AccessibleT()
   */
   override void resetRelation(gtk.types.AccessibleRelation relation)
   {
-    gtk_accessible_reset_relation(cast(GtkAccessible*)cPtr, relation);
+    gtk_accessible_reset_relation(cast(GtkAccessible*)this._cPtr, relation);
   }
 
   /**
@@ -223,7 +223,7 @@ template AccessibleT()
   */
   override void resetState(gtk.types.AccessibleState state)
   {
-    gtk_accessible_reset_state(cast(GtkAccessible*)cPtr, state);
+    gtk_accessible_reset_state(cast(GtkAccessible*)this._cPtr, state);
   }
 
   /**
@@ -243,7 +243,7 @@ template AccessibleT()
   */
   override void setAccessibleParent(gtk.accessible.Accessible parent = null, gtk.accessible.Accessible nextSibling = null)
   {
-    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)cPtr, parent ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)parent).cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)nextSibling).cPtr(No.Dup) : null);
+    gtk_accessible_set_accessible_parent(cast(GtkAccessible*)this._cPtr, parent ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)parent)._cPtr(No.Dup) : null, nextSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)nextSibling)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -257,7 +257,7 @@ template AccessibleT()
   */
   override void updateNextAccessibleSibling(gtk.accessible.Accessible newSibling = null)
   {
-    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)cPtr, newSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)newSibling).cPtr(No.Dup) : null);
+    gtk_accessible_update_next_accessible_sibling(cast(GtkAccessible*)this._cPtr, newSibling ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)newSibling)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -284,9 +284,9 @@ template AccessibleT()
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
-    gtk_accessible_update_property_value(cast(GtkAccessible*)cPtr, _nProperties, _properties, _values);
+    gtk_accessible_update_property_value(cast(GtkAccessible*)this._cPtr, _nProperties, _properties, _values);
   }
 
   /**
@@ -313,9 +313,9 @@ template AccessibleT()
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
-    gtk_accessible_update_relation_value(cast(GtkAccessible*)cPtr, _nRelations, _relations, _values);
+    gtk_accessible_update_relation_value(cast(GtkAccessible*)this._cPtr, _nRelations, _relations, _values);
   }
 
   /**
@@ -342,8 +342,8 @@ template AccessibleT()
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
-    gtk_accessible_update_state_value(cast(GtkAccessible*)cPtr, _nStates, _states, _values);
+    gtk_accessible_update_state_value(cast(GtkAccessible*)this._cPtr, _nStates, _states, _values);
   }
 }

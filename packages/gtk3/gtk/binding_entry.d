@@ -31,7 +31,7 @@ class BindingEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class BindingEntry
   */
   @property uint keyval()
   {
-    return (cast(GtkBindingEntry*)cPtr).keyval;
+    return (cast(GtkBindingEntry*)this._cPtr).keyval;
   }
 
   /**
@@ -52,7 +52,7 @@ class BindingEntry
   */
   @property void keyval(uint propval)
   {
-    (cast(GtkBindingEntry*)cPtr).keyval = propval;
+    (cast(GtkBindingEntry*)this._cPtr).keyval = propval;
   }
 
   /**
@@ -61,7 +61,7 @@ class BindingEntry
   */
   @property gdk.types.ModifierType modifiers()
   {
-    return cast(gdk.types.ModifierType)(cast(GtkBindingEntry*)cPtr).modifiers;
+    return cast(gdk.types.ModifierType)(cast(GtkBindingEntry*)this._cPtr).modifiers;
   }
 
   /**
@@ -71,7 +71,7 @@ class BindingEntry
   */
   @property void modifiers(gdk.types.ModifierType propval)
   {
-    (cast(GtkBindingEntry*)cPtr).modifiers = cast(GdkModifierType)propval;
+    (cast(GtkBindingEntry*)this._cPtr).modifiers = cast(GdkModifierType)propval;
   }
 
   /**
@@ -80,7 +80,7 @@ class BindingEntry
   */
   @property gtk.binding_set.BindingSet bindingSet()
   {
-    return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)cPtr).bindingSet);
+    return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet);
   }
 
   /**
@@ -89,7 +89,7 @@ class BindingEntry
   */
   @property uint destroyed()
   {
-    return (cast(GtkBindingEntry*)cPtr).destroyed;
+    return (cast(GtkBindingEntry*)this._cPtr).destroyed;
   }
 
   /**
@@ -99,7 +99,7 @@ class BindingEntry
   */
   @property void destroyed(uint propval)
   {
-    (cast(GtkBindingEntry*)cPtr).destroyed = propval;
+    (cast(GtkBindingEntry*)this._cPtr).destroyed = propval;
   }
 
   /**
@@ -108,7 +108,7 @@ class BindingEntry
   */
   @property uint inEmission()
   {
-    return (cast(GtkBindingEntry*)cPtr).inEmission;
+    return (cast(GtkBindingEntry*)this._cPtr).inEmission;
   }
 
   /**
@@ -118,7 +118,7 @@ class BindingEntry
   */
   @property void inEmission(uint propval)
   {
-    (cast(GtkBindingEntry*)cPtr).inEmission = propval;
+    (cast(GtkBindingEntry*)this._cPtr).inEmission = propval;
   }
 
   /**
@@ -127,7 +127,7 @@ class BindingEntry
   */
   @property uint marksUnbound()
   {
-    return (cast(GtkBindingEntry*)cPtr).marksUnbound;
+    return (cast(GtkBindingEntry*)this._cPtr).marksUnbound;
   }
 
   /**
@@ -137,7 +137,7 @@ class BindingEntry
   */
   @property void marksUnbound(uint propval)
   {
-    (cast(GtkBindingEntry*)cPtr).marksUnbound = propval;
+    (cast(GtkBindingEntry*)this._cPtr).marksUnbound = propval;
   }
 
   /**
@@ -146,7 +146,7 @@ class BindingEntry
   */
   @property gtk.binding_entry.BindingEntry setNext()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)cPtr).setNext);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext);
   }
 
   /**
@@ -155,7 +155,7 @@ class BindingEntry
   */
   @property gtk.binding_entry.BindingEntry hashNext()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)cPtr).hashNext);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext);
   }
 
   /**
@@ -164,7 +164,7 @@ class BindingEntry
   */
   @property gtk.binding_signal.BindingSignal signals()
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)cPtr).signals);
+    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals);
   }
 
   /**
@@ -198,7 +198,7 @@ class BindingEntry
   {
     GTokenType _cretval;
     const(char)* _signalDesc = signalDesc.toCString(No.Alloc);
-    _cretval = gtk_binding_entry_add_signal_from_string(bindingSet ? cast(GtkBindingSet*)bindingSet.cPtr : null, _signalDesc);
+    _cretval = gtk_binding_entry_add_signal_from_string(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, _signalDesc);
     glib.types.TokenType _retval = cast(glib.types.TokenType)_cretval;
     return _retval;
   }
@@ -214,7 +214,7 @@ class BindingEntry
   */
   static void remove(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
   {
-    gtk_binding_entry_remove(bindingSet ? cast(GtkBindingSet*)bindingSet.cPtr : null, keyval, modifiers);
+    gtk_binding_entry_remove(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, keyval, modifiers);
   }
 
   /**
@@ -229,6 +229,6 @@ class BindingEntry
   */
   static void skip(gtk.binding_set.BindingSet bindingSet, uint keyval, gdk.types.ModifierType modifiers)
   {
-    gtk_binding_entry_skip(bindingSet ? cast(GtkBindingSet*)bindingSet.cPtr : null, keyval, modifiers);
+    gtk_binding_entry_skip(bindingSet ? cast(GtkBindingSet*)bindingSet._cPtr : null, keyval, modifiers);
   }
 }

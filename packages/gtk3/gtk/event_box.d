@@ -26,16 +26,16 @@ class EventBox : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_event_box_get_type != &gidSymbolNotFound ? gtk_event_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class EventBox : gtk.bin.Bin
   bool getAboveChild()
   {
     bool _retval;
-    _retval = gtk_event_box_get_above_child(cast(GtkEventBox*)cPtr);
+    _retval = gtk_event_box_get_above_child(cast(GtkEventBox*)this._cPtr);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class EventBox : gtk.bin.Bin
   bool getVisibleWindow()
   {
     bool _retval;
-    _retval = gtk_event_box_get_visible_window(cast(GtkEventBox*)cPtr);
+    _retval = gtk_event_box_get_visible_window(cast(GtkEventBox*)this._cPtr);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class EventBox : gtk.bin.Bin
   */
   void setAboveChild(bool aboveChild)
   {
-    gtk_event_box_set_above_child(cast(GtkEventBox*)cPtr, aboveChild);
+    gtk_event_box_set_above_child(cast(GtkEventBox*)this._cPtr, aboveChild);
   }
 
   /**
@@ -162,6 +162,6 @@ class EventBox : gtk.bin.Bin
   */
   void setVisibleWindow(bool visibleWindow)
   {
-    gtk_event_box_set_visible_window(cast(GtkEventBox*)cPtr, visibleWindow);
+    gtk_event_box_set_visible_window(cast(GtkEventBox*)this._cPtr, visibleWindow);
   }
 }

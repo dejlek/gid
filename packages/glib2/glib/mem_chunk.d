@@ -24,7 +24,7 @@ class MemChunk
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -32,39 +32,39 @@ class MemChunk
   /** */
   void* alloc()
   {
-    auto _retval = g_mem_chunk_alloc(cast(GMemChunk*)cPtr);
+    auto _retval = g_mem_chunk_alloc(cast(GMemChunk*)this._cPtr);
     return _retval;
   }
 
   /** */
   void* alloc0()
   {
-    auto _retval = g_mem_chunk_alloc0(cast(GMemChunk*)cPtr);
+    auto _retval = g_mem_chunk_alloc0(cast(GMemChunk*)this._cPtr);
     return _retval;
   }
 
   /** */
   void clean()
   {
-    g_mem_chunk_clean(cast(GMemChunk*)cPtr);
+    g_mem_chunk_clean(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
   void destroy()
   {
-    g_mem_chunk_destroy(cast(GMemChunk*)cPtr);
+    g_mem_chunk_destroy(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
   void print()
   {
-    g_mem_chunk_print(cast(GMemChunk*)cPtr);
+    g_mem_chunk_print(cast(GMemChunk*)this._cPtr);
   }
 
   /** */
   void reset()
   {
-    g_mem_chunk_reset(cast(GMemChunk*)cPtr);
+    g_mem_chunk_reset(cast(GMemChunk*)this._cPtr);
   }
 
   /** */

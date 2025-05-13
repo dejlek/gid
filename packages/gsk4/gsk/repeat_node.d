@@ -37,7 +37,7 @@ class RepeatNode : gsk.render_node.RenderNode
   this(graphene.rect.Rect bounds, gsk.render_node.RenderNode child, graphene.rect.Rect childBounds = null)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_repeat_node_new(bounds ? cast(const(graphene_rect_t)*)bounds.cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds.cPtr(No.Dup) : null);
+    _cretval = gsk_repeat_node_new(bounds ? cast(const(graphene_rect_t)*)bounds._cPtr(No.Dup) : null, child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, childBounds ? cast(const(graphene_rect_t)*)childBounds._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -48,7 +48,7 @@ class RepeatNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_repeat_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_repeat_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -60,7 +60,7 @@ class RepeatNode : gsk.render_node.RenderNode
   graphene.rect.Rect getChildBounds()
   {
     const(graphene_rect_t)* _cretval;
-    _cretval = gsk_repeat_node_get_child_bounds(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_repeat_node_get_child_bounds(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.rect.Rect(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

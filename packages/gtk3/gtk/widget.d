@@ -467,16 +467,16 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_get_type != &gidSymbolNotFound ? gtk_widget_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1224,7 +1224,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkStyle* _cretval;
     _cretval = gtk_widget_get_default_style();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1279,7 +1279,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool activate()
   {
     bool _retval;
-    _retval = gtk_widget_activate(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_activate(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1303,7 +1303,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void addAccelerator(string accelSignal, gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags)
   {
     const(char)* _accelSignal = accelSignal.toCString(No.Alloc);
-    gtk_widget_add_accelerator(cast(GtkWidget*)cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null, accelKey, accelMods, accelFlags);
+    gtk_widget_add_accelerator(cast(GtkWidget*)this._cPtr, _accelSignal, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null, accelKey, accelMods, accelFlags);
   }
 
   /**
@@ -1316,7 +1316,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
   {
-    gtk_widget_add_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, events);
+    gtk_widget_add_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, events);
   }
 
   /**
@@ -1329,7 +1329,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addEvents(int events)
   {
-    gtk_widget_add_events(cast(GtkWidget*)cPtr, events);
+    gtk_widget_add_events(cast(GtkWidget*)this._cPtr, events);
   }
 
   /**
@@ -1345,7 +1345,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void addMnemonicLabel(gtk.widget.Widget label)
   {
-    gtk_widget_add_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
+    gtk_widget_add_mnemonic_label(cast(GtkWidget*)this._cPtr, label ? cast(GtkWidget*)label._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1381,7 +1381,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     {
       auto _dlg = cast(gtk.types.TickCallback*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(void*)frameClock, No.Take));
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
@@ -1389,7 +1389,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     uint _retval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    _retval = gtk_widget_add_tick_callback(cast(GtkWidget*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    _retval = gtk_widget_add_tick_callback(cast(GtkWidget*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
     return _retval;
   }
 
@@ -1409,7 +1409,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool canActivateAccel(uint signalId)
   {
     bool _retval;
-    _retval = gtk_widget_can_activate_accel(cast(GtkWidget*)cPtr, signalId);
+    _retval = gtk_widget_can_activate_accel(cast(GtkWidget*)this._cPtr, signalId);
     return _retval;
   }
 
@@ -1441,7 +1441,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool childFocus(gtk.types.DirectionType direction)
   {
     bool _retval;
-    _retval = gtk_widget_child_focus(cast(GtkWidget*)cPtr, direction);
+    _retval = gtk_widget_child_focus(cast(GtkWidget*)this._cPtr, direction);
     return _retval;
   }
 
@@ -1461,7 +1461,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void childNotify(string childProperty)
   {
     const(char)* _childProperty = childProperty.toCString(No.Alloc);
-    gtk_widget_child_notify(cast(GtkWidget*)cPtr, _childProperty);
+    gtk_widget_child_notify(cast(GtkWidget*)this._cPtr, _childProperty);
   }
 
   /**
@@ -1482,7 +1482,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _path;
     char* _pathReversed;
-    gtk_widget_class_path(cast(GtkWidget*)cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
+    gtk_widget_class_path(cast(GtkWidget*)this._cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
     path = _path.fromCString(Yes.Free);
     pathReversed = _pathReversed.fromCString(Yes.Free);
   }
@@ -1507,7 +1507,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool computeExpand(gtk.types.Orientation orientation)
   {
     bool _retval;
-    _retval = gtk_widget_compute_expand(cast(GtkWidget*)cPtr, orientation);
+    _retval = gtk_widget_compute_expand(cast(GtkWidget*)this._cPtr, orientation);
     return _retval;
   }
 
@@ -1520,8 +1520,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   pango.context.Context createPangoContext()
   {
     PangoContext* _cretval;
-    _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
+    _cretval = gtk_widget_create_pango_context(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1543,8 +1543,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PangoLayout* _cretval;
     const(char)* _text = text.toCString(No.Alloc);
-    _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)cPtr, _text);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
+    _cretval = gtk_widget_create_pango_layout(cast(GtkWidget*)this._cPtr, _text);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.layout.Layout)(cast(PangoLayout*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1589,7 +1589,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void destroy()
   {
-    gtk_widget_destroy(cast(GtkWidget*)cPtr);
+    gtk_widget_destroy(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1606,7 +1606,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void destroyed(gtk.widget.Widget widgetPointer)
   {
-    gtk_widget_destroyed(cast(GtkWidget*)cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer.cPtr(No.Dup) : null);
+    gtk_widget_destroyed(cast(GtkWidget*)this._cPtr, widgetPointer ? cast(GtkWidget**)widgetPointer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1624,7 +1624,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool deviceIsShadowed(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gtk_widget_device_is_shadowed(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _retval = gtk_widget_device_is_shadowed(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1646,8 +1646,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBegin(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event = null)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
+    _cretval = gtk_drag_begin(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1696,8 +1696,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.drag_context.DragContext dragBeginWithCoordinates(gtk.target_list.TargetList targets, gdk.types.DragAction actions, int button, gdk.event.Event event, int x, int y)
   {
     GdkDragContext* _cretval;
-    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)cPtr, targets ? cast(GtkTargetList*)targets.cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event.cPtr : null, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
+    _cretval = gtk_drag_begin_with_coordinates(cast(GtkWidget*)this._cPtr, targets ? cast(GtkTargetList*)targets._cPtr(No.Dup) : null, actions, button, event ? cast(GdkEvent*)event._cPtr : null, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drag_context.DragContext)(cast(GdkDragContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1716,7 +1716,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool dragCheckThreshold(int startX, int startY, int currentX, int currentY)
   {
     bool _retval;
-    _retval = gtk_drag_check_threshold(cast(GtkWidget*)cPtr, startX, startY, currentX, currentY);
+    _retval = gtk_drag_check_threshold(cast(GtkWidget*)this._cPtr, startX, startY, currentX, currentY);
     return _retval;
   }
 
@@ -1729,7 +1729,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestAddImageTargets()
   {
-    gtk_drag_dest_add_image_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_dest_add_image_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1741,7 +1741,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestAddTextTargets()
   {
-    gtk_drag_dest_add_text_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_dest_add_text_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1753,7 +1753,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestAddUriTargets()
   {
-    gtk_drag_dest_add_uri_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_dest_add_uri_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1775,7 +1775,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.atom.Atom dragDestFindTarget(gdk.drag_context.DragContext context, gtk.target_list.TargetList targetList = null)
   {
     GdkAtom _cretval;
-    _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
+    _cretval = gtk_drag_dest_find_target(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gdk.atom.Atom(cast(GdkAtom)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1788,7 +1788,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.target_list.TargetList dragDestGetTargetList()
   {
     GtkTargetList* _cretval;
-    _cretval = gtk_drag_dest_get_target_list(cast(GtkWidget*)cPtr);
+    _cretval = gtk_drag_dest_get_target_list(cast(GtkWidget*)this._cPtr);
     auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1802,7 +1802,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool dragDestGetTrackMotion()
   {
     bool _retval;
-    _retval = gtk_drag_dest_get_track_motion(cast(GtkWidget*)cPtr);
+    _retval = gtk_drag_dest_get_track_motion(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -1863,9 +1863,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
     GtkTargetEntry[] _tmptargets;
     foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
+      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-    gtk_drag_dest_set(cast(GtkWidget*)cPtr, flags, _targets, _nTargets, actions);
+    gtk_drag_dest_set(cast(GtkWidget*)this._cPtr, flags, _targets, _nTargets, actions);
   }
 
   /**
@@ -1881,7 +1881,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestSetProxy(gdk.window.Window proxyWindow, gdk.types.DragProtocol protocol, bool useCoordinates)
   {
-    gtk_drag_dest_set_proxy(cast(GtkWidget*)cPtr, proxyWindow ? cast(GdkWindow*)proxyWindow.cPtr(No.Dup) : null, protocol, useCoordinates);
+    gtk_drag_dest_set_proxy(cast(GtkWidget*)this._cPtr, proxyWindow ? cast(GdkWindow*)proxyWindow._cPtr(No.Dup) : null, protocol, useCoordinates);
   }
 
   /**
@@ -1894,7 +1894,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestSetTargetList(gtk.target_list.TargetList targetList = null)
   {
-    gtk_drag_dest_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
+    gtk_drag_dest_set_target_list(cast(GtkWidget*)this._cPtr, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1910,7 +1910,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestSetTrackMotion(bool trackMotion)
   {
-    gtk_drag_dest_set_track_motion(cast(GtkWidget*)cPtr, trackMotion);
+    gtk_drag_dest_set_track_motion(cast(GtkWidget*)this._cPtr, trackMotion);
   }
 
   /**
@@ -1920,7 +1920,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragDestUnset()
   {
-    gtk_drag_dest_unset(cast(GtkWidget*)cPtr);
+    gtk_drag_dest_unset(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1942,7 +1942,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragGetData(gdk.drag_context.DragContext context, gdk.atom.Atom target, uint time)
   {
-    gtk_drag_get_data(cast(GtkWidget*)cPtr, context ? cast(GdkDragContext*)context.cPtr(No.Dup) : null, target ? cast(GdkAtom)target.cPtr : null, time);
+    gtk_drag_get_data(cast(GtkWidget*)this._cPtr, context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, target ? cast(GdkAtom)target._cPtr : null, time);
   }
 
   /**
@@ -1952,7 +1952,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragHighlight()
   {
-    gtk_drag_highlight(cast(GtkWidget*)cPtr);
+    gtk_drag_highlight(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1964,7 +1964,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceAddImageTargets()
   {
-    gtk_drag_source_add_image_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_source_add_image_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1976,7 +1976,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceAddTextTargets()
   {
-    gtk_drag_source_add_text_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_source_add_text_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1988,7 +1988,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceAddUriTargets()
   {
-    gtk_drag_source_add_uri_targets(cast(GtkWidget*)cPtr);
+    gtk_drag_source_add_uri_targets(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -1999,7 +1999,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.target_list.TargetList dragSourceGetTargetList()
   {
     GtkTargetList* _cretval;
-    _cretval = gtk_drag_source_get_target_list(cast(GtkWidget*)cPtr);
+    _cretval = gtk_drag_source_get_target_list(cast(GtkWidget*)this._cPtr);
     auto _retval = _cretval ? new gtk.target_list.TargetList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -2022,9 +2022,9 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 
     GtkTargetEntry[] _tmptargets;
     foreach (obj; targets)
-      _tmptargets ~= *cast(GtkTargetEntry*)obj.cPtr;
+      _tmptargets ~= *cast(GtkTargetEntry*)obj._cPtr;
     const(GtkTargetEntry)* _targets = _tmptargets.ptr;
-    gtk_drag_source_set(cast(GtkWidget*)cPtr, startButtonMask, _targets, _nTargets, actions);
+    gtk_drag_source_set(cast(GtkWidget*)this._cPtr, startButtonMask, _targets, _nTargets, actions);
   }
 
   /**
@@ -2036,7 +2036,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconGicon(gio.icon.Icon icon)
   {
-    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_drag_source_set_icon_gicon(cast(GtkWidget*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2049,7 +2049,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void dragSourceSetIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_drag_source_set_icon_name(cast(GtkWidget*)cPtr, _iconName);
+    gtk_drag_source_set_icon_name(cast(GtkWidget*)this._cPtr, _iconName);
   }
 
   /**
@@ -2062,7 +2062,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2077,7 +2077,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void dragSourceSetIconStock(string stockId)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    gtk_drag_source_set_icon_stock(cast(GtkWidget*)cPtr, _stockId);
+    gtk_drag_source_set_icon_stock(cast(GtkWidget*)this._cPtr, _stockId);
   }
 
   /**
@@ -2090,7 +2090,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetTargetList(gtk.target_list.TargetList targetList = null)
   {
-    gtk_drag_source_set_target_list(cast(GtkWidget*)cPtr, targetList ? cast(GtkTargetList*)targetList.cPtr(No.Dup) : null);
+    gtk_drag_source_set_target_list(cast(GtkWidget*)this._cPtr, targetList ? cast(GtkTargetList*)targetList._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2098,7 +2098,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceUnset()
   {
-    gtk_drag_source_unset(cast(GtkWidget*)cPtr);
+    gtk_drag_source_unset(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -2107,7 +2107,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragUnhighlight()
   {
-    gtk_drag_unhighlight(cast(GtkWidget*)cPtr);
+    gtk_drag_unhighlight(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -2134,7 +2134,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void draw(cairo.context.Context cr)
   {
-    gtk_widget_draw(cast(GtkWidget*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gtk_widget_draw(cast(GtkWidget*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2148,7 +2148,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void ensureStyle()
   {
-    gtk_widget_ensure_style(cast(GtkWidget*)cPtr);
+    gtk_widget_ensure_style(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -2162,7 +2162,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void errorBell()
   {
-    gtk_widget_error_bell(cast(GtkWidget*)cPtr);
+    gtk_widget_error_bell(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -2183,7 +2183,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool event(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_widget_event(cast(GtkWidget*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_widget_event(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -2196,7 +2196,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void freezeChildNotify()
   {
-    gtk_widget_freeze_child_notify(cast(GtkWidget*)cPtr);
+    gtk_widget_freeze_child_notify(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -2217,8 +2217,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   atk.object.ObjectWrap getAccessible()
   {
     AtkObject* _cretval;
-    _cretval = gtk_widget_get_accessible(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
+    _cretval = gtk_widget_get_accessible(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2237,8 +2237,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GActionGroup* _cretval;
     const(char)* _prefix = prefix.toCString(No.Alloc);
-    _cretval = gtk_widget_get_action_group(cast(GtkWidget*)cPtr, _prefix);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
+    _cretval = gtk_widget_get_action_group(cast(GtkWidget*)this._cPtr, _prefix);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action_group.ActionGroup)(cast(GActionGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2252,7 +2252,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getAllocatedBaseline()
   {
     int _retval;
-    _retval = gtk_widget_get_allocated_baseline(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_allocated_baseline(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2265,7 +2265,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getAllocatedHeight()
   {
     int _retval;
-    _retval = gtk_widget_get_allocated_height(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_allocated_height(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2278,7 +2278,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getAllocatedWidth()
   {
     int _retval;
-    _retval = gtk_widget_get_allocated_width(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_allocated_width(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2300,8 +2300,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.widget.Widget getAncestor(gobject.types.GType widgetType)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)cPtr, widgetType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_widget_get_ancestor(cast(GtkWidget*)this._cPtr, widgetType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2315,7 +2315,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getAppPaintable()
   {
     bool _retval;
-    _retval = gtk_widget_get_app_paintable(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_app_paintable(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2327,7 +2327,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getCanDefault()
   {
     bool _retval;
-    _retval = gtk_widget_get_can_default(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_can_default(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2339,7 +2339,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getCanFocus()
   {
     bool _retval;
-    _retval = gtk_widget_get_can_focus(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_can_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2371,7 +2371,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void getChildRequisition(out gtk.requisition.Requisition requisition)
   {
     GtkRequisition _requisition;
-    gtk_widget_get_child_requisition(cast(GtkWidget*)cPtr, &_requisition);
+    gtk_widget_get_child_requisition(cast(GtkWidget*)this._cPtr, &_requisition);
     requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
@@ -2387,7 +2387,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getChildVisible()
   {
     bool _retval;
-    _retval = gtk_widget_get_child_visible(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_child_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2411,8 +2411,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.clipboard.Clipboard getClipboard(gdk.atom.Atom selection)
   {
     GtkClipboard* _cretval;
-    _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)cPtr, selection ? cast(GdkAtom)selection.cPtr : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
+    _cretval = gtk_widget_get_clipboard(cast(GtkWidget*)this._cPtr, selection ? cast(GdkAtom)selection._cPtr : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.clipboard.Clipboard)(cast(GtkClipboard*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2427,7 +2427,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   string getCompositeName()
   {
     char* _cretval;
-    _cretval = gtk_widget_get_composite_name(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_composite_name(cast(GtkWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -2443,7 +2443,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getDeviceEnabled(gdk.device.Device device)
   {
     bool _retval;
-    _retval = gtk_widget_get_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _retval = gtk_widget_get_device_enabled(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2458,7 +2458,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
   {
     GdkEventMask _cretval;
-    _cretval = gtk_widget_get_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _cretval = gtk_widget_get_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -2471,7 +2471,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.TextDirection getDirection()
   {
     GtkTextDirection _cretval;
-    _cretval = gtk_widget_get_direction(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_direction(cast(GtkWidget*)this._cPtr);
     gtk.types.TextDirection _retval = cast(gtk.types.TextDirection)_cretval;
     return _retval;
   }
@@ -2489,8 +2489,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gtk_widget_get_display(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gtk_widget_get_display(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2503,7 +2503,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getDoubleBuffered()
   {
     bool _retval;
-    _retval = gtk_widget_get_double_buffered(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_double_buffered(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2520,7 +2520,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getEvents()
   {
     int _retval;
-    _retval = gtk_widget_get_events(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_events(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2533,7 +2533,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_widget_get_focus_on_click(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_focus_on_click(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2544,8 +2544,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
-    _cretval = gtk_widget_get_font_map(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    _cretval = gtk_widget_get_font_map(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2557,7 +2557,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   cairo.font_options.FontOptions getFontOptions()
   {
     const(cairo_font_options_t)* _cretval;
-    _cretval = gtk_widget_get_font_options(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_font_options(cast(GtkWidget*)this._cPtr);
     auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -2590,8 +2590,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.frame_clock.FrameClock getFrameClock()
   {
     GdkFrameClock* _cretval;
-    _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    _cretval = gtk_widget_get_frame_clock(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2607,7 +2607,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.Align getHalign()
   {
     GtkAlign _cretval;
-    _cretval = gtk_widget_get_halign(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_halign(cast(GtkWidget*)this._cPtr);
     gtk.types.Align _retval = cast(gtk.types.Align)_cretval;
     return _retval;
   }
@@ -2620,7 +2620,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getHasTooltip()
   {
     bool _retval;
-    _retval = gtk_widget_get_has_tooltip(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_has_tooltip(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2632,7 +2632,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getHasWindow()
   {
     bool _retval;
-    _retval = gtk_widget_get_has_window(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_has_window(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2656,7 +2656,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getHexpand()
   {
     bool _retval;
-    _retval = gtk_widget_get_hexpand(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_hexpand(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2676,7 +2676,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getHexpandSet()
   {
     bool _retval;
-    _retval = gtk_widget_get_hexpand_set(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_hexpand_set(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2687,7 +2687,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getMapped()
   {
     bool _retval;
-    _retval = gtk_widget_get_mapped(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_mapped(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2698,7 +2698,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginBottom()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_bottom(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_bottom(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2709,7 +2709,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginEnd()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_end(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_end(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2722,7 +2722,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginLeft()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_left(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_left(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2735,7 +2735,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginRight()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_right(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_right(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2746,7 +2746,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginStart()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_start(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_start(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2757,7 +2757,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getMarginTop()
   {
     int _retval;
-    _retval = gtk_widget_get_margin_top(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_margin_top(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2774,7 +2774,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent)
   {
     GdkModifierType _cretval;
-    _cretval = gtk_widget_get_modifier_mask(cast(GtkWidget*)cPtr, intent);
+    _cretval = gtk_widget_get_modifier_mask(cast(GtkWidget*)this._cPtr, intent);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -2802,8 +2802,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.rc_style.RcStyle getModifierStyle()
   {
     GtkRcStyle* _cretval;
-    _cretval = gtk_widget_get_modifier_style(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.Take);
+    _cretval = gtk_widget_get_modifier_style(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.rc_style.RcStyle)(cast(GtkRcStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2816,7 +2816,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_widget_get_name(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_name(cast(GtkWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2830,7 +2830,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getNoShowAll()
   {
     bool _retval;
-    _retval = gtk_widget_get_no_show_all(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_no_show_all(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2842,7 +2842,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   double getOpacity()
   {
     double _retval;
-    _retval = gtk_widget_get_opacity(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_opacity(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -2859,8 +2859,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   pango.context.Context getPangoContext()
   {
     PangoContext* _cretval;
-    _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
+    _cretval = gtk_widget_get_pango_context(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.context.Context)(cast(PangoContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2871,8 +2871,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.widget.Widget getParent()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_widget_get_parent(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_widget_get_parent(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2884,8 +2884,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.window.Window getParentWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_widget_get_parent_window(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_widget_get_parent_window(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2898,7 +2898,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.widget_path.WidgetPath getPath()
   {
     GtkWidgetPath* _cretval;
-    _cretval = gtk_widget_get_path(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_path(cast(GtkWidget*)this._cPtr);
     auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -2918,7 +2918,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPointer(out int x, out int y)
   {
-    gtk_widget_get_pointer(cast(GtkWidget*)cPtr, cast(int*)&x, cast(int*)&y);
+    gtk_widget_get_pointer(cast(GtkWidget*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -2938,7 +2938,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredHeight(out int minimumHeight, out int naturalHeight)
   {
-    gtk_widget_get_preferred_height(cast(GtkWidget*)cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_widget_get_preferred_height(cast(GtkWidget*)this._cPtr, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -2961,7 +2961,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredHeightAndBaselineForWidth(int width, out int minimumHeight, out int naturalHeight, out int minimumBaseline, out int naturalBaseline)
   {
-    gtk_widget_get_preferred_height_and_baseline_for_width(cast(GtkWidget*)cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
+    gtk_widget_get_preferred_height_and_baseline_for_width(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight, cast(int*)&minimumBaseline, cast(int*)&naturalBaseline);
   }
 
   /**
@@ -2981,7 +2981,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredHeightForWidth(int width, out int minimumHeight, out int naturalHeight)
   {
-    gtk_widget_get_preferred_height_for_width(cast(GtkWidget*)cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
+    gtk_widget_get_preferred_height_for_width(cast(GtkWidget*)this._cPtr, width, cast(int*)&minimumHeight, cast(int*)&naturalHeight);
   }
 
   /**
@@ -3009,7 +3009,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     GtkRequisition _minimumSize;
     GtkRequisition _naturalSize;
-    gtk_widget_get_preferred_size(cast(GtkWidget*)cPtr, &_minimumSize, &_naturalSize);
+    gtk_widget_get_preferred_size(cast(GtkWidget*)this._cPtr, &_minimumSize, &_naturalSize);
     minimumSize = new gtk.requisition.Requisition(cast(void*)&_minimumSize, No.Take);
     naturalSize = new gtk.requisition.Requisition(cast(void*)&_naturalSize, No.Take);
   }
@@ -3031,7 +3031,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredWidth(out int minimumWidth, out int naturalWidth)
   {
-    gtk_widget_get_preferred_width(cast(GtkWidget*)cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_widget_get_preferred_width(cast(GtkWidget*)this._cPtr, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -3051,7 +3051,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getPreferredWidthForHeight(int height, out int minimumWidth, out int naturalWidth)
   {
-    gtk_widget_get_preferred_width_for_height(cast(GtkWidget*)cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
+    gtk_widget_get_preferred_width_for_height(cast(GtkWidget*)this._cPtr, height, cast(int*)&minimumWidth, cast(int*)&naturalWidth);
   }
 
   /**
@@ -3061,7 +3061,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getRealized()
   {
     bool _retval;
-    _retval = gtk_widget_get_realized(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_realized(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3077,7 +3077,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getReceivesDefault()
   {
     bool _retval;
-    _retval = gtk_widget_get_receives_default(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_receives_default(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3094,7 +3094,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.SizeRequestMode getRequestMode()
   {
     GtkSizeRequestMode _cretval;
-    _cretval = gtk_widget_get_request_mode(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_request_mode(cast(GtkWidget*)this._cPtr);
     gtk.types.SizeRequestMode _retval = cast(gtk.types.SizeRequestMode)_cretval;
     return _retval;
   }
@@ -3119,7 +3119,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void getRequisition(out gtk.requisition.Requisition requisition)
   {
     GtkRequisition _requisition;
-    gtk_widget_get_requisition(cast(GtkWidget*)cPtr, &_requisition);
+    gtk_widget_get_requisition(cast(GtkWidget*)this._cPtr, &_requisition);
     requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
@@ -3139,8 +3139,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.window.Window getRootWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_widget_get_root_window(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_widget_get_root_window(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3155,7 +3155,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int getScaleFactor()
   {
     int _retval;
-    _retval = gtk_widget_get_scale_factor(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_scale_factor(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3173,8 +3173,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gtk_widget_get_screen(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gtk_widget_get_screen(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3189,7 +3189,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getSensitive()
   {
     bool _retval;
-    _retval = gtk_widget_get_sensitive(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_sensitive(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3204,8 +3204,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.settings.Settings getSettings()
   {
     GtkSettings* _cretval;
-    _cretval = gtk_widget_get_settings(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
+    _cretval = gtk_widget_get_settings(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.settings.Settings)(cast(GtkSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3224,7 +3224,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void getSizeRequest(out int width, out int height)
   {
-    gtk_widget_get_size_request(cast(GtkWidget*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_widget_get_size_request(cast(GtkWidget*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -3236,7 +3236,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.StateType getState()
   {
     GtkStateType _cretval;
-    _cretval = gtk_widget_get_state(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_state(cast(GtkWidget*)this._cPtr);
     gtk.types.StateType _retval = cast(gtk.types.StateType)_cretval;
     return _retval;
   }
@@ -3255,7 +3255,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.StateFlags getStateFlags()
   {
     GtkStateFlags _cretval;
-    _cretval = gtk_widget_get_state_flags(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_state_flags(cast(GtkWidget*)this._cPtr);
     gtk.types.StateFlags _retval = cast(gtk.types.StateFlags)_cretval;
     return _retval;
   }
@@ -3269,8 +3269,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.style.Style getStyle()
   {
     GtkStyle* _cretval;
-    _cretval = gtk_widget_get_style(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
+    _cretval = gtk_widget_get_style(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style.Style)(cast(GtkStyle*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3283,8 +3283,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.style_context.StyleContext getStyleContext()
   {
     GtkStyleContext* _cretval;
-    _cretval = gtk_widget_get_style_context(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
+    _cretval = gtk_widget_get_style_context(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.style_context.StyleContext)(cast(GtkStyleContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3296,7 +3296,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getSupportMultidevice()
   {
     bool _retval;
-    _retval = gtk_widget_get_support_multidevice(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_support_multidevice(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3318,10 +3318,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gobject.object.ObjectWrap getTemplateChild(gobject.types.GType widgetType, string name)
   {
-    ObjectC* _cretval;
+    GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_widget_get_template_child(cast(GtkWidget*)cPtr, widgetType, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    _cretval = gtk_widget_get_template_child(cast(GtkWidget*)this._cPtr, widgetType, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3333,7 +3333,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   string getTooltipMarkup()
   {
     char* _cretval;
-    _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_tooltip_markup(cast(GtkWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -3346,7 +3346,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   string getTooltipText()
   {
     char* _cretval;
-    _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_tooltip_text(cast(GtkWidget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -3360,8 +3360,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.window.Window getTooltipWindow()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_widget_get_tooltip_window(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_widget_get_tooltip_window(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3403,8 +3403,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.widget.Widget getToplevel()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_widget_get_toplevel(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_widget_get_toplevel(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3422,7 +3422,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.Align getValign()
   {
     GtkAlign _cretval;
-    _cretval = gtk_widget_get_valign(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_valign(cast(GtkWidget*)this._cPtr);
     gtk.types.Align _retval = cast(gtk.types.Align)_cretval;
     return _retval;
   }
@@ -3435,7 +3435,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.types.Align getValignWithBaseline()
   {
     GtkAlign _cretval;
-    _cretval = gtk_widget_get_valign_with_baseline(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_get_valign_with_baseline(cast(GtkWidget*)this._cPtr);
     gtk.types.Align _retval = cast(gtk.types.Align)_cretval;
     return _retval;
   }
@@ -3450,7 +3450,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getVexpand()
   {
     bool _retval;
-    _retval = gtk_widget_get_vexpand(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_vexpand(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3464,7 +3464,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getVexpandSet()
   {
     bool _retval;
-    _retval = gtk_widget_get_vexpand_set(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_vexpand_set(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3481,7 +3481,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_widget_get_visible(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_get_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3492,8 +3492,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.visual.Visual getVisual()
   {
     GdkVisual* _cretval;
-    _cretval = gtk_widget_get_visual(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    _cretval = gtk_widget_get_visual(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3504,8 +3504,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gdk.window.Window getWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_widget_get_window(cast(GtkWidget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_widget_get_window(cast(GtkWidget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -3521,7 +3521,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void grabAdd()
   {
-    gtk_grab_add(cast(GtkWidget*)cPtr);
+    gtk_grab_add(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3537,7 +3537,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void grabDefault()
   {
-    gtk_widget_grab_default(cast(GtkWidget*)cPtr);
+    gtk_widget_grab_default(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3554,7 +3554,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void grabFocus()
   {
-    gtk_widget_grab_focus(cast(GtkWidget*)cPtr);
+    gtk_widget_grab_focus(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3566,7 +3566,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void grabRemove()
   {
-    gtk_grab_remove(cast(GtkWidget*)cPtr);
+    gtk_grab_remove(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3578,7 +3578,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasDefault()
   {
     bool _retval;
-    _retval = gtk_widget_has_default(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_default(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3591,7 +3591,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasFocus()
   {
     bool _retval;
-    _retval = gtk_widget_has_focus(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3605,7 +3605,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasGrab()
   {
     bool _retval;
-    _retval = gtk_widget_has_grab(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_grab(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3619,7 +3619,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasRcStyle()
   {
     bool _retval;
-    _retval = gtk_widget_has_rc_style(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_rc_style(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3634,7 +3634,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasScreen()
   {
     bool _retval;
-    _retval = gtk_widget_has_screen(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_screen(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3653,7 +3653,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hasVisibleFocus()
   {
     bool _retval;
-    _retval = gtk_widget_has_visible_focus(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_has_visible_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3663,7 +3663,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void hide()
   {
-    gtk_widget_hide(cast(GtkWidget*)cPtr);
+    gtk_widget_hide(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3679,7 +3679,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool hideOnDelete()
   {
     bool _retval;
-    _retval = gtk_widget_hide_on_delete(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_hide_on_delete(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3692,7 +3692,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool inDestruction()
   {
     bool _retval;
-    _retval = gtk_widget_in_destruction(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_in_destruction(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3716,7 +3716,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void initTemplate()
   {
-    gtk_widget_init_template(cast(GtkWidget*)cPtr);
+    gtk_widget_init_template(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -3729,7 +3729,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void inputShapeCombineRegion(cairo.region.Region region = null)
   {
-    gtk_widget_input_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gtk_widget_input_shape_combine_region(cast(GtkWidget*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -3748,7 +3748,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void insertActionGroup(string name, gio.action_group.ActionGroup group = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_insert_action_group(cast(GtkWidget*)cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null);
+    gtk_widget_insert_action_group(cast(GtkWidget*)this._cPtr, _name, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -3767,7 +3767,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     bool _retval;
     GdkRectangle _intersection;
-    _retval = gtk_widget_intersect(cast(GtkWidget*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null, &_intersection);
+    _retval = gtk_widget_intersect(cast(GtkWidget*)this._cPtr, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null, &_intersection);
     intersection = new gdk.rectangle.Rectangle(cast(void*)&_intersection, No.Take);
     return _retval;
   }
@@ -3784,7 +3784,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isAncestor(gtk.widget.Widget ancestor)
   {
     bool _retval;
-    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)cPtr, ancestor ? cast(GtkWidget*)ancestor.cPtr(No.Dup) : null);
+    _retval = gtk_widget_is_ancestor(cast(GtkWidget*)this._cPtr, ancestor ? cast(GtkWidget*)ancestor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -3804,7 +3804,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isComposited()
   {
     bool _retval;
-    _retval = gtk_widget_is_composited(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_composited(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3816,7 +3816,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isDrawable()
   {
     bool _retval;
-    _retval = gtk_widget_is_drawable(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_drawable(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3830,7 +3830,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isFocus()
   {
     bool _retval;
-    _retval = gtk_widget_is_focus(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_focus(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3842,7 +3842,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isSensitive()
   {
     bool _retval;
-    _retval = gtk_widget_is_sensitive(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_sensitive(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3857,7 +3857,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isToplevel()
   {
     bool _retval;
-    _retval = gtk_widget_is_toplevel(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_toplevel(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3873,7 +3873,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool isVisible()
   {
     bool _retval;
-    _retval = gtk_widget_is_visible(cast(GtkWidget*)cPtr);
+    _retval = gtk_widget_is_visible(cast(GtkWidget*)this._cPtr);
     return _retval;
   }
 
@@ -3915,7 +3915,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool keynavFailed(gtk.types.DirectionType direction)
   {
     bool _retval;
-    _retval = gtk_widget_keynav_failed(cast(GtkWidget*)cPtr, direction);
+    _retval = gtk_widget_keynav_failed(cast(GtkWidget*)this._cPtr, direction);
     return _retval;
   }
 
@@ -3931,7 +3931,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gobject.closure.Closure[] listAccelClosures()
   {
     GList* _cretval;
-    _cretval = gtk_widget_list_accel_closures(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_list_accel_closures(cast(GtkWidget*)this._cPtr);
     auto _retval = gListToD!(gobject.closure.Closure, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -3944,7 +3944,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   string[] listActionPrefixes()
   {
     const(char*)* _cretval;
-    _cretval = gtk_widget_list_action_prefixes(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_list_action_prefixes(cast(GtkWidget*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -3977,7 +3977,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   gtk.widget.Widget[] listMnemonicLabels()
   {
     GList* _cretval;
-    _cretval = gtk_widget_list_mnemonic_labels(cast(GtkWidget*)cPtr);
+    _cretval = gtk_widget_list_mnemonic_labels(cast(GtkWidget*)this._cPtr);
     auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -3988,7 +3988,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void map()
   {
-    gtk_widget_map(cast(GtkWidget*)cPtr);
+    gtk_widget_map(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4001,7 +4001,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool mnemonicActivate(bool groupCycling)
   {
     bool _retval;
-    _retval = gtk_widget_mnemonic_activate(cast(GtkWidget*)cPtr, groupCycling);
+    _retval = gtk_widget_mnemonic_activate(cast(GtkWidget*)this._cPtr, groupCycling);
     return _retval;
   }
 
@@ -4032,7 +4032,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyBase(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_base(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_widget_modify_base(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4061,7 +4061,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyBg(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_bg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_widget_modify_bg(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4084,7 +4084,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyCursor(gdk.color.Color primary = null, gdk.color.Color secondary = null)
   {
-    gtk_widget_modify_cursor(cast(GtkWidget*)cPtr, primary ? cast(const(GdkColor)*)primary.cPtr(No.Dup) : null, secondary ? cast(const(GdkColor)*)secondary.cPtr(No.Dup) : null);
+    gtk_widget_modify_cursor(cast(GtkWidget*)this._cPtr, primary ? cast(const(GdkColor)*)primary._cPtr(No.Dup) : null, secondary ? cast(const(GdkColor)*)secondary._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4103,7 +4103,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyFg(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_fg(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_widget_modify_fg(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4120,7 +4120,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyFont(pango.font_description.FontDescription fontDesc = null)
   {
-    gtk_widget_modify_font(cast(GtkWidget*)cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc.cPtr(No.Dup) : null);
+    gtk_widget_modify_font(cast(GtkWidget*)this._cPtr, fontDesc ? cast(PangoFontDescription*)fontDesc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4150,7 +4150,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyStyle(gtk.rc_style.RcStyle style)
   {
-    gtk_widget_modify_style(cast(GtkWidget*)cPtr, style ? cast(GtkRcStyle*)style.cPtr(No.Dup) : null);
+    gtk_widget_modify_style(cast(GtkWidget*)this._cPtr, style ? cast(GtkRcStyle*)style._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4172,7 +4172,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void modifyText(gtk.types.StateType state, gdk.color.Color color = null)
   {
-    gtk_widget_modify_text(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gtk_widget_modify_text(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4195,7 +4195,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideBackgroundColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
-    gtk_widget_override_background_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_widget_override_background_color(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4234,7 +4234,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideColor(gtk.types.StateFlags state, gdk.rgba.RGBA color = null)
   {
-    gtk_widget_override_color(cast(GtkWidget*)cPtr, state, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_widget_override_color(cast(GtkWidget*)this._cPtr, state, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4261,7 +4261,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideCursor(gdk.rgba.RGBA cursor = null, gdk.rgba.RGBA secondaryCursor = null)
   {
-    gtk_widget_override_cursor(cast(GtkWidget*)cPtr, cursor ? cast(const(GdkRGBA)*)cursor.cPtr(No.Dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor.cPtr(No.Dup) : null);
+    gtk_widget_override_cursor(cast(GtkWidget*)this._cPtr, cursor ? cast(const(GdkRGBA)*)cursor._cPtr(No.Dup) : null, secondaryCursor ? cast(const(GdkRGBA)*)secondaryCursor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4279,7 +4279,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void overrideFont(pango.font_description.FontDescription fontDesc = null)
   {
-    gtk_widget_override_font(cast(GtkWidget*)cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc.cPtr(No.Dup) : null);
+    gtk_widget_override_font(cast(GtkWidget*)this._cPtr, fontDesc ? cast(const(PangoFontDescription)*)fontDesc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4303,7 +4303,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void overrideSymbolicColor(string name, gdk.rgba.RGBA color = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_override_symbolic_color(cast(GtkWidget*)cPtr, _name, color ? cast(const(GdkRGBA)*)color.cPtr(No.Dup) : null);
+    gtk_widget_override_symbolic_color(cast(GtkWidget*)this._cPtr, _name, color ? cast(const(GdkRGBA)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4334,7 +4334,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     char* _path;
     char* _pathReversed;
-    gtk_widget_path(cast(GtkWidget*)cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
+    gtk_widget_path(cast(GtkWidget*)this._cPtr, cast(uint*)&pathLength, &_path, &_pathReversed);
     path = _path.fromCString(Yes.Free);
     pathReversed = _pathReversed.fromCString(Yes.Free);
   }
@@ -4351,7 +4351,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueAllocate()
   {
-    gtk_widget_queue_allocate(cast(GtkWidget*)cPtr);
+    gtk_widget_queue_allocate(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4363,7 +4363,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueComputeExpand()
   {
-    gtk_widget_queue_compute_expand(cast(GtkWidget*)cPtr);
+    gtk_widget_queue_compute_expand(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4372,7 +4372,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueDraw()
   {
-    gtk_widget_queue_draw(cast(GtkWidget*)cPtr);
+    gtk_widget_queue_draw(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4396,7 +4396,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueDrawArea(int x, int y, int width, int height)
   {
-    gtk_widget_queue_draw_area(cast(GtkWidget*)cPtr, x, y, width, height);
+    gtk_widget_queue_draw_area(cast(GtkWidget*)this._cPtr, x, y, width, height);
   }
 
   /**
@@ -4416,7 +4416,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueDrawRegion(cairo.region.Region region)
   {
-    gtk_widget_queue_draw_region(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    gtk_widget_queue_draw_region(cast(GtkWidget*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4433,7 +4433,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueResize()
   {
-    gtk_widget_queue_resize(cast(GtkWidget*)cPtr);
+    gtk_widget_queue_resize(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4442,7 +4442,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void queueResizeNoRedraw()
   {
-    gtk_widget_queue_resize_no_redraw(cast(GtkWidget*)cPtr);
+    gtk_widget_queue_resize_no_redraw(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4467,7 +4467,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void realize()
   {
-    gtk_widget_realize(cast(GtkWidget*)cPtr);
+    gtk_widget_realize(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4489,7 +4489,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   cairo.region.Region regionIntersect(cairo.region.Region region)
   {
     cairo_region_t* _cretval;
-    _cretval = gtk_widget_region_intersect(cast(GtkWidget*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    _cretval = gtk_widget_region_intersect(cast(GtkWidget*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -4509,7 +4509,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void registerWindow(gdk.window.Window window)
   {
-    gtk_widget_register_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    gtk_widget_register_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4525,7 +4525,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool removeAccelerator(gtk.accel_group.AccelGroup accelGroup, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_widget_remove_accelerator(cast(GtkWidget*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null, accelKey, accelMods);
+    _retval = gtk_widget_remove_accelerator(cast(GtkWidget*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null, accelKey, accelMods);
     return _retval;
   }
 
@@ -4541,7 +4541,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void removeMnemonicLabel(gtk.widget.Widget label)
   {
-    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)cPtr, label ? cast(GtkWidget*)label.cPtr(No.Dup) : null);
+    gtk_widget_remove_mnemonic_label(cast(GtkWidget*)this._cPtr, label ? cast(GtkWidget*)label._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4553,7 +4553,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void removeTickCallback(uint id)
   {
-    gtk_widget_remove_tick_callback(cast(GtkWidget*)cPtr, id);
+    gtk_widget_remove_tick_callback(cast(GtkWidget*)this._cPtr, id);
   }
 
   /**
@@ -4585,8 +4585,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
     PixbufC* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     const(char)* _detail = detail.toCString(No.Alloc);
-    _cretval = gtk_widget_render_icon(cast(GtkWidget*)cPtr, _stockId, size, _detail);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_widget_render_icon(cast(GtkWidget*)this._cPtr, _stockId, size, _detail);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -4615,8 +4615,8 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   {
     PixbufC* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)cPtr, _stockId, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)this._cPtr, _stockId, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -4631,7 +4631,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void reparent(gtk.widget.Widget newParent)
   {
-    gtk_widget_reparent(cast(GtkWidget*)cPtr, newParent ? cast(GtkWidget*)newParent.cPtr(No.Dup) : null);
+    gtk_widget_reparent(cast(GtkWidget*)this._cPtr, newParent ? cast(GtkWidget*)newParent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4645,7 +4645,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void resetRcStyles()
   {
-    gtk_widget_reset_rc_styles(cast(GtkWidget*)cPtr);
+    gtk_widget_reset_rc_styles(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4656,7 +4656,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void resetStyle()
   {
-    gtk_widget_reset_style(cast(GtkWidget*)cPtr);
+    gtk_widget_reset_style(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -4684,7 +4684,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   int sendExpose(gdk.event.Event event)
   {
     int _retval;
-    _retval = gtk_widget_send_expose(cast(GtkWidget*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_widget_send_expose(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -4721,7 +4721,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool sendFocusChange(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gtk_widget_send_focus_change(cast(GtkWidget*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gtk_widget_send_focus_change(cast(GtkWidget*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -4755,7 +4755,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void setAccelPath(string accelPath = null, gtk.accel_group.AccelGroup accelGroup = null)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
-    gtk_widget_set_accel_path(cast(GtkWidget*)cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_widget_set_accel_path(cast(GtkWidget*)this._cPtr, _accelPath, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4774,7 +4774,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setAllocation(gtk.types.Allocation allocation)
   {
-    gtk_widget_set_allocation(cast(GtkWidget*)cPtr, allocation ? cast(const(GtkAllocation)*)allocation.cPtr(No.Dup) : null);
+    gtk_widget_set_allocation(cast(GtkWidget*)this._cPtr, allocation ? cast(const(GtkAllocation)*)allocation._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4795,7 +4795,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setAppPaintable(bool appPaintable)
   {
-    gtk_widget_set_app_paintable(cast(GtkWidget*)cPtr, appPaintable);
+    gtk_widget_set_app_paintable(cast(GtkWidget*)this._cPtr, appPaintable);
   }
 
   /**
@@ -4808,7 +4808,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setCanDefault(bool canDefault)
   {
-    gtk_widget_set_can_default(cast(GtkWidget*)cPtr, canDefault);
+    gtk_widget_set_can_default(cast(GtkWidget*)this._cPtr, canDefault);
   }
 
   /**
@@ -4821,7 +4821,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setCanFocus(bool canFocus)
   {
-    gtk_widget_set_can_focus(cast(GtkWidget*)cPtr, canFocus);
+    gtk_widget_set_can_focus(cast(GtkWidget*)this._cPtr, canFocus);
   }
 
   /**
@@ -4848,7 +4848,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setChildVisible(bool isVisible)
   {
-    gtk_widget_set_child_visible(cast(GtkWidget*)cPtr, isVisible);
+    gtk_widget_set_child_visible(cast(GtkWidget*)this._cPtr, isVisible);
   }
 
   /**
@@ -4868,7 +4868,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setClip(gtk.types.Allocation clip)
   {
-    gtk_widget_set_clip(cast(GtkWidget*)cPtr, clip ? cast(const(GtkAllocation)*)clip.cPtr(No.Dup) : null);
+    gtk_widget_set_clip(cast(GtkWidget*)this._cPtr, clip ? cast(const(GtkAllocation)*)clip._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4883,7 +4883,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void setCompositeName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_set_composite_name(cast(GtkWidget*)cPtr, _name);
+    gtk_widget_set_composite_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
   /**
@@ -4900,7 +4900,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDeviceEnabled(gdk.device.Device device, bool enabled)
   {
-    gtk_widget_set_device_enabled(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, enabled);
+    gtk_widget_set_device_enabled(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, enabled);
   }
 
   /**
@@ -4922,7 +4922,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask events)
   {
-    gtk_widget_set_device_events(cast(GtkWidget*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, events);
+    gtk_widget_set_device_events(cast(GtkWidget*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, events);
   }
 
   /**
@@ -4944,7 +4944,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDirection(gtk.types.TextDirection dir)
   {
-    gtk_widget_set_direction(cast(GtkWidget*)cPtr, dir);
+    gtk_widget_set_direction(cast(GtkWidget*)this._cPtr, dir);
   }
 
   /**
@@ -4983,7 +4983,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setDoubleBuffered(bool doubleBuffered)
   {
-    gtk_widget_set_double_buffered(cast(GtkWidget*)cPtr, doubleBuffered);
+    gtk_widget_set_double_buffered(cast(GtkWidget*)this._cPtr, doubleBuffered);
   }
 
   /**
@@ -5004,7 +5004,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setEvents(int events)
   {
-    gtk_widget_set_events(cast(GtkWidget*)cPtr, events);
+    gtk_widget_set_events(cast(GtkWidget*)this._cPtr, events);
   }
 
   /**
@@ -5018,7 +5018,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setFocusOnClick(bool focusOnClick)
   {
-    gtk_widget_set_focus_on_click(cast(GtkWidget*)cPtr, focusOnClick);
+    gtk_widget_set_focus_on_click(cast(GtkWidget*)this._cPtr, focusOnClick);
   }
 
   /**
@@ -5031,7 +5031,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setFontMap(pango.font_map.FontMap fontMap = null)
   {
-    gtk_widget_set_font_map(cast(GtkWidget*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
+    gtk_widget_set_font_map(cast(GtkWidget*)this._cPtr, fontMap ? cast(PangoFontMap*)fontMap._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5044,7 +5044,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setFontOptions(cairo.font_options.FontOptions options = null)
   {
-    gtk_widget_set_font_options(cast(GtkWidget*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
+    gtk_widget_set_font_options(cast(GtkWidget*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5056,7 +5056,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setHalign(gtk.types.Align align_)
   {
-    gtk_widget_set_halign(cast(GtkWidget*)cPtr, align_);
+    gtk_widget_set_halign(cast(GtkWidget*)this._cPtr, align_);
   }
 
   /**
@@ -5068,7 +5068,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setHasTooltip(bool hasTooltip)
   {
-    gtk_widget_set_has_tooltip(cast(GtkWidget*)cPtr, hasTooltip);
+    gtk_widget_set_has_tooltip(cast(GtkWidget*)this._cPtr, hasTooltip);
   }
 
   /**
@@ -5088,7 +5088,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setHasWindow(bool hasWindow)
   {
-    gtk_widget_set_has_window(cast(GtkWidget*)cPtr, hasWindow);
+    gtk_widget_set_has_window(cast(GtkWidget*)this._cPtr, hasWindow);
   }
 
   /**
@@ -5123,7 +5123,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setHexpand(bool expand)
   {
-    gtk_widget_set_hexpand(cast(GtkWidget*)cPtr, expand);
+    gtk_widget_set_hexpand(cast(GtkWidget*)this._cPtr, expand);
   }
 
   /**
@@ -5148,7 +5148,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setHexpandSet(bool set)
   {
-    gtk_widget_set_hexpand_set(cast(GtkWidget*)cPtr, set);
+    gtk_widget_set_hexpand_set(cast(GtkWidget*)this._cPtr, set);
   }
 
   /**
@@ -5162,7 +5162,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMapped(bool mapped)
   {
-    gtk_widget_set_mapped(cast(GtkWidget*)cPtr, mapped);
+    gtk_widget_set_mapped(cast(GtkWidget*)this._cPtr, mapped);
   }
 
   /**
@@ -5174,7 +5174,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginBottom(int margin)
   {
-    gtk_widget_set_margin_bottom(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_bottom(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5186,7 +5186,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginEnd(int margin)
   {
-    gtk_widget_set_margin_end(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_end(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5200,7 +5200,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginLeft(int margin)
   {
-    gtk_widget_set_margin_left(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_left(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5214,7 +5214,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginRight(int margin)
   {
-    gtk_widget_set_margin_right(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_right(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5226,7 +5226,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginStart(int margin)
   {
-    gtk_widget_set_margin_start(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_start(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5238,7 +5238,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setMarginTop(int margin)
   {
-    gtk_widget_set_margin_top(cast(GtkWidget*)cPtr, margin);
+    gtk_widget_set_margin_top(cast(GtkWidget*)this._cPtr, margin);
   }
 
   /**
@@ -5258,7 +5258,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_widget_set_name(cast(GtkWidget*)cPtr, _name);
+    gtk_widget_set_name(cast(GtkWidget*)this._cPtr, _name);
   }
 
   /**
@@ -5273,7 +5273,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setNoShowAll(bool noShowAll)
   {
-    gtk_widget_set_no_show_all(cast(GtkWidget*)cPtr, noShowAll);
+    gtk_widget_set_no_show_all(cast(GtkWidget*)this._cPtr, noShowAll);
   }
 
   /**
@@ -5297,7 +5297,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setOpacity(double opacity)
   {
-    gtk_widget_set_opacity(cast(GtkWidget*)cPtr, opacity);
+    gtk_widget_set_opacity(cast(GtkWidget*)this._cPtr, opacity);
   }
 
   /**
@@ -5313,7 +5313,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setParent(gtk.widget.Widget parent)
   {
-    gtk_widget_set_parent(cast(GtkWidget*)cPtr, parent ? cast(GtkWidget*)parent.cPtr(No.Dup) : null);
+    gtk_widget_set_parent(cast(GtkWidget*)this._cPtr, parent ? cast(GtkWidget*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5331,7 +5331,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setParentWindow(gdk.window.Window parentWindow)
   {
-    gtk_widget_set_parent_window(cast(GtkWidget*)cPtr, parentWindow ? cast(GdkWindow*)parentWindow.cPtr(No.Dup) : null);
+    gtk_widget_set_parent_window(cast(GtkWidget*)this._cPtr, parentWindow ? cast(GdkWindow*)parentWindow._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5347,7 +5347,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setRealized(bool realized)
   {
-    gtk_widget_set_realized(cast(GtkWidget*)cPtr, realized);
+    gtk_widget_set_realized(cast(GtkWidget*)this._cPtr, realized);
   }
 
   /**
@@ -5363,7 +5363,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setReceivesDefault(bool receivesDefault)
   {
-    gtk_widget_set_receives_default(cast(GtkWidget*)cPtr, receivesDefault);
+    gtk_widget_set_receives_default(cast(GtkWidget*)this._cPtr, receivesDefault);
   }
 
   /**
@@ -5390,7 +5390,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setRedrawOnAllocate(bool redrawOnAllocate)
   {
-    gtk_widget_set_redraw_on_allocate(cast(GtkWidget*)cPtr, redrawOnAllocate);
+    gtk_widget_set_redraw_on_allocate(cast(GtkWidget*)this._cPtr, redrawOnAllocate);
   }
 
   /**
@@ -5404,7 +5404,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setSensitive(bool sensitive)
   {
-    gtk_widget_set_sensitive(cast(GtkWidget*)cPtr, sensitive);
+    gtk_widget_set_sensitive(cast(GtkWidget*)this._cPtr, sensitive);
   }
 
   /**
@@ -5445,7 +5445,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setSizeRequest(int width, int height)
   {
-    gtk_widget_set_size_request(cast(GtkWidget*)cPtr, width, height);
+    gtk_widget_set_size_request(cast(GtkWidget*)this._cPtr, width, height);
   }
 
   /**
@@ -5460,7 +5460,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setState(gtk.types.StateType state)
   {
-    gtk_widget_set_state(cast(GtkWidget*)cPtr, state);
+    gtk_widget_set_state(cast(GtkWidget*)this._cPtr, state);
   }
 
   /**
@@ -5484,7 +5484,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setStateFlags(gtk.types.StateFlags flags, bool clear)
   {
-    gtk_widget_set_state_flags(cast(GtkWidget*)cPtr, flags, clear);
+    gtk_widget_set_state_flags(cast(GtkWidget*)this._cPtr, flags, clear);
   }
 
   /**
@@ -5500,7 +5500,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setStyle(gtk.style.Style style = null)
   {
-    gtk_widget_set_style(cast(GtkWidget*)cPtr, style ? cast(GtkStyle*)style.cPtr(No.Dup) : null);
+    gtk_widget_set_style(cast(GtkWidget*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5514,7 +5514,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setSupportMultidevice(bool supportMultidevice)
   {
-    gtk_widget_set_support_multidevice(cast(GtkWidget*)cPtr, supportMultidevice);
+    gtk_widget_set_support_multidevice(cast(GtkWidget*)this._cPtr, supportMultidevice);
   }
 
   /**
@@ -5533,7 +5533,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_widget_set_tooltip_markup(cast(GtkWidget*)cPtr, _markup);
+    gtk_widget_set_tooltip_markup(cast(GtkWidget*)this._cPtr, _markup);
   }
 
   /**
@@ -5549,7 +5549,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void setTooltipText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_widget_set_tooltip_text(cast(GtkWidget*)cPtr, _text);
+    gtk_widget_set_tooltip_text(cast(GtkWidget*)this._cPtr, _text);
   }
 
   /**
@@ -5564,7 +5564,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setTooltipWindow(gtk.window.Window customWindow = null)
   {
-    gtk_widget_set_tooltip_window(cast(GtkWidget*)cPtr, customWindow ? cast(GtkWindow*)customWindow.cPtr(No.Dup) : null);
+    gtk_widget_set_tooltip_window(cast(GtkWidget*)this._cPtr, customWindow ? cast(GtkWindow*)customWindow._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5576,7 +5576,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setValign(gtk.types.Align align_)
   {
-    gtk_widget_set_valign(cast(GtkWidget*)cPtr, align_);
+    gtk_widget_set_valign(cast(GtkWidget*)this._cPtr, align_);
   }
 
   /**
@@ -5590,7 +5590,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setVexpand(bool expand)
   {
-    gtk_widget_set_vexpand(cast(GtkWidget*)cPtr, expand);
+    gtk_widget_set_vexpand(cast(GtkWidget*)this._cPtr, expand);
   }
 
   /**
@@ -5604,7 +5604,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setVexpandSet(bool set)
   {
-    gtk_widget_set_vexpand_set(cast(GtkWidget*)cPtr, set);
+    gtk_widget_set_vexpand_set(cast(GtkWidget*)this._cPtr, set);
   }
 
   /**
@@ -5621,7 +5621,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setVisible(bool visible)
   {
-    gtk_widget_set_visible(cast(GtkWidget*)cPtr, visible);
+    gtk_widget_set_visible(cast(GtkWidget*)this._cPtr, visible);
   }
 
   /**
@@ -5638,7 +5638,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setVisual(gdk.visual.Visual visual = null)
   {
-    gtk_widget_set_visual(cast(GtkWidget*)cPtr, visual ? cast(GdkVisual*)visual.cPtr(No.Dup) : null);
+    gtk_widget_set_visual(cast(GtkWidget*)this._cPtr, visual ? cast(GdkVisual*)visual._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5659,7 +5659,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void setWindow(gdk.window.Window window)
   {
-    gtk_widget_set_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(Yes.Dup) : null);
+    gtk_widget_set_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -5672,7 +5672,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void shapeCombineRegion(cairo.region.Region region = null)
   {
-    gtk_widget_shape_combine_region(cast(GtkWidget*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gtk_widget_shape_combine_region(cast(GtkWidget*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5690,7 +5690,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void show()
   {
-    gtk_widget_show(cast(GtkWidget*)cPtr);
+    gtk_widget_show(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5699,7 +5699,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void showAll()
   {
-    gtk_widget_show_all(cast(GtkWidget*)cPtr);
+    gtk_widget_show_all(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5711,7 +5711,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void showNow()
   {
-    gtk_widget_show_now(cast(GtkWidget*)cPtr);
+    gtk_widget_show_now(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5732,7 +5732,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void sizeAllocate(gtk.types.Allocation allocation)
   {
-    gtk_widget_size_allocate(cast(GtkWidget*)cPtr, allocation ? cast(GtkAllocation*)allocation.cPtr(No.Dup) : null);
+    gtk_widget_size_allocate(cast(GtkWidget*)this._cPtr, allocation ? cast(GtkAllocation*)allocation._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5756,7 +5756,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void sizeAllocateWithBaseline(gtk.types.Allocation allocation, int baseline)
   {
-    gtk_widget_size_allocate_with_baseline(cast(GtkWidget*)cPtr, allocation ? cast(GtkAllocation*)allocation.cPtr(No.Dup) : null, baseline);
+    gtk_widget_size_allocate_with_baseline(cast(GtkWidget*)this._cPtr, allocation ? cast(GtkAllocation*)allocation._cPtr(No.Dup) : null, baseline);
   }
 
   /**
@@ -5781,7 +5781,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void sizeRequest(out gtk.requisition.Requisition requisition)
   {
     GtkRequisition _requisition;
-    gtk_widget_size_request(cast(GtkWidget*)cPtr, &_requisition);
+    gtk_widget_size_request(cast(GtkWidget*)this._cPtr, &_requisition);
     requisition = new gtk.requisition.Requisition(cast(void*)&_requisition, No.Take);
   }
 
@@ -5802,7 +5802,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void styleAttach()
   {
-    gtk_widget_style_attach(cast(GtkWidget*)cPtr);
+    gtk_widget_style_attach(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5815,7 +5815,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   void styleGetProperty(string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_widget_style_get_property(cast(GtkWidget*)cPtr, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    gtk_widget_style_get_property(cast(GtkWidget*)this._cPtr, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5825,7 +5825,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void thawChildNotify()
   {
-    gtk_widget_thaw_child_notify(cast(GtkWidget*)cPtr);
+    gtk_widget_thaw_child_notify(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5847,7 +5847,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   bool translateCoordinates(gtk.widget.Widget destWidget, int srcX, int srcY, out int destX, out int destY)
   {
     bool _retval;
-    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)cPtr, destWidget ? cast(GtkWidget*)destWidget.cPtr(No.Dup) : null, srcX, srcY, cast(int*)&destX, cast(int*)&destY);
+    _retval = gtk_widget_translate_coordinates(cast(GtkWidget*)this._cPtr, destWidget ? cast(GtkWidget*)destWidget._cPtr(No.Dup) : null, srcX, srcY, cast(int*)&destX, cast(int*)&destY);
     return _retval;
   }
 
@@ -5858,7 +5858,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void triggerTooltipQuery()
   {
-    gtk_widget_trigger_tooltip_query(cast(GtkWidget*)cPtr);
+    gtk_widget_trigger_tooltip_query(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5867,7 +5867,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unmap()
   {
-    gtk_widget_unmap(cast(GtkWidget*)cPtr);
+    gtk_widget_unmap(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5877,7 +5877,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unparent()
   {
-    gtk_widget_unparent(cast(GtkWidget*)cPtr);
+    gtk_widget_unparent(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5887,7 +5887,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unrealize()
   {
-    gtk_widget_unrealize(cast(GtkWidget*)cPtr);
+    gtk_widget_unrealize(cast(GtkWidget*)this._cPtr);
   }
 
   /**
@@ -5900,7 +5900,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unregisterWindow(gdk.window.Window window)
   {
-    gtk_widget_unregister_window(cast(GtkWidget*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    gtk_widget_unregister_window(cast(GtkWidget*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -5913,7 +5913,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void unsetStateFlags(gtk.types.StateFlags flags)
   {
-    gtk_widget_unset_state_flags(cast(GtkWidget*)cPtr, flags);
+    gtk_widget_unset_state_flags(cast(GtkWidget*)this._cPtr, flags);
   }
 
   /**

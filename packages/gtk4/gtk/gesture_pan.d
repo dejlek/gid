@@ -34,16 +34,16 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_pan_get_type != &gidSymbolNotFound ? gtk_gesture_pan_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -92,7 +92,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_gesture_pan_get_orientation(cast(GtkGesturePan*)cPtr);
+    _cretval = gtk_gesture_pan_get_orientation(cast(GtkGesturePan*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -105,7 +105,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
   */
   void setOrientation(gtk.types.Orientation orientation)
   {
-    gtk_gesture_pan_set_orientation(cast(GtkGesturePan*)cPtr, orientation);
+    gtk_gesture_pan_set_orientation(cast(GtkGesturePan*)this._cPtr, orientation);
   }
 
   /**

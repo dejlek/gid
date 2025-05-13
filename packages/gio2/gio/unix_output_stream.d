@@ -32,16 +32,16 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_output_stream_get_type != &gidSymbolNotFound ? g_unix_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   bool getCloseFd()
   {
     bool _retval;
-    _retval = g_unix_output_stream_get_close_fd(cast(GUnixOutputStream*)cPtr);
+    _retval = g_unix_output_stream_get_close_fd(cast(GUnixOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   int getFd()
   {
     int _retval;
-    _retval = g_unix_output_stream_get_fd(cast(GUnixOutputStream*)cPtr);
+    _retval = g_unix_output_stream_get_fd(cast(GUnixOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -122,6 +122,6 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
   */
   void setCloseFd(bool closeFd)
   {
-    g_unix_output_stream_set_close_fd(cast(GUnixOutputStream*)cPtr, closeFd);
+    g_unix_output_stream_set_close_fd(cast(GUnixOutputStream*)this._cPtr, closeFd);
   }
 }

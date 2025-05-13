@@ -42,16 +42,16 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_widget_paintable_get_type != &gidSymbolNotFound ? gtk_widget_paintable_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,7 +91,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   this(gtk.widget.Widget widget = null)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _cretval = gtk_widget_paintable_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -102,8 +102,8 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   gtk.widget.Widget getWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_widget_paintable_get_widget(cast(GtkWidgetPaintable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,6 +115,6 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void setWidget(gtk.widget.Widget widget = null)
   {
-    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_widget_paintable_set_widget(cast(GtkWidgetPaintable*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 }

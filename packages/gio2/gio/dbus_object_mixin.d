@@ -32,8 +32,8 @@ template DBusObjectT()
   {
     GDBusInterface* _cretval;
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    _cretval = g_dbus_object_get_interface(cast(GDBusObject*)cPtr, _interfaceName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
+    _cretval = g_dbus_object_get_interface(cast(GDBusObject*)this._cPtr, _interfaceName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -46,7 +46,7 @@ template DBusObjectT()
   override gio.dbus_interface.DBusInterface[] getInterfaces()
   {
     GList* _cretval;
-    _cretval = g_dbus_object_get_interfaces(cast(GDBusObject*)cPtr);
+    _cretval = g_dbus_object_get_interfaces(cast(GDBusObject*)this._cPtr);
     auto _retval = gListToD!(gio.dbus_interface.DBusInterface, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -58,7 +58,7 @@ template DBusObjectT()
   override string getObjectPath()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)cPtr);
+    _cretval = g_dbus_object_get_object_path(cast(GDBusObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

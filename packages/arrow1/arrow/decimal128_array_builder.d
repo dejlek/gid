@@ -22,16 +22,16 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal128_array_builder_get_type != &gidSymbolNotFound ? garrow_decimal128_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   this(arrow.decimal128_data_type.Decimal128DataType dataType)
   {
     GArrowDecimal128ArrayBuilder* _cretval;
-    _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType.cPtr(No.Dup) : null);
+    _cretval = garrow_decimal128_array_builder_new(dataType ? cast(GArrowDecimal128DataType*)dataType._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -53,7 +53,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal128_array_builder_append(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)cPtr, value ? cast(GArrowDecimal128*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_decimal128_array_builder_append_value(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, value ? cast(GArrowDecimal128*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -96,7 +96,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
     GArrowDecimal128*[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowDecimal128*)obj.cPtr : null;
+      _tmpvalues ~= obj ? cast(GArrowDecimal128*)obj._cPtr : null;
     GArrowDecimal128** _values = cast(GArrowDecimal128**)_tmpvalues.ptr;
 
     long _isValidsLength;
@@ -105,7 +105,7 @@ class Decimal128ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBi
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_decimal128_array_builder_append_values(cast(GArrowDecimal128ArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_decimal128_array_builder_append_values(cast(GArrowDecimal128ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

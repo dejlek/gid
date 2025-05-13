@@ -34,16 +34,16 @@ class UnixFDList : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_list_get_type != &gidSymbolNotFound ? g_unix_fd_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,7 +86,7 @@ class UnixFDList : gobject.object.ObjectWrap
 
     auto _fds = cast(const(int)*)fds.ptr;
     _cretval = g_unix_fd_list_new_from_array(_fds, _nFds);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class UnixFDList : gobject.object.ObjectWrap
   {
     int _retval;
     GError *_err;
-    _retval = g_unix_fd_list_append(cast(GUnixFDList*)cPtr, fd, &_err);
+    _retval = g_unix_fd_list_append(cast(GUnixFDList*)this._cPtr, fd, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -143,7 +143,7 @@ class UnixFDList : gobject.object.ObjectWrap
   {
     int _retval;
     GError *_err;
-    _retval = g_unix_fd_list_get(cast(GUnixFDList*)cPtr, index, &_err);
+    _retval = g_unix_fd_list_get(cast(GUnixFDList*)this._cPtr, index, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -157,7 +157,7 @@ class UnixFDList : gobject.object.ObjectWrap
   int getLength()
   {
     int _retval;
-    _retval = g_unix_fd_list_get_length(cast(GUnixFDList*)cPtr);
+    _retval = g_unix_fd_list_get_length(cast(GUnixFDList*)this._cPtr);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class UnixFDList : gobject.object.ObjectWrap
   {
     const(int)* _cretval;
     int _cretlength;
-    _cretval = g_unix_fd_list_peek_fds(cast(GUnixFDList*)cPtr, &_cretlength);
+    _cretval = g_unix_fd_list_peek_fds(cast(GUnixFDList*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)
@@ -218,7 +218,7 @@ class UnixFDList : gobject.object.ObjectWrap
   {
     int* _cretval;
     int _cretlength;
-    _cretval = g_unix_fd_list_steal_fds(cast(GUnixFDList*)cPtr, &_cretlength);
+    _cretval = g_unix_fd_list_steal_fds(cast(GUnixFDList*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)

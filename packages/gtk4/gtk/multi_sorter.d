@@ -30,16 +30,16 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_sorter_get_type != &gidSymbolNotFound ? gtk_multi_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   */
   void append(gtk.sorter.Sorter sorter)
   {
-    gtk_multi_sorter_append(cast(GtkMultiSorter*)cPtr, sorter ? cast(GtkSorter*)sorter.cPtr(Yes.Dup) : null);
+    gtk_multi_sorter_append(cast(GtkMultiSorter*)this._cPtr, sorter ? cast(GtkSorter*)sorter._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -110,6 +110,6 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
   */
   void remove(uint position)
   {
-    gtk_multi_sorter_remove(cast(GtkMultiSorter*)cPtr, position);
+    gtk_multi_sorter_remove(cast(GtkMultiSorter*)this._cPtr, position);
   }
 }

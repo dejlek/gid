@@ -33,7 +33,7 @@ class ByteWriter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -44,7 +44,7 @@ class ByteWriter
   */
   @property gstbase.byte_reader.ByteReader parent()
   {
-    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)cPtr).parent);
+    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent);
   }
 
   /**
@@ -53,7 +53,7 @@ class ByteWriter
   */
   @property uint allocSize()
   {
-    return (cast(GstByteWriter*)cPtr).allocSize;
+    return (cast(GstByteWriter*)this._cPtr).allocSize;
   }
 
   /**
@@ -63,7 +63,7 @@ class ByteWriter
   */
   @property void allocSize(uint propval)
   {
-    (cast(GstByteWriter*)cPtr).allocSize = propval;
+    (cast(GstByteWriter*)this._cPtr).allocSize = propval;
   }
 
   /**
@@ -72,7 +72,7 @@ class ByteWriter
   */
   @property bool fixed()
   {
-    return (cast(GstByteWriter*)cPtr).fixed;
+    return (cast(GstByteWriter*)this._cPtr).fixed;
   }
 
   /**
@@ -82,7 +82,7 @@ class ByteWriter
   */
   @property void fixed(bool propval)
   {
-    (cast(GstByteWriter*)cPtr).fixed = propval;
+    (cast(GstByteWriter*)this._cPtr).fixed = propval;
   }
 
   /**
@@ -91,7 +91,7 @@ class ByteWriter
   */
   @property bool owned()
   {
-    return (cast(GstByteWriter*)cPtr).owned;
+    return (cast(GstByteWriter*)this._cPtr).owned;
   }
 
   /**
@@ -101,7 +101,7 @@ class ByteWriter
   */
   @property void owned(bool propval)
   {
-    (cast(GstByteWriter*)cPtr).owned = propval;
+    (cast(GstByteWriter*)this._cPtr).owned = propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class ByteWriter
   bool ensureFreeSpace(uint size)
   {
     bool _retval;
-    _retval = gst_byte_writer_ensure_free_space(cast(GstByteWriter*)cPtr, size);
+    _retval = gst_byte_writer_ensure_free_space(cast(GstByteWriter*)this._cPtr, size);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ByteWriter
   bool fill(ubyte value, uint size)
   {
     bool _retval;
-    _retval = gst_byte_writer_fill(cast(GstByteWriter*)cPtr, value, size);
+    _retval = gst_byte_writer_fill(cast(GstByteWriter*)this._cPtr, value, size);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class ByteWriter
   gst.buffer.Buffer freeAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_byte_writer_free_and_get_buffer(cast(GstByteWriter*)cPtr);
+    _cretval = gst_byte_writer_free_and_get_buffer(cast(GstByteWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -159,7 +159,7 @@ class ByteWriter
   */
   ubyte* freeAndGetData()
   {
-    auto _retval = gst_byte_writer_free_and_get_data(cast(GstByteWriter*)cPtr);
+    auto _retval = gst_byte_writer_free_and_get_data(cast(GstByteWriter*)this._cPtr);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class ByteWriter
   uint getRemaining()
   {
     uint _retval;
-    _retval = gst_byte_writer_get_remaining(cast(const(GstByteWriter)*)cPtr);
+    _retval = gst_byte_writer_get_remaining(cast(const(GstByteWriter)*)this._cPtr);
     return _retval;
   }
 
@@ -180,7 +180,7 @@ class ByteWriter
   */
   void init_()
   {
-    gst_byte_writer_init(cast(GstByteWriter*)cPtr);
+    gst_byte_writer_init(cast(GstByteWriter*)this._cPtr);
   }
 
   /**
@@ -199,7 +199,7 @@ class ByteWriter
       _size = cast(uint)data.length;
 
     auto _data = cast(ubyte*)data.ptr;
-    gst_byte_writer_init_with_data(cast(GstByteWriter*)cPtr, _data, _size, initialized);
+    gst_byte_writer_init_with_data(cast(GstByteWriter*)this._cPtr, _data, _size, initialized);
   }
 
   /**
@@ -211,7 +211,7 @@ class ByteWriter
   */
   void initWithSize(uint size, bool fixed)
   {
-    gst_byte_writer_init_with_size(cast(GstByteWriter*)cPtr, size, fixed);
+    gst_byte_writer_init_with_size(cast(GstByteWriter*)this._cPtr, size, fixed);
   }
 
   /**
@@ -226,7 +226,7 @@ class ByteWriter
   bool putBuffer(gst.buffer.Buffer buffer, size_t offset, ptrdiff_t size)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_buffer(cast(GstByteWriter*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, offset, size);
+    _retval = gst_byte_writer_put_buffer(cast(GstByteWriter*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, offset, size);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class ByteWriter
       _size = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_byte_writer_put_data(cast(GstByteWriter*)cPtr, _data, _size);
+    _retval = gst_byte_writer_put_data(cast(GstByteWriter*)this._cPtr, _data, _size);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class ByteWriter
   bool putFloat32Be(float val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_float32_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_float32_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class ByteWriter
   bool putFloat32Le(float val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_float32_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_float32_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class ByteWriter
   bool putFloat64Be(double val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_float64_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_float64_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class ByteWriter
   bool putFloat64Le(double val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_float64_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_float64_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -315,7 +315,7 @@ class ByteWriter
   bool putInt16Be(short val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int16_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int16_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class ByteWriter
   bool putInt16Le(short val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int16_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int16_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class ByteWriter
   bool putInt24Be(int val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int24_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int24_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class ByteWriter
   bool putInt24Le(int val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int24_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int24_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class ByteWriter
   bool putInt32Be(int val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int32_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int32_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class ByteWriter
   bool putInt32Le(int val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int32_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int32_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ class ByteWriter
   bool putInt64Be(long val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int64_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int64_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class ByteWriter
   bool putInt64Le(long val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int64_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int64_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class ByteWriter
   bool putInt8(byte val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_int8(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_int8(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class ByteWriter
   {
     bool _retval;
     auto _data = cast(const(ushort)*)(data ~ ushort.init).ptr;
-    _retval = gst_byte_writer_put_string_utf16(cast(GstByteWriter*)cPtr, _data);
+    _retval = gst_byte_writer_put_string_utf16(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }
 
@@ -457,7 +457,7 @@ class ByteWriter
   {
     bool _retval;
     auto _data = cast(const(uint)*)(data ~ uint.init).ptr;
-    _retval = gst_byte_writer_put_string_utf32(cast(GstByteWriter*)cPtr, _data);
+    _retval = gst_byte_writer_put_string_utf32(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }
 
@@ -472,7 +472,7 @@ class ByteWriter
   {
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
-    _retval = gst_byte_writer_put_string_utf8(cast(GstByteWriter*)cPtr, _data);
+    _retval = gst_byte_writer_put_string_utf8(cast(GstByteWriter*)this._cPtr, _data);
     return _retval;
   }
 
@@ -486,7 +486,7 @@ class ByteWriter
   bool putUint16Be(ushort val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint16_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint16_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -500,7 +500,7 @@ class ByteWriter
   bool putUint16Le(ushort val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint16_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint16_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -514,7 +514,7 @@ class ByteWriter
   bool putUint24Be(uint val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint24_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint24_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -528,7 +528,7 @@ class ByteWriter
   bool putUint24Le(uint val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint24_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint24_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class ByteWriter
   bool putUint32Be(uint val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint32_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint32_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class ByteWriter
   bool putUint32Le(uint val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint32_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint32_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -570,7 +570,7 @@ class ByteWriter
   bool putUint64Be(ulong val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint64_be(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint64_be(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -584,7 +584,7 @@ class ByteWriter
   bool putUint64Le(ulong val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint64_le(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint64_le(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class ByteWriter
   bool putUint8(ubyte val)
   {
     bool _retval;
-    _retval = gst_byte_writer_put_uint8(cast(GstByteWriter*)cPtr, val);
+    _retval = gst_byte_writer_put_uint8(cast(GstByteWriter*)this._cPtr, val);
     return _retval;
   }
 
@@ -608,7 +608,7 @@ class ByteWriter
   */
   void reset()
   {
-    gst_byte_writer_reset(cast(GstByteWriter*)cPtr);
+    gst_byte_writer_reset(cast(GstByteWriter*)this._cPtr);
   }
 
   /**
@@ -621,7 +621,7 @@ class ByteWriter
   gst.buffer.Buffer resetAndGetBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_byte_writer_reset_and_get_buffer(cast(GstByteWriter*)cPtr);
+    _cretval = gst_byte_writer_reset_and_get_buffer(cast(GstByteWriter*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

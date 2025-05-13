@@ -131,16 +131,16 @@ class ListView : gtk.list_base.ListBase
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_list_view_get_type != &gidSymbolNotFound ? gtk_list_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -301,7 +301,7 @@ class ListView : gtk.list_base.ListBase
   this(gtk.selection_model.SelectionModel model = null, gtk.list_item_factory.ListItemFactory factory = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory.cPtr(Yes.Dup) : null);
+    _cretval = gtk_list_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, factory ? cast(GtkListItemFactory*)factory._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -312,7 +312,7 @@ class ListView : gtk.list_base.ListBase
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_list_view_get_enable_rubberband(cast(GtkListView*)cPtr);
+    _retval = gtk_list_view_get_enable_rubberband(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 
@@ -323,8 +323,8 @@ class ListView : gtk.list_base.ListBase
   gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_list_view_get_factory(cast(GtkListView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_list_view_get_factory(cast(GtkListView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -335,8 +335,8 @@ class ListView : gtk.list_base.ListBase
   gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_list_view_get_header_factory(cast(GtkListView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_list_view_get_header_factory(cast(GtkListView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -347,8 +347,8 @@ class ListView : gtk.list_base.ListBase
   gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
-    _cretval = gtk_list_view_get_model(cast(GtkListView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    _cretval = gtk_list_view_get_model(cast(GtkListView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class ListView : gtk.list_base.ListBase
   bool getShowSeparators()
   {
     bool _retval;
-    _retval = gtk_list_view_get_show_separators(cast(GtkListView*)cPtr);
+    _retval = gtk_list_view_get_show_separators(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ class ListView : gtk.list_base.ListBase
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_list_view_get_single_click_activate(cast(GtkListView*)cPtr);
+    _retval = gtk_list_view_get_single_click_activate(cast(GtkListView*)this._cPtr);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class ListView : gtk.list_base.ListBase
   gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
-    _cretval = gtk_list_view_get_tab_behavior(cast(GtkListView*)cPtr);
+    _cretval = gtk_list_view_get_tab_behavior(cast(GtkListView*)this._cPtr);
     gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
@@ -403,7 +403,7 @@ class ListView : gtk.list_base.ListBase
   */
   void scrollTo(uint pos, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_list_view_scroll_to(cast(GtkListView*)cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_list_view_scroll_to(cast(GtkListView*)this._cPtr, pos, flags, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -414,7 +414,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setEnableRubberband(bool enableRubberband)
   {
-    gtk_list_view_set_enable_rubberband(cast(GtkListView*)cPtr, enableRubberband);
+    gtk_list_view_set_enable_rubberband(cast(GtkListView*)this._cPtr, enableRubberband);
   }
 
   /**
@@ -425,7 +425,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_list_view_set_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_list_view_set_factory(cast(GtkListView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -439,7 +439,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_list_view_set_header_factory(cast(GtkListView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_list_view_set_header_factory(cast(GtkListView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -452,7 +452,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_list_view_set_model(cast(GtkListView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_list_view_set_model(cast(GtkListView*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -464,7 +464,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setShowSeparators(bool showSeparators)
   {
-    gtk_list_view_set_show_separators(cast(GtkListView*)cPtr, showSeparators);
+    gtk_list_view_set_show_separators(cast(GtkListView*)this._cPtr, showSeparators);
   }
 
   /**
@@ -476,7 +476,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setSingleClickActivate(bool singleClickActivate)
   {
-    gtk_list_view_set_single_click_activate(cast(GtkListView*)cPtr, singleClickActivate);
+    gtk_list_view_set_single_click_activate(cast(GtkListView*)this._cPtr, singleClickActivate);
   }
 
   /**
@@ -487,7 +487,7 @@ class ListView : gtk.list_base.ListBase
   */
   void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
-    gtk_list_view_set_tab_behavior(cast(GtkListView*)cPtr, tabBehavior);
+    gtk_list_view_set_tab_behavior(cast(GtkListView*)this._cPtr, tabBehavior);
   }
 
   /**

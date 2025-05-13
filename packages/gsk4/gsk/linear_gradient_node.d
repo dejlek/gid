@@ -30,7 +30,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
   graphene.point.Point getEnd()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_linear_gradient_node_get_end(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_linear_gradient_node_get_end(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -42,7 +42,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
   size_t getNColorStops()
   {
     size_t _retval;
-    _retval = gsk_linear_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_linear_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ class LinearGradientNode : gsk.render_node.RenderNode
   graphene.point.Point getStart()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_linear_gradient_node_get_start(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_linear_gradient_node_get_start(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

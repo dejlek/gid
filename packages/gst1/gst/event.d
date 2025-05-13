@@ -86,22 +86,22 @@ class Event : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_event_get_type != &gidSymbolNotFound ? gst_event_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -116,7 +116,7 @@ class Event : gobject.boxed.Boxed
   */
   @property gst.mini_object.MiniObject miniObject()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstEvent*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstEvent*)this._cPtr).miniObject);
   }
 
   /**
@@ -125,7 +125,7 @@ class Event : gobject.boxed.Boxed
   */
   @property gst.types.EventType type()
   {
-    return cast(gst.types.EventType)(cast(GstEvent*)cPtr).type;
+    return cast(gst.types.EventType)(cast(GstEvent*)this._cPtr).type;
   }
 
   /**
@@ -135,7 +135,7 @@ class Event : gobject.boxed.Boxed
   */
   @property void type(gst.types.EventType propval)
   {
-    (cast(GstEvent*)cPtr).type = cast(GstEventType)propval;
+    (cast(GstEvent*)this._cPtr).type = cast(GstEventType)propval;
   }
 
   /**
@@ -144,7 +144,7 @@ class Event : gobject.boxed.Boxed
   */
   @property ulong timestamp()
   {
-    return (cast(GstEvent*)cPtr).timestamp;
+    return (cast(GstEvent*)this._cPtr).timestamp;
   }
 
   /**
@@ -154,7 +154,7 @@ class Event : gobject.boxed.Boxed
   */
   @property void timestamp(ulong propval)
   {
-    (cast(GstEvent*)cPtr).timestamp = propval;
+    (cast(GstEvent*)this._cPtr).timestamp = propval;
   }
 
   /**
@@ -163,7 +163,7 @@ class Event : gobject.boxed.Boxed
   */
   @property uint seqnum()
   {
-    return (cast(GstEvent*)cPtr).seqnum;
+    return (cast(GstEvent*)this._cPtr).seqnum;
   }
 
   /**
@@ -173,7 +173,7 @@ class Event : gobject.boxed.Boxed
   */
   @property void seqnum(uint propval)
   {
-    (cast(GstEvent*)cPtr).seqnum = propval;
+    (cast(GstEvent*)this._cPtr).seqnum = propval;
   }
 
   /**
@@ -209,7 +209,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newCaps(gst.caps.Caps caps)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_event_new_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -235,7 +235,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newCustom(gst.types.EventType type, gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    _cretval = gst_event_new_custom(type, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -418,7 +418,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newNavigation(gst.structure.Structure structure)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    _cretval = gst_event_new_navigation(structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -469,7 +469,7 @@ class Event : gobject.boxed.Boxed
     GstEvent* _cretval;
     const(char)* _systemId = systemId.toCString(No.Alloc);
     const(char)* _origin = origin.toCString(No.Alloc);
-    _cretval = gst_event_new_protection(_systemId, data ? cast(GstBuffer*)data.cPtr(No.Dup) : null, _origin);
+    _cretval = gst_event_new_protection(_systemId, data ? cast(GstBuffer*)data._cPtr(No.Dup) : null, _origin);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -639,7 +639,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newSegment(gst.segment.Segment segment)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_segment(segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null);
+    _cretval = gst_event_new_segment(segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -704,7 +704,7 @@ class Event : gobject.boxed.Boxed
   {
     GstEvent* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_event_new_sink_message(_name, msg ? cast(GstMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = gst_event_new_sink_message(_name, msg ? cast(GstMessage*)msg._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -757,7 +757,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newStreamCollection(gst.stream_collection.StreamCollection collection)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_stream_collection(collection ? cast(GstStreamCollection*)collection.cPtr(No.Dup) : null);
+    _cretval = gst_event_new_stream_collection(collection ? cast(GstStreamCollection*)collection._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -838,7 +838,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newTag(gst.tag_list.TagList taglist)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_tag(taglist ? cast(GstTagList*)taglist.cPtr(Yes.Dup) : null);
+    _cretval = gst_event_new_tag(taglist ? cast(GstTagList*)taglist._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -855,7 +855,7 @@ class Event : gobject.boxed.Boxed
   static gst.event.Event newToc(gst.toc.Toc toc, bool updated)
   {
     GstEvent* _cretval;
-    _cretval = gst_event_new_toc(toc ? cast(GstToc*)toc.cPtr(No.Dup) : null, updated);
+    _cretval = gst_event_new_toc(toc ? cast(GstToc*)toc._cPtr(No.Dup) : null, updated);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -887,7 +887,7 @@ class Event : gobject.boxed.Boxed
   */
   void copySegment(gst.segment.Segment segment)
   {
-    gst_event_copy_segment(cast(GstEvent*)cPtr, segment ? cast(GstSegment*)segment.cPtr(No.Dup) : null);
+    gst_event_copy_segment(cast(GstEvent*)this._cPtr, segment ? cast(GstSegment*)segment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -907,7 +907,7 @@ class Event : gobject.boxed.Boxed
   long getRunningTimeOffset()
   {
     long _retval;
-    _retval = gst_event_get_running_time_offset(cast(GstEvent*)cPtr);
+    _retval = gst_event_get_running_time_offset(cast(GstEvent*)this._cPtr);
     return _retval;
   }
 
@@ -931,7 +931,7 @@ class Event : gobject.boxed.Boxed
   uint getSeqnum()
   {
     uint _retval;
-    _retval = gst_event_get_seqnum(cast(GstEvent*)cPtr);
+    _retval = gst_event_get_seqnum(cast(GstEvent*)this._cPtr);
     return _retval;
   }
 
@@ -946,7 +946,7 @@ class Event : gobject.boxed.Boxed
   gst.structure.Structure getStructure()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_event_get_structure(cast(GstEvent*)cPtr);
+    _cretval = gst_event_get_structure(cast(GstEvent*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -963,7 +963,7 @@ class Event : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_event_has_name(cast(GstEvent*)cPtr, _name);
+    _retval = gst_event_has_name(cast(GstEvent*)this._cPtr, _name);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Event : gobject.boxed.Boxed
   bool hasNameId(glib.types.Quark name)
   {
     bool _retval;
-    _retval = gst_event_has_name_id(cast(GstEvent*)cPtr, name);
+    _retval = gst_event_has_name_id(cast(GstEvent*)this._cPtr, name);
     return _retval;
   }
 
@@ -993,7 +993,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseBufferSize(out gst.types.Format format, out long minsize, out long maxsize, out bool async)
   {
-    gst_event_parse_buffer_size(cast(GstEvent*)cPtr, &format, cast(long*)&minsize, cast(long*)&maxsize, cast(bool*)&async);
+    gst_event_parse_buffer_size(cast(GstEvent*)this._cPtr, &format, cast(long*)&minsize, cast(long*)&maxsize, cast(bool*)&async);
   }
 
   /**
@@ -1006,7 +1006,7 @@ class Event : gobject.boxed.Boxed
   void parseCaps(out gst.caps.Caps caps)
   {
     GstCaps* _caps;
-    gst_event_parse_caps(cast(GstEvent*)cPtr, &_caps);
+    gst_event_parse_caps(cast(GstEvent*)this._cPtr, &_caps);
     caps = new gst.caps.Caps(cast(void*)_caps, No.Take);
   }
 
@@ -1018,7 +1018,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseFlushStop(out bool resetTime)
   {
-    gst_event_parse_flush_stop(cast(GstEvent*)cPtr, cast(bool*)&resetTime);
+    gst_event_parse_flush_stop(cast(GstEvent*)this._cPtr, cast(bool*)&resetTime);
   }
 
   /**
@@ -1032,7 +1032,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseGap(out gst.types.ClockTime timestamp, out gst.types.ClockTime duration)
   {
-    gst_event_parse_gap(cast(GstEvent*)cPtr, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&duration);
+    gst_event_parse_gap(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&timestamp, cast(GstClockTime*)&duration);
   }
 
   /**
@@ -1044,14 +1044,14 @@ class Event : gobject.boxed.Boxed
   */
   void parseGapFlags(out gst.types.GapFlags flags)
   {
-    gst_event_parse_gap_flags(cast(GstEvent*)cPtr, &flags);
+    gst_event_parse_gap_flags(cast(GstEvent*)this._cPtr, &flags);
   }
 
   /** */
   bool parseGroupId(out uint groupId)
   {
     bool _retval;
-    _retval = gst_event_parse_group_id(cast(GstEvent*)cPtr, cast(uint*)&groupId);
+    _retval = gst_event_parse_group_id(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
     return _retval;
   }
 
@@ -1066,7 +1066,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseInstantRateChange(out double rateMultiplier, out gst.types.SegmentFlags newFlags)
   {
-    gst_event_parse_instant_rate_change(cast(GstEvent*)cPtr, cast(double*)&rateMultiplier, &newFlags);
+    gst_event_parse_instant_rate_change(cast(GstEvent*)this._cPtr, cast(double*)&rateMultiplier, &newFlags);
   }
 
   /**
@@ -1082,7 +1082,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseInstantRateSyncTime(out double rateMultiplier, out gst.types.ClockTime runningTime, out gst.types.ClockTime upstreamRunningTime)
   {
-    gst_event_parse_instant_rate_sync_time(cast(GstEvent*)cPtr, cast(double*)&rateMultiplier, cast(GstClockTime*)&runningTime, cast(GstClockTime*)&upstreamRunningTime);
+    gst_event_parse_instant_rate_sync_time(cast(GstEvent*)this._cPtr, cast(double*)&rateMultiplier, cast(GstClockTime*)&runningTime, cast(GstClockTime*)&upstreamRunningTime);
   }
 
   /**
@@ -1093,7 +1093,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseLatency(out gst.types.ClockTime latency)
   {
-    gst_event_parse_latency(cast(GstEvent*)cPtr, cast(GstClockTime*)&latency);
+    gst_event_parse_latency(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&latency);
   }
 
   /**
@@ -1115,7 +1115,7 @@ class Event : gobject.boxed.Boxed
     char* _systemId;
     GstBuffer* _data;
     char* _origin;
-    gst_event_parse_protection(cast(GstEvent*)cPtr, &_systemId, &_data, &_origin);
+    gst_event_parse_protection(cast(GstEvent*)this._cPtr, &_systemId, &_data, &_origin);
     systemId = _systemId.fromCString(No.Free);
     data = new gst.buffer.Buffer(cast(void*)_data, No.Take);
     origin = _origin.fromCString(No.Free);
@@ -1135,7 +1135,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseQos(out gst.types.QOSType type, out double proportion, out gst.types.ClockTimeDiff diff, out gst.types.ClockTime timestamp)
   {
-    gst_event_parse_qos(cast(GstEvent*)cPtr, &type, cast(double*)&proportion, cast(GstClockTimeDiff*)&diff, cast(GstClockTime*)&timestamp);
+    gst_event_parse_qos(cast(GstEvent*)this._cPtr, &type, cast(double*)&proportion, cast(GstClockTimeDiff*)&diff, cast(GstClockTime*)&timestamp);
   }
 
   /**
@@ -1152,7 +1152,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseSeek(out double rate, out gst.types.Format format, out gst.types.SeekFlags flags, out gst.types.SeekType startType, out long start, out gst.types.SeekType stopType, out long stop)
   {
-    gst_event_parse_seek(cast(GstEvent*)cPtr, cast(double*)&rate, &format, &flags, &startType, cast(long*)&start, &stopType, cast(long*)&stop);
+    gst_event_parse_seek(cast(GstEvent*)this._cPtr, cast(double*)&rate, &format, &flags, &startType, cast(long*)&start, &stopType, cast(long*)&stop);
   }
 
   /**
@@ -1164,7 +1164,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseSeekTrickmodeInterval(out gst.types.ClockTime interval)
   {
-    gst_event_parse_seek_trickmode_interval(cast(GstEvent*)cPtr, cast(GstClockTime*)&interval);
+    gst_event_parse_seek_trickmode_interval(cast(GstEvent*)this._cPtr, cast(GstClockTime*)&interval);
   }
 
   /**
@@ -1178,7 +1178,7 @@ class Event : gobject.boxed.Boxed
   void parseSegment(out gst.segment.Segment segment)
   {
     const(GstSegment)* _segment;
-    gst_event_parse_segment(cast(GstEvent*)cPtr, &_segment);
+    gst_event_parse_segment(cast(GstEvent*)this._cPtr, &_segment);
     segment = new gst.segment.Segment(cast(void*)_segment, No.Take);
   }
 
@@ -1191,7 +1191,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseSegmentDone(out gst.types.Format format, out long position)
   {
-    gst_event_parse_segment_done(cast(GstEvent*)cPtr, &format, cast(long*)&position);
+    gst_event_parse_segment_done(cast(GstEvent*)this._cPtr, &format, cast(long*)&position);
   }
 
   /**
@@ -1203,7 +1203,7 @@ class Event : gobject.boxed.Boxed
   void parseSelectStreams(out string[] streams)
   {
     GList* _streams;
-    gst_event_parse_select_streams(cast(GstEvent*)cPtr, &_streams);
+    gst_event_parse_select_streams(cast(GstEvent*)this._cPtr, &_streams);
     streams = gListToD!(string, GidOwnership.Full)(_streams);
   }
 
@@ -1216,7 +1216,7 @@ class Event : gobject.boxed.Boxed
   void parseSinkMessage(out gst.message.Message msg)
   {
     GstMessage* _msg;
-    gst_event_parse_sink_message(cast(GstEvent*)cPtr, &_msg);
+    gst_event_parse_sink_message(cast(GstEvent*)this._cPtr, &_msg);
     msg = new gst.message.Message(cast(void*)_msg, Yes.Take);
   }
 
@@ -1233,7 +1233,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseStep(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate)
   {
-    gst_event_parse_step(cast(GstEvent*)cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
+    gst_event_parse_step(cast(GstEvent*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
   }
 
   /**
@@ -1245,7 +1245,7 @@ class Event : gobject.boxed.Boxed
   void parseStream(out gst.stream.Stream stream)
   {
     GstStream* _stream;
-    gst_event_parse_stream(cast(GstEvent*)cPtr, &_stream);
+    gst_event_parse_stream(cast(GstEvent*)this._cPtr, &_stream);
     stream = new gst.stream.Stream(cast(void*)_stream, Yes.Take);
   }
 
@@ -1258,14 +1258,14 @@ class Event : gobject.boxed.Boxed
   void parseStreamCollection(out gst.stream_collection.StreamCollection collection)
   {
     GstStreamCollection* _collection;
-    gst_event_parse_stream_collection(cast(GstEvent*)cPtr, &_collection);
+    gst_event_parse_stream_collection(cast(GstEvent*)this._cPtr, &_collection);
     collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
   }
 
   /** */
   void parseStreamFlags(out gst.types.StreamFlags flags)
   {
-    gst_event_parse_stream_flags(cast(GstEvent*)cPtr, &flags);
+    gst_event_parse_stream_flags(cast(GstEvent*)this._cPtr, &flags);
   }
 
   /**
@@ -1277,7 +1277,7 @@ class Event : gobject.boxed.Boxed
   */
   void parseStreamGroupDone(out uint groupId)
   {
-    gst_event_parse_stream_group_done(cast(GstEvent*)cPtr, cast(uint*)&groupId);
+    gst_event_parse_stream_group_done(cast(GstEvent*)this._cPtr, cast(uint*)&groupId);
   }
 
   /**
@@ -1292,7 +1292,7 @@ class Event : gobject.boxed.Boxed
   void parseStreamStart(out string streamId)
   {
     char* _streamId;
-    gst_event_parse_stream_start(cast(GstEvent*)cPtr, &_streamId);
+    gst_event_parse_stream_start(cast(GstEvent*)this._cPtr, &_streamId);
     streamId = _streamId.fromCString(No.Free);
   }
 
@@ -1308,7 +1308,7 @@ class Event : gobject.boxed.Boxed
   void parseTag(out gst.tag_list.TagList taglist)
   {
     GstTagList* _taglist;
-    gst_event_parse_tag(cast(GstEvent*)cPtr, &_taglist);
+    gst_event_parse_tag(cast(GstEvent*)this._cPtr, &_taglist);
     taglist = new gst.tag_list.TagList(cast(void*)_taglist, No.Take);
   }
 
@@ -1322,7 +1322,7 @@ class Event : gobject.boxed.Boxed
   void parseToc(out gst.toc.Toc toc, out bool updated)
   {
     GstToc* _toc;
-    gst_event_parse_toc(cast(GstEvent*)cPtr, &_toc, cast(bool*)&updated);
+    gst_event_parse_toc(cast(GstEvent*)this._cPtr, &_toc, cast(bool*)&updated);
     toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
   }
 
@@ -1335,7 +1335,7 @@ class Event : gobject.boxed.Boxed
   void parseTocSelect(out string uid)
   {
     char* _uid;
-    gst_event_parse_toc_select(cast(GstEvent*)cPtr, &_uid);
+    gst_event_parse_toc_select(cast(GstEvent*)this._cPtr, &_uid);
     uid = _uid.fromCString(Yes.Free);
   }
 
@@ -1348,7 +1348,7 @@ class Event : gobject.boxed.Boxed
   */
   void setGapFlags(gst.types.GapFlags flags)
   {
-    gst_event_set_gap_flags(cast(GstEvent*)cPtr, flags);
+    gst_event_set_gap_flags(cast(GstEvent*)this._cPtr, flags);
   }
 
   /**
@@ -1365,7 +1365,7 @@ class Event : gobject.boxed.Boxed
   */
   void setGroupId(uint groupId)
   {
-    gst_event_set_group_id(cast(GstEvent*)cPtr, groupId);
+    gst_event_set_group_id(cast(GstEvent*)this._cPtr, groupId);
   }
 
   /**
@@ -1379,7 +1379,7 @@ class Event : gobject.boxed.Boxed
   */
   void setRunningTimeOffset(long offset)
   {
-    gst_event_set_running_time_offset(cast(GstEvent*)cPtr, offset);
+    gst_event_set_running_time_offset(cast(GstEvent*)this._cPtr, offset);
   }
 
   /**
@@ -1392,7 +1392,7 @@ class Event : gobject.boxed.Boxed
   */
   void setSeekTrickmodeInterval(gst.types.ClockTime interval)
   {
-    gst_event_set_seek_trickmode_interval(cast(GstEvent*)cPtr, interval);
+    gst_event_set_seek_trickmode_interval(cast(GstEvent*)this._cPtr, interval);
   }
 
   /**
@@ -1409,7 +1409,7 @@ class Event : gobject.boxed.Boxed
   */
   void setSeqnum(uint seqnum)
   {
-    gst_event_set_seqnum(cast(GstEvent*)cPtr, seqnum);
+    gst_event_set_seqnum(cast(GstEvent*)this._cPtr, seqnum);
   }
 
   /**
@@ -1420,13 +1420,13 @@ class Event : gobject.boxed.Boxed
   */
   void setStream(gst.stream.Stream stream)
   {
-    gst_event_set_stream(cast(GstEvent*)cPtr, stream ? cast(GstStream*)stream.cPtr(No.Dup) : null);
+    gst_event_set_stream(cast(GstEvent*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(No.Dup) : null);
   }
 
   /** */
   void setStreamFlags(gst.types.StreamFlags flags)
   {
-    gst_event_set_stream_flags(cast(GstEvent*)cPtr, flags);
+    gst_event_set_stream_flags(cast(GstEvent*)this._cPtr, flags);
   }
 
   /**
@@ -1442,7 +1442,7 @@ class Event : gobject.boxed.Boxed
   gst.structure.Structure writableStructure()
   {
     GstStructure* _cretval;
-    _cretval = gst_event_writable_structure(cast(GstEvent*)cPtr);
+    _cretval = gst_event_writable_structure(cast(GstEvent*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -8,7 +8,7 @@ public import arrow.c.types;
 struct GAFlightCallOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -22,7 +22,7 @@ struct GAFlightCallOptionsClass
 struct GAFlightClient
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -36,7 +36,7 @@ struct GAFlightClientClass
 struct GAFlightClientOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -64,7 +64,7 @@ struct GAFlightCommandDescriptorClass
 struct GAFlightCriteria
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -78,7 +78,7 @@ struct GAFlightCriteriaClass
 struct GAFlightDataStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -92,7 +92,7 @@ struct GAFlightDataStreamClass
 struct GAFlightDescriptor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -106,7 +106,7 @@ struct GAFlightDescriptorClass
 struct GAFlightDoPutResult
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -120,7 +120,7 @@ struct GAFlightDoPutResultClass
 struct GAFlightEndpoint
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -134,7 +134,7 @@ struct GAFlightEndpointClass
 struct GAFlightInfo
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -148,7 +148,7 @@ struct GAFlightInfoClass
 struct GAFlightLocation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -176,7 +176,7 @@ struct GAFlightMessageReaderClass
 struct GAFlightMetadataReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -190,7 +190,7 @@ struct GAFlightMetadataReaderClass
 struct GAFlightMetadataWriter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -218,7 +218,7 @@ struct GAFlightPathDescriptorClass
 struct GAFlightRecordBatchReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -266,14 +266,14 @@ struct GAFlightServableInterface;
 struct GAFlightServer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
 struct GAFlightServerAuthHandler
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -287,7 +287,7 @@ struct GAFlightServerAuthHandlerClass
 struct GAFlightServerAuthReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -301,7 +301,7 @@ struct GAFlightServerAuthReaderClass
 struct GAFlightServerAuthSender
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -315,7 +315,7 @@ struct GAFlightServerAuthSenderClass
 struct GAFlightServerCallContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -379,7 +379,7 @@ struct GAFlightServerCustomAuthHandlerClass
 struct GAFlightServerOptions
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -393,7 +393,7 @@ struct GAFlightServerOptionsClass
 struct GAFlightStreamChunk
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -435,7 +435,7 @@ struct GAFlightStreamWriterClass
 struct GAFlightTicket
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

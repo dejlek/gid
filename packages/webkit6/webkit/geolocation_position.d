@@ -23,22 +23,22 @@ class GeolocationPosition : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_geolocation_position_get_type != &gidSymbolNotFound ? webkit_geolocation_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class GeolocationPosition : gobject.boxed.Boxed
   webkit.geolocation_position.GeolocationPosition copy()
   {
     WebKitGeolocationPosition* _cretval;
-    _cretval = webkit_geolocation_position_copy(cast(WebKitGeolocationPosition*)cPtr);
+    _cretval = webkit_geolocation_position_copy(cast(WebKitGeolocationPosition*)this._cPtr);
     auto _retval = _cretval ? new webkit.geolocation_position.GeolocationPosition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -83,7 +83,7 @@ class GeolocationPosition : gobject.boxed.Boxed
   */
   void setAltitude(double altitude)
   {
-    webkit_geolocation_position_set_altitude(cast(WebKitGeolocationPosition*)cPtr, altitude);
+    webkit_geolocation_position_set_altitude(cast(WebKitGeolocationPosition*)this._cPtr, altitude);
   }
 
   /**
@@ -94,7 +94,7 @@ class GeolocationPosition : gobject.boxed.Boxed
   */
   void setAltitudeAccuracy(double altitudeAccuracy)
   {
-    webkit_geolocation_position_set_altitude_accuracy(cast(WebKitGeolocationPosition*)cPtr, altitudeAccuracy);
+    webkit_geolocation_position_set_altitude_accuracy(cast(WebKitGeolocationPosition*)this._cPtr, altitudeAccuracy);
   }
 
   /**
@@ -108,7 +108,7 @@ class GeolocationPosition : gobject.boxed.Boxed
   */
   void setHeading(double heading)
   {
-    webkit_geolocation_position_set_heading(cast(WebKitGeolocationPosition*)cPtr, heading);
+    webkit_geolocation_position_set_heading(cast(WebKitGeolocationPosition*)this._cPtr, heading);
   }
 
   /**
@@ -119,7 +119,7 @@ class GeolocationPosition : gobject.boxed.Boxed
   */
   void setSpeed(double speed)
   {
-    webkit_geolocation_position_set_speed(cast(WebKitGeolocationPosition*)cPtr, speed);
+    webkit_geolocation_position_set_speed(cast(WebKitGeolocationPosition*)this._cPtr, speed);
   }
 
   /**
@@ -132,6 +132,6 @@ class GeolocationPosition : gobject.boxed.Boxed
   */
   void setTimestamp(ulong timestamp)
   {
-    webkit_geolocation_position_set_timestamp(cast(WebKitGeolocationPosition*)cPtr, timestamp);
+    webkit_geolocation_position_set_timestamp(cast(WebKitGeolocationPosition*)this._cPtr, timestamp);
   }
 }

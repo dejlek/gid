@@ -22,7 +22,7 @@ import gstrtp.types;
 gstrtp.rtpsource_meta.RTPSourceMeta bufferGetRtpSourceMeta(gst.buffer.Buffer buffer)
 {
   GstRTPSourceMeta* _cretval;
-  _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_get_rtp_source_meta(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gstrtp.rtpsource_meta.RTPSourceMeta(cast(GstRTPSourceMeta*)_cretval) : null;
   return _retval;
 }

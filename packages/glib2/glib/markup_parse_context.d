@@ -25,22 +25,22 @@ class MarkupParseContext : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_markup_parse_context_get_type != &gidSymbolNotFound ? g_markup_parse_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -72,7 +72,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   {
     bool _retval;
     GError *_err;
-    _retval = g_markup_parse_context_end_parse(cast(GMarkupParseContext*)cPtr, &_err);
+    _retval = g_markup_parse_context_end_parse(cast(GMarkupParseContext*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -89,7 +89,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   string getElement()
   {
     const(char)* _cretval;
-    _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)cPtr);
+    _cretval = g_markup_parse_context_get_element(cast(GMarkupParseContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -111,7 +111,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   string[] getElementStack()
   {
     const(GSList)* _cretval;
-    _cretval = g_markup_parse_context_get_element_stack(cast(GMarkupParseContext*)cPtr);
+    _cretval = g_markup_parse_context_get_element_stack(cast(GMarkupParseContext*)this._cPtr);
     auto _retval = gSListToD!(string, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -128,7 +128,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   */
   void getPosition(out int lineNumber, out int charNumber)
   {
-    g_markup_parse_context_get_position(cast(GMarkupParseContext*)cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
+    g_markup_parse_context_get_position(cast(GMarkupParseContext*)this._cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
   }
 
   /**
@@ -143,7 +143,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   */
   void* getUserData()
   {
-    auto _retval = g_markup_parse_context_get_user_data(cast(GMarkupParseContext*)cPtr);
+    auto _retval = g_markup_parse_context_get_user_data(cast(GMarkupParseContext*)this._cPtr);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class MarkupParseContext : gobject.boxed.Boxed
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
     GError *_err;
-    _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)cPtr, _text, textLen, &_err);
+    _retval = g_markup_parse_context_parse(cast(GMarkupParseContext*)this._cPtr, _text, textLen, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -194,7 +194,7 @@ class MarkupParseContext : gobject.boxed.Boxed
   */
   void* pop()
   {
-    auto _retval = g_markup_parse_context_pop(cast(GMarkupParseContext*)cPtr);
+    auto _retval = g_markup_parse_context_pop(cast(GMarkupParseContext*)this._cPtr);
     return _retval;
   }
 
@@ -320,6 +320,6 @@ class MarkupParseContext : gobject.boxed.Boxed
   */
   void push(glib.types.MarkupParser parser, void* userData = null)
   {
-    g_markup_parse_context_push(cast(GMarkupParseContext*)cPtr, &parser, userData);
+    g_markup_parse_context_push(cast(GMarkupParseContext*)this._cPtr, &parser, userData);
   }
 }

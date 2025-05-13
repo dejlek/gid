@@ -30,16 +30,16 @@ class MonitorWrap : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_monitor_get_type != &gidSymbolNotFound ? gdk_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -109,8 +109,8 @@ class MonitorWrap : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_monitor_get_display(cast(GdkMonitor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_monitor_get_display(cast(GdkMonitor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   void getGeometry(out gdk.rectangle.Rectangle geometry)
   {
     GdkRectangle _geometry;
-    gdk_monitor_get_geometry(cast(GdkMonitor*)cPtr, &_geometry);
+    gdk_monitor_get_geometry(cast(GdkMonitor*)this._cPtr, &_geometry);
     geometry = new gdk.rectangle.Rectangle(cast(void*)&_geometry, No.Take);
   }
 
@@ -136,7 +136,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   int getHeightMm()
   {
     int _retval;
-    _retval = gdk_monitor_get_height_mm(cast(GdkMonitor*)cPtr);
+    _retval = gdk_monitor_get_height_mm(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   string getManufacturer()
   {
     const(char)* _cretval;
-    _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)cPtr);
+    _cretval = gdk_monitor_get_manufacturer(cast(GdkMonitor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -164,7 +164,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   string getModel()
   {
     const(char)* _cretval;
-    _cretval = gdk_monitor_get_model(cast(GdkMonitor*)cPtr);
+    _cretval = gdk_monitor_get_model(cast(GdkMonitor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -179,7 +179,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   int getRefreshRate()
   {
     int _retval;
-    _retval = gdk_monitor_get_refresh_rate(cast(GdkMonitor*)cPtr);
+    _retval = gdk_monitor_get_refresh_rate(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   int getScaleFactor()
   {
     int _retval;
-    _retval = gdk_monitor_get_scale_factor(cast(GdkMonitor*)cPtr);
+    _retval = gdk_monitor_get_scale_factor(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   gdk.types.SubpixelLayout getSubpixelLayout()
   {
     GdkSubpixelLayout _cretval;
-    _cretval = gdk_monitor_get_subpixel_layout(cast(GdkMonitor*)cPtr);
+    _cretval = gdk_monitor_get_subpixel_layout(cast(GdkMonitor*)this._cPtr);
     gdk.types.SubpixelLayout _retval = cast(gdk.types.SubpixelLayout)_cretval;
     return _retval;
   }
@@ -220,7 +220,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   int getWidthMm()
   {
     int _retval;
-    _retval = gdk_monitor_get_width_mm(cast(GdkMonitor*)cPtr);
+    _retval = gdk_monitor_get_width_mm(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   void getWorkarea(out gdk.rectangle.Rectangle workarea)
   {
     GdkRectangle _workarea;
-    gdk_monitor_get_workarea(cast(GdkMonitor*)cPtr, &_workarea);
+    gdk_monitor_get_workarea(cast(GdkMonitor*)this._cPtr, &_workarea);
     workarea = new gdk.rectangle.Rectangle(cast(void*)&_workarea, No.Take);
   }
 
@@ -257,7 +257,7 @@ class MonitorWrap : gobject.object.ObjectWrap
   bool isPrimary()
   {
     bool _retval;
-    _retval = gdk_monitor_is_primary(cast(GdkMonitor*)cPtr);
+    _retval = gdk_monitor_is_primary(cast(GdkMonitor*)this._cPtr);
     return _retval;
   }
 

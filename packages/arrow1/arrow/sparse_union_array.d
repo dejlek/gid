@@ -23,16 +23,16 @@ class SparseUnionArray : arrow.union_array.UnionArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sparse_union_array_get_type != &gidSymbolNotFound ? garrow_sparse_union_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class SparseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_sparse_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_sparse_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds._cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -61,10 +61,10 @@ class SparseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_sparse_union_array_new_data_type(dataType ? cast(GArrowSparseUnionDataType*)dataType.cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_sparse_union_array_new_data_type(dataType ? cast(GArrowSparseUnionDataType*)dataType._cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds._cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.sparse_union_array.SparseUnionArray)(cast(GArrowSparseUnionArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.sparse_union_array.SparseUnionArray)(cast(GArrowSparseUnionArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

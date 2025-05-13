@@ -34,16 +34,16 @@ class TlsConnection : gio.iostream.IOStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_connection_get_type != &gidSymbolNotFound ? g_tls_connection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -295,7 +295,7 @@ class TlsConnection : gio.iostream.IOStream
   bool emitAcceptCertificate(gio.tls_certificate.TlsCertificate peerCert, gio.types.TlsCertificateFlags errors)
   {
     bool _retval;
-    _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)cPtr, peerCert ? cast(GTlsCertificate*)peerCert.cPtr(No.Dup) : null, errors);
+    _retval = g_tls_connection_emit_accept_certificate(cast(GTlsConnection*)this._cPtr, peerCert ? cast(GTlsCertificate*)peerCert._cPtr(No.Dup) : null, errors);
     return _retval;
   }
 
@@ -307,8 +307,8 @@ class TlsConnection : gio.iostream.IOStream
   gio.tls_certificate.TlsCertificate getCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = g_tls_connection_get_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = g_tls_connection_get_certificate(cast(GTlsConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class TlsConnection : gio.iostream.IOStream
   string getCiphersuiteName()
   {
     char* _cretval;
-    _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)cPtr);
+    _cretval = g_tls_connection_get_ciphersuite_name(cast(GTlsConnection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -339,8 +339,8 @@ class TlsConnection : gio.iostream.IOStream
   gio.tls_database.TlsDatabase getDatabase()
   {
     GTlsDatabase* _cretval;
-    _cretval = g_tls_connection_get_database(cast(GTlsConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    _cretval = g_tls_connection_get_database(cast(GTlsConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -353,8 +353,8 @@ class TlsConnection : gio.iostream.IOStream
   gio.tls_interaction.TlsInteraction getInteraction()
   {
     GTlsInteraction* _cretval;
-    _cretval = g_tls_connection_get_interaction(cast(GTlsConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
+    _cretval = g_tls_connection_get_interaction(cast(GTlsConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_interaction.TlsInteraction)(cast(GTlsInteraction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -371,7 +371,7 @@ class TlsConnection : gio.iostream.IOStream
   string getNegotiatedProtocol()
   {
     const(char)* _cretval;
-    _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)cPtr);
+    _cretval = g_tls_connection_get_negotiated_protocol(cast(GTlsConnection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -385,8 +385,8 @@ class TlsConnection : gio.iostream.IOStream
   gio.tls_certificate.TlsCertificate getPeerCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = g_tls_connection_get_peer_certificate(cast(GTlsConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = g_tls_connection_get_peer_certificate(cast(GTlsConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class TlsConnection : gio.iostream.IOStream
   gio.types.TlsCertificateFlags getPeerCertificateErrors()
   {
     GTlsCertificateFlags _cretval;
-    _cretval = g_tls_connection_get_peer_certificate_errors(cast(GTlsConnection*)cPtr);
+    _cretval = g_tls_connection_get_peer_certificate_errors(cast(GTlsConnection*)this._cPtr);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -416,7 +416,7 @@ class TlsConnection : gio.iostream.IOStream
   gio.types.TlsProtocolVersion getProtocolVersion()
   {
     GTlsProtocolVersion _cretval;
-    _cretval = g_tls_connection_get_protocol_version(cast(GTlsConnection*)cPtr);
+    _cretval = g_tls_connection_get_protocol_version(cast(GTlsConnection*)this._cPtr);
     gio.types.TlsProtocolVersion _retval = cast(gio.types.TlsProtocolVersion)_cretval;
     return _retval;
   }
@@ -433,7 +433,7 @@ class TlsConnection : gio.iostream.IOStream
   gio.types.TlsRehandshakeMode getRehandshakeMode()
   {
     GTlsRehandshakeMode _cretval;
-    _cretval = g_tls_connection_get_rehandshake_mode(cast(GTlsConnection*)cPtr);
+    _cretval = g_tls_connection_get_rehandshake_mode(cast(GTlsConnection*)this._cPtr);
     gio.types.TlsRehandshakeMode _retval = cast(gio.types.TlsRehandshakeMode)_cretval;
     return _retval;
   }
@@ -448,7 +448,7 @@ class TlsConnection : gio.iostream.IOStream
   bool getRequireCloseNotify()
   {
     bool _retval;
-    _retval = g_tls_connection_get_require_close_notify(cast(GTlsConnection*)cPtr);
+    _retval = g_tls_connection_get_require_close_notify(cast(GTlsConnection*)this._cPtr);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class TlsConnection : gio.iostream.IOStream
   bool getUseSystemCertdb()
   {
     bool _retval;
-    _retval = g_tls_connection_get_use_system_certdb(cast(GTlsConnection*)cPtr);
+    _retval = g_tls_connection_get_use_system_certdb(cast(GTlsConnection*)this._cPtr);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake(cast(GTlsConnection*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_tls_connection_handshake(cast(GTlsConnection*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -525,17 +525,17 @@ class TlsConnection : gio.iostream.IOStream
   */
   void handshakeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_tls_connection_handshake_async(cast(GTlsConnection*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_tls_connection_handshake_async(cast(GTlsConnection*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -552,7 +552,7 @@ class TlsConnection : gio.iostream.IOStream
   {
     bool _retval;
     GError *_err;
-    _retval = g_tls_connection_handshake_finish(cast(GTlsConnection*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_tls_connection_handshake_finish(cast(GTlsConnection*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -581,7 +581,7 @@ class TlsConnection : gio.iostream.IOStream
       _tmpprotocols ~= s.toCString(No.Alloc);
     _tmpprotocols ~= null;
     const(char*)* _protocols = _tmpprotocols.ptr;
-    g_tls_connection_set_advertised_protocols(cast(GTlsConnection*)cPtr, _protocols);
+    g_tls_connection_set_advertised_protocols(cast(GTlsConnection*)this._cPtr, _protocols);
   }
 
   /**
@@ -609,7 +609,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
-    g_tls_connection_set_certificate(cast(GTlsConnection*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
+    g_tls_connection_set_certificate(cast(GTlsConnection*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
 
   /**
@@ -630,7 +630,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setDatabase(gio.tls_database.TlsDatabase database = null)
   {
-    g_tls_connection_set_database(cast(GTlsConnection*)cPtr, database ? cast(GTlsDatabase*)database.cPtr(No.Dup) : null);
+    g_tls_connection_set_database(cast(GTlsConnection*)this._cPtr, database ? cast(GTlsDatabase*)database._cPtr(No.Dup) : null);
   }
 
   /**
@@ -646,7 +646,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setInteraction(gio.tls_interaction.TlsInteraction interaction = null)
   {
-    g_tls_connection_set_interaction(cast(GTlsConnection*)cPtr, interaction ? cast(GTlsInteraction*)interaction.cPtr(No.Dup) : null);
+    g_tls_connection_set_interaction(cast(GTlsConnection*)this._cPtr, interaction ? cast(GTlsInteraction*)interaction._cPtr(No.Dup) : null);
   }
 
   /**
@@ -664,7 +664,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setRehandshakeMode(gio.types.TlsRehandshakeMode mode)
   {
-    g_tls_connection_set_rehandshake_mode(cast(GTlsConnection*)cPtr, mode);
+    g_tls_connection_set_rehandshake_mode(cast(GTlsConnection*)this._cPtr, mode);
   }
 
   /**
@@ -701,7 +701,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setRequireCloseNotify(bool requireCloseNotify)
   {
-    g_tls_connection_set_require_close_notify(cast(GTlsConnection*)cPtr, requireCloseNotify);
+    g_tls_connection_set_require_close_notify(cast(GTlsConnection*)this._cPtr, requireCloseNotify);
   }
 
   /**
@@ -720,7 +720,7 @@ class TlsConnection : gio.iostream.IOStream
   */
   void setUseSystemCertdb(bool useSystemCertdb)
   {
-    g_tls_connection_set_use_system_certdb(cast(GTlsConnection*)cPtr, useSystemCertdb);
+    g_tls_connection_set_use_system_certdb(cast(GTlsConnection*)this._cPtr, useSystemCertdb);
   }
 
   /**

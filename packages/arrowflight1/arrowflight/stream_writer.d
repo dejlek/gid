@@ -19,16 +19,16 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_stream_writer_get_type != &gidSymbolNotFound ? gaflight_stream_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class StreamWriter : arrowflight.record_batch_writer.RecordBatchWriter
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_stream_writer_done_writing(cast(GAFlightStreamWriter*)cPtr, &_err);
+    _retval = gaflight_stream_writer_done_writing(cast(GAFlightStreamWriter*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

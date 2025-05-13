@@ -189,16 +189,16 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_async_result_get_type != &gidSymbolNotFound ? g_simple_async_result_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -231,18 +231,18 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   this(gobject.object.ObjectWrap sourceObject = null, gio.types.AsyncReadyCallback callback = null, void* sourceTag = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag);
+    _cretval = g_simple_async_result_new(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag);
     this(_cretval, Yes.Take);
   }
 
@@ -259,19 +259,19 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   static gio.simple_async_result.SimpleAsyncResult newFromError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, glib.error.ErrorWrap error)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GSimpleAsyncResult* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error.cPtr : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
+    _cretval = g_simple_async_result_new_from_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, error ? cast(const(GError)*)error._cPtr : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.simple_async_result.SimpleAsyncResult)(cast(GSimpleAsyncResult*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap source = null, void* sourceTag = null)
   {
     bool _retval;
-    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, source ? cast(ObjectC*)source.cPtr(No.Dup) : null, sourceTag);
+    _retval = g_simple_async_result_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, source ? cast(GObject*)source._cPtr(No.Dup) : null, sourceTag);
     return _retval;
   }
 
@@ -317,7 +317,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void complete()
   {
-    g_simple_async_result_complete(cast(GSimpleAsyncResult*)cPtr);
+    g_simple_async_result_complete(cast(GSimpleAsyncResult*)this._cPtr);
   }
 
   /**
@@ -333,7 +333,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void completeInIdle()
   {
-    g_simple_async_result_complete_in_idle(cast(GSimpleAsyncResult*)cPtr);
+    g_simple_async_result_complete_in_idle(cast(GSimpleAsyncResult*)this._cPtr);
   }
 
   /**
@@ -346,7 +346,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   bool getOpResGboolean()
   {
     bool _retval;
-    _retval = g_simple_async_result_get_op_res_gboolean(cast(GSimpleAsyncResult*)cPtr);
+    _retval = g_simple_async_result_get_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   ptrdiff_t getOpResGssize()
   {
     ptrdiff_t _retval;
-    _retval = g_simple_async_result_get_op_res_gssize(cast(GSimpleAsyncResult*)cPtr);
+    _retval = g_simple_async_result_get_op_res_gssize(cast(GSimpleAsyncResult*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   {
     bool _retval;
     GError *_err;
-    _retval = g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)cPtr, &_err);
+    _retval = g_simple_async_result_propagate_error(cast(GSimpleAsyncResult*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -409,7 +409,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setCheckCancellable(gio.cancellable.Cancellable checkCancellable = null)
   {
-    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)cPtr, checkCancellable ? cast(GCancellable*)checkCancellable.cPtr(No.Dup) : null);
+    g_simple_async_result_set_check_cancellable(cast(GSimpleAsyncResult*)this._cPtr, checkCancellable ? cast(GCancellable*)checkCancellable._cPtr(No.Dup) : null);
   }
 
   /**
@@ -422,7 +422,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setFromError(glib.error.ErrorWrap error)
   {
-    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
+    g_simple_async_result_set_from_error(cast(GSimpleAsyncResult*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
 
   /**
@@ -437,7 +437,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setHandleCancellation(bool handleCancellation)
   {
-    g_simple_async_result_set_handle_cancellation(cast(GSimpleAsyncResult*)cPtr, handleCancellation);
+    g_simple_async_result_set_handle_cancellation(cast(GSimpleAsyncResult*)this._cPtr, handleCancellation);
   }
 
   /**
@@ -450,7 +450,7 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setOpResGboolean(bool opRes)
   {
-    g_simple_async_result_set_op_res_gboolean(cast(GSimpleAsyncResult*)cPtr, opRes);
+    g_simple_async_result_set_op_res_gboolean(cast(GSimpleAsyncResult*)this._cPtr, opRes);
   }
 
   /**
@@ -464,6 +464,6 @@ class SimpleAsyncResult : gobject.object.ObjectWrap, gio.async_result.AsyncResul
   */
   void setOpResGssize(ptrdiff_t opRes)
   {
-    g_simple_async_result_set_op_res_gssize(cast(GSimpleAsyncResult*)cPtr, opRes);
+    g_simple_async_result_set_op_res_gssize(cast(GSimpleAsyncResult*)this._cPtr, opRes);
   }
 }

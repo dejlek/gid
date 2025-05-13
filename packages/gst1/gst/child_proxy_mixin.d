@@ -39,7 +39,7 @@ template ChildProxyT()
   override void childAdded(gobject.object.ObjectWrap child, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_child_added(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
+    gst_child_proxy_child_added(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
   }
 
   /**
@@ -52,7 +52,7 @@ template ChildProxyT()
   override void childRemoved(gobject.object.ObjectWrap child, string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_child_removed(cast(GstChildProxy*)cPtr, child ? cast(ObjectC*)child.cPtr(No.Dup) : null, _name);
+    gst_child_proxy_child_removed(cast(GstChildProxy*)this._cPtr, child ? cast(GObject*)child._cPtr(No.Dup) : null, _name);
   }
 
   /**
@@ -65,9 +65,9 @@ template ChildProxyT()
   */
   override gobject.object.ObjectWrap getChildByIndex(uint index)
   {
-    ObjectC* _cretval;
-    _cretval = gst_child_proxy_get_child_by_index(cast(GstChildProxy*)cPtr, index);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = gst_child_proxy_get_child_by_index(cast(GstChildProxy*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,10 +85,10 @@ template ChildProxyT()
   */
   override gobject.object.ObjectWrap getChildByName(string name)
   {
-    ObjectC* _cretval;
+    GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_child_proxy_get_child_by_name(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    _cretval = gst_child_proxy_get_child_by_name(cast(GstChildProxy*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,10 +109,10 @@ template ChildProxyT()
   */
   override gobject.object.ObjectWrap getChildByNameRecurse(string name)
   {
-    ObjectC* _cretval;
+    GObject* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_child_proxy_get_child_by_name_recurse(cast(GstChildProxy*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    _cretval = gst_child_proxy_get_child_by_name_recurse(cast(GstChildProxy*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ template ChildProxyT()
   override uint getChildrenCount()
   {
     uint _retval;
-    _retval = gst_child_proxy_get_children_count(cast(GstChildProxy*)cPtr);
+    _retval = gst_child_proxy_get_children_count(cast(GstChildProxy*)this._cPtr);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ template ChildProxyT()
   {
     const(char)* _name = name.toCString(No.Alloc);
     GValue _value;
-    gst_child_proxy_get_property(cast(GstChildProxy*)cPtr, _name, &_value);
+    gst_child_proxy_get_property(cast(GstChildProxy*)this._cPtr, _name, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -160,9 +160,9 @@ template ChildProxyT()
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    ObjectC* _target;
+    GObject* _target;
     GParamSpec* _pspec;
-    _retval = gst_child_proxy_lookup(cast(GstChildProxy*)cPtr, _name, &_target, &_pspec);
+    _retval = gst_child_proxy_lookup(cast(GstChildProxy*)this._cPtr, _name, &_target, &_pspec);
     target = new gobject.object.ObjectWrap(cast(void*)_target, Yes.Take);
     pspec = new gobject.param_spec.ParamSpec(cast(void*)_pspec, No.Take);
     return _retval;
@@ -178,7 +178,7 @@ template ChildProxyT()
   override void setProperty(string name, gobject.value.Value value)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_child_proxy_set_property(cast(GstChildProxy*)cPtr, _name, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    gst_child_proxy_set_property(cast(GstChildProxy*)this._cPtr, _name, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**

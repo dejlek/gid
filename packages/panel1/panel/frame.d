@@ -39,16 +39,16 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_get_type != &gidSymbolNotFound ? panel_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void add(panel.widget.Widget panel)
   {
-    panel_frame_add(cast(PanelFrame*)cPtr, panel ? cast(PanelWidget*)panel.cPtr(No.Dup) : null);
+    panel_frame_add(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -126,7 +126,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void addBefore(panel.widget.Widget panel, panel.widget.Widget sibling)
   {
-    panel_frame_add_before(cast(PanelFrame*)cPtr, panel ? cast(PanelWidget*)panel.cPtr(No.Dup) : null, sibling ? cast(PanelWidget*)sibling.cPtr(No.Dup) : null);
+    panel_frame_add_before(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null, sibling ? cast(PanelWidget*)sibling._cPtr(No.Dup) : null);
   }
 
   /**
@@ -136,7 +136,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   bool getCloseable()
   {
     bool _retval;
-    _retval = panel_frame_get_closeable(cast(PanelFrame*)cPtr);
+    _retval = panel_frame_get_closeable(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   bool getEmpty()
   {
     bool _retval;
-    _retval = panel_frame_get_empty(cast(PanelFrame*)cPtr);
+    _retval = panel_frame_get_empty(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 
@@ -158,8 +158,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   panel.frame_header.FrameHeader getHeader()
   {
     PanelFrameHeader* _cretval;
-    _cretval = panel_frame_get_header(cast(PanelFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame_header.FrameHeader)(cast(PanelFrameHeader*)_cretval, No.Take);
+    _cretval = panel_frame_get_header(cast(PanelFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.frame_header.FrameHeader)(cast(PanelFrameHeader*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   uint getNPages()
   {
     uint _retval;
-    _retval = panel_frame_get_n_pages(cast(PanelFrame*)cPtr);
+    _retval = panel_frame_get_n_pages(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 
@@ -184,8 +184,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   panel.widget.Widget getPage(uint n)
   {
     PanelWidget* _cretval;
-    _cretval = panel_frame_get_page(cast(PanelFrame*)cPtr, n);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
+    _cretval = panel_frame_get_page(cast(PanelFrame*)this._cPtr, n);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -196,8 +196,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
-    _cretval = panel_frame_get_pages(cast(PanelFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    _cretval = panel_frame_get_pages(cast(PanelFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -208,8 +208,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getPlaceholder()
   {
     GtkWidget* _cretval;
-    _cretval = panel_frame_get_placeholder(cast(PanelFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = panel_frame_get_placeholder(cast(PanelFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -220,8 +220,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   panel.position.Position getPosition()
   {
     PanelPosition* _cretval;
-    _cretval = panel_frame_get_position(cast(PanelFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    _cretval = panel_frame_get_position(cast(PanelFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   int getRequestedSize()
   {
     int _retval;
-    _retval = panel_frame_get_requested_size(cast(PanelFrame*)cPtr);
+    _retval = panel_frame_get_requested_size(cast(PanelFrame*)this._cPtr);
     return _retval;
   }
 
@@ -243,8 +243,8 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   panel.widget.Widget getVisibleChild()
   {
     PanelWidget* _cretval;
-    _cretval = panel_frame_get_visible_child(cast(PanelFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
+    _cretval = panel_frame_get_visible_child(cast(PanelFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.widget.Widget)(cast(PanelWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void remove(panel.widget.Widget panel)
   {
-    panel_frame_remove(cast(PanelFrame*)cPtr, panel ? cast(PanelWidget*)panel.cPtr(No.Dup) : null);
+    panel_frame_remove(cast(PanelFrame*)this._cPtr, panel ? cast(PanelWidget*)panel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -268,7 +268,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setChildPinned(panel.widget.Widget child, bool pinned)
   {
-    panel_frame_set_child_pinned(cast(PanelFrame*)cPtr, child ? cast(PanelWidget*)child.cPtr(No.Dup) : null, pinned);
+    panel_frame_set_child_pinned(cast(PanelFrame*)this._cPtr, child ? cast(PanelWidget*)child._cPtr(No.Dup) : null, pinned);
   }
 
   /**
@@ -279,7 +279,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setHeader(panel.frame_header.FrameHeader header = null)
   {
-    panel_frame_set_header(cast(PanelFrame*)cPtr, header ? cast(PanelFrameHeader*)(cast(gobject.object.ObjectWrap)header).cPtr(No.Dup) : null);
+    panel_frame_set_header(cast(PanelFrame*)this._cPtr, header ? cast(PanelFrameHeader*)(cast(gobject.object.ObjectWrap)header)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -293,7 +293,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setPlaceholder(gtk.widget.Widget placeholder = null)
   {
-    panel_frame_set_placeholder(cast(PanelFrame*)cPtr, placeholder ? cast(GtkWidget*)placeholder.cPtr(No.Dup) : null);
+    panel_frame_set_placeholder(cast(PanelFrame*)this._cPtr, placeholder ? cast(GtkWidget*)placeholder._cPtr(No.Dup) : null);
   }
 
   /**
@@ -304,7 +304,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setRequestedSize(int requestedSize)
   {
-    panel_frame_set_requested_size(cast(PanelFrame*)cPtr, requestedSize);
+    panel_frame_set_requested_size(cast(PanelFrame*)this._cPtr, requestedSize);
   }
 
   /**
@@ -315,7 +315,7 @@ class Frame : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setVisibleChild(panel.widget.Widget widget)
   {
-    panel_frame_set_visible_child(cast(PanelFrame*)cPtr, widget ? cast(PanelWidget*)widget.cPtr(No.Dup) : null);
+    panel_frame_set_visible_child(cast(PanelFrame*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**

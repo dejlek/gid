@@ -72,7 +72,7 @@ class StaticMutex
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -80,14 +80,14 @@ class StaticMutex
   /** */
   @property glib.mutex.Mutex mutex()
   {
-    return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)cPtr).mutex);
+    return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)this._cPtr).mutex);
   }
 
   /** */
   glib.mutex.Mutex getMutexImpl()
   {
     GMutex* _cretval;
-    _cretval = g_static_mutex_get_mutex_impl(cast(GStaticMutex*)cPtr);
+    _cretval = g_static_mutex_get_mutex_impl(cast(GStaticMutex*)this._cPtr);
     auto _retval = _cretval ? new glib.mutex.Mutex(cast(GMutex*)_cretval) : null;
     return _retval;
   }

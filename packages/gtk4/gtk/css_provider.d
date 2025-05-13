@@ -55,16 +55,16 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_css_provider_get_type != &gidSymbolNotFound ? gtk_css_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromBytes(glib.bytes.Bytes data)
   {
-    gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)cPtr, data ? cast(GBytes*)data.cPtr(No.Dup) : null);
+    gtk_css_provider_load_from_bytes(cast(GtkCssProvider*)this._cPtr, data ? cast(GBytes*)data._cPtr(No.Dup) : null);
   }
 
   /**
@@ -114,7 +114,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void loadFromData(string data, ptrdiff_t length)
   {
     const(char)* _data = data.toCString(No.Alloc);
-    gtk_css_provider_load_from_data(cast(GtkCssProvider*)cPtr, _data, length);
+    gtk_css_provider_load_from_data(cast(GtkCssProvider*)this._cPtr, _data, length);
   }
 
   /**
@@ -127,7 +127,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   */
   void loadFromFile(gio.file.File file)
   {
-    gtk_css_provider_load_from_file(cast(GtkCssProvider*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    gtk_css_provider_load_from_file(cast(GtkCssProvider*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -141,7 +141,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void loadFromPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    gtk_css_provider_load_from_path(cast(GtkCssProvider*)cPtr, _path);
+    gtk_css_provider_load_from_path(cast(GtkCssProvider*)this._cPtr, _path);
   }
 
   /**
@@ -156,7 +156,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void loadFromResource(string resourcePath)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    gtk_css_provider_load_from_resource(cast(GtkCssProvider*)cPtr, _resourcePath);
+    gtk_css_provider_load_from_resource(cast(GtkCssProvider*)this._cPtr, _resourcePath);
   }
 
   /**
@@ -170,7 +170,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   void loadFromString(string string_)
   {
     const(char)* _string_ = string_.toCString(No.Alloc);
-    gtk_css_provider_load_from_string(cast(GtkCssProvider*)cPtr, _string_);
+    gtk_css_provider_load_from_string(cast(GtkCssProvider*)this._cPtr, _string_);
   }
 
   /**
@@ -189,7 +189,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _variant = variant.toCString(No.Alloc);
-    gtk_css_provider_load_named(cast(GtkCssProvider*)cPtr, _name, _variant);
+    gtk_css_provider_load_named(cast(GtkCssProvider*)this._cPtr, _name, _variant);
   }
 
   /**
@@ -205,7 +205,7 @@ class CssProvider : gobject.object.ObjectWrap, gtk.style_provider.StyleProvider
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)cPtr);
+    _cretval = gtk_css_provider_to_string(cast(GtkCssProvider*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

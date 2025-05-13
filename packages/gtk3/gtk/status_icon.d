@@ -61,16 +61,16 @@ class StatusIcon : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_status_icon_get_type != &gidSymbolNotFound ? gtk_status_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -377,7 +377,7 @@ class StatusIcon : gobject.object.ObjectWrap
     GtkStatusIcon* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_file(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -395,8 +395,8 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromGicon(gio.icon.Icon icon)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    _cretval = gtk_status_icon_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class StatusIcon : gobject.object.ObjectWrap
     GtkStatusIcon* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_icon_name(_iconName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -437,8 +437,8 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class StatusIcon : gobject.object.ObjectWrap
     GtkStatusIcon* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_status_icon_new_from_stock(_stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   static void positionMenu(gtk.menu.Menu menu, ref int x, ref int y, out bool pushIn, gtk.status_icon.StatusIcon userData)
   {
-    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData.cPtr(No.Dup) : null);
+    gtk_status_icon_position_menu(menu ? cast(GtkMenu*)menu._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, cast(bool*)&pushIn, userData ? cast(GtkStatusIcon*)userData._cPtr(No.Dup) : null);
   }
 
   /**
@@ -522,7 +522,7 @@ class StatusIcon : gobject.object.ObjectWrap
     bool _retval;
     GdkScreen* _screen;
     GdkRectangle _area;
-    _retval = gtk_status_icon_get_geometry(cast(GtkStatusIcon*)cPtr, &_screen, &_area, &orientation);
+    _retval = gtk_status_icon_get_geometry(cast(GtkStatusIcon*)this._cPtr, &_screen, &_area, &orientation);
     screen = new gdk.screen.Screen(cast(void*)_screen, No.Take);
     area = new gdk.rectangle.Rectangle(cast(void*)&_area, No.Take);
     return _retval;
@@ -545,8 +545,8 @@ class StatusIcon : gobject.object.ObjectWrap
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_status_icon_get_gicon(cast(GtkStatusIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_status_icon_get_gicon(cast(GtkStatusIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -562,7 +562,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool getHasTooltip()
   {
     bool _retval;
-    _retval = gtk_status_icon_get_has_tooltip(cast(GtkStatusIcon*)cPtr);
+    _retval = gtk_status_icon_get_has_tooltip(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -581,7 +581,7 @@ class StatusIcon : gobject.object.ObjectWrap
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_status_icon_get_icon_name(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_icon_name(cast(GtkStatusIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -602,8 +602,8 @@ class StatusIcon : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -618,8 +618,8 @@ class StatusIcon : gobject.object.ObjectWrap
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gtk_status_icon_get_screen(cast(GtkStatusIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gtk_status_icon_get_screen(cast(GtkStatusIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -642,7 +642,7 @@ class StatusIcon : gobject.object.ObjectWrap
   int getSize()
   {
     int _retval;
-    _retval = gtk_status_icon_get_size(cast(GtkStatusIcon*)cPtr);
+    _retval = gtk_status_icon_get_size(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -660,7 +660,7 @@ class StatusIcon : gobject.object.ObjectWrap
   string getStock()
   {
     const(char)* _cretval;
-    _cretval = gtk_status_icon_get_stock(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_stock(cast(GtkStatusIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -679,7 +679,7 @@ class StatusIcon : gobject.object.ObjectWrap
   gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
-    _cretval = gtk_status_icon_get_storage_type(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_storage_type(cast(GtkStatusIcon*)this._cPtr);
     gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
     return _retval;
   }
@@ -695,7 +695,7 @@ class StatusIcon : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_status_icon_get_title(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_title(cast(GtkStatusIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -712,7 +712,7 @@ class StatusIcon : gobject.object.ObjectWrap
   string getTooltipMarkup()
   {
     char* _cretval;
-    _cretval = gtk_status_icon_get_tooltip_markup(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_tooltip_markup(cast(GtkStatusIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -729,7 +729,7 @@ class StatusIcon : gobject.object.ObjectWrap
   string getTooltipText()
   {
     char* _cretval;
-    _cretval = gtk_status_icon_get_tooltip_text(cast(GtkStatusIcon*)cPtr);
+    _cretval = gtk_status_icon_get_tooltip_text(cast(GtkStatusIcon*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -748,7 +748,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_status_icon_get_visible(cast(GtkStatusIcon*)cPtr);
+    _retval = gtk_status_icon_get_visible(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -774,7 +774,7 @@ class StatusIcon : gobject.object.ObjectWrap
   uint getX11WindowId()
   {
     uint _retval;
-    _retval = gtk_status_icon_get_x11_window_id(cast(GtkStatusIcon*)cPtr);
+    _retval = gtk_status_icon_get_x11_window_id(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -791,7 +791,7 @@ class StatusIcon : gobject.object.ObjectWrap
   bool isEmbedded()
   {
     bool _retval;
-    _retval = gtk_status_icon_is_embedded(cast(GtkStatusIcon*)cPtr);
+    _retval = gtk_status_icon_is_embedded(cast(GtkStatusIcon*)this._cPtr);
     return _retval;
   }
 
@@ -809,7 +809,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setFromFile(string filename)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_status_icon_set_from_file(cast(GtkStatusIcon*)cPtr, _filename);
+    gtk_status_icon_set_from_file(cast(GtkStatusIcon*)this._cPtr, _filename);
   }
 
   /**
@@ -825,7 +825,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromGicon(gio.icon.Icon icon)
   {
-    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gtk_status_icon_set_from_gicon(cast(GtkStatusIcon*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -843,7 +843,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setFromIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_status_icon_set_from_icon_name(cast(GtkStatusIcon*)cPtr, _iconName);
+    gtk_status_icon_set_from_icon_name(cast(GtkStatusIcon*)this._cPtr, _iconName);
   }
 
   /**
@@ -859,7 +859,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -874,7 +874,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setFromStock(string stockId)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    gtk_status_icon_set_from_stock(cast(GtkStatusIcon*)cPtr, _stockId);
+    gtk_status_icon_set_from_stock(cast(GtkStatusIcon*)this._cPtr, _stockId);
   }
 
   /**
@@ -891,7 +891,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setHasTooltip(bool hasTooltip)
   {
-    gtk_status_icon_set_has_tooltip(cast(GtkStatusIcon*)cPtr, hasTooltip);
+    gtk_status_icon_set_has_tooltip(cast(GtkStatusIcon*)this._cPtr, hasTooltip);
   }
 
   /**
@@ -911,7 +911,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_status_icon_set_name(cast(GtkStatusIcon*)cPtr, _name);
+    gtk_status_icon_set_name(cast(GtkStatusIcon*)this._cPtr, _name);
   }
 
   /**
@@ -929,7 +929,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_status_icon_set_screen(cast(GtkStatusIcon*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_status_icon_set_screen(cast(GtkStatusIcon*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
 
   /**
@@ -948,7 +948,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_status_icon_set_title(cast(GtkStatusIcon*)cPtr, _title);
+    gtk_status_icon_set_title(cast(GtkStatusIcon*)this._cPtr, _title);
   }
 
   /**
@@ -971,7 +971,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setTooltipMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)cPtr, _markup);
+    gtk_status_icon_set_tooltip_markup(cast(GtkStatusIcon*)this._cPtr, _markup);
   }
 
   /**
@@ -994,7 +994,7 @@ class StatusIcon : gobject.object.ObjectWrap
   void setTooltipText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_status_icon_set_tooltip_text(cast(GtkStatusIcon*)cPtr, _text);
+    gtk_status_icon_set_tooltip_text(cast(GtkStatusIcon*)this._cPtr, _text);
   }
 
   /**
@@ -1009,7 +1009,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setVisible(bool visible)
   {
-    gtk_status_icon_set_visible(cast(GtkStatusIcon*)cPtr, visible);
+    gtk_status_icon_set_visible(cast(GtkStatusIcon*)this._cPtr, visible);
   }
 
   /**

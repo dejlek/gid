@@ -22,22 +22,22 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_info_list_get_type != &gidSymbolNotFound ? g_file_attribute_info_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   @property gio.file_attribute_info.FileAttributeInfo infos()
   {
-    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)cPtr).infos);
+    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos);
   }
 
   /**
@@ -61,7 +61,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   @property int nInfos()
   {
-    return (cast(GFileAttributeInfoList*)cPtr).nInfos;
+    return (cast(GFileAttributeInfoList*)this._cPtr).nInfos;
   }
 
   /**
@@ -71,7 +71,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   @property void nInfos(int propval)
   {
-    (cast(GFileAttributeInfoList*)cPtr).nInfos = propval;
+    (cast(GFileAttributeInfoList*)this._cPtr).nInfos = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   void add(string name, gio.types.FileAttributeType type, gio.types.FileAttributeInfoFlags flags)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)cPtr, _name, type, flags);
+    g_file_attribute_info_list_add(cast(GFileAttributeInfoList*)this._cPtr, _name, type, flags);
   }
 
   /**
@@ -107,7 +107,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   gio.file_attribute_info_list.FileAttributeInfoList dup()
   {
     GFileAttributeInfoList* _cretval;
-    _cretval = g_file_attribute_info_list_dup(cast(GFileAttributeInfoList*)cPtr);
+    _cretval = g_file_attribute_info_list_dup(cast(GFileAttributeInfoList*)this._cPtr);
     auto _retval = _cretval ? new gio.file_attribute_info_list.FileAttributeInfoList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -124,7 +124,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   {
     const(GFileAttributeInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)cPtr, _name);
+    _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval) : null;
     return _retval;
   }

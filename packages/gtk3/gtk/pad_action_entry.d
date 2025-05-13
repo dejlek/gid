@@ -26,7 +26,7 @@ class PadActionEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class PadActionEntry
   */
   @property gtk.types.PadActionType type()
   {
-    return cast(gtk.types.PadActionType)(cast(GtkPadActionEntry*)cPtr).type;
+    return cast(gtk.types.PadActionType)(cast(GtkPadActionEntry*)this._cPtr).type;
   }
 
   /**
@@ -47,7 +47,7 @@ class PadActionEntry
   */
   @property void type(gtk.types.PadActionType propval)
   {
-    (cast(GtkPadActionEntry*)cPtr).type = cast(GtkPadActionType)propval;
+    (cast(GtkPadActionEntry*)this._cPtr).type = cast(GtkPadActionType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class PadActionEntry
   */
   @property int index()
   {
-    return (cast(GtkPadActionEntry*)cPtr).index;
+    return (cast(GtkPadActionEntry*)this._cPtr).index;
   }
 
   /**
@@ -68,7 +68,7 @@ class PadActionEntry
   */
   @property void index(int propval)
   {
-    (cast(GtkPadActionEntry*)cPtr).index = propval;
+    (cast(GtkPadActionEntry*)this._cPtr).index = propval;
   }
 
   /**
@@ -77,7 +77,7 @@ class PadActionEntry
   */
   @property int mode()
   {
-    return (cast(GtkPadActionEntry*)cPtr).mode;
+    return (cast(GtkPadActionEntry*)this._cPtr).mode;
   }
 
   /**
@@ -87,7 +87,7 @@ class PadActionEntry
   */
   @property void mode(int propval)
   {
-    (cast(GtkPadActionEntry*)cPtr).mode = propval;
+    (cast(GtkPadActionEntry*)this._cPtr).mode = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class PadActionEntry
   */
   @property string label()
   {
-    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
+    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -108,8 +108,8 @@ class PadActionEntry
   */
   @property void label(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)cPtr).label);
+    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).label);
   }
 
   /**
@@ -118,7 +118,7 @@ class PadActionEntry
   */
   @property string actionName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
+    return cToD!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).actionName);
   }
 
   /**
@@ -128,7 +128,7 @@ class PadActionEntry
   */
   @property void actionName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)cPtr).actionName);
-    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)cPtr).actionName);
+    cValueFree!(string)(cast(void*)(cast(GtkPadActionEntry*)this._cPtr).actionName);
+    dToC(propval, cast(void*)&(cast(GtkPadActionEntry*)this._cPtr).actionName);
   }
 }

@@ -29,16 +29,16 @@ class SystemClock : gst.clock.Clock
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_system_clock_get_type != &gidSymbolNotFound ? gst_system_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class SystemClock : gst.clock.Clock
   {
     GstClock* _cretval;
     _cretval = gst_system_clock_obtain();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,6 +90,6 @@ class SystemClock : gst.clock.Clock
   */
   static void setDefault(gst.clock.Clock newClock = null)
   {
-    gst_system_clock_set_default(newClock ? cast(GstClock*)newClock.cPtr(No.Dup) : null);
+    gst_system_clock_set_default(newClock ? cast(GstClock*)newClock._cPtr(No.Dup) : null);
   }
 }

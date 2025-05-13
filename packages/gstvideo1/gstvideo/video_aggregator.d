@@ -30,16 +30,16 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_get_type != &gidSymbolNotFound ? gst_video_aggregator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,8 +60,8 @@ class VideoAggregator : gstbase.aggregator.Aggregator
   gst.task_pool.TaskPool getExecutionTaskPool()
   {
     GstTaskPool* _cretval;
-    _cretval = gst_video_aggregator_get_execution_task_pool(cast(GstVideoAggregator*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
+    _cretval = gst_video_aggregator_get_execution_task_pool(cast(GstVideoAggregator*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 }

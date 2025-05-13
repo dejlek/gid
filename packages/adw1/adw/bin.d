@@ -38,16 +38,16 @@ class Bin : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_bin_get_type != &gidSymbolNotFound ? adw_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,8 +93,8 @@ class Bin : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_bin_get_child(cast(AdwBin*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_bin_get_child(cast(AdwBin*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,6 +106,6 @@ class Bin : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_bin_set_child(cast(AdwBin*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_bin_set_child(cast(AdwBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

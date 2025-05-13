@@ -19,16 +19,16 @@ class CallExpression : arrow.expression.Expression
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_call_expression_get_type != &gidSymbolNotFound ? garrow_call_expression_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class CallExpression : arrow.expression.Expression
     const(char)* _function_ = function_.toCString(No.Alloc);
     auto _arguments = gListFromD!(arrow.expression.Expression)(arguments);
     scope(exit) containerFree!(GList*, arrow.expression.Expression, GidOwnership.None)(_arguments);
-    _cretval = garrow_call_expression_new(_function_, _arguments, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null);
+    _cretval = garrow_call_expression_new(_function_, _arguments, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

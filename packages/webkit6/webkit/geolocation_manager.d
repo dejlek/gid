@@ -29,16 +29,16 @@ class GeolocationManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_geolocation_manager_get_type != &gidSymbolNotFound ? webkit_geolocation_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   void failed(string errorMessage)
   {
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    webkit_geolocation_manager_failed(cast(WebKitGeolocationManager*)cPtr, _errorMessage);
+    webkit_geolocation_manager_failed(cast(WebKitGeolocationManager*)this._cPtr, _errorMessage);
   }
 
   /**
@@ -77,7 +77,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   bool getEnableHighAccuracy()
   {
     bool _retval;
-    _retval = webkit_geolocation_manager_get_enable_high_accuracy(cast(WebKitGeolocationManager*)cPtr);
+    _retval = webkit_geolocation_manager_get_enable_high_accuracy(cast(WebKitGeolocationManager*)this._cPtr);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class GeolocationManager : gobject.object.ObjectWrap
   */
   void updatePosition(webkit.geolocation_position.GeolocationPosition position)
   {
-    webkit_geolocation_manager_update_position(cast(WebKitGeolocationManager*)cPtr, position ? cast(WebKitGeolocationPosition*)position.cPtr(No.Dup) : null);
+    webkit_geolocation_manager_update_position(cast(WebKitGeolocationManager*)this._cPtr, position ? cast(WebKitGeolocationPosition*)position._cPtr(No.Dup) : null);
   }
 
   /**

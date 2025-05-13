@@ -97,16 +97,16 @@ class HeaderBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_header_bar_get_type != &gidSymbolNotFound ? gtk_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -199,7 +199,7 @@ class HeaderBar : gtk.widget.Widget
   string getDecorationLayout()
   {
     const(char)* _cretval;
-    _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)cPtr);
+    _cretval = gtk_header_bar_get_decoration_layout(cast(GtkHeaderBar*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -212,7 +212,7 @@ class HeaderBar : gtk.widget.Widget
   bool getShowTitleButtons()
   {
     bool _retval;
-    _retval = gtk_header_bar_get_show_title_buttons(cast(GtkHeaderBar*)cPtr);
+    _retval = gtk_header_bar_get_show_title_buttons(cast(GtkHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -225,8 +225,8 @@ class HeaderBar : gtk.widget.Widget
   gtk.widget.Widget getTitleWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_header_bar_get_title_widget(cast(GtkHeaderBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_header_bar_pack_end(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_pack_end(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -251,7 +251,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_header_bar_pack_start(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_pack_start(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -267,7 +267,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_header_bar_remove(cast(GtkHeaderBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_header_bar_remove(cast(GtkHeaderBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -295,7 +295,7 @@ class HeaderBar : gtk.widget.Widget
   void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
-    gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)cPtr, _layout);
+    gtk_header_bar_set_decoration_layout(cast(GtkHeaderBar*)this._cPtr, _layout);
   }
 
   /**
@@ -307,7 +307,7 @@ class HeaderBar : gtk.widget.Widget
   */
   void setShowTitleButtons(bool setting)
   {
-    gtk_header_bar_set_show_title_buttons(cast(GtkHeaderBar*)cPtr, setting);
+    gtk_header_bar_set_show_title_buttons(cast(GtkHeaderBar*)this._cPtr, setting);
   }
 
   /**
@@ -328,6 +328,6 @@ class HeaderBar : gtk.widget.Widget
   */
   void setTitleWidget(gtk.widget.Widget titleWidget = null)
   {
-    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)cPtr, titleWidget ? cast(GtkWidget*)titleWidget.cPtr(No.Dup) : null);
+    gtk_header_bar_set_title_widget(cast(GtkHeaderBar*)this._cPtr, titleWidget ? cast(GtkWidget*)titleWidget._cPtr(No.Dup) : null);
   }
 }

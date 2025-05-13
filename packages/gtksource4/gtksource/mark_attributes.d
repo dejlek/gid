@@ -24,16 +24,16 @@ class MarkAttributes : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_attributes_get_type != &gidSymbolNotFound ? gtk_source_mark_attributes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -140,7 +140,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   {
     bool _retval;
     GdkRGBA _background;
-    _retval = gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)cPtr, &_background);
+    _retval = gtk_source_mark_attributes_get_background(cast(GtkSourceMarkAttributes*)this._cPtr, &_background);
     background = new gdk.rgba.RGBA(cast(void*)&_background, No.Take);
     return _retval;
   }
@@ -154,8 +154,8 @@ class MarkAttributes : gobject.object.ObjectWrap
   gio.icon.Icon getGicon()
   {
     GIcon* _cretval;
-    _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = gtk_source_mark_attributes_get_gicon(cast(GtkSourceMarkAttributes*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_mark_attributes_get_icon_name(cast(GtkSourceMarkAttributes*)cPtr);
+    _cretval = gtk_source_mark_attributes_get_icon_name(cast(GtkSourceMarkAttributes*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -182,8 +182,8 @@ class MarkAttributes : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     const(PixbufC)* _cretval;
-    _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   string getTooltipMarkup(gtksource.mark.Mark mark)
   {
     char* _cretval;
-    _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
+    _cretval = gtk_source_mark_attributes_get_tooltip_markup(cast(GtkSourceMarkAttributes*)this._cPtr, mark ? cast(GtkSourceMark*)mark._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -218,7 +218,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   string getTooltipText(gtksource.mark.Mark mark)
   {
     char* _cretval;
-    _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)cPtr, mark ? cast(GtkSourceMark*)mark.cPtr(No.Dup) : null);
+    _cretval = gtk_source_mark_attributes_get_tooltip_text(cast(GtkSourceMarkAttributes*)this._cPtr, mark ? cast(GtkSourceMark*)mark._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -238,8 +238,8 @@ class MarkAttributes : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.widget.Widget widget, int size)
   {
     const(PixbufC)* _cretval;
-    _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   void setBackground(gdk.rgba.RGBA background)
   {
-    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)cPtr, background ? cast(const(GdkRGBA)*)background.cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_background(cast(GtkSourceMarkAttributes*)this._cPtr, background ? cast(const(GdkRGBA)*)background._cPtr(No.Dup) : null);
   }
 
   /**
@@ -262,7 +262,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   void setGicon(gio.icon.Icon gicon)
   {
-    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_gicon(cast(GtkSourceMarkAttributes*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -274,7 +274,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_source_mark_attributes_set_icon_name(cast(GtkSourceMarkAttributes*)cPtr, _iconName);
+    gtk_source_mark_attributes_set_icon_name(cast(GtkSourceMarkAttributes*)this._cPtr, _iconName);
   }
 
   /**
@@ -285,7 +285,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf.cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

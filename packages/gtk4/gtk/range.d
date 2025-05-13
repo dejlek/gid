@@ -42,16 +42,16 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_range_get_type != &gidSymbolNotFound ? gtk_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -194,8 +194,8 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_range_get_adjustment(cast(GtkRange*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_range_get_adjustment(cast(GtkRange*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   double getFillLevel()
   {
     double _retval;
-    _retval = gtk_range_get_fill_level(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_fill_level(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getFlippable()
   {
     bool _retval;
-    _retval = gtk_range_get_flippable(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_flippable(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_range_get_inverted(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_inverted(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   void getRangeRect(out gdk.rectangle.Rectangle rangeRect)
   {
     GdkRectangle _rangeRect;
-    gtk_range_get_range_rect(cast(GtkRange*)cPtr, &_rangeRect);
+    gtk_range_get_range_rect(cast(GtkRange*)this._cPtr, &_rangeRect);
     rangeRect = new gdk.rectangle.Rectangle(cast(void*)&_rangeRect, No.Take);
   }
 
@@ -259,7 +259,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getRestrictToFillLevel()
   {
     bool _retval;
-    _retval = gtk_range_get_restrict_to_fill_level(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_restrict_to_fill_level(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -273,7 +273,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   int getRoundDigits()
   {
     int _retval;
-    _retval = gtk_range_get_round_digits(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_round_digits(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -284,7 +284,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShowFillLevel()
   {
     bool _retval;
-    _retval = gtk_range_get_show_fill_level(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_show_fill_level(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -300,7 +300,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void getSliderRange(out int sliderStart, out int sliderEnd)
   {
-    gtk_range_get_slider_range(cast(GtkRange*)cPtr, cast(int*)&sliderStart, cast(int*)&sliderEnd);
+    gtk_range_get_slider_range(cast(GtkRange*)this._cPtr, cast(int*)&sliderStart, cast(int*)&sliderEnd);
   }
 
   /**
@@ -312,7 +312,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getSliderSizeFixed()
   {
     bool _retval;
-    _retval = gtk_range_get_slider_size_fixed(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_slider_size_fixed(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   double getValue()
   {
     double _retval;
-    _retval = gtk_range_get_value(cast(GtkRange*)cPtr);
+    _retval = gtk_range_get_value(cast(GtkRange*)this._cPtr);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_range_set_adjustment(cast(GtkRange*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_range_set_adjustment(cast(GtkRange*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -370,7 +370,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setFillLevel(double fillLevel)
   {
-    gtk_range_set_fill_level(cast(GtkRange*)cPtr, fillLevel);
+    gtk_range_set_fill_level(cast(GtkRange*)this._cPtr, fillLevel);
   }
 
   /**
@@ -386,7 +386,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setFlippable(bool flippable)
   {
-    gtk_range_set_flippable(cast(GtkRange*)cPtr, flippable);
+    gtk_range_set_flippable(cast(GtkRange*)this._cPtr, flippable);
   }
 
   /**
@@ -402,7 +402,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setIncrements(double step, double page)
   {
-    gtk_range_set_increments(cast(GtkRange*)cPtr, step, page);
+    gtk_range_set_increments(cast(GtkRange*)this._cPtr, step, page);
   }
 
   /**
@@ -418,7 +418,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setInverted(bool setting)
   {
-    gtk_range_set_inverted(cast(GtkRange*)cPtr, setting);
+    gtk_range_set_inverted(cast(GtkRange*)this._cPtr, setting);
   }
 
   /**
@@ -434,7 +434,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setRange(double min, double max)
   {
-    gtk_range_set_range(cast(GtkRange*)cPtr, min, max);
+    gtk_range_set_range(cast(GtkRange*)this._cPtr, min, max);
   }
 
   /**
@@ -448,7 +448,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setRestrictToFillLevel(bool restrictToFillLevel)
   {
-    gtk_range_set_restrict_to_fill_level(cast(GtkRange*)cPtr, restrictToFillLevel);
+    gtk_range_set_restrict_to_fill_level(cast(GtkRange*)this._cPtr, restrictToFillLevel);
   }
 
   /**
@@ -462,7 +462,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setRoundDigits(int roundDigits)
   {
-    gtk_range_set_round_digits(cast(GtkRange*)cPtr, roundDigits);
+    gtk_range_set_round_digits(cast(GtkRange*)this._cPtr, roundDigits);
   }
 
   /**
@@ -476,7 +476,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setShowFillLevel(bool showFillLevel)
   {
-    gtk_range_set_show_fill_level(cast(GtkRange*)cPtr, showFillLevel);
+    gtk_range_set_show_fill_level(cast(GtkRange*)this._cPtr, showFillLevel);
   }
 
   /**
@@ -490,7 +490,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setSliderSizeFixed(bool sizeFixed)
   {
-    gtk_range_set_slider_size_fixed(cast(GtkRange*)cPtr, sizeFixed);
+    gtk_range_set_slider_size_fixed(cast(GtkRange*)this._cPtr, sizeFixed);
   }
 
   /**
@@ -505,7 +505,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setValue(double value)
   {
-    gtk_range_set_value(cast(GtkRange*)cPtr, value);
+    gtk_range_set_value(cast(GtkRange*)this._cPtr, value);
   }
 
   /**

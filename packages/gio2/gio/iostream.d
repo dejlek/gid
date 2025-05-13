@@ -72,16 +72,16 @@ class IOStream : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_io_stream_get_type != &gidSymbolNotFound ? g_io_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -129,7 +129,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_splice_finish(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -140,7 +140,7 @@ class IOStream : gobject.object.ObjectWrap
   */
   void clearPending()
   {
-    g_io_stream_clear_pending(cast(GIOStream*)cPtr);
+    g_io_stream_clear_pending(cast(GIOStream*)this._cPtr);
   }
 
   /**
@@ -187,7 +187,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close(cast(GIOStream*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_close(cast(GIOStream*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -213,17 +213,17 @@ class IOStream : gobject.object.ObjectWrap
   */
   void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_io_stream_close_async(cast(GIOStream*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_io_stream_close_async(cast(GIOStream*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -238,7 +238,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_close_finish(cast(GIOStream*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_io_stream_close_finish(cast(GIOStream*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -253,8 +253,8 @@ class IOStream : gobject.object.ObjectWrap
   gio.input_stream.InputStream getInputStream()
   {
     GInputStream* _cretval;
-    _cretval = g_io_stream_get_input_stream(cast(GIOStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
+    _cretval = g_io_stream_get_input_stream(cast(GIOStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -267,8 +267,8 @@ class IOStream : gobject.object.ObjectWrap
   gio.output_stream.OutputStream getOutputStream()
   {
     GOutputStream* _cretval;
-    _cretval = g_io_stream_get_output_stream(cast(GIOStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    _cretval = g_io_stream_get_output_stream(cast(GIOStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -279,7 +279,7 @@ class IOStream : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = g_io_stream_has_pending(cast(GIOStream*)cPtr);
+    _retval = g_io_stream_has_pending(cast(GIOStream*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class IOStream : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = g_io_stream_is_closed(cast(GIOStream*)cPtr);
+    _retval = g_io_stream_is_closed(cast(GIOStream*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class IOStream : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_io_stream_set_pending(cast(GIOStream*)cPtr, &_err);
+    _retval = g_io_stream_set_pending(cast(GIOStream*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -330,16 +330,16 @@ class IOStream : gobject.object.ObjectWrap
   */
   void spliceAsync(gio.iostream.IOStream stream2, gio.types.IOStreamSpliceFlags flags, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_io_stream_splice_async(cast(GIOStream*)cPtr, stream2 ? cast(GIOStream*)stream2.cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_io_stream_splice_async(cast(GIOStream*)this._cPtr, stream2 ? cast(GIOStream*)stream2._cPtr(No.Dup) : null, flags, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 }

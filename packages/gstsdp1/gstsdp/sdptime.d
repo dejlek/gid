@@ -27,7 +27,7 @@ class SDPTime
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class SDPTime
   */
   @property string start()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
+    return cToD!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).start);
   }
 
   /**
@@ -50,8 +50,8 @@ class SDPTime
   */
   @property void start(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).start);
-    dToC(propval, cast(void*)&(cast(GstSDPTime*)cPtr).start);
+    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).start);
+    dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).start);
   }
 
   /**
@@ -61,7 +61,7 @@ class SDPTime
   */
   @property string stop()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);
+    return cToD!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).stop);
   }
 
   /**
@@ -72,8 +72,8 @@ class SDPTime
   */
   @property void stop(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)cPtr).stop);
-    dToC(propval, cast(void*)&(cast(GstSDPTime*)cPtr).stop);
+    cValueFree!(string)(cast(void*)(cast(GstSDPTime*)this._cPtr).stop);
+    dToC(propval, cast(void*)&(cast(GstSDPTime*)this._cPtr).stop);
   }
 
   /**
@@ -83,7 +83,7 @@ class SDPTime
   gstsdp.types.SDPResult clear()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_time_clear(cast(GstSDPTime*)cPtr);
+    _cretval = gst_sdp_time_clear(cast(GstSDPTime*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -107,7 +107,7 @@ class SDPTime
       _tmprepeat ~= s.toCString(No.Alloc);
     _tmprepeat ~= null;
     const(char*)* _repeat = _tmprepeat.ptr;
-    _cretval = gst_sdp_time_set(cast(GstSDPTime*)cPtr, _start, _stop, _repeat);
+    _cretval = gst_sdp_time_set(cast(GstSDPTime*)this._cPtr, _start, _stop, _repeat);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

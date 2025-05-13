@@ -38,8 +38,8 @@ template DBusObjectManagerT()
     GDBusInterface* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)cPtr, _objectPath, _interfaceName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
+    _cretval = g_dbus_object_manager_get_interface(cast(GDBusObjectManager*)this._cPtr, _objectPath, _interfaceName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_interface.DBusInterface)(cast(GDBusInterface*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -55,8 +55,8 @@ template DBusObjectManagerT()
   {
     GDBusObject* _cretval;
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)cPtr, _objectPath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
+    _cretval = g_dbus_object_manager_get_object(cast(GDBusObjectManager*)this._cPtr, _objectPath);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_object.DBusObject)(cast(GDBusObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -67,7 +67,7 @@ template DBusObjectManagerT()
   override string getObjectPath()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_object_manager_get_object_path(cast(GDBusObjectManager*)cPtr);
+    _cretval = g_dbus_object_manager_get_object_path(cast(GDBusObjectManager*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -82,7 +82,7 @@ template DBusObjectManagerT()
   override gio.dbus_object.DBusObject[] getObjects()
   {
     GList* _cretval;
-    _cretval = g_dbus_object_manager_get_objects(cast(GDBusObjectManager*)cPtr);
+    _cretval = g_dbus_object_manager_get_objects(cast(GDBusObjectManager*)this._cPtr);
     auto _retval = gListToD!(gio.dbus_object.DBusObject, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

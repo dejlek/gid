@@ -22,7 +22,7 @@ interface Serializable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_serializable_get_type != &gidSymbolNotFound ? json_serializable_get_type() : cast(GType)0;

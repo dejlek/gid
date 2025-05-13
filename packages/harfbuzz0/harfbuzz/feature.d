@@ -43,22 +43,22 @@ class Feature : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_feature_get_type != &gidSymbolNotFound ? hb_gobject_feature_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Tag tag()
   {
-    return (cast(hb_feature_t*)cPtr).tag;
+    return (cast(hb_feature_t*)this._cPtr).tag;
   }
 
   /**
@@ -83,7 +83,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property void tag(harfbuzz.types.Tag propval)
   {
-    (cast(hb_feature_t*)cPtr).tag = propval;
+    (cast(hb_feature_t*)this._cPtr).tag = propval;
   }
 
   /**
@@ -94,7 +94,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property uint value()
   {
-    return (cast(hb_feature_t*)cPtr).value;
+    return (cast(hb_feature_t*)this._cPtr).value;
   }
 
   /**
@@ -106,7 +106,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property void value(uint propval)
   {
-    (cast(hb_feature_t*)cPtr).value = propval;
+    (cast(hb_feature_t*)this._cPtr).value = propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property uint start()
   {
-    return (cast(hb_feature_t*)cPtr).start;
+    return (cast(hb_feature_t*)this._cPtr).start;
   }
 
   /**
@@ -125,7 +125,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property void start(uint propval)
   {
-    (cast(hb_feature_t*)cPtr).start = propval;
+    (cast(hb_feature_t*)this._cPtr).start = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class Feature : gobject.boxed.Boxed
   */
   @property uint end()
   {
-    return (cast(hb_feature_t*)cPtr).end;
+    return (cast(hb_feature_t*)this._cPtr).end;
   }
 
   /**
@@ -144,6 +144,6 @@ class Feature : gobject.boxed.Boxed
   */
   @property void end(uint propval)
   {
-    (cast(hb_feature_t*)cPtr).end = propval;
+    (cast(hb_feature_t*)this._cPtr).end = propval;
   }
 }

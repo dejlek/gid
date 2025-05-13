@@ -52,16 +52,16 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_button_get_type != &gidSymbolNotFound ? gtk_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -170,7 +170,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
-    _cretval = gtk_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null, _label);
+    _cretval = gtk_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null, _label);
     this(_cretval, No.Take);
   }
 
@@ -193,7 +193,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_tool_button_new_from_stock(_stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tool_button.ToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_tool_button_get_icon_name(cast(GtkToolButton*)cPtr);
+    _cretval = gtk_tool_button_get_icon_name(cast(GtkToolButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -220,8 +220,8 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   gtk.widget.Widget getIconWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tool_button_get_icon_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_button_get_icon_widget(cast(GtkToolButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_tool_button_get_label(cast(GtkToolButton*)cPtr);
+    _cretval = gtk_tool_button_get_label(cast(GtkToolButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -248,8 +248,8 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tool_button_get_label_widget(cast(GtkToolButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_button_get_label_widget(cast(GtkToolButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   string getStockId()
   {
     const(char)* _cretval;
-    _cretval = gtk_tool_button_get_stock_id(cast(GtkToolButton*)cPtr);
+    _cretval = gtk_tool_button_get_stock_id(cast(GtkToolButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -277,7 +277,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_tool_button_get_use_underline(cast(GtkToolButton*)cPtr);
+    _retval = gtk_tool_button_get_use_underline(cast(GtkToolButton*)this._cPtr);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_tool_button_set_icon_name(cast(GtkToolButton*)cPtr, _iconName);
+    gtk_tool_button_set_icon_name(cast(GtkToolButton*)this._cPtr, _iconName);
   }
 
   /**
@@ -307,7 +307,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setIconWidget(gtk.widget.Widget iconWidget = null)
   {
-    gtk_tool_button_set_icon_widget(cast(GtkToolButton*)cPtr, iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null);
+    gtk_tool_button_set_icon_widget(cast(GtkToolButton*)this._cPtr, iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -324,7 +324,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_tool_button_set_label(cast(GtkToolButton*)cPtr, _label);
+    gtk_tool_button_set_label(cast(GtkToolButton*)this._cPtr, _label);
   }
 
   /**
@@ -339,7 +339,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_tool_button_set_label_widget(cast(GtkToolButton*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_tool_button_set_label_widget(cast(GtkToolButton*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -355,7 +355,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   void setStockId(string stockId = null)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    gtk_tool_button_set_stock_id(cast(GtkToolButton*)cPtr, _stockId);
+    gtk_tool_button_set_stock_id(cast(GtkToolButton*)this._cPtr, _stockId);
   }
 
   /**
@@ -373,7 +373,7 @@ class ToolButton : gtk.tool_item.ToolItem, gtk.actionable.Actionable
   */
   void setUseUnderline(bool useUnderline)
   {
-    gtk_tool_button_set_use_underline(cast(GtkToolButton*)cPtr, useUnderline);
+    gtk_tool_button_set_use_underline(cast(GtkToolButton*)this._cPtr, useUnderline);
   }
 
   /**

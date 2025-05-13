@@ -65,16 +65,16 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_store_get_type != &gidSymbolNotFound ? gtk_tree_store_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -109,7 +109,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
 
     auto _types = cast(GType*)types.ptr;
     _cretval = gtk_tree_store_newv(_nColumns, _types);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_store.TreeStore)(cast(GtkTreeStore*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_store.TreeStore)(cast(GtkTreeStore*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void append(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
   {
     GtkTreeIter _iter;
-    gtk_tree_store_append(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null);
+    gtk_tree_store_append(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -143,7 +143,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void clear()
   {
-    gtk_tree_store_clear(cast(GtkTreeStore*)cPtr);
+    gtk_tree_store_clear(cast(GtkTreeStore*)this._cPtr);
   }
 
   /**
@@ -169,7 +169,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void insert(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent, int position)
   {
     GtkTreeIter _iter;
-    gtk_tree_store_insert(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, position);
+    gtk_tree_store_insert(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, position);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -198,7 +198,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void insertAfter(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
-    gtk_tree_store_insert_after(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
+    gtk_tree_store_insert_after(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -227,7 +227,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void insertBefore(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null, gtk.tree_iter.TreeIter sibling = null)
   {
     GtkTreeIter _iter;
-    gtk_tree_store_insert_before(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling.cPtr(No.Dup) : null);
+    gtk_tree_store_insert_before(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, sibling ? cast(GtkTreeIter*)sibling._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -259,9 +259,9 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    gtk_tree_store_insert_with_valuesv(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null, position, _columns, _values, _nValues);
+    gtk_tree_store_insert_with_valuesv(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null, position, _columns, _values, _nValues);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -278,7 +278,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool isAncestor(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter descendant)
   {
     bool _retval;
-    _retval = gtk_tree_store_is_ancestor(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, descendant ? cast(GtkTreeIter*)descendant.cPtr(No.Dup) : null);
+    _retval = gtk_tree_store_is_ancestor(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, descendant ? cast(GtkTreeIter*)descendant._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   int iterDepth(gtk.tree_iter.TreeIter iter)
   {
     int _retval;
-    _retval = gtk_tree_store_iter_depth(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_tree_store_iter_depth(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool iterIsValid(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_store_iter_is_valid(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_tree_store_iter_is_valid(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void moveAfter(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
-    gtk_tree_store_move_after(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
+    gtk_tree_store_move_after(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
   }
 
   /**
@@ -357,7 +357,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void moveBefore(gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter position = null)
   {
-    gtk_tree_store_move_before(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position.cPtr(No.Dup) : null);
+    gtk_tree_store_move_before(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, position ? cast(GtkTreeIter*)position._cPtr(No.Dup) : null);
   }
 
   /**
@@ -378,7 +378,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   void prepend(out gtk.tree_iter.TreeIter iter, gtk.tree_iter.TreeIter parent = null)
   {
     GtkTreeIter _iter;
-    gtk_tree_store_prepend(cast(GtkTreeStore*)cPtr, &_iter, parent ? cast(GtkTreeIter*)parent.cPtr(No.Dup) : null);
+    gtk_tree_store_prepend(cast(GtkTreeStore*)this._cPtr, &_iter, parent ? cast(GtkTreeIter*)parent._cPtr(No.Dup) : null);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
   }
 
@@ -397,7 +397,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   bool remove(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_store_remove(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_tree_store_remove(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
       _nColumns = cast(int)types.length;
 
     auto _types = cast(GType*)types.ptr;
-    gtk_tree_store_set_column_types(cast(GtkTreeStore*)cPtr, _nColumns, _types);
+    gtk_tree_store_set_column_types(cast(GtkTreeStore*)this._cPtr, _nColumns, _types);
   }
 
   /**
@@ -442,7 +442,7 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void setValue(gtk.tree_iter.TreeIter iter, int column, gobject.value.Value value)
   {
-    gtk_tree_store_set_value(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, column, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    gtk_tree_store_set_value(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, column, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -472,9 +472,9 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    gtk_tree_store_set_valuesv(cast(GtkTreeStore*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null, _columns, _values, _nValues);
+    gtk_tree_store_set_valuesv(cast(GtkTreeStore*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null, _columns, _values, _nValues);
   }
 
   /**
@@ -490,6 +490,6 @@ class TreeStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
   */
   void swap(gtk.tree_iter.TreeIter a, gtk.tree_iter.TreeIter b)
   {
-    gtk_tree_store_swap(cast(GtkTreeStore*)cPtr, a ? cast(GtkTreeIter*)a.cPtr(No.Dup) : null, b ? cast(GtkTreeIter*)b.cPtr(No.Dup) : null);
+    gtk_tree_store_swap(cast(GtkTreeStore*)this._cPtr, a ? cast(GtkTreeIter*)a._cPtr(No.Dup) : null, b ? cast(GtkTreeIter*)b._cPtr(No.Dup) : null);
   }
 }

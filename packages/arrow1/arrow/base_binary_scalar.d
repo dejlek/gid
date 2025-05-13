@@ -20,16 +20,16 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_base_binary_scalar_get_type != &gidSymbolNotFound ? garrow_base_binary_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,8 +42,8 @@ class BaseBinaryScalar : arrow.scalar.Scalar
   arrow.buffer.Buffer getValue()
   {
     GArrowBuffer* _cretval;
-    _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
+    _cretval = garrow_base_binary_scalar_get_value(cast(GArrowBaseBinaryScalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, No.Take);
     return _retval;
   }
 }

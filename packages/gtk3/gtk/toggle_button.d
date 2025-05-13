@@ -89,16 +89,16 @@ class ToggleButton : gtk.button.Button
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_toggle_button_get_type != &gidSymbolNotFound ? gtk_toggle_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -166,7 +166,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class ToggleButton : gtk.button.Button
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_toggle_button_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.toggle_button.ToggleButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class ToggleButton : gtk.button.Button
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_active(cast(GtkToggleButton*)cPtr);
+    _retval = gtk_toggle_button_get_active(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class ToggleButton : gtk.button.Button
   bool getInconsistent()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_inconsistent(cast(GtkToggleButton*)cPtr);
+    _retval = gtk_toggle_button_get_inconsistent(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 
@@ -221,7 +221,7 @@ class ToggleButton : gtk.button.Button
   bool getMode()
   {
     bool _retval;
-    _retval = gtk_toggle_button_get_mode(cast(GtkToggleButton*)cPtr);
+    _retval = gtk_toggle_button_get_mode(cast(GtkToggleButton*)this._cPtr);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class ToggleButton : gtk.button.Button
   */
   void setActive(bool isActive)
   {
-    gtk_toggle_button_set_active(cast(GtkToggleButton*)cPtr, isActive);
+    gtk_toggle_button_set_active(cast(GtkToggleButton*)this._cPtr, isActive);
   }
 
   /**
@@ -254,7 +254,7 @@ class ToggleButton : gtk.button.Button
   */
   void setInconsistent(bool setting)
   {
-    gtk_toggle_button_set_inconsistent(cast(GtkToggleButton*)cPtr, setting);
+    gtk_toggle_button_set_inconsistent(cast(GtkToggleButton*)this._cPtr, setting);
   }
 
   /**
@@ -275,7 +275,7 @@ class ToggleButton : gtk.button.Button
   */
   void setMode(bool drawIndicator)
   {
-    gtk_toggle_button_set_mode(cast(GtkToggleButton*)cPtr, drawIndicator);
+    gtk_toggle_button_set_mode(cast(GtkToggleButton*)this._cPtr, drawIndicator);
   }
 
   /**
@@ -285,7 +285,7 @@ class ToggleButton : gtk.button.Button
   */
   void toggled()
   {
-    gtk_toggle_button_toggled(cast(GtkToggleButton*)cPtr);
+    gtk_toggle_button_toggled(cast(GtkToggleButton*)this._cPtr);
   }
 
   /**

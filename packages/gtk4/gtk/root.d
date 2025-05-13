@@ -29,7 +29,7 @@ interface Root
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_root_get_type != &gidSymbolNotFound ? gtk_root_get_type() : cast(GType)0;

@@ -20,16 +20,16 @@ class Time32Array : arrow.numeric_array.NumericArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time32_array_get_type != &gidSymbolNotFound ? garrow_time32_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   this(arrow.time32_data_type.Time32DataType dataType, long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowTime32Array* _cretval;
-    _cretval = garrow_time32_array_new(dataType ? cast(GArrowTime32DataType*)dataType.cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_time32_array_new(dataType ? cast(GArrowTime32DataType*)dataType._cPtr(No.Dup) : null, length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -50,7 +50,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   int getValue(long i)
   {
     int _retval;
-    _retval = garrow_time32_array_get_value(cast(GArrowTime32Array*)cPtr, i);
+    _retval = garrow_time32_array_get_value(cast(GArrowTime32Array*)this._cPtr, i);
     return _retval;
   }
 
@@ -59,7 +59,7 @@ class Time32Array : arrow.numeric_array.NumericArray
   {
     const(int)* _cretval;
     long _cretlength;
-    _cretval = garrow_time32_array_get_values(cast(GArrowTime32Array*)cPtr, &_cretlength);
+    _cretval = garrow_time32_array_get_values(cast(GArrowTime32Array*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)

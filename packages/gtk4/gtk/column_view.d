@@ -100,16 +100,16 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_get_type != &gidSymbolNotFound ? gtk_column_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -322,7 +322,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null);
+    _cretval = gtk_column_view_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -335,7 +335,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void appendColumn(gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_append_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
+    gtk_column_view_append_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
 
   /**
@@ -349,8 +349,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gio.list_model.ListModel getColumns()
   {
     GListModel* _cretval;
-    _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_column_view_get_columns(cast(GtkColumnView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getEnableRubberband()
   {
     bool _retval;
-    _retval = gtk_column_view_get_enable_rubberband(cast(GtkColumnView*)cPtr);
+    _retval = gtk_column_view_get_enable_rubberband(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -372,8 +372,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_column_view_get_header_factory(cast(GtkColumnView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -384,8 +384,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
-    _cretval = gtk_column_view_get_model(cast(GtkColumnView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    _cretval = gtk_column_view_get_model(cast(GtkColumnView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getReorderable()
   {
     bool _retval;
-    _retval = gtk_column_view_get_reorderable(cast(GtkColumnView*)cPtr);
+    _retval = gtk_column_view_get_reorderable(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -407,8 +407,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.list_item_factory.ListItemFactory getRowFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_column_view_get_row_factory(cast(GtkColumnView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getShowColumnSeparators()
   {
     bool _retval;
-    _retval = gtk_column_view_get_show_column_separators(cast(GtkColumnView*)cPtr);
+    _retval = gtk_column_view_get_show_column_separators(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -432,7 +432,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getShowRowSeparators()
   {
     bool _retval;
-    _retval = gtk_column_view_get_show_row_separators(cast(GtkColumnView*)cPtr);
+    _retval = gtk_column_view_get_show_row_separators(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   bool getSingleClickActivate()
   {
     bool _retval;
-    _retval = gtk_column_view_get_single_click_activate(cast(GtkColumnView*)cPtr);
+    _retval = gtk_column_view_get_single_click_activate(cast(GtkColumnView*)this._cPtr);
     return _retval;
   }
 
@@ -473,8 +473,8 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.sorter.Sorter getSorter()
   {
     GtkSorter* _cretval;
-    _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
+    _cretval = gtk_column_view_get_sorter(cast(GtkColumnView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.sorter.Sorter)(cast(GtkSorter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   gtk.types.ListTabBehavior getTabBehavior()
   {
     GtkListTabBehavior _cretval;
-    _cretval = gtk_column_view_get_tab_behavior(cast(GtkColumnView*)cPtr);
+    _cretval = gtk_column_view_get_tab_behavior(cast(GtkColumnView*)this._cPtr);
     gtk.types.ListTabBehavior _retval = cast(gtk.types.ListTabBehavior)_cretval;
     return _retval;
   }
@@ -501,7 +501,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void insertColumn(uint position, gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_insert_column(cast(GtkColumnView*)cPtr, position, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
+    gtk_column_view_insert_column(cast(GtkColumnView*)this._cPtr, position, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
 
   /**
@@ -512,7 +512,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void removeColumn(gtk.column_view_column.ColumnViewColumn column)
   {
-    gtk_column_view_remove_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null);
+    gtk_column_view_remove_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null);
   }
 
   /**
@@ -532,7 +532,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void scrollTo(uint pos, gtk.column_view_column.ColumnViewColumn column, gtk.types.ListScrollFlags flags, gtk.scroll_info.ScrollInfo scroll = null)
   {
-    gtk_column_view_scroll_to(cast(GtkColumnView*)cPtr, pos, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll.cPtr(Yes.Dup) : null);
+    gtk_column_view_scroll_to(cast(GtkColumnView*)this._cPtr, pos, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null, flags, scroll ? cast(GtkScrollInfo*)scroll._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -543,7 +543,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setEnableRubberband(bool enableRubberband)
   {
-    gtk_column_view_set_enable_rubberband(cast(GtkColumnView*)cPtr, enableRubberband);
+    gtk_column_view_set_enable_rubberband(cast(GtkColumnView*)this._cPtr, enableRubberband);
   }
 
   /**
@@ -558,7 +558,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_set_header_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_column_view_set_header_factory(cast(GtkColumnView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -571,7 +571,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_column_view_set_model(cast(GtkColumnView*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_column_view_set_model(cast(GtkColumnView*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -582,7 +582,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setReorderable(bool reorderable)
   {
-    gtk_column_view_set_reorderable(cast(GtkColumnView*)cPtr, reorderable);
+    gtk_column_view_set_reorderable(cast(GtkColumnView*)this._cPtr, reorderable);
   }
 
   /**
@@ -599,7 +599,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setRowFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_column_view_set_row_factory(cast(GtkColumnView*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_column_view_set_row_factory(cast(GtkColumnView*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -611,7 +611,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setShowColumnSeparators(bool showColumnSeparators)
   {
-    gtk_column_view_set_show_column_separators(cast(GtkColumnView*)cPtr, showColumnSeparators);
+    gtk_column_view_set_show_column_separators(cast(GtkColumnView*)this._cPtr, showColumnSeparators);
   }
 
   /**
@@ -623,7 +623,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setShowRowSeparators(bool showRowSeparators)
   {
-    gtk_column_view_set_show_row_separators(cast(GtkColumnView*)cPtr, showRowSeparators);
+    gtk_column_view_set_show_row_separators(cast(GtkColumnView*)this._cPtr, showRowSeparators);
   }
 
   /**
@@ -635,7 +635,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setSingleClickActivate(bool singleClickActivate)
   {
-    gtk_column_view_set_single_click_activate(cast(GtkColumnView*)cPtr, singleClickActivate);
+    gtk_column_view_set_single_click_activate(cast(GtkColumnView*)this._cPtr, singleClickActivate);
   }
 
   /**
@@ -646,7 +646,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void setTabBehavior(gtk.types.ListTabBehavior tabBehavior)
   {
-    gtk_column_view_set_tab_behavior(cast(GtkColumnView*)cPtr, tabBehavior);
+    gtk_column_view_set_tab_behavior(cast(GtkColumnView*)this._cPtr, tabBehavior);
   }
 
   /**
@@ -669,7 +669,7 @@ class ColumnView : gtk.widget.Widget, gtk.scrollable.Scrollable
   */
   void sortByColumn(gtk.column_view_column.ColumnViewColumn column, gtk.types.SortType direction)
   {
-    gtk_column_view_sort_by_column(cast(GtkColumnView*)cPtr, column ? cast(GtkColumnViewColumn*)column.cPtr(No.Dup) : null, direction);
+    gtk_column_view_sort_by_column(cast(GtkColumnView*)this._cPtr, column ? cast(GtkColumnViewColumn*)column._cPtr(No.Dup) : null, direction);
   }
 
   /**

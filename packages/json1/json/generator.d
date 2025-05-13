@@ -27,16 +27,16 @@ class Generator : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_generator_get_type != &gidSymbolNotFound ? json_generator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -152,7 +152,7 @@ class Generator : gobject.object.ObjectWrap
   uint getIndent()
   {
     uint _retval;
-    _retval = json_generator_get_indent(cast(JsonGenerator*)cPtr);
+    _retval = json_generator_get_indent(cast(JsonGenerator*)this._cPtr);
     return _retval;
   }
 
@@ -163,7 +163,7 @@ class Generator : gobject.object.ObjectWrap
   dchar getIndentChar()
   {
     dchar _retval;
-    _retval = json_generator_get_indent_char(cast(JsonGenerator*)cPtr);
+    _retval = json_generator_get_indent_char(cast(JsonGenerator*)this._cPtr);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Generator : gobject.object.ObjectWrap
   bool getPretty()
   {
     bool _retval;
-    _retval = json_generator_get_pretty(cast(JsonGenerator*)cPtr);
+    _retval = json_generator_get_pretty(cast(JsonGenerator*)this._cPtr);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class Generator : gobject.object.ObjectWrap
   json.node.Node getRoot()
   {
     JsonNode* _cretval;
-    _cretval = json_generator_get_root(cast(JsonGenerator*)cPtr);
+    _cretval = json_generator_get_root(cast(JsonGenerator*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -201,7 +201,7 @@ class Generator : gobject.object.ObjectWrap
   */
   void setIndent(uint indentLevel)
   {
-    json_generator_set_indent(cast(JsonGenerator*)cPtr, indentLevel);
+    json_generator_set_indent(cast(JsonGenerator*)this._cPtr, indentLevel);
   }
 
   /**
@@ -212,7 +212,7 @@ class Generator : gobject.object.ObjectWrap
   */
   void setIndentChar(dchar indentChar)
   {
-    json_generator_set_indent_char(cast(JsonGenerator*)cPtr, indentChar);
+    json_generator_set_indent_char(cast(JsonGenerator*)this._cPtr, indentChar);
   }
 
   /**
@@ -227,7 +227,7 @@ class Generator : gobject.object.ObjectWrap
   */
   void setPretty(bool isPretty)
   {
-    json_generator_set_pretty(cast(JsonGenerator*)cPtr, isPretty);
+    json_generator_set_pretty(cast(JsonGenerator*)this._cPtr, isPretty);
   }
 
   /**
@@ -242,7 +242,7 @@ class Generator : gobject.object.ObjectWrap
   */
   void setRoot(json.node.Node node)
   {
-    json_generator_set_root(cast(JsonGenerator*)cPtr, node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
+    json_generator_set_root(cast(JsonGenerator*)this._cPtr, node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
   }
 
   /**
@@ -257,7 +257,7 @@ class Generator : gobject.object.ObjectWrap
   string toData(out size_t length)
   {
     char* _cretval;
-    _cretval = json_generator_to_data(cast(JsonGenerator*)cPtr, cast(size_t*)&length);
+    _cretval = json_generator_to_data(cast(JsonGenerator*)this._cPtr, cast(size_t*)&length);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -279,7 +279,7 @@ class Generator : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_generator_to_file(cast(JsonGenerator*)cPtr, _filename, &_err);
+    _retval = json_generator_to_file(cast(JsonGenerator*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -296,7 +296,7 @@ class Generator : gobject.object.ObjectWrap
   glib.string_.String toGstring(glib.string_.String string_)
   {
     GString* _cretval;
-    _cretval = json_generator_to_gstring(cast(JsonGenerator*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    _cretval = json_generator_to_gstring(cast(JsonGenerator*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new glib.string_.String(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -314,7 +314,7 @@ class Generator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_generator_to_stream(cast(JsonGenerator*)cPtr, stream ? cast(GOutputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = json_generator_to_stream(cast(JsonGenerator*)this._cPtr, stream ? cast(GOutputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

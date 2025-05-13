@@ -21,16 +21,16 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_simple_anim_get_type != &gidSymbolNotFound ? gdk_pixbuf_simple_anim_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,7 +84,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   */
   void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -94,7 +94,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   bool getLoop()
   {
     bool _retval;
-    _retval = gdk_pixbuf_simple_anim_get_loop(cast(GdkPixbufSimpleAnim*)cPtr);
+    _retval = gdk_pixbuf_simple_anim_get_loop(cast(GdkPixbufSimpleAnim*)this._cPtr);
     return _retval;
   }
 
@@ -106,6 +106,6 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   */
   void setLoop(bool loop)
   {
-    gdk_pixbuf_simple_anim_set_loop(cast(GdkPixbufSimpleAnim*)cPtr, loop);
+    gdk_pixbuf_simple_anim_set_loop(cast(GdkPixbufSimpleAnim*)this._cPtr, loop);
   }
 }

@@ -143,16 +143,16 @@ class Toast : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toast_get_type != &gidSymbolNotFound ? adw_toast_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -414,7 +414,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void dismiss()
   {
-    adw_toast_dismiss(cast(AdwToast*)cPtr);
+    adw_toast_dismiss(cast(AdwToast*)this._cPtr);
   }
 
   /**
@@ -424,7 +424,7 @@ class Toast : gobject.object.ObjectWrap
   string getActionName()
   {
     const(char)* _cretval;
-    _cretval = adw_toast_get_action_name(cast(AdwToast*)cPtr);
+    _cretval = adw_toast_get_action_name(cast(AdwToast*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -436,7 +436,7 @@ class Toast : gobject.object.ObjectWrap
   glib.variant.Variant getActionTargetValue()
   {
     GVariant* _cretval;
-    _cretval = adw_toast_get_action_target_value(cast(AdwToast*)cPtr);
+    _cretval = adw_toast_get_action_target_value(cast(AdwToast*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -448,7 +448,7 @@ class Toast : gobject.object.ObjectWrap
   string getButtonLabel()
   {
     const(char)* _cretval;
-    _cretval = adw_toast_get_button_label(cast(AdwToast*)cPtr);
+    _cretval = adw_toast_get_button_label(cast(AdwToast*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -460,8 +460,8 @@ class Toast : gobject.object.ObjectWrap
   gtk.widget.Widget getCustomTitle()
   {
     GtkWidget* _cretval;
-    _cretval = adw_toast_get_custom_title(cast(AdwToast*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_toast_get_custom_title(cast(AdwToast*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -472,7 +472,7 @@ class Toast : gobject.object.ObjectWrap
   adw.types.ToastPriority getPriority()
   {
     AdwToastPriority _cretval;
-    _cretval = adw_toast_get_priority(cast(AdwToast*)cPtr);
+    _cretval = adw_toast_get_priority(cast(AdwToast*)this._cPtr);
     adw.types.ToastPriority _retval = cast(adw.types.ToastPriority)_cretval;
     return _retval;
   }
@@ -484,7 +484,7 @@ class Toast : gobject.object.ObjectWrap
   uint getTimeout()
   {
     uint _retval;
-    _retval = adw_toast_get_timeout(cast(AdwToast*)cPtr);
+    _retval = adw_toast_get_timeout(cast(AdwToast*)this._cPtr);
     return _retval;
   }
 
@@ -498,7 +498,7 @@ class Toast : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_toast_get_title(cast(AdwToast*)cPtr);
+    _cretval = adw_toast_get_title(cast(AdwToast*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -510,7 +510,7 @@ class Toast : gobject.object.ObjectWrap
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_toast_get_use_markup(cast(AdwToast*)cPtr);
+    _retval = adw_toast_get_use_markup(cast(AdwToast*)this._cPtr);
     return _retval;
   }
 
@@ -527,7 +527,7 @@ class Toast : gobject.object.ObjectWrap
   void setActionName(string actionName = null)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    adw_toast_set_action_name(cast(AdwToast*)cPtr, _actionName);
+    adw_toast_set_action_name(cast(AdwToast*)this._cPtr, _actionName);
   }
 
   /**
@@ -541,7 +541,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setActionTargetValue(glib.variant.Variant actionTarget = null)
   {
-    adw_toast_set_action_target_value(cast(AdwToast*)cPtr, actionTarget ? cast(GVariant*)actionTarget.cPtr(No.Dup) : null);
+    adw_toast_set_action_target_value(cast(AdwToast*)this._cPtr, actionTarget ? cast(GVariant*)actionTarget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -559,7 +559,7 @@ class Toast : gobject.object.ObjectWrap
   void setButtonLabel(string buttonLabel = null)
   {
     const(char)* _buttonLabel = buttonLabel.toCString(No.Alloc);
-    adw_toast_set_button_label(cast(AdwToast*)cPtr, _buttonLabel);
+    adw_toast_set_button_label(cast(AdwToast*)this._cPtr, _buttonLabel);
   }
 
   /**
@@ -575,7 +575,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setCustomTitle(gtk.widget.Widget widget = null)
   {
-    adw_toast_set_custom_title(cast(AdwToast*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_toast_set_custom_title(cast(AdwToast*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -590,7 +590,7 @@ class Toast : gobject.object.ObjectWrap
   void setDetailedActionName(string detailedActionName = null)
   {
     const(char)* _detailedActionName = detailedActionName.toCString(No.Alloc);
-    adw_toast_set_detailed_action_name(cast(AdwToast*)cPtr, _detailedActionName);
+    adw_toast_set_detailed_action_name(cast(AdwToast*)this._cPtr, _detailedActionName);
   }
 
   /**
@@ -609,7 +609,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setPriority(adw.types.ToastPriority priority)
   {
-    adw_toast_set_priority(cast(AdwToast*)cPtr, priority);
+    adw_toast_set_priority(cast(AdwToast*)this._cPtr, priority);
   }
 
   /**
@@ -626,7 +626,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setTimeout(uint timeout)
   {
-    adw_toast_set_timeout(cast(AdwToast*)cPtr, timeout);
+    adw_toast_set_timeout(cast(AdwToast*)this._cPtr, timeout);
   }
 
   /**
@@ -644,7 +644,7 @@ class Toast : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_toast_set_title(cast(AdwToast*)cPtr, _title);
+    adw_toast_set_title(cast(AdwToast*)this._cPtr, _title);
   }
 
   /**
@@ -657,7 +657,7 @@ class Toast : gobject.object.ObjectWrap
   */
   void setUseMarkup(bool useMarkup)
   {
-    adw_toast_set_use_markup(cast(AdwToast*)cPtr, useMarkup);
+    adw_toast_set_use_markup(cast(AdwToast*)this._cPtr, useMarkup);
   }
 
   /**

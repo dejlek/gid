@@ -65,7 +65,7 @@ template TagSetterT()
   override void addTagValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
   {
     const(char)* _tag = tag.toCString(No.Alloc);
-    gst_tag_setter_add_tag_value(cast(GstTagSetter*)cPtr, mode, _tag, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    gst_tag_setter_add_tag_value(cast(GstTagSetter*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -79,7 +79,7 @@ template TagSetterT()
   override gst.tag_list.TagList getTagList()
   {
     const(GstTagList)* _cretval;
-    _cretval = gst_tag_setter_get_tag_list(cast(GstTagSetter*)cPtr);
+    _cretval = gst_tag_setter_get_tag_list(cast(GstTagSetter*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -92,7 +92,7 @@ template TagSetterT()
   override gst.types.TagMergeMode getTagMergeMode()
   {
     GstTagMergeMode _cretval;
-    _cretval = gst_tag_setter_get_tag_merge_mode(cast(GstTagSetter*)cPtr);
+    _cretval = gst_tag_setter_get_tag_merge_mode(cast(GstTagSetter*)this._cPtr);
     gst.types.TagMergeMode _retval = cast(gst.types.TagMergeMode)_cretval;
     return _retval;
   }
@@ -106,7 +106,7 @@ template TagSetterT()
   */
   override void mergeTags(gst.tag_list.TagList list, gst.types.TagMergeMode mode)
   {
-    gst_tag_setter_merge_tags(cast(GstTagSetter*)cPtr, list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, mode);
+    gst_tag_setter_merge_tags(cast(GstTagSetter*)this._cPtr, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -115,7 +115,7 @@ template TagSetterT()
   */
   override void resetTags()
   {
-    gst_tag_setter_reset_tags(cast(GstTagSetter*)cPtr);
+    gst_tag_setter_reset_tags(cast(GstTagSetter*)this._cPtr);
   }
 
   /**
@@ -128,6 +128,6 @@ template TagSetterT()
   */
   override void setTagMergeMode(gst.types.TagMergeMode mode)
   {
-    gst_tag_setter_set_tag_merge_mode(cast(GstTagSetter*)cPtr, mode);
+    gst_tag_setter_set_tag_merge_mode(cast(GstTagSetter*)this._cPtr, mode);
   }
 }

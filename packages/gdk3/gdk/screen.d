@@ -37,16 +37,16 @@ class Screen : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_screen_get_type != &gidSymbolNotFound ? gdk_screen_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class Screen : gobject.object.ObjectWrap
   {
     GdkScreen* _cretval;
     _cretval = gdk_screen_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -174,8 +174,8 @@ class Screen : gobject.object.ObjectWrap
   gdk.window.Window getActiveWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_screen_get_active_window(cast(GdkScreen*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.Take);
+    _cretval = gdk_screen_get_active_window(cast(GdkScreen*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -186,8 +186,8 @@ class Screen : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_screen_get_display(cast(GdkScreen*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_screen_get_display(cast(GdkScreen*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Screen : gobject.object.ObjectWrap
   cairo.font_options.FontOptions getFontOptions()
   {
     const(cairo_font_options_t)* _cretval;
-    _cretval = gdk_screen_get_font_options(cast(GdkScreen*)cPtr);
+    _cretval = gdk_screen_get_font_options(cast(GdkScreen*)this._cPtr);
     auto _retval = _cretval ? new cairo.font_options.FontOptions(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -215,7 +215,7 @@ class Screen : gobject.object.ObjectWrap
   int getHeight()
   {
     int _retval;
-    _retval = gdk_screen_get_height(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_height(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Screen : gobject.object.ObjectWrap
   int getHeightMm()
   {
     int _retval;
-    _retval = gdk_screen_get_height_mm(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_height_mm(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class Screen : gobject.object.ObjectWrap
   int getMonitorAtPoint(int x, int y)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_at_point(cast(GdkScreen*)cPtr, x, y);
+    _retval = gdk_screen_get_monitor_at_point(cast(GdkScreen*)this._cPtr, x, y);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Screen : gobject.object.ObjectWrap
   int getMonitorAtWindow(gdk.window.Window window)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_at_window(cast(GdkScreen*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    _retval = gdk_screen_get_monitor_at_window(cast(GdkScreen*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class Screen : gobject.object.ObjectWrap
   void getMonitorGeometry(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
     GdkRectangle _dest;
-    gdk_screen_get_monitor_geometry(cast(GdkScreen*)cPtr, monitorNum, &_dest);
+    gdk_screen_get_monitor_geometry(cast(GdkScreen*)this._cPtr, monitorNum, &_dest);
     dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 
@@ -311,7 +311,7 @@ class Screen : gobject.object.ObjectWrap
   int getMonitorHeightMm(int monitorNum)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_height_mm(cast(GdkScreen*)cPtr, monitorNum);
+    _retval = gdk_screen_get_monitor_height_mm(cast(GdkScreen*)this._cPtr, monitorNum);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class Screen : gobject.object.ObjectWrap
   string getMonitorPlugName(int monitorNum)
   {
     char* _cretval;
-    _cretval = gdk_screen_get_monitor_plug_name(cast(GdkScreen*)cPtr, monitorNum);
+    _cretval = gdk_screen_get_monitor_plug_name(cast(GdkScreen*)this._cPtr, monitorNum);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -353,7 +353,7 @@ class Screen : gobject.object.ObjectWrap
   int getMonitorScaleFactor(int monitorNum)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_scale_factor(cast(GdkScreen*)cPtr, monitorNum);
+    _retval = gdk_screen_get_monitor_scale_factor(cast(GdkScreen*)this._cPtr, monitorNum);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class Screen : gobject.object.ObjectWrap
   int getMonitorWidthMm(int monitorNum)
   {
     int _retval;
-    _retval = gdk_screen_get_monitor_width_mm(cast(GdkScreen*)cPtr, monitorNum);
+    _retval = gdk_screen_get_monitor_width_mm(cast(GdkScreen*)this._cPtr, monitorNum);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class Screen : gobject.object.ObjectWrap
   void getMonitorWorkarea(int monitorNum, out gdk.rectangle.Rectangle dest)
   {
     GdkRectangle _dest;
-    gdk_screen_get_monitor_workarea(cast(GdkScreen*)cPtr, monitorNum, &_dest);
+    gdk_screen_get_monitor_workarea(cast(GdkScreen*)this._cPtr, monitorNum, &_dest);
     dest = new gdk.rectangle.Rectangle(cast(void*)&_dest, No.Take);
   }
 
@@ -413,7 +413,7 @@ class Screen : gobject.object.ObjectWrap
   int getNMonitors()
   {
     int _retval;
-    _retval = gdk_screen_get_n_monitors(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_n_monitors(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class Screen : gobject.object.ObjectWrap
   int getNumber()
   {
     int _retval;
-    _retval = gdk_screen_get_number(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_number(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class Screen : gobject.object.ObjectWrap
   int getPrimaryMonitor()
   {
     int _retval;
-    _retval = gdk_screen_get_primary_monitor(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_primary_monitor(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -458,7 +458,7 @@ class Screen : gobject.object.ObjectWrap
   double getResolution()
   {
     double _retval;
-    _retval = gdk_screen_get_resolution(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_resolution(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -483,8 +483,8 @@ class Screen : gobject.object.ObjectWrap
   gdk.visual.Visual getRgbaVisual()
   {
     GdkVisual* _cretval;
-    _cretval = gdk_screen_get_rgba_visual(cast(GdkScreen*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    _cretval = gdk_screen_get_rgba_visual(cast(GdkScreen*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -495,8 +495,8 @@ class Screen : gobject.object.ObjectWrap
   gdk.window.Window getRootWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_screen_get_root_window(cast(GdkScreen*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_screen_get_root_window(cast(GdkScreen*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -517,7 +517,7 @@ class Screen : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gdk_screen_get_setting(cast(GdkScreen*)cPtr, _name, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    _retval = gdk_screen_get_setting(cast(GdkScreen*)this._cPtr, _name, value ? cast(GValue*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -530,8 +530,8 @@ class Screen : gobject.object.ObjectWrap
   gdk.visual.Visual getSystemVisual()
   {
     GdkVisual* _cretval;
-    _cretval = gdk_screen_get_system_visual(cast(GdkScreen*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    _cretval = gdk_screen_get_system_visual(cast(GdkScreen*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -547,7 +547,7 @@ class Screen : gobject.object.ObjectWrap
   gdk.window.Window[] getToplevelWindows()
   {
     GList* _cretval;
-    _cretval = gdk_screen_get_toplevel_windows(cast(GdkScreen*)cPtr);
+    _cretval = gdk_screen_get_toplevel_windows(cast(GdkScreen*)this._cPtr);
     auto _retval = gListToD!(gdk.window.Window, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -563,7 +563,7 @@ class Screen : gobject.object.ObjectWrap
   int getWidth()
   {
     int _retval;
-    _retval = gdk_screen_get_width(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_width(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class Screen : gobject.object.ObjectWrap
   int getWidthMm()
   {
     int _retval;
-    _retval = gdk_screen_get_width_mm(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_get_width_mm(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -606,7 +606,7 @@ class Screen : gobject.object.ObjectWrap
   gdk.window.Window[] getWindowStack()
   {
     GList* _cretval;
-    _cretval = gdk_screen_get_window_stack(cast(GdkScreen*)cPtr);
+    _cretval = gdk_screen_get_window_stack(cast(GdkScreen*)this._cPtr);
     auto _retval = gListToD!(gdk.window.Window, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -624,7 +624,7 @@ class Screen : gobject.object.ObjectWrap
   bool isComposited()
   {
     bool _retval;
-    _retval = gdk_screen_is_composited(cast(GdkScreen*)cPtr);
+    _retval = gdk_screen_is_composited(cast(GdkScreen*)this._cPtr);
     return _retval;
   }
 
@@ -640,7 +640,7 @@ class Screen : gobject.object.ObjectWrap
   gdk.visual.Visual[] listVisuals()
   {
     GList* _cretval;
-    _cretval = gdk_screen_list_visuals(cast(GdkScreen*)cPtr);
+    _cretval = gdk_screen_list_visuals(cast(GdkScreen*)this._cPtr);
     auto _retval = gListToD!(gdk.visual.Visual, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -653,7 +653,7 @@ class Screen : gobject.object.ObjectWrap
   string makeDisplayName()
   {
     char* _cretval;
-    _cretval = gdk_screen_make_display_name(cast(GdkScreen*)cPtr);
+    _cretval = gdk_screen_make_display_name(cast(GdkScreen*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -671,7 +671,7 @@ class Screen : gobject.object.ObjectWrap
   */
   void setFontOptions(cairo.font_options.FontOptions options = null)
   {
-    gdk_screen_set_font_options(cast(GdkScreen*)cPtr, options ? cast(const(cairo_font_options_t)*)options.cPtr(No.Dup) : null);
+    gdk_screen_set_font_options(cast(GdkScreen*)this._cPtr, options ? cast(const(cairo_font_options_t)*)options._cPtr(No.Dup) : null);
   }
 
   /**
@@ -686,7 +686,7 @@ class Screen : gobject.object.ObjectWrap
   */
   void setResolution(double dpi)
   {
-    gdk_screen_set_resolution(cast(GdkScreen*)cPtr, dpi);
+    gdk_screen_set_resolution(cast(GdkScreen*)this._cPtr, dpi);
   }
 
   /**

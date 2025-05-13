@@ -27,16 +27,16 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_stylus_get_type != &gidSymbolNotFound ? gtk_gesture_stylus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     bool _retval;
     auto _axes = cast(GdkAxisUse*)(axes ~ GdkAxisUse.init).ptr;
     double* _values;
-    _retval = gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)cPtr, _axes, &_values);
+    _retval = gtk_gesture_stylus_get_axes(cast(GtkGestureStylus*)this._cPtr, _axes, &_values);
     values.length = axes.length;
     values[0 .. $] = (cast(double*)_values)[0 .. axes.length];
     gFree(cast(void*)_values);
@@ -116,7 +116,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   bool getAxis(gdk.types.AxisUse axis, out double value)
   {
     bool _retval;
-    _retval = gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)cPtr, axis, cast(double*)&value);
+    _retval = gtk_gesture_stylus_get_axis(cast(GtkGestureStylus*)this._cPtr, axis, cast(double*)&value);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
     bool _retval;
     uint _nElems;
     GdkTimeCoord* _backlog;
-    _retval = gtk_gesture_stylus_get_backlog(cast(GtkGestureStylus*)cPtr, &_backlog, &_nElems);
+    _retval = gtk_gesture_stylus_get_backlog(cast(GtkGestureStylus*)this._cPtr, &_backlog, &_nElems);
     backlog.length = _nElems;
     backlog[0 .. $] = (cast(gdk.types.TimeCoord*)_backlog)[0 .. _nElems];
     gFree(cast(void*)_backlog);
@@ -163,8 +163,8 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   gdk.device_tool.DeviceTool getDeviceTool()
   {
     GdkDeviceTool* _cretval;
-    _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
+    _cretval = gtk_gesture_stylus_get_device_tool(cast(GtkGestureStylus*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device_tool.DeviceTool)(cast(GdkDeviceTool*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   bool getStylusOnly()
   {
     bool _retval;
-    _retval = gtk_gesture_stylus_get_stylus_only(cast(GtkGestureStylus*)cPtr);
+    _retval = gtk_gesture_stylus_get_stylus_only(cast(GtkGestureStylus*)this._cPtr);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class GestureStylus : gtk.gesture_single.GestureSingle
   */
   void setStylusOnly(bool stylusOnly)
   {
-    gtk_gesture_stylus_set_stylus_only(cast(GtkGestureStylus*)cPtr, stylusOnly);
+    gtk_gesture_stylus_set_stylus_only(cast(GtkGestureStylus*)this._cPtr, stylusOnly);
   }
 
   /**

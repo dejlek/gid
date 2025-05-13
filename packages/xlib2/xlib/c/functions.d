@@ -26,6 +26,8 @@ alias XOpenDisplay = c_XOpenDisplay;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // global
-  gidLink(cast(void**)&XOpenDisplay, "XOpenDisplay", LIBS);
+  gidLink(cast(void**)&XOpenDisplay, "XOpenDisplay", libs);
 }

@@ -30,16 +30,16 @@ class Device : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_get_type != &gidSymbolNotFound ? gst_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,8 +62,8 @@ class Device : gst.object.ObjectWrap
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_device_create_element(cast(GstDevice*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    _cretval = gst_device_create_element(cast(GstDevice*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class Device : gst.object.ObjectWrap
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_device_get_caps(cast(GstDevice*)cPtr);
+    _cretval = gst_device_get_caps(cast(GstDevice*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -89,7 +89,7 @@ class Device : gst.object.ObjectWrap
   string getDeviceClass()
   {
     char* _cretval;
-    _cretval = gst_device_get_device_class(cast(GstDevice*)cPtr);
+    _cretval = gst_device_get_device_class(cast(GstDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -101,7 +101,7 @@ class Device : gst.object.ObjectWrap
   string getDisplayName()
   {
     char* _cretval;
-    _cretval = gst_device_get_display_name(cast(GstDevice*)cPtr);
+    _cretval = gst_device_get_display_name(cast(GstDevice*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -114,7 +114,7 @@ class Device : gst.object.ObjectWrap
   gst.structure.Structure getProperties()
   {
     GstStructure* _cretval;
-    _cretval = gst_device_get_properties(cast(GstDevice*)cPtr);
+    _cretval = gst_device_get_properties(cast(GstDevice*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -131,7 +131,7 @@ class Device : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _classes = classes.toCString(No.Alloc);
-    _retval = gst_device_has_classes(cast(GstDevice*)cPtr, _classes);
+    _retval = gst_device_has_classes(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Device : gst.object.ObjectWrap
       _tmpclasses ~= s.toCString(No.Alloc);
     _tmpclasses ~= null;
     char** _classes = _tmpclasses.ptr;
-    _retval = gst_device_has_classesv(cast(GstDevice*)cPtr, _classes);
+    _retval = gst_device_has_classesv(cast(GstDevice*)this._cPtr, _classes);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class Device : gst.object.ObjectWrap
   bool reconfigureElement(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_device_reconfigure_element(cast(GstDevice*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_device_reconfigure_element(cast(GstDevice*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 

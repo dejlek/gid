@@ -33,16 +33,16 @@ class StringFilter : gtk.filter.Filter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_filter_get_type != &gidSymbolNotFound ? gtk_string_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -140,7 +140,7 @@ class StringFilter : gtk.filter.Filter
   this(gtk.expression.Expression expression = null)
   {
     GtkStringFilter* _cretval;
-    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    _cretval = gtk_string_filter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -152,7 +152,7 @@ class StringFilter : gtk.filter.Filter
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)cPtr);
+    _cretval = gtk_string_filter_get_expression(cast(GtkStringFilter*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -164,7 +164,7 @@ class StringFilter : gtk.filter.Filter
   bool getIgnoreCase()
   {
     bool _retval;
-    _retval = gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)cPtr);
+    _retval = gtk_string_filter_get_ignore_case(cast(GtkStringFilter*)this._cPtr);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class StringFilter : gtk.filter.Filter
   gtk.types.StringFilterMatchMode getMatchMode()
   {
     GtkStringFilterMatchMode _cretval;
-    _cretval = gtk_string_filter_get_match_mode(cast(GtkStringFilter*)cPtr);
+    _cretval = gtk_string_filter_get_match_mode(cast(GtkStringFilter*)this._cPtr);
     gtk.types.StringFilterMatchMode _retval = cast(gtk.types.StringFilterMatchMode)_cretval;
     return _retval;
   }
@@ -187,7 +187,7 @@ class StringFilter : gtk.filter.Filter
   string getSearch()
   {
     const(char)* _cretval;
-    _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)cPtr);
+    _cretval = gtk_string_filter_get_search(cast(GtkStringFilter*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -203,7 +203,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_string_filter_set_expression(cast(GtkStringFilter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_string_filter_set_expression(cast(GtkStringFilter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setIgnoreCase(bool ignoreCase)
   {
-    gtk_string_filter_set_ignore_case(cast(GtkStringFilter*)cPtr, ignoreCase);
+    gtk_string_filter_set_ignore_case(cast(GtkStringFilter*)this._cPtr, ignoreCase);
   }
 
   /**
@@ -225,7 +225,7 @@ class StringFilter : gtk.filter.Filter
   */
   void setMatchMode(gtk.types.StringFilterMatchMode mode)
   {
-    gtk_string_filter_set_match_mode(cast(GtkStringFilter*)cPtr, mode);
+    gtk_string_filter_set_match_mode(cast(GtkStringFilter*)this._cPtr, mode);
   }
 
   /**
@@ -238,6 +238,6 @@ class StringFilter : gtk.filter.Filter
   void setSearch(string search = null)
   {
     const(char)* _search = search.toCString(No.Alloc);
-    gtk_string_filter_set_search(cast(GtkStringFilter*)cPtr, _search);
+    gtk_string_filter_set_search(cast(GtkStringFilter*)this._cPtr, _search);
   }
 }

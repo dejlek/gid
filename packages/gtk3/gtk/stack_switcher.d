@@ -49,16 +49,16 @@ class StackSwitcher : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_switcher_get_type != &gidSymbolNotFound ? gtk_stack_switcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -120,8 +120,8 @@ class StackSwitcher : gtk.box.Box
   gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
-    _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    _cretval = gtk_stack_switcher_get_stack(cast(GtkStackSwitcher*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,6 +133,6 @@ class StackSwitcher : gtk.box.Box
   */
   void setStack(gtk.stack.Stack stack = null)
   {
-    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
+    gtk_stack_switcher_set_stack(cast(GtkStackSwitcher*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
   }
 }

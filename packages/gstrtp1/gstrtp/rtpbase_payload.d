@@ -27,16 +27,16 @@ class RTPBasePayload : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtp_base_payload_get_type != &gidSymbolNotFound ? gst_rtp_base_payload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -354,7 +354,7 @@ class RTPBasePayload : gst.element.Element
   gst.buffer.Buffer allocateOutputBuffer(uint payloadLen, ubyte padLen, ubyte csrcCount)
   {
     GstBuffer* _cretval;
-    _cretval = gst_rtp_base_payload_allocate_output_buffer(cast(GstRTPBasePayload*)cPtr, payloadLen, padLen, csrcCount);
+    _cretval = gst_rtp_base_payload_allocate_output_buffer(cast(GstRTPBasePayload*)this._cPtr, payloadLen, padLen, csrcCount);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -371,7 +371,7 @@ class RTPBasePayload : gst.element.Element
   uint getSourceCount(gst.buffer.Buffer buffer)
   {
     uint _retval;
-    _retval = gst_rtp_base_payload_get_source_count(cast(GstRTPBasePayload*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+    _retval = gst_rtp_base_payload_get_source_count(cast(GstRTPBasePayload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class RTPBasePayload : gst.element.Element
   bool isFilled(uint size, gst.types.ClockTime duration)
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_is_filled(cast(GstRTPBasePayload*)cPtr, size, duration);
+    _retval = gst_rtp_base_payload_is_filled(cast(GstRTPBasePayload*)this._cPtr, size, duration);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class RTPBasePayload : gst.element.Element
   bool isSourceInfoEnabled()
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_is_source_info_enabled(cast(GstRTPBasePayload*)cPtr);
+    _retval = gst_rtp_base_payload_is_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr);
     return _retval;
   }
 
@@ -417,7 +417,7 @@ class RTPBasePayload : gst.element.Element
   gst.types.FlowReturn push(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_payload_push(cast(GstRTPBasePayload*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_rtp_base_payload_push(cast(GstRTPBasePayload*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -435,7 +435,7 @@ class RTPBasePayload : gst.element.Element
   gst.types.FlowReturn pushList(gst.buffer_list.BufferList list)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_rtp_base_payload_push_list(cast(GstRTPBasePayload*)cPtr, list ? cast(GstBufferList*)list.cPtr(Yes.Dup) : null);
+    _cretval = gst_rtp_base_payload_push_list(cast(GstRTPBasePayload*)this._cPtr, list ? cast(GstBufferList*)list._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -455,7 +455,7 @@ class RTPBasePayload : gst.element.Element
   {
     const(char)* _media = media.toCString(No.Alloc);
     const(char)* _encodingName = encodingName.toCString(No.Alloc);
-    gst_rtp_base_payload_set_options(cast(GstRTPBasePayload*)cPtr, _media, dynamic, _encodingName, clockRate);
+    gst_rtp_base_payload_set_options(cast(GstRTPBasePayload*)this._cPtr, _media, dynamic, _encodingName, clockRate);
   }
 
   /**
@@ -468,7 +468,7 @@ class RTPBasePayload : gst.element.Element
   bool setOutcapsStructure(gst.structure.Structure s = null)
   {
     bool _retval;
-    _retval = gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)cPtr, s ? cast(GstStructure*)s.cPtr(No.Dup) : null);
+    _retval = gst_rtp_base_payload_set_outcaps_structure(cast(GstRTPBasePayload*)this._cPtr, s ? cast(GstStructure*)s._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class RTPBasePayload : gst.element.Element
   */
   void setSourceInfoEnabled(bool enable)
   {
-    gst_rtp_base_payload_set_source_info_enabled(cast(GstRTPBasePayload*)cPtr, enable);
+    gst_rtp_base_payload_set_source_info_enabled(cast(GstRTPBasePayload*)this._cPtr, enable);
   }
 
   /**

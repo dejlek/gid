@@ -169,7 +169,7 @@ template ValueT()
   override void getCurrentValue(out gobject.value.Value value)
   {
     GValue _value;
-    atk_value_get_current_value(cast(AtkValue*)cPtr, &_value);
+    atk_value_get_current_value(cast(AtkValue*)this._cPtr, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -184,7 +184,7 @@ template ValueT()
   override double getIncrement()
   {
     double _retval;
-    _retval = atk_value_get_increment(cast(AtkValue*)cPtr);
+    _retval = atk_value_get_increment(cast(AtkValue*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ template ValueT()
   override void getMaximumValue(out gobject.value.Value value)
   {
     GValue _value;
-    atk_value_get_maximum_value(cast(AtkValue*)cPtr, &_value);
+    atk_value_get_maximum_value(cast(AtkValue*)this._cPtr, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -216,7 +216,7 @@ template ValueT()
   override void getMinimumIncrement(out gobject.value.Value value)
   {
     GValue _value;
-    atk_value_get_minimum_increment(cast(AtkValue*)cPtr, &_value);
+    atk_value_get_minimum_increment(cast(AtkValue*)this._cPtr, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -231,7 +231,7 @@ template ValueT()
   override void getMinimumValue(out gobject.value.Value value)
   {
     GValue _value;
-    atk_value_get_minimum_value(cast(AtkValue*)cPtr, &_value);
+    atk_value_get_minimum_value(cast(AtkValue*)this._cPtr, &_value);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
   }
 
@@ -244,7 +244,7 @@ template ValueT()
   override atk.range.Range getRange()
   {
     AtkRange* _cretval;
-    _cretval = atk_value_get_range(cast(AtkValue*)cPtr);
+    _cretval = atk_value_get_range(cast(AtkValue*)this._cPtr);
     auto _retval = _cretval ? new atk.range.Range(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -259,7 +259,7 @@ template ValueT()
   override atk.range.Range[] getSubRanges()
   {
     GSList* _cretval;
-    _cretval = atk_value_get_sub_ranges(cast(AtkValue*)cPtr);
+    _cretval = atk_value_get_sub_ranges(cast(AtkValue*)this._cPtr);
     auto _retval = gSListToD!(atk.range.Range, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -277,7 +277,7 @@ template ValueT()
   override void getValueAndText(out double value, out string text)
   {
     char* _text;
-    atk_value_get_value_and_text(cast(AtkValue*)cPtr, cast(double*)&value, &_text);
+    atk_value_get_value_and_text(cast(AtkValue*)this._cPtr, cast(double*)&value, &_text);
     text = _text.fromCString(Yes.Free);
   }
 
@@ -293,7 +293,7 @@ template ValueT()
   override bool setCurrentValue(gobject.value.Value value)
   {
     bool _retval;
-    _retval = atk_value_set_current_value(cast(AtkValue*)cPtr, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    _retval = atk_value_set_current_value(cast(AtkValue*)this._cPtr, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ template ValueT()
   */
   override void setValue(double newValue)
   {
-    atk_value_set_value(cast(AtkValue*)cPtr, newValue);
+    atk_value_set_value(cast(AtkValue*)this._cPtr, newValue);
   }
 
   /**

@@ -28,22 +28,22 @@ class TagList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tag_list_get_type != &gidSymbolNotFound ? gst_tag_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class TagList : gobject.boxed.Boxed
   */
   @property gst.mini_object.MiniObject miniObject()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstTagList*)this._cPtr).miniObject);
   }
 
   /**
@@ -103,7 +103,7 @@ class TagList : gobject.boxed.Boxed
   void addValue(gst.types.TagMergeMode mode, string tag, gobject.value.Value value)
   {
     const(char)* _tag = tag.toCString(No.Alloc);
-    gst_tag_list_add_value(cast(GstTagList*)cPtr, mode, _tag, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    gst_tag_list_add_value(cast(GstTagList*)this._cPtr, mode, _tag, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -121,7 +121,7 @@ class TagList : gobject.boxed.Boxed
   gst.tag_list.TagList copy()
   {
     GstTagList* _cretval;
-    _cretval = gst_tag_list_copy(cast(const(GstTagList)*)cPtr);
+    _cretval = gst_tag_list_copy(cast(const(GstTagList)*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -145,7 +145,7 @@ class TagList : gobject.boxed.Boxed
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_tag_list_foreach(cast(const(GstTagList)*)cPtr, _funcCB, _func);
+    gst_tag_list_foreach(cast(const(GstTagList)*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -162,7 +162,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_boolean(cast(const(GstTagList)*)cPtr, _tag, cast(bool*)&value);
+    _retval = gst_tag_list_get_boolean(cast(const(GstTagList)*)this._cPtr, _tag, cast(bool*)&value);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_boolean_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(bool*)&value);
+    _retval = gst_tag_list_get_boolean_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(bool*)&value);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GDate* _value;
-    _retval = gst_tag_list_get_date(cast(const(GstTagList)*)cPtr, _tag, &_value);
+    _retval = gst_tag_list_get_date(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = new glib.date.Date(cast(void*)_value, Yes.Take);
     return _retval;
   }
@@ -228,7 +228,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GDate* _value;
-    _retval = gst_tag_list_get_date_index(cast(const(GstTagList)*)cPtr, _tag, index, &_value);
+    _retval = gst_tag_list_get_date_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = new glib.date.Date(cast(void*)_value, Yes.Take);
     return _retval;
   }
@@ -252,7 +252,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GstDateTime* _value;
-    _retval = gst_tag_list_get_date_time(cast(const(GstTagList)*)cPtr, _tag, &_value);
+    _retval = gst_tag_list_get_date_time(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
@@ -276,7 +276,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GstDateTime* _value;
-    _retval = gst_tag_list_get_date_time_index(cast(const(GstTagList)*)cPtr, _tag, index, &_value);
+    _retval = gst_tag_list_get_date_time_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = new gst.date_time.DateTime(cast(void*)_value, Yes.Take);
     return _retval;
   }
@@ -295,7 +295,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_double(cast(const(GstTagList)*)cPtr, _tag, cast(double*)&value);
+    _retval = gst_tag_list_get_double(cast(const(GstTagList)*)this._cPtr, _tag, cast(double*)&value);
     return _retval;
   }
 
@@ -314,7 +314,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_double_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(double*)&value);
+    _retval = gst_tag_list_get_double_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(double*)&value);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_float(cast(const(GstTagList)*)cPtr, _tag, cast(float*)&value);
+    _retval = gst_tag_list_get_float(cast(const(GstTagList)*)this._cPtr, _tag, cast(float*)&value);
     return _retval;
   }
 
@@ -351,7 +351,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_float_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(float*)&value);
+    _retval = gst_tag_list_get_float_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(float*)&value);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_int(cast(const(GstTagList)*)cPtr, _tag, cast(int*)&value);
+    _retval = gst_tag_list_get_int(cast(const(GstTagList)*)this._cPtr, _tag, cast(int*)&value);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_int64(cast(const(GstTagList)*)cPtr, _tag, cast(long*)&value);
+    _retval = gst_tag_list_get_int64(cast(const(GstTagList)*)this._cPtr, _tag, cast(long*)&value);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_int64_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(long*)&value);
+    _retval = gst_tag_list_get_int64_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(long*)&value);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_int_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(int*)&value);
+    _retval = gst_tag_list_get_int_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(int*)&value);
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_pointer(cast(const(GstTagList)*)cPtr, _tag, cast(void**)&value);
+    _retval = gst_tag_list_get_pointer(cast(const(GstTagList)*)this._cPtr, _tag, cast(void**)&value);
     return _retval;
   }
 
@@ -462,7 +462,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_pointer_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(void**)&value);
+    _retval = gst_tag_list_get_pointer_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(void**)&value);
     return _retval;
   }
 
@@ -487,7 +487,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GstSample* _sample;
-    _retval = gst_tag_list_get_sample(cast(const(GstTagList)*)cPtr, _tag, &_sample);
+    _retval = gst_tag_list_get_sample(cast(const(GstTagList)*)this._cPtr, _tag, &_sample);
     sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
     return _retval;
   }
@@ -514,7 +514,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     GstSample* _sample;
-    _retval = gst_tag_list_get_sample_index(cast(const(GstTagList)*)cPtr, _tag, index, &_sample);
+    _retval = gst_tag_list_get_sample_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_sample);
     sample = new gst.sample.Sample(cast(void*)_sample, Yes.Take);
     return _retval;
   }
@@ -526,7 +526,7 @@ class TagList : gobject.boxed.Boxed
   gst.types.TagScope getScope()
   {
     GstTagScope _cretval;
-    _cretval = gst_tag_list_get_scope(cast(const(GstTagList)*)cPtr);
+    _cretval = gst_tag_list_get_scope(cast(const(GstTagList)*)this._cPtr);
     gst.types.TagScope _retval = cast(gst.types.TagScope)_cretval;
     return _retval;
   }
@@ -555,7 +555,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     char* _value;
-    _retval = gst_tag_list_get_string(cast(const(GstTagList)*)cPtr, _tag, &_value);
+    _retval = gst_tag_list_get_string(cast(const(GstTagList)*)this._cPtr, _tag, &_value);
     value = _value.fromCString(Yes.Free);
     return _retval;
   }
@@ -582,7 +582,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     char* _value;
-    _retval = gst_tag_list_get_string_index(cast(const(GstTagList)*)cPtr, _tag, index, &_value);
+    _retval = gst_tag_list_get_string_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = _value.fromCString(Yes.Free);
     return _retval;
   }
@@ -598,7 +598,7 @@ class TagList : gobject.boxed.Boxed
   {
     uint _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_tag_size(cast(const(GstTagList)*)cPtr, _tag);
+    _retval = gst_tag_list_get_tag_size(cast(const(GstTagList)*)this._cPtr, _tag);
     return _retval;
   }
 
@@ -616,7 +616,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_uint(cast(const(GstTagList)*)cPtr, _tag, cast(uint*)&value);
+    _retval = gst_tag_list_get_uint(cast(const(GstTagList)*)this._cPtr, _tag, cast(uint*)&value);
     return _retval;
   }
 
@@ -634,7 +634,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_uint64(cast(const(GstTagList)*)cPtr, _tag, cast(ulong*)&value);
+    _retval = gst_tag_list_get_uint64(cast(const(GstTagList)*)this._cPtr, _tag, cast(ulong*)&value);
     return _retval;
   }
 
@@ -653,7 +653,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_uint64_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(ulong*)&value);
+    _retval = gst_tag_list_get_uint64_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(ulong*)&value);
     return _retval;
   }
 
@@ -672,7 +672,7 @@ class TagList : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_get_uint_index(cast(const(GstTagList)*)cPtr, _tag, index, cast(uint*)&value);
+    _retval = gst_tag_list_get_uint_index(cast(const(GstTagList)*)this._cPtr, _tag, index, cast(uint*)&value);
     return _retval;
   }
 
@@ -691,7 +691,7 @@ class TagList : gobject.boxed.Boxed
   {
     const(GValue)* _cretval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _cretval = gst_tag_list_get_value_index(cast(const(GstTagList)*)cPtr, _tag, index);
+    _cretval = gst_tag_list_get_value_index(cast(const(GstTagList)*)this._cPtr, _tag, index);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -705,7 +705,7 @@ class TagList : gobject.boxed.Boxed
   */
   void insert(gst.tag_list.TagList from, gst.types.TagMergeMode mode)
   {
-    gst_tag_list_insert(cast(GstTagList*)cPtr, from ? cast(const(GstTagList)*)from.cPtr(No.Dup) : null, mode);
+    gst_tag_list_insert(cast(GstTagList*)this._cPtr, from ? cast(const(GstTagList)*)from._cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -715,7 +715,7 @@ class TagList : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gst_tag_list_is_empty(cast(const(GstTagList)*)cPtr);
+    _retval = gst_tag_list_is_empty(cast(const(GstTagList)*)this._cPtr);
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class TagList : gobject.boxed.Boxed
   bool isEqual(gst.tag_list.TagList list2)
   {
     bool _retval;
-    _retval = gst_tag_list_is_equal(cast(const(GstTagList)*)cPtr, list2 ? cast(const(GstTagList)*)list2.cPtr(No.Dup) : null);
+    _retval = gst_tag_list_is_equal(cast(const(GstTagList)*)this._cPtr, list2 ? cast(const(GstTagList)*)list2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -747,7 +747,7 @@ class TagList : gobject.boxed.Boxed
   gst.tag_list.TagList merge(gst.tag_list.TagList list2, gst.types.TagMergeMode mode)
   {
     GstTagList* _cretval;
-    _cretval = gst_tag_list_merge(cast(const(GstTagList)*)cPtr, list2 ? cast(const(GstTagList)*)list2.cPtr(No.Dup) : null, mode);
+    _cretval = gst_tag_list_merge(cast(const(GstTagList)*)this._cPtr, list2 ? cast(const(GstTagList)*)list2._cPtr(No.Dup) : null, mode);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -759,7 +759,7 @@ class TagList : gobject.boxed.Boxed
   int nTags()
   {
     int _retval;
-    _retval = gst_tag_list_n_tags(cast(const(GstTagList)*)cPtr);
+    _retval = gst_tag_list_n_tags(cast(const(GstTagList)*)this._cPtr);
     return _retval;
   }
 
@@ -773,7 +773,7 @@ class TagList : gobject.boxed.Boxed
   string nthTagName(uint index)
   {
     const(char)* _cretval;
-    _cretval = gst_tag_list_nth_tag_name(cast(const(GstTagList)*)cPtr, index);
+    _cretval = gst_tag_list_nth_tag_name(cast(const(GstTagList)*)this._cPtr, index);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -798,7 +798,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
     char* _value;
-    _retval = gst_tag_list_peek_string_index(cast(const(GstTagList)*)cPtr, _tag, index, &_value);
+    _retval = gst_tag_list_peek_string_index(cast(const(GstTagList)*)this._cPtr, _tag, index, &_value);
     value = _value.fromCString(No.Free);
     return _retval;
   }
@@ -812,7 +812,7 @@ class TagList : gobject.boxed.Boxed
   void removeTag(string tag)
   {
     const(char)* _tag = tag.toCString(No.Alloc);
-    gst_tag_list_remove_tag(cast(GstTagList*)cPtr, _tag);
+    gst_tag_list_remove_tag(cast(GstTagList*)this._cPtr, _tag);
   }
 
   /**
@@ -824,7 +824,7 @@ class TagList : gobject.boxed.Boxed
   */
   void setScope(gst.types.TagScope scope_)
   {
-    gst_tag_list_set_scope(cast(GstTagList*)cPtr, scope_);
+    gst_tag_list_set_scope(cast(GstTagList*)this._cPtr, scope_);
   }
 
   /**
@@ -836,7 +836,7 @@ class TagList : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_tag_list_to_string(cast(const(GstTagList)*)cPtr);
+    _cretval = gst_tag_list_to_string(cast(const(GstTagList)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -859,7 +859,7 @@ class TagList : gobject.boxed.Boxed
     bool _retval;
     GValue _dest;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = gst_tag_list_copy_value(&_dest, list ? cast(const(GstTagList)*)list.cPtr(No.Dup) : null, _tag);
+    _retval = gst_tag_list_copy_value(&_dest, list ? cast(const(GstTagList)*)list._cPtr(No.Dup) : null, _tag);
     dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
     return _retval;
   }

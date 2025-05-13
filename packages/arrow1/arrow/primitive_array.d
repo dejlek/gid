@@ -20,16 +20,16 @@ class PrimitiveArray : arrow.array.Array
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_primitive_array_get_type != &gidSymbolNotFound ? garrow_primitive_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,8 +42,8 @@ class PrimitiveArray : arrow.array.Array
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
-    _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_primitive_array_get_buffer(cast(GArrowPrimitiveArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,8 +51,8 @@ class PrimitiveArray : arrow.array.Array
   arrow.buffer.Buffer getDataBuffer()
   {
     GArrowBuffer* _cretval;
-    _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_primitive_array_get_data_buffer(cast(GArrowPrimitiveArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

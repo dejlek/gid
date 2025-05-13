@@ -80,16 +80,16 @@ class Reader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_reader_get_type != &gidSymbolNotFound ? json_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -130,7 +130,7 @@ class Reader : gobject.object.ObjectWrap
   this(json.node.Node node = null)
   {
     JsonReader* _cretval;
-    _cretval = json_reader_new(node ? cast(JsonNode*)node.cPtr(No.Dup) : null);
+    _cretval = json_reader_new(node ? cast(JsonNode*)node._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -144,7 +144,7 @@ class Reader : gobject.object.ObjectWrap
   int countElements()
   {
     int _retval;
-    _retval = json_reader_count_elements(cast(JsonReader*)cPtr);
+    _retval = json_reader_count_elements(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Reader : gobject.object.ObjectWrap
   int countMembers()
   {
     int _retval;
-    _retval = json_reader_count_members(cast(JsonReader*)cPtr);
+    _retval = json_reader_count_members(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Reader : gobject.object.ObjectWrap
   */
   void endElement()
   {
-    json_reader_end_element(cast(JsonReader*)cPtr);
+    json_reader_end_element(cast(JsonReader*)this._cPtr);
   }
 
   /**
@@ -181,7 +181,7 @@ class Reader : gobject.object.ObjectWrap
   */
   void endMember()
   {
-    json_reader_end_member(cast(JsonReader*)cPtr);
+    json_reader_end_member(cast(JsonReader*)this._cPtr);
   }
 
   /**
@@ -193,7 +193,7 @@ class Reader : gobject.object.ObjectWrap
   bool getBooleanValue()
   {
     bool _retval;
-    _retval = json_reader_get_boolean_value(cast(JsonReader*)cPtr);
+    _retval = json_reader_get_boolean_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class Reader : gobject.object.ObjectWrap
   json.node.Node getCurrentNode()
   {
     JsonNode* _cretval;
-    _cretval = json_reader_get_current_node(cast(JsonReader*)cPtr);
+    _cretval = json_reader_get_current_node(cast(JsonReader*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -218,7 +218,7 @@ class Reader : gobject.object.ObjectWrap
   double getDoubleValue()
   {
     double _retval;
-    _retval = json_reader_get_double_value(cast(JsonReader*)cPtr);
+    _retval = json_reader_get_double_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -229,7 +229,7 @@ class Reader : gobject.object.ObjectWrap
   glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
-    _cretval = json_reader_get_error(cast(JsonReader*)cPtr);
+    _cretval = json_reader_get_error(cast(JsonReader*)this._cPtr);
     auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
@@ -243,7 +243,7 @@ class Reader : gobject.object.ObjectWrap
   long getIntValue()
   {
     long _retval;
-    _retval = json_reader_get_int_value(cast(JsonReader*)cPtr);
+    _retval = json_reader_get_int_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Reader : gobject.object.ObjectWrap
   string getMemberName()
   {
     const(char)* _cretval;
-    _cretval = json_reader_get_member_name(cast(JsonReader*)cPtr);
+    _cretval = json_reader_get_member_name(cast(JsonReader*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -270,7 +270,7 @@ class Reader : gobject.object.ObjectWrap
   bool getNullValue()
   {
     bool _retval;
-    _retval = json_reader_get_null_value(cast(JsonReader*)cPtr);
+    _retval = json_reader_get_null_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Reader : gobject.object.ObjectWrap
   string getStringValue()
   {
     const(char)* _cretval;
-    _cretval = json_reader_get_string_value(cast(JsonReader*)cPtr);
+    _cretval = json_reader_get_string_value(cast(JsonReader*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -298,7 +298,7 @@ class Reader : gobject.object.ObjectWrap
   json.node.Node getValue()
   {
     JsonNode* _cretval;
-    _cretval = json_reader_get_value(cast(JsonReader*)cPtr);
+    _cretval = json_reader_get_value(cast(JsonReader*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -310,7 +310,7 @@ class Reader : gobject.object.ObjectWrap
   bool isArray()
   {
     bool _retval;
-    _retval = json_reader_is_array(cast(JsonReader*)cPtr);
+    _retval = json_reader_is_array(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Reader : gobject.object.ObjectWrap
   bool isObject()
   {
     bool _retval;
-    _retval = json_reader_is_object(cast(JsonReader*)cPtr);
+    _retval = json_reader_is_object(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class Reader : gobject.object.ObjectWrap
   bool isValue()
   {
     bool _retval;
-    _retval = json_reader_is_value(cast(JsonReader*)cPtr);
+    _retval = json_reader_is_value(cast(JsonReader*)this._cPtr);
     return _retval;
   }
 
@@ -347,7 +347,7 @@ class Reader : gobject.object.ObjectWrap
   string[] listMembers()
   {
     char** _cretval;
-    _cretval = json_reader_list_members(cast(JsonReader*)cPtr);
+    _cretval = json_reader_list_members(cast(JsonReader*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -421,7 +421,7 @@ class Reader : gobject.object.ObjectWrap
   bool readElement(uint index)
   {
     bool _retval;
-    _retval = json_reader_read_element(cast(JsonReader*)cPtr, index);
+    _retval = json_reader_read_element(cast(JsonReader*)this._cPtr, index);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class Reader : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _retval = json_reader_read_member(cast(JsonReader*)cPtr, _memberName);
+    _retval = json_reader_read_member(cast(JsonReader*)this._cPtr, _memberName);
     return _retval;
   }
 
@@ -495,6 +495,6 @@ class Reader : gobject.object.ObjectWrap
   */
   void setRoot(json.node.Node root = null)
   {
-    json_reader_set_root(cast(JsonReader*)cPtr, root ? cast(JsonNode*)root.cPtr(No.Dup) : null);
+    json_reader_set_root(cast(JsonReader*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
   }
 }

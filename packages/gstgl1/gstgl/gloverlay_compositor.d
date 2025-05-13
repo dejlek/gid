@@ -24,16 +24,16 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_overlay_compositor_get_type != &gidSymbolNotFound ? gst_gl_overlay_compositor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   this(gstgl.glcontext.GLContext context)
   {
     GstGLOverlayCompositor* _cretval;
-    _cretval = gst_gl_overlay_compositor_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    _cretval = gst_gl_overlay_compositor_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -66,7 +66,7 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   static gst.caps.Caps addCaps(gst.caps.Caps caps)
   {
     GstCaps* _cretval;
-    _cretval = gst_gl_overlay_compositor_add_caps(caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_gl_overlay_compositor_add_caps(caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -74,18 +74,18 @@ class GLOverlayCompositor : gst.object.ObjectWrap
   /** */
   void drawOverlays()
   {
-    gst_gl_overlay_compositor_draw_overlays(cast(GstGLOverlayCompositor*)cPtr);
+    gst_gl_overlay_compositor_draw_overlays(cast(GstGLOverlayCompositor*)this._cPtr);
   }
 
   /** */
   void freeOverlays()
   {
-    gst_gl_overlay_compositor_free_overlays(cast(GstGLOverlayCompositor*)cPtr);
+    gst_gl_overlay_compositor_free_overlays(cast(GstGLOverlayCompositor*)this._cPtr);
   }
 
   /** */
   void uploadOverlays(gst.buffer.Buffer buf)
   {
-    gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)cPtr, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null);
+    gst_gl_overlay_compositor_upload_overlays(cast(GstGLOverlayCompositor*)this._cPtr, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null);
   }
 }

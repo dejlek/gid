@@ -43,22 +43,22 @@ class Path : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_get_type != &gidSymbolNotFound ? gsk_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class Path : gobject.boxed.Boxed
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gsk_path_foreach(cast(GskPath*)cPtr, flags, _funcCB, _func);
+    _retval = gsk_path_foreach(cast(GskPath*)this._cPtr, flags, _funcCB, _func);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class Path : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_bounds(cast(GskPath*)cPtr, &_bounds);
+    _retval = gsk_path_get_bounds(cast(GskPath*)this._cPtr, &_bounds);
     bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
@@ -156,7 +156,7 @@ class Path : gobject.boxed.Boxed
   {
     bool _retval;
     graphene_rect_t _bounds;
-    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)cPtr, stroke ? cast(const(GskStroke)*)stroke.cPtr(No.Dup) : null, &_bounds);
+    _retval = gsk_path_get_stroke_bounds(cast(GskPath*)this._cPtr, stroke ? cast(const(GskStroke)*)stroke._cPtr(No.Dup) : null, &_bounds);
     bounds = new graphene.rect.Rect(cast(void*)&_bounds, No.Take);
     return _retval;
   }
@@ -177,7 +177,7 @@ class Path : gobject.boxed.Boxed
   bool inFill(graphene.point.Point point, gsk.types.FillRule fillRule)
   {
     bool _retval;
-    _retval = gsk_path_in_fill(cast(GskPath*)cPtr, point ? cast(const(graphene_point_t)*)point.cPtr(No.Dup) : null, fillRule);
+    _retval = gsk_path_in_fill(cast(GskPath*)this._cPtr, point ? cast(const(graphene_point_t)*)point._cPtr(No.Dup) : null, fillRule);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Path : gobject.boxed.Boxed
   bool isClosed()
   {
     bool _retval;
-    _retval = gsk_path_is_closed(cast(GskPath*)cPtr);
+    _retval = gsk_path_is_closed(cast(GskPath*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Path : gobject.boxed.Boxed
   bool isEmpty()
   {
     bool _retval;
-    _retval = gsk_path_is_empty(cast(GskPath*)cPtr);
+    _retval = gsk_path_is_empty(cast(GskPath*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Path : gobject.boxed.Boxed
   */
   void print(glib.string_.String string_)
   {
-    gsk_path_print(cast(GskPath*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    gsk_path_print(cast(GskPath*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -235,7 +235,7 @@ class Path : gobject.boxed.Boxed
   */
   void toCairo(cairo.context.Context cr)
   {
-    gsk_path_to_cairo(cast(GskPath*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_path_to_cairo(cast(GskPath*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**
@@ -251,7 +251,7 @@ class Path : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gsk_path_to_string(cast(GskPath*)cPtr);
+    _cretval = gsk_path_to_string(cast(GskPath*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

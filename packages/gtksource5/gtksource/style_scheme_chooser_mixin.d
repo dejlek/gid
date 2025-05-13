@@ -51,8 +51,8 @@ template StyleSchemeChooserT()
   override gtksource.style_scheme.StyleScheme getStyleScheme()
   {
     GtkSourceStyleScheme* _cretval;
-    _cretval = gtk_source_style_scheme_chooser_get_style_scheme(cast(GtkSourceStyleSchemeChooser*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
+    _cretval = gtk_source_style_scheme_chooser_get_style_scheme(cast(GtkSourceStyleSchemeChooser*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.style_scheme.StyleScheme)(cast(GtkSourceStyleScheme*)_cretval, No.Take);
     return _retval;
   }
 
@@ -64,6 +64,6 @@ template StyleSchemeChooserT()
   */
   override void setStyleScheme(gtksource.style_scheme.StyleScheme scheme)
   {
-    gtk_source_style_scheme_chooser_set_style_scheme(cast(GtkSourceStyleSchemeChooser*)cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme.cPtr(No.Dup) : null);
+    gtk_source_style_scheme_chooser_set_style_scheme(cast(GtkSourceStyleSchemeChooser*)this._cPtr, scheme ? cast(GtkSourceStyleScheme*)scheme._cPtr(No.Dup) : null);
   }
 }

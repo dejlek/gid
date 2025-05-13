@@ -27,22 +27,22 @@ class BaseParseFrame : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_parse_frame_get_type != &gidSymbolNotFound ? gst_base_parse_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).buffer);
   }
 
   /**
@@ -67,8 +67,8 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)this._cPtr).buffer);
   }
 
   /**
@@ -77,7 +77,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property gst.buffer.Buffer outBuffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
   }
 
   /**
@@ -87,8 +87,8 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property void outBuffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)cPtr).outBuffer);
-    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)cPtr).outBuffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
+    dToC(propval, cast(void*)&(cast(GstBaseParseFrame*)this._cPtr).outBuffer);
   }
 
   /**
@@ -99,7 +99,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property uint flags()
   {
-    return (cast(GstBaseParseFrame*)cPtr).flags;
+    return (cast(GstBaseParseFrame*)this._cPtr).flags;
   }
 
   /**
@@ -111,7 +111,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property void flags(uint propval)
   {
-    (cast(GstBaseParseFrame*)cPtr).flags = propval;
+    (cast(GstBaseParseFrame*)this._cPtr).flags = propval;
   }
 
   /**
@@ -121,7 +121,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property ulong offset()
   {
-    return (cast(GstBaseParseFrame*)cPtr).offset;
+    return (cast(GstBaseParseFrame*)this._cPtr).offset;
   }
 
   /**
@@ -132,7 +132,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property void offset(ulong propval)
   {
-    (cast(GstBaseParseFrame*)cPtr).offset = propval;
+    (cast(GstBaseParseFrame*)this._cPtr).offset = propval;
   }
 
   /**
@@ -144,7 +144,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property int overhead()
   {
-    return (cast(GstBaseParseFrame*)cPtr).overhead;
+    return (cast(GstBaseParseFrame*)this._cPtr).overhead;
   }
 
   /**
@@ -157,7 +157,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   @property void overhead(int propval)
   {
-    (cast(GstBaseParseFrame*)cPtr).overhead = propval;
+    (cast(GstBaseParseFrame*)this._cPtr).overhead = propval;
   }
 
   /**
@@ -177,7 +177,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   this(gst.buffer.Buffer buffer, gstbase.types.BaseParseFrameFlags flags, int overhead)
   {
     GstBaseParseFrame* _cretval;
-    _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, flags, overhead);
+    _cretval = gst_base_parse_frame_new(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, overhead);
     this(_cretval, Yes.Take);
   }
 
@@ -188,7 +188,7 @@ class BaseParseFrame : gobject.boxed.Boxed
   gstbase.base_parse_frame.BaseParseFrame copy()
   {
     GstBaseParseFrame* _cretval;
-    _cretval = gst_base_parse_frame_copy(cast(GstBaseParseFrame*)cPtr);
+    _cretval = gst_base_parse_frame_copy(cast(GstBaseParseFrame*)this._cPtr);
     auto _retval = _cretval ? new gstbase.base_parse_frame.BaseParseFrame(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -202,6 +202,6 @@ class BaseParseFrame : gobject.boxed.Boxed
   */
   void init_()
   {
-    gst_base_parse_frame_init(cast(GstBaseParseFrame*)cPtr);
+    gst_base_parse_frame_init(cast(GstBaseParseFrame*)this._cPtr);
   }
 }

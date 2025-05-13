@@ -29,16 +29,16 @@ class RecordBatch : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_get_type != &gidSymbolNotFound ? garrow_record_batch_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class RecordBatch : gobject.object.ObjectWrap
     auto _columns = gListFromD!(arrow.array.Array)(columns);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_columns);
     GError *_err;
-    _cretval = garrow_record_batch_new(schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, nRows, _columns, &_err);
+    _cretval = garrow_record_batch_new(schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, nRows, _columns, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -65,10 +65,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_import(cAbiArray, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_import(cAbiArray, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -77,10 +77,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_add_column(cast(GArrowRecordBatch*)cPtr, i, field ? cast(GArrowField*)field.cPtr(No.Dup) : null, column ? cast(GArrowArray*)column.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_add_column(cast(GArrowRecordBatch*)this._cPtr, i, field ? cast(GArrowField*)field._cPtr(No.Dup) : null, column ? cast(GArrowArray*)column._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -88,7 +88,7 @@ class RecordBatch : gobject.object.ObjectWrap
   bool equal(arrow.record_batch.RecordBatch otherRecordBatch)
   {
     bool _retval;
-    _retval = garrow_record_batch_equal(cast(GArrowRecordBatch*)cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch.cPtr(No.Dup) : null);
+    _retval = garrow_record_batch_equal(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class RecordBatch : gobject.object.ObjectWrap
   bool equalMetadata(arrow.record_batch.RecordBatch otherRecordBatch, bool checkMetadata)
   {
     bool _retval;
-    _retval = garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch.cPtr(No.Dup) : null, checkMetadata);
+    _retval = garrow_record_batch_equal_metadata(cast(GArrowRecordBatch*)this._cPtr, otherRecordBatch ? cast(GArrowRecordBatch*)otherRecordBatch._cPtr(No.Dup) : null, checkMetadata);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_record_batch_export(cast(GArrowRecordBatch*)cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
+    _retval = garrow_record_batch_export(cast(GArrowRecordBatch*)this._cPtr, cast(void**)&cAbiArray, cast(void**)&cAbiSchema, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -116,10 +116,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_filter(cast(GArrowRecordBatch*)cPtr, filter ? cast(GArrowBooleanArray*)filter.cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_filter(cast(GArrowRecordBatch*)this._cPtr, filter ? cast(GArrowBooleanArray*)filter._cPtr(No.Dup) : null, options ? cast(GArrowFilterOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,8 +127,8 @@ class RecordBatch : gobject.object.ObjectWrap
   arrow.array.Array getColumnData(int i)
   {
     GArrowArray* _cretval;
-    _cretval = garrow_record_batch_get_column_data(cast(GArrowRecordBatch*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_record_batch_get_column_data(cast(GArrowRecordBatch*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class RecordBatch : gobject.object.ObjectWrap
   string getColumnName(int i)
   {
     const(char)* _cretval;
-    _cretval = garrow_record_batch_get_column_name(cast(GArrowRecordBatch*)cPtr, i);
+    _cretval = garrow_record_batch_get_column_name(cast(GArrowRecordBatch*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -145,7 +145,7 @@ class RecordBatch : gobject.object.ObjectWrap
   uint getNColumns()
   {
     uint _retval;
-    _retval = garrow_record_batch_get_n_columns(cast(GArrowRecordBatch*)cPtr);
+    _retval = garrow_record_batch_get_n_columns(cast(GArrowRecordBatch*)this._cPtr);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class RecordBatch : gobject.object.ObjectWrap
   long getNRows()
   {
     long _retval;
-    _retval = garrow_record_batch_get_n_rows(cast(GArrowRecordBatch*)cPtr);
+    _retval = garrow_record_batch_get_n_rows(cast(GArrowRecordBatch*)this._cPtr);
     return _retval;
   }
 
@@ -161,8 +161,8 @@ class RecordBatch : gobject.object.ObjectWrap
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
-    _cretval = garrow_record_batch_get_schema(cast(GArrowRecordBatch*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    _cretval = garrow_record_batch_get_schema(cast(GArrowRecordBatch*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -171,10 +171,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_remove_column(cast(GArrowRecordBatch*)cPtr, i, &_err);
+    _cretval = garrow_record_batch_remove_column(cast(GArrowRecordBatch*)this._cPtr, i, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -183,10 +183,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowBuffer* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_serialize(cast(GArrowRecordBatch*)cPtr, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_serialize(cast(GArrowRecordBatch*)this._cPtr, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,8 +194,8 @@ class RecordBatch : gobject.object.ObjectWrap
   arrow.record_batch.RecordBatch slice(long offset, long length)
   {
     GArrowRecordBatch* _cretval;
-    _cretval = garrow_record_batch_slice(cast(GArrowRecordBatch*)cPtr, offset, length);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    _cretval = garrow_record_batch_slice(cast(GArrowRecordBatch*)this._cPtr, offset, length);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -204,10 +204,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowUInt64Array* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_sort_indices(cast(GArrowRecordBatch*)cPtr, options ? cast(GArrowSortOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_sort_indices(cast(GArrowRecordBatch*)this._cPtr, options ? cast(GArrowSortOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.uint64_array.UInt64Array)(cast(GArrowUInt64Array*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -216,10 +216,10 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_take(cast(GArrowRecordBatch*)cPtr, indices ? cast(GArrowArray*)indices.cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_take(cast(GArrowRecordBatch*)this._cPtr, indices ? cast(GArrowArray*)indices._cPtr(No.Dup) : null, options ? cast(GArrowTakeOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class RecordBatch : gobject.object.ObjectWrap
   {
     char* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_to_string(cast(GArrowRecordBatch*)cPtr, &_err);
+    _cretval = garrow_record_batch_to_string(cast(GArrowRecordBatch*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);

@@ -28,7 +28,7 @@ class QueueArray
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -36,6 +36,6 @@ class QueueArray
   /** */
   void pushTailStruct(void* pStruct = null)
   {
-    gst_queue_array_push_tail_struct(cast(GstQueueArray*)cPtr, pStruct);
+    gst_queue_array_push_tail_struct(cast(GstQueueArray*)this._cPtr, pStruct);
   }
 }

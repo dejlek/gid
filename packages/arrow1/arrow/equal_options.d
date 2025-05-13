@@ -18,16 +18,16 @@ class EqualOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_equal_options_get_type != &gidSymbolNotFound ? garrow_equal_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -107,7 +107,7 @@ class EqualOptions : gobject.object.ObjectWrap
   bool isApprox()
   {
     bool _retval;
-    _retval = garrow_equal_options_is_approx(cast(GArrowEqualOptions*)cPtr);
+    _retval = garrow_equal_options_is_approx(cast(GArrowEqualOptions*)this._cPtr);
     return _retval;
   }
 }

@@ -29,22 +29,22 @@ class StrvBuilder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_strv_builder_get_type != &gidSymbolNotFound ? g_strv_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -76,7 +76,7 @@ class StrvBuilder : gobject.boxed.Boxed
   void add(string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    g_strv_builder_add(cast(GStrvBuilder*)cPtr, _value);
+    g_strv_builder_add(cast(GStrvBuilder*)this._cPtr, _value);
   }
 
   /**
@@ -94,7 +94,7 @@ class StrvBuilder : gobject.boxed.Boxed
       _tmpvalue ~= s.toCString(No.Alloc);
     _tmpvalue ~= null;
     const(char*)* _value = _tmpvalue.ptr;
-    g_strv_builder_addv(cast(GStrvBuilder*)cPtr, _value);
+    g_strv_builder_addv(cast(GStrvBuilder*)this._cPtr, _value);
   }
 
   /**
@@ -108,7 +108,7 @@ class StrvBuilder : gobject.boxed.Boxed
   string[] end()
   {
     char** _cretval;
-    _cretval = g_strv_builder_end(cast(GStrvBuilder*)cPtr);
+    _cretval = g_strv_builder_end(cast(GStrvBuilder*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -136,6 +136,6 @@ class StrvBuilder : gobject.boxed.Boxed
   void take(string value)
   {
     char* _value = value.toCString(Yes.Alloc);
-    g_strv_builder_take(cast(GStrvBuilder*)cPtr, _value);
+    g_strv_builder_take(cast(GStrvBuilder*)this._cPtr, _value);
   }
 }

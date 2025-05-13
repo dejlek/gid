@@ -90,16 +90,16 @@ class IMContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_context_get_type != &gidSymbolNotFound ? gtk_im_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -159,7 +159,7 @@ class IMContext : gobject.object.ObjectWrap
   bool deleteSurrounding(int offset, int nChars)
   {
     bool _retval;
-    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)cPtr, offset, nChars);
+    _retval = gtk_im_context_delete_surrounding(cast(GtkIMContext*)this._cPtr, offset, nChars);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class IMContext : gobject.object.ObjectWrap
   bool filterKeypress(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)cPtr, event ? cast(GdkEventKey*)event.cPtr : null);
+    _retval = gtk_im_context_filter_keypress(cast(GtkIMContext*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void focusIn()
   {
-    gtk_im_context_focus_in(cast(GtkIMContext*)cPtr);
+    gtk_im_context_focus_in(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -198,7 +198,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void focusOut()
   {
-    gtk_im_context_focus_out(cast(GtkIMContext*)cPtr);
+    gtk_im_context_focus_out(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -220,7 +220,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     char* _str;
     PangoAttrList* _attrs;
-    gtk_im_context_get_preedit_string(cast(GtkIMContext*)cPtr, &_str, &_attrs, cast(int*)&cursorPos);
+    gtk_im_context_get_preedit_string(cast(GtkIMContext*)this._cPtr, &_str, &_attrs, cast(int*)&cursorPos);
     str = _str.fromCString(Yes.Free);
     attrs = new pango.attr_list.AttrList(cast(void*)_attrs, Yes.Take);
   }
@@ -253,7 +253,7 @@ class IMContext : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _text;
-    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)cPtr, &_text, cast(int*)&cursorIndex);
+    _retval = gtk_im_context_get_surrounding(cast(GtkIMContext*)this._cPtr, &_text, cast(int*)&cursorIndex);
     text = _text.fromCString(Yes.Free);
     return _retval;
   }
@@ -265,7 +265,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void reset()
   {
-    gtk_im_context_reset(cast(GtkIMContext*)cPtr);
+    gtk_im_context_reset(cast(GtkIMContext*)this._cPtr);
   }
 
   /**
@@ -280,7 +280,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setClientWindow(gdk.window.Window window = null)
   {
-    gtk_im_context_set_client_window(cast(GtkIMContext*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null);
+    gtk_im_context_set_client_window(cast(GtkIMContext*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null);
   }
 
   /**
@@ -293,7 +293,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setCursorLocation(gdk.rectangle.Rectangle area)
   {
-    gtk_im_context_set_cursor_location(cast(GtkIMContext*)cPtr, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
+    gtk_im_context_set_cursor_location(cast(GtkIMContext*)this._cPtr, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
   }
 
   /**
@@ -312,7 +312,7 @@ class IMContext : gobject.object.ObjectWrap
   void setSurrounding(string text, int len, int cursorIndex)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_im_context_set_surrounding(cast(GtkIMContext*)cPtr, _text, len, cursorIndex);
+    gtk_im_context_set_surrounding(cast(GtkIMContext*)this._cPtr, _text, len, cursorIndex);
   }
 
   /**
@@ -326,7 +326,7 @@ class IMContext : gobject.object.ObjectWrap
   */
   void setUsePreedit(bool usePreedit)
   {
-    gtk_im_context_set_use_preedit(cast(GtkIMContext*)cPtr, usePreedit);
+    gtk_im_context_set_use_preedit(cast(GtkIMContext*)this._cPtr, usePreedit);
   }
 
   /**

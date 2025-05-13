@@ -136,16 +136,16 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_bin_get_type != &gidSymbolNotFound ? gst_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -246,7 +246,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool add(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_add(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_bin_add(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -265,8 +265,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.pad.Pad findUnlinkedPad(gst.types.PadDirection direction)
   {
     GstPad* _cretval;
-    _cretval = gst_bin_find_unlinked_pad(cast(GstBin*)cPtr, direction);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_bin_find_unlinked_pad(cast(GstBin*)this._cPtr, direction);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -285,8 +285,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.element.Element getByInterface(gobject.types.GType iface)
   {
     GstElement* _cretval;
-    _cretval = gst_bin_get_by_interface(cast(GstBin*)cPtr, iface);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    _cretval = gst_bin_get_by_interface(cast(GstBin*)this._cPtr, iface);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -303,8 +303,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_bin_get_by_name(cast(GstBin*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    _cretval = gst_bin_get_by_name(cast(GstBin*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -321,8 +321,8 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_bin_get_by_name_recurse_up(cast(GstBin*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+    _cretval = gst_bin_get_by_name_recurse_up(cast(GstBin*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -330,7 +330,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.types.ElementFlags getSuppressedFlags()
   {
     GstElementFlags _cretval;
-    _cretval = gst_bin_get_suppressed_flags(cast(GstBin*)cPtr);
+    _cretval = gst_bin_get_suppressed_flags(cast(GstBin*)this._cPtr);
     gst.types.ElementFlags _retval = cast(gst.types.ElementFlags)_cretval;
     return _retval;
   }
@@ -349,7 +349,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   {
     GstIterator* _cretval;
     const(char)* _factoryName = factoryName.toCString(No.Alloc);
-    _cretval = gst_bin_iterate_all_by_element_factory_name(cast(GstBin*)cPtr, _factoryName);
+    _cretval = gst_bin_iterate_all_by_element_factory_name(cast(GstBin*)this._cPtr, _factoryName);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -368,7 +368,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateAllByInterface(gobject.types.GType iface)
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_all_by_interface(cast(GstBin*)cPtr, iface);
+    _cretval = gst_bin_iterate_all_by_interface(cast(GstBin*)this._cPtr, iface);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -380,7 +380,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateElements()
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_elements(cast(GstBin*)cPtr);
+    _cretval = gst_bin_iterate_elements(cast(GstBin*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -393,7 +393,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateRecurse()
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_recurse(cast(GstBin*)cPtr);
+    _cretval = gst_bin_iterate_recurse(cast(GstBin*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -406,7 +406,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateSinks()
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_sinks(cast(GstBin*)cPtr);
+    _cretval = gst_bin_iterate_sinks(cast(GstBin*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -423,7 +423,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateSorted()
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_sorted(cast(GstBin*)cPtr);
+    _cretval = gst_bin_iterate_sorted(cast(GstBin*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -436,7 +436,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   gst.iterator.Iterator iterateSources()
   {
     GstIterator* _cretval;
-    _cretval = gst_bin_iterate_sources(cast(GstBin*)cPtr);
+    _cretval = gst_bin_iterate_sources(cast(GstBin*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -455,7 +455,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool recalculateLatency()
   {
     bool _retval;
-    _retval = gst_bin_recalculate_latency(cast(GstBin*)cPtr);
+    _retval = gst_bin_recalculate_latency(cast(GstBin*)this._cPtr);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool remove(gst.element.Element element)
   {
     bool _retval;
-    _retval = gst_bin_remove(cast(GstBin*)cPtr, element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+    _retval = gst_bin_remove(cast(GstBin*)this._cPtr, element ? cast(GstElement*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -493,7 +493,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   */
   void setSuppressedFlags(gst.types.ElementFlags flags)
   {
-    gst_bin_set_suppressed_flags(cast(GstBin*)cPtr, flags);
+    gst_bin_set_suppressed_flags(cast(GstBin*)this._cPtr, flags);
   }
 
   /**
@@ -505,7 +505,7 @@ class Bin : gst.element.Element, gst.child_proxy.ChildProxy
   bool syncChildrenStates()
   {
     bool _retval;
-    _retval = gst_bin_sync_children_states(cast(GstBin*)cPtr);
+    _retval = gst_bin_sync_children_states(cast(GstBin*)this._cPtr);
     return _retval;
   }
 

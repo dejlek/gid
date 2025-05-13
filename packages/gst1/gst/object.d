@@ -78,16 +78,16 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_object_get_type != &gidSymbolNotFound ? gst_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -184,7 +184,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
       _tmpexcludedProps ~= s.toCString(No.Alloc);
     _tmpexcludedProps ~= null;
     char** _excludedProps = _tmpexcludedProps.ptr;
-    gst_object_default_deep_notify(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, orig ? cast(GstObject*)orig.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null, _excludedProps);
+    gst_object_default_deep_notify(object ? cast(GObject*)object._cPtr(No.Dup) : null, orig ? cast(GstObject*)orig._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null, _excludedProps);
   }
 
   /**
@@ -203,7 +203,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   static bool replace(gst.object.ObjectWrap oldobj = null, gst.object.ObjectWrap newobj = null)
   {
     bool _retval;
-    _retval = gst_object_replace(oldobj ? cast(GstObject**)oldobj.cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj.cPtr(No.Dup) : null);
+    _retval = gst_object_replace(oldobj ? cast(GstObject**)oldobj._cPtr(No.Dup) : null, newobj ? cast(GstObject*)newobj._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool addControlBinding(gst.control_binding.ControlBinding binding)
   {
     bool _retval;
-    _retval = gst_object_add_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.Dup) : null);
+    _retval = gst_object_add_control_binding(cast(GstObject*)this._cPtr, binding ? cast(GstControlBinding*)binding._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   void defaultError(glib.error.ErrorWrap error, string debug_ = null)
   {
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    gst_object_default_error(cast(GstObject*)cPtr, error ? cast(const(GError)*)error.cPtr : null, _debug_);
+    gst_object_default_error(cast(GstObject*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null, _debug_);
   }
 
   /**
@@ -255,8 +255,8 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_object_get_control_binding(cast(GstObject*)cPtr, _propertyName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
+    _cretval = gst_object_get_control_binding(cast(GstObject*)this._cPtr, _propertyName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.control_binding.ControlBinding)(cast(GstControlBinding*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   gst.types.ClockTime getControlRate()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_object_get_control_rate(cast(GstObject*)cPtr);
+    _retval = gst_object_get_control_rate(cast(GstObject*)this._cPtr);
     return _retval;
   }
 
@@ -305,9 +305,9 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    _retval = gst_object_get_g_value_array(cast(GstObject*)cPtr, _propertyName, timestamp, interval, _nValues, _values);
+    _retval = gst_object_get_g_value_array(cast(GstObject*)this._cPtr, _propertyName, timestamp, interval, _nValues, _values);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   string getName()
   {
     char* _cretval;
-    _cretval = gst_object_get_name(cast(GstObject*)cPtr);
+    _cretval = gst_object_get_name(cast(GstObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -342,8 +342,8 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   gst.object.ObjectWrap getParent()
   {
     GstObject* _cretval;
-    _cretval = gst_object_get_parent(cast(GstObject*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.object.ObjectWrap)(cast(GstObject*)_cretval, Yes.Take);
+    _cretval = gst_object_get_parent(cast(GstObject*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.object.ObjectWrap)(cast(GstObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   string getPathString()
   {
     char* _cretval;
-    _cretval = gst_object_get_path_string(cast(GstObject*)cPtr);
+    _cretval = gst_object_get_path_string(cast(GstObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -379,7 +379,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     GValue* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_object_get_value(cast(GstObject*)cPtr, _propertyName, timestamp);
+    _cretval = gst_object_get_value(cast(GstObject*)this._cPtr, _propertyName, timestamp);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -391,7 +391,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool hasActiveControlBindings()
   {
     bool _retval;
-    _retval = gst_object_has_active_control_bindings(cast(GstObject*)cPtr);
+    _retval = gst_object_has_active_control_bindings(cast(GstObject*)this._cPtr);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool hasAncestor(gst.object.ObjectWrap ancestor)
   {
     bool _retval;
-    _retval = gst_object_has_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
+    _retval = gst_object_has_ancestor(cast(GstObject*)this._cPtr, ancestor ? cast(GstObject*)ancestor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -427,7 +427,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool hasAsAncestor(gst.object.ObjectWrap ancestor)
   {
     bool _retval;
-    _retval = gst_object_has_as_ancestor(cast(GstObject*)cPtr, ancestor ? cast(GstObject*)ancestor.cPtr(No.Dup) : null);
+    _retval = gst_object_has_as_ancestor(cast(GstObject*)this._cPtr, ancestor ? cast(GstObject*)ancestor._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool hasAsParent(gst.object.ObjectWrap parent)
   {
     bool _retval;
-    _retval = gst_object_has_as_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
+    _retval = gst_object_has_as_parent(cast(GstObject*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool removeControlBinding(gst.control_binding.ControlBinding binding)
   {
     bool _retval;
-    _retval = gst_object_remove_control_binding(cast(GstObject*)cPtr, binding ? cast(GstControlBinding*)binding.cPtr(No.Dup) : null);
+    _retval = gst_object_remove_control_binding(cast(GstObject*)this._cPtr, binding ? cast(GstControlBinding*)binding._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -477,7 +477,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   void setControlBindingDisabled(string propertyName, bool disabled)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gst_object_set_control_binding_disabled(cast(GstObject*)cPtr, _propertyName, disabled);
+    gst_object_set_control_binding_disabled(cast(GstObject*)this._cPtr, _propertyName, disabled);
   }
 
   /**
@@ -490,7 +490,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   void setControlBindingsDisabled(bool disabled)
   {
-    gst_object_set_control_bindings_disabled(cast(GstObject*)cPtr, disabled);
+    gst_object_set_control_bindings_disabled(cast(GstObject*)this._cPtr, disabled);
   }
 
   /**
@@ -507,7 +507,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   void setControlRate(gst.types.ClockTime controlRate)
   {
-    gst_object_set_control_rate(cast(GstObject*)cPtr, controlRate);
+    gst_object_set_control_rate(cast(GstObject*)this._cPtr, controlRate);
   }
 
   /**
@@ -528,7 +528,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_object_set_name(cast(GstObject*)cPtr, _name);
+    _retval = gst_object_set_name(cast(GstObject*)this._cPtr, _name);
     return _retval;
   }
 
@@ -546,7 +546,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool setParent(gst.object.ObjectWrap parent)
   {
     bool _retval;
-    _retval = gst_object_set_parent(cast(GstObject*)cPtr, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null);
+    _retval = gst_object_set_parent(cast(GstObject*)this._cPtr, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -559,7 +559,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   gst.types.ClockTime suggestNextSync()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_object_suggest_next_sync(cast(GstObject*)cPtr);
+    _retval = gst_object_suggest_next_sync(cast(GstObject*)this._cPtr);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   bool syncValues(gst.types.ClockTime timestamp)
   {
     bool _retval;
-    _retval = gst_object_sync_values(cast(GstObject*)cPtr, timestamp);
+    _retval = gst_object_sync_values(cast(GstObject*)this._cPtr, timestamp);
     return _retval;
   }
 
@@ -590,7 +590,7 @@ class ObjectWrap : gobject.initially_unowned.InitiallyUnowned
   */
   void unparent()
   {
-    gst_object_unparent(cast(GstObject*)cPtr);
+    gst_object_unparent(cast(GstObject*)this._cPtr);
   }
 
   /**

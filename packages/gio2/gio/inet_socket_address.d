@@ -28,16 +28,16 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_inet_socket_address_get_type != &gidSymbolNotFound ? g_inet_socket_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   this(gio.inet_address.InetAddress address, ushort port)
   {
     GSocketAddress* _cretval;
-    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address.cPtr(No.Dup) : null, port);
+    _cretval = g_inet_socket_address_new(address ? cast(GInetAddress*)address._cPtr(No.Dup) : null, port);
     this(_cretval, Yes.Take);
   }
 
@@ -78,7 +78,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
     GSocketAddress* _cretval;
     const(char)* _address = address.toCString(No.Alloc);
     _cretval = g_inet_socket_address_new_from_string(_address, port);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_socket_address.InetSocketAddress)(cast(GSocketAddress*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -90,8 +90,8 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   gio.inet_address.InetAddress getAddress()
   {
     GInetAddress* _cretval;
-    _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
+    _cretval = g_inet_socket_address_get_address(cast(GInetSocketAddress*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.inet_address.InetAddress)(cast(GInetAddress*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   uint getFlowinfo()
   {
     uint _retval;
-    _retval = g_inet_socket_address_get_flowinfo(cast(GInetSocketAddress*)cPtr);
+    _retval = g_inet_socket_address_get_flowinfo(cast(GInetSocketAddress*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   ushort getPort()
   {
     ushort _retval;
-    _retval = g_inet_socket_address_get_port(cast(GInetSocketAddress*)cPtr);
+    _retval = g_inet_socket_address_get_port(cast(GInetSocketAddress*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class InetSocketAddress : gio.socket_address.SocketAddress
   uint getScopeId()
   {
     uint _retval;
-    _retval = g_inet_socket_address_get_scope_id(cast(GInetSocketAddress*)cPtr);
+    _retval = g_inet_socket_address_get_scope_id(cast(GInetSocketAddress*)this._cPtr);
     return _retval;
   }
 }

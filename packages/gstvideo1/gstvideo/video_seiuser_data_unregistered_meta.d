@@ -28,7 +28,7 @@ class VideoSEIUserDataUnregisteredMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class VideoSEIUserDataUnregisteredMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoSEIUserDataUnregisteredMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).meta);
   }
 
   /**
@@ -48,7 +48,7 @@ class VideoSEIUserDataUnregisteredMeta
   */
   @property size_t size()
   {
-    return (cast(GstVideoSEIUserDataUnregisteredMeta*)cPtr).size;
+    return (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size;
   }
 
   /**
@@ -58,7 +58,7 @@ class VideoSEIUserDataUnregisteredMeta
   */
   @property void size(size_t propval)
   {
-    (cast(GstVideoSEIUserDataUnregisteredMeta*)cPtr).size = propval;
+    (cast(GstVideoSEIUserDataUnregisteredMeta*)this._cPtr).size = propval;
   }
 
   /** */

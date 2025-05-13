@@ -20,7 +20,7 @@ interface ColorBalance
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_color_balance_get_type != &gidSymbolNotFound ? gst_color_balance_get_type() : cast(GType)0;

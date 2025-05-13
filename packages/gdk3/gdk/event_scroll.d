@@ -35,7 +35,7 @@ class EventScroll
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -46,7 +46,7 @@ class EventScroll
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventScroll*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventScroll*)this._cPtr).type;
   }
 
   /**
@@ -56,7 +56,7 @@ class EventScroll
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventScroll*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventScroll*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -65,7 +65,7 @@ class EventScroll
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)this._cPtr).window);
   }
 
   /**
@@ -75,8 +75,8 @@ class EventScroll
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventScroll*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).window);
   }
 
   /**
@@ -85,7 +85,7 @@ class EventScroll
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventScroll*)cPtr).sendEvent;
+    return (cast(GdkEventScroll*)this._cPtr).sendEvent;
   }
 
   /**
@@ -95,7 +95,7 @@ class EventScroll
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventScroll*)cPtr).sendEvent = propval;
+    (cast(GdkEventScroll*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -104,7 +104,7 @@ class EventScroll
   */
   @property uint time()
   {
-    return (cast(GdkEventScroll*)cPtr).time;
+    return (cast(GdkEventScroll*)this._cPtr).time;
   }
 
   /**
@@ -114,7 +114,7 @@ class EventScroll
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventScroll*)cPtr).time = propval;
+    (cast(GdkEventScroll*)this._cPtr).time = propval;
   }
 
   /**
@@ -123,7 +123,7 @@ class EventScroll
   */
   @property double x()
   {
-    return (cast(GdkEventScroll*)cPtr).x;
+    return (cast(GdkEventScroll*)this._cPtr).x;
   }
 
   /**
@@ -133,7 +133,7 @@ class EventScroll
   */
   @property void x(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).x = propval;
+    (cast(GdkEventScroll*)this._cPtr).x = propval;
   }
 
   /**
@@ -142,7 +142,7 @@ class EventScroll
   */
   @property double y()
   {
-    return (cast(GdkEventScroll*)cPtr).y;
+    return (cast(GdkEventScroll*)this._cPtr).y;
   }
 
   /**
@@ -152,7 +152,7 @@ class EventScroll
   */
   @property void y(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).y = propval;
+    (cast(GdkEventScroll*)this._cPtr).y = propval;
   }
 
   /**
@@ -163,7 +163,7 @@ class EventScroll
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventScroll*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventScroll*)this._cPtr).state;
   }
 
   /**
@@ -175,7 +175,7 @@ class EventScroll
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventScroll*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventScroll*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 
   /**
@@ -186,7 +186,7 @@ class EventScroll
   */
   @property gdk.types.ScrollDirection direction()
   {
-    return cast(gdk.types.ScrollDirection)(cast(GdkEventScroll*)cPtr).direction;
+    return cast(gdk.types.ScrollDirection)(cast(GdkEventScroll*)this._cPtr).direction;
   }
 
   /**
@@ -198,7 +198,7 @@ class EventScroll
   */
   @property void direction(gdk.types.ScrollDirection propval)
   {
-    (cast(GdkEventScroll*)cPtr).direction = cast(GdkScrollDirection)propval;
+    (cast(GdkEventScroll*)this._cPtr).direction = cast(GdkScrollDirection)propval;
   }
 
   /**
@@ -208,7 +208,7 @@ class EventScroll
   */
   @property gdk.device.Device device()
   {
-    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)this._cPtr).device);
   }
 
   /**
@@ -219,8 +219,8 @@ class EventScroll
   */
   @property void device(gdk.device.Device propval)
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventScroll*)cPtr).device);
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventScroll*)this._cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventScroll*)this._cPtr).device);
   }
 
   /**
@@ -230,7 +230,7 @@ class EventScroll
   */
   @property double xRoot()
   {
-    return (cast(GdkEventScroll*)cPtr).xRoot;
+    return (cast(GdkEventScroll*)this._cPtr).xRoot;
   }
 
   /**
@@ -241,7 +241,7 @@ class EventScroll
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).xRoot = propval;
+    (cast(GdkEventScroll*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -251,7 +251,7 @@ class EventScroll
   */
   @property double yRoot()
   {
-    return (cast(GdkEventScroll*)cPtr).yRoot;
+    return (cast(GdkEventScroll*)this._cPtr).yRoot;
   }
 
   /**
@@ -262,7 +262,7 @@ class EventScroll
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).yRoot = propval;
+    (cast(GdkEventScroll*)this._cPtr).yRoot = propval;
   }
 
   /**
@@ -271,7 +271,7 @@ class EventScroll
   */
   @property double deltaX()
   {
-    return (cast(GdkEventScroll*)cPtr).deltaX;
+    return (cast(GdkEventScroll*)this._cPtr).deltaX;
   }
 
   /**
@@ -281,7 +281,7 @@ class EventScroll
   */
   @property void deltaX(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).deltaX = propval;
+    (cast(GdkEventScroll*)this._cPtr).deltaX = propval;
   }
 
   /**
@@ -290,7 +290,7 @@ class EventScroll
   */
   @property double deltaY()
   {
-    return (cast(GdkEventScroll*)cPtr).deltaY;
+    return (cast(GdkEventScroll*)this._cPtr).deltaY;
   }
 
   /**
@@ -300,18 +300,18 @@ class EventScroll
   */
   @property void deltaY(double propval)
   {
-    (cast(GdkEventScroll*)cPtr).deltaY = propval;
+    (cast(GdkEventScroll*)this._cPtr).deltaY = propval;
   }
 
   /** */
   @property uint isStop()
   {
-    return (cast(GdkEventScroll*)cPtr).isStop;
+    return (cast(GdkEventScroll*)this._cPtr).isStop;
   }
 
   /** */
   @property void isStop(uint propval)
   {
-    (cast(GdkEventScroll*)cPtr).isStop = propval;
+    (cast(GdkEventScroll*)this._cPtr).isStop = propval;
   }
 }

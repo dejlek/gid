@@ -32,16 +32,16 @@ class HSV : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_hsv_get_type != &gidSymbolNotFound ? gtk_hsv_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,7 +91,7 @@ class HSV : gtk.widget.Widget
   */
   void getColor(out double h, out double s, out double v)
   {
-    gtk_hsv_get_color(cast(GtkHSV*)cPtr, cast(double*)&h, cast(double*)&s, cast(double*)&v);
+    gtk_hsv_get_color(cast(GtkHSV*)this._cPtr, cast(double*)&h, cast(double*)&s, cast(double*)&v);
   }
 
   /**
@@ -103,7 +103,7 @@ class HSV : gtk.widget.Widget
   */
   void getMetrics(out int size, out int ringWidth)
   {
-    gtk_hsv_get_metrics(cast(GtkHSV*)cPtr, cast(int*)&size, cast(int*)&ringWidth);
+    gtk_hsv_get_metrics(cast(GtkHSV*)this._cPtr, cast(int*)&size, cast(int*)&ringWidth);
   }
 
   /**
@@ -118,7 +118,7 @@ class HSV : gtk.widget.Widget
   bool isAdjusting()
   {
     bool _retval;
-    _retval = gtk_hsv_is_adjusting(cast(GtkHSV*)cPtr);
+    _retval = gtk_hsv_is_adjusting(cast(GtkHSV*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class HSV : gtk.widget.Widget
   */
   void setColor(double h, double s, double v)
   {
-    gtk_hsv_set_color(cast(GtkHSV*)cPtr, h, s, v);
+    gtk_hsv_set_color(cast(GtkHSV*)this._cPtr, h, s, v);
   }
 
   /**
@@ -145,7 +145,7 @@ class HSV : gtk.widget.Widget
   */
   void setMetrics(int size, int ringWidth)
   {
-    gtk_hsv_set_metrics(cast(GtkHSV*)cPtr, size, ringWidth);
+    gtk_hsv_set_metrics(cast(GtkHSV*)this._cPtr, size, ringWidth);
   }
 
   /**

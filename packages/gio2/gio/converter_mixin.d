@@ -133,7 +133,7 @@ template ConverterT()
 
     auto _outbuf = cast(void*)outbuf.ptr;
     GError *_err;
-    _cretval = g_converter_convert(cast(GConverter*)cPtr, _inbuf, _inbufSize, _outbuf, _outbufSize, flags, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
+    _cretval = g_converter_convert(cast(GConverter*)this._cPtr, _inbuf, _inbufSize, _outbuf, _outbufSize, flags, cast(size_t*)&bytesRead, cast(size_t*)&bytesWritten, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gio.types.ConverterResult _retval = cast(gio.types.ConverterResult)_cretval;
@@ -147,6 +147,6 @@ template ConverterT()
   */
   override void reset()
   {
-    g_converter_reset(cast(GConverter*)cPtr);
+    g_converter_reset(cast(GConverter*)this._cPtr);
   }
 }

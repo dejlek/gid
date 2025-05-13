@@ -30,22 +30,22 @@ class ToplevelLayout : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_toplevel_layout_get_type != &gidSymbolNotFound ? gdk_toplevel_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   gdk.toplevel_layout.ToplevelLayout copy()
   {
     GdkToplevelLayout* _cretval;
-    _cretval = gdk_toplevel_layout_copy(cast(GdkToplevelLayout*)cPtr);
+    _cretval = gdk_toplevel_layout_copy(cast(GdkToplevelLayout*)this._cPtr);
     auto _retval = _cretval ? new gdk.toplevel_layout.ToplevelLayout(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -94,7 +94,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool equal(gdk.toplevel_layout.ToplevelLayout other)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)cPtr, other ? cast(GdkToplevelLayout*)other.cPtr(No.Dup) : null);
+    _retval = gdk_toplevel_layout_equal(cast(GdkToplevelLayout*)this._cPtr, other ? cast(GdkToplevelLayout*)other._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getFullscreen(out bool fullscreen)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_fullscreen(cast(GdkToplevelLayout*)cPtr, cast(bool*)&fullscreen);
+    _retval = gdk_toplevel_layout_get_fullscreen(cast(GdkToplevelLayout*)this._cPtr, cast(bool*)&fullscreen);
     return _retval;
   }
 
@@ -122,8 +122,8 @@ class ToplevelLayout : gobject.boxed.Boxed
   gdk.monitor.MonitorWrap getFullscreenMonitor()
   {
     GdkMonitor* _cretval;
-    _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
+    _cretval = gdk_toplevel_layout_get_fullscreen_monitor(cast(GdkToplevelLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.monitor.MonitorWrap)(cast(GdkMonitor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getMaximized(out bool maximized)
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_maximized(cast(GdkToplevelLayout*)cPtr, cast(bool*)&maximized);
+    _retval = gdk_toplevel_layout_get_maximized(cast(GdkToplevelLayout*)this._cPtr, cast(bool*)&maximized);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   bool getResizable()
   {
     bool _retval;
-    _retval = gdk_toplevel_layout_get_resizable(cast(GdkToplevelLayout*)cPtr);
+    _retval = gdk_toplevel_layout_get_resizable(cast(GdkToplevelLayout*)this._cPtr);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   */
   void setFullscreen(bool fullscreen, gdk.monitor.MonitorWrap monitor = null)
   {
-    gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor.cPtr(No.Dup) : null);
+    gdk_toplevel_layout_set_fullscreen(cast(GdkToplevelLayout*)this._cPtr, fullscreen, monitor ? cast(GdkMonitor*)monitor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -177,7 +177,7 @@ class ToplevelLayout : gobject.boxed.Boxed
   */
   void setMaximized(bool maximized)
   {
-    gdk_toplevel_layout_set_maximized(cast(GdkToplevelLayout*)cPtr, maximized);
+    gdk_toplevel_layout_set_maximized(cast(GdkToplevelLayout*)this._cPtr, maximized);
   }
 
   /**
@@ -189,6 +189,6 @@ class ToplevelLayout : gobject.boxed.Boxed
   */
   void setResizable(bool resizable)
   {
-    gdk_toplevel_layout_set_resizable(cast(GdkToplevelLayout*)cPtr, resizable);
+    gdk_toplevel_layout_set_resizable(cast(GdkToplevelLayout*)this._cPtr, resizable);
   }
 }

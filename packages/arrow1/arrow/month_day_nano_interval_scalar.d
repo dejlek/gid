@@ -20,16 +20,16 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_day_nano_interval_scalar_get_type != &gidSymbolNotFound ? garrow_month_day_nano_interval_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   this(arrow.month_day_nano.MonthDayNano value)
   {
     GArrowMonthDayNanoIntervalScalar* _cretval;
-    _cretval = garrow_month_day_nano_interval_scalar_new(value ? cast(GArrowMonthDayNano*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_month_day_nano_interval_scalar_new(value ? cast(GArrowMonthDayNano*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -50,8 +50,8 @@ class MonthDayNanoIntervalScalar : arrow.scalar.Scalar
   arrow.month_day_nano.MonthDayNano getValue()
   {
     GArrowMonthDayNano* _cretval;
-    _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
+    _cretval = garrow_month_day_nano_interval_scalar_get_value(cast(GArrowMonthDayNanoIntervalScalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.month_day_nano.MonthDayNano)(cast(GArrowMonthDayNano*)_cretval, No.Take);
     return _retval;
   }
 }

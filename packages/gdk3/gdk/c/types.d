@@ -4905,7 +4905,7 @@ struct GdkScreen;
 struct GdkSeat
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**

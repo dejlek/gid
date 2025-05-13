@@ -75,16 +75,16 @@ class WindowControls : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_controls_get_type != &gidSymbolNotFound ? gtk_window_controls_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -171,7 +171,7 @@ class WindowControls : gtk.widget.Widget
   string getDecorationLayout()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)cPtr);
+    _cretval = gtk_window_controls_get_decoration_layout(cast(GtkWindowControls*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,7 +183,7 @@ class WindowControls : gtk.widget.Widget
   bool getEmpty()
   {
     bool _retval;
-    _retval = gtk_window_controls_get_empty(cast(GtkWindowControls*)cPtr);
+    _retval = gtk_window_controls_get_empty(cast(GtkWindowControls*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class WindowControls : gtk.widget.Widget
   gtk.types.PackType getSide()
   {
     GtkPackType _cretval;
-    _cretval = gtk_window_controls_get_side(cast(GtkWindowControls*)cPtr);
+    _cretval = gtk_window_controls_get_side(cast(GtkWindowControls*)this._cPtr);
     gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
     return _retval;
   }
@@ -222,7 +222,7 @@ class WindowControls : gtk.widget.Widget
   void setDecorationLayout(string layout = null)
   {
     const(char)* _layout = layout.toCString(No.Alloc);
-    gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)cPtr, _layout);
+    gtk_window_controls_set_decoration_layout(cast(GtkWindowControls*)this._cPtr, _layout);
   }
 
   /**
@@ -235,6 +235,6 @@ class WindowControls : gtk.widget.Widget
   */
   void setSide(gtk.types.PackType side)
   {
-    gtk_window_controls_set_side(cast(GtkWindowControls*)cPtr, side);
+    gtk_window_controls_set_side(cast(GtkWindowControls*)this._cPtr, side);
   }
 }

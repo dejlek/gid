@@ -72,22 +72,22 @@ class Schema : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_schema_get_type != &gidSymbolNotFound ? secret_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,7 +102,7 @@ class Schema : gobject.boxed.Boxed
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(SecretSchema*)this._cPtr).name);
   }
 
   /**
@@ -112,8 +112,8 @@ class Schema : gobject.boxed.Boxed
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(SecretSchema*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(SecretSchema*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(SecretSchema*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(SecretSchema*)this._cPtr).name);
   }
 
   /**
@@ -122,7 +122,7 @@ class Schema : gobject.boxed.Boxed
   */
   @property secret.types.SchemaFlags flags()
   {
-    return cast(secret.types.SchemaFlags)(cast(SecretSchema*)cPtr).flags;
+    return cast(secret.types.SchemaFlags)(cast(SecretSchema*)this._cPtr).flags;
   }
 
   /**
@@ -132,6 +132,6 @@ class Schema : gobject.boxed.Boxed
   */
   @property void flags(secret.types.SchemaFlags propval)
   {
-    (cast(SecretSchema*)cPtr).flags = cast(SecretSchemaFlags)propval;
+    (cast(SecretSchema*)this._cPtr).flags = cast(SecretSchemaFlags)propval;
   }
 }

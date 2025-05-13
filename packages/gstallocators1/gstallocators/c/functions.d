@@ -142,40 +142,42 @@ alias gst_phys_memory_get_phys_addr = c_gst_phys_memory_get_phys_addr;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // DRMDumbAllocator
-  gidLink(cast(void**)&gst_drm_dumb_allocator_get_type, "gst_drm_dumb_allocator_get_type", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_allocator_new_with_device_path, "gst_drm_dumb_allocator_new_with_device_path", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_allocator_new_with_fd, "gst_drm_dumb_allocator_new_with_fd", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_allocator_alloc, "gst_drm_dumb_allocator_alloc", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_allocator_has_prime_export, "gst_drm_dumb_allocator_has_prime_export", LIBS);
+  gidLink(cast(void**)&gst_drm_dumb_allocator_get_type, "gst_drm_dumb_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_drm_dumb_allocator_new_with_device_path, "gst_drm_dumb_allocator_new_with_device_path", libs);
+  gidLink(cast(void**)&gst_drm_dumb_allocator_new_with_fd, "gst_drm_dumb_allocator_new_with_fd", libs);
+  gidLink(cast(void**)&gst_drm_dumb_allocator_alloc, "gst_drm_dumb_allocator_alloc", libs);
+  gidLink(cast(void**)&gst_drm_dumb_allocator_has_prime_export, "gst_drm_dumb_allocator_has_prime_export", libs);
 
   // DmaBufAllocator
-  gidLink(cast(void**)&gst_dmabuf_allocator_get_type, "gst_dmabuf_allocator_get_type", LIBS);
-  gidLink(cast(void**)&gst_dmabuf_allocator_new, "gst_dmabuf_allocator_new", LIBS);
-  gidLink(cast(void**)&gst_dmabuf_allocator_alloc, "gst_dmabuf_allocator_alloc", LIBS);
-  gidLink(cast(void**)&gst_dmabuf_allocator_alloc_with_flags, "gst_dmabuf_allocator_alloc_with_flags", LIBS);
+  gidLink(cast(void**)&gst_dmabuf_allocator_get_type, "gst_dmabuf_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_dmabuf_allocator_new, "gst_dmabuf_allocator_new", libs);
+  gidLink(cast(void**)&gst_dmabuf_allocator_alloc, "gst_dmabuf_allocator_alloc", libs);
+  gidLink(cast(void**)&gst_dmabuf_allocator_alloc_with_flags, "gst_dmabuf_allocator_alloc_with_flags", libs);
 
   // FdAllocator
-  gidLink(cast(void**)&gst_fd_allocator_get_type, "gst_fd_allocator_get_type", LIBS);
-  gidLink(cast(void**)&gst_fd_allocator_new, "gst_fd_allocator_new", LIBS);
-  gidLink(cast(void**)&gst_fd_allocator_alloc, "gst_fd_allocator_alloc", LIBS);
+  gidLink(cast(void**)&gst_fd_allocator_get_type, "gst_fd_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_fd_allocator_new, "gst_fd_allocator_new", libs);
+  gidLink(cast(void**)&gst_fd_allocator_alloc, "gst_fd_allocator_alloc", libs);
 
   // PhysMemoryAllocator
-  gidLink(cast(void**)&gst_phys_memory_allocator_get_type, "gst_phys_memory_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_phys_memory_allocator_get_type, "gst_phys_memory_allocator_get_type", libs);
 
   // ShmAllocator
-  gidLink(cast(void**)&gst_shm_allocator_get_type, "gst_shm_allocator_get_type", LIBS);
-  gidLink(cast(void**)&gst_shm_allocator_get, "gst_shm_allocator_get", LIBS);
-  gidLink(cast(void**)&gst_shm_allocator_init_once, "gst_shm_allocator_init_once", LIBS);
+  gidLink(cast(void**)&gst_shm_allocator_get_type, "gst_shm_allocator_get_type", libs);
+  gidLink(cast(void**)&gst_shm_allocator_get, "gst_shm_allocator_get", libs);
+  gidLink(cast(void**)&gst_shm_allocator_init_once, "gst_shm_allocator_init_once", libs);
 
   // global
-  gidLink(cast(void**)&gst_dmabuf_memory_get_fd, "gst_dmabuf_memory_get_fd", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_memory_export_dmabuf, "gst_drm_dumb_memory_export_dmabuf", LIBS);
-  gidLink(cast(void**)&gst_drm_dumb_memory_get_handle, "gst_drm_dumb_memory_get_handle", LIBS);
-  gidLink(cast(void**)&gst_fd_memory_get_fd, "gst_fd_memory_get_fd", LIBS);
-  gidLink(cast(void**)&gst_is_dmabuf_memory, "gst_is_dmabuf_memory", LIBS);
-  gidLink(cast(void**)&gst_is_drm_dumb_memory, "gst_is_drm_dumb_memory", LIBS);
-  gidLink(cast(void**)&gst_is_fd_memory, "gst_is_fd_memory", LIBS);
-  gidLink(cast(void**)&gst_is_phys_memory, "gst_is_phys_memory", LIBS);
-  gidLink(cast(void**)&gst_phys_memory_get_phys_addr, "gst_phys_memory_get_phys_addr", LIBS);
+  gidLink(cast(void**)&gst_dmabuf_memory_get_fd, "gst_dmabuf_memory_get_fd", libs);
+  gidLink(cast(void**)&gst_drm_dumb_memory_export_dmabuf, "gst_drm_dumb_memory_export_dmabuf", libs);
+  gidLink(cast(void**)&gst_drm_dumb_memory_get_handle, "gst_drm_dumb_memory_get_handle", libs);
+  gidLink(cast(void**)&gst_fd_memory_get_fd, "gst_fd_memory_get_fd", libs);
+  gidLink(cast(void**)&gst_is_dmabuf_memory, "gst_is_dmabuf_memory", libs);
+  gidLink(cast(void**)&gst_is_drm_dumb_memory, "gst_is_drm_dumb_memory", libs);
+  gidLink(cast(void**)&gst_is_fd_memory, "gst_is_fd_memory", libs);
+  gidLink(cast(void**)&gst_is_phys_memory, "gst_is_phys_memory", libs);
+  gidLink(cast(void**)&gst_phys_memory_get_phys_addr, "gst_phys_memory_get_phys_addr", libs);
 }

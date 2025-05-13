@@ -20,16 +20,16 @@ class SharedTaskPool : gst.task_pool.TaskPool
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_shared_task_pool_get_type != &gidSymbolNotFound ? gst_shared_task_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class SharedTaskPool : gst.task_pool.TaskPool
   uint getMaxThreads()
   {
     uint _retval;
-    _retval = gst_shared_task_pool_get_max_threads(cast(GstSharedTaskPool*)cPtr);
+    _retval = gst_shared_task_pool_get_max_threads(cast(GstSharedTaskPool*)this._cPtr);
     return _retval;
   }
 
@@ -74,6 +74,6 @@ class SharedTaskPool : gst.task_pool.TaskPool
   */
   void setMaxThreads(uint maxThreads)
   {
-    gst_shared_task_pool_set_max_threads(cast(GstSharedTaskPool*)cPtr, maxThreads);
+    gst_shared_task_pool_set_max_threads(cast(GstSharedTaskPool*)this._cPtr, maxThreads);
   }
 }

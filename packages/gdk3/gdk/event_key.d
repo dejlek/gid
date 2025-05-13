@@ -27,7 +27,7 @@ class EventKey
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventKey
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventKey*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventKey*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventKey
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventKey*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventKey*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventKey
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventKey
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventKey*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventKey*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventKey*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventKey
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventKey*)cPtr).sendEvent;
+    return (cast(GdkEventKey*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventKey
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventKey*)cPtr).sendEvent = propval;
+    (cast(GdkEventKey*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventKey
   */
   @property uint time()
   {
-    return (cast(GdkEventKey*)cPtr).time;
+    return (cast(GdkEventKey*)this._cPtr).time;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventKey
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventKey*)cPtr).time = propval;
+    (cast(GdkEventKey*)this._cPtr).time = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class EventKey
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventKey*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventKey*)this._cPtr).state;
   }
 
   /**
@@ -129,7 +129,7 @@ class EventKey
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventKey*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventKey*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 
   /**
@@ -140,7 +140,7 @@ class EventKey
   */
   @property uint keyval()
   {
-    return (cast(GdkEventKey*)cPtr).keyval;
+    return (cast(GdkEventKey*)this._cPtr).keyval;
   }
 
   /**
@@ -152,7 +152,7 @@ class EventKey
   */
   @property void keyval(uint propval)
   {
-    (cast(GdkEventKey*)cPtr).keyval = propval;
+    (cast(GdkEventKey*)this._cPtr).keyval = propval;
   }
 
   /**
@@ -161,7 +161,7 @@ class EventKey
   */
   @property int length()
   {
-    return (cast(GdkEventKey*)cPtr).length;
+    return (cast(GdkEventKey*)this._cPtr).length;
   }
 
   /**
@@ -171,7 +171,7 @@ class EventKey
   */
   @property void length(int propval)
   {
-    (cast(GdkEventKey*)cPtr).length = propval;
+    (cast(GdkEventKey*)this._cPtr).length = propval;
   }
 
   /**
@@ -190,7 +190,7 @@ class EventKey
   */
   @property string string_()
   {
-    return cToD!(string)(cast(void*)(cast(GdkEventKey*)cPtr).string_);
+    return cToD!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
   }
 
   /**
@@ -210,8 +210,8 @@ class EventKey
   */
   @property void string_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkEventKey*)cPtr).string_);
-    dToC(propval, cast(void*)&(cast(GdkEventKey*)cPtr).string_);
+    cValueFree!(string)(cast(void*)(cast(GdkEventKey*)this._cPtr).string_);
+    dToC(propval, cast(void*)&(cast(GdkEventKey*)this._cPtr).string_);
   }
 
   /**
@@ -220,7 +220,7 @@ class EventKey
   */
   @property ushort hardwareKeycode()
   {
-    return (cast(GdkEventKey*)cPtr).hardwareKeycode;
+    return (cast(GdkEventKey*)this._cPtr).hardwareKeycode;
   }
 
   /**
@@ -230,7 +230,7 @@ class EventKey
   */
   @property void hardwareKeycode(ushort propval)
   {
-    (cast(GdkEventKey*)cPtr).hardwareKeycode = propval;
+    (cast(GdkEventKey*)this._cPtr).hardwareKeycode = propval;
   }
 
   /**
@@ -239,7 +239,7 @@ class EventKey
   */
   @property ubyte group()
   {
-    return (cast(GdkEventKey*)cPtr).group;
+    return (cast(GdkEventKey*)this._cPtr).group;
   }
 
   /**
@@ -249,7 +249,7 @@ class EventKey
   */
   @property void group(ubyte propval)
   {
-    (cast(GdkEventKey*)cPtr).group = propval;
+    (cast(GdkEventKey*)this._cPtr).group = propval;
   }
 
   /**
@@ -259,7 +259,7 @@ class EventKey
   */
   @property uint isModifier()
   {
-    return (cast(GdkEventKey*)cPtr).isModifier;
+    return (cast(GdkEventKey*)this._cPtr).isModifier;
   }
 
   /**
@@ -270,6 +270,6 @@ class EventKey
   */
   @property void isModifier(uint propval)
   {
-    (cast(GdkEventKey*)cPtr).isModifier = propval;
+    (cast(GdkEventKey*)this._cPtr).isModifier = propval;
   }
 }

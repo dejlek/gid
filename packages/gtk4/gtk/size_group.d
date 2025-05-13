@@ -86,16 +86,16 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_size_group_get_type != &gidSymbolNotFound ? gtk_size_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -157,7 +157,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addWidget(gtk.widget.Widget widget)
   {
-    gtk_size_group_add_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_size_group_add_widget(cast(GtkSizeGroup*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -167,7 +167,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.types.SizeGroupMode getMode()
   {
     GtkSizeGroupMode _cretval;
-    _cretval = gtk_size_group_get_mode(cast(GtkSizeGroup*)cPtr);
+    _cretval = gtk_size_group_get_mode(cast(GtkSizeGroup*)this._cPtr);
     gtk.types.SizeGroupMode _retval = cast(gtk.types.SizeGroupMode)_cretval;
     return _retval;
   }
@@ -180,7 +180,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.widget.Widget[] getWidgets()
   {
     GSList* _cretval;
-    _cretval = gtk_size_group_get_widgets(cast(GtkSizeGroup*)cPtr);
+    _cretval = gtk_size_group_get_widgets(cast(GtkSizeGroup*)this._cPtr);
     auto _retval = gSListToD!(gtk.widget.Widget, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -193,7 +193,7 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void removeWidget(gtk.widget.Widget widget)
   {
-    gtk_size_group_remove_widget(cast(GtkSizeGroup*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_size_group_remove_widget(cast(GtkSizeGroup*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -210,6 +210,6 @@ class SizeGroup : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setMode(gtk.types.SizeGroupMode mode)
   {
-    gtk_size_group_set_mode(cast(GtkSizeGroup*)cPtr, mode);
+    gtk_size_group_set_mode(cast(GtkSizeGroup*)this._cPtr, mode);
   }
 }

@@ -24,16 +24,16 @@ class NumericSorter : gtk.sorter.Sorter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_numeric_sorter_get_type != &gidSymbolNotFound ? gtk_numeric_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class NumericSorter : gtk.sorter.Sorter
   this(gtk.expression.Expression expression = null)
   {
     GtkNumericSorter* _cretval;
-    _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    _cretval = gtk_numeric_sorter_new(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -104,7 +104,7 @@ class NumericSorter : gtk.sorter.Sorter
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_numeric_sorter_get_expression(cast(GtkNumericSorter*)cPtr);
+    _cretval = gtk_numeric_sorter_get_expression(cast(GtkNumericSorter*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -116,7 +116,7 @@ class NumericSorter : gtk.sorter.Sorter
   gtk.types.SortType getSortOrder()
   {
     GtkSortType _cretval;
-    _cretval = gtk_numeric_sorter_get_sort_order(cast(GtkNumericSorter*)cPtr);
+    _cretval = gtk_numeric_sorter_get_sort_order(cast(GtkNumericSorter*)this._cPtr);
     gtk.types.SortType _retval = cast(gtk.types.SortType)_cretval;
     return _retval;
   }
@@ -135,7 +135,7 @@ class NumericSorter : gtk.sorter.Sorter
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_numeric_sorter_set_expression(cast(GtkNumericSorter*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -146,6 +146,6 @@ class NumericSorter : gtk.sorter.Sorter
   */
   void setSortOrder(gtk.types.SortType sortOrder)
   {
-    gtk_numeric_sorter_set_sort_order(cast(GtkNumericSorter*)cPtr, sortOrder);
+    gtk_numeric_sorter_set_sort_order(cast(GtkNumericSorter*)this._cPtr, sortOrder);
   }
 }

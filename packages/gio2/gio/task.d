@@ -552,16 +552,16 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_task_get_type != &gidSymbolNotFound ? g_task_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -625,18 +625,18 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   this(gobject.object.ObjectWrap sourceObject = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     GTask* _cretval;
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    _cretval = g_task_new(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    _cretval = g_task_new(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
     this(_cretval, Yes.Take);
   }
 
@@ -655,7 +655,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   static bool isValid(gio.async_result.AsyncResult result, gobject.object.ObjectWrap sourceObject = null)
   {
     bool _retval;
-    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null);
+    _retval = g_task_is_valid(result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -678,17 +678,17 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   static void reportError(gobject.object.ObjectWrap sourceObject, gio.types.AsyncReadyCallback callback, void* sourceTag, glib.error.ErrorWrap error)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_task_report_error(sourceObject ? cast(ObjectC*)sourceObject.cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error.cPtr : null);
+    g_task_report_error(sourceObject ? cast(GObject*)sourceObject._cPtr(No.Dup) : null, _callbackCB, _callback, sourceTag, error ? cast(GError*)error._cPtr : null);
   }
 
   /**
@@ -698,8 +698,8 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   gio.cancellable.Cancellable getCancellable()
   {
     GCancellable* _cretval;
-    _cretval = g_task_get_cancellable(cast(GTask*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
+    _cretval = g_task_get_cancellable(cast(GTask*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(GCancellable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -711,7 +711,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getCheckCancellable()
   {
     bool _retval;
-    _retval = g_task_get_check_cancellable(cast(GTask*)cPtr);
+    _retval = g_task_get_check_cancellable(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -724,7 +724,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getCompleted()
   {
     bool _retval;
-    _retval = g_task_get_completed(cast(GTask*)cPtr);
+    _retval = g_task_get_completed(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -741,7 +741,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
-    _cretval = g_task_get_context(cast(GTask*)cPtr);
+    _cretval = g_task_get_context(cast(GTask*)this._cPtr);
     auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -753,7 +753,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_task_get_name(cast(GTask*)cPtr);
+    _cretval = g_task_get_name(cast(GTask*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -765,7 +765,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   int getPriority()
   {
     int _retval;
-    _retval = g_task_get_priority(cast(GTask*)cPtr);
+    _retval = g_task_get_priority(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -777,7 +777,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool getReturnOnCancel()
   {
     bool _retval;
-    _retval = g_task_get_return_on_cancel(cast(GTask*)cPtr);
+    _retval = g_task_get_return_on_cancel(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -788,9 +788,9 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   gobject.object.ObjectWrap getSourceObject()
   {
-    ObjectC* _cretval;
-    _cretval = g_task_get_source_object(cast(GTask*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_task_get_source_object(cast(GTask*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -800,7 +800,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void* getSourceTag()
   {
-    auto _retval = g_task_get_source_tag(cast(GTask*)cPtr);
+    auto _retval = g_task_get_source_tag(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -810,7 +810,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void* getTaskData()
   {
-    auto _retval = g_task_get_task_data(cast(GTask*)cPtr);
+    auto _retval = g_task_get_task_data(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -821,7 +821,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool hadError()
   {
     bool _retval;
-    _retval = g_task_had_error(cast(GTask*)cPtr);
+    _retval = g_task_had_error(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -840,7 +840,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   {
     bool _retval;
     GError *_err;
-    _retval = g_task_propagate_boolean(cast(GTask*)cPtr, &_err);
+    _retval = g_task_propagate_boolean(cast(GTask*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -861,7 +861,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   {
     ptrdiff_t _retval;
     GError *_err;
-    _retval = g_task_propagate_int(cast(GTask*)cPtr, &_err);
+    _retval = g_task_propagate_int(cast(GTask*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -882,7 +882,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   void* propagatePointer()
   {
     GError *_err;
-    auto _retval = g_task_propagate_pointer(cast(GTask*)cPtr, &_err);
+    auto _retval = g_task_propagate_pointer(cast(GTask*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -910,7 +910,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
     bool _retval;
     GValue _value;
     GError *_err;
-    _retval = g_task_propagate_value(cast(GTask*)cPtr, &_value, &_err);
+    _retval = g_task_propagate_value(cast(GTask*)this._cPtr, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     value = new gobject.value.Value(cast(void*)&_value, No.Take);
@@ -927,7 +927,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnBoolean(bool result)
   {
-    g_task_return_boolean(cast(GTask*)cPtr, result);
+    g_task_return_boolean(cast(GTask*)this._cPtr, result);
   }
 
   /**
@@ -949,7 +949,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnError(glib.error.ErrorWrap error)
   {
-    g_task_return_error(cast(GTask*)cPtr, error ? cast(GError*)error.cPtr : null);
+    g_task_return_error(cast(GTask*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
 
   /**
@@ -962,7 +962,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool returnErrorIfCancelled()
   {
     bool _retval;
-    _retval = g_task_return_error_if_cancelled(cast(GTask*)cPtr);
+    _retval = g_task_return_error_if_cancelled(cast(GTask*)this._cPtr);
     return _retval;
   }
 
@@ -976,7 +976,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnInt(ptrdiff_t result)
   {
-    g_task_return_int(cast(GTask*)cPtr, result);
+    g_task_return_int(cast(GTask*)this._cPtr, result);
   }
 
   /**
@@ -996,7 +996,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   void returnNewErrorLiteral(glib.types.Quark domain, int code, string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    g_task_return_new_error_literal(cast(GTask*)cPtr, domain, code, _message);
+    g_task_return_new_error_literal(cast(GTask*)this._cPtr, domain, code, _message);
   }
 
   /**
@@ -1034,7 +1034,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       (*_dlg)();
     }
     auto _resultDestroyCB = resultDestroy ? &_resultDestroyCallback : null;
-    g_task_return_pointer(cast(GTask*)cPtr, result, _resultDestroyCB);
+    g_task_return_pointer(cast(GTask*)this._cPtr, result, _resultDestroyCB);
   }
 
   /**
@@ -1053,7 +1053,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void returnValue(gobject.value.Value result = null)
   {
-    g_task_return_value(cast(GTask*)cPtr, result ? cast(GValue*)result.cPtr(No.Dup) : null);
+    g_task_return_value(cast(GTask*)this._cPtr, result ? cast(GValue*)result._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1082,15 +1082,15 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void runInThread(gio.types.TaskThreadFunc taskFunc)
   {
-    extern(C) void _taskFuncCallback(GTask* task, ObjectC* sourceObject, void* taskData, GCancellable* cancellable)
+    extern(C) void _taskFuncCallback(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable)
     {
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
-    g_task_run_in_thread(cast(GTask*)cPtr, _taskFuncCB);
+    g_task_run_in_thread(cast(GTask*)this._cPtr, _taskFuncCB);
   }
 
   /**
@@ -1116,15 +1116,15 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void runInThreadSync(gio.types.TaskThreadFunc taskFunc)
   {
-    extern(C) void _taskFuncCallback(GTask* task, ObjectC* sourceObject, void* taskData, GCancellable* cancellable)
+    extern(C) void _taskFuncCallback(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable)
     {
       ptrThawGC(taskData);
       auto _dlg = cast(gio.types.TaskThreadFunc*)taskData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.task.Task)(cast(void*)task, No.Take), gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.cancellable.Cancellable)(cast(void*)cancellable, No.Take));
     }
     auto _taskFuncCB = taskFunc ? &_taskFuncCallback : null;
-    g_task_run_in_thread_sync(cast(GTask*)cPtr, _taskFuncCB);
+    g_task_run_in_thread_sync(cast(GTask*)this._cPtr, _taskFuncCB);
   }
 
   /**
@@ -1149,7 +1149,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void setCheckCancellable(bool checkCancellable)
   {
-    g_task_set_check_cancellable(cast(GTask*)cPtr, checkCancellable);
+    g_task_set_check_cancellable(cast(GTask*)this._cPtr, checkCancellable);
   }
 
   /**
@@ -1170,7 +1170,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    g_task_set_name(cast(GTask*)cPtr, _name);
+    g_task_set_name(cast(GTask*)this._cPtr, _name);
   }
 
   /**
@@ -1187,7 +1187,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void setPriority(int priority)
   {
-    g_task_set_priority(cast(GTask*)cPtr, priority);
+    g_task_set_priority(cast(GTask*)this._cPtr, priority);
   }
 
   /**
@@ -1230,7 +1230,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   bool setReturnOnCancel(bool returnOnCancel)
   {
     bool _retval;
-    _retval = g_task_set_return_on_cancel(cast(GTask*)cPtr, returnOnCancel);
+    _retval = g_task_set_return_on_cancel(cast(GTask*)this._cPtr, returnOnCancel);
     return _retval;
   }
 
@@ -1253,7 +1253,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   */
   void setSourceTag(void* sourceTag = null)
   {
-    g_task_set_source_tag(cast(GTask*)cPtr, sourceTag);
+    g_task_set_source_tag(cast(GTask*)this._cPtr, sourceTag);
   }
 
   /**
@@ -1267,7 +1267,7 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
   void setStaticName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    g_task_set_static_name(cast(GTask*)cPtr, _name);
+    g_task_set_static_name(cast(GTask*)this._cPtr, _name);
   }
 
   /**
@@ -1287,6 +1287,6 @@ class Task : gobject.object.ObjectWrap, gio.async_result.AsyncResult
       (*_dlg)();
     }
     auto _taskDataDestroyCB = taskDataDestroy ? &_taskDataDestroyCallback : null;
-    g_task_set_task_data(cast(GTask*)cPtr, taskData, _taskDataDestroyCB);
+    g_task_set_task_data(cast(GTask*)this._cPtr, taskData, _taskDataDestroyCB);
   }
 }

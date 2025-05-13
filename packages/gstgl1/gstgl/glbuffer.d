@@ -39,22 +39,22 @@ class GLBuffer : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_get_type != &gidSymbolNotFound ? gst_gl_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property gstgl.glbase_memory.GLBaseMemory mem()
   {
-    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLBuffer*)cPtr).mem);
+    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLBuffer*)this._cPtr).mem);
   }
 
   /**
@@ -78,7 +78,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property uint id()
   {
-    return (cast(GstGLBuffer*)cPtr).id;
+    return (cast(GstGLBuffer*)this._cPtr).id;
   }
 
   /**
@@ -88,7 +88,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property void id(uint propval)
   {
-    (cast(GstGLBuffer*)cPtr).id = propval;
+    (cast(GstGLBuffer*)this._cPtr).id = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property uint target()
   {
-    return (cast(GstGLBuffer*)cPtr).target;
+    return (cast(GstGLBuffer*)this._cPtr).target;
   }
 
   /**
@@ -107,7 +107,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property void target(uint propval)
   {
-    (cast(GstGLBuffer*)cPtr).target = propval;
+    (cast(GstGLBuffer*)this._cPtr).target = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property uint usageHints()
   {
-    return (cast(GstGLBuffer*)cPtr).usageHints;
+    return (cast(GstGLBuffer*)this._cPtr).usageHints;
   }
 
   /**
@@ -126,7 +126,7 @@ class GLBuffer : gobject.boxed.Boxed
   */
   @property void usageHints(uint propval)
   {
-    (cast(GstGLBuffer*)cPtr).usageHints = propval;
+    (cast(GstGLBuffer*)this._cPtr).usageHints = propval;
   }
 
   /**

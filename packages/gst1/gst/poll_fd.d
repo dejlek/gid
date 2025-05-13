@@ -26,7 +26,7 @@ class PollFD
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class PollFD
   */
   @property int fd()
   {
-    return (cast(GstPollFD*)cPtr).fd;
+    return (cast(GstPollFD*)this._cPtr).fd;
   }
 
   /**
@@ -47,7 +47,7 @@ class PollFD
   */
   @property void fd(int propval)
   {
-    (cast(GstPollFD*)cPtr).fd = propval;
+    (cast(GstPollFD*)this._cPtr).fd = propval;
   }
 
   /**
@@ -56,6 +56,6 @@ class PollFD
   */
   void init_()
   {
-    gst_poll_fd_init(cast(GstPollFD*)cPtr);
+    gst_poll_fd_init(cast(GstPollFD*)this._cPtr);
   }
 }

@@ -34,16 +34,16 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcut_trigger_get_type != &gidSymbolNotFound ? gtk_shortcut_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
     GtkShortcutTrigger* _cretval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     _cretval = gtk_shortcut_trigger_parse_string(_string_);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   int compare(gtk.shortcut_trigger.ShortcutTrigger trigger2)
   {
     int _retval;
-    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
+    _retval = gtk_shortcut_trigger_compare(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   bool equal(gtk.shortcut_trigger.ShortcutTrigger trigger2)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2.cPtr(No.Dup) : null);
+    _retval = gtk_shortcut_trigger_equal(cast(GtkShortcutTrigger*)this._cPtr, trigger2 ? cast(GtkShortcutTrigger*)trigger2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   uint hash()
   {
     uint _retval;
-    _retval = gtk_shortcut_trigger_hash(cast(GtkShortcutTrigger*)cPtr);
+    _retval = gtk_shortcut_trigger_hash(cast(GtkShortcutTrigger*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   */
   void print(glib.string_.String string_)
   {
-    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)cPtr, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    gtk_shortcut_trigger_print(cast(GtkShortcutTrigger*)this._cPtr, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -178,7 +178,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   bool printLabel(gdk.display.Display display, glib.string_.String string_)
   {
     bool _retval;
-    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, string_ ? cast(GString*)string_.cPtr(No.Dup) : null);
+    _retval = gtk_shortcut_trigger_print_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, string_ ? cast(GString*)string_._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -203,7 +203,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   string toLabel(gdk.display.Display display)
   {
     char* _cretval;
-    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    _cretval = gtk_shortcut_trigger_to_label(cast(GtkShortcutTrigger*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -218,7 +218,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)cPtr);
+    _cretval = gtk_shortcut_trigger_to_string(cast(GtkShortcutTrigger*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -236,7 +236,7 @@ class ShortcutTrigger : gobject.object.ObjectWrap
   gdk.types.KeyMatch trigger(gdk.event.Event event, bool enableMnemonics)
   {
     GdkKeyMatch _cretval;
-    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)cPtr, event ? cast(GdkEvent*)event.cPtr(No.Dup) : null, enableMnemonics);
+    _cretval = gtk_shortcut_trigger_trigger(cast(GtkShortcutTrigger*)this._cPtr, event ? cast(GdkEvent*)event._cPtr(No.Dup) : null, enableMnemonics);
     gdk.types.KeyMatch _retval = cast(gdk.types.KeyMatch)_cretval;
     return _retval;
   }

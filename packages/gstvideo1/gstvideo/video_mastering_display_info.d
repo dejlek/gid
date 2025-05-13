@@ -28,7 +28,7 @@ class VideoMasteringDisplayInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class VideoMasteringDisplayInfo
   */
   @property gstvideo.types.VideoMasteringDisplayInfoCoordinates whitePoint()
   {
-    return cToD!(gstvideo.types.VideoMasteringDisplayInfoCoordinates)(cast(void*)&(cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint);
+    return cToD!(gstvideo.types.VideoMasteringDisplayInfoCoordinates)(cast(void*)&(cast(GstVideoMasteringDisplayInfo*)this._cPtr).whitePoint);
   }
 
   /**
@@ -51,7 +51,7 @@ class VideoMasteringDisplayInfo
   */
   @property void whitePoint(gstvideo.types.VideoMasteringDisplayInfoCoordinates propval)
   {
-    (cast(GstVideoMasteringDisplayInfo*)cPtr).whitePoint = propval;
+    (cast(GstVideoMasteringDisplayInfo*)this._cPtr).whitePoint = propval;
   }
 
   /**
@@ -61,7 +61,7 @@ class VideoMasteringDisplayInfo
   */
   @property uint maxDisplayMasteringLuminance()
   {
-    return (cast(GstVideoMasteringDisplayInfo*)cPtr).maxDisplayMasteringLuminance;
+    return (cast(GstVideoMasteringDisplayInfo*)this._cPtr).maxDisplayMasteringLuminance;
   }
 
   /**
@@ -72,7 +72,7 @@ class VideoMasteringDisplayInfo
   */
   @property void maxDisplayMasteringLuminance(uint propval)
   {
-    (cast(GstVideoMasteringDisplayInfo*)cPtr).maxDisplayMasteringLuminance = propval;
+    (cast(GstVideoMasteringDisplayInfo*)this._cPtr).maxDisplayMasteringLuminance = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class VideoMasteringDisplayInfo
   */
   @property uint minDisplayMasteringLuminance()
   {
-    return (cast(GstVideoMasteringDisplayInfo*)cPtr).minDisplayMasteringLuminance;
+    return (cast(GstVideoMasteringDisplayInfo*)this._cPtr).minDisplayMasteringLuminance;
   }
 
   /**
@@ -93,7 +93,7 @@ class VideoMasteringDisplayInfo
   */
   @property void minDisplayMasteringLuminance(uint propval)
   {
-    (cast(GstVideoMasteringDisplayInfo*)cPtr).minDisplayMasteringLuminance = propval;
+    (cast(GstVideoMasteringDisplayInfo*)this._cPtr).minDisplayMasteringLuminance = propval;
   }
 
   /**
@@ -106,7 +106,7 @@ class VideoMasteringDisplayInfo
   bool addToCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_mastering_display_info_add_to_caps(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class VideoMasteringDisplayInfo
   bool fromCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_video_mastering_display_info_from_caps(cast(GstVideoMasteringDisplayInfo*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class VideoMasteringDisplayInfo
   */
   void init_()
   {
-    gst_video_mastering_display_info_init(cast(GstVideoMasteringDisplayInfo*)cPtr);
+    gst_video_mastering_display_info_init(cast(GstVideoMasteringDisplayInfo*)this._cPtr);
   }
 
   /**
@@ -142,7 +142,7 @@ class VideoMasteringDisplayInfo
   bool isEqual(gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo other)
   {
     bool _retval;
-    _retval = gst_video_mastering_display_info_is_equal(cast(const(GstVideoMasteringDisplayInfo)*)cPtr, other ? cast(const(GstVideoMasteringDisplayInfo)*)other.cPtr : null);
+    _retval = gst_video_mastering_display_info_is_equal(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr, other ? cast(const(GstVideoMasteringDisplayInfo)*)other._cPtr : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class VideoMasteringDisplayInfo
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_video_mastering_display_info_to_string(cast(const(GstVideoMasteringDisplayInfo)*)cPtr);
+    _cretval = gst_video_mastering_display_info_to_string(cast(const(GstVideoMasteringDisplayInfo)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

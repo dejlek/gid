@@ -19,16 +19,16 @@ class IMMulticontext : gtk.imcontext.IMContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_im_multicontext_get_type != &gidSymbolNotFound ? gtk_im_multicontext_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   */
   void appendMenuitems(gtk.menu_shell.MenuShell menushell)
   {
-    gtk_im_multicontext_append_menuitems(cast(GtkIMMulticontext*)cPtr, menushell ? cast(GtkMenuShell*)menushell.cPtr(No.Dup) : null);
+    gtk_im_multicontext_append_menuitems(cast(GtkIMMulticontext*)this._cPtr, menushell ? cast(GtkMenuShell*)menushell._cPtr(No.Dup) : null);
   }
 
   /**
@@ -73,7 +73,7 @@ class IMMulticontext : gtk.imcontext.IMContext
   string getContextId()
   {
     const(char)* _cretval;
-    _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)cPtr);
+    _cretval = gtk_im_multicontext_get_context_id(cast(GtkIMMulticontext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -90,6 +90,6 @@ class IMMulticontext : gtk.imcontext.IMContext
   void setContextId(string contextId)
   {
     const(char)* _contextId = contextId.toCString(No.Alloc);
-    gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)cPtr, _contextId);
+    gtk_im_multicontext_set_context_id(cast(GtkIMMulticontext*)this._cPtr, _contextId);
   }
 }

@@ -41,7 +41,7 @@ class VideoAFDMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -52,7 +52,7 @@ class VideoAFDMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)this._cPtr).meta);
   }
 
   /**
@@ -61,7 +61,7 @@ class VideoAFDMeta
   */
   @property ubyte field()
   {
-    return (cast(GstVideoAFDMeta*)cPtr).field;
+    return (cast(GstVideoAFDMeta*)this._cPtr).field;
   }
 
   /**
@@ -71,7 +71,7 @@ class VideoAFDMeta
   */
   @property void field(ubyte propval)
   {
-    (cast(GstVideoAFDMeta*)cPtr).field = propval;
+    (cast(GstVideoAFDMeta*)this._cPtr).field = propval;
   }
 
   /**
@@ -80,7 +80,7 @@ class VideoAFDMeta
   */
   @property gstvideo.types.VideoAFDSpec spec()
   {
-    return cast(gstvideo.types.VideoAFDSpec)(cast(GstVideoAFDMeta*)cPtr).spec;
+    return cast(gstvideo.types.VideoAFDSpec)(cast(GstVideoAFDMeta*)this._cPtr).spec;
   }
 
   /**
@@ -90,7 +90,7 @@ class VideoAFDMeta
   */
   @property void spec(gstvideo.types.VideoAFDSpec propval)
   {
-    (cast(GstVideoAFDMeta*)cPtr).spec = cast(GstVideoAFDSpec)propval;
+    (cast(GstVideoAFDMeta*)this._cPtr).spec = cast(GstVideoAFDSpec)propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class VideoAFDMeta
   */
   @property gstvideo.types.VideoAFDValue afd()
   {
-    return cast(gstvideo.types.VideoAFDValue)(cast(GstVideoAFDMeta*)cPtr).afd;
+    return cast(gstvideo.types.VideoAFDValue)(cast(GstVideoAFDMeta*)this._cPtr).afd;
   }
 
   /**
@@ -109,7 +109,7 @@ class VideoAFDMeta
   */
   @property void afd(gstvideo.types.VideoAFDValue propval)
   {
-    (cast(GstVideoAFDMeta*)cPtr).afd = cast(GstVideoAFDValue)propval;
+    (cast(GstVideoAFDMeta*)this._cPtr).afd = cast(GstVideoAFDValue)propval;
   }
 
   /** */

@@ -48,7 +48,7 @@ template PresetT()
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_preset_delete_preset(cast(GstPreset*)cPtr, _name);
+    _retval = gst_preset_delete_preset(cast(GstPreset*)this._cPtr, _name);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ template PresetT()
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _tag = tag.toCString(No.Alloc);
     char* _value;
-    _retval = gst_preset_get_meta(cast(GstPreset*)cPtr, _name, _tag, &_value);
+    _retval = gst_preset_get_meta(cast(GstPreset*)this._cPtr, _name, _tag, &_value);
     value = _value.fromCString(Yes.Free);
     return _retval;
   }
@@ -81,7 +81,7 @@ template PresetT()
   override string[] getPresetNames()
   {
     char** _cretval;
-    _cretval = gst_preset_get_preset_names(cast(GstPreset*)cPtr);
+    _cretval = gst_preset_get_preset_names(cast(GstPreset*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -104,7 +104,7 @@ template PresetT()
   override string[] getPropertyNames()
   {
     char** _cretval;
-    _cretval = gst_preset_get_property_names(cast(GstPreset*)cPtr);
+    _cretval = gst_preset_get_property_names(cast(GstPreset*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -126,7 +126,7 @@ template PresetT()
   override bool isEditable()
   {
     bool _retval;
-    _retval = gst_preset_is_editable(cast(GstPreset*)cPtr);
+    _retval = gst_preset_is_editable(cast(GstPreset*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ template PresetT()
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_preset_load_preset(cast(GstPreset*)cPtr, _name);
+    _retval = gst_preset_load_preset(cast(GstPreset*)this._cPtr, _name);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ template PresetT()
     bool _retval;
     const(char)* _oldName = oldName.toCString(No.Alloc);
     const(char)* _newName = newName.toCString(No.Alloc);
-    _retval = gst_preset_rename_preset(cast(GstPreset*)cPtr, _oldName, _newName);
+    _retval = gst_preset_rename_preset(cast(GstPreset*)this._cPtr, _oldName, _newName);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ template PresetT()
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_preset_save_preset(cast(GstPreset*)cPtr, _name);
+    _retval = gst_preset_save_preset(cast(GstPreset*)this._cPtr, _name);
     return _retval;
   }
 
@@ -196,7 +196,7 @@ template PresetT()
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _tag = tag.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _retval = gst_preset_set_meta(cast(GstPreset*)cPtr, _name, _tag, _value);
+    _retval = gst_preset_set_meta(cast(GstPreset*)this._cPtr, _name, _tag, _value);
     return _retval;
   }
 }

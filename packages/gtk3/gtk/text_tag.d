@@ -42,16 +42,16 @@ class TextTag : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_tag_get_type != &gidSymbolNotFound ? gtk_text_tag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1131,7 +1131,7 @@ class TextTag : gobject.object.ObjectWrap
   */
   void changed(bool sizeChanged)
   {
-    gtk_text_tag_changed(cast(GtkTextTag*)cPtr, sizeChanged);
+    gtk_text_tag_changed(cast(GtkTextTag*)this._cPtr, sizeChanged);
   }
 
   /**
@@ -1146,7 +1146,7 @@ class TextTag : gobject.object.ObjectWrap
   bool event(gobject.object.ObjectWrap eventObject, gdk.event.Event event, gtk.text_iter.TextIter iter)
   {
     bool _retval;
-    _retval = gtk_text_tag_event(cast(GtkTextTag*)cPtr, eventObject ? cast(ObjectC*)eventObject.cPtr(No.Dup) : null, event ? cast(GdkEvent*)event.cPtr : null, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_text_tag_event(cast(GtkTextTag*)this._cPtr, eventObject ? cast(GObject*)eventObject._cPtr(No.Dup) : null, event ? cast(GdkEvent*)event._cPtr : null, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1157,7 +1157,7 @@ class TextTag : gobject.object.ObjectWrap
   int getPriority()
   {
     int _retval;
-    _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)cPtr);
+    _retval = gtk_text_tag_get_priority(cast(GtkTextTag*)this._cPtr);
     return _retval;
   }
 
@@ -1179,7 +1179,7 @@ class TextTag : gobject.object.ObjectWrap
   */
   void setPriority(int priority)
   {
-    gtk_text_tag_set_priority(cast(GtkTextTag*)cPtr, priority);
+    gtk_text_tag_set_priority(cast(GtkTextTag*)this._cPtr, priority);
   }
 
   /**

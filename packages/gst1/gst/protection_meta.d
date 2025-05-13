@@ -30,7 +30,7 @@ class ProtectionMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class ProtectionMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstProtectionMeta*)this._cPtr).meta);
   }
 
   /**
@@ -50,7 +50,7 @@ class ProtectionMeta
   */
   @property gst.structure.Structure info()
   {
-    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);
+    return cToD!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
   }
 
   /**
@@ -60,8 +60,8 @@ class ProtectionMeta
   */
   @property void info(gst.structure.Structure propval)
   {
-    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)cPtr).info);
-    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)cPtr).info);
+    cValueFree!(gst.structure.Structure)(cast(void*)(cast(GstProtectionMeta*)this._cPtr).info);
+    dToC(propval, cast(void*)&(cast(GstProtectionMeta*)this._cPtr).info);
   }
 
   /** */

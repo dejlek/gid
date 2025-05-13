@@ -22,16 +22,16 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_file_reader_get_type != &gidSymbolNotFound ? garrow_record_batch_file_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,7 +45,7 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   {
     GArrowRecordBatchFileReader* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_file_reader_new(file ? cast(GArrowSeekableInputStream*)file.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_file_reader_new(file ? cast(GArrowSeekableInputStream*)file._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -55,7 +55,7 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   uint getNRecordBatches()
   {
     uint _retval;
-    _retval = garrow_record_batch_file_reader_get_n_record_batches(cast(GArrowRecordBatchFileReader*)cPtr);
+    _retval = garrow_record_batch_file_reader_get_n_record_batches(cast(GArrowRecordBatchFileReader*)this._cPtr);
     return _retval;
   }
 
@@ -64,10 +64,10 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_file_reader_get_record_batch(cast(GArrowRecordBatchFileReader*)cPtr, i, &_err);
+    _cretval = garrow_record_batch_file_reader_get_record_batch(cast(GArrowRecordBatchFileReader*)this._cPtr, i, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -75,8 +75,8 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   arrow.schema.Schema getSchema()
   {
     GArrowSchema* _cretval;
-    _cretval = garrow_record_batch_file_reader_get_schema(cast(GArrowRecordBatchFileReader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
+    _cretval = garrow_record_batch_file_reader_get_schema(cast(GArrowRecordBatchFileReader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.schema.Schema)(cast(GArrowSchema*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -84,7 +84,7 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   arrow.types.MetadataVersion getVersion()
   {
     GArrowMetadataVersion _cretval;
-    _cretval = garrow_record_batch_file_reader_get_version(cast(GArrowRecordBatchFileReader*)cPtr);
+    _cretval = garrow_record_batch_file_reader_get_version(cast(GArrowRecordBatchFileReader*)this._cPtr);
     arrow.types.MetadataVersion _retval = cast(arrow.types.MetadataVersion)_cretval;
     return _retval;
   }
@@ -94,10 +94,10 @@ class RecordBatchFileReader : gobject.object.ObjectWrap
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_file_reader_read_record_batch(cast(GArrowRecordBatchFileReader*)cPtr, i, &_err);
+    _cretval = garrow_record_batch_file_reader_read_record_batch(cast(GArrowRecordBatchFileReader*)this._cPtr, i, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 }

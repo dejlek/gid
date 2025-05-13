@@ -31,16 +31,16 @@ class SnippetManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_manager_get_type != &gidSymbolNotFound ? gtk_source_snippet_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class SnippetManager : gobject.object.ObjectWrap
   {
     GtkSourceSnippetManager* _cretval;
     _cretval = gtk_source_snippet_manager_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.snippet_manager.SnippetManager)(cast(GtkSourceSnippetManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,7 +71,7 @@ class SnippetManager : gobject.object.ObjectWrap
   string[] getSearchPath()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_snippet_manager_get_search_path(cast(GtkSourceSnippetManager*)cPtr);
+    _cretval = gtk_source_snippet_manager_get_search_path(cast(GtkSourceSnippetManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -105,8 +105,8 @@ class SnippetManager : gobject.object.ObjectWrap
     const(char)* _group = group.toCString(No.Alloc);
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _trigger = trigger.toCString(No.Alloc);
-    _cretval = gtk_source_snippet_manager_get_snippet(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _trigger);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
+    _cretval = gtk_source_snippet_manager_get_snippet(cast(GtkSourceSnippetManager*)this._cPtr, _group, _languageId, _trigger);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.snippet.Snippet)(cast(GtkSourceSnippet*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class SnippetManager : gobject.object.ObjectWrap
   gio.list_model.ListModel listAll()
   {
     GListModel* _cretval;
-    _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_source_snippet_manager_list_all(cast(GtkSourceSnippetManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class SnippetManager : gobject.object.ObjectWrap
   string[] listGroups()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_snippet_manager_list_groups(cast(GtkSourceSnippetManager*)cPtr);
+    _cretval = gtk_source_snippet_manager_list_groups(cast(GtkSourceSnippetManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -173,8 +173,8 @@ class SnippetManager : gobject.object.ObjectWrap
     const(char)* _group = group.toCString(No.Alloc);
     const(char)* _languageId = languageId.toCString(No.Alloc);
     const(char)* _triggerPrefix = triggerPrefix.toCString(No.Alloc);
-    _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)cPtr, _group, _languageId, _triggerPrefix);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = gtk_source_snippet_manager_list_matching(cast(GtkSourceSnippetManager*)this._cPtr, _group, _languageId, _triggerPrefix);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -200,6 +200,6 @@ class SnippetManager : gobject.object.ObjectWrap
       _tmpdirs ~= s.toCString(No.Alloc);
     _tmpdirs ~= null;
     const(char*)* _dirs = _tmpdirs.ptr;
-    gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)cPtr, _dirs);
+    gtk_source_snippet_manager_set_search_path(cast(GtkSourceSnippetManager*)this._cPtr, _dirs);
   }
 }

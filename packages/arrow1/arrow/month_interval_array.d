@@ -19,16 +19,16 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_month_interval_array_get_type != &gidSymbolNotFound ? garrow_month_interval_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowMonthIntervalArray* _cretval;
-    _cretval = garrow_month_interval_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_month_interval_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   int getValue(long i)
   {
     int _retval;
-    _retval = garrow_month_interval_array_get_value(cast(GArrowMonthIntervalArray*)cPtr, i);
+    _retval = garrow_month_interval_array_get_value(cast(GArrowMonthIntervalArray*)this._cPtr, i);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class MonthIntervalArray : arrow.numeric_array.NumericArray
   {
     const(int)* _cretval;
     long _cretlength;
-    _cretval = garrow_month_interval_array_get_values(cast(GArrowMonthIntervalArray*)cPtr, &_cretlength);
+    _cretval = garrow_month_interval_array_get_values(cast(GArrowMonthIntervalArray*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)

@@ -148,16 +148,16 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_spin_button_get_type != &gidSymbolNotFound ? gtk_spin_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -363,7 +363,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   this(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    _cretval = gtk_spin_button_new(adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
     this(_cretval, No.Take);
   }
 
@@ -392,7 +392,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   {
     GtkWidget* _cretval;
     _cretval = gtk_spin_button_new_with_range(min, max, step);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.spin_button.SpinButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -410,7 +410,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void configure(gtk.adjustment.Adjustment adjustment, double climbRate, uint digits)
   {
-    gtk_spin_button_configure(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null, climbRate, digits);
+    gtk_spin_button_configure(cast(GtkSpinButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null, climbRate, digits);
   }
 
   /**
@@ -420,7 +420,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_activates_default(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_activates_default(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -431,8 +431,8 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_spin_button_get_adjustment(cast(GtkSpinButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   double getClimbRate()
   {
     double _retval;
-    _retval = gtk_spin_button_get_climb_rate(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_climb_rate(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -454,7 +454,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   uint getDigits()
   {
     uint _retval;
-    _retval = gtk_spin_button_get_digits(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_digits(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -470,7 +470,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void getIncrements(out double step, out double page)
   {
-    gtk_spin_button_get_increments(cast(GtkSpinButton*)cPtr, cast(double*)&step, cast(double*)&page);
+    gtk_spin_button_get_increments(cast(GtkSpinButton*)this._cPtr, cast(double*)&step, cast(double*)&page);
   }
 
   /**
@@ -480,7 +480,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getNumeric()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_numeric(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_numeric(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -495,7 +495,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void getRange(out double min, out double max)
   {
-    gtk_spin_button_get_range(cast(GtkSpinButton*)cPtr, cast(double*)&min, cast(double*)&max);
+    gtk_spin_button_get_range(cast(GtkSpinButton*)this._cPtr, cast(double*)&min, cast(double*)&max);
   }
 
   /**
@@ -505,7 +505,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getSnapToTicks()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_snap_to_ticks(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -518,7 +518,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   gtk.types.SpinButtonUpdatePolicy getUpdatePolicy()
   {
     GtkSpinButtonUpdatePolicy _cretval;
-    _cretval = gtk_spin_button_get_update_policy(cast(GtkSpinButton*)cPtr);
+    _cretval = gtk_spin_button_get_update_policy(cast(GtkSpinButton*)this._cPtr);
     gtk.types.SpinButtonUpdatePolicy _retval = cast(gtk.types.SpinButtonUpdatePolicy)_cretval;
     return _retval;
   }
@@ -530,7 +530,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   double getValue()
   {
     double _retval;
-    _retval = gtk_spin_button_get_value(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_value(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   int getValueAsInt()
   {
     int _retval;
-    _retval = gtk_spin_button_get_value_as_int(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_value_as_int(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -554,7 +554,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   bool getWrap()
   {
     bool _retval;
-    _retval = gtk_spin_button_get_wrap(cast(GtkSpinButton*)cPtr);
+    _retval = gtk_spin_button_get_wrap(cast(GtkSpinButton*)this._cPtr);
     return _retval;
   }
 
@@ -569,7 +569,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setActivatesDefault(bool activatesDefault)
   {
-    gtk_spin_button_set_activates_default(cast(GtkSpinButton*)cPtr, activatesDefault);
+    gtk_spin_button_set_activates_default(cast(GtkSpinButton*)this._cPtr, activatesDefault);
   }
 
   /**
@@ -580,7 +580,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_spin_button_set_adjustment(cast(GtkSpinButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -592,7 +592,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setClimbRate(double climbRate)
   {
-    gtk_spin_button_set_climb_rate(cast(GtkSpinButton*)cPtr, climbRate);
+    gtk_spin_button_set_climb_rate(cast(GtkSpinButton*)this._cPtr, climbRate);
   }
 
   /**
@@ -606,7 +606,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setDigits(uint digits)
   {
-    gtk_spin_button_set_digits(cast(GtkSpinButton*)cPtr, digits);
+    gtk_spin_button_set_digits(cast(GtkSpinButton*)this._cPtr, digits);
   }
 
   /**
@@ -621,7 +621,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setIncrements(double step, double page)
   {
-    gtk_spin_button_set_increments(cast(GtkSpinButton*)cPtr, step, page);
+    gtk_spin_button_set_increments(cast(GtkSpinButton*)this._cPtr, step, page);
   }
 
   /**
@@ -633,7 +633,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setNumeric(bool numeric)
   {
-    gtk_spin_button_set_numeric(cast(GtkSpinButton*)cPtr, numeric);
+    gtk_spin_button_set_numeric(cast(GtkSpinButton*)this._cPtr, numeric);
   }
 
   /**
@@ -648,7 +648,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setRange(double min, double max)
   {
-    gtk_spin_button_set_range(cast(GtkSpinButton*)cPtr, min, max);
+    gtk_spin_button_set_range(cast(GtkSpinButton*)this._cPtr, min, max);
   }
 
   /**
@@ -661,7 +661,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setSnapToTicks(bool snapToTicks)
   {
-    gtk_spin_button_set_snap_to_ticks(cast(GtkSpinButton*)cPtr, snapToTicks);
+    gtk_spin_button_set_snap_to_ticks(cast(GtkSpinButton*)this._cPtr, snapToTicks);
   }
 
   /**
@@ -675,7 +675,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setUpdatePolicy(gtk.types.SpinButtonUpdatePolicy policy)
   {
-    gtk_spin_button_set_update_policy(cast(GtkSpinButton*)cPtr, policy);
+    gtk_spin_button_set_update_policy(cast(GtkSpinButton*)this._cPtr, policy);
   }
 
   /**
@@ -686,7 +686,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setValue(double value)
   {
-    gtk_spin_button_set_value(cast(GtkSpinButton*)cPtr, value);
+    gtk_spin_button_set_value(cast(GtkSpinButton*)this._cPtr, value);
   }
 
   /**
@@ -699,7 +699,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void setWrap(bool wrap)
   {
-    gtk_spin_button_set_wrap(cast(GtkSpinButton*)cPtr, wrap);
+    gtk_spin_button_set_wrap(cast(GtkSpinButton*)this._cPtr, wrap);
   }
 
   /**
@@ -712,7 +712,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void spin(gtk.types.SpinType direction, double increment)
   {
-    gtk_spin_button_spin(cast(GtkSpinButton*)cPtr, direction, increment);
+    gtk_spin_button_spin(cast(GtkSpinButton*)this._cPtr, direction, increment);
   }
 
   /**
@@ -720,7 +720,7 @@ class SpinButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.
   */
   void update()
   {
-    gtk_spin_button_update(cast(GtkSpinButton*)cPtr);
+    gtk_spin_button_update(cast(GtkSpinButton*)this._cPtr);
   }
 
   /**

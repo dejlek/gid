@@ -24,7 +24,7 @@ class CharAttributes
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

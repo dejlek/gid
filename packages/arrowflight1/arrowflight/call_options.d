@@ -18,16 +18,16 @@ class CallOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_call_options_get_type != &gidSymbolNotFound ? gaflight_call_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class CallOptions : gobject.object.ObjectWrap
   {
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    gaflight_call_options_add_header(cast(GAFlightCallOptions*)cPtr, _name, _value);
+    gaflight_call_options_add_header(cast(GAFlightCallOptions*)this._cPtr, _name, _value);
   }
 
   /**
@@ -86,7 +86,7 @@ class CallOptions : gobject.object.ObjectWrap
   */
   void clearHeaders()
   {
-    gaflight_call_options_clear_headers(cast(GAFlightCallOptions*)cPtr);
+    gaflight_call_options_clear_headers(cast(GAFlightCallOptions*)this._cPtr);
   }
 
   /**
@@ -108,6 +108,6 @@ class CallOptions : gobject.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)cPtr, _funcCB, _func);
+    gaflight_call_options_foreach_header(cast(GAFlightCallOptions*)this._cPtr, _funcCB, _func);
   }
 }

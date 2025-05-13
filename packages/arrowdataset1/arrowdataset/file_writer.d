@@ -21,16 +21,16 @@ class FileWriter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_writer_get_type != &gidSymbolNotFound ? gadataset_file_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_finish(cast(GADatasetFileWriter*)cPtr, &_err);
+    _retval = gadataset_file_writer_finish(cast(GADatasetFileWriter*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -55,7 +55,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, &_err);
+    _retval = gadataset_file_writer_write_record_batch(cast(GADatasetFileWriter*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -66,7 +66,7 @@ class FileWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)cPtr, reader ? cast(GArrowRecordBatchReader*)reader.cPtr(No.Dup) : null, &_err);
+    _retval = gadataset_file_writer_write_record_batch_reader(cast(GADatasetFileWriter*)this._cPtr, reader ? cast(GArrowRecordBatchReader*)reader._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

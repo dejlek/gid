@@ -18,16 +18,16 @@ class FunctionDoc : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_function_doc_get_type != &gidSymbolNotFound ? garrow_function_doc_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   string[] getArgNames()
   {
     char** _cretval;
-    _cretval = garrow_function_doc_get_arg_names(cast(GArrowFunctionDoc*)cPtr);
+    _cretval = garrow_function_doc_get_arg_names(cast(GArrowFunctionDoc*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -59,7 +59,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   string getDescription()
   {
     char* _cretval;
-    _cretval = garrow_function_doc_get_description(cast(GArrowFunctionDoc*)cPtr);
+    _cretval = garrow_function_doc_get_description(cast(GArrowFunctionDoc*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -68,7 +68,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   string getOptionsClassName()
   {
     char* _cretval;
-    _cretval = garrow_function_doc_get_options_class_name(cast(GArrowFunctionDoc*)cPtr);
+    _cretval = garrow_function_doc_get_options_class_name(cast(GArrowFunctionDoc*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -77,7 +77,7 @@ class FunctionDoc : gobject.object.ObjectWrap
   string getSummary()
   {
     char* _cretval;
-    _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)cPtr);
+    _cretval = garrow_function_doc_get_summary(cast(GArrowFunctionDoc*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

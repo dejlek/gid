@@ -26,16 +26,16 @@ class ButtonBox : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_box_get_type != &gidSymbolNotFound ? gtk_button_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class ButtonBox : gtk.box.Box
   bool getChildNonHomogeneous(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_button_box_get_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class ButtonBox : gtk.box.Box
   bool getChildSecondary(gtk.widget.Widget child)
   {
     bool _retval;
-    _retval = gtk_button_box_get_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _retval = gtk_button_box_get_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class ButtonBox : gtk.box.Box
   gtk.types.ButtonBoxStyle getLayout()
   {
     GtkButtonBoxStyle _cretval;
-    _cretval = gtk_button_box_get_layout(cast(GtkButtonBox*)cPtr);
+    _cretval = gtk_button_box_get_layout(cast(GtkButtonBox*)this._cPtr);
     gtk.types.ButtonBoxStyle _retval = cast(gtk.types.ButtonBoxStyle)_cretval;
     return _retval;
   }
@@ -120,7 +120,7 @@ class ButtonBox : gtk.box.Box
   */
   void setChildNonHomogeneous(gtk.widget.Widget child, bool nonHomogeneous)
   {
-    gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, nonHomogeneous);
+    gtk_button_box_set_child_non_homogeneous(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, nonHomogeneous);
   }
 
   /**
@@ -144,7 +144,7 @@ class ButtonBox : gtk.box.Box
   */
   void setChildSecondary(gtk.widget.Widget child, bool isSecondary)
   {
-    gtk_button_box_set_child_secondary(cast(GtkButtonBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, isSecondary);
+    gtk_button_box_set_child_secondary(cast(GtkButtonBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, isSecondary);
   }
 
   /**
@@ -155,6 +155,6 @@ class ButtonBox : gtk.box.Box
   */
   void setLayout(gtk.types.ButtonBoxStyle layoutStyle)
   {
-    gtk_button_box_set_layout(cast(GtkButtonBox*)cPtr, layoutStyle);
+    gtk_button_box_set_layout(cast(GtkButtonBox*)this._cPtr, layoutStyle);
   }
 }

@@ -23,7 +23,7 @@ interface Popup
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_popup_get_type != &gidSymbolNotFound ? gdk_popup_get_type() : cast(GType)0;

@@ -231,60 +231,62 @@ alias gst_vorbis_tag_add = c_gst_vorbis_tag_add;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // TagDemux
-  gidLink(cast(void**)&gst_tag_demux_get_type, "gst_tag_demux_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_demux_get_type, "gst_tag_demux_get_type", libs);
 
   // TagMux
-  gidLink(cast(void**)&gst_tag_mux_get_type, "gst_tag_mux_get_type", LIBS);
+  gidLink(cast(void**)&gst_tag_mux_get_type, "gst_tag_mux_get_type", libs);
 
   // TagXmpWriter
-  gidLink(cast(void**)&gst_tag_xmp_writer_get_type, "gst_tag_xmp_writer_get_type", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_add_all_schemas, "gst_tag_xmp_writer_add_all_schemas", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_add_schema, "gst_tag_xmp_writer_add_schema", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_has_schema, "gst_tag_xmp_writer_has_schema", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_remove_all_schemas, "gst_tag_xmp_writer_remove_all_schemas", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_remove_schema, "gst_tag_xmp_writer_remove_schema", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_writer_tag_list_to_xmp_buffer, "gst_tag_xmp_writer_tag_list_to_xmp_buffer", LIBS);
+  gidLink(cast(void**)&gst_tag_xmp_writer_get_type, "gst_tag_xmp_writer_get_type", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_add_all_schemas, "gst_tag_xmp_writer_add_all_schemas", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_add_schema, "gst_tag_xmp_writer_add_schema", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_has_schema, "gst_tag_xmp_writer_has_schema", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_remove_all_schemas, "gst_tag_xmp_writer_remove_all_schemas", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_remove_schema, "gst_tag_xmp_writer_remove_schema", libs);
+  gidLink(cast(void**)&gst_tag_xmp_writer_tag_list_to_xmp_buffer, "gst_tag_xmp_writer_tag_list_to_xmp_buffer", libs);
 
   // global
-  gidLink(cast(void**)&gst_tag_check_language_code, "gst_tag_check_language_code", LIBS);
-  gidLink(cast(void**)&gst_tag_freeform_string_to_utf8, "gst_tag_freeform_string_to_utf8", LIBS);
-  gidLink(cast(void**)&gst_tag_from_id3_tag, "gst_tag_from_id3_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_from_id3_user_tag, "gst_tag_from_id3_user_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_from_vorbis_tag, "gst_tag_from_vorbis_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_get_id3v2_tag_size, "gst_tag_get_id3v2_tag_size", LIBS);
-  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_1, "gst_tag_get_language_code_iso_639_1", LIBS);
-  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_2B, "gst_tag_get_language_code_iso_639_2B", LIBS);
-  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_2T, "gst_tag_get_language_code_iso_639_2T", LIBS);
-  gidLink(cast(void**)&gst_tag_get_language_codes, "gst_tag_get_language_codes", LIBS);
-  gidLink(cast(void**)&gst_tag_get_language_name, "gst_tag_get_language_name", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_description, "gst_tag_get_license_description", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_flags, "gst_tag_get_license_flags", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_jurisdiction, "gst_tag_get_license_jurisdiction", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_nick, "gst_tag_get_license_nick", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_title, "gst_tag_get_license_title", LIBS);
-  gidLink(cast(void**)&gst_tag_get_license_version, "gst_tag_get_license_version", LIBS);
-  gidLink(cast(void**)&gst_tag_get_licenses, "gst_tag_get_licenses", LIBS);
-  gidLink(cast(void**)&gst_tag_id3_genre_count, "gst_tag_id3_genre_count", LIBS);
-  gidLink(cast(void**)&gst_tag_id3_genre_get, "gst_tag_id3_genre_get", LIBS);
-  gidLink(cast(void**)&gst_tag_image_data_to_image_sample, "gst_tag_image_data_to_image_sample", LIBS);
-  gidLink(cast(void**)&gst_tag_list_add_id3_image, "gst_tag_list_add_id3_image", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_exif_buffer, "gst_tag_list_from_exif_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_exif_buffer_with_tiff_header, "gst_tag_list_from_exif_buffer_with_tiff_header", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_id3v2_tag, "gst_tag_list_from_id3v2_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_vorbiscomment, "gst_tag_list_from_vorbiscomment", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_vorbiscomment_buffer, "gst_tag_list_from_vorbiscomment_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_list_from_xmp_buffer, "gst_tag_list_from_xmp_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_list_new_from_id3v1, "gst_tag_list_new_from_id3v1", LIBS);
-  gidLink(cast(void**)&gst_tag_list_to_exif_buffer, "gst_tag_list_to_exif_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_list_to_exif_buffer_with_tiff_header, "gst_tag_list_to_exif_buffer_with_tiff_header", LIBS);
-  gidLink(cast(void**)&gst_tag_list_to_vorbiscomment_buffer, "gst_tag_list_to_vorbiscomment_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_list_to_xmp_buffer, "gst_tag_list_to_xmp_buffer", LIBS);
-  gidLink(cast(void**)&gst_tag_parse_extended_comment, "gst_tag_parse_extended_comment", LIBS);
-  gidLink(cast(void**)&gst_tag_register_musicbrainz_tags, "gst_tag_register_musicbrainz_tags", LIBS);
-  gidLink(cast(void**)&gst_tag_to_id3_tag, "gst_tag_to_id3_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_to_vorbis_comments, "gst_tag_to_vorbis_comments", LIBS);
-  gidLink(cast(void**)&gst_tag_to_vorbis_tag, "gst_tag_to_vorbis_tag", LIBS);
-  gidLink(cast(void**)&gst_tag_xmp_list_schemas, "gst_tag_xmp_list_schemas", LIBS);
-  gidLink(cast(void**)&gst_vorbis_tag_add, "gst_vorbis_tag_add", LIBS);
+  gidLink(cast(void**)&gst_tag_check_language_code, "gst_tag_check_language_code", libs);
+  gidLink(cast(void**)&gst_tag_freeform_string_to_utf8, "gst_tag_freeform_string_to_utf8", libs);
+  gidLink(cast(void**)&gst_tag_from_id3_tag, "gst_tag_from_id3_tag", libs);
+  gidLink(cast(void**)&gst_tag_from_id3_user_tag, "gst_tag_from_id3_user_tag", libs);
+  gidLink(cast(void**)&gst_tag_from_vorbis_tag, "gst_tag_from_vorbis_tag", libs);
+  gidLink(cast(void**)&gst_tag_get_id3v2_tag_size, "gst_tag_get_id3v2_tag_size", libs);
+  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_1, "gst_tag_get_language_code_iso_639_1", libs);
+  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_2B, "gst_tag_get_language_code_iso_639_2B", libs);
+  gidLink(cast(void**)&gst_tag_get_language_code_iso_639_2T, "gst_tag_get_language_code_iso_639_2T", libs);
+  gidLink(cast(void**)&gst_tag_get_language_codes, "gst_tag_get_language_codes", libs);
+  gidLink(cast(void**)&gst_tag_get_language_name, "gst_tag_get_language_name", libs);
+  gidLink(cast(void**)&gst_tag_get_license_description, "gst_tag_get_license_description", libs);
+  gidLink(cast(void**)&gst_tag_get_license_flags, "gst_tag_get_license_flags", libs);
+  gidLink(cast(void**)&gst_tag_get_license_jurisdiction, "gst_tag_get_license_jurisdiction", libs);
+  gidLink(cast(void**)&gst_tag_get_license_nick, "gst_tag_get_license_nick", libs);
+  gidLink(cast(void**)&gst_tag_get_license_title, "gst_tag_get_license_title", libs);
+  gidLink(cast(void**)&gst_tag_get_license_version, "gst_tag_get_license_version", libs);
+  gidLink(cast(void**)&gst_tag_get_licenses, "gst_tag_get_licenses", libs);
+  gidLink(cast(void**)&gst_tag_id3_genre_count, "gst_tag_id3_genre_count", libs);
+  gidLink(cast(void**)&gst_tag_id3_genre_get, "gst_tag_id3_genre_get", libs);
+  gidLink(cast(void**)&gst_tag_image_data_to_image_sample, "gst_tag_image_data_to_image_sample", libs);
+  gidLink(cast(void**)&gst_tag_list_add_id3_image, "gst_tag_list_add_id3_image", libs);
+  gidLink(cast(void**)&gst_tag_list_from_exif_buffer, "gst_tag_list_from_exif_buffer", libs);
+  gidLink(cast(void**)&gst_tag_list_from_exif_buffer_with_tiff_header, "gst_tag_list_from_exif_buffer_with_tiff_header", libs);
+  gidLink(cast(void**)&gst_tag_list_from_id3v2_tag, "gst_tag_list_from_id3v2_tag", libs);
+  gidLink(cast(void**)&gst_tag_list_from_vorbiscomment, "gst_tag_list_from_vorbiscomment", libs);
+  gidLink(cast(void**)&gst_tag_list_from_vorbiscomment_buffer, "gst_tag_list_from_vorbiscomment_buffer", libs);
+  gidLink(cast(void**)&gst_tag_list_from_xmp_buffer, "gst_tag_list_from_xmp_buffer", libs);
+  gidLink(cast(void**)&gst_tag_list_new_from_id3v1, "gst_tag_list_new_from_id3v1", libs);
+  gidLink(cast(void**)&gst_tag_list_to_exif_buffer, "gst_tag_list_to_exif_buffer", libs);
+  gidLink(cast(void**)&gst_tag_list_to_exif_buffer_with_tiff_header, "gst_tag_list_to_exif_buffer_with_tiff_header", libs);
+  gidLink(cast(void**)&gst_tag_list_to_vorbiscomment_buffer, "gst_tag_list_to_vorbiscomment_buffer", libs);
+  gidLink(cast(void**)&gst_tag_list_to_xmp_buffer, "gst_tag_list_to_xmp_buffer", libs);
+  gidLink(cast(void**)&gst_tag_parse_extended_comment, "gst_tag_parse_extended_comment", libs);
+  gidLink(cast(void**)&gst_tag_register_musicbrainz_tags, "gst_tag_register_musicbrainz_tags", libs);
+  gidLink(cast(void**)&gst_tag_to_id3_tag, "gst_tag_to_id3_tag", libs);
+  gidLink(cast(void**)&gst_tag_to_vorbis_comments, "gst_tag_to_vorbis_comments", libs);
+  gidLink(cast(void**)&gst_tag_to_vorbis_tag, "gst_tag_to_vorbis_tag", libs);
+  gidLink(cast(void**)&gst_tag_xmp_list_schemas, "gst_tag_xmp_list_schemas", libs);
+  gidLink(cast(void**)&gst_vorbis_tag_add, "gst_vorbis_tag_add", libs);
 }

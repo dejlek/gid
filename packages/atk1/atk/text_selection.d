@@ -45,7 +45,7 @@ class TextSelection
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -56,7 +56,7 @@ class TextSelection
   */
   @property atk.object.ObjectWrap startObject()
   {
-    return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)cPtr).startObject);
+    return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
   }
 
   /**
@@ -66,8 +66,8 @@ class TextSelection
   */
   @property void startObject(atk.object.ObjectWrap propval)
   {
-    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)cPtr).startObject);
-    dToC(propval, cast(void*)&(cast(AtkTextSelection*)cPtr).startObject);
+    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).startObject);
+    dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).startObject);
   }
 
   /**
@@ -77,7 +77,7 @@ class TextSelection
   */
   @property int startOffset()
   {
-    return (cast(AtkTextSelection*)cPtr).startOffset;
+    return (cast(AtkTextSelection*)this._cPtr).startOffset;
   }
 
   /**
@@ -88,7 +88,7 @@ class TextSelection
   */
   @property void startOffset(int propval)
   {
-    (cast(AtkTextSelection*)cPtr).startOffset = propval;
+    (cast(AtkTextSelection*)this._cPtr).startOffset = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class TextSelection
   */
   @property atk.object.ObjectWrap endObject()
   {
-    return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)cPtr).endObject);
+    return cToD!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
   }
 
   /**
@@ -107,8 +107,8 @@ class TextSelection
   */
   @property void endObject(atk.object.ObjectWrap propval)
   {
-    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)cPtr).endObject);
-    dToC(propval, cast(void*)&(cast(AtkTextSelection*)cPtr).endObject);
+    cValueFree!(atk.object.ObjectWrap)(cast(void*)(cast(AtkTextSelection*)this._cPtr).endObject);
+    dToC(propval, cast(void*)&(cast(AtkTextSelection*)this._cPtr).endObject);
   }
 
   /**
@@ -117,7 +117,7 @@ class TextSelection
   */
   @property int endOffset()
   {
-    return (cast(AtkTextSelection*)cPtr).endOffset;
+    return (cast(AtkTextSelection*)this._cPtr).endOffset;
   }
 
   /**
@@ -127,7 +127,7 @@ class TextSelection
   */
   @property void endOffset(int propval)
   {
-    (cast(AtkTextSelection*)cPtr).endOffset = propval;
+    (cast(AtkTextSelection*)this._cPtr).endOffset = propval;
   }
 
   /**
@@ -137,7 +137,7 @@ class TextSelection
   */
   @property bool startIsActive()
   {
-    return (cast(AtkTextSelection*)cPtr).startIsActive;
+    return (cast(AtkTextSelection*)this._cPtr).startIsActive;
   }
 
   /**
@@ -148,6 +148,6 @@ class TextSelection
   */
   @property void startIsActive(bool propval)
   {
-    (cast(AtkTextSelection*)cPtr).startIsActive = propval;
+    (cast(AtkTextSelection*)this._cPtr).startIsActive = propval;
   }
 }

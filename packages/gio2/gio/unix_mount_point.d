@@ -23,22 +23,22 @@ class UnixMountPoint : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_mount_point_get_type != &gidSymbolNotFound ? g_unix_mount_point_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   int compare(gio.unix_mount_point.UnixMountPoint mount2)
   {
     int _retval;
-    _retval = g_unix_mount_point_compare(cast(GUnixMountPoint*)cPtr, mount2 ? cast(GUnixMountPoint*)mount2.cPtr(No.Dup) : null);
+    _retval = g_unix_mount_point_compare(cast(GUnixMountPoint*)this._cPtr, mount2 ? cast(GUnixMountPoint*)mount2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   gio.unix_mount_point.UnixMountPoint copy()
   {
     GUnixMountPoint* _cretval;
-    _cretval = g_unix_mount_point_copy(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_copy(cast(GUnixMountPoint*)this._cPtr);
     auto _retval = _cretval ? new gio.unix_mount_point.UnixMountPoint(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -81,7 +81,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   string getDevicePath()
   {
     const(char)* _cretval;
-    _cretval = g_unix_mount_point_get_device_path(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_get_device_path(cast(GUnixMountPoint*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -93,7 +93,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   string getFsType()
   {
     const(char)* _cretval;
-    _cretval = g_unix_mount_point_get_fs_type(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_get_fs_type(cast(GUnixMountPoint*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -105,7 +105,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   string getMountPath()
   {
     const(char)* _cretval;
-    _cretval = g_unix_mount_point_get_mount_path(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_get_mount_path(cast(GUnixMountPoint*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -117,7 +117,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   string getOptions()
   {
     const(char)* _cretval;
-    _cretval = g_unix_mount_point_get_options(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_get_options(cast(GUnixMountPoint*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -129,7 +129,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool guessCanEject()
   {
     bool _retval;
-    _retval = g_unix_mount_point_guess_can_eject(cast(GUnixMountPoint*)cPtr);
+    _retval = g_unix_mount_point_guess_can_eject(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -140,8 +140,8 @@ class UnixMountPoint : gobject.boxed.Boxed
   gio.icon.Icon guessIcon()
   {
     GIcon* _cretval;
-    _cretval = g_unix_mount_point_guess_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_unix_mount_point_guess_icon(cast(GUnixMountPoint*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   string guessName()
   {
     char* _cretval;
-    _cretval = g_unix_mount_point_guess_name(cast(GUnixMountPoint*)cPtr);
+    _cretval = g_unix_mount_point_guess_name(cast(GUnixMountPoint*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -166,8 +166,8 @@ class UnixMountPoint : gobject.boxed.Boxed
   gio.icon.Icon guessSymbolicIcon()
   {
     GIcon* _cretval;
-    _cretval = g_unix_mount_point_guess_symbolic_icon(cast(GUnixMountPoint*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_unix_mount_point_guess_symbolic_icon(cast(GUnixMountPoint*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isLoopback()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_loopback(cast(GUnixMountPoint*)cPtr);
+    _retval = g_unix_mount_point_is_loopback(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isReadonly()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_readonly(cast(GUnixMountPoint*)cPtr);
+    _retval = g_unix_mount_point_is_readonly(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class UnixMountPoint : gobject.boxed.Boxed
   bool isUserMountable()
   {
     bool _retval;
-    _retval = g_unix_mount_point_is_user_mountable(cast(GUnixMountPoint*)cPtr);
+    _retval = g_unix_mount_point_is_user_mountable(cast(GUnixMountPoint*)this._cPtr);
     return _retval;
   }
 

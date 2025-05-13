@@ -45,16 +45,16 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_hsts_enforcer_get_type != &gidSymbolNotFound ? soup_hsts_enforcer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,7 +91,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   string[] getDomains(bool sessionPolicies)
   {
     GList* _cretval;
-    _cretval = soup_hsts_enforcer_get_domains(cast(SoupHSTSEnforcer*)cPtr, sessionPolicies);
+    _cretval = soup_hsts_enforcer_get_domains(cast(SoupHSTSEnforcer*)this._cPtr, sessionPolicies);
     auto _retval = gListToD!(string, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -108,7 +108,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   soup.hstspolicy.HSTSPolicy[] getPolicies(bool sessionPolicies)
   {
     GList* _cretval;
-    _cretval = soup_hsts_enforcer_get_policies(cast(SoupHSTSEnforcer*)cPtr, sessionPolicies);
+    _cretval = soup_hsts_enforcer_get_policies(cast(SoupHSTSEnforcer*)this._cPtr, sessionPolicies);
     auto _retval = gListToD!(soup.hstspolicy.HSTSPolicy, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -125,7 +125,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   {
     bool _retval;
     const(char)* _domain = domain.toCString(No.Alloc);
-    _retval = soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)cPtr, _domain);
+    _retval = soup_hsts_enforcer_has_valid_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   bool isPersistent()
   {
     bool _retval;
-    _retval = soup_hsts_enforcer_is_persistent(cast(SoupHSTSEnforcer*)cPtr);
+    _retval = soup_hsts_enforcer_is_persistent(cast(SoupHSTSEnforcer*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   */
   void setPolicy(soup.hstspolicy.HSTSPolicy policy)
   {
-    soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)cPtr, policy ? cast(SoupHSTSPolicy*)policy.cPtr(No.Dup) : null);
+    soup_hsts_enforcer_set_policy(cast(SoupHSTSEnforcer*)this._cPtr, policy ? cast(SoupHSTSPolicy*)policy._cPtr(No.Dup) : null);
   }
 
   /**
@@ -171,7 +171,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
   void setSessionPolicy(string domain, bool includeSubdomains)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    soup_hsts_enforcer_set_session_policy(cast(SoupHSTSEnforcer*)cPtr, _domain, includeSubdomains);
+    soup_hsts_enforcer_set_session_policy(cast(SoupHSTSEnforcer*)this._cPtr, _domain, includeSubdomains);
   }
 
   /**

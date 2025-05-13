@@ -35,22 +35,22 @@ class PatternSpec : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_pattern_spec_get_type != &gidSymbolNotFound ? g_pattern_spec_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class PatternSpec : gobject.boxed.Boxed
   glib.pattern_spec.PatternSpec copy()
   {
     GPatternSpec* _cretval;
-    _cretval = g_pattern_spec_copy(cast(GPatternSpec*)cPtr);
+    _cretval = g_pattern_spec_copy(cast(GPatternSpec*)this._cPtr);
     auto _retval = _cretval ? new glib.pattern_spec.PatternSpec(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -97,7 +97,7 @@ class PatternSpec : gobject.boxed.Boxed
   bool equal(glib.pattern_spec.PatternSpec pspec2)
   {
     bool _retval;
-    _retval = g_pattern_spec_equal(cast(GPatternSpec*)cPtr, pspec2 ? cast(GPatternSpec*)pspec2.cPtr(No.Dup) : null);
+    _retval = g_pattern_spec_equal(cast(GPatternSpec*)this._cPtr, pspec2 ? cast(GPatternSpec*)pspec2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class PatternSpec : gobject.boxed.Boxed
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
     const(char)* _stringReversed = stringReversed.toCString(No.Alloc);
-    _retval = g_pattern_spec_match(cast(GPatternSpec*)cPtr, stringLength, _string_, _stringReversed);
+    _retval = g_pattern_spec_match(cast(GPatternSpec*)this._cPtr, stringLength, _string_, _stringReversed);
     return _retval;
   }
 
@@ -149,7 +149,7 @@ class PatternSpec : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _string_ = string_.toCString(No.Alloc);
-    _retval = g_pattern_spec_match_string(cast(GPatternSpec*)cPtr, _string_);
+    _retval = g_pattern_spec_match_string(cast(GPatternSpec*)this._cPtr, _string_);
     return _retval;
   }
 }

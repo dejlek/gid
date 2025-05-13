@@ -24,16 +24,16 @@ class ColumnViewRow : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_row_get_type != &gidSymbolNotFound ? gtk_column_view_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -171,7 +171,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   string getAccessibleDescription()
   {
     const(char)* _cretval;
-    _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)cPtr);
+    _cretval = gtk_column_view_row_get_accessible_description(cast(GtkColumnViewRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -183,7 +183,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   string getAccessibleLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)cPtr);
+    _cretval = gtk_column_view_row_get_accessible_label(cast(GtkColumnViewRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -196,7 +196,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getActivatable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_activatable(cast(GtkColumnViewRow*)cPtr);
+    _retval = gtk_column_view_row_get_activatable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_focusable(cast(GtkColumnViewRow*)cPtr);
+    _retval = gtk_column_view_row_get_focusable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -220,9 +220,9 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_column_view_row_get_item(cast(GtkColumnViewRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   uint getPosition()
   {
     uint _retval;
-    _retval = gtk_column_view_row_get_position(cast(GtkColumnViewRow*)cPtr);
+    _retval = gtk_column_view_row_get_position(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getSelectable()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_selectable(cast(GtkColumnViewRow*)cPtr);
+    _retval = gtk_column_view_row_get_selectable(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -263,7 +263,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   bool getSelected()
   {
     bool _retval;
-    _retval = gtk_column_view_row_get_selected(cast(GtkColumnViewRow*)cPtr);
+    _retval = gtk_column_view_row_get_selected(cast(GtkColumnViewRow*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   void setAccessibleDescription(string description)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    gtk_column_view_row_set_accessible_description(cast(GtkColumnViewRow*)cPtr, _description);
+    gtk_column_view_row_set_accessible_description(cast(GtkColumnViewRow*)this._cPtr, _description);
   }
 
   /**
@@ -290,7 +290,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   void setAccessibleLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_column_view_row_set_accessible_label(cast(GtkColumnViewRow*)cPtr, _label);
+    gtk_column_view_row_set_accessible_label(cast(GtkColumnViewRow*)this._cPtr, _label);
   }
 
   /**
@@ -308,7 +308,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   void setActivatable(bool activatable)
   {
-    gtk_column_view_row_set_activatable(cast(GtkColumnViewRow*)cPtr, activatable);
+    gtk_column_view_row_set_activatable(cast(GtkColumnViewRow*)this._cPtr, activatable);
   }
 
   /**
@@ -327,7 +327,7 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   void setFocusable(bool focusable)
   {
-    gtk_column_view_row_set_focusable(cast(GtkColumnViewRow*)cPtr, focusable);
+    gtk_column_view_row_set_focusable(cast(GtkColumnViewRow*)this._cPtr, focusable);
   }
 
   /**
@@ -348,6 +348,6 @@ class ColumnViewRow : gobject.object.ObjectWrap
   */
   void setSelectable(bool selectable)
   {
-    gtk_column_view_row_set_selectable(cast(GtkColumnViewRow*)cPtr, selectable);
+    gtk_column_view_row_set_selectable(cast(GtkColumnViewRow*)this._cPtr, selectable);
   }
 }

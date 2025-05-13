@@ -30,16 +30,16 @@ class LayoutChild : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_child_get_type != &gidSymbolNotFound ? gtk_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,8 +55,8 @@ class LayoutChild : gobject.object.ObjectWrap
   gtk.widget.Widget getChildWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_layout_child_get_child_widget(cast(GtkLayoutChild*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,8 +68,8 @@ class LayoutChild : gobject.object.ObjectWrap
   gtk.layout_manager.LayoutManager getLayoutManager()
   {
     GtkLayoutManager* _cretval;
-    _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
+    _cretval = gtk_layout_child_get_layout_manager(cast(GtkLayoutChild*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.layout_manager.LayoutManager)(cast(GtkLayoutManager*)_cretval, No.Take);
     return _retval;
   }
 }

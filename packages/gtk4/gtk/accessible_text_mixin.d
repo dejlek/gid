@@ -29,7 +29,7 @@ template AccessibleTextT()
   */
   override void updateCaretPosition()
   {
-    gtk_accessible_text_update_caret_position(cast(GtkAccessibleText*)cPtr);
+    gtk_accessible_text_update_caret_position(cast(GtkAccessibleText*)this._cPtr);
   }
 
   /**
@@ -50,7 +50,7 @@ template AccessibleTextT()
   */
   override void updateContents(gtk.types.AccessibleTextContentChange change, uint start, uint end)
   {
-    gtk_accessible_text_update_contents(cast(GtkAccessibleText*)cPtr, change, start, end);
+    gtk_accessible_text_update_contents(cast(GtkAccessibleText*)this._cPtr, change, start, end);
   }
 
   /**
@@ -62,6 +62,6 @@ template AccessibleTextT()
   */
   override void updateSelectionBound()
   {
-    gtk_accessible_text_update_selection_bound(cast(GtkAccessibleText*)cPtr);
+    gtk_accessible_text_update_selection_bound(cast(GtkAccessibleText*)this._cPtr);
   }
 }

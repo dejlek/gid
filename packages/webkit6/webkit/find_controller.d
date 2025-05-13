@@ -32,16 +32,16 @@ class FindController : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_find_controller_get_type != &gidSymbolNotFound ? webkit_find_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class FindController : gobject.object.ObjectWrap
   void countMatches(string searchText, uint findOptions, uint maxMatchCount)
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
-    webkit_find_controller_count_matches(cast(WebKitFindController*)cPtr, _searchText, findOptions, maxMatchCount);
+    webkit_find_controller_count_matches(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
   }
 
   /**
@@ -108,7 +108,7 @@ class FindController : gobject.object.ObjectWrap
   uint getMaxMatchCount()
   {
     uint _retval;
-    _retval = webkit_find_controller_get_max_match_count(cast(WebKitFindController*)cPtr);
+    _retval = webkit_find_controller_get_max_match_count(cast(WebKitFindController*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class FindController : gobject.object.ObjectWrap
   uint getOptions()
   {
     uint _retval;
-    _retval = webkit_find_controller_get_options(cast(WebKitFindController*)cPtr);
+    _retval = webkit_find_controller_get_options(cast(WebKitFindController*)this._cPtr);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class FindController : gobject.object.ObjectWrap
   string getSearchText()
   {
     const(char)* _cretval;
-    _cretval = webkit_find_controller_get_search_text(cast(WebKitFindController*)cPtr);
+    _cretval = webkit_find_controller_get_search_text(cast(WebKitFindController*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,8 +155,8 @@ class FindController : gobject.object.ObjectWrap
   webkit.web_view.WebView getWebView()
   {
     WebKitWebView* _cretval;
-    _cretval = webkit_find_controller_get_web_view(cast(WebKitFindController*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
+    _cretval = webkit_find_controller_get_web_view(cast(WebKitFindController*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class FindController : gobject.object.ObjectWrap
   void search(string searchText, uint findOptions, uint maxMatchCount)
   {
     const(char)* _searchText = searchText.toCString(No.Alloc);
-    webkit_find_controller_search(cast(WebKitFindController*)cPtr, _searchText, findOptions, maxMatchCount);
+    webkit_find_controller_search(cast(WebKitFindController*)this._cPtr, _searchText, findOptions, maxMatchCount);
   }
 
   /**
@@ -206,7 +206,7 @@ class FindController : gobject.object.ObjectWrap
   */
   void searchFinish()
   {
-    webkit_find_controller_search_finish(cast(WebKitFindController*)cPtr);
+    webkit_find_controller_search_finish(cast(WebKitFindController*)this._cPtr);
   }
 
   /**
@@ -217,7 +217,7 @@ class FindController : gobject.object.ObjectWrap
   */
   void searchNext()
   {
-    webkit_find_controller_search_next(cast(WebKitFindController*)cPtr);
+    webkit_find_controller_search_next(cast(WebKitFindController*)this._cPtr);
   }
 
   /**
@@ -228,7 +228,7 @@ class FindController : gobject.object.ObjectWrap
   */
   void searchPrevious()
   {
-    webkit_find_controller_search_previous(cast(WebKitFindController*)cPtr);
+    webkit_find_controller_search_previous(cast(WebKitFindController*)this._cPtr);
   }
 
   /**

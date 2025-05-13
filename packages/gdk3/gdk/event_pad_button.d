@@ -27,7 +27,7 @@ class EventPadButton
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventPadButton
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventPadButton*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventPadButton*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventPadButton
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventPadButton*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventPadButton*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventPadButton
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventPadButton
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventPadButton*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadButton*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventPadButton*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventPadButton
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventPadButton*)cPtr).sendEvent;
+    return (cast(GdkEventPadButton*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventPadButton
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventPadButton*)cPtr).sendEvent = propval;
+    (cast(GdkEventPadButton*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventPadButton
   */
   @property uint time()
   {
-    return (cast(GdkEventPadButton*)cPtr).time;
+    return (cast(GdkEventPadButton*)this._cPtr).time;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventPadButton
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventPadButton*)cPtr).time = propval;
+    (cast(GdkEventPadButton*)this._cPtr).time = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class EventPadButton
   */
   @property uint group()
   {
-    return (cast(GdkEventPadButton*)cPtr).group;
+    return (cast(GdkEventPadButton*)this._cPtr).group;
   }
 
   /**
@@ -127,7 +127,7 @@ class EventPadButton
   */
   @property void group(uint propval)
   {
-    (cast(GdkEventPadButton*)cPtr).group = propval;
+    (cast(GdkEventPadButton*)this._cPtr).group = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class EventPadButton
   */
   @property uint button()
   {
-    return (cast(GdkEventPadButton*)cPtr).button;
+    return (cast(GdkEventPadButton*)this._cPtr).button;
   }
 
   /**
@@ -146,7 +146,7 @@ class EventPadButton
   */
   @property void button(uint propval)
   {
-    (cast(GdkEventPadButton*)cPtr).button = propval;
+    (cast(GdkEventPadButton*)this._cPtr).button = propval;
   }
 
   /**
@@ -156,7 +156,7 @@ class EventPadButton
   */
   @property uint mode()
   {
-    return (cast(GdkEventPadButton*)cPtr).mode;
+    return (cast(GdkEventPadButton*)this._cPtr).mode;
   }
 
   /**
@@ -167,6 +167,6 @@ class EventPadButton
   */
   @property void mode(uint propval)
   {
-    (cast(GdkEventPadButton*)cPtr).mode = propval;
+    (cast(GdkEventPadButton*)this._cPtr).mode = propval;
   }
 }

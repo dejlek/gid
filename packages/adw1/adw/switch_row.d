@@ -57,16 +57,16 @@ class SwitchRow : adw.action_row.ActionRow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_switch_row_get_type != &gidSymbolNotFound ? adw_switch_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class SwitchRow : adw.action_row.ActionRow
   bool getActive()
   {
     bool _retval;
-    _retval = adw_switch_row_get_active(cast(AdwSwitchRow*)cPtr);
+    _retval = adw_switch_row_get_active(cast(AdwSwitchRow*)this._cPtr);
     return _retval;
   }
 
@@ -124,6 +124,6 @@ class SwitchRow : adw.action_row.ActionRow
   */
   void setActive(bool isActive)
   {
-    adw_switch_row_set_active(cast(AdwSwitchRow*)cPtr, isActive);
+    adw_switch_row_set_active(cast(AdwSwitchRow*)this._cPtr, isActive);
   }
 }

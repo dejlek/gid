@@ -113,16 +113,16 @@ class Image : gtk.misc.Misc
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_get_type != &gidSymbolNotFound ? gtk_image_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -361,8 +361,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_animation(animation ? cast(GdkPixbufAnimation*)animation._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -393,7 +393,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_image_new_from_file(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -411,8 +411,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_gicon(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -432,7 +432,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_image_new_from_icon_name(_iconName, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -459,8 +459,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_icon_set(iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -481,8 +481,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -513,7 +513,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_image_new_from_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -537,7 +537,7 @@ class Image : gtk.misc.Misc
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_image_new_from_stock(_stockId, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -554,8 +554,8 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromSurface(cairo.surface.Surface surface = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_new_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class Image : gtk.misc.Misc
   */
   void clear()
   {
-    gtk_image_clear(cast(GtkImage*)cPtr);
+    gtk_image_clear(cast(GtkImage*)this._cPtr);
   }
 
   /**
@@ -579,8 +579,8 @@ class Image : gtk.misc.Misc
   gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
   {
     GdkPixbufAnimation* _cretval;
-    _cretval = gtk_image_get_animation(cast(GtkImage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    _cretval = gtk_image_get_animation(cast(GtkImage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -600,8 +600,8 @@ class Image : gtk.misc.Misc
   void getGicon(out gio.icon.Icon gicon, out gtk.types.IconSize size)
   {
     GIcon* _gicon;
-    gtk_image_get_gicon(cast(GtkImage*)cPtr, &_gicon, &size);
-    gicon = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(_gicon, No.Take);
+    gtk_image_get_gicon(cast(GtkImage*)this._cPtr, &_gicon, &size);
+    gicon = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(_gicon, No.Take);
   }
 
   /**
@@ -620,7 +620,7 @@ class Image : gtk.misc.Misc
   void getIconName(out string iconName, out gtk.types.IconSize size)
   {
     char* _iconName;
-    gtk_image_get_icon_name(cast(GtkImage*)cPtr, &_iconName, &size);
+    gtk_image_get_icon_name(cast(GtkImage*)this._cPtr, &_iconName, &size);
     iconName = _iconName.fromCString(No.Free);
   }
 
@@ -640,7 +640,7 @@ class Image : gtk.misc.Misc
   void getIconSet(out gtk.icon_set.IconSet iconSet, out gtk.types.IconSize size)
   {
     GtkIconSet* _iconSet;
-    gtk_image_get_icon_set(cast(GtkImage*)cPtr, &_iconSet, &size);
+    gtk_image_get_icon_set(cast(GtkImage*)this._cPtr, &_iconSet, &size);
     iconSet = new gtk.icon_set.IconSet(cast(void*)_iconSet, No.Take);
   }
 
@@ -656,8 +656,8 @@ class Image : gtk.misc.Misc
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gtk_image_get_pixbuf(cast(GtkImage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_image_get_pixbuf(cast(GtkImage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -668,7 +668,7 @@ class Image : gtk.misc.Misc
   int getPixelSize()
   {
     int _retval;
-    _retval = gtk_image_get_pixel_size(cast(GtkImage*)cPtr);
+    _retval = gtk_image_get_pixel_size(cast(GtkImage*)this._cPtr);
     return _retval;
   }
 
@@ -690,7 +690,7 @@ class Image : gtk.misc.Misc
   void getStock(out string stockId, out gtk.types.IconSize size)
   {
     char* _stockId;
-    gtk_image_get_stock(cast(GtkImage*)cPtr, &_stockId, &size);
+    gtk_image_get_stock(cast(GtkImage*)this._cPtr, &_stockId, &size);
     stockId = _stockId.fromCString(No.Free);
   }
 
@@ -703,7 +703,7 @@ class Image : gtk.misc.Misc
   gtk.types.ImageType getStorageType()
   {
     GtkImageType _cretval;
-    _cretval = gtk_image_get_storage_type(cast(GtkImage*)cPtr);
+    _cretval = gtk_image_get_storage_type(cast(GtkImage*)this._cPtr);
     gtk.types.ImageType _retval = cast(gtk.types.ImageType)_cretval;
     return _retval;
   }
@@ -717,7 +717,7 @@ class Image : gtk.misc.Misc
   */
   void setFromAnimation(gdkpixbuf.pixbuf_animation.PixbufAnimation animation)
   {
-    gtk_image_set_from_animation(cast(GtkImage*)cPtr, animation ? cast(GdkPixbufAnimation*)animation.cPtr(No.Dup) : null);
+    gtk_image_set_from_animation(cast(GtkImage*)this._cPtr, animation ? cast(GdkPixbufAnimation*)animation._cPtr(No.Dup) : null);
   }
 
   /**
@@ -729,7 +729,7 @@ class Image : gtk.misc.Misc
   void setFromFile(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_image_set_from_file(cast(GtkImage*)cPtr, _filename);
+    gtk_image_set_from_file(cast(GtkImage*)this._cPtr, _filename);
   }
 
   /**
@@ -741,7 +741,7 @@ class Image : gtk.misc.Misc
   */
   void setFromGicon(gio.icon.Icon icon, gtk.types.IconSize size)
   {
-    gtk_image_set_from_gicon(cast(GtkImage*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, size);
+    gtk_image_set_from_gicon(cast(GtkImage*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, size);
   }
 
   /**
@@ -754,7 +754,7 @@ class Image : gtk.misc.Misc
   void setFromIconName(string iconName, gtk.types.IconSize size)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_image_set_from_icon_name(cast(GtkImage*)cPtr, _iconName, size);
+    gtk_image_set_from_icon_name(cast(GtkImage*)this._cPtr, _iconName, size);
   }
 
   /**
@@ -768,7 +768,7 @@ class Image : gtk.misc.Misc
   */
   void setFromIconSet(gtk.icon_set.IconSet iconSet, gtk.types.IconSize size)
   {
-    gtk_image_set_from_icon_set(cast(GtkImage*)cPtr, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null, size);
+    gtk_image_set_from_icon_set(cast(GtkImage*)this._cPtr, iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null, size);
   }
 
   /**
@@ -779,7 +779,7 @@ class Image : gtk.misc.Misc
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_image_set_from_pixbuf(cast(GtkImage*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_image_set_from_pixbuf(cast(GtkImage*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -791,7 +791,7 @@ class Image : gtk.misc.Misc
   void setFromResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    gtk_image_set_from_resource(cast(GtkImage*)cPtr, _resourcePath);
+    gtk_image_set_from_resource(cast(GtkImage*)this._cPtr, _resourcePath);
   }
 
   /**
@@ -806,7 +806,7 @@ class Image : gtk.misc.Misc
   void setFromStock(string stockId, gtk.types.IconSize size)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    gtk_image_set_from_stock(cast(GtkImage*)cPtr, _stockId, size);
+    gtk_image_set_from_stock(cast(GtkImage*)this._cPtr, _stockId, size);
   }
 
   /**
@@ -817,7 +817,7 @@ class Image : gtk.misc.Misc
   */
   void setFromSurface(cairo.surface.Surface surface = null)
   {
-    gtk_image_set_from_surface(cast(GtkImage*)cPtr, surface ? cast(cairo_surface_t*)surface.cPtr(No.Dup) : null);
+    gtk_image_set_from_surface(cast(GtkImage*)this._cPtr, surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null);
   }
 
   /**
@@ -830,6 +830,6 @@ class Image : gtk.misc.Misc
   */
   void setPixelSize(int pixelSize)
   {
-    gtk_image_set_pixel_size(cast(GtkImage*)cPtr, pixelSize);
+    gtk_image_set_pixel_size(cast(GtkImage*)this._cPtr, pixelSize);
   }
 }

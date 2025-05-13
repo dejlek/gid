@@ -37,7 +37,7 @@ class ScrollEvent : gdk.event.Event
   */
   void getDeltas(out double deltaX, out double deltaY)
   {
-    gdk_scroll_event_get_deltas(cast(GdkEvent*)cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
+    gdk_scroll_event_get_deltas(cast(GdkEvent*)this._cPtr, cast(double*)&deltaX, cast(double*)&deltaY);
   }
 
   /**
@@ -47,7 +47,7 @@ class ScrollEvent : gdk.event.Event
   gdk.types.ScrollDirection getDirection()
   {
     GdkScrollDirection _cretval;
-    _cretval = gdk_scroll_event_get_direction(cast(GdkEvent*)cPtr);
+    _cretval = gdk_scroll_event_get_direction(cast(GdkEvent*)this._cPtr);
     gdk.types.ScrollDirection _retval = cast(gdk.types.ScrollDirection)_cretval;
     return _retval;
   }
@@ -62,7 +62,7 @@ class ScrollEvent : gdk.event.Event
   gdk.types.ScrollUnit getUnit()
   {
     GdkScrollUnit _cretval;
-    _cretval = gdk_scroll_event_get_unit(cast(GdkEvent*)cPtr);
+    _cretval = gdk_scroll_event_get_unit(cast(GdkEvent*)this._cPtr);
     gdk.types.ScrollUnit _retval = cast(gdk.types.ScrollUnit)_cretval;
     return _retval;
   }
@@ -82,7 +82,7 @@ class ScrollEvent : gdk.event.Event
   bool isStop()
   {
     bool _retval;
-    _retval = gdk_scroll_event_is_stop(cast(GdkEvent*)cPtr);
+    _retval = gdk_scroll_event_is_stop(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

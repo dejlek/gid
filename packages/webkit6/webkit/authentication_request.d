@@ -37,16 +37,16 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_authentication_request_get_type != &gidSymbolNotFound ? webkit_authentication_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   void authenticate(webkit.credential.Credential credential = null)
   {
-    webkit_authentication_request_authenticate(cast(WebKitAuthenticationRequest*)cPtr, credential ? cast(WebKitCredential*)credential.cPtr(No.Dup) : null);
+    webkit_authentication_request_authenticate(cast(WebKitAuthenticationRequest*)this._cPtr, credential ? cast(WebKitCredential*)credential._cPtr(No.Dup) : null);
   }
 
   /**
@@ -83,7 +83,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool canSaveCredentials()
   {
     bool _retval;
-    _retval = webkit_authentication_request_can_save_credentials(cast(WebKitAuthenticationRequest*)cPtr);
+    _retval = webkit_authentication_request_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    webkit_authentication_request_cancel(cast(WebKitAuthenticationRequest*)cPtr);
+    webkit_authentication_request_cancel(cast(WebKitAuthenticationRequest*)this._cPtr);
   }
 
   /**
@@ -105,7 +105,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   gio.types.TlsPasswordFlags getCertificatePinFlags()
   {
     GTlsPasswordFlags _cretval;
-    _cretval = webkit_authentication_request_get_certificate_pin_flags(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_certificate_pin_flags(cast(WebKitAuthenticationRequest*)this._cPtr);
     gio.types.TlsPasswordFlags _retval = cast(gio.types.TlsPasswordFlags)_cretval;
     return _retval;
   }
@@ -117,7 +117,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   string getHost()
   {
     const(char)* _cretval;
-    _cretval = webkit_authentication_request_get_host(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_host(cast(WebKitAuthenticationRequest*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -129,7 +129,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   uint getPort()
   {
     uint _retval;
-    _retval = webkit_authentication_request_get_port(cast(WebKitAuthenticationRequest*)cPtr);
+    _retval = webkit_authentication_request_get_port(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   webkit.credential.Credential getProposedCredential()
   {
     WebKitCredential* _cretval;
-    _cretval = webkit_authentication_request_get_proposed_credential(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_proposed_credential(cast(WebKitAuthenticationRequest*)this._cPtr);
     auto _retval = _cretval ? new webkit.credential.Credential(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -157,7 +157,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   string getRealm()
   {
     const(char)* _cretval;
-    _cretval = webkit_authentication_request_get_realm(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_realm(cast(WebKitAuthenticationRequest*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -169,7 +169,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   webkit.types.AuthenticationScheme getScheme()
   {
     WebKitAuthenticationScheme _cretval;
-    _cretval = webkit_authentication_request_get_scheme(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_scheme(cast(WebKitAuthenticationRequest*)this._cPtr);
     webkit.types.AuthenticationScheme _retval = cast(webkit.types.AuthenticationScheme)_cretval;
     return _retval;
   }
@@ -181,7 +181,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   webkit.security_origin.SecurityOrigin getSecurityOrigin()
   {
     WebKitSecurityOrigin* _cretval;
-    _cretval = webkit_authentication_request_get_security_origin(cast(WebKitAuthenticationRequest*)cPtr);
+    _cretval = webkit_authentication_request_get_security_origin(cast(WebKitAuthenticationRequest*)this._cPtr);
     auto _retval = _cretval ? new webkit.security_origin.SecurityOrigin(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -195,7 +195,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool isForProxy()
   {
     bool _retval;
-    _retval = webkit_authentication_request_is_for_proxy(cast(WebKitAuthenticationRequest*)cPtr);
+    _retval = webkit_authentication_request_is_for_proxy(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -206,7 +206,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   bool isRetry()
   {
     bool _retval;
-    _retval = webkit_authentication_request_is_retry(cast(WebKitAuthenticationRequest*)cPtr);
+    _retval = webkit_authentication_request_is_retry(cast(WebKitAuthenticationRequest*)this._cPtr);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   void setCanSaveCredentials(bool enabled)
   {
-    webkit_authentication_request_set_can_save_credentials(cast(WebKitAuthenticationRequest*)cPtr, enabled);
+    webkit_authentication_request_set_can_save_credentials(cast(WebKitAuthenticationRequest*)this._cPtr, enabled);
   }
 
   /**
@@ -245,7 +245,7 @@ class AuthenticationRequest : gobject.object.ObjectWrap
   */
   void setProposedCredential(webkit.credential.Credential credential)
   {
-    webkit_authentication_request_set_proposed_credential(cast(WebKitAuthenticationRequest*)cPtr, credential ? cast(WebKitCredential*)credential.cPtr(No.Dup) : null);
+    webkit_authentication_request_set_proposed_credential(cast(WebKitAuthenticationRequest*)this._cPtr, credential ? cast(WebKitCredential*)credential._cPtr(No.Dup) : null);
   }
 
   /**

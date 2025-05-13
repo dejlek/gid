@@ -85,16 +85,16 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_auth_observer_get_type != &gidSymbolNotFound ? g_dbus_auth_observer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -125,7 +125,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _mechanism = mechanism.toCString(No.Alloc);
-    _retval = g_dbus_auth_observer_allow_mechanism(cast(GDBusAuthObserver*)cPtr, _mechanism);
+    _retval = g_dbus_auth_observer_allow_mechanism(cast(GDBusAuthObserver*)this._cPtr, _mechanism);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class DBusAuthObserver : gobject.object.ObjectWrap
   bool authorizeAuthenticatedPeer(gio.iostream.IOStream stream, gio.credentials.Credentials credentials = null)
   {
     bool _retval;
-    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
+    _retval = g_dbus_auth_observer_authorize_authenticated_peer(cast(GDBusAuthObserver*)this._cPtr, stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, credentials ? cast(GCredentials*)credentials._cPtr(No.Dup) : null);
     return _retval;
   }
 

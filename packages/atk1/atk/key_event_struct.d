@@ -26,7 +26,7 @@ class KeyEventStruct
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class KeyEventStruct
   */
   @property int type()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).type;
+    return (cast(AtkKeyEventStruct*)this._cPtr).type;
   }
 
   /**
@@ -47,7 +47,7 @@ class KeyEventStruct
   */
   @property void type(int propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).type = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).type = propval;
   }
 
   /**
@@ -59,7 +59,7 @@ class KeyEventStruct
   */
   @property uint state()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).state;
+    return (cast(AtkKeyEventStruct*)this._cPtr).state;
   }
 
   /**
@@ -72,7 +72,7 @@ class KeyEventStruct
   */
   @property void state(uint propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).state = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).state = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class KeyEventStruct
   */
   @property uint keyval()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).keyval;
+    return (cast(AtkKeyEventStruct*)this._cPtr).keyval;
   }
 
   /**
@@ -93,7 +93,7 @@ class KeyEventStruct
   */
   @property void keyval(uint propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).keyval = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).keyval = propval;
   }
 
   /**
@@ -102,7 +102,7 @@ class KeyEventStruct
   */
   @property int length()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).length;
+    return (cast(AtkKeyEventStruct*)this._cPtr).length;
   }
 
   /**
@@ -112,7 +112,7 @@ class KeyEventStruct
   */
   @property void length(int propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).length = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).length = propval;
   }
 
   /**
@@ -124,7 +124,7 @@ class KeyEventStruct
   */
   @property string string_()
   {
-    return cToD!(string)(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
+    return cToD!(string)(cast(void*)(cast(AtkKeyEventStruct*)this._cPtr).string_);
   }
 
   /**
@@ -137,8 +137,8 @@ class KeyEventStruct
   */
   @property void string_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(AtkKeyEventStruct*)cPtr).string_);
-    dToC(propval, cast(void*)&(cast(AtkKeyEventStruct*)cPtr).string_);
+    cValueFree!(string)(cast(void*)(cast(AtkKeyEventStruct*)this._cPtr).string_);
+    dToC(propval, cast(void*)&(cast(AtkKeyEventStruct*)this._cPtr).string_);
   }
 
   /**
@@ -147,7 +147,7 @@ class KeyEventStruct
   */
   @property ushort keycode()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).keycode;
+    return (cast(AtkKeyEventStruct*)this._cPtr).keycode;
   }
 
   /**
@@ -157,7 +157,7 @@ class KeyEventStruct
   */
   @property void keycode(ushort propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).keycode = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).keycode = propval;
   }
 
   /**
@@ -168,7 +168,7 @@ class KeyEventStruct
   */
   @property uint timestamp()
   {
-    return (cast(AtkKeyEventStruct*)cPtr).timestamp;
+    return (cast(AtkKeyEventStruct*)this._cPtr).timestamp;
   }
 
   /**
@@ -180,6 +180,6 @@ class KeyEventStruct
   */
   @property void timestamp(uint propval)
   {
-    (cast(AtkKeyEventStruct*)cPtr).timestamp = propval;
+    (cast(AtkKeyEventStruct*)this._cPtr).timestamp = propval;
   }
 }

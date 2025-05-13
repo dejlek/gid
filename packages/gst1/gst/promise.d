@@ -74,22 +74,22 @@ class Promise : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_promise_get_type != &gidSymbolNotFound ? gst_promise_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class Promise : gobject.boxed.Boxed
   */
   @property gst.mini_object.MiniObject parent()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)cPtr).parent);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstPromise*)this._cPtr).parent);
   }
 
   /** */
@@ -149,7 +149,7 @@ class Promise : gobject.boxed.Boxed
   */
   void expire()
   {
-    gst_promise_expire(cast(GstPromise*)cPtr);
+    gst_promise_expire(cast(GstPromise*)this._cPtr);
   }
 
   /**
@@ -160,7 +160,7 @@ class Promise : gobject.boxed.Boxed
   gst.structure.Structure getReply()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_promise_get_reply(cast(GstPromise*)cPtr);
+    _cretval = gst_promise_get_reply(cast(GstPromise*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -172,7 +172,7 @@ class Promise : gobject.boxed.Boxed
   */
   void interrupt()
   {
-    gst_promise_interrupt(cast(GstPromise*)cPtr);
+    gst_promise_interrupt(cast(GstPromise*)this._cPtr);
   }
 
   /**
@@ -188,7 +188,7 @@ class Promise : gobject.boxed.Boxed
   */
   void reply(gst.structure.Structure s = null)
   {
-    gst_promise_reply(cast(GstPromise*)cPtr, s ? cast(GstStructure*)s.cPtr(Yes.Dup) : null);
+    gst_promise_reply(cast(GstPromise*)this._cPtr, s ? cast(GstStructure*)s._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -200,7 +200,7 @@ class Promise : gobject.boxed.Boxed
   gst.types.PromiseResult wait()
   {
     GstPromiseResult _cretval;
-    _cretval = gst_promise_wait(cast(GstPromise*)cPtr);
+    _cretval = gst_promise_wait(cast(GstPromise*)this._cPtr);
     gst.types.PromiseResult _retval = cast(gst.types.PromiseResult)_cretval;
     return _retval;
   }

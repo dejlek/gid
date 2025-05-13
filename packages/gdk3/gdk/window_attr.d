@@ -28,7 +28,7 @@ class WindowAttr
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class WindowAttr
   */
   @property string title()
   {
-    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).title);
+    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).title);
   }
 
   /**
@@ -49,8 +49,8 @@ class WindowAttr
   */
   @property void title(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).title);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)cPtr).title);
+    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).title);
+    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).title);
   }
 
   /**
@@ -59,7 +59,7 @@ class WindowAttr
   */
   @property int eventMask()
   {
-    return (cast(GdkWindowAttr*)cPtr).eventMask;
+    return (cast(GdkWindowAttr*)this._cPtr).eventMask;
   }
 
   /**
@@ -69,7 +69,7 @@ class WindowAttr
   */
   @property void eventMask(int propval)
   {
-    (cast(GdkWindowAttr*)cPtr).eventMask = propval;
+    (cast(GdkWindowAttr*)this._cPtr).eventMask = propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class WindowAttr
   */
   @property int x()
   {
-    return (cast(GdkWindowAttr*)cPtr).x;
+    return (cast(GdkWindowAttr*)this._cPtr).x;
   }
 
   /**
@@ -88,7 +88,7 @@ class WindowAttr
   */
   @property void x(int propval)
   {
-    (cast(GdkWindowAttr*)cPtr).x = propval;
+    (cast(GdkWindowAttr*)this._cPtr).x = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class WindowAttr
   */
   @property int y()
   {
-    return (cast(GdkWindowAttr*)cPtr).y;
+    return (cast(GdkWindowAttr*)this._cPtr).y;
   }
 
   /**
@@ -107,7 +107,7 @@ class WindowAttr
   */
   @property void y(int propval)
   {
-    (cast(GdkWindowAttr*)cPtr).y = propval;
+    (cast(GdkWindowAttr*)this._cPtr).y = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class WindowAttr
   */
   @property int width()
   {
-    return (cast(GdkWindowAttr*)cPtr).width;
+    return (cast(GdkWindowAttr*)this._cPtr).width;
   }
 
   /**
@@ -126,7 +126,7 @@ class WindowAttr
   */
   @property void width(int propval)
   {
-    (cast(GdkWindowAttr*)cPtr).width = propval;
+    (cast(GdkWindowAttr*)this._cPtr).width = propval;
   }
 
   /**
@@ -135,7 +135,7 @@ class WindowAttr
   */
   @property int height()
   {
-    return (cast(GdkWindowAttr*)cPtr).height;
+    return (cast(GdkWindowAttr*)this._cPtr).height;
   }
 
   /**
@@ -145,7 +145,7 @@ class WindowAttr
   */
   @property void height(int propval)
   {
-    (cast(GdkWindowAttr*)cPtr).height = propval;
+    (cast(GdkWindowAttr*)this._cPtr).height = propval;
   }
 
   /**
@@ -155,7 +155,7 @@ class WindowAttr
   */
   @property gdk.types.WindowWindowClass wclass()
   {
-    return cast(gdk.types.WindowWindowClass)(cast(GdkWindowAttr*)cPtr).wclass;
+    return cast(gdk.types.WindowWindowClass)(cast(GdkWindowAttr*)this._cPtr).wclass;
   }
 
   /**
@@ -166,7 +166,7 @@ class WindowAttr
   */
   @property void wclass(gdk.types.WindowWindowClass propval)
   {
-    (cast(GdkWindowAttr*)cPtr).wclass = cast(GdkWindowWindowClass)propval;
+    (cast(GdkWindowAttr*)this._cPtr).wclass = cast(GdkWindowWindowClass)propval;
   }
 
   /**
@@ -175,7 +175,7 @@ class WindowAttr
   */
   @property gdk.visual.Visual visual()
   {
-    return cToD!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)cPtr).visual);
+    return cToD!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).visual);
   }
 
   /**
@@ -185,8 +185,8 @@ class WindowAttr
   */
   @property void visual(gdk.visual.Visual propval)
   {
-    cValueFree!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)cPtr).visual);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)cPtr).visual);
+    cValueFree!(gdk.visual.Visual)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).visual);
+    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).visual);
   }
 
   /**
@@ -195,7 +195,7 @@ class WindowAttr
   */
   @property gdk.types.WindowType windowType()
   {
-    return cast(gdk.types.WindowType)(cast(GdkWindowAttr*)cPtr).windowType;
+    return cast(gdk.types.WindowType)(cast(GdkWindowAttr*)this._cPtr).windowType;
   }
 
   /**
@@ -205,7 +205,7 @@ class WindowAttr
   */
   @property void windowType(gdk.types.WindowType propval)
   {
-    (cast(GdkWindowAttr*)cPtr).windowType = cast(GdkWindowType)propval;
+    (cast(GdkWindowAttr*)this._cPtr).windowType = cast(GdkWindowType)propval;
   }
 
   /**
@@ -214,7 +214,7 @@ class WindowAttr
   */
   @property gdk.cursor.Cursor cursor()
   {
-    return cToD!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)cPtr).cursor);
+    return cToD!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).cursor);
   }
 
   /**
@@ -224,8 +224,8 @@ class WindowAttr
   */
   @property void cursor(gdk.cursor.Cursor propval)
   {
-    cValueFree!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)cPtr).cursor);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)cPtr).cursor);
+    cValueFree!(gdk.cursor.Cursor)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).cursor);
+    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).cursor);
   }
 
   /**
@@ -234,7 +234,7 @@ class WindowAttr
   */
   @property string wmclassName()
   {
-    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassName);
+    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassName);
   }
 
   /**
@@ -244,8 +244,8 @@ class WindowAttr
   */
   @property void wmclassName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassName);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)cPtr).wmclassName);
+    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassName);
+    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassName);
   }
 
   /**
@@ -254,7 +254,7 @@ class WindowAttr
   */
   @property string wmclassClass()
   {
-    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassClass);
+    return cToD!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
   }
 
   /**
@@ -264,8 +264,8 @@ class WindowAttr
   */
   @property void wmclassClass(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)cPtr).wmclassClass);
-    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)cPtr).wmclassClass);
+    cValueFree!(string)(cast(void*)(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
+    dToC(propval, cast(void*)&(cast(GdkWindowAttr*)this._cPtr).wmclassClass);
   }
 
   /**
@@ -274,7 +274,7 @@ class WindowAttr
   */
   @property bool overrideRedirect()
   {
-    return (cast(GdkWindowAttr*)cPtr).overrideRedirect;
+    return (cast(GdkWindowAttr*)this._cPtr).overrideRedirect;
   }
 
   /**
@@ -284,7 +284,7 @@ class WindowAttr
   */
   @property void overrideRedirect(bool propval)
   {
-    (cast(GdkWindowAttr*)cPtr).overrideRedirect = propval;
+    (cast(GdkWindowAttr*)this._cPtr).overrideRedirect = propval;
   }
 
   /**
@@ -293,7 +293,7 @@ class WindowAttr
   */
   @property gdk.types.WindowTypeHint typeHint()
   {
-    return cast(gdk.types.WindowTypeHint)(cast(GdkWindowAttr*)cPtr).typeHint;
+    return cast(gdk.types.WindowTypeHint)(cast(GdkWindowAttr*)this._cPtr).typeHint;
   }
 
   /**
@@ -303,6 +303,6 @@ class WindowAttr
   */
   @property void typeHint(gdk.types.WindowTypeHint propval)
   {
-    (cast(GdkWindowAttr*)cPtr).typeHint = cast(GdkWindowTypeHint)propval;
+    (cast(GdkWindowAttr*)this._cPtr).typeHint = cast(GdkWindowTypeHint)propval;
   }
 }

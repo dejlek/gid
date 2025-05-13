@@ -50,7 +50,7 @@ template MountT()
   override bool canEject()
   {
     bool _retval;
-    _retval = g_mount_can_eject(cast(GMount*)cPtr);
+    _retval = g_mount_can_eject(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template MountT()
   override bool canUnmount()
   {
     bool _retval;
-    _retval = g_mount_can_unmount(cast(GMount*)cPtr);
+    _retval = g_mount_can_unmount(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -79,17 +79,17 @@ template MountT()
   */
   override void eject(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_eject(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_eject(cast(GMount*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -107,7 +107,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_mount_eject_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -127,17 +127,17 @@ template MountT()
   */
   override void ejectWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_eject_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_eject_with_operation(cast(GMount*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -153,7 +153,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_eject_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_mount_eject_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -170,8 +170,8 @@ template MountT()
   override gio.file.File getDefaultLocation()
   {
     GFile* _cretval;
-    _cretval = g_mount_get_default_location(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_mount_get_default_location(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -188,8 +188,8 @@ template MountT()
   override gio.drive.Drive getDrive()
   {
     GDrive* _cretval;
-    _cretval = g_mount_get_drive(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
+    _cretval = g_mount_get_drive(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.drive.Drive)(cast(GDrive*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -202,8 +202,8 @@ template MountT()
   override gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = g_mount_get_icon(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_mount_get_icon(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ template MountT()
   override string getName()
   {
     char* _cretval;
-    _cretval = g_mount_get_name(cast(GMount*)cPtr);
+    _cretval = g_mount_get_name(cast(GMount*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -230,8 +230,8 @@ template MountT()
   override gio.file.File getRoot()
   {
     GFile* _cretval;
-    _cretval = g_mount_get_root(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_mount_get_root(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ template MountT()
   override string getSortKey()
   {
     const(char)* _cretval;
-    _cretval = g_mount_get_sort_key(cast(GMount*)cPtr);
+    _cretval = g_mount_get_sort_key(cast(GMount*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -256,8 +256,8 @@ template MountT()
   override gio.icon.Icon getSymbolicIcon()
   {
     GIcon* _cretval;
-    _cretval = g_mount_get_symbolic_icon(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
+    _cretval = g_mount_get_symbolic_icon(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ template MountT()
   override string getUuid()
   {
     char* _cretval;
-    _cretval = g_mount_get_uuid(cast(GMount*)cPtr);
+    _cretval = g_mount_get_uuid(cast(GMount*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -289,8 +289,8 @@ template MountT()
   override gio.volume.Volume getVolume()
   {
     GVolume* _cretval;
-    _cretval = g_mount_get_volume(cast(GMount*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    _cretval = g_mount_get_volume(cast(GMount*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -315,17 +315,17 @@ template MountT()
   */
   override void guessContentType(bool forceRescan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_guess_content_type(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_guess_content_type(cast(GMount*)this._cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -345,7 +345,7 @@ template MountT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_mount_guess_content_type_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_mount_guess_content_type_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string[] _retval;
@@ -385,7 +385,7 @@ template MountT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_mount_guess_content_type_sync(cast(GMount*)cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_mount_guess_content_type_sync(cast(GMount*)this._cPtr, forceRescan, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string[] _retval;
@@ -431,7 +431,7 @@ template MountT()
   override bool isShadowed()
   {
     bool _retval;
-    _retval = g_mount_is_shadowed(cast(GMount*)cPtr);
+    _retval = g_mount_is_shadowed(cast(GMount*)this._cPtr);
     return _retval;
   }
 
@@ -455,17 +455,17 @@ template MountT()
   */
   override void remount(gio.types.MountMountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_remount(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_remount(cast(GMount*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -481,7 +481,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_remount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_mount_remount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -495,7 +495,7 @@ template MountT()
   */
   override void shadow()
   {
-    g_mount_shadow(cast(GMount*)cPtr);
+    g_mount_shadow(cast(GMount*)this._cPtr);
   }
 
   /**
@@ -512,17 +512,17 @@ template MountT()
   */
   override void unmount(gio.types.MountUnmountFlags flags, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_unmount(cast(GMount*)cPtr, flags, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_unmount(cast(GMount*)this._cPtr, flags, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -540,7 +540,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_mount_unmount_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -560,17 +560,17 @@ template MountT()
   */
   override void unmountWithOperation(gio.types.MountUnmountFlags flags, gio.mount_operation.MountOperation mountOperation = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_mount_unmount_with_operation(cast(GMount*)cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_mount_unmount_with_operation(cast(GMount*)this._cPtr, flags, mountOperation ? cast(GMountOperation*)mountOperation._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -586,7 +586,7 @@ template MountT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_mount_unmount_with_operation_finish(cast(GMount*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_mount_unmount_with_operation_finish(cast(GMount*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -600,7 +600,7 @@ template MountT()
   */
   override void unshadow()
   {
-    g_mount_unshadow(cast(GMount*)cPtr);
+    g_mount_unshadow(cast(GMount*)this._cPtr);
   }
 
   /**

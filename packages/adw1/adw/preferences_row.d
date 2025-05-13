@@ -36,16 +36,16 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_row_get_type != &gidSymbolNotFound ? adw_preferences_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -166,7 +166,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_row_get_title(cast(AdwPreferencesRow*)cPtr);
+    _cretval = adw_preferences_row_get_title(cast(AdwPreferencesRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -178,7 +178,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getTitleSelectable()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_title_selectable(cast(AdwPreferencesRow*)cPtr);
+    _retval = adw_preferences_row_get_title_selectable(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_use_markup(cast(AdwPreferencesRow*)cPtr);
+    _retval = adw_preferences_row_get_use_markup(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_preferences_row_get_use_underline(cast(AdwPreferencesRow*)cPtr);
+    _retval = adw_preferences_row_get_use_underline(cast(AdwPreferencesRow*)this._cPtr);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_preferences_row_set_title(cast(AdwPreferencesRow*)cPtr, _title);
+    adw_preferences_row_set_title(cast(AdwPreferencesRow*)this._cPtr, _title);
   }
 
   /**
@@ -229,7 +229,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   void setTitleSelectable(bool titleSelectable)
   {
-    adw_preferences_row_set_title_selectable(cast(AdwPreferencesRow*)cPtr, titleSelectable);
+    adw_preferences_row_set_title_selectable(cast(AdwPreferencesRow*)this._cPtr, titleSelectable);
   }
 
   /**
@@ -244,7 +244,7 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   void setUseMarkup(bool useMarkup)
   {
-    adw_preferences_row_set_use_markup(cast(AdwPreferencesRow*)cPtr, useMarkup);
+    adw_preferences_row_set_use_markup(cast(AdwPreferencesRow*)this._cPtr, useMarkup);
   }
 
   /**
@@ -255,6 +255,6 @@ class PreferencesRow : gtk.list_box_row.ListBoxRow
   */
   void setUseUnderline(bool useUnderline)
   {
-    adw_preferences_row_set_use_underline(cast(AdwPreferencesRow*)cPtr, useUnderline);
+    adw_preferences_row_set_use_underline(cast(AdwPreferencesRow*)this._cPtr, useUnderline);
   }
 }

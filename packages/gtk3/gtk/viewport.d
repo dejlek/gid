@@ -47,16 +47,16 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_viewport_get_type != &gidSymbolNotFound ? gtk_viewport_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,7 +91,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_viewport_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -102,8 +102,8 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   gdk.window.Window getBinWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_viewport_get_bin_window(cast(GtkViewport*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_viewport_get_bin_window(cast(GtkViewport*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -116,8 +116,8 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_viewport_get_hadjustment(cast(GtkViewport*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_viewport_get_hadjustment(cast(GtkViewport*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   gtk.types.ShadowType getShadowType()
   {
     GtkShadowType _cretval;
-    _cretval = gtk_viewport_get_shadow_type(cast(GtkViewport*)cPtr);
+    _cretval = gtk_viewport_get_shadow_type(cast(GtkViewport*)this._cPtr);
     gtk.types.ShadowType _retval = cast(gtk.types.ShadowType)_cretval;
     return _retval;
   }
@@ -143,8 +143,8 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_viewport_get_vadjustment(cast(GtkViewport*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_viewport_get_vadjustment(cast(GtkViewport*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -155,8 +155,8 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   gdk.window.Window getViewWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_viewport_get_view_window(cast(GtkViewport*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_viewport_get_view_window(cast(GtkViewport*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_viewport_set_hadjustment(cast(GtkViewport*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_viewport_set_hadjustment(cast(GtkViewport*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -181,7 +181,7 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   */
   void setShadowType(gtk.types.ShadowType type)
   {
-    gtk_viewport_set_shadow_type(cast(GtkViewport*)cPtr, type);
+    gtk_viewport_set_shadow_type(cast(GtkViewport*)this._cPtr, type);
   }
 
   /**
@@ -194,6 +194,6 @@ class Viewport : gtk.bin.Bin, gtk.scrollable.Scrollable
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_viewport_set_vadjustment(cast(GtkViewport*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_viewport_set_vadjustment(cast(GtkViewport*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 }

@@ -25,16 +25,16 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_basic_get_type != &gidSymbolNotFound ? soup_auth_domain_basic_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,13 +105,13 @@ class AuthDomainBasic : soup.auth_domain.AuthDomain
       string _username = username.fromCString(No.Free);
       string _password = password.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain_basic.AuthDomainBasic)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username, _password);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    soup_auth_domain_basic_set_auth_callback(cast(SoupAuthDomain*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    soup_auth_domain_basic_set_auth_callback(cast(SoupAuthDomain*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 }

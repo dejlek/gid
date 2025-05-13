@@ -29,7 +29,7 @@ template TableCellT()
   override atk.object.ObjectWrap[] getColumnHeaderCells()
   {
     GPtrArray* _cretval;
-    _cretval = atk_table_cell_get_column_header_cells(cast(AtkTableCell*)cPtr);
+    _cretval = atk_table_cell_get_column_header_cells(cast(AtkTableCell*)this._cPtr);
     auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -42,7 +42,7 @@ template TableCellT()
   override int getColumnSpan()
   {
     int _retval;
-    _retval = atk_table_cell_get_column_span(cast(AtkTableCell*)cPtr);
+    _retval = atk_table_cell_get_column_span(cast(AtkTableCell*)this._cPtr);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ template TableCellT()
   override bool getPosition(out int row, out int column)
   {
     bool _retval;
-    _retval = atk_table_cell_get_position(cast(AtkTableCell*)cPtr, cast(int*)&row, cast(int*)&column);
+    _retval = atk_table_cell_get_position(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ template TableCellT()
   override bool getRowColumnSpan(out int row, out int column, out int rowSpan, out int columnSpan)
   {
     bool _retval;
-    _retval = atk_table_cell_get_row_column_span(cast(AtkTableCell*)cPtr, cast(int*)&row, cast(int*)&column, cast(int*)&rowSpan, cast(int*)&columnSpan);
+    _retval = atk_table_cell_get_row_column_span(cast(AtkTableCell*)this._cPtr, cast(int*)&row, cast(int*)&column, cast(int*)&rowSpan, cast(int*)&columnSpan);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ template TableCellT()
   override atk.object.ObjectWrap[] getRowHeaderCells()
   {
     GPtrArray* _cretval;
-    _cretval = atk_table_cell_get_row_header_cells(cast(AtkTableCell*)cPtr);
+    _cretval = atk_table_cell_get_row_header_cells(cast(AtkTableCell*)this._cPtr);
     auto _retval = gPtrArrayToD!(atk.object.ObjectWrap, GidOwnership.Full)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -103,7 +103,7 @@ template TableCellT()
   override int getRowSpan()
   {
     int _retval;
-    _retval = atk_table_cell_get_row_span(cast(AtkTableCell*)cPtr);
+    _retval = atk_table_cell_get_row_span(cast(AtkTableCell*)this._cPtr);
     return _retval;
   }
 
@@ -114,8 +114,8 @@ template TableCellT()
   override atk.object.ObjectWrap getTable()
   {
     AtkObject* _cretval;
-    _cretval = atk_table_cell_get_table(cast(AtkTableCell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_table_cell_get_table(cast(AtkTableCell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -23,16 +23,16 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_page_get_type != &gidSymbolNotFound ? adw_view_stack_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -203,7 +203,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   uint getBadgeNumber()
   {
     uint _retval;
-    _retval = adw_view_stack_page_get_badge_number(cast(AdwViewStackPage*)cPtr);
+    _retval = adw_view_stack_page_get_badge_number(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -214,8 +214,8 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_view_stack_page_get_child(cast(AdwViewStackPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_view_stack_page_get_child(cast(AdwViewStackPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_view_stack_page_get_icon_name(cast(AdwViewStackPage*)cPtr);
+    _cretval = adw_view_stack_page_get_icon_name(cast(AdwViewStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -238,7 +238,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getName()
   {
     const(char)* _cretval;
-    _cretval = adw_view_stack_page_get_name(cast(AdwViewStackPage*)cPtr);
+    _cretval = adw_view_stack_page_get_name(cast(AdwViewStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -250,7 +250,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_needs_attention(cast(AdwViewStackPage*)cPtr);
+    _retval = adw_view_stack_page_get_needs_attention(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_view_stack_page_get_title(cast(AdwViewStackPage*)cPtr);
+    _cretval = adw_view_stack_page_get_title(cast(AdwViewStackPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -273,7 +273,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_use_underline(cast(AdwViewStackPage*)cPtr);
+    _retval = adw_view_stack_page_get_use_underline(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getVisible()
   {
     bool _retval;
-    _retval = adw_view_stack_page_get_visible(cast(AdwViewStackPage*)cPtr);
+    _retval = adw_view_stack_page_get_visible(cast(AdwViewStackPage*)this._cPtr);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setBadgeNumber(uint badgeNumber)
   {
-    adw_view_stack_page_set_badge_number(cast(AdwViewStackPage*)cPtr, badgeNumber);
+    adw_view_stack_page_set_badge_number(cast(AdwViewStackPage*)this._cPtr, badgeNumber);
   }
 
   /**
@@ -316,7 +316,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_view_stack_page_set_icon_name(cast(AdwViewStackPage*)cPtr, _iconName);
+    adw_view_stack_page_set_icon_name(cast(AdwViewStackPage*)this._cPtr, _iconName);
   }
 
   /**
@@ -328,7 +328,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_view_stack_page_set_name(cast(AdwViewStackPage*)cPtr, _name);
+    adw_view_stack_page_set_name(cast(AdwViewStackPage*)this._cPtr, _name);
   }
 
   /**
@@ -341,7 +341,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setNeedsAttention(bool needsAttention)
   {
-    adw_view_stack_page_set_needs_attention(cast(AdwViewStackPage*)cPtr, needsAttention);
+    adw_view_stack_page_set_needs_attention(cast(AdwViewStackPage*)this._cPtr, needsAttention);
   }
 
   /**
@@ -353,7 +353,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_view_stack_page_set_title(cast(AdwViewStackPage*)cPtr, _title);
+    adw_view_stack_page_set_title(cast(AdwViewStackPage*)this._cPtr, _title);
   }
 
   /**
@@ -364,7 +364,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setUseUnderline(bool useUnderline)
   {
-    adw_view_stack_page_set_use_underline(cast(AdwViewStackPage*)cPtr, useUnderline);
+    adw_view_stack_page_set_use_underline(cast(AdwViewStackPage*)this._cPtr, useUnderline);
   }
 
   /**
@@ -378,6 +378,6 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setVisible(bool visible)
   {
-    adw_view_stack_page_set_visible(cast(AdwViewStackPage*)cPtr, visible);
+    adw_view_stack_page_set_visible(cast(AdwViewStackPage*)this._cPtr, visible);
   }
 }

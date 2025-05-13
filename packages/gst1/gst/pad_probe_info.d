@@ -30,7 +30,7 @@ class PadProbeInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class PadProbeInfo
   */
   @property gst.types.PadProbeType type()
   {
-    return cast(gst.types.PadProbeType)(cast(GstPadProbeInfo*)cPtr).type;
+    return cast(gst.types.PadProbeType)(cast(GstPadProbeInfo*)this._cPtr).type;
   }
 
   /**
@@ -51,7 +51,7 @@ class PadProbeInfo
   */
   @property void type(gst.types.PadProbeType propval)
   {
-    (cast(GstPadProbeInfo*)cPtr).type = cast(GstPadProbeType)propval;
+    (cast(GstPadProbeInfo*)this._cPtr).type = cast(GstPadProbeType)propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class PadProbeInfo
   */
   @property gulong id()
   {
-    return (cast(GstPadProbeInfo*)cPtr).id;
+    return (cast(GstPadProbeInfo*)this._cPtr).id;
   }
 
   /**
@@ -70,7 +70,7 @@ class PadProbeInfo
   */
   @property void id(gulong propval)
   {
-    (cast(GstPadProbeInfo*)cPtr).id = propval;
+    (cast(GstPadProbeInfo*)this._cPtr).id = propval;
   }
 
   /**
@@ -80,7 +80,7 @@ class PadProbeInfo
   */
   @property ulong offset()
   {
-    return (cast(GstPadProbeInfo*)cPtr).offset;
+    return (cast(GstPadProbeInfo*)this._cPtr).offset;
   }
 
   /**
@@ -91,7 +91,7 @@ class PadProbeInfo
   */
   @property void offset(ulong propval)
   {
-    (cast(GstPadProbeInfo*)cPtr).offset = propval;
+    (cast(GstPadProbeInfo*)this._cPtr).offset = propval;
   }
 
   /**
@@ -101,7 +101,7 @@ class PadProbeInfo
   */
   @property uint size()
   {
-    return (cast(GstPadProbeInfo*)cPtr).size;
+    return (cast(GstPadProbeInfo*)this._cPtr).size;
   }
 
   /**
@@ -112,14 +112,14 @@ class PadProbeInfo
   */
   @property void size(uint propval)
   {
-    (cast(GstPadProbeInfo*)cPtr).size = propval;
+    (cast(GstPadProbeInfo*)this._cPtr).size = propval;
   }
 
   /** */
   gst.buffer.Buffer getBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_pad_probe_info_get_buffer(cast(GstPadProbeInfo*)cPtr);
+    _cretval = gst_pad_probe_info_get_buffer(cast(GstPadProbeInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -128,7 +128,7 @@ class PadProbeInfo
   gst.buffer_list.BufferList getBufferList()
   {
     GstBufferList* _cretval;
-    _cretval = gst_pad_probe_info_get_buffer_list(cast(GstPadProbeInfo*)cPtr);
+    _cretval = gst_pad_probe_info_get_buffer_list(cast(GstPadProbeInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer_list.BufferList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -137,7 +137,7 @@ class PadProbeInfo
   gst.event.Event getEvent()
   {
     GstEvent* _cretval;
-    _cretval = gst_pad_probe_info_get_event(cast(GstPadProbeInfo*)cPtr);
+    _cretval = gst_pad_probe_info_get_event(cast(GstPadProbeInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.event.Event(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -146,7 +146,7 @@ class PadProbeInfo
   gst.query.Query getQuery()
   {
     GstQuery* _cretval;
-    _cretval = gst_pad_probe_info_get_query(cast(GstPadProbeInfo*)cPtr);
+    _cretval = gst_pad_probe_info_get_query(cast(GstPadProbeInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.query.Query(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

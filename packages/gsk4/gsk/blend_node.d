@@ -35,7 +35,7 @@ class BlendNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode bottom, gsk.render_node.RenderNode top, gsk.types.BlendMode blendMode)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blend_node_new(bottom ? cast(GskRenderNode*)bottom.cPtr(No.Dup) : null, top ? cast(GskRenderNode*)top.cPtr(No.Dup) : null, blendMode);
+    _cretval = gsk_blend_node_new(bottom ? cast(GskRenderNode*)bottom._cPtr(No.Dup) : null, top ? cast(GskRenderNode*)top._cPtr(No.Dup) : null, blendMode);
     this(_cretval, Yes.Take);
   }
 
@@ -46,7 +46,7 @@ class BlendNode : gsk.render_node.RenderNode
   gsk.types.BlendMode getBlendMode()
   {
     GskBlendMode _cretval;
-    _cretval = gsk_blend_node_get_blend_mode(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_blend_node_get_blend_mode(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.BlendMode _retval = cast(gsk.types.BlendMode)_cretval;
     return _retval;
   }
@@ -58,7 +58,7 @@ class BlendNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getBottomChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blend_node_get_bottom_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_blend_node_get_bottom_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -70,7 +70,7 @@ class BlendNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getTopChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blend_node_get_top_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_blend_node_get_top_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }

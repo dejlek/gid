@@ -55,16 +55,16 @@ class MenuShell : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_shell_get_type != &gidSymbolNotFound ? gtk_menu_shell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -106,7 +106,7 @@ class MenuShell : gtk.container.Container
   */
   void activateItem(gtk.widget.Widget menuItem, bool forceDeactivate)
   {
-    gtk_menu_shell_activate_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null, forceDeactivate);
+    gtk_menu_shell_activate_item(cast(GtkMenuShell*)this._cPtr, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null, forceDeactivate);
   }
 
   /**
@@ -118,7 +118,7 @@ class MenuShell : gtk.container.Container
   */
   void append(gtk.menu_item.MenuItem child)
   {
-    gtk_menu_shell_append(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_menu_shell_append(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -166,7 +166,7 @@ class MenuShell : gtk.container.Container
   void bindModel(gio.menu_model.MenuModel model, string actionNamespace, bool withSeparators)
   {
     const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
-    gtk_menu_shell_bind_model(cast(GtkMenuShell*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, _actionNamespace, withSeparators);
+    gtk_menu_shell_bind_model(cast(GtkMenuShell*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace, withSeparators);
   }
 
   /**
@@ -174,7 +174,7 @@ class MenuShell : gtk.container.Container
   */
   void cancel()
   {
-    gtk_menu_shell_cancel(cast(GtkMenuShell*)cPtr);
+    gtk_menu_shell_cancel(cast(GtkMenuShell*)this._cPtr);
   }
 
   /**
@@ -185,7 +185,7 @@ class MenuShell : gtk.container.Container
   */
   void deactivate()
   {
-    gtk_menu_shell_deactivate(cast(GtkMenuShell*)cPtr);
+    gtk_menu_shell_deactivate(cast(GtkMenuShell*)this._cPtr);
   }
 
   /**
@@ -194,7 +194,7 @@ class MenuShell : gtk.container.Container
   */
   void deselect()
   {
-    gtk_menu_shell_deselect(cast(GtkMenuShell*)cPtr);
+    gtk_menu_shell_deselect(cast(GtkMenuShell*)this._cPtr);
   }
 
   /**
@@ -207,8 +207,8 @@ class MenuShell : gtk.container.Container
   gtk.widget.Widget getParentShell()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_shell_get_parent_shell(cast(GtkMenuShell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_shell_get_parent_shell(cast(GtkMenuShell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -219,8 +219,8 @@ class MenuShell : gtk.container.Container
   gtk.widget.Widget getSelectedItem()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_shell_get_selected_item(cast(GtkMenuShell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_shell_get_selected_item(cast(GtkMenuShell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class MenuShell : gtk.container.Container
   bool getTakeFocus()
   {
     bool _retval;
-    _retval = gtk_menu_shell_get_take_focus(cast(GtkMenuShell*)cPtr);
+    _retval = gtk_menu_shell_get_take_focus(cast(GtkMenuShell*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class MenuShell : gtk.container.Container
   */
   void insert(gtk.widget.Widget child, int position)
   {
-    gtk_menu_shell_insert(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
+    gtk_menu_shell_insert(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -258,7 +258,7 @@ class MenuShell : gtk.container.Container
   */
   void prepend(gtk.widget.Widget child)
   {
-    gtk_menu_shell_prepend(cast(GtkMenuShell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_menu_shell_prepend(cast(GtkMenuShell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -275,7 +275,7 @@ class MenuShell : gtk.container.Container
   */
   void selectFirst(bool searchSensitive)
   {
-    gtk_menu_shell_select_first(cast(GtkMenuShell*)cPtr, searchSensitive);
+    gtk_menu_shell_select_first(cast(GtkMenuShell*)this._cPtr, searchSensitive);
   }
 
   /**
@@ -286,7 +286,7 @@ class MenuShell : gtk.container.Container
   */
   void selectItem(gtk.widget.Widget menuItem)
   {
-    gtk_menu_shell_select_item(cast(GtkMenuShell*)cPtr, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null);
+    gtk_menu_shell_select_item(cast(GtkMenuShell*)this._cPtr, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
   }
 
   /**
@@ -323,7 +323,7 @@ class MenuShell : gtk.container.Container
   */
   void setTakeFocus(bool takeFocus)
   {
-    gtk_menu_shell_set_take_focus(cast(GtkMenuShell*)cPtr, takeFocus);
+    gtk_menu_shell_set_take_focus(cast(GtkMenuShell*)this._cPtr, takeFocus);
   }
 
   /**

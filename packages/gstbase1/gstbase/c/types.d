@@ -2170,7 +2170,7 @@ struct GstDataQueue
   /**
       the parent structure
   */
-  ObjectC object;
+  GObject object;
 
   /** */
   GstDataQueuePrivate* priv;

@@ -37,16 +37,16 @@ class Renderer : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_renderer_get_type != &gidSymbolNotFound ? gsk_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,8 +89,8 @@ class Renderer : gobject.object.ObjectWrap
   static gsk.renderer.Renderer newForSurface(gdk.surface.Surface surface)
   {
     GskRenderer* _cretval;
-    _cretval = gsk_renderer_new_for_surface(surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, Yes.Take);
+    _cretval = gsk_renderer_new_for_surface(surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gsk.renderer.Renderer)(cast(GskRenderer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,8 +103,8 @@ class Renderer : gobject.object.ObjectWrap
   gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gsk_renderer_get_surface(cast(GskRenderer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gsk_renderer_get_surface(cast(GskRenderer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Renderer : gobject.object.ObjectWrap
   bool isRealized()
   {
     bool _retval;
-    _retval = gsk_renderer_is_realized(cast(GskRenderer*)cPtr);
+    _retval = gsk_renderer_is_realized(cast(GskRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Renderer : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gsk_renderer_realize(cast(GskRenderer*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null, &_err);
+    _retval = gsk_renderer_realize(cast(GskRenderer*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -162,7 +162,7 @@ class Renderer : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gsk_renderer_realize_for_display(cast(GskRenderer*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, &_err);
+    _retval = gsk_renderer_realize_for_display(cast(GskRenderer*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -189,7 +189,7 @@ class Renderer : gobject.object.ObjectWrap
   */
   void render(gsk.render_node.RenderNode root, cairo.region.Region region = null)
   {
-    gsk_renderer_render(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    gsk_renderer_render(cast(GskRenderer*)this._cPtr, root ? cast(GskRenderNode*)root._cPtr(No.Dup) : null, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -210,8 +210,8 @@ class Renderer : gobject.object.ObjectWrap
   gdk.texture.Texture renderTexture(gsk.render_node.RenderNode root, graphene.rect.Rect viewport = null)
   {
     GdkTexture* _cretval;
-    _cretval = gsk_renderer_render_texture(cast(GskRenderer*)cPtr, root ? cast(GskRenderNode*)root.cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    _cretval = gsk_renderer_render_texture(cast(GskRenderer*)this._cPtr, root ? cast(GskRenderNode*)root._cPtr(No.Dup) : null, viewport ? cast(const(graphene_rect_t)*)viewport._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -220,6 +220,6 @@ class Renderer : gobject.object.ObjectWrap
   */
   void unrealize()
   {
-    gsk_renderer_unrealize(cast(GskRenderer*)cPtr);
+    gsk_renderer_unrealize(cast(GskRenderer*)this._cPtr);
   }
 }

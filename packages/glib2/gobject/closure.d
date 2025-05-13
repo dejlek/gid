@@ -82,22 +82,22 @@ class Closure : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_closure_get_type != &gidSymbolNotFound ? g_closure_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -113,7 +113,7 @@ class Closure : gobject.boxed.Boxed
   */
   @property uint inMarshal()
   {
-    return (cast(GClosure*)cPtr).inMarshal;
+    return (cast(GClosure*)this._cPtr).inMarshal;
   }
 
   /**
@@ -124,7 +124,7 @@ class Closure : gobject.boxed.Boxed
   */
   @property void inMarshal(uint propval)
   {
-    (cast(GClosure*)cPtr).inMarshal = propval;
+    (cast(GClosure*)this._cPtr).inMarshal = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class Closure : gobject.boxed.Boxed
   */
   @property uint isInvalid()
   {
-    return (cast(GClosure*)cPtr).isInvalid;
+    return (cast(GClosure*)this._cPtr).isInvalid;
   }
 
   /**
@@ -145,7 +145,7 @@ class Closure : gobject.boxed.Boxed
   */
   @property void isInvalid(uint propval)
   {
-    (cast(GClosure*)cPtr).isInvalid = propval;
+    (cast(GClosure*)this._cPtr).isInvalid = propval;
   }
 
   /** Function alias for field `marshal` */
@@ -154,7 +154,7 @@ class Closure : gobject.boxed.Boxed
   /** */
   @property MarshalFuncType marshal()
   {
-    return (cast(GClosure*)cPtr).marshal;
+    return (cast(GClosure*)this._cPtr).marshal;
   }
 
   /**
@@ -173,7 +173,7 @@ class Closure : gobject.boxed.Boxed
   static gobject.closure.Closure newObject(uint sizeofClosure, gobject.object.ObjectWrap object)
   {
     GClosure* _cretval;
-    _cretval = g_closure_new_object(sizeofClosure, object ? cast(ObjectC*)object.cPtr(No.Dup) : null);
+    _cretval = g_closure_new_object(sizeofClosure, object ? cast(GObject*)object._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gobject.closure.Closure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -250,7 +250,7 @@ class Closure : gobject.boxed.Boxed
   */
   void invalidate()
   {
-    g_closure_invalidate(cast(GClosure*)cPtr);
+    g_closure_invalidate(cast(GClosure*)this._cPtr);
   }
 
   /**
@@ -274,9 +274,9 @@ class Closure : gobject.boxed.Boxed
 
     GValue[] _tmpparamValues;
     foreach (obj; paramValues)
-      _tmpparamValues ~= *cast(GValue*)obj.cPtr;
+      _tmpparamValues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _paramValues = _tmpparamValues.ptr;
-    g_closure_invoke(cast(GClosure*)cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
+    g_closure_invoke(cast(GClosure*)this._cPtr, &_returnValue, _nParamValues, _paramValues, invocationHint);
     returnValue = new gobject.value.Value(cast(void*)&_returnValue, No.Take);
   }
 
@@ -331,6 +331,6 @@ class Closure : gobject.boxed.Boxed
   */
   void sink()
   {
-    g_closure_sink(cast(GClosure*)cPtr);
+    g_closure_sink(cast(GClosure*)this._cPtr);
   }
 }

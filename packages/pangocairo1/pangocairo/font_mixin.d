@@ -28,7 +28,7 @@ template FontT()
   override cairo.scaled_font.ScaledFont getScaledFont()
   {
     cairo_scaled_font_t* _cretval;
-    _cretval = pango_cairo_font_get_scaled_font(cast(PangoCairoFont*)cPtr);
+    _cretval = pango_cairo_font_get_scaled_font(cast(PangoCairoFont*)this._cPtr);
     auto _retval = _cretval ? new cairo.scaled_font.ScaledFont(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

@@ -57,7 +57,7 @@ class ThreadPool
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -68,7 +68,7 @@ class ThreadPool
   */
   @property GFunc func()
   {
-    return (cast(GThreadPool*)cPtr).func;
+    return (cast(GThreadPool*)this._cPtr).func;
   }
 
   /**
@@ -79,7 +79,7 @@ class ThreadPool
 
   @property void func(GFunc propval)
   {
-    (cast(GThreadPool*)cPtr).func = propval;
+    (cast(GThreadPool*)this._cPtr).func = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class ThreadPool
   */
   @property bool exclusive()
   {
-    return (cast(GThreadPool*)cPtr).exclusive;
+    return (cast(GThreadPool*)this._cPtr).exclusive;
   }
 
   /**
@@ -98,7 +98,7 @@ class ThreadPool
   */
   @property void exclusive(bool propval)
   {
-    (cast(GThreadPool*)cPtr).exclusive = propval;
+    (cast(GThreadPool*)this._cPtr).exclusive = propval;
   }
 
   private static void freePool(GThreadPool* pool)
@@ -115,7 +115,7 @@ class ThreadPool
   int getMaxThreads()
   {
     int _retval;
-    _retval = g_thread_pool_get_max_threads(cast(GThreadPool*)cPtr);
+    _retval = g_thread_pool_get_max_threads(cast(GThreadPool*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class ThreadPool
   uint getNumThreads()
   {
     uint _retval;
-    _retval = g_thread_pool_get_num_threads(cast(GThreadPool*)cPtr);
+    _retval = g_thread_pool_get_num_threads(cast(GThreadPool*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class ThreadPool
   bool moveToFront(void* data = null)
   {
     bool _retval;
-    _retval = g_thread_pool_move_to_front(cast(GThreadPool*)cPtr, data);
+    _retval = g_thread_pool_move_to_front(cast(GThreadPool*)this._cPtr, data);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = g_thread_pool_push(cast(GThreadPool*)cPtr, data, &_err);
+    _retval = g_thread_pool_push(cast(GThreadPool*)this._cPtr, data, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -208,7 +208,7 @@ class ThreadPool
   {
     bool _retval;
     GError *_err;
-    _retval = g_thread_pool_set_max_threads(cast(GThreadPool*)cPtr, maxThreads, &_err);
+    _retval = g_thread_pool_set_max_threads(cast(GThreadPool*)this._cPtr, maxThreads, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -221,7 +221,7 @@ class ThreadPool
   uint unprocessed()
   {
     uint _retval;
-    _retval = g_thread_pool_unprocessed(cast(GThreadPool*)cPtr);
+    _retval = g_thread_pool_unprocessed(cast(GThreadPool*)this._cPtr);
     return _retval;
   }
 

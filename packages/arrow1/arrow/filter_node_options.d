@@ -19,16 +19,16 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_filter_node_options_get_type != &gidSymbolNotFound ? garrow_filter_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class FilterNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   this(arrow.expression.Expression expression)
   {
     GArrowFilterNodeOptions* _cretval;
-    _cretval = garrow_filter_node_options_new(expression ? cast(GArrowExpression*)expression.cPtr(No.Dup) : null);
+    _cretval = garrow_filter_node_options_new(expression ? cast(GArrowExpression*)expression._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

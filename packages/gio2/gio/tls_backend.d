@@ -19,7 +19,7 @@ interface TlsBackend
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_tls_backend_get_type != &gidSymbolNotFound ? g_tls_backend_get_type() : cast(GType)0;
@@ -34,7 +34,7 @@ interface TlsBackend
   {
     GTlsBackend* _cretval;
     _cretval = g_tls_backend_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_backend.TlsBackend)(cast(GTlsBackend*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_backend.TlsBackend)(cast(GTlsBackend*)_cretval, No.Take);
     return _retval;
   }
 

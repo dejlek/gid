@@ -22,16 +22,16 @@ class Dataset : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_dataset_get_type != &gidSymbolNotFound ? gadataset_dataset_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,10 +45,10 @@ class Dataset : gobject.object.ObjectWrap
   {
     GADatasetScannerBuilder* _cretval;
     GError *_err;
-    _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)cPtr, &_err);
+    _cretval = gadataset_dataset_begin_scan(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.scanner_builder.ScannerBuilder)(cast(GADatasetScannerBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class Dataset : gobject.object.ObjectWrap
   string getTypeName()
   {
     char* _cretval;
-    _cretval = gadataset_dataset_get_type_name(cast(GADatasetDataset*)cPtr);
+    _cretval = gadataset_dataset_get_type_name(cast(GADatasetDataset*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -66,10 +66,10 @@ class Dataset : gobject.object.ObjectWrap
   {
     GArrowRecordBatchReader* _cretval;
     GError *_err;
-    _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)cPtr, &_err);
+    _cretval = gadataset_dataset_to_record_batch_reader(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -78,10 +78,10 @@ class Dataset : gobject.object.ObjectWrap
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)cPtr, &_err);
+    _cretval = gadataset_dataset_to_table(cast(GADatasetDataset*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

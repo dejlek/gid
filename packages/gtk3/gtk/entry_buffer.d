@@ -31,16 +31,16 @@ class EntryBuffer : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_buffer_get_type != &gidSymbolNotFound ? gtk_entry_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -132,7 +132,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   uint deleteText(uint position, int nChars)
   {
     uint _retval;
-    _retval = gtk_entry_buffer_delete_text(cast(GtkEntryBuffer*)cPtr, position, nChars);
+    _retval = gtk_entry_buffer_delete_text(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   */
   void emitDeletedText(uint position, uint nChars)
   {
-    gtk_entry_buffer_emit_deleted_text(cast(GtkEntryBuffer*)cPtr, position, nChars);
+    gtk_entry_buffer_emit_deleted_text(cast(GtkEntryBuffer*)this._cPtr, position, nChars);
   }
 
   /**
@@ -159,7 +159,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   void emitInsertedText(uint position, string chars, uint nChars)
   {
     const(char)* _chars = chars.toCString(No.Alloc);
-    gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
+    gtk_entry_buffer_emit_inserted_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
   }
 
   /**
@@ -170,7 +170,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   size_t getBytes()
   {
     size_t _retval;
-    _retval = gtk_entry_buffer_get_bytes(cast(GtkEntryBuffer*)cPtr);
+    _retval = gtk_entry_buffer_get_bytes(cast(GtkEntryBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   uint getLength()
   {
     uint _retval;
-    _retval = gtk_entry_buffer_get_length(cast(GtkEntryBuffer*)cPtr);
+    _retval = gtk_entry_buffer_get_length(cast(GtkEntryBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   int getMaxLength()
   {
     int _retval;
-    _retval = gtk_entry_buffer_get_max_length(cast(GtkEntryBuffer*)cPtr);
+    _retval = gtk_entry_buffer_get_max_length(cast(GtkEntryBuffer*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)cPtr);
+    _cretval = gtk_entry_buffer_get_text(cast(GtkEntryBuffer*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -237,7 +237,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   {
     uint _retval;
     const(char)* _chars = chars.toCString(No.Alloc);
-    _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)cPtr, position, _chars, nChars);
+    _retval = gtk_entry_buffer_insert_text(cast(GtkEntryBuffer*)this._cPtr, position, _chars, nChars);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   */
   void setMaxLength(int maxLength)
   {
-    gtk_entry_buffer_set_max_length(cast(GtkEntryBuffer*)cPtr, maxLength);
+    gtk_entry_buffer_set_max_length(cast(GtkEntryBuffer*)this._cPtr, maxLength);
   }
 
   /**
@@ -271,7 +271,7 @@ class EntryBuffer : gobject.object.ObjectWrap
   void setText(string chars, int nChars)
   {
     const(char)* _chars = chars.toCString(No.Alloc);
-    gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)cPtr, _chars, nChars);
+    gtk_entry_buffer_set_text(cast(GtkEntryBuffer*)this._cPtr, _chars, nChars);
   }
 
   /**

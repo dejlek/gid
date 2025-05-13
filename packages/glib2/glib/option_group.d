@@ -26,22 +26,22 @@ class OptionGroup : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_option_group_get_type != &gidSymbolNotFound ? g_option_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class OptionGroup : gobject.boxed.Boxed
   void addEntries(glib.types.OptionEntry[] entries)
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
-    g_option_group_add_entries(cast(GOptionGroup*)cPtr, _entries);
+    g_option_group_add_entries(cast(GOptionGroup*)this._cPtr, _entries);
   }
 
   /**
@@ -102,7 +102,7 @@ class OptionGroup : gobject.boxed.Boxed
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    g_option_group_set_translate_func(cast(GOptionGroup*)cPtr, _funcCB, _func, _funcDestroyCB);
+    g_option_group_set_translate_func(cast(GOptionGroup*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -115,6 +115,6 @@ class OptionGroup : gobject.boxed.Boxed
   void setTranslationDomain(string domain)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    g_option_group_set_translation_domain(cast(GOptionGroup*)cPtr, _domain);
+    g_option_group_set_translation_domain(cast(GOptionGroup*)this._cPtr, _domain);
   }
 }

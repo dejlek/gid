@@ -191,16 +191,16 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_application_command_line_get_type != &gidSymbolNotFound ? g_application_command_line_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -234,8 +234,8 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   {
     GFile* _cretval;
     const(char)* _arg = arg.toCString(No.Alloc);
-    _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)cPtr, _arg);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_application_command_line_create_file_for_arg(cast(GApplicationCommandLine*)this._cPtr, _arg);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -258,7 +258,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   */
   void done()
   {
-    g_application_command_line_done(cast(GApplicationCommandLine*)cPtr);
+    g_application_command_line_done(cast(GApplicationCommandLine*)this._cPtr);
   }
 
   /**
@@ -279,7 +279,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   {
     char** _cretval;
     int _cretlength;
-    _cretval = g_application_command_line_get_arguments(cast(GApplicationCommandLine*)cPtr, &_cretlength);
+    _cretval = g_application_command_line_get_arguments(cast(GApplicationCommandLine*)this._cPtr, &_cretlength);
     string[] _retval;
 
     if (_cretval)
@@ -305,7 +305,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   string getCwd()
   {
     const(char)* _cretval;
-    _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)cPtr);
+    _cretval = g_application_command_line_get_cwd(cast(GApplicationCommandLine*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -331,7 +331,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   string[] getEnviron()
   {
     const(char*)* _cretval;
-    _cretval = g_application_command_line_get_environ(cast(GApplicationCommandLine*)cPtr);
+    _cretval = g_application_command_line_get_environ(cast(GApplicationCommandLine*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -354,7 +354,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   int getExitStatus()
   {
     int _retval;
-    _retval = g_application_command_line_get_exit_status(cast(GApplicationCommandLine*)cPtr);
+    _retval = g_application_command_line_get_exit_status(cast(GApplicationCommandLine*)this._cPtr);
     return _retval;
   }
 
@@ -365,7 +365,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   bool getIsRemote()
   {
     bool _retval;
-    _retval = g_application_command_line_get_is_remote(cast(GApplicationCommandLine*)cPtr);
+    _retval = g_application_command_line_get_is_remote(cast(GApplicationCommandLine*)this._cPtr);
     return _retval;
   }
 
@@ -387,7 +387,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   glib.variant_dict.VariantDict getOptionsDict()
   {
     GVariantDict* _cretval;
-    _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)cPtr);
+    _cretval = g_application_command_line_get_options_dict(cast(GApplicationCommandLine*)this._cPtr);
     auto _retval = _cretval ? new glib.variant_dict.VariantDict(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -409,7 +409,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   glib.variant.Variant getPlatformData()
   {
     GVariant* _cretval;
-    _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)cPtr);
+    _cretval = g_application_command_line_get_platform_data(cast(GApplicationCommandLine*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -430,8 +430,8 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   gio.input_stream.InputStream getStdin()
   {
     GInputStream* _cretval;
-    _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    _cretval = g_application_command_line_get_stdin(cast(GApplicationCommandLine*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.input_stream.InputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -456,7 +456,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)cPtr, _name);
+    _cretval = g_application_command_line_getenv(cast(GApplicationCommandLine*)this._cPtr, _name);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -474,7 +474,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   void printLiteral(string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    g_application_command_line_print_literal(cast(GApplicationCommandLine*)cPtr, _message);
+    g_application_command_line_print_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
   }
 
   /**
@@ -490,7 +490,7 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   void printerrLiteral(string message)
   {
     const(char)* _message = message.toCString(No.Alloc);
-    g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)cPtr, _message);
+    g_application_command_line_printerr_literal(cast(GApplicationCommandLine*)this._cPtr, _message);
   }
 
   /**
@@ -524,6 +524,6 @@ class ApplicationCommandLine : gobject.object.ObjectWrap
   */
   void setExitStatus(int exitStatus)
   {
-    g_application_command_line_set_exit_status(cast(GApplicationCommandLine*)cPtr, exitStatus);
+    g_application_command_line_set_exit_status(cast(GApplicationCommandLine*)this._cPtr, exitStatus);
   }
 }

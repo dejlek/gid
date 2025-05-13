@@ -25,7 +25,7 @@ interface Proxy
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_proxy_get_type != &gidSymbolNotFound ? g_proxy_get_type() : cast(GType)0;
@@ -45,7 +45,7 @@ interface Proxy
     GProxy* _cretval;
     const(char)* _protocol = protocol.toCString(No.Alloc);
     _cretval = g_proxy_get_default_for_protocol(_protocol);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.proxy.Proxy)(cast(GProxy*)_cretval, Yes.Take);
     return _retval;
   }
 

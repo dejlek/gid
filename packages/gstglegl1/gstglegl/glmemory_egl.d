@@ -29,22 +29,22 @@ class GLMemoryEGL : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_egl_get_type != &gidSymbolNotFound ? gst_gl_memory_egl_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,14 +56,14 @@ class GLMemoryEGL : gobject.boxed.Boxed
   /** */
   void* getDisplay()
   {
-    auto _retval = gst_gl_memory_egl_get_display(cast(GstGLMemoryEGL*)cPtr);
+    auto _retval = gst_gl_memory_egl_get_display(cast(GstGLMemoryEGL*)this._cPtr);
     return _retval;
   }
 
   /** */
   void* getImage()
   {
-    auto _retval = gst_gl_memory_egl_get_image(cast(GstGLMemoryEGL*)cPtr);
+    auto _retval = gst_gl_memory_egl_get_image(cast(GstGLMemoryEGL*)this._cPtr);
     return _retval;
   }
 

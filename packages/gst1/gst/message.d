@@ -65,22 +65,22 @@ class Message : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_message_get_type != &gidSymbolNotFound ? gst_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,7 @@ class Message : gobject.boxed.Boxed
   */
   @property gst.mini_object.MiniObject miniObject()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMessage*)cPtr).miniObject);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)&(cast(GstMessage*)this._cPtr).miniObject);
   }
 
   /**
@@ -104,7 +104,7 @@ class Message : gobject.boxed.Boxed
   */
   @property gst.types.MessageType type()
   {
-    return cast(gst.types.MessageType)(cast(GstMessage*)cPtr).type;
+    return cast(gst.types.MessageType)(cast(GstMessage*)this._cPtr).type;
   }
 
   /**
@@ -114,7 +114,7 @@ class Message : gobject.boxed.Boxed
   */
   @property void type(gst.types.MessageType propval)
   {
-    (cast(GstMessage*)cPtr).type = cast(GstMessageType)propval;
+    (cast(GstMessage*)this._cPtr).type = cast(GstMessageType)propval;
   }
 
   /**
@@ -123,7 +123,7 @@ class Message : gobject.boxed.Boxed
   */
   @property ulong timestamp()
   {
-    return (cast(GstMessage*)cPtr).timestamp;
+    return (cast(GstMessage*)this._cPtr).timestamp;
   }
 
   /**
@@ -133,7 +133,7 @@ class Message : gobject.boxed.Boxed
   */
   @property void timestamp(ulong propval)
   {
-    (cast(GstMessage*)cPtr).timestamp = propval;
+    (cast(GstMessage*)this._cPtr).timestamp = propval;
   }
 
   /**
@@ -142,7 +142,7 @@ class Message : gobject.boxed.Boxed
   */
   @property gst.object.ObjectWrap src()
   {
-    return cToD!(gst.object.ObjectWrap)(cast(void*)(cast(GstMessage*)cPtr).src);
+    return cToD!(gst.object.ObjectWrap)(cast(void*)(cast(GstMessage*)this._cPtr).src);
   }
 
   /**
@@ -152,8 +152,8 @@ class Message : gobject.boxed.Boxed
   */
   @property void src(gst.object.ObjectWrap propval)
   {
-    cValueFree!(gst.object.ObjectWrap)(cast(void*)(cast(GstMessage*)cPtr).src);
-    dToC(propval, cast(void*)&(cast(GstMessage*)cPtr).src);
+    cValueFree!(gst.object.ObjectWrap)(cast(void*)(cast(GstMessage*)this._cPtr).src);
+    dToC(propval, cast(void*)&(cast(GstMessage*)this._cPtr).src);
   }
 
   /**
@@ -162,7 +162,7 @@ class Message : gobject.boxed.Boxed
   */
   @property uint seqnum()
   {
-    return (cast(GstMessage*)cPtr).seqnum;
+    return (cast(GstMessage*)this._cPtr).seqnum;
   }
 
   /**
@@ -172,7 +172,7 @@ class Message : gobject.boxed.Boxed
   */
   @property void seqnum(uint propval)
   {
-    (cast(GstMessage*)cPtr).seqnum = propval;
+    (cast(GstMessage*)this._cPtr).seqnum = propval;
   }
 
   /**
@@ -190,7 +190,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newApplication(gst.object.ObjectWrap src, gst.structure.Structure structure)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_application(src ? cast(GstObject*)src.cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_application(src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -212,7 +212,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newAsyncDone(gst.object.ObjectWrap src, gst.types.ClockTime runningTime)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_async_done(src ? cast(GstObject*)src.cPtr(No.Dup) : null, runningTime);
+    _cretval = gst_message_new_async_done(src ? cast(GstObject*)src._cPtr(No.Dup) : null, runningTime);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -229,7 +229,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newAsyncStart(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_async_start(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_async_start(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -256,7 +256,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newBuffering(gst.object.ObjectWrap src, int percent)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_buffering(src ? cast(GstObject*)src.cPtr(No.Dup) : null, percent);
+    _cretval = gst_message_new_buffering(src ? cast(GstObject*)src._cPtr(No.Dup) : null, percent);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -279,7 +279,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newClockLost(gst.object.ObjectWrap src, gst.clock.Clock clock)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_clock_lost(src ? cast(GstObject*)src.cPtr(No.Dup) : null, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_clock_lost(src ? cast(GstObject*)src._cPtr(No.Dup) : null, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -303,7 +303,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newClockProvide(gst.object.ObjectWrap src, gst.clock.Clock clock, bool ready)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_clock_provide(src ? cast(GstObject*)src.cPtr(No.Dup) : null, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null, ready);
+    _cretval = gst_message_new_clock_provide(src ? cast(GstObject*)src._cPtr(No.Dup) : null, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null, ready);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -325,7 +325,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newCustom(gst.types.MessageType type, gst.object.ObjectWrap src = null, gst.structure.Structure structure = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_custom(type, src ? cast(GstObject*)src.cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_custom(type, src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -343,7 +343,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newDeviceAdded(gst.object.ObjectWrap src, gst.device.Device device)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_device_added(src ? cast(GstObject*)src.cPtr(No.Dup) : null, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_device_added(src ? cast(GstObject*)src._cPtr(No.Dup) : null, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -363,7 +363,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newDeviceChanged(gst.object.ObjectWrap src, gst.device.Device device, gst.device.Device changedDevice)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_device_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null, device ? cast(GstDevice*)device.cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_device_changed(src ? cast(GstObject*)src._cPtr(No.Dup) : null, device ? cast(GstDevice*)device._cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -381,7 +381,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newDeviceRemoved(gst.object.ObjectWrap src, gst.device.Device device)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_device_removed(src ? cast(GstObject*)src.cPtr(No.Dup) : null, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_device_removed(src ? cast(GstObject*)src._cPtr(No.Dup) : null, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -401,7 +401,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newDurationChanged(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_duration_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_duration_changed(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -423,7 +423,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newElement(gst.object.ObjectWrap src, gst.structure.Structure structure)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_element(src ? cast(GstObject*)src.cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_element(src ? cast(GstObject*)src._cPtr(No.Dup) : null, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -442,7 +442,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newEos(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_eos(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_eos(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -465,7 +465,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_error(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_);
+    _cretval = gst_message_new_error(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -487,7 +487,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_, details ? cast(GstStructure*)details.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_error_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -505,7 +505,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newHaveContext(gst.object.ObjectWrap src, gst.context.Context context)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_have_context(src ? cast(GstObject*)src.cPtr(No.Dup) : null, context ? cast(GstContext*)context.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_have_context(src ? cast(GstObject*)src._cPtr(No.Dup) : null, context ? cast(GstContext*)context._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -526,7 +526,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_info(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_);
+    _cretval = gst_message_new_info(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -546,7 +546,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_, details ? cast(GstStructure*)details.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_info_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -567,7 +567,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newInstantRateRequest(gst.object.ObjectWrap src, double rateMultiplier)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_instant_rate_request(src ? cast(GstObject*)src.cPtr(No.Dup) : null, rateMultiplier);
+    _cretval = gst_message_new_instant_rate_request(src ? cast(GstObject*)src._cPtr(No.Dup) : null, rateMultiplier);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -585,7 +585,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newLatency(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_latency(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_latency(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -604,7 +604,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
-    _cretval = gst_message_new_need_context(src ? cast(GstObject*)src.cPtr(No.Dup) : null, _contextType);
+    _cretval = gst_message_new_need_context(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _contextType);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -623,7 +623,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newNewClock(gst.object.ObjectWrap src, gst.clock.Clock clock)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_new_clock(src ? cast(GstObject*)src.cPtr(No.Dup) : null, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_new_clock(src ? cast(GstObject*)src._cPtr(No.Dup) : null, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -647,7 +647,7 @@ class Message : gobject.boxed.Boxed
     GstMessage* _cretval;
     const(char)* _code = code.toCString(No.Alloc);
     const(char)* _text = text.toCString(No.Alloc);
-    _cretval = gst_message_new_progress(src ? cast(GstObject*)src.cPtr(No.Dup) : null, type, _code, _text);
+    _cretval = gst_message_new_progress(src ? cast(GstObject*)src._cPtr(No.Dup) : null, type, _code, _text);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -657,7 +657,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_message_new_property_notify(src ? cast(GstObject*)src.cPtr(No.Dup) : null, _propertyName, val ? cast(GValue*)val.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_property_notify(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _propertyName, val ? cast(GValue*)val._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -691,7 +691,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newQos(gst.object.ObjectWrap src, bool live, ulong runningTime, ulong streamTime, ulong timestamp, ulong duration)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_qos(src ? cast(GstObject*)src.cPtr(No.Dup) : null, live, runningTime, streamTime, timestamp, duration);
+    _cretval = gst_message_new_qos(src ? cast(GstObject*)src._cPtr(No.Dup) : null, live, runningTime, streamTime, timestamp, duration);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -734,7 +734,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _location = location.toCString(No.Alloc);
-    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src.cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList.cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_redirect(src ? cast(GstObject*)src._cPtr(No.Dup) : null, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -754,7 +754,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newRequestState(gst.object.ObjectWrap src, gst.types.State state)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_request_state(src ? cast(GstObject*)src.cPtr(No.Dup) : null, state);
+    _cretval = gst_message_new_request_state(src ? cast(GstObject*)src._cPtr(No.Dup) : null, state);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -773,7 +773,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newResetTime(gst.object.ObjectWrap src, gst.types.ClockTime runningTime)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_reset_time(src ? cast(GstObject*)src.cPtr(No.Dup) : null, runningTime);
+    _cretval = gst_message_new_reset_time(src ? cast(GstObject*)src._cPtr(No.Dup) : null, runningTime);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -795,7 +795,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newSegmentDone(gst.object.ObjectWrap src, gst.types.Format format, long position)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_segment_done(src ? cast(GstObject*)src.cPtr(No.Dup) : null, format, position);
+    _cretval = gst_message_new_segment_done(src ? cast(GstObject*)src._cPtr(No.Dup) : null, format, position);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -817,7 +817,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newSegmentStart(gst.object.ObjectWrap src, gst.types.Format format, long position)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_segment_start(src ? cast(GstObject*)src.cPtr(No.Dup) : null, format, position);
+    _cretval = gst_message_new_segment_start(src ? cast(GstObject*)src._cPtr(No.Dup) : null, format, position);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -838,7 +838,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStateChanged(gst.object.ObjectWrap src, gst.types.State oldstate, gst.types.State newstate, gst.types.State pending)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_state_changed(src ? cast(GstObject*)src.cPtr(No.Dup) : null, oldstate, newstate, pending);
+    _cretval = gst_message_new_state_changed(src ? cast(GstObject*)src._cPtr(No.Dup) : null, oldstate, newstate, pending);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -857,7 +857,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStateDirty(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_state_dirty(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_state_dirty(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -885,7 +885,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStepDone(gst.object.ObjectWrap src, gst.types.Format format, ulong amount, double rate, bool flush, bool intermediate, ulong duration, bool eos)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_step_done(src ? cast(GstObject*)src.cPtr(No.Dup) : null, format, amount, rate, flush, intermediate, duration, eos);
+    _cretval = gst_message_new_step_done(src ? cast(GstObject*)src._cPtr(No.Dup) : null, format, amount, rate, flush, intermediate, duration, eos);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -917,7 +917,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStepStart(gst.object.ObjectWrap src, bool active, gst.types.Format format, ulong amount, double rate, bool flush, bool intermediate)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_step_start(src ? cast(GstObject*)src.cPtr(No.Dup) : null, active, format, amount, rate, flush, intermediate);
+    _cretval = gst_message_new_step_start(src ? cast(GstObject*)src._cPtr(No.Dup) : null, active, format, amount, rate, flush, intermediate);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -934,7 +934,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStreamCollection(gst.object.ObjectWrap src, gst.stream_collection.StreamCollection collection)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_stream_collection(src ? cast(GstObject*)src.cPtr(No.Dup) : null, collection ? cast(GstStreamCollection*)collection.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_stream_collection(src ? cast(GstObject*)src._cPtr(No.Dup) : null, collection ? cast(GstStreamCollection*)collection._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -953,7 +953,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStreamStart(gst.object.ObjectWrap src = null)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_stream_start(src ? cast(GstObject*)src.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_stream_start(src ? cast(GstObject*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -973,7 +973,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStreamStatus(gst.object.ObjectWrap src, gst.types.StreamStatusType type, gst.element.Element owner)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_stream_status(src ? cast(GstObject*)src.cPtr(No.Dup) : null, type, owner ? cast(GstElement*)owner.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_stream_status(src ? cast(GstObject*)src._cPtr(No.Dup) : null, type, owner ? cast(GstElement*)owner._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -998,7 +998,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStreamsSelected(gst.object.ObjectWrap src, gst.stream_collection.StreamCollection collection)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_streams_selected(src ? cast(GstObject*)src.cPtr(No.Dup) : null, collection ? cast(GstStreamCollection*)collection.cPtr(No.Dup) : null);
+    _cretval = gst_message_new_streams_selected(src ? cast(GstObject*)src._cPtr(No.Dup) : null, collection ? cast(GstStreamCollection*)collection._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1022,7 +1022,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newStructureChange(gst.object.ObjectWrap src, gst.types.StructureChangeType type, gst.element.Element owner, bool busy)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_structure_change(src ? cast(GstObject*)src.cPtr(No.Dup) : null, type, owner ? cast(GstElement*)owner.cPtr(No.Dup) : null, busy);
+    _cretval = gst_message_new_structure_change(src ? cast(GstObject*)src._cPtr(No.Dup) : null, type, owner ? cast(GstElement*)owner._cPtr(No.Dup) : null, busy);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1041,7 +1041,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newTag(gst.object.ObjectWrap src, gst.tag_list.TagList tagList)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_tag(src ? cast(GstObject*)src.cPtr(No.Dup) : null, tagList ? cast(GstTagList*)tagList.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_tag(src ? cast(GstObject*)src._cPtr(No.Dup) : null, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1061,7 +1061,7 @@ class Message : gobject.boxed.Boxed
   static gst.message.Message newToc(gst.object.ObjectWrap src, gst.toc.Toc toc, bool updated)
   {
     GstMessage* _cretval;
-    _cretval = gst_message_new_toc(src ? cast(GstObject*)src.cPtr(No.Dup) : null, toc ? cast(GstToc*)toc.cPtr(No.Dup) : null, updated);
+    _cretval = gst_message_new_toc(src ? cast(GstObject*)src._cPtr(No.Dup) : null, toc ? cast(GstToc*)toc._cPtr(No.Dup) : null, updated);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1082,7 +1082,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_warning(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_);
+    _cretval = gst_message_new_warning(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1102,7 +1102,7 @@ class Message : gobject.boxed.Boxed
   {
     GstMessage* _cretval;
     const(char)* _debug_ = debug_.toCString(No.Alloc);
-    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src.cPtr(No.Dup) : null, error ? cast(GError*)error.cPtr : null, _debug_, details ? cast(GstStructure*)details.cPtr(Yes.Dup) : null);
+    _cretval = gst_message_new_warning_with_details(src ? cast(GstObject*)src._cPtr(No.Dup) : null, error ? cast(GError*)error._cPtr : null, _debug_, details ? cast(GstStructure*)details._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new gst.message.Message(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1121,14 +1121,14 @@ class Message : gobject.boxed.Boxed
   void addRedirectEntry(string location, gst.tag_list.TagList tagList = null, gst.structure.Structure entryStruct = null)
   {
     const(char)* _location = location.toCString(No.Alloc);
-    gst_message_add_redirect_entry(cast(GstMessage*)cPtr, _location, tagList ? cast(GstTagList*)tagList.cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct.cPtr(Yes.Dup) : null);
+    gst_message_add_redirect_entry(cast(GstMessage*)this._cPtr, _location, tagList ? cast(GstTagList*)tagList._cPtr(Yes.Dup) : null, entryStruct ? cast(const(GstStructure)*)entryStruct._cPtr(Yes.Dup) : null);
   }
 
   /** */
   size_t getNumRedirectEntries()
   {
     size_t _retval;
-    _retval = gst_message_get_num_redirect_entries(cast(GstMessage*)cPtr);
+    _retval = gst_message_get_num_redirect_entries(cast(GstMessage*)this._cPtr);
     return _retval;
   }
 
@@ -1152,7 +1152,7 @@ class Message : gobject.boxed.Boxed
   uint getSeqnum()
   {
     uint _retval;
-    _retval = gst_message_get_seqnum(cast(GstMessage*)cPtr);
+    _retval = gst_message_get_seqnum(cast(GstMessage*)this._cPtr);
     return _retval;
   }
 
@@ -1166,7 +1166,7 @@ class Message : gobject.boxed.Boxed
   gobject.value.Value getStreamStatusObject()
   {
     const(GValue)* _cretval;
-    _cretval = gst_message_get_stream_status_object(cast(GstMessage*)cPtr);
+    _cretval = gst_message_get_stream_status_object(cast(GstMessage*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1182,7 +1182,7 @@ class Message : gobject.boxed.Boxed
   gst.structure.Structure getStructure()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_message_get_structure(cast(GstMessage*)cPtr);
+    _cretval = gst_message_get_structure(cast(GstMessage*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -1199,7 +1199,7 @@ class Message : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_message_has_name(cast(GstMessage*)cPtr, _name);
+    _retval = gst_message_has_name(cast(GstMessage*)this._cPtr, _name);
     return _retval;
   }
 
@@ -1213,7 +1213,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseAsyncDone(out gst.types.ClockTime runningTime)
   {
-    gst_message_parse_async_done(cast(GstMessage*)cPtr, cast(GstClockTime*)&runningTime);
+    gst_message_parse_async_done(cast(GstMessage*)this._cPtr, cast(GstClockTime*)&runningTime);
   }
 
   /**
@@ -1227,7 +1227,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseBuffering(out int percent)
   {
-    gst_message_parse_buffering(cast(GstMessage*)cPtr, cast(int*)&percent);
+    gst_message_parse_buffering(cast(GstMessage*)this._cPtr, cast(int*)&percent);
   }
 
   /**
@@ -1242,7 +1242,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseBufferingStats(out gst.types.BufferingMode mode, out int avgIn, out int avgOut, out long bufferingLeft)
   {
-    gst_message_parse_buffering_stats(cast(GstMessage*)cPtr, &mode, cast(int*)&avgIn, cast(int*)&avgOut, cast(long*)&bufferingLeft);
+    gst_message_parse_buffering_stats(cast(GstMessage*)this._cPtr, &mode, cast(int*)&avgIn, cast(int*)&avgOut, cast(long*)&bufferingLeft);
   }
 
   /**
@@ -1257,7 +1257,7 @@ class Message : gobject.boxed.Boxed
   void parseClockLost(out gst.clock.Clock clock)
   {
     GstClock* _clock;
-    gst_message_parse_clock_lost(cast(GstMessage*)cPtr, &_clock);
+    gst_message_parse_clock_lost(cast(GstMessage*)this._cPtr, &_clock);
     clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
   }
 
@@ -1275,7 +1275,7 @@ class Message : gobject.boxed.Boxed
   void parseClockProvide(out gst.clock.Clock clock, out bool ready)
   {
     GstClock* _clock;
-    gst_message_parse_clock_provide(cast(GstMessage*)cPtr, &_clock, cast(bool*)&ready);
+    gst_message_parse_clock_provide(cast(GstMessage*)this._cPtr, &_clock, cast(bool*)&ready);
     clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
   }
 
@@ -1290,7 +1290,7 @@ class Message : gobject.boxed.Boxed
   {
     bool _retval;
     char* _contextType;
-    _retval = gst_message_parse_context_type(cast(GstMessage*)cPtr, &_contextType);
+    _retval = gst_message_parse_context_type(cast(GstMessage*)this._cPtr, &_contextType);
     contextType = _contextType.fromCString(No.Free);
     return _retval;
   }
@@ -1307,7 +1307,7 @@ class Message : gobject.boxed.Boxed
   void parseDeviceAdded(out gst.device.Device device)
   {
     GstDevice* _device;
-    gst_message_parse_device_added(cast(GstMessage*)cPtr, &_device);
+    gst_message_parse_device_added(cast(GstMessage*)this._cPtr, &_device);
     device = new gst.device.Device(cast(void*)_device, Yes.Take);
   }
 
@@ -1327,7 +1327,7 @@ class Message : gobject.boxed.Boxed
   {
     GstDevice* _device;
     GstDevice* _changedDevice;
-    gst_message_parse_device_changed(cast(GstMessage*)cPtr, &_device, &_changedDevice);
+    gst_message_parse_device_changed(cast(GstMessage*)this._cPtr, &_device, &_changedDevice);
     device = new gst.device.Device(cast(void*)_device, Yes.Take);
     changedDevice = new gst.device.Device(cast(void*)_changedDevice, Yes.Take);
   }
@@ -1344,7 +1344,7 @@ class Message : gobject.boxed.Boxed
   void parseDeviceRemoved(out gst.device.Device device)
   {
     GstDevice* _device;
-    gst_message_parse_device_removed(cast(GstMessage*)cPtr, &_device);
+    gst_message_parse_device_removed(cast(GstMessage*)this._cPtr, &_device);
     device = new gst.device.Device(cast(void*)_device, Yes.Take);
   }
 
@@ -1384,7 +1384,7 @@ class Message : gobject.boxed.Boxed
   {
     GError* _gerror;
     char* _debug_;
-    gst_message_parse_error(cast(GstMessage*)cPtr, &_gerror, &_debug_);
+    gst_message_parse_error(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
     debug_ = _debug_.fromCString(Yes.Free);
   }
@@ -1399,7 +1399,7 @@ class Message : gobject.boxed.Boxed
   void parseErrorDetails(out gst.structure.Structure structure)
   {
     const(GstStructure)* _structure;
-    gst_message_parse_error_details(cast(GstMessage*)cPtr, &_structure);
+    gst_message_parse_error_details(cast(GstMessage*)this._cPtr, &_structure);
     structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
@@ -1416,7 +1416,7 @@ class Message : gobject.boxed.Boxed
   bool parseGroupId(out uint groupId)
   {
     bool _retval;
-    _retval = gst_message_parse_group_id(cast(GstMessage*)cPtr, cast(uint*)&groupId);
+    _retval = gst_message_parse_group_id(cast(GstMessage*)this._cPtr, cast(uint*)&groupId);
     return _retval;
   }
 
@@ -1432,7 +1432,7 @@ class Message : gobject.boxed.Boxed
   void parseHaveContext(out gst.context.Context context)
   {
     GstContext* _context;
-    gst_message_parse_have_context(cast(GstMessage*)cPtr, &_context);
+    gst_message_parse_have_context(cast(GstMessage*)this._cPtr, &_context);
     context = new gst.context.Context(cast(void*)_context, Yes.Take);
   }
 
@@ -1451,7 +1451,7 @@ class Message : gobject.boxed.Boxed
   {
     GError* _gerror;
     char* _debug_;
-    gst_message_parse_info(cast(GstMessage*)cPtr, &_gerror, &_debug_);
+    gst_message_parse_info(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
     debug_ = _debug_.fromCString(Yes.Free);
   }
@@ -1466,7 +1466,7 @@ class Message : gobject.boxed.Boxed
   void parseInfoDetails(out gst.structure.Structure structure)
   {
     const(GstStructure)* _structure;
-    gst_message_parse_info_details(cast(GstMessage*)cPtr, &_structure);
+    gst_message_parse_info_details(cast(GstMessage*)this._cPtr, &_structure);
     structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
@@ -1478,7 +1478,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseInstantRateRequest(out double rateMultiplier)
   {
-    gst_message_parse_instant_rate_request(cast(GstMessage*)cPtr, cast(double*)&rateMultiplier);
+    gst_message_parse_instant_rate_request(cast(GstMessage*)this._cPtr, cast(double*)&rateMultiplier);
   }
 
   /**
@@ -1494,7 +1494,7 @@ class Message : gobject.boxed.Boxed
   void parseNewClock(out gst.clock.Clock clock)
   {
     GstClock* _clock;
-    gst_message_parse_new_clock(cast(GstMessage*)cPtr, &_clock);
+    gst_message_parse_new_clock(cast(GstMessage*)this._cPtr, &_clock);
     clock = new gst.clock.Clock(cast(void*)_clock, No.Take);
   }
 
@@ -1510,7 +1510,7 @@ class Message : gobject.boxed.Boxed
   {
     char* _code;
     char* _text;
-    gst_message_parse_progress(cast(GstMessage*)cPtr, &type, &_code, &_text);
+    gst_message_parse_progress(cast(GstMessage*)this._cPtr, &type, &_code, &_text);
     code = _code.fromCString(Yes.Free);
     text = _text.fromCString(Yes.Free);
   }
@@ -1535,7 +1535,7 @@ class Message : gobject.boxed.Boxed
     GstObject* _object;
     char* _propertyName;
     const(GValue)* _propertyValue;
-    gst_message_parse_property_notify(cast(GstMessage*)cPtr, &_object, &_propertyName, &_propertyValue);
+    gst_message_parse_property_notify(cast(GstMessage*)this._cPtr, &_object, &_propertyName, &_propertyValue);
     object = new gst.object.ObjectWrap(cast(void*)_object, No.Take);
     propertyName = _propertyName.fromCString(No.Free);
     propertyValue = new gobject.value.Value(cast(void*)_propertyValue, No.Take);
@@ -1563,7 +1563,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseQos(out bool live, out ulong runningTime, out ulong streamTime, out ulong timestamp, out ulong duration)
   {
-    gst_message_parse_qos(cast(GstMessage*)cPtr, cast(bool*)&live, cast(ulong*)&runningTime, cast(ulong*)&streamTime, cast(ulong*)&timestamp, cast(ulong*)&duration);
+    gst_message_parse_qos(cast(GstMessage*)this._cPtr, cast(bool*)&live, cast(ulong*)&runningTime, cast(ulong*)&streamTime, cast(ulong*)&timestamp, cast(ulong*)&duration);
   }
 
   /**
@@ -1587,7 +1587,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseQosStats(out gst.types.Format format, out ulong processed, out ulong dropped)
   {
-    gst_message_parse_qos_stats(cast(GstMessage*)cPtr, &format, cast(ulong*)&processed, cast(ulong*)&dropped);
+    gst_message_parse_qos_stats(cast(GstMessage*)this._cPtr, &format, cast(ulong*)&processed, cast(ulong*)&dropped);
   }
 
   /**
@@ -1606,7 +1606,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseQosValues(out long jitter, out double proportion, out int quality)
   {
-    gst_message_parse_qos_values(cast(GstMessage*)cPtr, cast(long*)&jitter, cast(double*)&proportion, cast(int*)&quality);
+    gst_message_parse_qos_values(cast(GstMessage*)this._cPtr, cast(long*)&jitter, cast(double*)&proportion, cast(int*)&quality);
   }
 
   /**
@@ -1628,7 +1628,7 @@ class Message : gobject.boxed.Boxed
     char* _location;
     GstTagList* _tagList;
     const(GstStructure)* _entryStruct;
-    gst_message_parse_redirect_entry(cast(GstMessage*)cPtr, entryIndex, &_location, &_tagList, &_entryStruct);
+    gst_message_parse_redirect_entry(cast(GstMessage*)this._cPtr, entryIndex, &_location, &_tagList, &_entryStruct);
     location = _location.fromCString(No.Free);
     tagList = new gst.tag_list.TagList(cast(void*)_tagList, No.Take);
     entryStruct = new gst.structure.Structure(cast(void*)_entryStruct, No.Take);
@@ -1644,7 +1644,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseRequestState(out gst.types.State state)
   {
-    gst_message_parse_request_state(cast(GstMessage*)cPtr, &state);
+    gst_message_parse_request_state(cast(GstMessage*)this._cPtr, &state);
   }
 
   /**
@@ -1658,7 +1658,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseResetTime(out gst.types.ClockTime runningTime)
   {
-    gst_message_parse_reset_time(cast(GstMessage*)cPtr, cast(GstClockTime*)&runningTime);
+    gst_message_parse_reset_time(cast(GstMessage*)this._cPtr, cast(GstClockTime*)&runningTime);
   }
 
   /**
@@ -1672,7 +1672,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseSegmentDone(out gst.types.Format format, out long position)
   {
-    gst_message_parse_segment_done(cast(GstMessage*)cPtr, &format, cast(long*)&position);
+    gst_message_parse_segment_done(cast(GstMessage*)this._cPtr, &format, cast(long*)&position);
   }
 
   /**
@@ -1686,7 +1686,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseSegmentStart(out gst.types.Format format, out long position)
   {
-    gst_message_parse_segment_start(cast(GstMessage*)cPtr, &format, cast(long*)&position);
+    gst_message_parse_segment_start(cast(GstMessage*)this._cPtr, &format, cast(long*)&position);
   }
 
   /**
@@ -1720,7 +1720,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseStateChanged(out gst.types.State oldstate, out gst.types.State newstate, out gst.types.State pending)
   {
-    gst_message_parse_state_changed(cast(GstMessage*)cPtr, &oldstate, &newstate, &pending);
+    gst_message_parse_state_changed(cast(GstMessage*)this._cPtr, &oldstate, &newstate, &pending);
   }
 
   /**
@@ -1739,7 +1739,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseStepDone(out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate, out ulong duration, out bool eos)
   {
-    gst_message_parse_step_done(cast(GstMessage*)cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate, cast(ulong*)&duration, cast(bool*)&eos);
+    gst_message_parse_step_done(cast(GstMessage*)this._cPtr, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate, cast(ulong*)&duration, cast(bool*)&eos);
   }
 
   /**
@@ -1757,7 +1757,7 @@ class Message : gobject.boxed.Boxed
   */
   void parseStepStart(out bool active, out gst.types.Format format, out ulong amount, out double rate, out bool flush, out bool intermediate)
   {
-    gst_message_parse_step_start(cast(GstMessage*)cPtr, cast(bool*)&active, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
+    gst_message_parse_step_start(cast(GstMessage*)this._cPtr, cast(bool*)&active, &format, cast(ulong*)&amount, cast(double*)&rate, cast(bool*)&flush, cast(bool*)&intermediate);
   }
 
   /**
@@ -1770,7 +1770,7 @@ class Message : gobject.boxed.Boxed
   void parseStreamCollection(out gst.stream_collection.StreamCollection collection)
   {
     GstStreamCollection* _collection;
-    gst_message_parse_stream_collection(cast(GstMessage*)cPtr, &_collection);
+    gst_message_parse_stream_collection(cast(GstMessage*)this._cPtr, &_collection);
     collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
   }
 
@@ -1788,7 +1788,7 @@ class Message : gobject.boxed.Boxed
   void parseStreamStatus(out gst.types.StreamStatusType type, out gst.element.Element owner)
   {
     GstElement* _owner;
-    gst_message_parse_stream_status(cast(GstMessage*)cPtr, &type, &_owner);
+    gst_message_parse_stream_status(cast(GstMessage*)this._cPtr, &type, &_owner);
     owner = new gst.element.Element(cast(void*)_owner, No.Take);
   }
 
@@ -1802,7 +1802,7 @@ class Message : gobject.boxed.Boxed
   void parseStreamsSelected(out gst.stream_collection.StreamCollection collection)
   {
     GstStreamCollection* _collection;
-    gst_message_parse_streams_selected(cast(GstMessage*)cPtr, &_collection);
+    gst_message_parse_streams_selected(cast(GstMessage*)this._cPtr, &_collection);
     collection = new gst.stream_collection.StreamCollection(cast(void*)_collection, Yes.Take);
   }
 
@@ -1821,7 +1821,7 @@ class Message : gobject.boxed.Boxed
   void parseStructureChange(out gst.types.StructureChangeType type, out gst.element.Element owner, out bool busy)
   {
     GstElement* _owner;
-    gst_message_parse_structure_change(cast(GstMessage*)cPtr, &type, &_owner, cast(bool*)&busy);
+    gst_message_parse_structure_change(cast(GstMessage*)this._cPtr, &type, &_owner, cast(bool*)&busy);
     owner = new gst.element.Element(cast(void*)_owner, No.Take);
   }
 
@@ -1855,7 +1855,7 @@ class Message : gobject.boxed.Boxed
   void parseTag(out gst.tag_list.TagList tagList)
   {
     GstTagList* _tagList;
-    gst_message_parse_tag(cast(GstMessage*)cPtr, &_tagList);
+    gst_message_parse_tag(cast(GstMessage*)this._cPtr, &_tagList);
     tagList = new gst.tag_list.TagList(cast(void*)_tagList, Yes.Take);
   }
 
@@ -1873,7 +1873,7 @@ class Message : gobject.boxed.Boxed
   void parseToc(out gst.toc.Toc toc, out bool updated)
   {
     GstToc* _toc;
-    gst_message_parse_toc(cast(GstMessage*)cPtr, &_toc, cast(bool*)&updated);
+    gst_message_parse_toc(cast(GstMessage*)this._cPtr, &_toc, cast(bool*)&updated);
     toc = new gst.toc.Toc(cast(void*)_toc, Yes.Take);
   }
 
@@ -1892,7 +1892,7 @@ class Message : gobject.boxed.Boxed
   {
     GError* _gerror;
     char* _debug_;
-    gst_message_parse_warning(cast(GstMessage*)cPtr, &_gerror, &_debug_);
+    gst_message_parse_warning(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
     gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
     debug_ = _debug_.fromCString(Yes.Free);
   }
@@ -1907,7 +1907,7 @@ class Message : gobject.boxed.Boxed
   void parseWarningDetails(out gst.structure.Structure structure)
   {
     const(GstStructure)* _structure;
-    gst_message_parse_warning_details(cast(GstMessage*)cPtr, &_structure);
+    gst_message_parse_warning_details(cast(GstMessage*)this._cPtr, &_structure);
     structure = new gst.structure.Structure(cast(void*)_structure, No.Take);
   }
 
@@ -1922,7 +1922,7 @@ class Message : gobject.boxed.Boxed
   */
   void setBufferingStats(gst.types.BufferingMode mode, int avgIn, int avgOut, long bufferingLeft)
   {
-    gst_message_set_buffering_stats(cast(GstMessage*)cPtr, mode, avgIn, avgOut, bufferingLeft);
+    gst_message_set_buffering_stats(cast(GstMessage*)this._cPtr, mode, avgIn, avgOut, bufferingLeft);
   }
 
   /**
@@ -1941,7 +1941,7 @@ class Message : gobject.boxed.Boxed
   */
   void setGroupId(uint groupId)
   {
-    gst_message_set_group_id(cast(GstMessage*)cPtr, groupId);
+    gst_message_set_group_id(cast(GstMessage*)this._cPtr, groupId);
   }
 
   /**
@@ -1964,7 +1964,7 @@ class Message : gobject.boxed.Boxed
   */
   void setQosStats(gst.types.Format format, ulong processed, ulong dropped)
   {
-    gst_message_set_qos_stats(cast(GstMessage*)cPtr, format, processed, dropped);
+    gst_message_set_qos_stats(cast(GstMessage*)this._cPtr, format, processed, dropped);
   }
 
   /**
@@ -1981,7 +1981,7 @@ class Message : gobject.boxed.Boxed
   */
   void setQosValues(long jitter, double proportion, int quality)
   {
-    gst_message_set_qos_values(cast(GstMessage*)cPtr, jitter, proportion, quality);
+    gst_message_set_qos_values(cast(GstMessage*)this._cPtr, jitter, proportion, quality);
   }
 
   /**
@@ -1998,7 +1998,7 @@ class Message : gobject.boxed.Boxed
   */
   void setSeqnum(uint seqnum)
   {
-    gst_message_set_seqnum(cast(GstMessage*)cPtr, seqnum);
+    gst_message_set_seqnum(cast(GstMessage*)this._cPtr, seqnum);
   }
 
   /**
@@ -2010,7 +2010,7 @@ class Message : gobject.boxed.Boxed
   */
   void setStreamStatusObject(gobject.value.Value object)
   {
-    gst_message_set_stream_status_object(cast(GstMessage*)cPtr, object ? cast(const(GValue)*)object.cPtr(No.Dup) : null);
+    gst_message_set_stream_status_object(cast(GstMessage*)this._cPtr, object ? cast(const(GValue)*)object._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2021,7 +2021,7 @@ class Message : gobject.boxed.Boxed
   */
   void streamsSelectedAdd(gst.stream.Stream stream)
   {
-    gst_message_streams_selected_add(cast(GstMessage*)cPtr, stream ? cast(GstStream*)stream.cPtr(No.Dup) : null);
+    gst_message_streams_selected_add(cast(GstMessage*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2031,7 +2031,7 @@ class Message : gobject.boxed.Boxed
   uint streamsSelectedGetSize()
   {
     uint _retval;
-    _retval = gst_message_streams_selected_get_size(cast(GstMessage*)cPtr);
+    _retval = gst_message_streams_selected_get_size(cast(GstMessage*)this._cPtr);
     return _retval;
   }
 
@@ -2045,8 +2045,8 @@ class Message : gobject.boxed.Boxed
   gst.stream.Stream streamsSelectedGetStream(uint idx)
   {
     GstStream* _cretval;
-    _cretval = gst_message_streams_selected_get_stream(cast(GstMessage*)cPtr, idx);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
+    _cretval = gst_message_streams_selected_get_stream(cast(GstMessage*)this._cPtr, idx);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -2063,7 +2063,7 @@ class Message : gobject.boxed.Boxed
   gst.structure.Structure writableStructure()
   {
     GstStructure* _cretval;
-    _cretval = gst_message_writable_structure(cast(GstMessage*)cPtr);
+    _cretval = gst_message_writable_structure(cast(GstMessage*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

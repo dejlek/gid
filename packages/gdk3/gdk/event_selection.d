@@ -29,7 +29,7 @@ class EventSelection
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class EventSelection
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventSelection*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventSelection*)this._cPtr).type;
   }
 
   /**
@@ -52,7 +52,7 @@ class EventSelection
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventSelection*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventSelection*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -61,7 +61,7 @@ class EventSelection
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).window);
   }
 
   /**
@@ -71,8 +71,8 @@ class EventSelection
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventSelection*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).window);
   }
 
   /**
@@ -81,7 +81,7 @@ class EventSelection
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventSelection*)cPtr).sendEvent;
+    return (cast(GdkEventSelection*)this._cPtr).sendEvent;
   }
 
   /**
@@ -91,7 +91,7 @@ class EventSelection
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventSelection*)cPtr).sendEvent = propval;
+    (cast(GdkEventSelection*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -100,7 +100,7 @@ class EventSelection
   */
   @property gdk.atom.Atom selection()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)cPtr).selection);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).selection);
   }
 
   /**
@@ -109,7 +109,7 @@ class EventSelection
   */
   @property gdk.atom.Atom target()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)cPtr).target);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).target);
   }
 
   /**
@@ -118,7 +118,7 @@ class EventSelection
   */
   @property gdk.atom.Atom property()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)cPtr).property);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).property);
   }
 
   /**
@@ -127,7 +127,7 @@ class EventSelection
   */
   @property uint time()
   {
-    return (cast(GdkEventSelection*)cPtr).time;
+    return (cast(GdkEventSelection*)this._cPtr).time;
   }
 
   /**
@@ -137,7 +137,7 @@ class EventSelection
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventSelection*)cPtr).time = propval;
+    (cast(GdkEventSelection*)this._cPtr).time = propval;
   }
 
   /**
@@ -146,7 +146,7 @@ class EventSelection
   */
   @property gdk.window.Window requestor()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)cPtr).requestor);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).requestor);
   }
 
   /**
@@ -156,7 +156,7 @@ class EventSelection
   */
   @property void requestor(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)cPtr).requestor);
-    dToC(propval, cast(void*)&(cast(GdkEventSelection*)cPtr).requestor);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventSelection*)this._cPtr).requestor);
+    dToC(propval, cast(void*)&(cast(GdkEventSelection*)this._cPtr).requestor);
   }
 }

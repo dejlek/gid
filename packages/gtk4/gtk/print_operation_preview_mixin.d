@@ -28,7 +28,7 @@ template PrintOperationPreviewT()
   */
   override void endPreview()
   {
-    gtk_print_operation_preview_end_preview(cast(GtkPrintOperationPreview*)cPtr);
+    gtk_print_operation_preview_end_preview(cast(GtkPrintOperationPreview*)this._cPtr);
   }
 
   /**
@@ -42,7 +42,7 @@ template PrintOperationPreviewT()
   override bool isSelected(int pageNr)
   {
     bool _retval;
-    _retval = gtk_print_operation_preview_is_selected(cast(GtkPrintOperationPreview*)cPtr, pageNr);
+    _retval = gtk_print_operation_preview_is_selected(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ template PrintOperationPreviewT()
   */
   override void renderPage(int pageNr)
   {
-    gtk_print_operation_preview_render_page(cast(GtkPrintOperationPreview*)cPtr, pageNr);
+    gtk_print_operation_preview_render_page(cast(GtkPrintOperationPreview*)this._cPtr, pageNr);
   }
 
   /**

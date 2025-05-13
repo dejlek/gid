@@ -20,22 +20,22 @@ class ParseContext : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_parse_context_get_type != &gidSymbolNotFound ? gst_parse_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class ParseContext : gobject.boxed.Boxed
   gst.parse_context.ParseContext copy()
   {
     GstParseContext* _cretval;
-    _cretval = gst_parse_context_copy(cast(const(GstParseContext)*)cPtr);
+    _cretval = gst_parse_context_copy(cast(const(GstParseContext)*)this._cPtr);
     auto _retval = _cretval ? new gst.parse_context.ParseContext(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -82,7 +82,7 @@ class ParseContext : gobject.boxed.Boxed
   string[] getMissingElements()
   {
     char** _cretval;
-    _cretval = gst_parse_context_get_missing_elements(cast(GstParseContext*)cPtr);
+    _cretval = gst_parse_context_get_missing_elements(cast(GstParseContext*)this._cPtr);
     string[] _retval;
 
     if (_cretval)

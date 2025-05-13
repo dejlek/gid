@@ -21,16 +21,16 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_proxy_control_binding_get_type != &gidSymbolNotFound ? gst_proxy_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
     const(char)* _refPropertyName = refPropertyName.toCString(No.Alloc);
-    _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject.cPtr(No.Dup) : null, _refPropertyName);
+    _cretval = gst_proxy_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, refObject ? cast(GstObject*)refObject._cPtr(No.Dup) : null, _refPropertyName);
     this(_cretval, No.Take);
   }
 }

@@ -64,16 +64,16 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_button_get_type != &gidSymbolNotFound ? gtk_file_chooser_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -157,8 +157,8 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   static gtk.file_chooser_button.FileChooserButton newWithDialog(gtk.dialog.Dialog dialog)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_file_chooser_button_new_with_dialog(dialog ? cast(GtkWidget*)dialog._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.file_chooser_button.FileChooserButton)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   override bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_file_chooser_button_get_focus_on_click(cast(GtkFileChooserButton*)cPtr);
+    _retval = gtk_file_chooser_button_get_focus_on_click(cast(GtkFileChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_file_chooser_button_get_title(cast(GtkFileChooserButton*)cPtr);
+    _cretval = gtk_file_chooser_button_get_title(cast(GtkFileChooserButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -197,7 +197,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   int getWidthChars()
   {
     int _retval;
-    _retval = gtk_file_chooser_button_get_width_chars(cast(GtkFileChooserButton*)cPtr);
+    _retval = gtk_file_chooser_button_get_width_chars(cast(GtkFileChooserButton*)this._cPtr);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   override void setFocusOnClick(bool focusOnClick)
   {
-    gtk_file_chooser_button_set_focus_on_click(cast(GtkFileChooserButton*)cPtr, focusOnClick);
+    gtk_file_chooser_button_set_focus_on_click(cast(GtkFileChooserButton*)this._cPtr, focusOnClick);
   }
 
   /**
@@ -226,7 +226,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_file_chooser_button_set_title(cast(GtkFileChooserButton*)cPtr, _title);
+    gtk_file_chooser_button_set_title(cast(GtkFileChooserButton*)this._cPtr, _title);
   }
 
   /**
@@ -237,7 +237,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
   */
   void setWidthChars(int nChars)
   {
-    gtk_file_chooser_button_set_width_chars(cast(GtkFileChooserButton*)cPtr, nChars);
+    gtk_file_chooser_button_set_width_chars(cast(GtkFileChooserButton*)this._cPtr, nChars);
   }
 
   /**

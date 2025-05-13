@@ -32,7 +32,7 @@ class Queue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -43,7 +43,7 @@ class Queue
   */
   @property uint length()
   {
-    return (cast(GQueue*)cPtr).length;
+    return (cast(GQueue*)this._cPtr).length;
   }
 
   /**
@@ -53,7 +53,7 @@ class Queue
   */
   @property void length(uint propval)
   {
-    (cast(GQueue*)cPtr).length = propval;
+    (cast(GQueue*)this._cPtr).length = propval;
   }
 
   /**
@@ -62,7 +62,7 @@ class Queue
   */
   void clear()
   {
-    g_queue_clear(cast(GQueue*)cPtr);
+    g_queue_clear(cast(GQueue*)this._cPtr);
   }
 
   /**
@@ -81,7 +81,7 @@ class Queue
       (*_dlg)();
     }
     auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
-    g_queue_clear_full(cast(GQueue*)cPtr, _freeFuncCB);
+    g_queue_clear_full(cast(GQueue*)this._cPtr, _freeFuncCB);
   }
 
   /**
@@ -105,7 +105,7 @@ class Queue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_queue_foreach(cast(GQueue*)cPtr, _funcCB, _func);
+    g_queue_foreach(cast(GQueue*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -127,7 +127,7 @@ class Queue
       (*_dlg)();
     }
     auto _freeFuncCB = freeFunc ? &_freeFuncCallback : null;
-    g_queue_free_full(cast(GQueue*)cPtr, _freeFuncCB);
+    g_queue_free_full(cast(GQueue*)this._cPtr, _freeFuncCB);
   }
 
   /**
@@ -137,7 +137,7 @@ class Queue
   uint getLength()
   {
     uint _retval;
-    _retval = g_queue_get_length(cast(GQueue*)cPtr);
+    _retval = g_queue_get_length(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class Queue
   int index(const(void)* data = null)
   {
     int _retval;
-    _retval = g_queue_index(cast(GQueue*)cPtr, data);
+    _retval = g_queue_index(cast(GQueue*)this._cPtr, data);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Queue
   */
   void init_()
   {
-    g_queue_init(cast(GQueue*)cPtr);
+    g_queue_init(cast(GQueue*)this._cPtr);
   }
 
   /**
@@ -190,7 +190,7 @@ class Queue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_queue_insert_sorted(cast(GQueue*)cPtr, data, _funcCB, _func);
+    g_queue_insert_sorted(cast(GQueue*)this._cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -200,7 +200,7 @@ class Queue
   bool isEmpty()
   {
     bool _retval;
-    _retval = g_queue_is_empty(cast(GQueue*)cPtr);
+    _retval = g_queue_is_empty(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Queue
   */
   void* peekHead()
   {
-    auto _retval = g_queue_peek_head(cast(GQueue*)cPtr);
+    auto _retval = g_queue_peek_head(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class Queue
   */
   void* peekNth(uint n)
   {
-    auto _retval = g_queue_peek_nth(cast(GQueue*)cPtr, n);
+    auto _retval = g_queue_peek_nth(cast(GQueue*)this._cPtr, n);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Queue
   */
   void* peekTail()
   {
-    auto _retval = g_queue_peek_tail(cast(GQueue*)cPtr);
+    auto _retval = g_queue_peek_tail(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Queue
   */
   void* popHead()
   {
-    auto _retval = g_queue_pop_head(cast(GQueue*)cPtr);
+    auto _retval = g_queue_pop_head(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Queue
   */
   void* popNth(uint n)
   {
-    auto _retval = g_queue_pop_nth(cast(GQueue*)cPtr, n);
+    auto _retval = g_queue_pop_nth(cast(GQueue*)this._cPtr, n);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class Queue
   */
   void* popTail()
   {
-    auto _retval = g_queue_pop_tail(cast(GQueue*)cPtr);
+    auto _retval = g_queue_pop_tail(cast(GQueue*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Queue
   */
   void pushHead(void* data = null)
   {
-    g_queue_push_head(cast(GQueue*)cPtr, data);
+    g_queue_push_head(cast(GQueue*)this._cPtr, data);
   }
 
   /**
@@ -297,7 +297,7 @@ class Queue
   */
   void pushNth(void* data, int n)
   {
-    g_queue_push_nth(cast(GQueue*)cPtr, data, n);
+    g_queue_push_nth(cast(GQueue*)this._cPtr, data, n);
   }
 
   /**
@@ -308,7 +308,7 @@ class Queue
   */
   void pushTail(void* data = null)
   {
-    g_queue_push_tail(cast(GQueue*)cPtr, data);
+    g_queue_push_tail(cast(GQueue*)this._cPtr, data);
   }
 
   /**
@@ -321,7 +321,7 @@ class Queue
   bool remove(const(void)* data = null)
   {
     bool _retval;
-    _retval = g_queue_remove(cast(GQueue*)cPtr, data);
+    _retval = g_queue_remove(cast(GQueue*)this._cPtr, data);
     return _retval;
   }
 
@@ -335,7 +335,7 @@ class Queue
   uint removeAll(const(void)* data = null)
   {
     uint _retval;
-    _retval = g_queue_remove_all(cast(GQueue*)cPtr, data);
+    _retval = g_queue_remove_all(cast(GQueue*)this._cPtr, data);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class Queue
   */
   void reverse()
   {
-    g_queue_reverse(cast(GQueue*)cPtr);
+    g_queue_reverse(cast(GQueue*)this._cPtr);
   }
 
   /**
@@ -368,6 +368,6 @@ class Queue
     auto _compareFuncCB = compareFunc ? &_compareFuncCallback : null;
 
     auto _compareFunc = compareFunc ? cast(void*)&(compareFunc) : null;
-    g_queue_sort(cast(GQueue*)cPtr, _compareFuncCB, _compareFunc);
+    g_queue_sort(cast(GQueue*)this._cPtr, _compareFuncCB, _compareFunc);
   }
 }

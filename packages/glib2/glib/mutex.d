@@ -69,7 +69,7 @@ class Mutex
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -85,7 +85,7 @@ class Mutex
   */
   void clear()
   {
-    g_mutex_clear(cast(GMutex*)cPtr);
+    g_mutex_clear(cast(GMutex*)this._cPtr);
   }
 
   /**
@@ -116,7 +116,7 @@ class Mutex
   */
   void init_()
   {
-    g_mutex_init(cast(GMutex*)cPtr);
+    g_mutex_init(cast(GMutex*)this._cPtr);
   }
 
   /**
@@ -131,7 +131,7 @@ class Mutex
   */
   void lock()
   {
-    g_mutex_lock(cast(GMutex*)cPtr);
+    g_mutex_lock(cast(GMutex*)this._cPtr);
   }
 
   /**
@@ -148,7 +148,7 @@ class Mutex
   bool trylock()
   {
     bool _retval;
-    _retval = g_mutex_trylock(cast(GMutex*)cPtr);
+    _retval = g_mutex_trylock(cast(GMutex*)this._cPtr);
     return _retval;
   }
 
@@ -161,6 +161,6 @@ class Mutex
   */
   void unlock()
   {
-    g_mutex_unlock(cast(GMutex*)cPtr);
+    g_mutex_unlock(cast(GMutex*)this._cPtr);
   }
 }

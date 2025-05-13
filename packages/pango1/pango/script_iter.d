@@ -21,22 +21,22 @@ class ScriptIter : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_script_iter_get_type != &gidSymbolNotFound ? pango_script_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -92,7 +92,7 @@ class ScriptIter : gobject.boxed.Boxed
   {
     char* _start;
     char* _end;
-    pango_script_iter_get_range(cast(PangoScriptIter*)cPtr, &_start, &_end, &script);
+    pango_script_iter_get_range(cast(PangoScriptIter*)this._cPtr, &_start, &_end, &script);
     start = _start.fromCString(Yes.Free);
     end = _end.fromCString(Yes.Free);
   }
@@ -107,7 +107,7 @@ class ScriptIter : gobject.boxed.Boxed
   bool next()
   {
     bool _retval;
-    _retval = pango_script_iter_next(cast(PangoScriptIter*)cPtr);
+    _retval = pango_script_iter_next(cast(PangoScriptIter*)this._cPtr);
     return _retval;
   }
 }

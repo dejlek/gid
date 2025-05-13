@@ -1346,7 +1346,7 @@ struct AdwAlertDialogClass
 struct AdwAnimation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

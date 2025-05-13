@@ -21,22 +21,22 @@ class ITPFirstParty : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_itp_first_party_get_type != &gidSymbolNotFound ? webkit_itp_first_party_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class ITPFirstParty : gobject.boxed.Boxed
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = webkit_itp_first_party_get_domain(cast(WebKitITPFirstParty*)cPtr);
+    _cretval = webkit_itp_first_party_get_domain(cast(WebKitITPFirstParty*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -67,7 +67,7 @@ class ITPFirstParty : gobject.boxed.Boxed
   glib.date_time.DateTime getLastUpdateTime()
   {
     GDateTime* _cretval;
-    _cretval = webkit_itp_first_party_get_last_update_time(cast(WebKitITPFirstParty*)cPtr);
+    _cretval = webkit_itp_first_party_get_last_update_time(cast(WebKitITPFirstParty*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -82,7 +82,7 @@ class ITPFirstParty : gobject.boxed.Boxed
   bool getWebsiteDataAccessAllowed()
   {
     bool _retval;
-    _retval = webkit_itp_first_party_get_website_data_access_allowed(cast(WebKitITPFirstParty*)cPtr);
+    _retval = webkit_itp_first_party_get_website_data_access_allowed(cast(WebKitITPFirstParty*)this._cPtr);
     return _retval;
   }
 }

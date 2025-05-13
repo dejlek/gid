@@ -37,7 +37,7 @@ class AudioBuffer
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -48,7 +48,7 @@ class AudioBuffer
   */
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioBuffer*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioBuffer*)this._cPtr).info);
   }
 
   /**
@@ -57,7 +57,7 @@ class AudioBuffer
   */
   @property size_t nSamples()
   {
-    return (cast(GstAudioBuffer*)cPtr).nSamples;
+    return (cast(GstAudioBuffer*)this._cPtr).nSamples;
   }
 
   /**
@@ -67,7 +67,7 @@ class AudioBuffer
   */
   @property void nSamples(size_t propval)
   {
-    (cast(GstAudioBuffer*)cPtr).nSamples = propval;
+    (cast(GstAudioBuffer*)this._cPtr).nSamples = propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class AudioBuffer
   */
   @property int nPlanes()
   {
-    return (cast(GstAudioBuffer*)cPtr).nPlanes;
+    return (cast(GstAudioBuffer*)this._cPtr).nPlanes;
   }
 
   /**
@@ -86,7 +86,7 @@ class AudioBuffer
   */
   @property void nPlanes(int propval)
   {
-    (cast(GstAudioBuffer*)cPtr).nPlanes = propval;
+    (cast(GstAudioBuffer*)this._cPtr).nPlanes = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class AudioBuffer
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)this._cPtr).buffer);
   }
 
   /**
@@ -105,8 +105,8 @@ class AudioBuffer
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstAudioBuffer*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstAudioBuffer*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstAudioBuffer*)this._cPtr).buffer);
   }
 
   /**
@@ -115,7 +115,7 @@ class AudioBuffer
   */
   void unmap()
   {
-    gst_audio_buffer_unmap(cast(GstAudioBuffer*)cPtr);
+    gst_audio_buffer_unmap(cast(GstAudioBuffer*)this._cPtr);
   }
 
   /**
@@ -140,7 +140,7 @@ class AudioBuffer
   static gst.buffer.Buffer clip(gst.buffer.Buffer buffer, gst.segment.Segment segment, int rate, int bpf)
   {
     GstBuffer* _cretval;
-    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null, segment ? cast(const(GstSegment)*)segment.cPtr(No.Dup) : null, rate, bpf);
+    _cretval = gst_audio_buffer_clip(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, segment ? cast(const(GstSegment)*)segment._cPtr(No.Dup) : null, rate, bpf);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -182,7 +182,7 @@ class AudioBuffer
   {
     bool _retval;
     GstAudioBuffer _buffer;
-    _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info.cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer.cPtr(No.Dup) : null, flags);
+    _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
     buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer);
     return _retval;
   }
@@ -212,7 +212,7 @@ class AudioBuffer
       _channels = cast(int)to.length;
 
     auto _to = cast(const(GstAudioChannelPosition)*)to.ptr;
-    _retval = gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, format, _channels, _from, _to);
+    _retval = gst_audio_buffer_reorder_channels(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, format, _channels, _from, _to);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class AudioBuffer
   static gst.buffer.Buffer truncate(gst.buffer.Buffer buffer, int bpf, size_t trim, size_t samples)
   {
     GstBuffer* _cretval;
-    _cretval = gst_audio_buffer_truncate(buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null, bpf, trim, samples);
+    _cretval = gst_audio_buffer_truncate(buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null, bpf, trim, samples);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

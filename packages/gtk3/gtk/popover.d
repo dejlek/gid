@@ -89,16 +89,16 @@ class Popover : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_get_type != &gidSymbolNotFound ? gtk_popover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -241,7 +241,7 @@ class Popover : gtk.bin.Bin
   this(gtk.widget.Widget relativeTo = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
+    _cretval = gtk_popover_new(relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -265,8 +265,8 @@ class Popover : gtk.bin.Bin
   static gtk.popover.Popover newFromModel(gtk.widget.Widget relativeTo, gio.menu_model.MenuModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_new_from_model(relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover.Popover)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Popover : gtk.bin.Bin
   void bindModel(gio.menu_model.MenuModel model = null, string actionNamespace = null)
   {
     const(char)* _actionNamespace = actionNamespace.toCString(No.Alloc);
-    gtk_popover_bind_model(cast(GtkPopover*)cPtr, model ? cast(GMenuModel*)model.cPtr(No.Dup) : null, _actionNamespace);
+    gtk_popover_bind_model(cast(GtkPopover*)this._cPtr, model ? cast(GMenuModel*)model._cPtr(No.Dup) : null, _actionNamespace);
   }
 
   /**
@@ -315,7 +315,7 @@ class Popover : gtk.bin.Bin
   gtk.types.PopoverConstraint getConstrainTo()
   {
     GtkPopoverConstraint _cretval;
-    _cretval = gtk_popover_get_constrain_to(cast(GtkPopover*)cPtr);
+    _cretval = gtk_popover_get_constrain_to(cast(GtkPopover*)this._cPtr);
     gtk.types.PopoverConstraint _retval = cast(gtk.types.PopoverConstraint)_cretval;
     return _retval;
   }
@@ -329,8 +329,8 @@ class Popover : gtk.bin.Bin
   gtk.widget.Widget getDefaultWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_get_default_widget(cast(GtkPopover*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_get_default_widget(cast(GtkPopover*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class Popover : gtk.bin.Bin
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_popover_get_modal(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_modal(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -360,7 +360,7 @@ class Popover : gtk.bin.Bin
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)cPtr, &_rect);
+    _retval = gtk_popover_get_pointing_to(cast(GtkPopover*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -372,7 +372,7 @@ class Popover : gtk.bin.Bin
   gtk.types.PositionType getPosition()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_popover_get_position(cast(GtkPopover*)cPtr);
+    _cretval = gtk_popover_get_position(cast(GtkPopover*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -384,8 +384,8 @@ class Popover : gtk.bin.Bin
   gtk.widget.Widget getRelativeTo()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_popover_get_relative_to(cast(GtkPopover*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_popover_get_relative_to(cast(GtkPopover*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class Popover : gtk.bin.Bin
   bool getTransitionsEnabled()
   {
     bool _retval;
-    _retval = gtk_popover_get_transitions_enabled(cast(GtkPopover*)cPtr);
+    _retval = gtk_popover_get_transitions_enabled(cast(GtkPopover*)this._cPtr);
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class Popover : gtk.bin.Bin
   */
   void popdown()
   {
-    gtk_popover_popdown(cast(GtkPopover*)cPtr);
+    gtk_popover_popdown(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -422,7 +422,7 @@ class Popover : gtk.bin.Bin
   */
   void popup()
   {
-    gtk_popover_popup(cast(GtkPopover*)cPtr);
+    gtk_popover_popup(cast(GtkPopover*)this._cPtr);
   }
 
   /**
@@ -436,7 +436,7 @@ class Popover : gtk.bin.Bin
   */
   void setConstrainTo(gtk.types.PopoverConstraint constraint)
   {
-    gtk_popover_set_constrain_to(cast(GtkPopover*)cPtr, constraint);
+    gtk_popover_set_constrain_to(cast(GtkPopover*)this._cPtr, constraint);
   }
 
   /**
@@ -450,7 +450,7 @@ class Popover : gtk.bin.Bin
   */
   void setDefaultWidget(gtk.widget.Widget widget = null)
   {
-    gtk_popover_set_default_widget(cast(GtkPopover*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_popover_set_default_widget(cast(GtkPopover*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -464,7 +464,7 @@ class Popover : gtk.bin.Bin
   */
   void setModal(bool modal)
   {
-    gtk_popover_set_modal(cast(GtkPopover*)cPtr, modal);
+    gtk_popover_set_modal(cast(GtkPopover*)this._cPtr, modal);
   }
 
   /**
@@ -477,7 +477,7 @@ class Popover : gtk.bin.Bin
   */
   void setPointingTo(gdk.rectangle.Rectangle rect)
   {
-    gtk_popover_set_pointing_to(cast(GtkPopover*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_popover_set_pointing_to(cast(GtkPopover*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
   }
 
   /**
@@ -493,7 +493,7 @@ class Popover : gtk.bin.Bin
   */
   void setPosition(gtk.types.PositionType position)
   {
-    gtk_popover_set_position(cast(GtkPopover*)cPtr, position);
+    gtk_popover_set_position(cast(GtkPopover*)this._cPtr, position);
   }
 
   /**
@@ -510,7 +510,7 @@ class Popover : gtk.bin.Bin
   */
   void setRelativeTo(gtk.widget.Widget relativeTo = null)
   {
-    gtk_popover_set_relative_to(cast(GtkPopover*)cPtr, relativeTo ? cast(GtkWidget*)relativeTo.cPtr(No.Dup) : null);
+    gtk_popover_set_relative_to(cast(GtkPopover*)this._cPtr, relativeTo ? cast(GtkWidget*)relativeTo._cPtr(No.Dup) : null);
   }
 
   /**
@@ -525,7 +525,7 @@ class Popover : gtk.bin.Bin
   */
   void setTransitionsEnabled(bool transitionsEnabled)
   {
-    gtk_popover_set_transitions_enabled(cast(GtkPopover*)cPtr, transitionsEnabled);
+    gtk_popover_set_transitions_enabled(cast(GtkPopover*)this._cPtr, transitionsEnabled);
   }
 
   /**

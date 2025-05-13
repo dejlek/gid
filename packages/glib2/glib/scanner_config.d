@@ -28,7 +28,7 @@ class ScannerConfig
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class ScannerConfig
   */
   @property string csetSkipCharacters()
   {
-    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetSkipCharacters);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
   }
 
   /**
@@ -53,8 +53,8 @@ class ScannerConfig
   */
   @property void csetSkipCharacters(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetSkipCharacters);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetSkipCharacters);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetSkipCharacters);
   }
 
   /**
@@ -64,7 +64,7 @@ class ScannerConfig
   */
   @property string csetIdentifierFirst()
   {
-    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
   }
 
   /**
@@ -75,8 +75,8 @@ class ScannerConfig
   */
   @property void csetIdentifierFirst(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetIdentifierFirst);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierFirst);
   }
 
   /**
@@ -88,7 +88,7 @@ class ScannerConfig
   */
   @property string csetIdentifierNth()
   {
-    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierNth);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
   }
 
   /**
@@ -101,8 +101,8 @@ class ScannerConfig
   */
   @property void csetIdentifierNth(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).csetIdentifierNth);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).csetIdentifierNth);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).csetIdentifierNth);
   }
 
   /**
@@ -114,7 +114,7 @@ class ScannerConfig
   */
   @property string cpairCommentSingle()
   {
-    return cToD!(string)(cast(void*)(cast(GScannerConfig*)cPtr).cpairCommentSingle);
+    return cToD!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
   }
 
   /**
@@ -127,8 +127,8 @@ class ScannerConfig
   */
   @property void cpairCommentSingle(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)cPtr).cpairCommentSingle);
-    dToC(propval, cast(void*)&(cast(GScannerConfig*)cPtr).cpairCommentSingle);
+    cValueFree!(string)(cast(void*)(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
+    dToC(propval, cast(void*)&(cast(GScannerConfig*)this._cPtr).cpairCommentSingle);
   }
 
   /**
@@ -138,7 +138,7 @@ class ScannerConfig
   */
   @property uint caseSensitive()
   {
-    return (cast(GScannerConfig*)cPtr).caseSensitive;
+    return (cast(GScannerConfig*)this._cPtr).caseSensitive;
   }
 
   /**
@@ -149,7 +149,7 @@ class ScannerConfig
   */
   @property void caseSensitive(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).caseSensitive = propval;
+    (cast(GScannerConfig*)this._cPtr).caseSensitive = propval;
   }
 
   /**
@@ -159,7 +159,7 @@ class ScannerConfig
   */
   @property uint skipCommentMulti()
   {
-    return (cast(GScannerConfig*)cPtr).skipCommentMulti;
+    return (cast(GScannerConfig*)this._cPtr).skipCommentMulti;
   }
 
   /**
@@ -170,7 +170,7 @@ class ScannerConfig
   */
   @property void skipCommentMulti(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).skipCommentMulti = propval;
+    (cast(GScannerConfig*)this._cPtr).skipCommentMulti = propval;
   }
 
   /**
@@ -180,7 +180,7 @@ class ScannerConfig
   */
   @property uint skipCommentSingle()
   {
-    return (cast(GScannerConfig*)cPtr).skipCommentSingle;
+    return (cast(GScannerConfig*)this._cPtr).skipCommentSingle;
   }
 
   /**
@@ -191,7 +191,7 @@ class ScannerConfig
   */
   @property void skipCommentSingle(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).skipCommentSingle = propval;
+    (cast(GScannerConfig*)this._cPtr).skipCommentSingle = propval;
   }
 
   /**
@@ -201,7 +201,7 @@ class ScannerConfig
   */
   @property uint scanCommentMulti()
   {
-    return (cast(GScannerConfig*)cPtr).scanCommentMulti;
+    return (cast(GScannerConfig*)this._cPtr).scanCommentMulti;
   }
 
   /**
@@ -212,7 +212,7 @@ class ScannerConfig
   */
   @property void scanCommentMulti(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanCommentMulti = propval;
+    (cast(GScannerConfig*)this._cPtr).scanCommentMulti = propval;
   }
 
   /**
@@ -222,7 +222,7 @@ class ScannerConfig
   */
   @property uint scanIdentifier()
   {
-    return (cast(GScannerConfig*)cPtr).scanIdentifier;
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifier;
   }
 
   /**
@@ -233,7 +233,7 @@ class ScannerConfig
   */
   @property void scanIdentifier(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanIdentifier = propval;
+    (cast(GScannerConfig*)this._cPtr).scanIdentifier = propval;
   }
 
   /**
@@ -243,7 +243,7 @@ class ScannerConfig
   */
   @property uint scanIdentifier1char()
   {
-    return (cast(GScannerConfig*)cPtr).scanIdentifier1char;
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifier1char;
   }
 
   /**
@@ -254,7 +254,7 @@ class ScannerConfig
   */
   @property void scanIdentifier1char(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanIdentifier1char = propval;
+    (cast(GScannerConfig*)this._cPtr).scanIdentifier1char = propval;
   }
 
   /**
@@ -264,7 +264,7 @@ class ScannerConfig
   */
   @property uint scanIdentifierNULL()
   {
-    return (cast(GScannerConfig*)cPtr).scanIdentifierNULL;
+    return (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL;
   }
 
   /**
@@ -275,7 +275,7 @@ class ScannerConfig
   */
   @property void scanIdentifierNULL(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanIdentifierNULL = propval;
+    (cast(GScannerConfig*)this._cPtr).scanIdentifierNULL = propval;
   }
 
   /**
@@ -285,7 +285,7 @@ class ScannerConfig
   */
   @property uint scanSymbols()
   {
-    return (cast(GScannerConfig*)cPtr).scanSymbols;
+    return (cast(GScannerConfig*)this._cPtr).scanSymbols;
   }
 
   /**
@@ -296,7 +296,7 @@ class ScannerConfig
   */
   @property void scanSymbols(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanSymbols = propval;
+    (cast(GScannerConfig*)this._cPtr).scanSymbols = propval;
   }
 
   /**
@@ -306,7 +306,7 @@ class ScannerConfig
   */
   @property uint scanBinary()
   {
-    return (cast(GScannerConfig*)cPtr).scanBinary;
+    return (cast(GScannerConfig*)this._cPtr).scanBinary;
   }
 
   /**
@@ -317,7 +317,7 @@ class ScannerConfig
   */
   @property void scanBinary(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanBinary = propval;
+    (cast(GScannerConfig*)this._cPtr).scanBinary = propval;
   }
 
   /**
@@ -327,7 +327,7 @@ class ScannerConfig
   */
   @property uint scanOctal()
   {
-    return (cast(GScannerConfig*)cPtr).scanOctal;
+    return (cast(GScannerConfig*)this._cPtr).scanOctal;
   }
 
   /**
@@ -338,7 +338,7 @@ class ScannerConfig
   */
   @property void scanOctal(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanOctal = propval;
+    (cast(GScannerConfig*)this._cPtr).scanOctal = propval;
   }
 
   /**
@@ -348,7 +348,7 @@ class ScannerConfig
   */
   @property uint scanFloat()
   {
-    return (cast(GScannerConfig*)cPtr).scanFloat;
+    return (cast(GScannerConfig*)this._cPtr).scanFloat;
   }
 
   /**
@@ -359,7 +359,7 @@ class ScannerConfig
   */
   @property void scanFloat(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanFloat = propval;
+    (cast(GScannerConfig*)this._cPtr).scanFloat = propval;
   }
 
   /**
@@ -369,7 +369,7 @@ class ScannerConfig
   */
   @property uint scanHex()
   {
-    return (cast(GScannerConfig*)cPtr).scanHex;
+    return (cast(GScannerConfig*)this._cPtr).scanHex;
   }
 
   /**
@@ -380,7 +380,7 @@ class ScannerConfig
   */
   @property void scanHex(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanHex = propval;
+    (cast(GScannerConfig*)this._cPtr).scanHex = propval;
   }
 
   /**
@@ -390,7 +390,7 @@ class ScannerConfig
   */
   @property uint scanHexDollar()
   {
-    return (cast(GScannerConfig*)cPtr).scanHexDollar;
+    return (cast(GScannerConfig*)this._cPtr).scanHexDollar;
   }
 
   /**
@@ -401,7 +401,7 @@ class ScannerConfig
   */
   @property void scanHexDollar(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanHexDollar = propval;
+    (cast(GScannerConfig*)this._cPtr).scanHexDollar = propval;
   }
 
   /**
@@ -411,7 +411,7 @@ class ScannerConfig
   */
   @property uint scanStringSq()
   {
-    return (cast(GScannerConfig*)cPtr).scanStringSq;
+    return (cast(GScannerConfig*)this._cPtr).scanStringSq;
   }
 
   /**
@@ -422,7 +422,7 @@ class ScannerConfig
   */
   @property void scanStringSq(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanStringSq = propval;
+    (cast(GScannerConfig*)this._cPtr).scanStringSq = propval;
   }
 
   /**
@@ -432,7 +432,7 @@ class ScannerConfig
   */
   @property uint scanStringDq()
   {
-    return (cast(GScannerConfig*)cPtr).scanStringDq;
+    return (cast(GScannerConfig*)this._cPtr).scanStringDq;
   }
 
   /**
@@ -443,7 +443,7 @@ class ScannerConfig
   */
   @property void scanStringDq(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scanStringDq = propval;
+    (cast(GScannerConfig*)this._cPtr).scanStringDq = propval;
   }
 
   /**
@@ -453,7 +453,7 @@ class ScannerConfig
   */
   @property uint numbers2Int()
   {
-    return (cast(GScannerConfig*)cPtr).numbers2Int;
+    return (cast(GScannerConfig*)this._cPtr).numbers2Int;
   }
 
   /**
@@ -464,7 +464,7 @@ class ScannerConfig
   */
   @property void numbers2Int(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).numbers2Int = propval;
+    (cast(GScannerConfig*)this._cPtr).numbers2Int = propval;
   }
 
   /**
@@ -474,7 +474,7 @@ class ScannerConfig
   */
   @property uint int2Float()
   {
-    return (cast(GScannerConfig*)cPtr).int2Float;
+    return (cast(GScannerConfig*)this._cPtr).int2Float;
   }
 
   /**
@@ -485,7 +485,7 @@ class ScannerConfig
   */
   @property void int2Float(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).int2Float = propval;
+    (cast(GScannerConfig*)this._cPtr).int2Float = propval;
   }
 
   /**
@@ -495,7 +495,7 @@ class ScannerConfig
   */
   @property uint identifier2String()
   {
-    return (cast(GScannerConfig*)cPtr).identifier2String;
+    return (cast(GScannerConfig*)this._cPtr).identifier2String;
   }
 
   /**
@@ -506,7 +506,7 @@ class ScannerConfig
   */
   @property void identifier2String(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).identifier2String = propval;
+    (cast(GScannerConfig*)this._cPtr).identifier2String = propval;
   }
 
   /**
@@ -516,7 +516,7 @@ class ScannerConfig
   */
   @property uint char2Token()
   {
-    return (cast(GScannerConfig*)cPtr).char2Token;
+    return (cast(GScannerConfig*)this._cPtr).char2Token;
   }
 
   /**
@@ -527,7 +527,7 @@ class ScannerConfig
   */
   @property void char2Token(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).char2Token = propval;
+    (cast(GScannerConfig*)this._cPtr).char2Token = propval;
   }
 
   /**
@@ -537,7 +537,7 @@ class ScannerConfig
   */
   @property uint symbol2Token()
   {
-    return (cast(GScannerConfig*)cPtr).symbol2Token;
+    return (cast(GScannerConfig*)this._cPtr).symbol2Token;
   }
 
   /**
@@ -548,7 +548,7 @@ class ScannerConfig
   */
   @property void symbol2Token(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).symbol2Token = propval;
+    (cast(GScannerConfig*)this._cPtr).symbol2Token = propval;
   }
 
   /**
@@ -558,7 +558,7 @@ class ScannerConfig
   */
   @property uint scope0Fallback()
   {
-    return (cast(GScannerConfig*)cPtr).scope0Fallback;
+    return (cast(GScannerConfig*)this._cPtr).scope0Fallback;
   }
 
   /**
@@ -569,7 +569,7 @@ class ScannerConfig
   */
   @property void scope0Fallback(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).scope0Fallback = propval;
+    (cast(GScannerConfig*)this._cPtr).scope0Fallback = propval;
   }
 
   /**
@@ -578,7 +578,7 @@ class ScannerConfig
   */
   @property uint storeInt64()
   {
-    return (cast(GScannerConfig*)cPtr).storeInt64;
+    return (cast(GScannerConfig*)this._cPtr).storeInt64;
   }
 
   /**
@@ -588,6 +588,6 @@ class ScannerConfig
   */
   @property void storeInt64(uint propval)
   {
-    (cast(GScannerConfig*)cPtr).storeInt64 = propval;
+    (cast(GScannerConfig*)this._cPtr).storeInt64 = propval;
   }
 }

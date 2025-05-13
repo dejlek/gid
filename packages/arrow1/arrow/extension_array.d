@@ -19,16 +19,16 @@ class ExtensionArray : arrow.array.Array
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_array_get_type != &gidSymbolNotFound ? garrow_extension_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,8 +41,8 @@ class ExtensionArray : arrow.array.Array
   arrow.array.Array getStorage()
   {
     GArrowArray* _cretval;
-    _cretval = garrow_extension_array_get_storage(cast(GArrowExtensionArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_extension_array_get_storage(cast(GArrowExtensionArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

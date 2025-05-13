@@ -24,16 +24,16 @@ class DenseUnionArray : arrow.union_array.UnionArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_dense_union_array_get_type != &gidSymbolNotFound ? garrow_dense_union_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -49,7 +49,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_dense_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_dense_union_array_new(typeIds ? cast(GArrowInt8Array*)typeIds._cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets._cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -62,10 +62,10 @@ class DenseUnionArray : arrow.union_array.UnionArray
     auto _fields = gListFromD!(arrow.array.Array)(fields);
     scope(exit) containerFree!(GList*, arrow.array.Array, GidOwnership.None)(_fields);
     GError *_err;
-    _cretval = garrow_dense_union_array_new_data_type(dataType ? cast(GArrowDenseUnionDataType*)dataType.cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds.cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets.cPtr(No.Dup) : null, _fields, &_err);
+    _cretval = garrow_dense_union_array_new_data_type(dataType ? cast(GArrowDenseUnionDataType*)dataType._cPtr(No.Dup) : null, typeIds ? cast(GArrowInt8Array*)typeIds._cPtr(No.Dup) : null, valueOffsets ? cast(GArrowInt32Array*)valueOffsets._cPtr(No.Dup) : null, _fields, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.dense_union_array.DenseUnionArray)(cast(GArrowDenseUnionArray*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.dense_union_array.DenseUnionArray)(cast(GArrowDenseUnionArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class DenseUnionArray : arrow.union_array.UnionArray
   int getValueOffset(long i)
   {
     int _retval;
-    _retval = garrow_dense_union_array_get_value_offset(cast(GArrowDenseUnionArray*)cPtr, i);
+    _retval = garrow_dense_union_array_get_value_offset(cast(GArrowDenseUnionArray*)this._cPtr, i);
     return _retval;
   }
 }

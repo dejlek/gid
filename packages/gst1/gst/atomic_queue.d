@@ -21,22 +21,22 @@ class AtomicQueue : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_atomic_queue_get_type != &gidSymbolNotFound ? gst_atomic_queue_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class AtomicQueue : gobject.boxed.Boxed
   uint length()
   {
     uint _retval;
-    _retval = gst_atomic_queue_length(cast(GstAtomicQueue*)cPtr);
+    _retval = gst_atomic_queue_length(cast(GstAtomicQueue*)this._cPtr);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class AtomicQueue : gobject.boxed.Boxed
   */
   void* peek()
   {
-    auto _retval = gst_atomic_queue_peek(cast(GstAtomicQueue*)cPtr);
+    auto _retval = gst_atomic_queue_peek(cast(GstAtomicQueue*)this._cPtr);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class AtomicQueue : gobject.boxed.Boxed
   */
   void* pop()
   {
-    auto _retval = gst_atomic_queue_pop(cast(GstAtomicQueue*)cPtr);
+    auto _retval = gst_atomic_queue_pop(cast(GstAtomicQueue*)this._cPtr);
     return _retval;
   }
 
@@ -101,6 +101,6 @@ class AtomicQueue : gobject.boxed.Boxed
   */
   void push(void* data = null)
   {
-    gst_atomic_queue_push(cast(GstAtomicQueue*)cPtr, data);
+    gst_atomic_queue_push(cast(GstAtomicQueue*)this._cPtr, data);
   }
 }

@@ -31,16 +31,16 @@ class Download : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_download_get_type != &gidSymbolNotFound ? webkit_download_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class Download : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    webkit_download_cancel(cast(WebKitDownload*)cPtr);
+    webkit_download_cancel(cast(WebKitDownload*)this._cPtr);
   }
 
   /**
@@ -128,7 +128,7 @@ class Download : gobject.object.ObjectWrap
   bool getAllowOverwrite()
   {
     bool _retval;
-    _retval = webkit_download_get_allow_overwrite(cast(WebKitDownload*)cPtr);
+    _retval = webkit_download_get_allow_overwrite(cast(WebKitDownload*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class Download : gobject.object.ObjectWrap
   string getDestination()
   {
     const(char)* _cretval;
-    _cretval = webkit_download_get_destination(cast(WebKitDownload*)cPtr);
+    _cretval = webkit_download_get_destination(cast(WebKitDownload*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -157,7 +157,7 @@ class Download : gobject.object.ObjectWrap
   double getElapsedTime()
   {
     double _retval;
-    _retval = webkit_download_get_elapsed_time(cast(WebKitDownload*)cPtr);
+    _retval = webkit_download_get_elapsed_time(cast(WebKitDownload*)this._cPtr);
     return _retval;
   }
 
@@ -172,7 +172,7 @@ class Download : gobject.object.ObjectWrap
   double getEstimatedProgress()
   {
     double _retval;
-    _retval = webkit_download_get_estimated_progress(cast(WebKitDownload*)cPtr);
+    _retval = webkit_download_get_estimated_progress(cast(WebKitDownload*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Download : gobject.object.ObjectWrap
   ulong getReceivedDataLength()
   {
     ulong _retval;
-    _retval = webkit_download_get_received_data_length(cast(WebKitDownload*)cPtr);
+    _retval = webkit_download_get_received_data_length(cast(WebKitDownload*)this._cPtr);
     return _retval;
   }
 
@@ -198,8 +198,8 @@ class Download : gobject.object.ObjectWrap
   webkit.urirequest.URIRequest getRequest()
   {
     WebKitURIRequest* _cretval;
-    _cretval = webkit_download_get_request(cast(WebKitDownload*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    _cretval = webkit_download_get_request(cast(WebKitDownload*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 
@@ -216,8 +216,8 @@ class Download : gobject.object.ObjectWrap
   webkit.uriresponse.URIResponse getResponse()
   {
     WebKitURIResponse* _cretval;
-    _cretval = webkit_download_get_response(cast(WebKitDownload*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    _cretval = webkit_download_get_response(cast(WebKitDownload*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 
@@ -229,8 +229,8 @@ class Download : gobject.object.ObjectWrap
   webkit.web_view.WebView getWebView()
   {
     WebKitWebView* _cretval;
-    _cretval = webkit_download_get_web_view(cast(WebKitDownload*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
+    _cretval = webkit_download_get_web_view(cast(WebKitDownload*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.web_view.WebView)(cast(WebKitWebView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class Download : gobject.object.ObjectWrap
   */
   void setAllowOverwrite(bool allowed)
   {
-    webkit_download_set_allow_overwrite(cast(WebKitDownload*)cPtr, allowed);
+    webkit_download_set_allow_overwrite(cast(WebKitDownload*)this._cPtr, allowed);
   }
 
   /**
@@ -272,7 +272,7 @@ class Download : gobject.object.ObjectWrap
   void setDestination(string destination)
   {
     const(char)* _destination = destination.toCString(No.Alloc);
-    webkit_download_set_destination(cast(WebKitDownload*)cPtr, _destination);
+    webkit_download_set_destination(cast(WebKitDownload*)this._cPtr, _destination);
   }
 
   /**

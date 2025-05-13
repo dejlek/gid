@@ -68,16 +68,16 @@ class LockButton : gtk.button.Button
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_lock_button_get_type != &gidSymbolNotFound ? gtk_lock_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -236,7 +236,7 @@ class LockButton : gtk.button.Button
   this(gio.permission.Permission permission = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
+    _cretval = gtk_lock_button_new(permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -249,8 +249,8 @@ class LockButton : gtk.button.Button
   gio.permission.Permission getPermission()
   {
     GPermission* _cretval;
-    _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
+    _cretval = gtk_lock_button_get_permission(cast(GtkLockButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.permission.Permission)(cast(GPermission*)_cretval, No.Take);
     return _retval;
   }
 
@@ -264,6 +264,6 @@ class LockButton : gtk.button.Button
   */
   void setPermission(gio.permission.Permission permission = null)
   {
-    gtk_lock_button_set_permission(cast(GtkLockButton*)cPtr, permission ? cast(GPermission*)permission.cPtr(No.Dup) : null);
+    gtk_lock_button_set_permission(cast(GtkLockButton*)this._cPtr, permission ? cast(GPermission*)permission._cPtr(No.Dup) : null);
   }
 }

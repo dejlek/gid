@@ -28,16 +28,16 @@ class Seat : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_seat_get_type != &gidSymbolNotFound ? gdk_seat_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class Seat : gobject.object.ObjectWrap
   gdk.types.SeatCapabilities getCapabilities()
   {
     GdkSeatCapabilities _cretval;
-    _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)cPtr);
+    _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)this._cPtr);
     gdk.types.SeatCapabilities _retval = cast(gdk.types.SeatCapabilities)_cretval;
     return _retval;
   }
@@ -66,8 +66,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_seat_get_display(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -79,8 +79,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device getKeyboard()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,8 +92,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device getPointer()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_seat_get_pointer(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device[] getSlaves(gdk.types.SeatCapabilities capabilities)
   {
     GList* _cretval;
-    _cretval = gdk_seat_get_slaves(cast(GdkSeat*)cPtr, capabilities);
+    _cretval = gdk_seat_get_slaves(cast(GdkSeat*)this._cPtr, capabilities);
     auto _retval = gListToD!(gdk.device.Device, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -166,13 +166,13 @@ class Seat : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gdk.types.SeatGrabPrepareFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.seat.Seat)(cast(void*)seat, No.Take), gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
     }
     auto _prepareFuncCB = prepareFunc ? &_prepareFuncCallback : null;
 
     GdkGrabStatus _cretval;
     auto _prepareFunc = prepareFunc ? cast(void*)&(prepareFunc) : null;
-    _cretval = gdk_seat_grab(cast(GdkSeat*)cPtr, window ? cast(GdkWindow*)window.cPtr(No.Dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null, event ? cast(const(GdkEvent)*)event.cPtr : null, _prepareFuncCB, _prepareFunc);
+    _cretval = gdk_seat_grab(cast(GdkSeat*)this._cPtr, window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, capabilities, ownerEvents, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null, event ? cast(const(GdkEvent)*)event._cPtr : null, _prepareFuncCB, _prepareFunc);
     gdk.types.GrabStatus _retval = cast(gdk.types.GrabStatus)_cretval;
     return _retval;
   }
@@ -182,7 +182,7 @@ class Seat : gobject.object.ObjectWrap
   */
   void ungrab()
   {
-    gdk_seat_ungrab(cast(GdkSeat*)cPtr);
+    gdk_seat_ungrab(cast(GdkSeat*)this._cPtr);
   }
 
   /**

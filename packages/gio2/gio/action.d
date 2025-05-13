@@ -45,7 +45,7 @@ interface Action
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_action_get_type != &gidSymbolNotFound ? g_action_get_type() : cast(GType)0;
@@ -185,7 +185,7 @@ interface Action
   {
     char* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(GVariant*)targetValue.cPtr(No.Dup) : null);
+    _cretval = g_action_print_detailed_name(_actionName, targetValue ? cast(GVariant*)targetValue._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

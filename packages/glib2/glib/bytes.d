@@ -43,22 +43,22 @@ class Bytes : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_bytes_get_type != &gidSymbolNotFound ? g_bytes_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -108,7 +108,7 @@ class Bytes : gobject.boxed.Boxed
   int compare(glib.bytes.Bytes bytes2)
   {
     int _retval;
-    _retval = g_bytes_compare(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
+    _retval = g_bytes_compare(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class Bytes : gobject.boxed.Boxed
   bool equal(glib.bytes.Bytes bytes2)
   {
     bool _retval;
-    _retval = g_bytes_equal(cast(GBytes*)cPtr, bytes2 ? cast(GBytes*)bytes2.cPtr(No.Dup) : null);
+    _retval = g_bytes_equal(cast(GBytes*)this._cPtr, bytes2 ? cast(GBytes*)bytes2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Bytes : gobject.boxed.Boxed
   {
     const(void)* _cretval;
     size_t _cretlength;
-    _cretval = g_bytes_get_data(cast(GBytes*)cPtr, &_cretlength);
+    _cretval = g_bytes_get_data(cast(GBytes*)this._cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -184,7 +184,7 @@ class Bytes : gobject.boxed.Boxed
   */
   const(void)* getRegion(size_t elementSize, size_t offset, size_t nElements)
   {
-    auto _retval = g_bytes_get_region(cast(GBytes*)cPtr, elementSize, offset, nElements);
+    auto _retval = g_bytes_get_region(cast(GBytes*)this._cPtr, elementSize, offset, nElements);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Bytes : gobject.boxed.Boxed
   size_t getSize()
   {
     size_t _retval;
-    _retval = g_bytes_get_size(cast(GBytes*)cPtr);
+    _retval = g_bytes_get_size(cast(GBytes*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Bytes : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = g_bytes_hash(cast(GBytes*)cPtr);
+    _retval = g_bytes_hash(cast(GBytes*)this._cPtr);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Bytes : gobject.boxed.Boxed
   glib.bytes.Bytes newFromBytes(size_t offset, size_t length)
   {
     GBytes* _cretval;
-    _cretval = g_bytes_new_from_bytes(cast(GBytes*)cPtr, offset, length);
+    _cretval = g_bytes_new_from_bytes(cast(GBytes*)this._cPtr, offset, length);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -258,7 +258,7 @@ class Bytes : gobject.boxed.Boxed
   ubyte[] unrefToArray()
   {
     GByteArray* _cretval;
-    _cretval = g_bytes_unref_to_array(cast(GBytes*)cPtr);
+    _cretval = g_bytes_unref_to_array(cast(GBytes*)this._cPtr);
     auto _retval = gByteArrayToD(cast(GByteArray*)_cretval);
     return _retval;
   }
@@ -278,7 +278,7 @@ class Bytes : gobject.boxed.Boxed
   {
     void* _cretval;
     size_t _cretlength;
-    _cretval = g_bytes_unref_to_data(cast(GBytes*)cPtr, &_cretlength);
+    _cretval = g_bytes_unref_to_data(cast(GBytes*)this._cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)

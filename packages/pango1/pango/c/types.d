@@ -2168,7 +2168,7 @@ struct PangoCoverage;
 struct PangoFont
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2219,7 +2219,7 @@ struct PangoFontDescription;
 struct PangoFontFace
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2260,7 +2260,7 @@ struct PangoFontFaceClass
 struct PangoFontFamily
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -2298,7 +2298,7 @@ struct PangoFontFamilyClass
 struct PangoFontMap
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -2400,7 +2400,7 @@ struct PangoFontMetrics
 struct PangoFontset
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -3004,7 +3004,7 @@ struct PangoRectangle
 struct PangoRenderer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   PangoUnderline underline;

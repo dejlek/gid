@@ -19,7 +19,7 @@ interface DtlsServerConnection
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dtls_server_connection_get_type != &gidSymbolNotFound ? g_dtls_server_connection_get_type() : cast(GType)0;
@@ -56,10 +56,10 @@ interface DtlsServerConnection
   {
     GDatagramBased* _cretval;
     GError *_err;
-    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)baseSocket).cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dtls_server_connection_new(baseSocket ? cast(GDatagramBased*)(cast(gobject.object.ObjectWrap)baseSocket)._cPtr(No.Dup) : null, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dtls_server_connection.DtlsServerConnection)(cast(GDatagramBased*)_cretval, Yes.Take);
     return _retval;
   }
 }

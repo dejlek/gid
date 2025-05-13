@@ -22,16 +22,16 @@ class PluginFeature : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_plugin_feature_get_type != &gidSymbolNotFound ? gst_plugin_feature_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class PluginFeature : gst.object.ObjectWrap
   bool checkVersion(uint minMajor, uint minMinor, uint minMicro)
   {
     bool _retval;
-    _retval = gst_plugin_feature_check_version(cast(GstPluginFeature*)cPtr, minMajor, minMinor, minMicro);
+    _retval = gst_plugin_feature_check_version(cast(GstPluginFeature*)this._cPtr, minMajor, minMinor, minMicro);
     return _retval;
   }
 
@@ -125,8 +125,8 @@ class PluginFeature : gst.object.ObjectWrap
   gst.plugin.Plugin getPlugin()
   {
     GstPlugin* _cretval;
-    _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
+    _cretval = gst_plugin_feature_get_plugin(cast(GstPluginFeature*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin.Plugin)(cast(GstPlugin*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class PluginFeature : gst.object.ObjectWrap
   string getPluginName()
   {
     const(char)* _cretval;
-    _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)cPtr);
+    _cretval = gst_plugin_feature_get_plugin_name(cast(GstPluginFeature*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -151,7 +151,7 @@ class PluginFeature : gst.object.ObjectWrap
   uint getRank()
   {
     uint _retval;
-    _retval = gst_plugin_feature_get_rank(cast(GstPluginFeature*)cPtr);
+    _retval = gst_plugin_feature_get_rank(cast(GstPluginFeature*)this._cPtr);
     return _retval;
   }
 
@@ -174,8 +174,8 @@ class PluginFeature : gst.object.ObjectWrap
   gst.plugin_feature.PluginFeature load()
   {
     GstPluginFeature* _cretval;
-    _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
+    _cretval = gst_plugin_feature_load(cast(GstPluginFeature*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.plugin_feature.PluginFeature)(cast(GstPluginFeature*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -188,6 +188,6 @@ class PluginFeature : gst.object.ObjectWrap
   */
   void setRank(uint rank)
   {
-    gst_plugin_feature_set_rank(cast(GstPluginFeature*)cPtr, rank);
+    gst_plugin_feature_set_rank(cast(GstPluginFeature*)this._cPtr, rank);
   }
 }

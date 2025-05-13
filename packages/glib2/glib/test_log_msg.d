@@ -24,7 +24,7 @@ class TestLogMsg
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }

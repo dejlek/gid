@@ -46,16 +46,16 @@ class Calendar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -286,7 +286,7 @@ class Calendar : gtk.widget.Widget
   */
   void clearMarks()
   {
-    gtk_calendar_clear_marks(cast(GtkCalendar*)cPtr);
+    gtk_calendar_clear_marks(cast(GtkCalendar*)this._cPtr);
   }
 
   /**
@@ -302,7 +302,7 @@ class Calendar : gtk.widget.Widget
   */
   void getDate(out uint year, out uint month, out uint day)
   {
-    gtk_calendar_get_date(cast(GtkCalendar*)cPtr, cast(uint*)&year, cast(uint*)&month, cast(uint*)&day);
+    gtk_calendar_get_date(cast(GtkCalendar*)this._cPtr, cast(uint*)&year, cast(uint*)&month, cast(uint*)&day);
   }
 
   /**
@@ -315,7 +315,7 @@ class Calendar : gtk.widget.Widget
   bool getDayIsMarked(uint day)
   {
     bool _retval;
-    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)cPtr, day);
+    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Calendar : gtk.widget.Widget
   int getDetailHeightRows()
   {
     int _retval;
-    _retval = gtk_calendar_get_detail_height_rows(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_detail_height_rows(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -339,7 +339,7 @@ class Calendar : gtk.widget.Widget
   int getDetailWidthChars()
   {
     int _retval;
-    _retval = gtk_calendar_get_detail_width_chars(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_detail_width_chars(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class Calendar : gtk.widget.Widget
   gtk.types.CalendarDisplayOptions getDisplayOptions()
   {
     GtkCalendarDisplayOptions _cretval;
-    _cretval = gtk_calendar_get_display_options(cast(GtkCalendar*)cPtr);
+    _cretval = gtk_calendar_get_display_options(cast(GtkCalendar*)this._cPtr);
     gtk.types.CalendarDisplayOptions _retval = cast(gtk.types.CalendarDisplayOptions)_cretval;
     return _retval;
   }
@@ -363,7 +363,7 @@ class Calendar : gtk.widget.Widget
   */
   void markDay(uint day)
   {
-    gtk_calendar_mark_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_mark_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**
@@ -375,7 +375,7 @@ class Calendar : gtk.widget.Widget
   */
   void selectDay(uint day)
   {
-    gtk_calendar_select_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_select_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**
@@ -387,7 +387,7 @@ class Calendar : gtk.widget.Widget
   */
   void selectMonth(uint month, uint year)
   {
-    gtk_calendar_select_month(cast(GtkCalendar*)cPtr, month, year);
+    gtk_calendar_select_month(cast(GtkCalendar*)this._cPtr, month, year);
   }
 
   /**
@@ -412,7 +412,7 @@ class Calendar : gtk.widget.Widget
       string _dretval;
       auto _dlg = cast(gtk.types.CalendarDetailFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.calendar.Calendar)(cast(void*)calendar, No.Take), year, month, day);
       char* _retval = _dretval.toCString(Yes.Alloc);
 
       return _retval;
@@ -421,7 +421,7 @@ class Calendar : gtk.widget.Widget
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_calendar_set_detail_func(cast(GtkCalendar*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_calendar_set_detail_func(cast(GtkCalendar*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -433,7 +433,7 @@ class Calendar : gtk.widget.Widget
   */
   void setDetailHeightRows(int rows)
   {
-    gtk_calendar_set_detail_height_rows(cast(GtkCalendar*)cPtr, rows);
+    gtk_calendar_set_detail_height_rows(cast(GtkCalendar*)this._cPtr, rows);
   }
 
   /**
@@ -445,7 +445,7 @@ class Calendar : gtk.widget.Widget
   */
   void setDetailWidthChars(int chars)
   {
-    gtk_calendar_set_detail_width_chars(cast(GtkCalendar*)cPtr, chars);
+    gtk_calendar_set_detail_width_chars(cast(GtkCalendar*)this._cPtr, chars);
   }
 
   /**
@@ -457,7 +457,7 @@ class Calendar : gtk.widget.Widget
   */
   void setDisplayOptions(gtk.types.CalendarDisplayOptions flags)
   {
-    gtk_calendar_set_display_options(cast(GtkCalendar*)cPtr, flags);
+    gtk_calendar_set_display_options(cast(GtkCalendar*)this._cPtr, flags);
   }
 
   /**
@@ -468,7 +468,7 @@ class Calendar : gtk.widget.Widget
   */
   void unmarkDay(uint day)
   {
-    gtk_calendar_unmark_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_unmark_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**

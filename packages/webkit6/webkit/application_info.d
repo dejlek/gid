@@ -20,22 +20,22 @@ class ApplicationInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_application_info_get_type != &gidSymbolNotFound ? webkit_application_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class ApplicationInfo : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_application_info_get_name(cast(WebKitApplicationInfo*)cPtr);
+    _cretval = webkit_application_info_get_name(cast(WebKitApplicationInfo*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -80,7 +80,7 @@ class ApplicationInfo : gobject.boxed.Boxed
   */
   void getVersion(out ulong major, out ulong minor, out ulong micro)
   {
-    webkit_application_info_get_version(cast(WebKitApplicationInfo*)cPtr, cast(ulong*)&major, cast(ulong*)&minor, cast(ulong*)&micro);
+    webkit_application_info_get_version(cast(WebKitApplicationInfo*)this._cPtr, cast(ulong*)&major, cast(ulong*)&minor, cast(ulong*)&micro);
   }
 
   /**
@@ -95,7 +95,7 @@ class ApplicationInfo : gobject.boxed.Boxed
   void setName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    webkit_application_info_set_name(cast(WebKitApplicationInfo*)cPtr, _name);
+    webkit_application_info_set_name(cast(WebKitApplicationInfo*)this._cPtr, _name);
   }
 
   /**
@@ -113,6 +113,6 @@ class ApplicationInfo : gobject.boxed.Boxed
   */
   void setVersion(ulong major, ulong minor, ulong micro)
   {
-    webkit_application_info_set_version(cast(WebKitApplicationInfo*)cPtr, major, minor, micro);
+    webkit_application_info_set_version(cast(WebKitApplicationInfo*)this._cPtr, major, minor, micro);
   }
 }

@@ -27,16 +27,16 @@ class MemoryTexture : gdk.texture.Texture
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_memory_texture_get_type != &gidSymbolNotFound ? gdk_memory_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class MemoryTexture : gdk.texture.Texture
   this(int width, int height, gdk.types.MemoryFormat format, glib.bytes.Bytes bytes, size_t stride)
   {
     GdkTexture* _cretval;
-    _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, stride);
+    _cretval = gdk_memory_texture_new(width, height, format, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, stride);
     this(_cretval, Yes.Take);
   }
 }

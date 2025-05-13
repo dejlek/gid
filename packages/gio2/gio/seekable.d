@@ -30,7 +30,7 @@ interface Seekable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_seekable_get_type != &gidSymbolNotFound ? g_seekable_get_type() : cast(GType)0;

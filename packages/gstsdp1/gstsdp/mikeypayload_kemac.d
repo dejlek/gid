@@ -27,7 +27,7 @@ class MIKEYPayloadKEMAC
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class MIKEYPayloadKEMAC
   */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKEMAC*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKEMAC*)this._cPtr).pt);
   }
 
   /**
@@ -47,7 +47,7 @@ class MIKEYPayloadKEMAC
   */
   @property gstsdp.types.MIKEYEncAlg encAlg()
   {
-    return cast(gstsdp.types.MIKEYEncAlg)(cast(GstMIKEYPayloadKEMAC*)cPtr).encAlg;
+    return cast(gstsdp.types.MIKEYEncAlg)(cast(GstMIKEYPayloadKEMAC*)this._cPtr).encAlg;
   }
 
   /**
@@ -57,7 +57,7 @@ class MIKEYPayloadKEMAC
   */
   @property void encAlg(gstsdp.types.MIKEYEncAlg propval)
   {
-    (cast(GstMIKEYPayloadKEMAC*)cPtr).encAlg = cast(GstMIKEYEncAlg)propval;
+    (cast(GstMIKEYPayloadKEMAC*)this._cPtr).encAlg = cast(GstMIKEYEncAlg)propval;
   }
 
   /**
@@ -66,7 +66,7 @@ class MIKEYPayloadKEMAC
   */
   @property gstsdp.types.MIKEYMacAlg macAlg()
   {
-    return cast(gstsdp.types.MIKEYMacAlg)(cast(GstMIKEYPayloadKEMAC*)cPtr).macAlg;
+    return cast(gstsdp.types.MIKEYMacAlg)(cast(GstMIKEYPayloadKEMAC*)this._cPtr).macAlg;
   }
 
   /**
@@ -76,6 +76,6 @@ class MIKEYPayloadKEMAC
   */
   @property void macAlg(gstsdp.types.MIKEYMacAlg propval)
   {
-    (cast(GstMIKEYPayloadKEMAC*)cPtr).macAlg = cast(GstMIKEYMacAlg)propval;
+    (cast(GstMIKEYPayloadKEMAC*)this._cPtr).macAlg = cast(GstMIKEYMacAlg)propval;
   }
 }

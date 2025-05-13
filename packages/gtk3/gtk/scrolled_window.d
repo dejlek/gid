@@ -104,16 +104,16 @@ class ScrolledWindow : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrolled_window_get_type != &gidSymbolNotFound ? gtk_scrolled_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -419,7 +419,7 @@ class ScrolledWindow : gtk.bin.Bin
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrolled_window_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_scrolled_window_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -449,7 +449,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void addWithViewport(gtk.widget.Widget child)
   {
-    gtk_scrolled_window_add_with_viewport(cast(GtkScrolledWindow*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_scrolled_window_add_with_viewport(cast(GtkScrolledWindow*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -460,7 +460,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getCaptureButtonPress()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_capture_button_press(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_capture_button_press(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -473,8 +473,8 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scrolled_window_get_hadjustment(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -485,8 +485,8 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.widget.Widget getHscrollbar()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_scrolled_window_get_hscrollbar(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getKineticScrolling()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class ScrolledWindow : gtk.bin.Bin
   int getMaxContentHeight()
   {
     int _retval;
-    _retval = gtk_scrolled_window_get_max_content_height(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_max_content_height(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class ScrolledWindow : gtk.bin.Bin
   int getMaxContentWidth()
   {
     int _retval;
-    _retval = gtk_scrolled_window_get_max_content_width(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_max_content_width(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -530,7 +530,7 @@ class ScrolledWindow : gtk.bin.Bin
   int getMinContentHeight()
   {
     int _retval;
-    _retval = gtk_scrolled_window_get_min_content_height(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_min_content_height(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -541,7 +541,7 @@ class ScrolledWindow : gtk.bin.Bin
   int getMinContentWidth()
   {
     int _retval;
-    _retval = gtk_scrolled_window_get_min_content_width(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_min_content_width(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -552,7 +552,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getOverlayScrolling()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.types.CornerType getPlacement()
   {
     GtkCornerType _cretval;
-    _cretval = gtk_scrolled_window_get_placement(cast(GtkScrolledWindow*)cPtr);
+    _cretval = gtk_scrolled_window_get_placement(cast(GtkScrolledWindow*)this._cPtr);
     gtk.types.CornerType _retval = cast(gtk.types.CornerType)_cretval;
     return _retval;
   }
@@ -584,7 +584,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void getPolicy(out gtk.types.PolicyType hscrollbarPolicy, out gtk.types.PolicyType vscrollbarPolicy)
   {
-    gtk_scrolled_window_get_policy(cast(GtkScrolledWindow*)cPtr, &hscrollbarPolicy, &vscrollbarPolicy);
+    gtk_scrolled_window_get_policy(cast(GtkScrolledWindow*)this._cPtr, &hscrollbarPolicy, &vscrollbarPolicy);
   }
 
   /**
@@ -595,7 +595,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getPropagateNaturalHeight()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -607,7 +607,7 @@ class ScrolledWindow : gtk.bin.Bin
   bool getPropagateNaturalWidth()
   {
     bool _retval;
-    _retval = gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)cPtr);
+    _retval = gtk_scrolled_window_get_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr);
     return _retval;
   }
 
@@ -619,7 +619,7 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.types.ShadowType getShadowType()
   {
     GtkShadowType _cretval;
-    _cretval = gtk_scrolled_window_get_shadow_type(cast(GtkScrolledWindow*)cPtr);
+    _cretval = gtk_scrolled_window_get_shadow_type(cast(GtkScrolledWindow*)this._cPtr);
     gtk.types.ShadowType _retval = cast(gtk.types.ShadowType)_cretval;
     return _retval;
   }
@@ -632,8 +632,8 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scrolled_window_get_vadjustment(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -644,8 +644,8 @@ class ScrolledWindow : gtk.bin.Bin
   gtk.widget.Widget getVscrollbar()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_scrolled_window_get_vscrollbar(cast(GtkScrolledWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -667,7 +667,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setCaptureButtonPress(bool captureButtonPress)
   {
-    gtk_scrolled_window_set_capture_button_press(cast(GtkScrolledWindow*)cPtr, captureButtonPress);
+    gtk_scrolled_window_set_capture_button_press(cast(GtkScrolledWindow*)this._cPtr, captureButtonPress);
   }
 
   /**
@@ -678,7 +678,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setHadjustment(gtk.adjustment.Adjustment hadjustment = null)
   {
-    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null);
+    gtk_scrolled_window_set_hadjustment(cast(GtkScrolledWindow*)this._cPtr, hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -691,7 +691,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setKineticScrolling(bool kineticScrolling)
   {
-    gtk_scrolled_window_set_kinetic_scrolling(cast(GtkScrolledWindow*)cPtr, kineticScrolling);
+    gtk_scrolled_window_set_kinetic_scrolling(cast(GtkScrolledWindow*)this._cPtr, kineticScrolling);
   }
 
   /**
@@ -707,7 +707,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setMaxContentHeight(int height)
   {
-    gtk_scrolled_window_set_max_content_height(cast(GtkScrolledWindow*)cPtr, height);
+    gtk_scrolled_window_set_max_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
   }
 
   /**
@@ -723,7 +723,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setMaxContentWidth(int width)
   {
-    gtk_scrolled_window_set_max_content_width(cast(GtkScrolledWindow*)cPtr, width);
+    gtk_scrolled_window_set_max_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
   }
 
   /**
@@ -739,7 +739,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setMinContentHeight(int height)
   {
-    gtk_scrolled_window_set_min_content_height(cast(GtkScrolledWindow*)cPtr, height);
+    gtk_scrolled_window_set_min_content_height(cast(GtkScrolledWindow*)this._cPtr, height);
   }
 
   /**
@@ -755,7 +755,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setMinContentWidth(int width)
   {
-    gtk_scrolled_window_set_min_content_width(cast(GtkScrolledWindow*)cPtr, width);
+    gtk_scrolled_window_set_min_content_width(cast(GtkScrolledWindow*)this._cPtr, width);
   }
 
   /**
@@ -766,7 +766,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setOverlayScrolling(bool overlayScrolling)
   {
-    gtk_scrolled_window_set_overlay_scrolling(cast(GtkScrolledWindow*)cPtr, overlayScrolling);
+    gtk_scrolled_window_set_overlay_scrolling(cast(GtkScrolledWindow*)this._cPtr, overlayScrolling);
   }
 
   /**
@@ -786,7 +786,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setPlacement(gtk.types.CornerType windowPlacement)
   {
-    gtk_scrolled_window_set_placement(cast(GtkScrolledWindow*)cPtr, windowPlacement);
+    gtk_scrolled_window_set_placement(cast(GtkScrolledWindow*)this._cPtr, windowPlacement);
   }
 
   /**
@@ -805,7 +805,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setPolicy(gtk.types.PolicyType hscrollbarPolicy, gtk.types.PolicyType vscrollbarPolicy)
   {
-    gtk_scrolled_window_set_policy(cast(GtkScrolledWindow*)cPtr, hscrollbarPolicy, vscrollbarPolicy);
+    gtk_scrolled_window_set_policy(cast(GtkScrolledWindow*)this._cPtr, hscrollbarPolicy, vscrollbarPolicy);
   }
 
   /**
@@ -817,7 +817,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setPropagateNaturalHeight(bool propagate)
   {
-    gtk_scrolled_window_set_propagate_natural_height(cast(GtkScrolledWindow*)cPtr, propagate);
+    gtk_scrolled_window_set_propagate_natural_height(cast(GtkScrolledWindow*)this._cPtr, propagate);
   }
 
   /**
@@ -829,7 +829,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setPropagateNaturalWidth(bool propagate)
   {
-    gtk_scrolled_window_set_propagate_natural_width(cast(GtkScrolledWindow*)cPtr, propagate);
+    gtk_scrolled_window_set_propagate_natural_width(cast(GtkScrolledWindow*)this._cPtr, propagate);
   }
 
   /**
@@ -841,7 +841,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setShadowType(gtk.types.ShadowType type)
   {
-    gtk_scrolled_window_set_shadow_type(cast(GtkScrolledWindow*)cPtr, type);
+    gtk_scrolled_window_set_shadow_type(cast(GtkScrolledWindow*)this._cPtr, type);
   }
 
   /**
@@ -852,7 +852,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void setVadjustment(gtk.adjustment.Adjustment vadjustment = null)
   {
-    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    gtk_scrolled_window_set_vadjustment(cast(GtkScrolledWindow*)this._cPtr, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -865,7 +865,7 @@ class ScrolledWindow : gtk.bin.Bin
   */
   void unsetPlacement()
   {
-    gtk_scrolled_window_unset_placement(cast(GtkScrolledWindow*)cPtr);
+    gtk_scrolled_window_unset_placement(cast(GtkScrolledWindow*)this._cPtr);
   }
 
   /**

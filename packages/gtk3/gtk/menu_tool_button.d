@@ -53,16 +53,16 @@ class MenuToolButton : gtk.tool_button.ToolButton
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_tool_button_get_type != &gidSymbolNotFound ? gtk_menu_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   {
     GtkToolItem* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
-    _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget.cPtr(No.Dup) : null, _label);
+    _cretval = gtk_menu_tool_button_new(iconWidget ? cast(GtkWidget*)iconWidget._cPtr(No.Dup) : null, _label);
     this(_cretval, No.Take);
   }
 
@@ -116,7 +116,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_menu_tool_button_new_from_stock(_stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.menu_tool_button.MenuToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,8 +128,8 @@ class MenuToolButton : gtk.tool_button.ToolButton
   gtk.widget.Widget getMenu()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_tool_button_get_menu(cast(GtkMenuToolButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   void setArrowTooltipMarkup(string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)cPtr, _markup);
+    gtk_menu_tool_button_set_arrow_tooltip_markup(cast(GtkMenuToolButton*)this._cPtr, _markup);
   }
 
   /**
@@ -158,7 +158,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   void setArrowTooltipText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)cPtr, _text);
+    gtk_menu_tool_button_set_arrow_tooltip_text(cast(GtkMenuToolButton*)this._cPtr, _text);
   }
 
   /**
@@ -170,7 +170,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
   */
   void setMenu(gtk.widget.Widget menu)
   {
-    gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)cPtr, menu ? cast(GtkWidget*)menu.cPtr(No.Dup) : null);
+    gtk_menu_tool_button_set_menu(cast(GtkMenuToolButton*)this._cPtr, menu ? cast(GtkWidget*)menu._cPtr(No.Dup) : null);
   }
 
   /**

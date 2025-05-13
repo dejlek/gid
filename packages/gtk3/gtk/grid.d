@@ -43,16 +43,16 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_get_type != &gidSymbolNotFound ? gtk_grid_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -150,7 +150,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void attach(gtk.widget.Widget child, int left, int top, int width, int height)
   {
-    gtk_grid_attach(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, left, top, width, height);
+    gtk_grid_attach(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, left, top, width, height);
   }
 
   /**
@@ -174,7 +174,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void attachNextTo(gtk.widget.Widget child, gtk.widget.Widget sibling, gtk.types.PositionType side, int width, int height)
   {
-    gtk_grid_attach_next_to(cast(GtkGrid*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side, width, height);
+    gtk_grid_attach_next_to(cast(GtkGrid*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null, side, width, height);
   }
 
   /**
@@ -184,7 +184,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   int getBaselineRow()
   {
     int _retval;
-    _retval = gtk_grid_get_baseline_row(cast(GtkGrid*)cPtr);
+    _retval = gtk_grid_get_baseline_row(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -200,8 +200,8 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   gtk.widget.Widget getChildAt(int left, int top)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_grid_get_child_at(cast(GtkGrid*)cPtr, left, top);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_grid_get_child_at(cast(GtkGrid*)this._cPtr, left, top);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   bool getColumnHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_get_column_homogeneous(cast(GtkGrid*)cPtr);
+    _retval = gtk_grid_get_column_homogeneous(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   uint getColumnSpacing()
   {
     uint _retval;
-    _retval = gtk_grid_get_column_spacing(cast(GtkGrid*)cPtr);
+    _retval = gtk_grid_get_column_spacing(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
     GtkBaselinePosition _cretval;
-    _cretval = gtk_grid_get_row_baseline_position(cast(GtkGrid*)cPtr, row);
+    _cretval = gtk_grid_get_row_baseline_position(cast(GtkGrid*)this._cPtr, row);
     gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
@@ -251,7 +251,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   bool getRowHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_get_row_homogeneous(cast(GtkGrid*)cPtr);
+    _retval = gtk_grid_get_row_homogeneous(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   uint getRowSpacing()
   {
     uint _retval;
-    _retval = gtk_grid_get_row_spacing(cast(GtkGrid*)cPtr);
+    _retval = gtk_grid_get_row_spacing(cast(GtkGrid*)this._cPtr);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void insertColumn(int position)
   {
-    gtk_grid_insert_column(cast(GtkGrid*)cPtr, position);
+    gtk_grid_insert_column(cast(GtkGrid*)this._cPtr, position);
   }
 
   /**
@@ -296,7 +296,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void insertNextTo(gtk.widget.Widget sibling, gtk.types.PositionType side)
   {
-    gtk_grid_insert_next_to(cast(GtkGrid*)cPtr, sibling ? cast(GtkWidget*)sibling.cPtr(No.Dup) : null, side);
+    gtk_grid_insert_next_to(cast(GtkGrid*)this._cPtr, sibling ? cast(GtkWidget*)sibling._cPtr(No.Dup) : null, side);
   }
 
   /**
@@ -311,7 +311,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void insertRow(int position)
   {
-    gtk_grid_insert_row(cast(GtkGrid*)cPtr, position);
+    gtk_grid_insert_row(cast(GtkGrid*)this._cPtr, position);
   }
 
   /**
@@ -327,7 +327,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void removeColumn(int position)
   {
-    gtk_grid_remove_column(cast(GtkGrid*)cPtr, position);
+    gtk_grid_remove_column(cast(GtkGrid*)this._cPtr, position);
   }
 
   /**
@@ -343,7 +343,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void removeRow(int position)
   {
-    gtk_grid_remove_row(cast(GtkGrid*)cPtr, position);
+    gtk_grid_remove_row(cast(GtkGrid*)this._cPtr, position);
   }
 
   /**
@@ -357,7 +357,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setBaselineRow(int row)
   {
-    gtk_grid_set_baseline_row(cast(GtkGrid*)cPtr, row);
+    gtk_grid_set_baseline_row(cast(GtkGrid*)this._cPtr, row);
   }
 
   /**
@@ -368,7 +368,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setColumnHomogeneous(bool homogeneous)
   {
-    gtk_grid_set_column_homogeneous(cast(GtkGrid*)cPtr, homogeneous);
+    gtk_grid_set_column_homogeneous(cast(GtkGrid*)this._cPtr, homogeneous);
   }
 
   /**
@@ -379,7 +379,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setColumnSpacing(uint spacing)
   {
-    gtk_grid_set_column_spacing(cast(GtkGrid*)cPtr, spacing);
+    gtk_grid_set_column_spacing(cast(GtkGrid*)this._cPtr, spacing);
   }
 
   /**
@@ -392,7 +392,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
-    gtk_grid_set_row_baseline_position(cast(GtkGrid*)cPtr, row, pos);
+    gtk_grid_set_row_baseline_position(cast(GtkGrid*)this._cPtr, row, pos);
   }
 
   /**
@@ -403,7 +403,7 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setRowHomogeneous(bool homogeneous)
   {
-    gtk_grid_set_row_homogeneous(cast(GtkGrid*)cPtr, homogeneous);
+    gtk_grid_set_row_homogeneous(cast(GtkGrid*)this._cPtr, homogeneous);
   }
 
   /**
@@ -414,6 +414,6 @@ class Grid : gtk.container.Container, gtk.orientable.Orientable
   */
   void setRowSpacing(uint spacing)
   {
-    gtk_grid_set_row_spacing(cast(GtkGrid*)cPtr, spacing);
+    gtk_grid_set_row_spacing(cast(GtkGrid*)this._cPtr, spacing);
   }
 }

@@ -19,16 +19,16 @@ class UnionScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_scalar_get_type != &gidSymbolNotFound ? garrow_union_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class UnionScalar : arrow.scalar.Scalar
   byte getTypeCode()
   {
     byte _retval;
-    _retval = garrow_union_scalar_get_type_code(cast(GArrowUnionScalar*)cPtr);
+    _retval = garrow_union_scalar_get_type_code(cast(GArrowUnionScalar*)this._cPtr);
     return _retval;
   }
 
@@ -49,8 +49,8 @@ class UnionScalar : arrow.scalar.Scalar
   arrow.scalar.Scalar getValue()
   {
     GArrowScalar* _cretval;
-    _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
+    _cretval = garrow_union_scalar_get_value(cast(GArrowUnionScalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.scalar.Scalar)(cast(GArrowScalar*)_cretval, No.Take);
     return _retval;
   }
 }

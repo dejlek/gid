@@ -58,16 +58,16 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_button_get_type != &gidSymbolNotFound ? adw_tab_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -115,8 +115,8 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   adw.tab_view.TabView getView()
   {
     AdwTabView* _cretval;
-    _cretval = adw_tab_button_get_view(cast(AdwTabButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
+    _cretval = adw_tab_button_get_view(cast(AdwTabButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_view.TabView)(cast(AdwTabView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class TabButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setView(adw.tab_view.TabView view = null)
   {
-    adw_tab_button_set_view(cast(AdwTabButton*)cPtr, view ? cast(AdwTabView*)view.cPtr(No.Dup) : null);
+    adw_tab_button_set_view(cast(AdwTabButton*)this._cPtr, view ? cast(AdwTabView*)view._cPtr(No.Dup) : null);
   }
 
   /**

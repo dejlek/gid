@@ -29,16 +29,16 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_pool_get_type != &gidSymbolNotFound ? gst_gl_buffer_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   this(gstgl.glcontext.GLContext context)
   {
     GstBufferPool* _cretval;
-    _cretval = gst_gl_buffer_pool_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null);
+    _cretval = gst_gl_buffer_pool_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -65,7 +65,7 @@ class GLBufferPool : gst.buffer_pool.BufferPool
   gstgl.glallocation_params.GLAllocationParams getGlAllocationParams()
   {
     GstGLAllocationParams* _cretval;
-    _cretval = gst_gl_buffer_pool_get_gl_allocation_params(cast(GstGLBufferPool*)cPtr);
+    _cretval = gst_gl_buffer_pool_get_gl_allocation_params(cast(GstGLBufferPool*)this._cPtr);
     auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

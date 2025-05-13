@@ -31,16 +31,16 @@ class DrawContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_draw_context_get_type != &gidSymbolNotFound ? gdk_draw_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class DrawContext : gobject.object.ObjectWrap
   */
   void beginFrame(cairo.region.Region region)
   {
-    gdk_draw_context_begin_frame(cast(GdkDrawContext*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    gdk_draw_context_begin_frame(cast(GdkDrawContext*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -95,7 +95,7 @@ class DrawContext : gobject.object.ObjectWrap
   */
   void endFrame()
   {
-    gdk_draw_context_end_frame(cast(GdkDrawContext*)cPtr);
+    gdk_draw_context_end_frame(cast(GdkDrawContext*)this._cPtr);
   }
 
   /**
@@ -105,8 +105,8 @@ class DrawContext : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_draw_context_get_display(cast(GdkDrawContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class DrawContext : gobject.object.ObjectWrap
   cairo.region.Region getFrameRegion()
   {
     const(cairo_region_t)* _cretval;
-    _cretval = gdk_draw_context_get_frame_region(cast(GdkDrawContext*)cPtr);
+    _cretval = gdk_draw_context_get_frame_region(cast(GdkDrawContext*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -136,8 +136,8 @@ class DrawContext : gobject.object.ObjectWrap
   gdk.surface.Surface getSurface()
   {
     GdkSurface* _cretval;
-    _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_draw_context_get_surface(cast(GdkDrawContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class DrawContext : gobject.object.ObjectWrap
   bool isInFrame()
   {
     bool _retval;
-    _retval = gdk_draw_context_is_in_frame(cast(GdkDrawContext*)cPtr);
+    _retval = gdk_draw_context_is_in_frame(cast(GdkDrawContext*)this._cPtr);
     return _retval;
   }
 }

@@ -46,16 +46,16 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_directory_list_get_type != &gidSymbolNotFound ? gtk_directory_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -193,7 +193,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     GtkDirectoryList* _cretval;
     const(char)* _attributes = attributes.toCString(No.Alloc);
-    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    _cretval = gtk_directory_list_new(_attributes, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -204,7 +204,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   string getAttributes()
   {
     const(char)* _cretval;
-    _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)cPtr);
+    _cretval = gtk_directory_list_get_attributes(cast(GtkDirectoryList*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -224,7 +224,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
-    _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)cPtr);
+    _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)this._cPtr);
     auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
@@ -236,8 +236,8 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_directory_list_get_file(cast(GtkDirectoryList*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   int getIoPriority()
   {
     int _retval;
-    _retval = gtk_directory_list_get_io_priority(cast(GtkDirectoryList*)cPtr);
+    _retval = gtk_directory_list_get_io_priority(cast(GtkDirectoryList*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool getMonitored()
   {
     bool _retval;
-    _retval = gtk_directory_list_get_monitored(cast(GtkDirectoryList*)cPtr);
+    _retval = gtk_directory_list_get_monitored(cast(GtkDirectoryList*)this._cPtr);
     return _retval;
   }
 
@@ -276,7 +276,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   bool isLoading()
   {
     bool _retval;
-    _retval = gtk_directory_list_is_loading(cast(GtkDirectoryList*)cPtr);
+    _retval = gtk_directory_list_is_loading(cast(GtkDirectoryList*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   void setAttributes(string attributes = null)
   {
     const(char)* _attributes = attributes.toCString(No.Alloc);
-    gtk_directory_list_set_attributes(cast(GtkDirectoryList*)cPtr, _attributes);
+    gtk_directory_list_set_attributes(cast(GtkDirectoryList*)this._cPtr, _attributes);
   }
 
   /**
@@ -305,7 +305,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_directory_list_set_file(cast(GtkDirectoryList*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    gtk_directory_list_set_file(cast(GtkDirectoryList*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -324,7 +324,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setIoPriority(int ioPriority)
   {
-    gtk_directory_list_set_io_priority(cast(GtkDirectoryList*)cPtr, ioPriority);
+    gtk_directory_list_set_io_priority(cast(GtkDirectoryList*)this._cPtr, ioPriority);
   }
 
   /**
@@ -345,6 +345,6 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setMonitored(bool monitored)
   {
-    gtk_directory_list_set_monitored(cast(GtkDirectoryList*)cPtr, monitored);
+    gtk_directory_list_set_monitored(cast(GtkDirectoryList*)this._cPtr, monitored);
   }
 }

@@ -21,22 +21,22 @@ class VideoVBIEncoder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_vbi_encoder_get_type != &gidSymbolNotFound ? gst_video_vbi_encoder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -85,7 +85,7 @@ class VideoVBIEncoder : gobject.boxed.Boxed
       _dataCount = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _retval = gst_video_vbi_encoder_add_ancillary(cast(GstVideoVBIEncoder*)cPtr, composite, DID, SDIDBlockNumber, _data, _dataCount);
+    _retval = gst_video_vbi_encoder_add_ancillary(cast(GstVideoVBIEncoder*)this._cPtr, composite, DID, SDIDBlockNumber, _data, _dataCount);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class VideoVBIEncoder : gobject.boxed.Boxed
   gstvideo.video_vbiencoder.VideoVBIEncoder copy()
   {
     GstVideoVBIEncoder* _cretval;
-    _cretval = gst_video_vbi_encoder_copy(cast(const(GstVideoVBIEncoder)*)cPtr);
+    _cretval = gst_video_vbi_encoder_copy(cast(const(GstVideoVBIEncoder)*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_vbiencoder.VideoVBIEncoder(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

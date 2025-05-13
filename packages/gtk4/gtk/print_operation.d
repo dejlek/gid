@@ -90,16 +90,16 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_print_operation_get_type != &gidSymbolNotFound ? gtk_print_operation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -599,7 +599,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void cancel()
   {
-    gtk_print_operation_cancel(cast(GtkPrintOperation*)cPtr);
+    gtk_print_operation_cancel(cast(GtkPrintOperation*)this._cPtr);
   }
 
   /**
@@ -612,7 +612,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void drawPageFinish()
   {
-    gtk_print_operation_draw_page_finish(cast(GtkPrintOperation*)cPtr);
+    gtk_print_operation_draw_page_finish(cast(GtkPrintOperation*)this._cPtr);
   }
 
   /**
@@ -622,8 +622,8 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   gtk.page_setup.PageSetup getDefaultPageSetup()
   {
     GtkPageSetup* _cretval;
-    _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
+    _cretval = gtk_print_operation_get_default_page_setup(cast(GtkPrintOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.page_setup.PageSetup)(cast(GtkPageSetup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -634,7 +634,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getEmbedPageSetup()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_embed_page_setup(cast(GtkPrintOperation*)cPtr);
+    _retval = gtk_print_operation_get_embed_page_setup(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -652,7 +652,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   void getError()
   {
     GError *_err;
-    gtk_print_operation_get_error(cast(GtkPrintOperation*)cPtr, &_err);
+    gtk_print_operation_get_error(cast(GtkPrintOperation*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
   }
@@ -664,7 +664,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getHasSelection()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_has_selection(cast(GtkPrintOperation*)cPtr);
+    _retval = gtk_print_operation_get_has_selection(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -684,7 +684,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   int getNPagesToPrint()
   {
     int _retval;
-    _retval = gtk_print_operation_get_n_pages_to_print(cast(GtkPrintOperation*)cPtr);
+    _retval = gtk_print_operation_get_n_pages_to_print(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -699,8 +699,8 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   gtk.print_settings.PrintSettings getPrintSettings()
   {
     GtkPrintSettings* _cretval;
-    _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
+    _cretval = gtk_print_operation_get_print_settings(cast(GtkPrintOperation*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.print_settings.PrintSettings)(cast(GtkPrintSettings*)_cretval, No.Take);
     return _retval;
   }
 
@@ -713,7 +713,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   gtk.types.PrintStatus getStatus()
   {
     GtkPrintStatus _cretval;
-    _cretval = gtk_print_operation_get_status(cast(GtkPrintOperation*)cPtr);
+    _cretval = gtk_print_operation_get_status(cast(GtkPrintOperation*)this._cPtr);
     gtk.types.PrintStatus _retval = cast(gtk.types.PrintStatus)_cretval;
     return _retval;
   }
@@ -733,7 +733,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   string getStatusString()
   {
     const(char)* _cretval;
-    _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)cPtr);
+    _cretval = gtk_print_operation_get_status_string(cast(GtkPrintOperation*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -745,7 +745,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool getSupportSelection()
   {
     bool _retval;
-    _retval = gtk_print_operation_get_support_selection(cast(GtkPrintOperation*)cPtr);
+    _retval = gtk_print_operation_get_support_selection(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -764,7 +764,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   bool isFinished()
   {
     bool _retval;
-    _retval = gtk_print_operation_is_finished(cast(GtkPrintOperation*)cPtr);
+    _retval = gtk_print_operation_is_finished(cast(GtkPrintOperation*)this._cPtr);
     return _retval;
   }
 
@@ -843,7 +843,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   {
     GtkPrintOperationResult _cretval;
     GError *_err;
-    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)cPtr, action, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, &_err);
+    _cretval = gtk_print_operation_run(cast(GtkPrintOperation*)this._cPtr, action, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     gtk.types.PrintOperationResult _retval = cast(gtk.types.PrintOperationResult)_cretval;
@@ -862,7 +862,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setAllowAsync(bool allowAsync)
   {
-    gtk_print_operation_set_allow_async(cast(GtkPrintOperation*)cPtr, allowAsync);
+    gtk_print_operation_set_allow_async(cast(GtkPrintOperation*)this._cPtr, allowAsync);
   }
 
   /**
@@ -878,7 +878,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setCurrentPage(int currentPage)
   {
-    gtk_print_operation_set_current_page(cast(GtkPrintOperation*)cPtr, currentPage);
+    gtk_print_operation_set_current_page(cast(GtkPrintOperation*)this._cPtr, currentPage);
   }
 
   /**
@@ -890,7 +890,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   void setCustomTabLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)cPtr, _label);
+    gtk_print_operation_set_custom_tab_label(cast(GtkPrintOperation*)this._cPtr, _label);
   }
 
   /**
@@ -905,7 +905,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setDefaultPageSetup(gtk.page_setup.PageSetup defaultPageSetup = null)
   {
-    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup.cPtr(No.Dup) : null);
+    gtk_print_operation_set_default_page_setup(cast(GtkPrintOperation*)this._cPtr, defaultPageSetup ? cast(GtkPageSetup*)defaultPageSetup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -919,7 +919,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setDeferDrawing()
   {
-    gtk_print_operation_set_defer_drawing(cast(GtkPrintOperation*)cPtr);
+    gtk_print_operation_set_defer_drawing(cast(GtkPrintOperation*)this._cPtr);
   }
 
   /**
@@ -932,7 +932,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setEmbedPageSetup(bool embed)
   {
-    gtk_print_operation_set_embed_page_setup(cast(GtkPrintOperation*)cPtr, embed);
+    gtk_print_operation_set_embed_page_setup(cast(GtkPrintOperation*)this._cPtr, embed);
   }
 
   /**
@@ -953,7 +953,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   void setExportFilename(string filename)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)cPtr, _filename);
+    gtk_print_operation_set_export_filename(cast(GtkPrintOperation*)this._cPtr, _filename);
   }
 
   /**
@@ -968,7 +968,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setHasSelection(bool hasSelection)
   {
-    gtk_print_operation_set_has_selection(cast(GtkPrintOperation*)cPtr, hasSelection);
+    gtk_print_operation_set_has_selection(cast(GtkPrintOperation*)this._cPtr, hasSelection);
   }
 
   /**
@@ -986,7 +986,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   void setJobName(string jobName)
   {
     const(char)* _jobName = jobName.toCString(No.Alloc);
-    gtk_print_operation_set_job_name(cast(GtkPrintOperation*)cPtr, _jobName);
+    gtk_print_operation_set_job_name(cast(GtkPrintOperation*)this._cPtr, _jobName);
   }
 
   /**
@@ -1007,7 +1007,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setNPages(int nPages)
   {
-    gtk_print_operation_set_n_pages(cast(GtkPrintOperation*)cPtr, nPages);
+    gtk_print_operation_set_n_pages(cast(GtkPrintOperation*)this._cPtr, nPages);
   }
 
   /**
@@ -1021,7 +1021,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setPrintSettings(gtk.print_settings.PrintSettings printSettings = null)
   {
-    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)cPtr, printSettings ? cast(GtkPrintSettings*)printSettings.cPtr(No.Dup) : null);
+    gtk_print_operation_set_print_settings(cast(GtkPrintOperation*)this._cPtr, printSettings ? cast(GtkPrintSettings*)printSettings._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1033,7 +1033,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setShowProgress(bool showProgress)
   {
-    gtk_print_operation_set_show_progress(cast(GtkPrintOperation*)cPtr, showProgress);
+    gtk_print_operation_set_show_progress(cast(GtkPrintOperation*)this._cPtr, showProgress);
   }
 
   /**
@@ -1044,7 +1044,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setSupportSelection(bool supportSelection)
   {
-    gtk_print_operation_set_support_selection(cast(GtkPrintOperation*)cPtr, supportSelection);
+    gtk_print_operation_set_support_selection(cast(GtkPrintOperation*)this._cPtr, supportSelection);
   }
 
   /**
@@ -1062,7 +1062,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setTrackPrintStatus(bool trackStatus)
   {
-    gtk_print_operation_set_track_print_status(cast(GtkPrintOperation*)cPtr, trackStatus);
+    gtk_print_operation_set_track_print_status(cast(GtkPrintOperation*)this._cPtr, trackStatus);
   }
 
   /**
@@ -1075,7 +1075,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setUnit(gtk.types.Unit unit)
   {
-    gtk_print_operation_set_unit(cast(GtkPrintOperation*)cPtr, unit);
+    gtk_print_operation_set_unit(cast(GtkPrintOperation*)this._cPtr, unit);
   }
 
   /**
@@ -1092,7 +1092,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
   */
   void setUseFullPage(bool fullPage)
   {
-    gtk_print_operation_set_use_full_page(cast(GtkPrintOperation*)cPtr, fullPage);
+    gtk_print_operation_set_use_full_page(cast(GtkPrintOperation*)this._cPtr, fullPage);
   }
 
   /**

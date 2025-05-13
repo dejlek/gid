@@ -48,22 +48,22 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_ot_var_axis_info_get_type != &gidSymbolNotFound ? hb_gobject_ot_var_axis_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property uint axisIndex()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).axisIndex;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).axisIndex;
   }
 
   /**
@@ -88,7 +88,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void axisIndex(uint propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).axisIndex = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).axisIndex = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Tag tag()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).tag;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).tag;
   }
 
   /**
@@ -107,7 +107,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void tag(harfbuzz.types.Tag propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).tag = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).tag = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property harfbuzz.types.OtNameId nameId()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).nameId;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).nameId;
   }
 
   /**
@@ -126,7 +126,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void nameId(harfbuzz.types.OtNameId propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).nameId = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).nameId = propval;
   }
 
   /**
@@ -135,7 +135,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property harfbuzz.types.OtVarAxisFlags flags()
   {
-    return cast(harfbuzz.types.OtVarAxisFlags)(cast(hb_ot_var_axis_info_t*)cPtr).flags;
+    return cast(harfbuzz.types.OtVarAxisFlags)(cast(hb_ot_var_axis_info_t*)this._cPtr).flags;
   }
 
   /**
@@ -145,7 +145,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void flags(harfbuzz.types.OtVarAxisFlags propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).flags = cast(hb_ot_var_axis_flags_t)propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).flags = cast(hb_ot_var_axis_flags_t)propval;
   }
 
   /**
@@ -154,7 +154,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property float minValue()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).minValue;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).minValue;
   }
 
   /**
@@ -164,7 +164,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void minValue(float propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).minValue = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).minValue = propval;
   }
 
   /**
@@ -173,7 +173,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property float defaultValue()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).defaultValue;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).defaultValue;
   }
 
   /**
@@ -183,7 +183,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void defaultValue(float propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).defaultValue = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).defaultValue = propval;
   }
 
   /**
@@ -192,7 +192,7 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property float maxValue()
   {
-    return (cast(hb_ot_var_axis_info_t*)cPtr).maxValue;
+    return (cast(hb_ot_var_axis_info_t*)this._cPtr).maxValue;
   }
 
   /**
@@ -202,6 +202,6 @@ class OtVarAxisInfo : gobject.boxed.Boxed
   */
   @property void maxValue(float propval)
   {
-    (cast(hb_ot_var_axis_info_t*)cPtr).maxValue = propval;
+    (cast(hb_ot_var_axis_info_t*)this._cPtr).maxValue = propval;
   }
 }

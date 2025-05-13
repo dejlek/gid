@@ -18,7 +18,7 @@ interface FrameHeader
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_header_get_type != &gidSymbolNotFound ? panel_frame_header_get_type() : cast(GType)0;

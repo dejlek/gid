@@ -25,16 +25,16 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gadataset_file_system_dataset_factory_get_type != &gidSymbolNotFound ? gadataset_file_system_dataset_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -94,7 +94,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   this(arrowdataset.file_format.FileFormat fileFormat)
   {
     GADatasetFileSystemDatasetFactory* _cretval;
-    _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat.cPtr(No.Dup) : null);
+    _cretval = gadataset_file_system_dataset_factory_new(fileFormat ? cast(GADatasetFileFormat*)fileFormat._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -104,7 +104,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     bool _retval;
     const(char)* _path = path.toCString(No.Alloc);
     GError *_err;
-    _retval = gadataset_file_system_dataset_factory_add_path(cast(GADatasetFileSystemDatasetFactory*)cPtr, _path, &_err);
+    _retval = gadataset_file_system_dataset_factory_add_path(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, _path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -115,10 +115,10 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   {
     GADatasetFileSystemDataset* _cretval;
     GError *_err;
-    _cretval = gadataset_file_system_dataset_factory_finish(cast(GADatasetFileSystemDatasetFactory*)cPtr, options ? cast(GADatasetFinishOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = gadataset_file_system_dataset_factory_finish(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, options ? cast(GADatasetFinishOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrowdataset.file_system_dataset.FileSystemDataset)(cast(GADatasetFileSystemDataset*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrowdataset.file_system_dataset.FileSystemDataset)(cast(GADatasetFileSystemDataset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
   {
     bool _retval;
     GError *_err;
-    _retval = gadataset_file_system_dataset_factory_set_file_system(cast(GADatasetFileSystemDatasetFactory*)cPtr, fileSystem ? cast(GArrowFileSystem*)fileSystem.cPtr(No.Dup) : null, &_err);
+    _retval = gadataset_file_system_dataset_factory_set_file_system(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, fileSystem ? cast(GArrowFileSystem*)fileSystem._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -139,7 +139,7 @@ class FileSystemDatasetFactory : arrowdataset.dataset_factory.DatasetFactory
     bool _retval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _retval = gadataset_file_system_dataset_factory_set_file_system_uri(cast(GADatasetFileSystemDatasetFactory*)cPtr, _uri, &_err);
+    _retval = gadataset_file_system_dataset_factory_set_file_system_uri(cast(GADatasetFileSystemDatasetFactory*)this._cPtr, _uri, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

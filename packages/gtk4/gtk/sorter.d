@@ -40,16 +40,16 @@ class Sorter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_sorter_get_type != &gidSymbolNotFound ? gtk_sorter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -77,7 +77,7 @@ class Sorter : gobject.object.ObjectWrap
   */
   void changed(gtk.types.SorterChange change)
   {
-    gtk_sorter_changed(cast(GtkSorter*)cPtr, change);
+    gtk_sorter_changed(cast(GtkSorter*)this._cPtr, change);
   }
 
   /**
@@ -106,7 +106,7 @@ class Sorter : gobject.object.ObjectWrap
   gtk.types.Ordering compare(gobject.object.ObjectWrap item1, gobject.object.ObjectWrap item2)
   {
     GtkOrdering _cretval;
-    _cretval = gtk_sorter_compare(cast(GtkSorter*)cPtr, item1 ? cast(ObjectC*)item1.cPtr(No.Dup) : null, item2 ? cast(ObjectC*)item2.cPtr(No.Dup) : null);
+    _cretval = gtk_sorter_compare(cast(GtkSorter*)this._cPtr, item1 ? cast(GObject*)item1._cPtr(No.Dup) : null, item2 ? cast(GObject*)item2._cPtr(No.Dup) : null);
     gtk.types.Ordering _retval = cast(gtk.types.Ordering)_cretval;
     return _retval;
   }
@@ -123,7 +123,7 @@ class Sorter : gobject.object.ObjectWrap
   gtk.types.SorterOrder getOrder()
   {
     GtkSorterOrder _cretval;
-    _cretval = gtk_sorter_get_order(cast(GtkSorter*)cPtr);
+    _cretval = gtk_sorter_get_order(cast(GtkSorter*)this._cPtr);
     gtk.types.SorterOrder _retval = cast(gtk.types.SorterOrder)_cretval;
     return _retval;
   }

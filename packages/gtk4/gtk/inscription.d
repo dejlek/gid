@@ -41,16 +41,16 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_inscription_get_type != &gidSymbolNotFound ? gtk_inscription_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -371,7 +371,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
-    _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)cPtr);
+    _cretval = gtk_inscription_get_attributes(cast(GtkInscription*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -385,7 +385,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   uint getMinChars()
   {
     uint _retval;
-    _retval = gtk_inscription_get_min_chars(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_min_chars(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   uint getMinLines()
   {
     uint _retval;
-    _retval = gtk_inscription_get_min_lines(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_min_lines(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -411,7 +411,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   uint getNatChars()
   {
     uint _retval;
-    _retval = gtk_inscription_get_nat_chars(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_nat_chars(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -424,7 +424,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   uint getNatLines()
   {
     uint _retval;
-    _retval = gtk_inscription_get_nat_lines(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_nat_lines(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -435,7 +435,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   string getText()
   {
     const(char)* _cretval;
-    _cretval = gtk_inscription_get_text(cast(GtkInscription*)cPtr);
+    _cretval = gtk_inscription_get_text(cast(GtkInscription*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -447,7 +447,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   gtk.types.InscriptionOverflow getTextOverflow()
   {
     GtkInscriptionOverflow _cretval;
-    _cretval = gtk_inscription_get_text_overflow(cast(GtkInscription*)cPtr);
+    _cretval = gtk_inscription_get_text_overflow(cast(GtkInscription*)this._cPtr);
     gtk.types.InscriptionOverflow _retval = cast(gtk.types.InscriptionOverflow)_cretval;
     return _retval;
   }
@@ -461,7 +461,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   pango.types.WrapMode getWrapMode()
   {
     PangoWrapMode _cretval;
-    _cretval = gtk_inscription_get_wrap_mode(cast(GtkInscription*)cPtr);
+    _cretval = gtk_inscription_get_wrap_mode(cast(GtkInscription*)this._cPtr);
     pango.types.WrapMode _retval = cast(pango.types.WrapMode)_cretval;
     return _retval;
   }
@@ -475,7 +475,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   float getXalign()
   {
     float _retval;
-    _retval = gtk_inscription_get_xalign(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_xalign(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -488,7 +488,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   float getYalign()
   {
     float _retval;
-    _retval = gtk_inscription_get_yalign(cast(GtkInscription*)cPtr);
+    _retval = gtk_inscription_get_yalign(cast(GtkInscription*)this._cPtr);
     return _retval;
   }
 
@@ -502,7 +502,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setAttributes(pango.attr_list.AttrList attrs = null)
   {
-    gtk_inscription_set_attributes(cast(GtkInscription*)cPtr, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null);
+    gtk_inscription_set_attributes(cast(GtkInscription*)this._cPtr, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null);
   }
 
   /**
@@ -516,7 +516,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_inscription_set_markup(cast(GtkInscription*)cPtr, _markup);
+    gtk_inscription_set_markup(cast(GtkInscription*)this._cPtr, _markup);
   }
 
   /**
@@ -529,7 +529,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setMinChars(uint minChars)
   {
-    gtk_inscription_set_min_chars(cast(GtkInscription*)cPtr, minChars);
+    gtk_inscription_set_min_chars(cast(GtkInscription*)this._cPtr, minChars);
   }
 
   /**
@@ -542,7 +542,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setMinLines(uint minLines)
   {
-    gtk_inscription_set_min_lines(cast(GtkInscription*)cPtr, minLines);
+    gtk_inscription_set_min_lines(cast(GtkInscription*)this._cPtr, minLines);
   }
 
   /**
@@ -555,7 +555,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setNatChars(uint natChars)
   {
-    gtk_inscription_set_nat_chars(cast(GtkInscription*)cPtr, natChars);
+    gtk_inscription_set_nat_chars(cast(GtkInscription*)this._cPtr, natChars);
   }
 
   /**
@@ -568,7 +568,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setNatLines(uint natLines)
   {
-    gtk_inscription_set_nat_lines(cast(GtkInscription*)cPtr, natLines);
+    gtk_inscription_set_nat_lines(cast(GtkInscription*)this._cPtr, natLines);
   }
 
   /**
@@ -580,7 +580,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_inscription_set_text(cast(GtkInscription*)cPtr, _text);
+    gtk_inscription_set_text(cast(GtkInscription*)this._cPtr, _text);
   }
 
   /**
@@ -591,7 +591,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setTextOverflow(gtk.types.InscriptionOverflow overflow)
   {
-    gtk_inscription_set_text_overflow(cast(GtkInscription*)cPtr, overflow);
+    gtk_inscription_set_text_overflow(cast(GtkInscription*)this._cPtr, overflow);
   }
 
   /**
@@ -602,7 +602,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setWrapMode(pango.types.WrapMode wrapMode)
   {
-    gtk_inscription_set_wrap_mode(cast(GtkInscription*)cPtr, wrapMode);
+    gtk_inscription_set_wrap_mode(cast(GtkInscription*)this._cPtr, wrapMode);
   }
 
   /**
@@ -615,7 +615,7 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setXalign(float xalign)
   {
-    gtk_inscription_set_xalign(cast(GtkInscription*)cPtr, xalign);
+    gtk_inscription_set_xalign(cast(GtkInscription*)this._cPtr, xalign);
   }
 
   /**
@@ -628,6 +628,6 @@ class Inscription : gtk.widget.Widget, gtk.accessible_text.AccessibleText
   */
   void setYalign(float yalign)
   {
-    gtk_inscription_set_yalign(cast(GtkInscription*)cPtr, yalign);
+    gtk_inscription_set_yalign(cast(GtkInscription*)this._cPtr, yalign);
   }
 }

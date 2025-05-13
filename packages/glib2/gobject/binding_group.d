@@ -27,16 +27,16 @@ class BindingGroup : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_binding_group_get_type != &gidSymbolNotFound ? g_binding_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class BindingGroup : gobject.object.ObjectWrap
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    g_binding_group_bind(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags);
+    g_binding_group_bind(cast(GBindingGroup*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags);
   }
 
   /**
@@ -124,7 +124,7 @@ class BindingGroup : gobject.object.ObjectWrap
   {
     const(char)* _sourceProperty = sourceProperty.toCString(No.Alloc);
     const(char)* _targetProperty = targetProperty.toCString(No.Alloc);
-    g_binding_group_bind_with_closures(cast(GBindingGroup*)cPtr, _sourceProperty, target ? cast(ObjectC*)target.cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo.cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom.cPtr(No.Dup) : null);
+    g_binding_group_bind_with_closures(cast(GBindingGroup*)this._cPtr, _sourceProperty, target ? cast(GObject*)target._cPtr(No.Dup) : null, _targetProperty, flags, transformTo ? cast(GClosure*)transformTo._cPtr(No.Dup) : null, transformFrom ? cast(GClosure*)transformFrom._cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,9 +133,9 @@ class BindingGroup : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap dupSource()
   {
-    ObjectC* _cretval;
-    _cretval = g_binding_group_dup_source(cast(GBindingGroup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_binding_group_dup_source(cast(GBindingGroup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,6 +152,6 @@ class BindingGroup : gobject.object.ObjectWrap
   */
   void setSource(gobject.object.ObjectWrap source = null)
   {
-    g_binding_group_set_source(cast(GBindingGroup*)cPtr, source ? cast(ObjectC*)source.cPtr(No.Dup) : null);
+    g_binding_group_set_source(cast(GBindingGroup*)this._cPtr, source ? cast(GObject*)source._cPtr(No.Dup) : null);
   }
 }

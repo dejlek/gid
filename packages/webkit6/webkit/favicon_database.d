@@ -36,16 +36,16 @@ class FaviconDatabase : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_favicon_database_get_type != &gidSymbolNotFound ? webkit_favicon_database_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
   */
   void clear()
   {
-    webkit_favicon_database_clear(cast(WebKitFaviconDatabase*)cPtr);
+    webkit_favicon_database_clear(cast(WebKitFaviconDatabase*)this._cPtr);
   }
 
   /**
@@ -81,18 +81,18 @@ class FaviconDatabase : gobject.object.ObjectWrap
   */
   void getFavicon(string pageUri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _pageUri = pageUri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_favicon_database_get_favicon(cast(WebKitFaviconDatabase*)cPtr, _pageUri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_favicon_database_get_favicon(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -107,10 +107,10 @@ class FaviconDatabase : gobject.object.ObjectWrap
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = webkit_favicon_database_get_favicon_finish(cast(WebKitFaviconDatabase*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_favicon_database_get_favicon_finish(cast(WebKitFaviconDatabase*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class FaviconDatabase : gobject.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _pageUri = pageUri.toCString(No.Alloc);
-    _cretval = webkit_favicon_database_get_favicon_uri(cast(WebKitFaviconDatabase*)cPtr, _pageUri);
+    _cretval = webkit_favicon_database_get_favicon_uri(cast(WebKitFaviconDatabase*)this._cPtr, _pageUri);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

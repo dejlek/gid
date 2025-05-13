@@ -29,16 +29,16 @@ class SnippetContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_snippet_context_get_type != &gidSymbolNotFound ? gtk_source_snippet_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class SnippetContext : gobject.object.ObjectWrap
   */
   void clearVariables()
   {
-    gtk_source_snippet_context_clear_variables(cast(GtkSourceSnippetContext*)cPtr);
+    gtk_source_snippet_context_clear_variables(cast(GtkSourceSnippetContext*)this._cPtr);
   }
 
   /** */
@@ -74,7 +74,7 @@ class SnippetContext : gobject.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _input = input.toCString(No.Alloc);
-    _cretval = gtk_source_snippet_context_expand(cast(GtkSourceSnippetContext*)cPtr, _input);
+    _cretval = gtk_source_snippet_context_expand(cast(GtkSourceSnippetContext*)this._cPtr, _input);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -90,7 +90,7 @@ class SnippetContext : gobject.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gtk_source_snippet_context_get_variable(cast(GtkSourceSnippetContext*)cPtr, _key);
+    _cretval = gtk_source_snippet_context_get_variable(cast(GtkSourceSnippetContext*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -111,26 +111,26 @@ class SnippetContext : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    gtk_source_snippet_context_set_constant(cast(GtkSourceSnippetContext*)cPtr, _key, _value);
+    gtk_source_snippet_context_set_constant(cast(GtkSourceSnippetContext*)this._cPtr, _key, _value);
   }
 
   /** */
   void setLinePrefix(string linePrefix)
   {
     const(char)* _linePrefix = linePrefix.toCString(No.Alloc);
-    gtk_source_snippet_context_set_line_prefix(cast(GtkSourceSnippetContext*)cPtr, _linePrefix);
+    gtk_source_snippet_context_set_line_prefix(cast(GtkSourceSnippetContext*)this._cPtr, _linePrefix);
   }
 
   /** */
   void setTabWidth(int tabWidth)
   {
-    gtk_source_snippet_context_set_tab_width(cast(GtkSourceSnippetContext*)cPtr, tabWidth);
+    gtk_source_snippet_context_set_tab_width(cast(GtkSourceSnippetContext*)this._cPtr, tabWidth);
   }
 
   /** */
   void setUseSpaces(bool useSpaces)
   {
-    gtk_source_snippet_context_set_use_spaces(cast(GtkSourceSnippetContext*)cPtr, useSpaces);
+    gtk_source_snippet_context_set_use_spaces(cast(GtkSourceSnippetContext*)this._cPtr, useSpaces);
   }
 
   /**
@@ -147,7 +147,7 @@ class SnippetContext : gobject.object.ObjectWrap
   {
     const(char)* _key = key.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    gtk_source_snippet_context_set_variable(cast(GtkSourceSnippetContext*)cPtr, _key, _value);
+    gtk_source_snippet_context_set_variable(cast(GtkSourceSnippetContext*)this._cPtr, _key, _value);
   }
 
   /**

@@ -56,16 +56,16 @@ class Builder : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_builder_get_type != &gidSymbolNotFound ? json_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class Builder : gobject.object.ObjectWrap
   {
     JsonBuilder* _cretval;
     _cretval = json_builder_new_immutable();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,8 +118,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addBooleanValue(bool value)
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_boolean_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_boolean_value(cast(JsonBuilder*)this._cPtr, value);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,8 +139,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addDoubleValue(double value)
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_double_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_double_value(cast(JsonBuilder*)this._cPtr, value);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,8 +160,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addIntValue(long value)
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_int_value(cast(JsonBuilder*)cPtr, value);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_int_value(cast(JsonBuilder*)this._cPtr, value);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,8 +178,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addNullValue()
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_null_value(cast(JsonBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_null_value(cast(JsonBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -200,8 +200,8 @@ class Builder : gobject.object.ObjectWrap
   {
     JsonBuilder* _cretval;
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = json_builder_add_string_value(cast(JsonBuilder*)cPtr, _value);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_string_value(cast(JsonBuilder*)this._cPtr, _value);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -221,8 +221,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder addValue(json.node.Node node)
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_add_value(cast(JsonBuilder*)cPtr, node ? cast(JsonNode*)node.cPtr(Yes.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_add_value(cast(JsonBuilder*)this._cPtr, node ? cast(JsonNode*)node._cPtr(Yes.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,8 +238,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder beginArray()
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_begin_array(cast(JsonBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_begin_array(cast(JsonBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -258,8 +258,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder beginObject()
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_begin_object(cast(JsonBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_begin_object(cast(JsonBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -273,8 +273,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder endArray()
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_end_array(cast(JsonBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_end_array(cast(JsonBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -288,8 +288,8 @@ class Builder : gobject.object.ObjectWrap
   json.builder.Builder endObject()
   {
     JsonBuilder* _cretval;
-    _cretval = json_builder_end_object(cast(JsonBuilder*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_end_object(cast(JsonBuilder*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Builder : gobject.object.ObjectWrap
   json.node.Node getRoot()
   {
     JsonNode* _cretval;
-    _cretval = json_builder_get_root(cast(JsonBuilder*)cPtr);
+    _cretval = json_builder_get_root(cast(JsonBuilder*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -314,7 +314,7 @@ class Builder : gobject.object.ObjectWrap
   */
   void reset()
   {
-    json_builder_reset(cast(JsonBuilder*)cPtr);
+    json_builder_reset(cast(JsonBuilder*)this._cPtr);
   }
 
   /**
@@ -338,8 +338,8 @@ class Builder : gobject.object.ObjectWrap
   {
     JsonBuilder* _cretval;
     const(char)* _memberName = memberName.toCString(No.Alloc);
-    _cretval = json_builder_set_member_name(cast(JsonBuilder*)cPtr, _memberName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
+    _cretval = json_builder_set_member_name(cast(JsonBuilder*)this._cPtr, _memberName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.builder.Builder)(cast(JsonBuilder*)_cretval, No.Take);
     return _retval;
   }
 }

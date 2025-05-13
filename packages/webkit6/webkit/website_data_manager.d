@@ -41,16 +41,16 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_data_manager_get_type != &gidSymbolNotFound ? webkit_website_data_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,17 +79,17 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   */
   void clear(webkit.types.WebsiteDataTypes types, glib.types.TimeSpan timespan, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_website_data_manager_clear(cast(WebKitWebsiteDataManager*)cPtr, types, timespan, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_website_data_manager_clear(cast(WebKitWebsiteDataManager*)this._cPtr, types, timespan, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -104,7 +104,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_website_data_manager_clear_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -123,17 +123,17 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   */
   void fetch(webkit.types.WebsiteDataTypes types, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_website_data_manager_fetch(cast(WebKitWebsiteDataManager*)cPtr, types, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_website_data_manager_fetch(cast(WebKitWebsiteDataManager*)this._cPtr, types, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -149,7 +149,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_website_data_manager_fetch_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_website_data_manager_fetch_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.website_data.WebsiteData, GidOwnership.Full)(cast(GList*)_cretval);
@@ -164,7 +164,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   string getBaseCacheDirectory()
   {
     const(char)* _cretval;
-    _cretval = webkit_website_data_manager_get_base_cache_directory(cast(WebKitWebsiteDataManager*)cPtr);
+    _cretval = webkit_website_data_manager_get_base_cache_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -177,7 +177,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   string getBaseDataDirectory()
   {
     const(char)* _cretval;
-    _cretval = webkit_website_data_manager_get_base_data_directory(cast(WebKitWebsiteDataManager*)cPtr);
+    _cretval = webkit_website_data_manager_get_base_data_directory(cast(WebKitWebsiteDataManager*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -189,8 +189,8 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   webkit.favicon_database.FaviconDatabase getFaviconDatabase()
   {
     WebKitFaviconDatabase* _cretval;
-    _cretval = webkit_website_data_manager_get_favicon_database(cast(WebKitWebsiteDataManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.favicon_database.FaviconDatabase)(cast(WebKitFaviconDatabase*)_cretval, No.Take);
+    _cretval = webkit_website_data_manager_get_favicon_database(cast(WebKitWebsiteDataManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.favicon_database.FaviconDatabase)(cast(WebKitFaviconDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   bool getFaviconsEnabled()
   {
     bool _retval;
-    _retval = webkit_website_data_manager_get_favicons_enabled(cast(WebKitWebsiteDataManager*)cPtr);
+    _retval = webkit_website_data_manager_get_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr);
     return _retval;
   }
 
@@ -220,17 +220,17 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   */
   void getItpSummary(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_website_data_manager_get_itp_summary(cast(WebKitWebsiteDataManager*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_website_data_manager_get_itp_summary(cast(WebKitWebsiteDataManager*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -247,7 +247,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = webkit_website_data_manager_get_itp_summary_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_website_data_manager_get_itp_summary_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(webkit.itpthird_party.ITPThirdParty, GidOwnership.Full)(cast(GList*)_cretval);
@@ -263,7 +263,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   bool isEphemeral()
   {
     bool _retval;
-    _retval = webkit_website_data_manager_is_ephemeral(cast(WebKitWebsiteDataManager*)cPtr);
+    _retval = webkit_website_data_manager_is_ephemeral(cast(WebKitWebsiteDataManager*)this._cPtr);
     return _retval;
   }
 
@@ -284,19 +284,19 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   */
   void remove(webkit.types.WebsiteDataTypes types, webkit.website_data.WebsiteData[] websiteData, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _websiteData = gListFromD!(webkit.website_data.WebsiteData)(websiteData);
     scope(exit) containerFree!(GList*, webkit.website_data.WebsiteData, GidOwnership.None)(_websiteData);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_website_data_manager_remove(cast(WebKitWebsiteDataManager*)cPtr, types, _websiteData, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_website_data_manager_remove(cast(WebKitWebsiteDataManager*)this._cPtr, types, _websiteData, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -311,7 +311,7 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = webkit_website_data_manager_remove_finish(cast(WebKitWebsiteDataManager*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -329,6 +329,6 @@ class WebsiteDataManager : gobject.object.ObjectWrap
   */
   void setFaviconsEnabled(bool enabled)
   {
-    webkit_website_data_manager_set_favicons_enabled(cast(WebKitWebsiteDataManager*)cPtr, enabled);
+    webkit_website_data_manager_set_favicons_enabled(cast(WebKitWebsiteDataManager*)this._cPtr, enabled);
   }
 }

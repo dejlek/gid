@@ -43,22 +43,22 @@ class ColorStop : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_color_stop_get_type != &gidSymbolNotFound ? hb_gobject_color_stop_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property float offset()
   {
-    return (cast(hb_color_stop_t*)cPtr).offset;
+    return (cast(hb_color_stop_t*)this._cPtr).offset;
   }
 
   /**
@@ -83,7 +83,7 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property void offset(float propval)
   {
-    (cast(hb_color_stop_t*)cPtr).offset = propval;
+    (cast(hb_color_stop_t*)this._cPtr).offset = propval;
   }
 
   /**
@@ -92,7 +92,7 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Bool isForeground()
   {
-    return (cast(hb_color_stop_t*)cPtr).isForeground;
+    return (cast(hb_color_stop_t*)this._cPtr).isForeground;
   }
 
   /**
@@ -102,7 +102,7 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property void isForeground(harfbuzz.types.Bool propval)
   {
-    (cast(hb_color_stop_t*)cPtr).isForeground = propval;
+    (cast(hb_color_stop_t*)this._cPtr).isForeground = propval;
   }
 
   /**
@@ -111,7 +111,7 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Color color()
   {
-    return (cast(hb_color_stop_t*)cPtr).color;
+    return (cast(hb_color_stop_t*)this._cPtr).color;
   }
 
   /**
@@ -121,6 +121,6 @@ class ColorStop : gobject.boxed.Boxed
   */
   @property void color(harfbuzz.types.Color propval)
   {
-    (cast(hb_color_stop_t*)cPtr).color = propval;
+    (cast(hb_color_stop_t*)this._cPtr).color = propval;
   }
 }

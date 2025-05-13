@@ -55,16 +55,16 @@ class Credentials : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_credentials_get_type != &gidSymbolNotFound ? g_credentials_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -99,7 +99,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     int _retval;
     GError *_err;
-    _retval = g_credentials_get_unix_pid(cast(GCredentials*)cPtr, &_err);
+    _retval = g_credentials_get_unix_pid(cast(GCredentials*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -119,7 +119,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     uint _retval;
     GError *_err;
-    _retval = g_credentials_get_unix_user(cast(GCredentials*)cPtr, &_err);
+    _retval = g_credentials_get_unix_user(cast(GCredentials*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -141,7 +141,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_is_same_user(cast(GCredentials*)cPtr, otherCredentials ? cast(GCredentials*)otherCredentials.cPtr(No.Dup) : null, &_err);
+    _retval = g_credentials_is_same_user(cast(GCredentials*)this._cPtr, otherCredentials ? cast(GCredentials*)otherCredentials._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -161,7 +161,7 @@ class Credentials : gobject.object.ObjectWrap
   */
   void setNative(gio.types.CredentialsType nativeType, void* native)
   {
-    g_credentials_set_native(cast(GCredentials*)cPtr, nativeType, native);
+    g_credentials_set_native(cast(GCredentials*)this._cPtr, nativeType, native);
   }
 
   /**
@@ -182,7 +182,7 @@ class Credentials : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_credentials_set_unix_user(cast(GCredentials*)cPtr, uid, &_err);
+    _retval = g_credentials_set_unix_user(cast(GCredentials*)this._cPtr, uid, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -197,7 +197,7 @@ class Credentials : gobject.object.ObjectWrap
   string toString_()
   {
     char* _cretval;
-    _cretval = g_credentials_to_string(cast(GCredentials*)cPtr);
+    _cretval = g_credentials_to_string(cast(GCredentials*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

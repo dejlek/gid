@@ -34,7 +34,7 @@ template ProxyResolverT()
   override bool isSupported()
   {
     bool _retval;
-    _retval = g_proxy_resolver_is_supported(cast(GProxyResolver*)cPtr);
+    _retval = g_proxy_resolver_is_supported(cast(GProxyResolver*)this._cPtr);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ template ProxyResolverT()
     char** _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_proxy_resolver_lookup(cast(GProxyResolver*)this._cPtr, _uri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string[] _retval;
@@ -96,18 +96,18 @@ template ProxyResolverT()
   */
   override void lookupAsync(string uri, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _uri = uri.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_proxy_resolver_lookup_async(cast(GProxyResolver*)cPtr, _uri, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_proxy_resolver_lookup_async(cast(GProxyResolver*)this._cPtr, _uri, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -126,7 +126,7 @@ template ProxyResolverT()
   {
     char** _cretval;
     GError *_err;
-    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_proxy_resolver_lookup_finish(cast(GProxyResolver*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     string[] _retval;

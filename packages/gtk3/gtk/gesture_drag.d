@@ -27,16 +27,16 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_drag_get_type != &gidSymbolNotFound ? gtk_gesture_drag_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   this(gtk.widget.Widget widget)
   {
     GtkGesture* _cretval;
-    _cretval = gtk_gesture_drag_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    _cretval = gtk_gesture_drag_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -72,7 +72,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   bool getOffset(out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_drag_get_offset(cast(GtkGestureDrag*)cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = gtk_gesture_drag_get_offset(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 
@@ -89,7 +89,7 @@ class GestureDrag : gtk.gesture_single.GestureSingle
   bool getStartPoint(out double x, out double y)
   {
     bool _retval;
-    _retval = gtk_gesture_drag_get_start_point(cast(GtkGestureDrag*)cPtr, cast(double*)&x, cast(double*)&y);
+    _retval = gtk_gesture_drag_get_start_point(cast(GtkGestureDrag*)this._cPtr, cast(double*)&x, cast(double*)&y);
     return _retval;
   }
 

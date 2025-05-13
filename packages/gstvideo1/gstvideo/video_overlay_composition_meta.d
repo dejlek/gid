@@ -29,7 +29,7 @@ class VideoOverlayCompositionMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class VideoOverlayCompositionMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).meta);
   }
 
   /**
@@ -49,7 +49,7 @@ class VideoOverlayCompositionMeta
   */
   @property gstvideo.video_overlay_composition.VideoOverlayComposition overlay()
   {
-    return cToD!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
+    return cToD!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
   }
 
   /**
@@ -59,8 +59,8 @@ class VideoOverlayCompositionMeta
   */
   @property void overlay(gstvideo.video_overlay_composition.VideoOverlayComposition propval)
   {
-    cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
-    dToC(propval, cast(void*)&(cast(GstVideoOverlayCompositionMeta*)cPtr).overlay);
+    cValueFree!(gstvideo.video_overlay_composition.VideoOverlayComposition)(cast(void*)(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
+    dToC(propval, cast(void*)&(cast(GstVideoOverlayCompositionMeta*)this._cPtr).overlay);
   }
 
   /** */

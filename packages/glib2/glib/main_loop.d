@@ -22,22 +22,22 @@ class MainLoop : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_main_loop_get_type != &gidSymbolNotFound ? g_main_loop_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class MainLoop : gobject.boxed.Boxed
   this(glib.main_context.MainContext context, bool isRunning)
   {
     GMainLoop* _cretval;
-    _cretval = g_main_loop_new(context ? cast(GMainContext*)context.cPtr(No.Dup) : null, isRunning);
+    _cretval = g_main_loop_new(context ? cast(GMainContext*)context._cPtr(No.Dup) : null, isRunning);
     this(_cretval, Yes.Take);
   }
 
@@ -71,7 +71,7 @@ class MainLoop : gobject.boxed.Boxed
   glib.main_context.MainContext getContext()
   {
     GMainContext* _cretval;
-    _cretval = g_main_loop_get_context(cast(GMainLoop*)cPtr);
+    _cretval = g_main_loop_get_context(cast(GMainLoop*)this._cPtr);
     auto _retval = _cretval ? new glib.main_context.MainContext(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -83,7 +83,7 @@ class MainLoop : gobject.boxed.Boxed
   bool isRunning()
   {
     bool _retval;
-    _retval = g_main_loop_is_running(cast(GMainLoop*)cPtr);
+    _retval = g_main_loop_is_running(cast(GMainLoop*)this._cPtr);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class MainLoop : gobject.boxed.Boxed
   */
   void quit()
   {
-    g_main_loop_quit(cast(GMainLoop*)cPtr);
+    g_main_loop_quit(cast(GMainLoop*)this._cPtr);
   }
 
   /**
@@ -107,6 +107,6 @@ class MainLoop : gobject.boxed.Boxed
   */
   void run()
   {
-    g_main_loop_run(cast(GMainLoop*)cPtr);
+    g_main_loop_run(cast(GMainLoop*)this._cPtr);
   }
 }

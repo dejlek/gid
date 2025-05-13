@@ -50,22 +50,22 @@ class VideoCodecState : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_codec_state_get_type != &gidSymbolNotFound ? gst_video_codec_state_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,7 +80,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_info.VideoInfo info()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstVideoCodecState*)this._cPtr).info);
   }
 
   /**
@@ -89,7 +89,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gst.caps.Caps caps()
   {
-    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).caps);
   }
 
   /**
@@ -99,8 +99,8 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property void caps(gst.caps.Caps propval)
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).caps);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).caps);
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).caps);
   }
 
   /**
@@ -110,7 +110,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gst.buffer.Buffer codecData()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).codecData);
   }
 
   /**
@@ -121,8 +121,8 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property void codecData(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)cPtr).codecData);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).codecData);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).codecData);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).codecData);
   }
 
   /**
@@ -132,7 +132,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gst.caps.Caps allocationCaps()
   {
-    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
   }
 
   /**
@@ -143,8 +143,8 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property void allocationCaps(gst.caps.Caps propval)
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)cPtr).allocationCaps);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)cPtr).allocationCaps);
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecState*)this._cPtr).allocationCaps);
   }
 
   /**
@@ -153,7 +153,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo()
   {
-    return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)cPtr).masteringDisplayInfo);
+    return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)this._cPtr).masteringDisplayInfo);
   }
 
   /**
@@ -162,6 +162,6 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel()
   {
-    return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)cPtr).contentLightLevel);
+    return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel);
   }
 }

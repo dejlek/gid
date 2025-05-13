@@ -31,16 +31,16 @@ class DiscovererInfo : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_info_get_type != &gidSymbolNotFound ? gst_discoverer_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,8 +60,8 @@ class DiscovererInfo : gobject.object.ObjectWrap
   static gstpbutils.discoverer_info.DiscovererInfo fromVariant(glib.variant.Variant variant)
   {
     GstDiscovererInfo* _cretval;
-    _cretval = gst_discoverer_info_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_info_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,8 +69,8 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_info.DiscovererInfo copy()
   {
     GstDiscovererInfo* _cretval;
-    _cretval = gst_discoverer_info_copy(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_info_copy(cast(GstDiscovererInfo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_info.DiscovererInfo)(cast(GstDiscovererInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -83,7 +83,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_audio_info.DiscovererAudioInfo[] getAudioStreams()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_audio_streams(cast(GstDiscovererInfo*)cPtr);
+    _cretval = gst_discoverer_info_get_audio_streams(cast(GstDiscovererInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_audio_info.DiscovererAudioInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -97,7 +97,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_container_info.DiscovererContainerInfo[] getContainerStreams()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_container_streams(cast(GstDiscovererInfo*)cPtr);
+    _cretval = gst_discoverer_info_get_container_streams(cast(GstDiscovererInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_container_info.DiscovererContainerInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -106,7 +106,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gst.types.ClockTime getDuration()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_discoverer_info_get_duration(cast(const(GstDiscovererInfo)*)cPtr);
+    _retval = gst_discoverer_info_get_duration(cast(const(GstDiscovererInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   bool getLive()
   {
     bool _retval;
-    _retval = gst_discoverer_info_get_live(cast(const(GstDiscovererInfo)*)cPtr);
+    _retval = gst_discoverer_info_get_live(cast(const(GstDiscovererInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -122,7 +122,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gst.structure.Structure getMisc()
   {
     const(GstStructure)* _cretval;
-    _cretval = gst_discoverer_info_get_misc(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_misc(cast(const(GstDiscovererInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -137,7 +137,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   string[] getMissingElementsInstallerDetails()
   {
     const(char*)* _cretval;
-    _cretval = gst_discoverer_info_get_missing_elements_installer_details(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_missing_elements_installer_details(cast(const(GstDiscovererInfo)*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -156,7 +156,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.types.DiscovererResult getResult()
   {
     GstDiscovererResult _cretval;
-    _cretval = gst_discoverer_info_get_result(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_result(cast(const(GstDiscovererInfo)*)this._cPtr);
     gstpbutils.types.DiscovererResult _retval = cast(gstpbutils.types.DiscovererResult)_cretval;
     return _retval;
   }
@@ -165,7 +165,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   bool getSeekable()
   {
     bool _retval;
-    _retval = gst_discoverer_info_get_seekable(cast(const(GstDiscovererInfo)*)cPtr);
+    _retval = gst_discoverer_info_get_seekable(cast(const(GstDiscovererInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -173,8 +173,8 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo getStreamInfo()
   {
     GstDiscovererStreamInfo* _cretval;
-    _cretval = gst_discoverer_info_get_stream_info(cast(GstDiscovererInfo*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
+    _cretval = gst_discoverer_info_get_stream_info(cast(GstDiscovererInfo*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo)(cast(GstDiscovererStreamInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreamList()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_stream_list(cast(GstDiscovererInfo*)cPtr);
+    _cretval = gst_discoverer_info_get_stream_list(cast(GstDiscovererInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -200,7 +200,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams(gobject.types.GType streamtype)
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_streams(cast(GstDiscovererInfo*)cPtr, streamtype);
+    _cretval = gst_discoverer_info_get_streams(cast(GstDiscovererInfo*)this._cPtr, streamtype);
     auto _retval = gListToD!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -214,7 +214,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo[] getSubtitleStreams()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_subtitle_streams(cast(GstDiscovererInfo*)cPtr);
+    _cretval = gst_discoverer_info_get_subtitle_streams(cast(GstDiscovererInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_subtitle_info.DiscovererSubtitleInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -223,7 +223,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gst.tag_list.TagList getTags()
   {
     const(GstTagList)* _cretval;
-    _cretval = gst_discoverer_info_get_tags(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_tags(cast(const(GstDiscovererInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -232,7 +232,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gst.toc.Toc getToc()
   {
     const(GstToc)* _cretval;
-    _cretval = gst_discoverer_info_get_toc(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_toc(cast(const(GstDiscovererInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.toc.Toc(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -241,7 +241,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = gst_discoverer_info_get_uri(cast(const(GstDiscovererInfo)*)cPtr);
+    _cretval = gst_discoverer_info_get_uri(cast(const(GstDiscovererInfo)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -255,7 +255,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   gstpbutils.discoverer_video_info.DiscovererVideoInfo[] getVideoStreams()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_info_get_video_streams(cast(GstDiscovererInfo*)cPtr);
+    _cretval = gst_discoverer_info_get_video_streams(cast(GstDiscovererInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_video_info.DiscovererVideoInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -275,7 +275,7 @@ class DiscovererInfo : gobject.object.ObjectWrap
   glib.variant.Variant toVariant(gstpbutils.types.DiscovererSerializeFlags flags)
   {
     GVariant* _cretval;
-    _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)cPtr, flags);
+    _cretval = gst_discoverer_info_to_variant(cast(GstDiscovererInfo*)this._cPtr, flags);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

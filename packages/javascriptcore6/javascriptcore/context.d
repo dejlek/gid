@@ -31,16 +31,16 @@ class Context : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())jsc_context_get_type != &gidSymbolNotFound ? jsc_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -72,8 +72,8 @@ class Context : gobject.object.ObjectWrap
   static javascriptcore.context.Context newWithVirtualMachine(javascriptcore.virtual_machine.VirtualMachine vm)
   {
     JSCContext* _cretval;
-    _cretval = jsc_context_new_with_virtual_machine(vm ? cast(JSCVirtualMachine*)vm.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
+    _cretval = jsc_context_new_with_virtual_machine(vm ? cast(JSCVirtualMachine*)vm._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class Context : gobject.object.ObjectWrap
   {
     JSCContext* _cretval;
     _cretval = jsc_context_get_current();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(JSCContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Context : gobject.object.ObjectWrap
     const(char)* _code = code.toCString(No.Alloc);
     const(char)* _uri = uri.toCString(No.Alloc);
     JSCException* _exception;
-    _cretval = jsc_context_check_syntax(cast(JSCContext*)cPtr, _code, length, mode, _uri, lineNumber, &_exception);
+    _cretval = jsc_context_check_syntax(cast(JSCContext*)this._cPtr, _code, length, mode, _uri, lineNumber, &_exception);
     javascriptcore.types.CheckSyntaxResult _retval = cast(javascriptcore.types.CheckSyntaxResult)_cretval;
     exception = new javascriptcore.exception.ExceptionWrap(cast(void*)_exception, Yes.Take);
     return _retval;
@@ -122,7 +122,7 @@ class Context : gobject.object.ObjectWrap
   */
   void clearException()
   {
-    jsc_context_clear_exception(cast(JSCContext*)cPtr);
+    jsc_context_clear_exception(cast(JSCContext*)this._cPtr);
   }
 
   /**
@@ -137,8 +137,8 @@ class Context : gobject.object.ObjectWrap
   {
     JSCValue* _cretval;
     const(char)* _code = code.toCString(No.Alloc);
-    _cretval = jsc_context_evaluate(cast(JSCContext*)cPtr, _code, length);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_context_evaluate(cast(JSCContext*)this._cPtr, _code, length);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -165,8 +165,8 @@ class Context : gobject.object.ObjectWrap
     const(char)* _code = code.toCString(No.Alloc);
     const(char)* _uri = uri.toCString(No.Alloc);
     JSCValue* _object;
-    _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)cPtr, _code, length, objectInstance, objectClass ? cast(JSCClass*)objectClass.cPtr(No.Dup) : null, _uri, lineNumber, &_object);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_context_evaluate_in_object(cast(JSCContext*)this._cPtr, _code, length, objectInstance, objectClass ? cast(JSCClass*)objectClass._cPtr(No.Dup) : null, _uri, lineNumber, &_object);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     object = new javascriptcore.value.Value(cast(void*)_object, Yes.Take);
     return _retval;
   }
@@ -188,8 +188,8 @@ class Context : gobject.object.ObjectWrap
     JSCValue* _cretval;
     const(char)* _code = code.toCString(No.Alloc);
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)cPtr, _code, length, _uri, lineNumber);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_context_evaluate_with_source_uri(cast(JSCContext*)this._cPtr, _code, length, _uri, lineNumber);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,8 +201,8 @@ class Context : gobject.object.ObjectWrap
   javascriptcore.exception.ExceptionWrap getException()
   {
     JSCException* _cretval;
-    _cretval = jsc_context_get_exception(cast(JSCContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, No.Take);
+    _cretval = jsc_context_get_exception(cast(JSCContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(JSCException*)_cretval, No.Take);
     return _retval;
   }
 
@@ -213,8 +213,8 @@ class Context : gobject.object.ObjectWrap
   javascriptcore.value.Value getGlobalObject()
   {
     JSCValue* _cretval;
-    _cretval = jsc_context_get_global_object(cast(JSCContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_context_get_global_object(cast(JSCContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -229,8 +229,8 @@ class Context : gobject.object.ObjectWrap
   {
     JSCValue* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = jsc_context_get_value(cast(JSCContext*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
+    _cretval = jsc_context_get_value(cast(JSCContext*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.value.Value)(cast(JSCValue*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -241,8 +241,8 @@ class Context : gobject.object.ObjectWrap
   javascriptcore.virtual_machine.VirtualMachine getVirtualMachine()
   {
     JSCVirtualMachine* _cretval;
-    _cretval = jsc_context_get_virtual_machine(cast(JSCContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.virtual_machine.VirtualMachine)(cast(JSCVirtualMachine*)_cretval, No.Take);
+    _cretval = jsc_context_get_virtual_machine(cast(JSCContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.virtual_machine.VirtualMachine)(cast(JSCVirtualMachine*)_cretval, No.Take);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class Context : gobject.object.ObjectWrap
   */
   void popExceptionHandler()
   {
-    jsc_context_pop_exception_handler(cast(JSCContext*)cPtr);
+    jsc_context_pop_exception_handler(cast(JSCContext*)this._cPtr);
   }
 
   /**
@@ -274,13 +274,13 @@ class Context : gobject.object.ObjectWrap
     {
       auto _dlg = cast(javascriptcore.types.ExceptionHandler*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap.getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(javascriptcore.context.Context)(cast(void*)context, No.Take), gobject.object.ObjectWrap._getDObject!(javascriptcore.exception.ExceptionWrap)(cast(void*)exception, No.Take));
     }
     auto _handlerCB = handler ? &_handlerCallback : null;
 
     auto _handler = handler ? freezeDelegate(cast(void*)&handler) : null;
     GDestroyNotify _handlerDestroyCB = handler ? &thawDelegate : null;
-    jsc_context_push_exception_handler(cast(JSCContext*)cPtr, _handlerCB, _handler, _handlerDestroyCB);
+    jsc_context_push_exception_handler(cast(JSCContext*)this._cPtr, _handlerCB, _handler, _handlerDestroyCB);
   }
 
   /**
@@ -311,8 +311,8 @@ class Context : gobject.object.ObjectWrap
 
     JSCClass* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = jsc_context_register_class(cast(JSCContext*)cPtr, _name, parentClass ? cast(JSCClass*)parentClass.cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
+    _cretval = jsc_context_register_class(cast(JSCContext*)this._cPtr, _name, parentClass ? cast(JSCClass*)parentClass._cPtr(No.Dup) : null, &vtable, _destroyNotifyCB);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(javascriptcore.class_.Class)(cast(JSCClass*)_cretval, No.Take);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Context : gobject.object.ObjectWrap
   void setValue(string name, javascriptcore.value.Value value)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    jsc_context_set_value(cast(JSCContext*)cPtr, _name, value ? cast(JSCValue*)value.cPtr(No.Dup) : null);
+    jsc_context_set_value(cast(JSCContext*)this._cPtr, _name, value ? cast(JSCValue*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -339,7 +339,7 @@ class Context : gobject.object.ObjectWrap
   void throw_(string errorMessage)
   {
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    jsc_context_throw(cast(JSCContext*)cPtr, _errorMessage);
+    jsc_context_throw(cast(JSCContext*)this._cPtr, _errorMessage);
   }
 
   /**
@@ -350,7 +350,7 @@ class Context : gobject.object.ObjectWrap
   */
   void throwException(javascriptcore.exception.ExceptionWrap exception)
   {
-    jsc_context_throw_exception(cast(JSCContext*)cPtr, exception ? cast(JSCException*)exception.cPtr(No.Dup) : null);
+    jsc_context_throw_exception(cast(JSCContext*)this._cPtr, exception ? cast(JSCException*)exception._cPtr(No.Dup) : null);
   }
 
   /**
@@ -365,6 +365,6 @@ class Context : gobject.object.ObjectWrap
   {
     const(char)* _errorName = errorName.toCString(No.Alloc);
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    jsc_context_throw_with_name(cast(JSCContext*)cPtr, _errorName, _errorMessage);
+    jsc_context_throw_with_name(cast(JSCContext*)this._cPtr, _errorName, _errorMessage);
   }
 }

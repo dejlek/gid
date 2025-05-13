@@ -21,16 +21,16 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_audio_profile_get_type != &gidSymbolNotFound ? gst_encoding_audio_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class EncodingAudioProfile : gstpbutils.encoding_profile.EncodingProfile
   {
     GstEncodingAudioProfile* _cretval;
     const(char)* _preset = preset.toCString(No.Alloc);
-    _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format.cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction.cPtr(No.Dup) : null, presence);
+    _cretval = gst_encoding_audio_profile_new(format ? cast(GstCaps*)format._cPtr(No.Dup) : null, _preset, restriction ? cast(GstCaps*)restriction._cPtr(No.Dup) : null, presence);
     this(_cretval, Yes.Take);
   }
 }

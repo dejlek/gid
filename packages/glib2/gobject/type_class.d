@@ -26,7 +26,7 @@ class TypeClass
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -103,13 +103,13 @@ class TypeClass
   */
   void addPrivate(size_t privateSize)
   {
-    g_type_class_add_private(cast(GTypeClass*)cPtr, privateSize);
+    g_type_class_add_private(cast(GTypeClass*)this._cPtr, privateSize);
   }
 
   /** */
   void* getPrivate(gobject.types.GType privateType)
   {
-    auto _retval = g_type_class_get_private(cast(GTypeClass*)cPtr, privateType);
+    auto _retval = g_type_class_get_private(cast(GTypeClass*)this._cPtr, privateType);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class TypeClass
   gobject.type_class.TypeClass peekParent()
   {
     GTypeClass* _cretval;
-    _cretval = g_type_class_peek_parent(cast(GTypeClass*)cPtr);
+    _cretval = g_type_class_peek_parent(cast(GTypeClass*)this._cPtr);
     auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval) : null;
     return _retval;
   }

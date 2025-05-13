@@ -28,7 +28,7 @@ class EventDND
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class EventDND
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventDND*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventDND*)this._cPtr).type;
   }
 
   /**
@@ -53,7 +53,7 @@ class EventDND
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventDND*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventDND*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -62,7 +62,7 @@ class EventDND
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)this._cPtr).window);
   }
 
   /**
@@ -72,8 +72,8 @@ class EventDND
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventDND*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventDND*)this._cPtr).window);
   }
 
   /**
@@ -82,7 +82,7 @@ class EventDND
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventDND*)cPtr).sendEvent;
+    return (cast(GdkEventDND*)this._cPtr).sendEvent;
   }
 
   /**
@@ -92,7 +92,7 @@ class EventDND
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventDND*)cPtr).sendEvent = propval;
+    (cast(GdkEventDND*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -101,7 +101,7 @@ class EventDND
   */
   @property gdk.drag_context.DragContext context()
   {
-    return cToD!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
+    return cToD!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)this._cPtr).context);
   }
 
   /**
@@ -111,8 +111,8 @@ class EventDND
   */
   @property void context(gdk.drag_context.DragContext propval)
   {
-    cValueFree!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)cPtr).context);
-    dToC(propval, cast(void*)&(cast(GdkEventDND*)cPtr).context);
+    cValueFree!(gdk.drag_context.DragContext)(cast(void*)(cast(GdkEventDND*)this._cPtr).context);
+    dToC(propval, cast(void*)&(cast(GdkEventDND*)this._cPtr).context);
   }
 
   /**
@@ -121,7 +121,7 @@ class EventDND
   */
   @property uint time()
   {
-    return (cast(GdkEventDND*)cPtr).time;
+    return (cast(GdkEventDND*)this._cPtr).time;
   }
 
   /**
@@ -131,7 +131,7 @@ class EventDND
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventDND*)cPtr).time = propval;
+    (cast(GdkEventDND*)this._cPtr).time = propval;
   }
 
   /**
@@ -141,7 +141,7 @@ class EventDND
   */
   @property short xRoot()
   {
-    return (cast(GdkEventDND*)cPtr).xRoot;
+    return (cast(GdkEventDND*)this._cPtr).xRoot;
   }
 
   /**
@@ -152,7 +152,7 @@ class EventDND
   */
   @property void xRoot(short propval)
   {
-    (cast(GdkEventDND*)cPtr).xRoot = propval;
+    (cast(GdkEventDND*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -162,7 +162,7 @@ class EventDND
   */
   @property short yRoot()
   {
-    return (cast(GdkEventDND*)cPtr).yRoot;
+    return (cast(GdkEventDND*)this._cPtr).yRoot;
   }
 
   /**
@@ -173,6 +173,6 @@ class EventDND
   */
   @property void yRoot(short propval)
   {
-    (cast(GdkEventDND*)cPtr).yRoot = propval;
+    (cast(GdkEventDND*)this._cPtr).yRoot = propval;
   }
 }

@@ -36,22 +36,22 @@ class Color : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_color_get_type != &gidSymbolNotFound ? pango_color_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort red()
   {
-    return (cast(PangoColor*)cPtr).red;
+    return (cast(PangoColor*)this._cPtr).red;
   }
 
   /**
@@ -76,7 +76,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void red(ushort propval)
   {
-    (cast(PangoColor*)cPtr).red = propval;
+    (cast(PangoColor*)this._cPtr).red = propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort green()
   {
-    return (cast(PangoColor*)cPtr).green;
+    return (cast(PangoColor*)this._cPtr).green;
   }
 
   /**
@@ -95,7 +95,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void green(ushort propval)
   {
-    (cast(PangoColor*)cPtr).green = propval;
+    (cast(PangoColor*)this._cPtr).green = propval;
   }
 
   /**
@@ -104,7 +104,7 @@ class Color : gobject.boxed.Boxed
   */
   @property ushort blue()
   {
-    return (cast(PangoColor*)cPtr).blue;
+    return (cast(PangoColor*)this._cPtr).blue;
   }
 
   /**
@@ -114,7 +114,7 @@ class Color : gobject.boxed.Boxed
   */
   @property void blue(ushort propval)
   {
-    (cast(PangoColor*)cPtr).blue = propval;
+    (cast(PangoColor*)this._cPtr).blue = propval;
   }
 
   /**
@@ -130,7 +130,7 @@ class Color : gobject.boxed.Boxed
   pango.color.Color copy()
   {
     PangoColor* _cretval;
-    _cretval = pango_color_copy(cast(const(PangoColor)*)cPtr);
+    _cretval = pango_color_copy(cast(const(PangoColor)*)this._cPtr);
     auto _retval = _cretval ? new pango.color.Color(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -155,7 +155,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = pango_color_parse(cast(PangoColor*)cPtr, _spec);
+    _retval = pango_color_parse(cast(PangoColor*)this._cPtr, _spec);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Color : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = pango_color_parse_with_alpha(cast(PangoColor*)cPtr, cast(ushort*)&alpha, _spec);
+    _retval = pango_color_parse_with_alpha(cast(PangoColor*)this._cPtr, cast(ushort*)&alpha, _spec);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class Color : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = pango_color_to_string(cast(const(PangoColor)*)cPtr);
+    _cretval = pango_color_to_string(cast(const(PangoColor)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

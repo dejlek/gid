@@ -26,7 +26,7 @@ class VideoColorimetry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class VideoColorimetry
   */
   @property gstvideo.types.VideoColorRange range()
   {
-    return cast(gstvideo.types.VideoColorRange)(cast(GstVideoColorimetry*)cPtr).range;
+    return cast(gstvideo.types.VideoColorRange)(cast(GstVideoColorimetry*)this._cPtr).range;
   }
 
   /**
@@ -49,7 +49,7 @@ class VideoColorimetry
   */
   @property void range(gstvideo.types.VideoColorRange propval)
   {
-    (cast(GstVideoColorimetry*)cPtr).range = cast(GstVideoColorRange)propval;
+    (cast(GstVideoColorimetry*)this._cPtr).range = cast(GstVideoColorRange)propval;
   }
 
   /**
@@ -59,7 +59,7 @@ class VideoColorimetry
   */
   @property gstvideo.types.VideoColorMatrix matrix()
   {
-    return cast(gstvideo.types.VideoColorMatrix)(cast(GstVideoColorimetry*)cPtr).matrix;
+    return cast(gstvideo.types.VideoColorMatrix)(cast(GstVideoColorimetry*)this._cPtr).matrix;
   }
 
   /**
@@ -70,7 +70,7 @@ class VideoColorimetry
   */
   @property void matrix(gstvideo.types.VideoColorMatrix propval)
   {
-    (cast(GstVideoColorimetry*)cPtr).matrix = cast(GstVideoColorMatrix)propval;
+    (cast(GstVideoColorimetry*)this._cPtr).matrix = cast(GstVideoColorMatrix)propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class VideoColorimetry
   */
   @property gstvideo.types.VideoTransferFunction transfer()
   {
-    return cast(gstvideo.types.VideoTransferFunction)(cast(GstVideoColorimetry*)cPtr).transfer;
+    return cast(gstvideo.types.VideoTransferFunction)(cast(GstVideoColorimetry*)this._cPtr).transfer;
   }
 
   /**
@@ -89,7 +89,7 @@ class VideoColorimetry
   */
   @property void transfer(gstvideo.types.VideoTransferFunction propval)
   {
-    (cast(GstVideoColorimetry*)cPtr).transfer = cast(GstVideoTransferFunction)propval;
+    (cast(GstVideoColorimetry*)this._cPtr).transfer = cast(GstVideoTransferFunction)propval;
   }
 
   /**
@@ -98,7 +98,7 @@ class VideoColorimetry
   */
   @property gstvideo.types.VideoColorPrimaries primaries()
   {
-    return cast(gstvideo.types.VideoColorPrimaries)(cast(GstVideoColorimetry*)cPtr).primaries;
+    return cast(gstvideo.types.VideoColorPrimaries)(cast(GstVideoColorimetry*)this._cPtr).primaries;
   }
 
   /**
@@ -108,7 +108,7 @@ class VideoColorimetry
   */
   @property void primaries(gstvideo.types.VideoColorPrimaries propval)
   {
-    (cast(GstVideoColorimetry*)cPtr).primaries = cast(GstVideoColorPrimaries)propval;
+    (cast(GstVideoColorimetry*)this._cPtr).primaries = cast(GstVideoColorPrimaries)propval;
   }
 
   /**
@@ -123,7 +123,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)cPtr, _color);
+    _retval = gst_video_colorimetry_from_string(cast(GstVideoColorimetry*)this._cPtr, _color);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class VideoColorimetry
   bool isEqual(gstvideo.video_colorimetry.VideoColorimetry other)
   {
     bool _retval;
-    _retval = gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)cPtr, other ? cast(const(GstVideoColorimetry)*)other.cPtr : null);
+    _retval = gst_video_colorimetry_is_equal(cast(const(GstVideoColorimetry)*)this._cPtr, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class VideoColorimetry
   bool isEquivalent(uint bitdepth, gstvideo.video_colorimetry.VideoColorimetry other, uint otherBitdepth)
   {
     bool _retval;
-    _retval = gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)cPtr, bitdepth, other ? cast(const(GstVideoColorimetry)*)other.cPtr : null, otherBitdepth);
+    _retval = gst_video_colorimetry_is_equivalent(cast(const(GstVideoColorimetry)*)this._cPtr, bitdepth, other ? cast(const(GstVideoColorimetry)*)other._cPtr : null, otherBitdepth);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class VideoColorimetry
   {
     bool _retval;
     const(char)* _color = color.toCString(No.Alloc);
-    _retval = gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)cPtr, _color);
+    _retval = gst_video_colorimetry_matches(cast(const(GstVideoColorimetry)*)this._cPtr, _color);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class VideoColorimetry
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)cPtr);
+    _cretval = gst_video_colorimetry_to_string(cast(const(GstVideoColorimetry)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

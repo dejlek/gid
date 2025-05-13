@@ -64,16 +64,16 @@ class GraphicsOffload : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_graphics_offload_get_type != &gidSymbolNotFound ? gtk_graphics_offload_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -130,7 +130,7 @@ class GraphicsOffload : gtk.widget.Widget
   this(gtk.widget.Widget child = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _cretval = gtk_graphics_offload_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -141,8 +141,8 @@ class GraphicsOffload : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_graphics_offload_get_child(cast(GtkGraphicsOffload*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class GraphicsOffload : gtk.widget.Widget
   gtk.types.GraphicsOffloadEnabled getEnabled()
   {
     GtkGraphicsOffloadEnabled _cretval;
-    _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)cPtr);
+    _cretval = gtk_graphics_offload_get_enabled(cast(GtkGraphicsOffload*)this._cPtr);
     gtk.types.GraphicsOffloadEnabled _retval = cast(gtk.types.GraphicsOffloadEnabled)_cretval;
     return _retval;
   }
@@ -166,7 +166,7 @@ class GraphicsOffload : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_graphics_offload_set_child(cast(GtkGraphicsOffload*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -178,6 +178,6 @@ class GraphicsOffload : gtk.widget.Widget
   */
   void setEnabled(gtk.types.GraphicsOffloadEnabled enabled)
   {
-    gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)cPtr, enabled);
+    gtk_graphics_offload_set_enabled(cast(GtkGraphicsOffload*)this._cPtr, enabled);
   }
 }

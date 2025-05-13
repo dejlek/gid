@@ -19,16 +19,16 @@ class SortOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sort_options_get_type != &gidSymbolNotFound ? garrow_sort_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   */
   void addSortKey(arrow.sort_key.SortKey sortKey)
   {
-    garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)cPtr, sortKey ? cast(GArrowSortKey*)sortKey.cPtr(No.Dup) : null);
+    garrow_sort_options_add_sort_key(cast(GArrowSortOptions*)this._cPtr, sortKey ? cast(GArrowSortKey*)sortKey._cPtr(No.Dup) : null);
   }
 
   alias equal = arrow.function_options.FunctionOptions.equal;
@@ -64,7 +64,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   bool equal(arrow.sort_options.SortOptions otherOptions)
   {
     bool _retval;
-    _retval = garrow_sort_options_equal(cast(GArrowSortOptions*)cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions.cPtr(No.Dup) : null);
+    _retval = garrow_sort_options_equal(cast(GArrowSortOptions*)this._cPtr, otherOptions ? cast(GArrowSortOptions*)otherOptions._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -72,7 +72,7 @@ class SortOptions : arrow.function_options.FunctionOptions
   arrow.sort_key.SortKey[] getSortKeys()
   {
     GList* _cretval;
-    _cretval = garrow_sort_options_get_sort_keys(cast(GArrowSortOptions*)cPtr);
+    _cretval = garrow_sort_options_get_sort_keys(cast(GArrowSortOptions*)this._cPtr);
     auto _retval = gListToD!(arrow.sort_key.SortKey, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -87,6 +87,6 @@ class SortOptions : arrow.function_options.FunctionOptions
   {
     auto _sortKeys = gListFromD!(arrow.sort_key.SortKey)(sortKeys);
     scope(exit) containerFree!(GList*, arrow.sort_key.SortKey, GidOwnership.None)(_sortKeys);
-    garrow_sort_options_set_sort_keys(cast(GArrowSortOptions*)cPtr, _sortKeys);
+    garrow_sort_options_set_sort_keys(cast(GArrowSortOptions*)this._cPtr, _sortKeys);
   }
 }

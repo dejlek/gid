@@ -31,7 +31,7 @@ class PadEvent : gdk.event.Event
   */
   void getAxisValue(out uint index, out double value)
   {
-    gdk_pad_event_get_axis_value(cast(GdkEvent*)cPtr, cast(uint*)&index, cast(double*)&value);
+    gdk_pad_event_get_axis_value(cast(GdkEvent*)this._cPtr, cast(uint*)&index, cast(double*)&value);
   }
 
   /**
@@ -42,7 +42,7 @@ class PadEvent : gdk.event.Event
   uint getButton()
   {
     uint _retval;
-    _retval = gdk_pad_event_get_button(cast(GdkEvent*)cPtr);
+    _retval = gdk_pad_event_get_button(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -55,6 +55,6 @@ class PadEvent : gdk.event.Event
   */
   void getGroupMode(out uint group, out uint mode)
   {
-    gdk_pad_event_get_group_mode(cast(GdkEvent*)cPtr, cast(uint*)&group, cast(uint*)&mode);
+    gdk_pad_event_get_group_mode(cast(GdkEvent*)this._cPtr, cast(uint*)&group, cast(uint*)&mode);
   }
 }

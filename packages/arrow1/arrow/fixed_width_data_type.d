@@ -18,16 +18,16 @@ class FixedWidthDataType : arrow.data_type.DataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_fixed_width_data_type_get_type != &gidSymbolNotFound ? garrow_fixed_width_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class FixedWidthDataType : arrow.data_type.DataType
   int getBitWidth()
   {
     int _retval;
-    _retval = garrow_fixed_width_data_type_get_bit_width(cast(GArrowFixedWidthDataType*)cPtr);
+    _retval = garrow_fixed_width_data_type_get_bit_width(cast(GArrowFixedWidthDataType*)this._cPtr);
     return _retval;
   }
 }

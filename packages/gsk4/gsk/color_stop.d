@@ -27,7 +27,7 @@ class ColorStop
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class ColorStop
   */
   @property float offset()
   {
-    return (cast(GskColorStop*)cPtr).offset;
+    return (cast(GskColorStop*)this._cPtr).offset;
   }
 
   /**
@@ -48,7 +48,7 @@ class ColorStop
   */
   @property void offset(float propval)
   {
-    (cast(GskColorStop*)cPtr).offset = propval;
+    (cast(GskColorStop*)this._cPtr).offset = propval;
   }
 
   /**
@@ -57,6 +57,6 @@ class ColorStop
   */
   @property gdk.rgba.RGBA color()
   {
-    return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskColorStop*)cPtr).color);
+    return cToD!(gdk.rgba.RGBA)(cast(void*)&(cast(GskColorStop*)this._cPtr).color);
   }
 }

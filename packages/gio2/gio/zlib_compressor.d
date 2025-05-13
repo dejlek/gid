@@ -24,16 +24,16 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_zlib_compressor_get_type != &gidSymbolNotFound ? g_zlib_compressor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,8 +89,8 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   gio.file_info.FileInfo getFileInfo()
   {
     GFileInfo* _cretval;
-    _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
+    _cretval = g_zlib_compressor_get_file_info(cast(GZlibCompressor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, No.Take);
     return _retval;
   }
 
@@ -109,6 +109,6 @@ class ZlibCompressor : gobject.object.ObjectWrap, gio.converter.Converter
   */
   void setFileInfo(gio.file_info.FileInfo fileInfo = null)
   {
-    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)cPtr, fileInfo ? cast(GFileInfo*)fileInfo.cPtr(No.Dup) : null);
+    g_zlib_compressor_set_file_info(cast(GZlibCompressor*)this._cPtr, fileInfo ? cast(GFileInfo*)fileInfo._cPtr(No.Dup) : null);
   }
 }

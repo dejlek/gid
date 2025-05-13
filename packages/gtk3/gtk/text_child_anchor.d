@@ -23,16 +23,16 @@ class TextChildAnchor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_child_anchor_get_type != &gidSymbolNotFound ? gtk_text_child_anchor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   bool getDeleted()
   {
     bool _retval;
-    _retval = gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)cPtr);
+    _retval = gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)this._cPtr);
     return _retval;
   }
 
@@ -79,7 +79,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   gtk.widget.Widget[] getWidgets()
   {
     GList* _cretval;
-    _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)cPtr);
+    _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)this._cPtr);
     auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }

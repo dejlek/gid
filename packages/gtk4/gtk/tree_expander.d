@@ -81,16 +81,16 @@ class TreeExpander : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_expander_get_type != &gidSymbolNotFound ? gtk_tree_expander_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -231,8 +231,8 @@ class TreeExpander : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tree_expander_get_child(cast(GtkTreeExpander*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class TreeExpander : gtk.widget.Widget
   bool getHideExpander()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_hide_expander(cast(GtkTreeExpander*)cPtr);
+    _retval = gtk_tree_expander_get_hide_expander(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class TreeExpander : gtk.widget.Widget
   bool getIndentForDepth()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_indent_for_depth(cast(GtkTreeExpander*)cPtr);
+    _retval = gtk_tree_expander_get_indent_for_depth(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class TreeExpander : gtk.widget.Widget
   bool getIndentForIcon()
   {
     bool _retval;
-    _retval = gtk_tree_expander_get_indent_for_icon(cast(GtkTreeExpander*)cPtr);
+    _retval = gtk_tree_expander_get_indent_for_icon(cast(GtkTreeExpander*)this._cPtr);
     return _retval;
   }
 
@@ -281,9 +281,9 @@ class TreeExpander : gtk.widget.Widget
   */
   gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = gtk_tree_expander_get_item(cast(GtkTreeExpander*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -294,8 +294,8 @@ class TreeExpander : gtk.widget.Widget
   gtk.tree_list_row.TreeListRow getListRow()
   {
     GtkTreeListRow* _cretval;
-    _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, No.Take);
+    _cretval = gtk_tree_expander_get_list_row(cast(GtkTreeExpander*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_list_row.TreeListRow)(cast(GtkTreeListRow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class TreeExpander : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_tree_expander_set_child(cast(GtkTreeExpander*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_tree_expander_set_child(cast(GtkTreeExpander*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -318,7 +318,7 @@ class TreeExpander : gtk.widget.Widget
   */
   void setHideExpander(bool hideExpander)
   {
-    gtk_tree_expander_set_hide_expander(cast(GtkTreeExpander*)cPtr, hideExpander);
+    gtk_tree_expander_set_hide_expander(cast(GtkTreeExpander*)this._cPtr, hideExpander);
   }
 
   /**
@@ -329,7 +329,7 @@ class TreeExpander : gtk.widget.Widget
   */
   void setIndentForDepth(bool indentForDepth)
   {
-    gtk_tree_expander_set_indent_for_depth(cast(GtkTreeExpander*)cPtr, indentForDepth);
+    gtk_tree_expander_set_indent_for_depth(cast(GtkTreeExpander*)this._cPtr, indentForDepth);
   }
 
   /**
@@ -340,7 +340,7 @@ class TreeExpander : gtk.widget.Widget
   */
   void setIndentForIcon(bool indentForIcon)
   {
-    gtk_tree_expander_set_indent_for_icon(cast(GtkTreeExpander*)cPtr, indentForIcon);
+    gtk_tree_expander_set_indent_for_icon(cast(GtkTreeExpander*)this._cPtr, indentForIcon);
   }
 
   /**
@@ -351,6 +351,6 @@ class TreeExpander : gtk.widget.Widget
   */
   void setListRow(gtk.tree_list_row.TreeListRow listRow = null)
   {
-    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)cPtr, listRow ? cast(GtkTreeListRow*)listRow.cPtr(No.Dup) : null);
+    gtk_tree_expander_set_list_row(cast(GtkTreeExpander*)this._cPtr, listRow ? cast(GtkTreeListRow*)listRow._cPtr(No.Dup) : null);
   }
 }

@@ -25,16 +25,16 @@ class SaveDelegate : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_save_delegate_get_type != &gidSymbolNotFound ? panel_save_delegate_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -203,13 +203,13 @@ class SaveDelegate : gobject.object.ObjectWrap
   /** */
   void close()
   {
-    panel_save_delegate_close(cast(PanelSaveDelegate*)cPtr);
+    panel_save_delegate_close(cast(PanelSaveDelegate*)this._cPtr);
   }
 
   /** */
   void discard()
   {
-    panel_save_delegate_discard(cast(PanelSaveDelegate*)cPtr);
+    panel_save_delegate_discard(cast(PanelSaveDelegate*)this._cPtr);
   }
 
   /**
@@ -219,8 +219,8 @@ class SaveDelegate : gobject.object.ObjectWrap
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = panel_save_delegate_get_icon(cast(PanelSaveDelegate*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = panel_save_delegate_get_icon(cast(PanelSaveDelegate*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = panel_save_delegate_get_icon_name(cast(PanelSaveDelegate*)cPtr);
+    _cretval = panel_save_delegate_get_icon_name(cast(PanelSaveDelegate*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -240,7 +240,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   bool getIsDraft()
   {
     bool _retval;
-    _retval = panel_save_delegate_get_is_draft(cast(PanelSaveDelegate*)cPtr);
+    _retval = panel_save_delegate_get_is_draft(cast(PanelSaveDelegate*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   double getProgress()
   {
     double _retval;
-    _retval = panel_save_delegate_get_progress(cast(PanelSaveDelegate*)cPtr);
+    _retval = panel_save_delegate_get_progress(cast(PanelSaveDelegate*)this._cPtr);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   string getSubtitle()
   {
     const(char)* _cretval;
-    _cretval = panel_save_delegate_get_subtitle(cast(PanelSaveDelegate*)cPtr);
+    _cretval = panel_save_delegate_get_subtitle(cast(PanelSaveDelegate*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -271,7 +271,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = panel_save_delegate_get_title(cast(PanelSaveDelegate*)cPtr);
+    _cretval = panel_save_delegate_get_title(cast(PanelSaveDelegate*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -279,17 +279,17 @@ class SaveDelegate : gobject.object.ObjectWrap
   /** */
   void saveAsync(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    panel_save_delegate_save_async(cast(PanelSaveDelegate*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    panel_save_delegate_save_async(cast(PanelSaveDelegate*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /** */
@@ -297,7 +297,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = panel_save_delegate_save_finish(cast(PanelSaveDelegate*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = panel_save_delegate_save_finish(cast(PanelSaveDelegate*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -311,7 +311,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    panel_save_delegate_set_icon(cast(PanelSaveDelegate*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    panel_save_delegate_set_icon(cast(PanelSaveDelegate*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -323,19 +323,19 @@ class SaveDelegate : gobject.object.ObjectWrap
   void setIconName(string icon = null)
   {
     const(char)* _icon = icon.toCString(No.Alloc);
-    panel_save_delegate_set_icon_name(cast(PanelSaveDelegate*)cPtr, _icon);
+    panel_save_delegate_set_icon_name(cast(PanelSaveDelegate*)this._cPtr, _icon);
   }
 
   /** */
   void setIsDraft(bool isDraft)
   {
-    panel_save_delegate_set_is_draft(cast(PanelSaveDelegate*)cPtr, isDraft);
+    panel_save_delegate_set_is_draft(cast(PanelSaveDelegate*)this._cPtr, isDraft);
   }
 
   /** */
   void setProgress(double progress)
   {
-    panel_save_delegate_set_progress(cast(PanelSaveDelegate*)cPtr, progress);
+    panel_save_delegate_set_progress(cast(PanelSaveDelegate*)this._cPtr, progress);
   }
 
   /**
@@ -347,7 +347,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   void setSubtitle(string subtitle = null)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
-    panel_save_delegate_set_subtitle(cast(PanelSaveDelegate*)cPtr, _subtitle);
+    panel_save_delegate_set_subtitle(cast(PanelSaveDelegate*)this._cPtr, _subtitle);
   }
 
   /**
@@ -359,7 +359,7 @@ class SaveDelegate : gobject.object.ObjectWrap
   void setTitle(string title = null)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    panel_save_delegate_set_title(cast(PanelSaveDelegate*)cPtr, _title);
+    panel_save_delegate_set_title(cast(PanelSaveDelegate*)this._cPtr, _title);
   }
 
   /**

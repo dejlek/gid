@@ -21,16 +21,16 @@ class MapArray : arrow.list_array.ListArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_map_array_get_type != &gidSymbolNotFound ? garrow_map_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class MapArray : arrow.list_array.ListArray
   {
     GArrowMapArray* _cretval;
     GError *_err;
-    _cretval = garrow_map_array_new(offsets ? cast(GArrowArray*)offsets.cPtr(No.Dup) : null, keys ? cast(GArrowArray*)keys.cPtr(No.Dup) : null, items ? cast(GArrowArray*)items.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_map_array_new(offsets ? cast(GArrowArray*)offsets._cPtr(No.Dup) : null, keys ? cast(GArrowArray*)keys._cPtr(No.Dup) : null, items ? cast(GArrowArray*)items._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -54,8 +54,8 @@ class MapArray : arrow.list_array.ListArray
   arrow.array.Array getItems()
   {
     GArrowArray* _cretval;
-    _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_map_array_get_items(cast(GArrowMapArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -63,8 +63,8 @@ class MapArray : arrow.list_array.ListArray
   arrow.array.Array getKeys()
   {
     GArrowArray* _cretval;
-    _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
+    _cretval = garrow_map_array_get_keys(cast(GArrowMapArray*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.array.Array)(cast(GArrowArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

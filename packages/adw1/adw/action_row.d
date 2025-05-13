@@ -69,16 +69,16 @@ class ActionRow : adw.preferences_row.PreferencesRow
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_action_row_get_type != &gidSymbolNotFound ? adw_action_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -259,7 +259,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void activate()
   {
-    adw_action_row_activate(cast(AdwActionRow*)cPtr);
+    adw_action_row_activate(cast(AdwActionRow*)this._cPtr);
   }
 
   /**
@@ -270,7 +270,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void addPrefix(gtk.widget.Widget widget)
   {
-    adw_action_row_add_prefix(cast(AdwActionRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_action_row_add_prefix(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -281,7 +281,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void addSuffix(gtk.widget.Widget widget)
   {
-    adw_action_row_add_suffix(cast(AdwActionRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_action_row_add_suffix(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -291,8 +291,8 @@ class ActionRow : adw.preferences_row.PreferencesRow
   gtk.widget.Widget getActivatableWidget()
   {
     GtkWidget* _cretval;
-    _cretval = adw_action_row_get_activatable_widget(cast(AdwActionRow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_action_row_get_activatable_widget(cast(AdwActionRow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_action_row_get_icon_name(cast(AdwActionRow*)cPtr);
+    _cretval = adw_action_row_get_icon_name(cast(AdwActionRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -317,7 +317,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   string getSubtitle()
   {
     const(char)* _cretval;
-    _cretval = adw_action_row_get_subtitle(cast(AdwActionRow*)cPtr);
+    _cretval = adw_action_row_get_subtitle(cast(AdwActionRow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -331,7 +331,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   int getSubtitleLines()
   {
     int _retval;
-    _retval = adw_action_row_get_subtitle_lines(cast(AdwActionRow*)cPtr);
+    _retval = adw_action_row_get_subtitle_lines(cast(AdwActionRow*)this._cPtr);
     return _retval;
   }
 
@@ -342,7 +342,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   bool getSubtitleSelectable()
   {
     bool _retval;
-    _retval = adw_action_row_get_subtitle_selectable(cast(AdwActionRow*)cPtr);
+    _retval = adw_action_row_get_subtitle_selectable(cast(AdwActionRow*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   int getTitleLines()
   {
     int _retval;
-    _retval = adw_action_row_get_title_lines(cast(AdwActionRow*)cPtr);
+    _retval = adw_action_row_get_title_lines(cast(AdwActionRow*)this._cPtr);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void remove(gtk.widget.Widget widget)
   {
-    adw_action_row_remove(cast(AdwActionRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_action_row_remove(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -385,7 +385,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setActivatableWidget(gtk.widget.Widget widget = null)
   {
-    adw_action_row_set_activatable_widget(cast(AdwActionRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_action_row_set_activatable_widget(cast(AdwActionRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -399,7 +399,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_action_row_set_icon_name(cast(AdwActionRow*)cPtr, _iconName);
+    adw_action_row_set_icon_name(cast(AdwActionRow*)this._cPtr, _iconName);
   }
 
   /**
@@ -414,7 +414,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   void setSubtitle(string subtitle)
   {
     const(char)* _subtitle = subtitle.toCString(No.Alloc);
-    adw_action_row_set_subtitle(cast(AdwActionRow*)cPtr, _subtitle);
+    adw_action_row_set_subtitle(cast(AdwActionRow*)this._cPtr, _subtitle);
   }
 
   /**
@@ -428,7 +428,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setSubtitleLines(int subtitleLines)
   {
-    adw_action_row_set_subtitle_lines(cast(AdwActionRow*)cPtr, subtitleLines);
+    adw_action_row_set_subtitle_lines(cast(AdwActionRow*)this._cPtr, subtitleLines);
   }
 
   /**
@@ -441,7 +441,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setSubtitleSelectable(bool subtitleSelectable)
   {
-    adw_action_row_set_subtitle_selectable(cast(AdwActionRow*)cPtr, subtitleSelectable);
+    adw_action_row_set_subtitle_selectable(cast(AdwActionRow*)this._cPtr, subtitleSelectable);
   }
 
   /**
@@ -455,7 +455,7 @@ class ActionRow : adw.preferences_row.PreferencesRow
   */
   void setTitleLines(int titleLines)
   {
-    adw_action_row_set_title_lines(cast(AdwActionRow*)cPtr, titleLines);
+    adw_action_row_set_title_lines(cast(AdwActionRow*)this._cPtr, titleLines);
   }
 
   /**

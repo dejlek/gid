@@ -24,16 +24,16 @@ class ControlBinding : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_control_binding_get_type != &gidSymbolNotFound ? gst_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,9 +67,9 @@ class ControlBinding : gst.object.ObjectWrap
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     GValue* _values = _tmpvalues.ptr;
-    _retval = gst_control_binding_get_g_value_array(cast(GstControlBinding*)cPtr, timestamp, interval, _nValues, _values);
+    _retval = gst_control_binding_get_g_value_array(cast(GstControlBinding*)this._cPtr, timestamp, interval, _nValues, _values);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class ControlBinding : gst.object.ObjectWrap
   gobject.value.Value getValue(gst.types.ClockTime timestamp)
   {
     GValue* _cretval;
-    _cretval = gst_control_binding_get_value(cast(GstControlBinding*)cPtr, timestamp);
+    _cretval = gst_control_binding_get_value(cast(GstControlBinding*)this._cPtr, timestamp);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -98,7 +98,7 @@ class ControlBinding : gst.object.ObjectWrap
   bool isDisabled()
   {
     bool _retval;
-    _retval = gst_control_binding_is_disabled(cast(GstControlBinding*)cPtr);
+    _retval = gst_control_binding_is_disabled(cast(GstControlBinding*)this._cPtr);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class ControlBinding : gst.object.ObjectWrap
   */
   void setDisabled(bool disabled)
   {
-    gst_control_binding_set_disabled(cast(GstControlBinding*)cPtr, disabled);
+    gst_control_binding_set_disabled(cast(GstControlBinding*)this._cPtr, disabled);
   }
 
   alias syncValues = gst.object.ObjectWrap.syncValues;
@@ -134,7 +134,7 @@ class ControlBinding : gst.object.ObjectWrap
   bool syncValues(gst.object.ObjectWrap object, gst.types.ClockTime timestamp, gst.types.ClockTime lastSync)
   {
     bool _retval;
-    _retval = gst_control_binding_sync_values(cast(GstControlBinding*)cPtr, object ? cast(GstObject*)object.cPtr(No.Dup) : null, timestamp, lastSync);
+    _retval = gst_control_binding_sync_values(cast(GstControlBinding*)this._cPtr, object ? cast(GstObject*)object._cPtr(No.Dup) : null, timestamp, lastSync);
     return _retval;
   }
 }

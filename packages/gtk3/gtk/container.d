@@ -232,16 +232,16 @@ class Container : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_get_type != &gidSymbolNotFound ? gtk_container_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -299,13 +299,13 @@ class Container : gtk.widget.Widget
   */
   void add(gtk.widget.Widget widget)
   {
-    gtk_container_add(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_container_add(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /** */
   void checkResize()
   {
-    gtk_container_check_resize(cast(GtkContainer*)cPtr);
+    gtk_container_check_resize(cast(GtkContainer*)this._cPtr);
   }
 
   /**
@@ -319,7 +319,7 @@ class Container : gtk.widget.Widget
   void childGetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_container_child_get_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value.cPtr(No.Dup) : null);
+    gtk_container_child_get_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(GValue*)value._cPtr(No.Dup) : null);
   }
 
   alias childNotify = gtk.widget.Widget.childNotify;
@@ -341,7 +341,7 @@ class Container : gtk.widget.Widget
   void childNotify(gtk.widget.Widget child, string childProperty)
   {
     const(char)* _childProperty = childProperty.toCString(No.Alloc);
-    gtk_container_child_notify(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _childProperty);
+    gtk_container_child_notify(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _childProperty);
   }
 
   /**
@@ -358,7 +358,7 @@ class Container : gtk.widget.Widget
   */
   void childNotifyByPspec(gtk.widget.Widget child, gobject.param_spec.ParamSpec pspec)
   {
-    gtk_container_child_notify_by_pspec(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    gtk_container_child_notify_by_pspec(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   }
 
   /**
@@ -372,7 +372,7 @@ class Container : gtk.widget.Widget
   void childSetProperty(gtk.widget.Widget child, string propertyName, gobject.value.Value value)
   {
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    gtk_container_child_set_property(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _propertyName, value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+    gtk_container_child_set_property(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _propertyName, value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -386,7 +386,7 @@ class Container : gtk.widget.Widget
   gobject.types.GType childType()
   {
     gobject.types.GType _retval;
-    _retval = gtk_container_child_type(cast(GtkContainer*)cPtr);
+    _retval = gtk_container_child_type(cast(GtkContainer*)this._cPtr);
     return _retval;
   }
 
@@ -409,12 +409,12 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? cast(void*)&(callback) : null;
-    gtk_container_forall(cast(GtkContainer*)cPtr, _callbackCB, _callback);
+    gtk_container_forall(cast(GtkContainer*)this._cPtr, _callbackCB, _callback);
   }
 
   /**
@@ -439,12 +439,12 @@ class Container : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.Callback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? cast(void*)&(callback) : null;
-    gtk_container_foreach(cast(GtkContainer*)cPtr, _callbackCB, _callback);
+    gtk_container_foreach(cast(GtkContainer*)this._cPtr, _callbackCB, _callback);
   }
 
   /**
@@ -455,7 +455,7 @@ class Container : gtk.widget.Widget
   uint getBorderWidth()
   {
     uint _retval;
-    _retval = gtk_container_get_border_width(cast(GtkContainer*)cPtr);
+    _retval = gtk_container_get_border_width(cast(GtkContainer*)this._cPtr);
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Container : gtk.widget.Widget
   gtk.widget.Widget[] getChildren()
   {
     GList* _cretval;
-    _cretval = gtk_container_get_children(cast(GtkContainer*)cPtr);
+    _cretval = gtk_container_get_children(cast(GtkContainer*)this._cPtr);
     auto _retval = gListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -496,7 +496,7 @@ class Container : gtk.widget.Widget
   {
     bool _retval;
     GList* _focusableWidgets;
-    _retval = gtk_container_get_focus_chain(cast(GtkContainer*)cPtr, &_focusableWidgets);
+    _retval = gtk_container_get_focus_chain(cast(GtkContainer*)this._cPtr, &_focusableWidgets);
     focusableWidgets = gListToD!(gtk.widget.Widget, GidOwnership.Container)(_focusableWidgets);
     return _retval;
   }
@@ -512,8 +512,8 @@ class Container : gtk.widget.Widget
   gtk.widget.Widget getFocusChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_container_get_focus_child(cast(GtkContainer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_container_get_focus_child(cast(GtkContainer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -526,8 +526,8 @@ class Container : gtk.widget.Widget
   gtk.adjustment.Adjustment getFocusHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_container_get_focus_hadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_container_get_focus_hadjustment(cast(GtkContainer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -540,8 +540,8 @@ class Container : gtk.widget.Widget
   gtk.adjustment.Adjustment getFocusVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_container_get_focus_vadjustment(cast(GtkContainer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_container_get_focus_vadjustment(cast(GtkContainer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class Container : gtk.widget.Widget
   gtk.widget_path.WidgetPath getPathForChild(gtk.widget.Widget child)
   {
     GtkWidgetPath* _cretval;
-    _cretval = gtk_container_get_path_for_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    _cretval = gtk_container_get_path_for_child(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.widget_path.WidgetPath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -573,7 +573,7 @@ class Container : gtk.widget.Widget
   gtk.types.ResizeMode getResizeMode()
   {
     GtkResizeMode _cretval;
-    _cretval = gtk_container_get_resize_mode(cast(GtkContainer*)cPtr);
+    _cretval = gtk_container_get_resize_mode(cast(GtkContainer*)this._cPtr);
     gtk.types.ResizeMode _retval = cast(gtk.types.ResizeMode)_cretval;
     return _retval;
   }
@@ -603,7 +603,7 @@ class Container : gtk.widget.Widget
   */
   void propagateDraw(gtk.widget.Widget child, cairo.context.Context cr)
   {
-    gtk_container_propagate_draw(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gtk_container_propagate_draw(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**
@@ -622,13 +622,13 @@ class Container : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    gtk_container_remove(cast(GtkContainer*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_container_remove(cast(GtkContainer*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /** */
   void resizeChildren()
   {
-    gtk_container_resize_children(cast(GtkContainer*)cPtr);
+    gtk_container_resize_children(cast(GtkContainer*)this._cPtr);
   }
 
   /**
@@ -648,7 +648,7 @@ class Container : gtk.widget.Widget
   */
   void setBorderWidth(uint borderWidth)
   {
-    gtk_container_set_border_width(cast(GtkContainer*)cPtr, borderWidth);
+    gtk_container_set_border_width(cast(GtkContainer*)this._cPtr, borderWidth);
   }
 
   /**
@@ -670,7 +670,7 @@ class Container : gtk.widget.Widget
   {
     auto _focusableWidgets = gListFromD!(gtk.widget.Widget)(focusableWidgets);
     scope(exit) containerFree!(GList*, gtk.widget.Widget, GidOwnership.None)(_focusableWidgets);
-    gtk_container_set_focus_chain(cast(GtkContainer*)cPtr, _focusableWidgets);
+    gtk_container_set_focus_chain(cast(GtkContainer*)this._cPtr, _focusableWidgets);
   }
 
   /**
@@ -688,7 +688,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusChild(gtk.widget.Widget child = null)
   {
-    gtk_container_set_focus_child(cast(GtkContainer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_container_set_focus_child(cast(GtkContainer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -708,7 +708,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusHadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_container_set_focus_hadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_container_set_focus_hadjustment(cast(GtkContainer*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -728,7 +728,7 @@ class Container : gtk.widget.Widget
   */
   void setFocusVadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_container_set_focus_vadjustment(cast(GtkContainer*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_container_set_focus_vadjustment(cast(GtkContainer*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -744,7 +744,7 @@ class Container : gtk.widget.Widget
   */
   void setReallocateRedraws(bool needsRedraws)
   {
-    gtk_container_set_reallocate_redraws(cast(GtkContainer*)cPtr, needsRedraws);
+    gtk_container_set_reallocate_redraws(cast(GtkContainer*)this._cPtr, needsRedraws);
   }
 
   /**
@@ -763,7 +763,7 @@ class Container : gtk.widget.Widget
   */
   void setResizeMode(gtk.types.ResizeMode resizeMode)
   {
-    gtk_container_set_resize_mode(cast(GtkContainer*)cPtr, resizeMode);
+    gtk_container_set_resize_mode(cast(GtkContainer*)this._cPtr, resizeMode);
   }
 
   /**
@@ -774,7 +774,7 @@ class Container : gtk.widget.Widget
   */
   void unsetFocusChain()
   {
-    gtk_container_unset_focus_chain(cast(GtkContainer*)cPtr);
+    gtk_container_unset_focus_chain(cast(GtkContainer*)this._cPtr);
   }
 
   /**

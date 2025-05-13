@@ -88,16 +88,16 @@ class ViewSwitcherBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_switcher_bar_get_type != &gidSymbolNotFound ? adw_view_switcher_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -162,7 +162,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   bool getReveal()
   {
     bool _retval;
-    _retval = adw_view_switcher_bar_get_reveal(cast(AdwViewSwitcherBar*)cPtr);
+    _retval = adw_view_switcher_bar_get_reveal(cast(AdwViewSwitcherBar*)this._cPtr);
     return _retval;
   }
 
@@ -173,8 +173,8 @@ class ViewSwitcherBar : gtk.widget.Widget
   adw.view_stack.ViewStack getStack()
   {
     AdwViewStack* _cretval;
-    _cretval = adw_view_switcher_bar_get_stack(cast(AdwViewSwitcherBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
+    _cretval = adw_view_switcher_bar_get_stack(cast(AdwViewSwitcherBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack.ViewStack)(cast(AdwViewStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class ViewSwitcherBar : gtk.widget.Widget
   */
   void setReveal(bool reveal)
   {
-    adw_view_switcher_bar_set_reveal(cast(AdwViewSwitcherBar*)cPtr, reveal);
+    adw_view_switcher_bar_set_reveal(cast(AdwViewSwitcherBar*)this._cPtr, reveal);
   }
 
   /**
@@ -197,6 +197,6 @@ class ViewSwitcherBar : gtk.widget.Widget
   */
   void setStack(adw.view_stack.ViewStack stack = null)
   {
-    adw_view_switcher_bar_set_stack(cast(AdwViewSwitcherBar*)cPtr, stack ? cast(AdwViewStack*)stack.cPtr(No.Dup) : null);
+    adw_view_switcher_bar_set_stack(cast(AdwViewSwitcherBar*)this._cPtr, stack ? cast(AdwViewStack*)stack._cPtr(No.Dup) : null);
   }
 }

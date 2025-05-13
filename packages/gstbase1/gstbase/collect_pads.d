@@ -64,16 +64,16 @@ class CollectPads : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_collect_pads_get_type != &gidSymbolNotFound ? gst_collect_pads_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -110,7 +110,7 @@ class CollectPads : gst.object.ObjectWrap
   uint available()
   {
     uint _retval;
-    _retval = gst_collect_pads_available(cast(GstCollectPads*)cPtr);
+    _retval = gst_collect_pads_available(cast(GstCollectPads*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class CollectPads : gst.object.ObjectWrap
   {
     GstFlowReturn _cretval;
     GstBuffer* _outbuf;
-    _cretval = gst_collect_pads_clip_running_time(cast(GstCollectPads*)cPtr, cdata ? cast(GstCollectData*)cdata.cPtr : null, buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null, &_outbuf, userData);
+    _cretval = gst_collect_pads_clip_running_time(cast(GstCollectPads*)this._cPtr, cdata ? cast(GstCollectData*)cdata._cPtr : null, buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null, &_outbuf, userData);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     outbuf = new gst.buffer.Buffer(cast(void*)_outbuf, Yes.Take);
     return _retval;
@@ -153,7 +153,7 @@ class CollectPads : gst.object.ObjectWrap
   bool eventDefault(gstbase.collect_data.CollectData data, gst.event.Event event, bool discard)
   {
     bool _retval;
-    _retval = gst_collect_pads_event_default(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, event ? cast(GstEvent*)event.cPtr(No.Dup) : null, discard);
+    _retval = gst_collect_pads_event_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null, discard);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class CollectPads : gst.object.ObjectWrap
   uint flush(gstbase.collect_data.CollectData data, uint size)
   {
     uint _retval;
-    _retval = gst_collect_pads_flush(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, size);
+    _retval = gst_collect_pads_flush(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class CollectPads : gst.object.ObjectWrap
   gst.buffer.Buffer peek(gstbase.collect_data.CollectData data)
   {
     GstBuffer* _cretval;
-    _cretval = gst_collect_pads_peek(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null);
+    _cretval = gst_collect_pads_peek(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -213,7 +213,7 @@ class CollectPads : gst.object.ObjectWrap
   gst.buffer.Buffer pop(gstbase.collect_data.CollectData data)
   {
     GstBuffer* _cretval;
-    _cretval = gst_collect_pads_pop(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null);
+    _cretval = gst_collect_pads_pop(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -232,7 +232,7 @@ class CollectPads : gst.object.ObjectWrap
   bool queryDefault(gstbase.collect_data.CollectData data, gst.query.Query query, bool discard)
   {
     bool _retval;
-    _retval = gst_collect_pads_query_default(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, query ? cast(GstQuery*)query.cPtr(No.Dup) : null, discard);
+    _retval = gst_collect_pads_query_default(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, query ? cast(GstQuery*)query._cPtr(No.Dup) : null, discard);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class CollectPads : gst.object.ObjectWrap
   gst.buffer.Buffer readBuffer(gstbase.collect_data.CollectData data, uint size)
   {
     GstBuffer* _cretval;
-    _cretval = gst_collect_pads_read_buffer(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, size);
+    _cretval = gst_collect_pads_read_buffer(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -275,7 +275,7 @@ class CollectPads : gst.object.ObjectWrap
   bool removePad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_collect_pads_remove_pad(cast(GstCollectPads*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    _retval = gst_collect_pads_remove_pad(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class CollectPads : gst.object.ObjectWrap
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsBufferFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, buffer ? new gst.buffer.Buffer(cast(void*)buffer, Yes.Take) : null);
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -305,7 +305,7 @@ class CollectPads : gst.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_buffer_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_buffer_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -323,16 +323,16 @@ class CollectPads : gst.object.ObjectWrap
       auto _dlg = cast(gstbase.types.CollectPadsClipFunction*)userData;
       auto _outbuffer = new gst.buffer.Buffer(outbuffer, No.Take);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data ? new gstbase.collect_data.CollectData(cast(void*)data, No.Take) : null, inbuffer ? new gst.buffer.Buffer(cast(void*)inbuffer, Yes.Take) : null, _outbuffer);
       auto _retval = cast(GstFlowReturn)_dretval;
-      *outbuffer = *cast(GstBuffer**)_outbuffer.cPtr;
+      *outbuffer = *cast(GstBuffer**)_outbuffer._cPtr;
 
       return _retval;
     }
     auto _clipfuncCB = clipfunc ? &_clipfuncCallback : null;
 
     auto _clipfunc = clipfunc ? cast(void*)&(clipfunc) : null;
-    gst_collect_pads_set_clip_function(cast(GstCollectPads*)cPtr, _clipfuncCB, _clipfunc);
+    gst_collect_pads_set_clip_function(cast(GstCollectPads*)this._cPtr, _clipfuncCB, _clipfunc);
   }
 
   /**
@@ -349,13 +349,13 @@ class CollectPads : gst.object.ObjectWrap
     {
       auto _dlg = cast(gstbase.types.CollectPadsCompareFunction*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), data1 ? new gstbase.collect_data.CollectData(cast(void*)data1, No.Take) : null, timestamp1, data2 ? new gstbase.collect_data.CollectData(cast(void*)data2, No.Take) : null, timestamp2);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_compare_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_compare_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -377,13 +377,13 @@ class CollectPads : gst.object.ObjectWrap
     {
       auto _dlg = cast(gstbase.types.CollectPadsEventFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, event ? new gst.event.Event(cast(void*)event, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_event_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_event_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -400,12 +400,12 @@ class CollectPads : gst.object.ObjectWrap
     {
       auto _dlg = cast(gstbase.types.CollectPadsFlushFunction*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_flush_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_flush_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -422,7 +422,7 @@ class CollectPads : gst.object.ObjectWrap
   */
   void setFlushing(bool flushing)
   {
-    gst_collect_pads_set_flushing(cast(GstCollectPads*)cPtr, flushing);
+    gst_collect_pads_set_flushing(cast(GstCollectPads*)this._cPtr, flushing);
   }
 
   /**
@@ -448,7 +448,7 @@ class CollectPads : gst.object.ObjectWrap
       gst.types.FlowReturn _dretval;
       auto _dlg = cast(gstbase.types.CollectPadsFunction*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take));
       auto _retval = cast(GstFlowReturn)_dretval;
 
       return _retval;
@@ -456,7 +456,7 @@ class CollectPads : gst.object.ObjectWrap
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -478,13 +478,13 @@ class CollectPads : gst.object.ObjectWrap
     {
       auto _dlg = cast(gstbase.types.CollectPadsQueryFunction*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstbase.collect_pads.CollectPads)(cast(void*)pads, No.Take), pad ? new gstbase.collect_data.CollectData(cast(void*)pad, No.Take) : null, query ? new gst.query.Query(cast(void*)query, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gst_collect_pads_set_query_function(cast(GstCollectPads*)cPtr, _funcCB, _func);
+    gst_collect_pads_set_query_function(cast(GstCollectPads*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -504,7 +504,7 @@ class CollectPads : gst.object.ObjectWrap
   */
   void setWaiting(gstbase.collect_data.CollectData data, bool waiting)
   {
-    gst_collect_pads_set_waiting(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, waiting);
+    gst_collect_pads_set_waiting(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, waiting);
   }
 
   /**
@@ -520,7 +520,7 @@ class CollectPads : gst.object.ObjectWrap
   bool srcEventDefault(gst.pad.Pad pad, gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_collect_pads_src_event_default(cast(GstCollectPads*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, event ? cast(GstEvent*)event.cPtr(No.Dup) : null);
+    _retval = gst_collect_pads_src_event_default(cast(GstCollectPads*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, event ? cast(GstEvent*)event._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class CollectPads : gst.object.ObjectWrap
   */
   void start()
   {
-    gst_collect_pads_start(cast(GstCollectPads*)cPtr);
+    gst_collect_pads_start(cast(GstCollectPads*)this._cPtr);
   }
 
   /**
@@ -542,7 +542,7 @@ class CollectPads : gst.object.ObjectWrap
   */
   void stop()
   {
-    gst_collect_pads_stop(cast(GstCollectPads*)cPtr);
+    gst_collect_pads_stop(cast(GstCollectPads*)this._cPtr);
   }
 
   /**
@@ -564,7 +564,7 @@ class CollectPads : gst.object.ObjectWrap
   gst.buffer.Buffer takeBuffer(gstbase.collect_data.CollectData data, uint size)
   {
     GstBuffer* _cretval;
-    _cretval = gst_collect_pads_take_buffer(cast(GstCollectPads*)cPtr, data ? cast(GstCollectData*)data.cPtr : null, size);
+    _cretval = gst_collect_pads_take_buffer(cast(GstCollectPads*)this._cPtr, data ? cast(GstCollectData*)data._cPtr : null, size);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

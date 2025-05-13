@@ -44,16 +44,16 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_texture_get_type != &gidSymbolNotFound ? gdk_texture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,8 +80,8 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkTexture* _cretval;
-    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,10 +106,10 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_texture_new_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -134,10 +134,10 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     GdkTexture* _cretval;
     GError *_err;
-    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null, &_err);
+    _cretval = gdk_texture_new_from_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     _cretval = gdk_texture_new_from_filename(_path, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
     GdkTexture* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gdk_texture_new_from_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -213,7 +213,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
-    _cretval = gdk_texture_get_format(cast(GdkTexture*)cPtr);
+    _cretval = gdk_texture_get_format(cast(GdkTexture*)this._cPtr);
     gdk.types.MemoryFormat _retval = cast(gdk.types.MemoryFormat)_cretval;
     return _retval;
   }
@@ -225,7 +225,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   int getHeight()
   {
     int _retval;
-    _retval = gdk_texture_get_height(cast(GdkTexture*)cPtr);
+    _retval = gdk_texture_get_height(cast(GdkTexture*)this._cPtr);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   int getWidth()
   {
     int _retval;
-    _retval = gdk_texture_get_width(cast(GdkTexture*)cPtr);
+    _retval = gdk_texture_get_width(cast(GdkTexture*)this._cPtr);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gdk_texture_save_to_png(cast(GdkTexture*)cPtr, _filename);
+    _retval = gdk_texture_save_to_png(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   glib.bytes.Bytes saveToPngBytes()
   {
     GBytes* _cretval;
-    _cretval = gdk_texture_save_to_png_bytes(cast(GdkTexture*)cPtr);
+    _cretval = gdk_texture_save_to_png_bytes(cast(GdkTexture*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -299,7 +299,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   {
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
-    _retval = gdk_texture_save_to_tiff(cast(GdkTexture*)cPtr, _filename);
+    _retval = gdk_texture_save_to_tiff(cast(GdkTexture*)this._cPtr, _filename);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   glib.bytes.Bytes saveToTiffBytes()
   {
     GBytes* _cretval;
-    _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)cPtr);
+    _cretval = gdk_texture_save_to_tiff_bytes(cast(GdkTexture*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

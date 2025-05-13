@@ -66,7 +66,7 @@ class Relation
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -85,7 +85,7 @@ class Relation
   int count(const(void)* key, int field)
   {
     int _retval;
-    _retval = g_relation_count(cast(GRelation*)cPtr, key, field);
+    _retval = g_relation_count(cast(GRelation*)this._cPtr, key, field);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class Relation
   int delete_(const(void)* key, int field)
   {
     int _retval;
-    _retval = g_relation_delete(cast(GRelation*)cPtr, key, field);
+    _retval = g_relation_delete(cast(GRelation*)this._cPtr, key, field);
     return _retval;
   }
 
@@ -116,7 +116,7 @@ class Relation
   */
   void destroy()
   {
-    g_relation_destroy(cast(GRelation*)cPtr);
+    g_relation_destroy(cast(GRelation*)this._cPtr);
   }
 
   /**
@@ -127,6 +127,6 @@ class Relation
   */
   void print()
   {
-    g_relation_print(cast(GRelation*)cPtr);
+    g_relation_print(cast(GRelation*)this._cPtr);
   }
 }

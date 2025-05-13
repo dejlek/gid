@@ -21,7 +21,7 @@ interface FontMap
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_cairo_font_map_get_type != &gidSymbolNotFound ? pango_cairo_font_map_get_type() : cast(GType)0;
@@ -51,7 +51,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ interface FontMap
   {
     PangoFontMap* _cretval;
     _cretval = pango_cairo_font_map_new_for_font_type(fonttype);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, Yes.Take);
     return _retval;
   }
 

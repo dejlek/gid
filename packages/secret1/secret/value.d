@@ -33,22 +33,22 @@ class Value : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_value_get_type != &gidSymbolNotFound ? secret_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -127,7 +127,7 @@ class Value : gobject.boxed.Boxed
   {
     const(ubyte)* _cretval;
     size_t _cretlength;
-    _cretval = secret_value_get(cast(SecretValue*)cPtr, &_cretlength);
+    _cretval = secret_value_get(cast(SecretValue*)this._cPtr, &_cretlength);
     ubyte[] _retval;
 
     if (_cretval)
@@ -145,7 +145,7 @@ class Value : gobject.boxed.Boxed
   string getContentType()
   {
     const(char)* _cretval;
-    _cretval = secret_value_get_content_type(cast(SecretValue*)cPtr);
+    _cretval = secret_value_get_content_type(cast(SecretValue*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,7 +160,7 @@ class Value : gobject.boxed.Boxed
   string getText()
   {
     const(char)* _cretval;
-    _cretval = secret_value_get_text(cast(SecretValue*)cPtr);
+    _cretval = secret_value_get_text(cast(SecretValue*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -177,7 +177,7 @@ class Value : gobject.boxed.Boxed
   string unrefToPassword(ref size_t length)
   {
     char* _cretval;
-    _cretval = secret_value_unref_to_password(cast(SecretValue*)cPtr, cast(size_t*)&length);
+    _cretval = secret_value_unref_to_password(cast(SecretValue*)this._cPtr, cast(size_t*)&length);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

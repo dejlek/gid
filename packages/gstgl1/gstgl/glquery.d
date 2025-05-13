@@ -30,7 +30,7 @@ class GLQuery
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class GLQuery
   */
   void counter()
   {
-    gst_gl_query_counter(cast(GstGLQuery*)cPtr);
+    gst_gl_query_counter(cast(GstGLQuery*)this._cPtr);
   }
 
   /**
@@ -48,20 +48,20 @@ class GLQuery
   */
   void end()
   {
-    gst_gl_query_end(cast(GstGLQuery*)cPtr);
+    gst_gl_query_end(cast(GstGLQuery*)this._cPtr);
   }
 
   /** */
   void init_(gstgl.glcontext.GLContext context, gstgl.types.GLQueryType queryType)
   {
-    gst_gl_query_init(cast(GstGLQuery*)cPtr, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, queryType);
+    gst_gl_query_init(cast(GstGLQuery*)this._cPtr, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, queryType);
   }
 
   /** */
   ulong result()
   {
     ulong _retval;
-    _retval = gst_gl_query_result(cast(GstGLQuery*)cPtr);
+    _retval = gst_gl_query_result(cast(GstGLQuery*)this._cPtr);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class GLQuery
   */
   void start()
   {
-    gst_gl_query_start(cast(GstGLQuery*)cPtr);
+    gst_gl_query_start(cast(GstGLQuery*)this._cPtr);
   }
 
   /**
@@ -78,7 +78,7 @@ class GLQuery
   */
   void unset()
   {
-    gst_gl_query_unset(cast(GstGLQuery*)cPtr);
+    gst_gl_query_unset(cast(GstGLQuery*)this._cPtr);
   }
 
   /**
@@ -96,7 +96,7 @@ class GLQuery
   static bool localGlContext(gst.element.Element element, gst.types.PadDirection direction, gstgl.glcontext.GLContext contextPtr)
   {
     bool _retval;
-    _retval = gst_gl_query_local_gl_context(element ? cast(GstElement*)element.cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr.cPtr(No.Dup) : null);
+    _retval = gst_gl_query_local_gl_context(element ? cast(GstElement*)element._cPtr(No.Dup) : null, direction, contextPtr ? cast(GstGLContext**)contextPtr._cPtr(No.Dup) : null);
     return _retval;
   }
 }

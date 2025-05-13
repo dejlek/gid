@@ -19,16 +19,16 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_table_batch_reader_get_type != &gidSymbolNotFound ? garrow_table_batch_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   this(arrow.table.Table table)
   {
     GArrowTableBatchReader* _cretval;
-    _cretval = garrow_table_batch_reader_new(table ? cast(GArrowTable*)table.cPtr(No.Dup) : null);
+    _cretval = garrow_table_batch_reader_new(table ? cast(GArrowTable*)table._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -56,6 +56,6 @@ class TableBatchReader : arrow.record_batch_reader.RecordBatchReader
   */
   void setMaxChunkSize(long maxChunkSize)
   {
-    garrow_table_batch_reader_set_max_chunk_size(cast(GArrowTableBatchReader*)cPtr, maxChunkSize);
+    garrow_table_batch_reader_set_max_chunk_size(cast(GArrowTableBatchReader*)this._cPtr, maxChunkSize);
   }
 }

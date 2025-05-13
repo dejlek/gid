@@ -29,16 +29,16 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_tab_bar_get_type != &gidSymbolNotFound ? panel_frame_tab_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getAutohide()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_autohide(cast(PanelFrameTabBar*)cPtr);
+    _retval = panel_frame_tab_bar_get_autohide(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getExpandTabs()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_expand_tabs(cast(PanelFrameTabBar*)cPtr);
+    _retval = panel_frame_tab_bar_get_expand_tabs(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getInverted()
   {
     bool _retval;
-    _retval = panel_frame_tab_bar_get_inverted(cast(PanelFrameTabBar*)cPtr);
+    _retval = panel_frame_tab_bar_get_inverted(cast(PanelFrameTabBar*)this._cPtr);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   void setAutohide(bool autohide)
   {
-    panel_frame_tab_bar_set_autohide(cast(PanelFrameTabBar*)cPtr, autohide);
+    panel_frame_tab_bar_set_autohide(cast(PanelFrameTabBar*)this._cPtr, autohide);
   }
 
   /**
@@ -169,7 +169,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   void setExpandTabs(bool expandTabs)
   {
-    panel_frame_tab_bar_set_expand_tabs(cast(PanelFrameTabBar*)cPtr, expandTabs);
+    panel_frame_tab_bar_set_expand_tabs(cast(PanelFrameTabBar*)this._cPtr, expandTabs);
   }
 
   /**
@@ -180,6 +180,6 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   void setInverted(bool inverted)
   {
-    panel_frame_tab_bar_set_inverted(cast(PanelFrameTabBar*)cPtr, inverted);
+    panel_frame_tab_bar_set_inverted(cast(PanelFrameTabBar*)this._cPtr, inverted);
   }
 }

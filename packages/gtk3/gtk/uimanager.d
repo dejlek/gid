@@ -256,16 +256,16 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_ui_manager_get_type != &gidSymbolNotFound ? gtk_ui_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -351,7 +351,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     const(char)* _path = path.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
     const(char)* _action = action.toCString(No.Alloc);
-    gtk_ui_manager_add_ui(cast(GtkUIManager*)cPtr, mergeId, _path, _name, _action, type, top);
+    gtk_ui_manager_add_ui(cast(GtkUIManager*)this._cPtr, mergeId, _path, _name, _action, type, top);
   }
 
   /**
@@ -370,7 +370,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     uint _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)cPtr, _filename, &_err);
+    _retval = gtk_ui_manager_add_ui_from_file(cast(GtkUIManager*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -392,7 +392,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     uint _retval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)cPtr, _resourcePath, &_err);
+    _retval = gtk_ui_manager_add_ui_from_resource(cast(GtkUIManager*)this._cPtr, _resourcePath, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -416,7 +416,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
     uint _retval;
     const(char)* _buffer = buffer.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)cPtr, _buffer, length, &_err);
+    _retval = gtk_ui_manager_add_ui_from_string(cast(GtkUIManager*)this._cPtr, _buffer, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -441,7 +441,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void ensureUpdate()
   {
-    gtk_ui_manager_ensure_update(cast(GtkUIManager*)cPtr);
+    gtk_ui_manager_ensure_update(cast(GtkUIManager*)this._cPtr);
   }
 
   /**
@@ -451,8 +451,8 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.accel_group.AccelGroup getAccelGroup()
   {
     GtkAccelGroup* _cretval;
-    _cretval = gtk_ui_manager_get_accel_group(cast(GtkUIManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    _cretval = gtk_ui_manager_get_accel_group(cast(GtkUIManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -469,8 +469,8 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     GtkAction* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = gtk_ui_manager_get_action(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    _cretval = gtk_ui_manager_get_action(cast(GtkUIManager*)this._cPtr, _path);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -483,7 +483,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.action_group.ActionGroup[] getActionGroups()
   {
     GList* _cretval;
-    _cretval = gtk_ui_manager_get_action_groups(cast(GtkUIManager*)cPtr);
+    _cretval = gtk_ui_manager_get_action_groups(cast(GtkUIManager*)this._cPtr);
     auto _retval = gListToD!(gtk.action_group.ActionGroup, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -499,7 +499,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   bool getAddTearoffs()
   {
     bool _retval;
-    _retval = gtk_ui_manager_get_add_tearoffs(cast(GtkUIManager*)cPtr);
+    _retval = gtk_ui_manager_get_add_tearoffs(cast(GtkUIManager*)this._cPtr);
     return _retval;
   }
 
@@ -516,7 +516,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   gtk.widget.Widget[] getToplevels(gtk.types.UIManagerItemType types)
   {
     GSList* _cretval;
-    _cretval = gtk_ui_manager_get_toplevels(cast(GtkUIManager*)cPtr, types);
+    _cretval = gtk_ui_manager_get_toplevels(cast(GtkUIManager*)this._cPtr, types);
     auto _retval = gSListToD!(gtk.widget.Widget, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -529,7 +529,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   string getUi()
   {
     char* _cretval;
-    _cretval = gtk_ui_manager_get_ui(cast(GtkUIManager*)cPtr);
+    _cretval = gtk_ui_manager_get_ui(cast(GtkUIManager*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -559,8 +559,8 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     GtkWidget* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = gtk_ui_manager_get_widget(cast(GtkUIManager*)cPtr, _path);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_ui_manager_get_widget(cast(GtkUIManager*)this._cPtr, _path);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -579,7 +579,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void insertActionGroup(gtk.action_group.ActionGroup actionGroup, int pos)
   {
-    gtk_ui_manager_insert_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.Dup) : null, pos);
+    gtk_ui_manager_insert_action_group(cast(GtkUIManager*)this._cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup._cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -590,7 +590,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   uint newMergeId()
   {
     uint _retval;
-    _retval = gtk_ui_manager_new_merge_id(cast(GtkUIManager*)cPtr);
+    _retval = gtk_ui_manager_new_merge_id(cast(GtkUIManager*)this._cPtr);
     return _retval;
   }
 
@@ -603,7 +603,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void removeActionGroup(gtk.action_group.ActionGroup actionGroup)
   {
-    gtk_ui_manager_remove_action_group(cast(GtkUIManager*)cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup.cPtr(No.Dup) : null);
+    gtk_ui_manager_remove_action_group(cast(GtkUIManager*)this._cPtr, actionGroup ? cast(GtkActionGroup*)actionGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -614,7 +614,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void removeUi(uint mergeId)
   {
-    gtk_ui_manager_remove_ui(cast(GtkUIManager*)cPtr, mergeId);
+    gtk_ui_manager_remove_ui(cast(GtkUIManager*)this._cPtr, mergeId);
   }
 
   /**
@@ -632,7 +632,7 @@ class UIManager : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void setAddTearoffs(bool addTearoffs)
   {
-    gtk_ui_manager_set_add_tearoffs(cast(GtkUIManager*)cPtr, addTearoffs);
+    gtk_ui_manager_set_add_tearoffs(cast(GtkUIManager*)this._cPtr, addTearoffs);
   }
 
   /**

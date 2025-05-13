@@ -37,22 +37,22 @@ class Pattern : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_pattern_get_type != &gidSymbolNotFound ? cairo_gobject_pattern_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void addColorStopRgb(double offset, double red, double green, double blue)
   {
-    cairo_pattern_add_color_stop_rgb(cast(cairo_pattern_t*)cPtr, offset, red, green, blue);
+    cairo_pattern_add_color_stop_rgb(cast(cairo_pattern_t*)this._cPtr, offset, red, green, blue);
   }
 
   /**
@@ -120,7 +120,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void addColorStopRgba(double offset, double red, double green, double blue, double alpha)
   {
-    cairo_pattern_add_color_stop_rgba(cast(cairo_pattern_t*)cPtr, offset, red, green, blue, alpha);
+    cairo_pattern_add_color_stop_rgba(cast(cairo_pattern_t*)this._cPtr, offset, red, green, blue, alpha);
   }
 
   /**
@@ -136,7 +136,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getColorStopCount(out int count)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_color_stop_count(cast(cairo_pattern_t*)cPtr, cast(int*)&count);
+    _cretval = cairo_pattern_get_color_stop_count(cast(cairo_pattern_t*)this._cPtr, cast(int*)&count);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -164,7 +164,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getColorStopRgba(int index, out double offset, out double red, out double green, out double blue, out double alpha)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_color_stop_rgba(cast(cairo_pattern_t*)cPtr, index, cast(double*)&offset, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
+    _cretval = cairo_pattern_get_color_stop_rgba(cast(cairo_pattern_t*)this._cPtr, index, cast(double*)&offset, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -177,7 +177,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Dither getDither()
   {
     cairo_dither_t _cretval;
-    _cretval = cairo_pattern_get_dither(cast(cairo_pattern_t*)cPtr);
+    _cretval = cairo_pattern_get_dither(cast(cairo_pattern_t*)this._cPtr);
     cairo.types.Dither _retval = cast(cairo.types.Dither)_cretval;
     return _retval;
   }
@@ -191,7 +191,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Extend getExtend()
   {
     cairo_extend_t _cretval;
-    _cretval = cairo_pattern_get_extend(cast(cairo_pattern_t*)cPtr);
+    _cretval = cairo_pattern_get_extend(cast(cairo_pattern_t*)this._cPtr);
     cairo.types.Extend _retval = cast(cairo.types.Extend)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Filter getFilter()
   {
     cairo_filter_t _cretval;
-    _cretval = cairo_pattern_get_filter(cast(cairo_pattern_t*)cPtr);
+    _cretval = cairo_pattern_get_filter(cast(cairo_pattern_t*)this._cPtr);
     cairo.types.Filter _retval = cast(cairo.types.Filter)_cretval;
     return _retval;
   }
@@ -224,7 +224,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getLinearPoints(out double x0, out double y0, out double x1, out double y1)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_linear_points(cast(cairo_pattern_t*)cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&x1, cast(double*)&y1);
+    _cretval = cairo_pattern_get_linear_points(cast(cairo_pattern_t*)this._cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&x1, cast(double*)&y1);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -237,7 +237,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void getMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_get_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(cairo_matrix_t*)matrix.cPtr(No.Dup) : null);
+    cairo_pattern_get_matrix(cast(cairo_pattern_t*)this._cPtr, matrix ? cast(cairo_matrix_t*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -258,7 +258,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getRadialCircles(out double x0, out double y0, out double r0, out double x1, out double y1, out double r1)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_radial_circles(cast(cairo_pattern_t*)cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&r0, cast(double*)&x1, cast(double*)&y1, cast(double*)&r1);
+    _cretval = cairo_pattern_get_radial_circles(cast(cairo_pattern_t*)this._cPtr, cast(double*)&x0, cast(double*)&y0, cast(double*)&r0, cast(double*)&x1, cast(double*)&y1, cast(double*)&r1);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -280,7 +280,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getRgba(out double red, out double green, out double blue, out double alpha)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_rgba(cast(cairo_pattern_t*)cPtr, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
+    _cretval = cairo_pattern_get_rgba(cast(cairo_pattern_t*)this._cPtr, cast(double*)&red, cast(double*)&green, cast(double*)&blue, cast(double*)&alpha);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -299,7 +299,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status getSurface(cairo.surface.Surface surface)
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)cPtr, surface ? cast(cairo_surface_t**)surface.cPtr(No.Dup) : null);
+    _cretval = cairo_pattern_get_surface(cast(cairo_pattern_t*)this._cPtr, surface ? cast(cairo_surface_t**)surface._cPtr(No.Dup) : null);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -312,7 +312,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.PatternType getPatternType()
   {
     cairo_pattern_type_t _cretval;
-    _cretval = cairo_pattern_get_type(cast(cairo_pattern_t*)cPtr);
+    _cretval = cairo_pattern_get_type(cast(cairo_pattern_t*)this._cPtr);
     cairo.types.PatternType _retval = cast(cairo.types.PatternType)_cretval;
     return _retval;
   }
@@ -329,7 +329,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void* getUserData(cairo.types.UserDataKey key)
   {
-    auto _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)cPtr, &key);
+    auto _retval = cairo_pattern_get_user_data(cast(cairo_pattern_t*)this._cPtr, &key);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void setDither(cairo.types.Dither dither)
   {
-    cairo_pattern_set_dither(cast(cairo_pattern_t*)cPtr, dither);
+    cairo_pattern_set_dither(cast(cairo_pattern_t*)this._cPtr, dither);
   }
 
   /**
@@ -360,7 +360,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void setExtend(cairo.types.Extend extend)
   {
-    cairo_pattern_set_extend(cast(cairo_pattern_t*)cPtr, extend);
+    cairo_pattern_set_extend(cast(cairo_pattern_t*)this._cPtr, extend);
   }
 
   /**
@@ -386,7 +386,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void setFilter(cairo.types.Filter filter)
   {
-    cairo_pattern_set_filter(cast(cairo_pattern_t*)cPtr, filter);
+    cairo_pattern_set_filter(cast(cairo_pattern_t*)this._cPtr, filter);
   }
 
   /**
@@ -422,7 +422,7 @@ class Pattern : gobject.boxed.Boxed
   */
   void setMatrix(cairo.matrix.Matrix matrix)
   {
-    cairo_pattern_set_matrix(cast(cairo_pattern_t*)cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix.cPtr(No.Dup) : null);
+    cairo_pattern_set_matrix(cast(cairo_pattern_t*)this._cPtr, matrix ? cast(const(cairo_matrix_t)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -435,7 +435,7 @@ class Pattern : gobject.boxed.Boxed
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_pattern_status(cast(cairo_pattern_t*)cPtr);
+    _cretval = cairo_pattern_status(cast(cairo_pattern_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }

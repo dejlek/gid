@@ -19,7 +19,7 @@ template UndoManagerT()
   */
   override void beginNotUndoableAction()
   {
-    gtk_source_undo_manager_begin_not_undoable_action(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_begin_not_undoable_action(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**
@@ -29,7 +29,7 @@ template UndoManagerT()
   override bool canRedo()
   {
     bool _retval;
-    _retval = gtk_source_undo_manager_can_redo(cast(GtkSourceUndoManager*)cPtr);
+    _retval = gtk_source_undo_manager_can_redo(cast(GtkSourceUndoManager*)this._cPtr);
     return _retval;
   }
 
@@ -38,7 +38,7 @@ template UndoManagerT()
   */
   override void canRedoChanged()
   {
-    gtk_source_undo_manager_can_redo_changed(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_can_redo_changed(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**
@@ -48,7 +48,7 @@ template UndoManagerT()
   override bool canUndo()
   {
     bool _retval;
-    _retval = gtk_source_undo_manager_can_undo(cast(GtkSourceUndoManager*)cPtr);
+    _retval = gtk_source_undo_manager_can_undo(cast(GtkSourceUndoManager*)this._cPtr);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ template UndoManagerT()
   */
   override void canUndoChanged()
   {
-    gtk_source_undo_manager_can_undo_changed(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_can_undo_changed(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**
@@ -65,7 +65,7 @@ template UndoManagerT()
   */
   override void endNotUndoableAction()
   {
-    gtk_source_undo_manager_end_not_undoable_action(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_end_not_undoable_action(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**
@@ -75,7 +75,7 @@ template UndoManagerT()
   */
   override void redo()
   {
-    gtk_source_undo_manager_redo(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_redo(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**
@@ -85,7 +85,7 @@ template UndoManagerT()
   */
   override void undo()
   {
-    gtk_source_undo_manager_undo(cast(GtkSourceUndoManager*)cPtr);
+    gtk_source_undo_manager_undo(cast(GtkSourceUndoManager*)this._cPtr);
   }
 
   /**

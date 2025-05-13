@@ -24,22 +24,22 @@ class MappedFile : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_mapped_file_get_type != &gidSymbolNotFound ? g_mapped_file_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -126,7 +126,7 @@ class MappedFile : gobject.boxed.Boxed
   glib.bytes.Bytes getBytes()
   {
     GBytes* _cretval;
-    _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)cPtr);
+    _cretval = g_mapped_file_get_bytes(cast(GMappedFile*)this._cPtr);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -143,7 +143,7 @@ class MappedFile : gobject.boxed.Boxed
   string getContents()
   {
     char* _cretval;
-    _cretval = g_mapped_file_get_contents(cast(GMappedFile*)cPtr);
+    _cretval = g_mapped_file_get_contents(cast(GMappedFile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class MappedFile : gobject.boxed.Boxed
   size_t getLength()
   {
     size_t _retval;
-    _retval = g_mapped_file_get_length(cast(GMappedFile*)cPtr);
+    _retval = g_mapped_file_get_length(cast(GMappedFile*)this._cPtr);
     return _retval;
   }
 }

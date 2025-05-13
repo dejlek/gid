@@ -39,22 +39,22 @@ class RGBA : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_rgba_get_type != &gidSymbolNotFound ? gdk_rgba_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property double red()
   {
-    return (cast(GdkRGBA*)cPtr).red;
+    return (cast(GdkRGBA*)this._cPtr).red;
   }
 
   /**
@@ -79,7 +79,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property void red(double propval)
   {
-    (cast(GdkRGBA*)cPtr).red = propval;
+    (cast(GdkRGBA*)this._cPtr).red = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property double green()
   {
-    return (cast(GdkRGBA*)cPtr).green;
+    return (cast(GdkRGBA*)this._cPtr).green;
   }
 
   /**
@@ -98,7 +98,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property void green(double propval)
   {
-    (cast(GdkRGBA*)cPtr).green = propval;
+    (cast(GdkRGBA*)this._cPtr).green = propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property double blue()
   {
-    return (cast(GdkRGBA*)cPtr).blue;
+    return (cast(GdkRGBA*)this._cPtr).blue;
   }
 
   /**
@@ -117,7 +117,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property void blue(double propval)
   {
-    (cast(GdkRGBA*)cPtr).blue = propval;
+    (cast(GdkRGBA*)this._cPtr).blue = propval;
   }
 
   /**
@@ -127,7 +127,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property double alpha()
   {
-    return (cast(GdkRGBA*)cPtr).alpha;
+    return (cast(GdkRGBA*)this._cPtr).alpha;
   }
 
   /**
@@ -138,7 +138,7 @@ class RGBA : gobject.boxed.Boxed
   */
   @property void alpha(double propval)
   {
-    (cast(GdkRGBA*)cPtr).alpha = propval;
+    (cast(GdkRGBA*)this._cPtr).alpha = propval;
   }
 
   /**
@@ -150,7 +150,7 @@ class RGBA : gobject.boxed.Boxed
   gdk.rgba.RGBA copy()
   {
     GdkRGBA* _cretval;
-    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)cPtr);
+    _cretval = gdk_rgba_copy(cast(const(GdkRGBA)*)this._cPtr);
     auto _retval = _cretval ? new gdk.rgba.RGBA(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -165,7 +165,7 @@ class RGBA : gobject.boxed.Boxed
   bool equal(gdk.rgba.RGBA p2)
   {
     bool _retval;
-    _retval = gdk_rgba_equal(cast(GdkRGBA*)cPtr, p2 ? cast(GdkRGBA*)p2.cPtr(No.Dup) : null);
+    _retval = gdk_rgba_equal(cast(GdkRGBA*)this._cPtr, p2 ? cast(GdkRGBA*)p2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -177,7 +177,7 @@ class RGBA : gobject.boxed.Boxed
   uint hash()
   {
     uint _retval;
-    _retval = gdk_rgba_hash(cast(GdkRGBA*)cPtr);
+    _retval = gdk_rgba_hash(cast(GdkRGBA*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class RGBA : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _spec = spec.toCString(No.Alloc);
-    _retval = gdk_rgba_parse(cast(GdkRGBA*)cPtr, _spec);
+    _retval = gdk_rgba_parse(cast(GdkRGBA*)this._cPtr, _spec);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class RGBA : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)cPtr);
+    _cretval = gdk_rgba_to_string(cast(const(GdkRGBA)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

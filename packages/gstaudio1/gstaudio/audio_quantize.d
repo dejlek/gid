@@ -24,7 +24,7 @@ class AudioQuantize
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -35,6 +35,6 @@ class AudioQuantize
   */
   void reset()
   {
-    gst_audio_quantize_reset(cast(GstAudioQuantize*)cPtr);
+    gst_audio_quantize_reset(cast(GstAudioQuantize*)this._cPtr);
   }
 }

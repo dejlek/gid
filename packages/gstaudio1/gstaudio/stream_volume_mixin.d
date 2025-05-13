@@ -58,7 +58,7 @@ template StreamVolumeT()
   override bool getMute()
   {
     bool _retval;
-    _retval = gst_stream_volume_get_mute(cast(GstStreamVolume*)cPtr);
+    _retval = gst_stream_volume_get_mute(cast(GstStreamVolume*)this._cPtr);
     return _retval;
   }
 
@@ -66,19 +66,19 @@ template StreamVolumeT()
   override double getVolume(gstaudio.types.StreamVolumeFormat format)
   {
     double _retval;
-    _retval = gst_stream_volume_get_volume(cast(GstStreamVolume*)cPtr, format);
+    _retval = gst_stream_volume_get_volume(cast(GstStreamVolume*)this._cPtr, format);
     return _retval;
   }
 
   /** */
   override void setMute(bool mute)
   {
-    gst_stream_volume_set_mute(cast(GstStreamVolume*)cPtr, mute);
+    gst_stream_volume_set_mute(cast(GstStreamVolume*)this._cPtr, mute);
   }
 
   /** */
   override void setVolume(gstaudio.types.StreamVolumeFormat format, double val)
   {
-    gst_stream_volume_set_volume(cast(GstStreamVolume*)cPtr, format, val);
+    gst_stream_volume_set_volume(cast(GstStreamVolume*)this._cPtr, format, val);
   }
 }

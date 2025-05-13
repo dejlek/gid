@@ -67,16 +67,16 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_entry_row_get_type != &gidSymbolNotFound ? adw_entry_row_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -267,7 +267,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void addPrefix(gtk.widget.Widget widget)
   {
-    adw_entry_row_add_prefix(cast(AdwEntryRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_entry_row_add_prefix(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -278,7 +278,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void addSuffix(gtk.widget.Widget widget)
   {
-    adw_entry_row_add_suffix(cast(AdwEntryRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_entry_row_add_suffix(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -288,7 +288,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getActivatesDefault()
   {
     bool _retval;
-    _retval = adw_entry_row_get_activates_default(cast(AdwEntryRow*)cPtr);
+    _retval = adw_entry_row_get_activates_default(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -299,7 +299,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   pango.attr_list.AttrList getAttributes()
   {
     PangoAttrList* _cretval;
-    _cretval = adw_entry_row_get_attributes(cast(AdwEntryRow*)cPtr);
+    _cretval = adw_entry_row_get_attributes(cast(AdwEntryRow*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_list.AttrList(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -311,7 +311,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getEnableEmojiCompletion()
   {
     bool _retval;
-    _retval = adw_entry_row_get_enable_emoji_completion(cast(AdwEntryRow*)cPtr);
+    _retval = adw_entry_row_get_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   gtk.types.InputHints getInputHints()
   {
     GtkInputHints _cretval;
-    _cretval = adw_entry_row_get_input_hints(cast(AdwEntryRow*)cPtr);
+    _cretval = adw_entry_row_get_input_hints(cast(AdwEntryRow*)this._cPtr);
     gtk.types.InputHints _retval = cast(gtk.types.InputHints)_cretval;
     return _retval;
   }
@@ -334,7 +334,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   gtk.types.InputPurpose getInputPurpose()
   {
     GtkInputPurpose _cretval;
-    _cretval = adw_entry_row_get_input_purpose(cast(AdwEntryRow*)cPtr);
+    _cretval = adw_entry_row_get_input_purpose(cast(AdwEntryRow*)this._cPtr);
     gtk.types.InputPurpose _retval = cast(gtk.types.InputPurpose)_cretval;
     return _retval;
   }
@@ -346,7 +346,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool getShowApplyButton()
   {
     bool _retval;
-    _retval = adw_entry_row_get_show_apply_button(cast(AdwEntryRow*)cPtr);
+    _retval = adw_entry_row_get_show_apply_button(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -357,7 +357,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   uint getTextLength()
   {
     uint _retval;
-    _retval = adw_entry_row_get_text_length(cast(AdwEntryRow*)cPtr);
+    _retval = adw_entry_row_get_text_length(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   bool grabFocusWithoutSelecting()
   {
     bool _retval;
-    _retval = adw_entry_row_grab_focus_without_selecting(cast(AdwEntryRow*)cPtr);
+    _retval = adw_entry_row_grab_focus_without_selecting(cast(AdwEntryRow*)this._cPtr);
     return _retval;
   }
 
@@ -382,7 +382,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void remove(gtk.widget.Widget widget)
   {
-    adw_entry_row_remove(cast(AdwEntryRow*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_entry_row_remove(cast(AdwEntryRow*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -393,7 +393,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setActivatesDefault(bool activates)
   {
-    adw_entry_row_set_activates_default(cast(AdwEntryRow*)cPtr, activates);
+    adw_entry_row_set_activates_default(cast(AdwEntryRow*)this._cPtr, activates);
   }
 
   /**
@@ -407,7 +407,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setAttributes(pango.attr_list.AttrList attributes = null)
   {
-    adw_entry_row_set_attributes(cast(AdwEntryRow*)cPtr, attributes ? cast(PangoAttrList*)attributes.cPtr(No.Dup) : null);
+    adw_entry_row_set_attributes(cast(AdwEntryRow*)this._cPtr, attributes ? cast(PangoAttrList*)attributes._cPtr(No.Dup) : null);
   }
 
   /**
@@ -420,7 +420,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setEnableEmojiCompletion(bool enableEmojiCompletion)
   {
-    adw_entry_row_set_enable_emoji_completion(cast(AdwEntryRow*)cPtr, enableEmojiCompletion);
+    adw_entry_row_set_enable_emoji_completion(cast(AdwEntryRow*)this._cPtr, enableEmojiCompletion);
   }
 
   /**
@@ -435,7 +435,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setInputHints(gtk.types.InputHints hints)
   {
-    adw_entry_row_set_input_hints(cast(AdwEntryRow*)cPtr, hints);
+    adw_entry_row_set_input_hints(cast(AdwEntryRow*)this._cPtr, hints);
   }
 
   /**
@@ -448,7 +448,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setInputPurpose(gtk.types.InputPurpose purpose)
   {
-    adw_entry_row_set_input_purpose(cast(AdwEntryRow*)cPtr, purpose);
+    adw_entry_row_set_input_purpose(cast(AdwEntryRow*)this._cPtr, purpose);
   }
 
   /**
@@ -467,7 +467,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
   */
   void setShowApplyButton(bool showApplyButton)
   {
-    adw_entry_row_set_show_apply_button(cast(AdwEntryRow*)cPtr, showApplyButton);
+    adw_entry_row_set_show_apply_button(cast(AdwEntryRow*)this._cPtr, showApplyButton);
   }
 
   /**

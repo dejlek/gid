@@ -126,8 +126,8 @@ template DtlsClientConnectionT()
   override gio.socket_connectable.SocketConnectable getServerIdentity()
   {
     GSocketConnectable* _cretval;
-    _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
+    _cretval = g_dtls_client_connection_get_server_identity(cast(GDtlsClientConnection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.socket_connectable.SocketConnectable)(cast(GSocketConnectable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ template DtlsClientConnectionT()
   override gio.types.TlsCertificateFlags getValidationFlags()
   {
     GTlsCertificateFlags _cretval;
-    _cretval = g_dtls_client_connection_get_validation_flags(cast(GDtlsClientConnection*)cPtr);
+    _cretval = g_dtls_client_connection_get_validation_flags(cast(GDtlsClientConnection*)this._cPtr);
     gio.types.TlsCertificateFlags _retval = cast(gio.types.TlsCertificateFlags)_cretval;
     return _retval;
   }
@@ -160,7 +160,7 @@ template DtlsClientConnectionT()
   */
   override void setServerIdentity(gio.socket_connectable.SocketConnectable identity)
   {
-    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity).cPtr(No.Dup) : null);
+    g_dtls_client_connection_set_server_identity(cast(GDtlsClientConnection*)this._cPtr, identity ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)identity)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,6 +179,6 @@ template DtlsClientConnectionT()
   */
   override void setValidationFlags(gio.types.TlsCertificateFlags flags)
   {
-    g_dtls_client_connection_set_validation_flags(cast(GDtlsClientConnection*)cPtr, flags);
+    g_dtls_client_connection_set_validation_flags(cast(GDtlsClientConnection*)this._cPtr, flags);
   }
 }

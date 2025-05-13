@@ -35,22 +35,22 @@ class SrvTarget : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_srv_target_get_type != &gidSymbolNotFound ? g_srv_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class SrvTarget : gobject.boxed.Boxed
   gio.srv_target.SrvTarget copy()
   {
     GSrvTarget* _cretval;
-    _cretval = g_srv_target_copy(cast(GSrvTarget*)cPtr);
+    _cretval = g_srv_target_copy(cast(GSrvTarget*)this._cPtr);
     auto _retval = _cretval ? new gio.srv_target.SrvTarget(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -102,7 +102,7 @@ class SrvTarget : gobject.boxed.Boxed
   string getHostname()
   {
     const(char)* _cretval;
-    _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)cPtr);
+    _cretval = g_srv_target_get_hostname(cast(GSrvTarget*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -114,7 +114,7 @@ class SrvTarget : gobject.boxed.Boxed
   ushort getPort()
   {
     ushort _retval;
-    _retval = g_srv_target_get_port(cast(GSrvTarget*)cPtr);
+    _retval = g_srv_target_get_port(cast(GSrvTarget*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class SrvTarget : gobject.boxed.Boxed
   ushort getPriority()
   {
     ushort _retval;
-    _retval = g_srv_target_get_priority(cast(GSrvTarget*)cPtr);
+    _retval = g_srv_target_get_priority(cast(GSrvTarget*)this._cPtr);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class SrvTarget : gobject.boxed.Boxed
   ushort getWeight()
   {
     ushort _retval;
-    _retval = g_srv_target_get_weight(cast(GSrvTarget*)cPtr);
+    _retval = g_srv_target_get_weight(cast(GSrvTarget*)this._cPtr);
     return _retval;
   }
 }

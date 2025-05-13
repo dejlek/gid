@@ -36,16 +36,16 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_buffered_output_stream_get_type != &gidSymbolNotFound ? g_buffered_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   this(gio.output_stream.OutputStream baseStream)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null);
+    _cretval = g_buffered_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -119,8 +119,8 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   static gio.buffered_output_stream.BufferedOutputStream newSized(gio.output_stream.OutputStream baseStream, size_t size)
   {
     GOutputStream* _cretval;
-    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
+    _cretval = g_buffered_output_stream_new_sized(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.buffered_output_stream.BufferedOutputStream)(cast(GOutputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   bool getAutoGrow()
   {
     bool _retval;
-    _retval = g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)cPtr);
+    _retval = g_buffered_output_stream_get_auto_grow(cast(GBufferedOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   size_t getBufferSize()
   {
     size_t _retval;
-    _retval = g_buffered_output_stream_get_buffer_size(cast(GBufferedOutputStream*)cPtr);
+    _retval = g_buffered_output_stream_get_buffer_size(cast(GBufferedOutputStream*)this._cPtr);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   */
   void setAutoGrow(bool autoGrow)
   {
-    g_buffered_output_stream_set_auto_grow(cast(GBufferedOutputStream*)cPtr, autoGrow);
+    g_buffered_output_stream_set_auto_grow(cast(GBufferedOutputStream*)this._cPtr, autoGrow);
   }
 
   /**
@@ -169,6 +169,6 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
   */
   void setBufferSize(size_t size)
   {
-    g_buffered_output_stream_set_buffer_size(cast(GBufferedOutputStream*)cPtr, size);
+    g_buffered_output_stream_set_buffer_size(cast(GBufferedOutputStream*)this._cPtr, size);
   }
 }

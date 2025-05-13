@@ -20,16 +20,16 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_child_get_type != &gidSymbolNotFound ? gtk_grid_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -121,7 +121,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   int getColumn()
   {
     int _retval;
-    _retval = gtk_grid_layout_child_get_column(cast(GtkGridLayoutChild*)cPtr);
+    _retval = gtk_grid_layout_child_get_column(cast(GtkGridLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   int getColumnSpan()
   {
     int _retval;
-    _retval = gtk_grid_layout_child_get_column_span(cast(GtkGridLayoutChild*)cPtr);
+    _retval = gtk_grid_layout_child_get_column_span(cast(GtkGridLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   int getRow()
   {
     int _retval;
-    _retval = gtk_grid_layout_child_get_row(cast(GtkGridLayoutChild*)cPtr);
+    _retval = gtk_grid_layout_child_get_row(cast(GtkGridLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   int getRowSpan()
   {
     int _retval;
-    _retval = gtk_grid_layout_child_get_row_span(cast(GtkGridLayoutChild*)cPtr);
+    _retval = gtk_grid_layout_child_get_row_span(cast(GtkGridLayoutChild*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   */
   void setColumn(int column)
   {
-    gtk_grid_layout_child_set_column(cast(GtkGridLayoutChild*)cPtr, column);
+    gtk_grid_layout_child_set_column(cast(GtkGridLayoutChild*)this._cPtr, column);
   }
 
   /**
@@ -177,7 +177,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   */
   void setColumnSpan(int span)
   {
-    gtk_grid_layout_child_set_column_span(cast(GtkGridLayoutChild*)cPtr, span);
+    gtk_grid_layout_child_set_column_span(cast(GtkGridLayoutChild*)this._cPtr, span);
   }
 
   /**
@@ -188,7 +188,7 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   */
   void setRow(int row)
   {
-    gtk_grid_layout_child_set_row(cast(GtkGridLayoutChild*)cPtr, row);
+    gtk_grid_layout_child_set_row(cast(GtkGridLayoutChild*)this._cPtr, row);
   }
 
   /**
@@ -199,6 +199,6 @@ class GridLayoutChild : gtk.layout_child.LayoutChild
   */
   void setRowSpan(int span)
   {
-    gtk_grid_layout_child_set_row_span(cast(GtkGridLayoutChild*)cPtr, span);
+    gtk_grid_layout_child_set_row_span(cast(GtkGridLayoutChild*)this._cPtr, span);
   }
 }

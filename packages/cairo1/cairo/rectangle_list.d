@@ -37,22 +37,22 @@ class RectangleList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_rectangle_list_get_type != &gidSymbolNotFound ? cairo_gobject_rectangle_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property cairo.types.Status status()
   {
-    return cast(cairo.types.Status)(cast(cairo_rectangle_list_t*)cPtr).status;
+    return cast(cairo.types.Status)(cast(cairo_rectangle_list_t*)this._cPtr).status;
   }
 
   /**
@@ -77,7 +77,7 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property void status(cairo.types.Status propval)
   {
-    (cast(cairo_rectangle_list_t*)cPtr).status = cast(cairo_status_t)propval;
+    (cast(cairo_rectangle_list_t*)this._cPtr).status = cast(cairo_status_t)propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property cairo.rectangle.Rectangle rectangles()
   {
-    return cToD!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+    return cToD!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
   }
 
   /**
@@ -96,8 +96,8 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property void rectangles(cairo.rectangle.Rectangle propval)
   {
-    cValueFree!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)cPtr).rectangles);
-    dToC(propval, cast(void*)&(cast(cairo_rectangle_list_t*)cPtr).rectangles);
+    cValueFree!(cairo.rectangle.Rectangle)(cast(void*)(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
+    dToC(propval, cast(void*)&(cast(cairo_rectangle_list_t*)this._cPtr).rectangles);
   }
 
   /**
@@ -106,7 +106,7 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property int numRectangles()
   {
-    return (cast(cairo_rectangle_list_t*)cPtr).numRectangles;
+    return (cast(cairo_rectangle_list_t*)this._cPtr).numRectangles;
   }
 
   /**
@@ -116,6 +116,6 @@ class RectangleList : gobject.boxed.Boxed
   */
   @property void numRectangles(int propval)
   {
-    (cast(cairo_rectangle_list_t*)cPtr).numRectangles = propval;
+    (cast(cairo_rectangle_list_t*)this._cPtr).numRectangles = propval;
   }
 }

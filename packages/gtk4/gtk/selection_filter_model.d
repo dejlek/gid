@@ -25,16 +25,16 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_selection_filter_model_get_type != &gidSymbolNotFound ? gtk_selection_filter_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   this(gtk.selection_model.SelectionModel model = null)
   {
     GtkSelectionFilterModel* _cretval;
-    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    _cretval = gtk_selection_filter_model_new(model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -104,8 +104,8 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   gtk.selection_model.SelectionModel getModel()
   {
     GtkSelectionModel* _cretval;
-    _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
+    _cretval = gtk_selection_filter_model_get_model(cast(GtkSelectionFilterModel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -122,6 +122,6 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   */
   void setModel(gtk.selection_model.SelectionModel model = null)
   {
-    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_selection_filter_model_set_model(cast(GtkSelectionFilterModel*)this._cPtr, model ? cast(GtkSelectionModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 }

@@ -23,16 +23,16 @@ class WebsitePolicies : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_website_policies_get_type != &gidSymbolNotFound ? webkit_website_policies_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class WebsitePolicies : gobject.object.ObjectWrap
   webkit.types.AutoplayPolicy getAutoplayPolicy()
   {
     WebKitAutoplayPolicy _cretval;
-    _cretval = webkit_website_policies_get_autoplay_policy(cast(WebKitWebsitePolicies*)cPtr);
+    _cretval = webkit_website_policies_get_autoplay_policy(cast(WebKitWebsitePolicies*)this._cPtr);
     webkit.types.AutoplayPolicy _retval = cast(webkit.types.AutoplayPolicy)_cretval;
     return _retval;
   }

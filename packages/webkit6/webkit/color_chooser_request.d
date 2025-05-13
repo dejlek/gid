@@ -37,16 +37,16 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_color_chooser_request_get_type != &gidSymbolNotFound ? webkit_color_chooser_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,7 +84,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    webkit_color_chooser_request_cancel(cast(WebKitColorChooserRequest*)cPtr);
+    webkit_color_chooser_request_cancel(cast(WebKitColorChooserRequest*)this._cPtr);
   }
 
   /**
@@ -98,7 +98,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void finish()
   {
-    webkit_color_chooser_request_finish(cast(WebKitColorChooserRequest*)cPtr);
+    webkit_color_chooser_request_finish(cast(WebKitColorChooserRequest*)this._cPtr);
   }
 
   /**
@@ -110,7 +110,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   void getElementRectangle(out gdk.rectangle.Rectangle rect)
   {
     GdkRectangle _rect;
-    webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)cPtr, &_rect);
+    webkit_color_chooser_request_get_element_rectangle(cast(WebKitColorChooserRequest*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 
@@ -123,7 +123,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   void getRgba(out gdk.rgba.RGBA rgba)
   {
     GdkRGBA _rgba;
-    webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)cPtr, &_rgba);
+    webkit_color_chooser_request_get_rgba(cast(WebKitColorChooserRequest*)this._cPtr, &_rgba);
     rgba = new gdk.rgba.RGBA(cast(void*)&_rgba, No.Take);
   }
 
@@ -135,7 +135,7 @@ class ColorChooserRequest : gobject.object.ObjectWrap
   */
   void setRgba(gdk.rgba.RGBA rgba)
   {
-    webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    webkit_color_chooser_request_set_rgba(cast(WebKitColorChooserRequest*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 
   /**

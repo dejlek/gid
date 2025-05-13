@@ -19,16 +19,16 @@ class SlowFileSystem : arrow.file_system.FileSystem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_slow_file_system_get_type != &gidSymbolNotFound ? garrow_slow_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,8 +51,8 @@ class SlowFileSystem : arrow.file_system.FileSystem
   static arrow.slow_file_system.SlowFileSystem newAverageLatency(arrow.file_system.FileSystem baseFileSystem, double averageLatency)
   {
     GArrowSlowFileSystem* _cretval;
-    _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
+    _cretval = garrow_slow_file_system_new_average_latency(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null, averageLatency);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -69,8 +69,8 @@ class SlowFileSystem : arrow.file_system.FileSystem
   static arrow.slow_file_system.SlowFileSystem newAverageLatencyAndSeed(arrow.file_system.FileSystem baseFileSystem, double averageLatency, int seed)
   {
     GArrowSlowFileSystem* _cretval;
-    _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem.cPtr(No.Dup) : null, averageLatency, seed);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
+    _cretval = garrow_slow_file_system_new_average_latency_and_seed(baseFileSystem ? cast(GArrowFileSystem*)baseFileSystem._cPtr(No.Dup) : null, averageLatency, seed);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.slow_file_system.SlowFileSystem)(cast(GArrowSlowFileSystem*)_cretval, Yes.Take);
     return _retval;
   }
 }

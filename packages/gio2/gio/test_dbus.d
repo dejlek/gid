@@ -98,16 +98,16 @@ class TestDBus : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_test_dbus_get_type != &gidSymbolNotFound ? g_test_dbus_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -153,7 +153,7 @@ class TestDBus : gobject.object.ObjectWrap
   void addServiceDir(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_test_dbus_add_service_dir(cast(GTestDBus*)cPtr, _path);
+    g_test_dbus_add_service_dir(cast(GTestDBus*)this._cPtr, _path);
   }
 
   /**
@@ -165,7 +165,7 @@ class TestDBus : gobject.object.ObjectWrap
   */
   void down()
   {
-    g_test_dbus_down(cast(GTestDBus*)cPtr);
+    g_test_dbus_down(cast(GTestDBus*)this._cPtr);
   }
 
   /**
@@ -177,7 +177,7 @@ class TestDBus : gobject.object.ObjectWrap
   string getBusAddress()
   {
     const(char)* _cretval;
-    _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)cPtr);
+    _cretval = g_test_dbus_get_bus_address(cast(GTestDBus*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -189,7 +189,7 @@ class TestDBus : gobject.object.ObjectWrap
   gio.types.TestDBusFlags getFlags()
   {
     GTestDBusFlags _cretval;
-    _cretval = g_test_dbus_get_flags(cast(GTestDBus*)cPtr);
+    _cretval = g_test_dbus_get_flags(cast(GTestDBus*)this._cPtr);
     gio.types.TestDBusFlags _retval = cast(gio.types.TestDBusFlags)_cretval;
     return _retval;
   }
@@ -204,7 +204,7 @@ class TestDBus : gobject.object.ObjectWrap
   */
   void stop()
   {
-    g_test_dbus_stop(cast(GTestDBus*)cPtr);
+    g_test_dbus_stop(cast(GTestDBus*)this._cPtr);
   }
 
   /**
@@ -219,6 +219,6 @@ class TestDBus : gobject.object.ObjectWrap
   */
   void up()
   {
-    g_test_dbus_up(cast(GTestDBus*)cPtr);
+    g_test_dbus_up(cast(GTestDBus*)this._cPtr);
   }
 }

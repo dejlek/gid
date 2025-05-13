@@ -41,16 +41,16 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_app_launch_context_get_type != &gidSymbolNotFound ? gdk_app_launch_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -68,8 +68,8 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_app_launch_context_get_display(cast(GdkAppLaunchContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,7 +93,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setDesktop(int desktop)
   {
-    gdk_app_launch_context_set_desktop(cast(GdkAppLaunchContext*)cPtr, desktop);
+    gdk_app_launch_context_set_desktop(cast(GdkAppLaunchContext*)this._cPtr, desktop);
   }
 
   /**
@@ -110,7 +110,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    gdk_app_launch_context_set_icon(cast(GdkAppLaunchContext*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -130,7 +130,7 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   void setIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)cPtr, _iconName);
+    gdk_app_launch_context_set_icon_name(cast(GdkAppLaunchContext*)this._cPtr, _iconName);
   }
 
   /**
@@ -149,6 +149,6 @@ class AppLaunchContext : gio.app_launch_context.AppLaunchContext
   */
   void setTimestamp(uint timestamp)
   {
-    gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)cPtr, timestamp);
+    gdk_app_launch_context_set_timestamp(cast(GdkAppLaunchContext*)this._cPtr, timestamp);
   }
 }

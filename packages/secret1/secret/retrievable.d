@@ -27,7 +27,7 @@ interface Retrievable
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())secret_retrievable_get_type != &gidSymbolNotFound ? secret_retrievable_get_type() : cast(GType)0;

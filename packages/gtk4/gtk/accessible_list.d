@@ -22,22 +22,22 @@ class AccessibleList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accessible_list_get_type != &gidSymbolNotFound ? gtk_accessible_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class AccessibleList : gobject.boxed.Boxed
 
     GtkAccessible*[] _tmpaccessibles;
     foreach (obj; accessibles)
-      _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj).cPtr : null;
+      _tmpaccessibles ~= obj ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)obj)._cPtr : null;
     GtkAccessible** _accessibles = _tmpaccessibles.ptr;
     _cretval = gtk_accessible_list_new_from_array(_accessibles, _nAccessibles);
     auto _retval = _cretval ? new gtk.accessible_list.AccessibleList(cast(void*)_cretval, Yes.Take) : null;
@@ -94,7 +94,7 @@ class AccessibleList : gobject.boxed.Boxed
   gtk.accessible.Accessible[] getObjects()
   {
     GList* _cretval;
-    _cretval = gtk_accessible_list_get_objects(cast(GtkAccessibleList*)cPtr);
+    _cretval = gtk_accessible_list_get_objects(cast(GtkAccessibleList*)this._cPtr);
     auto _retval = gListToD!(gtk.accessible.Accessible, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }

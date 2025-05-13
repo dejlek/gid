@@ -31,7 +31,7 @@ class VideoGLTextureUploadMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class VideoGLTextureUploadMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoGLTextureUploadMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoGLTextureUploadMeta*)this._cPtr).meta);
   }
 
   /**
@@ -51,7 +51,7 @@ class VideoGLTextureUploadMeta
   */
   @property gstvideo.types.VideoGLTextureOrientation textureOrientation()
   {
-    return cast(gstvideo.types.VideoGLTextureOrientation)(cast(GstVideoGLTextureUploadMeta*)cPtr).textureOrientation;
+    return cast(gstvideo.types.VideoGLTextureOrientation)(cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureOrientation;
   }
 
   /**
@@ -61,7 +61,7 @@ class VideoGLTextureUploadMeta
   */
   @property void textureOrientation(gstvideo.types.VideoGLTextureOrientation propval)
   {
-    (cast(GstVideoGLTextureUploadMeta*)cPtr).textureOrientation = cast(GstVideoGLTextureOrientation)propval;
+    (cast(GstVideoGLTextureUploadMeta*)this._cPtr).textureOrientation = cast(GstVideoGLTextureOrientation)propval;
   }
 
   /**
@@ -70,7 +70,7 @@ class VideoGLTextureUploadMeta
   */
   @property uint nTextures()
   {
-    return (cast(GstVideoGLTextureUploadMeta*)cPtr).nTextures;
+    return (cast(GstVideoGLTextureUploadMeta*)this._cPtr).nTextures;
   }
 
   /**
@@ -80,7 +80,7 @@ class VideoGLTextureUploadMeta
   */
   @property void nTextures(uint propval)
   {
-    (cast(GstVideoGLTextureUploadMeta*)cPtr).nTextures = propval;
+    (cast(GstVideoGLTextureUploadMeta*)this._cPtr).nTextures = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class VideoGLTextureUploadMeta
     bool _retval;
     assert(!textureId || textureId.length == 4);
     auto _textureId = cast(uint*)textureId.ptr;
-    _retval = gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)cPtr, _textureId);
+    _retval = gst_video_gl_texture_upload_meta_upload(cast(GstVideoGLTextureUploadMeta*)this._cPtr, _textureId);
     return _retval;
   }
 

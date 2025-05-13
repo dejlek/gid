@@ -28,7 +28,7 @@ class MetaInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class MetaInfo
   */
   @property gobject.types.GType api()
   {
-    return (cast(GstMetaInfo*)cPtr).api;
+    return (cast(GstMetaInfo*)this._cPtr).api;
   }
 
   /**
@@ -49,7 +49,7 @@ class MetaInfo
   */
   @property void api(gobject.types.GType propval)
   {
-    (cast(GstMetaInfo*)cPtr).api = propval;
+    (cast(GstMetaInfo*)this._cPtr).api = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class MetaInfo
   */
   @property gobject.types.GType type()
   {
-    return (cast(GstMetaInfo*)cPtr).type;
+    return (cast(GstMetaInfo*)this._cPtr).type;
   }
 
   /**
@@ -68,7 +68,7 @@ class MetaInfo
   */
   @property void type(gobject.types.GType propval)
   {
-    (cast(GstMetaInfo*)cPtr).type = propval;
+    (cast(GstMetaInfo*)this._cPtr).type = propval;
   }
 
   /**
@@ -77,7 +77,7 @@ class MetaInfo
   */
   @property size_t size()
   {
-    return (cast(GstMetaInfo*)cPtr).size;
+    return (cast(GstMetaInfo*)this._cPtr).size;
   }
 
   /**
@@ -87,7 +87,7 @@ class MetaInfo
   */
   @property void size(size_t propval)
   {
-    (cast(GstMetaInfo*)cPtr).size = propval;
+    (cast(GstMetaInfo*)this._cPtr).size = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class MetaInfo
   */
   @property GstMetaInitFunction initFunc()
   {
-    return (cast(GstMetaInfo*)cPtr).initFunc;
+    return (cast(GstMetaInfo*)this._cPtr).initFunc;
   }
 
   /**
@@ -107,7 +107,7 @@ class MetaInfo
 
   @property void initFunc(GstMetaInitFunction propval)
   {
-    (cast(GstMetaInfo*)cPtr).initFunc = propval;
+    (cast(GstMetaInfo*)this._cPtr).initFunc = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class MetaInfo
   */
   @property GstMetaFreeFunction freeFunc()
   {
-    return (cast(GstMetaInfo*)cPtr).freeFunc;
+    return (cast(GstMetaInfo*)this._cPtr).freeFunc;
   }
 
   /**
@@ -127,7 +127,7 @@ class MetaInfo
 
   @property void freeFunc(GstMetaFreeFunction propval)
   {
-    (cast(GstMetaInfo*)cPtr).freeFunc = propval;
+    (cast(GstMetaInfo*)this._cPtr).freeFunc = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class MetaInfo
   */
   @property GstMetaTransformFunction transformFunc()
   {
-    return (cast(GstMetaInfo*)cPtr).transformFunc;
+    return (cast(GstMetaInfo*)this._cPtr).transformFunc;
   }
 
   /**
@@ -147,7 +147,7 @@ class MetaInfo
 
   @property void transformFunc(GstMetaTransformFunction propval)
   {
-    (cast(GstMetaInfo*)cPtr).transformFunc = propval;
+    (cast(GstMetaInfo*)this._cPtr).transformFunc = propval;
   }
 
   /**
@@ -157,7 +157,7 @@ class MetaInfo
   */
   @property GstMetaDeserializeFunction deserializeFunc()
   {
-    return (cast(GstMetaInfo*)cPtr).deserializeFunc;
+    return (cast(GstMetaInfo*)this._cPtr).deserializeFunc;
   }
 
   /**
@@ -169,7 +169,7 @@ class MetaInfo
 
   @property void deserializeFunc(GstMetaDeserializeFunction propval)
   {
-    (cast(GstMetaInfo*)cPtr).deserializeFunc = propval;
+    (cast(GstMetaInfo*)this._cPtr).deserializeFunc = propval;
   }
 
   /**
@@ -180,7 +180,7 @@ class MetaInfo
   */
   @property GstMetaClearFunction clearFunc()
   {
-    return (cast(GstMetaInfo*)cPtr).clearFunc;
+    return (cast(GstMetaInfo*)this._cPtr).clearFunc;
   }
 
   /**
@@ -193,14 +193,14 @@ class MetaInfo
 
   @property void clearFunc(GstMetaClearFunction propval)
   {
-    (cast(GstMetaInfo*)cPtr).clearFunc = propval;
+    (cast(GstMetaInfo*)this._cPtr).clearFunc = propval;
   }
 
   /** */
   bool isCustom()
   {
     bool _retval;
-    _retval = gst_meta_info_is_custom(cast(const(GstMetaInfo)*)cPtr);
+    _retval = gst_meta_info_is_custom(cast(const(GstMetaInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class MetaInfo
   gst.meta_info.MetaInfo register()
   {
     const(GstMetaInfo)* _cretval;
-    _cretval = gst_meta_info_register(cast(GstMetaInfo*)cPtr);
+    _cretval = gst_meta_info_register(cast(GstMetaInfo*)this._cPtr);
     auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
     return _retval;
   }

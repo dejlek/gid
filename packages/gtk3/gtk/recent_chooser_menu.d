@@ -47,16 +47,16 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_recent_chooser_menu_get_type != &gidSymbolNotFound ? gtk_recent_chooser_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -127,8 +127,8 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   static gtk.recent_chooser_menu.RecentChooserMenu newForManager(gtk.recent_manager.RecentManager manager)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_recent_chooser_menu_new_for_manager(manager ? cast(GtkRecentManager*)manager.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.recent_chooser_menu.RecentChooserMenu)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_recent_chooser_menu_new_for_manager(manager ? cast(GtkRecentManager*)manager._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.recent_chooser_menu.RecentChooserMenu)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   bool getShowNumbers()
   {
     bool _retval;
-    _retval = gtk_recent_chooser_menu_get_show_numbers(cast(GtkRecentChooserMenu*)cPtr);
+    _retval = gtk_recent_chooser_menu_get_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr);
     return _retval;
   }
 
@@ -154,6 +154,6 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
   */
   void setShowNumbers(bool showNumbers)
   {
-    gtk_recent_chooser_menu_set_show_numbers(cast(GtkRecentChooserMenu*)cPtr, showNumbers);
+    gtk_recent_chooser_menu_set_show_numbers(cast(GtkRecentChooserMenu*)this._cPtr, showNumbers);
   }
 }

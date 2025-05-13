@@ -33,7 +33,7 @@ class NetControlMessageMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -44,7 +44,7 @@ class NetControlMessageMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetControlMessageMeta*)this._cPtr).meta);
   }
 
   /**
@@ -53,7 +53,7 @@ class NetControlMessageMeta
   */
   @property gio.socket_control_message.SocketControlMessage message()
   {
-    return cToD!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)cPtr).message);
+    return cToD!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)this._cPtr).message);
   }
 
   /**
@@ -63,8 +63,8 @@ class NetControlMessageMeta
   */
   @property void message(gio.socket_control_message.SocketControlMessage propval)
   {
-    cValueFree!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)cPtr).message);
-    dToC(propval, cast(void*)&(cast(GstNetControlMessageMeta*)cPtr).message);
+    cValueFree!(gio.socket_control_message.SocketControlMessage)(cast(void*)(cast(GstNetControlMessageMeta*)this._cPtr).message);
+    dToC(propval, cast(void*)&(cast(GstNetControlMessageMeta*)this._cPtr).message);
   }
 
   /** */

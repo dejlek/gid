@@ -21,16 +21,16 @@ class FeatherFileReader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_feather_file_reader_get_type != &gidSymbolNotFound ? garrow_feather_file_reader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
   {
     GArrowFeatherFileReader* _cretval;
     GError *_err;
-    _cretval = garrow_feather_file_reader_new(file ? cast(GArrowSeekableInputStream*)file.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_feather_file_reader_new(file ? cast(GArrowSeekableInputStream*)file._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);
@@ -54,7 +54,7 @@ class FeatherFileReader : gobject.object.ObjectWrap
   int getVersion()
   {
     int _retval;
-    _retval = garrow_feather_file_reader_get_version(cast(GArrowFeatherFileReader*)cPtr);
+    _retval = garrow_feather_file_reader_get_version(cast(GArrowFeatherFileReader*)this._cPtr);
     return _retval;
   }
 
@@ -63,10 +63,10 @@ class FeatherFileReader : gobject.object.ObjectWrap
   {
     GArrowTable* _cretval;
     GError *_err;
-    _cretval = garrow_feather_file_reader_read(cast(GArrowFeatherFileReader*)cPtr, &_err);
+    _cretval = garrow_feather_file_reader_read(cast(GArrowFeatherFileReader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -80,10 +80,10 @@ class FeatherFileReader : gobject.object.ObjectWrap
 
     auto _indices = cast(const(int)*)indices.ptr;
     GError *_err;
-    _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)cPtr, _indices, _nIndices, &_err);
+    _cretval = garrow_feather_file_reader_read_indices(cast(GArrowFeatherFileReader*)this._cPtr, _indices, _nIndices, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,10 +101,10 @@ class FeatherFileReader : gobject.object.ObjectWrap
     const(char*)* _names = _tmpnames.ptr;
 
     GError *_err;
-    _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)cPtr, _names, _nNames, &_err);
+    _cretval = garrow_feather_file_reader_read_names(cast(GArrowFeatherFileReader*)this._cPtr, _names, _nNames, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.table.Table)(cast(GArrowTable*)_cretval, Yes.Take);
     return _retval;
   }
 }

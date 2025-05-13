@@ -29,7 +29,7 @@ interface StreamVolume
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_volume_get_type != &gidSymbolNotFound ? gst_stream_volume_get_type() : cast(GType)0;

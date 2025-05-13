@@ -19,16 +19,16 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_date32_array_builder_get_type != &gidSymbolNotFound ? garrow_date32_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,7 +50,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_date32_array_builder_append(cast(GArrowDate32ArrayBuilder*)cPtr, value, &_err);
+    _retval = garrow_date32_array_builder_append(cast(GArrowDate32ArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -61,7 +61,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_date32_array_builder_append_value(cast(GArrowDate32ArrayBuilder*)cPtr, value, &_err);
+    _retval = garrow_date32_array_builder_append_value(cast(GArrowDate32ArrayBuilder*)this._cPtr, value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -95,7 +95,7 @@ class Date32ArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_date32_array_builder_append_values(cast(GArrowDate32ArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_date32_array_builder_append_values(cast(GArrowDate32ArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

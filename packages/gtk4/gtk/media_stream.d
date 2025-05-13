@@ -40,16 +40,16 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_media_stream_get_type != &gidSymbolNotFound ? gtk_media_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -191,7 +191,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void gerror(glib.error.ErrorWrap error)
   {
-    gtk_media_stream_gerror(cast(GtkMediaStream*)cPtr, error ? cast(GError*)error.cPtr : null);
+    gtk_media_stream_gerror(cast(GtkMediaStream*)this._cPtr, error ? cast(GError*)error._cPtr : null);
   }
 
   /**
@@ -203,7 +203,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   long getDuration()
   {
     long _retval;
-    _retval = gtk_media_stream_get_duration(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_duration(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getEnded()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_ended(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_ended(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   glib.error.ErrorWrap getError()
   {
     const(GError)* _cretval;
-    _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)cPtr);
+    _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)this._cPtr);
     auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
@@ -253,7 +253,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getLoop()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_loop(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_loop(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getMuted()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_muted(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_muted(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool getPlaying()
   {
     bool _retval;
-    _retval = gtk_media_stream_get_playing(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_playing(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -288,7 +288,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   long getTimestamp()
   {
     long _retval;
-    _retval = gtk_media_stream_get_timestamp(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_timestamp(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   double getVolume()
   {
     double _retval;
-    _retval = gtk_media_stream_get_volume(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_get_volume(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool hasAudio()
   {
     bool _retval;
-    _retval = gtk_media_stream_has_audio(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_has_audio(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -323,7 +323,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool hasVideo()
   {
     bool _retval;
-    _retval = gtk_media_stream_has_video(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_has_video(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -336,7 +336,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isPrepared()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_prepared(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_is_prepared(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isSeekable()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_seekable(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_is_seekable(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   bool isSeeking()
   {
     bool _retval;
-    _retval = gtk_media_stream_is_seeking(cast(GtkMediaStream*)cPtr);
+    _retval = gtk_media_stream_is_seeking(cast(GtkMediaStream*)this._cPtr);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void pause()
   {
-    gtk_media_stream_pause(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_pause(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -387,7 +387,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void play()
   {
-    gtk_media_stream_play(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_play(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -413,7 +413,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void realize(gdk.surface.Surface surface)
   {
-    gtk_media_stream_realize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    gtk_media_stream_realize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
   }
 
   /**
@@ -434,7 +434,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void seek(long timestamp)
   {
-    gtk_media_stream_seek(cast(GtkMediaStream*)cPtr, timestamp);
+    gtk_media_stream_seek(cast(GtkMediaStream*)this._cPtr, timestamp);
   }
 
   /**
@@ -448,7 +448,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void seekFailed()
   {
-    gtk_media_stream_seek_failed(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_seek_failed(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -462,7 +462,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void seekSuccess()
   {
-    gtk_media_stream_seek_success(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_seek_success(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -480,7 +480,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void setLoop(bool loop)
   {
-    gtk_media_stream_set_loop(cast(GtkMediaStream*)cPtr, loop);
+    gtk_media_stream_set_loop(cast(GtkMediaStream*)this._cPtr, loop);
   }
 
   /**
@@ -498,7 +498,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void setMuted(bool muted)
   {
-    gtk_media_stream_set_muted(cast(GtkMediaStream*)cPtr, muted);
+    gtk_media_stream_set_muted(cast(GtkMediaStream*)this._cPtr, muted);
   }
 
   /**
@@ -509,7 +509,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void setPlaying(bool playing)
   {
-    gtk_media_stream_set_playing(cast(GtkMediaStream*)cPtr, playing);
+    gtk_media_stream_set_playing(cast(GtkMediaStream*)this._cPtr, playing);
   }
 
   /**
@@ -530,7 +530,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void setVolume(double volume)
   {
-    gtk_media_stream_set_volume(cast(GtkMediaStream*)cPtr, volume);
+    gtk_media_stream_set_volume(cast(GtkMediaStream*)this._cPtr, volume);
   }
 
   /**
@@ -543,7 +543,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void streamEnded()
   {
-    gtk_media_stream_stream_ended(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_stream_ended(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -566,7 +566,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void streamPrepared(bool hasAudio, bool hasVideo, bool seekable, long duration)
   {
-    gtk_media_stream_stream_prepared(cast(GtkMediaStream*)cPtr, hasAudio, hasVideo, seekable, duration);
+    gtk_media_stream_stream_prepared(cast(GtkMediaStream*)this._cPtr, hasAudio, hasVideo, seekable, duration);
   }
 
   /**
@@ -578,7 +578,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void streamUnprepared()
   {
-    gtk_media_stream_stream_unprepared(cast(GtkMediaStream*)cPtr);
+    gtk_media_stream_stream_unprepared(cast(GtkMediaStream*)this._cPtr);
   }
 
   /**
@@ -592,7 +592,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void unrealize(gdk.surface.Surface surface)
   {
-    gtk_media_stream_unrealize(cast(GtkMediaStream*)cPtr, surface ? cast(GdkSurface*)surface.cPtr(No.Dup) : null);
+    gtk_media_stream_unrealize(cast(GtkMediaStream*)this._cPtr, surface ? cast(GdkSurface*)surface._cPtr(No.Dup) : null);
   }
 
   /**
@@ -609,6 +609,6 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   */
   void update(long timestamp)
   {
-    gtk_media_stream_update(cast(GtkMediaStream*)cPtr, timestamp);
+    gtk_media_stream_update(cast(GtkMediaStream*)this._cPtr, timestamp);
   }
 }

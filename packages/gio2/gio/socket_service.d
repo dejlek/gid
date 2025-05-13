@@ -48,16 +48,16 @@ class SocketService : gio.socket_listener.SocketListener
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_socket_service_get_type != &gidSymbolNotFound ? g_socket_service_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class SocketService : gio.socket_listener.SocketListener
   bool isActive()
   {
     bool _retval;
-    _retval = g_socket_service_is_active(cast(GSocketService*)cPtr);
+    _retval = g_socket_service_is_active(cast(GSocketService*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ class SocketService : gio.socket_listener.SocketListener
   */
   void start()
   {
-    g_socket_service_start(cast(GSocketService*)cPtr);
+    g_socket_service_start(cast(GSocketService*)this._cPtr);
   }
 
   /**
@@ -149,7 +149,7 @@ class SocketService : gio.socket_listener.SocketListener
   */
   void stop()
   {
-    g_socket_service_stop(cast(GSocketService*)cPtr);
+    g_socket_service_stop(cast(GSocketService*)this._cPtr);
   }
 
   /**

@@ -35,16 +35,16 @@ class DeviceProvider : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_device_provider_get_type != &gidSymbolNotFound ? gst_device_provider_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,7 +69,7 @@ class DeviceProvider : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_device_provider_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, type);
+    _retval = gst_device_provider_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool canMonitor()
   {
     bool _retval;
-    _retval = gst_device_provider_can_monitor(cast(GstDeviceProvider*)cPtr);
+    _retval = gst_device_provider_can_monitor(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 
@@ -95,7 +95,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void deviceAdd(gst.device.Device device)
   {
-    gst_device_provider_device_add(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    gst_device_provider_device_add(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -111,7 +111,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void deviceChanged(gst.device.Device device, gst.device.Device changedDevice)
   {
-    gst_device_provider_device_changed(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice.cPtr(No.Dup) : null);
+    gst_device_provider_device_changed(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null, changedDevice ? cast(GstDevice*)changedDevice._cPtr(No.Dup) : null);
   }
 
   /**
@@ -125,7 +125,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void deviceRemove(gst.device.Device device)
   {
-    gst_device_provider_device_remove(cast(GstDeviceProvider*)cPtr, device ? cast(GstDevice*)device.cPtr(No.Dup) : null);
+    gst_device_provider_device_remove(cast(GstDeviceProvider*)this._cPtr, device ? cast(GstDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -135,8 +135,8 @@ class DeviceProvider : gst.object.ObjectWrap
   gst.bus.Bus getBus()
   {
     GstBus* _cretval;
-    _cretval = gst_device_provider_get_bus(cast(GstDeviceProvider*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    _cretval = gst_device_provider_get_bus(cast(GstDeviceProvider*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class DeviceProvider : gst.object.ObjectWrap
   gst.device.Device[] getDevices()
   {
     GList* _cretval;
-    _cretval = gst_device_provider_get_devices(cast(GstDeviceProvider*)cPtr);
+    _cretval = gst_device_provider_get_devices(cast(GstDeviceProvider*)this._cPtr);
     auto _retval = gListToD!(gst.device.Device, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -165,8 +165,8 @@ class DeviceProvider : gst.object.ObjectWrap
   gst.device_provider_factory.DeviceProviderFactory getFactory()
   {
     GstDeviceProviderFactory* _cretval;
-    _cretval = gst_device_provider_get_factory(cast(GstDeviceProvider*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.Take);
+    _cretval = gst_device_provider_get_factory(cast(GstDeviceProvider*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.device_provider_factory.DeviceProviderFactory)(cast(GstDeviceProviderFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class DeviceProvider : gst.object.ObjectWrap
   string[] getHiddenProviders()
   {
     char** _cretval;
-    _cretval = gst_device_provider_get_hidden_providers(cast(GstDeviceProvider*)cPtr);
+    _cretval = gst_device_provider_get_hidden_providers(cast(GstDeviceProvider*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -205,7 +205,7 @@ class DeviceProvider : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gst_device_provider_get_metadata(cast(GstDeviceProvider*)cPtr, _key);
+    _cretval = gst_device_provider_get_metadata(cast(GstDeviceProvider*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -223,7 +223,7 @@ class DeviceProvider : gst.object.ObjectWrap
   void hideProvider(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_device_provider_hide_provider(cast(GstDeviceProvider*)cPtr, _name);
+    gst_device_provider_hide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
   }
 
   /**
@@ -233,7 +233,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool isStarted()
   {
     bool _retval;
-    _retval = gst_device_provider_is_started(cast(GstDeviceProvider*)cPtr);
+    _retval = gst_device_provider_is_started(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class DeviceProvider : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_device_provider_start(cast(GstDeviceProvider*)cPtr);
+    _retval = gst_device_provider_start(cast(GstDeviceProvider*)this._cPtr);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ class DeviceProvider : gst.object.ObjectWrap
   */
   void stop()
   {
-    gst_device_provider_stop(cast(GstDeviceProvider*)cPtr);
+    gst_device_provider_stop(cast(GstDeviceProvider*)this._cPtr);
   }
 
   /**
@@ -283,7 +283,7 @@ class DeviceProvider : gst.object.ObjectWrap
   void unhideProvider(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_device_provider_unhide_provider(cast(GstDeviceProvider*)cPtr, _name);
+    gst_device_provider_unhide_provider(cast(GstDeviceProvider*)this._cPtr, _name);
   }
 
   /**

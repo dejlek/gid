@@ -29,16 +29,16 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_response_policy_decision_get_type != &gidSymbolNotFound ? webkit_response_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -80,8 +80,8 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   webkit.urirequest.URIRequest getRequest()
   {
     WebKitURIRequest* _cretval;
-    _cretval = webkit_response_policy_decision_get_request(cast(WebKitResponsePolicyDecision*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
+    _cretval = webkit_response_policy_decision_get_request(cast(WebKitResponsePolicyDecision*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.urirequest.URIRequest)(cast(WebKitURIRequest*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,8 +92,8 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   webkit.uriresponse.URIResponse getResponse()
   {
     WebKitURIResponse* _cretval;
-    _cretval = webkit_response_policy_decision_get_response(cast(WebKitResponsePolicyDecision*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    _cretval = webkit_response_policy_decision_get_response(cast(WebKitResponsePolicyDecision*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 
@@ -104,7 +104,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   bool isMainFrameMainResource()
   {
     bool _retval;
-    _retval = webkit_response_policy_decision_is_main_frame_main_resource(cast(WebKitResponsePolicyDecision*)cPtr);
+    _retval = webkit_response_policy_decision_is_main_frame_main_resource(cast(WebKitResponsePolicyDecision*)this._cPtr);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
   bool isMimeTypeSupported()
   {
     bool _retval;
-    _retval = webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)cPtr);
+    _retval = webkit_response_policy_decision_is_mime_type_supported(cast(WebKitResponsePolicyDecision*)this._cPtr);
     return _retval;
   }
 }

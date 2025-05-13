@@ -37,22 +37,22 @@ class TextRange : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_text_range_get_type != &gidSymbolNotFound ? atk_text_range_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property atk.types.TextRectangle bounds()
   {
-    return cToD!(atk.types.TextRectangle)(cast(void*)&(cast(AtkTextRange*)cPtr).bounds);
+    return cToD!(atk.types.TextRectangle)(cast(void*)&(cast(AtkTextRange*)this._cPtr).bounds);
   }
 
   /**
@@ -77,7 +77,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property void bounds(atk.types.TextRectangle propval)
   {
-    (cast(AtkTextRange*)cPtr).bounds = propval;
+    (cast(AtkTextRange*)this._cPtr).bounds = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property int startOffset()
   {
-    return (cast(AtkTextRange*)cPtr).startOffset;
+    return (cast(AtkTextRange*)this._cPtr).startOffset;
   }
 
   /**
@@ -96,7 +96,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property void startOffset(int propval)
   {
-    (cast(AtkTextRange*)cPtr).startOffset = propval;
+    (cast(AtkTextRange*)this._cPtr).startOffset = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property int endOffset()
   {
-    return (cast(AtkTextRange*)cPtr).endOffset;
+    return (cast(AtkTextRange*)this._cPtr).endOffset;
   }
 
   /**
@@ -115,7 +115,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property void endOffset(int propval)
   {
-    (cast(AtkTextRange*)cPtr).endOffset = propval;
+    (cast(AtkTextRange*)this._cPtr).endOffset = propval;
   }
 
   /**
@@ -124,7 +124,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property string content()
   {
-    return cToD!(string)(cast(void*)(cast(AtkTextRange*)cPtr).content);
+    return cToD!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
   }
 
   /**
@@ -134,7 +134,7 @@ class TextRange : gobject.boxed.Boxed
   */
   @property void content(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(AtkTextRange*)cPtr).content);
-    dToC(propval, cast(void*)&(cast(AtkTextRange*)cPtr).content);
+    cValueFree!(string)(cast(void*)(cast(AtkTextRange*)this._cPtr).content);
+    dToC(propval, cast(void*)&(cast(AtkTextRange*)this._cPtr).content);
   }
 }

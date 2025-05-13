@@ -30,7 +30,7 @@ class Module
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -42,7 +42,7 @@ class Module
   bool close()
   {
     bool _retval;
-    _retval = g_module_close(cast(ModuleC*)cPtr);
+    _retval = g_module_close(cast(ModuleC*)this._cPtr);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class Module
   */
   void makeResident()
   {
-    g_module_make_resident(cast(ModuleC*)cPtr);
+    g_module_make_resident(cast(ModuleC*)this._cPtr);
   }
 
   /**
@@ -64,7 +64,7 @@ class Module
   string name()
   {
     const(char)* _cretval;
-    _cretval = g_module_name(cast(ModuleC*)cPtr);
+    _cretval = g_module_name(cast(ModuleC*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -82,7 +82,7 @@ class Module
   {
     bool _retval;
     const(char)* _symbolName = symbolName.toCString(No.Alloc);
-    _retval = g_module_symbol(cast(ModuleC*)cPtr, _symbolName, cast(void**)&symbol);
+    _retval = g_module_symbol(cast(ModuleC*)this._cPtr, _symbolName, cast(void**)&symbol);
     return _retval;
   }
 
@@ -166,5 +166,5 @@ class ModuleException : ErrorWrap
     super(gmodule.module_.Module.errorQuark, cast(int)code, msg);
   }
 
-  alias Code = GModuleError;
+  alias Code = ModuleError;
 }

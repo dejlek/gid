@@ -27,22 +27,22 @@ class Device : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_device_get_type != &gidSymbolNotFound ? cairo_gobject_device_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class Device : gobject.boxed.Boxed
   cairo.types.Status acquire()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_device_acquire(cast(cairo_device_t*)cPtr);
+    _cretval = cairo_device_acquire(cast(cairo_device_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -99,7 +99,7 @@ class Device : gobject.boxed.Boxed
   */
   void finish()
   {
-    cairo_device_finish(cast(cairo_device_t*)cPtr);
+    cairo_device_finish(cast(cairo_device_t*)this._cPtr);
   }
 
   /**
@@ -114,7 +114,7 @@ class Device : gobject.boxed.Boxed
   */
   void flush()
   {
-    cairo_device_flush(cast(cairo_device_t*)cPtr);
+    cairo_device_flush(cast(cairo_device_t*)this._cPtr);
   }
 
   /**
@@ -125,7 +125,7 @@ class Device : gobject.boxed.Boxed
   cairo.types.DeviceType getDeviceType()
   {
     cairo_device_type_t _cretval;
-    _cretval = cairo_device_get_type(cast(cairo_device_t*)cPtr);
+    _cretval = cairo_device_get_type(cast(cairo_device_t*)this._cPtr);
     cairo.types.DeviceType _retval = cast(cairo.types.DeviceType)_cretval;
     return _retval;
   }
@@ -142,7 +142,7 @@ class Device : gobject.boxed.Boxed
   */
   void* getUserData(cairo.types.UserDataKey key)
   {
-    auto _retval = cairo_device_get_user_data(cast(cairo_device_t*)cPtr, &key);
+    auto _retval = cairo_device_get_user_data(cast(cairo_device_t*)this._cPtr, &key);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Device : gobject.boxed.Boxed
   double observerElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class Device : gobject.boxed.Boxed
   double observerFillElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_fill_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_fill_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Device : gobject.boxed.Boxed
   double observerGlyphsElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_glyphs_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_glyphs_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Device : gobject.boxed.Boxed
   double observerMaskElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_mask_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_mask_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class Device : gobject.boxed.Boxed
   double observerPaintElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_paint_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_paint_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class Device : gobject.boxed.Boxed
 
     cairo_status_t _cretval;
     auto _writeFunc = writeFunc ? cast(void*)&(writeFunc) : null;
-    _cretval = cairo_device_observer_print(cast(cairo_device_t*)cPtr, _writeFuncCB, _writeFunc);
+    _cretval = cairo_device_observer_print(cast(cairo_device_t*)this._cPtr, _writeFuncCB, _writeFunc);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }
@@ -239,7 +239,7 @@ class Device : gobject.boxed.Boxed
   double observerStrokeElapsed()
   {
     double _retval;
-    _retval = cairo_device_observer_stroke_elapsed(cast(cairo_device_t*)cPtr);
+    _retval = cairo_device_observer_stroke_elapsed(cast(cairo_device_t*)this._cPtr);
     return _retval;
   }
 
@@ -249,7 +249,7 @@ class Device : gobject.boxed.Boxed
   */
   void release()
   {
-    cairo_device_release(cast(cairo_device_t*)cPtr);
+    cairo_device_release(cast(cairo_device_t*)this._cPtr);
   }
 
   /**
@@ -261,7 +261,7 @@ class Device : gobject.boxed.Boxed
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_device_status(cast(cairo_device_t*)cPtr);
+    _cretval = cairo_device_status(cast(cairo_device_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }

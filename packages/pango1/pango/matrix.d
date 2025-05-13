@@ -49,22 +49,22 @@ class Matrix : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_matrix_get_type != &gidSymbolNotFound ? pango_matrix_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,7 +79,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double xx()
   {
-    return (cast(PangoMatrix*)cPtr).xx;
+    return (cast(PangoMatrix*)this._cPtr).xx;
   }
 
   /**
@@ -89,7 +89,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void xx(double propval)
   {
-    (cast(PangoMatrix*)cPtr).xx = propval;
+    (cast(PangoMatrix*)this._cPtr).xx = propval;
   }
 
   /**
@@ -98,7 +98,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double xy()
   {
-    return (cast(PangoMatrix*)cPtr).xy;
+    return (cast(PangoMatrix*)this._cPtr).xy;
   }
 
   /**
@@ -108,7 +108,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void xy(double propval)
   {
-    (cast(PangoMatrix*)cPtr).xy = propval;
+    (cast(PangoMatrix*)this._cPtr).xy = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double yx()
   {
-    return (cast(PangoMatrix*)cPtr).yx;
+    return (cast(PangoMatrix*)this._cPtr).yx;
   }
 
   /**
@@ -127,7 +127,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void yx(double propval)
   {
-    (cast(PangoMatrix*)cPtr).yx = propval;
+    (cast(PangoMatrix*)this._cPtr).yx = propval;
   }
 
   /**
@@ -136,7 +136,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double yy()
   {
-    return (cast(PangoMatrix*)cPtr).yy;
+    return (cast(PangoMatrix*)this._cPtr).yy;
   }
 
   /**
@@ -146,7 +146,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void yy(double propval)
   {
-    (cast(PangoMatrix*)cPtr).yy = propval;
+    (cast(PangoMatrix*)this._cPtr).yy = propval;
   }
 
   /**
@@ -155,7 +155,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double x0()
   {
-    return (cast(PangoMatrix*)cPtr).x0;
+    return (cast(PangoMatrix*)this._cPtr).x0;
   }
 
   /**
@@ -165,7 +165,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void x0(double propval)
   {
-    (cast(PangoMatrix*)cPtr).x0 = propval;
+    (cast(PangoMatrix*)this._cPtr).x0 = propval;
   }
 
   /**
@@ -174,7 +174,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property double y0()
   {
-    return (cast(PangoMatrix*)cPtr).y0;
+    return (cast(PangoMatrix*)this._cPtr).y0;
   }
 
   /**
@@ -184,7 +184,7 @@ class Matrix : gobject.boxed.Boxed
   */
   @property void y0(double propval)
   {
-    (cast(PangoMatrix*)cPtr).y0 = propval;
+    (cast(PangoMatrix*)this._cPtr).y0 = propval;
   }
 
   /**
@@ -197,7 +197,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void concat(pango.matrix.Matrix newMatrix)
   {
-    pango_matrix_concat(cast(PangoMatrix*)cPtr, newMatrix ? cast(const(PangoMatrix)*)newMatrix.cPtr(No.Dup) : null);
+    pango_matrix_concat(cast(PangoMatrix*)this._cPtr, newMatrix ? cast(const(PangoMatrix)*)newMatrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class Matrix : gobject.boxed.Boxed
   pango.matrix.Matrix copy()
   {
     PangoMatrix* _cretval;
-    _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)cPtr);
+    _cretval = pango_matrix_copy(cast(const(PangoMatrix)*)this._cPtr);
     auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -224,7 +224,7 @@ class Matrix : gobject.boxed.Boxed
   double getFontScaleFactor()
   {
     double _retval;
-    _retval = pango_matrix_get_font_scale_factor(cast(const(PangoMatrix)*)cPtr);
+    _retval = pango_matrix_get_font_scale_factor(cast(const(PangoMatrix)*)this._cPtr);
     return _retval;
   }
 
@@ -243,7 +243,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void getFontScaleFactors(out double xscale, out double yscale)
   {
-    pango_matrix_get_font_scale_factors(cast(const(PangoMatrix)*)cPtr, cast(double*)&xscale, cast(double*)&yscale);
+    pango_matrix_get_font_scale_factors(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&xscale, cast(double*)&yscale);
   }
 
   /**
@@ -260,7 +260,7 @@ class Matrix : gobject.boxed.Boxed
   double getSlantRatio()
   {
     double _retval;
-    _retval = pango_matrix_get_slant_ratio(cast(const(PangoMatrix)*)cPtr);
+    _retval = pango_matrix_get_slant_ratio(cast(const(PangoMatrix)*)this._cPtr);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void rotate(double degrees)
   {
-    pango_matrix_rotate(cast(PangoMatrix*)cPtr, degrees);
+    pango_matrix_rotate(cast(PangoMatrix*)this._cPtr, degrees);
   }
 
   /**
@@ -289,7 +289,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void scale(double scaleX, double scaleY)
   {
-    pango_matrix_scale(cast(PangoMatrix*)cPtr, scaleX, scaleY);
+    pango_matrix_scale(cast(PangoMatrix*)this._cPtr, scaleX, scaleY);
   }
 
   /**
@@ -315,7 +315,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformDistance(ref double dx, ref double dy)
   {
-    pango_matrix_transform_distance(cast(const(PangoMatrix)*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    pango_matrix_transform_distance(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -335,7 +335,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPixelRectangle(ref pango.types.Rectangle rect)
   {
-    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)cPtr, &rect);
+    pango_matrix_transform_pixel_rectangle(cast(const(PangoMatrix)*)this._cPtr, &rect);
   }
 
   /**
@@ -347,7 +347,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformPoint(ref double x, ref double y)
   {
-    pango_matrix_transform_point(cast(const(PangoMatrix)*)cPtr, cast(double*)&x, cast(double*)&y);
+    pango_matrix_transform_point(cast(const(PangoMatrix)*)this._cPtr, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -375,7 +375,7 @@ class Matrix : gobject.boxed.Boxed
   */
   void transformRectangle(ref pango.types.Rectangle rect)
   {
-    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)cPtr, &rect);
+    pango_matrix_transform_rectangle(cast(const(PangoMatrix)*)this._cPtr, &rect);
   }
 
   /**
@@ -389,6 +389,6 @@ class Matrix : gobject.boxed.Boxed
   */
   void translate(double tx, double ty)
   {
-    pango_matrix_translate(cast(PangoMatrix*)cPtr, tx, ty);
+    pango_matrix_translate(cast(PangoMatrix*)this._cPtr, tx, ty);
   }
 }

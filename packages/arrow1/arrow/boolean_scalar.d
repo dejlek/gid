@@ -18,16 +18,16 @@ class BooleanScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_boolean_scalar_get_type != &gidSymbolNotFound ? garrow_boolean_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class BooleanScalar : arrow.scalar.Scalar
   bool getValue()
   {
     bool _retval;
-    _retval = garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)cPtr);
+    _retval = garrow_boolean_scalar_get_value(cast(GArrowBooleanScalar*)this._cPtr);
     return _retval;
   }
 }

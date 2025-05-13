@@ -38,16 +38,16 @@ class Filter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_filter_get_type != &gidSymbolNotFound ? gtk_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class Filter : gobject.object.ObjectWrap
   */
   void changed(gtk.types.FilterChange change)
   {
-    gtk_filter_changed(cast(GtkFilter*)cPtr, change);
+    gtk_filter_changed(cast(GtkFilter*)this._cPtr, change);
   }
 
   /**
@@ -93,7 +93,7 @@ class Filter : gobject.object.ObjectWrap
   gtk.types.FilterMatch getStrictness()
   {
     GtkFilterMatch _cretval;
-    _cretval = gtk_filter_get_strictness(cast(GtkFilter*)cPtr);
+    _cretval = gtk_filter_get_strictness(cast(GtkFilter*)this._cPtr);
     gtk.types.FilterMatch _retval = cast(gtk.types.FilterMatch)_cretval;
     return _retval;
   }
@@ -109,7 +109,7 @@ class Filter : gobject.object.ObjectWrap
   bool match(gobject.object.ObjectWrap item)
   {
     bool _retval;
-    _retval = gtk_filter_match(cast(GtkFilter*)cPtr, item ? cast(ObjectC*)item.cPtr(No.Dup) : null);
+    _retval = gtk_filter_match(cast(GtkFilter*)this._cPtr, item ? cast(GObject*)item._cPtr(No.Dup) : null);
     return _retval;
   }
 

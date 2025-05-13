@@ -29,7 +29,7 @@ class KeyEvent : gdk.event.Event
   gdk.types.ModifierType getConsumedModifiers()
   {
     GdkModifierType _cretval;
-    _cretval = gdk_key_event_get_consumed_modifiers(cast(GdkEvent*)cPtr);
+    _cretval = gdk_key_event_get_consumed_modifiers(cast(GdkEvent*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -41,7 +41,7 @@ class KeyEvent : gdk.event.Event
   uint getKeycode()
   {
     uint _retval;
-    _retval = gdk_key_event_get_keycode(cast(GdkEvent*)cPtr);
+    _retval = gdk_key_event_get_keycode(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ class KeyEvent : gdk.event.Event
   uint getKeyval()
   {
     uint _retval;
-    _retval = gdk_key_event_get_keyval(cast(GdkEvent*)cPtr);
+    _retval = gdk_key_event_get_keyval(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class KeyEvent : gdk.event.Event
   uint getLayout()
   {
     uint _retval;
-    _retval = gdk_key_event_get_layout(cast(GdkEvent*)cPtr);
+    _retval = gdk_key_event_get_layout(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class KeyEvent : gdk.event.Event
   uint getLevel()
   {
     uint _retval;
-    _retval = gdk_key_event_get_level(cast(GdkEvent*)cPtr);
+    _retval = gdk_key_event_get_level(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class KeyEvent : gdk.event.Event
   bool getMatch(out uint keyval, out gdk.types.ModifierType modifiers)
   {
     bool _retval;
-    _retval = gdk_key_event_get_match(cast(GdkEvent*)cPtr, cast(uint*)&keyval, &modifiers);
+    _retval = gdk_key_event_get_match(cast(GdkEvent*)this._cPtr, cast(uint*)&keyval, &modifiers);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class KeyEvent : gdk.event.Event
   bool isModifier()
   {
     bool _retval;
-    _retval = gdk_key_event_is_modifier(cast(GdkEvent*)cPtr);
+    _retval = gdk_key_event_is_modifier(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class KeyEvent : gdk.event.Event
   gdk.types.KeyMatch matches(uint keyval, gdk.types.ModifierType modifiers)
   {
     GdkKeyMatch _cretval;
-    _cretval = gdk_key_event_matches(cast(GdkEvent*)cPtr, keyval, modifiers);
+    _cretval = gdk_key_event_matches(cast(GdkEvent*)this._cPtr, keyval, modifiers);
     gdk.types.KeyMatch _retval = cast(gdk.types.KeyMatch)_cretval;
     return _retval;
   }

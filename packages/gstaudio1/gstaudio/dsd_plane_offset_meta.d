@@ -46,7 +46,7 @@ class DsdPlaneOffsetMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -57,7 +57,7 @@ class DsdPlaneOffsetMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)this._cPtr).meta);
   }
 
   /**
@@ -66,7 +66,7 @@ class DsdPlaneOffsetMeta
   */
   @property int numChannels()
   {
-    return (cast(GstDsdPlaneOffsetMeta*)cPtr).numChannels;
+    return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels;
   }
 
   /**
@@ -76,7 +76,7 @@ class DsdPlaneOffsetMeta
   */
   @property void numChannels(int propval)
   {
-    (cast(GstDsdPlaneOffsetMeta*)cPtr).numChannels = propval;
+    (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numChannels = propval;
   }
 
   /**
@@ -85,7 +85,7 @@ class DsdPlaneOffsetMeta
   */
   @property size_t numBytesPerChannel()
   {
-    return (cast(GstDsdPlaneOffsetMeta*)cPtr).numBytesPerChannel;
+    return (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numBytesPerChannel;
   }
 
   /**
@@ -95,7 +95,7 @@ class DsdPlaneOffsetMeta
   */
   @property void numBytesPerChannel(size_t propval)
   {
-    (cast(GstDsdPlaneOffsetMeta*)cPtr).numBytesPerChannel = propval;
+    (cast(GstDsdPlaneOffsetMeta*)this._cPtr).numBytesPerChannel = propval;
   }
 
   /** */

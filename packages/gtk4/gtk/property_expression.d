@@ -48,7 +48,7 @@ class PropertyExpression : gtk.expression.Expression
   {
     GtkExpression* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gtk_property_expression_new(thisType, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null, _propertyName);
+    _cretval = gtk_property_expression_new(thisType, expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null, _propertyName);
     this(_cretval, Yes.Take);
   }
 
@@ -72,7 +72,7 @@ class PropertyExpression : gtk.expression.Expression
   static gtk.property_expression.PropertyExpression newForPspec(gtk.expression.Expression expression, gobject.param_spec.ParamSpec pspec)
   {
     GtkExpression* _cretval;
-    _cretval = gtk_property_expression_new_for_pspec(expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+    _cretval = gtk_property_expression_new_for_pspec(expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.property_expression.PropertyExpression(cast(GtkExpression*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -85,7 +85,7 @@ class PropertyExpression : gtk.expression.Expression
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_property_expression_get_expression(cast(GtkExpression*)cPtr);
+    _cretval = gtk_property_expression_get_expression(cast(GtkExpression*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -98,7 +98,7 @@ class PropertyExpression : gtk.expression.Expression
   gobject.param_spec.ParamSpec getPspec()
   {
     GParamSpec* _cretval;
-    _cretval = gtk_property_expression_get_pspec(cast(GtkExpression*)cPtr);
+    _cretval = gtk_property_expression_get_pspec(cast(GtkExpression*)this._cPtr);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }

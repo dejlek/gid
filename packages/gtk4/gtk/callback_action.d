@@ -23,16 +23,16 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_callback_action_get_type != &gidSymbolNotFound ? gtk_callback_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class CallbackAction : gtk.shortcut_action.ShortcutAction
     {
       auto _dlg = cast(gtk.types.ShortcutFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(void*)widget, No.Take), args ? new glib.variant.Variant(cast(void*)args, No.Take) : null);
       return _retval;
     }
     auto _callbackCB = callback ? &_callbackCallback : null;

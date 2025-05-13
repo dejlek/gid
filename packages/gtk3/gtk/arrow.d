@@ -44,16 +44,16 @@ class Arrow : gtk.misc.Misc
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_arrow_get_type != &gidSymbolNotFound ? gtk_arrow_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,6 +114,6 @@ class Arrow : gtk.misc.Misc
   */
   void set(gtk.types.ArrowType arrowType, gtk.types.ShadowType shadowType)
   {
-    gtk_arrow_set(cast(GtkArrow*)cPtr, arrowType, shadowType);
+    gtk_arrow_set(cast(GtkArrow*)this._cPtr, arrowType, shadowType);
   }
 }

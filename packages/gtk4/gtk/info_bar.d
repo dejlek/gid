@@ -106,16 +106,16 @@ class InfoBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_info_bar_get_type != &gidSymbolNotFound ? gtk_info_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -210,7 +210,7 @@ class InfoBar : gtk.widget.Widget
   */
   void addActionWidget(gtk.widget.Widget child, int responseId)
   {
-    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, responseId);
+    gtk_info_bar_add_action_widget(cast(GtkInfoBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, responseId);
   }
 
   /**
@@ -231,8 +231,8 @@ class InfoBar : gtk.widget.Widget
   {
     GtkWidget* _cretval;
     const(char)* _buttonText = buttonText.toCString(No.Alloc);
-    _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)cPtr, _buttonText, responseId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_info_bar_add_button(cast(GtkInfoBar*)this._cPtr, _buttonText, responseId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class InfoBar : gtk.widget.Widget
   */
   void addChild(gtk.widget.Widget widget)
   {
-    gtk_info_bar_add_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_info_bar_add_child(cast(GtkInfoBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -254,7 +254,7 @@ class InfoBar : gtk.widget.Widget
   gtk.types.MessageType getMessageType()
   {
     GtkMessageType _cretval;
-    _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)cPtr);
+    _cretval = gtk_info_bar_get_message_type(cast(GtkInfoBar*)this._cPtr);
     gtk.types.MessageType _retval = cast(gtk.types.MessageType)_cretval;
     return _retval;
   }
@@ -266,7 +266,7 @@ class InfoBar : gtk.widget.Widget
   bool getRevealed()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_revealed(cast(GtkInfoBar*)cPtr);
+    _retval = gtk_info_bar_get_revealed(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class InfoBar : gtk.widget.Widget
   bool getShowCloseButton()
   {
     bool _retval;
-    _retval = gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)cPtr);
+    _retval = gtk_info_bar_get_show_close_button(cast(GtkInfoBar*)this._cPtr);
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class InfoBar : gtk.widget.Widget
   */
   void removeActionWidget(gtk.widget.Widget widget)
   {
-    gtk_info_bar_remove_action_widget(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_info_bar_remove_action_widget(cast(GtkInfoBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -303,7 +303,7 @@ class InfoBar : gtk.widget.Widget
   */
   void removeChild(gtk.widget.Widget widget)
   {
-    gtk_info_bar_remove_child(cast(GtkInfoBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    gtk_info_bar_remove_child(cast(GtkInfoBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -314,7 +314,7 @@ class InfoBar : gtk.widget.Widget
   */
   void response(int responseId)
   {
-    gtk_info_bar_response(cast(GtkInfoBar*)cPtr, responseId);
+    gtk_info_bar_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
 
   /**
@@ -331,7 +331,7 @@ class InfoBar : gtk.widget.Widget
   */
   void setDefaultResponse(int responseId)
   {
-    gtk_info_bar_set_default_response(cast(GtkInfoBar*)cPtr, responseId);
+    gtk_info_bar_set_default_response(cast(GtkInfoBar*)this._cPtr, responseId);
   }
 
   /**
@@ -344,7 +344,7 @@ class InfoBar : gtk.widget.Widget
   */
   void setMessageType(gtk.types.MessageType messageType)
   {
-    gtk_info_bar_set_message_type(cast(GtkInfoBar*)cPtr, messageType);
+    gtk_info_bar_set_message_type(cast(GtkInfoBar*)this._cPtr, messageType);
   }
 
   /**
@@ -360,7 +360,7 @@ class InfoBar : gtk.widget.Widget
   */
   void setResponseSensitive(int responseId, bool setting)
   {
-    gtk_info_bar_set_response_sensitive(cast(GtkInfoBar*)cPtr, responseId, setting);
+    gtk_info_bar_set_response_sensitive(cast(GtkInfoBar*)this._cPtr, responseId, setting);
   }
 
   /**
@@ -378,7 +378,7 @@ class InfoBar : gtk.widget.Widget
   */
   void setRevealed(bool revealed)
   {
-    gtk_info_bar_set_revealed(cast(GtkInfoBar*)cPtr, revealed);
+    gtk_info_bar_set_revealed(cast(GtkInfoBar*)this._cPtr, revealed);
   }
 
   /**
@@ -391,7 +391,7 @@ class InfoBar : gtk.widget.Widget
   */
   void setShowCloseButton(bool setting)
   {
-    gtk_info_bar_set_show_close_button(cast(GtkInfoBar*)cPtr, setting);
+    gtk_info_bar_set_show_close_button(cast(GtkInfoBar*)this._cPtr, setting);
   }
 
   /**

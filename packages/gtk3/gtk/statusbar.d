@@ -61,16 +61,16 @@ class Statusbar : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_statusbar_get_type != &gidSymbolNotFound ? gtk_statusbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class Statusbar : gtk.box.Box
   {
     uint _retval;
     const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
-    _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)cPtr, _contextDescription);
+    _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)this._cPtr, _contextDescription);
     return _retval;
   }
 
@@ -115,8 +115,8 @@ class Statusbar : gtk.box.Box
   gtk.box.Box getMessageArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_statusbar_get_message_area(cast(GtkStatusbar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_statusbar_get_message_area(cast(GtkStatusbar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.box.Box)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Statusbar : gtk.box.Box
   */
   void pop(uint contextId)
   {
-    gtk_statusbar_pop(cast(GtkStatusbar*)cPtr, contextId);
+    gtk_statusbar_pop(cast(GtkStatusbar*)this._cPtr, contextId);
   }
 
   /**
@@ -150,7 +150,7 @@ class Statusbar : gtk.box.Box
   {
     uint _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = gtk_statusbar_push(cast(GtkStatusbar*)cPtr, contextId, _text);
+    _retval = gtk_statusbar_push(cast(GtkStatusbar*)this._cPtr, contextId, _text);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Statusbar : gtk.box.Box
   */
   void remove(uint contextId, uint messageId)
   {
-    gtk_statusbar_remove(cast(GtkStatusbar*)cPtr, contextId, messageId);
+    gtk_statusbar_remove(cast(GtkStatusbar*)this._cPtr, contextId, messageId);
   }
 
   /**
@@ -178,7 +178,7 @@ class Statusbar : gtk.box.Box
   */
   void removeAll(uint contextId)
   {
-    gtk_statusbar_remove_all(cast(GtkStatusbar*)cPtr, contextId);
+    gtk_statusbar_remove_all(cast(GtkStatusbar*)this._cPtr, contextId);
   }
 
   /**

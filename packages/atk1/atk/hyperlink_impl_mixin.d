@@ -27,8 +27,8 @@ template HyperlinkImplT()
   override atk.hyperlink.Hyperlink getHyperlink()
   {
     AtkHyperlink* _cretval;
-    _cretval = atk_hyperlink_impl_get_hyperlink(cast(AtkHyperlinkImpl*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.Take);
+    _cretval = atk_hyperlink_impl_get_hyperlink(cast(AtkHyperlinkImpl*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, Yes.Take);
     return _retval;
   }
 }

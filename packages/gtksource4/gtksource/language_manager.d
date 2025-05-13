@@ -19,16 +19,16 @@ class LanguageManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_language_manager_get_type != &gidSymbolNotFound ? gtk_source_language_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class LanguageManager : gobject.object.ObjectWrap
   {
     GtkSourceLanguageManager* _cretval;
     _cretval = gtk_source_language_manager_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language_manager.LanguageManager)(cast(GtkSourceLanguageManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -77,8 +77,8 @@ class LanguageManager : gobject.object.ObjectWrap
   {
     GtkSourceLanguage* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
-    _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)cPtr, _id);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    _cretval = gtk_source_language_manager_get_language(cast(GtkSourceLanguageManager*)this._cPtr, _id);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class LanguageManager : gobject.object.ObjectWrap
   string[] getLanguageIds()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_language_manager_get_language_ids(cast(GtkSourceLanguageManager*)cPtr);
+    _cretval = gtk_source_language_manager_get_language_ids(cast(GtkSourceLanguageManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -116,7 +116,7 @@ class LanguageManager : gobject.object.ObjectWrap
   string[] getSearchPath()
   {
     const(char*)* _cretval;
-    _cretval = gtk_source_language_manager_get_search_path(cast(GtkSourceLanguageManager*)cPtr);
+    _cretval = gtk_source_language_manager_get_search_path(cast(GtkSourceLanguageManager*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -177,8 +177,8 @@ class LanguageManager : gobject.object.ObjectWrap
     GtkSourceLanguage* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     const(char)* _contentType = contentType.toCString(No.Alloc);
-    _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)cPtr, _filename, _contentType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
+    _cretval = gtk_source_language_manager_guess_language(cast(GtkSourceLanguageManager*)this._cPtr, _filename, _contentType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.language.Language)(cast(GtkSourceLanguage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -206,6 +206,6 @@ class LanguageManager : gobject.object.ObjectWrap
       _tmpdirs ~= s.toCString(No.Alloc);
     _tmpdirs ~= null;
     char** _dirs = _tmpdirs.ptr;
-    gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)cPtr, _dirs);
+    gtk_source_language_manager_set_search_path(cast(GtkSourceLanguageManager*)this._cPtr, _dirs);
   }
 }

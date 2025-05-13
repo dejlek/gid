@@ -8,7 +8,7 @@ public import arrow.c.types;
 struct GParquetArrowFileReader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -22,7 +22,7 @@ struct GParquetArrowFileReaderClass
 struct GParquetArrowFileWriter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -64,7 +64,7 @@ struct GParquetByteArrayStatisticsClass
 struct GParquetColumnChunkMetadata
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -92,7 +92,7 @@ struct GParquetDoubleStatisticsClass
 struct GParquetFileMetadata
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -162,7 +162,7 @@ struct GParquetInt64StatisticsClass
 struct GParquetRowGroupMetadata
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -176,7 +176,7 @@ struct GParquetRowGroupMetadataClass
 struct GParquetStatistics
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -190,7 +190,7 @@ struct GParquetStatisticsClass
 struct GParquetWriterProperties
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

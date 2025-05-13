@@ -47,16 +47,16 @@ class Revealer : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_revealer_get_type != &gidSymbolNotFound ? gtk_revealer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -168,8 +168,8 @@ class Revealer : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_revealer_get_child(cast(GtkRevealer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_revealer_get_child(cast(GtkRevealer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class Revealer : gtk.widget.Widget
   bool getChildRevealed()
   {
     bool _retval;
-    _retval = gtk_revealer_get_child_revealed(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_child_revealed(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class Revealer : gtk.widget.Widget
   bool getRevealChild()
   {
     bool _retval;
-    _retval = gtk_revealer_get_reveal_child(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_reveal_child(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class Revealer : gtk.widget.Widget
   uint getTransitionDuration()
   {
     uint _retval;
-    _retval = gtk_revealer_get_transition_duration(cast(GtkRevealer*)cPtr);
+    _retval = gtk_revealer_get_transition_duration(cast(GtkRevealer*)this._cPtr);
     return _retval;
   }
 
@@ -223,7 +223,7 @@ class Revealer : gtk.widget.Widget
   gtk.types.RevealerTransitionType getTransitionType()
   {
     GtkRevealerTransitionType _cretval;
-    _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)cPtr);
+    _cretval = gtk_revealer_get_transition_type(cast(GtkRevealer*)this._cPtr);
     gtk.types.RevealerTransitionType _retval = cast(gtk.types.RevealerTransitionType)_cretval;
     return _retval;
   }
@@ -236,7 +236,7 @@ class Revealer : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_revealer_set_child(cast(GtkRevealer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_revealer_set_child(cast(GtkRevealer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -250,7 +250,7 @@ class Revealer : gtk.widget.Widget
   */
   void setRevealChild(bool revealChild)
   {
-    gtk_revealer_set_reveal_child(cast(GtkRevealer*)cPtr, revealChild);
+    gtk_revealer_set_reveal_child(cast(GtkRevealer*)this._cPtr, revealChild);
   }
 
   /**
@@ -261,7 +261,7 @@ class Revealer : gtk.widget.Widget
   */
   void setTransitionDuration(uint duration)
   {
-    gtk_revealer_set_transition_duration(cast(GtkRevealer*)cPtr, duration);
+    gtk_revealer_set_transition_duration(cast(GtkRevealer*)this._cPtr, duration);
   }
 
   /**
@@ -275,6 +275,6 @@ class Revealer : gtk.widget.Widget
   */
   void setTransitionType(gtk.types.RevealerTransitionType transition)
   {
-    gtk_revealer_set_transition_type(cast(GtkRevealer*)cPtr, transition);
+    gtk_revealer_set_transition_type(cast(GtkRevealer*)this._cPtr, transition);
   }
 }

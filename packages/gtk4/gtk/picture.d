@@ -75,16 +75,16 @@ class Picture : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_picture_get_type != &gidSymbolNotFound ? gtk_picture_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -241,8 +241,8 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForFile(gio.file.File file = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_picture_new_for_file(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class Picture : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _filename = filename.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_filename(_filename);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,8 +278,8 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForPaintable(gdk.paintable.Paintable paintable = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_picture_new_for_paintable(paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -301,8 +301,8 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class Picture : gtk.widget.Widget
     GtkWidget* _cretval;
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
     _cretval = gtk_picture_new_for_resource(_resourcePath);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class Picture : gtk.widget.Widget
   string getAlternativeText()
   {
     const(char)* _cretval;
-    _cretval = gtk_picture_get_alternative_text(cast(GtkPicture*)cPtr);
+    _cretval = gtk_picture_get_alternative_text(cast(GtkPicture*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -346,7 +346,7 @@ class Picture : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_picture_get_can_shrink(cast(GtkPicture*)cPtr);
+    _retval = gtk_picture_get_can_shrink(cast(GtkPicture*)this._cPtr);
     return _retval;
   }
 
@@ -359,7 +359,7 @@ class Picture : gtk.widget.Widget
   gtk.types.ContentFit getContentFit()
   {
     GtkContentFit _cretval;
-    _cretval = gtk_picture_get_content_fit(cast(GtkPicture*)cPtr);
+    _cretval = gtk_picture_get_content_fit(cast(GtkPicture*)this._cPtr);
     gtk.types.ContentFit _retval = cast(gtk.types.ContentFit)_cretval;
     return _retval;
   }
@@ -374,8 +374,8 @@ class Picture : gtk.widget.Widget
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_picture_get_file(cast(GtkPicture*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_picture_get_file(cast(GtkPicture*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class Picture : gtk.widget.Widget
   bool getKeepAspectRatio()
   {
     bool _retval;
-    _retval = gtk_picture_get_keep_aspect_ratio(cast(GtkPicture*)cPtr);
+    _retval = gtk_picture_get_keep_aspect_ratio(cast(GtkPicture*)this._cPtr);
     return _retval;
   }
 
@@ -401,8 +401,8 @@ class Picture : gtk.widget.Widget
   gdk.paintable.Paintable getPaintable()
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_picture_get_paintable(cast(GtkPicture*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = gtk_picture_get_paintable(cast(GtkPicture*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -421,7 +421,7 @@ class Picture : gtk.widget.Widget
   void setAlternativeText(string alternativeText = null)
   {
     const(char)* _alternativeText = alternativeText.toCString(No.Alloc);
-    gtk_picture_set_alternative_text(cast(GtkPicture*)cPtr, _alternativeText);
+    gtk_picture_set_alternative_text(cast(GtkPicture*)this._cPtr, _alternativeText);
   }
 
   /**
@@ -441,7 +441,7 @@ class Picture : gtk.widget.Widget
   */
   void setCanShrink(bool canShrink)
   {
-    gtk_picture_set_can_shrink(cast(GtkPicture*)cPtr, canShrink);
+    gtk_picture_set_can_shrink(cast(GtkPicture*)this._cPtr, canShrink);
   }
 
   /**
@@ -454,7 +454,7 @@ class Picture : gtk.widget.Widget
   */
   void setContentFit(gtk.types.ContentFit contentFit)
   {
-    gtk_picture_set_content_fit(cast(GtkPicture*)cPtr, contentFit);
+    gtk_picture_set_content_fit(cast(GtkPicture*)this._cPtr, contentFit);
   }
 
   /**
@@ -467,7 +467,7 @@ class Picture : gtk.widget.Widget
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_picture_set_file(cast(GtkPicture*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    gtk_picture_set_file(cast(GtkPicture*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -481,7 +481,7 @@ class Picture : gtk.widget.Widget
   void setFilename(string filename = null)
   {
     const(char)* _filename = filename.toCString(No.Alloc);
-    gtk_picture_set_filename(cast(GtkPicture*)cPtr, _filename);
+    gtk_picture_set_filename(cast(GtkPicture*)this._cPtr, _filename);
   }
 
   /**
@@ -504,7 +504,7 @@ class Picture : gtk.widget.Widget
   */
   void setKeepAspectRatio(bool keepAspectRatio)
   {
-    gtk_picture_set_keep_aspect_ratio(cast(GtkPicture*)cPtr, keepAspectRatio);
+    gtk_picture_set_keep_aspect_ratio(cast(GtkPicture*)this._cPtr, keepAspectRatio);
   }
 
   /**
@@ -519,7 +519,7 @@ class Picture : gtk.widget.Widget
   */
   void setPaintable(gdk.paintable.Paintable paintable = null)
   {
-    gtk_picture_set_paintable(cast(GtkPicture*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_picture_set_paintable(cast(GtkPicture*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -536,7 +536,7 @@ class Picture : gtk.widget.Widget
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_picture_set_pixbuf(cast(GtkPicture*)cPtr, pixbuf ? cast(PixbufC*)pixbuf.cPtr(No.Dup) : null);
+    gtk_picture_set_pixbuf(cast(GtkPicture*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -551,6 +551,6 @@ class Picture : gtk.widget.Widget
   void setResource(string resourcePath = null)
   {
     const(char)* _resourcePath = resourcePath.toCString(No.Alloc);
-    gtk_picture_set_resource(cast(GtkPicture*)cPtr, _resourcePath);
+    gtk_picture_set_resource(cast(GtkPicture*)this._cPtr, _resourcePath);
   }
 }

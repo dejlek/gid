@@ -327,7 +327,7 @@ __gshared extern(C)
   // VideoOverlay
   GType function() c_gst_video_overlay_get_type; ///
   void function(GObjectClass* oclass, int lastPropId) c_gst_video_overlay_install_properties; ///
-  bool function(ObjectC* object, int lastPropId, uint propertyId, const(GValue)* value) c_gst_video_overlay_set_property; ///
+  bool function(GObject* object, int lastPropId, uint propertyId, const(GValue)* value) c_gst_video_overlay_set_property; ///
   void function(GstVideoOverlay* overlay) c_gst_video_overlay_expose; ///
   void function(GstVideoOverlay* overlay, size_t handle) c_gst_video_overlay_got_window_handle; ///
   void function(GstVideoOverlay* overlay, bool handleEvents) c_gst_video_overlay_handle_events; ///
@@ -1815,504 +1815,506 @@ alias gst_video_time_code_meta_api_get_type = c_gst_video_time_code_meta_api_get
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // AncillaryMeta
-  gidLink(cast(void**)&gst_ancillary_meta_get_info, "gst_ancillary_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_ancillary_meta_get_info, "gst_ancillary_meta_get_info", libs);
 
   // ColorBalance
-  gidLink(cast(void**)&gst_color_balance_get_type, "gst_color_balance_get_type", LIBS);
-  gidLink(cast(void**)&gst_color_balance_get_balance_type, "gst_color_balance_get_balance_type", LIBS);
-  gidLink(cast(void**)&gst_color_balance_get_value, "gst_color_balance_get_value", LIBS);
-  gidLink(cast(void**)&gst_color_balance_list_channels, "gst_color_balance_list_channels", LIBS);
-  gidLink(cast(void**)&gst_color_balance_set_value, "gst_color_balance_set_value", LIBS);
-  gidLink(cast(void**)&gst_color_balance_value_changed, "gst_color_balance_value_changed", LIBS);
+  gidLink(cast(void**)&gst_color_balance_get_type, "gst_color_balance_get_type", libs);
+  gidLink(cast(void**)&gst_color_balance_get_balance_type, "gst_color_balance_get_balance_type", libs);
+  gidLink(cast(void**)&gst_color_balance_get_value, "gst_color_balance_get_value", libs);
+  gidLink(cast(void**)&gst_color_balance_list_channels, "gst_color_balance_list_channels", libs);
+  gidLink(cast(void**)&gst_color_balance_set_value, "gst_color_balance_set_value", libs);
+  gidLink(cast(void**)&gst_color_balance_value_changed, "gst_color_balance_value_changed", libs);
 
   // ColorBalanceChannel
-  gidLink(cast(void**)&gst_color_balance_channel_get_type, "gst_color_balance_channel_get_type", LIBS);
+  gidLink(cast(void**)&gst_color_balance_channel_get_type, "gst_color_balance_channel_get_type", libs);
 
   // Navigation
-  gidLink(cast(void**)&gst_navigation_get_type, "gst_navigation_get_type", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_get_coordinates, "gst_navigation_event_get_coordinates", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_get_type, "gst_navigation_event_get_type", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_command, "gst_navigation_event_new_command", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_key_press, "gst_navigation_event_new_key_press", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_key_release, "gst_navigation_event_new_key_release", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_mouse_button_press, "gst_navigation_event_new_mouse_button_press", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_mouse_button_release, "gst_navigation_event_new_mouse_button_release", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_mouse_move, "gst_navigation_event_new_mouse_move", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_mouse_scroll, "gst_navigation_event_new_mouse_scroll", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_touch_cancel, "gst_navigation_event_new_touch_cancel", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_touch_down, "gst_navigation_event_new_touch_down", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_touch_frame, "gst_navigation_event_new_touch_frame", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_touch_motion, "gst_navigation_event_new_touch_motion", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_new_touch_up, "gst_navigation_event_new_touch_up", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_command, "gst_navigation_event_parse_command", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_key_event, "gst_navigation_event_parse_key_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_modifier_state, "gst_navigation_event_parse_modifier_state", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_mouse_button_event, "gst_navigation_event_parse_mouse_button_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_mouse_move_event, "gst_navigation_event_parse_mouse_move_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_mouse_scroll_event, "gst_navigation_event_parse_mouse_scroll_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_touch_event, "gst_navigation_event_parse_touch_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_parse_touch_up_event, "gst_navigation_event_parse_touch_up_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_event_set_coordinates, "gst_navigation_event_set_coordinates", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_get_type, "gst_navigation_message_get_type", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_new_angles_changed, "gst_navigation_message_new_angles_changed", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_new_commands_changed, "gst_navigation_message_new_commands_changed", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_new_event, "gst_navigation_message_new_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_new_mouse_over, "gst_navigation_message_new_mouse_over", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_parse_angles_changed, "gst_navigation_message_parse_angles_changed", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_parse_event, "gst_navigation_message_parse_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_message_parse_mouse_over, "gst_navigation_message_parse_mouse_over", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_get_type, "gst_navigation_query_get_type", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_new_angles, "gst_navigation_query_new_angles", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_new_commands, "gst_navigation_query_new_commands", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_parse_angles, "gst_navigation_query_parse_angles", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_parse_commands_length, "gst_navigation_query_parse_commands_length", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_parse_commands_nth, "gst_navigation_query_parse_commands_nth", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_set_angles, "gst_navigation_query_set_angles", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_set_commands, "gst_navigation_query_set_commands", LIBS);
-  gidLink(cast(void**)&gst_navigation_query_set_commandsv, "gst_navigation_query_set_commandsv", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_command, "gst_navigation_send_command", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_event, "gst_navigation_send_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_event_simple, "gst_navigation_send_event_simple", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_key_event, "gst_navigation_send_key_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_mouse_event, "gst_navigation_send_mouse_event", LIBS);
-  gidLink(cast(void**)&gst_navigation_send_mouse_scroll_event, "gst_navigation_send_mouse_scroll_event", LIBS);
+  gidLink(cast(void**)&gst_navigation_get_type, "gst_navigation_get_type", libs);
+  gidLink(cast(void**)&gst_navigation_event_get_coordinates, "gst_navigation_event_get_coordinates", libs);
+  gidLink(cast(void**)&gst_navigation_event_get_type, "gst_navigation_event_get_type", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_command, "gst_navigation_event_new_command", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_key_press, "gst_navigation_event_new_key_press", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_key_release, "gst_navigation_event_new_key_release", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_mouse_button_press, "gst_navigation_event_new_mouse_button_press", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_mouse_button_release, "gst_navigation_event_new_mouse_button_release", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_mouse_move, "gst_navigation_event_new_mouse_move", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_mouse_scroll, "gst_navigation_event_new_mouse_scroll", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_touch_cancel, "gst_navigation_event_new_touch_cancel", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_touch_down, "gst_navigation_event_new_touch_down", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_touch_frame, "gst_navigation_event_new_touch_frame", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_touch_motion, "gst_navigation_event_new_touch_motion", libs);
+  gidLink(cast(void**)&gst_navigation_event_new_touch_up, "gst_navigation_event_new_touch_up", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_command, "gst_navigation_event_parse_command", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_key_event, "gst_navigation_event_parse_key_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_modifier_state, "gst_navigation_event_parse_modifier_state", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_mouse_button_event, "gst_navigation_event_parse_mouse_button_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_mouse_move_event, "gst_navigation_event_parse_mouse_move_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_mouse_scroll_event, "gst_navigation_event_parse_mouse_scroll_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_touch_event, "gst_navigation_event_parse_touch_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_parse_touch_up_event, "gst_navigation_event_parse_touch_up_event", libs);
+  gidLink(cast(void**)&gst_navigation_event_set_coordinates, "gst_navigation_event_set_coordinates", libs);
+  gidLink(cast(void**)&gst_navigation_message_get_type, "gst_navigation_message_get_type", libs);
+  gidLink(cast(void**)&gst_navigation_message_new_angles_changed, "gst_navigation_message_new_angles_changed", libs);
+  gidLink(cast(void**)&gst_navigation_message_new_commands_changed, "gst_navigation_message_new_commands_changed", libs);
+  gidLink(cast(void**)&gst_navigation_message_new_event, "gst_navigation_message_new_event", libs);
+  gidLink(cast(void**)&gst_navigation_message_new_mouse_over, "gst_navigation_message_new_mouse_over", libs);
+  gidLink(cast(void**)&gst_navigation_message_parse_angles_changed, "gst_navigation_message_parse_angles_changed", libs);
+  gidLink(cast(void**)&gst_navigation_message_parse_event, "gst_navigation_message_parse_event", libs);
+  gidLink(cast(void**)&gst_navigation_message_parse_mouse_over, "gst_navigation_message_parse_mouse_over", libs);
+  gidLink(cast(void**)&gst_navigation_query_get_type, "gst_navigation_query_get_type", libs);
+  gidLink(cast(void**)&gst_navigation_query_new_angles, "gst_navigation_query_new_angles", libs);
+  gidLink(cast(void**)&gst_navigation_query_new_commands, "gst_navigation_query_new_commands", libs);
+  gidLink(cast(void**)&gst_navigation_query_parse_angles, "gst_navigation_query_parse_angles", libs);
+  gidLink(cast(void**)&gst_navigation_query_parse_commands_length, "gst_navigation_query_parse_commands_length", libs);
+  gidLink(cast(void**)&gst_navigation_query_parse_commands_nth, "gst_navigation_query_parse_commands_nth", libs);
+  gidLink(cast(void**)&gst_navigation_query_set_angles, "gst_navigation_query_set_angles", libs);
+  gidLink(cast(void**)&gst_navigation_query_set_commands, "gst_navigation_query_set_commands", libs);
+  gidLink(cast(void**)&gst_navigation_query_set_commandsv, "gst_navigation_query_set_commandsv", libs);
+  gidLink(cast(void**)&gst_navigation_send_command, "gst_navigation_send_command", libs);
+  gidLink(cast(void**)&gst_navigation_send_event, "gst_navigation_send_event", libs);
+  gidLink(cast(void**)&gst_navigation_send_event_simple, "gst_navigation_send_event_simple", libs);
+  gidLink(cast(void**)&gst_navigation_send_key_event, "gst_navigation_send_key_event", libs);
+  gidLink(cast(void**)&gst_navigation_send_mouse_event, "gst_navigation_send_mouse_event", libs);
+  gidLink(cast(void**)&gst_navigation_send_mouse_scroll_event, "gst_navigation_send_mouse_scroll_event", libs);
 
   // VideoAFDMeta
-  gidLink(cast(void**)&gst_video_afd_meta_get_info, "gst_video_afd_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_afd_meta_get_info, "gst_video_afd_meta_get_info", libs);
 
   // VideoAffineTransformationMeta
-  gidLink(cast(void**)&gst_video_affine_transformation_meta_apply_matrix, "gst_video_affine_transformation_meta_apply_matrix", LIBS);
-  gidLink(cast(void**)&gst_video_affine_transformation_meta_get_info, "gst_video_affine_transformation_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_affine_transformation_meta_apply_matrix, "gst_video_affine_transformation_meta_apply_matrix", libs);
+  gidLink(cast(void**)&gst_video_affine_transformation_meta_get_info, "gst_video_affine_transformation_meta_get_info", libs);
 
   // VideoAggregator
-  gidLink(cast(void**)&gst_video_aggregator_get_type, "gst_video_aggregator_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_get_execution_task_pool, "gst_video_aggregator_get_execution_task_pool", LIBS);
+  gidLink(cast(void**)&gst_video_aggregator_get_type, "gst_video_aggregator_get_type", libs);
+  gidLink(cast(void**)&gst_video_aggregator_get_execution_task_pool, "gst_video_aggregator_get_execution_task_pool", libs);
 
   // VideoAggregatorConvertPad
-  gidLink(cast(void**)&gst_video_aggregator_convert_pad_get_type, "gst_video_aggregator_convert_pad_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_convert_pad_update_conversion_info, "gst_video_aggregator_convert_pad_update_conversion_info", LIBS);
+  gidLink(cast(void**)&gst_video_aggregator_convert_pad_get_type, "gst_video_aggregator_convert_pad_get_type", libs);
+  gidLink(cast(void**)&gst_video_aggregator_convert_pad_update_conversion_info, "gst_video_aggregator_convert_pad_update_conversion_info", libs);
 
   // VideoAggregatorPad
-  gidLink(cast(void**)&gst_video_aggregator_pad_get_type, "gst_video_aggregator_pad_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_pad_get_current_buffer, "gst_video_aggregator_pad_get_current_buffer", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_pad_get_prepared_frame, "gst_video_aggregator_pad_get_prepared_frame", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_pad_has_current_buffer, "gst_video_aggregator_pad_has_current_buffer", LIBS);
-  gidLink(cast(void**)&gst_video_aggregator_pad_set_needs_alpha, "gst_video_aggregator_pad_set_needs_alpha", LIBS);
+  gidLink(cast(void**)&gst_video_aggregator_pad_get_type, "gst_video_aggregator_pad_get_type", libs);
+  gidLink(cast(void**)&gst_video_aggregator_pad_get_current_buffer, "gst_video_aggregator_pad_get_current_buffer", libs);
+  gidLink(cast(void**)&gst_video_aggregator_pad_get_prepared_frame, "gst_video_aggregator_pad_get_prepared_frame", libs);
+  gidLink(cast(void**)&gst_video_aggregator_pad_has_current_buffer, "gst_video_aggregator_pad_has_current_buffer", libs);
+  gidLink(cast(void**)&gst_video_aggregator_pad_set_needs_alpha, "gst_video_aggregator_pad_set_needs_alpha", libs);
 
   // VideoAggregatorParallelConvertPad
-  gidLink(cast(void**)&gst_video_aggregator_parallel_convert_pad_get_type, "gst_video_aggregator_parallel_convert_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_video_aggregator_parallel_convert_pad_get_type, "gst_video_aggregator_parallel_convert_pad_get_type", libs);
 
   // VideoAlignment
-  gidLink(cast(void**)&gst_video_alignment_reset, "gst_video_alignment_reset", LIBS);
+  gidLink(cast(void**)&gst_video_alignment_reset, "gst_video_alignment_reset", libs);
 
   // VideoBarMeta
-  gidLink(cast(void**)&gst_video_bar_meta_get_info, "gst_video_bar_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_bar_meta_get_info, "gst_video_bar_meta_get_info", libs);
 
   // VideoBufferPool
-  gidLink(cast(void**)&gst_video_buffer_pool_get_type, "gst_video_buffer_pool_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_buffer_pool_new, "gst_video_buffer_pool_new", LIBS);
+  gidLink(cast(void**)&gst_video_buffer_pool_get_type, "gst_video_buffer_pool_get_type", libs);
+  gidLink(cast(void**)&gst_video_buffer_pool_new, "gst_video_buffer_pool_new", libs);
 
   // VideoCaptionMeta
-  gidLink(cast(void**)&gst_video_caption_meta_get_info, "gst_video_caption_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_caption_meta_get_info, "gst_video_caption_meta_get_info", libs);
 
   // VideoChromaResample
-  gidLink(cast(void**)&gst_video_chroma_resample_free, "gst_video_chroma_resample_free", LIBS);
-  gidLink(cast(void**)&gst_video_chroma_resample_get_info, "gst_video_chroma_resample_get_info", LIBS);
-  gidLink(cast(void**)&gst_video_chroma_resample_new, "gst_video_chroma_resample_new", LIBS);
+  gidLink(cast(void**)&gst_video_chroma_resample_free, "gst_video_chroma_resample_free", libs);
+  gidLink(cast(void**)&gst_video_chroma_resample_get_info, "gst_video_chroma_resample_get_info", libs);
+  gidLink(cast(void**)&gst_video_chroma_resample_new, "gst_video_chroma_resample_new", libs);
 
   // VideoCodecAlphaMeta
-  gidLink(cast(void**)&gst_video_codec_alpha_meta_get_info, "gst_video_codec_alpha_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_codec_alpha_meta_get_info, "gst_video_codec_alpha_meta_get_info", libs);
 
   // VideoCodecFrame
-  gidLink(cast(void**)&gst_video_codec_frame_get_type, "gst_video_codec_frame_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_codec_frame_get_user_data, "gst_video_codec_frame_get_user_data", LIBS);
-  gidLink(cast(void**)&gst_video_codec_frame_ref, "gst_video_codec_frame_ref", LIBS);
-  gidLink(cast(void**)&gst_video_codec_frame_set_user_data, "gst_video_codec_frame_set_user_data", LIBS);
-  gidLink(cast(void**)&gst_video_codec_frame_unref, "gst_video_codec_frame_unref", LIBS);
+  gidLink(cast(void**)&gst_video_codec_frame_get_type, "gst_video_codec_frame_get_type", libs);
+  gidLink(cast(void**)&gst_video_codec_frame_get_user_data, "gst_video_codec_frame_get_user_data", libs);
+  gidLink(cast(void**)&gst_video_codec_frame_ref, "gst_video_codec_frame_ref", libs);
+  gidLink(cast(void**)&gst_video_codec_frame_set_user_data, "gst_video_codec_frame_set_user_data", libs);
+  gidLink(cast(void**)&gst_video_codec_frame_unref, "gst_video_codec_frame_unref", libs);
 
   // VideoCodecState
-  gidLink(cast(void**)&gst_video_codec_state_get_type, "gst_video_codec_state_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_codec_state_ref, "gst_video_codec_state_ref", LIBS);
-  gidLink(cast(void**)&gst_video_codec_state_unref, "gst_video_codec_state_unref", LIBS);
+  gidLink(cast(void**)&gst_video_codec_state_get_type, "gst_video_codec_state_get_type", libs);
+  gidLink(cast(void**)&gst_video_codec_state_ref, "gst_video_codec_state_ref", libs);
+  gidLink(cast(void**)&gst_video_codec_state_unref, "gst_video_codec_state_unref", libs);
 
   // VideoColorimetry
-  gidLink(cast(void**)&gst_video_colorimetry_from_string, "gst_video_colorimetry_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_colorimetry_is_equal, "gst_video_colorimetry_is_equal", LIBS);
-  gidLink(cast(void**)&gst_video_colorimetry_is_equivalent, "gst_video_colorimetry_is_equivalent", LIBS);
-  gidLink(cast(void**)&gst_video_colorimetry_matches, "gst_video_colorimetry_matches", LIBS);
-  gidLink(cast(void**)&gst_video_colorimetry_to_string, "gst_video_colorimetry_to_string", LIBS);
+  gidLink(cast(void**)&gst_video_colorimetry_from_string, "gst_video_colorimetry_from_string", libs);
+  gidLink(cast(void**)&gst_video_colorimetry_is_equal, "gst_video_colorimetry_is_equal", libs);
+  gidLink(cast(void**)&gst_video_colorimetry_is_equivalent, "gst_video_colorimetry_is_equivalent", libs);
+  gidLink(cast(void**)&gst_video_colorimetry_matches, "gst_video_colorimetry_matches", libs);
+  gidLink(cast(void**)&gst_video_colorimetry_to_string, "gst_video_colorimetry_to_string", libs);
 
   // VideoContentLightLevel
-  gidLink(cast(void**)&gst_video_content_light_level_add_to_caps, "gst_video_content_light_level_add_to_caps", LIBS);
-  gidLink(cast(void**)&gst_video_content_light_level_from_caps, "gst_video_content_light_level_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_content_light_level_from_string, "gst_video_content_light_level_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_content_light_level_init, "gst_video_content_light_level_init", LIBS);
-  gidLink(cast(void**)&gst_video_content_light_level_is_equal, "gst_video_content_light_level_is_equal", LIBS);
-  gidLink(cast(void**)&gst_video_content_light_level_to_string, "gst_video_content_light_level_to_string", LIBS);
+  gidLink(cast(void**)&gst_video_content_light_level_add_to_caps, "gst_video_content_light_level_add_to_caps", libs);
+  gidLink(cast(void**)&gst_video_content_light_level_from_caps, "gst_video_content_light_level_from_caps", libs);
+  gidLink(cast(void**)&gst_video_content_light_level_from_string, "gst_video_content_light_level_from_string", libs);
+  gidLink(cast(void**)&gst_video_content_light_level_init, "gst_video_content_light_level_init", libs);
+  gidLink(cast(void**)&gst_video_content_light_level_is_equal, "gst_video_content_light_level_is_equal", libs);
+  gidLink(cast(void**)&gst_video_content_light_level_to_string, "gst_video_content_light_level_to_string", libs);
 
   // VideoConverter
-  gidLink(cast(void**)&gst_video_converter_frame, "gst_video_converter_frame", LIBS);
-  gidLink(cast(void**)&gst_video_converter_frame_finish, "gst_video_converter_frame_finish", LIBS);
-  gidLink(cast(void**)&gst_video_converter_free, "gst_video_converter_free", LIBS);
-  gidLink(cast(void**)&gst_video_converter_get_config, "gst_video_converter_get_config", LIBS);
-  gidLink(cast(void**)&gst_video_converter_get_in_info, "gst_video_converter_get_in_info", LIBS);
-  gidLink(cast(void**)&gst_video_converter_get_out_info, "gst_video_converter_get_out_info", LIBS);
-  gidLink(cast(void**)&gst_video_converter_set_config, "gst_video_converter_set_config", LIBS);
-  gidLink(cast(void**)&gst_video_converter_new, "gst_video_converter_new", LIBS);
-  gidLink(cast(void**)&gst_video_converter_new_with_pool, "gst_video_converter_new_with_pool", LIBS);
+  gidLink(cast(void**)&gst_video_converter_frame, "gst_video_converter_frame", libs);
+  gidLink(cast(void**)&gst_video_converter_frame_finish, "gst_video_converter_frame_finish", libs);
+  gidLink(cast(void**)&gst_video_converter_free, "gst_video_converter_free", libs);
+  gidLink(cast(void**)&gst_video_converter_get_config, "gst_video_converter_get_config", libs);
+  gidLink(cast(void**)&gst_video_converter_get_in_info, "gst_video_converter_get_in_info", libs);
+  gidLink(cast(void**)&gst_video_converter_get_out_info, "gst_video_converter_get_out_info", libs);
+  gidLink(cast(void**)&gst_video_converter_set_config, "gst_video_converter_set_config", libs);
+  gidLink(cast(void**)&gst_video_converter_new, "gst_video_converter_new", libs);
+  gidLink(cast(void**)&gst_video_converter_new_with_pool, "gst_video_converter_new_with_pool", libs);
 
   // VideoCropMeta
-  gidLink(cast(void**)&gst_video_crop_meta_get_info, "gst_video_crop_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_crop_meta_get_info, "gst_video_crop_meta_get_info", libs);
 
   // VideoDecoder
-  gidLink(cast(void**)&gst_video_decoder_get_type, "gst_video_decoder_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_add_to_frame, "gst_video_decoder_add_to_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_allocate_output_buffer, "gst_video_decoder_allocate_output_buffer", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_allocate_output_frame, "gst_video_decoder_allocate_output_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_allocate_output_frame_with_params, "gst_video_decoder_allocate_output_frame_with_params", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_drop_frame, "gst_video_decoder_drop_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_drop_subframe, "gst_video_decoder_drop_subframe", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_finish_frame, "gst_video_decoder_finish_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_finish_subframe, "gst_video_decoder_finish_subframe", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_allocator, "gst_video_decoder_get_allocator", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_buffer_pool, "gst_video_decoder_get_buffer_pool", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_estimate_rate, "gst_video_decoder_get_estimate_rate", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_frame, "gst_video_decoder_get_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_frames, "gst_video_decoder_get_frames", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_input_subframe_index, "gst_video_decoder_get_input_subframe_index", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_latency, "gst_video_decoder_get_latency", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_max_decode_time, "gst_video_decoder_get_max_decode_time", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_max_errors, "gst_video_decoder_get_max_errors", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_needs_format, "gst_video_decoder_get_needs_format", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_needs_sync_point, "gst_video_decoder_get_needs_sync_point", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_oldest_frame, "gst_video_decoder_get_oldest_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_output_state, "gst_video_decoder_get_output_state", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_packetized, "gst_video_decoder_get_packetized", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_pending_frame_size, "gst_video_decoder_get_pending_frame_size", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_processed_subframe_index, "gst_video_decoder_get_processed_subframe_index", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_qos_proportion, "gst_video_decoder_get_qos_proportion", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_get_subframe_mode, "gst_video_decoder_get_subframe_mode", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_have_frame, "gst_video_decoder_have_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_have_last_subframe, "gst_video_decoder_have_last_subframe", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_merge_tags, "gst_video_decoder_merge_tags", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_negotiate, "gst_video_decoder_negotiate", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_proxy_getcaps, "gst_video_decoder_proxy_getcaps", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_release_frame, "gst_video_decoder_release_frame", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_request_sync_point, "gst_video_decoder_request_sync_point", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_estimate_rate, "gst_video_decoder_set_estimate_rate", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_interlaced_output_state, "gst_video_decoder_set_interlaced_output_state", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_latency, "gst_video_decoder_set_latency", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_max_errors, "gst_video_decoder_set_max_errors", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_needs_format, "gst_video_decoder_set_needs_format", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_needs_sync_point, "gst_video_decoder_set_needs_sync_point", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_output_state, "gst_video_decoder_set_output_state", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_packetized, "gst_video_decoder_set_packetized", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_subframe_mode, "gst_video_decoder_set_subframe_mode", LIBS);
-  gidLink(cast(void**)&gst_video_decoder_set_use_default_pad_acceptcaps, "gst_video_decoder_set_use_default_pad_acceptcaps", LIBS);
+  gidLink(cast(void**)&gst_video_decoder_get_type, "gst_video_decoder_get_type", libs);
+  gidLink(cast(void**)&gst_video_decoder_add_to_frame, "gst_video_decoder_add_to_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_allocate_output_buffer, "gst_video_decoder_allocate_output_buffer", libs);
+  gidLink(cast(void**)&gst_video_decoder_allocate_output_frame, "gst_video_decoder_allocate_output_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_allocate_output_frame_with_params, "gst_video_decoder_allocate_output_frame_with_params", libs);
+  gidLink(cast(void**)&gst_video_decoder_drop_frame, "gst_video_decoder_drop_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_drop_subframe, "gst_video_decoder_drop_subframe", libs);
+  gidLink(cast(void**)&gst_video_decoder_finish_frame, "gst_video_decoder_finish_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_finish_subframe, "gst_video_decoder_finish_subframe", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_allocator, "gst_video_decoder_get_allocator", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_buffer_pool, "gst_video_decoder_get_buffer_pool", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_estimate_rate, "gst_video_decoder_get_estimate_rate", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_frame, "gst_video_decoder_get_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_frames, "gst_video_decoder_get_frames", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_input_subframe_index, "gst_video_decoder_get_input_subframe_index", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_latency, "gst_video_decoder_get_latency", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_max_decode_time, "gst_video_decoder_get_max_decode_time", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_max_errors, "gst_video_decoder_get_max_errors", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_needs_format, "gst_video_decoder_get_needs_format", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_needs_sync_point, "gst_video_decoder_get_needs_sync_point", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_oldest_frame, "gst_video_decoder_get_oldest_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_output_state, "gst_video_decoder_get_output_state", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_packetized, "gst_video_decoder_get_packetized", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_pending_frame_size, "gst_video_decoder_get_pending_frame_size", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_processed_subframe_index, "gst_video_decoder_get_processed_subframe_index", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_qos_proportion, "gst_video_decoder_get_qos_proportion", libs);
+  gidLink(cast(void**)&gst_video_decoder_get_subframe_mode, "gst_video_decoder_get_subframe_mode", libs);
+  gidLink(cast(void**)&gst_video_decoder_have_frame, "gst_video_decoder_have_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_have_last_subframe, "gst_video_decoder_have_last_subframe", libs);
+  gidLink(cast(void**)&gst_video_decoder_merge_tags, "gst_video_decoder_merge_tags", libs);
+  gidLink(cast(void**)&gst_video_decoder_negotiate, "gst_video_decoder_negotiate", libs);
+  gidLink(cast(void**)&gst_video_decoder_proxy_getcaps, "gst_video_decoder_proxy_getcaps", libs);
+  gidLink(cast(void**)&gst_video_decoder_release_frame, "gst_video_decoder_release_frame", libs);
+  gidLink(cast(void**)&gst_video_decoder_request_sync_point, "gst_video_decoder_request_sync_point", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_estimate_rate, "gst_video_decoder_set_estimate_rate", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_interlaced_output_state, "gst_video_decoder_set_interlaced_output_state", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_latency, "gst_video_decoder_set_latency", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_max_errors, "gst_video_decoder_set_max_errors", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_needs_format, "gst_video_decoder_set_needs_format", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_needs_sync_point, "gst_video_decoder_set_needs_sync_point", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_output_state, "gst_video_decoder_set_output_state", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_packetized, "gst_video_decoder_set_packetized", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_subframe_mode, "gst_video_decoder_set_subframe_mode", libs);
+  gidLink(cast(void**)&gst_video_decoder_set_use_default_pad_acceptcaps, "gst_video_decoder_set_use_default_pad_acceptcaps", libs);
 
   // VideoDirection
-  gidLink(cast(void**)&gst_video_direction_get_type, "gst_video_direction_get_type", LIBS);
+  gidLink(cast(void**)&gst_video_direction_get_type, "gst_video_direction_get_type", libs);
 
   // VideoDither
-  gidLink(cast(void**)&gst_video_dither_free, "gst_video_dither_free", LIBS);
-  gidLink(cast(void**)&gst_video_dither_line, "gst_video_dither_line", LIBS);
-  gidLink(cast(void**)&gst_video_dither_new, "gst_video_dither_new", LIBS);
+  gidLink(cast(void**)&gst_video_dither_free, "gst_video_dither_free", libs);
+  gidLink(cast(void**)&gst_video_dither_line, "gst_video_dither_line", libs);
+  gidLink(cast(void**)&gst_video_dither_new, "gst_video_dither_new", libs);
 
   // VideoEncoder
-  gidLink(cast(void**)&gst_video_encoder_get_type, "gst_video_encoder_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_allocate_output_buffer, "gst_video_encoder_allocate_output_buffer", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_allocate_output_frame, "gst_video_encoder_allocate_output_frame", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_finish_frame, "gst_video_encoder_finish_frame", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_finish_subframe, "gst_video_encoder_finish_subframe", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_allocator, "gst_video_encoder_get_allocator", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_frame, "gst_video_encoder_get_frame", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_frames, "gst_video_encoder_get_frames", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_latency, "gst_video_encoder_get_latency", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_max_encode_time, "gst_video_encoder_get_max_encode_time", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_min_force_key_unit_interval, "gst_video_encoder_get_min_force_key_unit_interval", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_oldest_frame, "gst_video_encoder_get_oldest_frame", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_get_output_state, "gst_video_encoder_get_output_state", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_is_qos_enabled, "gst_video_encoder_is_qos_enabled", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_merge_tags, "gst_video_encoder_merge_tags", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_negotiate, "gst_video_encoder_negotiate", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_proxy_getcaps, "gst_video_encoder_proxy_getcaps", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_headers, "gst_video_encoder_set_headers", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_latency, "gst_video_encoder_set_latency", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_min_force_key_unit_interval, "gst_video_encoder_set_min_force_key_unit_interval", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_min_pts, "gst_video_encoder_set_min_pts", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_output_state, "gst_video_encoder_set_output_state", LIBS);
-  gidLink(cast(void**)&gst_video_encoder_set_qos_enabled, "gst_video_encoder_set_qos_enabled", LIBS);
+  gidLink(cast(void**)&gst_video_encoder_get_type, "gst_video_encoder_get_type", libs);
+  gidLink(cast(void**)&gst_video_encoder_allocate_output_buffer, "gst_video_encoder_allocate_output_buffer", libs);
+  gidLink(cast(void**)&gst_video_encoder_allocate_output_frame, "gst_video_encoder_allocate_output_frame", libs);
+  gidLink(cast(void**)&gst_video_encoder_finish_frame, "gst_video_encoder_finish_frame", libs);
+  gidLink(cast(void**)&gst_video_encoder_finish_subframe, "gst_video_encoder_finish_subframe", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_allocator, "gst_video_encoder_get_allocator", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_frame, "gst_video_encoder_get_frame", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_frames, "gst_video_encoder_get_frames", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_latency, "gst_video_encoder_get_latency", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_max_encode_time, "gst_video_encoder_get_max_encode_time", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_min_force_key_unit_interval, "gst_video_encoder_get_min_force_key_unit_interval", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_oldest_frame, "gst_video_encoder_get_oldest_frame", libs);
+  gidLink(cast(void**)&gst_video_encoder_get_output_state, "gst_video_encoder_get_output_state", libs);
+  gidLink(cast(void**)&gst_video_encoder_is_qos_enabled, "gst_video_encoder_is_qos_enabled", libs);
+  gidLink(cast(void**)&gst_video_encoder_merge_tags, "gst_video_encoder_merge_tags", libs);
+  gidLink(cast(void**)&gst_video_encoder_negotiate, "gst_video_encoder_negotiate", libs);
+  gidLink(cast(void**)&gst_video_encoder_proxy_getcaps, "gst_video_encoder_proxy_getcaps", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_headers, "gst_video_encoder_set_headers", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_latency, "gst_video_encoder_set_latency", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_min_force_key_unit_interval, "gst_video_encoder_set_min_force_key_unit_interval", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_min_pts, "gst_video_encoder_set_min_pts", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_output_state, "gst_video_encoder_set_output_state", libs);
+  gidLink(cast(void**)&gst_video_encoder_set_qos_enabled, "gst_video_encoder_set_qos_enabled", libs);
 
   // VideoFilter
-  gidLink(cast(void**)&gst_video_filter_get_type, "gst_video_filter_get_type", LIBS);
+  gidLink(cast(void**)&gst_video_filter_get_type, "gst_video_filter_get_type", libs);
 
   // VideoFormatInfo
-  gidLink(cast(void**)&gst_video_format_info_component, "gst_video_format_info_component", LIBS);
-  gidLink(cast(void**)&gst_video_format_info_extrapolate_stride, "gst_video_format_info_extrapolate_stride", LIBS);
+  gidLink(cast(void**)&gst_video_format_info_component, "gst_video_format_info_component", libs);
+  gidLink(cast(void**)&gst_video_format_info_extrapolate_stride, "gst_video_format_info_extrapolate_stride", libs);
 
   // VideoFrame
-  gidLink(cast(void**)&gst_video_frame_copy, "gst_video_frame_copy", LIBS);
-  gidLink(cast(void**)&gst_video_frame_copy_plane, "gst_video_frame_copy_plane", LIBS);
-  gidLink(cast(void**)&gst_video_frame_unmap, "gst_video_frame_unmap", LIBS);
-  gidLink(cast(void**)&gst_video_frame_map, "gst_video_frame_map", LIBS);
-  gidLink(cast(void**)&gst_video_frame_map_id, "gst_video_frame_map_id", LIBS);
+  gidLink(cast(void**)&gst_video_frame_copy, "gst_video_frame_copy", libs);
+  gidLink(cast(void**)&gst_video_frame_copy_plane, "gst_video_frame_copy_plane", libs);
+  gidLink(cast(void**)&gst_video_frame_unmap, "gst_video_frame_unmap", libs);
+  gidLink(cast(void**)&gst_video_frame_map, "gst_video_frame_map", libs);
+  gidLink(cast(void**)&gst_video_frame_map_id, "gst_video_frame_map_id", libs);
 
   // VideoGLTextureUploadMeta
-  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_upload, "gst_video_gl_texture_upload_meta_upload", LIBS);
-  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_get_info, "gst_video_gl_texture_upload_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_upload, "gst_video_gl_texture_upload_meta_upload", libs);
+  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_get_info, "gst_video_gl_texture_upload_meta_get_info", libs);
 
   // VideoInfo
-  gidLink(cast(void**)&gst_video_info_get_type, "gst_video_info_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_info_new, "gst_video_info_new", LIBS);
-  gidLink(cast(void**)&gst_video_info_new_from_caps, "gst_video_info_new_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_align, "gst_video_info_align", LIBS);
-  gidLink(cast(void**)&gst_video_info_align_full, "gst_video_info_align_full", LIBS);
-  gidLink(cast(void**)&gst_video_info_convert, "gst_video_info_convert", LIBS);
-  gidLink(cast(void**)&gst_video_info_copy, "gst_video_info_copy", LIBS);
-  gidLink(cast(void**)&gst_video_info_free, "gst_video_info_free", LIBS);
-  gidLink(cast(void**)&gst_video_info_is_equal, "gst_video_info_is_equal", LIBS);
-  gidLink(cast(void**)&gst_video_info_set_format, "gst_video_info_set_format", LIBS);
-  gidLink(cast(void**)&gst_video_info_set_interlaced_format, "gst_video_info_set_interlaced_format", LIBS);
-  gidLink(cast(void**)&gst_video_info_to_caps, "gst_video_info_to_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_from_caps, "gst_video_info_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_init, "gst_video_info_init", LIBS);
+  gidLink(cast(void**)&gst_video_info_get_type, "gst_video_info_get_type", libs);
+  gidLink(cast(void**)&gst_video_info_new, "gst_video_info_new", libs);
+  gidLink(cast(void**)&gst_video_info_new_from_caps, "gst_video_info_new_from_caps", libs);
+  gidLink(cast(void**)&gst_video_info_align, "gst_video_info_align", libs);
+  gidLink(cast(void**)&gst_video_info_align_full, "gst_video_info_align_full", libs);
+  gidLink(cast(void**)&gst_video_info_convert, "gst_video_info_convert", libs);
+  gidLink(cast(void**)&gst_video_info_copy, "gst_video_info_copy", libs);
+  gidLink(cast(void**)&gst_video_info_free, "gst_video_info_free", libs);
+  gidLink(cast(void**)&gst_video_info_is_equal, "gst_video_info_is_equal", libs);
+  gidLink(cast(void**)&gst_video_info_set_format, "gst_video_info_set_format", libs);
+  gidLink(cast(void**)&gst_video_info_set_interlaced_format, "gst_video_info_set_interlaced_format", libs);
+  gidLink(cast(void**)&gst_video_info_to_caps, "gst_video_info_to_caps", libs);
+  gidLink(cast(void**)&gst_video_info_from_caps, "gst_video_info_from_caps", libs);
+  gidLink(cast(void**)&gst_video_info_init, "gst_video_info_init", libs);
 
   // VideoInfoDmaDrm
-  gidLink(cast(void**)&gst_video_info_dma_drm_get_type, "gst_video_info_dma_drm_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_new, "gst_video_info_dma_drm_new", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_new_from_caps, "gst_video_info_dma_drm_new_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_free, "gst_video_info_dma_drm_free", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_to_caps, "gst_video_info_dma_drm_to_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_to_video_info, "gst_video_info_dma_drm_to_video_info", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_from_caps, "gst_video_info_dma_drm_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_from_video_info, "gst_video_info_dma_drm_from_video_info", LIBS);
-  gidLink(cast(void**)&gst_video_info_dma_drm_init, "gst_video_info_dma_drm_init", LIBS);
+  gidLink(cast(void**)&gst_video_info_dma_drm_get_type, "gst_video_info_dma_drm_get_type", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_new, "gst_video_info_dma_drm_new", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_new_from_caps, "gst_video_info_dma_drm_new_from_caps", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_free, "gst_video_info_dma_drm_free", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_to_caps, "gst_video_info_dma_drm_to_caps", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_to_video_info, "gst_video_info_dma_drm_to_video_info", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_from_caps, "gst_video_info_dma_drm_from_caps", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_from_video_info, "gst_video_info_dma_drm_from_video_info", libs);
+  gidLink(cast(void**)&gst_video_info_dma_drm_init, "gst_video_info_dma_drm_init", libs);
 
   // VideoMasteringDisplayInfo
-  gidLink(cast(void**)&gst_video_mastering_display_info_add_to_caps, "gst_video_mastering_display_info_add_to_caps", LIBS);
-  gidLink(cast(void**)&gst_video_mastering_display_info_from_caps, "gst_video_mastering_display_info_from_caps", LIBS);
-  gidLink(cast(void**)&gst_video_mastering_display_info_init, "gst_video_mastering_display_info_init", LIBS);
-  gidLink(cast(void**)&gst_video_mastering_display_info_is_equal, "gst_video_mastering_display_info_is_equal", LIBS);
-  gidLink(cast(void**)&gst_video_mastering_display_info_to_string, "gst_video_mastering_display_info_to_string", LIBS);
-  gidLink(cast(void**)&gst_video_mastering_display_info_from_string, "gst_video_mastering_display_info_from_string", LIBS);
+  gidLink(cast(void**)&gst_video_mastering_display_info_add_to_caps, "gst_video_mastering_display_info_add_to_caps", libs);
+  gidLink(cast(void**)&gst_video_mastering_display_info_from_caps, "gst_video_mastering_display_info_from_caps", libs);
+  gidLink(cast(void**)&gst_video_mastering_display_info_init, "gst_video_mastering_display_info_init", libs);
+  gidLink(cast(void**)&gst_video_mastering_display_info_is_equal, "gst_video_mastering_display_info_is_equal", libs);
+  gidLink(cast(void**)&gst_video_mastering_display_info_to_string, "gst_video_mastering_display_info_to_string", libs);
+  gidLink(cast(void**)&gst_video_mastering_display_info_from_string, "gst_video_mastering_display_info_from_string", libs);
 
   // VideoMeta
-  gidLink(cast(void**)&gst_video_meta_get_plane_height, "gst_video_meta_get_plane_height", LIBS);
-  gidLink(cast(void**)&gst_video_meta_get_plane_size, "gst_video_meta_get_plane_size", LIBS);
-  gidLink(cast(void**)&gst_video_meta_map, "gst_video_meta_map", LIBS);
-  gidLink(cast(void**)&gst_video_meta_set_alignment, "gst_video_meta_set_alignment", LIBS);
-  gidLink(cast(void**)&gst_video_meta_unmap, "gst_video_meta_unmap", LIBS);
-  gidLink(cast(void**)&gst_video_meta_get_info, "gst_video_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_meta_get_plane_height, "gst_video_meta_get_plane_height", libs);
+  gidLink(cast(void**)&gst_video_meta_get_plane_size, "gst_video_meta_get_plane_size", libs);
+  gidLink(cast(void**)&gst_video_meta_map, "gst_video_meta_map", libs);
+  gidLink(cast(void**)&gst_video_meta_set_alignment, "gst_video_meta_set_alignment", libs);
+  gidLink(cast(void**)&gst_video_meta_unmap, "gst_video_meta_unmap", libs);
+  gidLink(cast(void**)&gst_video_meta_get_info, "gst_video_meta_get_info", libs);
 
   // VideoMetaTransform
-  gidLink(cast(void**)&gst_video_meta_transform_scale_get_quark, "gst_video_meta_transform_scale_get_quark", LIBS);
+  gidLink(cast(void**)&gst_video_meta_transform_scale_get_quark, "gst_video_meta_transform_scale_get_quark", libs);
 
   // VideoMultiviewFlagsSet
-  gidLink(cast(void**)&gst_video_multiview_flagset_get_type, "gst_video_multiview_flagset_get_type", LIBS);
+  gidLink(cast(void**)&gst_video_multiview_flagset_get_type, "gst_video_multiview_flagset_get_type", libs);
 
   // VideoOrientation
-  gidLink(cast(void**)&gst_video_orientation_get_type, "gst_video_orientation_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_from_tag, "gst_video_orientation_from_tag", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_get_hcenter, "gst_video_orientation_get_hcenter", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_get_hflip, "gst_video_orientation_get_hflip", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_get_vcenter, "gst_video_orientation_get_vcenter", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_get_vflip, "gst_video_orientation_get_vflip", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_set_hcenter, "gst_video_orientation_set_hcenter", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_set_hflip, "gst_video_orientation_set_hflip", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_set_vcenter, "gst_video_orientation_set_vcenter", LIBS);
-  gidLink(cast(void**)&gst_video_orientation_set_vflip, "gst_video_orientation_set_vflip", LIBS);
+  gidLink(cast(void**)&gst_video_orientation_get_type, "gst_video_orientation_get_type", libs);
+  gidLink(cast(void**)&gst_video_orientation_from_tag, "gst_video_orientation_from_tag", libs);
+  gidLink(cast(void**)&gst_video_orientation_get_hcenter, "gst_video_orientation_get_hcenter", libs);
+  gidLink(cast(void**)&gst_video_orientation_get_hflip, "gst_video_orientation_get_hflip", libs);
+  gidLink(cast(void**)&gst_video_orientation_get_vcenter, "gst_video_orientation_get_vcenter", libs);
+  gidLink(cast(void**)&gst_video_orientation_get_vflip, "gst_video_orientation_get_vflip", libs);
+  gidLink(cast(void**)&gst_video_orientation_set_hcenter, "gst_video_orientation_set_hcenter", libs);
+  gidLink(cast(void**)&gst_video_orientation_set_hflip, "gst_video_orientation_set_hflip", libs);
+  gidLink(cast(void**)&gst_video_orientation_set_vcenter, "gst_video_orientation_set_vcenter", libs);
+  gidLink(cast(void**)&gst_video_orientation_set_vflip, "gst_video_orientation_set_vflip", libs);
 
   // VideoOverlay
-  gidLink(cast(void**)&gst_video_overlay_get_type, "gst_video_overlay_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_install_properties, "gst_video_overlay_install_properties", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_set_property, "gst_video_overlay_set_property", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_expose, "gst_video_overlay_expose", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_got_window_handle, "gst_video_overlay_got_window_handle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_handle_events, "gst_video_overlay_handle_events", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_prepare_window_handle, "gst_video_overlay_prepare_window_handle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_set_render_rectangle, "gst_video_overlay_set_render_rectangle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_set_window_handle, "gst_video_overlay_set_window_handle", LIBS);
+  gidLink(cast(void**)&gst_video_overlay_get_type, "gst_video_overlay_get_type", libs);
+  gidLink(cast(void**)&gst_video_overlay_install_properties, "gst_video_overlay_install_properties", libs);
+  gidLink(cast(void**)&gst_video_overlay_set_property, "gst_video_overlay_set_property", libs);
+  gidLink(cast(void**)&gst_video_overlay_expose, "gst_video_overlay_expose", libs);
+  gidLink(cast(void**)&gst_video_overlay_got_window_handle, "gst_video_overlay_got_window_handle", libs);
+  gidLink(cast(void**)&gst_video_overlay_handle_events, "gst_video_overlay_handle_events", libs);
+  gidLink(cast(void**)&gst_video_overlay_prepare_window_handle, "gst_video_overlay_prepare_window_handle", libs);
+  gidLink(cast(void**)&gst_video_overlay_set_render_rectangle, "gst_video_overlay_set_render_rectangle", libs);
+  gidLink(cast(void**)&gst_video_overlay_set_window_handle, "gst_video_overlay_set_window_handle", libs);
 
   // VideoOverlayComposition
-  gidLink(cast(void**)&gst_video_overlay_composition_get_type, "gst_video_overlay_composition_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_new, "gst_video_overlay_composition_new", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_add_rectangle, "gst_video_overlay_composition_add_rectangle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_blend, "gst_video_overlay_composition_blend", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_copy, "gst_video_overlay_composition_copy", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_get_rectangle, "gst_video_overlay_composition_get_rectangle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_get_seqnum, "gst_video_overlay_composition_get_seqnum", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_make_writable, "gst_video_overlay_composition_make_writable", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_n_rectangles, "gst_video_overlay_composition_n_rectangles", LIBS);
+  gidLink(cast(void**)&gst_video_overlay_composition_get_type, "gst_video_overlay_composition_get_type", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_new, "gst_video_overlay_composition_new", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_add_rectangle, "gst_video_overlay_composition_add_rectangle", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_blend, "gst_video_overlay_composition_blend", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_copy, "gst_video_overlay_composition_copy", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_get_rectangle, "gst_video_overlay_composition_get_rectangle", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_get_seqnum, "gst_video_overlay_composition_get_seqnum", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_make_writable, "gst_video_overlay_composition_make_writable", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_n_rectangles, "gst_video_overlay_composition_n_rectangles", libs);
 
   // VideoOverlayCompositionMeta
-  gidLink(cast(void**)&gst_video_overlay_composition_meta_get_info, "gst_video_overlay_composition_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_overlay_composition_meta_get_info, "gst_video_overlay_composition_meta_get_info", libs);
 
   // VideoOverlayRectangle
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_type, "gst_video_overlay_rectangle_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_new_raw, "gst_video_overlay_rectangle_new_raw", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_copy, "gst_video_overlay_rectangle_copy", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_flags, "gst_video_overlay_rectangle_get_flags", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_global_alpha, "gst_video_overlay_rectangle_get_global_alpha", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_argb, "gst_video_overlay_rectangle_get_pixels_argb", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_ayuv, "gst_video_overlay_rectangle_get_pixels_ayuv", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_raw, "gst_video_overlay_rectangle_get_pixels_raw", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_argb, "gst_video_overlay_rectangle_get_pixels_unscaled_argb", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_ayuv, "gst_video_overlay_rectangle_get_pixels_unscaled_ayuv", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_raw, "gst_video_overlay_rectangle_get_pixels_unscaled_raw", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_render_rectangle, "gst_video_overlay_rectangle_get_render_rectangle", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_get_seqnum, "gst_video_overlay_rectangle_get_seqnum", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_set_global_alpha, "gst_video_overlay_rectangle_set_global_alpha", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_rectangle_set_render_rectangle, "gst_video_overlay_rectangle_set_render_rectangle", LIBS);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_type, "gst_video_overlay_rectangle_get_type", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_new_raw, "gst_video_overlay_rectangle_new_raw", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_copy, "gst_video_overlay_rectangle_copy", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_flags, "gst_video_overlay_rectangle_get_flags", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_global_alpha, "gst_video_overlay_rectangle_get_global_alpha", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_argb, "gst_video_overlay_rectangle_get_pixels_argb", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_ayuv, "gst_video_overlay_rectangle_get_pixels_ayuv", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_raw, "gst_video_overlay_rectangle_get_pixels_raw", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_argb, "gst_video_overlay_rectangle_get_pixels_unscaled_argb", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_ayuv, "gst_video_overlay_rectangle_get_pixels_unscaled_ayuv", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_pixels_unscaled_raw, "gst_video_overlay_rectangle_get_pixels_unscaled_raw", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_render_rectangle, "gst_video_overlay_rectangle_get_render_rectangle", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_get_seqnum, "gst_video_overlay_rectangle_get_seqnum", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_set_global_alpha, "gst_video_overlay_rectangle_set_global_alpha", libs);
+  gidLink(cast(void**)&gst_video_overlay_rectangle_set_render_rectangle, "gst_video_overlay_rectangle_set_render_rectangle", libs);
 
   // VideoRegionOfInterestMeta
-  gidLink(cast(void**)&gst_video_region_of_interest_meta_add_param, "gst_video_region_of_interest_meta_add_param", LIBS);
-  gidLink(cast(void**)&gst_video_region_of_interest_meta_get_param, "gst_video_region_of_interest_meta_get_param", LIBS);
-  gidLink(cast(void**)&gst_video_region_of_interest_meta_get_info, "gst_video_region_of_interest_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_region_of_interest_meta_add_param, "gst_video_region_of_interest_meta_add_param", libs);
+  gidLink(cast(void**)&gst_video_region_of_interest_meta_get_param, "gst_video_region_of_interest_meta_get_param", libs);
+  gidLink(cast(void**)&gst_video_region_of_interest_meta_get_info, "gst_video_region_of_interest_meta_get_info", libs);
 
   // VideoResampler
-  gidLink(cast(void**)&gst_video_resampler_clear, "gst_video_resampler_clear", LIBS);
-  gidLink(cast(void**)&gst_video_resampler_init, "gst_video_resampler_init", LIBS);
+  gidLink(cast(void**)&gst_video_resampler_clear, "gst_video_resampler_clear", libs);
+  gidLink(cast(void**)&gst_video_resampler_init, "gst_video_resampler_init", libs);
 
   // VideoSEIUserDataUnregisteredMeta
-  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_meta_get_info, "gst_video_sei_user_data_unregistered_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_meta_get_info, "gst_video_sei_user_data_unregistered_meta_get_info", libs);
 
   // VideoScaler
-  gidLink(cast(void**)&gst_video_scaler_2d, "gst_video_scaler_2d", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_combine_packed_YUV, "gst_video_scaler_combine_packed_YUV", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_free, "gst_video_scaler_free", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_get_coeff, "gst_video_scaler_get_coeff", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_get_max_taps, "gst_video_scaler_get_max_taps", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_horizontal, "gst_video_scaler_horizontal", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_vertical, "gst_video_scaler_vertical", LIBS);
-  gidLink(cast(void**)&gst_video_scaler_new, "gst_video_scaler_new", LIBS);
+  gidLink(cast(void**)&gst_video_scaler_2d, "gst_video_scaler_2d", libs);
+  gidLink(cast(void**)&gst_video_scaler_combine_packed_YUV, "gst_video_scaler_combine_packed_YUV", libs);
+  gidLink(cast(void**)&gst_video_scaler_free, "gst_video_scaler_free", libs);
+  gidLink(cast(void**)&gst_video_scaler_get_coeff, "gst_video_scaler_get_coeff", libs);
+  gidLink(cast(void**)&gst_video_scaler_get_max_taps, "gst_video_scaler_get_max_taps", libs);
+  gidLink(cast(void**)&gst_video_scaler_horizontal, "gst_video_scaler_horizontal", libs);
+  gidLink(cast(void**)&gst_video_scaler_vertical, "gst_video_scaler_vertical", libs);
+  gidLink(cast(void**)&gst_video_scaler_new, "gst_video_scaler_new", libs);
 
   // VideoSink
-  gidLink(cast(void**)&gst_video_sink_get_type, "gst_video_sink_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_sink_center_rect, "gst_video_sink_center_rect", LIBS);
+  gidLink(cast(void**)&gst_video_sink_get_type, "gst_video_sink_get_type", libs);
+  gidLink(cast(void**)&gst_video_sink_center_rect, "gst_video_sink_center_rect", libs);
 
   // VideoTimeCode
-  gidLink(cast(void**)&gst_video_time_code_get_type, "gst_video_time_code_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_new, "gst_video_time_code_new", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_new_empty, "gst_video_time_code_new_empty", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_new_from_date_time, "gst_video_time_code_new_from_date_time", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_new_from_date_time_full, "gst_video_time_code_new_from_date_time_full", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_new_from_string, "gst_video_time_code_new_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_add_frames, "gst_video_time_code_add_frames", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_add_interval, "gst_video_time_code_add_interval", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_clear, "gst_video_time_code_clear", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_compare, "gst_video_time_code_compare", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_copy, "gst_video_time_code_copy", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_frames_since_daily_jam, "gst_video_time_code_frames_since_daily_jam", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_free, "gst_video_time_code_free", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_increment_frame, "gst_video_time_code_increment_frame", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_init, "gst_video_time_code_init", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_init_from_date_time, "gst_video_time_code_init_from_date_time", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_init_from_date_time_full, "gst_video_time_code_init_from_date_time_full", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_is_valid, "gst_video_time_code_is_valid", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_nsec_since_daily_jam, "gst_video_time_code_nsec_since_daily_jam", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_to_date_time, "gst_video_time_code_to_date_time", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_to_string, "gst_video_time_code_to_string", LIBS);
+  gidLink(cast(void**)&gst_video_time_code_get_type, "gst_video_time_code_get_type", libs);
+  gidLink(cast(void**)&gst_video_time_code_new, "gst_video_time_code_new", libs);
+  gidLink(cast(void**)&gst_video_time_code_new_empty, "gst_video_time_code_new_empty", libs);
+  gidLink(cast(void**)&gst_video_time_code_new_from_date_time, "gst_video_time_code_new_from_date_time", libs);
+  gidLink(cast(void**)&gst_video_time_code_new_from_date_time_full, "gst_video_time_code_new_from_date_time_full", libs);
+  gidLink(cast(void**)&gst_video_time_code_new_from_string, "gst_video_time_code_new_from_string", libs);
+  gidLink(cast(void**)&gst_video_time_code_add_frames, "gst_video_time_code_add_frames", libs);
+  gidLink(cast(void**)&gst_video_time_code_add_interval, "gst_video_time_code_add_interval", libs);
+  gidLink(cast(void**)&gst_video_time_code_clear, "gst_video_time_code_clear", libs);
+  gidLink(cast(void**)&gst_video_time_code_compare, "gst_video_time_code_compare", libs);
+  gidLink(cast(void**)&gst_video_time_code_copy, "gst_video_time_code_copy", libs);
+  gidLink(cast(void**)&gst_video_time_code_frames_since_daily_jam, "gst_video_time_code_frames_since_daily_jam", libs);
+  gidLink(cast(void**)&gst_video_time_code_free, "gst_video_time_code_free", libs);
+  gidLink(cast(void**)&gst_video_time_code_increment_frame, "gst_video_time_code_increment_frame", libs);
+  gidLink(cast(void**)&gst_video_time_code_init, "gst_video_time_code_init", libs);
+  gidLink(cast(void**)&gst_video_time_code_init_from_date_time, "gst_video_time_code_init_from_date_time", libs);
+  gidLink(cast(void**)&gst_video_time_code_init_from_date_time_full, "gst_video_time_code_init_from_date_time_full", libs);
+  gidLink(cast(void**)&gst_video_time_code_is_valid, "gst_video_time_code_is_valid", libs);
+  gidLink(cast(void**)&gst_video_time_code_nsec_since_daily_jam, "gst_video_time_code_nsec_since_daily_jam", libs);
+  gidLink(cast(void**)&gst_video_time_code_to_date_time, "gst_video_time_code_to_date_time", libs);
+  gidLink(cast(void**)&gst_video_time_code_to_string, "gst_video_time_code_to_string", libs);
 
   // VideoTimeCodeInterval
-  gidLink(cast(void**)&gst_video_time_code_interval_get_type, "gst_video_time_code_interval_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_new, "gst_video_time_code_interval_new", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_new_from_string, "gst_video_time_code_interval_new_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_clear, "gst_video_time_code_interval_clear", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_copy, "gst_video_time_code_interval_copy", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_free, "gst_video_time_code_interval_free", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_interval_init, "gst_video_time_code_interval_init", LIBS);
+  gidLink(cast(void**)&gst_video_time_code_interval_get_type, "gst_video_time_code_interval_get_type", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_new, "gst_video_time_code_interval_new", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_new_from_string, "gst_video_time_code_interval_new_from_string", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_clear, "gst_video_time_code_interval_clear", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_copy, "gst_video_time_code_interval_copy", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_free, "gst_video_time_code_interval_free", libs);
+  gidLink(cast(void**)&gst_video_time_code_interval_init, "gst_video_time_code_interval_init", libs);
 
   // VideoTimeCodeMeta
-  gidLink(cast(void**)&gst_video_time_code_meta_get_info, "gst_video_time_code_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_video_time_code_meta_get_info, "gst_video_time_code_meta_get_info", libs);
 
   // VideoVBIEncoder
-  gidLink(cast(void**)&gst_video_vbi_encoder_get_type, "gst_video_vbi_encoder_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_encoder_new, "gst_video_vbi_encoder_new", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_encoder_add_ancillary, "gst_video_vbi_encoder_add_ancillary", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_encoder_copy, "gst_video_vbi_encoder_copy", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_encoder_free, "gst_video_vbi_encoder_free", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_encoder_write_line, "gst_video_vbi_encoder_write_line", LIBS);
+  gidLink(cast(void**)&gst_video_vbi_encoder_get_type, "gst_video_vbi_encoder_get_type", libs);
+  gidLink(cast(void**)&gst_video_vbi_encoder_new, "gst_video_vbi_encoder_new", libs);
+  gidLink(cast(void**)&gst_video_vbi_encoder_add_ancillary, "gst_video_vbi_encoder_add_ancillary", libs);
+  gidLink(cast(void**)&gst_video_vbi_encoder_copy, "gst_video_vbi_encoder_copy", libs);
+  gidLink(cast(void**)&gst_video_vbi_encoder_free, "gst_video_vbi_encoder_free", libs);
+  gidLink(cast(void**)&gst_video_vbi_encoder_write_line, "gst_video_vbi_encoder_write_line", libs);
 
   // VideoVBIParser
-  gidLink(cast(void**)&gst_video_vbi_parser_get_type, "gst_video_vbi_parser_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_parser_new, "gst_video_vbi_parser_new", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_parser_add_line, "gst_video_vbi_parser_add_line", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_parser_copy, "gst_video_vbi_parser_copy", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_parser_free, "gst_video_vbi_parser_free", LIBS);
-  gidLink(cast(void**)&gst_video_vbi_parser_get_ancillary, "gst_video_vbi_parser_get_ancillary", LIBS);
+  gidLink(cast(void**)&gst_video_vbi_parser_get_type, "gst_video_vbi_parser_get_type", libs);
+  gidLink(cast(void**)&gst_video_vbi_parser_new, "gst_video_vbi_parser_new", libs);
+  gidLink(cast(void**)&gst_video_vbi_parser_add_line, "gst_video_vbi_parser_add_line", libs);
+  gidLink(cast(void**)&gst_video_vbi_parser_copy, "gst_video_vbi_parser_copy", libs);
+  gidLink(cast(void**)&gst_video_vbi_parser_free, "gst_video_vbi_parser_free", libs);
+  gidLink(cast(void**)&gst_video_vbi_parser_get_ancillary, "gst_video_vbi_parser_get_ancillary", libs);
 
   // global
-  gidLink(cast(void**)&gst_ancillary_meta_api_get_type, "gst_ancillary_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_ancillary_meta, "gst_buffer_add_ancillary_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_afd_meta, "gst_buffer_add_video_afd_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_affine_transformation_meta, "gst_buffer_add_video_affine_transformation_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_bar_meta, "gst_buffer_add_video_bar_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_caption_meta, "gst_buffer_add_video_caption_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_codec_alpha_meta, "gst_buffer_add_video_codec_alpha_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_gl_texture_upload_meta, "gst_buffer_add_video_gl_texture_upload_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_meta, "gst_buffer_add_video_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_meta_full, "gst_buffer_add_video_meta_full", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_overlay_composition_meta, "gst_buffer_add_video_overlay_composition_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_region_of_interest_meta, "gst_buffer_add_video_region_of_interest_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_region_of_interest_meta_id, "gst_buffer_add_video_region_of_interest_meta_id", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_sei_user_data_unregistered_meta, "gst_buffer_add_video_sei_user_data_unregistered_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_time_code_meta, "gst_buffer_add_video_time_code_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_video_time_code_meta_full, "gst_buffer_add_video_time_code_meta_full", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_video_meta, "gst_buffer_get_video_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_video_meta_id, "gst_buffer_get_video_meta_id", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_video_region_of_interest_meta_id, "gst_buffer_get_video_region_of_interest_meta_id", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_get_video_alignment, "gst_buffer_pool_config_get_video_alignment", LIBS);
-  gidLink(cast(void**)&gst_buffer_pool_config_set_video_alignment, "gst_buffer_pool_config_set_video_alignment", LIBS);
-  gidLink(cast(void**)&gst_is_video_overlay_prepare_window_handle_message, "gst_is_video_overlay_prepare_window_handle_message", LIBS);
-  gidLink(cast(void**)&gst_video_afd_meta_api_get_type, "gst_video_afd_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_affine_transformation_meta_api_get_type, "gst_video_affine_transformation_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_bar_meta_api_get_type, "gst_video_bar_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_blend, "gst_video_blend", LIBS);
-  gidLink(cast(void**)&gst_video_blend_scale_linear_RGBA, "gst_video_blend_scale_linear_RGBA", LIBS);
-  gidLink(cast(void**)&gst_video_calculate_display_ratio, "gst_video_calculate_display_ratio", LIBS);
-  gidLink(cast(void**)&gst_video_caption_meta_api_get_type, "gst_video_caption_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_center_rect, "gst_video_center_rect", LIBS);
-  gidLink(cast(void**)&gst_video_chroma_from_string, "gst_video_chroma_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_chroma_resample, "gst_video_chroma_resample", LIBS);
-  gidLink(cast(void**)&gst_video_chroma_to_string, "gst_video_chroma_to_string", LIBS);
-  gidLink(cast(void**)&gst_video_codec_alpha_meta_api_get_type, "gst_video_codec_alpha_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_color_transfer_decode, "gst_video_color_transfer_decode", LIBS);
-  gidLink(cast(void**)&gst_video_color_transfer_encode, "gst_video_color_transfer_encode", LIBS);
-  gidLink(cast(void**)&gst_video_convert_sample, "gst_video_convert_sample", LIBS);
-  gidLink(cast(void**)&gst_video_convert_sample_async, "gst_video_convert_sample_async", LIBS);
-  gidLink(cast(void**)&gst_video_crop_meta_api_get_type, "gst_video_crop_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_format, "gst_video_dma_drm_fourcc_from_format", LIBS);
-  gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_string, "gst_video_dma_drm_fourcc_from_string", LIBS);
-  gidLink(cast(void**)&gst_video_dma_drm_fourcc_to_format, "gst_video_dma_drm_fourcc_to_format", LIBS);
-  gidLink(cast(void**)&gst_video_dma_drm_fourcc_to_string, "gst_video_dma_drm_fourcc_to_string", LIBS);
-  gidLink(cast(void**)&gst_video_event_is_force_key_unit, "gst_video_event_is_force_key_unit", LIBS);
-  gidLink(cast(void**)&gst_video_event_new_downstream_force_key_unit, "gst_video_event_new_downstream_force_key_unit", LIBS);
-  gidLink(cast(void**)&gst_video_event_new_still_frame, "gst_video_event_new_still_frame", LIBS);
-  gidLink(cast(void**)&gst_video_event_new_upstream_force_key_unit, "gst_video_event_new_upstream_force_key_unit", LIBS);
-  gidLink(cast(void**)&gst_video_event_parse_downstream_force_key_unit, "gst_video_event_parse_downstream_force_key_unit", LIBS);
-  gidLink(cast(void**)&gst_video_event_parse_still_frame, "gst_video_event_parse_still_frame", LIBS);
-  gidLink(cast(void**)&gst_video_event_parse_upstream_force_key_unit, "gst_video_event_parse_upstream_force_key_unit", LIBS);
-  gidLink(cast(void**)&gst_video_formats_any, "gst_video_formats_any", LIBS);
-  gidLink(cast(void**)&gst_video_formats_raw, "gst_video_formats_raw", LIBS);
-  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_api_get_type, "gst_video_gl_texture_upload_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_guess_framerate, "gst_video_guess_framerate", LIBS);
-  gidLink(cast(void**)&gst_video_is_common_aspect_ratio, "gst_video_is_common_aspect_ratio", LIBS);
-  gidLink(cast(void**)&gst_video_is_dma_drm_caps, "gst_video_is_dma_drm_caps", LIBS);
-  gidLink(cast(void**)&gst_video_make_raw_caps, "gst_video_make_raw_caps", LIBS);
-  gidLink(cast(void**)&gst_video_make_raw_caps_with_features, "gst_video_make_raw_caps_with_features", LIBS);
-  gidLink(cast(void**)&gst_video_meta_api_get_type, "gst_video_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_get_doubled_height_modes, "gst_video_multiview_get_doubled_height_modes", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_get_doubled_size_modes, "gst_video_multiview_get_doubled_size_modes", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_get_doubled_width_modes, "gst_video_multiview_get_doubled_width_modes", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_get_mono_modes, "gst_video_multiview_get_mono_modes", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_get_unpacked_modes, "gst_video_multiview_get_unpacked_modes", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_guess_half_aspect, "gst_video_multiview_guess_half_aspect", LIBS);
-  gidLink(cast(void**)&gst_video_multiview_video_info_change_mode, "gst_video_multiview_video_info_change_mode", LIBS);
-  gidLink(cast(void**)&gst_video_overlay_composition_meta_api_get_type, "gst_video_overlay_composition_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_region_of_interest_meta_api_get_type, "gst_video_region_of_interest_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_meta_api_get_type, "gst_video_sei_user_data_unregistered_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_parse_precision_time_stamp, "gst_video_sei_user_data_unregistered_parse_precision_time_stamp", LIBS);
-  gidLink(cast(void**)&gst_video_tile_get_index, "gst_video_tile_get_index", LIBS);
-  gidLink(cast(void**)&gst_video_time_code_meta_api_get_type, "gst_video_time_code_meta_api_get_type", LIBS);
+  gidLink(cast(void**)&gst_ancillary_meta_api_get_type, "gst_ancillary_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_buffer_add_ancillary_meta, "gst_buffer_add_ancillary_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_afd_meta, "gst_buffer_add_video_afd_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_affine_transformation_meta, "gst_buffer_add_video_affine_transformation_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_bar_meta, "gst_buffer_add_video_bar_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_caption_meta, "gst_buffer_add_video_caption_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_codec_alpha_meta, "gst_buffer_add_video_codec_alpha_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_gl_texture_upload_meta, "gst_buffer_add_video_gl_texture_upload_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_meta, "gst_buffer_add_video_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_meta_full, "gst_buffer_add_video_meta_full", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_overlay_composition_meta, "gst_buffer_add_video_overlay_composition_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_region_of_interest_meta, "gst_buffer_add_video_region_of_interest_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_region_of_interest_meta_id, "gst_buffer_add_video_region_of_interest_meta_id", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_sei_user_data_unregistered_meta, "gst_buffer_add_video_sei_user_data_unregistered_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_time_code_meta, "gst_buffer_add_video_time_code_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_video_time_code_meta_full, "gst_buffer_add_video_time_code_meta_full", libs);
+  gidLink(cast(void**)&gst_buffer_get_video_meta, "gst_buffer_get_video_meta", libs);
+  gidLink(cast(void**)&gst_buffer_get_video_meta_id, "gst_buffer_get_video_meta_id", libs);
+  gidLink(cast(void**)&gst_buffer_get_video_region_of_interest_meta_id, "gst_buffer_get_video_region_of_interest_meta_id", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_get_video_alignment, "gst_buffer_pool_config_get_video_alignment", libs);
+  gidLink(cast(void**)&gst_buffer_pool_config_set_video_alignment, "gst_buffer_pool_config_set_video_alignment", libs);
+  gidLink(cast(void**)&gst_is_video_overlay_prepare_window_handle_message, "gst_is_video_overlay_prepare_window_handle_message", libs);
+  gidLink(cast(void**)&gst_video_afd_meta_api_get_type, "gst_video_afd_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_affine_transformation_meta_api_get_type, "gst_video_affine_transformation_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_bar_meta_api_get_type, "gst_video_bar_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_blend, "gst_video_blend", libs);
+  gidLink(cast(void**)&gst_video_blend_scale_linear_RGBA, "gst_video_blend_scale_linear_RGBA", libs);
+  gidLink(cast(void**)&gst_video_calculate_display_ratio, "gst_video_calculate_display_ratio", libs);
+  gidLink(cast(void**)&gst_video_caption_meta_api_get_type, "gst_video_caption_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_center_rect, "gst_video_center_rect", libs);
+  gidLink(cast(void**)&gst_video_chroma_from_string, "gst_video_chroma_from_string", libs);
+  gidLink(cast(void**)&gst_video_chroma_resample, "gst_video_chroma_resample", libs);
+  gidLink(cast(void**)&gst_video_chroma_to_string, "gst_video_chroma_to_string", libs);
+  gidLink(cast(void**)&gst_video_codec_alpha_meta_api_get_type, "gst_video_codec_alpha_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_color_transfer_decode, "gst_video_color_transfer_decode", libs);
+  gidLink(cast(void**)&gst_video_color_transfer_encode, "gst_video_color_transfer_encode", libs);
+  gidLink(cast(void**)&gst_video_convert_sample, "gst_video_convert_sample", libs);
+  gidLink(cast(void**)&gst_video_convert_sample_async, "gst_video_convert_sample_async", libs);
+  gidLink(cast(void**)&gst_video_crop_meta_api_get_type, "gst_video_crop_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_format, "gst_video_dma_drm_fourcc_from_format", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_fourcc_from_string, "gst_video_dma_drm_fourcc_from_string", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_fourcc_to_format, "gst_video_dma_drm_fourcc_to_format", libs);
+  gidLink(cast(void**)&gst_video_dma_drm_fourcc_to_string, "gst_video_dma_drm_fourcc_to_string", libs);
+  gidLink(cast(void**)&gst_video_event_is_force_key_unit, "gst_video_event_is_force_key_unit", libs);
+  gidLink(cast(void**)&gst_video_event_new_downstream_force_key_unit, "gst_video_event_new_downstream_force_key_unit", libs);
+  gidLink(cast(void**)&gst_video_event_new_still_frame, "gst_video_event_new_still_frame", libs);
+  gidLink(cast(void**)&gst_video_event_new_upstream_force_key_unit, "gst_video_event_new_upstream_force_key_unit", libs);
+  gidLink(cast(void**)&gst_video_event_parse_downstream_force_key_unit, "gst_video_event_parse_downstream_force_key_unit", libs);
+  gidLink(cast(void**)&gst_video_event_parse_still_frame, "gst_video_event_parse_still_frame", libs);
+  gidLink(cast(void**)&gst_video_event_parse_upstream_force_key_unit, "gst_video_event_parse_upstream_force_key_unit", libs);
+  gidLink(cast(void**)&gst_video_formats_any, "gst_video_formats_any", libs);
+  gidLink(cast(void**)&gst_video_formats_raw, "gst_video_formats_raw", libs);
+  gidLink(cast(void**)&gst_video_gl_texture_upload_meta_api_get_type, "gst_video_gl_texture_upload_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_guess_framerate, "gst_video_guess_framerate", libs);
+  gidLink(cast(void**)&gst_video_is_common_aspect_ratio, "gst_video_is_common_aspect_ratio", libs);
+  gidLink(cast(void**)&gst_video_is_dma_drm_caps, "gst_video_is_dma_drm_caps", libs);
+  gidLink(cast(void**)&gst_video_make_raw_caps, "gst_video_make_raw_caps", libs);
+  gidLink(cast(void**)&gst_video_make_raw_caps_with_features, "gst_video_make_raw_caps_with_features", libs);
+  gidLink(cast(void**)&gst_video_meta_api_get_type, "gst_video_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_multiview_get_doubled_height_modes, "gst_video_multiview_get_doubled_height_modes", libs);
+  gidLink(cast(void**)&gst_video_multiview_get_doubled_size_modes, "gst_video_multiview_get_doubled_size_modes", libs);
+  gidLink(cast(void**)&gst_video_multiview_get_doubled_width_modes, "gst_video_multiview_get_doubled_width_modes", libs);
+  gidLink(cast(void**)&gst_video_multiview_get_mono_modes, "gst_video_multiview_get_mono_modes", libs);
+  gidLink(cast(void**)&gst_video_multiview_get_unpacked_modes, "gst_video_multiview_get_unpacked_modes", libs);
+  gidLink(cast(void**)&gst_video_multiview_guess_half_aspect, "gst_video_multiview_guess_half_aspect", libs);
+  gidLink(cast(void**)&gst_video_multiview_video_info_change_mode, "gst_video_multiview_video_info_change_mode", libs);
+  gidLink(cast(void**)&gst_video_overlay_composition_meta_api_get_type, "gst_video_overlay_composition_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_region_of_interest_meta_api_get_type, "gst_video_region_of_interest_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_meta_api_get_type, "gst_video_sei_user_data_unregistered_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_video_sei_user_data_unregistered_parse_precision_time_stamp, "gst_video_sei_user_data_unregistered_parse_precision_time_stamp", libs);
+  gidLink(cast(void**)&gst_video_tile_get_index, "gst_video_tile_get_index", libs);
+  gidLink(cast(void**)&gst_video_time_code_meta_api_get_type, "gst_video_time_code_meta_api_get_type", libs);
 }

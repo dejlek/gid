@@ -37,22 +37,22 @@ class FeatureList : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_feature_list_get_type != &gidSymbolNotFound ? webkit_feature_list_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class FeatureList : gobject.boxed.Boxed
   webkit.feature.Feature get(size_t index)
   {
     WebKitFeature* _cretval;
-    _cretval = webkit_feature_list_get(cast(WebKitFeatureList*)cPtr, index);
+    _cretval = webkit_feature_list_get(cast(WebKitFeatureList*)this._cPtr, index);
     auto _retval = _cretval ? new webkit.feature.Feature(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -85,7 +85,7 @@ class FeatureList : gobject.boxed.Boxed
   size_t getLength()
   {
     size_t _retval;
-    _retval = webkit_feature_list_get_length(cast(WebKitFeatureList*)cPtr);
+    _retval = webkit_feature_list_get_length(cast(WebKitFeatureList*)this._cPtr);
     return _retval;
   }
 }

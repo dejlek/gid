@@ -35,16 +35,16 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_long_press_get_type != &gidSymbolNotFound ? gtk_gesture_long_press_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -90,7 +90,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   double getDelayFactor()
   {
     double _retval;
-    _retval = gtk_gesture_long_press_get_delay_factor(cast(GtkGestureLongPress*)cPtr);
+    _retval = gtk_gesture_long_press_get_delay_factor(cast(GtkGestureLongPress*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class GestureLongPress : gtk.gesture_single.GestureSingle
   */
   void setDelayFactor(double delayFactor)
   {
-    gtk_gesture_long_press_set_delay_factor(cast(GtkGestureLongPress*)cPtr, delayFactor);
+    gtk_gesture_long_press_set_delay_factor(cast(GtkGestureLongPress*)this._cPtr, delayFactor);
   }
 
   /**

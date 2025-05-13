@@ -72,16 +72,16 @@ class TabView : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_view_get_type != &gidSymbolNotFound ? adw_tab_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -288,8 +288,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage addPage(gtk.widget.Widget child, adw.tab_page.TabPage parent = null)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_add_page(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, parent ? cast(AdwTabPage*)parent.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_add_page(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, parent ? cast(AdwTabPage*)parent._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class TabView : gtk.widget.Widget
   */
   void addShortcuts(adw.types.TabViewShortcuts shortcuts)
   {
-    adw_tab_view_add_shortcuts(cast(AdwTabView*)cPtr, shortcuts);
+    adw_tab_view_add_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
 
   /**
@@ -316,8 +316,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage append(gtk.widget.Widget child)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_append(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_append(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -331,8 +331,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage appendPinned(gtk.widget.Widget child)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_append_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_append_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class TabView : gtk.widget.Widget
   */
   void closeOtherPages(adw.tab_page.TabPage page)
   {
-    adw_tab_view_close_other_pages(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    adw_tab_view_close_other_pages(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -376,7 +376,7 @@ class TabView : gtk.widget.Widget
   */
   void closePage(adw.tab_page.TabPage page)
   {
-    adw_tab_view_close_page(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    adw_tab_view_close_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -395,7 +395,7 @@ class TabView : gtk.widget.Widget
   */
   void closePageFinish(adw.tab_page.TabPage page, bool confirm)
   {
-    adw_tab_view_close_page_finish(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null, confirm);
+    adw_tab_view_close_page_finish(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, confirm);
   }
 
   /**
@@ -406,7 +406,7 @@ class TabView : gtk.widget.Widget
   */
   void closePagesAfter(adw.tab_page.TabPage page)
   {
-    adw_tab_view_close_pages_after(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    adw_tab_view_close_pages_after(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -417,7 +417,7 @@ class TabView : gtk.widget.Widget
   */
   void closePagesBefore(adw.tab_page.TabPage page)
   {
-    adw_tab_view_close_pages_before(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    adw_tab_view_close_pages_before(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -427,8 +427,8 @@ class TabView : gtk.widget.Widget
   gio.icon.Icon getDefaultIcon()
   {
     GIcon* _cretval;
-    _cretval = adw_tab_view_get_default_icon(cast(AdwTabView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = adw_tab_view_get_default_icon(cast(AdwTabView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -445,7 +445,7 @@ class TabView : gtk.widget.Widget
   bool getIsTransferringPage()
   {
     bool _retval;
-    _retval = adw_tab_view_get_is_transferring_page(cast(AdwTabView*)cPtr);
+    _retval = adw_tab_view_get_is_transferring_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -456,8 +456,8 @@ class TabView : gtk.widget.Widget
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = adw_tab_view_get_menu_model(cast(AdwTabView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = adw_tab_view_get_menu_model(cast(AdwTabView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -468,7 +468,7 @@ class TabView : gtk.widget.Widget
   int getNPages()
   {
     int _retval;
-    _retval = adw_tab_view_get_n_pages(cast(AdwTabView*)cPtr);
+    _retval = adw_tab_view_get_n_pages(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class TabView : gtk.widget.Widget
   int getNPinnedPages()
   {
     int _retval;
-    _retval = adw_tab_view_get_n_pinned_pages(cast(AdwTabView*)cPtr);
+    _retval = adw_tab_view_get_n_pinned_pages(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -495,8 +495,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage getNthPage(int position)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_get_nth_page(cast(AdwTabView*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_get_nth_page(cast(AdwTabView*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -510,8 +510,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage getPage(gtk.widget.Widget child)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_get_page(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_get_page(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -525,7 +525,7 @@ class TabView : gtk.widget.Widget
   int getPagePosition(adw.tab_page.TabPage page)
   {
     int _retval;
-    _retval = adw_tab_view_get_page_position(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_tab_view_get_page_position(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -540,8 +540,8 @@ class TabView : gtk.widget.Widget
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
-    _cretval = adw_tab_view_get_pages(cast(AdwTabView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    _cretval = adw_tab_view_get_pages(cast(AdwTabView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -552,8 +552,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage getSelectedPage()
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_get_selected_page(cast(AdwTabView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_get_selected_page(cast(AdwTabView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class TabView : gtk.widget.Widget
   adw.types.TabViewShortcuts getShortcuts()
   {
     AdwTabViewShortcuts _cretval;
-    _cretval = adw_tab_view_get_shortcuts(cast(AdwTabView*)cPtr);
+    _cretval = adw_tab_view_get_shortcuts(cast(AdwTabView*)this._cPtr);
     adw.types.TabViewShortcuts _retval = cast(adw.types.TabViewShortcuts)_cretval;
     return _retval;
   }
@@ -583,8 +583,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage insert(gtk.widget.Widget child, int position)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_insert(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_insert(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -602,8 +602,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage insertPinned(gtk.widget.Widget child, int position)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_insert_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_insert_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -615,7 +615,7 @@ class TabView : gtk.widget.Widget
   */
   void invalidateThumbnails()
   {
-    adw_tab_view_invalidate_thumbnails(cast(AdwTabView*)cPtr);
+    adw_tab_view_invalidate_thumbnails(cast(AdwTabView*)this._cPtr);
   }
 
   /**
@@ -628,8 +628,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage prepend(gtk.widget.Widget child)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_prepend(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_prepend(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -643,8 +643,8 @@ class TabView : gtk.widget.Widget
   adw.tab_page.TabPage prependPinned(gtk.widget.Widget child)
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_view_prepend_pinned(cast(AdwTabView*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_view_prepend_pinned(cast(AdwTabView*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -658,7 +658,7 @@ class TabView : gtk.widget.Widget
   */
   void removeShortcuts(adw.types.TabViewShortcuts shortcuts)
   {
-    adw_tab_view_remove_shortcuts(cast(AdwTabView*)cPtr, shortcuts);
+    adw_tab_view_remove_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
 
   /**
@@ -671,7 +671,7 @@ class TabView : gtk.widget.Widget
   bool reorderBackward(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_backward(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_tab_view_reorder_backward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -685,7 +685,7 @@ class TabView : gtk.widget.Widget
   bool reorderFirst(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_first(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_tab_view_reorder_first(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -699,7 +699,7 @@ class TabView : gtk.widget.Widget
   bool reorderForward(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_forward(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_tab_view_reorder_forward(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -713,7 +713,7 @@ class TabView : gtk.widget.Widget
   bool reorderLast(adw.tab_page.TabPage page)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_last(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_tab_view_reorder_last(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -731,7 +731,7 @@ class TabView : gtk.widget.Widget
   bool reorderPage(adw.tab_page.TabPage page, int position)
   {
     bool _retval;
-    _retval = adw_tab_view_reorder_page(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null, position);
+    _retval = adw_tab_view_reorder_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -744,7 +744,7 @@ class TabView : gtk.widget.Widget
   bool selectNextPage()
   {
     bool _retval;
-    _retval = adw_tab_view_select_next_page(cast(AdwTabView*)cPtr);
+    _retval = adw_tab_view_select_next_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -757,7 +757,7 @@ class TabView : gtk.widget.Widget
   bool selectPreviousPage()
   {
     bool _retval;
-    _retval = adw_tab_view_select_previous_page(cast(AdwTabView*)cPtr);
+    _retval = adw_tab_view_select_previous_page(cast(AdwTabView*)this._cPtr);
     return _retval;
   }
 
@@ -780,7 +780,7 @@ class TabView : gtk.widget.Widget
   */
   void setDefaultIcon(gio.icon.Icon defaultIcon)
   {
-    adw_tab_view_set_default_icon(cast(AdwTabView*)cPtr, defaultIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)defaultIcon).cPtr(No.Dup) : null);
+    adw_tab_view_set_default_icon(cast(AdwTabView*)this._cPtr, defaultIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)defaultIcon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -795,7 +795,7 @@ class TabView : gtk.widget.Widget
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    adw_tab_view_set_menu_model(cast(AdwTabView*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    adw_tab_view_set_menu_model(cast(AdwTabView*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -835,7 +835,7 @@ class TabView : gtk.widget.Widget
   */
   void setPagePinned(adw.tab_page.TabPage page, bool pinned)
   {
-    adw_tab_view_set_page_pinned(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null, pinned);
+    adw_tab_view_set_page_pinned(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, pinned);
   }
 
   /**
@@ -846,7 +846,7 @@ class TabView : gtk.widget.Widget
   */
   void setSelectedPage(adw.tab_page.TabPage selectedPage)
   {
-    adw_tab_view_set_selected_page(cast(AdwTabView*)cPtr, selectedPage ? cast(AdwTabPage*)selectedPage.cPtr(No.Dup) : null);
+    adw_tab_view_set_selected_page(cast(AdwTabView*)this._cPtr, selectedPage ? cast(AdwTabPage*)selectedPage._cPtr(No.Dup) : null);
   }
 
   /**
@@ -863,7 +863,7 @@ class TabView : gtk.widget.Widget
   */
   void setShortcuts(adw.types.TabViewShortcuts shortcuts)
   {
-    adw_tab_view_set_shortcuts(cast(AdwTabView*)cPtr, shortcuts);
+    adw_tab_view_set_shortcuts(cast(AdwTabView*)this._cPtr, shortcuts);
   }
 
   /**
@@ -881,7 +881,7 @@ class TabView : gtk.widget.Widget
   */
   void transferPage(adw.tab_page.TabPage page, adw.tab_view.TabView otherView, int position)
   {
-    adw_tab_view_transfer_page(cast(AdwTabView*)cPtr, page ? cast(AdwTabPage*)page.cPtr(No.Dup) : null, otherView ? cast(AdwTabView*)otherView.cPtr(No.Dup) : null, position);
+    adw_tab_view_transfer_page(cast(AdwTabView*)this._cPtr, page ? cast(AdwTabPage*)page._cPtr(No.Dup) : null, otherView ? cast(AdwTabView*)otherView._cPtr(No.Dup) : null, position);
   }
 
   /**

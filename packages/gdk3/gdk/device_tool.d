@@ -18,16 +18,16 @@ class DeviceTool : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_device_tool_get_type != &gidSymbolNotFound ? gdk_device_tool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class DeviceTool : gobject.object.ObjectWrap
   ulong getHardwareId()
   {
     ulong _retval;
-    _retval = gdk_device_tool_get_hardware_id(cast(GdkDeviceTool*)cPtr);
+    _retval = gdk_device_tool_get_hardware_id(cast(GdkDeviceTool*)this._cPtr);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ class DeviceTool : gobject.object.ObjectWrap
   ulong getSerial()
   {
     ulong _retval;
-    _retval = gdk_device_tool_get_serial(cast(GdkDeviceTool*)cPtr);
+    _retval = gdk_device_tool_get_serial(cast(GdkDeviceTool*)this._cPtr);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class DeviceTool : gobject.object.ObjectWrap
   gdk.types.DeviceToolType getToolType()
   {
     GdkDeviceToolType _cretval;
-    _cretval = gdk_device_tool_get_tool_type(cast(GdkDeviceTool*)cPtr);
+    _cretval = gdk_device_tool_get_tool_type(cast(GdkDeviceTool*)this._cPtr);
     gdk.types.DeviceToolType _retval = cast(gdk.types.DeviceToolType)_cretval;
     return _retval;
   }

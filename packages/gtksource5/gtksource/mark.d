@@ -33,16 +33,16 @@ class Mark : gtk.text_mark.TextMark
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_mark_get_type != &gidSymbolNotFound ? gtk_source_mark_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,7 +84,7 @@ class Mark : gtk.text_mark.TextMark
   string getCategory()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)cPtr);
+    _cretval = gtk_source_mark_get_category(cast(GtkSourceMark*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -105,8 +105,8 @@ class Mark : gtk.text_mark.TextMark
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_mark_next(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    _cretval = gtk_source_mark_next(cast(GtkSourceMark*)this._cPtr, _category);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,8 +126,8 @@ class Mark : gtk.text_mark.TextMark
   {
     GtkSourceMark* _cretval;
     const(char)* _category = category.toCString(No.Alloc);
-    _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)cPtr, _category);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
+    _cretval = gtk_source_mark_prev(cast(GtkSourceMark*)this._cPtr, _category);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.mark.Mark)(cast(GtkSourceMark*)_cretval, No.Take);
     return _retval;
   }
 }

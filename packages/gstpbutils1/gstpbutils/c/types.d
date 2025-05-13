@@ -353,7 +353,7 @@ struct GstAudioVisualizerPrivate;
 struct GstDiscoverer
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   GstDiscovererPrivate* priv;

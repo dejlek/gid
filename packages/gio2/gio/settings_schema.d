@@ -110,22 +110,22 @@ class SettingsSchema : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_get_type != &gidSymbolNotFound ? g_settings_schema_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -141,7 +141,7 @@ class SettingsSchema : gobject.boxed.Boxed
   string getId()
   {
     const(char)* _cretval;
-    _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)cPtr);
+    _cretval = g_settings_schema_get_id(cast(GSettingsSchema*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -160,7 +160,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     GSettingsSchemaKey* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)cPtr, _name);
+    _cretval = g_settings_schema_get_key(cast(GSettingsSchema*)this._cPtr, _name);
     auto _retval = _cretval ? new gio.settings_schema_key.SettingsSchemaKey(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -180,7 +180,7 @@ class SettingsSchema : gobject.boxed.Boxed
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)cPtr);
+    _cretval = g_settings_schema_get_path(cast(GSettingsSchema*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -196,7 +196,7 @@ class SettingsSchema : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = g_settings_schema_has_key(cast(GSettingsSchema*)cPtr, _name);
+    _retval = g_settings_schema_has_key(cast(GSettingsSchema*)this._cPtr, _name);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class SettingsSchema : gobject.boxed.Boxed
   string[] listChildren()
   {
     char** _cretval;
-    _cretval = g_settings_schema_list_children(cast(GSettingsSchema*)cPtr);
+    _cretval = g_settings_schema_list_children(cast(GSettingsSchema*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -238,7 +238,7 @@ class SettingsSchema : gobject.boxed.Boxed
   string[] listKeys()
   {
     char** _cretval;
-    _cretval = g_settings_schema_list_keys(cast(GSettingsSchema*)cPtr);
+    _cretval = g_settings_schema_list_keys(cast(GSettingsSchema*)this._cPtr);
     string[] _retval;
 
     if (_cretval)

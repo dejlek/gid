@@ -93,16 +93,16 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_app_src_get_type != &gidSymbolNotFound ? gst_app_src_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -504,7 +504,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn endOfStream()
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_end_of_stream(cast(GstAppSrc*)cPtr);
+    _cretval = gst_app_src_end_of_stream(cast(GstAppSrc*)this._cPtr);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -516,7 +516,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_app_src_get_caps(cast(GstAppSrc*)cPtr);
+    _cretval = gst_app_src_get_caps(cast(GstAppSrc*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -528,7 +528,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   ulong getCurrentLevelBuffers()
   {
     ulong _retval;
-    _retval = gst_app_src_get_current_level_buffers(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_current_level_buffers(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   ulong getCurrentLevelBytes()
   {
     ulong _retval;
-    _retval = gst_app_src_get_current_level_bytes(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_current_level_bytes(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.ClockTime getCurrentLevelTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_app_src_get_current_level_time(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_current_level_time(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -562,7 +562,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.ClockTime getDuration()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_app_src_get_duration(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_duration(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -574,7 +574,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   bool getEmitSignals()
   {
     bool _retval;
-    _retval = gst_app_src_get_emit_signals(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_emit_signals(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -587,7 +587,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void getLatency(out ulong min, out ulong max)
   {
-    gst_app_src_get_latency(cast(GstAppSrc*)cPtr, cast(ulong*)&min, cast(ulong*)&max);
+    gst_app_src_get_latency(cast(GstAppSrc*)this._cPtr, cast(ulong*)&min, cast(ulong*)&max);
   }
 
   /**
@@ -598,7 +598,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gstapp.types.AppLeakyType getLeakyType()
   {
     GstAppLeakyType _cretval;
-    _cretval = gst_app_src_get_leaky_type(cast(GstAppSrc*)cPtr);
+    _cretval = gst_app_src_get_leaky_type(cast(GstAppSrc*)this._cPtr);
     gstapp.types.AppLeakyType _retval = cast(gstapp.types.AppLeakyType)_cretval;
     return _retval;
   }
@@ -610,7 +610,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   ulong getMaxBuffers()
   {
     ulong _retval;
-    _retval = gst_app_src_get_max_buffers(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_max_buffers(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -621,7 +621,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   ulong getMaxBytes()
   {
     ulong _retval;
-    _retval = gst_app_src_get_max_bytes(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_max_bytes(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.ClockTime getMaxTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_app_src_get_max_time(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_max_time(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   long getSize()
   {
     long _retval;
-    _retval = gst_app_src_get_size(cast(GstAppSrc*)cPtr);
+    _retval = gst_app_src_get_size(cast(GstAppSrc*)this._cPtr);
     return _retval;
   }
 
@@ -656,7 +656,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gstapp.types.AppStreamType getStreamType()
   {
     GstAppStreamType _cretval;
-    _cretval = gst_app_src_get_stream_type(cast(GstAppSrc*)cPtr);
+    _cretval = gst_app_src_get_stream_type(cast(GstAppSrc*)this._cPtr);
     gstapp.types.AppStreamType _retval = cast(gstapp.types.AppStreamType)_cretval;
     return _retval;
   }
@@ -677,7 +677,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushBuffer(gst.buffer.Buffer buffer)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_buffer(cast(GstAppSrc*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_app_src_push_buffer(cast(GstAppSrc*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -699,7 +699,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushBufferList(gst.buffer_list.BufferList bufferList)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_buffer_list(cast(GstAppSrc*)cPtr, bufferList ? cast(GstBufferList*)bufferList.cPtr(Yes.Dup) : null);
+    _cretval = gst_app_src_push_buffer_list(cast(GstAppSrc*)this._cPtr, bufferList ? cast(GstBufferList*)bufferList._cPtr(Yes.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -726,7 +726,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   gst.types.FlowReturn pushSample(gst.sample.Sample sample)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_app_src_push_sample(cast(GstAppSrc*)cPtr, sample ? cast(GstSample*)sample.cPtr(No.Dup) : null);
+    _cretval = gst_app_src_push_sample(cast(GstAppSrc*)this._cPtr, sample ? cast(GstSample*)sample._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -744,7 +744,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setCaps(gst.caps.Caps caps = null)
   {
-    gst_app_src_set_caps(cast(GstAppSrc*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    gst_app_src_set_caps(cast(GstAppSrc*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
   }
 
   /**
@@ -756,7 +756,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setDuration(gst.types.ClockTime duration)
   {
-    gst_app_src_set_duration(cast(GstAppSrc*)cPtr, duration);
+    gst_app_src_set_duration(cast(GstAppSrc*)this._cPtr, duration);
   }
 
   /**
@@ -769,7 +769,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setEmitSignals(bool emit)
   {
-    gst_app_src_set_emit_signals(cast(GstAppSrc*)cPtr, emit);
+    gst_app_src_set_emit_signals(cast(GstAppSrc*)this._cPtr, emit);
   }
 
   /**
@@ -782,7 +782,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setLatency(ulong min, ulong max)
   {
-    gst_app_src_set_latency(cast(GstAppSrc*)cPtr, min, max);
+    gst_app_src_set_latency(cast(GstAppSrc*)this._cPtr, min, max);
   }
 
   /**
@@ -796,7 +796,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setLeakyType(gstapp.types.AppLeakyType leaky)
   {
-    gst_app_src_set_leaky_type(cast(GstAppSrc*)cPtr, leaky);
+    gst_app_src_set_leaky_type(cast(GstAppSrc*)this._cPtr, leaky);
   }
 
   /**
@@ -809,7 +809,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setMaxBuffers(ulong max)
   {
-    gst_app_src_set_max_buffers(cast(GstAppSrc*)cPtr, max);
+    gst_app_src_set_max_buffers(cast(GstAppSrc*)this._cPtr, max);
   }
 
   /**
@@ -822,7 +822,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setMaxBytes(ulong max)
   {
-    gst_app_src_set_max_bytes(cast(GstAppSrc*)cPtr, max);
+    gst_app_src_set_max_bytes(cast(GstAppSrc*)this._cPtr, max);
   }
 
   /**
@@ -835,7 +835,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setMaxTime(gst.types.ClockTime max)
   {
-    gst_app_src_set_max_time(cast(GstAppSrc*)cPtr, max);
+    gst_app_src_set_max_time(cast(GstAppSrc*)this._cPtr, max);
   }
 
   /**
@@ -847,7 +847,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setSize(long size)
   {
-    gst_app_src_set_size(cast(GstAppSrc*)cPtr, size);
+    gst_app_src_set_size(cast(GstAppSrc*)this._cPtr, size);
   }
 
   /**
@@ -861,7 +861,7 @@ class AppSrc : gstbase.base_src.BaseSrc, gst.urihandler.URIHandler
   */
   void setStreamType(gstapp.types.AppStreamType type)
   {
-    gst_app_src_set_stream_type(cast(GstAppSrc*)cPtr, type);
+    gst_app_src_set_stream_type(cast(GstAppSrc*)this._cPtr, type);
   }
 
   /**

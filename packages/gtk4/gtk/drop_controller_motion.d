@@ -30,16 +30,16 @@ class DropControllerMotion : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_controller_motion_get_type != &gidSymbolNotFound ? gtk_drop_controller_motion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   bool containsPointer()
   {
     bool _retval;
-    _retval = gtk_drop_controller_motion_contains_pointer(cast(GtkDropControllerMotion*)cPtr);
+    _retval = gtk_drop_controller_motion_contains_pointer(cast(GtkDropControllerMotion*)this._cPtr);
     return _retval;
   }
 
@@ -100,8 +100,8 @@ class DropControllerMotion : gtk.event_controller.EventController
   gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
-    _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    _cretval = gtk_drop_controller_motion_get_drop(cast(GtkDropControllerMotion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class DropControllerMotion : gtk.event_controller.EventController
   bool isPointer()
   {
     bool _retval;
-    _retval = gtk_drop_controller_motion_is_pointer(cast(GtkDropControllerMotion*)cPtr);
+    _retval = gtk_drop_controller_motion_is_pointer(cast(GtkDropControllerMotion*)this._cPtr);
     return _retval;
   }
 

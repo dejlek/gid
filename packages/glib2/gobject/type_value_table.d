@@ -27,7 +27,7 @@ class TypeValueTable
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class TypeValueTable
   */
   @property GTypeValueInitFunc valueInit()
   {
-    return (cast(GTypeValueTable*)cPtr).valueInit;
+    return (cast(GTypeValueTable*)this._cPtr).valueInit;
   }
 
   /**
@@ -49,7 +49,7 @@ class TypeValueTable
 
   @property void valueInit(GTypeValueInitFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).valueInit = propval;
+    (cast(GTypeValueTable*)this._cPtr).valueInit = propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class TypeValueTable
   */
   @property GTypeValueFreeFunc valueFree()
   {
-    return (cast(GTypeValueTable*)cPtr).valueFree;
+    return (cast(GTypeValueTable*)this._cPtr).valueFree;
   }
 
   /**
@@ -69,7 +69,7 @@ class TypeValueTable
 
   @property void valueFree(GTypeValueFreeFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).valueFree = propval;
+    (cast(GTypeValueTable*)this._cPtr).valueFree = propval;
   }
 
   /**
@@ -78,7 +78,7 @@ class TypeValueTable
   */
   @property GTypeValueCopyFunc valueCopy()
   {
-    return (cast(GTypeValueTable*)cPtr).valueCopy;
+    return (cast(GTypeValueTable*)this._cPtr).valueCopy;
   }
 
   /**
@@ -89,7 +89,7 @@ class TypeValueTable
 
   @property void valueCopy(GTypeValueCopyFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).valueCopy = propval;
+    (cast(GTypeValueTable*)this._cPtr).valueCopy = propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class TypeValueTable
   */
   @property GTypeValuePeekPointerFunc valuePeekPointer()
   {
-    return (cast(GTypeValueTable*)cPtr).valuePeekPointer;
+    return (cast(GTypeValueTable*)this._cPtr).valuePeekPointer;
   }
 
   /**
@@ -111,7 +111,7 @@ class TypeValueTable
 
   @property void valuePeekPointer(GTypeValuePeekPointerFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).valuePeekPointer = propval;
+    (cast(GTypeValueTable*)this._cPtr).valuePeekPointer = propval;
   }
 
   /**
@@ -133,7 +133,7 @@ class TypeValueTable
   */
   @property string collectFormat()
   {
-    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
   }
 
   /**
@@ -156,8 +156,8 @@ class TypeValueTable
   */
   @property void collectFormat(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).collectFormat);
-    dToC(propval, cast(void*)&(cast(GTypeValueTable*)cPtr).collectFormat);
+    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).collectFormat);
+    dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).collectFormat);
   }
 
   /**
@@ -167,7 +167,7 @@ class TypeValueTable
   */
   @property GTypeValueCollectFunc collectValue()
   {
-    return (cast(GTypeValueTable*)cPtr).collectValue;
+    return (cast(GTypeValueTable*)this._cPtr).collectValue;
   }
 
   /**
@@ -179,7 +179,7 @@ class TypeValueTable
 
   @property void collectValue(GTypeValueCollectFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).collectValue = propval;
+    (cast(GTypeValueTable*)this._cPtr).collectValue = propval;
   }
 
   /**
@@ -190,7 +190,7 @@ class TypeValueTable
   */
   @property string lcopyFormat()
   {
-    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
+    return cToD!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
   }
 
   /**
@@ -202,8 +202,8 @@ class TypeValueTable
   */
   @property void lcopyFormat(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)cPtr).lcopyFormat);
-    dToC(propval, cast(void*)&(cast(GTypeValueTable*)cPtr).lcopyFormat);
+    cValueFree!(string)(cast(void*)(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
+    dToC(propval, cast(void*)&(cast(GTypeValueTable*)this._cPtr).lcopyFormat);
   }
 
   /**
@@ -213,7 +213,7 @@ class TypeValueTable
   */
   @property GTypeValueLCopyFunc lcopyValue()
   {
-    return (cast(GTypeValueTable*)cPtr).lcopyValue;
+    return (cast(GTypeValueTable*)this._cPtr).lcopyValue;
   }
 
   /**
@@ -225,6 +225,6 @@ class TypeValueTable
 
   @property void lcopyValue(GTypeValueLCopyFunc propval)
   {
-    (cast(GTypeValueTable*)cPtr).lcopyValue = propval;
+    (cast(GTypeValueTable*)this._cPtr).lcopyValue = propval;
   }
 }

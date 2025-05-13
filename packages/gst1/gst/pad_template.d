@@ -85,16 +85,16 @@ class PadTemplate : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pad_template_get_type != &gidSymbolNotFound ? gst_pad_template_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -118,7 +118,7 @@ class PadTemplate : gst.object.ObjectWrap
   {
     GstPadTemplate* _cretval;
     const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
-    _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    _cretval = gst_pad_template_new(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -133,8 +133,8 @@ class PadTemplate : gst.object.ObjectWrap
   static gst.pad_template.PadTemplate newFromStaticPadTemplateWithGtype(gst.static_pad_template.StaticPadTemplate padTemplate, gobject.types.GType padType)
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate.cPtr : null, padType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_pad_template_new_from_static_pad_template_with_gtype(padTemplate ? cast(GstStaticPadTemplate*)padTemplate._cPtr : null, padType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class PadTemplate : gst.object.ObjectWrap
   {
     GstPadTemplate* _cretval;
     const(char)* _nameTemplate = nameTemplate.toCString(No.Alloc);
-    _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, padType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_pad_template_new_with_gtype(_nameTemplate, direction, presence, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, padType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class PadTemplate : gst.object.ObjectWrap
   gst.caps.Caps getCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_template_get_caps(cast(GstPadTemplate*)cPtr);
+    _cretval = gst_pad_template_get_caps(cast(GstPadTemplate*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -180,7 +180,7 @@ class PadTemplate : gst.object.ObjectWrap
   gst.caps.Caps getDocumentationCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_pad_template_get_documentation_caps(cast(GstPadTemplate*)cPtr);
+    _cretval = gst_pad_template_get_documentation_caps(cast(GstPadTemplate*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -193,7 +193,7 @@ class PadTemplate : gst.object.ObjectWrap
   */
   void padCreated(gst.pad.Pad pad)
   {
-    gst_pad_template_pad_created(cast(GstPadTemplate*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_pad_template_pad_created(cast(GstPadTemplate*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
 
   /**
@@ -207,7 +207,7 @@ class PadTemplate : gst.object.ObjectWrap
   */
   void setDocumentationCaps(gst.caps.Caps caps)
   {
-    gst_pad_template_set_documentation_caps(cast(GstPadTemplate*)cPtr, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
+    gst_pad_template_set_documentation_caps(cast(GstPadTemplate*)this._cPtr, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
   }
 
   /**

@@ -43,22 +43,22 @@ class GlyphPosition : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())hb_gobject_glyph_position_get_type != &gidSymbolNotFound ? hb_gobject_glyph_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position xAdvance()
   {
-    return (cast(hb_glyph_position_t*)cPtr).xAdvance;
+    return (cast(hb_glyph_position_t*)this._cPtr).xAdvance;
   }
 
   /**
@@ -85,7 +85,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property void xAdvance(harfbuzz.types.Position propval)
   {
-    (cast(hb_glyph_position_t*)cPtr).xAdvance = propval;
+    (cast(hb_glyph_position_t*)this._cPtr).xAdvance = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position yAdvance()
   {
-    return (cast(hb_glyph_position_t*)cPtr).yAdvance;
+    return (cast(hb_glyph_position_t*)this._cPtr).yAdvance;
   }
 
   /**
@@ -106,7 +106,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property void yAdvance(harfbuzz.types.Position propval)
   {
-    (cast(hb_glyph_position_t*)cPtr).yAdvance = propval;
+    (cast(hb_glyph_position_t*)this._cPtr).yAdvance = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position xOffset()
   {
-    return (cast(hb_glyph_position_t*)cPtr).xOffset;
+    return (cast(hb_glyph_position_t*)this._cPtr).xOffset;
   }
 
   /**
@@ -127,7 +127,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property void xOffset(harfbuzz.types.Position propval)
   {
-    (cast(hb_glyph_position_t*)cPtr).xOffset = propval;
+    (cast(hb_glyph_position_t*)this._cPtr).xOffset = propval;
   }
 
   /**
@@ -137,7 +137,7 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property harfbuzz.types.Position yOffset()
   {
-    return (cast(hb_glyph_position_t*)cPtr).yOffset;
+    return (cast(hb_glyph_position_t*)this._cPtr).yOffset;
   }
 
   /**
@@ -148,6 +148,6 @@ class GlyphPosition : gobject.boxed.Boxed
   */
   @property void yOffset(harfbuzz.types.Position propval)
   {
-    (cast(hb_glyph_position_t*)cPtr).yOffset = propval;
+    (cast(hb_glyph_position_t*)this._cPtr).yOffset = propval;
   }
 }

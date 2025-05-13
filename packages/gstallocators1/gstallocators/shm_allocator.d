@@ -30,16 +30,16 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_shm_allocator_get_type != &gidSymbolNotFound ? gst_shm_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class ShmAllocator : gstallocators.fd_allocator.FdAllocator
   {
     GstAllocator* _cretval;
     _cretval = gst_shm_allocator_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.allocator.Allocator)(cast(GstAllocator*)_cretval, Yes.Take);
     return _retval;
   }
 

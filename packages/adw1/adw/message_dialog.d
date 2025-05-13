@@ -167,16 +167,16 @@ class MessageDialog : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_message_dialog_get_type != &gidSymbolNotFound ? adw_message_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -381,7 +381,7 @@ class MessageDialog : gtk.window.Window
     GtkWidget* _cretval;
     const(char)* _heading = heading.toCString(No.Alloc);
     const(char)* _body_ = body_.toCString(No.Alloc);
-    _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, _heading, _body_);
+    _cretval = adw_message_dialog_new(parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, _heading, _body_);
     this(_cretval, No.Take);
   }
 
@@ -411,7 +411,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _id = id.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    adw_message_dialog_add_response(cast(AdwMessageDialog*)cPtr, _id, _label);
+    adw_message_dialog_add_response(cast(AdwMessageDialog*)this._cPtr, _id, _label);
   }
 
   /**
@@ -426,17 +426,17 @@ class MessageDialog : gtk.window.Window
   */
   void choose(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    adw_message_dialog_choose(cast(AdwMessageDialog*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    adw_message_dialog_choose(cast(AdwMessageDialog*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -450,7 +450,7 @@ class MessageDialog : gtk.window.Window
   string chooseFinish(gio.async_result.AsyncResult result)
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null);
+    _cretval = adw_message_dialog_choose_finish(cast(AdwMessageDialog*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -462,7 +462,7 @@ class MessageDialog : gtk.window.Window
   string getBody()
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_get_body(cast(AdwMessageDialog*)cPtr);
+    _cretval = adw_message_dialog_get_body(cast(AdwMessageDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -474,7 +474,7 @@ class MessageDialog : gtk.window.Window
   bool getBodyUseMarkup()
   {
     bool _retval;
-    _retval = adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)cPtr);
+    _retval = adw_message_dialog_get_body_use_markup(cast(AdwMessageDialog*)this._cPtr);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class MessageDialog : gtk.window.Window
   string getCloseResponse()
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_get_close_response(cast(AdwMessageDialog*)cPtr);
+    _cretval = adw_message_dialog_get_close_response(cast(AdwMessageDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -497,7 +497,7 @@ class MessageDialog : gtk.window.Window
   string getDefaultResponse()
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_get_default_response(cast(AdwMessageDialog*)cPtr);
+    _cretval = adw_message_dialog_get_default_response(cast(AdwMessageDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -509,8 +509,8 @@ class MessageDialog : gtk.window.Window
   gtk.widget.Widget getExtraChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_message_dialog_get_extra_child(cast(AdwMessageDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_message_dialog_get_extra_child(cast(AdwMessageDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -521,7 +521,7 @@ class MessageDialog : gtk.window.Window
   string getHeading()
   {
     const(char)* _cretval;
-    _cretval = adw_message_dialog_get_heading(cast(AdwMessageDialog*)cPtr);
+    _cretval = adw_message_dialog_get_heading(cast(AdwMessageDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -533,7 +533,7 @@ class MessageDialog : gtk.window.Window
   bool getHeadingUseMarkup()
   {
     bool _retval;
-    _retval = adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)cPtr);
+    _retval = adw_message_dialog_get_heading_use_markup(cast(AdwMessageDialog*)this._cPtr);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class MessageDialog : gtk.window.Window
   {
     AdwResponseAppearance _cretval;
     const(char)* _response = response.toCString(No.Alloc);
-    _cretval = adw_message_dialog_get_response_appearance(cast(AdwMessageDialog*)cPtr, _response);
+    _cretval = adw_message_dialog_get_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response);
     adw.types.ResponseAppearance _retval = cast(adw.types.ResponseAppearance)_cretval;
     return _retval;
   }
@@ -568,7 +568,7 @@ class MessageDialog : gtk.window.Window
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)cPtr, _response);
+    _retval = adw_message_dialog_get_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -585,7 +585,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _cretval;
     const(char)* _response = response.toCString(No.Alloc);
-    _cretval = adw_message_dialog_get_response_label(cast(AdwMessageDialog*)cPtr, _response);
+    _cretval = adw_message_dialog_get_response_label(cast(AdwMessageDialog*)this._cPtr, _response);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -601,7 +601,7 @@ class MessageDialog : gtk.window.Window
   {
     bool _retval;
     const(char)* _response = response.toCString(No.Alloc);
-    _retval = adw_message_dialog_has_response(cast(AdwMessageDialog*)cPtr, _response);
+    _retval = adw_message_dialog_has_response(cast(AdwMessageDialog*)this._cPtr, _response);
     return _retval;
   }
 
@@ -614,7 +614,7 @@ class MessageDialog : gtk.window.Window
   void removeResponse(string id)
   {
     const(char)* _id = id.toCString(No.Alloc);
-    adw_message_dialog_remove_response(cast(AdwMessageDialog*)cPtr, _id);
+    adw_message_dialog_remove_response(cast(AdwMessageDialog*)this._cPtr, _id);
   }
 
   /**
@@ -628,7 +628,7 @@ class MessageDialog : gtk.window.Window
   void response(string response)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_message_dialog_response(cast(AdwMessageDialog*)cPtr, _response);
+    adw_message_dialog_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
   /**
@@ -640,7 +640,7 @@ class MessageDialog : gtk.window.Window
   void setBody(string body_)
   {
     const(char)* _body_ = body_.toCString(No.Alloc);
-    adw_message_dialog_set_body(cast(AdwMessageDialog*)cPtr, _body_);
+    adw_message_dialog_set_body(cast(AdwMessageDialog*)this._cPtr, _body_);
   }
 
   /**
@@ -653,7 +653,7 @@ class MessageDialog : gtk.window.Window
   */
   void setBodyUseMarkup(bool useMarkup)
   {
-    adw_message_dialog_set_body_use_markup(cast(AdwMessageDialog*)cPtr, useMarkup);
+    adw_message_dialog_set_body_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
   }
 
   /**
@@ -672,7 +672,7 @@ class MessageDialog : gtk.window.Window
   void setCloseResponse(string response)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_message_dialog_set_close_response(cast(AdwMessageDialog*)cPtr, _response);
+    adw_message_dialog_set_close_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
   /**
@@ -689,7 +689,7 @@ class MessageDialog : gtk.window.Window
   void setDefaultResponse(string response = null)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_message_dialog_set_default_response(cast(AdwMessageDialog*)cPtr, _response);
+    adw_message_dialog_set_default_response(cast(AdwMessageDialog*)this._cPtr, _response);
   }
 
   /**
@@ -702,7 +702,7 @@ class MessageDialog : gtk.window.Window
   */
   void setExtraChild(gtk.widget.Widget child = null)
   {
-    adw_message_dialog_set_extra_child(cast(AdwMessageDialog*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_message_dialog_set_extra_child(cast(AdwMessageDialog*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -714,7 +714,7 @@ class MessageDialog : gtk.window.Window
   void setHeading(string heading = null)
   {
     const(char)* _heading = heading.toCString(No.Alloc);
-    adw_message_dialog_set_heading(cast(AdwMessageDialog*)cPtr, _heading);
+    adw_message_dialog_set_heading(cast(AdwMessageDialog*)this._cPtr, _heading);
   }
 
   /**
@@ -727,7 +727,7 @@ class MessageDialog : gtk.window.Window
   */
   void setHeadingUseMarkup(bool useMarkup)
   {
-    adw_message_dialog_set_heading_use_markup(cast(AdwMessageDialog*)cPtr, useMarkup);
+    adw_message_dialog_set_heading_use_markup(cast(AdwMessageDialog*)this._cPtr, useMarkup);
   }
 
   /**
@@ -756,7 +756,7 @@ class MessageDialog : gtk.window.Window
   void setResponseAppearance(string response, adw.types.ResponseAppearance appearance)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_message_dialog_set_response_appearance(cast(AdwMessageDialog*)cPtr, _response, appearance);
+    adw_message_dialog_set_response_appearance(cast(AdwMessageDialog*)this._cPtr, _response, appearance);
   }
 
   /**
@@ -778,7 +778,7 @@ class MessageDialog : gtk.window.Window
   void setResponseEnabled(string response, bool enabled)
   {
     const(char)* _response = response.toCString(No.Alloc);
-    adw_message_dialog_set_response_enabled(cast(AdwMessageDialog*)cPtr, _response, enabled);
+    adw_message_dialog_set_response_enabled(cast(AdwMessageDialog*)this._cPtr, _response, enabled);
   }
 
   /**
@@ -795,7 +795,7 @@ class MessageDialog : gtk.window.Window
   {
     const(char)* _response = response.toCString(No.Alloc);
     const(char)* _label = label.toCString(No.Alloc);
-    adw_message_dialog_set_response_label(cast(AdwMessageDialog*)cPtr, _response, _label);
+    adw_message_dialog_set_response_label(cast(AdwMessageDialog*)this._cPtr, _response, _label);
   }
 
   /**

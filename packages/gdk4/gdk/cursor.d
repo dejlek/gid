@@ -54,16 +54,16 @@ class Cursor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_cursor_get_type != &gidSymbolNotFound ? gdk_cursor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,8 +102,8 @@ class Cursor : gobject.object.ObjectWrap
   {
     GdkCursor* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    _cretval = gdk_cursor_new_from_name(_name, fallback ? cast(GdkCursor*)fallback._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -121,8 +121,8 @@ class Cursor : gobject.object.ObjectWrap
   static gdk.cursor.Cursor newFromTexture(gdk.texture.Texture texture, int hotspotX, int hotspotY, gdk.cursor.Cursor fallback = null)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
+    _cretval = gdk_cursor_new_from_texture(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null, hotspotX, hotspotY, fallback ? cast(GdkCursor*)fallback._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,8 +140,8 @@ class Cursor : gobject.object.ObjectWrap
   gdk.cursor.Cursor getFallback()
   {
     GdkCursor* _cretval;
-    _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    _cretval = gdk_cursor_get_fallback(cast(GdkCursor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class Cursor : gobject.object.ObjectWrap
   int getHotspotX()
   {
     int _retval;
-    _retval = gdk_cursor_get_hotspot_x(cast(GdkCursor*)cPtr);
+    _retval = gdk_cursor_get_hotspot_x(cast(GdkCursor*)this._cPtr);
     return _retval;
   }
 
@@ -175,7 +175,7 @@ class Cursor : gobject.object.ObjectWrap
   int getHotspotY()
   {
     int _retval;
-    _retval = gdk_cursor_get_hotspot_y(cast(GdkCursor*)cPtr);
+    _retval = gdk_cursor_get_hotspot_y(cast(GdkCursor*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class Cursor : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gdk_cursor_get_name(cast(GdkCursor*)cPtr);
+    _cretval = gdk_cursor_get_name(cast(GdkCursor*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -204,8 +204,8 @@ class Cursor : gobject.object.ObjectWrap
   gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gdk_cursor_get_texture(cast(GdkCursor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gdk_cursor_get_texture(cast(GdkCursor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 }

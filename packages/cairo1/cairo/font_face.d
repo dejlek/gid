@@ -32,22 +32,22 @@ class FontFace : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_font_face_get_type != &gidSymbolNotFound ? cairo_gobject_font_face_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class FontFace : gobject.boxed.Boxed
   cairo.types.FontType getFontType()
   {
     cairo_font_type_t _cretval;
-    _cretval = cairo_font_face_get_type(cast(cairo_font_face_t*)cPtr);
+    _cretval = cairo_font_face_get_type(cast(cairo_font_face_t*)this._cPtr);
     cairo.types.FontType _retval = cast(cairo.types.FontType)_cretval;
     return _retval;
   }
@@ -81,7 +81,7 @@ class FontFace : gobject.boxed.Boxed
   */
   void* getUserData(cairo.types.UserDataKey key)
   {
-    auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)cPtr, &key);
+    auto _retval = cairo_font_face_get_user_data(cast(cairo_font_face_t*)this._cPtr, &key);
     return _retval;
   }
 
@@ -94,7 +94,7 @@ class FontFace : gobject.boxed.Boxed
   cairo.types.Status status()
   {
     cairo_status_t _cretval;
-    _cretval = cairo_font_face_status(cast(cairo_font_face_t*)cPtr);
+    _cretval = cairo_font_face_status(cast(cairo_font_face_t*)this._cPtr);
     cairo.types.Status _retval = cast(cairo.types.Status)_cretval;
     return _retval;
   }

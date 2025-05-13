@@ -33,7 +33,7 @@ class MessageHeadersIter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -59,7 +59,7 @@ class MessageHeadersIter
     bool _retval;
     char* _name;
     char* _value;
-    _retval = soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)cPtr, &_name, &_value);
+    _retval = soup_message_headers_iter_next(cast(SoupMessageHeadersIter*)this._cPtr, &_name, &_value);
     name = _name.fromCString(No.Free);
     value = _value.fromCString(No.Free);
     return _retval;
@@ -76,7 +76,7 @@ class MessageHeadersIter
   static void init_(out soup.message_headers_iter.MessageHeadersIter iter, soup.message_headers.MessageHeaders hdrs)
   {
     SoupMessageHeadersIter _iter;
-    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs.cPtr(No.Dup) : null);
+    soup_message_headers_iter_init(&_iter, hdrs ? cast(SoupMessageHeaders*)hdrs._cPtr(No.Dup) : null);
     iter = new soup.message_headers_iter.MessageHeadersIter(cast(void*)&_iter);
   }
 }

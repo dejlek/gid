@@ -36,7 +36,7 @@ import gstcheck.types;
 gst.buffer.Buffer bufferStrawGetBuffer(gst.element.Element bin, gst.pad.Pad pad)
 {
   GstBuffer* _cretval;
-  _cretval = gst_buffer_straw_get_buffer(bin ? cast(GstElement*)bin.cPtr(No.Dup) : null, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+  _cretval = gst_buffer_straw_get_buffer(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -64,7 +64,7 @@ gst.buffer.Buffer bufferStrawGetBuffer(gst.element.Element bin, gst.pad.Pad pad)
 */
 void bufferStrawStartPipeline(gst.element.Element bin, gst.pad.Pad pad)
 {
-  gst_buffer_straw_start_pipeline(bin ? cast(GstElement*)bin.cPtr(No.Dup) : null, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+  gst_buffer_straw_start_pipeline(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
 }
 
 /**
@@ -80,7 +80,7 @@ void bufferStrawStartPipeline(gst.element.Element bin, gst.pad.Pad pad)
 */
 void bufferStrawStopPipeline(gst.element.Element bin, gst.pad.Pad pad)
 {
-  gst_buffer_straw_stop_pipeline(bin ? cast(GstElement*)bin.cPtr(No.Dup) : null, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+  gst_buffer_straw_stop_pipeline(bin ? cast(GstElement*)bin._cPtr(No.Dup) : null, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
 }
 
 /**
@@ -94,7 +94,7 @@ void bufferStrawStopPipeline(gst.element.Element bin, gst.pad.Pad pad)
 */
 void checkAbiList(gstcheck.check_abistruct.CheckABIStruct list, bool haveAbiSizes)
 {
-  gst_check_abi_list(list ? cast(GstCheckABIStruct*)list.cPtr : null, haveAbiSizes);
+  gst_check_abi_list(list ? cast(GstCheckABIStruct*)list._cPtr : null, haveAbiSizes);
 }
 
 /**
@@ -107,7 +107,7 @@ void checkAbiList(gstcheck.check_abistruct.CheckABIStruct list, bool haveAbiSize
 */
 void checkBufferData(gst.buffer.Buffer buffer, const(void)* data, size_t size)
 {
-  gst_check_buffer_data(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, data, size);
+  gst_check_buffer_data(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, data, size);
 }
 
 /**
@@ -120,7 +120,7 @@ void checkBufferData(gst.buffer.Buffer buffer, const(void)* data, size_t size)
 */
 void checkCapsEqual(gst.caps.Caps caps1, gst.caps.Caps caps2)
 {
-  gst_check_caps_equal(caps1 ? cast(GstCaps*)caps1.cPtr(No.Dup) : null, caps2 ? cast(GstCaps*)caps2.cPtr(No.Dup) : null);
+  gst_check_caps_equal(caps1 ? cast(GstCaps*)caps1._cPtr(No.Dup) : null, caps2 ? cast(GstCaps*)caps2._cPtr(No.Dup) : null);
 }
 
 /**
@@ -136,7 +136,7 @@ void checkCapsEqual(gst.caps.Caps caps1, gst.caps.Caps caps2)
 gst.types.FlowReturn checkChainFunc(gst.pad.Pad pad, gst.object.ObjectWrap parent, gst.buffer.Buffer buffer)
 {
   GstFlowReturn _cretval;
-  _cretval = gst_check_chain_func(pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, parent ? cast(GstObject*)parent.cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+  _cretval = gst_check_chain_func(pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, parent ? cast(GstObject*)parent._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
   gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
   return _retval;
 }
@@ -176,13 +176,13 @@ void checkDropBuffers()
 void checkElementPushBuffer(string elementName, gst.buffer.Buffer bufferIn, gst.caps.Caps capsIn, gst.buffer.Buffer bufferOut, gst.caps.Caps capsOut)
 {
   const(char)* _elementName = elementName.toCString(No.Alloc);
-  gst_check_element_push_buffer(_elementName, bufferIn ? cast(GstBuffer*)bufferIn.cPtr(No.Dup) : null, capsIn ? cast(GstCaps*)capsIn.cPtr(No.Dup) : null, bufferOut ? cast(GstBuffer*)bufferOut.cPtr(No.Dup) : null, capsOut ? cast(GstCaps*)capsOut.cPtr(No.Dup) : null);
+  gst_check_element_push_buffer(_elementName, bufferIn ? cast(GstBuffer*)bufferIn._cPtr(No.Dup) : null, capsIn ? cast(GstCaps*)capsIn._cPtr(No.Dup) : null, bufferOut ? cast(GstBuffer*)bufferOut._cPtr(No.Dup) : null, capsOut ? cast(GstCaps*)capsOut._cPtr(No.Dup) : null);
 }
 
 /** */
 void checkMessageError(gst.message.Message message, gst.types.MessageType type, glib.types.Quark domain, int code)
 {
-  gst_check_message_error(message ? cast(GstMessage*)message.cPtr(No.Dup) : null, type, domain, code);
+  gst_check_message_error(message ? cast(GstMessage*)message._cPtr(No.Dup) : null, type, domain, code);
 }
 
 /**
@@ -222,7 +222,7 @@ gst.element.Element checkSetupElement(string factory)
   GstElement* _cretval;
   const(char)* _factory = factory.toCString(No.Alloc);
   _cretval = gst_check_setup_element(_factory);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -240,7 +240,7 @@ gst.element.Element checkSetupElement(string factory)
 */
 void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format)
 {
-  gst_check_setup_events(srcpad ? cast(GstPad*)srcpad.cPtr(No.Dup) : null, element ? cast(GstElement*)element.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, format);
+  gst_check_setup_events(srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null, element ? cast(GstElement*)element._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, format);
 }
 
 /**
@@ -258,7 +258,7 @@ void checkSetupEvents(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.
 void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element element, gst.caps.Caps caps, gst.types.Format format, string streamId)
 {
   const(char)* _streamId = streamId.toCString(No.Alloc);
-  gst_check_setup_events_with_stream_id(srcpad ? cast(GstPad*)srcpad.cPtr(No.Dup) : null, element ? cast(GstElement*)element.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null, format, _streamId);
+  gst_check_setup_events_with_stream_id(srcpad ? cast(GstPad*)srcpad._cPtr(No.Dup) : null, element ? cast(GstElement*)element._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null, format, _streamId);
 }
 
 /**
@@ -272,8 +272,8 @@ void checkSetupEventsWithStreamId(gst.pad.Pad srcpad, gst.element.Element elemen
 gst.pad.Pad checkSetupSinkPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl)
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_sink_pad(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl.cPtr : null);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -292,8 +292,8 @@ gst.pad.Pad checkSetupSinkPadByName(gst.element.Element element, gst.static_pad_
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = gst_check_setup_sink_pad_by_name(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl.cPtr : null, _name);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_sink_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -302,8 +302,8 @@ gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = gst_check_setup_sink_pad_by_name_from_template(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl.cPtr(No.Dup) : null, _name);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_sink_pad_by_name_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -311,8 +311,8 @@ gst.pad.Pad checkSetupSinkPadByNameFromTemplate(gst.element.Element element, gst
 gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl)
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_sink_pad_from_template(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl.cPtr(No.Dup) : null);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_sink_pad_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -327,8 +327,8 @@ gst.pad.Pad checkSetupSinkPadFromTemplate(gst.element.Element element, gst.pad_t
 gst.pad.Pad checkSetupSrcPad(gst.element.Element element, gst.static_pad_template.StaticPadTemplate tmpl)
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_src_pad(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl.cPtr : null);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -377,8 +377,8 @@ gst.pad.Pad checkSetupSrcPadByName(gst.element.Element element, gst.static_pad_t
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = gst_check_setup_src_pad_by_name(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl.cPtr : null, _name);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_src_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstStaticPadTemplate*)tmpl._cPtr : null, _name);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -387,8 +387,8 @@ gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.
 {
   GstPad* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
-  _cretval = gst_check_setup_src_pad_by_name_from_template(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl.cPtr(No.Dup) : null, _name);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_src_pad_by_name_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null, _name);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -396,34 +396,34 @@ gst.pad.Pad checkSetupSrcPadByNameFromTemplate(gst.element.Element element, gst.
 gst.pad.Pad checkSetupSrcPadFromTemplate(gst.element.Element element, gst.pad_template.PadTemplate tmpl)
 {
   GstPad* _cretval;
-  _cretval = gst_check_setup_src_pad_from_template(element ? cast(GstElement*)element.cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl.cPtr(No.Dup) : null);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+  _cretval = gst_check_setup_src_pad_from_template(element ? cast(GstElement*)element._cPtr(No.Dup) : null, tmpl ? cast(GstPadTemplate*)tmpl._cPtr(No.Dup) : null);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
   return _retval;
 }
 
 /** */
 void checkTeardownElement(gst.element.Element element)
 {
-  gst_check_teardown_element(element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+  gst_check_teardown_element(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
 
 /** */
 void checkTeardownPadByName(gst.element.Element element, string name)
 {
   const(char)* _name = name.toCString(No.Alloc);
-  gst_check_teardown_pad_by_name(element ? cast(GstElement*)element.cPtr(No.Dup) : null, _name);
+  gst_check_teardown_pad_by_name(element ? cast(GstElement*)element._cPtr(No.Dup) : null, _name);
 }
 
 /** */
 void checkTeardownSinkPad(gst.element.Element element)
 {
-  gst_check_teardown_sink_pad(element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+  gst_check_teardown_sink_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
 
 /** */
 void checkTeardownSrcPad(gst.element.Element element)
 {
-  gst_check_teardown_src_pad(element ? cast(GstElement*)element.cPtr(No.Dup) : null);
+  gst_check_teardown_src_pad(element ? cast(GstElement*)element._cPtr(No.Dup) : null);
 }
 
 /**
@@ -438,7 +438,7 @@ void checkTeardownSrcPad(gst.element.Element element)
 bool consistencyCheckerAddPad(gstcheck.types.StreamConsistency consist, gst.pad.Pad pad)
 {
   bool _retval;
-  _retval = gst_consistency_checker_add_pad(consist, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+  _retval = gst_consistency_checker_add_pad(consist, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   return _retval;
 }
 

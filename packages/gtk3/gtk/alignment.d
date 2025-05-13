@@ -41,16 +41,16 @@ class Alignment : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alignment_get_type != &gidSymbolNotFound ? gtk_alignment_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -303,7 +303,7 @@ class Alignment : gtk.bin.Bin
   */
   void getPadding(out uint paddingTop, out uint paddingBottom, out uint paddingLeft, out uint paddingRight)
   {
-    gtk_alignment_get_padding(cast(GtkAlignment*)cPtr, cast(uint*)&paddingTop, cast(uint*)&paddingBottom, cast(uint*)&paddingLeft, cast(uint*)&paddingRight);
+    gtk_alignment_get_padding(cast(GtkAlignment*)this._cPtr, cast(uint*)&paddingTop, cast(uint*)&paddingBottom, cast(uint*)&paddingLeft, cast(uint*)&paddingRight);
   }
 
   /**
@@ -326,7 +326,7 @@ class Alignment : gtk.bin.Bin
   */
   void set(float xalign, float yalign, float xscale, float yscale)
   {
-    gtk_alignment_set(cast(GtkAlignment*)cPtr, xalign, yalign, xscale, yscale);
+    gtk_alignment_set(cast(GtkAlignment*)this._cPtr, xalign, yalign, xscale, yscale);
   }
 
   /**
@@ -345,6 +345,6 @@ class Alignment : gtk.bin.Bin
   */
   void setPadding(uint paddingTop, uint paddingBottom, uint paddingLeft, uint paddingRight)
   {
-    gtk_alignment_set_padding(cast(GtkAlignment*)cPtr, paddingTop, paddingBottom, paddingLeft, paddingRight);
+    gtk_alignment_set_padding(cast(GtkAlignment*)this._cPtr, paddingTop, paddingBottom, paddingLeft, paddingRight);
   }
 }

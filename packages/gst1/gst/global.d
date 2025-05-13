@@ -26,6 +26,76 @@ import gst.types;
 
 
 /**
+* Initializes the GStreamer library, setting up internal path lists,
+* registering built-in elements, and loading standard plugins.
+*
+* Unless the plugin registry is disabled at compile time, the registry will be
+* loaded. By default this will also check if the registry cache needs to be
+* updated and rescan all plugins if needed. See gst_update_registry() for
+* details and section
+* &lt;link linkend="gst-running"&gt;Running GStreamer Applications&lt;/link&gt;
+* for how to disable automatic registry updates.
+*
+* WARNING: This function will terminate your program if it was unable to
+* initialize GStreamer for some reason. If you want your program to fall back,
+* use gst_init_check() instead.
+*
+* Params:
+*   argv = Array of program arguments or null to not process them.
+*/
+void init_(ref string[] argv)
+{
+  int _argc = cast(int)argv.length;
+  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
+  scope(exit) gFree(_argv);
+
+  foreach (i, a; argv)
+    _argv[i] = toCString(a, No.Alloc);
+
+  gst_init(&_argc, &_argv);
+
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = fromCString(_argv[i], No.Free);
+}
+
+/**
+* Initializes the GStreamer library, setting up internal path lists,
+* registering built-in elements, and loading standard plugins.
+*
+* This function will return %FALSE if GStreamer could not be initialized
+* for some reason.  If you want your program to fail fatally,
+* use gst_init() instead.
+*
+* Params:
+*   argv = Array of program arguments or null to not process them.
+* Returns: true if GStreamer could be initialized.
+* Throws: [ErrorWrap]
+*/
+bool initCheck(ref string[] argv)
+{
+  int _argc = cast(int)argv.length;
+  char** _argv = cast(char**)gMalloc(_argc * (char*).sizeof);
+  scope(exit) gFree(_argv);
+
+  foreach (i, a; argv)
+    _argv[i] = toCString(a, No.Alloc);
+
+  GError *_err;
+  bool _retval = gst_init_check(&_argc, &_argv, &_err);
+
+  if (_err)
+    throw new ErrorWrap(_err);
+
+  argv.length = _argc;
+  foreach (i; 0 .. _argc)
+    argv[i] = fromCString(_argv[i], No.Free);
+
+  return _retval;
+}
+
+
+/**
     Adds the logging function to the list of logging functions.
     Be sure to use #G_GNUC_NO_INSTRUMENT on that function, it is needed.
 
@@ -34,13 +104,13 @@ import gst.types;
 */
 void debugAddLogFunction(gst.types.LogFunction func)
 {
-  extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, GstDebugMessage* message, void* userData)
+  extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData)
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
     string _file = file.fromCString(No.Free);
     string _function_ = function_.fromCString(No.Free);
 
-    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
@@ -81,7 +151,7 @@ void debugAddRingBufferLogger(uint maxSizePerThread, uint threadTimeout)
 string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details)
 {
   char* _cretval;
-  _cretval = gst_debug_bin_to_dot_data(bin ? cast(GstBin*)bin.cPtr(No.Dup) : null, details);
+  _cretval = gst_debug_bin_to_dot_data(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -103,7 +173,7 @@ string debugBinToDotData(gst.bin.Bin bin, gst.types.DebugGraphDetails details)
 void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName)
 {
   const(char)* _fileName = fileName.toCString(No.Alloc);
-  gst_debug_bin_to_dot_file(bin ? cast(GstBin*)bin.cPtr(No.Dup) : null, details, _fileName);
+  gst_debug_bin_to_dot_file(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details, _fileName);
 }
 
 /**
@@ -118,7 +188,7 @@ void debugBinToDotFile(gst.bin.Bin bin, gst.types.DebugGraphDetails details, str
 void debugBinToDotFileWithTs(gst.bin.Bin bin, gst.types.DebugGraphDetails details, string fileName)
 {
   const(char)* _fileName = fileName.toCString(No.Alloc);
-  gst_debug_bin_to_dot_file_with_ts(bin ? cast(GstBin*)bin.cPtr(No.Dup) : null, details, _fileName);
+  gst_debug_bin_to_dot_file_with_ts(bin ? cast(GstBin*)bin._cPtr(No.Dup) : null, details, _fileName);
 }
 
 /**
@@ -238,7 +308,7 @@ void debugLogDefault(gst.debug_category.DebugCategory category, gst.types.DebugL
 {
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _function_ = function_.toCString(No.Alloc);
-  gst_debug_log_default(category ? cast(GstDebugCategory*)category.cPtr : null, level, _file, _function_, line, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message.cPtr : null, userData);
+  gst_debug_log_default(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message._cPtr : null, userData);
 }
 
 /**
@@ -264,7 +334,7 @@ string debugLogGetLine(gst.debug_category.DebugCategory category, gst.types.Debu
   char* _cretval;
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _function_ = function_.toCString(No.Alloc);
-  _cretval = gst_debug_log_get_line(category ? cast(GstDebugCategory*)category.cPtr : null, level, _file, _function_, line, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message.cPtr : null);
+  _cretval = gst_debug_log_get_line(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, message ? cast(GstDebugMessage*)message._cPtr : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -288,7 +358,7 @@ void debugLogIdLiteral(gst.debug_category.DebugCategory category, gst.types.Debu
   const(char)* _function_ = function_.toCString(No.Alloc);
   const(char)* _id = id.toCString(No.Alloc);
   const(char)* _messageString = messageString.toCString(No.Alloc);
-  gst_debug_log_id_literal(category ? cast(GstDebugCategory*)category.cPtr : null, level, _file, _function_, line, _id, _messageString);
+  gst_debug_log_id_literal(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, _id, _messageString);
 }
 
 /**
@@ -309,7 +379,7 @@ void debugLogLiteral(gst.debug_category.DebugCategory category, gst.types.DebugL
   const(char)* _file = file.toCString(No.Alloc);
   const(char)* _function_ = function_.toCString(No.Alloc);
   const(char)* _messageString = messageString.toCString(No.Alloc);
-  gst_debug_log_literal(category ? cast(GstDebugCategory*)category.cPtr : null, level, _file, _function_, line, object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _messageString);
+  gst_debug_log_literal(category ? cast(GstDebugCategory*)category._cPtr : null, level, _file, _function_, line, object ? cast(GObject*)object._cPtr(No.Dup) : null, _messageString);
 }
 
 /**
@@ -331,13 +401,13 @@ void debugPrintStackTrace()
 */
 uint debugRemoveLogFunction(gst.types.LogFunction func = null)
 {
-  extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, ObjectC* object, GstDebugMessage* message, void* userData)
+  extern(C) void _funcCallback(GstDebugCategory* category, GstDebugLevel level, const(char)* file, const(char)* function_, int line, GObject* object, GstDebugMessage* message, void* userData)
   {
     auto _dlg = cast(gst.types.LogFunction*)userData;
     string _file = file.fromCString(No.Free);
     string _function_ = function_.fromCString(No.Free);
 
-    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
+    (*_dlg)(category ? new gst.debug_category.DebugCategory(cast(void*)category, No.Take) : null, level, _file, _function_, line, gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)object, No.Take), message ? new gst.debug_message.DebugMessage(cast(void*)message, No.Take) : null);
   }
   auto _funcCB = func ? &_funcCallback : null;
 
@@ -536,7 +606,7 @@ void deinit()
 bool dynamicTypeRegister(gst.plugin.Plugin plugin, gobject.types.GType type)
 {
   bool _retval;
-  _retval = gst_dynamic_type_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, type);
+  _retval = gst_dynamic_type_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, type);
   return _retval;
 }
 
@@ -694,7 +764,7 @@ gobject.param_spec.ParamSpec paramSpecArray(string name, string nick, string blu
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _nick = nick.toCString(No.Alloc);
   const(char)* _blurb = blurb.toCString(No.Alloc);
-  _cretval = gst_param_spec_array(_name, _nick, _blurb, elementSpec ? cast(GParamSpec*)elementSpec.cPtr(No.Dup) : null, flags);
+  _cretval = gst_param_spec_array(_name, _nick, _blurb, elementSpec ? cast(GParamSpec*)elementSpec._cPtr(No.Dup) : null, flags);
   auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -764,7 +834,7 @@ gst.bin.Bin parseBinFromDescription(string binDescription, bool ghostUnlinkedPad
   _cretval = gst_parse_bin_from_description(_binDescription, ghostUnlinkedPads, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bin.Bin)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bin.Bin)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -797,10 +867,10 @@ gst.element.Element parseBinFromDescriptionFull(string binDescription, bool ghos
   GstElement* _cretval;
   const(char)* _binDescription = binDescription.toCString(No.Alloc);
   GError *_err;
-  _cretval = gst_parse_bin_from_description_full(_binDescription, ghostUnlinkedPads, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
+  _cretval = gst_parse_bin_from_description_full(_binDescription, ghostUnlinkedPads, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -829,7 +899,7 @@ gst.element.Element parseLaunch(string pipelineDescription)
   _cretval = gst_parse_launch(_pipelineDescription, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -859,10 +929,10 @@ gst.element.Element parseLaunchFull(string pipelineDescription, gst.parse_contex
   GstElement* _cretval;
   const(char)* _pipelineDescription = pipelineDescription.toCString(No.Alloc);
   GError *_err;
-  _cretval = gst_parse_launch_full(_pipelineDescription, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
+  _cretval = gst_parse_launch_full(_pipelineDescription, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -890,7 +960,7 @@ gst.element.Element parseLaunchv(string[] argv)
   _cretval = gst_parse_launchv(_argv, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -921,10 +991,10 @@ gst.element.Element parseLaunchvFull(string[] argv, gst.parse_context.ParseConte
   const(char*)* _argv = _tmpargv.ptr;
 
   GError *_err;
-  _cretval = gst_parse_launchv_full(_argv, context ? cast(GstParseContext*)context.cPtr(No.Dup) : null, flags, &_err);
+  _cretval = gst_parse_launchv_full(_argv, context ? cast(GstParseContext*)context._cPtr(No.Dup) : null, flags, &_err);
   if (_err)
     throw new ErrorWrap(_err);
-  auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
   return _retval;
 }
 
@@ -1158,7 +1228,7 @@ bool tagIsFixed(string tag)
 void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value src)
 {
   GValue _dest;
-  gst_tag_merge_strings_with_comma(&_dest, src ? cast(const(GValue)*)src.cPtr(No.Dup) : null);
+  gst_tag_merge_strings_with_comma(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
 }
 
@@ -1173,7 +1243,7 @@ void tagMergeStringsWithComma(out gobject.value.Value dest, gobject.value.Value 
 void tagMergeUseFirst(out gobject.value.Value dest, gobject.value.Value src)
 {
   GValue _dest;
-  gst_tag_merge_use_first(&_dest, src ? cast(const(GValue)*)src.cPtr(No.Dup) : null);
+  gst_tag_merge_use_first(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
 }
 
@@ -1334,7 +1404,7 @@ void utilDoubleToFraction(double src, out int destN, out int destD)
 */
 void utilDumpBuffer(gst.buffer.Buffer buf)
 {
-  gst_util_dump_buffer(buf ? cast(GstBuffer*)buf.cPtr(No.Dup) : null);
+  gst_util_dump_buffer(buf ? cast(GstBuffer*)buf._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1465,7 +1535,7 @@ bool utilGetObjectArray(gobject.object.ObjectWrap object, string name, out gobje
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
   GValueArray* _array;
-  _retval = gst_util_get_object_array(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _name, &_array);
+  _retval = gst_util_get_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, &_array);
   array = new gobject.value_array.ValueArray(cast(void*)_array, Yes.Take);
   return _retval;
 }
@@ -1593,7 +1663,7 @@ void utilSetObjectArg(gobject.object.ObjectWrap object, string name, string valu
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  gst_util_set_object_arg(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _name, _value);
+  gst_util_set_object_arg(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, _value);
 }
 
 /**
@@ -1611,7 +1681,7 @@ bool utilSetObjectArray(gobject.object.ObjectWrap object, string name, gobject.v
 {
   bool _retval;
   const(char)* _name = name.toCString(No.Alloc);
-  _retval = gst_util_set_object_array(object ? cast(ObjectC*)object.cPtr(No.Dup) : null, _name, array ? cast(const(GValueArray)*)array.cPtr(No.Dup) : null);
+  _retval = gst_util_set_object_array(object ? cast(GObject*)object._cPtr(No.Dup) : null, _name, array ? cast(const(GValueArray)*)array._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1811,7 +1881,7 @@ ulong utilUint64ScaleRound(ulong val, ulong num, ulong denom)
 bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_compare(value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_can_compare(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1828,7 +1898,7 @@ bool valueCanCompare(gobject.value.Value value1, gobject.value.Value value2)
 bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_intersect(value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_can_intersect(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1843,7 +1913,7 @@ bool valueCanIntersect(gobject.value.Value value1, gobject.value.Value value2)
 bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
   bool _retval;
-  _retval = gst_value_can_subtract(minuend ? cast(const(GValue)*)minuend.cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend.cPtr(No.Dup) : null);
+  _retval = gst_value_can_subtract(minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1865,7 +1935,7 @@ bool valueCanSubtract(gobject.value.Value minuend, gobject.value.Value subtrahen
 bool valueCanUnion(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_can_union(value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_can_union(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1884,7 +1954,7 @@ bool valueCanUnion(gobject.value.Value value1, gobject.value.Value value2)
 int valueCompare(gobject.value.Value value1, gobject.value.Value value2)
 {
   int _retval;
-  _retval = gst_value_compare(value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_compare(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1925,7 +1995,7 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
   bool _retval;
   GValue _dest;
   const(char)* _src = src.toCString(No.Alloc);
-  _retval = gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec.cPtr(No.Dup) : null);
+  _retval = gst_value_deserialize_with_pspec(&_dest, _src, pspec ? cast(GParamSpec*)pspec._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }
@@ -1944,7 +2014,7 @@ bool valueDeserializeWithPspec(out gobject.value.Value dest, string src, gobject
 bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 {
   bool _retval;
-  _retval = gst_value_fixate(dest ? cast(GValue*)dest.cPtr(No.Dup) : null, src ? cast(const(GValue)*)src.cPtr(No.Dup) : null);
+  _retval = gst_value_fixate(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1961,7 +2031,7 @@ bool valueFixate(gobject.value.Value dest, gobject.value.Value src)
 bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value factor1, gobject.value.Value factor2)
 {
   bool _retval;
-  _retval = gst_value_fraction_multiply(product ? cast(GValue*)product.cPtr(No.Dup) : null, factor1 ? cast(const(GValue)*)factor1.cPtr(No.Dup) : null, factor2 ? cast(const(GValue)*)factor2.cPtr(No.Dup) : null);
+  _retval = gst_value_fraction_multiply(product ? cast(GValue*)product._cPtr(No.Dup) : null, factor1 ? cast(const(GValue)*)factor1._cPtr(No.Dup) : null, factor2 ? cast(const(GValue)*)factor2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1977,7 +2047,7 @@ bool valueFractionMultiply(gobject.value.Value product, gobject.value.Value fact
 bool valueFractionSubtract(gobject.value.Value dest, gobject.value.Value minuend, gobject.value.Value subtrahend)
 {
   bool _retval;
-  _retval = gst_value_fraction_subtract(dest ? cast(GValue*)dest.cPtr(No.Dup) : null, minuend ? cast(const(GValue)*)minuend.cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend.cPtr(No.Dup) : null);
+  _retval = gst_value_fraction_subtract(dest ? cast(GValue*)dest._cPtr(No.Dup) : null, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1991,7 +2061,7 @@ bool valueFractionSubtract(gobject.value.Value dest, gobject.value.Value minuend
 ulong valueGetBitmask(gobject.value.Value value)
 {
   ulong _retval;
-  _retval = gst_value_get_bitmask(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_bitmask(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2007,7 +2077,7 @@ ulong valueGetBitmask(gobject.value.Value value)
 gst.caps.Caps valueGetCaps(gobject.value.Value value)
 {
   const(GstCaps)* _cretval;
-  _cretval = gst_value_get_caps(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_get_caps(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -2022,7 +2092,7 @@ gst.caps.Caps valueGetCaps(gobject.value.Value value)
 gst.caps_features.CapsFeatures valueGetCapsFeatures(gobject.value.Value value)
 {
   const(GstCapsFeatures)* _cretval;
-  _cretval = gst_value_get_caps_features(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_get_caps_features(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.caps_features.CapsFeatures(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -2037,7 +2107,7 @@ gst.caps_features.CapsFeatures valueGetCapsFeatures(gobject.value.Value value)
 double valueGetDoubleRangeMax(gobject.value.Value value)
 {
   double _retval;
-  _retval = gst_value_get_double_range_max(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_double_range_max(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2051,7 +2121,7 @@ double valueGetDoubleRangeMax(gobject.value.Value value)
 double valueGetDoubleRangeMin(gobject.value.Value value)
 {
   double _retval;
-  _retval = gst_value_get_double_range_min(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_double_range_min(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2065,7 +2135,7 @@ double valueGetDoubleRangeMin(gobject.value.Value value)
 uint valueGetFlagsetFlags(gobject.value.Value value)
 {
   uint _retval;
-  _retval = gst_value_get_flagset_flags(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_flagset_flags(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2079,7 +2149,7 @@ uint valueGetFlagsetFlags(gobject.value.Value value)
 uint valueGetFlagsetMask(gobject.value.Value value)
 {
   uint _retval;
-  _retval = gst_value_get_flagset_mask(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_flagset_mask(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2093,7 +2163,7 @@ uint valueGetFlagsetMask(gobject.value.Value value)
 int valueGetFractionDenominator(gobject.value.Value value)
 {
   int _retval;
-  _retval = gst_value_get_fraction_denominator(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_fraction_denominator(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2107,7 +2177,7 @@ int valueGetFractionDenominator(gobject.value.Value value)
 int valueGetFractionNumerator(gobject.value.Value value)
 {
   int _retval;
-  _retval = gst_value_get_fraction_numerator(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_fraction_numerator(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2121,7 +2191,7 @@ int valueGetFractionNumerator(gobject.value.Value value)
 gobject.value.Value valueGetFractionRangeMax(gobject.value.Value value)
 {
   const(GValue)* _cretval;
-  _cretval = gst_value_get_fraction_range_max(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_get_fraction_range_max(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -2136,7 +2206,7 @@ gobject.value.Value valueGetFractionRangeMax(gobject.value.Value value)
 gobject.value.Value valueGetFractionRangeMin(gobject.value.Value value)
 {
   const(GValue)* _cretval;
-  _cretval = gst_value_get_fraction_range_min(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_get_fraction_range_min(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -2151,7 +2221,7 @@ gobject.value.Value valueGetFractionRangeMin(gobject.value.Value value)
 long valueGetInt64RangeMax(gobject.value.Value value)
 {
   long _retval;
-  _retval = gst_value_get_int64_range_max(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int64_range_max(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2165,7 +2235,7 @@ long valueGetInt64RangeMax(gobject.value.Value value)
 long valueGetInt64RangeMin(gobject.value.Value value)
 {
   long _retval;
-  _retval = gst_value_get_int64_range_min(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int64_range_min(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2179,7 +2249,7 @@ long valueGetInt64RangeMin(gobject.value.Value value)
 long valueGetInt64RangeStep(gobject.value.Value value)
 {
   long _retval;
-  _retval = gst_value_get_int64_range_step(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int64_range_step(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2193,7 +2263,7 @@ long valueGetInt64RangeStep(gobject.value.Value value)
 int valueGetIntRangeMax(gobject.value.Value value)
 {
   int _retval;
-  _retval = gst_value_get_int_range_max(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int_range_max(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2207,7 +2277,7 @@ int valueGetIntRangeMax(gobject.value.Value value)
 int valueGetIntRangeMin(gobject.value.Value value)
 {
   int _retval;
-  _retval = gst_value_get_int_range_min(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int_range_min(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2221,7 +2291,7 @@ int valueGetIntRangeMin(gobject.value.Value value)
 int valueGetIntRangeStep(gobject.value.Value value)
 {
   int _retval;
-  _retval = gst_value_get_int_range_step(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_get_int_range_step(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2235,7 +2305,7 @@ int valueGetIntRangeStep(gobject.value.Value value)
 gst.structure.Structure valueGetStructure(gobject.value.Value value)
 {
   const(GstStructure)* _cretval;
-  _cretval = gst_value_get_structure(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_get_structure(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, No.Take) : null;
   return _retval;
 }
@@ -2251,7 +2321,7 @@ gst.structure.Structure valueGetStructure(gobject.value.Value value)
 void valueInitAndCopy(out gobject.value.Value dest, gobject.value.Value src)
 {
   GValue _dest;
-  gst_value_init_and_copy(&_dest, src ? cast(const(GValue)*)src.cPtr(No.Dup) : null);
+  gst_value_init_and_copy(&_dest, src ? cast(const(GValue)*)src._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
 }
 
@@ -2273,7 +2343,7 @@ bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, go
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_intersect(&_dest, value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_intersect(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, Yes.Take);
   return _retval;
 }
@@ -2291,7 +2361,7 @@ bool valueIntersect(out gobject.value.Value dest, gobject.value.Value value1, go
 bool valueIsFixed(gobject.value.Value value)
 {
   bool _retval;
-  _retval = gst_value_is_fixed(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _retval = gst_value_is_fixed(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2306,7 +2376,7 @@ bool valueIsFixed(gobject.value.Value value)
 bool valueIsSubset(gobject.value.Value value1, gobject.value.Value value2)
 {
   bool _retval;
-  _retval = gst_value_is_subset(value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_is_subset(value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -2336,7 +2406,7 @@ void valueRegister(gst.types.ValueTable table)
 string valueSerialize(gobject.value.Value value)
 {
   char* _cretval;
-  _cretval = gst_value_serialize(value ? cast(const(GValue)*)value.cPtr(No.Dup) : null);
+  _cretval = gst_value_serialize(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -2350,7 +2420,7 @@ string valueSerialize(gobject.value.Value value)
 */
 void valueSetBitmask(gobject.value.Value value, ulong bitmask)
 {
-  gst_value_set_bitmask(value ? cast(GValue*)value.cPtr(No.Dup) : null, bitmask);
+  gst_value_set_bitmask(value ? cast(GValue*)value._cPtr(No.Dup) : null, bitmask);
 }
 
 /**
@@ -2363,7 +2433,7 @@ void valueSetBitmask(gobject.value.Value value, ulong bitmask)
 */
 void valueSetCaps(gobject.value.Value value, gst.caps.Caps caps)
 {
-  gst_value_set_caps(value ? cast(GValue*)value.cPtr(No.Dup) : null, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+  gst_value_set_caps(value ? cast(GValue*)value._cPtr(No.Dup) : null, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
 }
 
 /**
@@ -2375,7 +2445,7 @@ void valueSetCaps(gobject.value.Value value, gst.caps.Caps caps)
 */
 void valueSetCapsFeatures(gobject.value.Value value, gst.caps_features.CapsFeatures features)
 {
-  gst_value_set_caps_features(value ? cast(GValue*)value.cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features.cPtr(No.Dup) : null);
+  gst_value_set_caps_features(value ? cast(GValue*)value._cPtr(No.Dup) : null, features ? cast(const(GstCapsFeatures)*)features._cPtr(No.Dup) : null);
 }
 
 /**
@@ -2388,7 +2458,7 @@ void valueSetCapsFeatures(gobject.value.Value value, gst.caps_features.CapsFeatu
 */
 void valueSetDoubleRange(gobject.value.Value value, double start, double end)
 {
-  gst_value_set_double_range(value ? cast(GValue*)value.cPtr(No.Dup) : null, start, end);
+  gst_value_set_double_range(value ? cast(GValue*)value._cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -2403,7 +2473,7 @@ void valueSetDoubleRange(gobject.value.Value value, double start, double end)
 */
 void valueSetFlagset(gobject.value.Value value, uint flags, uint mask)
 {
-  gst_value_set_flagset(value ? cast(GValue*)value.cPtr(No.Dup) : null, flags, mask);
+  gst_value_set_flagset(value ? cast(GValue*)value._cPtr(No.Dup) : null, flags, mask);
 }
 
 /**
@@ -2418,7 +2488,7 @@ void valueSetFlagset(gobject.value.Value value, uint flags, uint mask)
 */
 void valueSetFraction(gobject.value.Value value, int numerator, int denominator)
 {
-  gst_value_set_fraction(value ? cast(GValue*)value.cPtr(No.Dup) : null, numerator, denominator);
+  gst_value_set_fraction(value ? cast(GValue*)value._cPtr(No.Dup) : null, numerator, denominator);
 }
 
 /**
@@ -2431,7 +2501,7 @@ void valueSetFraction(gobject.value.Value value, int numerator, int denominator)
 */
 void valueSetFractionRange(gobject.value.Value value, gobject.value.Value start, gobject.value.Value end)
 {
-  gst_value_set_fraction_range(value ? cast(GValue*)value.cPtr(No.Dup) : null, start ? cast(const(GValue)*)start.cPtr(No.Dup) : null, end ? cast(const(GValue)*)end.cPtr(No.Dup) : null);
+  gst_value_set_fraction_range(value ? cast(GValue*)value._cPtr(No.Dup) : null, start ? cast(const(GValue)*)start._cPtr(No.Dup) : null, end ? cast(const(GValue)*)end._cPtr(No.Dup) : null);
 }
 
 /**
@@ -2447,7 +2517,7 @@ void valueSetFractionRange(gobject.value.Value value, gobject.value.Value start,
 */
 void valueSetFractionRangeFull(gobject.value.Value value, int numeratorStart, int denominatorStart, int numeratorEnd, int denominatorEnd)
 {
-  gst_value_set_fraction_range_full(value ? cast(GValue*)value.cPtr(No.Dup) : null, numeratorStart, denominatorStart, numeratorEnd, denominatorEnd);
+  gst_value_set_fraction_range_full(value ? cast(GValue*)value._cPtr(No.Dup) : null, numeratorStart, denominatorStart, numeratorEnd, denominatorEnd);
 }
 
 /**
@@ -2460,7 +2530,7 @@ void valueSetFractionRangeFull(gobject.value.Value value, int numeratorStart, in
 */
 void valueSetInt64Range(gobject.value.Value value, long start, long end)
 {
-  gst_value_set_int64_range(value ? cast(GValue*)value.cPtr(No.Dup) : null, start, end);
+  gst_value_set_int64_range(value ? cast(GValue*)value._cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -2474,7 +2544,7 @@ void valueSetInt64Range(gobject.value.Value value, long start, long end)
 */
 void valueSetInt64RangeStep(gobject.value.Value value, long start, long end, long step)
 {
-  gst_value_set_int64_range_step(value ? cast(GValue*)value.cPtr(No.Dup) : null, start, end, step);
+  gst_value_set_int64_range_step(value ? cast(GValue*)value._cPtr(No.Dup) : null, start, end, step);
 }
 
 /**
@@ -2487,7 +2557,7 @@ void valueSetInt64RangeStep(gobject.value.Value value, long start, long end, lon
 */
 void valueSetIntRange(gobject.value.Value value, int start, int end)
 {
-  gst_value_set_int_range(value ? cast(GValue*)value.cPtr(No.Dup) : null, start, end);
+  gst_value_set_int_range(value ? cast(GValue*)value._cPtr(No.Dup) : null, start, end);
 }
 
 /**
@@ -2501,7 +2571,7 @@ void valueSetIntRange(gobject.value.Value value, int start, int end)
 */
 void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int step)
 {
-  gst_value_set_int_range_step(value ? cast(GValue*)value.cPtr(No.Dup) : null, start, end, step);
+  gst_value_set_int_range_step(value ? cast(GValue*)value._cPtr(No.Dup) : null, start, end, step);
 }
 
 /**
@@ -2513,7 +2583,7 @@ void valueSetIntRangeStep(gobject.value.Value value, int start, int end, int ste
 */
 void valueSetStructure(gobject.value.Value value, gst.structure.Structure structure)
 {
-  gst_value_set_structure(value ? cast(GValue*)value.cPtr(No.Dup) : null, structure ? cast(const(GstStructure)*)structure.cPtr(No.Dup) : null);
+  gst_value_set_structure(value ? cast(GValue*)value._cPtr(No.Dup) : null, structure ? cast(const(GstStructure)*)structure._cPtr(No.Dup) : null);
 }
 
 /**
@@ -2533,7 +2603,7 @@ bool valueSubtract(out gobject.value.Value dest, gobject.value.Value minuend, go
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_subtract(&_dest, minuend ? cast(const(GValue)*)minuend.cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend.cPtr(No.Dup) : null);
+  _retval = gst_value_subtract(&_dest, minuend ? cast(const(GValue)*)minuend._cPtr(No.Dup) : null, subtrahend ? cast(const(GValue)*)subtrahend._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }
@@ -2551,7 +2621,7 @@ bool valueUnion(out gobject.value.Value dest, gobject.value.Value value1, gobjec
 {
   bool _retval;
   GValue _dest;
-  _retval = gst_value_union(&_dest, value1 ? cast(const(GValue)*)value1.cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2.cPtr(No.Dup) : null);
+  _retval = gst_value_union(&_dest, value1 ? cast(const(GValue)*)value1._cPtr(No.Dup) : null, value2 ? cast(const(GValue)*)value2._cPtr(No.Dup) : null);
   dest = new gobject.value.Value(cast(void*)&_dest, No.Take);
   return _retval;
 }

@@ -20,16 +20,16 @@ class UnionDataType : arrow.data_type.DataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_union_data_type_get_type != &gidSymbolNotFound ? garrow_union_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,8 +42,8 @@ class UnionDataType : arrow.data_type.DataType
   arrow.field.Field getField(int i)
   {
     GArrowField* _cretval;
-    _cretval = garrow_union_data_type_get_field(cast(GArrowUnionDataType*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
+    _cretval = garrow_union_data_type_get_field(cast(GArrowUnionDataType*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.field.Field)(cast(GArrowField*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -51,7 +51,7 @@ class UnionDataType : arrow.data_type.DataType
   arrow.field.Field[] getFields()
   {
     GList* _cretval;
-    _cretval = garrow_union_data_type_get_fields(cast(GArrowUnionDataType*)cPtr);
+    _cretval = garrow_union_data_type_get_fields(cast(GArrowUnionDataType*)this._cPtr);
     auto _retval = gListToD!(arrow.field.Field, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -60,7 +60,7 @@ class UnionDataType : arrow.data_type.DataType
   int getNFields()
   {
     int _retval;
-    _retval = garrow_union_data_type_get_n_fields(cast(GArrowUnionDataType*)cPtr);
+    _retval = garrow_union_data_type_get_n_fields(cast(GArrowUnionDataType*)this._cPtr);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class UnionDataType : arrow.data_type.DataType
   {
     byte* _cretval;
     size_t _cretlength;
-    _cretval = garrow_union_data_type_get_type_codes(cast(GArrowUnionDataType*)cPtr, &_cretlength);
+    _cretval = garrow_union_data_type_get_type_codes(cast(GArrowUnionDataType*)this._cPtr, &_cretlength);
     byte[] _retval;
 
     if (_cretval)

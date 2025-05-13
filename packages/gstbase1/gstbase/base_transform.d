@@ -143,16 +143,16 @@ class BaseTransform : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_transform_get_type != &gidSymbolNotFound ? gst_base_transform_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -188,7 +188,7 @@ class BaseTransform : gst.element.Element
   {
     GstAllocator* _allocator;
     GstAllocationParams _params;
-    gst_base_transform_get_allocator(cast(GstBaseTransform*)cPtr, &_allocator, &_params);
+    gst_base_transform_get_allocator(cast(GstBaseTransform*)this._cPtr, &_allocator, &_params);
     allocator = new gst.allocator.Allocator(cast(void*)_allocator, Yes.Take);
     params = new gst.allocation_params.AllocationParams(cast(void*)&_params, No.Take);
   }
@@ -197,8 +197,8 @@ class BaseTransform : gst.element.Element
   gst.buffer_pool.BufferPool getBufferPool()
   {
     GstBufferPool* _cretval;
-    _cretval = gst_base_transform_get_buffer_pool(cast(GstBaseTransform*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
+    _cretval = gst_base_transform_get_buffer_pool(cast(GstBaseTransform*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.buffer_pool.BufferPool)(cast(GstBufferPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class BaseTransform : gst.element.Element
   bool isInPlace()
   {
     bool _retval;
-    _retval = gst_base_transform_is_in_place(cast(GstBaseTransform*)cPtr);
+    _retval = gst_base_transform_is_in_place(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class BaseTransform : gst.element.Element
   bool isPassthrough()
   {
     bool _retval;
-    _retval = gst_base_transform_is_passthrough(cast(GstBaseTransform*)cPtr);
+    _retval = gst_base_transform_is_passthrough(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class BaseTransform : gst.element.Element
   bool isQosEnabled()
   {
     bool _retval;
-    _retval = gst_base_transform_is_qos_enabled(cast(GstBaseTransform*)cPtr);
+    _retval = gst_base_transform_is_qos_enabled(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class BaseTransform : gst.element.Element
   bool reconfigure()
   {
     bool _retval;
-    _retval = gst_base_transform_reconfigure(cast(GstBaseTransform*)cPtr);
+    _retval = gst_base_transform_reconfigure(cast(GstBaseTransform*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class BaseTransform : gst.element.Element
   */
   void reconfigureSink()
   {
-    gst_base_transform_reconfigure_sink(cast(GstBaseTransform*)cPtr);
+    gst_base_transform_reconfigure_sink(cast(GstBaseTransform*)this._cPtr);
   }
 
   /**
@@ -282,7 +282,7 @@ class BaseTransform : gst.element.Element
   */
   void reconfigureSrc()
   {
-    gst_base_transform_reconfigure_src(cast(GstBaseTransform*)cPtr);
+    gst_base_transform_reconfigure_src(cast(GstBaseTransform*)this._cPtr);
   }
 
   /**
@@ -300,7 +300,7 @@ class BaseTransform : gst.element.Element
   */
   void setGapAware(bool gapAware)
   {
-    gst_base_transform_set_gap_aware(cast(GstBaseTransform*)cPtr, gapAware);
+    gst_base_transform_set_gap_aware(cast(GstBaseTransform*)this._cPtr, gapAware);
   }
 
   /**
@@ -320,7 +320,7 @@ class BaseTransform : gst.element.Element
   */
   void setInPlace(bool inPlace)
   {
-    gst_base_transform_set_in_place(cast(GstBaseTransform*)cPtr, inPlace);
+    gst_base_transform_set_in_place(cast(GstBaseTransform*)this._cPtr, inPlace);
   }
 
   /**
@@ -337,7 +337,7 @@ class BaseTransform : gst.element.Element
   */
   void setPassthrough(bool passthrough)
   {
-    gst_base_transform_set_passthrough(cast(GstBaseTransform*)cPtr, passthrough);
+    gst_base_transform_set_passthrough(cast(GstBaseTransform*)this._cPtr, passthrough);
   }
 
   /**
@@ -358,7 +358,7 @@ class BaseTransform : gst.element.Element
   */
   void setPreferPassthrough(bool preferPassthrough)
   {
-    gst_base_transform_set_prefer_passthrough(cast(GstBaseTransform*)cPtr, preferPassthrough);
+    gst_base_transform_set_prefer_passthrough(cast(GstBaseTransform*)this._cPtr, preferPassthrough);
   }
 
   /**
@@ -371,7 +371,7 @@ class BaseTransform : gst.element.Element
   */
   void setQosEnabled(bool enabled)
   {
-    gst_base_transform_set_qos_enabled(cast(GstBaseTransform*)cPtr, enabled);
+    gst_base_transform_set_qos_enabled(cast(GstBaseTransform*)this._cPtr, enabled);
   }
 
   /**
@@ -389,7 +389,7 @@ class BaseTransform : gst.element.Element
   */
   void updateQos(double proportion, gst.types.ClockTimeDiff diff, gst.types.ClockTime timestamp)
   {
-    gst_base_transform_update_qos(cast(GstBaseTransform*)cPtr, proportion, diff, timestamp);
+    gst_base_transform_update_qos(cast(GstBaseTransform*)this._cPtr, proportion, diff, timestamp);
   }
 
   /**
@@ -407,7 +407,7 @@ class BaseTransform : gst.element.Element
   bool updateSrcCaps(gst.caps.Caps updatedCaps)
   {
     bool _retval;
-    _retval = gst_base_transform_update_src_caps(cast(GstBaseTransform*)cPtr, updatedCaps ? cast(GstCaps*)updatedCaps.cPtr(No.Dup) : null);
+    _retval = gst_base_transform_update_src_caps(cast(GstBaseTransform*)this._cPtr, updatedCaps ? cast(GstCaps*)updatedCaps._cPtr(No.Dup) : null);
     return _retval;
   }
 }

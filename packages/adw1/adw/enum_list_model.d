@@ -25,16 +25,16 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_enum_list_model_get_type != &gidSymbolNotFound ? adw_enum_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   uint findPosition(int value)
   {
     uint _retval;
-    _retval = adw_enum_list_model_find_position(cast(AdwEnumListModel*)cPtr, value);
+    _retval = adw_enum_list_model_find_position(cast(AdwEnumListModel*)this._cPtr, value);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class EnumListModel : gobject.object.ObjectWrap, gio.list_model.ListModel
   gobject.types.GType getEnumType()
   {
     gobject.types.GType _retval;
-    _retval = adw_enum_list_model_get_enum_type(cast(AdwEnumListModel*)cPtr);
+    _retval = adw_enum_list_model_get_enum_type(cast(AdwEnumListModel*)this._cPtr);
     return _retval;
   }
 }

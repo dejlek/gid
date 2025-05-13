@@ -31,16 +31,16 @@ class SimpleIOStream : gio.iostream.IOStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_io_stream_get_type != &gidSymbolNotFound ? g_simple_io_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class SimpleIOStream : gio.iostream.IOStream
   this(gio.input_stream.InputStream inputStream, gio.output_stream.OutputStream outputStream)
   {
     GIOStream* _cretval;
-    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream.cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream.cPtr(No.Dup) : null);
+    _cretval = g_simple_io_stream_new(inputStream ? cast(GInputStream*)inputStream._cPtr(No.Dup) : null, outputStream ? cast(GOutputStream*)outputStream._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

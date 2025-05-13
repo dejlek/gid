@@ -26,16 +26,16 @@ class Tracer : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_tracer_get_type != &gidSymbolNotFound ? gst_tracer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class Tracer : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_tracer_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, type);
+    _retval = gst_tracer_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, type);
     return _retval;
   }
 }

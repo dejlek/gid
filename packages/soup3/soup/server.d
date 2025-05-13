@@ -116,16 +116,16 @@ class Server : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_server_get_type != &gidSymbolNotFound ? soup_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -286,7 +286,7 @@ class Server : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_accept_iostream(cast(SoupServer*)cPtr, stream ? cast(GIOStream*)stream.cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr.cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr.cPtr(No.Dup) : null, &_err);
+    _retval = soup_server_accept_iostream(cast(SoupServer*)this._cPtr, stream ? cast(GIOStream*)stream._cPtr(No.Dup) : null, localAddr ? cast(GSocketAddress*)localAddr._cPtr(No.Dup) : null, remoteAddr ? cast(GSocketAddress*)remoteAddr._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -310,7 +310,7 @@ class Server : gobject.object.ObjectWrap
   */
   void addAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
-    soup_server_add_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
+    soup_server_add_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
   }
 
   /**
@@ -354,14 +354,14 @@ class Server : gobject.object.ObjectWrap
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    soup_server_add_early_handler(cast(SoupServer*)cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
+    soup_server_add_early_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -412,14 +412,14 @@ class Server : gobject.object.ObjectWrap
       string _path = path.fromCString(No.Free);
       auto _query = gHashTableToD!(string, string, GidOwnership.None)(query);
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, _query);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     const(char)* _path = path.toCString(No.Alloc);
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    soup_server_add_handler(cast(SoupServer*)cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
+    soup_server_add_handler(cast(SoupServer*)this._cPtr, _path, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -437,7 +437,7 @@ class Server : gobject.object.ObjectWrap
   */
   void addWebsocketExtension(gobject.types.GType extensionType)
   {
-    soup_server_add_websocket_extension(cast(SoupServer*)cPtr, extensionType);
+    soup_server_add_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
   }
 
   /**
@@ -475,7 +475,7 @@ class Server : gobject.object.ObjectWrap
       auto _dlg = cast(soup.types.ServerWebsocketCallback*)userData;
       string _path = path.fromCString(No.Free);
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap.getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.server.Server)(cast(void*)server, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _path, gobject.object.ObjectWrap._getDObject!(soup.websocket_connection.WebsocketConnection)(cast(void*)connection, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
@@ -489,7 +489,7 @@ class Server : gobject.object.ObjectWrap
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    soup_server_add_websocket_handler(cast(SoupServer*)cPtr, _path, _origin, _protocols, _callbackCB, _callback, _callbackDestroyCB);
+    soup_server_add_websocket_handler(cast(SoupServer*)this._cPtr, _path, _origin, _protocols, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -504,7 +504,7 @@ class Server : gobject.object.ObjectWrap
   */
   void disconnect()
   {
-    soup_server_disconnect(cast(SoupServer*)cPtr);
+    soup_server_disconnect(cast(SoupServer*)this._cPtr);
   }
 
   /**
@@ -518,7 +518,7 @@ class Server : gobject.object.ObjectWrap
   gio.socket.Socket[] getListeners()
   {
     GSList* _cretval;
-    _cretval = soup_server_get_listeners(cast(SoupServer*)cPtr);
+    _cretval = soup_server_get_listeners(cast(SoupServer*)this._cPtr);
     auto _retval = gSListToD!(gio.socket.Socket, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -530,7 +530,7 @@ class Server : gobject.object.ObjectWrap
   gio.types.TlsAuthenticationMode getTlsAuthMode()
   {
     GTlsAuthenticationMode _cretval;
-    _cretval = soup_server_get_tls_auth_mode(cast(SoupServer*)cPtr);
+    _cretval = soup_server_get_tls_auth_mode(cast(SoupServer*)this._cPtr);
     gio.types.TlsAuthenticationMode _retval = cast(gio.types.TlsAuthenticationMode)_cretval;
     return _retval;
   }
@@ -542,8 +542,8 @@ class Server : gobject.object.ObjectWrap
   gio.tls_certificate.TlsCertificate getTlsCertificate()
   {
     GTlsCertificate* _cretval;
-    _cretval = soup_server_get_tls_certificate(cast(SoupServer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
+    _cretval = soup_server_get_tls_certificate(cast(SoupServer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_certificate.TlsCertificate)(cast(GTlsCertificate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -554,8 +554,8 @@ class Server : gobject.object.ObjectWrap
   gio.tls_database.TlsDatabase getTlsDatabase()
   {
     GTlsDatabase* _cretval;
-    _cretval = soup_server_get_tls_database(cast(SoupServer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
+    _cretval = soup_server_get_tls_database(cast(SoupServer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.tls_database.TlsDatabase)(cast(GTlsDatabase*)_cretval, No.Take);
     return _retval;
   }
 
@@ -575,7 +575,7 @@ class Server : gobject.object.ObjectWrap
   glib.uri.Uri[] getUris()
   {
     GSList* _cretval;
-    _cretval = soup_server_get_uris(cast(SoupServer*)cPtr);
+    _cretval = soup_server_get_uris(cast(SoupServer*)this._cPtr);
     auto _retval = gSListToD!(glib.uri.Uri, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -599,7 +599,7 @@ class Server : gobject.object.ObjectWrap
   bool isHttps()
   {
     bool _retval;
-    _retval = soup_server_is_https(cast(SoupServer*)cPtr);
+    _retval = soup_server_is_https(cast(SoupServer*)this._cPtr);
     return _retval;
   }
 
@@ -633,7 +633,7 @@ class Server : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen(cast(SoupServer*)cPtr, address ? cast(GSocketAddress*)address.cPtr(No.Dup) : null, options, &_err);
+    _retval = soup_server_listen(cast(SoupServer*)this._cPtr, address ? cast(GSocketAddress*)address._cPtr(No.Dup) : null, options, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -663,7 +663,7 @@ class Server : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen_all(cast(SoupServer*)cPtr, port, options, &_err);
+    _retval = soup_server_listen_all(cast(SoupServer*)this._cPtr, port, options, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -691,7 +691,7 @@ class Server : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen_local(cast(SoupServer*)cPtr, port, options, &_err);
+    _retval = soup_server_listen_local(cast(SoupServer*)this._cPtr, port, options, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -713,7 +713,7 @@ class Server : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = soup_server_listen_socket(cast(SoupServer*)cPtr, socket ? cast(GSocket*)socket.cPtr(No.Dup) : null, options, &_err);
+    _retval = soup_server_listen_socket(cast(SoupServer*)this._cPtr, socket ? cast(GSocket*)socket._cPtr(No.Dup) : null, options, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -738,7 +738,7 @@ class Server : gobject.object.ObjectWrap
   */
   void pauseMessage(soup.server_message.ServerMessage msg)
   {
-    soup_server_pause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    soup_server_pause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
 
   /**
@@ -749,7 +749,7 @@ class Server : gobject.object.ObjectWrap
   */
   void removeAuthDomain(soup.auth_domain.AuthDomain authDomain)
   {
-    soup_server_remove_auth_domain(cast(SoupServer*)cPtr, authDomain ? cast(SoupAuthDomain*)authDomain.cPtr(No.Dup) : null);
+    soup_server_remove_auth_domain(cast(SoupServer*)this._cPtr, authDomain ? cast(SoupAuthDomain*)authDomain._cPtr(No.Dup) : null);
   }
 
   /**
@@ -761,7 +761,7 @@ class Server : gobject.object.ObjectWrap
   void removeHandler(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    soup_server_remove_handler(cast(SoupServer*)cPtr, _path);
+    soup_server_remove_handler(cast(SoupServer*)this._cPtr, _path);
   }
 
   /**
@@ -773,7 +773,7 @@ class Server : gobject.object.ObjectWrap
   */
   void removeWebsocketExtension(gobject.types.GType extensionType)
   {
-    soup_server_remove_websocket_extension(cast(SoupServer*)cPtr, extensionType);
+    soup_server_remove_websocket_extension(cast(SoupServer*)this._cPtr, extensionType);
   }
 
   /**
@@ -784,7 +784,7 @@ class Server : gobject.object.ObjectWrap
   */
   void setTlsAuthMode(gio.types.TlsAuthenticationMode mode)
   {
-    soup_server_set_tls_auth_mode(cast(SoupServer*)cPtr, mode);
+    soup_server_set_tls_auth_mode(cast(SoupServer*)this._cPtr, mode);
   }
 
   /**
@@ -795,7 +795,7 @@ class Server : gobject.object.ObjectWrap
   */
   void setTlsCertificate(gio.tls_certificate.TlsCertificate certificate)
   {
-    soup_server_set_tls_certificate(cast(SoupServer*)cPtr, certificate ? cast(GTlsCertificate*)certificate.cPtr(No.Dup) : null);
+    soup_server_set_tls_certificate(cast(SoupServer*)this._cPtr, certificate ? cast(GTlsCertificate*)certificate._cPtr(No.Dup) : null);
   }
 
   /**
@@ -806,7 +806,7 @@ class Server : gobject.object.ObjectWrap
   */
   void setTlsDatabase(gio.tls_database.TlsDatabase tlsDatabase)
   {
-    soup_server_set_tls_database(cast(SoupServer*)cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase.cPtr(No.Dup) : null);
+    soup_server_set_tls_database(cast(SoupServer*)this._cPtr, tlsDatabase ? cast(GTlsDatabase*)tlsDatabase._cPtr(No.Dup) : null);
   }
 
   /**
@@ -829,7 +829,7 @@ class Server : gobject.object.ObjectWrap
   */
   void unpauseMessage(soup.server_message.ServerMessage msg)
   {
-    soup_server_unpause_message(cast(SoupServer*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    soup_server_unpause_message(cast(SoupServer*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
 
   /**

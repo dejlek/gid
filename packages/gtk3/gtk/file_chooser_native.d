@@ -188,16 +188,16 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_chooser_native_get_type != &gidSymbolNotFound ? gtk_file_chooser_native_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -267,7 +267,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
-    _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
+    _cretval = gtk_file_chooser_native_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, action, _acceptLabel, _cancelLabel);
     this(_cretval, Yes.Take);
   }
 
@@ -279,7 +279,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   string getAcceptLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)cPtr);
+    _cretval = gtk_file_chooser_native_get_accept_label(cast(GtkFileChooserNative*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -292,7 +292,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   string getCancelLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)cPtr);
+    _cretval = gtk_file_chooser_native_get_cancel_label(cast(GtkFileChooserNative*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -312,7 +312,7 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   void setAcceptLabel(string acceptLabel = null)
   {
     const(char)* _acceptLabel = acceptLabel.toCString(No.Alloc);
-    gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)cPtr, _acceptLabel);
+    gtk_file_chooser_native_set_accept_label(cast(GtkFileChooserNative*)this._cPtr, _acceptLabel);
   }
 
   /**
@@ -330,6 +330,6 @@ class FileChooserNative : gtk.native_dialog.NativeDialog, gtk.file_chooser.FileC
   void setCancelLabel(string cancelLabel = null)
   {
     const(char)* _cancelLabel = cancelLabel.toCString(No.Alloc);
-    gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)cPtr, _cancelLabel);
+    gtk_file_chooser_native_set_cancel_label(cast(GtkFileChooserNative*)this._cPtr, _cancelLabel);
   }
 }

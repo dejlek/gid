@@ -52,16 +52,16 @@ class Tooltip : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tooltip_get_type != &gidSymbolNotFound ? gtk_tooltip_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setCustom(gtk.widget.Widget customWidget = null)
   {
-    gtk_tooltip_set_custom(cast(GtkTooltip*)cPtr, customWidget ? cast(GtkWidget*)customWidget.cPtr(No.Dup) : null);
+    gtk_tooltip_set_custom(cast(GtkTooltip*)this._cPtr, customWidget ? cast(GtkWidget*)customWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -95,7 +95,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setIcon(gdk.paintable.Paintable paintable = null)
   {
-    gtk_tooltip_set_icon(cast(GtkTooltip*)cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable).cPtr(No.Dup) : null);
+    gtk_tooltip_set_icon(cast(GtkTooltip*)this._cPtr, paintable ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)paintable)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -108,7 +108,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setIconFromGicon(gio.icon.Icon gicon = null)
   {
-    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon).cPtr(No.Dup) : null);
+    gtk_tooltip_set_icon_from_gicon(cast(GtkTooltip*)this._cPtr, gicon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)gicon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -122,7 +122,7 @@ class Tooltip : gobject.object.ObjectWrap
   void setIconFromIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)cPtr, _iconName);
+    gtk_tooltip_set_icon_from_icon_name(cast(GtkTooltip*)this._cPtr, _iconName);
   }
 
   /**
@@ -137,7 +137,7 @@ class Tooltip : gobject.object.ObjectWrap
   void setMarkup(string markup = null)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_tooltip_set_markup(cast(GtkTooltip*)cPtr, _markup);
+    gtk_tooltip_set_markup(cast(GtkTooltip*)this._cPtr, _markup);
   }
 
   /**
@@ -152,7 +152,7 @@ class Tooltip : gobject.object.ObjectWrap
   void setText(string text = null)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_tooltip_set_text(cast(GtkTooltip*)cPtr, _text);
+    gtk_tooltip_set_text(cast(GtkTooltip*)this._cPtr, _text);
   }
 
   /**
@@ -170,6 +170,6 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setTipArea(gdk.rectangle.Rectangle rect)
   {
-    gtk_tooltip_set_tip_area(cast(GtkTooltip*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null);
+    gtk_tooltip_set_tip_area(cast(GtkTooltip*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null);
   }
 }

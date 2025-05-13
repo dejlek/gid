@@ -18,16 +18,16 @@ class MemoryPool : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_memory_pool_get_type != &gidSymbolNotFound ? garrow_memory_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class MemoryPool : gobject.object.ObjectWrap
   {
     GArrowMemoryPool* _cretval;
     _cretval = garrow_memory_pool_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.memory_pool.MemoryPool)(cast(GArrowMemoryPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -49,7 +49,7 @@ class MemoryPool : gobject.object.ObjectWrap
   string getBackendName()
   {
     char* _cretval;
-    _cretval = garrow_memory_pool_get_backend_name(cast(GArrowMemoryPool*)cPtr);
+    _cretval = garrow_memory_pool_get_backend_name(cast(GArrowMemoryPool*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -58,7 +58,7 @@ class MemoryPool : gobject.object.ObjectWrap
   long getBytesAllocated()
   {
     long _retval;
-    _retval = garrow_memory_pool_get_bytes_allocated(cast(GArrowMemoryPool*)cPtr);
+    _retval = garrow_memory_pool_get_bytes_allocated(cast(GArrowMemoryPool*)this._cPtr);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class MemoryPool : gobject.object.ObjectWrap
   long getMaxMemory()
   {
     long _retval;
-    _retval = garrow_memory_pool_get_max_memory(cast(GArrowMemoryPool*)cPtr);
+    _retval = garrow_memory_pool_get_max_memory(cast(GArrowMemoryPool*)this._cPtr);
     return _retval;
   }
 }

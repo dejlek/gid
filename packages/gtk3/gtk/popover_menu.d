@@ -96,16 +96,16 @@ class PopoverMenu : gtk.popover.Popover
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_popover_menu_get_type != &gidSymbolNotFound ? gtk_popover_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -154,6 +154,6 @@ class PopoverMenu : gtk.popover.Popover
   void openSubmenu(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)cPtr, _name);
+    gtk_popover_menu_open_submenu(cast(GtkPopoverMenu*)this._cPtr, _name);
   }
 }

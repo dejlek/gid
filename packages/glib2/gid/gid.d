@@ -716,8 +716,8 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        cValueFree!T(n.data);
-        g_list_free_1(n);
+        cValueFree!T(tmp.data);
+        g_list_free_1(tmp);
       }
     }
     else
@@ -731,8 +731,8 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
       {
         auto tmp = n;
         n = n.next;
-        cValueFree!T(n.data);
-        g_slist_free_1(n);
+        cValueFree!T(tmp.data);
+        g_slist_free_1(tmp);
       }
     }
     else
@@ -757,7 +757,7 @@ void containerFree(CT, T, GidOwnership ownership = GidOwnership.None)(CT contain
 */
 bool isTypeCopyableStruct(T)()
 {
-  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c.cPtr(Yes.Dup);});
+  return __traits(compiles, {auto c = new T(cast(void*)null, No.Take); c._cPtr(Yes.Dup);});
 }
 
 /**
@@ -782,7 +782,7 @@ T cToD(T)(void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
-    return gobject.object.ObjectWrap.getDObject!T(data, No.Take);
+    return gobject.object.ObjectWrap._getDObject!T(data, No.Take);
   else static if (is(T == string))
     return fromCString(cast(const(char)*)data, No.Free);
   else static if (isTypeCopyableStruct!T)
@@ -806,11 +806,11 @@ void dToC(T)(T val, void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || isTypeCopyableStruct!T)
-    *(cast(void**)data) = val.cPtr(Yes.Dup);
+    *(cast(void**)data) = val._cPtr(Yes.Dup);
   else static if (is(T == interface))
   {
     if (auto objG = cast(gobject.object.ObjectWrap)val)
-      *(cast(void**)data) = objG.cPtr(Yes.Dup);
+      *(cast(void**)data) = objG._cPtr(Yes.Dup);
     else
       assert(0, "Object implementing " ~ T.stringof ~ " interface is not an ObjectWrap");
   }
@@ -834,11 +834,11 @@ void cValueFree(T)(void* data)
 if (containerTypeIsSupported!T)
 {
   static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
-    gobject.object.ObjectWrap.unref(data);
+    gobject.object.ObjectWrap._unref(data);
   else static if (is(T : Boxed))
     Boxed.boxedFree!T(data);
-  else static if (__traits(compiles, T.unref(data))) // Reffed types
-    T.unref(data);
+  else static if (__traits(compiles, T._unref(data))) // Reffed types
+    T._unref(data);
   else static if (is(T : string) || isTypeSimple!T)
     gFree(data);
 }

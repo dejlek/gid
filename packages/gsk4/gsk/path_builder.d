@@ -65,22 +65,22 @@ class PathBuilder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_builder_get_type != &gidSymbolNotFound ? gsk_path_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addCairoPath(cairo.path.Path path)
   {
-    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)cPtr, path ? cast(const(cairo_path_t)*)path.cPtr(No.Dup) : null);
+    gsk_path_builder_add_cairo_path(cast(GskPathBuilder*)this._cPtr, path ? cast(const(cairo_path_t)*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -130,7 +130,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addCircle(graphene.point.Point center, float radius)
   {
-    gsk_path_builder_add_circle(cast(GskPathBuilder*)cPtr, center ? cast(const(graphene_point_t)*)center.cPtr(No.Dup) : null, radius);
+    gsk_path_builder_add_circle(cast(GskPathBuilder*)this._cPtr, center ? cast(const(graphene_point_t)*)center._cPtr(No.Dup) : null, radius);
   }
 
   /**
@@ -141,7 +141,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addLayout(pango.layout.Layout layout)
   {
-    gsk_path_builder_add_layout(cast(GskPathBuilder*)cPtr, layout ? cast(PangoLayout*)layout.cPtr(No.Dup) : null);
+    gsk_path_builder_add_layout(cast(GskPathBuilder*)this._cPtr, layout ? cast(PangoLayout*)layout._cPtr(No.Dup) : null);
   }
 
   /**
@@ -152,7 +152,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addPath(gsk.path.Path path)
   {
-    gsk_path_builder_add_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
+    gsk_path_builder_add_path(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -168,7 +168,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addRect(graphene.rect.Rect rect)
   {
-    gsk_path_builder_add_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(graphene_rect_t)*)rect.cPtr(No.Dup) : null);
+    gsk_path_builder_add_rect(cast(GskPathBuilder*)this._cPtr, rect ? cast(const(graphene_rect_t)*)rect._cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,7 +179,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addReversePath(gsk.path.Path path)
   {
-    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null);
+    gsk_path_builder_add_reverse_path(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -192,7 +192,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addRoundedRect(gsk.rounded_rect.RoundedRect rect)
   {
-    gsk_path_builder_add_rounded_rect(cast(GskPathBuilder*)cPtr, rect ? cast(const(GskRoundedRect)*)rect.cPtr : null);
+    gsk_path_builder_add_rounded_rect(cast(GskPathBuilder*)this._cPtr, rect ? cast(const(GskRoundedRect)*)rect._cPtr : null);
   }
 
   /**
@@ -213,7 +213,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void addSegment(gsk.path.Path path, gsk.path_point.PathPoint start, gsk.path_point.PathPoint end)
   {
-    gsk_path_builder_add_segment(cast(GskPathBuilder*)cPtr, path ? cast(GskPath*)path.cPtr(No.Dup) : null, start ? cast(const(GskPathPoint)*)start.cPtr(No.Dup) : null, end ? cast(const(GskPathPoint)*)end.cPtr(No.Dup) : null);
+    gsk_path_builder_add_segment(cast(GskPathBuilder*)this._cPtr, path ? cast(GskPath*)path._cPtr(No.Dup) : null, start ? cast(const(GskPathPoint)*)start._cPtr(No.Dup) : null, end ? cast(const(GskPathPoint)*)end._cPtr(No.Dup) : null);
   }
 
   /**
@@ -240,7 +240,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void arcTo(float x1, float y1, float x2, float y2)
   {
-    gsk_path_builder_arc_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2);
+    gsk_path_builder_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
 
   /**
@@ -254,7 +254,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void close()
   {
-    gsk_path_builder_close(cast(GskPathBuilder*)cPtr);
+    gsk_path_builder_close(cast(GskPathBuilder*)this._cPtr);
   }
 
   /**
@@ -284,7 +284,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void conicTo(float x1, float y1, float x2, float y2, float weight)
   {
-    gsk_path_builder_conic_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, weight);
+    gsk_path_builder_conic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, weight);
   }
 
   /**
@@ -309,7 +309,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void cubicTo(float x1, float y1, float x2, float y2, float x3, float y3)
   {
-    gsk_path_builder_cubic_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, x3, y3);
+    gsk_path_builder_cubic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
 
   /**
@@ -326,7 +326,7 @@ class PathBuilder : gobject.boxed.Boxed
   graphene.point.Point getCurrentPoint()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)cPtr);
+    _cretval = gsk_path_builder_get_current_point(cast(GskPathBuilder*)this._cPtr);
     auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -351,7 +351,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void htmlArcTo(float x1, float y1, float x2, float y2, float radius)
   {
-    gsk_path_builder_html_arc_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, radius);
+    gsk_path_builder_html_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, radius);
   }
 
   /**
@@ -369,7 +369,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void lineTo(float x, float y)
   {
-    gsk_path_builder_line_to(cast(GskPathBuilder*)cPtr, x, y);
+    gsk_path_builder_line_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
 
   /**
@@ -385,7 +385,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void moveTo(float x, float y)
   {
-    gsk_path_builder_move_to(cast(GskPathBuilder*)cPtr, x, y);
+    gsk_path_builder_move_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
 
   /**
@@ -407,7 +407,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void quadTo(float x1, float y1, float x2, float y2)
   {
-    gsk_path_builder_quad_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2);
+    gsk_path_builder_quad_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
 
   /**
@@ -426,7 +426,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relArcTo(float x1, float y1, float x2, float y2)
   {
-    gsk_path_builder_rel_arc_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2);
+    gsk_path_builder_rel_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
 
   /**
@@ -447,7 +447,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relConicTo(float x1, float y1, float x2, float y2, float weight)
   {
-    gsk_path_builder_rel_conic_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, weight);
+    gsk_path_builder_rel_conic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, weight);
   }
 
   /**
@@ -469,7 +469,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relCubicTo(float x1, float y1, float x2, float y2, float x3, float y3)
   {
-    gsk_path_builder_rel_cubic_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, x3, y3);
+    gsk_path_builder_rel_cubic_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, x3, y3);
   }
 
   /**
@@ -488,7 +488,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relHtmlArcTo(float x1, float y1, float x2, float y2, float radius)
   {
-    gsk_path_builder_rel_html_arc_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2, radius);
+    gsk_path_builder_rel_html_arc_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2, radius);
   }
 
   /**
@@ -503,7 +503,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relLineTo(float x, float y)
   {
-    gsk_path_builder_rel_line_to(cast(GskPathBuilder*)cPtr, x, y);
+    gsk_path_builder_rel_line_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
 
   /**
@@ -518,7 +518,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relMoveTo(float x, float y)
   {
-    gsk_path_builder_rel_move_to(cast(GskPathBuilder*)cPtr, x, y);
+    gsk_path_builder_rel_move_to(cast(GskPathBuilder*)this._cPtr, x, y);
   }
 
   /**
@@ -537,7 +537,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relQuadTo(float x1, float y1, float x2, float y2)
   {
-    gsk_path_builder_rel_quad_to(cast(GskPathBuilder*)cPtr, x1, y1, x2, y2);
+    gsk_path_builder_rel_quad_to(cast(GskPathBuilder*)this._cPtr, x1, y1, x2, y2);
   }
 
   /**
@@ -558,7 +558,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void relSvgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y)
   {
-    gsk_path_builder_rel_svg_arc_to(cast(GskPathBuilder*)cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
+    gsk_path_builder_rel_svg_arc_to(cast(GskPathBuilder*)this._cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
   }
 
   /**
@@ -581,7 +581,7 @@ class PathBuilder : gobject.boxed.Boxed
   */
   void svgArcTo(float rx, float ry, float xAxisRotation, bool largeArc, bool positiveSweep, float x, float y)
   {
-    gsk_path_builder_svg_arc_to(cast(GskPathBuilder*)cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
+    gsk_path_builder_svg_arc_to(cast(GskPathBuilder*)this._cPtr, rx, ry, xAxisRotation, largeArc, positiveSweep, x, y);
   }
 
   /**
@@ -599,7 +599,7 @@ class PathBuilder : gobject.boxed.Boxed
   gsk.path.Path toPath()
   {
     GskPath* _cretval;
-    _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)cPtr);
+    _cretval = gsk_path_builder_to_path(cast(GskPathBuilder*)this._cPtr);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -38,7 +38,7 @@ class EventTouch
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -50,7 +50,7 @@ class EventTouch
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventTouch*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventTouch*)this._cPtr).type;
   }
 
   /**
@@ -61,7 +61,7 @@ class EventTouch
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventTouch*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventTouch*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -70,7 +70,7 @@ class EventTouch
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)this._cPtr).window);
   }
 
   /**
@@ -80,8 +80,8 @@ class EventTouch
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouch*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).window);
   }
 
   /**
@@ -90,7 +90,7 @@ class EventTouch
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventTouch*)cPtr).sendEvent;
+    return (cast(GdkEventTouch*)this._cPtr).sendEvent;
   }
 
   /**
@@ -100,7 +100,7 @@ class EventTouch
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventTouch*)cPtr).sendEvent = propval;
+    (cast(GdkEventTouch*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -109,7 +109,7 @@ class EventTouch
   */
   @property uint time()
   {
-    return (cast(GdkEventTouch*)cPtr).time;
+    return (cast(GdkEventTouch*)this._cPtr).time;
   }
 
   /**
@@ -119,7 +119,7 @@ class EventTouch
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventTouch*)cPtr).time = propval;
+    (cast(GdkEventTouch*)this._cPtr).time = propval;
   }
 
   /**
@@ -128,7 +128,7 @@ class EventTouch
   */
   @property double x()
   {
-    return (cast(GdkEventTouch*)cPtr).x;
+    return (cast(GdkEventTouch*)this._cPtr).x;
   }
 
   /**
@@ -138,7 +138,7 @@ class EventTouch
   */
   @property void x(double propval)
   {
-    (cast(GdkEventTouch*)cPtr).x = propval;
+    (cast(GdkEventTouch*)this._cPtr).x = propval;
   }
 
   /**
@@ -147,7 +147,7 @@ class EventTouch
   */
   @property double y()
   {
-    return (cast(GdkEventTouch*)cPtr).y;
+    return (cast(GdkEventTouch*)this._cPtr).y;
   }
 
   /**
@@ -157,7 +157,7 @@ class EventTouch
   */
   @property void y(double propval)
   {
-    (cast(GdkEventTouch*)cPtr).y = propval;
+    (cast(GdkEventTouch*)this._cPtr).y = propval;
   }
 
   /**
@@ -168,7 +168,7 @@ class EventTouch
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventTouch*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventTouch*)this._cPtr).state;
   }
 
   /**
@@ -180,7 +180,7 @@ class EventTouch
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventTouch*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventTouch*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 
   /**
@@ -189,7 +189,7 @@ class EventTouch
   */
   @property gdk.event_sequence.EventSequence sequence()
   {
-    return cToD!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)cPtr).sequence);
+    return cToD!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)this._cPtr).sequence);
   }
 
   /**
@@ -199,8 +199,8 @@ class EventTouch
   */
   @property void sequence(gdk.event_sequence.EventSequence propval)
   {
-    cValueFree!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)cPtr).sequence);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).sequence);
+    cValueFree!(gdk.event_sequence.EventSequence)(cast(void*)(cast(GdkEventTouch*)this._cPtr).sequence);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).sequence);
   }
 
   /**
@@ -210,7 +210,7 @@ class EventTouch
   */
   @property bool emulatingPointer()
   {
-    return (cast(GdkEventTouch*)cPtr).emulatingPointer;
+    return (cast(GdkEventTouch*)this._cPtr).emulatingPointer;
   }
 
   /**
@@ -221,7 +221,7 @@ class EventTouch
   */
   @property void emulatingPointer(bool propval)
   {
-    (cast(GdkEventTouch*)cPtr).emulatingPointer = propval;
+    (cast(GdkEventTouch*)this._cPtr).emulatingPointer = propval;
   }
 
   /**
@@ -231,7 +231,7 @@ class EventTouch
   */
   @property gdk.device.Device device()
   {
-    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)cPtr).device);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)this._cPtr).device);
   }
 
   /**
@@ -242,8 +242,8 @@ class EventTouch
   */
   @property void device(gdk.device.Device propval)
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventTouch*)cPtr).device);
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventTouch*)this._cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventTouch*)this._cPtr).device);
   }
 
   /**
@@ -253,7 +253,7 @@ class EventTouch
   */
   @property double xRoot()
   {
-    return (cast(GdkEventTouch*)cPtr).xRoot;
+    return (cast(GdkEventTouch*)this._cPtr).xRoot;
   }
 
   /**
@@ -264,7 +264,7 @@ class EventTouch
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventTouch*)cPtr).xRoot = propval;
+    (cast(GdkEventTouch*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -274,7 +274,7 @@ class EventTouch
   */
   @property double yRoot()
   {
-    return (cast(GdkEventTouch*)cPtr).yRoot;
+    return (cast(GdkEventTouch*)this._cPtr).yRoot;
   }
 
   /**
@@ -285,6 +285,6 @@ class EventTouch
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventTouch*)cPtr).yRoot = propval;
+    (cast(GdkEventTouch*)this._cPtr).yRoot = propval;
   }
 }

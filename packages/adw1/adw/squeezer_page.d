@@ -23,16 +23,16 @@ class SqueezerPage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_squeezer_page_get_type != &gidSymbolNotFound ? adw_squeezer_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,8 +91,8 @@ class SqueezerPage : gobject.object.ObjectWrap
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_squeezer_page_get_child(cast(AdwSqueezerPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_squeezer_page_get_child(cast(AdwSqueezerPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class SqueezerPage : gobject.object.ObjectWrap
   bool getEnabled()
   {
     bool _retval;
-    _retval = adw_squeezer_page_get_enabled(cast(AdwSqueezerPage*)cPtr);
+    _retval = adw_squeezer_page_get_enabled(cast(AdwSqueezerPage*)this._cPtr);
     return _retval;
   }
 
@@ -128,6 +128,6 @@ class SqueezerPage : gobject.object.ObjectWrap
   */
   void setEnabled(bool enabled)
   {
-    adw_squeezer_page_set_enabled(cast(AdwSqueezerPage*)cPtr, enabled);
+    adw_squeezer_page_set_enabled(cast(AdwSqueezerPage*)this._cPtr, enabled);
   }
 }

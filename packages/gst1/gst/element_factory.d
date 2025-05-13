@@ -49,16 +49,16 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_element_factory_get_type != &gidSymbolNotFound ? gst_element_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -81,7 +81,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     GstElementFactory* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_factory_find(_name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     GList* _cretval;
     auto _list = gListFromD!(gst.element_factory.ElementFactory)(list);
     scope(exit) containerFree!(GList*, gst.element_factory.ElementFactory, GidOwnership.None)(_list);
-    _cretval = gst_element_factory_list_filter(_list, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null, direction, subsetonly);
+    _cretval = gst_element_factory_list_filter(_list, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, direction, subsetonly);
     auto _retval = gListToD!(gst.element_factory.ElementFactory, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -152,7 +152,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
     const(char)* _factoryname = factoryname.toCString(No.Alloc);
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_element_factory_make(_factoryname, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -185,10 +185,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
     _cretval = gst_element_factory_make_with_properties(_factoryname, _n, _names, _values);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -202,7 +202,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_sink_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSinkAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_sink_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAllCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_all_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_src_all_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -244,7 +244,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool canSrcAnyCaps(gst.caps.Caps caps)
   {
     bool _retval;
-    _retval = gst_element_factory_can_src_any_caps(cast(GstElementFactory*)cPtr, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
+    _retval = gst_element_factory_can_src_any_caps(cast(GstElementFactory*)this._cPtr, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -263,8 +263,8 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   {
     GstElement* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_factory_create(cast(GstElementFactory*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    _cretval = gst_element_factory_create(cast(GstElementFactory*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -295,10 +295,10 @@ class ElementFactory : gst.plugin_feature.PluginFeature
 
     GValue[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= *cast(GValue*)obj.cPtr;
+      _tmpvalues ~= *cast(GValue*)obj._cPtr;
     const(GValue)* _values = _tmpvalues.ptr;
-    _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)cPtr, _n, _names, _values);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    _cretval = gst_element_factory_create_with_properties(cast(GstElementFactory*)this._cPtr, _n, _names, _values);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -312,7 +312,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   gobject.types.GType getElementType()
   {
     gobject.types.GType _retval;
-    _retval = gst_element_factory_get_element_type(cast(GstElementFactory*)cPtr);
+    _retval = gst_element_factory_get_element_type(cast(GstElementFactory*)this._cPtr);
     return _retval;
   }
 
@@ -328,7 +328,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gst_element_factory_get_metadata(cast(GstElementFactory*)cPtr, _key);
+    _cretval = gst_element_factory_get_metadata(cast(GstElementFactory*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -341,7 +341,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   string[] getMetadataKeys()
   {
     char** _cretval;
-    _cretval = gst_element_factory_get_metadata_keys(cast(GstElementFactory*)cPtr);
+    _cretval = gst_element_factory_get_metadata_keys(cast(GstElementFactory*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -363,7 +363,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   uint getNumPadTemplates()
   {
     uint _retval;
-    _retval = gst_element_factory_get_num_pad_templates(cast(GstElementFactory*)cPtr);
+    _retval = gst_element_factory_get_num_pad_templates(cast(GstElementFactory*)this._cPtr);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool getSkipDocumentation()
   {
     bool _retval;
-    _retval = gst_element_factory_get_skip_documentation(cast(GstElementFactory*)cPtr);
+    _retval = gst_element_factory_get_skip_documentation(cast(GstElementFactory*)this._cPtr);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   string[] getUriProtocols()
   {
     const(char*)* _cretval;
-    _cretval = gst_element_factory_get_uri_protocols(cast(GstElementFactory*)cPtr);
+    _cretval = gst_element_factory_get_uri_protocols(cast(GstElementFactory*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -412,7 +412,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   gst.types.URIType getUriType()
   {
     GstURIType _cretval;
-    _cretval = gst_element_factory_get_uri_type(cast(GstElementFactory*)cPtr);
+    _cretval = gst_element_factory_get_uri_type(cast(GstElementFactory*)this._cPtr);
     gst.types.URIType _retval = cast(gst.types.URIType)_cretval;
     return _retval;
   }
@@ -428,7 +428,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   {
     bool _retval;
     const(char)* _interfacename = interfacename.toCString(No.Alloc);
-    _retval = gst_element_factory_has_interface(cast(GstElementFactory*)cPtr, _interfacename);
+    _retval = gst_element_factory_has_interface(cast(GstElementFactory*)this._cPtr, _interfacename);
     return _retval;
   }
 
@@ -442,7 +442,7 @@ class ElementFactory : gst.plugin_feature.PluginFeature
   bool listIsType(gst.types.ElementFactoryListType type)
   {
     bool _retval;
-    _retval = gst_element_factory_list_is_type(cast(GstElementFactory*)cPtr, type);
+    _retval = gst_element_factory_list_is_type(cast(GstElementFactory*)this._cPtr, type);
     return _retval;
   }
 }

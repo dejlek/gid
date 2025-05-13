@@ -25,16 +25,16 @@ class Seat : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_seat_get_type != &gidSymbolNotFound ? gdk_seat_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,7 +50,7 @@ class Seat : gobject.object.ObjectWrap
   gdk.types.SeatCapabilities getCapabilities()
   {
     GdkSeatCapabilities _cretval;
-    _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)cPtr);
+    _cretval = gdk_seat_get_capabilities(cast(GdkSeat*)this._cPtr);
     gdk.types.SeatCapabilities _retval = cast(gdk.types.SeatCapabilities)_cretval;
     return _retval;
   }
@@ -67,7 +67,7 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device[] getDevices(gdk.types.SeatCapabilities capabilities)
   {
     GList* _cretval;
-    _cretval = gdk_seat_get_devices(cast(GdkSeat*)cPtr, capabilities);
+    _cretval = gdk_seat_get_devices(cast(GdkSeat*)this._cPtr, capabilities);
     auto _retval = gListToD!(gdk.device.Device, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -80,8 +80,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_seat_get_display(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_seat_get_display(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -93,8 +93,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device getKeyboard()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_seat_get_keyboard(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -106,8 +106,8 @@ class Seat : gobject.object.ObjectWrap
   gdk.device.Device getPointer()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_seat_get_pointer(cast(GdkSeat*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_seat_get_pointer(cast(GdkSeat*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -118,7 +118,7 @@ class Seat : gobject.object.ObjectWrap
   gdk.device_tool.DeviceTool[] getTools()
   {
     GList* _cretval;
-    _cretval = gdk_seat_get_tools(cast(GdkSeat*)cPtr);
+    _cretval = gdk_seat_get_tools(cast(GdkSeat*)this._cPtr);
     auto _retval = gListToD!(gdk.device_tool.DeviceTool, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }

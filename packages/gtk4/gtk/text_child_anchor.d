@@ -24,16 +24,16 @@ class TextChildAnchor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_text_child_anchor_get_type != &gidSymbolNotFound ? gtk_text_child_anchor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
     GtkTextChildAnchor* _cretval;
     const(char)* _character = character.toCString(No.Alloc);
     _cretval = gtk_text_child_anchor_new_with_replacement(_character);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.text_child_anchor.TextChildAnchor)(cast(GtkTextChildAnchor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class TextChildAnchor : gobject.object.ObjectWrap
   bool getDeleted()
   {
     bool _retval;
-    _retval = gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)cPtr);
+    _retval = gtk_text_child_anchor_get_deleted(cast(GtkTextChildAnchor*)this._cPtr);
     return _retval;
   }
 
@@ -106,14 +106,14 @@ class TextChildAnchor : gobject.object.ObjectWrap
   {
     GtkWidget** _cretval;
     uint _cretlength;
-    _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)cPtr, &_cretlength);
+    _cretval = gtk_text_child_anchor_get_widgets(cast(GtkTextChildAnchor*)this._cPtr, &_cretlength);
     gtk.widget.Widget[] _retval;
 
     if (_cretval)
     {
       _retval = new gtk.widget.Widget[_cretlength];
       foreach (i; 0 .. _cretlength)
-        _retval[i] = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
+        _retval[i] = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(_cretval[i], No.Take);
     }
     return _retval;
   }

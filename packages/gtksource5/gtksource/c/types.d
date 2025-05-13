@@ -633,7 +633,7 @@ struct GtkSourceCompletionProviderInterface
 struct GtkSourceCompletionSnippets
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -656,7 +656,7 @@ struct GtkSourceCompletionSnippetsClass
 struct GtkSourceCompletionWords
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -692,7 +692,7 @@ struct GtkSourceEncoding;
 struct GtkSourceFile
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1239,7 +1239,7 @@ struct GtkSourceMarkClass
 struct GtkSourcePrintCompositor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1299,7 +1299,7 @@ struct GtkSourcePrintCompositorClass
 struct GtkSourceRegion
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -1403,7 +1403,7 @@ struct GtkSourceSearchContextClass
 struct GtkSourceSearchSettings
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

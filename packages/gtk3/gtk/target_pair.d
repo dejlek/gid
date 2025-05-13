@@ -29,7 +29,7 @@ class TargetPair
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class TargetPair
   */
   @property gdk.atom.Atom target()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)cPtr).target);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)this._cPtr).target);
   }
 
   /**
@@ -49,7 +49,7 @@ class TargetPair
   */
   @property uint flags()
   {
-    return (cast(GtkTargetPair*)cPtr).flags;
+    return (cast(GtkTargetPair*)this._cPtr).flags;
   }
 
   /**
@@ -59,7 +59,7 @@ class TargetPair
   */
   @property void flags(uint propval)
   {
-    (cast(GtkTargetPair*)cPtr).flags = propval;
+    (cast(GtkTargetPair*)this._cPtr).flags = propval;
   }
 
   /**
@@ -71,7 +71,7 @@ class TargetPair
   */
   @property uint info()
   {
-    return (cast(GtkTargetPair*)cPtr).info;
+    return (cast(GtkTargetPair*)this._cPtr).info;
   }
 
   /**
@@ -84,6 +84,6 @@ class TargetPair
   */
   @property void info(uint propval)
   {
-    (cast(GtkTargetPair*)cPtr).info = propval;
+    (cast(GtkTargetPair*)this._cPtr).info = propval;
   }
 }

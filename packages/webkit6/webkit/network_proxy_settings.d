@@ -24,22 +24,22 @@ class NetworkProxySettings : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_network_proxy_settings_get_type != &gidSymbolNotFound ? webkit_network_proxy_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -114,7 +114,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
     const(char)* _proxyUri = proxyUri.toCString(No.Alloc);
-    webkit_network_proxy_settings_add_proxy_for_scheme(cast(WebKitNetworkProxySettings*)cPtr, _scheme, _proxyUri);
+    webkit_network_proxy_settings_add_proxy_for_scheme(cast(WebKitNetworkProxySettings*)this._cPtr, _scheme, _proxyUri);
   }
 
   /**
@@ -124,7 +124,7 @@ class NetworkProxySettings : gobject.boxed.Boxed
   webkit.network_proxy_settings.NetworkProxySettings copy()
   {
     WebKitNetworkProxySettings* _cretval;
-    _cretval = webkit_network_proxy_settings_copy(cast(WebKitNetworkProxySettings*)cPtr);
+    _cretval = webkit_network_proxy_settings_copy(cast(WebKitNetworkProxySettings*)this._cPtr);
     auto _retval = _cretval ? new webkit.network_proxy_settings.NetworkProxySettings(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -19,16 +19,16 @@ class TimestampScalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_timestamp_scalar_get_type != &gidSymbolNotFound ? garrow_timestamp_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class TimestampScalar : arrow.scalar.Scalar
   this(arrow.timestamp_data_type.TimestampDataType dataType, long value)
   {
     GArrowTimestampScalar* _cretval;
-    _cretval = garrow_timestamp_scalar_new(dataType ? cast(GArrowTimestampDataType*)dataType.cPtr(No.Dup) : null, value);
+    _cretval = garrow_timestamp_scalar_new(dataType ? cast(GArrowTimestampDataType*)dataType._cPtr(No.Dup) : null, value);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class TimestampScalar : arrow.scalar.Scalar
   long getValue()
   {
     long _retval;
-    _retval = garrow_timestamp_scalar_get_value(cast(GArrowTimestampScalar*)cPtr);
+    _retval = garrow_timestamp_scalar_get_value(cast(GArrowTimestampScalar*)this._cPtr);
     return _retval;
   }
 }

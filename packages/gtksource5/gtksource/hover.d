@@ -33,16 +33,16 @@ class Hover : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_hover_get_type != &gidSymbolNotFound ? gtk_source_hover_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,12 +73,12 @@ class Hover : gobject.object.ObjectWrap
   /** */
   void addProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_add_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_add_provider(cast(GtkSourceHover*)this._cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 
   /** */
   void removeProvider(gtksource.hover_provider.HoverProvider provider)
   {
-    gtk_source_hover_remove_provider(cast(GtkSourceHover*)cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider).cPtr(No.Dup) : null);
+    gtk_source_hover_remove_provider(cast(GtkSourceHover*)this._cPtr, provider ? cast(GtkSourceHoverProvider*)(cast(gobject.object.ObjectWrap)provider)._cPtr(No.Dup) : null);
   }
 }

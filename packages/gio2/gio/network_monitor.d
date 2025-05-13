@@ -25,7 +25,7 @@ interface NetworkMonitor
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_monitor_get_type != &gidSymbolNotFound ? g_network_monitor_get_type() : cast(GType)0;
@@ -96,7 +96,7 @@ interface NetworkMonitor
   {
     GNetworkMonitor* _cretval;
     _cretval = g_network_monitor_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_monitor.NetworkMonitor)(cast(GNetworkMonitor*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_monitor.NetworkMonitor)(cast(GNetworkMonitor*)_cretval, No.Take);
     return _retval;
   }
 

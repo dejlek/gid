@@ -91,16 +91,16 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_image_menu_item_get_type != &gidSymbolNotFound ? gtk_image_menu_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -238,8 +238,8 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   {
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_menu_item_new_from_stock(_stockId, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_image_menu_item_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image_menu_item.ImageMenuItem)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   bool getAlwaysShowImage()
   {
     bool _retval;
-    _retval = gtk_image_menu_item_get_always_show_image(cast(GtkImageMenuItem*)cPtr);
+    _retval = gtk_image_menu_item_get_always_show_image(cast(GtkImageMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -302,8 +302,8 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   gtk.widget.Widget getImage()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_menu_item_get_image(cast(GtkImageMenuItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_image_menu_item_get_image(cast(GtkImageMenuItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   bool getUseStock()
   {
     bool _retval;
-    _retval = gtk_image_menu_item_get_use_stock(cast(GtkImageMenuItem*)cPtr);
+    _retval = gtk_image_menu_item_get_use_stock(cast(GtkImageMenuItem*)this._cPtr);
     return _retval;
   }
 
@@ -334,7 +334,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_image_menu_item_set_accel_group(cast(GtkImageMenuItem*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_image_menu_item_set_accel_group(cast(GtkImageMenuItem*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -349,7 +349,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setAlwaysShowImage(bool alwaysShow)
   {
-    gtk_image_menu_item_set_always_show_image(cast(GtkImageMenuItem*)cPtr, alwaysShow);
+    gtk_image_menu_item_set_always_show_image(cast(GtkImageMenuItem*)this._cPtr, alwaysShow);
   }
 
   /**
@@ -362,7 +362,7 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setImage(gtk.widget.Widget image = null)
   {
-    gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
+    gtk_image_menu_item_set_image(cast(GtkImageMenuItem*)this._cPtr, image ? cast(GtkWidget*)image._cPtr(No.Dup) : null);
   }
 
   /**
@@ -374,6 +374,6 @@ class ImageMenuItem : gtk.menu_item.MenuItem
   */
   void setUseStock(bool useStock)
   {
-    gtk_image_menu_item_set_use_stock(cast(GtkImageMenuItem*)cPtr, useStock);
+    gtk_image_menu_item_set_use_stock(cast(GtkImageMenuItem*)this._cPtr, useStock);
   }
 }

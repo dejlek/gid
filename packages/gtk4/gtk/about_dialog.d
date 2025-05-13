@@ -81,16 +81,16 @@ class AboutDialog : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_about_dialog_get_type != &gidSymbolNotFound ? gtk_about_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -480,7 +480,7 @@ class AboutDialog : gtk.window.Window
       _tmppeople ~= s.toCString(No.Alloc);
     _tmppeople ~= null;
     const(char*)* _people = _tmppeople.ptr;
-    gtk_about_dialog_add_credit_section(cast(GtkAboutDialog*)cPtr, _sectionName, _people);
+    gtk_about_dialog_add_credit_section(cast(GtkAboutDialog*)this._cPtr, _sectionName, _people);
   }
 
   /**
@@ -492,7 +492,7 @@ class AboutDialog : gtk.window.Window
   string[] getArtists()
   {
     const(char*)* _cretval;
-    _cretval = gtk_about_dialog_get_artists(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_artists(cast(GtkAboutDialog*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -516,7 +516,7 @@ class AboutDialog : gtk.window.Window
   string[] getAuthors()
   {
     const(char*)* _cretval;
-    _cretval = gtk_about_dialog_get_authors(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_authors(cast(GtkAboutDialog*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -538,7 +538,7 @@ class AboutDialog : gtk.window.Window
   string getComments()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_comments(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_comments(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -550,7 +550,7 @@ class AboutDialog : gtk.window.Window
   string getCopyright()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_copyright(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_copyright(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -564,7 +564,7 @@ class AboutDialog : gtk.window.Window
   string[] getDocumenters()
   {
     const(char*)* _cretval;
-    _cretval = gtk_about_dialog_get_documenters(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_documenters(cast(GtkAboutDialog*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -586,7 +586,7 @@ class AboutDialog : gtk.window.Window
   string getLicense()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_license(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_license(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -598,7 +598,7 @@ class AboutDialog : gtk.window.Window
   gtk.types.License getLicenseType()
   {
     GtkLicense _cretval;
-    _cretval = gtk_about_dialog_get_license_type(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_license_type(cast(GtkAboutDialog*)this._cPtr);
     gtk.types.License _retval = cast(gtk.types.License)_cretval;
     return _retval;
   }
@@ -612,8 +612,8 @@ class AboutDialog : gtk.window.Window
   gdk.paintable.Paintable getLogo()
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
+    _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, No.Take);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class AboutDialog : gtk.window.Window
   string getLogoIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_logo_icon_name(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_logo_icon_name(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -637,7 +637,7 @@ class AboutDialog : gtk.window.Window
   string getProgramName()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_program_name(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_program_name(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -649,7 +649,7 @@ class AboutDialog : gtk.window.Window
   string getSystemInformation()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_system_information(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_system_information(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -662,7 +662,7 @@ class AboutDialog : gtk.window.Window
   string getTranslatorCredits()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_translator_credits(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_translator_credits(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -674,7 +674,7 @@ class AboutDialog : gtk.window.Window
   string getVersion()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_version(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_version(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -686,7 +686,7 @@ class AboutDialog : gtk.window.Window
   string getWebsite()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_website(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_website(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -698,7 +698,7 @@ class AboutDialog : gtk.window.Window
   string getWebsiteLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_about_dialog_get_website_label(cast(GtkAboutDialog*)cPtr);
+    _cretval = gtk_about_dialog_get_website_label(cast(GtkAboutDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -711,7 +711,7 @@ class AboutDialog : gtk.window.Window
   bool getWrapLicense()
   {
     bool _retval;
-    _retval = gtk_about_dialog_get_wrap_license(cast(GtkAboutDialog*)cPtr);
+    _retval = gtk_about_dialog_get_wrap_license(cast(GtkAboutDialog*)this._cPtr);
     return _retval;
   }
 
@@ -730,7 +730,7 @@ class AboutDialog : gtk.window.Window
       _tmpartists ~= s.toCString(No.Alloc);
     _tmpartists ~= null;
     const(char*)* _artists = _tmpartists.ptr;
-    gtk_about_dialog_set_artists(cast(GtkAboutDialog*)cPtr, _artists);
+    gtk_about_dialog_set_artists(cast(GtkAboutDialog*)this._cPtr, _artists);
   }
 
   /**
@@ -747,7 +747,7 @@ class AboutDialog : gtk.window.Window
       _tmpauthors ~= s.toCString(No.Alloc);
     _tmpauthors ~= null;
     const(char*)* _authors = _tmpauthors.ptr;
-    gtk_about_dialog_set_authors(cast(GtkAboutDialog*)cPtr, _authors);
+    gtk_about_dialog_set_authors(cast(GtkAboutDialog*)this._cPtr, _authors);
   }
 
   /**
@@ -761,7 +761,7 @@ class AboutDialog : gtk.window.Window
   void setComments(string comments = null)
   {
     const(char)* _comments = comments.toCString(No.Alloc);
-    gtk_about_dialog_set_comments(cast(GtkAboutDialog*)cPtr, _comments);
+    gtk_about_dialog_set_comments(cast(GtkAboutDialog*)this._cPtr, _comments);
   }
 
   /**
@@ -775,7 +775,7 @@ class AboutDialog : gtk.window.Window
   void setCopyright(string copyright = null)
   {
     const(char)* _copyright = copyright.toCString(No.Alloc);
-    gtk_about_dialog_set_copyright(cast(GtkAboutDialog*)cPtr, _copyright);
+    gtk_about_dialog_set_copyright(cast(GtkAboutDialog*)this._cPtr, _copyright);
   }
 
   /**
@@ -793,7 +793,7 @@ class AboutDialog : gtk.window.Window
       _tmpdocumenters ~= s.toCString(No.Alloc);
     _tmpdocumenters ~= null;
     const(char*)* _documenters = _tmpdocumenters.ptr;
-    gtk_about_dialog_set_documenters(cast(GtkAboutDialog*)cPtr, _documenters);
+    gtk_about_dialog_set_documenters(cast(GtkAboutDialog*)this._cPtr, _documenters);
   }
 
   /**
@@ -808,7 +808,7 @@ class AboutDialog : gtk.window.Window
   void setLicense(string license = null)
   {
     const(char)* _license = license.toCString(No.Alloc);
-    gtk_about_dialog_set_license(cast(GtkAboutDialog*)cPtr, _license);
+    gtk_about_dialog_set_license(cast(GtkAboutDialog*)this._cPtr, _license);
   }
 
   /**
@@ -823,7 +823,7 @@ class AboutDialog : gtk.window.Window
   */
   void setLicenseType(gtk.types.License licenseType)
   {
-    gtk_about_dialog_set_license_type(cast(GtkAboutDialog*)cPtr, licenseType);
+    gtk_about_dialog_set_license_type(cast(GtkAboutDialog*)this._cPtr, licenseType);
   }
 
   /**
@@ -834,7 +834,7 @@ class AboutDialog : gtk.window.Window
   */
   void setLogo(gdk.paintable.Paintable logo = null)
   {
-    gtk_about_dialog_set_logo(cast(GtkAboutDialog*)cPtr, logo ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)logo).cPtr(No.Dup) : null);
+    gtk_about_dialog_set_logo(cast(GtkAboutDialog*)this._cPtr, logo ? cast(GdkPaintable*)(cast(gobject.object.ObjectWrap)logo)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -846,7 +846,7 @@ class AboutDialog : gtk.window.Window
   void setLogoIconName(string iconName = null)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_about_dialog_set_logo_icon_name(cast(GtkAboutDialog*)cPtr, _iconName);
+    gtk_about_dialog_set_logo_icon_name(cast(GtkAboutDialog*)this._cPtr, _iconName);
   }
 
   /**
@@ -861,7 +861,7 @@ class AboutDialog : gtk.window.Window
   void setProgramName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_about_dialog_set_program_name(cast(GtkAboutDialog*)cPtr, _name);
+    gtk_about_dialog_set_program_name(cast(GtkAboutDialog*)this._cPtr, _name);
   }
 
   /**
@@ -879,7 +879,7 @@ class AboutDialog : gtk.window.Window
   void setSystemInformation(string systemInformation = null)
   {
     const(char)* _systemInformation = systemInformation.toCString(No.Alloc);
-    gtk_about_dialog_set_system_information(cast(GtkAboutDialog*)cPtr, _systemInformation);
+    gtk_about_dialog_set_system_information(cast(GtkAboutDialog*)this._cPtr, _systemInformation);
   }
 
   /**
@@ -908,7 +908,7 @@ class AboutDialog : gtk.window.Window
   void setTranslatorCredits(string translatorCredits = null)
   {
     const(char)* _translatorCredits = translatorCredits.toCString(No.Alloc);
-    gtk_about_dialog_set_translator_credits(cast(GtkAboutDialog*)cPtr, _translatorCredits);
+    gtk_about_dialog_set_translator_credits(cast(GtkAboutDialog*)this._cPtr, _translatorCredits);
   }
 
   /**
@@ -920,7 +920,7 @@ class AboutDialog : gtk.window.Window
   void setVersion(string version_ = null)
   {
     const(char)* _version_ = version_.toCString(No.Alloc);
-    gtk_about_dialog_set_version(cast(GtkAboutDialog*)cPtr, _version_);
+    gtk_about_dialog_set_version(cast(GtkAboutDialog*)this._cPtr, _version_);
   }
 
   /**
@@ -932,7 +932,7 @@ class AboutDialog : gtk.window.Window
   void setWebsite(string website = null)
   {
     const(char)* _website = website.toCString(No.Alloc);
-    gtk_about_dialog_set_website(cast(GtkAboutDialog*)cPtr, _website);
+    gtk_about_dialog_set_website(cast(GtkAboutDialog*)this._cPtr, _website);
   }
 
   /**
@@ -944,7 +944,7 @@ class AboutDialog : gtk.window.Window
   void setWebsiteLabel(string websiteLabel)
   {
     const(char)* _websiteLabel = websiteLabel.toCString(No.Alloc);
-    gtk_about_dialog_set_website_label(cast(GtkAboutDialog*)cPtr, _websiteLabel);
+    gtk_about_dialog_set_website_label(cast(GtkAboutDialog*)this._cPtr, _websiteLabel);
   }
 
   /**
@@ -956,7 +956,7 @@ class AboutDialog : gtk.window.Window
   */
   void setWrapLicense(bool wrapLicense)
   {
-    gtk_about_dialog_set_wrap_license(cast(GtkAboutDialog*)cPtr, wrapLicense);
+    gtk_about_dialog_set_wrap_license(cast(GtkAboutDialog*)this._cPtr, wrapLicense);
   }
 
   /**

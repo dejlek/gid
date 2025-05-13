@@ -21,16 +21,16 @@ class MutableBuffer : arrow.buffer.Buffer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_mutable_buffer_get_type != &gidSymbolNotFound ? garrow_mutable_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,8 +56,8 @@ class MutableBuffer : arrow.buffer.Buffer
   static arrow.mutable_buffer.MutableBuffer newBytes(glib.bytes.Bytes data)
   {
     GArrowMutableBuffer* _cretval;
-    _cretval = garrow_mutable_buffer_new_bytes(data ? cast(GBytes*)data.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_mutable_buffer_new_bytes(data ? cast(GBytes*)data._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -73,7 +73,7 @@ class MutableBuffer : arrow.buffer.Buffer
 
     auto _data = cast(const(ubyte)*)data.ptr;
     GError *_err;
-    _retval = garrow_mutable_buffer_set_data(cast(GArrowMutableBuffer*)cPtr, offset, _data, _size, &_err);
+    _retval = garrow_mutable_buffer_set_data(cast(GArrowMutableBuffer*)this._cPtr, offset, _data, _size, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -83,8 +83,8 @@ class MutableBuffer : arrow.buffer.Buffer
   override arrow.mutable_buffer.MutableBuffer slice(long offset, long size)
   {
     GArrowMutableBuffer* _cretval;
-    _cretval = garrow_mutable_buffer_slice(cast(GArrowMutableBuffer*)cPtr, offset, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_mutable_buffer_slice(cast(GArrowMutableBuffer*)this._cPtr, offset, size);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.mutable_buffer.MutableBuffer)(cast(GArrowMutableBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -35,22 +35,22 @@ class Checksum : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_checksum_get_type != &gidSymbolNotFound ? g_checksum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class Checksum : gobject.boxed.Boxed
   glib.checksum.Checksum copy()
   {
     GChecksum* _cretval;
-    _cretval = g_checksum_copy(cast(const(GChecksum)*)cPtr);
+    _cretval = g_checksum_copy(cast(const(GChecksum)*)this._cPtr);
     auto _retval = _cretval ? new glib.checksum.Checksum(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -115,7 +115,7 @@ class Checksum : gobject.boxed.Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = g_checksum_get_string(cast(GChecksum*)cPtr);
+    _cretval = g_checksum_get_string(cast(GChecksum*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -125,7 +125,7 @@ class Checksum : gobject.boxed.Boxed
   */
   void reset()
   {
-    g_checksum_reset(cast(GChecksum*)cPtr);
+    g_checksum_reset(cast(GChecksum*)this._cPtr);
   }
 
   /**
@@ -143,7 +143,7 @@ class Checksum : gobject.boxed.Boxed
       _length = cast(ptrdiff_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    g_checksum_update(cast(GChecksum*)cPtr, _data, _length);
+    g_checksum_update(cast(GChecksum*)this._cPtr, _data, _length);
   }
 
   /**

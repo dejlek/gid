@@ -22,16 +22,16 @@ class ExtensionDataType : arrow.data_type.DataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_extension_data_type_get_type != &gidSymbolNotFound ? garrow_extension_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class ExtensionDataType : arrow.data_type.DataType
   string getExtensionName()
   {
     char* _cretval;
-    _cretval = garrow_extension_data_type_get_extension_name(cast(GArrowExtensionDataType*)cPtr);
+    _cretval = garrow_extension_data_type_get_extension_name(cast(GArrowExtensionDataType*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -53,8 +53,8 @@ class ExtensionDataType : arrow.data_type.DataType
   arrow.extension_array.ExtensionArray wrapArray(arrow.array.Array storage)
   {
     GArrowExtensionArray* _cretval;
-    _cretval = garrow_extension_data_type_wrap_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.extension_array.ExtensionArray)(cast(GArrowExtensionArray*)_cretval, Yes.Take);
+    _cretval = garrow_extension_data_type_wrap_array(cast(GArrowExtensionDataType*)this._cPtr, storage ? cast(GArrowArray*)storage._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.extension_array.ExtensionArray)(cast(GArrowExtensionArray*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -62,8 +62,8 @@ class ExtensionDataType : arrow.data_type.DataType
   arrow.chunked_array.ChunkedArray wrapChunkedArray(arrow.chunked_array.ChunkedArray storage)
   {
     GArrowChunkedArray* _cretval;
-    _cretval = garrow_extension_data_type_wrap_chunked_array(cast(GArrowExtensionDataType*)cPtr, storage ? cast(GArrowChunkedArray*)storage.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
+    _cretval = garrow_extension_data_type_wrap_chunked_array(cast(GArrowExtensionDataType*)this._cPtr, storage ? cast(GArrowChunkedArray*)storage._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.chunked_array.ChunkedArray)(cast(GArrowChunkedArray*)_cretval, Yes.Take);
     return _retval;
   }
 }

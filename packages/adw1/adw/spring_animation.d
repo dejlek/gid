@@ -53,16 +53,16 @@ class SpringAnimation : adw.animation.Animation
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spring_animation_get_type != &gidSymbolNotFound ? adw_spring_animation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -272,7 +272,7 @@ class SpringAnimation : adw.animation.Animation
   this(gtk.widget.Widget widget, double from, double to, adw.spring_params.SpringParams springParams, adw.animation_target.AnimationTarget target)
   {
     AdwAnimation* _cretval;
-    _cretval = adw_spring_animation_new(widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, from, to, springParams ? cast(AdwSpringParams*)springParams.cPtr(Yes.Dup) : null, target ? cast(AdwAnimationTarget*)target.cPtr(Yes.Dup) : null);
+    _cretval = adw_spring_animation_new(widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, from, to, springParams ? cast(AdwSpringParams*)springParams._cPtr(Yes.Dup) : null, target ? cast(AdwAnimationTarget*)target._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -291,7 +291,7 @@ class SpringAnimation : adw.animation.Animation
   double calculateValue(uint time)
   {
     double _retval;
-    _retval = adw_spring_animation_calculate_value(cast(AdwSpringAnimation*)cPtr, time);
+    _retval = adw_spring_animation_calculate_value(cast(AdwSpringAnimation*)this._cPtr, time);
     return _retval;
   }
 
@@ -310,7 +310,7 @@ class SpringAnimation : adw.animation.Animation
   double calculateVelocity(uint time)
   {
     double _retval;
-    _retval = adw_spring_animation_calculate_velocity(cast(AdwSpringAnimation*)cPtr, time);
+    _retval = adw_spring_animation_calculate_velocity(cast(AdwSpringAnimation*)this._cPtr, time);
     return _retval;
   }
 
@@ -321,7 +321,7 @@ class SpringAnimation : adw.animation.Animation
   bool getClamp()
   {
     bool _retval;
-    _retval = adw_spring_animation_get_clamp(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_clamp(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class SpringAnimation : adw.animation.Animation
   double getEpsilon()
   {
     double _retval;
-    _retval = adw_spring_animation_get_epsilon(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_epsilon(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class SpringAnimation : adw.animation.Animation
   uint getEstimatedDuration()
   {
     uint _retval;
-    _retval = adw_spring_animation_get_estimated_duration(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_estimated_duration(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class SpringAnimation : adw.animation.Animation
   double getInitialVelocity()
   {
     double _retval;
-    _retval = adw_spring_animation_get_initial_velocity(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_initial_velocity(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -367,7 +367,7 @@ class SpringAnimation : adw.animation.Animation
   adw.spring_params.SpringParams getSpringParams()
   {
     AdwSpringParams* _cretval;
-    _cretval = adw_spring_animation_get_spring_params(cast(AdwSpringAnimation*)cPtr);
+    _cretval = adw_spring_animation_get_spring_params(cast(AdwSpringAnimation*)this._cPtr);
     auto _retval = _cretval ? new adw.spring_params.SpringParams(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -379,7 +379,7 @@ class SpringAnimation : adw.animation.Animation
   double getValueFrom()
   {
     double _retval;
-    _retval = adw_spring_animation_get_value_from(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_value_from(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -390,7 +390,7 @@ class SpringAnimation : adw.animation.Animation
   double getValueTo()
   {
     double _retval;
-    _retval = adw_spring_animation_get_value_to(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_value_to(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -401,7 +401,7 @@ class SpringAnimation : adw.animation.Animation
   double getVelocity()
   {
     double _retval;
-    _retval = adw_spring_animation_get_velocity(cast(AdwSpringAnimation*)cPtr);
+    _retval = adw_spring_animation_get_velocity(cast(AdwSpringAnimation*)this._cPtr);
     return _retval;
   }
 
@@ -419,7 +419,7 @@ class SpringAnimation : adw.animation.Animation
   */
   void setClamp(bool clamp)
   {
-    adw_spring_animation_set_clamp(cast(AdwSpringAnimation*)cPtr, clamp);
+    adw_spring_animation_set_clamp(cast(AdwSpringAnimation*)this._cPtr, clamp);
   }
 
   /**
@@ -441,7 +441,7 @@ class SpringAnimation : adw.animation.Animation
   */
   void setEpsilon(double epsilon)
   {
-    adw_spring_animation_set_epsilon(cast(AdwSpringAnimation*)cPtr, epsilon);
+    adw_spring_animation_set_epsilon(cast(AdwSpringAnimation*)this._cPtr, epsilon);
   }
 
   /**
@@ -454,7 +454,7 @@ class SpringAnimation : adw.animation.Animation
   */
   void setInitialVelocity(double velocity)
   {
-    adw_spring_animation_set_initial_velocity(cast(AdwSpringAnimation*)cPtr, velocity);
+    adw_spring_animation_set_initial_velocity(cast(AdwSpringAnimation*)this._cPtr, velocity);
   }
 
   /**
@@ -465,7 +465,7 @@ class SpringAnimation : adw.animation.Animation
   */
   void setSpringParams(adw.spring_params.SpringParams springParams)
   {
-    adw_spring_animation_set_spring_params(cast(AdwSpringAnimation*)cPtr, springParams ? cast(AdwSpringParams*)springParams.cPtr(No.Dup) : null);
+    adw_spring_animation_set_spring_params(cast(AdwSpringAnimation*)this._cPtr, springParams ? cast(AdwSpringParams*)springParams._cPtr(No.Dup) : null);
   }
 
   /**
@@ -479,7 +479,7 @@ class SpringAnimation : adw.animation.Animation
   */
   void setValueFrom(double value)
   {
-    adw_spring_animation_set_value_from(cast(AdwSpringAnimation*)cPtr, value);
+    adw_spring_animation_set_value_from(cast(AdwSpringAnimation*)this._cPtr, value);
   }
 
   /**
@@ -493,6 +493,6 @@ class SpringAnimation : adw.animation.Animation
   */
   void setValueTo(double value)
   {
-    adw_spring_animation_set_value_to(cast(AdwSpringAnimation*)cPtr, value);
+    adw_spring_animation_set_value_to(cast(AdwSpringAnimation*)this._cPtr, value);
   }
 }

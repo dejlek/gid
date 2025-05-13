@@ -21,16 +21,16 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_fixed_layout_child_get_type != &gidSymbolNotFound ? gtk_fixed_layout_child_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   gsk.transform.Transform getTransform()
   {
     GskTransform* _cretval;
-    _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)cPtr);
+    _cretval = gtk_fixed_layout_child_get_transform(cast(GtkFixedLayoutChild*)this._cPtr);
     auto _retval = _cretval ? new gsk.transform.Transform(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -78,6 +78,6 @@ class FixedLayoutChild : gtk.layout_child.LayoutChild
   */
   void setTransform(gsk.transform.Transform transform)
   {
-    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)cPtr, transform ? cast(GskTransform*)transform.cPtr(No.Dup) : null);
+    gtk_fixed_layout_child_set_transform(cast(GtkFixedLayoutChild*)this._cPtr, transform ? cast(GskTransform*)transform._cPtr(No.Dup) : null);
   }
 }

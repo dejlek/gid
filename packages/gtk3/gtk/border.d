@@ -21,22 +21,22 @@ class Border : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_border_get_type != &gidSymbolNotFound ? gtk_border_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class Border : gobject.boxed.Boxed
   */
   @property short left()
   {
-    return (cast(GtkBorder*)cPtr).left;
+    return (cast(GtkBorder*)this._cPtr).left;
   }
 
   /**
@@ -61,7 +61,7 @@ class Border : gobject.boxed.Boxed
   */
   @property void left(short propval)
   {
-    (cast(GtkBorder*)cPtr).left = propval;
+    (cast(GtkBorder*)this._cPtr).left = propval;
   }
 
   /**
@@ -70,7 +70,7 @@ class Border : gobject.boxed.Boxed
   */
   @property short right()
   {
-    return (cast(GtkBorder*)cPtr).right;
+    return (cast(GtkBorder*)this._cPtr).right;
   }
 
   /**
@@ -80,7 +80,7 @@ class Border : gobject.boxed.Boxed
   */
   @property void right(short propval)
   {
-    (cast(GtkBorder*)cPtr).right = propval;
+    (cast(GtkBorder*)this._cPtr).right = propval;
   }
 
   /**
@@ -89,7 +89,7 @@ class Border : gobject.boxed.Boxed
   */
   @property short top()
   {
-    return (cast(GtkBorder*)cPtr).top;
+    return (cast(GtkBorder*)this._cPtr).top;
   }
 
   /**
@@ -99,7 +99,7 @@ class Border : gobject.boxed.Boxed
   */
   @property void top(short propval)
   {
-    (cast(GtkBorder*)cPtr).top = propval;
+    (cast(GtkBorder*)this._cPtr).top = propval;
   }
 
   /**
@@ -108,7 +108,7 @@ class Border : gobject.boxed.Boxed
   */
   @property short bottom()
   {
-    return (cast(GtkBorder*)cPtr).bottom;
+    return (cast(GtkBorder*)this._cPtr).bottom;
   }
 
   /**
@@ -118,7 +118,7 @@ class Border : gobject.boxed.Boxed
   */
   @property void bottom(short propval)
   {
-    (cast(GtkBorder*)cPtr).bottom = propval;
+    (cast(GtkBorder*)this._cPtr).bottom = propval;
   }
 
   /**
@@ -140,7 +140,7 @@ class Border : gobject.boxed.Boxed
   gtk.border.Border copy()
   {
     GtkBorder* _cretval;
-    _cretval = gtk_border_copy(cast(const(GtkBorder)*)cPtr);
+    _cretval = gtk_border_copy(cast(const(GtkBorder)*)this._cPtr);
     auto _retval = _cretval ? new gtk.border.Border(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

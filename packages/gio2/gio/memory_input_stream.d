@@ -30,16 +30,16 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_memory_input_stream_get_type != &gidSymbolNotFound ? g_memory_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -72,8 +72,8 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   static gio.memory_input_stream.MemoryInputStream newFromBytes(glib.bytes.Bytes bytes)
   {
     GInputStream* _cretval;
-    _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
+    _cretval = g_memory_input_stream_new_from_bytes(bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.memory_input_stream.MemoryInputStream)(cast(GInputStream*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,6 +85,6 @@ class MemoryInputStream : gio.input_stream.InputStream, gio.pollable_input_strea
   */
   void addBytes(glib.bytes.Bytes bytes)
   {
-    g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)cPtr, bytes ? cast(GBytes*)bytes.cPtr(No.Dup) : null);
+    g_memory_input_stream_add_bytes(cast(GMemoryInputStream*)this._cPtr, bytes ? cast(GBytes*)bytes._cPtr(No.Dup) : null);
   }
 }

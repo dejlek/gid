@@ -33,7 +33,7 @@ class BlurNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, float radius)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blur_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, radius);
+    _cretval = gsk_blur_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, radius);
     this(_cretval, Yes.Take);
   }
 
@@ -44,7 +44,7 @@ class BlurNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_blur_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_blur_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -56,7 +56,7 @@ class BlurNode : gsk.render_node.RenderNode
   float getRadius()
   {
     float _retval;
-    _retval = gsk_blur_node_get_radius(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_blur_node_get_radius(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 }

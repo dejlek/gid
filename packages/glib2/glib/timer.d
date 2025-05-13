@@ -30,7 +30,7 @@ class Timer
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -47,9 +47,10 @@ class Timer
   double elapsed()
   {
     double _retval;
-    _retval = g_timer_elapsed(cast(GTimer*)cPtr, null);
+    _retval = g_timer_elapsed(cast(GTimer*)_cPtr, null);
     return _retval;
   }
+
 
   /**
       Resumes a timer that has previously been stopped with
@@ -58,7 +59,7 @@ class Timer
   */
   void continue_()
   {
-    g_timer_continue(cast(GTimer*)cPtr);
+    g_timer_continue(cast(GTimer*)this._cPtr);
   }
 
   /**
@@ -66,7 +67,7 @@ class Timer
   */
   void destroy()
   {
-    g_timer_destroy(cast(GTimer*)cPtr);
+    g_timer_destroy(cast(GTimer*)this._cPtr);
   }
 
   /**
@@ -87,7 +88,7 @@ class Timer
   double elapsed(out gulong microseconds)
   {
     double _retval;
-    _retval = g_timer_elapsed(cast(GTimer*)cPtr, cast(gulong*)&microseconds);
+    _retval = g_timer_elapsed(cast(GTimer*)this._cPtr, cast(gulong*)&microseconds);
     return _retval;
   }
 
@@ -98,7 +99,7 @@ class Timer
   bool isActive()
   {
     bool _retval;
-    _retval = g_timer_is_active(cast(GTimer*)cPtr);
+    _retval = g_timer_is_active(cast(GTimer*)this._cPtr);
     return _retval;
   }
 
@@ -109,7 +110,7 @@ class Timer
   */
   void reset()
   {
-    g_timer_reset(cast(GTimer*)cPtr);
+    g_timer_reset(cast(GTimer*)this._cPtr);
   }
 
   /**
@@ -120,7 +121,7 @@ class Timer
   */
   void start()
   {
-    g_timer_start(cast(GTimer*)cPtr);
+    g_timer_start(cast(GTimer*)this._cPtr);
   }
 
   /**
@@ -129,7 +130,7 @@ class Timer
   */
   void stop()
   {
-    g_timer_stop(cast(GTimer*)cPtr);
+    g_timer_stop(cast(GTimer*)this._cPtr);
   }
 
   /**

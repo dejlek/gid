@@ -26,16 +26,16 @@ class SecurityManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_security_manager_get_type != &gidSymbolNotFound ? webkit_security_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsCorsEnabled(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_cors_enabled(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -71,7 +71,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsDisplayIsolated(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_display_isolated(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -86,7 +86,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsEmptyDocument(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_empty_document(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -101,7 +101,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsLocal(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_local(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -116,7 +116,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsNoAccess(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_no_access(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -132,7 +132,7 @@ class SecurityManager : gobject.object.ObjectWrap
   void registerUriSchemeAsSecure(string scheme)
   {
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    webkit_security_manager_register_uri_scheme_as_secure(cast(WebKitSecurityManager*)cPtr, _scheme);
+    webkit_security_manager_register_uri_scheme_as_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
   }
 
   /**
@@ -148,7 +148,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_cors_enabled(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_cors_enabled(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_display_isolated(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_display_isolated(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_empty_document(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_empty_document(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_local(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_local(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_no_access(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_no_access(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class SecurityManager : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)cPtr, _scheme);
+    _retval = webkit_security_manager_uri_scheme_is_secure(cast(WebKitSecurityManager*)this._cPtr, _scheme);
     return _retval;
   }
 }

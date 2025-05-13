@@ -41,16 +41,16 @@ class StackSidebar : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_stack_sidebar_get_type != &gidSymbolNotFound ? gtk_stack_sidebar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,8 +91,8 @@ class StackSidebar : gtk.bin.Bin
   gtk.stack.Stack getStack()
   {
     GtkStack* _cretval;
-    _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
+    _cretval = gtk_stack_sidebar_get_stack(cast(GtkStackSidebar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.stack.Stack)(cast(GtkStack*)_cretval, No.Take);
     return _retval;
   }
 
@@ -107,6 +107,6 @@ class StackSidebar : gtk.bin.Bin
   */
   void setStack(gtk.stack.Stack stack)
   {
-    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)cPtr, stack ? cast(GtkStack*)stack.cPtr(No.Dup) : null);
+    gtk_stack_sidebar_set_stack(cast(GtkStackSidebar*)this._cPtr, stack ? cast(GtkStack*)stack._cPtr(No.Dup) : null);
   }
 }

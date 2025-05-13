@@ -86,16 +86,16 @@ class Element : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_element_get_type != &gidSymbolNotFound ? gst_element_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class Element : gst.object.ObjectWrap
     _cretval = gst_element_make_from_uri(type, _uri, _elementname, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(GstElement*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class Element : gst.object.ObjectWrap
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gst_element_register(plugin ? cast(GstPlugin*)plugin.cPtr(No.Dup) : null, _name, rank, type);
+    _retval = gst_element_register(plugin ? cast(GstPlugin*)plugin._cPtr(No.Dup) : null, _name, rank, type);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class Element : gst.object.ObjectWrap
   */
   void abortState()
   {
-    gst_element_abort_state(cast(GstElement*)cPtr);
+    gst_element_abort_state(cast(GstElement*)this._cPtr);
   }
 
   /**
@@ -242,7 +242,7 @@ class Element : gst.object.ObjectWrap
   bool addPad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_add_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    _retval = gst_element_add_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class Element : gst.object.ObjectWrap
   {
     gulong _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _retval = gst_element_add_property_deep_notify_watch(cast(GstElement*)cPtr, _propertyName, includeValue);
+    _retval = gst_element_add_property_deep_notify_watch(cast(GstElement*)this._cPtr, _propertyName, includeValue);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class Element : gst.object.ObjectWrap
   {
     gulong _retval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _retval = gst_element_add_property_notify_watch(cast(GstElement*)cPtr, _propertyName, includeValue);
+    _retval = gst_element_add_property_notify_watch(cast(GstElement*)this._cPtr, _propertyName, includeValue);
     return _retval;
   }
 
@@ -285,13 +285,13 @@ class Element : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.ElementCallAsyncFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gst_element_call_async(cast(GstElement*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gst_element_call_async(cast(GstElement*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -307,7 +307,7 @@ class Element : gst.object.ObjectWrap
   gst.types.StateChangeReturn changeState(gst.types.StateChange transition)
   {
     GstStateChangeReturn _cretval;
-    _cretval = gst_element_change_state(cast(GstElement*)cPtr, transition);
+    _cretval = gst_element_change_state(cast(GstElement*)this._cPtr, transition);
     gst.types.StateChangeReturn _retval = cast(gst.types.StateChangeReturn)_cretval;
     return _retval;
   }
@@ -336,7 +336,7 @@ class Element : gst.object.ObjectWrap
   gst.types.StateChangeReturn continueState(gst.types.StateChangeReturn ret)
   {
     GstStateChangeReturn _cretval;
-    _cretval = gst_element_continue_state(cast(GstElement*)cPtr, ret);
+    _cretval = gst_element_continue_state(cast(GstElement*)this._cPtr, ret);
     gst.types.StateChangeReturn _retval = cast(gst.types.StateChangeReturn)_cretval;
     return _retval;
   }
@@ -348,7 +348,7 @@ class Element : gst.object.ObjectWrap
   */
   void createAllPads()
   {
-    gst_element_create_all_pads(cast(GstElement*)cPtr);
+    gst_element_create_all_pads(cast(GstElement*)this._cPtr);
   }
 
   /**
@@ -374,7 +374,7 @@ class Element : gst.object.ObjectWrap
   {
     char* _cretval;
     const(char)* _streamId = streamId.toCString(No.Alloc);
-    _cretval = gst_element_decorate_stream_id(cast(GstElement*)cPtr, _streamId);
+    _cretval = gst_element_decorate_stream_id(cast(GstElement*)this._cPtr, _streamId);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -398,14 +398,14 @@ class Element : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_pad(cast(GstElement*)cPtr, _funcCB, _func);
+    _retval = gst_element_foreach_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -428,14 +428,14 @@ class Element : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_sink_pad(cast(GstElement*)cPtr, _funcCB, _func);
+    _retval = gst_element_foreach_sink_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -458,14 +458,14 @@ class Element : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.ElementForeachPadFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.element.Element)(cast(void*)element, No.Take), gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(void*)pad, No.Take));
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_element_foreach_src_pad(cast(GstElement*)cPtr, _funcCB, _func);
+    _retval = gst_element_foreach_src_pad(cast(GstElement*)this._cPtr, _funcCB, _func);
     return _retval;
   }
 
@@ -481,7 +481,7 @@ class Element : gst.object.ObjectWrap
   gst.types.ClockTime getBaseTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_element_get_base_time(cast(GstElement*)cPtr);
+    _retval = gst_element_get_base_time(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -496,8 +496,8 @@ class Element : gst.object.ObjectWrap
   gst.bus.Bus getBus()
   {
     GstBus* _cretval;
-    _cretval = gst_element_get_bus(cast(GstElement*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    _cretval = gst_element_get_bus(cast(GstElement*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -514,8 +514,8 @@ class Element : gst.object.ObjectWrap
   gst.clock.Clock getClock()
   {
     GstClock* _cretval;
-    _cretval = gst_element_get_clock(cast(GstElement*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    _cretval = gst_element_get_clock(cast(GstElement*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -538,8 +538,8 @@ class Element : gst.object.ObjectWrap
   gst.pad.Pad getCompatiblePad(gst.pad.Pad pad, gst.caps.Caps caps = null)
   {
     GstPad* _cretval;
-    _cretval = gst_element_get_compatible_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_get_compatible_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, caps ? cast(GstCaps*)caps._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -556,8 +556,8 @@ class Element : gst.object.ObjectWrap
   gst.pad_template.PadTemplate getCompatiblePadTemplate(gst.pad_template.PadTemplate compattempl)
   {
     GstPadTemplate* _cretval;
-    _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)cPtr, compattempl ? cast(GstPadTemplate*)compattempl.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_element_get_compatible_pad_template(cast(GstElement*)this._cPtr, compattempl ? cast(GstPadTemplate*)compattempl._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -574,7 +574,7 @@ class Element : gst.object.ObjectWrap
   {
     GstContext* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
-    _cretval = gst_element_get_context(cast(GstElement*)cPtr, _contextType);
+    _cretval = gst_element_get_context(cast(GstElement*)this._cPtr, _contextType);
     auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -590,7 +590,7 @@ class Element : gst.object.ObjectWrap
   {
     GstContext* _cretval;
     const(char)* _contextType = contextType.toCString(No.Alloc);
-    _cretval = gst_element_get_context_unlocked(cast(GstElement*)cPtr, _contextType);
+    _cretval = gst_element_get_context_unlocked(cast(GstElement*)this._cPtr, _contextType);
     auto _retval = _cretval ? new gst.context.Context(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -604,7 +604,7 @@ class Element : gst.object.ObjectWrap
   gst.context.Context[] getContexts()
   {
     GList* _cretval;
-    _cretval = gst_element_get_contexts(cast(GstElement*)cPtr);
+    _cretval = gst_element_get_contexts(cast(GstElement*)this._cPtr);
     auto _retval = gListToD!(gst.context.Context, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -618,7 +618,7 @@ class Element : gst.object.ObjectWrap
   gst.types.ClockTime getCurrentClockTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_element_get_current_clock_time(cast(GstElement*)cPtr);
+    _retval = gst_element_get_current_clock_time(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class Element : gst.object.ObjectWrap
   gst.types.ClockTime getCurrentRunningTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_element_get_current_running_time(cast(GstElement*)cPtr);
+    _retval = gst_element_get_current_running_time(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -644,8 +644,8 @@ class Element : gst.object.ObjectWrap
   gst.element_factory.ElementFactory getFactory()
   {
     GstElementFactory* _cretval;
-    _cretval = gst_element_get_factory(cast(GstElement*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.Take);
+    _cretval = gst_element_get_factory(cast(GstElement*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.element_factory.ElementFactory)(cast(GstElementFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -660,7 +660,7 @@ class Element : gst.object.ObjectWrap
   {
     const(char)* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gst_element_get_metadata(cast(GstElement*)cPtr, _key);
+    _cretval = gst_element_get_metadata(cast(GstElement*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -678,8 +678,8 @@ class Element : gst.object.ObjectWrap
   {
     GstPadTemplate* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_get_pad_template(cast(GstElement*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
+    _cretval = gst_element_get_pad_template(cast(GstElement*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad_template.PadTemplate)(cast(GstPadTemplate*)_cretval, No.Take);
     return _retval;
   }
 
@@ -692,7 +692,7 @@ class Element : gst.object.ObjectWrap
   gst.pad_template.PadTemplate[] getPadTemplateList()
   {
     GList* _cretval;
-    _cretval = gst_element_get_pad_template_list(cast(GstElement*)cPtr);
+    _cretval = gst_element_get_pad_template_list(cast(GstElement*)this._cPtr);
     auto _retval = gListToD!(gst.pad_template.PadTemplate, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -714,8 +714,8 @@ class Element : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_get_request_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_get_request_pad(cast(GstElement*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -732,7 +732,7 @@ class Element : gst.object.ObjectWrap
   gst.types.ClockTime getStartTime()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_element_get_start_time(cast(GstElement*)cPtr);
+    _retval = gst_element_get_start_time(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -775,7 +775,7 @@ class Element : gst.object.ObjectWrap
   gst.types.StateChangeReturn getState(out gst.types.State state, out gst.types.State pending, gst.types.ClockTime timeout)
   {
     GstStateChangeReturn _cretval;
-    _cretval = gst_element_get_state(cast(GstElement*)cPtr, &state, &pending, timeout);
+    _cretval = gst_element_get_state(cast(GstElement*)this._cPtr, &state, &pending, timeout);
     gst.types.StateChangeReturn _retval = cast(gst.types.StateChangeReturn)_cretval;
     return _retval;
   }
@@ -795,8 +795,8 @@ class Element : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_get_static_pad(cast(GstElement*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_get_static_pad(cast(GstElement*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -813,7 +813,7 @@ class Element : gst.object.ObjectWrap
   bool isLockedState()
   {
     bool _retval;
-    _retval = gst_element_is_locked_state(cast(GstElement*)cPtr);
+    _retval = gst_element_is_locked_state(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -831,7 +831,7 @@ class Element : gst.object.ObjectWrap
   gst.iterator.Iterator iteratePads()
   {
     GstIterator* _cretval;
-    _cretval = gst_element_iterate_pads(cast(GstElement*)cPtr);
+    _cretval = gst_element_iterate_pads(cast(GstElement*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -848,7 +848,7 @@ class Element : gst.object.ObjectWrap
   gst.iterator.Iterator iterateSinkPads()
   {
     GstIterator* _cretval;
-    _cretval = gst_element_iterate_sink_pads(cast(GstElement*)cPtr);
+    _cretval = gst_element_iterate_sink_pads(cast(GstElement*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -865,7 +865,7 @@ class Element : gst.object.ObjectWrap
   gst.iterator.Iterator iterateSrcPads()
   {
     GstIterator* _cretval;
-    _cretval = gst_element_iterate_src_pads(cast(GstElement*)cPtr);
+    _cretval = gst_element_iterate_src_pads(cast(GstElement*)this._cPtr);
     auto _retval = _cretval ? new gst.iterator.Iterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -887,7 +887,7 @@ class Element : gst.object.ObjectWrap
   bool link(gst.element.Element dest)
   {
     bool _retval;
-    _retval = gst_element_link(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null);
+    _retval = gst_element_link(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -910,7 +910,7 @@ class Element : gst.object.ObjectWrap
   bool linkFiltered(gst.element.Element dest, gst.caps.Caps filter = null)
   {
     bool _retval;
-    _retval = gst_element_link_filtered(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _retval = gst_element_link_filtered(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -933,7 +933,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname);
+    _retval = gst_element_link_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
     return _retval;
   }
 
@@ -958,7 +958,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_filtered(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter.cPtr(No.Dup) : null);
+    _retval = gst_element_link_pads_filtered(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, filter ? cast(GstCaps*)filter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -988,7 +988,7 @@ class Element : gst.object.ObjectWrap
     bool _retval;
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    _retval = gst_element_link_pads_full(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname, flags);
+    _retval = gst_element_link_pads_full(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname, flags);
     return _retval;
   }
 
@@ -1012,7 +1012,7 @@ class Element : gst.object.ObjectWrap
   */
   void lostState()
   {
-    gst_element_lost_state(cast(GstElement*)cPtr);
+    gst_element_lost_state(cast(GstElement*)this._cPtr);
   }
 
   /**
@@ -1043,7 +1043,7 @@ class Element : gst.object.ObjectWrap
     char* _debug_ = debug_.toCString(Yes.Alloc);
     const(char)* _file = file.toCString(No.Alloc);
     const(char)* _function_ = function_.toCString(No.Alloc);
-    gst_element_message_full(cast(GstElement*)cPtr, type, domain, code, _text, _debug_, _file, _function_, line);
+    gst_element_message_full(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line);
   }
 
   /**
@@ -1073,7 +1073,7 @@ class Element : gst.object.ObjectWrap
     char* _debug_ = debug_.toCString(Yes.Alloc);
     const(char)* _file = file.toCString(No.Alloc);
     const(char)* _function_ = function_.toCString(No.Alloc);
-    gst_element_message_full_with_details(cast(GstElement*)cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure.cPtr(Yes.Dup) : null);
+    gst_element_message_full_with_details(cast(GstElement*)this._cPtr, type, domain, code, _text, _debug_, _file, _function_, line, structure ? cast(GstStructure*)structure._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -1089,7 +1089,7 @@ class Element : gst.object.ObjectWrap
   */
   void noMorePads()
   {
-    gst_element_no_more_pads(cast(GstElement*)cPtr);
+    gst_element_no_more_pads(cast(GstElement*)this._cPtr);
   }
 
   /**
@@ -1107,7 +1107,7 @@ class Element : gst.object.ObjectWrap
   bool postMessage(gst.message.Message message)
   {
     bool _retval;
-    _retval = gst_element_post_message(cast(GstElement*)cPtr, message ? cast(GstMessage*)message.cPtr(Yes.Dup) : null);
+    _retval = gst_element_post_message(cast(GstElement*)this._cPtr, message ? cast(GstMessage*)message._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1123,8 +1123,8 @@ class Element : gst.object.ObjectWrap
   gst.clock.Clock provideClock()
   {
     GstClock* _cretval;
-    _cretval = gst_element_provide_clock(cast(GstElement*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    _cretval = gst_element_provide_clock(cast(GstElement*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1146,7 +1146,7 @@ class Element : gst.object.ObjectWrap
   bool query(gst.query.Query query)
   {
     bool _retval;
-    _retval = gst_element_query(cast(GstElement*)cPtr, query ? cast(GstQuery*)query.cPtr(No.Dup) : null);
+    _retval = gst_element_query(cast(GstElement*)this._cPtr, query ? cast(GstQuery*)query._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1163,7 +1163,7 @@ class Element : gst.object.ObjectWrap
   bool queryConvert(gst.types.Format srcFormat, long srcVal, gst.types.Format destFormat, out long destVal)
   {
     bool _retval;
-    _retval = gst_element_query_convert(cast(GstElement*)cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
+    _retval = gst_element_query_convert(cast(GstElement*)this._cPtr, srcFormat, srcVal, destFormat, cast(long*)&destVal);
     return _retval;
   }
 
@@ -1185,7 +1185,7 @@ class Element : gst.object.ObjectWrap
   bool queryDuration(gst.types.Format format, out long duration)
   {
     bool _retval;
-    _retval = gst_element_query_duration(cast(GstElement*)cPtr, format, cast(long*)&duration);
+    _retval = gst_element_query_duration(cast(GstElement*)this._cPtr, format, cast(long*)&duration);
     return _retval;
   }
 
@@ -1209,7 +1209,7 @@ class Element : gst.object.ObjectWrap
   bool queryPosition(gst.types.Format format, out long cur)
   {
     bool _retval;
-    _retval = gst_element_query_position(cast(GstElement*)cPtr, format, cast(long*)&cur);
+    _retval = gst_element_query_position(cast(GstElement*)this._cPtr, format, cast(long*)&cur);
     return _retval;
   }
 
@@ -1228,7 +1228,7 @@ class Element : gst.object.ObjectWrap
   */
   void releaseRequestPad(gst.pad.Pad pad)
   {
-    gst_element_release_request_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_element_release_request_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1259,14 +1259,14 @@ class Element : gst.object.ObjectWrap
   bool removePad(gst.pad.Pad pad)
   {
     bool _retval;
-    _retval = gst_element_remove_pad(cast(GstElement*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    _retval = gst_element_remove_pad(cast(GstElement*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
     return _retval;
   }
 
   /** */
   void removePropertyNotifyWatch(gulong watchId)
   {
-    gst_element_remove_property_notify_watch(cast(GstElement*)cPtr, watchId);
+    gst_element_remove_property_notify_watch(cast(GstElement*)this._cPtr, watchId);
   }
 
   /**
@@ -1289,8 +1289,8 @@ class Element : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_request_pad(cast(GstElement*)cPtr, templ ? cast(GstPadTemplate*)templ.cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_request_pad(cast(GstElement*)this._cPtr, templ ? cast(GstPadTemplate*)templ._cPtr(No.Dup) : null, _name, caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1317,8 +1317,8 @@ class Element : gst.object.ObjectWrap
   {
     GstPad* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gst_element_request_pad_simple(cast(GstElement*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
+    _cretval = gst_element_request_pad_simple(cast(GstElement*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.pad.Pad)(cast(GstPad*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -1343,7 +1343,7 @@ class Element : gst.object.ObjectWrap
   bool seek(double rate, gst.types.Format format, gst.types.SeekFlags flags, gst.types.SeekType startType, long start, gst.types.SeekType stopType, long stop)
   {
     bool _retval;
-    _retval = gst_element_seek(cast(GstElement*)cPtr, rate, format, flags, startType, start, stopType, stop);
+    _retval = gst_element_seek(cast(GstElement*)this._cPtr, rate, format, flags, startType, start, stopType, stop);
     return _retval;
   }
 
@@ -1377,7 +1377,7 @@ class Element : gst.object.ObjectWrap
   bool seekSimple(gst.types.Format format, gst.types.SeekFlags seekFlags, long seekPos)
   {
     bool _retval;
-    _retval = gst_element_seek_simple(cast(GstElement*)cPtr, format, seekFlags, seekPos);
+    _retval = gst_element_seek_simple(cast(GstElement*)this._cPtr, format, seekFlags, seekPos);
     return _retval;
   }
 
@@ -1399,7 +1399,7 @@ class Element : gst.object.ObjectWrap
   bool sendEvent(gst.event.Event event)
   {
     bool _retval;
-    _retval = gst_element_send_event(cast(GstElement*)cPtr, event ? cast(GstEvent*)event.cPtr(Yes.Dup) : null);
+    _retval = gst_element_send_event(cast(GstElement*)this._cPtr, event ? cast(GstEvent*)event._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -1413,7 +1413,7 @@ class Element : gst.object.ObjectWrap
   */
   void setBaseTime(gst.types.ClockTime time)
   {
-    gst_element_set_base_time(cast(GstElement*)cPtr, time);
+    gst_element_set_base_time(cast(GstElement*)this._cPtr, time);
   }
 
   /**
@@ -1427,7 +1427,7 @@ class Element : gst.object.ObjectWrap
   */
   void setBus(gst.bus.Bus bus = null)
   {
-    gst_element_set_bus(cast(GstElement*)cPtr, bus ? cast(GstBus*)bus.cPtr(No.Dup) : null);
+    gst_element_set_bus(cast(GstElement*)this._cPtr, bus ? cast(GstBus*)bus._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1446,7 +1446,7 @@ class Element : gst.object.ObjectWrap
   bool setClock(gst.clock.Clock clock = null)
   {
     bool _retval;
-    _retval = gst_element_set_clock(cast(GstElement*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    _retval = gst_element_set_clock(cast(GstElement*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1460,7 +1460,7 @@ class Element : gst.object.ObjectWrap
   */
   void setContext(gst.context.Context context)
   {
-    gst_element_set_context(cast(GstElement*)cPtr, context ? cast(GstContext*)context.cPtr(No.Dup) : null);
+    gst_element_set_context(cast(GstElement*)this._cPtr, context ? cast(GstContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1481,7 +1481,7 @@ class Element : gst.object.ObjectWrap
   bool setLockedState(bool lockedState)
   {
     bool _retval;
-    _retval = gst_element_set_locked_state(cast(GstElement*)cPtr, lockedState);
+    _retval = gst_element_set_locked_state(cast(GstElement*)this._cPtr, lockedState);
     return _retval;
   }
 
@@ -1504,7 +1504,7 @@ class Element : gst.object.ObjectWrap
   */
   void setStartTime(gst.types.ClockTime time)
   {
-    gst_element_set_start_time(cast(GstElement*)cPtr, time);
+    gst_element_set_start_time(cast(GstElement*)this._cPtr, time);
   }
 
   /**
@@ -1531,7 +1531,7 @@ class Element : gst.object.ObjectWrap
   gst.types.StateChangeReturn setState(gst.types.State state)
   {
     GstStateChangeReturn _cretval;
-    _cretval = gst_element_set_state(cast(GstElement*)cPtr, state);
+    _cretval = gst_element_set_state(cast(GstElement*)this._cPtr, state);
     gst.types.StateChangeReturn _retval = cast(gst.types.StateChangeReturn)_cretval;
     return _retval;
   }
@@ -1546,7 +1546,7 @@ class Element : gst.object.ObjectWrap
   bool syncStateWithParent()
   {
     bool _retval;
-    _retval = gst_element_sync_state_with_parent(cast(GstElement*)cPtr);
+    _retval = gst_element_sync_state_with_parent(cast(GstElement*)this._cPtr);
     return _retval;
   }
 
@@ -1562,7 +1562,7 @@ class Element : gst.object.ObjectWrap
   */
   void unlink(gst.element.Element dest)
   {
-    gst_element_unlink(cast(GstElement*)cPtr, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null);
+    gst_element_unlink(cast(GstElement*)this._cPtr, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1579,7 +1579,7 @@ class Element : gst.object.ObjectWrap
   {
     const(char)* _srcpadname = srcpadname.toCString(No.Alloc);
     const(char)* _destpadname = destpadname.toCString(No.Alloc);
-    gst_element_unlink_pads(cast(GstElement*)cPtr, _srcpadname, dest ? cast(GstElement*)dest.cPtr(No.Dup) : null, _destpadname);
+    gst_element_unlink_pads(cast(GstElement*)this._cPtr, _srcpadname, dest ? cast(GstElement*)dest._cPtr(No.Dup) : null, _destpadname);
   }
 
   /**

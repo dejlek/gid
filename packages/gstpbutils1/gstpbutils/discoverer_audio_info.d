@@ -20,16 +20,16 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_audio_info_get_type != &gidSymbolNotFound ? gst_discoverer_audio_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   uint getBitrate()
   {
     uint _retval;
-    _retval = gst_discoverer_audio_info_get_bitrate(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_bitrate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -50,7 +50,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   ulong getChannelMask()
   {
     ulong _retval;
-    _retval = gst_discoverer_audio_info_get_channel_mask(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_channel_mask(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   uint getChannels()
   {
     uint _retval;
-    _retval = gst_discoverer_audio_info_get_channels(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_channels(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   uint getDepth()
   {
     uint _retval;
-    _retval = gst_discoverer_audio_info_get_depth(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_depth(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   string getLanguage()
   {
     const(char)* _cretval;
-    _cretval = gst_discoverer_audio_info_get_language(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _cretval = gst_discoverer_audio_info_get_language(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -83,7 +83,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   uint getMaxBitrate()
   {
     uint _retval;
-    _retval = gst_discoverer_audio_info_get_max_bitrate(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_max_bitrate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
   uint getSampleRate()
   {
     uint _retval;
-    _retval = gst_discoverer_audio_info_get_sample_rate(cast(const(GstDiscovererAudioInfo)*)cPtr);
+    _retval = gst_discoverer_audio_info_get_sample_rate(cast(const(GstDiscovererAudioInfo)*)this._cPtr);
     return _retval;
   }
 }

@@ -45,22 +45,22 @@ class RTSPUrl : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_url_get_type != &gidSymbolNotFound ? gst_rtsp_url_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,7 +75,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property gstrtsp.types.RTSPLowerTrans transports()
   {
-    return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPUrl*)cPtr).transports;
+    return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPUrl*)this._cPtr).transports;
   }
 
   /**
@@ -85,7 +85,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void transports(gstrtsp.types.RTSPLowerTrans propval)
   {
-    (cast(GstRTSPUrl*)cPtr).transports = cast(GstRTSPLowerTrans)propval;
+    (cast(GstRTSPUrl*)this._cPtr).transports = cast(GstRTSPLowerTrans)propval;
   }
 
   /**
@@ -94,7 +94,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property gstrtsp.types.RTSPFamily family()
   {
-    return cast(gstrtsp.types.RTSPFamily)(cast(GstRTSPUrl*)cPtr).family;
+    return cast(gstrtsp.types.RTSPFamily)(cast(GstRTSPUrl*)this._cPtr).family;
   }
 
   /**
@@ -104,7 +104,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void family(gstrtsp.types.RTSPFamily propval)
   {
-    (cast(GstRTSPUrl*)cPtr).family = cast(GstRTSPFamily)propval;
+    (cast(GstRTSPUrl*)this._cPtr).family = cast(GstRTSPFamily)propval;
   }
 
   /**
@@ -113,7 +113,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property string user()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).user);
   }
 
   /**
@@ -123,8 +123,8 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void user(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).user);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).user);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).user);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).user);
   }
 
   /**
@@ -133,7 +133,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property string passwd()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).passwd);
   }
 
   /**
@@ -143,8 +143,8 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void passwd(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).passwd);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).passwd);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).passwd);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).passwd);
   }
 
   /**
@@ -153,7 +153,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property string host()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).host);
   }
 
   /**
@@ -163,8 +163,8 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void host(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).host);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).host);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).host);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).host);
   }
 
   /**
@@ -173,7 +173,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property ushort port()
   {
-    return (cast(GstRTSPUrl*)cPtr).port;
+    return (cast(GstRTSPUrl*)this._cPtr).port;
   }
 
   /**
@@ -183,7 +183,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void port(ushort propval)
   {
-    (cast(GstRTSPUrl*)cPtr).port = propval;
+    (cast(GstRTSPUrl*)this._cPtr).port = propval;
   }
 
   /**
@@ -192,7 +192,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property string abspath()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).abspath);
   }
 
   /**
@@ -202,8 +202,8 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void abspath(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).abspath);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).abspath);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).abspath);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).abspath);
   }
 
   /**
@@ -212,7 +212,7 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property string query()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
+    return cToD!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).query);
   }
 
   /**
@@ -222,8 +222,8 @@ class RTSPUrl : gobject.boxed.Boxed
   */
   @property void query(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)cPtr).query);
-    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)cPtr).query);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPUrl*)this._cPtr).query);
+    dToC(propval, cast(void*)&(cast(GstRTSPUrl*)this._cPtr).query);
   }
 
   /**
@@ -233,7 +233,7 @@ class RTSPUrl : gobject.boxed.Boxed
   gstrtsp.rtspurl.RTSPUrl copy()
   {
     GstRTSPUrl* _cretval;
-    _cretval = gst_rtsp_url_copy(cast(const(GstRTSPUrl)*)cPtr);
+    _cretval = gst_rtsp_url_copy(cast(const(GstRTSPUrl)*)this._cPtr);
     auto _retval = _cretval ? new gstrtsp.rtspurl.RTSPUrl(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -256,7 +256,7 @@ class RTSPUrl : gobject.boxed.Boxed
   string[] decodePathComponents()
   {
     char** _cretval;
-    _cretval = gst_rtsp_url_decode_path_components(cast(const(GstRTSPUrl)*)cPtr);
+    _cretval = gst_rtsp_url_decode_path_components(cast(const(GstRTSPUrl)*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -281,7 +281,7 @@ class RTSPUrl : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult getPort(out ushort port)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_url_get_port(cast(const(GstRTSPUrl)*)cPtr, cast(ushort*)&port);
+    _cretval = gst_rtsp_url_get_port(cast(const(GstRTSPUrl)*)this._cPtr, cast(ushort*)&port);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -293,7 +293,7 @@ class RTSPUrl : gobject.boxed.Boxed
   string getRequestUri()
   {
     char* _cretval;
-    _cretval = gst_rtsp_url_get_request_uri(cast(const(GstRTSPUrl)*)cPtr);
+    _cretval = gst_rtsp_url_get_request_uri(cast(const(GstRTSPUrl)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -311,7 +311,7 @@ class RTSPUrl : gobject.boxed.Boxed
   {
     char* _cretval;
     const(char)* _controlPath = controlPath.toCString(No.Alloc);
-    _cretval = gst_rtsp_url_get_request_uri_with_control(cast(const(GstRTSPUrl)*)cPtr, _controlPath);
+    _cretval = gst_rtsp_url_get_request_uri_with_control(cast(const(GstRTSPUrl)*)this._cPtr, _controlPath);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -326,7 +326,7 @@ class RTSPUrl : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult setPort(ushort port)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_url_set_port(cast(GstRTSPUrl*)cPtr, port);
+    _cretval = gst_rtsp_url_set_port(cast(GstRTSPUrl*)this._cPtr, port);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

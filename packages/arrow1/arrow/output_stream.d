@@ -26,16 +26,16 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_output_stream_get_type != &gidSymbolNotFound ? garrow_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_output_stream_align(cast(GArrowOutputStream*)cPtr, alignment, &_err);
+    _retval = garrow_output_stream_align(cast(GArrowOutputStream*)this._cPtr, alignment, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -63,7 +63,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   {
     long _retval;
     GError *_err;
-    _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch.cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_output_stream_write_record_batch(cast(GArrowOutputStream*)this._cPtr, recordBatch ? cast(GArrowRecordBatch*)recordBatch._cPtr(No.Dup) : null, options ? cast(GArrowWriteOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -74,7 +74,7 @@ class OutputStream : gobject.object.ObjectWrap, arrow.file.File, arrow.writable.
   {
     long _retval;
     GError *_err;
-    _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)cPtr, tensor ? cast(GArrowTensor*)tensor.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_output_stream_write_tensor(cast(GArrowOutputStream*)this._cPtr, tensor ? cast(GArrowTensor*)tensor._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

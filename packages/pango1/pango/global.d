@@ -127,7 +127,7 @@ void attrBreak(string text, pango.attr_list.AttrList attrList, int offset, pango
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList.cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
+  pango_attr_break(_text, _length, attrList ? cast(PangoAttrList*)attrList._cPtr(No.Dup) : null, offset, _attrs, _attrsLen);
 }
 
 /**
@@ -659,7 +659,7 @@ void break_(string text, pango.analysis.Analysis analysis, pango.types.LogAttr[]
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, _attrs, _attrsLen);
+  pango_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, _attrs, _attrsLen);
 }
 
 /**
@@ -686,7 +686,7 @@ void defaultBreak(string text, pango.analysis.Analysis analysis, pango.types.Log
     _length = cast(int)text.length;
 
   auto _text = cast(const(char)*)text.ptr;
-  pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, &attrs, attrsLen);
+  pango_default_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, &attrs, attrsLen);
 }
 
 /**
@@ -802,7 +802,7 @@ void getLogAttrs(string text, int level, pango.language.Language language, pango
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null, _attrs, _attrsLen);
+  pango_get_log_attrs(_text, _length, level, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null, _attrs, _attrsLen);
 }
 
 /**
@@ -855,7 +855,7 @@ pango.item.Item[] itemize(pango.context.Context context, string text, int startI
 {
   GList* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
-  _cretval = pango_itemize(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
+  _cretval = pango_itemize(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter._cPtr(No.Dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -885,7 +885,7 @@ pango.item.Item[] itemizeWithBaseDir(pango.context.Context context, pango.types.
 {
   GList* _cretval;
   const(char)* _text = text.toCString(No.Alloc);
-  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context.cPtr(No.Dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs.cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter.cPtr(No.Dup) : null);
+  _cretval = pango_itemize_with_base_dir(context ? cast(PangoContext*)context._cPtr(No.Dup) : null, baseDir, _text, startIndex, length, attrs ? cast(PangoAttrList*)attrs._cPtr(No.Dup) : null, cachedIter ? cast(PangoAttrIterator*)cachedIter._cPtr(No.Dup) : null);
   auto _retval = gListToD!(pango.item.Item, GidOwnership.Full)(cast(GList*)_cretval);
   return _retval;
 }
@@ -912,7 +912,7 @@ bool markupParserFinish(glib.markup_parse_context.MarkupParseContext context, ou
   PangoAttrList* _attrList;
   char* _text;
   GError *_err;
-  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context.cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
+  _retval = pango_markup_parser_finish(context ? cast(GMarkupParseContext*)context._cPtr(No.Dup) : null, &_attrList, &_text, cast(dchar*)&accelChar, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   attrList = new pango.attr_list.AttrList(cast(void*)_attrList, Yes.Take);
@@ -1160,7 +1160,7 @@ void quantizeLineGeometry(ref int thickness, ref int position)
 int readLine(void* stream, glib.string_.String str)
 {
   int _retval;
-  _retval = pango_read_line(stream, str ? cast(GString*)str.cPtr(No.Dup) : null);
+  _retval = pango_read_line(stream, str ? cast(GString*)str._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -1222,7 +1222,7 @@ void shape(string text, pango.analysis.Analysis analysis, pango.glyph_string.Gly
     _length = cast(int)text.length;
 
   auto _text = cast(const(char)*)text.ptr;
-  pango_shape(_text, _length, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  pango_shape(_text, _length, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1266,7 +1266,7 @@ void shapeFull(string itemText, string paragraphText, pango.analysis.Analysis an
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null);
+  pango_shape_full(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null);
 }
 
 /**
@@ -1298,7 +1298,7 @@ void shapeItem(pango.item.Item item, string paragraphText, pango.types.LogAttr l
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_item(item ? cast(PangoItem*)item.cPtr(No.Dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  pango_shape_item(item ? cast(PangoItem*)item._cPtr(No.Dup) : null, _paragraphText, _paragraphLength, &logAttrs, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1340,7 +1340,7 @@ void shapeWithFlags(string itemText, string paragraphText, pango.analysis.Analys
     _paragraphLength = cast(int)paragraphText.length;
 
   auto _paragraphText = cast(const(char)*)paragraphText.ptr;
-  pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis.cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs.cPtr(No.Dup) : null, flags);
+  pango_shape_with_flags(_itemText, _itemLength, _paragraphText, _paragraphLength, analysis ? cast(const(PangoAnalysis)*)analysis._cPtr : null, glyphs ? cast(PangoGlyphString*)glyphs._cPtr(No.Dup) : null, flags);
 }
 
 /**
@@ -1402,7 +1402,7 @@ void tailorBreak(string text, pango.analysis.Analysis analysis, int offset, pang
     _attrsLen = cast(int)attrs.length;
 
   auto _attrs = cast(PangoLogAttr*)attrs.ptr;
-  pango_tailor_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis.cPtr : null, offset, _attrs, _attrsLen);
+  pango_tailor_break(_text, _length, analysis ? cast(PangoAnalysis*)analysis._cPtr : null, offset, _attrs, _attrsLen);
 }
 
 /**

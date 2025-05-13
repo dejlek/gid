@@ -38,7 +38,7 @@ template ActionMapT()
   */
   override void addAction(gio.action.Action action)
   {
-    g_action_map_add_action(cast(GActionMap*)cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action).cPtr(No.Dup) : null);
+    g_action_map_add_action(cast(GActionMap*)this._cPtr, action ? cast(GAction*)(cast(gobject.object.ObjectWrap)action)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -54,8 +54,8 @@ template ActionMapT()
   {
     GAction* _cretval;
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    _cretval = g_action_map_lookup_action(cast(GActionMap*)cPtr, _actionName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
+    _cretval = g_action_map_lookup_action(cast(GActionMap*)this._cPtr, _actionName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.action.Action)(cast(GAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,6 +70,6 @@ template ActionMapT()
   override void removeAction(string actionName)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    g_action_map_remove_action(cast(GActionMap*)cPtr, _actionName);
+    g_action_map_remove_action(cast(GActionMap*)this._cPtr, _actionName);
   }
 }

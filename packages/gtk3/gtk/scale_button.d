@@ -44,16 +44,16 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scale_button_get_type != &gidSymbolNotFound ? gtk_scale_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -135,8 +135,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scale_button_get_adjustment(cast(GtkScaleButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -147,8 +147,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   gtk.button.Button getMinusButton()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_scale_button_get_minus_button(cast(GtkScaleButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -159,8 +159,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   gtk.button.Button getPlusButton()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_scale_button_get_plus_button(cast(GtkScaleButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -171,8 +171,8 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   gtk.widget.Widget getPopup()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_scale_button_get_popup(cast(GtkScaleButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   double getValue()
   {
     double _retval;
-    _retval = gtk_scale_button_get_value(cast(GtkScaleButton*)cPtr);
+    _retval = gtk_scale_button_get_value(cast(GtkScaleButton*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_scale_button_set_adjustment(cast(GtkScaleButton*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -214,7 +214,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
       _tmpicons ~= s.toCString(No.Alloc);
     _tmpicons ~= null;
     const(char*)* _icons = _tmpicons.ptr;
-    gtk_scale_button_set_icons(cast(GtkScaleButton*)cPtr, _icons);
+    gtk_scale_button_set_icons(cast(GtkScaleButton*)this._cPtr, _icons);
   }
 
   /**
@@ -228,7 +228,7 @@ class ScaleButton : gtk.button.Button, gtk.orientable.Orientable
   */
   void setValue(double value)
   {
-    gtk_scale_button_set_value(cast(GtkScaleButton*)cPtr, value);
+    gtk_scale_button_set_value(cast(GtkScaleButton*)this._cPtr, value);
   }
 
   /**

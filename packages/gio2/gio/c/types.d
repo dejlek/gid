@@ -3629,7 +3629,7 @@ struct GAppInfoMonitor;
 struct GAppLaunchContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GAppLaunchContextPrivate* priv;
@@ -3799,7 +3799,7 @@ struct GAppLaunchContextPrivate;
 struct GApplication
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GApplicationPrivate* priv;
@@ -4090,7 +4090,7 @@ struct GApplicationClass
 struct GApplicationCommandLine
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GApplicationCommandLinePrivate* priv;
@@ -4361,7 +4361,7 @@ struct GAsyncResultIface
   /**
       Gets the source object that issued the asynchronous operation.
   */
-  extern(C) ObjectC* function(GAsyncResult* res) getSourceObject;
+  extern(C) GObject* function(GAsyncResult* res) getSourceObject;
 
   /**
       Checks if a result is tagged with a particular source.
@@ -4483,7 +4483,7 @@ struct GBytesIcon;
 struct GCancellable
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GCancellablePrivate* priv;
@@ -4974,7 +4974,7 @@ struct GDBusInterfaceInfo
 struct GDBusInterfaceSkeleton
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusInterfaceSkeletonPrivate* priv;
@@ -5314,7 +5314,7 @@ struct GDBusObjectManager;
 struct GDBusObjectManagerClient
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusObjectManagerClientPrivate* priv;
@@ -5424,7 +5424,7 @@ struct GDBusObjectManagerIface
 struct GDBusObjectManagerServer
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusObjectManagerServerPrivate* priv;
@@ -5456,7 +5456,7 @@ struct GDBusObjectManagerServerPrivate;
 struct GDBusObjectProxy
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusObjectProxyPrivate* priv;
@@ -5489,7 +5489,7 @@ struct GDBusObjectProxyPrivate;
 struct GDBusObjectSkeleton
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusObjectSkeletonPrivate* priv;
@@ -5599,7 +5599,7 @@ struct GDBusPropertyInfo
 struct GDBusProxy
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GDBusProxyPrivate* priv;
@@ -6009,7 +6009,7 @@ struct GDebugController;
 struct GDebugControllerDBus
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -6431,7 +6431,7 @@ struct GEmblemClass;
 struct GEmblemedIcon
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GEmblemedIconPrivate* priv;
@@ -6648,7 +6648,7 @@ struct GFileDescriptorBasedIface
 struct GFileEnumerator
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GFileEnumeratorPrivate* priv;
@@ -7449,7 +7449,7 @@ struct GFileInputStreamPrivate;
 struct GFileMonitor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GFileMonitorPrivate* priv;
@@ -7792,7 +7792,7 @@ struct GIOSchedulerJob;
 struct GIOStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GIOStreamPrivate* priv;
@@ -7947,7 +7947,7 @@ struct GIconIface
 struct GInetAddress
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GInetAddressPrivate* priv;
@@ -7975,7 +7975,7 @@ struct GInetAddressClass
 struct GInetAddressMask
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GInetAddressMaskPrivate* priv;
@@ -8148,7 +8148,7 @@ struct GInputMessage
 struct GInputStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GInputStreamPrivate* priv;
@@ -8316,7 +8316,7 @@ struct GListModelInterface
   /**
       the virtual function pointer for [gio.list_model.ListModel.getItem]
   */
-  extern(C) ObjectC* function(GListModel* list, uint position) getItem;
+  extern(C) GObject* function(GListModel* list, uint position) getItem;
 }
 
 /**
@@ -8539,7 +8539,7 @@ struct GMenu;
 struct GMenuAttributeIter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GMenuAttributeIterPrivate* priv;
@@ -8571,7 +8571,7 @@ struct GMenuItem;
 struct GMenuLinkIter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GMenuLinkIterPrivate* priv;
@@ -8713,7 +8713,7 @@ struct GMenuLinkIterPrivate;
 struct GMenuModel
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GMenuModelPrivate* priv;
@@ -8953,7 +8953,7 @@ struct GMountIface
 struct GMountOperation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GMountOperationPrivate* priv;
@@ -9071,7 +9071,7 @@ struct GNativeVolumeMonitorClass
 struct GNetworkAddress
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GNetworkAddressPrivate* priv;
@@ -9145,7 +9145,7 @@ struct GNetworkMonitorInterface
 struct GNetworkService
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GNetworkServicePrivate* priv;
@@ -9276,7 +9276,7 @@ struct GOutputMessage
 struct GOutputStream
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GOutputStreamPrivate* priv;
@@ -9391,7 +9391,7 @@ struct GOutputVector
 struct GPermission
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GPermissionPrivate* priv;
@@ -9877,7 +9877,7 @@ struct GRemoteActionGroupInterface
 struct GResolver
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GResolverPrivate* priv;
@@ -10456,7 +10456,7 @@ struct GSeekableIface
 struct GSettings
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSettingsPrivate* priv;
@@ -10490,7 +10490,7 @@ struct GSettings
 struct GSettingsBackend
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSettingsBackendPrivate* priv;
@@ -10706,7 +10706,7 @@ struct GSimpleAction;
 struct GSimpleActionGroup
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSimpleActionGroupPrivate* priv;
@@ -10935,7 +10935,7 @@ struct GSimplePermission;
 struct GSimpleProxyResolver
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSimpleProxyResolverPrivate* priv;
@@ -11041,7 +11041,7 @@ struct GSimpleProxyResolverPrivate;
 struct GSocket
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSocketPrivate* priv;
@@ -11056,7 +11056,7 @@ struct GSocket
 struct GSocketAddress
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -11095,7 +11095,7 @@ struct GSocketAddressClass
 struct GSocketAddressEnumerator
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -11177,7 +11177,7 @@ struct GSocketClass
 struct GSocketClient
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSocketClientPrivate* priv;
@@ -11377,7 +11377,7 @@ struct GSocketConnectionPrivate;
 struct GSocketControlMessage
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSocketControlMessagePrivate* priv;
@@ -11455,7 +11455,7 @@ struct GSocketControlMessagePrivate;
 struct GSocketListener
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GSocketListenerPrivate* priv;
@@ -11547,7 +11547,7 @@ struct GSocketServiceClass
   /**
       signal emitted when new connections are accepted
   */
-  extern(C) bool function(GSocketService* service, GSocketConnection* connection, ObjectC* sourceObject) incoming;
+  extern(C) bool function(GSocketService* service, GSocketConnection* connection, GObject* sourceObject) incoming;
 
   /** */
   extern(C) void function() GReserved1;
@@ -12415,7 +12415,7 @@ struct GThreadedSocketServiceClass
   GSocketServiceClass parentClass;
 
   /** */
-  extern(C) bool function(GThreadedSocketService* service, GSocketConnection* connection, ObjectC* sourceObject) run;
+  extern(C) bool function(GThreadedSocketService* service, GSocketConnection* connection, GObject* sourceObject) run;
 
   /** */
   extern(C) void function() GReserved1;
@@ -12509,7 +12509,7 @@ struct GTlsBackendInterface
 struct GTlsCertificate
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GTlsCertificatePrivate* priv;
@@ -12632,7 +12632,7 @@ struct GTlsConnectionPrivate;
 struct GTlsDatabase
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GTlsDatabasePrivate* priv;
@@ -12779,7 +12779,7 @@ struct GTlsFileDatabaseInterface
 struct GTlsInteraction
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GTlsInteractionPrivate* priv;
@@ -12862,7 +12862,7 @@ struct GTlsInteractionPrivate;
 struct GTlsPassword
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GTlsPasswordPrivate* priv;
@@ -13016,7 +13016,7 @@ struct GUnixCredentialsMessagePrivate;
 struct GUnixFDList
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   GUnixFDListPrivate* priv;
@@ -13243,7 +13243,7 @@ struct GUnixSocketAddressPrivate;
 struct GVfs
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */
@@ -13487,7 +13487,7 @@ struct GVolumeIface
 struct GVolumeMonitor
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   void* priv;
@@ -13601,7 +13601,7 @@ struct GZlibDecompressorClass
   GObjectClass parentClass;
 }
 
-alias extern(C) void function(ObjectC* sourceObject, GAsyncResult* res, void* data) GAsyncReadyCallback;
+alias extern(C) void function(GObject* sourceObject, GAsyncResult* res, void* data) GAsyncReadyCallback;
 
 alias extern(C) void function(GDBusConnection* connection, const(char)* name, void* userData) GBusAcquiredCallback;
 
@@ -13645,7 +13645,7 @@ alias extern(C) bool function(const(char)* fileContents, long fileSize, void* ca
 
 alias extern(C) bool function(GIOSchedulerJob* job, GCancellable* cancellable, void* data) GIOSchedulerJobFunc;
 
-alias extern(C) bool function(ObjectC* pollableStream, void* data) GPollableSourceFunc;
+alias extern(C) bool function(GObject* pollableStream, void* data) GPollableSourceFunc;
 
 alias extern(C) void* function(void* data, size_t size) GReallocFunc;
 
@@ -13655,11 +13655,11 @@ alias extern(C) GVariant* function(const(GValue)* value, const(GVariantType)* ex
 
 alias extern(C) bool function(GVariant* value, void** result, void* userData) GSettingsGetMapping;
 
-alias extern(C) void function(GSimpleAsyncResult* res, ObjectC* object, GCancellable* cancellable) GSimpleAsyncThreadFunc;
+alias extern(C) void function(GSimpleAsyncResult* res, GObject* object, GCancellable* cancellable) GSimpleAsyncThreadFunc;
 
 alias extern(C) bool function(GSocket* socket, GIOCondition condition, void* data) GSocketSourceFunc;
 
-alias extern(C) void function(GTask* task, ObjectC* sourceObject, void* taskData, GCancellable* cancellable) GTaskThreadFunc;
+alias extern(C) void function(GTask* task, GObject* sourceObject, void* taskData, GCancellable* cancellable) GTaskThreadFunc;
 
 alias extern(C) GFile* function(GVfs* vfs, const(char)* identifier, void* userData) GVfsFileLookupFunc;
 

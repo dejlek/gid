@@ -62,16 +62,16 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_center_box_get_type != &gidSymbolNotFound ? gtk_center_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -225,7 +225,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.types.BaselinePosition getBaselinePosition()
   {
     GtkBaselinePosition _cretval;
-    _cretval = gtk_center_box_get_baseline_position(cast(GtkCenterBox*)cPtr);
+    _cretval = gtk_center_box_get_baseline_position(cast(GtkCenterBox*)this._cPtr);
     gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
@@ -237,8 +237,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_center_box_get_center_widget(cast(GtkCenterBox*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -249,8 +249,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getEndWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_center_box_get_end_widget(cast(GtkCenterBox*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -261,7 +261,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   bool getShrinkCenterLast()
   {
     bool _retval;
-    _retval = gtk_center_box_get_shrink_center_last(cast(GtkCenterBox*)cPtr);
+    _retval = gtk_center_box_get_shrink_center_last(cast(GtkCenterBox*)this._cPtr);
     return _retval;
   }
 
@@ -272,8 +272,8 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getStartWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_center_box_get_start_widget(cast(GtkCenterBox*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setBaselinePosition(gtk.types.BaselinePosition position)
   {
-    gtk_center_box_set_baseline_position(cast(GtkCenterBox*)cPtr, position);
+    gtk_center_box_set_baseline_position(cast(GtkCenterBox*)this._cPtr, position);
   }
 
   /**
@@ -304,7 +304,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setCenterWidget(gtk.widget.Widget child = null)
   {
-    gtk_center_box_set_center_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_center_box_set_center_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -317,7 +317,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setEndWidget(gtk.widget.Widget child = null)
   {
-    gtk_center_box_set_end_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_center_box_set_end_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -335,7 +335,7 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setShrinkCenterLast(bool shrinkCenterLast)
   {
-    gtk_center_box_set_shrink_center_last(cast(GtkCenterBox*)cPtr, shrinkCenterLast);
+    gtk_center_box_set_shrink_center_last(cast(GtkCenterBox*)this._cPtr, shrinkCenterLast);
   }
 
   /**
@@ -348,6 +348,6 @@ class CenterBox : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setStartWidget(gtk.widget.Widget child = null)
   {
-    gtk_center_box_set_start_widget(cast(GtkCenterBox*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_center_box_set_start_widget(cast(GtkCenterBox*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

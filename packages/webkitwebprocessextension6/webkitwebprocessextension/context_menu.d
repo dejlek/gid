@@ -35,16 +35,16 @@ class ContextMenu : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_context_menu_get_type != &gidSymbolNotFound ? webkit_context_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class ContextMenu : gobject.object.ObjectWrap
     auto _items = gListFromD!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(items);
     scope(exit) containerFree!(GList*, webkitwebprocessextension.context_menu_item.ContextMenuItem, GidOwnership.None)(_items);
     _cretval = webkit_context_menu_new_with_items(_items);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu.ContextMenu)(cast(WebKitContextMenu*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void append(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
   {
-    webkit_context_menu_append(cast(WebKitContextMenu*)cPtr, item ? cast(WebKitContextMenuItem*)item.cPtr(No.Dup) : null);
+    webkit_context_menu_append(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -112,8 +112,8 @@ class ContextMenu : gobject.object.ObjectWrap
   webkitwebprocessextension.context_menu_item.ContextMenuItem first()
   {
     WebKitContextMenuItem* _cretval;
-    _cretval = webkit_context_menu_first(cast(WebKitContextMenu*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    _cretval = webkit_context_menu_first(cast(WebKitContextMenu*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class ContextMenu : gobject.object.ObjectWrap
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;
-    _cretval = webkit_context_menu_get_event(cast(WebKitContextMenu*)cPtr);
+    _cretval = webkit_context_menu_get_event(cast(WebKitContextMenu*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -155,8 +155,8 @@ class ContextMenu : gobject.object.ObjectWrap
   webkitwebprocessextension.context_menu_item.ContextMenuItem getItemAtPosition(uint position)
   {
     WebKitContextMenuItem* _cretval;
-    _cretval = webkit_context_menu_get_item_at_position(cast(WebKitContextMenu*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    _cretval = webkit_context_menu_get_item_at_position(cast(WebKitContextMenu*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class ContextMenu : gobject.object.ObjectWrap
   webkitwebprocessextension.context_menu_item.ContextMenuItem[] getItems()
   {
     GList* _cretval;
-    _cretval = webkit_context_menu_get_items(cast(WebKitContextMenu*)cPtr);
+    _cretval = webkit_context_menu_get_items(cast(WebKitContextMenu*)this._cPtr);
     auto _retval = gListToD!(webkitwebprocessextension.context_menu_item.ContextMenuItem, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -180,7 +180,7 @@ class ContextMenu : gobject.object.ObjectWrap
   uint getNItems()
   {
     uint _retval;
-    _retval = webkit_context_menu_get_n_items(cast(WebKitContextMenu*)cPtr);
+    _retval = webkit_context_menu_get_n_items(cast(WebKitContextMenu*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class ContextMenu : gobject.object.ObjectWrap
   glib.variant.Variant getUserData()
   {
     GVariant* _cretval;
-    _cretval = webkit_context_menu_get_user_data(cast(WebKitContextMenu*)cPtr);
+    _cretval = webkit_context_menu_get_user_data(cast(WebKitContextMenu*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -212,7 +212,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void insert(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position)
   {
-    webkit_context_menu_insert(cast(WebKitContextMenu*)cPtr, item ? cast(WebKitContextMenuItem*)item.cPtr(No.Dup) : null, position);
+    webkit_context_menu_insert(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -223,8 +223,8 @@ class ContextMenu : gobject.object.ObjectWrap
   webkitwebprocessextension.context_menu_item.ContextMenuItem last()
   {
     WebKitContextMenuItem* _cretval;
-    _cretval = webkit_context_menu_last(cast(WebKitContextMenu*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
+    _cretval = webkit_context_menu_last(cast(WebKitContextMenu*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.context_menu_item.ContextMenuItem)(cast(WebKitContextMenuItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -242,7 +242,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void moveItem(webkitwebprocessextension.context_menu_item.ContextMenuItem item, int position)
   {
-    webkit_context_menu_move_item(cast(WebKitContextMenu*)cPtr, item ? cast(WebKitContextMenuItem*)item.cPtr(No.Dup) : null, position);
+    webkit_context_menu_move_item(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -253,7 +253,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void prepend(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
   {
-    webkit_context_menu_prepend(cast(WebKitContextMenu*)cPtr, item ? cast(WebKitContextMenuItem*)item.cPtr(No.Dup) : null);
+    webkit_context_menu_prepend(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -266,7 +266,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void remove(webkitwebprocessextension.context_menu_item.ContextMenuItem item)
   {
-    webkit_context_menu_remove(cast(WebKitContextMenu*)cPtr, item ? cast(WebKitContextMenuItem*)item.cPtr(No.Dup) : null);
+    webkit_context_menu_remove(cast(WebKitContextMenu*)this._cPtr, item ? cast(WebKitContextMenuItem*)item._cPtr(No.Dup) : null);
   }
 
   /**
@@ -274,7 +274,7 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void removeAll()
   {
-    webkit_context_menu_remove_all(cast(WebKitContextMenu*)cPtr);
+    webkit_context_menu_remove_all(cast(WebKitContextMenu*)this._cPtr);
   }
 
   /**
@@ -289,6 +289,6 @@ class ContextMenu : gobject.object.ObjectWrap
   */
   void setUserData(glib.variant.Variant userData)
   {
-    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)cPtr, userData ? cast(GVariant*)userData.cPtr(No.Dup) : null);
+    webkit_context_menu_set_user_data(cast(WebKitContextMenu*)this._cPtr, userData ? cast(GVariant*)userData._cPtr(No.Dup) : null);
   }
 }

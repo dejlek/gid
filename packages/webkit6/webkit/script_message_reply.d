@@ -23,22 +23,22 @@ class ScriptMessageReply : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_script_message_reply_get_type != &gidSymbolNotFound ? webkit_script_message_reply_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class ScriptMessageReply : gobject.boxed.Boxed
   void returnErrorMessage(string errorMessage)
   {
     const(char)* _errorMessage = errorMessage.toCString(No.Alloc);
-    webkit_script_message_reply_return_error_message(cast(WebKitScriptMessageReply*)cPtr, _errorMessage);
+    webkit_script_message_reply_return_error_message(cast(WebKitScriptMessageReply*)this._cPtr, _errorMessage);
   }
 
   /**
@@ -69,6 +69,6 @@ class ScriptMessageReply : gobject.boxed.Boxed
   */
   void returnValue(javascriptcore.value.Value replyValue)
   {
-    webkit_script_message_reply_return_value(cast(WebKitScriptMessageReply*)cPtr, replyValue ? cast(JSCValue*)replyValue.cPtr(No.Dup) : null);
+    webkit_script_message_reply_return_value(cast(WebKitScriptMessageReply*)this._cPtr, replyValue ? cast(JSCValue*)replyValue._cPtr(No.Dup) : null);
   }
 }

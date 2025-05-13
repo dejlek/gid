@@ -18,16 +18,16 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_path_descriptor_get_type != &gidSymbolNotFound ? gaflight_path_descriptor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class PathDescriptor : arrowflight.descriptor.Descriptor
   string[] getPaths()
   {
     char** _cretval;
-    _cretval = gaflight_path_descriptor_get_paths(cast(GAFlightPathDescriptor*)cPtr);
+    _cretval = gaflight_path_descriptor_get_paths(cast(GAFlightPathDescriptor*)this._cPtr);
     string[] _retval;
 
     if (_cretval)

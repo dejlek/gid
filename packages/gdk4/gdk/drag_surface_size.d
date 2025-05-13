@@ -27,7 +27,7 @@ class DragSurfaceSize
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -41,6 +41,6 @@ class DragSurfaceSize
   */
   void setSize(int width, int height)
   {
-    gdk_drag_surface_size_set_size(cast(GdkDragSurfaceSize*)cPtr, width, height);
+    gdk_drag_surface_size_set_size(cast(GdkDragSurfaceSize*)this._cPtr, width, height);
   }
 }

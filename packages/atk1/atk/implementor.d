@@ -26,7 +26,7 @@ class Implementor
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -40,8 +40,8 @@ class Implementor
   atk.object.ObjectWrap refAccessible()
   {
     AtkObject* _cretval;
-    _cretval = atk_implementor_ref_accessible(cast(AtkImplementor*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_implementor_ref_accessible(cast(AtkImplementor*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 }

@@ -28,16 +28,16 @@ class ATContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_at_context_get_type != &gidSymbolNotFound ? gtk_at_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -106,8 +106,8 @@ class ATContext : gobject.object.ObjectWrap
   static gtk.atcontext.ATContext create(gtk.types.AccessibleRole accessibleRole, gtk.accessible.Accessible accessible, gdk.display.Display display)
   {
     GtkATContext* _cretval;
-    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible).cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
+    _cretval = gtk_at_context_create(accessibleRole, accessible ? cast(GtkAccessible*)(cast(gobject.object.ObjectWrap)accessible)._cPtr(No.Dup) : null, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.atcontext.ATContext)(cast(GtkATContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -118,8 +118,8 @@ class ATContext : gobject.object.ObjectWrap
   gtk.accessible.Accessible getAccessible()
   {
     GtkAccessible* _cretval;
-    _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, No.Take);
+    _cretval = gtk_at_context_get_accessible(cast(GtkATContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accessible.Accessible)(cast(GtkAccessible*)_cretval, No.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ATContext : gobject.object.ObjectWrap
   gtk.types.AccessibleRole getAccessibleRole()
   {
     GtkAccessibleRole _cretval;
-    _cretval = gtk_at_context_get_accessible_role(cast(GtkATContext*)cPtr);
+    _cretval = gtk_at_context_get_accessible_role(cast(GtkATContext*)this._cPtr);
     gtk.types.AccessibleRole _retval = cast(gtk.types.AccessibleRole)_cretval;
     return _retval;
   }

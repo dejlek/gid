@@ -54,16 +54,16 @@ class FrameClock : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_frame_clock_get_type != &gidSymbolNotFound ? gdk_frame_clock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   void beginUpdating()
   {
-    gdk_frame_clock_begin_updating(cast(GdkFrameClock*)cPtr);
+    gdk_frame_clock_begin_updating(cast(GdkFrameClock*)this._cPtr);
   }
 
   /**
@@ -93,7 +93,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   void endUpdating()
   {
-    gdk_frame_clock_end_updating(cast(GdkFrameClock*)cPtr);
+    gdk_frame_clock_end_updating(cast(GdkFrameClock*)this._cPtr);
   }
 
   /**
@@ -106,7 +106,7 @@ class FrameClock : gobject.object.ObjectWrap
   gdk.frame_timings.FrameTimings getCurrentTimings()
   {
     GdkFrameTimings* _cretval;
-    _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)cPtr);
+    _cretval = gdk_frame_clock_get_current_timings(cast(GdkFrameClock*)this._cPtr);
     auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -119,7 +119,7 @@ class FrameClock : gobject.object.ObjectWrap
   double getFps()
   {
     double _retval;
-    _retval = gdk_frame_clock_get_fps(cast(GdkFrameClock*)cPtr);
+    _retval = gdk_frame_clock_get_fps(cast(GdkFrameClock*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class FrameClock : gobject.object.ObjectWrap
   long getFrameCounter()
   {
     long _retval;
-    _retval = gdk_frame_clock_get_frame_counter(cast(GdkFrameClock*)cPtr);
+    _retval = gdk_frame_clock_get_frame_counter(cast(GdkFrameClock*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class FrameClock : gobject.object.ObjectWrap
   long getFrameTime()
   {
     long _retval;
-    _retval = gdk_frame_clock_get_frame_time(cast(GdkFrameClock*)cPtr);
+    _retval = gdk_frame_clock_get_frame_time(cast(GdkFrameClock*)this._cPtr);
     return _retval;
   }
 
@@ -171,7 +171,7 @@ class FrameClock : gobject.object.ObjectWrap
   long getHistoryStart()
   {
     long _retval;
-    _retval = gdk_frame_clock_get_history_start(cast(GdkFrameClock*)cPtr);
+    _retval = gdk_frame_clock_get_history_start(cast(GdkFrameClock*)this._cPtr);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   void getRefreshInfo(long baseTime, out long refreshIntervalReturn, out long presentationTimeReturn)
   {
-    gdk_frame_clock_get_refresh_info(cast(GdkFrameClock*)cPtr, baseTime, cast(long*)&refreshIntervalReturn, cast(long*)&presentationTimeReturn);
+    gdk_frame_clock_get_refresh_info(cast(GdkFrameClock*)this._cPtr, baseTime, cast(long*)&refreshIntervalReturn, cast(long*)&presentationTimeReturn);
   }
 
   /**
@@ -215,7 +215,7 @@ class FrameClock : gobject.object.ObjectWrap
   gdk.frame_timings.FrameTimings getTimings(long frameCounter)
   {
     GdkFrameTimings* _cretval;
-    _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)cPtr, frameCounter);
+    _cretval = gdk_frame_clock_get_timings(cast(GdkFrameClock*)this._cPtr, frameCounter);
     auto _retval = _cretval ? new gdk.frame_timings.FrameTimings(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -238,7 +238,7 @@ class FrameClock : gobject.object.ObjectWrap
   */
   void requestPhase(gdk.types.FrameClockPhase phase)
   {
-    gdk_frame_clock_request_phase(cast(GdkFrameClock*)cPtr, phase);
+    gdk_frame_clock_request_phase(cast(GdkFrameClock*)this._cPtr, phase);
   }
 
   /**

@@ -334,7 +334,7 @@ template ActivatableT()
   */
   override void doSetRelatedAction(gtk.action.Action action)
   {
-    gtk_activatable_do_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_do_set_related_action(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 
   /**
@@ -344,8 +344,8 @@ template ActivatableT()
   override gtk.action.Action getRelatedAction()
   {
     GtkAction* _cretval;
-    _cretval = gtk_activatable_get_related_action(cast(GtkActivatable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
+    _cretval = gtk_activatable_get_related_action(cast(GtkActivatable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.action.Action)(cast(GtkAction*)_cretval, No.Take);
     return _retval;
   }
 
@@ -358,7 +358,7 @@ template ActivatableT()
   override bool getUseActionAppearance()
   {
     bool _retval;
-    _retval = gtk_activatable_get_use_action_appearance(cast(GtkActivatable*)cPtr);
+    _retval = gtk_activatable_get_use_action_appearance(cast(GtkActivatable*)this._cPtr);
     return _retval;
   }
 
@@ -373,7 +373,7 @@ template ActivatableT()
   */
   override void setRelatedAction(gtk.action.Action action)
   {
-    gtk_activatable_set_related_action(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_set_related_action(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 
   /**
@@ -390,7 +390,7 @@ template ActivatableT()
   */
   override void setUseActionAppearance(bool useAppearance)
   {
-    gtk_activatable_set_use_action_appearance(cast(GtkActivatable*)cPtr, useAppearance);
+    gtk_activatable_set_use_action_appearance(cast(GtkActivatable*)this._cPtr, useAppearance);
   }
 
   /**
@@ -404,6 +404,6 @@ template ActivatableT()
   */
   override void syncActionProperties(gtk.action.Action action = null)
   {
-    gtk_activatable_sync_action_properties(cast(GtkActivatable*)cPtr, action ? cast(GtkAction*)action.cPtr(No.Dup) : null);
+    gtk_activatable_sync_action_properties(cast(GtkActivatable*)this._cPtr, action ? cast(GtkAction*)action._cPtr(No.Dup) : null);
   }
 }

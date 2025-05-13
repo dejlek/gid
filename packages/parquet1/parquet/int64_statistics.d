@@ -18,16 +18,16 @@ class Int64Statistics : parquet.statistics.Statistics
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gparquet_int64_statistics_get_type != &gidSymbolNotFound ? gparquet_int64_statistics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class Int64Statistics : parquet.statistics.Statistics
   long getMax()
   {
     long _retval;
-    _retval = gparquet_int64_statistics_get_max(cast(GParquetInt64Statistics*)cPtr);
+    _retval = gparquet_int64_statistics_get_max(cast(GParquetInt64Statistics*)this._cPtr);
     return _retval;
   }
 
@@ -48,7 +48,7 @@ class Int64Statistics : parquet.statistics.Statistics
   long getMin()
   {
     long _retval;
-    _retval = gparquet_int64_statistics_get_min(cast(GParquetInt64Statistics*)cPtr);
+    _retval = gparquet_int64_statistics_get_min(cast(GParquetInt64Statistics*)this._cPtr);
     return _retval;
   }
 }

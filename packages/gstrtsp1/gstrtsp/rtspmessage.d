@@ -34,22 +34,22 @@ class RTSPMessage : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_rtsp_msg_get_type != &gidSymbolNotFound ? gst_rtsp_msg_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class RTSPMessage : gobject.boxed.Boxed
   */
   @property gstrtsp.types.RTSPMsgType type()
   {
-    return cast(gstrtsp.types.RTSPMsgType)(cast(GstRTSPMessage*)cPtr).type;
+    return cast(gstrtsp.types.RTSPMsgType)(cast(GstRTSPMessage*)this._cPtr).type;
   }
 
   /**
@@ -74,7 +74,7 @@ class RTSPMessage : gobject.boxed.Boxed
   */
   @property void type(gstrtsp.types.RTSPMsgType propval)
   {
-    (cast(GstRTSPMessage*)cPtr).type = cast(GstRTSPMsgType)propval;
+    (cast(GstRTSPMessage*)this._cPtr).type = cast(GstRTSPMsgType)propval;
   }
 
   /**
@@ -90,7 +90,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = gst_rtsp_message_add_header(cast(GstRTSPMessage*)cPtr, field, _value);
+    _cretval = gst_rtsp_message_add_header(cast(GstRTSPMessage*)this._cPtr, field, _value);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -109,7 +109,7 @@ class RTSPMessage : gobject.boxed.Boxed
     GstRTSPResult _cretval;
     const(char)* _header = header.toCString(No.Alloc);
     const(char)* _value = value.toCString(No.Alloc);
-    _cretval = gst_rtsp_message_add_header_by_name(cast(GstRTSPMessage*)cPtr, _header, _value);
+    _cretval = gst_rtsp_message_add_header_by_name(cast(GstRTSPMessage*)this._cPtr, _header, _value);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -125,7 +125,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult appendHeaders(glib.string_.String str)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_append_headers(cast(const(GstRTSPMessage)*)cPtr, str ? cast(GString*)str.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_message_append_headers(cast(const(GstRTSPMessage)*)this._cPtr, str ? cast(GString*)str._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -142,7 +142,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     GstRTSPMessage* _copy;
-    _cretval = gst_rtsp_message_copy(cast(const(GstRTSPMessage)*)cPtr, &_copy);
+    _cretval = gst_rtsp_message_copy(cast(const(GstRTSPMessage)*)this._cPtr, &_copy);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     copy = new gstrtsp.rtspmessage.RTSPMessage(cast(void*)_copy, Yes.Take);
     return _retval;
@@ -155,7 +155,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult dump()
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_dump(cast(GstRTSPMessage*)cPtr);
+    _cretval = gst_rtsp_message_dump(cast(GstRTSPMessage*)this._cPtr);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -177,7 +177,7 @@ class RTSPMessage : gobject.boxed.Boxed
     GstRTSPResult _cretval;
     uint _size;
     ubyte* _data;
-    _cretval = gst_rtsp_message_get_body(cast(const(GstRTSPMessage)*)cPtr, &_data, &_size);
+    _cretval = gst_rtsp_message_get_body(cast(const(GstRTSPMessage)*)this._cPtr, &_data, &_size);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
@@ -200,7 +200,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_rtsp_message_get_body_buffer(cast(const(GstRTSPMessage)*)cPtr, &_buffer);
+    _cretval = gst_rtsp_message_get_body_buffer(cast(const(GstRTSPMessage)*)this._cPtr, &_buffer);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, No.Take);
     return _retval;
@@ -221,7 +221,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     char* _value;
-    _cretval = gst_rtsp_message_get_header(cast(const(GstRTSPMessage)*)cPtr, field, &_value, indx);
+    _cretval = gst_rtsp_message_get_header(cast(const(GstRTSPMessage)*)this._cPtr, field, &_value, indx);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     value = _value.fromCString(No.Free);
     return _retval;
@@ -243,7 +243,7 @@ class RTSPMessage : gobject.boxed.Boxed
     GstRTSPResult _cretval;
     const(char)* _header = header.toCString(No.Alloc);
     char* _value;
-    _cretval = gst_rtsp_message_get_header_by_name(cast(GstRTSPMessage*)cPtr, _header, &_value, index);
+    _cretval = gst_rtsp_message_get_header_by_name(cast(GstRTSPMessage*)this._cPtr, _header, &_value, index);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     value = _value.fromCString(No.Free);
     return _retval;
@@ -256,7 +256,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPMsgType getType()
   {
     GstRTSPMsgType _cretval;
-    _cretval = gst_rtsp_message_get_type(cast(GstRTSPMessage*)cPtr);
+    _cretval = gst_rtsp_message_get_type(cast(GstRTSPMessage*)this._cPtr);
     gstrtsp.types.RTSPMsgType _retval = cast(gstrtsp.types.RTSPMsgType)_cretval;
     return _retval;
   }
@@ -269,7 +269,7 @@ class RTSPMessage : gobject.boxed.Boxed
   bool hasBodyBuffer()
   {
     bool _retval;
-    _retval = gst_rtsp_message_has_body_buffer(cast(const(GstRTSPMessage)*)cPtr);
+    _retval = gst_rtsp_message_has_body_buffer(cast(const(GstRTSPMessage)*)this._cPtr);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult init_()
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_init(cast(GstRTSPMessage*)cPtr);
+    _cretval = gst_rtsp_message_init(cast(GstRTSPMessage*)this._cPtr);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -296,7 +296,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult initData(ubyte channel)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_init_data(cast(GstRTSPMessage*)cPtr, channel);
+    _cretval = gst_rtsp_message_init_data(cast(GstRTSPMessage*)this._cPtr, channel);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -314,7 +314,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = gst_rtsp_message_init_request(cast(GstRTSPMessage*)cPtr, method, _uri);
+    _cretval = gst_rtsp_message_init_request(cast(GstRTSPMessage*)this._cPtr, method, _uri);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -337,7 +337,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     const(char)* _reason = reason.toCString(No.Alloc);
-    _cretval = gst_rtsp_message_init_response(cast(GstRTSPMessage*)cPtr, code, _reason, request ? cast(const(GstRTSPMessage)*)request.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_message_init_response(cast(GstRTSPMessage*)this._cPtr, code, _reason, request ? cast(const(GstRTSPMessage)*)request._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -352,7 +352,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.rtspauth_credential.RTSPAuthCredential[] parseAuthCredentials(gstrtsp.types.RTSPHeaderField field)
   {
     GstRTSPAuthCredential** _cretval;
-    _cretval = gst_rtsp_message_parse_auth_credentials(cast(GstRTSPMessage*)cPtr, field);
+    _cretval = gst_rtsp_message_parse_auth_credentials(cast(GstRTSPMessage*)this._cPtr, field);
     gstrtsp.rtspauth_credential.RTSPAuthCredential[] _retval;
 
     if (_cretval)
@@ -377,7 +377,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult parseData(out ubyte channel)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_parse_data(cast(GstRTSPMessage*)cPtr, cast(ubyte*)&channel);
+    _cretval = gst_rtsp_message_parse_data(cast(GstRTSPMessage*)this._cPtr, cast(ubyte*)&channel);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -399,7 +399,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     char* _uri;
-    _cretval = gst_rtsp_message_parse_request(cast(GstRTSPMessage*)cPtr, &method, &_uri, &version_);
+    _cretval = gst_rtsp_message_parse_request(cast(GstRTSPMessage*)this._cPtr, &method, &_uri, &version_);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     uri = _uri.fromCString(No.Free);
     return _retval;
@@ -422,7 +422,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     char* _reason;
-    _cretval = gst_rtsp_message_parse_response(cast(GstRTSPMessage*)cPtr, &code, &_reason, &version_);
+    _cretval = gst_rtsp_message_parse_response(cast(GstRTSPMessage*)this._cPtr, &code, &_reason, &version_);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     reason = _reason.fromCString(No.Free);
     return _retval;
@@ -440,7 +440,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult removeHeader(gstrtsp.types.RTSPHeaderField field, int indx)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_remove_header(cast(GstRTSPMessage*)cPtr, field, indx);
+    _cretval = gst_rtsp_message_remove_header(cast(GstRTSPMessage*)this._cPtr, field, indx);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -458,7 +458,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     const(char)* _header = header.toCString(No.Alloc);
-    _cretval = gst_rtsp_message_remove_header_by_name(cast(GstRTSPMessage*)cPtr, _header, index);
+    _cretval = gst_rtsp_message_remove_header_by_name(cast(GstRTSPMessage*)this._cPtr, _header, index);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -479,7 +479,7 @@ class RTSPMessage : gobject.boxed.Boxed
       _size = cast(uint)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _cretval = gst_rtsp_message_set_body(cast(GstRTSPMessage*)cPtr, _data, _size);
+    _cretval = gst_rtsp_message_set_body(cast(GstRTSPMessage*)this._cPtr, _data, _size);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -495,7 +495,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult setBodyBuffer(gst.buffer.Buffer buffer)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_set_body_buffer(cast(GstRTSPMessage*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null);
+    _cretval = gst_rtsp_message_set_body_buffer(cast(GstRTSPMessage*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -513,7 +513,7 @@ class RTSPMessage : gobject.boxed.Boxed
     GstRTSPResult _cretval;
     uint _size;
     ubyte* _data;
-    _cretval = gst_rtsp_message_steal_body(cast(GstRTSPMessage*)cPtr, &_data, &_size);
+    _cretval = gst_rtsp_message_steal_body(cast(GstRTSPMessage*)this._cPtr, &_data, &_size);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     data.length = _size;
     data[0 .. $] = (cast(ubyte*)_data)[0 .. _size];
@@ -537,7 +537,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     GstBuffer* _buffer;
-    _cretval = gst_rtsp_message_steal_body_buffer(cast(GstRTSPMessage*)cPtr, &_buffer);
+    _cretval = gst_rtsp_message_steal_body_buffer(cast(GstRTSPMessage*)this._cPtr, &_buffer);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     buffer = new gst.buffer.Buffer(cast(void*)_buffer, Yes.Take);
     return _retval;
@@ -554,7 +554,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult takeBodyBuffer(gst.buffer.Buffer buffer)
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_take_body_buffer(cast(GstRTSPMessage*)cPtr, buffer ? cast(GstBuffer*)buffer.cPtr(Yes.Dup) : null);
+    _cretval = gst_rtsp_message_take_body_buffer(cast(GstRTSPMessage*)this._cPtr, buffer ? cast(GstBuffer*)buffer._cPtr(Yes.Dup) : null);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -572,7 +572,7 @@ class RTSPMessage : gobject.boxed.Boxed
   {
     GstRTSPResult _cretval;
     char* _value = value.toCString(Yes.Alloc);
-    _cretval = gst_rtsp_message_take_header(cast(GstRTSPMessage*)cPtr, field, _value);
+    _cretval = gst_rtsp_message_take_header(cast(GstRTSPMessage*)this._cPtr, field, _value);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -591,7 +591,7 @@ class RTSPMessage : gobject.boxed.Boxed
     GstRTSPResult _cretval;
     const(char)* _header = header.toCString(No.Alloc);
     char* _value = value.toCString(Yes.Alloc);
-    _cretval = gst_rtsp_message_take_header_by_name(cast(GstRTSPMessage*)cPtr, _header, _value);
+    _cretval = gst_rtsp_message_take_header_by_name(cast(GstRTSPMessage*)this._cPtr, _header, _value);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }
@@ -606,7 +606,7 @@ class RTSPMessage : gobject.boxed.Boxed
   gstrtsp.types.RTSPResult unset()
   {
     GstRTSPResult _cretval;
-    _cretval = gst_rtsp_message_unset(cast(GstRTSPMessage*)cPtr);
+    _cretval = gst_rtsp_message_unset(cast(GstRTSPMessage*)this._cPtr);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     return _retval;
   }

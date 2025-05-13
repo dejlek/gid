@@ -26,16 +26,16 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_multi_filter_get_type != &gidSymbolNotFound ? gtk_multi_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   */
   void append(gtk.filter.Filter filter)
   {
-    gtk_multi_filter_append(cast(GtkMultiFilter*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
+    gtk_multi_filter_append(cast(GtkMultiFilter*)this._cPtr, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -88,6 +88,6 @@ class MultiFilter : gtk.filter.Filter, gio.list_model.ListModel, gtk.buildable.B
   */
   void remove(uint position)
   {
-    gtk_multi_filter_remove(cast(GtkMultiFilter*)cPtr, position);
+    gtk_multi_filter_remove(cast(GtkMultiFilter*)this._cPtr, position);
   }
 }

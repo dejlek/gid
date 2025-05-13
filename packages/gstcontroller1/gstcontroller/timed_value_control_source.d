@@ -29,16 +29,16 @@ class TimedValueControlSource : gst.control_source.ControlSource
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_timed_value_control_source_get_type != &gidSymbolNotFound ? gst_timed_value_control_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   glib.sequence_iter.SequenceIter findControlPointIter(gst.types.ClockTime timestamp)
   {
     GSequenceIter* _cretval;
-    _cretval = gst_timed_value_control_source_find_control_point_iter(cast(GstTimedValueControlSource*)cPtr, timestamp);
+    _cretval = gst_timed_value_control_source_find_control_point_iter(cast(GstTimedValueControlSource*)this._cPtr, timestamp);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -75,7 +75,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   gst.types.TimedValue[] getAll()
   {
     GList* _cretval;
-    _cretval = gst_timed_value_control_source_get_all(cast(GstTimedValueControlSource*)cPtr);
+    _cretval = gst_timed_value_control_source_get_all(cast(GstTimedValueControlSource*)this._cPtr);
     auto _retval = gListToD!(gst.types.TimedValue, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -87,7 +87,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   int getCount()
   {
     int _retval;
-    _retval = gst_timed_value_control_source_get_count(cast(GstTimedValueControlSource*)cPtr);
+    _retval = gst_timed_value_control_source_get_count(cast(GstTimedValueControlSource*)this._cPtr);
     return _retval;
   }
 
@@ -102,7 +102,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   bool set(gst.types.ClockTime timestamp, double value)
   {
     bool _retval;
-    _retval = gst_timed_value_control_source_set(cast(GstTimedValueControlSource*)cPtr, timestamp, value);
+    _retval = gst_timed_value_control_source_set(cast(GstTimedValueControlSource*)this._cPtr, timestamp, value);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
     bool _retval;
     auto _timedvalues = gSListFromD!(gst.types.TimedValue)(timedvalues);
     scope(exit) containerFree!(const(GSList)*, gst.types.TimedValue, GidOwnership.None)(_timedvalues);
-    _retval = gst_timed_value_control_source_set_from_list(cast(GstTimedValueControlSource*)cPtr, _timedvalues);
+    _retval = gst_timed_value_control_source_set_from_list(cast(GstTimedValueControlSource*)this._cPtr, _timedvalues);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   bool unset(gst.types.ClockTime timestamp)
   {
     bool _retval;
-    _retval = gst_timed_value_control_source_unset(cast(GstTimedValueControlSource*)cPtr, timestamp);
+    _retval = gst_timed_value_control_source_unset(cast(GstTimedValueControlSource*)this._cPtr, timestamp);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class TimedValueControlSource : gst.control_source.ControlSource
   */
   void unsetAll()
   {
-    gst_timed_value_control_source_unset_all(cast(GstTimedValueControlSource*)cPtr);
+    gst_timed_value_control_source_unset_all(cast(GstTimedValueControlSource*)this._cPtr);
   }
 
   /**

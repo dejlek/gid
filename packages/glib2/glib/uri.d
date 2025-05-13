@@ -182,22 +182,22 @@ class Uri : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_uri_get_type != &gidSymbolNotFound ? g_uri_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -219,7 +219,7 @@ class Uri : gobject.boxed.Boxed
   string getAuthParams()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_auth_params(cast(GUri*)cPtr);
+    _cretval = g_uri_get_auth_params(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -231,7 +231,7 @@ class Uri : gobject.boxed.Boxed
   glib.types.UriFlags getFlags()
   {
     GUriFlags _cretval;
-    _cretval = g_uri_get_flags(cast(GUri*)cPtr);
+    _cretval = g_uri_get_flags(cast(GUri*)this._cPtr);
     glib.types.UriFlags _retval = cast(glib.types.UriFlags)_cretval;
     return _retval;
   }
@@ -244,7 +244,7 @@ class Uri : gobject.boxed.Boxed
   string getFragment()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_fragment(cast(GUri*)cPtr);
+    _cretval = g_uri_get_fragment(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -264,7 +264,7 @@ class Uri : gobject.boxed.Boxed
   string getHost()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_host(cast(GUri*)cPtr);
+    _cretval = g_uri_get_host(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -278,7 +278,7 @@ class Uri : gobject.boxed.Boxed
   string getPassword()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_password(cast(GUri*)cPtr);
+    _cretval = g_uri_get_password(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -291,7 +291,7 @@ class Uri : gobject.boxed.Boxed
   string getPath()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_path(cast(GUri*)cPtr);
+    _cretval = g_uri_get_path(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -303,7 +303,7 @@ class Uri : gobject.boxed.Boxed
   int getPort()
   {
     int _retval;
-    _retval = g_uri_get_port(cast(GUri*)cPtr);
+    _retval = g_uri_get_port(cast(GUri*)this._cPtr);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class Uri : gobject.boxed.Boxed
   string getQuery()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_query(cast(GUri*)cPtr);
+    _cretval = g_uri_get_query(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -331,7 +331,7 @@ class Uri : gobject.boxed.Boxed
   string getScheme()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_scheme(cast(GUri*)cPtr);
+    _cretval = g_uri_get_scheme(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -346,7 +346,7 @@ class Uri : gobject.boxed.Boxed
   string getUser()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_user(cast(GUri*)cPtr);
+    _cretval = g_uri_get_user(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -359,7 +359,7 @@ class Uri : gobject.boxed.Boxed
   string getUserinfo()
   {
     const(char)* _cretval;
-    _cretval = g_uri_get_userinfo(cast(GUri*)cPtr);
+    _cretval = g_uri_get_userinfo(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -381,7 +381,7 @@ class Uri : gobject.boxed.Boxed
     GUri* _cretval;
     const(char)* _uriRef = uriRef.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_uri_parse_relative(cast(GUri*)cPtr, _uriRef, flags, &_err);
+    _cretval = g_uri_parse_relative(cast(GUri*)this._cPtr, _uriRef, flags, &_err);
     if (_err)
       throw new UriException(_err);
     auto _retval = _cretval ? new glib.uri.Uri(cast(void*)_cretval, Yes.Take) : null;
@@ -407,7 +407,7 @@ class Uri : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = g_uri_to_string(cast(GUri*)cPtr);
+    _cretval = g_uri_to_string(cast(GUri*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -424,7 +424,7 @@ class Uri : gobject.boxed.Boxed
   string toStringPartial(glib.types.UriHideFlags flags)
   {
     char* _cretval;
-    _cretval = g_uri_to_string_partial(cast(GUri*)cPtr, flags);
+    _cretval = g_uri_to_string_partial(cast(GUri*)this._cPtr, flags);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -1137,5 +1137,5 @@ class UriException : ErrorWrap
     super(glib.uri.Uri.errorQuark, cast(int)code, msg);
   }
 
-  alias Code = GUriError;
+  alias Code = UriError;
 }

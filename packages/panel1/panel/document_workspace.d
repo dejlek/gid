@@ -43,16 +43,16 @@ class DocumentWorkspace : panel.workspace.Workspace
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_document_workspace_get_type != &gidSymbolNotFound ? panel_document_workspace_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class DocumentWorkspace : panel.workspace.Workspace
   bool addWidget(panel.widget.Widget widget, panel.position.Position position = null)
   {
     bool _retval;
-    _retval = panel_document_workspace_add_widget(cast(PanelDocumentWorkspace*)cPtr, widget ? cast(PanelWidget*)widget.cPtr(No.Dup) : null, position ? cast(PanelPosition*)position.cPtr(No.Dup) : null);
+    _retval = panel_document_workspace_add_widget(cast(PanelDocumentWorkspace*)this._cPtr, widget ? cast(PanelWidget*)widget._cPtr(No.Dup) : null, position ? cast(PanelPosition*)position._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -114,8 +114,8 @@ class DocumentWorkspace : panel.workspace.Workspace
   panel.dock.Dock getDock()
   {
     PanelDock* _cretval;
-    _cretval = panel_document_workspace_get_dock(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.dock.Dock)(cast(PanelDock*)_cretval, No.Take);
+    _cretval = panel_document_workspace_get_dock(cast(PanelDocumentWorkspace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.dock.Dock)(cast(PanelDock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -126,8 +126,8 @@ class DocumentWorkspace : panel.workspace.Workspace
   panel.grid.Grid getGrid()
   {
     PanelGrid* _cretval;
-    _cretval = panel_document_workspace_get_grid(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.grid.Grid)(cast(PanelGrid*)_cretval, No.Take);
+    _cretval = panel_document_workspace_get_grid(cast(PanelDocumentWorkspace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.grid.Grid)(cast(PanelGrid*)_cretval, No.Take);
     return _retval;
   }
 
@@ -138,8 +138,8 @@ class DocumentWorkspace : panel.workspace.Workspace
   panel.statusbar.Statusbar getStatusbar()
   {
     PanelStatusbar* _cretval;
-    _cretval = panel_document_workspace_get_statusbar(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.statusbar.Statusbar)(cast(PanelStatusbar*)_cretval, No.Take);
+    _cretval = panel_document_workspace_get_statusbar(cast(PanelDocumentWorkspace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.statusbar.Statusbar)(cast(PanelStatusbar*)_cretval, No.Take);
     return _retval;
   }
 
@@ -150,15 +150,15 @@ class DocumentWorkspace : panel.workspace.Workspace
   override gtk.widget.Widget getTitlebar()
   {
     GtkWidget* _cretval;
-    _cretval = panel_document_workspace_get_titlebar(cast(PanelDocumentWorkspace*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = panel_document_workspace_get_titlebar(cast(PanelDocumentWorkspace*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
   /** */
   override void setTitlebar(gtk.widget.Widget titlebar)
   {
-    panel_document_workspace_set_titlebar(cast(PanelDocumentWorkspace*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
+    panel_document_workspace_set_titlebar(cast(PanelDocumentWorkspace*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
 
   /**

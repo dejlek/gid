@@ -49,7 +49,7 @@ class Meta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -60,7 +60,7 @@ class Meta
   */
   @property gst.types.MetaFlags flags()
   {
-    return cast(gst.types.MetaFlags)(cast(GstMeta*)cPtr).flags;
+    return cast(gst.types.MetaFlags)(cast(GstMeta*)this._cPtr).flags;
   }
 
   /**
@@ -70,7 +70,7 @@ class Meta
   */
   @property void flags(gst.types.MetaFlags propval)
   {
-    (cast(GstMeta*)cPtr).flags = cast(GstMetaFlags)propval;
+    (cast(GstMeta*)this._cPtr).flags = cast(GstMetaFlags)propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class Meta
   */
   @property gst.meta_info.MetaInfo info()
   {
-    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)cPtr).info);
+    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)this._cPtr).info);
   }
 
   /**
@@ -95,7 +95,7 @@ class Meta
   int compareSeqnum(gst.meta.Meta meta2)
   {
     int _retval;
-    _retval = gst_meta_compare_seqnum(cast(const(GstMeta)*)cPtr, meta2 ? cast(const(GstMeta)*)meta2.cPtr : null);
+    _retval = gst_meta_compare_seqnum(cast(const(GstMeta)*)this._cPtr, meta2 ? cast(const(GstMeta)*)meta2._cPtr : null);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Meta
   ulong getSeqnum()
   {
     ulong _retval;
-    _retval = gst_meta_get_seqnum(cast(const(GstMeta)*)cPtr);
+    _retval = gst_meta_get_seqnum(cast(const(GstMeta)*)this._cPtr);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Meta
     bool _retval;
     auto _data = gByteArrayFromD(data);
     scope(exit) containerFree!(GByteArray*, ubyte, GidOwnership.None)(_data);
-    _retval = gst_meta_serialize_simple(cast(const(GstMeta)*)cPtr, _data);
+    _retval = gst_meta_serialize_simple(cast(const(GstMeta)*)this._cPtr, _data);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class Meta
       _size = cast(size_t)data.length;
 
     auto _data = cast(const(ubyte)*)data.ptr;
-    _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer.cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
+    _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
     auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval) : null;
     return _retval;
   }

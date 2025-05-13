@@ -237,17 +237,17 @@ __gshared extern(C)
   void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedDeserializeFunc deserializeFunc) c_json_boxed_register_deserialize_func; ///
   void function(GType gboxedType, JsonNodeType nodeType, JsonBoxedSerializeFunc serializeFunc) c_json_boxed_register_serialize_func; ///
   JsonNode* function(GType gboxedType, const(void)* boxed) c_json_boxed_serialize; ///
-  ObjectC* function(GType gtype, const(char)* data, size_t length, GError** _err) c_json_construct_gobject; ///
+  GObject* function(GType gtype, const(char)* data, size_t length, GError** _err) c_json_construct_gobject; ///
   JsonNode* function(const(char)* str, GError** _err) c_json_from_string; ///
-  ObjectC* function(GType gtype, JsonNode* node) c_json_gobject_deserialize; ///
-  ObjectC* function(GType gtype, const(char)* data, ptrdiff_t length, GError** _err) c_json_gobject_from_data; ///
-  JsonNode* function(ObjectC* gobject) c_json_gobject_serialize; ///
-  char* function(ObjectC* gobject, size_t* length) c_json_gobject_to_data; ///
+  GObject* function(GType gtype, JsonNode* node) c_json_gobject_deserialize; ///
+  GObject* function(GType gtype, const(char)* data, ptrdiff_t length, GError** _err) c_json_gobject_from_data; ///
+  JsonNode* function(GObject* gobject) c_json_gobject_serialize; ///
+  char* function(GObject* gobject, size_t* length) c_json_gobject_to_data; ///
   GVariant* function(JsonNode* jsonNode, const(char)* signature, GError** _err) c_json_gvariant_deserialize; ///
   GVariant* function(const(char)* json, ptrdiff_t length, const(char)* signature, GError** _err) c_json_gvariant_deserialize_data; ///
   JsonNode* function(GVariant* variant) c_json_gvariant_serialize; ///
   char* function(GVariant* variant, size_t* length) c_json_gvariant_serialize_data; ///
-  char* function(ObjectC* gobject, size_t* length) c_json_serialize_gobject; ///
+  char* function(GObject* gobject, size_t* length) c_json_serialize_gobject; ///
   int function(const(void)* a, const(void)* b) c_json_string_compare; ///
   bool function(const(void)* a, const(void)* b) c_json_string_equal; ///
   uint function(const(void)* key) c_json_string_hash; ///
@@ -923,240 +923,242 @@ alias json_to_string = c_json_to_string;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // Array
-  gidLink(cast(void**)&json_array_get_type, "json_array_get_type", LIBS);
-  gidLink(cast(void**)&json_array_new, "json_array_new", LIBS);
-  gidLink(cast(void**)&json_array_sized_new, "json_array_sized_new", LIBS);
-  gidLink(cast(void**)&json_array_add_array_element, "json_array_add_array_element", LIBS);
-  gidLink(cast(void**)&json_array_add_boolean_element, "json_array_add_boolean_element", LIBS);
-  gidLink(cast(void**)&json_array_add_double_element, "json_array_add_double_element", LIBS);
-  gidLink(cast(void**)&json_array_add_element, "json_array_add_element", LIBS);
-  gidLink(cast(void**)&json_array_add_int_element, "json_array_add_int_element", LIBS);
-  gidLink(cast(void**)&json_array_add_null_element, "json_array_add_null_element", LIBS);
-  gidLink(cast(void**)&json_array_add_object_element, "json_array_add_object_element", LIBS);
-  gidLink(cast(void**)&json_array_add_string_element, "json_array_add_string_element", LIBS);
-  gidLink(cast(void**)&json_array_dup_element, "json_array_dup_element", LIBS);
-  gidLink(cast(void**)&json_array_equal, "json_array_equal", LIBS);
-  gidLink(cast(void**)&json_array_foreach_element, "json_array_foreach_element", LIBS);
-  gidLink(cast(void**)&json_array_get_array_element, "json_array_get_array_element", LIBS);
-  gidLink(cast(void**)&json_array_get_boolean_element, "json_array_get_boolean_element", LIBS);
-  gidLink(cast(void**)&json_array_get_double_element, "json_array_get_double_element", LIBS);
-  gidLink(cast(void**)&json_array_get_element, "json_array_get_element", LIBS);
-  gidLink(cast(void**)&json_array_get_elements, "json_array_get_elements", LIBS);
-  gidLink(cast(void**)&json_array_get_int_element, "json_array_get_int_element", LIBS);
-  gidLink(cast(void**)&json_array_get_length, "json_array_get_length", LIBS);
-  gidLink(cast(void**)&json_array_get_null_element, "json_array_get_null_element", LIBS);
-  gidLink(cast(void**)&json_array_get_object_element, "json_array_get_object_element", LIBS);
-  gidLink(cast(void**)&json_array_get_string_element, "json_array_get_string_element", LIBS);
-  gidLink(cast(void**)&json_array_hash, "json_array_hash", LIBS);
-  gidLink(cast(void**)&json_array_is_immutable, "json_array_is_immutable", LIBS);
-  gidLink(cast(void**)&json_array_ref, "json_array_ref", LIBS);
-  gidLink(cast(void**)&json_array_remove_element, "json_array_remove_element", LIBS);
-  gidLink(cast(void**)&json_array_seal, "json_array_seal", LIBS);
-  gidLink(cast(void**)&json_array_unref, "json_array_unref", LIBS);
+  gidLink(cast(void**)&json_array_get_type, "json_array_get_type", libs);
+  gidLink(cast(void**)&json_array_new, "json_array_new", libs);
+  gidLink(cast(void**)&json_array_sized_new, "json_array_sized_new", libs);
+  gidLink(cast(void**)&json_array_add_array_element, "json_array_add_array_element", libs);
+  gidLink(cast(void**)&json_array_add_boolean_element, "json_array_add_boolean_element", libs);
+  gidLink(cast(void**)&json_array_add_double_element, "json_array_add_double_element", libs);
+  gidLink(cast(void**)&json_array_add_element, "json_array_add_element", libs);
+  gidLink(cast(void**)&json_array_add_int_element, "json_array_add_int_element", libs);
+  gidLink(cast(void**)&json_array_add_null_element, "json_array_add_null_element", libs);
+  gidLink(cast(void**)&json_array_add_object_element, "json_array_add_object_element", libs);
+  gidLink(cast(void**)&json_array_add_string_element, "json_array_add_string_element", libs);
+  gidLink(cast(void**)&json_array_dup_element, "json_array_dup_element", libs);
+  gidLink(cast(void**)&json_array_equal, "json_array_equal", libs);
+  gidLink(cast(void**)&json_array_foreach_element, "json_array_foreach_element", libs);
+  gidLink(cast(void**)&json_array_get_array_element, "json_array_get_array_element", libs);
+  gidLink(cast(void**)&json_array_get_boolean_element, "json_array_get_boolean_element", libs);
+  gidLink(cast(void**)&json_array_get_double_element, "json_array_get_double_element", libs);
+  gidLink(cast(void**)&json_array_get_element, "json_array_get_element", libs);
+  gidLink(cast(void**)&json_array_get_elements, "json_array_get_elements", libs);
+  gidLink(cast(void**)&json_array_get_int_element, "json_array_get_int_element", libs);
+  gidLink(cast(void**)&json_array_get_length, "json_array_get_length", libs);
+  gidLink(cast(void**)&json_array_get_null_element, "json_array_get_null_element", libs);
+  gidLink(cast(void**)&json_array_get_object_element, "json_array_get_object_element", libs);
+  gidLink(cast(void**)&json_array_get_string_element, "json_array_get_string_element", libs);
+  gidLink(cast(void**)&json_array_hash, "json_array_hash", libs);
+  gidLink(cast(void**)&json_array_is_immutable, "json_array_is_immutable", libs);
+  gidLink(cast(void**)&json_array_ref, "json_array_ref", libs);
+  gidLink(cast(void**)&json_array_remove_element, "json_array_remove_element", libs);
+  gidLink(cast(void**)&json_array_seal, "json_array_seal", libs);
+  gidLink(cast(void**)&json_array_unref, "json_array_unref", libs);
 
   // Builder
-  gidLink(cast(void**)&json_builder_get_type, "json_builder_get_type", LIBS);
-  gidLink(cast(void**)&json_builder_new, "json_builder_new", LIBS);
-  gidLink(cast(void**)&json_builder_new_immutable, "json_builder_new_immutable", LIBS);
-  gidLink(cast(void**)&json_builder_add_boolean_value, "json_builder_add_boolean_value", LIBS);
-  gidLink(cast(void**)&json_builder_add_double_value, "json_builder_add_double_value", LIBS);
-  gidLink(cast(void**)&json_builder_add_int_value, "json_builder_add_int_value", LIBS);
-  gidLink(cast(void**)&json_builder_add_null_value, "json_builder_add_null_value", LIBS);
-  gidLink(cast(void**)&json_builder_add_string_value, "json_builder_add_string_value", LIBS);
-  gidLink(cast(void**)&json_builder_add_value, "json_builder_add_value", LIBS);
-  gidLink(cast(void**)&json_builder_begin_array, "json_builder_begin_array", LIBS);
-  gidLink(cast(void**)&json_builder_begin_object, "json_builder_begin_object", LIBS);
-  gidLink(cast(void**)&json_builder_end_array, "json_builder_end_array", LIBS);
-  gidLink(cast(void**)&json_builder_end_object, "json_builder_end_object", LIBS);
-  gidLink(cast(void**)&json_builder_get_root, "json_builder_get_root", LIBS);
-  gidLink(cast(void**)&json_builder_reset, "json_builder_reset", LIBS);
-  gidLink(cast(void**)&json_builder_set_member_name, "json_builder_set_member_name", LIBS);
+  gidLink(cast(void**)&json_builder_get_type, "json_builder_get_type", libs);
+  gidLink(cast(void**)&json_builder_new, "json_builder_new", libs);
+  gidLink(cast(void**)&json_builder_new_immutable, "json_builder_new_immutable", libs);
+  gidLink(cast(void**)&json_builder_add_boolean_value, "json_builder_add_boolean_value", libs);
+  gidLink(cast(void**)&json_builder_add_double_value, "json_builder_add_double_value", libs);
+  gidLink(cast(void**)&json_builder_add_int_value, "json_builder_add_int_value", libs);
+  gidLink(cast(void**)&json_builder_add_null_value, "json_builder_add_null_value", libs);
+  gidLink(cast(void**)&json_builder_add_string_value, "json_builder_add_string_value", libs);
+  gidLink(cast(void**)&json_builder_add_value, "json_builder_add_value", libs);
+  gidLink(cast(void**)&json_builder_begin_array, "json_builder_begin_array", libs);
+  gidLink(cast(void**)&json_builder_begin_object, "json_builder_begin_object", libs);
+  gidLink(cast(void**)&json_builder_end_array, "json_builder_end_array", libs);
+  gidLink(cast(void**)&json_builder_end_object, "json_builder_end_object", libs);
+  gidLink(cast(void**)&json_builder_get_root, "json_builder_get_root", libs);
+  gidLink(cast(void**)&json_builder_reset, "json_builder_reset", libs);
+  gidLink(cast(void**)&json_builder_set_member_name, "json_builder_set_member_name", libs);
 
   // Generator
-  gidLink(cast(void**)&json_generator_get_type, "json_generator_get_type", LIBS);
-  gidLink(cast(void**)&json_generator_new, "json_generator_new", LIBS);
-  gidLink(cast(void**)&json_generator_get_indent, "json_generator_get_indent", LIBS);
-  gidLink(cast(void**)&json_generator_get_indent_char, "json_generator_get_indent_char", LIBS);
-  gidLink(cast(void**)&json_generator_get_pretty, "json_generator_get_pretty", LIBS);
-  gidLink(cast(void**)&json_generator_get_root, "json_generator_get_root", LIBS);
-  gidLink(cast(void**)&json_generator_set_indent, "json_generator_set_indent", LIBS);
-  gidLink(cast(void**)&json_generator_set_indent_char, "json_generator_set_indent_char", LIBS);
-  gidLink(cast(void**)&json_generator_set_pretty, "json_generator_set_pretty", LIBS);
-  gidLink(cast(void**)&json_generator_set_root, "json_generator_set_root", LIBS);
-  gidLink(cast(void**)&json_generator_to_data, "json_generator_to_data", LIBS);
-  gidLink(cast(void**)&json_generator_to_file, "json_generator_to_file", LIBS);
-  gidLink(cast(void**)&json_generator_to_gstring, "json_generator_to_gstring", LIBS);
-  gidLink(cast(void**)&json_generator_to_stream, "json_generator_to_stream", LIBS);
+  gidLink(cast(void**)&json_generator_get_type, "json_generator_get_type", libs);
+  gidLink(cast(void**)&json_generator_new, "json_generator_new", libs);
+  gidLink(cast(void**)&json_generator_get_indent, "json_generator_get_indent", libs);
+  gidLink(cast(void**)&json_generator_get_indent_char, "json_generator_get_indent_char", libs);
+  gidLink(cast(void**)&json_generator_get_pretty, "json_generator_get_pretty", libs);
+  gidLink(cast(void**)&json_generator_get_root, "json_generator_get_root", libs);
+  gidLink(cast(void**)&json_generator_set_indent, "json_generator_set_indent", libs);
+  gidLink(cast(void**)&json_generator_set_indent_char, "json_generator_set_indent_char", libs);
+  gidLink(cast(void**)&json_generator_set_pretty, "json_generator_set_pretty", libs);
+  gidLink(cast(void**)&json_generator_set_root, "json_generator_set_root", libs);
+  gidLink(cast(void**)&json_generator_to_data, "json_generator_to_data", libs);
+  gidLink(cast(void**)&json_generator_to_file, "json_generator_to_file", libs);
+  gidLink(cast(void**)&json_generator_to_gstring, "json_generator_to_gstring", libs);
+  gidLink(cast(void**)&json_generator_to_stream, "json_generator_to_stream", libs);
 
   // Node
-  gidLink(cast(void**)&json_node_get_type, "json_node_get_type", LIBS);
-  gidLink(cast(void**)&json_node_alloc, "json_node_alloc", LIBS);
-  gidLink(cast(void**)&json_node_new, "json_node_new", LIBS);
-  gidLink(cast(void**)&json_node_copy, "json_node_copy", LIBS);
-  gidLink(cast(void**)&json_node_dup_array, "json_node_dup_array", LIBS);
-  gidLink(cast(void**)&json_node_dup_object, "json_node_dup_object", LIBS);
-  gidLink(cast(void**)&json_node_dup_string, "json_node_dup_string", LIBS);
-  gidLink(cast(void**)&json_node_equal, "json_node_equal", LIBS);
-  gidLink(cast(void**)&json_node_free, "json_node_free", LIBS);
-  gidLink(cast(void**)&json_node_get_array, "json_node_get_array", LIBS);
-  gidLink(cast(void**)&json_node_get_boolean, "json_node_get_boolean", LIBS);
-  gidLink(cast(void**)&json_node_get_double, "json_node_get_double", LIBS);
-  gidLink(cast(void**)&json_node_get_int, "json_node_get_int", LIBS);
-  gidLink(cast(void**)&json_node_get_node_type, "json_node_get_node_type", LIBS);
-  gidLink(cast(void**)&json_node_get_object, "json_node_get_object", LIBS);
-  gidLink(cast(void**)&json_node_get_parent, "json_node_get_parent", LIBS);
-  gidLink(cast(void**)&json_node_get_string, "json_node_get_string", LIBS);
-  gidLink(cast(void**)&json_node_get_value, "json_node_get_value", LIBS);
-  gidLink(cast(void**)&json_node_get_value_type, "json_node_get_value_type", LIBS);
-  gidLink(cast(void**)&json_node_hash, "json_node_hash", LIBS);
-  gidLink(cast(void**)&json_node_init, "json_node_init", LIBS);
-  gidLink(cast(void**)&json_node_init_array, "json_node_init_array", LIBS);
-  gidLink(cast(void**)&json_node_init_boolean, "json_node_init_boolean", LIBS);
-  gidLink(cast(void**)&json_node_init_double, "json_node_init_double", LIBS);
-  gidLink(cast(void**)&json_node_init_int, "json_node_init_int", LIBS);
-  gidLink(cast(void**)&json_node_init_null, "json_node_init_null", LIBS);
-  gidLink(cast(void**)&json_node_init_object, "json_node_init_object", LIBS);
-  gidLink(cast(void**)&json_node_init_string, "json_node_init_string", LIBS);
-  gidLink(cast(void**)&json_node_is_immutable, "json_node_is_immutable", LIBS);
-  gidLink(cast(void**)&json_node_is_null, "json_node_is_null", LIBS);
-  gidLink(cast(void**)&json_node_ref, "json_node_ref", LIBS);
-  gidLink(cast(void**)&json_node_seal, "json_node_seal", LIBS);
-  gidLink(cast(void**)&json_node_set_array, "json_node_set_array", LIBS);
-  gidLink(cast(void**)&json_node_set_boolean, "json_node_set_boolean", LIBS);
-  gidLink(cast(void**)&json_node_set_double, "json_node_set_double", LIBS);
-  gidLink(cast(void**)&json_node_set_int, "json_node_set_int", LIBS);
-  gidLink(cast(void**)&json_node_set_object, "json_node_set_object", LIBS);
-  gidLink(cast(void**)&json_node_set_parent, "json_node_set_parent", LIBS);
-  gidLink(cast(void**)&json_node_set_string, "json_node_set_string", LIBS);
-  gidLink(cast(void**)&json_node_set_value, "json_node_set_value", LIBS);
-  gidLink(cast(void**)&json_node_take_array, "json_node_take_array", LIBS);
-  gidLink(cast(void**)&json_node_take_object, "json_node_take_object", LIBS);
-  gidLink(cast(void**)&json_node_type_name, "json_node_type_name", LIBS);
-  gidLink(cast(void**)&json_node_unref, "json_node_unref", LIBS);
+  gidLink(cast(void**)&json_node_get_type, "json_node_get_type", libs);
+  gidLink(cast(void**)&json_node_alloc, "json_node_alloc", libs);
+  gidLink(cast(void**)&json_node_new, "json_node_new", libs);
+  gidLink(cast(void**)&json_node_copy, "json_node_copy", libs);
+  gidLink(cast(void**)&json_node_dup_array, "json_node_dup_array", libs);
+  gidLink(cast(void**)&json_node_dup_object, "json_node_dup_object", libs);
+  gidLink(cast(void**)&json_node_dup_string, "json_node_dup_string", libs);
+  gidLink(cast(void**)&json_node_equal, "json_node_equal", libs);
+  gidLink(cast(void**)&json_node_free, "json_node_free", libs);
+  gidLink(cast(void**)&json_node_get_array, "json_node_get_array", libs);
+  gidLink(cast(void**)&json_node_get_boolean, "json_node_get_boolean", libs);
+  gidLink(cast(void**)&json_node_get_double, "json_node_get_double", libs);
+  gidLink(cast(void**)&json_node_get_int, "json_node_get_int", libs);
+  gidLink(cast(void**)&json_node_get_node_type, "json_node_get_node_type", libs);
+  gidLink(cast(void**)&json_node_get_object, "json_node_get_object", libs);
+  gidLink(cast(void**)&json_node_get_parent, "json_node_get_parent", libs);
+  gidLink(cast(void**)&json_node_get_string, "json_node_get_string", libs);
+  gidLink(cast(void**)&json_node_get_value, "json_node_get_value", libs);
+  gidLink(cast(void**)&json_node_get_value_type, "json_node_get_value_type", libs);
+  gidLink(cast(void**)&json_node_hash, "json_node_hash", libs);
+  gidLink(cast(void**)&json_node_init, "json_node_init", libs);
+  gidLink(cast(void**)&json_node_init_array, "json_node_init_array", libs);
+  gidLink(cast(void**)&json_node_init_boolean, "json_node_init_boolean", libs);
+  gidLink(cast(void**)&json_node_init_double, "json_node_init_double", libs);
+  gidLink(cast(void**)&json_node_init_int, "json_node_init_int", libs);
+  gidLink(cast(void**)&json_node_init_null, "json_node_init_null", libs);
+  gidLink(cast(void**)&json_node_init_object, "json_node_init_object", libs);
+  gidLink(cast(void**)&json_node_init_string, "json_node_init_string", libs);
+  gidLink(cast(void**)&json_node_is_immutable, "json_node_is_immutable", libs);
+  gidLink(cast(void**)&json_node_is_null, "json_node_is_null", libs);
+  gidLink(cast(void**)&json_node_ref, "json_node_ref", libs);
+  gidLink(cast(void**)&json_node_seal, "json_node_seal", libs);
+  gidLink(cast(void**)&json_node_set_array, "json_node_set_array", libs);
+  gidLink(cast(void**)&json_node_set_boolean, "json_node_set_boolean", libs);
+  gidLink(cast(void**)&json_node_set_double, "json_node_set_double", libs);
+  gidLink(cast(void**)&json_node_set_int, "json_node_set_int", libs);
+  gidLink(cast(void**)&json_node_set_object, "json_node_set_object", libs);
+  gidLink(cast(void**)&json_node_set_parent, "json_node_set_parent", libs);
+  gidLink(cast(void**)&json_node_set_string, "json_node_set_string", libs);
+  gidLink(cast(void**)&json_node_set_value, "json_node_set_value", libs);
+  gidLink(cast(void**)&json_node_take_array, "json_node_take_array", libs);
+  gidLink(cast(void**)&json_node_take_object, "json_node_take_object", libs);
+  gidLink(cast(void**)&json_node_type_name, "json_node_type_name", libs);
+  gidLink(cast(void**)&json_node_unref, "json_node_unref", libs);
 
   // ObjectIter
-  gidLink(cast(void**)&json_object_iter_init, "json_object_iter_init", LIBS);
-  gidLink(cast(void**)&json_object_iter_init_ordered, "json_object_iter_init_ordered", LIBS);
-  gidLink(cast(void**)&json_object_iter_next, "json_object_iter_next", LIBS);
-  gidLink(cast(void**)&json_object_iter_next_ordered, "json_object_iter_next_ordered", LIBS);
+  gidLink(cast(void**)&json_object_iter_init, "json_object_iter_init", libs);
+  gidLink(cast(void**)&json_object_iter_init_ordered, "json_object_iter_init_ordered", libs);
+  gidLink(cast(void**)&json_object_iter_next, "json_object_iter_next", libs);
+  gidLink(cast(void**)&json_object_iter_next_ordered, "json_object_iter_next_ordered", libs);
 
   // ObjectWrap
-  gidLink(cast(void**)&json_object_get_type, "json_object_get_type", LIBS);
-  gidLink(cast(void**)&json_object_new, "json_object_new", LIBS);
-  gidLink(cast(void**)&json_object_add_member, "json_object_add_member", LIBS);
-  gidLink(cast(void**)&json_object_dup_member, "json_object_dup_member", LIBS);
-  gidLink(cast(void**)&json_object_equal, "json_object_equal", LIBS);
-  gidLink(cast(void**)&json_object_foreach_member, "json_object_foreach_member", LIBS);
-  gidLink(cast(void**)&json_object_get_array_member, "json_object_get_array_member", LIBS);
-  gidLink(cast(void**)&json_object_get_boolean_member, "json_object_get_boolean_member", LIBS);
-  gidLink(cast(void**)&json_object_get_boolean_member_with_default, "json_object_get_boolean_member_with_default", LIBS);
-  gidLink(cast(void**)&json_object_get_double_member, "json_object_get_double_member", LIBS);
-  gidLink(cast(void**)&json_object_get_double_member_with_default, "json_object_get_double_member_with_default", LIBS);
-  gidLink(cast(void**)&json_object_get_int_member, "json_object_get_int_member", LIBS);
-  gidLink(cast(void**)&json_object_get_int_member_with_default, "json_object_get_int_member_with_default", LIBS);
-  gidLink(cast(void**)&json_object_get_member, "json_object_get_member", LIBS);
-  gidLink(cast(void**)&json_object_get_members, "json_object_get_members", LIBS);
-  gidLink(cast(void**)&json_object_get_null_member, "json_object_get_null_member", LIBS);
-  gidLink(cast(void**)&json_object_get_object_member, "json_object_get_object_member", LIBS);
-  gidLink(cast(void**)&json_object_get_size, "json_object_get_size", LIBS);
-  gidLink(cast(void**)&json_object_get_string_member, "json_object_get_string_member", LIBS);
-  gidLink(cast(void**)&json_object_get_string_member_with_default, "json_object_get_string_member_with_default", LIBS);
-  gidLink(cast(void**)&json_object_get_values, "json_object_get_values", LIBS);
-  gidLink(cast(void**)&json_object_has_member, "json_object_has_member", LIBS);
-  gidLink(cast(void**)&json_object_hash, "json_object_hash", LIBS);
-  gidLink(cast(void**)&json_object_is_immutable, "json_object_is_immutable", LIBS);
-  gidLink(cast(void**)&json_object_ref, "json_object_ref", LIBS);
-  gidLink(cast(void**)&json_object_remove_member, "json_object_remove_member", LIBS);
-  gidLink(cast(void**)&json_object_seal, "json_object_seal", LIBS);
-  gidLink(cast(void**)&json_object_set_array_member, "json_object_set_array_member", LIBS);
-  gidLink(cast(void**)&json_object_set_boolean_member, "json_object_set_boolean_member", LIBS);
-  gidLink(cast(void**)&json_object_set_double_member, "json_object_set_double_member", LIBS);
-  gidLink(cast(void**)&json_object_set_int_member, "json_object_set_int_member", LIBS);
-  gidLink(cast(void**)&json_object_set_member, "json_object_set_member", LIBS);
-  gidLink(cast(void**)&json_object_set_null_member, "json_object_set_null_member", LIBS);
-  gidLink(cast(void**)&json_object_set_object_member, "json_object_set_object_member", LIBS);
-  gidLink(cast(void**)&json_object_set_string_member, "json_object_set_string_member", LIBS);
-  gidLink(cast(void**)&json_object_unref, "json_object_unref", LIBS);
+  gidLink(cast(void**)&json_object_get_type, "json_object_get_type", libs);
+  gidLink(cast(void**)&json_object_new, "json_object_new", libs);
+  gidLink(cast(void**)&json_object_add_member, "json_object_add_member", libs);
+  gidLink(cast(void**)&json_object_dup_member, "json_object_dup_member", libs);
+  gidLink(cast(void**)&json_object_equal, "json_object_equal", libs);
+  gidLink(cast(void**)&json_object_foreach_member, "json_object_foreach_member", libs);
+  gidLink(cast(void**)&json_object_get_array_member, "json_object_get_array_member", libs);
+  gidLink(cast(void**)&json_object_get_boolean_member, "json_object_get_boolean_member", libs);
+  gidLink(cast(void**)&json_object_get_boolean_member_with_default, "json_object_get_boolean_member_with_default", libs);
+  gidLink(cast(void**)&json_object_get_double_member, "json_object_get_double_member", libs);
+  gidLink(cast(void**)&json_object_get_double_member_with_default, "json_object_get_double_member_with_default", libs);
+  gidLink(cast(void**)&json_object_get_int_member, "json_object_get_int_member", libs);
+  gidLink(cast(void**)&json_object_get_int_member_with_default, "json_object_get_int_member_with_default", libs);
+  gidLink(cast(void**)&json_object_get_member, "json_object_get_member", libs);
+  gidLink(cast(void**)&json_object_get_members, "json_object_get_members", libs);
+  gidLink(cast(void**)&json_object_get_null_member, "json_object_get_null_member", libs);
+  gidLink(cast(void**)&json_object_get_object_member, "json_object_get_object_member", libs);
+  gidLink(cast(void**)&json_object_get_size, "json_object_get_size", libs);
+  gidLink(cast(void**)&json_object_get_string_member, "json_object_get_string_member", libs);
+  gidLink(cast(void**)&json_object_get_string_member_with_default, "json_object_get_string_member_with_default", libs);
+  gidLink(cast(void**)&json_object_get_values, "json_object_get_values", libs);
+  gidLink(cast(void**)&json_object_has_member, "json_object_has_member", libs);
+  gidLink(cast(void**)&json_object_hash, "json_object_hash", libs);
+  gidLink(cast(void**)&json_object_is_immutable, "json_object_is_immutable", libs);
+  gidLink(cast(void**)&json_object_ref, "json_object_ref", libs);
+  gidLink(cast(void**)&json_object_remove_member, "json_object_remove_member", libs);
+  gidLink(cast(void**)&json_object_seal, "json_object_seal", libs);
+  gidLink(cast(void**)&json_object_set_array_member, "json_object_set_array_member", libs);
+  gidLink(cast(void**)&json_object_set_boolean_member, "json_object_set_boolean_member", libs);
+  gidLink(cast(void**)&json_object_set_double_member, "json_object_set_double_member", libs);
+  gidLink(cast(void**)&json_object_set_int_member, "json_object_set_int_member", libs);
+  gidLink(cast(void**)&json_object_set_member, "json_object_set_member", libs);
+  gidLink(cast(void**)&json_object_set_null_member, "json_object_set_null_member", libs);
+  gidLink(cast(void**)&json_object_set_object_member, "json_object_set_object_member", libs);
+  gidLink(cast(void**)&json_object_set_string_member, "json_object_set_string_member", libs);
+  gidLink(cast(void**)&json_object_unref, "json_object_unref", libs);
 
   // Parser
-  gidLink(cast(void**)&json_parser_get_type, "json_parser_get_type", LIBS);
-  gidLink(cast(void**)&json_parser_new, "json_parser_new", LIBS);
-  gidLink(cast(void**)&json_parser_new_immutable, "json_parser_new_immutable", LIBS);
-  gidLink(cast(void**)&json_parser_get_current_line, "json_parser_get_current_line", LIBS);
-  gidLink(cast(void**)&json_parser_get_current_pos, "json_parser_get_current_pos", LIBS);
-  gidLink(cast(void**)&json_parser_get_root, "json_parser_get_root", LIBS);
-  gidLink(cast(void**)&json_parser_has_assignment, "json_parser_has_assignment", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_data, "json_parser_load_from_data", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_file, "json_parser_load_from_file", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_mapped_file, "json_parser_load_from_mapped_file", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_stream, "json_parser_load_from_stream", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_stream_async, "json_parser_load_from_stream_async", LIBS);
-  gidLink(cast(void**)&json_parser_load_from_stream_finish, "json_parser_load_from_stream_finish", LIBS);
-  gidLink(cast(void**)&json_parser_steal_root, "json_parser_steal_root", LIBS);
+  gidLink(cast(void**)&json_parser_get_type, "json_parser_get_type", libs);
+  gidLink(cast(void**)&json_parser_new, "json_parser_new", libs);
+  gidLink(cast(void**)&json_parser_new_immutable, "json_parser_new_immutable", libs);
+  gidLink(cast(void**)&json_parser_get_current_line, "json_parser_get_current_line", libs);
+  gidLink(cast(void**)&json_parser_get_current_pos, "json_parser_get_current_pos", libs);
+  gidLink(cast(void**)&json_parser_get_root, "json_parser_get_root", libs);
+  gidLink(cast(void**)&json_parser_has_assignment, "json_parser_has_assignment", libs);
+  gidLink(cast(void**)&json_parser_load_from_data, "json_parser_load_from_data", libs);
+  gidLink(cast(void**)&json_parser_load_from_file, "json_parser_load_from_file", libs);
+  gidLink(cast(void**)&json_parser_load_from_mapped_file, "json_parser_load_from_mapped_file", libs);
+  gidLink(cast(void**)&json_parser_load_from_stream, "json_parser_load_from_stream", libs);
+  gidLink(cast(void**)&json_parser_load_from_stream_async, "json_parser_load_from_stream_async", libs);
+  gidLink(cast(void**)&json_parser_load_from_stream_finish, "json_parser_load_from_stream_finish", libs);
+  gidLink(cast(void**)&json_parser_steal_root, "json_parser_steal_root", libs);
 
   // Path
-  gidLink(cast(void**)&json_path_get_type, "json_path_get_type", LIBS);
-  gidLink(cast(void**)&json_path_new, "json_path_new", LIBS);
-  gidLink(cast(void**)&json_path_query, "json_path_query", LIBS);
-  gidLink(cast(void**)&json_path_compile, "json_path_compile", LIBS);
-  gidLink(cast(void**)&json_path_match, "json_path_match", LIBS);
+  gidLink(cast(void**)&json_path_get_type, "json_path_get_type", libs);
+  gidLink(cast(void**)&json_path_new, "json_path_new", libs);
+  gidLink(cast(void**)&json_path_query, "json_path_query", libs);
+  gidLink(cast(void**)&json_path_compile, "json_path_compile", libs);
+  gidLink(cast(void**)&json_path_match, "json_path_match", libs);
 
   // Reader
-  gidLink(cast(void**)&json_reader_get_type, "json_reader_get_type", LIBS);
-  gidLink(cast(void**)&json_reader_new, "json_reader_new", LIBS);
-  gidLink(cast(void**)&json_reader_count_elements, "json_reader_count_elements", LIBS);
-  gidLink(cast(void**)&json_reader_count_members, "json_reader_count_members", LIBS);
-  gidLink(cast(void**)&json_reader_end_element, "json_reader_end_element", LIBS);
-  gidLink(cast(void**)&json_reader_end_member, "json_reader_end_member", LIBS);
-  gidLink(cast(void**)&json_reader_get_boolean_value, "json_reader_get_boolean_value", LIBS);
-  gidLink(cast(void**)&json_reader_get_current_node, "json_reader_get_current_node", LIBS);
-  gidLink(cast(void**)&json_reader_get_double_value, "json_reader_get_double_value", LIBS);
-  gidLink(cast(void**)&json_reader_get_error, "json_reader_get_error", LIBS);
-  gidLink(cast(void**)&json_reader_get_int_value, "json_reader_get_int_value", LIBS);
-  gidLink(cast(void**)&json_reader_get_member_name, "json_reader_get_member_name", LIBS);
-  gidLink(cast(void**)&json_reader_get_null_value, "json_reader_get_null_value", LIBS);
-  gidLink(cast(void**)&json_reader_get_string_value, "json_reader_get_string_value", LIBS);
-  gidLink(cast(void**)&json_reader_get_value, "json_reader_get_value", LIBS);
-  gidLink(cast(void**)&json_reader_is_array, "json_reader_is_array", LIBS);
-  gidLink(cast(void**)&json_reader_is_object, "json_reader_is_object", LIBS);
-  gidLink(cast(void**)&json_reader_is_value, "json_reader_is_value", LIBS);
-  gidLink(cast(void**)&json_reader_list_members, "json_reader_list_members", LIBS);
-  gidLink(cast(void**)&json_reader_read_element, "json_reader_read_element", LIBS);
-  gidLink(cast(void**)&json_reader_read_member, "json_reader_read_member", LIBS);
-  gidLink(cast(void**)&json_reader_set_root, "json_reader_set_root", LIBS);
+  gidLink(cast(void**)&json_reader_get_type, "json_reader_get_type", libs);
+  gidLink(cast(void**)&json_reader_new, "json_reader_new", libs);
+  gidLink(cast(void**)&json_reader_count_elements, "json_reader_count_elements", libs);
+  gidLink(cast(void**)&json_reader_count_members, "json_reader_count_members", libs);
+  gidLink(cast(void**)&json_reader_end_element, "json_reader_end_element", libs);
+  gidLink(cast(void**)&json_reader_end_member, "json_reader_end_member", libs);
+  gidLink(cast(void**)&json_reader_get_boolean_value, "json_reader_get_boolean_value", libs);
+  gidLink(cast(void**)&json_reader_get_current_node, "json_reader_get_current_node", libs);
+  gidLink(cast(void**)&json_reader_get_double_value, "json_reader_get_double_value", libs);
+  gidLink(cast(void**)&json_reader_get_error, "json_reader_get_error", libs);
+  gidLink(cast(void**)&json_reader_get_int_value, "json_reader_get_int_value", libs);
+  gidLink(cast(void**)&json_reader_get_member_name, "json_reader_get_member_name", libs);
+  gidLink(cast(void**)&json_reader_get_null_value, "json_reader_get_null_value", libs);
+  gidLink(cast(void**)&json_reader_get_string_value, "json_reader_get_string_value", libs);
+  gidLink(cast(void**)&json_reader_get_value, "json_reader_get_value", libs);
+  gidLink(cast(void**)&json_reader_is_array, "json_reader_is_array", libs);
+  gidLink(cast(void**)&json_reader_is_object, "json_reader_is_object", libs);
+  gidLink(cast(void**)&json_reader_is_value, "json_reader_is_value", libs);
+  gidLink(cast(void**)&json_reader_list_members, "json_reader_list_members", libs);
+  gidLink(cast(void**)&json_reader_read_element, "json_reader_read_element", libs);
+  gidLink(cast(void**)&json_reader_read_member, "json_reader_read_member", libs);
+  gidLink(cast(void**)&json_reader_set_root, "json_reader_set_root", libs);
 
   // Serializable
-  gidLink(cast(void**)&json_serializable_get_type, "json_serializable_get_type", LIBS);
-  gidLink(cast(void**)&json_serializable_default_deserialize_property, "json_serializable_default_deserialize_property", LIBS);
-  gidLink(cast(void**)&json_serializable_default_serialize_property, "json_serializable_default_serialize_property", LIBS);
-  gidLink(cast(void**)&json_serializable_deserialize_property, "json_serializable_deserialize_property", LIBS);
-  gidLink(cast(void**)&json_serializable_find_property, "json_serializable_find_property", LIBS);
-  gidLink(cast(void**)&json_serializable_get_property, "json_serializable_get_property", LIBS);
-  gidLink(cast(void**)&json_serializable_list_properties, "json_serializable_list_properties", LIBS);
-  gidLink(cast(void**)&json_serializable_serialize_property, "json_serializable_serialize_property", LIBS);
-  gidLink(cast(void**)&json_serializable_set_property, "json_serializable_set_property", LIBS);
+  gidLink(cast(void**)&json_serializable_get_type, "json_serializable_get_type", libs);
+  gidLink(cast(void**)&json_serializable_default_deserialize_property, "json_serializable_default_deserialize_property", libs);
+  gidLink(cast(void**)&json_serializable_default_serialize_property, "json_serializable_default_serialize_property", libs);
+  gidLink(cast(void**)&json_serializable_deserialize_property, "json_serializable_deserialize_property", libs);
+  gidLink(cast(void**)&json_serializable_find_property, "json_serializable_find_property", libs);
+  gidLink(cast(void**)&json_serializable_get_property, "json_serializable_get_property", libs);
+  gidLink(cast(void**)&json_serializable_list_properties, "json_serializable_list_properties", libs);
+  gidLink(cast(void**)&json_serializable_serialize_property, "json_serializable_serialize_property", libs);
+  gidLink(cast(void**)&json_serializable_set_property, "json_serializable_set_property", libs);
 
   // global
-  gidLink(cast(void**)&json_boxed_can_deserialize, "json_boxed_can_deserialize", LIBS);
-  gidLink(cast(void**)&json_boxed_can_serialize, "json_boxed_can_serialize", LIBS);
-  gidLink(cast(void**)&json_boxed_deserialize, "json_boxed_deserialize", LIBS);
-  gidLink(cast(void**)&json_boxed_register_deserialize_func, "json_boxed_register_deserialize_func", LIBS);
-  gidLink(cast(void**)&json_boxed_register_serialize_func, "json_boxed_register_serialize_func", LIBS);
-  gidLink(cast(void**)&json_boxed_serialize, "json_boxed_serialize", LIBS);
-  gidLink(cast(void**)&json_construct_gobject, "json_construct_gobject", LIBS);
-  gidLink(cast(void**)&json_from_string, "json_from_string", LIBS);
-  gidLink(cast(void**)&json_gobject_deserialize, "json_gobject_deserialize", LIBS);
-  gidLink(cast(void**)&json_gobject_from_data, "json_gobject_from_data", LIBS);
-  gidLink(cast(void**)&json_gobject_serialize, "json_gobject_serialize", LIBS);
-  gidLink(cast(void**)&json_gobject_to_data, "json_gobject_to_data", LIBS);
-  gidLink(cast(void**)&json_gvariant_deserialize, "json_gvariant_deserialize", LIBS);
-  gidLink(cast(void**)&json_gvariant_deserialize_data, "json_gvariant_deserialize_data", LIBS);
-  gidLink(cast(void**)&json_gvariant_serialize, "json_gvariant_serialize", LIBS);
-  gidLink(cast(void**)&json_gvariant_serialize_data, "json_gvariant_serialize_data", LIBS);
-  gidLink(cast(void**)&json_serialize_gobject, "json_serialize_gobject", LIBS);
-  gidLink(cast(void**)&json_string_compare, "json_string_compare", LIBS);
-  gidLink(cast(void**)&json_string_equal, "json_string_equal", LIBS);
-  gidLink(cast(void**)&json_string_hash, "json_string_hash", LIBS);
-  gidLink(cast(void**)&json_to_string, "json_to_string", LIBS);
+  gidLink(cast(void**)&json_boxed_can_deserialize, "json_boxed_can_deserialize", libs);
+  gidLink(cast(void**)&json_boxed_can_serialize, "json_boxed_can_serialize", libs);
+  gidLink(cast(void**)&json_boxed_deserialize, "json_boxed_deserialize", libs);
+  gidLink(cast(void**)&json_boxed_register_deserialize_func, "json_boxed_register_deserialize_func", libs);
+  gidLink(cast(void**)&json_boxed_register_serialize_func, "json_boxed_register_serialize_func", libs);
+  gidLink(cast(void**)&json_boxed_serialize, "json_boxed_serialize", libs);
+  gidLink(cast(void**)&json_construct_gobject, "json_construct_gobject", libs);
+  gidLink(cast(void**)&json_from_string, "json_from_string", libs);
+  gidLink(cast(void**)&json_gobject_deserialize, "json_gobject_deserialize", libs);
+  gidLink(cast(void**)&json_gobject_from_data, "json_gobject_from_data", libs);
+  gidLink(cast(void**)&json_gobject_serialize, "json_gobject_serialize", libs);
+  gidLink(cast(void**)&json_gobject_to_data, "json_gobject_to_data", libs);
+  gidLink(cast(void**)&json_gvariant_deserialize, "json_gvariant_deserialize", libs);
+  gidLink(cast(void**)&json_gvariant_deserialize_data, "json_gvariant_deserialize_data", libs);
+  gidLink(cast(void**)&json_gvariant_serialize, "json_gvariant_serialize", libs);
+  gidLink(cast(void**)&json_gvariant_serialize_data, "json_gvariant_serialize_data", libs);
+  gidLink(cast(void**)&json_serialize_gobject, "json_serialize_gobject", libs);
+  gidLink(cast(void**)&json_string_compare, "json_string_compare", libs);
+  gidLink(cast(void**)&json_string_equal, "json_string_equal", libs);
+  gidLink(cast(void**)&json_string_hash, "json_string_hash", libs);
+  gidLink(cast(void**)&json_to_string, "json_to_string", libs);
 }

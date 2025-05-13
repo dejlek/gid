@@ -24,16 +24,16 @@ class TaskPool : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_pool_get_type != &gidSymbolNotFound ? gst_task_pool_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class TaskPool : gst.object.ObjectWrap
   */
   void cleanup()
   {
-    gst_task_pool_cleanup(cast(GstTaskPool*)cPtr);
+    gst_task_pool_cleanup(cast(GstTaskPool*)this._cPtr);
   }
 
   /**
@@ -81,7 +81,7 @@ class TaskPool : gst.object.ObjectWrap
   */
   void disposeHandle(void* id = null)
   {
-    gst_task_pool_dispose_handle(cast(GstTaskPool*)cPtr, id);
+    gst_task_pool_dispose_handle(cast(GstTaskPool*)this._cPtr, id);
   }
 
   /**
@@ -97,7 +97,7 @@ class TaskPool : gst.object.ObjectWrap
   */
   void join(void* id = null)
   {
-    gst_task_pool_join(cast(GstTaskPool*)cPtr, id);
+    gst_task_pool_join(cast(GstTaskPool*)this._cPtr, id);
   }
 
   /**
@@ -109,7 +109,7 @@ class TaskPool : gst.object.ObjectWrap
   void prepare()
   {
     GError *_err;
-    gst_task_pool_prepare(cast(GstTaskPool*)cPtr, &_err);
+    gst_task_pool_prepare(cast(GstTaskPool*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
   }
@@ -139,7 +139,7 @@ class TaskPool : gst.object.ObjectWrap
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GError *_err;
-    auto _retval = gst_task_pool_push(cast(GstTaskPool*)cPtr, _funcCB, _func, &_err);
+    auto _retval = gst_task_pool_push(cast(GstTaskPool*)this._cPtr, _funcCB, _func, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

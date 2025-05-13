@@ -24,16 +24,16 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_input_stream_get_type != &gidSymbolNotFound ? garrow_buffer_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -46,7 +46,7 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   this(arrow.buffer.Buffer buffer)
   {
     GArrowBufferInputStream* _cretval;
-    _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer.cPtr(No.Dup) : null);
+    _cretval = garrow_buffer_input_stream_new(buffer ? cast(GArrowBuffer*)buffer._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -54,8 +54,8 @@ class BufferInputStream : arrow.seekable_input_stream.SeekableInputStream
   arrow.buffer.Buffer getBuffer()
   {
     GArrowBuffer* _cretval;
-    _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
+    _cretval = garrow_buffer_input_stream_get_buffer(cast(GArrowBufferInputStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.buffer.Buffer)(cast(GArrowBuffer*)_cretval, Yes.Take);
     return _retval;
   }
 }

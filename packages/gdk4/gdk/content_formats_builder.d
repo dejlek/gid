@@ -23,22 +23,22 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_content_formats_builder_get_type != &gidSymbolNotFound ? gdk_content_formats_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -70,7 +70,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   */
   void addFormats(gdk.content_formats.ContentFormats formats)
   {
-    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)cPtr, formats ? cast(const(GdkContentFormats)*)formats.cPtr(No.Dup) : null);
+    gdk_content_formats_builder_add_formats(cast(GdkContentFormatsBuilder*)this._cPtr, formats ? cast(const(GdkContentFormats)*)formats._cPtr(No.Dup) : null);
   }
 
   /**
@@ -81,7 +81,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   */
   void addGtype(gobject.types.GType type)
   {
-    gdk_content_formats_builder_add_gtype(cast(GdkContentFormatsBuilder*)cPtr, type);
+    gdk_content_formats_builder_add_gtype(cast(GdkContentFormatsBuilder*)this._cPtr, type);
   }
 
   /**
@@ -93,7 +93,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   void addMimeType(string mimeType)
   {
     const(char)* _mimeType = mimeType.toCString(No.Alloc);
-    gdk_content_formats_builder_add_mime_type(cast(GdkContentFormatsBuilder*)cPtr, _mimeType);
+    gdk_content_formats_builder_add_mime_type(cast(GdkContentFormatsBuilder*)this._cPtr, _mimeType);
   }
 
   /**
@@ -110,7 +110,7 @@ class ContentFormatsBuilder : gobject.boxed.Boxed
   gdk.content_formats.ContentFormats toFormats()
   {
     GdkContentFormats* _cretval;
-    _cretval = gdk_content_formats_builder_to_formats(cast(GdkContentFormatsBuilder*)cPtr);
+    _cretval = gdk_content_formats_builder_to_formats(cast(GdkContentFormatsBuilder*)this._cPtr);
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

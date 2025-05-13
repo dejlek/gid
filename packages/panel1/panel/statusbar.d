@@ -27,16 +27,16 @@ class Statusbar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_statusbar_get_type != &gidSymbolNotFound ? panel_statusbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class Statusbar : gtk.widget.Widget
   */
   void addPrefix(int priority, gtk.widget.Widget widget)
   {
-    panel_statusbar_add_prefix(cast(PanelStatusbar*)cPtr, priority, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_statusbar_add_prefix(cast(PanelStatusbar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -79,7 +79,7 @@ class Statusbar : gtk.widget.Widget
   */
   void addSuffix(int priority, gtk.widget.Widget widget)
   {
-    panel_statusbar_add_suffix(cast(PanelStatusbar*)cPtr, priority, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_statusbar_add_suffix(cast(PanelStatusbar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -90,6 +90,6 @@ class Statusbar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    panel_statusbar_remove(cast(PanelStatusbar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_statusbar_remove(cast(PanelStatusbar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 }

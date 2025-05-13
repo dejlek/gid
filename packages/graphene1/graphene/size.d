@@ -33,22 +33,22 @@ class Size : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())graphene_size_get_type != &gidSymbolNotFound ? graphene_size_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -63,7 +63,7 @@ class Size : gobject.boxed.Boxed
   */
   @property float width()
   {
-    return (cast(graphene_size_t*)cPtr).width;
+    return (cast(graphene_size_t*)this._cPtr).width;
   }
 
   /**
@@ -73,7 +73,7 @@ class Size : gobject.boxed.Boxed
   */
   @property void width(float propval)
   {
-    (cast(graphene_size_t*)cPtr).width = propval;
+    (cast(graphene_size_t*)this._cPtr).width = propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class Size : gobject.boxed.Boxed
   */
   @property float height()
   {
-    return (cast(graphene_size_t*)cPtr).height;
+    return (cast(graphene_size_t*)this._cPtr).height;
   }
 
   /**
@@ -92,7 +92,7 @@ class Size : gobject.boxed.Boxed
   */
   @property void height(float propval)
   {
-    (cast(graphene_size_t*)cPtr).height = propval;
+    (cast(graphene_size_t*)this._cPtr).height = propval;
   }
 
   /**
@@ -119,7 +119,7 @@ class Size : gobject.boxed.Boxed
   bool equal(graphene.size.Size b)
   {
     bool _retval;
-    _retval = graphene_size_equal(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null);
+    _retval = graphene_size_equal(cast(const(graphene_size_t)*)this._cPtr, b ? cast(const(graphene_size_t)*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -134,7 +134,7 @@ class Size : gobject.boxed.Boxed
   graphene.size.Size init_(float width, float height)
   {
     graphene_size_t* _cretval;
-    _cretval = graphene_size_init(cast(graphene_size_t*)cPtr, width, height);
+    _cretval = graphene_size_init(cast(graphene_size_t*)this._cPtr, width, height);
     auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -150,7 +150,7 @@ class Size : gobject.boxed.Boxed
   graphene.size.Size initFromSize(graphene.size.Size src)
   {
     graphene_size_t* _cretval;
-    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)cPtr, src ? cast(const(graphene_size_t)*)src.cPtr(No.Dup) : null);
+    _cretval = graphene_size_init_from_size(cast(graphene_size_t*)this._cPtr, src ? cast(const(graphene_size_t)*)src._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new graphene.size.Size(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -167,7 +167,7 @@ class Size : gobject.boxed.Boxed
   void interpolate(graphene.size.Size b, double factor, out graphene.size.Size res)
   {
     graphene_size_t _res;
-    graphene_size_interpolate(cast(const(graphene_size_t)*)cPtr, b ? cast(const(graphene_size_t)*)b.cPtr(No.Dup) : null, factor, &_res);
+    graphene_size_interpolate(cast(const(graphene_size_t)*)this._cPtr, b ? cast(const(graphene_size_t)*)b._cPtr(No.Dup) : null, factor, &_res);
     res = new graphene.size.Size(cast(void*)&_res, No.Take);
   }
 
@@ -181,7 +181,7 @@ class Size : gobject.boxed.Boxed
   void scale(float factor, out graphene.size.Size res)
   {
     graphene_size_t _res;
-    graphene_size_scale(cast(const(graphene_size_t)*)cPtr, factor, &_res);
+    graphene_size_scale(cast(const(graphene_size_t)*)this._cPtr, factor, &_res);
     res = new graphene.size.Size(cast(void*)&_res, No.Take);
   }
 

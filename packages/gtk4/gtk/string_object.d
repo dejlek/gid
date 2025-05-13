@@ -24,16 +24,16 @@ class StringObject : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_string_object_get_type != &gidSymbolNotFound ? gtk_string_object_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -73,7 +73,7 @@ class StringObject : gobject.object.ObjectWrap
   string getString()
   {
     const(char)* _cretval;
-    _cretval = gtk_string_object_get_string(cast(GtkStringObject*)cPtr);
+    _cretval = gtk_string_object_get_string(cast(GtkStringObject*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

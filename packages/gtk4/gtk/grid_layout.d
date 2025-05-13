@@ -34,16 +34,16 @@ class GridLayout : gtk.layout_manager.LayoutManager
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_grid_layout_get_type != &gidSymbolNotFound ? gtk_grid_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -167,7 +167,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   int getBaselineRow()
   {
     int _retval;
-    _retval = gtk_grid_layout_get_baseline_row(cast(GtkGridLayout*)cPtr);
+    _retval = gtk_grid_layout_get_baseline_row(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   bool getColumnHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_layout_get_column_homogeneous(cast(GtkGridLayout*)cPtr);
+    _retval = gtk_grid_layout_get_column_homogeneous(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   uint getColumnSpacing()
   {
     uint _retval;
-    _retval = gtk_grid_layout_get_column_spacing(cast(GtkGridLayout*)cPtr);
+    _retval = gtk_grid_layout_get_column_spacing(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -208,7 +208,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   gtk.types.BaselinePosition getRowBaselinePosition(int row)
   {
     GtkBaselinePosition _cretval;
-    _cretval = gtk_grid_layout_get_row_baseline_position(cast(GtkGridLayout*)cPtr, row);
+    _cretval = gtk_grid_layout_get_row_baseline_position(cast(GtkGridLayout*)this._cPtr, row);
     gtk.types.BaselinePosition _retval = cast(gtk.types.BaselinePosition)_cretval;
     return _retval;
   }
@@ -220,7 +220,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   bool getRowHomogeneous()
   {
     bool _retval;
-    _retval = gtk_grid_layout_get_row_homogeneous(cast(GtkGridLayout*)cPtr);
+    _retval = gtk_grid_layout_get_row_homogeneous(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   uint getRowSpacing()
   {
     uint _retval;
-    _retval = gtk_grid_layout_get_row_spacing(cast(GtkGridLayout*)cPtr);
+    _retval = gtk_grid_layout_get_row_spacing(cast(GtkGridLayout*)this._cPtr);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setBaselineRow(int row)
   {
-    gtk_grid_layout_set_baseline_row(cast(GtkGridLayout*)cPtr, row);
+    gtk_grid_layout_set_baseline_row(cast(GtkGridLayout*)this._cPtr, row);
   }
 
   /**
@@ -258,7 +258,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setColumnHomogeneous(bool homogeneous)
   {
-    gtk_grid_layout_set_column_homogeneous(cast(GtkGridLayout*)cPtr, homogeneous);
+    gtk_grid_layout_set_column_homogeneous(cast(GtkGridLayout*)this._cPtr, homogeneous);
   }
 
   /**
@@ -269,7 +269,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setColumnSpacing(uint spacing)
   {
-    gtk_grid_layout_set_column_spacing(cast(GtkGridLayout*)cPtr, spacing);
+    gtk_grid_layout_set_column_spacing(cast(GtkGridLayout*)this._cPtr, spacing);
   }
 
   /**
@@ -282,7 +282,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setRowBaselinePosition(int row, gtk.types.BaselinePosition pos)
   {
-    gtk_grid_layout_set_row_baseline_position(cast(GtkGridLayout*)cPtr, row, pos);
+    gtk_grid_layout_set_row_baseline_position(cast(GtkGridLayout*)this._cPtr, row, pos);
   }
 
   /**
@@ -293,7 +293,7 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setRowHomogeneous(bool homogeneous)
   {
-    gtk_grid_layout_set_row_homogeneous(cast(GtkGridLayout*)cPtr, homogeneous);
+    gtk_grid_layout_set_row_homogeneous(cast(GtkGridLayout*)this._cPtr, homogeneous);
   }
 
   /**
@@ -304,6 +304,6 @@ class GridLayout : gtk.layout_manager.LayoutManager
   */
   void setRowSpacing(uint spacing)
   {
-    gtk_grid_layout_set_row_spacing(cast(GtkGridLayout*)cPtr, spacing);
+    gtk_grid_layout_set_row_spacing(cast(GtkGridLayout*)this._cPtr, spacing);
   }
 }

@@ -138,16 +138,16 @@ class BreakpointBin : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_bin_get_type != &gidSymbolNotFound ? adw_breakpoint_bin_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -203,7 +203,7 @@ class BreakpointBin : gtk.widget.Widget
   */
   void addBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
-    adw_breakpoint_bin_add_breakpoint(cast(AdwBreakpointBin*)cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint.cPtr(Yes.Dup) : null);
+    adw_breakpoint_bin_add_breakpoint(cast(AdwBreakpointBin*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -213,8 +213,8 @@ class BreakpointBin : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_breakpoint_bin_get_child(cast(AdwBreakpointBin*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_breakpoint_bin_get_child(cast(AdwBreakpointBin*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -225,8 +225,8 @@ class BreakpointBin : gtk.widget.Widget
   adw.breakpoint.Breakpoint getCurrentBreakpoint()
   {
     AdwBreakpoint* _cretval;
-    _cretval = adw_breakpoint_bin_get_current_breakpoint(cast(AdwBreakpointBin*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
+    _cretval = adw_breakpoint_bin_get_current_breakpoint(cast(AdwBreakpointBin*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.breakpoint.Breakpoint)(cast(AdwBreakpoint*)_cretval, No.Take);
     return _retval;
   }
 
@@ -238,7 +238,7 @@ class BreakpointBin : gtk.widget.Widget
   */
   void removeBreakpoint(adw.breakpoint.Breakpoint breakpoint)
   {
-    adw_breakpoint_bin_remove_breakpoint(cast(AdwBreakpointBin*)cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint.cPtr(No.Dup) : null);
+    adw_breakpoint_bin_remove_breakpoint(cast(AdwBreakpointBin*)this._cPtr, breakpoint ? cast(AdwBreakpoint*)breakpoint._cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,6 +249,6 @@ class BreakpointBin : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_breakpoint_bin_set_child(cast(AdwBreakpointBin*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_breakpoint_bin_set_child(cast(AdwBreakpointBin*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 }

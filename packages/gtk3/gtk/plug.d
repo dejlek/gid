@@ -46,16 +46,16 @@ class Plug : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_plug_get_type != &gidSymbolNotFound ? gtk_plug_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -109,8 +109,8 @@ class Plug : gtk.window.Window
   static gtk.plug.Plug newForDisplay(gdk.display.Display display, xlib.types.Window socketId)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_plug_new_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, socketId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.plug.Plug)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_plug_new_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, socketId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.plug.Plug)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class Plug : gtk.window.Window
   */
   void construct(xlib.types.Window socketId)
   {
-    gtk_plug_construct(cast(GtkPlug*)cPtr, socketId);
+    gtk_plug_construct(cast(GtkPlug*)this._cPtr, socketId);
   }
 
   /**
@@ -138,7 +138,7 @@ class Plug : gtk.window.Window
   */
   void constructForDisplay(gdk.display.Display display, xlib.types.Window socketId)
   {
-    gtk_plug_construct_for_display(cast(GtkPlug*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null, socketId);
+    gtk_plug_construct_for_display(cast(GtkPlug*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null, socketId);
   }
 
   /**
@@ -148,7 +148,7 @@ class Plug : gtk.window.Window
   bool getEmbedded()
   {
     bool _retval;
-    _retval = gtk_plug_get_embedded(cast(GtkPlug*)cPtr);
+    _retval = gtk_plug_get_embedded(cast(GtkPlug*)this._cPtr);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Plug : gtk.window.Window
   xlib.types.Window getId()
   {
     xlib.types.Window _retval;
-    _retval = gtk_plug_get_id(cast(GtkPlug*)cPtr);
+    _retval = gtk_plug_get_id(cast(GtkPlug*)this._cPtr);
     return _retval;
   }
 
@@ -172,8 +172,8 @@ class Plug : gtk.window.Window
   gdk.window.Window getSocketWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_plug_get_socket_window(cast(GtkPlug*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_plug_get_socket_window(cast(GtkPlug*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

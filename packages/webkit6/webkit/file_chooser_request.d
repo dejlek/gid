@@ -38,16 +38,16 @@ class FileChooserRequest : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_file_chooser_request_get_type != &gidSymbolNotFound ? webkit_file_chooser_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   */
   void cancel()
   {
-    webkit_file_chooser_request_cancel(cast(WebKitFileChooserRequest*)cPtr);
+    webkit_file_chooser_request_cancel(cast(WebKitFileChooserRequest*)this._cPtr);
   }
 
   /**
@@ -110,7 +110,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   string[] getMimeTypes()
   {
     const(char*)* _cretval;
-    _cretval = webkit_file_chooser_request_get_mime_types(cast(WebKitFileChooserRequest*)cPtr);
+    _cretval = webkit_file_chooser_request_get_mime_types(cast(WebKitFileChooserRequest*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -143,8 +143,8 @@ class FileChooserRequest : gobject.object.ObjectWrap
   gtk.file_filter.FileFilter getMimeTypesFilter()
   {
     GtkFileFilter* _cretval;
-    _cretval = webkit_file_chooser_request_get_mime_types_filter(cast(WebKitFileChooserRequest*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
+    _cretval = webkit_file_chooser_request_get_mime_types_filter(cast(WebKitFileChooserRequest*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.file_filter.FileFilter)(cast(GtkFileFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   bool getSelectMultiple()
   {
     bool _retval;
-    _retval = webkit_file_chooser_request_get_select_multiple(cast(WebKitFileChooserRequest*)cPtr);
+    _retval = webkit_file_chooser_request_get_select_multiple(cast(WebKitFileChooserRequest*)this._cPtr);
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class FileChooserRequest : gobject.object.ObjectWrap
   string[] getSelectedFiles()
   {
     const(char*)* _cretval;
-    _cretval = webkit_file_chooser_request_get_selected_files(cast(WebKitFileChooserRequest*)cPtr);
+    _cretval = webkit_file_chooser_request_get_selected_files(cast(WebKitFileChooserRequest*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -215,6 +215,6 @@ class FileChooserRequest : gobject.object.ObjectWrap
       _tmpfiles ~= s.toCString(No.Alloc);
     _tmpfiles ~= null;
     const(char*)* _files = _tmpfiles.ptr;
-    webkit_file_chooser_request_select_files(cast(WebKitFileChooserRequest*)cPtr, _files);
+    webkit_file_chooser_request_select_files(cast(WebKitFileChooserRequest*)this._cPtr, _files);
   }
 }

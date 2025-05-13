@@ -20,22 +20,22 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_attribute_matcher_get_type != &gidSymbolNotFound ? g_file_attribute_matcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,7 +96,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _ns = ns.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_enumerate_namespace(cast(GFileAttributeMatcher*)cPtr, _ns);
+    _retval = g_file_attribute_matcher_enumerate_namespace(cast(GFileAttributeMatcher*)this._cPtr, _ns);
     return _retval;
   }
 
@@ -108,7 +108,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   string enumerateNext()
   {
     const(char)* _cretval;
-    _cretval = g_file_attribute_matcher_enumerate_next(cast(GFileAttributeMatcher*)cPtr);
+    _cretval = g_file_attribute_matcher_enumerate_next(cast(GFileAttributeMatcher*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -126,7 +126,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_matches(cast(GFileAttributeMatcher*)cPtr, _attribute);
+    _retval = g_file_attribute_matcher_matches(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _attribute = attribute.toCString(No.Alloc);
-    _retval = g_file_attribute_matcher_matches_only(cast(GFileAttributeMatcher*)cPtr, _attribute);
+    _retval = g_file_attribute_matcher_matches_only(cast(GFileAttributeMatcher*)this._cPtr, _attribute);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   gio.file_attribute_matcher.FileAttributeMatcher subtract(gio.file_attribute_matcher.FileAttributeMatcher subtract = null)
   {
     GFileAttributeMatcher* _cretval;
-    _cretval = g_file_attribute_matcher_subtract(cast(GFileAttributeMatcher*)cPtr, subtract ? cast(GFileAttributeMatcher*)subtract.cPtr(No.Dup) : null);
+    _cretval = g_file_attribute_matcher_subtract(cast(GFileAttributeMatcher*)this._cPtr, subtract ? cast(GFileAttributeMatcher*)subtract._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gio.file_attribute_matcher.FileAttributeMatcher(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -180,7 +180,7 @@ class FileAttributeMatcher : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = g_file_attribute_matcher_to_string(cast(GFileAttributeMatcher*)cPtr);
+    _cretval = g_file_attribute_matcher_to_string(cast(GFileAttributeMatcher*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -24,7 +24,7 @@ class TestLogBuffer
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,6 +42,6 @@ class TestLogBuffer
       _nBytes = cast(uint)bytes.length;
 
     auto _bytes = cast(const(ubyte)*)bytes.ptr;
-    g_test_log_buffer_push(cast(GTestLogBuffer*)cPtr, _nBytes, _bytes);
+    g_test_log_buffer_push(cast(GTestLogBuffer*)this._cPtr, _nBytes, _bytes);
   }
 }

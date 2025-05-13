@@ -40,16 +40,16 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_radio_tool_button_get_type != &gidSymbolNotFound ? gtk_radio_tool_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,7 +105,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_radio_tool_button_new_from_stock(_group, _stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -119,8 +119,8 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   static gtk.radio_tool_button.RadioToolButton newFromWidget(gtk.radio_tool_button.RadioToolButton group = null)
   {
     GtkToolItem* _cretval;
-    _cretval = gtk_radio_tool_button_new_from_widget(group ? cast(GtkRadioToolButton*)group.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_radio_tool_button_new_from_widget(group ? cast(GtkRadioToolButton*)group._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,8 +140,8 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   {
     GtkToolItem* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_radio_tool_button_new_with_stock_from_widget(group ? cast(GtkRadioToolButton*)group.cPtr(No.Dup) : null, _stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
+    _cretval = gtk_radio_tool_button_new_with_stock_from_widget(group ? cast(GtkRadioToolButton*)group._cPtr(No.Dup) : null, _stockId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.radio_tool_button.RadioToolButton)(cast(GtkToolItem*)_cretval, No.Take);
     return _retval;
   }
 
@@ -152,7 +152,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   gtk.radio_button.RadioButton[] getGroup()
   {
     GSList* _cretval;
-    _cretval = gtk_radio_tool_button_get_group(cast(GtkRadioToolButton*)cPtr);
+    _cretval = gtk_radio_tool_button_get_group(cast(GtkRadioToolButton*)this._cPtr);
     auto _retval = gSListToD!(gtk.radio_button.RadioButton, GidOwnership.None)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -167,6 +167,6 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
   {
     auto _group = gSListFromD!(gtk.radio_button.RadioButton)(group);
     scope(exit) containerFree!(GSList*, gtk.radio_button.RadioButton, GidOwnership.None)(_group);
-    gtk_radio_tool_button_set_group(cast(GtkRadioToolButton*)cPtr, _group);
+    gtk_radio_tool_button_set_group(cast(GtkRadioToolButton*)this._cPtr, _group);
   }
 }

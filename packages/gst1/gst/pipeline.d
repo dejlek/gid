@@ -73,16 +73,16 @@ class Pipeline : gst.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_pipeline_get_type != &gidSymbolNotFound ? gst_pipeline_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -185,7 +185,7 @@ class Pipeline : gst.bin.Bin
   */
   void autoClock()
   {
-    gst_pipeline_auto_clock(cast(GstPipeline*)cPtr);
+    gst_pipeline_auto_clock(cast(GstPipeline*)this._cPtr);
   }
 
   /**
@@ -199,7 +199,7 @@ class Pipeline : gst.bin.Bin
   bool getAutoFlushBus()
   {
     bool _retval;
-    _retval = gst_pipeline_get_auto_flush_bus(cast(GstPipeline*)cPtr);
+    _retval = gst_pipeline_get_auto_flush_bus(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -213,8 +213,8 @@ class Pipeline : gst.bin.Bin
   override gst.bus.Bus getBus()
   {
     GstBus* _cretval;
-    _cretval = gst_pipeline_get_bus(cast(GstPipeline*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
+    _cretval = gst_pipeline_get_bus(cast(GstPipeline*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.bus.Bus)(cast(GstBus*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class Pipeline : gst.bin.Bin
   gst.types.ClockTime getConfiguredLatency()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_pipeline_get_configured_latency(cast(GstPipeline*)cPtr);
+    _retval = gst_pipeline_get_configured_latency(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -241,7 +241,7 @@ class Pipeline : gst.bin.Bin
   gst.types.ClockTime getDelay()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_pipeline_get_delay(cast(GstPipeline*)cPtr);
+    _retval = gst_pipeline_get_delay(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class Pipeline : gst.bin.Bin
   gst.types.ClockTime getLatency()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_pipeline_get_latency(cast(GstPipeline*)cPtr);
+    _retval = gst_pipeline_get_latency(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -267,8 +267,8 @@ class Pipeline : gst.bin.Bin
   gst.clock.Clock getPipelineClock()
   {
     GstClock* _cretval;
-    _cretval = gst_pipeline_get_pipeline_clock(cast(GstPipeline*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
+    _cretval = gst_pipeline_get_pipeline_clock(cast(GstPipeline*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.clock.Clock)(cast(GstClock*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class Pipeline : gst.bin.Bin
   bool isLive()
   {
     bool _retval;
-    _retval = gst_pipeline_is_live(cast(GstPipeline*)cPtr);
+    _retval = gst_pipeline_is_live(cast(GstPipeline*)this._cPtr);
     return _retval;
   }
 
@@ -307,7 +307,7 @@ class Pipeline : gst.bin.Bin
   */
   void setAutoFlushBus(bool autoFlush)
   {
-    gst_pipeline_set_auto_flush_bus(cast(GstPipeline*)cPtr, autoFlush);
+    gst_pipeline_set_auto_flush_bus(cast(GstPipeline*)this._cPtr, autoFlush);
   }
 
   /**
@@ -327,7 +327,7 @@ class Pipeline : gst.bin.Bin
   */
   void setDelay(gst.types.ClockTime delay)
   {
-    gst_pipeline_set_delay(cast(GstPipeline*)cPtr, delay);
+    gst_pipeline_set_delay(cast(GstPipeline*)this._cPtr, delay);
   }
 
   /**
@@ -344,7 +344,7 @@ class Pipeline : gst.bin.Bin
   */
   void setLatency(gst.types.ClockTime latency)
   {
-    gst_pipeline_set_latency(cast(GstPipeline*)cPtr, latency);
+    gst_pipeline_set_latency(cast(GstPipeline*)this._cPtr, latency);
   }
 
   /**
@@ -362,6 +362,6 @@ class Pipeline : gst.bin.Bin
   */
   void useClock(gst.clock.Clock clock = null)
   {
-    gst_pipeline_use_clock(cast(GstPipeline*)cPtr, clock ? cast(GstClock*)clock.cPtr(No.Dup) : null);
+    gst_pipeline_use_clock(cast(GstPipeline*)this._cPtr, clock ? cast(GstClock*)clock._cPtr(No.Dup) : null);
   }
 }

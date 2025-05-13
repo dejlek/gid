@@ -21,22 +21,22 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_buffer_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_buffer_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   */
   @property gstgl.glallocation_params.GLAllocationParams parent()
   {
-    return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLBufferAllocationParams*)cPtr).parent);
+    return cToD!(gstgl.glallocation_params.GLAllocationParams)(cast(void*)&(cast(GstGLBufferAllocationParams*)this._cPtr).parent);
   }
 
   /**
@@ -60,7 +60,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   */
   @property uint glTarget()
   {
-    return (cast(GstGLBufferAllocationParams*)cPtr).glTarget;
+    return (cast(GstGLBufferAllocationParams*)this._cPtr).glTarget;
   }
 
   /**
@@ -70,7 +70,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   */
   @property void glTarget(uint propval)
   {
-    (cast(GstGLBufferAllocationParams*)cPtr).glTarget = propval;
+    (cast(GstGLBufferAllocationParams*)this._cPtr).glTarget = propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   */
   @property uint glUsage()
   {
-    return (cast(GstGLBufferAllocationParams*)cPtr).glUsage;
+    return (cast(GstGLBufferAllocationParams*)this._cPtr).glUsage;
   }
 
   /**
@@ -89,14 +89,14 @@ class GLBufferAllocationParams : gobject.boxed.Boxed
   */
   @property void glUsage(uint propval)
   {
-    (cast(GstGLBufferAllocationParams*)cPtr).glUsage = propval;
+    (cast(GstGLBufferAllocationParams*)this._cPtr).glUsage = propval;
   }
 
   /** */
   this(gstgl.glcontext.GLContext context, size_t allocSize, gst.allocation_params.AllocationParams allocParams, uint glTarget, uint glUsage)
   {
     GstGLBufferAllocationParams* _cretval;
-    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocSize, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, glTarget, glUsage);
+    _cretval = gst_gl_buffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocSize, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, glTarget, glUsage);
     this(_cretval, Yes.Take);
   }
 }

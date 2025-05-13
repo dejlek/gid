@@ -28,7 +28,7 @@ class CClosure
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class CClosure
   */
   @property gobject.closure.Closure closure()
   {
-    return cToD!(gobject.closure.Closure)(cast(void*)&(cast(GCClosure*)cPtr).closure);
+    return cToD!(gobject.closure.Closure)(cast(void*)&(cast(GCClosure*)this._cPtr).closure);
   }
 
   /**
@@ -63,7 +63,7 @@ class CClosure
   */
   static void marshalBOOLEANBOXEDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_BOOLEAN__BOXED_BOXED(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_BOOLEAN__BOXED_BOXED(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -87,7 +87,7 @@ class CClosure
   */
   static void marshalBOOLEANFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_BOOLEAN__FLAGS(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_BOOLEAN__FLAGS(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -110,7 +110,7 @@ class CClosure
   */
   static void marshalSTRINGOBJECTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_STRING__OBJECT_POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_STRING__OBJECT_POINTER(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -132,7 +132,7 @@ class CClosure
   */
   static void marshalVOIDBOOLEAN(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__BOOLEAN(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__BOOLEAN(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -154,7 +154,7 @@ class CClosure
   */
   static void marshalVOIDBOXED(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__BOXED(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__BOXED(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -176,7 +176,7 @@ class CClosure
   */
   static void marshalVOIDCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__CHAR(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__CHAR(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -198,7 +198,7 @@ class CClosure
   */
   static void marshalVOIDDOUBLE(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__DOUBLE(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__DOUBLE(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -220,7 +220,7 @@ class CClosure
   */
   static void marshalVOIDENUM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__ENUM(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__ENUM(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -242,7 +242,7 @@ class CClosure
   */
   static void marshalVOIDFLAGS(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__FLAGS(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__FLAGS(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -264,7 +264,7 @@ class CClosure
   */
   static void marshalVOIDFLOAT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__FLOAT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__FLOAT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -286,7 +286,7 @@ class CClosure
   */
   static void marshalVOIDINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__INT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__INT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -308,7 +308,7 @@ class CClosure
   */
   static void marshalVOIDLONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__LONG(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__LONG(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -330,7 +330,7 @@ class CClosure
   */
   static void marshalVOIDOBJECT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__OBJECT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__OBJECT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -352,7 +352,7 @@ class CClosure
   */
   static void marshalVOIDPARAM(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__PARAM(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__PARAM(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -378,7 +378,7 @@ class CClosure
   */
   static void marshalVOIDPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__POINTER(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -400,7 +400,7 @@ class CClosure
   */
   static void marshalVOIDSTRING(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__STRING(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__STRING(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -422,7 +422,7 @@ class CClosure
   */
   static void marshalVOIDUCHAR(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__UCHAR(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__UCHAR(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -444,7 +444,7 @@ class CClosure
   */
   static void marshalVOIDUINT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__UINT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__UINT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -466,7 +466,7 @@ class CClosure
   */
   static void marshalVOIDUINTPOINTER(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__UINT_POINTER(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__UINT_POINTER(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -488,7 +488,7 @@ class CClosure
   */
   static void marshalVOIDULONG(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__ULONG(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__ULONG(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -510,7 +510,7 @@ class CClosure
   */
   static void marshalVOIDVARIANT(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__VARIANT(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__VARIANT(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -531,7 +531,7 @@ class CClosure
   */
   static void marshalVOIDVOID(gobject.closure.Closure closure, gobject.value.Value returnValue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_VOID__VOID(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_VOID__VOID(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnValue ? cast(GValue*)returnValue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 
   /**
@@ -556,6 +556,6 @@ class CClosure
   */
   static void marshalGeneric(gobject.closure.Closure closure, gobject.value.Value returnGvalue, uint nParamValues, gobject.value.Value paramValues, void* invocationHint = null, void* marshalData = null)
   {
-    g_cclosure_marshal_generic(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, returnGvalue ? cast(GValue*)returnGvalue.cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues.cPtr(No.Dup) : null, invocationHint, marshalData);
+    g_cclosure_marshal_generic(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, returnGvalue ? cast(GValue*)returnGvalue._cPtr(No.Dup) : null, nParamValues, paramValues ? cast(const(GValue)*)paramValues._cPtr(No.Dup) : null, invocationHint, marshalData);
   }
 }

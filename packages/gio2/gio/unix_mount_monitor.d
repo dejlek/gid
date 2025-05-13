@@ -21,16 +21,16 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_mount_monitor_get_type != &gidSymbolNotFound ? g_unix_mount_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   {
     GUnixMountMonitor* _cretval;
     _cretval = g_unix_mount_monitor_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_mount_monitor.UnixMountMonitor)(cast(GUnixMountMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class UnixMountMonitor : gobject.object.ObjectWrap
   */
   void setRateLimit(int limitMsec)
   {
-    g_unix_mount_monitor_set_rate_limit(cast(GUnixMountMonitor*)cPtr, limitMsec);
+    g_unix_mount_monitor_set_rate_limit(cast(GUnixMountMonitor*)this._cPtr, limitMsec);
   }
 
   /**

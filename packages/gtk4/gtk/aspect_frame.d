@@ -40,16 +40,16 @@ class AspectFrame : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_aspect_frame_get_type != &gidSymbolNotFound ? gtk_aspect_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -186,8 +186,8 @@ class AspectFrame : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_aspect_frame_get_child(cast(GtkAspectFrame*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -199,7 +199,7 @@ class AspectFrame : gtk.widget.Widget
   bool getObeyChild()
   {
     bool _retval;
-    _retval = gtk_aspect_frame_get_obey_child(cast(GtkAspectFrame*)cPtr);
+    _retval = gtk_aspect_frame_get_obey_child(cast(GtkAspectFrame*)this._cPtr);
     return _retval;
   }
 
@@ -210,7 +210,7 @@ class AspectFrame : gtk.widget.Widget
   float getRatio()
   {
     float _retval;
-    _retval = gtk_aspect_frame_get_ratio(cast(GtkAspectFrame*)cPtr);
+    _retval = gtk_aspect_frame_get_ratio(cast(GtkAspectFrame*)this._cPtr);
     return _retval;
   }
 
@@ -222,7 +222,7 @@ class AspectFrame : gtk.widget.Widget
   float getXalign()
   {
     float _retval;
-    _retval = gtk_aspect_frame_get_xalign(cast(GtkAspectFrame*)cPtr);
+    _retval = gtk_aspect_frame_get_xalign(cast(GtkAspectFrame*)this._cPtr);
     return _retval;
   }
 
@@ -234,7 +234,7 @@ class AspectFrame : gtk.widget.Widget
   float getYalign()
   {
     float _retval;
-    _retval = gtk_aspect_frame_get_yalign(cast(GtkAspectFrame*)cPtr);
+    _retval = gtk_aspect_frame_get_yalign(cast(GtkAspectFrame*)this._cPtr);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ class AspectFrame : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_aspect_frame_set_child(cast(GtkAspectFrame*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_aspect_frame_set_child(cast(GtkAspectFrame*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -260,7 +260,7 @@ class AspectFrame : gtk.widget.Widget
   */
   void setObeyChild(bool obeyChild)
   {
-    gtk_aspect_frame_set_obey_child(cast(GtkAspectFrame*)cPtr, obeyChild);
+    gtk_aspect_frame_set_obey_child(cast(GtkAspectFrame*)this._cPtr, obeyChild);
   }
 
   /**
@@ -271,7 +271,7 @@ class AspectFrame : gtk.widget.Widget
   */
   void setRatio(float ratio)
   {
-    gtk_aspect_frame_set_ratio(cast(GtkAspectFrame*)cPtr, ratio);
+    gtk_aspect_frame_set_ratio(cast(GtkAspectFrame*)this._cPtr, ratio);
   }
 
   /**
@@ -283,7 +283,7 @@ class AspectFrame : gtk.widget.Widget
   */
   void setXalign(float xalign)
   {
-    gtk_aspect_frame_set_xalign(cast(GtkAspectFrame*)cPtr, xalign);
+    gtk_aspect_frame_set_xalign(cast(GtkAspectFrame*)this._cPtr, xalign);
   }
 
   /**
@@ -295,6 +295,6 @@ class AspectFrame : gtk.widget.Widget
   */
   void setYalign(float yalign)
   {
-    gtk_aspect_frame_set_yalign(cast(GtkAspectFrame*)cPtr, yalign);
+    gtk_aspect_frame_set_yalign(cast(GtkAspectFrame*)this._cPtr, yalign);
   }
 }

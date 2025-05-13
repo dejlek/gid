@@ -23,16 +23,16 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_animation_iter_get_type != &gidSymbolNotFound ? gdk_pixbuf_animation_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -71,7 +71,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   bool advance(glib.time_val.TimeVal currentTime = null)
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)cPtr, currentTime ? cast(const(GTimeVal)*)currentTime.cPtr : null);
+    _retval = gdk_pixbuf_animation_iter_advance(cast(GdkPixbufAnimationIter*)this._cPtr, currentTime ? cast(const(GTimeVal)*)currentTime._cPtr : null);
     return _retval;
   }
 
@@ -90,7 +90,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   int getDelayTime()
   {
     int _retval;
-    _retval = gdk_pixbuf_animation_iter_get_delay_time(cast(GdkPixbufAnimationIter*)cPtr);
+    _retval = gdk_pixbuf_animation_iter_get_delay_time(cast(GdkPixbufAnimationIter*)this._cPtr);
     return _retval;
   }
 
@@ -115,8 +115,8 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_animation_iter_get_pixbuf(cast(GdkPixbufAnimationIter*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gdk_pixbuf_animation_iter_get_pixbuf(cast(GdkPixbufAnimationIter*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class PixbufAnimationIter : gobject.object.ObjectWrap
   bool onCurrentlyLoadingFrame()
   {
     bool _retval;
-    _retval = gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)cPtr);
+    _retval = gdk_pixbuf_animation_iter_on_currently_loading_frame(cast(GdkPixbufAnimationIter*)this._cPtr);
     return _retval;
   }
 }

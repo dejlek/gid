@@ -27,7 +27,7 @@ class RTSPTransport
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class RTSPTransport
   */
   @property gstrtsp.types.RTSPTransMode trans()
   {
-    return cast(gstrtsp.types.RTSPTransMode)(cast(GstRTSPTransport*)cPtr).trans;
+    return cast(gstrtsp.types.RTSPTransMode)(cast(GstRTSPTransport*)this._cPtr).trans;
   }
 
   /**
@@ -48,7 +48,7 @@ class RTSPTransport
   */
   @property void trans(gstrtsp.types.RTSPTransMode propval)
   {
-    (cast(GstRTSPTransport*)cPtr).trans = cast(GstRTSPTransMode)propval;
+    (cast(GstRTSPTransport*)this._cPtr).trans = cast(GstRTSPTransMode)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class RTSPTransport
   */
   @property gstrtsp.types.RTSPProfile profile()
   {
-    return cast(gstrtsp.types.RTSPProfile)(cast(GstRTSPTransport*)cPtr).profile;
+    return cast(gstrtsp.types.RTSPProfile)(cast(GstRTSPTransport*)this._cPtr).profile;
   }
 
   /**
@@ -67,7 +67,7 @@ class RTSPTransport
   */
   @property void profile(gstrtsp.types.RTSPProfile propval)
   {
-    (cast(GstRTSPTransport*)cPtr).profile = cast(GstRTSPProfile)propval;
+    (cast(GstRTSPTransport*)this._cPtr).profile = cast(GstRTSPProfile)propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class RTSPTransport
   */
   @property gstrtsp.types.RTSPLowerTrans lowerTransport()
   {
-    return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPTransport*)cPtr).lowerTransport;
+    return cast(gstrtsp.types.RTSPLowerTrans)(cast(GstRTSPTransport*)this._cPtr).lowerTransport;
   }
 
   /**
@@ -86,7 +86,7 @@ class RTSPTransport
   */
   @property void lowerTransport(gstrtsp.types.RTSPLowerTrans propval)
   {
-    (cast(GstRTSPTransport*)cPtr).lowerTransport = cast(GstRTSPLowerTrans)propval;
+    (cast(GstRTSPTransport*)this._cPtr).lowerTransport = cast(GstRTSPLowerTrans)propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class RTSPTransport
   */
   @property string destination()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
+    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
   }
 
   /**
@@ -105,8 +105,8 @@ class RTSPTransport
   */
   @property void destination(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).destination);
-    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).destination);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).destination);
+    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).destination);
   }
 
   /**
@@ -115,7 +115,7 @@ class RTSPTransport
   */
   @property string source()
   {
-    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
+    return cToD!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
   }
 
   /**
@@ -125,8 +125,8 @@ class RTSPTransport
   */
   @property void source(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)cPtr).source);
-    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)cPtr).source);
+    cValueFree!(string)(cast(void*)(cast(GstRTSPTransport*)this._cPtr).source);
+    dToC(propval, cast(void*)&(cast(GstRTSPTransport*)this._cPtr).source);
   }
 
   /**
@@ -135,7 +135,7 @@ class RTSPTransport
   */
   @property uint layers()
   {
-    return (cast(GstRTSPTransport*)cPtr).layers;
+    return (cast(GstRTSPTransport*)this._cPtr).layers;
   }
 
   /**
@@ -145,7 +145,7 @@ class RTSPTransport
   */
   @property void layers(uint propval)
   {
-    (cast(GstRTSPTransport*)cPtr).layers = propval;
+    (cast(GstRTSPTransport*)this._cPtr).layers = propval;
   }
 
   /**
@@ -154,7 +154,7 @@ class RTSPTransport
   */
   @property bool modePlay()
   {
-    return (cast(GstRTSPTransport*)cPtr).modePlay;
+    return (cast(GstRTSPTransport*)this._cPtr).modePlay;
   }
 
   /**
@@ -164,7 +164,7 @@ class RTSPTransport
   */
   @property void modePlay(bool propval)
   {
-    (cast(GstRTSPTransport*)cPtr).modePlay = propval;
+    (cast(GstRTSPTransport*)this._cPtr).modePlay = propval;
   }
 
   /**
@@ -173,7 +173,7 @@ class RTSPTransport
   */
   @property bool modeRecord()
   {
-    return (cast(GstRTSPTransport*)cPtr).modeRecord;
+    return (cast(GstRTSPTransport*)this._cPtr).modeRecord;
   }
 
   /**
@@ -183,7 +183,7 @@ class RTSPTransport
   */
   @property void modeRecord(bool propval)
   {
-    (cast(GstRTSPTransport*)cPtr).modeRecord = propval;
+    (cast(GstRTSPTransport*)this._cPtr).modeRecord = propval;
   }
 
   /**
@@ -192,7 +192,7 @@ class RTSPTransport
   */
   @property bool append()
   {
-    return (cast(GstRTSPTransport*)cPtr).append;
+    return (cast(GstRTSPTransport*)this._cPtr).append;
   }
 
   /**
@@ -202,7 +202,7 @@ class RTSPTransport
   */
   @property void append(bool propval)
   {
-    (cast(GstRTSPTransport*)cPtr).append = propval;
+    (cast(GstRTSPTransport*)this._cPtr).append = propval;
   }
 
   /**
@@ -211,7 +211,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange interleaved()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).interleaved);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).interleaved);
   }
 
   /**
@@ -220,7 +220,7 @@ class RTSPTransport
   */
   @property uint ttl()
   {
-    return (cast(GstRTSPTransport*)cPtr).ttl;
+    return (cast(GstRTSPTransport*)this._cPtr).ttl;
   }
 
   /**
@@ -230,7 +230,7 @@ class RTSPTransport
   */
   @property void ttl(uint propval)
   {
-    (cast(GstRTSPTransport*)cPtr).ttl = propval;
+    (cast(GstRTSPTransport*)this._cPtr).ttl = propval;
   }
 
   /**
@@ -239,7 +239,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange port()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).port);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).port);
   }
 
   /**
@@ -250,7 +250,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange clientPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).clientPort);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).clientPort);
   }
 
   /**
@@ -261,7 +261,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange serverPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)cPtr).serverPort);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).serverPort);
   }
 
   /**
@@ -270,7 +270,7 @@ class RTSPTransport
   */
   @property uint ssrc()
   {
-    return (cast(GstRTSPTransport*)cPtr).ssrc;
+    return (cast(GstRTSPTransport*)this._cPtr).ssrc;
   }
 
   /**
@@ -280,7 +280,7 @@ class RTSPTransport
   */
   @property void ssrc(uint propval)
   {
-    (cast(GstRTSPTransport*)cPtr).ssrc = propval;
+    (cast(GstRTSPTransport*)this._cPtr).ssrc = propval;
   }
 
   /**
@@ -292,7 +292,7 @@ class RTSPTransport
   string asText()
   {
     char* _cretval;
-    _cretval = gst_rtsp_transport_as_text(cast(GstRTSPTransport*)cPtr);
+    _cretval = gst_rtsp_transport_as_text(cast(GstRTSPTransport*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -309,7 +309,7 @@ class RTSPTransport
   {
     GstRTSPResult _cretval;
     char* _mediaType;
-    _cretval = gst_rtsp_transport_get_media_type(cast(GstRTSPTransport*)cPtr, &_mediaType);
+    _cretval = gst_rtsp_transport_get_media_type(cast(GstRTSPTransport*)this._cPtr, &_mediaType);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
     mediaType = _mediaType.fromCString(No.Free);
     return _retval;

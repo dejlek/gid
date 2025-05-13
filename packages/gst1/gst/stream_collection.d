@@ -39,16 +39,16 @@ class StreamCollection : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_stream_collection_get_type != &gidSymbolNotFound ? gst_stream_collection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -101,7 +101,7 @@ class StreamCollection : gst.object.ObjectWrap
   bool addStream(gst.stream.Stream stream)
   {
     bool _retval;
-    _retval = gst_stream_collection_add_stream(cast(GstStreamCollection*)cPtr, stream ? cast(GstStream*)stream.cPtr(Yes.Dup) : null);
+    _retval = gst_stream_collection_add_stream(cast(GstStreamCollection*)this._cPtr, stream ? cast(GstStream*)stream._cPtr(Yes.Dup) : null);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class StreamCollection : gst.object.ObjectWrap
   uint getSize()
   {
     uint _retval;
-    _retval = gst_stream_collection_get_size(cast(GstStreamCollection*)cPtr);
+    _retval = gst_stream_collection_get_size(cast(GstStreamCollection*)this._cPtr);
     return _retval;
   }
 
@@ -128,8 +128,8 @@ class StreamCollection : gst.object.ObjectWrap
   gst.stream.Stream getStream(uint index)
   {
     GstStream* _cretval;
-    _cretval = gst_stream_collection_get_stream(cast(GstStreamCollection*)cPtr, index);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.Take);
+    _cretval = gst_stream_collection_get_stream(cast(GstStreamCollection*)this._cPtr, index);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.stream.Stream)(cast(GstStream*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class StreamCollection : gst.object.ObjectWrap
   string getUpstreamId()
   {
     const(char)* _cretval;
-    _cretval = gst_stream_collection_get_upstream_id(cast(GstStreamCollection*)cPtr);
+    _cretval = gst_stream_collection_get_upstream_id(cast(GstStreamCollection*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

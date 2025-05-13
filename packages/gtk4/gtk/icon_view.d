@@ -66,16 +66,16 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_view_get_type != &gidSymbolNotFound ? gtk_icon_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -451,8 +451,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   static gtk.icon_view.IconView newWithArea(gtk.cell_area.CellArea area)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_icon_view_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -468,8 +468,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   static gtk.icon_view.IconView newWithModel(gtk.tree_model.TreeModel model)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_icon_view_new_with_model(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -486,8 +486,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gdk.paintable.Paintable createDragIcon(gtk.tree_path.TreePath path)
   {
     GdkPaintable* _cretval;
-    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    _cretval = gtk_icon_view_create_drag_icon(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -504,7 +504,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void enableModelDragDest(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
+    gtk_icon_view_enable_model_drag_dest(cast(GtkIconView*)this._cPtr, formats ? cast(GdkContentFormats*)formats._cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -521,7 +521,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void enableModelDragSource(gdk.types.ModifierType startButtonMask, gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
-    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null, actions);
+    gtk_icon_view_enable_model_drag_source(cast(GtkIconView*)this._cPtr, startButtonMask, formats ? cast(GdkContentFormats*)formats._cPtr(No.Dup) : null, actions);
   }
 
   /**
@@ -533,7 +533,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool getActivateOnSingleClick()
   {
     bool _retval;
-    _retval = gtk_icon_view_get_activate_on_single_click(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_activate_on_single_click(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -555,7 +555,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, &_rect);
+    _retval = gtk_icon_view_get_cell_rect(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -569,7 +569,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getColumnSpacing()
   {
     int _retval;
-    _retval = gtk_icon_view_get_column_spacing(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_column_spacing(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -582,7 +582,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getColumns()
   {
     int _retval;
-    _retval = gtk_icon_view_get_columns(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_columns(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -609,7 +609,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
-    _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)cPtr, &_path, &_cell);
+    _retval = gtk_icon_view_get_cursor(cast(GtkIconView*)this._cPtr, &_path, &_cell);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
@@ -631,7 +631,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   {
     bool _retval;
     GtkTreePath* _path;
-    _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)cPtr, dragX, dragY, &_path, &pos);
+    _retval = gtk_icon_view_get_dest_item_at_pos(cast(GtkIconView*)this._cPtr, dragX, dragY, &_path, &pos);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     return _retval;
   }
@@ -649,7 +649,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   void getDragDestItem(out gtk.tree_path.TreePath path, out gtk.types.IconViewDropPosition pos)
   {
     GtkTreePath* _path;
-    gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)cPtr, &_path, &pos);
+    gtk_icon_view_get_drag_dest_item(cast(GtkIconView*)this._cPtr, &_path, &pos);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
   }
 
@@ -671,7 +671,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _path;
     GtkCellRenderer* _cell;
-    _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)cPtr, x, y, &_path, &_cell);
+    _retval = gtk_icon_view_get_item_at_pos(cast(GtkIconView*)this._cPtr, x, y, &_path, &_cell);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     cell = new gtk.cell_renderer.CellRenderer(cast(void*)_cell, No.Take);
     return _retval;
@@ -690,7 +690,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemColumn(gtk.tree_path.TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_icon_view_get_item_column(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -704,7 +704,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gtk.types.Orientation getItemOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_icon_view_get_item_orientation(cast(GtkIconView*)cPtr);
+    _cretval = gtk_icon_view_get_item_orientation(cast(GtkIconView*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -718,7 +718,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemPadding()
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_padding(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_item_padding(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -735,7 +735,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemRow(gtk.tree_path.TreePath path)
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_icon_view_get_item_row(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -748,7 +748,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getItemWidth()
   {
     int _retval;
-    _retval = gtk_icon_view_get_item_width(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_item_width(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -761,7 +761,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getMargin()
   {
     int _retval;
-    _retval = gtk_icon_view_get_margin(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_margin(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -774,7 +774,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getMarkupColumn()
   {
     int _retval;
-    _retval = gtk_icon_view_get_markup_column(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_markup_column(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -788,8 +788,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
-    _cretval = gtk_icon_view_get_model(cast(GtkIconView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    _cretval = gtk_icon_view_get_model(cast(GtkIconView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -807,7 +807,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gtk.tree_path.TreePath getPathAtPos(int x, int y)
   {
     GtkTreePath* _cretval;
-    _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)cPtr, x, y);
+    _cretval = gtk_icon_view_get_path_at_pos(cast(GtkIconView*)this._cPtr, x, y);
     auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -821,7 +821,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getPixbufColumn()
   {
     int _retval;
-    _retval = gtk_icon_view_get_pixbuf_column(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_pixbuf_column(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -835,7 +835,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool getReorderable()
   {
     bool _retval;
-    _retval = gtk_icon_view_get_reorderable(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_reorderable(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -848,7 +848,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getRowSpacing()
   {
     int _retval;
-    _retval = gtk_icon_view_get_row_spacing(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_row_spacing(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -876,7 +876,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gtk.tree_path.TreePath[] getSelectedItems()
   {
     GList* _cretval;
-    _cretval = gtk_icon_view_get_selected_items(cast(GtkIconView*)cPtr);
+    _cretval = gtk_icon_view_get_selected_items(cast(GtkIconView*)this._cPtr);
     auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -890,7 +890,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   gtk.types.SelectionMode getSelectionMode()
   {
     GtkSelectionMode _cretval;
-    _cretval = gtk_icon_view_get_selection_mode(cast(GtkIconView*)cPtr);
+    _cretval = gtk_icon_view_get_selection_mode(cast(GtkIconView*)this._cPtr);
     gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
@@ -904,7 +904,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getSpacing()
   {
     int _retval;
-    _retval = gtk_icon_view_get_spacing(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_spacing(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -917,7 +917,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getTextColumn()
   {
     int _retval;
-    _retval = gtk_icon_view_get_text_column(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_text_column(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -932,7 +932,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   int getTooltipColumn()
   {
     int _retval;
-    _retval = gtk_icon_view_get_tooltip_column(cast(GtkIconView*)cPtr);
+    _retval = gtk_icon_view_get_tooltip_column(cast(GtkIconView*)this._cPtr);
     return _retval;
   }
 
@@ -965,8 +965,8 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     GtkTreeModel* _model;
     GtkTreePath* _path;
     GtkTreeIter _iter;
-    _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
-    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    _retval = gtk_icon_view_get_tooltip_context(cast(GtkIconView*)this._cPtr, x, y, keyboardTip, &_model, &_path, &_iter);
+    model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     path = new gtk.tree_path.TreePath(cast(void*)_path, Yes.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
@@ -990,7 +990,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     bool _retval;
     GtkTreePath* _startPath;
     GtkTreePath* _endPath;
-    _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)cPtr, &_startPath, &_endPath);
+    _retval = gtk_icon_view_get_visible_range(cast(GtkIconView*)this._cPtr, &_startPath, &_endPath);
     startPath = new gtk.tree_path.TreePath(cast(void*)_startPath, Yes.Take);
     endPath = new gtk.tree_path.TreePath(cast(void*)_endPath, Yes.Take);
     return _retval;
@@ -1006,7 +1006,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void itemActivated(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_item_activated(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_icon_view_item_activated(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1022,7 +1022,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_icon_view_path_is_selected(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -1052,7 +1052,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void scrollToPath(gtk.tree_path.TreePath path, bool useAlign, float rowAlign, float colAlign)
   {
-    gtk_icon_view_scroll_to_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
+    gtk_icon_view_scroll_to_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, useAlign, rowAlign, colAlign);
   }
 
   /**
@@ -1063,7 +1063,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void selectAll()
   {
-    gtk_icon_view_select_all(cast(GtkIconView*)cPtr);
+    gtk_icon_view_select_all(cast(GtkIconView*)this._cPtr);
   }
 
   /**
@@ -1076,7 +1076,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void selectPath(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_select_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_icon_view_select_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1094,12 +1094,12 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
     {
       auto _dlg = cast(gtk.types.IconViewForeachFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.icon_view.IconView)(cast(void*)iconView, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gtk_icon_view_selected_foreach(cast(GtkIconView*)cPtr, _funcCB, _func);
+    gtk_icon_view_selected_foreach(cast(GtkIconView*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -1113,7 +1113,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setActivateOnSingleClick(bool single)
   {
-    gtk_icon_view_set_activate_on_single_click(cast(GtkIconView*)cPtr, single);
+    gtk_icon_view_set_activate_on_single_click(cast(GtkIconView*)this._cPtr, single);
   }
 
   /**
@@ -1127,7 +1127,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setColumnSpacing(int columnSpacing)
   {
-    gtk_icon_view_set_column_spacing(cast(GtkIconView*)cPtr, columnSpacing);
+    gtk_icon_view_set_column_spacing(cast(GtkIconView*)this._cPtr, columnSpacing);
   }
 
   /**
@@ -1143,7 +1143,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setColumns(int columns)
   {
-    gtk_icon_view_set_columns(cast(GtkIconView*)cPtr, columns);
+    gtk_icon_view_set_columns(cast(GtkIconView*)this._cPtr, columns);
   }
 
   alias setCursor = gtk.widget.Widget.setCursor;
@@ -1168,7 +1168,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setCursor(gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell, bool startEditing)
   {
-    gtk_icon_view_set_cursor(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null, startEditing);
+    gtk_icon_view_set_cursor(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null, startEditing);
   }
 
   /**
@@ -1182,7 +1182,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setDragDestItem(gtk.tree_path.TreePath path, gtk.types.IconViewDropPosition pos)
   {
-    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, pos);
+    gtk_icon_view_set_drag_dest_item(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, pos);
   }
 
   /**
@@ -1196,7 +1196,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setItemOrientation(gtk.types.Orientation orientation)
   {
-    gtk_icon_view_set_item_orientation(cast(GtkIconView*)cPtr, orientation);
+    gtk_icon_view_set_item_orientation(cast(GtkIconView*)this._cPtr, orientation);
   }
 
   /**
@@ -1210,7 +1210,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setItemPadding(int itemPadding)
   {
-    gtk_icon_view_set_item_padding(cast(GtkIconView*)cPtr, itemPadding);
+    gtk_icon_view_set_item_padding(cast(GtkIconView*)this._cPtr, itemPadding);
   }
 
   /**
@@ -1225,7 +1225,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setItemWidth(int itemWidth)
   {
-    gtk_icon_view_set_item_width(cast(GtkIconView*)cPtr, itemWidth);
+    gtk_icon_view_set_item_width(cast(GtkIconView*)this._cPtr, itemWidth);
   }
 
   /**
@@ -1240,7 +1240,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setMargin(int margin)
   {
-    gtk_icon_view_set_margin(cast(GtkIconView*)cPtr, margin);
+    gtk_icon_view_set_margin(cast(GtkIconView*)this._cPtr, margin);
   }
 
   /**
@@ -1256,7 +1256,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setMarkupColumn(int column)
   {
-    gtk_icon_view_set_markup_column(cast(GtkIconView*)cPtr, column);
+    gtk_icon_view_set_markup_column(cast(GtkIconView*)this._cPtr, column);
   }
 
   /**
@@ -1272,7 +1272,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_icon_view_set_model(cast(GtkIconView*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_icon_view_set_model(cast(GtkIconView*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1286,7 +1286,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setPixbufColumn(int column)
   {
-    gtk_icon_view_set_pixbuf_column(cast(GtkIconView*)cPtr, column);
+    gtk_icon_view_set_pixbuf_column(cast(GtkIconView*)this._cPtr, column);
   }
 
   /**
@@ -1310,7 +1310,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setReorderable(bool reorderable)
   {
-    gtk_icon_view_set_reorderable(cast(GtkIconView*)cPtr, reorderable);
+    gtk_icon_view_set_reorderable(cast(GtkIconView*)this._cPtr, reorderable);
   }
 
   /**
@@ -1324,7 +1324,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setRowSpacing(int rowSpacing)
   {
-    gtk_icon_view_set_row_spacing(cast(GtkIconView*)cPtr, rowSpacing);
+    gtk_icon_view_set_row_spacing(cast(GtkIconView*)this._cPtr, rowSpacing);
   }
 
   /**
@@ -1337,7 +1337,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setSelectionMode(gtk.types.SelectionMode mode)
   {
-    gtk_icon_view_set_selection_mode(cast(GtkIconView*)cPtr, mode);
+    gtk_icon_view_set_selection_mode(cast(GtkIconView*)this._cPtr, mode);
   }
 
   /**
@@ -1352,7 +1352,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setSpacing(int spacing)
   {
-    gtk_icon_view_set_spacing(cast(GtkIconView*)cPtr, spacing);
+    gtk_icon_view_set_spacing(cast(GtkIconView*)this._cPtr, spacing);
   }
 
   /**
@@ -1366,7 +1366,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTextColumn(int column)
   {
-    gtk_icon_view_set_text_column(cast(GtkIconView*)cPtr, column);
+    gtk_icon_view_set_text_column(cast(GtkIconView*)this._cPtr, column);
   }
 
   /**
@@ -1384,7 +1384,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTooltipCell(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path, gtk.cell_renderer.CellRenderer cell = null)
   {
-    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell.cPtr(No.Dup) : null);
+    gtk_icon_view_set_tooltip_cell(cast(GtkIconView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null, cell ? cast(GtkCellRenderer*)cell._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1406,7 +1406,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTooltipColumn(int column)
   {
-    gtk_icon_view_set_tooltip_column(cast(GtkIconView*)cPtr, column);
+    gtk_icon_view_set_tooltip_column(cast(GtkIconView*)this._cPtr, column);
   }
 
   /**
@@ -1422,7 +1422,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void setTooltipItem(gtk.tooltip.Tooltip tooltip, gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)cPtr, tooltip ? cast(GtkTooltip*)tooltip.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_icon_view_set_tooltip_item(cast(GtkIconView*)this._cPtr, tooltip ? cast(GtkTooltip*)tooltip._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1432,7 +1432,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void unselectAll()
   {
-    gtk_icon_view_unselect_all(cast(GtkIconView*)cPtr);
+    gtk_icon_view_unselect_all(cast(GtkIconView*)this._cPtr);
   }
 
   /**
@@ -1445,7 +1445,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void unselectPath(gtk.tree_path.TreePath path)
   {
-    gtk_icon_view_unselect_path(cast(GtkIconView*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_icon_view_unselect_path(cast(GtkIconView*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1456,7 +1456,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void unsetModelDragDest()
   {
-    gtk_icon_view_unset_model_drag_dest(cast(GtkIconView*)cPtr);
+    gtk_icon_view_unset_model_drag_dest(cast(GtkIconView*)this._cPtr);
   }
 
   /**
@@ -1467,7 +1467,7 @@ class IconView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.scrollable.S
   */
   void unsetModelDragSource()
   {
-    gtk_icon_view_unset_model_drag_source(cast(GtkIconView*)cPtr);
+    gtk_icon_view_unset_model_drag_source(cast(GtkIconView*)this._cPtr);
   }
 
   /**

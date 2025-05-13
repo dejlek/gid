@@ -28,7 +28,7 @@ interface Selection
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_selection_get_type != &gidSymbolNotFound ? atk_selection_get_type() : cast(GType)0;

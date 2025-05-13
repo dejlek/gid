@@ -35,7 +35,7 @@ class UriParamsIter
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -90,7 +90,7 @@ class UriParamsIter
   {
     const(char)* _params = params.toCString(No.Alloc);
     const(char)* _separators = separators.toCString(No.Alloc);
-    g_uri_params_iter_init(cast(GUriParamsIter*)cPtr, _params, length, _separators, flags);
+    g_uri_params_iter_init(cast(GUriParamsIter*)this._cPtr, _params, length, _separators, flags);
   }
 
   /**
@@ -119,7 +119,7 @@ class UriParamsIter
     char* _attribute;
     char* _value;
     GError *_err;
-    _retval = g_uri_params_iter_next(cast(GUriParamsIter*)cPtr, &_attribute, &_value, &_err);
+    _retval = g_uri_params_iter_next(cast(GUriParamsIter*)this._cPtr, &_attribute, &_value, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     attribute = _attribute.fromCString(Yes.Free);

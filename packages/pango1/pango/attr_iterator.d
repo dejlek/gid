@@ -29,22 +29,22 @@ class AttrIterator : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_attr_iterator_get_type != &gidSymbolNotFound ? pango_attr_iterator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,7 +62,7 @@ class AttrIterator : gobject.boxed.Boxed
   pango.attr_iterator.AttrIterator copy()
   {
     PangoAttrIterator* _cretval;
-    _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)cPtr);
+    _cretval = pango_attr_iterator_copy(cast(PangoAttrIterator*)this._cPtr);
     auto _retval = _cretval ? new pango.attr_iterator.AttrIterator(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -72,7 +72,7 @@ class AttrIterator : gobject.boxed.Boxed
   */
   void destroy()
   {
-    pango_attr_iterator_destroy(cast(PangoAttrIterator*)cPtr);
+    pango_attr_iterator_destroy(cast(PangoAttrIterator*)this._cPtr);
   }
 
   /**
@@ -92,7 +92,7 @@ class AttrIterator : gobject.boxed.Boxed
   pango.attribute.Attribute get(pango.types.AttrType type)
   {
     PangoAttribute* _cretval;
-    _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)cPtr, type);
+    _cretval = pango_attr_iterator_get(cast(PangoAttrIterator*)this._cPtr, type);
     auto _retval = _cretval ? new pango.attribute.Attribute(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -107,7 +107,7 @@ class AttrIterator : gobject.boxed.Boxed
   pango.attribute.Attribute[] getAttrs()
   {
     GSList* _cretval;
-    _cretval = pango_attr_iterator_get_attrs(cast(PangoAttrIterator*)cPtr);
+    _cretval = pango_attr_iterator_get_attrs(cast(PangoAttrIterator*)this._cPtr);
     auto _retval = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -136,7 +136,7 @@ class AttrIterator : gobject.boxed.Boxed
   {
     PangoLanguage* _language;
     GSList* _extraAttrs;
-    pango_attr_iterator_get_font(cast(PangoAttrIterator*)cPtr, desc ? cast(PangoFontDescription*)desc.cPtr(No.Dup) : null, &_language, &_extraAttrs);
+    pango_attr_iterator_get_font(cast(PangoAttrIterator*)this._cPtr, desc ? cast(PangoFontDescription*)desc._cPtr(No.Dup) : null, &_language, &_extraAttrs);
     language = new pango.language.Language(cast(void*)_language, Yes.Take);
     extraAttrs = gSListToD!(pango.attribute.Attribute, GidOwnership.Full)(_extraAttrs);
   }
@@ -149,7 +149,7 @@ class AttrIterator : gobject.boxed.Boxed
   bool next()
   {
     bool _retval;
-    _retval = pango_attr_iterator_next(cast(PangoAttrIterator*)cPtr);
+    _retval = pango_attr_iterator_next(cast(PangoAttrIterator*)this._cPtr);
     return _retval;
   }
 
@@ -167,6 +167,6 @@ class AttrIterator : gobject.boxed.Boxed
   */
   void range(out int start, out int end)
   {
-    pango_attr_iterator_range(cast(PangoAttrIterator*)cPtr, cast(int*)&start, cast(int*)&end);
+    pango_attr_iterator_range(cast(PangoAttrIterator*)this._cPtr, cast(int*)&start, cast(int*)&end);
   }
 }

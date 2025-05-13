@@ -26,16 +26,16 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_charset_converter_get_type != &gidSymbolNotFound ? g_charset_converter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -94,7 +94,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   uint getNumFallbacks()
   {
     uint _retval;
-    _retval = g_charset_converter_get_num_fallbacks(cast(GCharsetConverter*)cPtr);
+    _retval = g_charset_converter_get_num_fallbacks(cast(GCharsetConverter*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   bool getUseFallback()
   {
     bool _retval;
-    _retval = g_charset_converter_get_use_fallback(cast(GCharsetConverter*)cPtr);
+    _retval = g_charset_converter_get_use_fallback(cast(GCharsetConverter*)this._cPtr);
     return _retval;
   }
 
@@ -117,6 +117,6 @@ class CharsetConverter : gobject.object.ObjectWrap, gio.converter.Converter, gio
   */
   void setUseFallback(bool useFallback)
   {
-    g_charset_converter_set_use_fallback(cast(GCharsetConverter*)cPtr, useFallback);
+    g_charset_converter_set_use_fallback(cast(GCharsetConverter*)this._cPtr, useFallback);
   }
 }

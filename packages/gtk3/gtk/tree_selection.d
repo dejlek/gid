@@ -47,16 +47,16 @@ class TreeSelection : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_selection_get_type != &gidSymbolNotFound ? gtk_tree_selection_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class TreeSelection : gobject.object.ObjectWrap
   int countSelectedRows()
   {
     int _retval;
-    _retval = gtk_tree_selection_count_selected_rows(cast(GtkTreeSelection*)cPtr);
+    _retval = gtk_tree_selection_count_selected_rows(cast(GtkTreeSelection*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class TreeSelection : gobject.object.ObjectWrap
   gtk.types.SelectionMode getMode()
   {
     GtkSelectionMode _cretval;
-    _cretval = gtk_tree_selection_get_mode(cast(GtkTreeSelection*)cPtr);
+    _cretval = gtk_tree_selection_get_mode(cast(GtkTreeSelection*)this._cPtr);
     gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
@@ -132,8 +132,8 @@ class TreeSelection : gobject.object.ObjectWrap
     bool _retval;
     GtkTreeModel* _model;
     GtkTreeIter _iter;
-    _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)cPtr, &_model, &_iter);
-    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    _retval = gtk_tree_selection_get_selected(cast(GtkTreeSelection*)this._cPtr, &_model, &_iter);
+    model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     iter = new gtk.tree_iter.TreeIter(cast(void*)&_iter, No.Take);
     return _retval;
   }
@@ -161,9 +161,9 @@ class TreeSelection : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GtkTreeModel* _model;
-    _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)cPtr, &_model);
+    _cretval = gtk_tree_selection_get_selected_rows(cast(GtkTreeSelection*)this._cPtr, &_model);
     auto _retval = gListToD!(gtk.tree_path.TreePath, GidOwnership.Full)(cast(GList*)_cretval);
-    model = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
+    model = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(_model, No.Take);
     return _retval;
   }
 
@@ -174,8 +174,8 @@ class TreeSelection : gobject.object.ObjectWrap
   gtk.tree_view.TreeView getTreeView()
   {
     GtkTreeView* _cretval;
-    _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
+    _cretval = gtk_tree_selection_get_tree_view(cast(GtkTreeSelection*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_view.TreeView)(cast(GtkTreeView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -189,7 +189,7 @@ class TreeSelection : gobject.object.ObjectWrap
   bool iterIsSelected(gtk.tree_iter.TreeIter iter)
   {
     bool _retval;
-    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    _retval = gtk_tree_selection_iter_is_selected(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class TreeSelection : gobject.object.ObjectWrap
   bool pathIsSelected(gtk.tree_path.TreePath path)
   {
     bool _retval;
-    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _retval = gtk_tree_selection_path_is_selected(cast(GtkTreeSelection*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -214,7 +214,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void selectAll()
   {
-    gtk_tree_selection_select_all(cast(GtkTreeSelection*)cPtr);
+    gtk_tree_selection_select_all(cast(GtkTreeSelection*)this._cPtr);
   }
 
   /**
@@ -225,7 +225,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void selectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_iter(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -236,7 +236,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void selectPath(gtk.tree_path.TreePath path)
   {
-    gtk_tree_selection_select_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_path(cast(GtkTreeSelection*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -249,7 +249,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void selectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
-    gtk_tree_selection_select_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
+    gtk_tree_selection_select_range(cast(GtkTreeSelection*)this._cPtr, startPath ? cast(GtkTreePath*)startPath._cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath._cPtr(No.Dup) : null);
   }
 
   /**
@@ -266,12 +266,12 @@ class TreeSelection : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gtk.types.TreeSelectionForeachFunc*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gtk_tree_selection_selected_foreach(cast(GtkTreeSelection*)cPtr, _funcCB, _func);
+    gtk_tree_selection_selected_foreach(cast(GtkTreeSelection*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -284,7 +284,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void setMode(gtk.types.SelectionMode type)
   {
-    gtk_tree_selection_set_mode(cast(GtkTreeSelection*)cPtr, type);
+    gtk_tree_selection_set_mode(cast(GtkTreeSelection*)this._cPtr, type);
   }
 
   /**
@@ -304,14 +304,14 @@ class TreeSelection : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gtk.types.TreeSelectionFunc*)data;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.tree_selection.TreeSelection)(cast(void*)selection, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(void*)model, No.Take), path ? new gtk.tree_path.TreePath(cast(void*)path, No.Take) : null, pathCurrentlySelected);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_tree_selection_set_select_function(cast(GtkTreeSelection*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_tree_selection_set_select_function(cast(GtkTreeSelection*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -319,7 +319,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void unselectAll()
   {
-    gtk_tree_selection_unselect_all(cast(GtkTreeSelection*)cPtr);
+    gtk_tree_selection_unselect_all(cast(GtkTreeSelection*)this._cPtr);
   }
 
   /**
@@ -330,7 +330,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void unselectIter(gtk.tree_iter.TreeIter iter)
   {
-    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)cPtr, iter ? cast(GtkTreeIter*)iter.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_iter(cast(GtkTreeSelection*)this._cPtr, iter ? cast(GtkTreeIter*)iter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -341,7 +341,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void unselectPath(gtk.tree_path.TreePath path)
   {
-    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)cPtr, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_path(cast(GtkTreeSelection*)this._cPtr, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -354,7 +354,7 @@ class TreeSelection : gobject.object.ObjectWrap
   */
   void unselectRange(gtk.tree_path.TreePath startPath, gtk.tree_path.TreePath endPath)
   {
-    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)cPtr, startPath ? cast(GtkTreePath*)startPath.cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath.cPtr(No.Dup) : null);
+    gtk_tree_selection_unselect_range(cast(GtkTreeSelection*)this._cPtr, startPath ? cast(GtkTreePath*)startPath._cPtr(No.Dup) : null, endPath ? cast(GtkTreePath*)endPath._cPtr(No.Dup) : null);
   }
 
   /**

@@ -41,16 +41,16 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_omni_bar_get_type != &gidSymbolNotFound ? panel_omni_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -177,7 +177,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void addPrefix(int priority, gtk.widget.Widget widget)
   {
-    panel_omni_bar_add_prefix(cast(PanelOmniBar*)cPtr, priority, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_omni_bar_add_prefix(cast(PanelOmniBar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -190,7 +190,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void addSuffix(int priority, gtk.widget.Widget widget)
   {
-    panel_omni_bar_add_suffix(cast(PanelOmniBar*)cPtr, priority, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_omni_bar_add_suffix(cast(PanelOmniBar*)this._cPtr, priority, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -200,8 +200,8 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.popover.Popover getPopover()
   {
     GtkPopover* _cretval;
-    _cretval = panel_omni_bar_get_popover(cast(PanelOmniBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    _cretval = panel_omni_bar_get_popover(cast(PanelOmniBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   double getProgress()
   {
     double _retval;
-    _retval = panel_omni_bar_get_progress(cast(PanelOmniBar*)cPtr);
+    _retval = panel_omni_bar_get_progress(cast(PanelOmniBar*)this._cPtr);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void remove(gtk.widget.Widget widget)
   {
-    panel_omni_bar_remove(cast(PanelOmniBar*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_omni_bar_remove(cast(PanelOmniBar*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -236,7 +236,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setPopover(gtk.popover.Popover popover = null)
   {
-    panel_omni_bar_set_popover(cast(PanelOmniBar*)cPtr, popover ? cast(GtkPopover*)popover.cPtr(No.Dup) : null);
+    panel_omni_bar_set_popover(cast(PanelOmniBar*)this._cPtr, popover ? cast(GtkPopover*)popover._cPtr(No.Dup) : null);
   }
 
   /**
@@ -247,7 +247,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setProgress(double progress)
   {
-    panel_omni_bar_set_progress(cast(PanelOmniBar*)cPtr, progress);
+    panel_omni_bar_set_progress(cast(PanelOmniBar*)this._cPtr, progress);
   }
 
   /**
@@ -256,7 +256,7 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void startPulsing()
   {
-    panel_omni_bar_start_pulsing(cast(PanelOmniBar*)cPtr);
+    panel_omni_bar_start_pulsing(cast(PanelOmniBar*)this._cPtr);
   }
 
   /**
@@ -265,6 +265,6 @@ class OmniBar : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void stopPulsing()
   {
-    panel_omni_bar_stop_pulsing(cast(PanelOmniBar*)cPtr);
+    panel_omni_bar_stop_pulsing(cast(PanelOmniBar*)this._cPtr);
   }
 }

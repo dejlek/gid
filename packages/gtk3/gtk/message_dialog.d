@@ -77,16 +77,16 @@ class MessageDialog : gtk.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_message_dialog_get_type != &gidSymbolNotFound ? gtk_message_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -239,8 +239,8 @@ class MessageDialog : gtk.dialog.Dialog
   gtk.widget.Widget getImage()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_message_dialog_get_image(cast(GtkMessageDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_message_dialog_get_image(cast(GtkMessageDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -256,8 +256,8 @@ class MessageDialog : gtk.dialog.Dialog
   gtk.widget.Widget getMessageArea()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_message_dialog_get_message_area(cast(GtkMessageDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class MessageDialog : gtk.dialog.Dialog
   */
   void setImage(gtk.widget.Widget image)
   {
-    gtk_message_dialog_set_image(cast(GtkMessageDialog*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
+    gtk_message_dialog_set_image(cast(GtkMessageDialog*)this._cPtr, image ? cast(GtkWidget*)image._cPtr(No.Dup) : null);
   }
 
   /**
@@ -284,6 +284,6 @@ class MessageDialog : gtk.dialog.Dialog
   void setMarkup(string str)
   {
     const(char)* _str = str.toCString(No.Alloc);
-    gtk_message_dialog_set_markup(cast(GtkMessageDialog*)cPtr, _str);
+    gtk_message_dialog_set_markup(cast(GtkMessageDialog*)this._cPtr, _str);
   }
 }

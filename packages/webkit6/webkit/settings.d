@@ -35,16 +35,16 @@ class Settings : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_settings_get_type != &gidSymbolNotFound ? webkit_settings_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -1526,7 +1526,7 @@ class Settings : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _groupName = groupName.toCString(No.Alloc);
     GError *_err;
-    _retval = webkit_settings_apply_from_key_file(cast(WebKitSettings*)cPtr, keyFile ? cast(GKeyFile*)keyFile.cPtr(No.Dup) : null, _groupName, &_err);
+    _retval = webkit_settings_apply_from_key_file(cast(WebKitSettings*)this._cPtr, keyFile ? cast(GKeyFile*)keyFile._cPtr(No.Dup) : null, _groupName, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -1539,7 +1539,7 @@ class Settings : gobject.object.ObjectWrap
   bool getAllowFileAccessFromFileUrls()
   {
     bool _retval;
-    _retval = webkit_settings_get_allow_file_access_from_file_urls(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_allow_file_access_from_file_urls(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1550,7 +1550,7 @@ class Settings : gobject.object.ObjectWrap
   bool getAllowModalDialogs()
   {
     bool _retval;
-    _retval = webkit_settings_get_allow_modal_dialogs(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_allow_modal_dialogs(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1562,7 +1562,7 @@ class Settings : gobject.object.ObjectWrap
   bool getAllowTopNavigationToDataUrls()
   {
     bool _retval;
-    _retval = webkit_settings_get_allow_top_navigation_to_data_urls(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_allow_top_navigation_to_data_urls(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1573,7 +1573,7 @@ class Settings : gobject.object.ObjectWrap
   bool getAllowUniversalAccessFromFileUrls()
   {
     bool _retval;
-    _retval = webkit_settings_get_allow_universal_access_from_file_urls(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_allow_universal_access_from_file_urls(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1584,7 +1584,7 @@ class Settings : gobject.object.ObjectWrap
   bool getAutoLoadImages()
   {
     bool _retval;
-    _retval = webkit_settings_get_auto_load_images(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_auto_load_images(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1595,7 +1595,7 @@ class Settings : gobject.object.ObjectWrap
   string getCursiveFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_cursive_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_cursive_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1607,7 +1607,7 @@ class Settings : gobject.object.ObjectWrap
   string getDefaultCharset()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_default_charset(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_default_charset(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1619,7 +1619,7 @@ class Settings : gobject.object.ObjectWrap
   string getDefaultFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_default_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_default_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1631,7 +1631,7 @@ class Settings : gobject.object.ObjectWrap
   uint getDefaultFontSize()
   {
     uint _retval;
-    _retval = webkit_settings_get_default_font_size(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_default_font_size(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1642,7 +1642,7 @@ class Settings : gobject.object.ObjectWrap
   uint getDefaultMonospaceFontSize()
   {
     uint _retval;
-    _retval = webkit_settings_get_default_monospace_font_size(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_default_monospace_font_size(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1653,7 +1653,7 @@ class Settings : gobject.object.ObjectWrap
   bool getDisableWebSecurity()
   {
     bool _retval;
-    _retval = webkit_settings_get_disable_web_security(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_disable_web_security(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1664,7 +1664,7 @@ class Settings : gobject.object.ObjectWrap
   bool getDrawCompositingIndicators()
   {
     bool _retval;
-    _retval = webkit_settings_get_draw_compositing_indicators(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_draw_compositing_indicators(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1675,7 +1675,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnable2dCanvasAcceleration()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_2d_canvas_acceleration(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_2d_canvas_acceleration(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1686,7 +1686,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableBackForwardNavigationGestures()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_back_forward_navigation_gestures(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_back_forward_navigation_gestures(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1697,7 +1697,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableCaretBrowsing()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_caret_browsing(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_caret_browsing(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1708,7 +1708,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableDeveloperExtras()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_developer_extras(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_developer_extras(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1719,7 +1719,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableDnsPrefetching()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_dns_prefetching(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_dns_prefetching(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1730,7 +1730,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableEncryptedMedia()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_encrypted_media(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_encrypted_media(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1741,7 +1741,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableFullscreen()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_fullscreen(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_fullscreen(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1752,7 +1752,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableHtml5Database()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_html5_database(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_html5_database(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1763,7 +1763,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableHtml5LocalStorage()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_html5_local_storage(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_html5_local_storage(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1774,7 +1774,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableHyperlinkAuditing()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_hyperlink_auditing(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_hyperlink_auditing(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1785,7 +1785,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableJavascript()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_javascript(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_javascript(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1796,7 +1796,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableJavascriptMarkup()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_javascript_markup(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_javascript_markup(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1807,7 +1807,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableMedia()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_media(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_media(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1818,7 +1818,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableMediaCapabilities()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_media_capabilities(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_media_capabilities(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1829,7 +1829,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableMediaStream()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_media_stream(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_media_stream(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1840,7 +1840,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableMediasource()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_mediasource(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_mediasource(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1851,7 +1851,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableMockCaptureDevices()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_mock_capture_devices(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_mock_capture_devices(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1862,7 +1862,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableOfflineWebApplicationCache()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_offline_web_application_cache(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_offline_web_application_cache(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1873,7 +1873,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnablePageCache()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_page_cache(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_page_cache(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1884,7 +1884,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableResizableTextAreas()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_resizable_text_areas(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_resizable_text_areas(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1895,7 +1895,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableSiteSpecificQuirks()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_site_specific_quirks(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_site_specific_quirks(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1906,7 +1906,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableSmoothScrolling()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_smooth_scrolling(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_smooth_scrolling(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1917,7 +1917,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableSpatialNavigation()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_spatial_navigation(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_spatial_navigation(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1928,7 +1928,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableTabsToLinks()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_tabs_to_links(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_tabs_to_links(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1939,7 +1939,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableWebaudio()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_webaudio(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_webaudio(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1950,7 +1950,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableWebgl()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_webgl(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_webgl(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1961,7 +1961,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableWebrtc()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_webrtc(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_webrtc(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1973,7 +1973,7 @@ class Settings : gobject.object.ObjectWrap
   bool getEnableWriteConsoleMessagesToStdout()
   {
     bool _retval;
-    _retval = webkit_settings_get_enable_write_console_messages_to_stdout(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_enable_write_console_messages_to_stdout(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -1984,7 +1984,7 @@ class Settings : gobject.object.ObjectWrap
   string getFantasyFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_fantasy_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_fantasy_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1999,7 +1999,7 @@ class Settings : gobject.object.ObjectWrap
   bool getFeatureEnabled(webkit.feature.Feature feature)
   {
     bool _retval;
-    _retval = webkit_settings_get_feature_enabled(cast(WebKitSettings*)cPtr, feature ? cast(WebKitFeature*)feature.cPtr(No.Dup) : null);
+    _retval = webkit_settings_get_feature_enabled(cast(WebKitSettings*)this._cPtr, feature ? cast(WebKitFeature*)feature._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -2010,7 +2010,7 @@ class Settings : gobject.object.ObjectWrap
   webkit.types.HardwareAccelerationPolicy getHardwareAccelerationPolicy()
   {
     WebKitHardwareAccelerationPolicy _cretval;
-    _cretval = webkit_settings_get_hardware_acceleration_policy(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_hardware_acceleration_policy(cast(WebKitSettings*)this._cPtr);
     webkit.types.HardwareAccelerationPolicy _retval = cast(webkit.types.HardwareAccelerationPolicy)_cretval;
     return _retval;
   }
@@ -2022,7 +2022,7 @@ class Settings : gobject.object.ObjectWrap
   bool getJavascriptCanAccessClipboard()
   {
     bool _retval;
-    _retval = webkit_settings_get_javascript_can_access_clipboard(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_javascript_can_access_clipboard(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2033,7 +2033,7 @@ class Settings : gobject.object.ObjectWrap
   bool getJavascriptCanOpenWindowsAutomatically()
   {
     bool _retval;
-    _retval = webkit_settings_get_javascript_can_open_windows_automatically(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_javascript_can_open_windows_automatically(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2044,7 +2044,7 @@ class Settings : gobject.object.ObjectWrap
   bool getLoadIconsIgnoringImageLoadSetting()
   {
     bool _retval;
-    _retval = webkit_settings_get_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2055,7 +2055,7 @@ class Settings : gobject.object.ObjectWrap
   string getMediaContentTypesRequiringHardwareSupport()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_media_content_types_requiring_hardware_support(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2068,7 +2068,7 @@ class Settings : gobject.object.ObjectWrap
   bool getMediaPlaybackAllowsInline()
   {
     bool _retval;
-    _retval = webkit_settings_get_media_playback_allows_inline(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_media_playback_allows_inline(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2080,7 +2080,7 @@ class Settings : gobject.object.ObjectWrap
   bool getMediaPlaybackRequiresUserGesture()
   {
     bool _retval;
-    _retval = webkit_settings_get_media_playback_requires_user_gesture(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_media_playback_requires_user_gesture(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2091,7 +2091,7 @@ class Settings : gobject.object.ObjectWrap
   uint getMinimumFontSize()
   {
     uint _retval;
-    _retval = webkit_settings_get_minimum_font_size(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_minimum_font_size(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2102,7 +2102,7 @@ class Settings : gobject.object.ObjectWrap
   string getMonospaceFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_monospace_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_monospace_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2114,7 +2114,7 @@ class Settings : gobject.object.ObjectWrap
   string getPictographFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_pictograph_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_pictograph_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2126,7 +2126,7 @@ class Settings : gobject.object.ObjectWrap
   bool getPrintBackgrounds()
   {
     bool _retval;
-    _retval = webkit_settings_get_print_backgrounds(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_print_backgrounds(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2137,7 +2137,7 @@ class Settings : gobject.object.ObjectWrap
   string getSansSerifFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_sans_serif_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_sans_serif_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2149,7 +2149,7 @@ class Settings : gobject.object.ObjectWrap
   string getSerifFontFamily()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_serif_font_family(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_serif_font_family(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2161,7 +2161,7 @@ class Settings : gobject.object.ObjectWrap
   string getUserAgent()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_user_agent(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_user_agent(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2173,7 +2173,7 @@ class Settings : gobject.object.ObjectWrap
   string getWebrtcUdpPortsRange()
   {
     const(char)* _cretval;
-    _cretval = webkit_settings_get_webrtc_udp_ports_range(cast(WebKitSettings*)cPtr);
+    _cretval = webkit_settings_get_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -2186,7 +2186,7 @@ class Settings : gobject.object.ObjectWrap
   bool getZoomTextOnly()
   {
     bool _retval;
-    _retval = webkit_settings_get_zoom_text_only(cast(WebKitSettings*)cPtr);
+    _retval = webkit_settings_get_zoom_text_only(cast(WebKitSettings*)this._cPtr);
     return _retval;
   }
 
@@ -2198,7 +2198,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setAllowFileAccessFromFileUrls(bool allowed)
   {
-    webkit_settings_set_allow_file_access_from_file_urls(cast(WebKitSettings*)cPtr, allowed);
+    webkit_settings_set_allow_file_access_from_file_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
 
   /**
@@ -2209,7 +2209,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setAllowModalDialogs(bool allowed)
   {
-    webkit_settings_set_allow_modal_dialogs(cast(WebKitSettings*)cPtr, allowed);
+    webkit_settings_set_allow_modal_dialogs(cast(WebKitSettings*)this._cPtr, allowed);
   }
 
   /**
@@ -2220,7 +2220,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setAllowTopNavigationToDataUrls(bool allowed)
   {
-    webkit_settings_set_allow_top_navigation_to_data_urls(cast(WebKitSettings*)cPtr, allowed);
+    webkit_settings_set_allow_top_navigation_to_data_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
 
   /**
@@ -2231,7 +2231,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setAllowUniversalAccessFromFileUrls(bool allowed)
   {
-    webkit_settings_set_allow_universal_access_from_file_urls(cast(WebKitSettings*)cPtr, allowed);
+    webkit_settings_set_allow_universal_access_from_file_urls(cast(WebKitSettings*)this._cPtr, allowed);
   }
 
   /**
@@ -2242,7 +2242,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setAutoLoadImages(bool enabled)
   {
-    webkit_settings_set_auto_load_images(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_auto_load_images(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2254,7 +2254,7 @@ class Settings : gobject.object.ObjectWrap
   void setCursiveFontFamily(string cursiveFontFamily)
   {
     const(char)* _cursiveFontFamily = cursiveFontFamily.toCString(No.Alloc);
-    webkit_settings_set_cursive_font_family(cast(WebKitSettings*)cPtr, _cursiveFontFamily);
+    webkit_settings_set_cursive_font_family(cast(WebKitSettings*)this._cPtr, _cursiveFontFamily);
   }
 
   /**
@@ -2266,7 +2266,7 @@ class Settings : gobject.object.ObjectWrap
   void setDefaultCharset(string defaultCharset)
   {
     const(char)* _defaultCharset = defaultCharset.toCString(No.Alloc);
-    webkit_settings_set_default_charset(cast(WebKitSettings*)cPtr, _defaultCharset);
+    webkit_settings_set_default_charset(cast(WebKitSettings*)this._cPtr, _defaultCharset);
   }
 
   /**
@@ -2278,7 +2278,7 @@ class Settings : gobject.object.ObjectWrap
   void setDefaultFontFamily(string defaultFontFamily)
   {
     const(char)* _defaultFontFamily = defaultFontFamily.toCString(No.Alloc);
-    webkit_settings_set_default_font_family(cast(WebKitSettings*)cPtr, _defaultFontFamily);
+    webkit_settings_set_default_font_family(cast(WebKitSettings*)this._cPtr, _defaultFontFamily);
   }
 
   /**
@@ -2289,7 +2289,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDefaultFontSize(uint fontSize)
   {
-    webkit_settings_set_default_font_size(cast(WebKitSettings*)cPtr, fontSize);
+    webkit_settings_set_default_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
 
   /**
@@ -2300,7 +2300,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDefaultMonospaceFontSize(uint fontSize)
   {
-    webkit_settings_set_default_monospace_font_size(cast(WebKitSettings*)cPtr, fontSize);
+    webkit_settings_set_default_monospace_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
 
   /**
@@ -2311,7 +2311,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDisableWebSecurity(bool disabled)
   {
-    webkit_settings_set_disable_web_security(cast(WebKitSettings*)cPtr, disabled);
+    webkit_settings_set_disable_web_security(cast(WebKitSettings*)this._cPtr, disabled);
   }
 
   /**
@@ -2322,7 +2322,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setDrawCompositingIndicators(bool enabled)
   {
-    webkit_settings_set_draw_compositing_indicators(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_draw_compositing_indicators(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2333,7 +2333,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnable2dCanvasAcceleration(bool enabled)
   {
-    webkit_settings_set_enable_2d_canvas_acceleration(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_2d_canvas_acceleration(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2344,7 +2344,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableBackForwardNavigationGestures(bool enabled)
   {
-    webkit_settings_set_enable_back_forward_navigation_gestures(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_back_forward_navigation_gestures(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2355,7 +2355,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableCaretBrowsing(bool enabled)
   {
-    webkit_settings_set_enable_caret_browsing(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_caret_browsing(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2366,7 +2366,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableDeveloperExtras(bool enabled)
   {
-    webkit_settings_set_enable_developer_extras(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_developer_extras(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2377,7 +2377,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableDnsPrefetching(bool enabled)
   {
-    webkit_settings_set_enable_dns_prefetching(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_dns_prefetching(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2388,7 +2388,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableEncryptedMedia(bool enabled)
   {
-    webkit_settings_set_enable_encrypted_media(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_encrypted_media(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2399,7 +2399,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableFullscreen(bool enabled)
   {
-    webkit_settings_set_enable_fullscreen(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_fullscreen(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2410,7 +2410,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableHtml5Database(bool enabled)
   {
-    webkit_settings_set_enable_html5_database(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_html5_database(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2421,7 +2421,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableHtml5LocalStorage(bool enabled)
   {
-    webkit_settings_set_enable_html5_local_storage(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_html5_local_storage(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2432,7 +2432,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableHyperlinkAuditing(bool enabled)
   {
-    webkit_settings_set_enable_hyperlink_auditing(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_hyperlink_auditing(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2443,7 +2443,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableJavascript(bool enabled)
   {
-    webkit_settings_set_enable_javascript(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_javascript(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2454,7 +2454,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableJavascriptMarkup(bool enabled)
   {
-    webkit_settings_set_enable_javascript_markup(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_javascript_markup(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2465,7 +2465,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableMedia(bool enabled)
   {
-    webkit_settings_set_enable_media(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_media(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2476,7 +2476,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableMediaCapabilities(bool enabled)
   {
-    webkit_settings_set_enable_media_capabilities(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_media_capabilities(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2487,7 +2487,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableMediaStream(bool enabled)
   {
-    webkit_settings_set_enable_media_stream(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_media_stream(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2498,7 +2498,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableMediasource(bool enabled)
   {
-    webkit_settings_set_enable_mediasource(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_mediasource(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2509,7 +2509,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableMockCaptureDevices(bool enabled)
   {
-    webkit_settings_set_enable_mock_capture_devices(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_mock_capture_devices(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2520,7 +2520,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableOfflineWebApplicationCache(bool enabled)
   {
-    webkit_settings_set_enable_offline_web_application_cache(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_offline_web_application_cache(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2531,7 +2531,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnablePageCache(bool enabled)
   {
-    webkit_settings_set_enable_page_cache(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_page_cache(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2542,7 +2542,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableResizableTextAreas(bool enabled)
   {
-    webkit_settings_set_enable_resizable_text_areas(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_resizable_text_areas(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2553,7 +2553,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableSiteSpecificQuirks(bool enabled)
   {
-    webkit_settings_set_enable_site_specific_quirks(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_site_specific_quirks(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2564,7 +2564,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableSmoothScrolling(bool enabled)
   {
-    webkit_settings_set_enable_smooth_scrolling(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_smooth_scrolling(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2575,7 +2575,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableSpatialNavigation(bool enabled)
   {
-    webkit_settings_set_enable_spatial_navigation(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_spatial_navigation(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2586,7 +2586,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableTabsToLinks(bool enabled)
   {
-    webkit_settings_set_enable_tabs_to_links(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_tabs_to_links(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2597,7 +2597,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableWebaudio(bool enabled)
   {
-    webkit_settings_set_enable_webaudio(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_webaudio(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2608,7 +2608,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableWebgl(bool enabled)
   {
-    webkit_settings_set_enable_webgl(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_webgl(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2621,7 +2621,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableWebrtc(bool enabled)
   {
-    webkit_settings_set_enable_webrtc(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_webrtc(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2632,7 +2632,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setEnableWriteConsoleMessagesToStdout(bool enabled)
   {
-    webkit_settings_set_enable_write_console_messages_to_stdout(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_enable_write_console_messages_to_stdout(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2644,7 +2644,7 @@ class Settings : gobject.object.ObjectWrap
   void setFantasyFontFamily(string fantasyFontFamily)
   {
     const(char)* _fantasyFontFamily = fantasyFontFamily.toCString(No.Alloc);
-    webkit_settings_set_fantasy_font_family(cast(WebKitSettings*)cPtr, _fantasyFontFamily);
+    webkit_settings_set_fantasy_font_family(cast(WebKitSettings*)this._cPtr, _fantasyFontFamily);
   }
 
   /**
@@ -2661,7 +2661,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setFeatureEnabled(webkit.feature.Feature feature, bool enabled)
   {
-    webkit_settings_set_feature_enabled(cast(WebKitSettings*)cPtr, feature ? cast(WebKitFeature*)feature.cPtr(No.Dup) : null, enabled);
+    webkit_settings_set_feature_enabled(cast(WebKitSettings*)this._cPtr, feature ? cast(WebKitFeature*)feature._cPtr(No.Dup) : null, enabled);
   }
 
   /**
@@ -2672,7 +2672,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setHardwareAccelerationPolicy(webkit.types.HardwareAccelerationPolicy policy)
   {
-    webkit_settings_set_hardware_acceleration_policy(cast(WebKitSettings*)cPtr, policy);
+    webkit_settings_set_hardware_acceleration_policy(cast(WebKitSettings*)this._cPtr, policy);
   }
 
   /**
@@ -2683,7 +2683,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setJavascriptCanAccessClipboard(bool enabled)
   {
-    webkit_settings_set_javascript_can_access_clipboard(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_javascript_can_access_clipboard(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2694,7 +2694,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setJavascriptCanOpenWindowsAutomatically(bool enabled)
   {
-    webkit_settings_set_javascript_can_open_windows_automatically(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_javascript_can_open_windows_automatically(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2705,7 +2705,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setLoadIconsIgnoringImageLoadSetting(bool enabled)
   {
-    webkit_settings_set_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_load_icons_ignoring_image_load_setting(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2717,7 +2717,7 @@ class Settings : gobject.object.ObjectWrap
   void setMediaContentTypesRequiringHardwareSupport(string contentTypes = null)
   {
     const(char)* _contentTypes = contentTypes.toCString(No.Alloc);
-    webkit_settings_set_media_content_types_requiring_hardware_support(cast(WebKitSettings*)cPtr, _contentTypes);
+    webkit_settings_set_media_content_types_requiring_hardware_support(cast(WebKitSettings*)this._cPtr, _contentTypes);
   }
 
   /**
@@ -2728,7 +2728,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setMediaPlaybackAllowsInline(bool enabled)
   {
-    webkit_settings_set_media_playback_allows_inline(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_media_playback_allows_inline(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2739,7 +2739,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setMediaPlaybackRequiresUserGesture(bool enabled)
   {
-    webkit_settings_set_media_playback_requires_user_gesture(cast(WebKitSettings*)cPtr, enabled);
+    webkit_settings_set_media_playback_requires_user_gesture(cast(WebKitSettings*)this._cPtr, enabled);
   }
 
   /**
@@ -2750,7 +2750,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setMinimumFontSize(uint fontSize)
   {
-    webkit_settings_set_minimum_font_size(cast(WebKitSettings*)cPtr, fontSize);
+    webkit_settings_set_minimum_font_size(cast(WebKitSettings*)this._cPtr, fontSize);
   }
 
   /**
@@ -2762,7 +2762,7 @@ class Settings : gobject.object.ObjectWrap
   void setMonospaceFontFamily(string monospaceFontFamily)
   {
     const(char)* _monospaceFontFamily = monospaceFontFamily.toCString(No.Alloc);
-    webkit_settings_set_monospace_font_family(cast(WebKitSettings*)cPtr, _monospaceFontFamily);
+    webkit_settings_set_monospace_font_family(cast(WebKitSettings*)this._cPtr, _monospaceFontFamily);
   }
 
   /**
@@ -2774,7 +2774,7 @@ class Settings : gobject.object.ObjectWrap
   void setPictographFontFamily(string pictographFontFamily)
   {
     const(char)* _pictographFontFamily = pictographFontFamily.toCString(No.Alloc);
-    webkit_settings_set_pictograph_font_family(cast(WebKitSettings*)cPtr, _pictographFontFamily);
+    webkit_settings_set_pictograph_font_family(cast(WebKitSettings*)this._cPtr, _pictographFontFamily);
   }
 
   /**
@@ -2785,7 +2785,7 @@ class Settings : gobject.object.ObjectWrap
   */
   void setPrintBackgrounds(bool printBackgrounds)
   {
-    webkit_settings_set_print_backgrounds(cast(WebKitSettings*)cPtr, printBackgrounds);
+    webkit_settings_set_print_backgrounds(cast(WebKitSettings*)this._cPtr, printBackgrounds);
   }
 
   /**
@@ -2797,7 +2797,7 @@ class Settings : gobject.object.ObjectWrap
   void setSansSerifFontFamily(string sansSerifFontFamily)
   {
     const(char)* _sansSerifFontFamily = sansSerifFontFamily.toCString(No.Alloc);
-    webkit_settings_set_sans_serif_font_family(cast(WebKitSettings*)cPtr, _sansSerifFontFamily);
+    webkit_settings_set_sans_serif_font_family(cast(WebKitSettings*)this._cPtr, _sansSerifFontFamily);
   }
 
   /**
@@ -2809,7 +2809,7 @@ class Settings : gobject.object.ObjectWrap
   void setSerifFontFamily(string serifFontFamily)
   {
     const(char)* _serifFontFamily = serifFontFamily.toCString(No.Alloc);
-    webkit_settings_set_serif_font_family(cast(WebKitSettings*)cPtr, _serifFontFamily);
+    webkit_settings_set_serif_font_family(cast(WebKitSettings*)this._cPtr, _serifFontFamily);
   }
 
   /**
@@ -2821,7 +2821,7 @@ class Settings : gobject.object.ObjectWrap
   void setUserAgent(string userAgent = null)
   {
     const(char)* _userAgent = userAgent.toCString(No.Alloc);
-    webkit_settings_set_user_agent(cast(WebKitSettings*)cPtr, _userAgent);
+    webkit_settings_set_user_agent(cast(WebKitSettings*)this._cPtr, _userAgent);
   }
 
   /**
@@ -2839,7 +2839,7 @@ class Settings : gobject.object.ObjectWrap
   {
     const(char)* _applicationName = applicationName.toCString(No.Alloc);
     const(char)* _applicationVersion = applicationVersion.toCString(No.Alloc);
-    webkit_settings_set_user_agent_with_application_details(cast(WebKitSettings*)cPtr, _applicationName, _applicationVersion);
+    webkit_settings_set_user_agent_with_application_details(cast(WebKitSettings*)this._cPtr, _applicationName, _applicationVersion);
   }
 
   /**
@@ -2851,7 +2851,7 @@ class Settings : gobject.object.ObjectWrap
   void setWebrtcUdpPortsRange(string udpPortRange)
   {
     const(char)* _udpPortRange = udpPortRange.toCString(No.Alloc);
-    webkit_settings_set_webrtc_udp_ports_range(cast(WebKitSettings*)cPtr, _udpPortRange);
+    webkit_settings_set_webrtc_udp_ports_range(cast(WebKitSettings*)this._cPtr, _udpPortRange);
   }
 
   /**
@@ -2862,6 +2862,6 @@ class Settings : gobject.object.ObjectWrap
   */
   void setZoomTextOnly(bool zoomTextOnly)
   {
-    webkit_settings_set_zoom_text_only(cast(WebKitSettings*)cPtr, zoomTextOnly);
+    webkit_settings_set_zoom_text_only(cast(WebKitSettings*)this._cPtr, zoomTextOnly);
   }
 }

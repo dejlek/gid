@@ -55,7 +55,7 @@ class PixbufModulePattern
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -66,7 +66,7 @@ class PixbufModulePattern
   */
   @property string prefix()
   {
-    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
   }
 
   /**
@@ -76,8 +76,8 @@ class PixbufModulePattern
   */
   @property void prefix(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).prefix);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).prefix);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).prefix);
   }
 
   /**
@@ -87,7 +87,7 @@ class PixbufModulePattern
   */
   @property string mask()
   {
-    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
+    return cToD!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
   }
 
   /**
@@ -98,8 +98,8 @@ class PixbufModulePattern
   */
   @property void mask(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)cPtr).mask);
-    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)cPtr).mask);
+    cValueFree!(string)(cast(void*)(cast(GdkPixbufModulePattern*)this._cPtr).mask);
+    dToC(propval, cast(void*)&(cast(GdkPixbufModulePattern*)this._cPtr).mask);
   }
 
   /**
@@ -108,7 +108,7 @@ class PixbufModulePattern
   */
   @property int relevance()
   {
-    return (cast(GdkPixbufModulePattern*)cPtr).relevance;
+    return (cast(GdkPixbufModulePattern*)this._cPtr).relevance;
   }
 
   /**
@@ -118,6 +118,6 @@ class PixbufModulePattern
   */
   @property void relevance(int propval)
   {
-    (cast(GdkPixbufModulePattern*)cPtr).relevance = propval;
+    (cast(GdkPixbufModulePattern*)this._cPtr).relevance = propval;
   }
 }

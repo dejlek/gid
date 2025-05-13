@@ -22,16 +22,16 @@ class Position : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_position_get_type != &gidSymbolNotFound ? panel_position_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -186,8 +186,8 @@ class Position : gobject.object.ObjectWrap
   static panel.position.Position newFromVariant(glib.variant.Variant variant)
   {
     PanelPosition* _cretval;
-    _cretval = panel_position_new_from_variant(variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
+    _cretval = panel_position_new_from_variant(variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.position.Position)(cast(PanelPosition*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class Position : gobject.object.ObjectWrap
   bool equal(panel.position.Position b)
   {
     bool _retval;
-    _retval = panel_position_equal(cast(PanelPosition*)cPtr, b ? cast(PanelPosition*)b.cPtr(No.Dup) : null);
+    _retval = panel_position_equal(cast(PanelPosition*)this._cPtr, b ? cast(PanelPosition*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -212,7 +212,7 @@ class Position : gobject.object.ObjectWrap
   panel.types.Area getArea()
   {
     PanelArea _cretval;
-    _cretval = panel_position_get_area(cast(PanelPosition*)cPtr);
+    _cretval = panel_position_get_area(cast(PanelPosition*)this._cPtr);
     panel.types.Area _retval = cast(panel.types.Area)_cretval;
     return _retval;
   }
@@ -224,7 +224,7 @@ class Position : gobject.object.ObjectWrap
   bool getAreaSet()
   {
     bool _retval;
-    _retval = panel_position_get_area_set(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_area_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class Position : gobject.object.ObjectWrap
   uint getColumn()
   {
     uint _retval;
-    _retval = panel_position_get_column(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_column(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class Position : gobject.object.ObjectWrap
   bool getColumnSet()
   {
     bool _retval;
-    _retval = panel_position_get_column_set(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_column_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class Position : gobject.object.ObjectWrap
   uint getDepth()
   {
     uint _retval;
-    _retval = panel_position_get_depth(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_depth(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -256,7 +256,7 @@ class Position : gobject.object.ObjectWrap
   bool getDepthSet()
   {
     bool _retval;
-    _retval = panel_position_get_depth_set(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_depth_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -264,7 +264,7 @@ class Position : gobject.object.ObjectWrap
   uint getRow()
   {
     uint _retval;
-    _retval = panel_position_get_row(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_row(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +272,7 @@ class Position : gobject.object.ObjectWrap
   bool getRowSet()
   {
     bool _retval;
-    _retval = panel_position_get_row_set(cast(PanelPosition*)cPtr);
+    _retval = panel_position_get_row_set(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Position : gobject.object.ObjectWrap
   bool isIndeterminate()
   {
     bool _retval;
-    _retval = panel_position_is_indeterminate(cast(PanelPosition*)cPtr);
+    _retval = panel_position_is_indeterminate(cast(PanelPosition*)this._cPtr);
     return _retval;
   }
 
@@ -295,7 +295,7 @@ class Position : gobject.object.ObjectWrap
   */
   void setArea(panel.types.Area area)
   {
-    panel_position_set_area(cast(PanelPosition*)cPtr, area);
+    panel_position_set_area(cast(PanelPosition*)this._cPtr, area);
   }
 
   /**
@@ -306,43 +306,43 @@ class Position : gobject.object.ObjectWrap
   */
   void setAreaSet(bool areaSet)
   {
-    panel_position_set_area_set(cast(PanelPosition*)cPtr, areaSet);
+    panel_position_set_area_set(cast(PanelPosition*)this._cPtr, areaSet);
   }
 
   /** */
   void setColumn(uint column)
   {
-    panel_position_set_column(cast(PanelPosition*)cPtr, column);
+    panel_position_set_column(cast(PanelPosition*)this._cPtr, column);
   }
 
   /** */
   void setColumnSet(bool columnSet)
   {
-    panel_position_set_column_set(cast(PanelPosition*)cPtr, columnSet);
+    panel_position_set_column_set(cast(PanelPosition*)this._cPtr, columnSet);
   }
 
   /** */
   void setDepth(uint depth)
   {
-    panel_position_set_depth(cast(PanelPosition*)cPtr, depth);
+    panel_position_set_depth(cast(PanelPosition*)this._cPtr, depth);
   }
 
   /** */
   void setDepthSet(bool depthSet)
   {
-    panel_position_set_depth_set(cast(PanelPosition*)cPtr, depthSet);
+    panel_position_set_depth_set(cast(PanelPosition*)this._cPtr, depthSet);
   }
 
   /** */
   void setRow(uint row)
   {
-    panel_position_set_row(cast(PanelPosition*)cPtr, row);
+    panel_position_set_row(cast(PanelPosition*)this._cPtr, row);
   }
 
   /** */
   void setRowSet(bool rowSet)
   {
-    panel_position_set_row_set(cast(PanelPosition*)cPtr, rowSet);
+    panel_position_set_row_set(cast(PanelPosition*)this._cPtr, rowSet);
   }
 
   /**
@@ -353,7 +353,7 @@ class Position : gobject.object.ObjectWrap
   glib.variant.Variant toVariant()
   {
     GVariant* _cretval;
-    _cretval = panel_position_to_variant(cast(PanelPosition*)cPtr);
+    _cretval = panel_position_to_variant(cast(PanelPosition*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }

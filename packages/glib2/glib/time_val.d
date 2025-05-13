@@ -37,7 +37,7 @@ class TimeVal
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -48,7 +48,7 @@ class TimeVal
   */
   @property glong tvSec()
   {
-    return (cast(GTimeVal*)cPtr).tvSec;
+    return (cast(GTimeVal*)this._cPtr).tvSec;
   }
 
   /**
@@ -58,7 +58,7 @@ class TimeVal
   */
   @property void tvSec(glong propval)
   {
-    (cast(GTimeVal*)cPtr).tvSec = propval;
+    (cast(GTimeVal*)this._cPtr).tvSec = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class TimeVal
   */
   @property glong tvUsec()
   {
-    return (cast(GTimeVal*)cPtr).tvUsec;
+    return (cast(GTimeVal*)this._cPtr).tvUsec;
   }
 
   /**
@@ -77,7 +77,7 @@ class TimeVal
   */
   @property void tvUsec(glong propval)
   {
-    (cast(GTimeVal*)cPtr).tvUsec = propval;
+    (cast(GTimeVal*)this._cPtr).tvUsec = propval;
   }
 
   /**
@@ -92,7 +92,7 @@ class TimeVal
   */
   void add(glong microseconds)
   {
-    g_time_val_add(cast(GTimeVal*)cPtr, microseconds);
+    g_time_val_add(cast(GTimeVal*)this._cPtr, microseconds);
   }
 
   /**
@@ -139,7 +139,7 @@ class TimeVal
   string toIso8601()
   {
     char* _cretval;
-    _cretval = g_time_val_to_iso8601(cast(GTimeVal*)cPtr);
+    _cretval = g_time_val_to_iso8601(cast(GTimeVal*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

@@ -66,16 +66,16 @@ class GutterRenderer : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_renderer_get_type != &gidSymbolNotFound ? gtk_source_gutter_renderer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -232,7 +232,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void activate(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area, uint button, gdk.types.ModifierType state, int nPresses)
   {
-    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null, button, state, nPresses);
+    gtk_source_gutter_renderer_activate(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null, button, state, nPresses);
   }
 
   /**
@@ -254,7 +254,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void alignCell(uint line, float width, float height, out float x, out float y)
   {
-    gtk_source_gutter_renderer_align_cell(cast(GtkSourceGutterRenderer*)cPtr, line, width, height, cast(float*)&x, cast(float*)&y);
+    gtk_source_gutter_renderer_align_cell(cast(GtkSourceGutterRenderer*)this._cPtr, line, width, height, cast(float*)&x, cast(float*)&y);
   }
 
   /**
@@ -268,7 +268,7 @@ class GutterRenderer : gtk.widget.Widget
   gtksource.types.GutterRendererAlignmentMode getAlignmentMode()
   {
     GtkSourceGutterRendererAlignmentMode _cretval;
-    _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr);
+    _cretval = gtk_source_gutter_renderer_get_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr);
     gtksource.types.GutterRendererAlignmentMode _retval = cast(gtksource.types.GutterRendererAlignmentMode)_cretval;
     return _retval;
   }
@@ -280,8 +280,8 @@ class GutterRenderer : gtk.widget.Widget
   gtksource.buffer.Buffer getBuffer()
   {
     GtkSourceBuffer* _cretval;
-    _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_get_buffer(cast(GtkSourceGutterRenderer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.buffer.Buffer)(cast(GtkSourceBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -292,8 +292,8 @@ class GutterRenderer : gtk.widget.Widget
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_renderer_get_view(cast(GtkSourceGutterRenderer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -306,7 +306,7 @@ class GutterRenderer : gtk.widget.Widget
   float getXalign()
   {
     float _retval;
-    _retval = gtk_source_gutter_renderer_get_xalign(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_xalign(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class GutterRenderer : gtk.widget.Widget
   int getXpad()
   {
     int _retval;
-    _retval = gtk_source_gutter_renderer_get_xpad(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_xpad(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -332,7 +332,7 @@ class GutterRenderer : gtk.widget.Widget
   float getYalign()
   {
     float _retval;
-    _retval = gtk_source_gutter_renderer_get_yalign(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_yalign(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -345,7 +345,7 @@ class GutterRenderer : gtk.widget.Widget
   int getYpad()
   {
     int _retval;
-    _retval = gtk_source_gutter_renderer_get_ypad(cast(GtkSourceGutterRenderer*)cPtr);
+    _retval = gtk_source_gutter_renderer_get_ypad(cast(GtkSourceGutterRenderer*)this._cPtr);
     return _retval;
   }
 
@@ -362,7 +362,7 @@ class GutterRenderer : gtk.widget.Widget
   bool queryActivatable(gtk.text_iter.TextIter iter, gdk.rectangle.Rectangle area)
   {
     bool _retval;
-    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)cPtr, iter ? cast(const(GtkTextIter)*)iter.cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area.cPtr(No.Dup) : null);
+    _retval = gtk_source_gutter_renderer_query_activatable(cast(GtkSourceGutterRenderer*)this._cPtr, iter ? cast(const(GtkTextIter)*)iter._cPtr(No.Dup) : null, area ? cast(const(GdkRectangle)*)area._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -376,7 +376,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void setAlignmentMode(gtksource.types.GutterRendererAlignmentMode mode)
   {
-    gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)cPtr, mode);
+    gtk_source_gutter_renderer_set_alignment_mode(cast(GtkSourceGutterRenderer*)this._cPtr, mode);
   }
 
   /**
@@ -389,7 +389,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void setXalign(float xalign)
   {
-    gtk_source_gutter_renderer_set_xalign(cast(GtkSourceGutterRenderer*)cPtr, xalign);
+    gtk_source_gutter_renderer_set_xalign(cast(GtkSourceGutterRenderer*)this._cPtr, xalign);
   }
 
   /**
@@ -402,7 +402,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void setXpad(int xpad)
   {
-    gtk_source_gutter_renderer_set_xpad(cast(GtkSourceGutterRenderer*)cPtr, xpad);
+    gtk_source_gutter_renderer_set_xpad(cast(GtkSourceGutterRenderer*)this._cPtr, xpad);
   }
 
   /**
@@ -415,7 +415,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void setYalign(float yalign)
   {
-    gtk_source_gutter_renderer_set_yalign(cast(GtkSourceGutterRenderer*)cPtr, yalign);
+    gtk_source_gutter_renderer_set_yalign(cast(GtkSourceGutterRenderer*)this._cPtr, yalign);
   }
 
   /**
@@ -428,7 +428,7 @@ class GutterRenderer : gtk.widget.Widget
   */
   void setYpad(int ypad)
   {
-    gtk_source_gutter_renderer_set_ypad(cast(GtkSourceGutterRenderer*)cPtr, ypad);
+    gtk_source_gutter_renderer_set_ypad(cast(GtkSourceGutterRenderer*)this._cPtr, ypad);
   }
 
   /**

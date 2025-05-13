@@ -64,16 +64,16 @@ class Parser : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_parser_get_type != &gidSymbolNotFound ? json_parser_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -105,7 +105,7 @@ class Parser : gobject.object.ObjectWrap
   {
     JsonParser* _cretval;
     _cretval = json_parser_new_immutable();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(json.parser.Parser)(cast(JsonParser*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,7 +120,7 @@ class Parser : gobject.object.ObjectWrap
   uint getCurrentLine()
   {
     uint _retval;
-    _retval = json_parser_get_current_line(cast(JsonParser*)cPtr);
+    _retval = json_parser_get_current_line(cast(JsonParser*)this._cPtr);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class Parser : gobject.object.ObjectWrap
   uint getCurrentPos()
   {
     uint _retval;
-    _retval = json_parser_get_current_pos(cast(JsonParser*)cPtr);
+    _retval = json_parser_get_current_pos(cast(JsonParser*)this._cPtr);
     return _retval;
   }
 
@@ -151,7 +151,7 @@ class Parser : gobject.object.ObjectWrap
   json.node.Node getRoot()
   {
     JsonNode* _cretval;
-    _cretval = json_parser_get_root(cast(JsonParser*)cPtr);
+    _cretval = json_parser_get_root(cast(JsonParser*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -178,7 +178,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     char* _variableName;
-    _retval = json_parser_has_assignment(cast(JsonParser*)cPtr, &_variableName);
+    _retval = json_parser_has_assignment(cast(JsonParser*)this._cPtr, &_variableName);
     variableName = _variableName.fromCString(No.Free);
     return _retval;
   }
@@ -200,7 +200,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _data = data.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_data(cast(JsonParser*)cPtr, _data, length, &_err);
+    _retval = json_parser_load_from_data(cast(JsonParser*)this._cPtr, _data, length, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -225,7 +225,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_file(cast(JsonParser*)cPtr, _filename, &_err);
+    _retval = json_parser_load_from_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -250,7 +250,7 @@ class Parser : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = json_parser_load_from_mapped_file(cast(JsonParser*)cPtr, _filename, &_err);
+    _retval = json_parser_load_from_mapped_file(cast(JsonParser*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -275,7 +275,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = json_parser_load_from_stream(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -298,17 +298,17 @@ class Parser : gobject.object.ObjectWrap
   */
   void loadFromStreamAsync(gio.input_stream.InputStream stream, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    json_parser_load_from_stream_async(cast(JsonParser*)cPtr, stream ? cast(GInputStream*)stream.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    json_parser_load_from_stream_async(cast(JsonParser*)this._cPtr, stream ? cast(GInputStream*)stream._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -325,7 +325,7 @@ class Parser : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = json_parser_load_from_stream_finish(cast(JsonParser*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -341,7 +341,7 @@ class Parser : gobject.object.ObjectWrap
   json.node.Node stealRoot()
   {
     JsonNode* _cretval;
-    _cretval = json_parser_steal_root(cast(JsonParser*)cPtr);
+    _cretval = json_parser_steal_root(cast(JsonParser*)this._cPtr);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

@@ -68,16 +68,16 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_entry_completion_get_type != &gidSymbolNotFound ? gtk_entry_completion_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -270,8 +270,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   static gtk.entry_completion.EntryCompletion newWithArea(gtk.cell_area.CellArea area)
   {
     GtkEntryCompletion* _cretval;
-    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
+    _cretval = gtk_entry_completion_new_with_area(area ? cast(GtkCellArea*)area._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(GtkEntryCompletion*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void complete()
   {
-    gtk_entry_completion_complete(cast(GtkEntryCompletion*)cPtr);
+    gtk_entry_completion_complete(cast(GtkEntryCompletion*)this._cPtr);
   }
 
   /**
@@ -300,7 +300,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   {
     char* _cretval;
     const(char)* _key = key.toCString(No.Alloc);
-    _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)cPtr, _key);
+    _cretval = gtk_entry_completion_compute_prefix(cast(GtkEntryCompletion*)this._cPtr, _key);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -316,7 +316,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void deleteAction(int index)
   {
-    gtk_entry_completion_delete_action(cast(GtkEntryCompletion*)cPtr, index);
+    gtk_entry_completion_delete_action(cast(GtkEntryCompletion*)this._cPtr, index);
   }
 
   /**
@@ -327,7 +327,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   string getCompletionPrefix()
   {
     const(char)* _cretval;
-    _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)cPtr);
+    _cretval = gtk_entry_completion_get_completion_prefix(cast(GtkEntryCompletion*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -339,8 +339,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   gtk.widget.Widget getEntry()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_entry_completion_get_entry(cast(GtkEntryCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -352,7 +352,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getInlineCompletion()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_inline_completion(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getInlineSelection()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_inline_selection(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   int getMinimumKeyLength()
   {
     int _retval;
-    _retval = gtk_entry_completion_get_minimum_key_length(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -387,8 +387,8 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
-    _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    _cretval = gtk_entry_completion_get_model(cast(GtkEntryCompletion*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -399,7 +399,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupCompletion()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_popup_completion(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -412,7 +412,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupSetWidth()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_popup_set_width(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -425,7 +425,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   bool getPopupSingleMatch()
   {
     bool _retval;
-    _retval = gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_popup_single_match(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -436,7 +436,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   int getTextColumn()
   {
     int _retval;
-    _retval = gtk_entry_completion_get_text_column(cast(GtkEntryCompletion*)cPtr);
+    _retval = gtk_entry_completion_get_text_column(cast(GtkEntryCompletion*)this._cPtr);
     return _retval;
   }
 
@@ -451,7 +451,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   void insertActionMarkup(int index, string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_entry_completion_insert_action_markup(cast(GtkEntryCompletion*)cPtr, index, _markup);
+    gtk_entry_completion_insert_action_markup(cast(GtkEntryCompletion*)this._cPtr, index, _markup);
   }
 
   /**
@@ -469,7 +469,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   void insertActionText(int index, string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_entry_completion_insert_action_text(cast(GtkEntryCompletion*)cPtr, index, _text);
+    gtk_entry_completion_insert_action_text(cast(GtkEntryCompletion*)this._cPtr, index, _text);
   }
 
   /**
@@ -477,7 +477,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void insertPrefix()
   {
-    gtk_entry_completion_insert_prefix(cast(GtkEntryCompletion*)cPtr);
+    gtk_entry_completion_insert_prefix(cast(GtkEntryCompletion*)this._cPtr);
   }
 
   /**
@@ -489,7 +489,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setInlineCompletion(bool inlineCompletion)
   {
-    gtk_entry_completion_set_inline_completion(cast(GtkEntryCompletion*)cPtr, inlineCompletion);
+    gtk_entry_completion_set_inline_completion(cast(GtkEntryCompletion*)this._cPtr, inlineCompletion);
   }
 
   /**
@@ -501,7 +501,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setInlineSelection(bool inlineSelection)
   {
-    gtk_entry_completion_set_inline_selection(cast(GtkEntryCompletion*)cPtr, inlineSelection);
+    gtk_entry_completion_set_inline_selection(cast(GtkEntryCompletion*)this._cPtr, inlineSelection);
   }
 
   /**
@@ -519,14 +519,14 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
       auto _dlg = cast(gtk.types.EntryCompletionMatchFunc*)userData;
       string _key = key.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.entry_completion.EntryCompletion)(cast(void*)completion, No.Take), _key, iter ? new gtk.tree_iter.TreeIter(cast(void*)iter, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_entry_completion_set_match_func(cast(GtkEntryCompletion*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -540,7 +540,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setMinimumKeyLength(int length)
   {
-    gtk_entry_completion_set_minimum_key_length(cast(GtkEntryCompletion*)cPtr, length);
+    gtk_entry_completion_set_minimum_key_length(cast(GtkEntryCompletion*)this._cPtr, length);
   }
 
   /**
@@ -553,7 +553,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setModel(gtk.tree_model.TreeModel model = null)
   {
-    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_entry_completion_set_model(cast(GtkEntryCompletion*)this._cPtr, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -564,7 +564,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setPopupCompletion(bool popupCompletion)
   {
-    gtk_entry_completion_set_popup_completion(cast(GtkEntryCompletion*)cPtr, popupCompletion);
+    gtk_entry_completion_set_popup_completion(cast(GtkEntryCompletion*)this._cPtr, popupCompletion);
   }
 
   /**
@@ -576,7 +576,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setPopupSetWidth(bool popupSetWidth)
   {
-    gtk_entry_completion_set_popup_set_width(cast(GtkEntryCompletion*)cPtr, popupSetWidth);
+    gtk_entry_completion_set_popup_set_width(cast(GtkEntryCompletion*)this._cPtr, popupSetWidth);
   }
 
   /**
@@ -590,7 +590,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setPopupSingleMatch(bool popupSingleMatch)
   {
-    gtk_entry_completion_set_popup_single_match(cast(GtkEntryCompletion*)cPtr, popupSingleMatch);
+    gtk_entry_completion_set_popup_single_match(cast(GtkEntryCompletion*)this._cPtr, popupSingleMatch);
   }
 
   /**
@@ -609,7 +609,7 @@ class EntryCompletion : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.
   */
   void setTextColumn(int column)
   {
-    gtk_entry_completion_set_text_column(cast(GtkEntryCompletion*)cPtr, column);
+    gtk_entry_completion_set_text_column(cast(GtkEntryCompletion*)this._cPtr, column);
   }
 
   /**

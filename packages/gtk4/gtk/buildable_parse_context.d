@@ -26,7 +26,7 @@ class BuildableParseContext
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -42,7 +42,7 @@ class BuildableParseContext
   string getElement()
   {
     const(char)* _cretval;
-    _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)cPtr);
+    _cretval = gtk_buildable_parse_context_get_element(cast(GtkBuildableParseContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -64,7 +64,7 @@ class BuildableParseContext
   string[] getElementStack()
   {
     GPtrArray* _cretval;
-    _cretval = gtk_buildable_parse_context_get_element_stack(cast(GtkBuildableParseContext*)cPtr);
+    _cretval = gtk_buildable_parse_context_get_element_stack(cast(GtkBuildableParseContext*)this._cPtr);
     auto _retval = gPtrArrayToD!(string, GidOwnership.None)(cast(GPtrArray*)_cretval);
     return _retval;
   }
@@ -81,7 +81,7 @@ class BuildableParseContext
   */
   void getPosition(out int lineNumber, out int charNumber)
   {
-    gtk_buildable_parse_context_get_position(cast(GtkBuildableParseContext*)cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
+    gtk_buildable_parse_context_get_position(cast(GtkBuildableParseContext*)this._cPtr, cast(int*)&lineNumber, cast(int*)&charNumber);
   }
 
   /**
@@ -102,7 +102,7 @@ class BuildableParseContext
   */
   void* pop()
   {
-    auto _retval = gtk_buildable_parse_context_pop(cast(GtkBuildableParseContext*)cPtr);
+    auto _retval = gtk_buildable_parse_context_pop(cast(GtkBuildableParseContext*)this._cPtr);
     return _retval;
   }
 
@@ -143,6 +143,6 @@ class BuildableParseContext
   */
   void push(gtk.types.BuildableParser parser, void* userData = null)
   {
-    gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)cPtr, &parser, userData);
+    gtk_buildable_parse_context_push(cast(GtkBuildableParseContext*)this._cPtr, &parser, userData);
   }
 }

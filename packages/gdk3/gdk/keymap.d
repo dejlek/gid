@@ -28,16 +28,16 @@ class Keymap : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_keymap_get_type != &gidSymbolNotFound ? gdk_keymap_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class Keymap : gobject.object.ObjectWrap
   {
     GdkKeymap* _cretval;
     _cretval = gdk_keymap_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -70,8 +70,8 @@ class Keymap : gobject.object.ObjectWrap
   static gdk.keymap.Keymap getForDisplay(gdk.display.Display display)
   {
     GdkKeymap* _cretval;
-    _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
+    _cretval = gdk_keymap_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.keymap.Keymap)(cast(GdkKeymap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class Keymap : gobject.object.ObjectWrap
   */
   void addVirtualModifiers(ref gdk.types.ModifierType state)
   {
-    gdk_keymap_add_virtual_modifiers(cast(GdkKeymap*)cPtr, &state);
+    gdk_keymap_add_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
   }
 
   /**
@@ -102,7 +102,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getCapsLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_caps_lock_state(cast(GdkKeymap*)cPtr);
+    _retval = gdk_keymap_get_caps_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -115,7 +115,7 @@ class Keymap : gobject.object.ObjectWrap
   pango.types.Direction getDirection()
   {
     PangoDirection _cretval;
-    _cretval = gdk_keymap_get_direction(cast(GdkKeymap*)cPtr);
+    _cretval = gdk_keymap_get_direction(cast(GdkKeymap*)this._cPtr);
     pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
@@ -142,7 +142,7 @@ class Keymap : gobject.object.ObjectWrap
     int _nEntries;
     GdkKeymapKey* _keys;
     uint* _keyvals;
-    _retval = gdk_keymap_get_entries_for_keycode(cast(GdkKeymap*)cPtr, hardwareKeycode, &_keys, &_keyvals, &_nEntries);
+    _retval = gdk_keymap_get_entries_for_keycode(cast(GdkKeymap*)this._cPtr, hardwareKeycode, &_keys, &_keyvals, &_nEntries);
     keys.length = _nEntries;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nEntries];
     gFree(cast(void*)_keys);
@@ -176,7 +176,7 @@ class Keymap : gobject.object.ObjectWrap
     bool _retval;
     int _nKeys;
     GdkKeymapKey* _keys;
-    _retval = gdk_keymap_get_entries_for_keyval(cast(GdkKeymap*)cPtr, keyval, &_keys, &_nKeys);
+    _retval = gdk_keymap_get_entries_for_keyval(cast(GdkKeymap*)this._cPtr, keyval, &_keys, &_nKeys);
     keys.length = _nKeys;
     keys[0 .. $] = (cast(gdk.types.KeymapKey*)_keys)[0 .. _nKeys];
     gFree(cast(void*)_keys);
@@ -201,7 +201,7 @@ class Keymap : gobject.object.ObjectWrap
   gdk.types.ModifierType getModifierMask(gdk.types.ModifierIntent intent)
   {
     GdkModifierType _cretval;
-    _cretval = gdk_keymap_get_modifier_mask(cast(GdkKeymap*)cPtr, intent);
+    _cretval = gdk_keymap_get_modifier_mask(cast(GdkKeymap*)this._cPtr, intent);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -213,7 +213,7 @@ class Keymap : gobject.object.ObjectWrap
   uint getModifierState()
   {
     uint _retval;
-    _retval = gdk_keymap_get_modifier_state(cast(GdkKeymap*)cPtr);
+    _retval = gdk_keymap_get_modifier_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getNumLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_num_lock_state(cast(GdkKeymap*)cPtr);
+    _retval = gdk_keymap_get_num_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -235,7 +235,7 @@ class Keymap : gobject.object.ObjectWrap
   bool getScrollLockState()
   {
     bool _retval;
-    _retval = gdk_keymap_get_scroll_lock_state(cast(GdkKeymap*)cPtr);
+    _retval = gdk_keymap_get_scroll_lock_state(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Keymap : gobject.object.ObjectWrap
   bool haveBidiLayouts()
   {
     bool _retval;
-    _retval = gdk_keymap_have_bidi_layouts(cast(GdkKeymap*)cPtr);
+    _retval = gdk_keymap_have_bidi_layouts(cast(GdkKeymap*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class Keymap : gobject.object.ObjectWrap
   uint lookupKey(gdk.types.KeymapKey key)
   {
     uint _retval;
-    _retval = gdk_keymap_lookup_key(cast(GdkKeymap*)cPtr, &key);
+    _retval = gdk_keymap_lookup_key(cast(GdkKeymap*)this._cPtr, &key);
     return _retval;
   }
 
@@ -287,7 +287,7 @@ class Keymap : gobject.object.ObjectWrap
   bool mapVirtualModifiers(ref gdk.types.ModifierType state)
   {
     bool _retval;
-    _retval = gdk_keymap_map_virtual_modifiers(cast(GdkKeymap*)cPtr, &state);
+    _retval = gdk_keymap_map_virtual_modifiers(cast(GdkKeymap*)this._cPtr, &state);
     return _retval;
   }
 
@@ -355,7 +355,7 @@ class Keymap : gobject.object.ObjectWrap
   bool translateKeyboardState(uint hardwareKeycode, gdk.types.ModifierType state, int group, out uint keyval, out int effectiveGroup, out int level, out gdk.types.ModifierType consumedModifiers)
   {
     bool _retval;
-    _retval = gdk_keymap_translate_keyboard_state(cast(GdkKeymap*)cPtr, hardwareKeycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumedModifiers);
+    _retval = gdk_keymap_translate_keyboard_state(cast(GdkKeymap*)this._cPtr, hardwareKeycode, state, group, cast(uint*)&keyval, cast(int*)&effectiveGroup, cast(int*)&level, &consumedModifiers);
     return _retval;
   }
 

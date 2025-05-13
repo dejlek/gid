@@ -23,16 +23,16 @@ class WebFormManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_form_manager_get_type != &gidSymbolNotFound ? webkit_web_form_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class WebFormManager : gobject.object.ObjectWrap
   static void inputElementAutoFill(javascriptcore.value.Value element, string value)
   {
     const(char)* _value = value.toCString(No.Alloc);
-    webkit_web_form_manager_input_element_auto_fill(element ? cast(JSCValue*)element.cPtr(No.Dup) : null, _value);
+    webkit_web_form_manager_input_element_auto_fill(element ? cast(JSCValue*)element._cPtr(No.Dup) : null, _value);
   }
 
   /**
@@ -67,7 +67,7 @@ class WebFormManager : gobject.object.ObjectWrap
   static bool inputElementIsAutoFilled(javascriptcore.value.Value element)
   {
     bool _retval;
-    _retval = webkit_web_form_manager_input_element_is_auto_filled(element ? cast(JSCValue*)element.cPtr(No.Dup) : null);
+    _retval = webkit_web_form_manager_input_element_is_auto_filled(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -82,7 +82,7 @@ class WebFormManager : gobject.object.ObjectWrap
   static bool inputElementIsUserEdited(javascriptcore.value.Value element)
   {
     bool _retval;
-    _retval = webkit_web_form_manager_input_element_is_user_edited(element ? cast(JSCValue*)element.cPtr(No.Dup) : null);
+    _retval = webkit_web_form_manager_input_element_is_user_edited(element ? cast(JSCValue*)element._cPtr(No.Dup) : null);
     return _retval;
   }
 

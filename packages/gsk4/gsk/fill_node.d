@@ -37,7 +37,7 @@ class FillNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, gsk.path.Path path, gsk.types.FillRule fillRule)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_fill_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, path ? cast(GskPath*)path.cPtr(No.Dup) : null, fillRule);
+    _cretval = gsk_fill_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, path ? cast(GskPath*)path._cPtr(No.Dup) : null, fillRule);
     this(_cretval, No.Take);
   }
 
@@ -48,7 +48,7 @@ class FillNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_fill_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_fill_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -60,7 +60,7 @@ class FillNode : gsk.render_node.RenderNode
   gsk.types.FillRule getFillRule()
   {
     GskFillRule _cretval;
-    _cretval = gsk_fill_node_get_fill_rule(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_fill_node_get_fill_rule(cast(const(GskRenderNode)*)this._cPtr);
     gsk.types.FillRule _retval = cast(gsk.types.FillRule)_cretval;
     return _retval;
   }
@@ -73,7 +73,7 @@ class FillNode : gsk.render_node.RenderNode
   gsk.path.Path getPath()
   {
     GskPath* _cretval;
-    _cretval = gsk_fill_node_get_path(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_fill_node_get_path(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

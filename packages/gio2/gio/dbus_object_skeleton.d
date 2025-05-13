@@ -29,16 +29,16 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_object_skeleton_get_type != &gidSymbolNotFound ? g_dbus_object_skeleton_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   void addInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
+    g_dbus_object_skeleton_add_interface(cast(GDBusObjectSkeleton*)this._cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -107,7 +107,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   void flush()
   {
-    g_dbus_object_skeleton_flush(cast(GDBusObjectSkeleton*)cPtr);
+    g_dbus_object_skeleton_flush(cast(GDBusObjectSkeleton*)this._cPtr);
   }
 
   /**
@@ -118,7 +118,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   */
   void removeInterface(gio.dbus_interface_skeleton.DBusInterfaceSkeleton interface_)
   {
-    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_.cPtr(No.Dup) : null);
+    g_dbus_object_skeleton_remove_interface(cast(GDBusObjectSkeleton*)this._cPtr, interface_ ? cast(GDBusInterfaceSkeleton*)interface_._cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,7 +133,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   void removeInterfaceByName(string interfaceName)
   {
     const(char)* _interfaceName = interfaceName.toCString(No.Alloc);
-    g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)cPtr, _interfaceName);
+    g_dbus_object_skeleton_remove_interface_by_name(cast(GDBusObjectSkeleton*)this._cPtr, _interfaceName);
   }
 
   /**
@@ -145,7 +145,7 @@ class DBusObjectSkeleton : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
   void setObjectPath(string objectPath)
   {
     const(char)* _objectPath = objectPath.toCString(No.Alloc);
-    g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)cPtr, _objectPath);
+    g_dbus_object_skeleton_set_object_path(cast(GDBusObjectSkeleton*)this._cPtr, _objectPath);
   }
 
   /**

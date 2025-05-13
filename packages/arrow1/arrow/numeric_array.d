@@ -19,16 +19,16 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_numeric_array_get_type != &gidSymbolNotFound ? garrow_numeric_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class NumericArray : arrow.primitive_array.PrimitiveArray
   {
     double _retval;
     GError *_err;
-    _retval = garrow_numeric_array_mean(cast(GArrowNumericArray*)cPtr, &_err);
+    _retval = garrow_numeric_array_mean(cast(GArrowNumericArray*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

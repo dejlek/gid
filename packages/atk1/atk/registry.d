@@ -31,16 +31,16 @@ class Registry : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_registry_get_type != &gidSymbolNotFound ? atk_registry_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,8 +61,8 @@ class Registry : gobject.object.ObjectWrap
   atk.object_factory.ObjectFactory getFactory(gobject.types.GType type)
   {
     AtkObjectFactory* _cretval;
-    _cretval = atk_registry_get_factory(cast(AtkRegistry*)cPtr, type);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
+    _cretval = atk_registry_get_factory(cast(AtkRegistry*)this._cPtr, type);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object_factory.ObjectFactory)(cast(AtkObjectFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -78,7 +78,7 @@ class Registry : gobject.object.ObjectWrap
   gobject.types.GType getFactoryType(gobject.types.GType type)
   {
     gobject.types.GType _retval;
-    _retval = atk_registry_get_factory_type(cast(AtkRegistry*)cPtr, type);
+    _retval = atk_registry_get_factory_type(cast(AtkRegistry*)this._cPtr, type);
     return _retval;
   }
 
@@ -95,6 +95,6 @@ class Registry : gobject.object.ObjectWrap
   */
   void setFactoryType(gobject.types.GType type, gobject.types.GType factoryType)
   {
-    atk_registry_set_factory_type(cast(AtkRegistry*)cPtr, type, factoryType);
+    atk_registry_set_factory_type(cast(AtkRegistry*)this._cPtr, type, factoryType);
   }
 }

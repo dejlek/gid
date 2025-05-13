@@ -36,16 +36,16 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_filter_list_model_get_type != &gidSymbolNotFound ? gtk_filter_list_model_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -153,7 +153,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   this(gio.list_model.ListModel model = null, gtk.filter.Filter filter = null)
   {
     GtkFilterListModel* _cretval;
-    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter.cPtr(Yes.Dup) : null);
+    _cretval = gtk_filter_list_model_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, filter ? cast(GtkFilter*)filter._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -164,8 +164,8 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   gtk.filter.Filter getFilter()
   {
     GtkFilter* _cretval;
-    _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
+    _cretval = gtk_filter_list_model_get_filter(cast(GtkFilterListModel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.filter.Filter)(cast(GtkFilter*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   bool getIncremental()
   {
     bool _retval;
-    _retval = gtk_filter_list_model_get_incremental(cast(GtkFilterListModel*)cPtr);
+    _retval = gtk_filter_list_model_get_incremental(cast(GtkFilterListModel*)this._cPtr);
     return _retval;
   }
 
@@ -189,8 +189,8 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_filter_list_model_get_model(cast(GtkFilterListModel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -216,7 +216,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   uint getPending()
   {
     uint _retval;
-    _retval = gtk_filter_list_model_get_pending(cast(GtkFilterListModel*)cPtr);
+    _retval = gtk_filter_list_model_get_pending(cast(GtkFilterListModel*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setFilter(gtk.filter.Filter filter = null)
   {
-    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)cPtr, filter ? cast(GtkFilter*)filter.cPtr(No.Dup) : null);
+    gtk_filter_list_model_set_filter(cast(GtkFilterListModel*)this._cPtr, filter ? cast(GtkFilter*)filter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -254,7 +254,7 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setIncremental(bool incremental)
   {
-    gtk_filter_list_model_set_incremental(cast(GtkFilterListModel*)cPtr, incremental);
+    gtk_filter_list_model_set_incremental(cast(GtkFilterListModel*)this._cPtr, incremental);
   }
 
   /**
@@ -270,6 +270,6 @@ class FilterListModel : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_filter_list_model_set_model(cast(GtkFilterListModel*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 }

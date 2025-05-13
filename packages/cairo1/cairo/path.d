@@ -44,22 +44,22 @@ class Path : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_path_get_type != &gidSymbolNotFound ? cairo_gobject_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class Path : gobject.boxed.Boxed
   */
   @property cairo.types.Status status()
   {
-    return cast(cairo.types.Status)(cast(cairo_path_t*)cPtr).status;
+    return cast(cairo.types.Status)(cast(cairo_path_t*)this._cPtr).status;
   }
 
   /**
@@ -84,7 +84,7 @@ class Path : gobject.boxed.Boxed
   */
   @property void status(cairo.types.Status propval)
   {
-    (cast(cairo_path_t*)cPtr).status = cast(cairo_status_t)propval;
+    (cast(cairo_path_t*)this._cPtr).status = cast(cairo_status_t)propval;
   }
 
   /**
@@ -93,7 +93,7 @@ class Path : gobject.boxed.Boxed
   */
   @property int numData()
   {
-    return (cast(cairo_path_t*)cPtr).numData;
+    return (cast(cairo_path_t*)this._cPtr).numData;
   }
 
   /**
@@ -103,6 +103,6 @@ class Path : gobject.boxed.Boxed
   */
   @property void numData(int propval)
   {
-    (cast(cairo_path_t*)cPtr).numData = propval;
+    (cast(cairo_path_t*)this._cPtr).numData = propval;
   }
 }

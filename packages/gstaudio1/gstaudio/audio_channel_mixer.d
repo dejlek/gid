@@ -24,7 +24,7 @@ class AudioChannelMixer
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -46,7 +46,7 @@ class AudioChannelMixer
   bool isPassthrough()
   {
     bool _retval;
-    _retval = gst_audio_channel_mixer_is_passthrough(cast(GstAudioChannelMixer*)cPtr);
+    _retval = gst_audio_channel_mixer_is_passthrough(cast(GstAudioChannelMixer*)this._cPtr);
     return _retval;
   }
 }

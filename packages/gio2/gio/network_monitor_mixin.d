@@ -119,7 +119,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -144,17 +144,17 @@ template NetworkMonitorT()
   */
   override void canReachAsync(gio.socket_connectable.SocketConnectable connectable, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable).cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_network_monitor_can_reach_async(cast(GNetworkMonitor*)this._cPtr, connectable ? cast(GSocketConnectable*)(cast(gobject.object.ObjectWrap)connectable)._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -170,7 +170,7 @@ template NetworkMonitorT()
   {
     bool _retval;
     GError *_err;
-    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_network_monitor_can_reach_finish(cast(GNetworkMonitor*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -201,7 +201,7 @@ template NetworkMonitorT()
   override gio.types.NetworkConnectivity getConnectivity()
   {
     GNetworkConnectivity _cretval;
-    _cretval = g_network_monitor_get_connectivity(cast(GNetworkMonitor*)cPtr);
+    _cretval = g_network_monitor_get_connectivity(cast(GNetworkMonitor*)this._cPtr);
     gio.types.NetworkConnectivity _retval = cast(gio.types.NetworkConnectivity)_cretval;
     return _retval;
   }
@@ -216,7 +216,7 @@ template NetworkMonitorT()
   override bool getNetworkAvailable()
   {
     bool _retval;
-    _retval = g_network_monitor_get_network_available(cast(GNetworkMonitor*)cPtr);
+    _retval = g_network_monitor_get_network_available(cast(GNetworkMonitor*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ template NetworkMonitorT()
   override bool getNetworkMetered()
   {
     bool _retval;
-    _retval = g_network_monitor_get_network_metered(cast(GNetworkMonitor*)cPtr);
+    _retval = g_network_monitor_get_network_metered(cast(GNetworkMonitor*)this._cPtr);
     return _retval;
   }
 

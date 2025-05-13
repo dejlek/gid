@@ -21,16 +21,16 @@ class DragContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_drag_context_get_type != &gidSymbolNotFound ? gdk_drag_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -47,7 +47,7 @@ class DragContext : gobject.object.ObjectWrap
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
-    _cretval = gdk_drag_context_get_actions(cast(GdkDragContext*)cPtr);
+    _cretval = gdk_drag_context_get_actions(cast(GdkDragContext*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -59,8 +59,8 @@ class DragContext : gobject.object.ObjectWrap
   gdk.window.Window getDestWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_drag_context_get_dest_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -71,8 +71,8 @@ class DragContext : gobject.object.ObjectWrap
   gdk.device.Device getDevice()
   {
     GdkDevice* _cretval;
-    _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
+    _cretval = gdk_drag_context_get_device(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.device.Device)(cast(GdkDevice*)_cretval, No.Take);
     return _retval;
   }
 
@@ -88,8 +88,8 @@ class DragContext : gobject.object.ObjectWrap
   gdk.window.Window getDragWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_drag_context_get_drag_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -100,7 +100,7 @@ class DragContext : gobject.object.ObjectWrap
   gdk.types.DragProtocol getProtocol()
   {
     GdkDragProtocol _cretval;
-    _cretval = gdk_drag_context_get_protocol(cast(GdkDragContext*)cPtr);
+    _cretval = gdk_drag_context_get_protocol(cast(GdkDragContext*)this._cPtr);
     gdk.types.DragProtocol _retval = cast(gdk.types.DragProtocol)_cretval;
     return _retval;
   }
@@ -112,7 +112,7 @@ class DragContext : gobject.object.ObjectWrap
   gdk.types.DragAction getSelectedAction()
   {
     GdkDragAction _cretval;
-    _cretval = gdk_drag_context_get_selected_action(cast(GdkDragContext*)cPtr);
+    _cretval = gdk_drag_context_get_selected_action(cast(GdkDragContext*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -124,8 +124,8 @@ class DragContext : gobject.object.ObjectWrap
   gdk.window.Window getSourceWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_drag_context_get_source_window(cast(GdkDragContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -136,7 +136,7 @@ class DragContext : gobject.object.ObjectWrap
   gdk.types.DragAction getSuggestedAction()
   {
     GdkDragAction _cretval;
-    _cretval = gdk_drag_context_get_suggested_action(cast(GdkDragContext*)cPtr);
+    _cretval = gdk_drag_context_get_suggested_action(cast(GdkDragContext*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -169,7 +169,7 @@ class DragContext : gobject.object.ObjectWrap
   bool manageDnd(gdk.window.Window ipcWindow, gdk.types.DragAction actions)
   {
     bool _retval;
-    _retval = gdk_drag_context_manage_dnd(cast(GdkDragContext*)cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow.cPtr(No.Dup) : null, actions);
+    _retval = gdk_drag_context_manage_dnd(cast(GdkDragContext*)this._cPtr, ipcWindow ? cast(GdkWindow*)ipcWindow._cPtr(No.Dup) : null, actions);
     return _retval;
   }
 
@@ -182,7 +182,7 @@ class DragContext : gobject.object.ObjectWrap
   */
   void setDevice(gdk.device.Device device)
   {
-    gdk_drag_context_set_device(cast(GdkDragContext*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    gdk_drag_context_set_device(cast(GdkDragContext*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
   }
 
   /**
@@ -196,7 +196,7 @@ class DragContext : gobject.object.ObjectWrap
   */
   void setHotspot(int hotX, int hotY)
   {
-    gdk_drag_context_set_hotspot(cast(GdkDragContext*)cPtr, hotX, hotY);
+    gdk_drag_context_set_hotspot(cast(GdkDragContext*)this._cPtr, hotX, hotY);
   }
 
   /**

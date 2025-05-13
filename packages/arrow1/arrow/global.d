@@ -39,7 +39,7 @@ bool s3Initialize(arrow.s3_global_options.S3GlobalOptions options = null)
 {
   bool _retval;
   GError *_err;
-  _retval = garrow_s3_initialize(options ? cast(GArrowS3GlobalOptions*)options.cPtr(No.Dup) : null, &_err);
+  _retval = garrow_s3_initialize(options ? cast(GArrowS3GlobalOptions*)options._cPtr(No.Dup) : null, &_err);
   if (_err)
     throw new ErrorWrap(_err);
   return _retval;

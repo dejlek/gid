@@ -91,16 +91,16 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_flap_get_type != &gidSymbolNotFound ? adw_flap_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -570,8 +570,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   gtk.widget.Widget getContent()
   {
     GtkWidget* _cretval;
-    _cretval = adw_flap_get_content(cast(AdwFlap*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_flap_get_content(cast(AdwFlap*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -584,8 +584,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   gtk.widget.Widget getFlap()
   {
     GtkWidget* _cretval;
-    _cretval = adw_flap_get_flap(cast(AdwFlap*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_flap_get_flap(cast(AdwFlap*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -598,7 +598,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   gtk.types.PackType getFlapPosition()
   {
     GtkPackType _cretval;
-    _cretval = adw_flap_get_flap_position(cast(AdwFlap*)cPtr);
+    _cretval = adw_flap_get_flap_position(cast(AdwFlap*)this._cPtr);
     gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
     return _retval;
   }
@@ -612,7 +612,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   uint getFoldDuration()
   {
     uint _retval;
-    _retval = adw_flap_get_fold_duration(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_fold_duration(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -625,7 +625,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   adw.types.FlapFoldPolicy getFoldPolicy()
   {
     AdwFlapFoldPolicy _cretval;
-    _cretval = adw_flap_get_fold_policy(cast(AdwFlap*)cPtr);
+    _cretval = adw_flap_get_fold_policy(cast(AdwFlap*)this._cPtr);
     adw.types.FlapFoldPolicy _retval = cast(adw.types.FlapFoldPolicy)_cretval;
     return _retval;
   }
@@ -639,7 +639,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   adw.types.FoldThresholdPolicy getFoldThresholdPolicy()
   {
     AdwFoldThresholdPolicy _cretval;
-    _cretval = adw_flap_get_fold_threshold_policy(cast(AdwFlap*)cPtr);
+    _cretval = adw_flap_get_fold_threshold_policy(cast(AdwFlap*)this._cPtr);
     adw.types.FoldThresholdPolicy _retval = cast(adw.types.FoldThresholdPolicy)_cretval;
     return _retval;
   }
@@ -655,7 +655,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getFolded()
   {
     bool _retval;
-    _retval = adw_flap_get_folded(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_folded(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -668,7 +668,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getLocked()
   {
     bool _retval;
-    _retval = adw_flap_get_locked(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_locked(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -681,7 +681,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getModal()
   {
     bool _retval;
-    _retval = adw_flap_get_modal(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_modal(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -694,7 +694,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getRevealFlap()
   {
     bool _retval;
-    _retval = adw_flap_get_reveal_flap(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_reveal_flap(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -707,7 +707,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   adw.spring_params.SpringParams getRevealParams()
   {
     AdwSpringParams* _cretval;
-    _cretval = adw_flap_get_reveal_params(cast(AdwFlap*)cPtr);
+    _cretval = adw_flap_get_reveal_params(cast(AdwFlap*)this._cPtr);
     auto _retval = _cretval ? new adw.spring_params.SpringParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -725,7 +725,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   double getRevealProgress()
   {
     double _retval;
-    _retval = adw_flap_get_reveal_progress(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_reveal_progress(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -738,8 +738,8 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   gtk.widget.Widget getSeparator()
   {
     GtkWidget* _cretval;
-    _cretval = adw_flap_get_separator(cast(AdwFlap*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_flap_get_separator(cast(AdwFlap*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -752,7 +752,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getSwipeToClose()
   {
     bool _retval;
-    _retval = adw_flap_get_swipe_to_close(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_swipe_to_close(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -765,7 +765,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   bool getSwipeToOpen()
   {
     bool _retval;
-    _retval = adw_flap_get_swipe_to_open(cast(AdwFlap*)cPtr);
+    _retval = adw_flap_get_swipe_to_open(cast(AdwFlap*)this._cPtr);
     return _retval;
   }
 
@@ -778,7 +778,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   adw.types.FlapTransitionType getTransitionType()
   {
     AdwFlapTransitionType _cretval;
-    _cretval = adw_flap_get_transition_type(cast(AdwFlap*)cPtr);
+    _cretval = adw_flap_get_transition_type(cast(AdwFlap*)this._cPtr);
     adw.types.FlapTransitionType _retval = cast(adw.types.FlapTransitionType)_cretval;
     return _retval;
   }
@@ -795,7 +795,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setContent(gtk.widget.Widget content = null)
   {
-    adw_flap_set_content(cast(AdwFlap*)cPtr, content ? cast(GtkWidget*)content.cPtr(No.Dup) : null);
+    adw_flap_set_content(cast(AdwFlap*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -810,7 +810,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setFlap(gtk.widget.Widget flap = null)
   {
-    adw_flap_set_flap(cast(AdwFlap*)cPtr, flap ? cast(GtkWidget*)flap.cPtr(No.Dup) : null);
+    adw_flap_set_flap(cast(AdwFlap*)this._cPtr, flap ? cast(GtkWidget*)flap._cPtr(No.Dup) : null);
   }
 
   /**
@@ -826,7 +826,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setFlapPosition(gtk.types.PackType position)
   {
-    adw_flap_set_flap_position(cast(AdwFlap*)cPtr, position);
+    adw_flap_set_flap_position(cast(AdwFlap*)this._cPtr, position);
   }
 
   /**
@@ -839,7 +839,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setFoldDuration(uint duration)
   {
-    adw_flap_set_fold_duration(cast(AdwFlap*)cPtr, duration);
+    adw_flap_set_fold_duration(cast(AdwFlap*)this._cPtr, duration);
   }
 
   /**
@@ -852,7 +852,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setFoldPolicy(adw.types.FlapFoldPolicy policy)
   {
-    adw_flap_set_fold_policy(cast(AdwFlap*)cPtr, policy);
+    adw_flap_set_fold_policy(cast(AdwFlap*)this._cPtr, policy);
   }
 
   /**
@@ -872,7 +872,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setFoldThresholdPolicy(adw.types.FoldThresholdPolicy policy)
   {
-    adw_flap_set_fold_threshold_policy(cast(AdwFlap*)cPtr, policy);
+    adw_flap_set_fold_threshold_policy(cast(AdwFlap*)this._cPtr, policy);
   }
 
   /**
@@ -889,7 +889,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setLocked(bool locked)
   {
-    adw_flap_set_locked(cast(AdwFlap*)cPtr, locked);
+    adw_flap_set_locked(cast(AdwFlap*)this._cPtr, locked);
   }
 
   /**
@@ -906,7 +906,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setModal(bool modal)
   {
-    adw_flap_set_modal(cast(AdwFlap*)cPtr, modal);
+    adw_flap_set_modal(cast(AdwFlap*)this._cPtr, modal);
   }
 
   /**
@@ -919,7 +919,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setRevealFlap(bool revealFlap)
   {
-    adw_flap_set_reveal_flap(cast(AdwFlap*)cPtr, revealFlap);
+    adw_flap_set_reveal_flap(cast(AdwFlap*)this._cPtr, revealFlap);
   }
 
   /**
@@ -938,7 +938,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setRevealParams(adw.spring_params.SpringParams params)
   {
-    adw_flap_set_reveal_params(cast(AdwFlap*)cPtr, params ? cast(AdwSpringParams*)params.cPtr(No.Dup) : null);
+    adw_flap_set_reveal_params(cast(AdwFlap*)this._cPtr, params ? cast(AdwSpringParams*)params._cPtr(No.Dup) : null);
   }
 
   /**
@@ -955,7 +955,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setSeparator(gtk.widget.Widget separator = null)
   {
-    adw_flap_set_separator(cast(AdwFlap*)cPtr, separator ? cast(GtkWidget*)separator.cPtr(No.Dup) : null);
+    adw_flap_set_separator(cast(AdwFlap*)this._cPtr, separator ? cast(GtkWidget*)separator._cPtr(No.Dup) : null);
   }
 
   /**
@@ -971,7 +971,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setSwipeToClose(bool swipeToClose)
   {
-    adw_flap_set_swipe_to_close(cast(AdwFlap*)cPtr, swipeToClose);
+    adw_flap_set_swipe_to_close(cast(AdwFlap*)this._cPtr, swipeToClose);
   }
 
   /**
@@ -987,7 +987,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setSwipeToOpen(bool swipeToOpen)
   {
-    adw_flap_set_swipe_to_open(cast(AdwFlap*)cPtr, swipeToOpen);
+    adw_flap_set_swipe_to_open(cast(AdwFlap*)this._cPtr, swipeToOpen);
   }
 
   /**
@@ -1005,6 +1005,6 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
   */
   void setTransitionType(adw.types.FlapTransitionType transitionType)
   {
-    adw_flap_set_transition_type(cast(AdwFlap*)cPtr, transitionType);
+    adw_flap_set_transition_type(cast(AdwFlap*)this._cPtr, transitionType);
   }
 }

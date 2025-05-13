@@ -150,16 +150,16 @@ class Path : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())json_path_get_type != &gidSymbolNotFound ? json_path_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -202,7 +202,7 @@ class Path : gobject.object.ObjectWrap
     JsonNode* _cretval;
     const(char)* _expression = expression.toCString(No.Alloc);
     GError *_err;
-    _cretval = json_path_query(_expression, root ? cast(JsonNode*)root.cPtr(No.Dup) : null, &_err);
+    _cretval = json_path_query(_expression, root ? cast(JsonNode*)root._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
@@ -226,7 +226,7 @@ class Path : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _expression = expression.toCString(No.Alloc);
     GError *_err;
-    _retval = json_path_compile(cast(JsonPath*)cPtr, _expression, &_err);
+    _retval = json_path_compile(cast(JsonPath*)this._cPtr, _expression, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -246,7 +246,7 @@ class Path : gobject.object.ObjectWrap
   json.node.Node match(json.node.Node root)
   {
     JsonNode* _cretval;
-    _cretval = json_path_match(cast(JsonPath*)cPtr, root ? cast(JsonNode*)root.cPtr(No.Dup) : null);
+    _cretval = json_path_match(cast(JsonPath*)this._cPtr, root ? cast(JsonNode*)root._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new json.node.Node(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

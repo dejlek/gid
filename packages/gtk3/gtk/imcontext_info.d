@@ -26,7 +26,7 @@ class IMContextInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class IMContextInfo
   */
   @property string contextId()
   {
-    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).contextId);
+    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextId);
   }
 
   /**
@@ -47,8 +47,8 @@ class IMContextInfo
   */
   @property void contextId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).contextId);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)cPtr).contextId);
+    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextId);
+    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextId);
   }
 
   /**
@@ -57,7 +57,7 @@ class IMContextInfo
   */
   @property string contextName()
   {
-    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).contextName);
+    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextName);
   }
 
   /**
@@ -67,8 +67,8 @@ class IMContextInfo
   */
   @property void contextName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).contextName);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)cPtr).contextName);
+    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).contextName);
+    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).contextName);
   }
 
   /**
@@ -77,7 +77,7 @@ class IMContextInfo
   */
   @property string domain()
   {
-    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).domain);
+    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domain);
   }
 
   /**
@@ -87,8 +87,8 @@ class IMContextInfo
   */
   @property void domain(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).domain);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)cPtr).domain);
+    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domain);
+    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domain);
   }
 
   /**
@@ -97,7 +97,7 @@ class IMContextInfo
   */
   @property string domainDirname()
   {
-    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).domainDirname);
+    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
   }
 
   /**
@@ -107,8 +107,8 @@ class IMContextInfo
   */
   @property void domainDirname(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).domainDirname);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)cPtr).domainDirname);
+    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
+    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).domainDirname);
   }
 
   /**
@@ -118,7 +118,7 @@ class IMContextInfo
   */
   @property string defaultLocales()
   {
-    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).defaultLocales);
+    return cToD!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
   }
 
   /**
@@ -129,7 +129,7 @@ class IMContextInfo
   */
   @property void defaultLocales(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)cPtr).defaultLocales);
-    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)cPtr).defaultLocales);
+    cValueFree!(string)(cast(void*)(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
+    dToC(propval, cast(void*)&(cast(GtkIMContextInfo*)this._cPtr).defaultLocales);
   }
 }

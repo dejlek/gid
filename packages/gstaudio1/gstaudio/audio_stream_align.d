@@ -26,22 +26,22 @@ class AudioStreamAlign : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_stream_align_get_type != &gidSymbolNotFound ? gst_audio_stream_align_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   gstaudio.audio_stream_align.AudioStreamAlign copy()
   {
     GstAudioStreamAlign* _cretval;
-    _cretval = gst_audio_stream_align_copy(cast(const(GstAudioStreamAlign)*)cPtr);
+    _cretval = gst_audio_stream_align_copy(cast(const(GstAudioStreamAlign)*)this._cPtr);
     auto _retval = _cretval ? new gstaudio.audio_stream_align.AudioStreamAlign(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -95,7 +95,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   gst.types.ClockTime getAlignmentThreshold()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_stream_align_get_alignment_threshold(cast(const(GstAudioStreamAlign)*)cPtr);
+    _retval = gst_audio_stream_align_get_alignment_threshold(cast(const(GstAudioStreamAlign)*)this._cPtr);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   gst.types.ClockTime getDiscontWait()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_stream_align_get_discont_wait(cast(const(GstAudioStreamAlign)*)cPtr);
+    _retval = gst_audio_stream_align_get_discont_wait(cast(const(GstAudioStreamAlign)*)this._cPtr);
     return _retval;
   }
 
@@ -117,7 +117,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   int getRate()
   {
     int _retval;
-    _retval = gst_audio_stream_align_get_rate(cast(const(GstAudioStreamAlign)*)cPtr);
+    _retval = gst_audio_stream_align_get_rate(cast(const(GstAudioStreamAlign)*)this._cPtr);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   ulong getSamplesSinceDiscont()
   {
     ulong _retval;
-    _retval = gst_audio_stream_align_get_samples_since_discont(cast(const(GstAudioStreamAlign)*)cPtr);
+    _retval = gst_audio_stream_align_get_samples_since_discont(cast(const(GstAudioStreamAlign)*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   gst.types.ClockTime getTimestampAtDiscont()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_stream_align_get_timestamp_at_discont(cast(const(GstAudioStreamAlign)*)cPtr);
+    _retval = gst_audio_stream_align_get_timestamp_at_discont(cast(const(GstAudioStreamAlign)*)this._cPtr);
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   */
   void markDiscont()
   {
-    gst_audio_stream_align_mark_discont(cast(GstAudioStreamAlign*)cPtr);
+    gst_audio_stream_align_mark_discont(cast(GstAudioStreamAlign*)this._cPtr);
   }
 
   /**
@@ -183,7 +183,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   bool process(bool discont, gst.types.ClockTime timestamp, uint nSamples, out gst.types.ClockTime outTimestamp, out gst.types.ClockTime outDuration, out ulong outSamplePosition)
   {
     bool _retval;
-    _retval = gst_audio_stream_align_process(cast(GstAudioStreamAlign*)cPtr, discont, timestamp, nSamples, cast(GstClockTime*)&outTimestamp, cast(GstClockTime*)&outDuration, cast(ulong*)&outSamplePosition);
+    _retval = gst_audio_stream_align_process(cast(GstAudioStreamAlign*)this._cPtr, discont, timestamp, nSamples, cast(GstClockTime*)&outTimestamp, cast(GstClockTime*)&outDuration, cast(ulong*)&outSamplePosition);
     return _retval;
   }
 
@@ -195,7 +195,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   */
   void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold)
   {
-    gst_audio_stream_align_set_alignment_threshold(cast(GstAudioStreamAlign*)cPtr, alignmentThreshold);
+    gst_audio_stream_align_set_alignment_threshold(cast(GstAudioStreamAlign*)this._cPtr, alignmentThreshold);
   }
 
   /**
@@ -206,7 +206,7 @@ class AudioStreamAlign : gobject.boxed.Boxed
   */
   void setDiscontWait(gst.types.ClockTime discontWait)
   {
-    gst_audio_stream_align_set_discont_wait(cast(GstAudioStreamAlign*)cPtr, discontWait);
+    gst_audio_stream_align_set_discont_wait(cast(GstAudioStreamAlign*)this._cPtr, discontWait);
   }
 
   /**
@@ -218,6 +218,6 @@ class AudioStreamAlign : gobject.boxed.Boxed
   */
   void setRate(int rate)
   {
-    gst_audio_stream_align_set_rate(cast(GstAudioStreamAlign*)cPtr, rate);
+    gst_audio_stream_align_set_rate(cast(GstAudioStreamAlign*)this._cPtr, rate);
   }
 }

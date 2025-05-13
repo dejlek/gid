@@ -145,40 +145,42 @@ alias gst_is_gl_memory_egl = c_gst_is_gl_memory_egl;
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // EGLImage
-  gidLink(cast(void**)&gst_egl_image_get_type, "gst_egl_image_get_type", LIBS);
-  gidLink(cast(void**)&gst_egl_image_new_wrapped, "gst_egl_image_new_wrapped", LIBS);
-  gidLink(cast(void**)&gst_egl_image_export_dmabuf, "gst_egl_image_export_dmabuf", LIBS);
-  gidLink(cast(void**)&gst_egl_image_get_image, "gst_egl_image_get_image", LIBS);
-  gidLink(cast(void**)&gst_egl_image_from_dmabuf, "gst_egl_image_from_dmabuf", LIBS);
-  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct, "gst_egl_image_from_dmabuf_direct", LIBS);
-  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct_target, "gst_egl_image_from_dmabuf_direct_target", LIBS);
-  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct_target_with_dma_drm, "gst_egl_image_from_dmabuf_direct_target_with_dma_drm", LIBS);
-  gidLink(cast(void**)&gst_egl_image_from_texture, "gst_egl_image_from_texture", LIBS);
+  gidLink(cast(void**)&gst_egl_image_get_type, "gst_egl_image_get_type", libs);
+  gidLink(cast(void**)&gst_egl_image_new_wrapped, "gst_egl_image_new_wrapped", libs);
+  gidLink(cast(void**)&gst_egl_image_export_dmabuf, "gst_egl_image_export_dmabuf", libs);
+  gidLink(cast(void**)&gst_egl_image_get_image, "gst_egl_image_get_image", libs);
+  gidLink(cast(void**)&gst_egl_image_from_dmabuf, "gst_egl_image_from_dmabuf", libs);
+  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct, "gst_egl_image_from_dmabuf_direct", libs);
+  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct_target, "gst_egl_image_from_dmabuf_direct_target", libs);
+  gidLink(cast(void**)&gst_egl_image_from_dmabuf_direct_target_with_dma_drm, "gst_egl_image_from_dmabuf_direct_target_with_dma_drm", libs);
+  gidLink(cast(void**)&gst_egl_image_from_texture, "gst_egl_image_from_texture", libs);
 
   // GLDisplayEGL
-  gidLink(cast(void**)&gst_gl_display_egl_get_type, "gst_gl_display_egl_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_new, "gst_gl_display_egl_new", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_new_surfaceless, "gst_gl_display_egl_new_surfaceless", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_new_with_egl_display, "gst_gl_display_egl_new_with_egl_display", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_from_gl_display, "gst_gl_display_egl_from_gl_display", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_get_from_native, "gst_gl_display_egl_get_from_native", LIBS);
+  gidLink(cast(void**)&gst_gl_display_egl_get_type, "gst_gl_display_egl_get_type", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_new, "gst_gl_display_egl_new", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_new_surfaceless, "gst_gl_display_egl_new_surfaceless", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_new_with_egl_display, "gst_gl_display_egl_new_with_egl_display", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_from_gl_display, "gst_gl_display_egl_from_gl_display", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_get_from_native, "gst_gl_display_egl_get_from_native", libs);
 
   // GLDisplayEGLDevice
-  gidLink(cast(void**)&gst_gl_display_egl_device_get_type, "gst_gl_display_egl_device_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_device_new, "gst_gl_display_egl_device_new", LIBS);
-  gidLink(cast(void**)&gst_gl_display_egl_device_new_with_egl_device, "gst_gl_display_egl_device_new_with_egl_device", LIBS);
+  gidLink(cast(void**)&gst_gl_display_egl_device_get_type, "gst_gl_display_egl_device_get_type", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_device_new, "gst_gl_display_egl_device_new", libs);
+  gidLink(cast(void**)&gst_gl_display_egl_device_new_with_egl_device, "gst_gl_display_egl_device_new_with_egl_device", libs);
 
   // GLMemoryEGL
-  gidLink(cast(void**)&gst_gl_memory_egl_get_type, "gst_gl_memory_egl_get_type", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_egl_get_display, "gst_gl_memory_egl_get_display", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_egl_get_image, "gst_gl_memory_egl_get_image", LIBS);
-  gidLink(cast(void**)&gst_gl_memory_egl_init_once, "gst_gl_memory_egl_init_once", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_egl_get_type, "gst_gl_memory_egl_get_type", libs);
+  gidLink(cast(void**)&gst_gl_memory_egl_get_display, "gst_gl_memory_egl_get_display", libs);
+  gidLink(cast(void**)&gst_gl_memory_egl_get_image, "gst_gl_memory_egl_get_image", libs);
+  gidLink(cast(void**)&gst_gl_memory_egl_init_once, "gst_gl_memory_egl_init_once", libs);
 
   // GLMemoryEGLAllocator
-  gidLink(cast(void**)&gst_gl_memory_egl_allocator_get_type, "gst_gl_memory_egl_allocator_get_type", LIBS);
+  gidLink(cast(void**)&gst_gl_memory_egl_allocator_get_type, "gst_gl_memory_egl_allocator_get_type", libs);
 
   // global
-  gidLink(cast(void**)&gst_egl_get_error_string, "gst_egl_get_error_string", LIBS);
-  gidLink(cast(void**)&gst_is_gl_memory_egl, "gst_is_gl_memory_egl", LIBS);
+  gidLink(cast(void**)&gst_egl_get_error_string, "gst_egl_get_error_string", libs);
+  gidLink(cast(void**)&gst_is_gl_memory_egl, "gst_is_gl_memory_egl", libs);
 }

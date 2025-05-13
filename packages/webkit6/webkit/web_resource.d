@@ -38,16 +38,16 @@ class WebResource : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_resource_get_type != &gidSymbolNotFound ? webkit_web_resource_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,17 +89,17 @@ class WebResource : gobject.object.ObjectWrap
   */
   void getData(gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_resource_get_data(cast(WebKitWebResource*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_resource_get_data(cast(WebKitWebResource*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -117,7 +117,7 @@ class WebResource : gobject.object.ObjectWrap
     ubyte* _cretval;
     size_t _cretlength;
     GError *_err;
-    _cretval = webkit_web_resource_get_data_finish(cast(WebKitWebResource*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_cretlength, &_err);
+    _cretval = webkit_web_resource_get_data_finish(cast(WebKitWebResource*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_cretlength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     ubyte[] _retval;
@@ -141,8 +141,8 @@ class WebResource : gobject.object.ObjectWrap
   webkit.uriresponse.URIResponse getResponse()
   {
     WebKitURIResponse* _cretval;
-    _cretval = webkit_web_resource_get_response(cast(WebKitWebResource*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
+    _cretval = webkit_web_resource_get_response(cast(WebKitWebResource*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.uriresponse.URIResponse)(cast(WebKitURIResponse*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class WebResource : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_resource_get_uri(cast(WebKitWebResource*)cPtr);
+    _cretval = webkit_web_resource_get_uri(cast(WebKitWebResource*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

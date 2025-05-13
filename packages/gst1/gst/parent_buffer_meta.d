@@ -36,7 +36,7 @@ class ParentBufferMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -47,7 +47,7 @@ class ParentBufferMeta
   */
   @property gst.meta.Meta parent()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)cPtr).parent);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent);
   }
 
   /**
@@ -56,7 +56,7 @@ class ParentBufferMeta
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)this._cPtr).buffer);
   }
 
   /**
@@ -66,8 +66,8 @@ class ParentBufferMeta
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstParentBufferMeta*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstParentBufferMeta*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstParentBufferMeta*)this._cPtr).buffer);
   }
 
   /**

@@ -51,16 +51,16 @@ class HandleBox : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_handle_box_get_type != &gidSymbolNotFound ? gtk_handle_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -145,7 +145,7 @@ class HandleBox : gtk.bin.Bin
   bool getChildDetached()
   {
     bool _retval;
-    _retval = gtk_handle_box_get_child_detached(cast(GtkHandleBox*)cPtr);
+    _retval = gtk_handle_box_get_child_detached(cast(GtkHandleBox*)this._cPtr);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class HandleBox : gtk.bin.Bin
   gtk.types.PositionType getHandlePosition()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_handle_box_get_handle_position(cast(GtkHandleBox*)cPtr);
+    _cretval = gtk_handle_box_get_handle_position(cast(GtkHandleBox*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -174,7 +174,7 @@ class HandleBox : gtk.bin.Bin
   gtk.types.ShadowType getShadowType()
   {
     GtkShadowType _cretval;
-    _cretval = gtk_handle_box_get_shadow_type(cast(GtkHandleBox*)cPtr);
+    _cretval = gtk_handle_box_get_shadow_type(cast(GtkHandleBox*)this._cPtr);
     gtk.types.ShadowType _retval = cast(gtk.types.ShadowType)_cretval;
     return _retval;
   }
@@ -191,7 +191,7 @@ class HandleBox : gtk.bin.Bin
   gtk.types.PositionType getSnapEdge()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_handle_box_get_snap_edge(cast(GtkHandleBox*)cPtr);
+    _cretval = gtk_handle_box_get_snap_edge(cast(GtkHandleBox*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -206,7 +206,7 @@ class HandleBox : gtk.bin.Bin
   */
   void setHandlePosition(gtk.types.PositionType position)
   {
-    gtk_handle_box_set_handle_position(cast(GtkHandleBox*)cPtr, position);
+    gtk_handle_box_set_handle_position(cast(GtkHandleBox*)this._cPtr, position);
   }
 
   /**
@@ -220,7 +220,7 @@ class HandleBox : gtk.bin.Bin
   */
   void setShadowType(gtk.types.ShadowType type)
   {
-    gtk_handle_box_set_shadow_type(cast(GtkHandleBox*)cPtr, type);
+    gtk_handle_box_set_shadow_type(cast(GtkHandleBox*)this._cPtr, type);
   }
 
   /**
@@ -247,7 +247,7 @@ class HandleBox : gtk.bin.Bin
   */
   void setSnapEdge(gtk.types.PositionType edge)
   {
-    gtk_handle_box_set_snap_edge(cast(GtkHandleBox*)cPtr, edge);
+    gtk_handle_box_set_snap_edge(cast(GtkHandleBox*)this._cPtr, edge);
   }
 
   /**

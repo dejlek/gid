@@ -33,22 +33,22 @@ class MessageMetrics : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_message_metrics_get_type != &gidSymbolNotFound ? soup_message_metrics_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,7 +64,7 @@ class MessageMetrics : gobject.boxed.Boxed
   soup.message_metrics.MessageMetrics copy()
   {
     SoupMessageMetrics* _cretval;
-    _cretval = soup_message_metrics_copy(cast(SoupMessageMetrics*)cPtr);
+    _cretval = soup_message_metrics_copy(cast(SoupMessageMetrics*)this._cPtr);
     auto _retval = _cretval ? new soup.message_metrics.MessageMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -82,7 +82,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getConnectEnd()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_connect_end(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_connect_end(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -98,7 +98,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getConnectStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_connect_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_connect_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getDnsEnd()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_dns_end(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_dns_end(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getDnsStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_dns_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_dns_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -142,7 +142,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getFetchStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_fetch_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_fetch_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getRequestBodyBytesSent()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_request_body_bytes_sent(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_request_body_bytes_sent(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -174,7 +174,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getRequestBodySize()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_request_body_size(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_request_body_size(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getRequestHeaderBytesSent()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_request_header_bytes_sent(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_request_header_bytes_sent(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getRequestStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_request_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_request_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getResponseBodyBytesReceived()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_response_body_bytes_received(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_response_body_bytes_received(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -232,7 +232,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getResponseBodySize()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_response_body_size(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_response_body_size(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getResponseEnd()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_response_end(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_response_end(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -262,7 +262,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getResponseHeaderBytesReceived()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_response_header_bytes_received(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_response_header_bytes_received(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getResponseStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_response_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_response_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 
@@ -290,7 +290,7 @@ class MessageMetrics : gobject.boxed.Boxed
   ulong getTlsStart()
   {
     ulong _retval;
-    _retval = soup_message_metrics_get_tls_start(cast(SoupMessageMetrics*)cPtr);
+    _retval = soup_message_metrics_get_tls_start(cast(SoupMessageMetrics*)this._cPtr);
     return _retval;
   }
 }

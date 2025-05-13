@@ -33,7 +33,7 @@ interface Action
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_action_get_type != &gidSymbolNotFound ? atk_action_get_type() : cast(GType)0;

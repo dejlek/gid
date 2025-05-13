@@ -20,16 +20,16 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal32_array_get_type != &gidSymbolNotFound ? garrow_decimal32_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -42,7 +42,7 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   string formatValue(long i)
   {
     char* _cretval;
-    _cretval = garrow_decimal32_array_format_value(cast(GArrowDecimal32Array*)cPtr, i);
+    _cretval = garrow_decimal32_array_format_value(cast(GArrowDecimal32Array*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -53,8 +53,8 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
   arrow.decimal32.Decimal32 getValue(long i)
   {
     GArrowDecimal32* _cretval;
-    _cretval = garrow_decimal32_array_get_value(cast(GArrowDecimal32Array*)cPtr, i);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
+    _cretval = garrow_decimal32_array_get_value(cast(GArrowDecimal32Array*)this._cPtr, i);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal32.Decimal32)(cast(GArrowDecimal32*)_cretval, Yes.Take);
     return _retval;
   }
 }

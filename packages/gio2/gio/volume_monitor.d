@@ -34,16 +34,16 @@ class VolumeMonitor : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_volume_monitor_get_type != &gidSymbolNotFound ? g_volume_monitor_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -96,8 +96,8 @@ class VolumeMonitor : gobject.object.ObjectWrap
   static gio.volume.Volume adoptOrphanMount(gio.mount.Mount mount)
   {
     GVolume* _cretval;
-    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(gobject.object.ObjectWrap)mount).cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    _cretval = g_volume_monitor_adopt_orphan_mount(mount ? cast(GMount*)(cast(gobject.object.ObjectWrap)mount)._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   {
     GVolumeMonitor* _cretval;
     _cretval = g_volume_monitor_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.volume_monitor.VolumeMonitor)(cast(GVolumeMonitor*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   gio.drive.Drive[] getConnectedDrives()
   {
     GList* _cretval;
-    _cretval = g_volume_monitor_get_connected_drives(cast(GVolumeMonitor*)cPtr);
+    _cretval = g_volume_monitor_get_connected_drives(cast(GVolumeMonitor*)this._cPtr);
     auto _retval = gListToD!(gio.drive.Drive, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -141,8 +141,8 @@ class VolumeMonitor : gobject.object.ObjectWrap
   {
     GMount* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
-    _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
+    _cretval = g_volume_monitor_get_mount_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.mount.Mount)(cast(GMount*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   gio.mount.Mount[] getMounts()
   {
     GList* _cretval;
-    _cretval = g_volume_monitor_get_mounts(cast(GVolumeMonitor*)cPtr);
+    _cretval = g_volume_monitor_get_mounts(cast(GVolumeMonitor*)this._cPtr);
     auto _retval = gListToD!(gio.mount.Mount, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -173,8 +173,8 @@ class VolumeMonitor : gobject.object.ObjectWrap
   {
     GVolume* _cretval;
     const(char)* _uuid = uuid.toCString(No.Alloc);
-    _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)cPtr, _uuid);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
+    _cretval = g_volume_monitor_get_volume_for_uuid(cast(GVolumeMonitor*)this._cPtr, _uuid);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.volume.Volume)(cast(GVolume*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -188,7 +188,7 @@ class VolumeMonitor : gobject.object.ObjectWrap
   gio.volume.Volume[] getVolumes()
   {
     GList* _cretval;
-    _cretval = g_volume_monitor_get_volumes(cast(GVolumeMonitor*)cPtr);
+    _cretval = g_volume_monitor_get_volumes(cast(GVolumeMonitor*)this._cPtr);
     auto _retval = gListToD!(gio.volume.Volume, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }

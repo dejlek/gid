@@ -27,7 +27,7 @@ class MIKEYPayloadRAND
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class MIKEYPayloadRAND
   */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadRAND*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadRAND*)this._cPtr).pt);
   }
 
   /**
@@ -47,7 +47,7 @@ class MIKEYPayloadRAND
   */
   @property ubyte len()
   {
-    return (cast(GstMIKEYPayloadRAND*)cPtr).len;
+    return (cast(GstMIKEYPayloadRAND*)this._cPtr).len;
   }
 
   /**
@@ -57,6 +57,6 @@ class MIKEYPayloadRAND
   */
   @property void len(ubyte propval)
   {
-    (cast(GstMIKEYPayloadRAND*)cPtr).len = propval;
+    (cast(GstMIKEYPayloadRAND*)this._cPtr).len = propval;
   }
 }

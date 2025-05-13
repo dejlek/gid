@@ -299,7 +299,7 @@ struct RsvgDimensionData
 struct RsvgHandle
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /** */
   void*[16] AbiPadding;

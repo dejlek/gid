@@ -20,22 +20,22 @@ class AllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_allocation_params_get_type != &gidSymbolNotFound ? gst_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,7 +50,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property gst.types.MemoryFlags flags()
   {
-    return cast(gst.types.MemoryFlags)(cast(GstAllocationParams*)cPtr).flags;
+    return cast(gst.types.MemoryFlags)(cast(GstAllocationParams*)this._cPtr).flags;
   }
 
   /**
@@ -60,7 +60,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property void flags(gst.types.MemoryFlags propval)
   {
-    (cast(GstAllocationParams*)cPtr).flags = cast(GstMemoryFlags)propval;
+    (cast(GstAllocationParams*)this._cPtr).flags = cast(GstMemoryFlags)propval;
   }
 
   /**
@@ -69,7 +69,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property size_t align_()
   {
-    return (cast(GstAllocationParams*)cPtr).align_;
+    return (cast(GstAllocationParams*)this._cPtr).align_;
   }
 
   /**
@@ -79,7 +79,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property void align_(size_t propval)
   {
-    (cast(GstAllocationParams*)cPtr).align_ = propval;
+    (cast(GstAllocationParams*)this._cPtr).align_ = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property size_t prefix()
   {
-    return (cast(GstAllocationParams*)cPtr).prefix;
+    return (cast(GstAllocationParams*)this._cPtr).prefix;
   }
 
   /**
@@ -98,7 +98,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property void prefix(size_t propval)
   {
-    (cast(GstAllocationParams*)cPtr).prefix = propval;
+    (cast(GstAllocationParams*)this._cPtr).prefix = propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property size_t padding()
   {
-    return (cast(GstAllocationParams*)cPtr).padding;
+    return (cast(GstAllocationParams*)this._cPtr).padding;
   }
 
   /**
@@ -117,7 +117,7 @@ class AllocationParams : gobject.boxed.Boxed
   */
   @property void padding(size_t propval)
   {
-    (cast(GstAllocationParams*)cPtr).padding = propval;
+    (cast(GstAllocationParams*)this._cPtr).padding = propval;
   }
 
   /**
@@ -144,7 +144,7 @@ class AllocationParams : gobject.boxed.Boxed
   gst.allocation_params.AllocationParams copy()
   {
     GstAllocationParams* _cretval;
-    _cretval = gst_allocation_params_copy(cast(const(GstAllocationParams)*)cPtr);
+    _cretval = gst_allocation_params_copy(cast(const(GstAllocationParams)*)this._cPtr);
     auto _retval = _cretval ? new gst.allocation_params.AllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -154,6 +154,6 @@ class AllocationParams : gobject.boxed.Boxed
   */
   void init_()
   {
-    gst_allocation_params_init(cast(GstAllocationParams*)cPtr);
+    gst_allocation_params_init(cast(GstAllocationParams*)this._cPtr);
   }
 }

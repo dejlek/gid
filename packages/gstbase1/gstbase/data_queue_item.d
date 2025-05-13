@@ -28,7 +28,7 @@ class DataQueueItem
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class DataQueueItem
   */
   @property gst.mini_object.MiniObject object()
   {
-    return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
+    return cToD!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
   }
 
   /**
@@ -49,8 +49,8 @@ class DataQueueItem
   */
   @property void object(gst.mini_object.MiniObject propval)
   {
-    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)cPtr).object);
-    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)cPtr).object);
+    cValueFree!(gst.mini_object.MiniObject)(cast(void*)(cast(GstDataQueueItem*)this._cPtr).object);
+    dToC(propval, cast(void*)&(cast(GstDataQueueItem*)this._cPtr).object);
   }
 
   /**
@@ -59,7 +59,7 @@ class DataQueueItem
   */
   @property uint size()
   {
-    return (cast(GstDataQueueItem*)cPtr).size;
+    return (cast(GstDataQueueItem*)this._cPtr).size;
   }
 
   /**
@@ -69,7 +69,7 @@ class DataQueueItem
   */
   @property void size(uint propval)
   {
-    (cast(GstDataQueueItem*)cPtr).size = propval;
+    (cast(GstDataQueueItem*)this._cPtr).size = propval;
   }
 
   /**
@@ -79,7 +79,7 @@ class DataQueueItem
   */
   @property ulong duration()
   {
-    return (cast(GstDataQueueItem*)cPtr).duration;
+    return (cast(GstDataQueueItem*)this._cPtr).duration;
   }
 
   /**
@@ -90,7 +90,7 @@ class DataQueueItem
   */
   @property void duration(ulong propval)
   {
-    (cast(GstDataQueueItem*)cPtr).duration = propval;
+    (cast(GstDataQueueItem*)this._cPtr).duration = propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class DataQueueItem
   */
   @property bool visible()
   {
-    return (cast(GstDataQueueItem*)cPtr).visible;
+    return (cast(GstDataQueueItem*)this._cPtr).visible;
   }
 
   /**
@@ -109,7 +109,7 @@ class DataQueueItem
   */
   @property void visible(bool propval)
   {
-    (cast(GstDataQueueItem*)cPtr).visible = propval;
+    (cast(GstDataQueueItem*)this._cPtr).visible = propval;
   }
 
   /**
@@ -120,7 +120,7 @@ class DataQueueItem
   */
   @property GDestroyNotify destroy()
   {
-    return (cast(GstDataQueueItem*)cPtr).destroy;
+    return (cast(GstDataQueueItem*)this._cPtr).destroy;
   }
 
   /**
@@ -133,6 +133,6 @@ class DataQueueItem
 
   @property void destroy(GDestroyNotify propval)
   {
-    (cast(GstDataQueueItem*)cPtr).destroy = propval;
+    (cast(GstDataQueueItem*)this._cPtr).destroy = propval;
   }
 }

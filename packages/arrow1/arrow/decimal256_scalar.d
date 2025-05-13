@@ -21,16 +21,16 @@ class Decimal256Scalar : arrow.scalar.Scalar
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_decimal256_scalar_get_type != &gidSymbolNotFound ? garrow_decimal256_scalar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -43,7 +43,7 @@ class Decimal256Scalar : arrow.scalar.Scalar
   this(arrow.decimal256_data_type.Decimal256DataType dataType, arrow.decimal256.Decimal256 value)
   {
     GArrowDecimal256Scalar* _cretval;
-    _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType.cPtr(No.Dup) : null, value ? cast(GArrowDecimal256*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_decimal256_scalar_new(dataType ? cast(GArrowDecimal256DataType*)dataType._cPtr(No.Dup) : null, value ? cast(GArrowDecimal256*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -51,8 +51,8 @@ class Decimal256Scalar : arrow.scalar.Scalar
   arrow.decimal256.Decimal256 getValue()
   {
     GArrowDecimal256* _cretval;
-    _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
+    _cretval = garrow_decimal256_scalar_get_value(cast(GArrowDecimal256Scalar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.decimal256.Decimal256)(cast(GArrowDecimal256*)_cretval, No.Take);
     return _retval;
   }
 }

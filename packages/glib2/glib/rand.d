@@ -21,22 +21,22 @@ class Rand : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_rand_get_type != &gidSymbolNotFound ? g_rand_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class Rand : gobject.boxed.Boxed
   glib.rand.Rand copy()
   {
     GRand* _cretval;
-    _cretval = g_rand_copy(cast(GRand*)cPtr);
+    _cretval = g_rand_copy(cast(GRand*)this._cPtr);
     auto _retval = _cretval ? new glib.rand.Rand(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -117,7 +117,7 @@ class Rand : gobject.boxed.Boxed
   double double_()
   {
     double _retval;
-    _retval = g_rand_double(cast(GRand*)cPtr);
+    _retval = g_rand_double(cast(GRand*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ class Rand : gobject.boxed.Boxed
   double doubleRange(double begin, double end)
   {
     double _retval;
-    _retval = g_rand_double_range(cast(GRand*)cPtr, begin, end);
+    _retval = g_rand_double_range(cast(GRand*)this._cPtr, begin, end);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class Rand : gobject.boxed.Boxed
   uint int_()
   {
     uint _retval;
-    _retval = g_rand_int(cast(GRand*)cPtr);
+    _retval = g_rand_int(cast(GRand*)this._cPtr);
     return _retval;
   }
 
@@ -161,7 +161,7 @@ class Rand : gobject.boxed.Boxed
   int intRange(int begin, int end)
   {
     int _retval;
-    _retval = g_rand_int_range(cast(GRand*)cPtr, begin, end);
+    _retval = g_rand_int_range(cast(GRand*)this._cPtr, begin, end);
     return _retval;
   }
 
@@ -173,7 +173,7 @@ class Rand : gobject.boxed.Boxed
   */
   void setSeed(uint seed)
   {
-    g_rand_set_seed(cast(GRand*)cPtr, seed);
+    g_rand_set_seed(cast(GRand*)this._cPtr, seed);
   }
 
   /**
@@ -193,6 +193,6 @@ class Rand : gobject.boxed.Boxed
       _seedLength = cast(uint)seed.length;
 
     auto _seed = cast(const(uint)*)seed.ptr;
-    g_rand_set_seed_array(cast(GRand*)cPtr, _seed, _seedLength);
+    g_rand_set_seed_array(cast(GRand*)this._cPtr, _seed, _seedLength);
   }
 }

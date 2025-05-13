@@ -26,7 +26,7 @@ class VideoFormatInfo
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -37,7 +37,7 @@ class VideoFormatInfo
   */
   @property gstvideo.types.VideoFormat format()
   {
-    return cast(gstvideo.types.VideoFormat)(cast(GstVideoFormatInfo*)cPtr).format;
+    return cast(gstvideo.types.VideoFormat)(cast(GstVideoFormatInfo*)this._cPtr).format;
   }
 
   /**
@@ -47,7 +47,7 @@ class VideoFormatInfo
   */
   @property void format(gstvideo.types.VideoFormat propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).format = cast(GstVideoFormat)propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).format = cast(GstVideoFormat)propval;
   }
 
   /**
@@ -56,7 +56,7 @@ class VideoFormatInfo
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).name);
   }
 
   /**
@@ -66,8 +66,8 @@ class VideoFormatInfo
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)this._cPtr).name);
   }
 
   /**
@@ -76,7 +76,7 @@ class VideoFormatInfo
   */
   @property string description()
   {
-    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
+    return cToD!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).description);
   }
 
   /**
@@ -86,8 +86,8 @@ class VideoFormatInfo
   */
   @property void description(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)cPtr).description);
-    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)cPtr).description);
+    cValueFree!(string)(cast(void*)(cast(GstVideoFormatInfo*)this._cPtr).description);
+    dToC(propval, cast(void*)&(cast(GstVideoFormatInfo*)this._cPtr).description);
   }
 
   /**
@@ -96,7 +96,7 @@ class VideoFormatInfo
   */
   @property gstvideo.types.VideoFormatFlags flags()
   {
-    return cast(gstvideo.types.VideoFormatFlags)(cast(GstVideoFormatInfo*)cPtr).flags;
+    return cast(gstvideo.types.VideoFormatFlags)(cast(GstVideoFormatInfo*)this._cPtr).flags;
   }
 
   /**
@@ -106,7 +106,7 @@ class VideoFormatInfo
   */
   @property void flags(gstvideo.types.VideoFormatFlags propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).flags = cast(GstVideoFormatFlags)propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).flags = cast(GstVideoFormatFlags)propval;
   }
 
   /**
@@ -118,7 +118,7 @@ class VideoFormatInfo
   */
   @property uint bits()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).bits;
+    return (cast(GstVideoFormatInfo*)this._cPtr).bits;
   }
 
   /**
@@ -131,7 +131,7 @@ class VideoFormatInfo
   */
   @property void bits(uint propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).bits = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).bits = propval;
   }
 
   /**
@@ -140,7 +140,7 @@ class VideoFormatInfo
   */
   @property uint nComponents()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).nComponents;
+    return (cast(GstVideoFormatInfo*)this._cPtr).nComponents;
   }
 
   /**
@@ -150,7 +150,7 @@ class VideoFormatInfo
   */
   @property void nComponents(uint propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).nComponents = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).nComponents = propval;
   }
 
   /**
@@ -161,7 +161,7 @@ class VideoFormatInfo
   */
   @property uint nPlanes()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).nPlanes;
+    return (cast(GstVideoFormatInfo*)this._cPtr).nPlanes;
   }
 
   /**
@@ -173,7 +173,7 @@ class VideoFormatInfo
   */
   @property void nPlanes(uint propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).nPlanes = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).nPlanes = propval;
   }
 
   /**
@@ -183,7 +183,7 @@ class VideoFormatInfo
   */
   @property gstvideo.types.VideoFormat unpackFormat()
   {
-    return cast(gstvideo.types.VideoFormat)(cast(GstVideoFormatInfo*)cPtr).unpackFormat;
+    return cast(gstvideo.types.VideoFormat)(cast(GstVideoFormatInfo*)this._cPtr).unpackFormat;
   }
 
   /**
@@ -194,7 +194,7 @@ class VideoFormatInfo
   */
   @property void unpackFormat(gstvideo.types.VideoFormat propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).unpackFormat = cast(GstVideoFormat)propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).unpackFormat = cast(GstVideoFormat)propval;
   }
 
   /**
@@ -203,7 +203,7 @@ class VideoFormatInfo
   */
   @property int packLines()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).packLines;
+    return (cast(GstVideoFormatInfo*)this._cPtr).packLines;
   }
 
   /**
@@ -213,7 +213,7 @@ class VideoFormatInfo
   */
   @property void packLines(int propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).packLines = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).packLines = propval;
   }
 
   /**
@@ -222,7 +222,7 @@ class VideoFormatInfo
   */
   @property gstvideo.types.VideoTileMode tileMode()
   {
-    return cast(gstvideo.types.VideoTileMode)(cast(GstVideoFormatInfo*)cPtr).tileMode;
+    return cast(gstvideo.types.VideoTileMode)(cast(GstVideoFormatInfo*)this._cPtr).tileMode;
   }
 
   /**
@@ -232,7 +232,7 @@ class VideoFormatInfo
   */
   @property void tileMode(gstvideo.types.VideoTileMode propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).tileMode = cast(GstVideoTileMode)propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).tileMode = cast(GstVideoTileMode)propval;
   }
 
   /**
@@ -242,7 +242,7 @@ class VideoFormatInfo
   */
   @property uint tileWs()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).tileWs;
+    return (cast(GstVideoFormatInfo*)this._cPtr).tileWs;
   }
 
   /**
@@ -253,7 +253,7 @@ class VideoFormatInfo
   */
   @property void tileWs(uint propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).tileWs = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).tileWs = propval;
   }
 
   /**
@@ -263,7 +263,7 @@ class VideoFormatInfo
   */
   @property uint tileHs()
   {
-    return (cast(GstVideoFormatInfo*)cPtr).tileHs;
+    return (cast(GstVideoFormatInfo*)this._cPtr).tileHs;
   }
 
   /**
@@ -274,7 +274,7 @@ class VideoFormatInfo
   */
   @property void tileHs(uint propval)
   {
-    (cast(GstVideoFormatInfo*)cPtr).tileHs = propval;
+    (cast(GstVideoFormatInfo*)this._cPtr).tileHs = propval;
   }
 
   /**
@@ -288,7 +288,7 @@ class VideoFormatInfo
   */
   void component(uint plane, out int components)
   {
-    gst_video_format_info_component(cast(const(GstVideoFormatInfo)*)cPtr, plane, cast(int*)&components);
+    gst_video_format_info_component(cast(const(GstVideoFormatInfo)*)this._cPtr, plane, cast(int*)&components);
   }
 
   /**
@@ -303,7 +303,7 @@ class VideoFormatInfo
   int extrapolateStride(int plane, int stride)
   {
     int _retval;
-    _retval = gst_video_format_info_extrapolate_stride(cast(const(GstVideoFormatInfo)*)cPtr, plane, stride);
+    _retval = gst_video_format_info_extrapolate_stride(cast(const(GstVideoFormatInfo)*)this._cPtr, plane, stride);
     return _retval;
   }
 }

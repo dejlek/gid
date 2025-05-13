@@ -18,16 +18,16 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_time_data_type_get_type != &gidSymbolNotFound ? garrow_time_data_type_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -40,7 +40,7 @@ class TimeDataType : arrow.temporal_data_type.TemporalDataType
   arrow.types.TimeUnit getUnit()
   {
     GArrowTimeUnit _cretval;
-    _cretval = garrow_time_data_type_get_unit(cast(GArrowTimeDataType*)cPtr);
+    _cretval = garrow_time_data_type_get_unit(cast(GArrowTimeDataType*)this._cPtr);
     arrow.types.TimeUnit _retval = cast(arrow.types.TimeUnit)_cretval;
     return _retval;
   }

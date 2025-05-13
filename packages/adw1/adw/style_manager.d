@@ -28,16 +28,16 @@ class StyleManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_style_manager_get_type != &gidSymbolNotFound ? adw_style_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -176,7 +176,7 @@ class StyleManager : gobject.object.ObjectWrap
   {
     AdwStyleManager* _cretval;
     _cretval = adw_style_manager_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -195,8 +195,8 @@ class StyleManager : gobject.object.ObjectWrap
   static adw.style_manager.StyleManager getForDisplay(gdk.display.Display display)
   {
     AdwStyleManager* _cretval;
-    _cretval = adw_style_manager_get_for_display(display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    _cretval = adw_style_manager_get_for_display(display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -207,7 +207,7 @@ class StyleManager : gobject.object.ObjectWrap
   adw.types.ColorScheme getColorScheme()
   {
     AdwColorScheme _cretval;
-    _cretval = adw_style_manager_get_color_scheme(cast(AdwStyleManager*)cPtr);
+    _cretval = adw_style_manager_get_color_scheme(cast(AdwStyleManager*)this._cPtr);
     adw.types.ColorScheme _retval = cast(adw.types.ColorScheme)_cretval;
     return _retval;
   }
@@ -222,7 +222,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getDark()
   {
     bool _retval;
-    _retval = adw_style_manager_get_dark(cast(AdwStyleManager*)cPtr);
+    _retval = adw_style_manager_get_dark(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 
@@ -236,8 +236,8 @@ class StyleManager : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = adw_style_manager_get_display(cast(AdwStyleManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = adw_style_manager_get_display(cast(AdwStyleManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -250,7 +250,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getHighContrast()
   {
     bool _retval;
-    _retval = adw_style_manager_get_high_contrast(cast(AdwStyleManager*)cPtr);
+    _retval = adw_style_manager_get_high_contrast(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 
@@ -265,7 +265,7 @@ class StyleManager : gobject.object.ObjectWrap
   bool getSystemSupportsColorSchemes()
   {
     bool _retval;
-    _retval = adw_style_manager_get_system_supports_color_schemes(cast(AdwStyleManager*)cPtr);
+    _retval = adw_style_manager_get_system_supports_color_schemes(cast(AdwStyleManager*)this._cPtr);
     return _retval;
   }
 
@@ -307,6 +307,6 @@ class StyleManager : gobject.object.ObjectWrap
   */
   void setColorScheme(adw.types.ColorScheme colorScheme)
   {
-    adw_style_manager_set_color_scheme(cast(AdwStyleManager*)cPtr, colorScheme);
+    adw_style_manager_set_color_scheme(cast(AdwStyleManager*)this._cPtr, colorScheme);
   }
 }

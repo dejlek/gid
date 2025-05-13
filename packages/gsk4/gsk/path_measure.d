@@ -30,22 +30,22 @@ class PathMeasure : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_path_measure_get_type != &gidSymbolNotFound ? gsk_path_measure_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class PathMeasure : gobject.boxed.Boxed
   this(gsk.path.Path path)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path.cPtr(No.Dup) : null);
+    _cretval = gsk_path_measure_new(path ? cast(GskPath*)path._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -80,7 +80,7 @@ class PathMeasure : gobject.boxed.Boxed
   static gsk.path_measure.PathMeasure newWithTolerance(gsk.path.Path path, float tolerance)
   {
     GskPathMeasure* _cretval;
-    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path.cPtr(No.Dup) : null, tolerance);
+    _cretval = gsk_path_measure_new_with_tolerance(path ? cast(GskPath*)path._cPtr(No.Dup) : null, tolerance);
     auto _retval = _cretval ? new gsk.path_measure.PathMeasure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -94,7 +94,7 @@ class PathMeasure : gobject.boxed.Boxed
   float getLength()
   {
     float _retval;
-    _retval = gsk_path_measure_get_length(cast(GskPathMeasure*)cPtr);
+    _retval = gsk_path_measure_get_length(cast(GskPathMeasure*)this._cPtr);
     return _retval;
   }
 
@@ -105,7 +105,7 @@ class PathMeasure : gobject.boxed.Boxed
   gsk.path.Path getPath()
   {
     GskPath* _cretval;
-    _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)cPtr);
+    _cretval = gsk_path_measure_get_path(cast(GskPathMeasure*)this._cPtr);
     auto _retval = _cretval ? new gsk.path.Path(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -117,7 +117,7 @@ class PathMeasure : gobject.boxed.Boxed
   float getTolerance()
   {
     float _retval;
-    _retval = gsk_path_measure_get_tolerance(cast(GskPathMeasure*)cPtr);
+    _retval = gsk_path_measure_get_tolerance(cast(GskPathMeasure*)this._cPtr);
     return _retval;
   }
 }

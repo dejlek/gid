@@ -29,7 +29,7 @@ class StaticCaps
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class StaticCaps
   */
   @property gst.caps.Caps caps()
   {
-    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)this._cPtr).caps);
   }
 
   /**
@@ -50,8 +50,8 @@ class StaticCaps
   */
   @property void caps(gst.caps.Caps propval)
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)cPtr).caps);
-    dToC(propval, cast(void*)&(cast(GstStaticCaps*)cPtr).caps);
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstStaticCaps*)this._cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).caps);
   }
 
   /**
@@ -60,7 +60,7 @@ class StaticCaps
   */
   @property string string_()
   {
-    return cToD!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
+    return cToD!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
   }
 
   /**
@@ -70,8 +70,8 @@ class StaticCaps
   */
   @property void string_(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)cPtr).string_);
-    dToC(propval, cast(void*)&(cast(GstStaticCaps*)cPtr).string_);
+    cValueFree!(string)(cast(void*)(cast(GstStaticCaps*)this._cPtr).string_);
+    dToC(propval, cast(void*)&(cast(GstStaticCaps*)this._cPtr).string_);
   }
 
   /**
@@ -79,7 +79,7 @@ class StaticCaps
   */
   void cleanup()
   {
-    gst_static_caps_cleanup(cast(GstStaticCaps*)cPtr);
+    gst_static_caps_cleanup(cast(GstStaticCaps*)this._cPtr);
   }
 
   /**
@@ -91,7 +91,7 @@ class StaticCaps
   gst.caps.Caps get()
   {
     GstCaps* _cretval;
-    _cretval = gst_static_caps_get(cast(GstStaticCaps*)cPtr);
+    _cretval = gst_static_caps_get(cast(GstStaticCaps*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

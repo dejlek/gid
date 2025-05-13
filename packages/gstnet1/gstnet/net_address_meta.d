@@ -31,7 +31,7 @@ class NetAddressMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -42,7 +42,7 @@ class NetAddressMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta);
   }
 
   /**
@@ -51,7 +51,7 @@ class NetAddressMeta
   */
   @property gio.socket_address.SocketAddress addr()
   {
-    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);
+    return cToD!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)this._cPtr).addr);
   }
 
   /**
@@ -61,8 +61,8 @@ class NetAddressMeta
   */
   @property void addr(gio.socket_address.SocketAddress propval)
   {
-    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)cPtr).addr);
-    dToC(propval, cast(void*)&(cast(GstNetAddressMeta*)cPtr).addr);
+    cValueFree!(gio.socket_address.SocketAddress)(cast(void*)(cast(GstNetAddressMeta*)this._cPtr).addr);
+    dToC(propval, cast(void*)&(cast(GstNetAddressMeta*)this._cPtr).addr);
   }
 
   /** */

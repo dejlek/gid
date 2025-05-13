@@ -26,16 +26,16 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_audio_base_sink_get_type != &gidSymbolNotFound ? gst_audio_base_sink_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -171,8 +171,8 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   gstaudio.audio_ring_buffer.AudioRingBuffer createRingbuffer()
   {
     GstAudioRingBuffer* _cretval;
-    _cretval = gst_audio_base_sink_create_ringbuffer(cast(GstAudioBaseSink*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
+    _cretval = gst_audio_base_sink_create_ringbuffer(cast(GstAudioBaseSink*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstaudio.audio_ring_buffer.AudioRingBuffer)(cast(GstAudioRingBuffer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -183,7 +183,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   gst.types.ClockTime getAlignmentThreshold()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_base_sink_get_alignment_threshold(cast(GstAudioBaseSink*)cPtr);
+    _retval = gst_audio_base_sink_get_alignment_threshold(cast(GstAudioBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   gst.types.ClockTime getDiscontWait()
   {
     gst.types.ClockTime _retval;
-    _retval = gst_audio_base_sink_get_discont_wait(cast(GstAudioBaseSink*)cPtr);
+    _retval = gst_audio_base_sink_get_discont_wait(cast(GstAudioBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   long getDriftTolerance()
   {
     long _retval;
-    _retval = gst_audio_base_sink_get_drift_tolerance(cast(GstAudioBaseSink*)cPtr);
+    _retval = gst_audio_base_sink_get_drift_tolerance(cast(GstAudioBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +217,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   bool getProvideClock()
   {
     bool _retval;
-    _retval = gst_audio_base_sink_get_provide_clock(cast(GstAudioBaseSink*)cPtr);
+    _retval = gst_audio_base_sink_get_provide_clock(cast(GstAudioBaseSink*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +228,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   gstaudio.types.AudioBaseSinkSlaveMethod getSlaveMethod()
   {
     GstAudioBaseSinkSlaveMethod _cretval;
-    _cretval = gst_audio_base_sink_get_slave_method(cast(GstAudioBaseSink*)cPtr);
+    _cretval = gst_audio_base_sink_get_slave_method(cast(GstAudioBaseSink*)this._cPtr);
     gstaudio.types.AudioBaseSinkSlaveMethod _retval = cast(gstaudio.types.AudioBaseSinkSlaveMethod)_cretval;
     return _retval;
   }
@@ -242,7 +242,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void reportDeviceFailure()
   {
-    gst_audio_base_sink_report_device_failure(cast(GstAudioBaseSink*)cPtr);
+    gst_audio_base_sink_report_device_failure(cast(GstAudioBaseSink*)this._cPtr);
   }
 
   /**
@@ -253,7 +253,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void setAlignmentThreshold(gst.types.ClockTime alignmentThreshold)
   {
-    gst_audio_base_sink_set_alignment_threshold(cast(GstAudioBaseSink*)cPtr, alignmentThreshold);
+    gst_audio_base_sink_set_alignment_threshold(cast(GstAudioBaseSink*)this._cPtr, alignmentThreshold);
   }
 
   /**
@@ -275,13 +275,13 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
     {
       auto _dlg = cast(gstaudio.types.AudioBaseSinkCustomSlavingCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstaudio.audio_base_sink.AudioBaseSink)(cast(void*)sink, No.Take), etime, itime, *requestedSkew, discontReason);
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
     GDestroyNotify _callbackDestroyCB = callback ? &thawDelegate : null;
-    gst_audio_base_sink_set_custom_slaving_callback(cast(GstAudioBaseSink*)cPtr, _callbackCB, _callback, _callbackDestroyCB);
+    gst_audio_base_sink_set_custom_slaving_callback(cast(GstAudioBaseSink*)this._cPtr, _callbackCB, _callback, _callbackDestroyCB);
   }
 
   /**
@@ -292,7 +292,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void setDiscontWait(gst.types.ClockTime discontWait)
   {
-    gst_audio_base_sink_set_discont_wait(cast(GstAudioBaseSink*)cPtr, discontWait);
+    gst_audio_base_sink_set_discont_wait(cast(GstAudioBaseSink*)this._cPtr, discontWait);
   }
 
   /**
@@ -303,7 +303,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void setDriftTolerance(long driftTolerance)
   {
-    gst_audio_base_sink_set_drift_tolerance(cast(GstAudioBaseSink*)cPtr, driftTolerance);
+    gst_audio_base_sink_set_drift_tolerance(cast(GstAudioBaseSink*)this._cPtr, driftTolerance);
   }
 
   /**
@@ -317,7 +317,7 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void setProvideClock(bool provide)
   {
-    gst_audio_base_sink_set_provide_clock(cast(GstAudioBaseSink*)cPtr, provide);
+    gst_audio_base_sink_set_provide_clock(cast(GstAudioBaseSink*)this._cPtr, provide);
   }
 
   /**
@@ -328,6 +328,6 @@ class AudioBaseSink : gstbase.base_sink.BaseSink
   */
   void setSlaveMethod(gstaudio.types.AudioBaseSinkSlaveMethod method)
   {
-    gst_audio_base_sink_set_slave_method(cast(GstAudioBaseSink*)cPtr, method);
+    gst_audio_base_sink_set_slave_method(cast(GstAudioBaseSink*)this._cPtr, method);
   }
 }

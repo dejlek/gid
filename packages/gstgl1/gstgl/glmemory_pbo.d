@@ -31,22 +31,22 @@ class GLMemoryPBO : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_pbo_get_type != &gidSymbolNotFound ? gst_gl_memory_pbo_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -83,7 +83,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   bool copyIntoTexture(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height, int stride, bool respecify)
   {
     bool _retval;
-    _retval = gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)cPtr, texId, target, texFormat, width, height, stride, respecify);
+    _retval = gst_gl_memory_pbo_copy_into_texture(cast(GstGLMemoryPBO*)this._cPtr, texId, target, texFormat, width, height, stride, respecify);
     return _retval;
   }
 
@@ -92,7 +92,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   */
   void downloadTransfer()
   {
-    gst_gl_memory_pbo_download_transfer(cast(GstGLMemoryPBO*)cPtr);
+    gst_gl_memory_pbo_download_transfer(cast(GstGLMemoryPBO*)this._cPtr);
   }
 
   /**
@@ -100,7 +100,7 @@ class GLMemoryPBO : gobject.boxed.Boxed
   */
   void uploadTransfer()
   {
-    gst_gl_memory_pbo_upload_transfer(cast(GstGLMemoryPBO*)cPtr);
+    gst_gl_memory_pbo_upload_transfer(cast(GstGLMemoryPBO*)this._cPtr);
   }
 
   /** */

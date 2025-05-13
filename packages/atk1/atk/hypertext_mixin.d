@@ -37,8 +37,8 @@ template HypertextT()
   override atk.hyperlink.Hyperlink getLink(int linkIndex)
   {
     AtkHyperlink* _cretval;
-    _cretval = atk_hypertext_get_link(cast(AtkHypertext*)cPtr, linkIndex);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, No.Take);
+    _cretval = atk_hypertext_get_link(cast(AtkHypertext*)this._cPtr, linkIndex);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.hyperlink.Hyperlink)(cast(AtkHyperlink*)_cretval, No.Take);
     return _retval;
   }
 
@@ -54,7 +54,7 @@ template HypertextT()
   override int getLinkIndex(int charIndex)
   {
     int _retval;
-    _retval = atk_hypertext_get_link_index(cast(AtkHypertext*)cPtr, charIndex);
+    _retval = atk_hypertext_get_link_index(cast(AtkHypertext*)this._cPtr, charIndex);
     return _retval;
   }
 
@@ -65,7 +65,7 @@ template HypertextT()
   override int getNLinks()
   {
     int _retval;
-    _retval = atk_hypertext_get_n_links(cast(AtkHypertext*)cPtr);
+    _retval = atk_hypertext_get_n_links(cast(AtkHypertext*)this._cPtr);
     return _retval;
   }
 

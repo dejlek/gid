@@ -35,7 +35,7 @@ class AsyncQueue
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -54,7 +54,7 @@ class AsyncQueue
   int length()
   {
     int _retval;
-    _retval = g_async_queue_length(cast(GAsyncQueue*)cPtr);
+    _retval = g_async_queue_length(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -74,7 +74,7 @@ class AsyncQueue
   int lengthUnlocked()
   {
     int _retval;
-    _retval = g_async_queue_length_unlocked(cast(GAsyncQueue*)cPtr);
+    _retval = g_async_queue_length_unlocked(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -91,7 +91,7 @@ class AsyncQueue
   */
   void lock()
   {
-    g_async_queue_lock(cast(GAsyncQueue*)cPtr);
+    g_async_queue_lock(cast(GAsyncQueue*)this._cPtr);
   }
 
   /**
@@ -101,7 +101,7 @@ class AsyncQueue
   */
   void* pop()
   {
-    auto _retval = g_async_queue_pop(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_pop(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class AsyncQueue
   */
   void* popUnlocked()
   {
-    auto _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class AsyncQueue
   */
   void push(void* data)
   {
-    g_async_queue_push(cast(GAsyncQueue*)cPtr, data);
+    g_async_queue_push(cast(GAsyncQueue*)this._cPtr, data);
   }
 
   /**
@@ -142,7 +142,7 @@ class AsyncQueue
   */
   void pushFront(void* item)
   {
-    g_async_queue_push_front(cast(GAsyncQueue*)cPtr, item);
+    g_async_queue_push_front(cast(GAsyncQueue*)this._cPtr, item);
   }
 
   /**
@@ -158,7 +158,7 @@ class AsyncQueue
   */
   void pushFrontUnlocked(void* item)
   {
-    g_async_queue_push_front_unlocked(cast(GAsyncQueue*)cPtr, item);
+    g_async_queue_push_front_unlocked(cast(GAsyncQueue*)this._cPtr, item);
   }
 
   /**
@@ -189,7 +189,7 @@ class AsyncQueue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_async_queue_push_sorted(cast(GAsyncQueue*)cPtr, data, _funcCB, _func);
+    g_async_queue_push_sorted(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -225,7 +225,7 @@ class AsyncQueue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)cPtr, data, _funcCB, _func);
+    g_async_queue_push_sorted_unlocked(cast(GAsyncQueue*)this._cPtr, data, _funcCB, _func);
   }
 
   /**
@@ -240,7 +240,7 @@ class AsyncQueue
   */
   void pushUnlocked(void* data)
   {
-    g_async_queue_push_unlocked(cast(GAsyncQueue*)cPtr, data);
+    g_async_queue_push_unlocked(cast(GAsyncQueue*)this._cPtr, data);
   }
 
   /**
@@ -252,7 +252,7 @@ class AsyncQueue
   */
   void refUnlocked()
   {
-    g_async_queue_ref_unlocked(cast(GAsyncQueue*)cPtr);
+    g_async_queue_ref_unlocked(cast(GAsyncQueue*)this._cPtr);
   }
 
   /**
@@ -265,7 +265,7 @@ class AsyncQueue
   bool remove(void* item)
   {
     bool _retval;
-    _retval = g_async_queue_remove(cast(GAsyncQueue*)cPtr, item);
+    _retval = g_async_queue_remove(cast(GAsyncQueue*)this._cPtr, item);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ class AsyncQueue
   bool removeUnlocked(void* item = null)
   {
     bool _retval;
-    _retval = g_async_queue_remove_unlocked(cast(GAsyncQueue*)cPtr, item);
+    _retval = g_async_queue_remove_unlocked(cast(GAsyncQueue*)this._cPtr, item);
     return _retval;
   }
 
@@ -324,7 +324,7 @@ class AsyncQueue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_async_queue_sort(cast(GAsyncQueue*)cPtr, _funcCB, _func);
+    g_async_queue_sort(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -353,7 +353,7 @@ class AsyncQueue
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_async_queue_sort_unlocked(cast(GAsyncQueue*)cPtr, _funcCB, _func);
+    g_async_queue_sort_unlocked(cast(GAsyncQueue*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -374,7 +374,7 @@ class AsyncQueue
   */
   void* timedPop(glib.time_val.TimeVal endTime)
   {
-    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
+    auto _retval = g_async_queue_timed_pop(cast(GAsyncQueue*)this._cPtr, endTime ? cast(GTimeVal*)endTime._cPtr : null);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class AsyncQueue
   */
   void* timedPopUnlocked(glib.time_val.TimeVal endTime)
   {
-    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)cPtr, endTime ? cast(GTimeVal*)endTime.cPtr : null);
+    auto _retval = g_async_queue_timed_pop_unlocked(cast(GAsyncQueue*)this._cPtr, endTime ? cast(GTimeVal*)endTime._cPtr : null);
     return _retval;
   }
 
@@ -415,7 +415,7 @@ class AsyncQueue
   */
   void* timeoutPop(ulong timeout)
   {
-    auto _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)cPtr, timeout);
+    auto _retval = g_async_queue_timeout_pop(cast(GAsyncQueue*)this._cPtr, timeout);
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class AsyncQueue
   */
   void* timeoutPopUnlocked(ulong timeout)
   {
-    auto _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)cPtr, timeout);
+    auto _retval = g_async_queue_timeout_pop_unlocked(cast(GAsyncQueue*)this._cPtr, timeout);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class AsyncQueue
   */
   void* tryPop()
   {
-    auto _retval = g_async_queue_try_pop(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_try_pop(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -460,7 +460,7 @@ class AsyncQueue
   */
   void* tryPopUnlocked()
   {
-    auto _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)cPtr);
+    auto _retval = g_async_queue_try_pop_unlocked(cast(GAsyncQueue*)this._cPtr);
     return _retval;
   }
 
@@ -473,7 +473,7 @@ class AsyncQueue
   */
   void unlock()
   {
-    g_async_queue_unlock(cast(GAsyncQueue*)cPtr);
+    g_async_queue_unlock(cast(GAsyncQueue*)this._cPtr);
   }
 
   /**
@@ -488,6 +488,6 @@ class AsyncQueue
   */
   void unrefAndUnlock()
   {
-    g_async_queue_unref_and_unlock(cast(GAsyncQueue*)cPtr);
+    g_async_queue_unref_and_unlock(cast(GAsyncQueue*)this._cPtr);
   }
 }

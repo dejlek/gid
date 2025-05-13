@@ -18,16 +18,16 @@ class AzureFileSystem : arrow.file_system.FileSystem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_azure_file_system_get_type != &gidSymbolNotFound ? garrow_azure_file_system_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

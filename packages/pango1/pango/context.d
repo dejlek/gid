@@ -35,16 +35,16 @@ class Context : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_context_get_type != &gidSymbolNotFound ? pango_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -86,7 +86,7 @@ class Context : gobject.object.ObjectWrap
   */
   void changed()
   {
-    pango_context_changed(cast(PangoContext*)cPtr);
+    pango_context_changed(cast(PangoContext*)this._cPtr);
   }
 
   /**
@@ -98,7 +98,7 @@ class Context : gobject.object.ObjectWrap
   pango.types.Direction getBaseDir()
   {
     PangoDirection _cretval;
-    _cretval = pango_context_get_base_dir(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_base_dir(cast(PangoContext*)this._cPtr);
     pango.types.Direction _retval = cast(pango.types.Direction)_cretval;
     return _retval;
   }
@@ -112,7 +112,7 @@ class Context : gobject.object.ObjectWrap
   pango.types.Gravity getBaseGravity()
   {
     PangoGravity _cretval;
-    _cretval = pango_context_get_base_gravity(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_base_gravity(cast(PangoContext*)this._cPtr);
     pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }
@@ -125,7 +125,7 @@ class Context : gobject.object.ObjectWrap
   pango.font_description.FontDescription getFontDescription()
   {
     PangoFontDescription* _cretval;
-    _cretval = pango_context_get_font_description(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_font_description(cast(PangoContext*)this._cPtr);
     auto _retval = _cretval ? new pango.font_description.FontDescription(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -139,8 +139,8 @@ class Context : gobject.object.ObjectWrap
   pango.font_map.FontMap getFontMap()
   {
     PangoFontMap* _cretval;
-    _cretval = pango_context_get_font_map(cast(PangoContext*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
+    _cretval = pango_context_get_font_map(cast(PangoContext*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font_map.FontMap)(cast(PangoFontMap*)_cretval, No.Take);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class Context : gobject.object.ObjectWrap
   pango.types.Gravity getGravity()
   {
     PangoGravity _cretval;
-    _cretval = pango_context_get_gravity(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_gravity(cast(PangoContext*)this._cPtr);
     pango.types.Gravity _retval = cast(pango.types.Gravity)_cretval;
     return _retval;
   }
@@ -170,7 +170,7 @@ class Context : gobject.object.ObjectWrap
   pango.types.GravityHint getGravityHint()
   {
     PangoGravityHint _cretval;
-    _cretval = pango_context_get_gravity_hint(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_gravity_hint(cast(PangoContext*)this._cPtr);
     pango.types.GravityHint _retval = cast(pango.types.GravityHint)_cretval;
     return _retval;
   }
@@ -182,7 +182,7 @@ class Context : gobject.object.ObjectWrap
   pango.language.Language getLanguage()
   {
     PangoLanguage* _cretval;
-    _cretval = pango_context_get_language(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_language(cast(PangoContext*)this._cPtr);
     auto _retval = _cretval ? new pango.language.Language(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -200,7 +200,7 @@ class Context : gobject.object.ObjectWrap
   pango.matrix.Matrix getMatrix()
   {
     const(PangoMatrix)* _cretval;
-    _cretval = pango_context_get_matrix(cast(PangoContext*)cPtr);
+    _cretval = pango_context_get_matrix(cast(PangoContext*)this._cPtr);
     auto _retval = _cretval ? new pango.matrix.Matrix(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -232,7 +232,7 @@ class Context : gobject.object.ObjectWrap
   pango.font_metrics.FontMetrics getMetrics(pango.font_description.FontDescription desc = null, pango.language.Language language = null)
   {
     PangoFontMetrics* _cretval;
-    _cretval = pango_context_get_metrics(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    _cretval = pango_context_get_metrics(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new pango.font_metrics.FontMetrics(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -245,7 +245,7 @@ class Context : gobject.object.ObjectWrap
   bool getRoundGlyphPositions()
   {
     bool _retval;
-    _retval = pango_context_get_round_glyph_positions(cast(PangoContext*)cPtr);
+    _retval = pango_context_get_round_glyph_positions(cast(PangoContext*)this._cPtr);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class Context : gobject.object.ObjectWrap
   uint getSerial()
   {
     uint _retval;
-    _retval = pango_context_get_serial(cast(PangoContext*)cPtr);
+    _retval = pango_context_get_serial(cast(PangoContext*)this._cPtr);
     return _retval;
   }
 
@@ -283,10 +283,10 @@ class Context : gobject.object.ObjectWrap
   {
     int _nFamilies;
     PangoFontFamily** _families;
-    pango_context_list_families(cast(PangoContext*)cPtr, &_families, &_nFamilies);
+    pango_context_list_families(cast(PangoContext*)this._cPtr, &_families, &_nFamilies);
     families.length = _nFamilies;
     foreach (i; 0 .. _nFamilies)
-      families[i] = gobject.object.ObjectWrap.getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
+      families[i] = gobject.object.ObjectWrap._getDObject!(pango.font_family.FontFamily)(_families[i], No.Take);
     gFree(cast(void*)_families);
   }
 
@@ -302,8 +302,8 @@ class Context : gobject.object.ObjectWrap
   pango.font.Font loadFont(pango.font_description.FontDescription desc)
   {
     PangoFont* _cretval;
-    _cretval = pango_context_load_font(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
+    _cretval = pango_context_load_font(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.font.Font)(cast(PangoFont*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -320,8 +320,8 @@ class Context : gobject.object.ObjectWrap
   pango.fontset.Fontset loadFontset(pango.font_description.FontDescription desc, pango.language.Language language)
   {
     PangoFontset* _cretval;
-    _cretval = pango_context_load_fontset(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
+    _cretval = pango_context_load_fontset(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.fontset.Fontset)(cast(PangoFontset*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setBaseDir(pango.types.Direction direction)
   {
-    pango_context_set_base_dir(cast(PangoContext*)cPtr, direction);
+    pango_context_set_base_dir(cast(PangoContext*)this._cPtr, direction);
   }
 
   /**
@@ -353,7 +353,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setBaseGravity(pango.types.Gravity gravity)
   {
-    pango_context_set_base_gravity(cast(PangoContext*)cPtr, gravity);
+    pango_context_set_base_gravity(cast(PangoContext*)this._cPtr, gravity);
   }
 
   /**
@@ -364,7 +364,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setFontDescription(pango.font_description.FontDescription desc = null)
   {
-    pango_context_set_font_description(cast(PangoContext*)cPtr, desc ? cast(const(PangoFontDescription)*)desc.cPtr(No.Dup) : null);
+    pango_context_set_font_description(cast(PangoContext*)this._cPtr, desc ? cast(const(PangoFontDescription)*)desc._cPtr(No.Dup) : null);
   }
 
   /**
@@ -380,7 +380,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setFontMap(pango.font_map.FontMap fontMap = null)
   {
-    pango_context_set_font_map(cast(PangoContext*)cPtr, fontMap ? cast(PangoFontMap*)fontMap.cPtr(No.Dup) : null);
+    pango_context_set_font_map(cast(PangoContext*)this._cPtr, fontMap ? cast(PangoFontMap*)fontMap._cPtr(No.Dup) : null);
   }
 
   /**
@@ -396,7 +396,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setGravityHint(pango.types.GravityHint hint)
   {
-    pango_context_set_gravity_hint(cast(PangoContext*)cPtr, hint);
+    pango_context_set_gravity_hint(cast(PangoContext*)this._cPtr, hint);
   }
 
   /**
@@ -410,7 +410,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setLanguage(pango.language.Language language = null)
   {
-    pango_context_set_language(cast(PangoContext*)cPtr, language ? cast(PangoLanguage*)language.cPtr(No.Dup) : null);
+    pango_context_set_language(cast(PangoContext*)this._cPtr, language ? cast(PangoLanguage*)language._cPtr(No.Dup) : null);
   }
 
   /**
@@ -429,7 +429,7 @@ class Context : gobject.object.ObjectWrap
   */
   void setMatrix(pango.matrix.Matrix matrix = null)
   {
-    pango_context_set_matrix(cast(PangoContext*)cPtr, matrix ? cast(const(PangoMatrix)*)matrix.cPtr(No.Dup) : null);
+    pango_context_set_matrix(cast(PangoContext*)this._cPtr, matrix ? cast(const(PangoMatrix)*)matrix._cPtr(No.Dup) : null);
   }
 
   /**
@@ -448,6 +448,6 @@ class Context : gobject.object.ObjectWrap
   */
   void setRoundGlyphPositions(bool roundPositions)
   {
-    pango_context_set_round_glyph_positions(cast(PangoContext*)cPtr, roundPositions);
+    pango_context_set_round_glyph_positions(cast(PangoContext*)this._cPtr, roundPositions);
   }
 }

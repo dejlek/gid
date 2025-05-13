@@ -32,16 +32,16 @@ class InputMethodContext : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_input_method_context_get_type != &gidSymbolNotFound ? webkit_input_method_context_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -101,7 +101,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   bool filterKeyEvent(gdk.event.Event keyEvent)
   {
     bool _retval;
-    _retval = webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)cPtr, keyEvent ? cast(GdkEvent*)keyEvent.cPtr(No.Dup) : null);
+    _retval = webkit_input_method_context_filter_key_event(cast(WebKitInputMethodContext*)this._cPtr, keyEvent ? cast(GdkEvent*)keyEvent._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   webkit.types.InputHints getInputHints()
   {
     WebKitInputHints _cretval;
-    _cretval = webkit_input_method_context_get_input_hints(cast(WebKitInputMethodContext*)cPtr);
+    _cretval = webkit_input_method_context_get_input_hints(cast(WebKitInputMethodContext*)this._cPtr);
     webkit.types.InputHints _retval = cast(webkit.types.InputHints)_cretval;
     return _retval;
   }
@@ -124,7 +124,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   webkit.types.InputPurpose getInputPurpose()
   {
     WebKitInputPurpose _cretval;
-    _cretval = webkit_input_method_context_get_input_purpose(cast(WebKitInputMethodContext*)cPtr);
+    _cretval = webkit_input_method_context_get_input_purpose(cast(WebKitInputMethodContext*)this._cPtr);
     webkit.types.InputPurpose _retval = cast(webkit.types.InputPurpose)_cretval;
     return _retval;
   }
@@ -144,7 +144,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   {
     char* _text;
     GList* _underlines;
-    webkit_input_method_context_get_preedit(cast(WebKitInputMethodContext*)cPtr, &_text, &_underlines, cast(uint*)&cursorOffset);
+    webkit_input_method_context_get_preedit(cast(WebKitInputMethodContext*)this._cPtr, &_text, &_underlines, cast(uint*)&cursorOffset);
     text = _text.fromCString(Yes.Free);
     underlines = gListToD!(webkit.input_method_underline.InputMethodUnderline, GidOwnership.Full)(_underlines);
   }
@@ -160,7 +160,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void notifyCursorArea(int x, int y, int width, int height)
   {
-    webkit_input_method_context_notify_cursor_area(cast(WebKitInputMethodContext*)cPtr, x, y, width, height);
+    webkit_input_method_context_notify_cursor_area(cast(WebKitInputMethodContext*)this._cPtr, x, y, width, height);
   }
 
   /**
@@ -168,7 +168,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void notifyFocusIn()
   {
-    webkit_input_method_context_notify_focus_in(cast(WebKitInputMethodContext*)cPtr);
+    webkit_input_method_context_notify_focus_in(cast(WebKitInputMethodContext*)this._cPtr);
   }
 
   /**
@@ -176,7 +176,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void notifyFocusOut()
   {
-    webkit_input_method_context_notify_focus_out(cast(WebKitInputMethodContext*)cPtr);
+    webkit_input_method_context_notify_focus_out(cast(WebKitInputMethodContext*)this._cPtr);
   }
 
   /**
@@ -193,7 +193,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   void notifySurrounding(string text, int length, uint cursorIndex, uint selectionIndex)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)cPtr, _text, length, cursorIndex, selectionIndex);
+    webkit_input_method_context_notify_surrounding(cast(WebKitInputMethodContext*)this._cPtr, _text, length, cursorIndex, selectionIndex);
   }
 
   /**
@@ -203,7 +203,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void reset()
   {
-    webkit_input_method_context_reset(cast(WebKitInputMethodContext*)cPtr);
+    webkit_input_method_context_reset(cast(WebKitInputMethodContext*)this._cPtr);
   }
 
   /**
@@ -214,7 +214,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void setEnablePreedit(bool enabled)
   {
-    webkit_input_method_context_set_enable_preedit(cast(WebKitInputMethodContext*)cPtr, enabled);
+    webkit_input_method_context_set_enable_preedit(cast(WebKitInputMethodContext*)this._cPtr, enabled);
   }
 
   /**
@@ -225,7 +225,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void setInputHints(webkit.types.InputHints hints)
   {
-    webkit_input_method_context_set_input_hints(cast(WebKitInputMethodContext*)cPtr, hints);
+    webkit_input_method_context_set_input_hints(cast(WebKitInputMethodContext*)this._cPtr, hints);
   }
 
   /**
@@ -236,7 +236,7 @@ class InputMethodContext : gobject.object.ObjectWrap
   */
   void setInputPurpose(webkit.types.InputPurpose purpose)
   {
-    webkit_input_method_context_set_input_purpose(cast(WebKitInputMethodContext*)cPtr, purpose);
+    webkit_input_method_context_set_input_purpose(cast(WebKitInputMethodContext*)this._cPtr, purpose);
   }
 
   /**

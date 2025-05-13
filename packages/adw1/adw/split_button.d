@@ -68,16 +68,16 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_split_button_get_type != &gidSymbolNotFound ? adw_split_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -355,7 +355,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getCanShrink()
   {
     bool _retval;
-    _retval = adw_split_button_get_can_shrink(cast(AdwSplitButton*)cPtr);
+    _retval = adw_split_button_get_can_shrink(cast(AdwSplitButton*)this._cPtr);
     return _retval;
   }
 
@@ -366,8 +366,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_split_button_get_child(cast(AdwSplitButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_split_button_get_child(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -380,7 +380,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.types.ArrowType getDirection()
   {
     GtkArrowType _cretval;
-    _cretval = adw_split_button_get_direction(cast(AdwSplitButton*)cPtr);
+    _cretval = adw_split_button_get_direction(cast(AdwSplitButton*)this._cPtr);
     gtk.types.ArrowType _retval = cast(gtk.types.ArrowType)_cretval;
     return _retval;
   }
@@ -392,7 +392,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   string getDropdownTooltip()
   {
     const(char)* _cretval;
-    _cretval = adw_split_button_get_dropdown_tooltip(cast(AdwSplitButton*)cPtr);
+    _cretval = adw_split_button_get_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -404,7 +404,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = adw_split_button_get_icon_name(cast(AdwSplitButton*)cPtr);
+    _cretval = adw_split_button_get_icon_name(cast(AdwSplitButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -416,7 +416,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = adw_split_button_get_label(cast(AdwSplitButton*)cPtr);
+    _cretval = adw_split_button_get_label(cast(AdwSplitButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -428,8 +428,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = adw_split_button_get_menu_model(cast(AdwSplitButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = adw_split_button_get_menu_model(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -440,8 +440,8 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   gtk.popover.Popover getPopover()
   {
     GtkPopover* _cretval;
-    _cretval = adw_split_button_get_popover(cast(AdwSplitButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    _cretval = adw_split_button_get_popover(cast(AdwSplitButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -452,7 +452,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = adw_split_button_get_use_underline(cast(AdwSplitButton*)cPtr);
+    _retval = adw_split_button_get_use_underline(cast(AdwSplitButton*)this._cPtr);
     return _retval;
   }
 
@@ -461,7 +461,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void popdown()
   {
-    adw_split_button_popdown(cast(AdwSplitButton*)cPtr);
+    adw_split_button_popdown(cast(AdwSplitButton*)this._cPtr);
   }
 
   /**
@@ -469,7 +469,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void popup()
   {
-    adw_split_button_popup(cast(AdwSplitButton*)cPtr);
+    adw_split_button_popup(cast(AdwSplitButton*)this._cPtr);
   }
 
   /**
@@ -485,7 +485,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setCanShrink(bool canShrink)
   {
-    adw_split_button_set_can_shrink(cast(AdwSplitButton*)cPtr, canShrink);
+    adw_split_button_set_can_shrink(cast(AdwSplitButton*)this._cPtr, canShrink);
   }
 
   /**
@@ -499,7 +499,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_split_button_set_child(cast(AdwSplitButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_split_button_set_child(cast(AdwSplitButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   alias setDirection = gtk.widget.Widget.setDirection;
@@ -519,7 +519,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setDirection(gtk.types.ArrowType direction)
   {
-    adw_split_button_set_direction(cast(AdwSplitButton*)cPtr, direction);
+    adw_split_button_set_direction(cast(AdwSplitButton*)this._cPtr, direction);
   }
 
   /**
@@ -533,7 +533,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   void setDropdownTooltip(string tooltip)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    adw_split_button_set_dropdown_tooltip(cast(AdwSplitButton*)cPtr, _tooltip);
+    adw_split_button_set_dropdown_tooltip(cast(AdwSplitButton*)this._cPtr, _tooltip);
   }
 
   /**
@@ -548,7 +548,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    adw_split_button_set_icon_name(cast(AdwSplitButton*)cPtr, _iconName);
+    adw_split_button_set_icon_name(cast(AdwSplitButton*)this._cPtr, _iconName);
   }
 
   /**
@@ -563,7 +563,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    adw_split_button_set_label(cast(AdwSplitButton*)cPtr, _label);
+    adw_split_button_set_label(cast(AdwSplitButton*)this._cPtr, _label);
   }
 
   /**
@@ -583,7 +583,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    adw_split_button_set_menu_model(cast(AdwSplitButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    adw_split_button_set_menu_model(cast(AdwSplitButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -599,7 +599,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setPopover(gtk.popover.Popover popover = null)
   {
-    adw_split_button_set_popover(cast(AdwSplitButton*)cPtr, popover ? cast(GtkPopover*)popover.cPtr(No.Dup) : null);
+    adw_split_button_set_popover(cast(AdwSplitButton*)this._cPtr, popover ? cast(GtkPopover*)popover._cPtr(No.Dup) : null);
   }
 
   /**
@@ -612,7 +612,7 @@ class SplitButton : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setUseUnderline(bool useUnderline)
   {
-    adw_split_button_set_use_underline(cast(AdwSplitButton*)cPtr, useUnderline);
+    adw_split_button_set_use_underline(cast(AdwSplitButton*)this._cPtr, useUnderline);
   }
 
   /**

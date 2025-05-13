@@ -39,16 +39,16 @@ class Window : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_window_get_type != &gidSymbolNotFound ? gdk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,7 @@ class Window : gobject.object.ObjectWrap
   this(gdk.window.Window parent, gdk.window_attr.WindowAttr attributes, gdk.types.WindowAttributesType attributesMask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent.cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes.cPtr : null, attributesMask);
+    _cretval = gdk_window_new(parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null, attributes ? cast(GdkWindowAttr*)attributes._cPtr : null, attributesMask);
     this(_cretval, Yes.Take);
   }
 
@@ -120,7 +120,7 @@ class Window : gobject.object.ObjectWrap
   {
     GdkWindow* _cretval;
     _cretval = gdk_window_at_pointer(cast(int*)&winX, cast(int*)&winY);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beep()
   {
-    gdk_window_beep(cast(GdkWindow*)cPtr);
+    gdk_window_beep(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -227,8 +227,8 @@ class Window : gobject.object.ObjectWrap
   gdk.drawing_context.DrawingContext beginDrawFrame(cairo.region.Region region)
   {
     GdkDrawingContext* _cretval;
-    _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
+    _cretval = gdk_window_begin_draw_frame(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drawing_context.DrawingContext)(cast(GdkDrawingContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -247,7 +247,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginMoveDrag(int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_move_drag(cast(GdkWindow*)cPtr, button, rootX, rootY, timestamp);
+    gdk_window_begin_move_drag(cast(GdkWindow*)this._cPtr, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -266,7 +266,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginMoveDragForDevice(gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_move_drag_for_device(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
+    gdk_window_begin_move_drag_for_device(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -281,7 +281,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginPaintRect(gdk.rectangle.Rectangle rectangle)
   {
-    gdk_window_begin_paint_rect(cast(GdkWindow*)cPtr, rectangle ? cast(const(GdkRectangle)*)rectangle.cPtr(No.Dup) : null);
+    gdk_window_begin_paint_rect(cast(GdkWindow*)this._cPtr, rectangle ? cast(const(GdkRectangle)*)rectangle._cPtr(No.Dup) : null);
   }
 
   /**
@@ -331,7 +331,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginPaintRegion(cairo.region.Region region)
   {
-    gdk_window_begin_paint_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null);
+    gdk_window_begin_paint_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -350,7 +350,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_resize_drag(cast(GdkWindow*)cPtr, edge, button, rootX, rootY, timestamp);
+    gdk_window_begin_resize_drag(cast(GdkWindow*)this._cPtr, edge, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -371,7 +371,7 @@ class Window : gobject.object.ObjectWrap
   */
   void beginResizeDragForDevice(gdk.types.WindowEdge edge, gdk.device.Device device, int button, int rootX, int rootY, uint timestamp)
   {
-    gdk_window_begin_resize_drag_for_device(cast(GdkWindow*)cPtr, edge, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
+    gdk_window_begin_resize_drag_for_device(cast(GdkWindow*)this._cPtr, edge, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -381,7 +381,7 @@ class Window : gobject.object.ObjectWrap
   */
   void configureFinished()
   {
-    gdk_window_configure_finished(cast(GdkWindow*)cPtr);
+    gdk_window_configure_finished(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -410,7 +410,7 @@ class Window : gobject.object.ObjectWrap
   */
   void coordsFromParent(double parentX, double parentY, out double x, out double y)
   {
-    gdk_window_coords_from_parent(cast(GdkWindow*)cPtr, parentX, parentY, cast(double*)&x, cast(double*)&y);
+    gdk_window_coords_from_parent(cast(GdkWindow*)this._cPtr, parentX, parentY, cast(double*)&x, cast(double*)&y);
   }
 
   /**
@@ -441,7 +441,7 @@ class Window : gobject.object.ObjectWrap
   */
   void coordsToParent(double x, double y, out double parentX, out double parentY)
   {
-    gdk_window_coords_to_parent(cast(GdkWindow*)cPtr, x, y, cast(double*)&parentX, cast(double*)&parentY);
+    gdk_window_coords_to_parent(cast(GdkWindow*)this._cPtr, x, y, cast(double*)&parentX, cast(double*)&parentY);
   }
 
   /**
@@ -461,10 +461,10 @@ class Window : gobject.object.ObjectWrap
   {
     GdkGLContext* _cretval;
     GError *_err;
-    _cretval = gdk_window_create_gl_context(cast(GdkWindow*)cPtr, &_err);
+    _cretval = gdk_window_create_gl_context(cast(GdkWindow*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -514,7 +514,7 @@ class Window : gobject.object.ObjectWrap
   cairo.surface.Surface createSimilarImageSurface(cairo.types.Format format, int width, int height, int scale)
   {
     cairo_surface_t* _cretval;
-    _cretval = gdk_window_create_similar_image_surface(cast(GdkWindow*)cPtr, format, width, height, scale);
+    _cretval = gdk_window_create_similar_image_surface(cast(GdkWindow*)this._cPtr, format, width, height, scale);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -545,7 +545,7 @@ class Window : gobject.object.ObjectWrap
   cairo.surface.Surface createSimilarSurface(cairo.types.Content content, int width, int height)
   {
     cairo_surface_t* _cretval;
-    _cretval = gdk_window_create_similar_surface(cast(GdkWindow*)cPtr, content, width, height);
+    _cretval = gdk_window_create_similar_surface(cast(GdkWindow*)this._cPtr, content, width, height);
     auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -559,7 +559,7 @@ class Window : gobject.object.ObjectWrap
   */
   void deiconify()
   {
-    gdk_window_deiconify(cast(GdkWindow*)cPtr);
+    gdk_window_deiconify(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -572,13 +572,13 @@ class Window : gobject.object.ObjectWrap
   */
   void destroy()
   {
-    gdk_window_destroy(cast(GdkWindow*)cPtr);
+    gdk_window_destroy(cast(GdkWindow*)this._cPtr);
   }
 
   /** */
   void destroyNotify()
   {
-    gdk_window_destroy_notify(cast(GdkWindow*)cPtr);
+    gdk_window_destroy_notify(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -588,7 +588,7 @@ class Window : gobject.object.ObjectWrap
   */
   void enableSynchronizedConfigure()
   {
-    gdk_window_enable_synchronized_configure(cast(GdkWindow*)cPtr);
+    gdk_window_enable_synchronized_configure(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -605,7 +605,7 @@ class Window : gobject.object.ObjectWrap
   */
   void endDrawFrame(gdk.drawing_context.DrawingContext context)
   {
-    gdk_window_end_draw_frame(cast(GdkWindow*)cPtr, context ? cast(GdkDrawingContext*)context.cPtr(No.Dup) : null);
+    gdk_window_end_draw_frame(cast(GdkWindow*)this._cPtr, context ? cast(GdkDrawingContext*)context._cPtr(No.Dup) : null);
   }
 
   /**
@@ -620,7 +620,7 @@ class Window : gobject.object.ObjectWrap
   */
   void endPaint()
   {
-    gdk_window_end_paint(cast(GdkWindow*)cPtr);
+    gdk_window_end_paint(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -635,7 +635,7 @@ class Window : gobject.object.ObjectWrap
   bool ensureNative()
   {
     bool _retval;
-    _retval = gdk_window_ensure_native(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_ensure_native(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -644,7 +644,7 @@ class Window : gobject.object.ObjectWrap
   */
   void flush()
   {
-    gdk_window_flush(cast(GdkWindow*)cPtr);
+    gdk_window_flush(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -656,7 +656,7 @@ class Window : gobject.object.ObjectWrap
   */
   void focus(uint timestamp)
   {
-    gdk_window_focus(cast(GdkWindow*)cPtr, timestamp);
+    gdk_window_focus(cast(GdkWindow*)this._cPtr, timestamp);
   }
 
   /**
@@ -675,7 +675,7 @@ class Window : gobject.object.ObjectWrap
   */
   void freezeToplevelUpdatesLibgtkOnly()
   {
-    gdk_window_freeze_toplevel_updates_libgtk_only(cast(GdkWindow*)cPtr);
+    gdk_window_freeze_toplevel_updates_libgtk_only(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -687,7 +687,7 @@ class Window : gobject.object.ObjectWrap
   */
   void freezeUpdates()
   {
-    gdk_window_freeze_updates(cast(GdkWindow*)cPtr);
+    gdk_window_freeze_updates(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -707,7 +707,7 @@ class Window : gobject.object.ObjectWrap
   */
   void fullscreen()
   {
-    gdk_window_fullscreen(cast(GdkWindow*)cPtr);
+    gdk_window_fullscreen(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -723,7 +723,7 @@ class Window : gobject.object.ObjectWrap
   */
   void fullscreenOnMonitor(int monitor)
   {
-    gdk_window_fullscreen_on_monitor(cast(GdkWindow*)cPtr, monitor);
+    gdk_window_fullscreen_on_monitor(cast(GdkWindow*)this._cPtr, monitor);
   }
 
   /**
@@ -733,7 +733,7 @@ class Window : gobject.object.ObjectWrap
   */
   void geometryChanged()
   {
-    gdk_window_geometry_changed(cast(GdkWindow*)cPtr);
+    gdk_window_geometry_changed(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -744,7 +744,7 @@ class Window : gobject.object.ObjectWrap
   bool getAcceptFocus()
   {
     bool _retval;
-    _retval = gdk_window_get_accept_focus(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_accept_focus(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -758,7 +758,7 @@ class Window : gobject.object.ObjectWrap
   cairo.pattern.Pattern getBackgroundPattern()
   {
     cairo_pattern_t* _cretval;
-    _cretval = gdk_window_get_background_pattern(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_background_pattern(cast(GdkWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.pattern.Pattern(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -776,7 +776,7 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window[] getChildren()
   {
     GList* _cretval;
-    _cretval = gdk_window_get_children(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_children(cast(GdkWindow*)this._cPtr);
     auto _retval = gListToD!(gdk.window.Window, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -798,7 +798,7 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window[] getChildrenWithUserData(void* userData = null)
   {
     GList* _cretval;
-    _cretval = gdk_window_get_children_with_user_data(cast(GdkWindow*)cPtr, userData);
+    _cretval = gdk_window_get_children_with_user_data(cast(GdkWindow*)this._cPtr, userData);
     auto _retval = gListToD!(gdk.window.Window, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -815,7 +815,7 @@ class Window : gobject.object.ObjectWrap
   cairo.region.Region getClipRegion()
   {
     cairo_region_t* _cretval;
-    _cretval = gdk_window_get_clip_region(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_clip_region(cast(GdkWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -832,7 +832,7 @@ class Window : gobject.object.ObjectWrap
   bool getComposited()
   {
     bool _retval;
-    _retval = gdk_window_get_composited(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_composited(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -849,8 +849,8 @@ class Window : gobject.object.ObjectWrap
   gdk.cursor.Cursor getCursor()
   {
     GdkCursor* _cretval;
-    _cretval = gdk_window_get_cursor(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    _cretval = gdk_window_get_cursor(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -865,7 +865,7 @@ class Window : gobject.object.ObjectWrap
   bool getDecorations(out gdk.types.WMDecoration decorations)
   {
     bool _retval;
-    _retval = gdk_window_get_decorations(cast(GdkWindow*)cPtr, &decorations);
+    _retval = gdk_window_get_decorations(cast(GdkWindow*)this._cPtr, &decorations);
     return _retval;
   }
 
@@ -885,8 +885,8 @@ class Window : gobject.object.ObjectWrap
   gdk.cursor.Cursor getDeviceCursor(gdk.device.Device device)
   {
     GdkCursor* _cretval;
-    _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
+    _cretval = gdk_window_get_device_cursor(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.cursor.Cursor)(cast(GdkCursor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -900,7 +900,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.EventMask getDeviceEvents(gdk.device.Device device)
   {
     GdkEventMask _cretval;
-    _cretval = gdk_window_get_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null);
+    _cretval = gdk_window_get_device_events(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -924,8 +924,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getDevicePosition(gdk.device.Device device, out int x, out int y, out gdk.types.ModifierType mask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_device_position(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_device_position(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(int*)&x, cast(int*)&y, &mask);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -946,8 +946,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getDevicePositionDouble(gdk.device.Device device, out double x, out double y, out gdk.types.ModifierType mask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_device_position_double(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cast(double*)&x, cast(double*)&y, &mask);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -958,8 +958,8 @@ class Window : gobject.object.ObjectWrap
   gdk.display.Display getDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_window_get_display(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_window_get_display(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -976,7 +976,7 @@ class Window : gobject.object.ObjectWrap
   {
     GdkDragProtocol _cretval;
     GdkWindow* _target;
-    _cretval = gdk_window_get_drag_protocol(cast(GdkWindow*)cPtr, &_target);
+    _cretval = gdk_window_get_drag_protocol(cast(GdkWindow*)this._cPtr, &_target);
     gdk.types.DragProtocol _retval = cast(gdk.types.DragProtocol)_cretval;
     target = new gdk.window.Window(cast(void*)_target, Yes.Take);
     return _retval;
@@ -993,8 +993,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getEffectiveParent()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_effective_parent(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_effective_parent(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1010,8 +1010,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getEffectiveToplevel()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_effective_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_effective_toplevel(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1022,7 +1022,7 @@ class Window : gobject.object.ObjectWrap
   bool getEventCompression()
   {
     bool _retval;
-    _retval = gdk_window_get_event_compression(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_event_compression(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1034,7 +1034,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.EventMask getEvents()
   {
     GdkEventMask _cretval;
-    _cretval = gdk_window_get_events(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_events(cast(GdkWindow*)this._cPtr);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -1048,7 +1048,7 @@ class Window : gobject.object.ObjectWrap
   bool getFocusOnMap()
   {
     bool _retval;
-    _retval = gdk_window_get_focus_on_map(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_focus_on_map(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1061,8 +1061,8 @@ class Window : gobject.object.ObjectWrap
   gdk.frame_clock.FrameClock getFrameClock()
   {
     GdkFrameClock* _cretval;
-    _cretval = gdk_window_get_frame_clock(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
+    _cretval = gdk_window_get_frame_clock(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.frame_clock.FrameClock)(cast(GdkFrameClock*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1078,7 +1078,7 @@ class Window : gobject.object.ObjectWrap
   void getFrameExtents(out gdk.rectangle.Rectangle rect)
   {
     GdkRectangle _rect;
-    gdk_window_get_frame_extents(cast(GdkWindow*)cPtr, &_rect);
+    gdk_window_get_frame_extents(cast(GdkWindow*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
   }
 
@@ -1089,7 +1089,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.FullscreenMode getFullscreenMode()
   {
     GdkFullscreenMode _cretval;
-    _cretval = gdk_window_get_fullscreen_mode(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_fullscreen_mode(cast(GdkWindow*)this._cPtr);
     gdk.types.FullscreenMode _retval = cast(gdk.types.FullscreenMode)_cretval;
     return _retval;
   }
@@ -1124,7 +1124,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getGeometry(out int x, out int y, out int width, out int height)
   {
-    gdk_window_get_geometry(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
+    gdk_window_get_geometry(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -1134,8 +1134,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getGroup()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_group(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_group(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1150,7 +1150,7 @@ class Window : gobject.object.ObjectWrap
   int getHeight()
   {
     int _retval;
-    _retval = gdk_window_get_height(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_height(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1162,7 +1162,7 @@ class Window : gobject.object.ObjectWrap
   bool getModalHint()
   {
     bool _retval;
-    _retval = gdk_window_get_modal_hint(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_modal_hint(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1180,7 +1180,7 @@ class Window : gobject.object.ObjectWrap
   int getOrigin(out int x, out int y)
   {
     int _retval;
-    _retval = gdk_window_get_origin(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y);
+    _retval = gdk_window_get_origin(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
     return _retval;
   }
 
@@ -1201,8 +1201,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getParent()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_parent(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_parent(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1216,7 +1216,7 @@ class Window : gobject.object.ObjectWrap
   bool getPassThrough()
   {
     bool _retval;
-    _retval = gdk_window_get_pass_through(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_pass_through(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1241,8 +1241,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getPointer(out int x, out int y, out gdk.types.ModifierType mask)
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_pointer(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y, &mask);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_pointer(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y, &mask);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1261,7 +1261,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getPosition(out int x, out int y)
   {
-    gdk_window_get_position(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y);
+    gdk_window_get_position(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -1278,7 +1278,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getRootCoords(int x, int y, out int rootX, out int rootY)
   {
-    gdk_window_get_root_coords(cast(GdkWindow*)cPtr, x, y, cast(int*)&rootX, cast(int*)&rootY);
+    gdk_window_get_root_coords(cast(GdkWindow*)this._cPtr, x, y, cast(int*)&rootX, cast(int*)&rootY);
   }
 
   /**
@@ -1291,7 +1291,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getRootOrigin(out int x, out int y)
   {
-    gdk_window_get_root_origin(cast(GdkWindow*)cPtr, cast(int*)&x, cast(int*)&y);
+    gdk_window_get_root_origin(cast(GdkWindow*)this._cPtr, cast(int*)&x, cast(int*)&y);
   }
 
   /**
@@ -1312,7 +1312,7 @@ class Window : gobject.object.ObjectWrap
   int getScaleFactor()
   {
     int _retval;
-    _retval = gdk_window_get_scale_factor(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_scale_factor(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1323,8 +1323,8 @@ class Window : gobject.object.ObjectWrap
   gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gdk_window_get_screen(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gdk_window_get_screen(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1339,7 +1339,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.EventMask getSourceEvents(gdk.types.InputSource source)
   {
     GdkEventMask _cretval;
-    _cretval = gdk_window_get_source_events(cast(GdkWindow*)cPtr, source);
+    _cretval = gdk_window_get_source_events(cast(GdkWindow*)this._cPtr, source);
     gdk.types.EventMask _retval = cast(gdk.types.EventMask)_cretval;
     return _retval;
   }
@@ -1352,7 +1352,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.WindowState getState()
   {
     GdkWindowState _cretval;
-    _cretval = gdk_window_get_state(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_state(cast(GdkWindow*)this._cPtr);
     gdk.types.WindowState _retval = cast(gdk.types.WindowState)_cretval;
     return _retval;
   }
@@ -1365,7 +1365,7 @@ class Window : gobject.object.ObjectWrap
   bool getSupportMultidevice()
   {
     bool _retval;
-    _retval = gdk_window_get_support_multidevice(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_support_multidevice(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1385,8 +1385,8 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window getToplevel()
   {
     GdkWindow* _cretval;
-    _cretval = gdk_window_get_toplevel(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gdk_window_get_toplevel(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1397,7 +1397,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.WindowTypeHint getTypeHint()
   {
     GdkWindowTypeHint _cretval;
-    _cretval = gdk_window_get_type_hint(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_type_hint(cast(GdkWindow*)this._cPtr);
     gdk.types.WindowTypeHint _retval = cast(gdk.types.WindowTypeHint)_cretval;
     return _retval;
   }
@@ -1414,7 +1414,7 @@ class Window : gobject.object.ObjectWrap
   cairo.region.Region getUpdateArea()
   {
     cairo_region_t* _cretval;
-    _cretval = gdk_window_get_update_area(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_update_area(cast(GdkWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1428,7 +1428,7 @@ class Window : gobject.object.ObjectWrap
   */
   void getUserData(out void* data)
   {
-    gdk_window_get_user_data(cast(GdkWindow*)cPtr, cast(void**)&data);
+    gdk_window_get_user_data(cast(GdkWindow*)this._cPtr, cast(void**)&data);
   }
 
   /**
@@ -1442,7 +1442,7 @@ class Window : gobject.object.ObjectWrap
   cairo.region.Region getVisibleRegion()
   {
     cairo_region_t* _cretval;
-    _cretval = gdk_window_get_visible_region(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_visible_region(cast(GdkWindow*)this._cPtr);
     auto _retval = _cretval ? new cairo.region.Region(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -1454,8 +1454,8 @@ class Window : gobject.object.ObjectWrap
   gdk.visual.Visual getVisual()
   {
     GdkVisual* _cretval;
-    _cretval = gdk_window_get_visual(cast(GdkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
+    _cretval = gdk_window_get_visual(cast(GdkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.visual.Visual)(cast(GdkVisual*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1470,7 +1470,7 @@ class Window : gobject.object.ObjectWrap
   int getWidth()
   {
     int _retval;
-    _retval = gdk_window_get_width(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_get_width(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1481,7 +1481,7 @@ class Window : gobject.object.ObjectWrap
   gdk.types.WindowType getWindowType()
   {
     GdkWindowType _cretval;
-    _cretval = gdk_window_get_window_type(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_get_window_type(cast(GdkWindow*)this._cPtr);
     gdk.types.WindowType _retval = cast(gdk.types.WindowType)_cretval;
     return _retval;
   }
@@ -1494,7 +1494,7 @@ class Window : gobject.object.ObjectWrap
   bool hasNative()
   {
     bool _retval;
-    _retval = gdk_window_has_native(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_has_native(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1506,7 +1506,7 @@ class Window : gobject.object.ObjectWrap
   */
   void hide()
   {
-    gdk_window_hide(cast(GdkWindow*)cPtr);
+    gdk_window_hide(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1518,7 +1518,7 @@ class Window : gobject.object.ObjectWrap
   */
   void iconify()
   {
-    gdk_window_iconify(cast(GdkWindow*)cPtr);
+    gdk_window_iconify(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1546,7 +1546,7 @@ class Window : gobject.object.ObjectWrap
   */
   void inputShapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
   {
-    gdk_window_input_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.Dup) : null, offsetX, offsetY);
+    gdk_window_input_shape_combine_region(cast(GdkWindow*)this._cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion._cPtr(No.Dup) : null, offsetX, offsetY);
   }
 
   /**
@@ -1578,13 +1578,13 @@ class Window : gobject.object.ObjectWrap
     {
       auto _dlg = cast(gdk.types.WindowChildFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(void*)window, No.Take));
       return _retval;
     }
     auto _childFuncCB = childFunc ? &_childFuncCallback : null;
 
     auto _childFunc = childFunc ? cast(void*)&(childFunc) : null;
-    gdk_window_invalidate_maybe_recurse(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, _childFuncCB, _childFunc);
+    gdk_window_invalidate_maybe_recurse(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, _childFuncCB, _childFunc);
   }
 
   /**
@@ -1599,7 +1599,7 @@ class Window : gobject.object.ObjectWrap
   */
   void invalidateRect(gdk.rectangle.Rectangle rect, bool invalidateChildren)
   {
-    gdk_window_invalidate_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, invalidateChildren);
+    gdk_window_invalidate_rect(cast(GdkWindow*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null, invalidateChildren);
   }
 
   /**
@@ -1627,7 +1627,7 @@ class Window : gobject.object.ObjectWrap
   */
   void invalidateRegion(cairo.region.Region region, bool invalidateChildren)
   {
-    gdk_window_invalidate_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, invalidateChildren);
+    gdk_window_invalidate_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, invalidateChildren);
   }
 
   /**
@@ -1637,7 +1637,7 @@ class Window : gobject.object.ObjectWrap
   bool isDestroyed()
   {
     bool _retval;
-    _retval = gdk_window_is_destroyed(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_is_destroyed(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1648,7 +1648,7 @@ class Window : gobject.object.ObjectWrap
   bool isInputOnly()
   {
     bool _retval;
-    _retval = gdk_window_is_input_only(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_is_input_only(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1659,7 +1659,7 @@ class Window : gobject.object.ObjectWrap
   bool isShaped()
   {
     bool _retval;
-    _retval = gdk_window_is_shaped(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_is_shaped(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1673,7 +1673,7 @@ class Window : gobject.object.ObjectWrap
   bool isViewable()
   {
     bool _retval;
-    _retval = gdk_window_is_viewable(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_is_viewable(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1685,7 +1685,7 @@ class Window : gobject.object.ObjectWrap
   bool isVisible()
   {
     bool _retval;
-    _retval = gdk_window_is_visible(cast(GdkWindow*)cPtr);
+    _retval = gdk_window_is_visible(cast(GdkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1703,7 +1703,7 @@ class Window : gobject.object.ObjectWrap
   */
   void lower()
   {
-    gdk_window_lower(cast(GdkWindow*)cPtr);
+    gdk_window_lower(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1721,7 +1721,7 @@ class Window : gobject.object.ObjectWrap
   */
   void markPaintFromClip(cairo.context.Context cr)
   {
-    gdk_window_mark_paint_from_clip(cast(GdkWindow*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gdk_window_mark_paint_from_clip(cast(GdkWindow*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1739,7 +1739,7 @@ class Window : gobject.object.ObjectWrap
   */
   void maximize()
   {
-    gdk_window_maximize(cast(GdkWindow*)cPtr);
+    gdk_window_maximize(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1754,7 +1754,7 @@ class Window : gobject.object.ObjectWrap
   */
   void mergeChildInputShapes()
   {
-    gdk_window_merge_child_input_shapes(cast(GdkWindow*)cPtr);
+    gdk_window_merge_child_input_shapes(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1769,7 +1769,7 @@ class Window : gobject.object.ObjectWrap
   */
   void mergeChildShapes()
   {
-    gdk_window_merge_child_shapes(cast(GdkWindow*)cPtr);
+    gdk_window_merge_child_shapes(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1788,7 +1788,7 @@ class Window : gobject.object.ObjectWrap
   */
   void move(int x, int y)
   {
-    gdk_window_move(cast(GdkWindow*)cPtr, x, y);
+    gdk_window_move(cast(GdkWindow*)this._cPtr, x, y);
   }
 
   /**
@@ -1805,7 +1805,7 @@ class Window : gobject.object.ObjectWrap
   */
   void moveRegion(cairo.region.Region region, int dx, int dy)
   {
-    gdk_window_move_region(cast(GdkWindow*)cPtr, region ? cast(const(cairo_region_t)*)region.cPtr(No.Dup) : null, dx, dy);
+    gdk_window_move_region(cast(GdkWindow*)this._cPtr, region ? cast(const(cairo_region_t)*)region._cPtr(No.Dup) : null, dx, dy);
   }
 
   /**
@@ -1822,7 +1822,7 @@ class Window : gobject.object.ObjectWrap
   */
   void moveResize(int x, int y, int width, int height)
   {
-    gdk_window_move_resize(cast(GdkWindow*)cPtr, x, y, width, height);
+    gdk_window_move_resize(cast(GdkWindow*)this._cPtr, x, y, width, height);
   }
 
   /**
@@ -1853,7 +1853,7 @@ class Window : gobject.object.ObjectWrap
   */
   void moveToRect(gdk.rectangle.Rectangle rect, gdk.types.Gravity rectAnchor, gdk.types.Gravity windowAnchor, gdk.types.AnchorHints anchorHints, int rectAnchorDx, int rectAnchorDy)
   {
-    gdk_window_move_to_rect(cast(GdkWindow*)cPtr, rect ? cast(const(GdkRectangle)*)rect.cPtr(No.Dup) : null, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
+    gdk_window_move_to_rect(cast(GdkWindow*)this._cPtr, rect ? cast(const(GdkRectangle)*)rect._cPtr(No.Dup) : null, rectAnchor, windowAnchor, anchorHints, rectAnchorDx, rectAnchorDy);
   }
 
   /**
@@ -1864,7 +1864,7 @@ class Window : gobject.object.ObjectWrap
   gdk.window.Window[] peekChildren()
   {
     GList* _cretval;
-    _cretval = gdk_window_peek_children(cast(GdkWindow*)cPtr);
+    _cretval = gdk_window_peek_children(cast(GdkWindow*)this._cPtr);
     auto _retval = gListToD!(gdk.window.Window, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -1884,7 +1884,7 @@ class Window : gobject.object.ObjectWrap
   */
   void processUpdates(bool updateChildren)
   {
-    gdk_window_process_updates(cast(GdkWindow*)cPtr, updateChildren);
+    gdk_window_process_updates(cast(GdkWindow*)this._cPtr, updateChildren);
   }
 
   /**
@@ -1898,7 +1898,7 @@ class Window : gobject.object.ObjectWrap
   */
   void raise()
   {
-    gdk_window_raise(cast(GdkWindow*)cPtr);
+    gdk_window_raise(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1906,7 +1906,7 @@ class Window : gobject.object.ObjectWrap
   */
   void registerDnd()
   {
-    gdk_window_register_dnd(cast(GdkWindow*)cPtr);
+    gdk_window_register_dnd(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -1920,7 +1920,7 @@ class Window : gobject.object.ObjectWrap
   */
   void reparent(gdk.window.Window newParent, int x, int y)
   {
-    gdk_window_reparent(cast(GdkWindow*)cPtr, newParent ? cast(GdkWindow*)newParent.cPtr(No.Dup) : null, x, y);
+    gdk_window_reparent(cast(GdkWindow*)this._cPtr, newParent ? cast(GdkWindow*)newParent._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -1939,7 +1939,7 @@ class Window : gobject.object.ObjectWrap
   */
   void resize(int width, int height)
   {
-    gdk_window_resize(cast(GdkWindow*)cPtr, width, height);
+    gdk_window_resize(cast(GdkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -1960,7 +1960,7 @@ class Window : gobject.object.ObjectWrap
   */
   void restack(gdk.window.Window sibling, bool above)
   {
-    gdk_window_restack(cast(GdkWindow*)cPtr, sibling ? cast(GdkWindow*)sibling.cPtr(No.Dup) : null, above);
+    gdk_window_restack(cast(GdkWindow*)this._cPtr, sibling ? cast(GdkWindow*)sibling._cPtr(No.Dup) : null, above);
   }
 
   /**
@@ -1982,7 +1982,7 @@ class Window : gobject.object.ObjectWrap
   */
   void scroll(int dx, int dy)
   {
-    gdk_window_scroll(cast(GdkWindow*)cPtr, dx, dy);
+    gdk_window_scroll(cast(GdkWindow*)this._cPtr, dx, dy);
   }
 
   /**
@@ -1997,7 +1997,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setAcceptFocus(bool acceptFocus)
   {
-    gdk_window_set_accept_focus(cast(GdkWindow*)cPtr, acceptFocus);
+    gdk_window_set_accept_focus(cast(GdkWindow*)this._cPtr, acceptFocus);
   }
 
   /**
@@ -2015,7 +2015,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setBackground(gdk.color.Color color)
   {
-    gdk_window_set_background(cast(GdkWindow*)cPtr, color ? cast(const(GdkColor)*)color.cPtr(No.Dup) : null);
+    gdk_window_set_background(cast(GdkWindow*)this._cPtr, color ? cast(const(GdkColor)*)color._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2035,7 +2035,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setBackgroundPattern(cairo.pattern.Pattern pattern = null)
   {
-    gdk_window_set_background_pattern(cast(GdkWindow*)cPtr, pattern ? cast(cairo_pattern_t*)pattern.cPtr(No.Dup) : null);
+    gdk_window_set_background_pattern(cast(GdkWindow*)this._cPtr, pattern ? cast(cairo_pattern_t*)pattern._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2050,7 +2050,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setBackgroundRgba(gdk.rgba.RGBA rgba)
   {
-    gdk_window_set_background_rgba(cast(GdkWindow*)cPtr, rgba ? cast(const(GdkRGBA)*)rgba.cPtr(No.Dup) : null);
+    gdk_window_set_background_rgba(cast(GdkWindow*)this._cPtr, rgba ? cast(const(GdkRGBA)*)rgba._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2061,7 +2061,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setChildInputShapes()
   {
-    gdk_window_set_child_input_shapes(cast(GdkWindow*)cPtr);
+    gdk_window_set_child_input_shapes(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2072,7 +2072,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setChildShapes()
   {
-    gdk_window_set_child_shapes(cast(GdkWindow*)cPtr);
+    gdk_window_set_child_shapes(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2107,7 +2107,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setComposited(bool composited)
   {
-    gdk_window_set_composited(cast(GdkWindow*)cPtr, composited);
+    gdk_window_set_composited(cast(GdkWindow*)this._cPtr, composited);
   }
 
   /**
@@ -2126,7 +2126,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setCursor(gdk.cursor.Cursor cursor = null)
   {
-    gdk_window_set_cursor(cast(GdkWindow*)cPtr, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
+    gdk_window_set_cursor(cast(GdkWindow*)this._cPtr, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2150,7 +2150,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setDecorations(gdk.types.WMDecoration decorations)
   {
-    gdk_window_set_decorations(cast(GdkWindow*)cPtr, decorations);
+    gdk_window_set_decorations(cast(GdkWindow*)this._cPtr, decorations);
   }
 
   /**
@@ -2167,7 +2167,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setDeviceCursor(gdk.device.Device device, gdk.cursor.Cursor cursor)
   {
-    gdk_window_set_device_cursor(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor.cPtr(No.Dup) : null);
+    gdk_window_set_device_cursor(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, cursor ? cast(GdkCursor*)cursor._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2185,7 +2185,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setDeviceEvents(gdk.device.Device device, gdk.types.EventMask eventMask)
   {
-    gdk_window_set_device_events(cast(GdkWindow*)cPtr, device ? cast(GdkDevice*)device.cPtr(No.Dup) : null, eventMask);
+    gdk_window_set_device_events(cast(GdkWindow*)this._cPtr, device ? cast(GdkDevice*)device._cPtr(No.Dup) : null, eventMask);
   }
 
   /**
@@ -2203,7 +2203,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setEventCompression(bool eventCompression)
   {
-    gdk_window_set_event_compression(cast(GdkWindow*)cPtr, eventCompression);
+    gdk_window_set_event_compression(cast(GdkWindow*)this._cPtr, eventCompression);
   }
 
   /**
@@ -2220,7 +2220,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setEvents(gdk.types.EventMask eventMask)
   {
-    gdk_window_set_events(cast(GdkWindow*)cPtr, eventMask);
+    gdk_window_set_events(cast(GdkWindow*)this._cPtr, eventMask);
   }
 
   /**
@@ -2238,7 +2238,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setFocusOnMap(bool focusOnMap)
   {
-    gdk_window_set_focus_on_map(cast(GdkWindow*)cPtr, focusOnMap);
+    gdk_window_set_focus_on_map(cast(GdkWindow*)this._cPtr, focusOnMap);
   }
 
   /**
@@ -2265,7 +2265,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setFullscreenMode(gdk.types.FullscreenMode mode)
   {
-    gdk_window_set_fullscreen_mode(cast(GdkWindow*)cPtr, mode);
+    gdk_window_set_fullscreen_mode(cast(GdkWindow*)this._cPtr, mode);
   }
 
   /**
@@ -2288,7 +2288,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setFunctions(gdk.types.WMFunction functions)
   {
-    gdk_window_set_functions(cast(GdkWindow*)cPtr, functions);
+    gdk_window_set_functions(cast(GdkWindow*)this._cPtr, functions);
   }
 
   /**
@@ -2320,7 +2320,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setGeometryHints(gdk.types.Geometry geometry, gdk.types.WindowHints geomMask)
   {
-    gdk_window_set_geometry_hints(cast(GdkWindow*)cPtr, &geometry, geomMask);
+    gdk_window_set_geometry_hints(cast(GdkWindow*)this._cPtr, &geometry, geomMask);
   }
 
   /**
@@ -2340,7 +2340,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setGroup(gdk.window.Window leader = null)
   {
-    gdk_window_set_group(cast(GdkWindow*)cPtr, leader ? cast(GdkWindow*)leader.cPtr(No.Dup) : null);
+    gdk_window_set_group(cast(GdkWindow*)this._cPtr, leader ? cast(GdkWindow*)leader._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2361,7 +2361,7 @@ class Window : gobject.object.ObjectWrap
   {
     auto _pixbufs = gListFromD!(gdkpixbuf.pixbuf.Pixbuf)(pixbufs);
     scope(exit) containerFree!(GList*, gdkpixbuf.pixbuf.Pixbuf, GidOwnership.None)(_pixbufs);
-    gdk_window_set_icon_list(cast(GdkWindow*)cPtr, _pixbufs);
+    gdk_window_set_icon_list(cast(GdkWindow*)this._cPtr, _pixbufs);
   }
 
   /**
@@ -2384,7 +2384,7 @@ class Window : gobject.object.ObjectWrap
   void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gdk_window_set_icon_name(cast(GdkWindow*)cPtr, _name);
+    gdk_window_set_icon_name(cast(GdkWindow*)this._cPtr, _name);
   }
 
   /**
@@ -2403,7 +2403,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setKeepAbove(bool setting)
   {
-    gdk_window_set_keep_above(cast(GdkWindow*)cPtr, setting);
+    gdk_window_set_keep_above(cast(GdkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2422,7 +2422,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setKeepBelow(bool setting)
   {
-    gdk_window_set_keep_below(cast(GdkWindow*)cPtr, setting);
+    gdk_window_set_keep_below(cast(GdkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2439,7 +2439,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setModalHint(bool modal)
   {
-    gdk_window_set_modal_hint(cast(GdkWindow*)cPtr, modal);
+    gdk_window_set_modal_hint(cast(GdkWindow*)this._cPtr, modal);
   }
 
   /**
@@ -2468,7 +2468,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setOpacity(double opacity)
   {
-    gdk_window_set_opacity(cast(GdkWindow*)cPtr, opacity);
+    gdk_window_set_opacity(cast(GdkWindow*)this._cPtr, opacity);
   }
 
   /**
@@ -2491,7 +2491,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setOpaqueRegion(cairo.region.Region region = null)
   {
-    gdk_window_set_opaque_region(cast(GdkWindow*)cPtr, region ? cast(cairo_region_t*)region.cPtr(No.Dup) : null);
+    gdk_window_set_opaque_region(cast(GdkWindow*)this._cPtr, region ? cast(cairo_region_t*)region._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2509,7 +2509,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setOverrideRedirect(bool overrideRedirect)
   {
-    gdk_window_set_override_redirect(cast(GdkWindow*)cPtr, overrideRedirect);
+    gdk_window_set_override_redirect(cast(GdkWindow*)this._cPtr, overrideRedirect);
   }
 
   /**
@@ -2537,7 +2537,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setPassThrough(bool passThrough)
   {
-    gdk_window_set_pass_through(cast(GdkWindow*)cPtr, passThrough);
+    gdk_window_set_pass_through(cast(GdkWindow*)this._cPtr, passThrough);
   }
 
   /**
@@ -2560,7 +2560,7 @@ class Window : gobject.object.ObjectWrap
   void setRole(string role)
   {
     const(char)* _role = role.toCString(No.Alloc);
-    gdk_window_set_role(cast(GdkWindow*)cPtr, _role);
+    gdk_window_set_role(cast(GdkWindow*)this._cPtr, _role);
   }
 
   /**
@@ -2582,7 +2582,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setShadowWidth(int left, int right, int top, int bottom)
   {
-    gdk_window_set_shadow_width(cast(GdkWindow*)cPtr, left, right, top, bottom);
+    gdk_window_set_shadow_width(cast(GdkWindow*)this._cPtr, left, right, top, bottom);
   }
 
   /**
@@ -2600,7 +2600,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setSkipPagerHint(bool skipsPager)
   {
-    gdk_window_set_skip_pager_hint(cast(GdkWindow*)cPtr, skipsPager);
+    gdk_window_set_skip_pager_hint(cast(GdkWindow*)this._cPtr, skipsPager);
   }
 
   /**
@@ -2616,7 +2616,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setSkipTaskbarHint(bool skipsTaskbar)
   {
-    gdk_window_set_skip_taskbar_hint(cast(GdkWindow*)cPtr, skipsTaskbar);
+    gdk_window_set_skip_taskbar_hint(cast(GdkWindow*)this._cPtr, skipsTaskbar);
   }
 
   /**
@@ -2631,7 +2631,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setSourceEvents(gdk.types.InputSource source, gdk.types.EventMask eventMask)
   {
-    gdk_window_set_source_events(cast(GdkWindow*)cPtr, source, eventMask);
+    gdk_window_set_source_events(cast(GdkWindow*)this._cPtr, source, eventMask);
   }
 
   /**
@@ -2644,7 +2644,7 @@ class Window : gobject.object.ObjectWrap
   void setStartupId(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gdk_window_set_startup_id(cast(GdkWindow*)cPtr, _startupId);
+    gdk_window_set_startup_id(cast(GdkWindow*)this._cPtr, _startupId);
   }
 
   /**
@@ -2663,7 +2663,7 @@ class Window : gobject.object.ObjectWrap
   bool setStaticGravities(bool useStatic)
   {
     bool _retval;
-    _retval = gdk_window_set_static_gravities(cast(GdkWindow*)cPtr, useStatic);
+    _retval = gdk_window_set_static_gravities(cast(GdkWindow*)this._cPtr, useStatic);
     return _retval;
   }
 
@@ -2678,7 +2678,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setSupportMultidevice(bool supportMultidevice)
   {
-    gdk_window_set_support_multidevice(cast(GdkWindow*)cPtr, supportMultidevice);
+    gdk_window_set_support_multidevice(cast(GdkWindow*)this._cPtr, supportMultidevice);
   }
 
   /**
@@ -2694,7 +2694,7 @@ class Window : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gdk_window_set_title(cast(GdkWindow*)cPtr, _title);
+    gdk_window_set_title(cast(GdkWindow*)this._cPtr, _title);
   }
 
   /**
@@ -2711,7 +2711,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setTransientFor(gdk.window.Window parent)
   {
-    gdk_window_set_transient_for(cast(GdkWindow*)cPtr, parent ? cast(GdkWindow*)parent.cPtr(No.Dup) : null);
+    gdk_window_set_transient_for(cast(GdkWindow*)this._cPtr, parent ? cast(GdkWindow*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2727,7 +2727,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setTypeHint(gdk.types.WindowTypeHint hint)
   {
-    gdk_window_set_type_hint(cast(GdkWindow*)cPtr, hint);
+    gdk_window_set_type_hint(cast(GdkWindow*)this._cPtr, hint);
   }
 
   /**
@@ -2739,7 +2739,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setUrgencyHint(bool urgent)
   {
-    gdk_window_set_urgency_hint(cast(GdkWindow*)cPtr, urgent);
+    gdk_window_set_urgency_hint(cast(GdkWindow*)this._cPtr, urgent);
   }
 
   /**
@@ -2756,7 +2756,7 @@ class Window : gobject.object.ObjectWrap
   */
   void setUserData(gobject.object.ObjectWrap userData = null)
   {
-    gdk_window_set_user_data(cast(GdkWindow*)cPtr, userData ? cast(ObjectC*)userData.cPtr(No.Dup) : null);
+    gdk_window_set_user_data(cast(GdkWindow*)this._cPtr, userData ? cast(GObject*)userData._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2782,7 +2782,7 @@ class Window : gobject.object.ObjectWrap
   */
   void shapeCombineRegion(cairo.region.Region shapeRegion, int offsetX, int offsetY)
   {
-    gdk_window_shape_combine_region(cast(GdkWindow*)cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion.cPtr(No.Dup) : null, offsetX, offsetY);
+    gdk_window_shape_combine_region(cast(GdkWindow*)this._cPtr, shapeRegion ? cast(const(cairo_region_t)*)shapeRegion._cPtr(No.Dup) : null, offsetX, offsetY);
   }
 
   /**
@@ -2798,7 +2798,7 @@ class Window : gobject.object.ObjectWrap
   */
   void show()
   {
-    gdk_window_show(cast(GdkWindow*)cPtr);
+    gdk_window_show(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2812,7 +2812,7 @@ class Window : gobject.object.ObjectWrap
   */
   void showUnraised()
   {
-    gdk_window_show_unraised(cast(GdkWindow*)cPtr);
+    gdk_window_show_unraised(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2829,7 +2829,7 @@ class Window : gobject.object.ObjectWrap
   bool showWindowMenu(gdk.event.Event event)
   {
     bool _retval;
-    _retval = gdk_window_show_window_menu(cast(GdkWindow*)cPtr, event ? cast(GdkEvent*)event.cPtr : null);
+    _retval = gdk_window_show_window_menu(cast(GdkWindow*)this._cPtr, event ? cast(GdkEvent*)event._cPtr : null);
     return _retval;
   }
 
@@ -2846,7 +2846,7 @@ class Window : gobject.object.ObjectWrap
   */
   void stick()
   {
-    gdk_window_stick(cast(GdkWindow*)cPtr);
+    gdk_window_stick(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2860,7 +2860,7 @@ class Window : gobject.object.ObjectWrap
   */
   void thawToplevelUpdatesLibgtkOnly()
   {
-    gdk_window_thaw_toplevel_updates_libgtk_only(cast(GdkWindow*)cPtr);
+    gdk_window_thaw_toplevel_updates_libgtk_only(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2868,7 +2868,7 @@ class Window : gobject.object.ObjectWrap
   */
   void thawUpdates()
   {
-    gdk_window_thaw_updates(cast(GdkWindow*)cPtr);
+    gdk_window_thaw_updates(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2885,7 +2885,7 @@ class Window : gobject.object.ObjectWrap
   */
   void unfullscreen()
   {
-    gdk_window_unfullscreen(cast(GdkWindow*)cPtr);
+    gdk_window_unfullscreen(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2903,7 +2903,7 @@ class Window : gobject.object.ObjectWrap
   */
   void unmaximize()
   {
-    gdk_window_unmaximize(cast(GdkWindow*)cPtr);
+    gdk_window_unmaximize(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2912,7 +2912,7 @@ class Window : gobject.object.ObjectWrap
   */
   void unstick()
   {
-    gdk_window_unstick(cast(GdkWindow*)cPtr);
+    gdk_window_unstick(cast(GdkWindow*)this._cPtr);
   }
 
   /**
@@ -2922,7 +2922,7 @@ class Window : gobject.object.ObjectWrap
   */
   void withdraw()
   {
-    gdk_window_withdraw(cast(GdkWindow*)cPtr);
+    gdk_window_withdraw(cast(GdkWindow*)this._cPtr);
   }
 
   /**

@@ -26,7 +26,7 @@ class AccelGroupEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -34,37 +34,37 @@ class AccelGroupEntry
   /** */
   @property gtk.types.AccelKey key()
   {
-    return cToD!(gtk.types.AccelKey)(cast(void*)&(cast(GtkAccelGroupEntry*)cPtr).key);
+    return cToD!(gtk.types.AccelKey)(cast(void*)&(cast(GtkAccelGroupEntry*)this._cPtr).key);
   }
 
   /** */
   @property void key(gtk.types.AccelKey propval)
   {
-    (cast(GtkAccelGroupEntry*)cPtr).key = propval;
+    (cast(GtkAccelGroupEntry*)this._cPtr).key = propval;
   }
 
   /** */
   @property gobject.closure.Closure closure()
   {
-    return cToD!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)cPtr).closure);
+    return cToD!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)this._cPtr).closure);
   }
 
   /** */
   @property void closure(gobject.closure.Closure propval)
   {
-    cValueFree!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)cPtr).closure);
-    dToC(propval, cast(void*)&(cast(GtkAccelGroupEntry*)cPtr).closure);
+    cValueFree!(gobject.closure.Closure)(cast(void*)(cast(GtkAccelGroupEntry*)this._cPtr).closure);
+    dToC(propval, cast(void*)&(cast(GtkAccelGroupEntry*)this._cPtr).closure);
   }
 
   /** */
   @property glib.types.Quark accelPathQuark()
   {
-    return (cast(GtkAccelGroupEntry*)cPtr).accelPathQuark;
+    return (cast(GtkAccelGroupEntry*)this._cPtr).accelPathQuark;
   }
 
   /** */
   @property void accelPathQuark(glib.types.Quark propval)
   {
-    (cast(GtkAccelGroupEntry*)cPtr).accelPathQuark = propval;
+    (cast(GtkAccelGroupEntry*)this._cPtr).accelPathQuark = propval;
   }
 }

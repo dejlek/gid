@@ -19,16 +19,16 @@ class Codec : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_codec_get_type != &gidSymbolNotFound ? garrow_codec_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class Codec : gobject.object.ObjectWrap
   int getCompressionLevel()
   {
     int _retval;
-    _retval = garrow_codec_get_compression_level(cast(GArrowCodec*)cPtr);
+    _retval = garrow_codec_get_compression_level(cast(GArrowCodec*)this._cPtr);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class Codec : gobject.object.ObjectWrap
   arrow.types.CompressionType getCompressionType()
   {
     GArrowCompressionType _cretval;
-    _cretval = garrow_codec_get_compression_type(cast(GArrowCodec*)cPtr);
+    _cretval = garrow_codec_get_compression_type(cast(GArrowCodec*)this._cPtr);
     arrow.types.CompressionType _retval = cast(arrow.types.CompressionType)_cretval;
     return _retval;
   }
@@ -69,7 +69,7 @@ class Codec : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = garrow_codec_get_name(cast(GArrowCodec*)cPtr);
+    _cretval = garrow_codec_get_name(cast(GArrowCodec*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

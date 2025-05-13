@@ -113,7 +113,7 @@ template ActionT()
   */
   override void activate(glib.variant.Variant parameter = null)
   {
-    g_action_activate(cast(GAction*)cPtr, parameter ? cast(GVariant*)parameter.cPtr(No.Dup) : null);
+    g_action_activate(cast(GAction*)this._cPtr, parameter ? cast(GVariant*)parameter._cPtr(No.Dup) : null);
   }
 
   /**
@@ -133,7 +133,7 @@ template ActionT()
   */
   override void changeState(glib.variant.Variant value)
   {
-    g_action_change_state(cast(GAction*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    g_action_change_state(cast(GAction*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -146,7 +146,7 @@ template ActionT()
   override bool getEnabled()
   {
     bool _retval;
-    _retval = g_action_get_enabled(cast(GAction*)cPtr);
+    _retval = g_action_get_enabled(cast(GAction*)this._cPtr);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ template ActionT()
   override string getName()
   {
     const(char)* _cretval;
-    _cretval = g_action_get_name(cast(GAction*)cPtr);
+    _cretval = g_action_get_name(cast(GAction*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -176,7 +176,7 @@ template ActionT()
   override glib.variant_type.VariantType getParameterType()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_action_get_parameter_type(cast(GAction*)cPtr);
+    _cretval = g_action_get_parameter_type(cast(GAction*)this._cPtr);
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -195,7 +195,7 @@ template ActionT()
   override glib.variant.Variant getState()
   {
     GVariant* _cretval;
-    _cretval = g_action_get_state(cast(GAction*)cPtr);
+    _cretval = g_action_get_state(cast(GAction*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -224,7 +224,7 @@ template ActionT()
   override glib.variant.Variant getStateHint()
   {
     GVariant* _cretval;
-    _cretval = g_action_get_state_hint(cast(GAction*)cPtr);
+    _cretval = g_action_get_state_hint(cast(GAction*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -247,7 +247,7 @@ template ActionT()
   override glib.variant_type.VariantType getStateType()
   {
     const(GVariantType)* _cretval;
-    _cretval = g_action_get_state_type(cast(GAction*)cPtr);
+    _cretval = g_action_get_state_type(cast(GAction*)this._cPtr);
     auto _retval = _cretval ? new glib.variant_type.VariantType(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

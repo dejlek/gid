@@ -51,7 +51,7 @@ class ReferenceTimestampMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -62,7 +62,7 @@ class ReferenceTimestampMeta
   */
   @property gst.meta.Meta parent()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)cPtr).parent);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstReferenceTimestampMeta*)this._cPtr).parent);
   }
 
   /**
@@ -71,7 +71,7 @@ class ReferenceTimestampMeta
   */
   @property gst.caps.Caps reference()
   {
-    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
   }
 
   /**
@@ -81,8 +81,8 @@ class ReferenceTimestampMeta
   */
   @property void reference(gst.caps.Caps propval)
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)cPtr).reference);
-    dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)cPtr).reference);
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
+    dToC(propval, cast(void*)&(cast(GstReferenceTimestampMeta*)this._cPtr).reference);
   }
 
   /**
@@ -91,7 +91,7 @@ class ReferenceTimestampMeta
   */
   @property gst.types.ClockTime timestamp()
   {
-    return (cast(GstReferenceTimestampMeta*)cPtr).timestamp;
+    return (cast(GstReferenceTimestampMeta*)this._cPtr).timestamp;
   }
 
   /**
@@ -101,7 +101,7 @@ class ReferenceTimestampMeta
   */
   @property void timestamp(gst.types.ClockTime propval)
   {
-    (cast(GstReferenceTimestampMeta*)cPtr).timestamp = propval;
+    (cast(GstReferenceTimestampMeta*)this._cPtr).timestamp = propval;
   }
 
   /**
@@ -110,7 +110,7 @@ class ReferenceTimestampMeta
   */
   @property gst.types.ClockTime duration()
   {
-    return (cast(GstReferenceTimestampMeta*)cPtr).duration;
+    return (cast(GstReferenceTimestampMeta*)this._cPtr).duration;
   }
 
   /**
@@ -120,7 +120,7 @@ class ReferenceTimestampMeta
   */
   @property void duration(gst.types.ClockTime propval)
   {
-    (cast(GstReferenceTimestampMeta*)cPtr).duration = propval;
+    (cast(GstReferenceTimestampMeta*)this._cPtr).duration = propval;
   }
 
   /**

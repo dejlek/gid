@@ -53,16 +53,16 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_button_get_type != &gidSymbolNotFound ? gtk_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -277,7 +277,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     _cretval = gtk_button_new_from_icon_name(_iconName, size);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -302,7 +302,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_button_new_from_stock(_stockId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_label(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -341,7 +341,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_button_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.button.Button)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -350,7 +350,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void clicked()
   {
-    gtk_button_clicked(cast(GtkButton*)cPtr);
+    gtk_button_clicked(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -360,7 +360,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void enter()
   {
-    gtk_button_enter(cast(GtkButton*)cPtr);
+    gtk_button_enter(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -375,7 +375,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void getAlignment(out float xalign, out float yalign)
   {
-    gtk_button_get_alignment(cast(GtkButton*)cPtr, cast(float*)&xalign, cast(float*)&yalign);
+    gtk_button_get_alignment(cast(GtkButton*)this._cPtr, cast(float*)&xalign, cast(float*)&yalign);
   }
 
   /**
@@ -386,7 +386,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getAlwaysShowImage()
   {
     bool _retval;
-    _retval = gtk_button_get_always_show_image(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_always_show_image(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -398,8 +398,8 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   gdk.window.Window getEventWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_button_get_event_window(cast(GtkButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_button_get_event_window(cast(GtkButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -414,7 +414,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   override bool getFocusOnClick()
   {
     bool _retval;
-    _retval = gtk_button_get_focus_on_click(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_focus_on_click(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -428,8 +428,8 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   gtk.widget.Widget getImage()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_button_get_image(cast(GtkButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_button_get_image(cast(GtkButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -441,7 +441,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   gtk.types.PositionType getImagePosition()
   {
     GtkPositionType _cretval;
-    _cretval = gtk_button_get_image_position(cast(GtkButton*)cPtr);
+    _cretval = gtk_button_get_image_position(cast(GtkButton*)this._cPtr);
     gtk.types.PositionType _retval = cast(gtk.types.PositionType)_cretval;
     return _retval;
   }
@@ -458,7 +458,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_button_get_label(cast(GtkButton*)cPtr);
+    _cretval = gtk_button_get_label(cast(GtkButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -470,7 +470,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   gtk.types.ReliefStyle getRelief()
   {
     GtkReliefStyle _cretval;
-    _cretval = gtk_button_get_relief(cast(GtkButton*)cPtr);
+    _cretval = gtk_button_get_relief(cast(GtkButton*)this._cPtr);
     gtk.types.ReliefStyle _retval = cast(gtk.types.ReliefStyle)_cretval;
     return _retval;
   }
@@ -484,7 +484,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getUseStock()
   {
     bool _retval;
-    _retval = gtk_button_get_use_stock(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_use_stock(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_button_get_use_underline(cast(GtkButton*)cPtr);
+    _retval = gtk_button_get_use_underline(cast(GtkButton*)this._cPtr);
     return _retval;
   }
 
@@ -508,7 +508,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void leave()
   {
-    gtk_button_leave(cast(GtkButton*)cPtr);
+    gtk_button_leave(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -518,7 +518,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void pressed()
   {
-    gtk_button_pressed(cast(GtkButton*)cPtr);
+    gtk_button_pressed(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -528,7 +528,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void released()
   {
-    gtk_button_released(cast(GtkButton*)cPtr);
+    gtk_button_released(cast(GtkButton*)this._cPtr);
   }
 
   /**
@@ -546,7 +546,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setAlignment(float xalign, float yalign)
   {
-    gtk_button_set_alignment(cast(GtkButton*)cPtr, xalign, yalign);
+    gtk_button_set_alignment(cast(GtkButton*)this._cPtr, xalign, yalign);
   }
 
   /**
@@ -561,7 +561,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setAlwaysShowImage(bool alwaysShow)
   {
-    gtk_button_set_always_show_image(cast(GtkButton*)cPtr, alwaysShow);
+    gtk_button_set_always_show_image(cast(GtkButton*)this._cPtr, alwaysShow);
   }
 
   /**
@@ -577,7 +577,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   override void setFocusOnClick(bool focusOnClick)
   {
-    gtk_button_set_focus_on_click(cast(GtkButton*)cPtr, focusOnClick);
+    gtk_button_set_focus_on_click(cast(GtkButton*)this._cPtr, focusOnClick);
   }
 
   /**
@@ -591,7 +591,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setImage(gtk.widget.Widget image = null)
   {
-    gtk_button_set_image(cast(GtkButton*)cPtr, image ? cast(GtkWidget*)image.cPtr(No.Dup) : null);
+    gtk_button_set_image(cast(GtkButton*)this._cPtr, image ? cast(GtkWidget*)image._cPtr(No.Dup) : null);
   }
 
   /**
@@ -603,7 +603,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setImagePosition(gtk.types.PositionType position)
   {
-    gtk_button_set_image_position(cast(GtkButton*)cPtr, position);
+    gtk_button_set_image_position(cast(GtkButton*)this._cPtr, position);
   }
 
   /**
@@ -619,7 +619,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_button_set_label(cast(GtkButton*)cPtr, _label);
+    gtk_button_set_label(cast(GtkButton*)this._cPtr, _label);
   }
 
   /**
@@ -634,7 +634,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setRelief(gtk.types.ReliefStyle relief)
   {
-    gtk_button_set_relief(cast(GtkButton*)cPtr, relief);
+    gtk_button_set_relief(cast(GtkButton*)this._cPtr, relief);
   }
 
   /**
@@ -646,7 +646,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setUseStock(bool useStock)
   {
-    gtk_button_set_use_stock(cast(GtkButton*)cPtr, useStock);
+    gtk_button_set_use_stock(cast(GtkButton*)this._cPtr, useStock);
   }
 
   /**
@@ -658,7 +658,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
   */
   void setUseUnderline(bool useUnderline)
   {
-    gtk_button_set_use_underline(cast(GtkButton*)cPtr, useUnderline);
+    gtk_button_set_use_underline(cast(GtkButton*)this._cPtr, useUnderline);
   }
 
   /**

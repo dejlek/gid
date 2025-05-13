@@ -37,22 +37,22 @@ class Rectangle : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())cairo_gobject_rectangle_get_type != &gidSymbolNotFound ? cairo_gobject_rectangle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property double x()
   {
-    return (cast(cairo_rectangle_t*)cPtr).x;
+    return (cast(cairo_rectangle_t*)this._cPtr).x;
   }
 
   /**
@@ -77,7 +77,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void x(double propval)
   {
-    (cast(cairo_rectangle_t*)cPtr).x = propval;
+    (cast(cairo_rectangle_t*)this._cPtr).x = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property double y()
   {
-    return (cast(cairo_rectangle_t*)cPtr).y;
+    return (cast(cairo_rectangle_t*)this._cPtr).y;
   }
 
   /**
@@ -96,7 +96,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void y(double propval)
   {
-    (cast(cairo_rectangle_t*)cPtr).y = propval;
+    (cast(cairo_rectangle_t*)this._cPtr).y = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property double width()
   {
-    return (cast(cairo_rectangle_t*)cPtr).width;
+    return (cast(cairo_rectangle_t*)this._cPtr).width;
   }
 
   /**
@@ -115,7 +115,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void width(double propval)
   {
-    (cast(cairo_rectangle_t*)cPtr).width = propval;
+    (cast(cairo_rectangle_t*)this._cPtr).width = propval;
   }
 
   /**
@@ -124,7 +124,7 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property double height()
   {
-    return (cast(cairo_rectangle_t*)cPtr).height;
+    return (cast(cairo_rectangle_t*)this._cPtr).height;
   }
 
   /**
@@ -134,6 +134,6 @@ class Rectangle : gobject.boxed.Boxed
   */
   @property void height(double propval)
   {
-    (cast(cairo_rectangle_t*)cPtr).height = propval;
+    (cast(cairo_rectangle_t*)this._cPtr).height = propval;
   }
 }

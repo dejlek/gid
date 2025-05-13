@@ -74,16 +74,16 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_flow_box_get_type != &gidSymbolNotFound ? gtk_flow_box_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -278,13 +278,13 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void bindModel(gio.list_model.ListModel model, gtk.types.FlowBoxCreateWidgetFunc createWidgetFunc)
   {
-    extern(C) GtkWidget* _createWidgetFuncCallback(ObjectC* item, void* userData)
+    extern(C) GtkWidget* _createWidgetFuncCallback(GObject* item, void* userData)
     {
       gtk.widget.Widget _dretval;
       auto _dlg = cast(gtk.types.FlowBoxCreateWidgetFunc*)userData;
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
-      GtkWidget* _retval = cast(GtkWidget*)_dretval.cPtr(Yes.Dup);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)item, No.Take));
+      GtkWidget* _retval = cast(GtkWidget*)_dretval._cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -292,7 +292,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
 
     auto _createWidgetFunc = createWidgetFunc ? freezeDelegate(cast(void*)&createWidgetFunc) : null;
     GDestroyNotify _createWidgetFuncDestroyCB = createWidgetFunc ? &thawDelegate : null;
-    gtk_flow_box_bind_model(cast(GtkFlowBox*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
+    gtk_flow_box_bind_model(cast(GtkFlowBox*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, _createWidgetFuncCB, _createWidgetFunc, _createWidgetFuncDestroyCB);
   }
 
   /**
@@ -303,7 +303,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   bool getActivateOnSingleClick()
   {
     bool _retval;
-    _retval = gtk_flow_box_get_activate_on_single_click(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_activate_on_single_click(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -319,8 +319,8 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   gtk.flow_box_child.FlowBoxChild getChildAtIndex(int idx)
   {
     GtkFlowBoxChild* _cretval;
-    _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)cPtr, idx);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    _cretval = gtk_flow_box_get_child_at_index(cast(GtkFlowBox*)this._cPtr, idx);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -337,8 +337,8 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   gtk.flow_box_child.FlowBoxChild getChildAtPos(int x, int y)
   {
     GtkFlowBoxChild* _cretval;
-    _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
+    _cretval = gtk_flow_box_get_child_at_pos(cast(GtkFlowBox*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(GtkFlowBoxChild*)_cretval, No.Take);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   uint getColumnSpacing()
   {
     uint _retval;
-    _retval = gtk_flow_box_get_column_spacing(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_column_spacing(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -361,7 +361,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_flow_box_get_homogeneous(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_homogeneous(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -372,7 +372,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   uint getMaxChildrenPerLine()
   {
     uint _retval;
-    _retval = gtk_flow_box_get_max_children_per_line(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_max_children_per_line(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -383,7 +383,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   uint getMinChildrenPerLine()
   {
     uint _retval;
-    _retval = gtk_flow_box_get_min_children_per_line(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_min_children_per_line(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   uint getRowSpacing()
   {
     uint _retval;
-    _retval = gtk_flow_box_get_row_spacing(cast(GtkFlowBox*)cPtr);
+    _retval = gtk_flow_box_get_row_spacing(cast(GtkFlowBox*)this._cPtr);
     return _retval;
   }
 
@@ -406,7 +406,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   gtk.flow_box_child.FlowBoxChild[] getSelectedChildren()
   {
     GList* _cretval;
-    _cretval = gtk_flow_box_get_selected_children(cast(GtkFlowBox*)cPtr);
+    _cretval = gtk_flow_box_get_selected_children(cast(GtkFlowBox*)this._cPtr);
     auto _retval = gListToD!(gtk.flow_box_child.FlowBoxChild, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -418,7 +418,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   gtk.types.SelectionMode getSelectionMode()
   {
     GtkSelectionMode _cretval;
-    _cretval = gtk_flow_box_get_selection_mode(cast(GtkFlowBox*)cPtr);
+    _cretval = gtk_flow_box_get_selection_mode(cast(GtkFlowBox*)this._cPtr);
     gtk.types.SelectionMode _retval = cast(gtk.types.SelectionMode)_cretval;
     return _retval;
   }
@@ -439,7 +439,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void insert(gtk.widget.Widget widget, int position)
   {
-    gtk_flow_box_insert(cast(GtkFlowBox*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null, position);
+    gtk_flow_box_insert(cast(GtkFlowBox*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, position);
   }
 
   /**
@@ -453,7 +453,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void invalidateFilter()
   {
-    gtk_flow_box_invalidate_filter(cast(GtkFlowBox*)cPtr);
+    gtk_flow_box_invalidate_filter(cast(GtkFlowBox*)this._cPtr);
   }
 
   /**
@@ -464,7 +464,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void invalidateSort()
   {
-    gtk_flow_box_invalidate_sort(cast(GtkFlowBox*)cPtr);
+    gtk_flow_box_invalidate_sort(cast(GtkFlowBox*)this._cPtr);
   }
 
   /**
@@ -473,7 +473,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void selectAll()
   {
-    gtk_flow_box_select_all(cast(GtkFlowBox*)cPtr);
+    gtk_flow_box_select_all(cast(GtkFlowBox*)this._cPtr);
   }
 
   /**
@@ -485,7 +485,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void selectChild(gtk.flow_box_child.FlowBoxChild child)
   {
-    gtk_flow_box_select_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_select_child(cast(GtkFlowBox*)this._cPtr, child ? cast(GtkFlowBoxChild*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -503,12 +503,12 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxForeachFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box.FlowBox)(cast(void*)box, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    gtk_flow_box_selected_foreach(cast(GtkFlowBox*)cPtr, _funcCB, _func);
+    gtk_flow_box_selected_foreach(cast(GtkFlowBox*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -520,7 +520,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setActivateOnSingleClick(bool single)
   {
-    gtk_flow_box_set_activate_on_single_click(cast(GtkFlowBox*)cPtr, single);
+    gtk_flow_box_set_activate_on_single_click(cast(GtkFlowBox*)this._cPtr, single);
   }
 
   /**
@@ -532,7 +532,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setColumnSpacing(uint spacing)
   {
-    gtk_flow_box_set_column_spacing(cast(GtkFlowBox*)cPtr, spacing);
+    gtk_flow_box_set_column_spacing(cast(GtkFlowBox*)this._cPtr, spacing);
   }
 
   /**
@@ -558,14 +558,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxFilterFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child, No.Take));
       return _retval;
     }
     auto _filterFuncCB = filterFunc ? &_filterFuncCallback : null;
 
     auto _filterFunc = filterFunc ? freezeDelegate(cast(void*)&filterFunc) : null;
     GDestroyNotify _filterFuncDestroyCB = filterFunc ? &thawDelegate : null;
-    gtk_flow_box_set_filter_func(cast(GtkFlowBox*)cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
+    gtk_flow_box_set_filter_func(cast(GtkFlowBox*)this._cPtr, _filterFuncCB, _filterFunc, _filterFuncDestroyCB);
   }
 
   /**
@@ -586,7 +586,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_flow_box_set_hadjustment(cast(GtkFlowBox*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -600,7 +600,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setHomogeneous(bool homogeneous)
   {
-    gtk_flow_box_set_homogeneous(cast(GtkFlowBox*)cPtr, homogeneous);
+    gtk_flow_box_set_homogeneous(cast(GtkFlowBox*)this._cPtr, homogeneous);
   }
 
   /**
@@ -616,7 +616,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setMaxChildrenPerLine(uint nChildren)
   {
-    gtk_flow_box_set_max_children_per_line(cast(GtkFlowBox*)cPtr, nChildren);
+    gtk_flow_box_set_max_children_per_line(cast(GtkFlowBox*)this._cPtr, nChildren);
   }
 
   /**
@@ -628,7 +628,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setMinChildrenPerLine(uint nChildren)
   {
-    gtk_flow_box_set_min_children_per_line(cast(GtkFlowBox*)cPtr, nChildren);
+    gtk_flow_box_set_min_children_per_line(cast(GtkFlowBox*)this._cPtr, nChildren);
   }
 
   /**
@@ -640,7 +640,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setRowSpacing(uint spacing)
   {
-    gtk_flow_box_set_row_spacing(cast(GtkFlowBox*)cPtr, spacing);
+    gtk_flow_box_set_row_spacing(cast(GtkFlowBox*)this._cPtr, spacing);
   }
 
   /**
@@ -652,7 +652,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setSelectionMode(gtk.types.SelectionMode mode)
   {
-    gtk_flow_box_set_selection_mode(cast(GtkFlowBox*)cPtr, mode);
+    gtk_flow_box_set_selection_mode(cast(GtkFlowBox*)this._cPtr, mode);
   }
 
   /**
@@ -677,14 +677,14 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
     {
       auto _dlg = cast(gtk.types.FlowBoxSortFunc*)userData;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), gobject.object.ObjectWrap.getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child1, No.Take), gobject.object.ObjectWrap._getDObject!(gtk.flow_box_child.FlowBoxChild)(cast(void*)child2, No.Take));
       return _retval;
     }
     auto _sortFuncCB = sortFunc ? &_sortFuncCallback : null;
 
     auto _sortFunc = sortFunc ? freezeDelegate(cast(void*)&sortFunc) : null;
     GDestroyNotify _sortFuncDestroyCB = sortFunc ? &thawDelegate : null;
-    gtk_flow_box_set_sort_func(cast(GtkFlowBox*)cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
+    gtk_flow_box_set_sort_func(cast(GtkFlowBox*)this._cPtr, _sortFuncCB, _sortFunc, _sortFuncDestroyCB);
   }
 
   /**
@@ -705,7 +705,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment)
   {
-    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_flow_box_set_vadjustment(cast(GtkFlowBox*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -714,7 +714,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void unselectAll()
   {
-    gtk_flow_box_unselect_all(cast(GtkFlowBox*)cPtr);
+    gtk_flow_box_unselect_all(cast(GtkFlowBox*)this._cPtr);
   }
 
   /**
@@ -726,7 +726,7 @@ class FlowBox : gtk.container.Container, gtk.orientable.Orientable
   */
   void unselectChild(gtk.flow_box_child.FlowBoxChild child)
   {
-    gtk_flow_box_unselect_child(cast(GtkFlowBox*)cPtr, child ? cast(GtkFlowBoxChild*)child.cPtr(No.Dup) : null);
+    gtk_flow_box_unselect_child(cast(GtkFlowBox*)this._cPtr, child ? cast(GtkFlowBoxChild*)child._cPtr(No.Dup) : null);
   }
 
   /**

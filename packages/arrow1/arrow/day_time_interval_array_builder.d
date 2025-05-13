@@ -20,16 +20,16 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_day_time_interval_array_builder_get_type != &gidSymbolNotFound ? garrow_day_time_interval_array_builder_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_day_time_interval_array_builder_append_value(cast(GArrowDayTimeIntervalArrayBuilder*)cPtr, value ? cast(GArrowDayMillisecond*)value.cPtr(No.Dup) : null, &_err);
+    _retval = garrow_day_time_interval_array_builder_append_value(cast(GArrowDayTimeIntervalArrayBuilder*)this._cPtr, value ? cast(GArrowDayMillisecond*)value._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -79,7 +79,7 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 
     GArrowDayMillisecond*[] _tmpvalues;
     foreach (obj; values)
-      _tmpvalues ~= obj ? cast(GArrowDayMillisecond*)obj.cPtr : null;
+      _tmpvalues ~= obj ? cast(GArrowDayMillisecond*)obj._cPtr : null;
     const(GArrowDayMillisecond*)* _values = cast(const(GArrowDayMillisecond*)*)_tmpvalues.ptr;
 
     long _isValidsLength;
@@ -88,7 +88,7 @@ class DayTimeIntervalArrayBuilder : arrow.array_builder.ArrayBuilder
 
     auto _isValids = cast(const(bool)*)isValids.ptr;
     GError *_err;
-    _retval = garrow_day_time_interval_array_builder_append_values(cast(GArrowDayTimeIntervalArrayBuilder*)cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
+    _retval = garrow_day_time_interval_array_builder_append_values(cast(GArrowDayTimeIntervalArrayBuilder*)this._cPtr, _values, _valuesLength, _isValids, _isValidsLength, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

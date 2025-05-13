@@ -28,7 +28,7 @@ class AttrShape
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class AttrShape
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrShape*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).attr);
   }
 
   /**
@@ -48,7 +48,7 @@ class AttrShape
   */
   @property pango.types.Rectangle inkRect()
   {
-    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).inkRect);
+    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).inkRect);
   }
 
   /**
@@ -58,7 +58,7 @@ class AttrShape
   */
   @property void inkRect(pango.types.Rectangle propval)
   {
-    (cast(PangoAttrShape*)cPtr).inkRect = propval;
+    (cast(PangoAttrShape*)this._cPtr).inkRect = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class AttrShape
   */
   @property pango.types.Rectangle logicalRect()
   {
-    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)cPtr).logicalRect);
+    return cToD!(pango.types.Rectangle)(cast(void*)&(cast(PangoAttrShape*)this._cPtr).logicalRect);
   }
 
   /**
@@ -77,7 +77,7 @@ class AttrShape
   */
   @property void logicalRect(pango.types.Rectangle propval)
   {
-    (cast(PangoAttrShape*)cPtr).logicalRect = propval;
+    (cast(PangoAttrShape*)this._cPtr).logicalRect = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class AttrShape
   */
   @property PangoAttrDataCopyFunc copyFunc()
   {
-    return (cast(PangoAttrShape*)cPtr).copyFunc;
+    return (cast(PangoAttrShape*)this._cPtr).copyFunc;
   }
 
   /**
@@ -97,7 +97,7 @@ class AttrShape
 
   @property void copyFunc(PangoAttrDataCopyFunc propval)
   {
-    (cast(PangoAttrShape*)cPtr).copyFunc = propval;
+    (cast(PangoAttrShape*)this._cPtr).copyFunc = propval;
   }
 
   /**
@@ -106,7 +106,7 @@ class AttrShape
   */
   @property GDestroyNotify destroyFunc()
   {
-    return (cast(PangoAttrShape*)cPtr).destroyFunc;
+    return (cast(PangoAttrShape*)this._cPtr).destroyFunc;
   }
 
   /**
@@ -117,7 +117,7 @@ class AttrShape
 
   @property void destroyFunc(GDestroyNotify propval)
   {
-    (cast(PangoAttrShape*)cPtr).destroyFunc = propval;
+    (cast(PangoAttrShape*)this._cPtr).destroyFunc = propval;
   }
 
   /**

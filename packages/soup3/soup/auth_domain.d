@@ -37,16 +37,16 @@ class AuthDomain : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())soup_auth_domain_get_type != &gidSymbolNotFound ? soup_auth_domain_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -149,7 +149,7 @@ class AuthDomain : gobject.object.ObjectWrap
   string accepts(soup.server_message.ServerMessage msg)
   {
     char* _cretval;
-    _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    _cretval = soup_auth_domain_accepts(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -167,7 +167,7 @@ class AuthDomain : gobject.object.ObjectWrap
   void addPath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    soup_auth_domain_add_path(cast(SoupAuthDomain*)cPtr, _path);
+    soup_auth_domain_add_path(cast(SoupAuthDomain*)this._cPtr, _path);
   }
 
   /**
@@ -183,7 +183,7 @@ class AuthDomain : gobject.object.ObjectWrap
   */
   void challenge(soup.server_message.ServerMessage msg)
   {
-    soup_auth_domain_challenge(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    soup_auth_domain_challenge(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
   }
 
   /**
@@ -204,7 +204,7 @@ class AuthDomain : gobject.object.ObjectWrap
     bool _retval;
     const(char)* _username = username.toCString(No.Alloc);
     const(char)* _password = password.toCString(No.Alloc);
-    _retval = soup_auth_domain_check_password(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null, _username, _password);
+    _retval = soup_auth_domain_check_password(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null, _username, _password);
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class AuthDomain : gobject.object.ObjectWrap
   bool covers(soup.server_message.ServerMessage msg)
   {
     bool _retval;
-    _retval = soup_auth_domain_covers(cast(SoupAuthDomain*)cPtr, msg ? cast(SoupServerMessage*)msg.cPtr(No.Dup) : null);
+    _retval = soup_auth_domain_covers(cast(SoupAuthDomain*)this._cPtr, msg ? cast(SoupServerMessage*)msg._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -236,7 +236,7 @@ class AuthDomain : gobject.object.ObjectWrap
   string getRealm()
   {
     const(char)* _cretval;
-    _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)cPtr);
+    _cretval = soup_auth_domain_get_realm(cast(SoupAuthDomain*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -261,7 +261,7 @@ class AuthDomain : gobject.object.ObjectWrap
   void removePath(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    soup_auth_domain_remove_path(cast(SoupAuthDomain*)cPtr, _path);
+    soup_auth_domain_remove_path(cast(SoupAuthDomain*)this._cPtr, _path);
   }
 
   /**
@@ -300,14 +300,14 @@ class AuthDomain : gobject.object.ObjectWrap
     {
       auto _dlg = cast(soup.types.AuthDomainFilter*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take));
       return _retval;
     }
     auto _filterCB = filter ? &_filterCallback : null;
 
     auto _filter = filter ? freezeDelegate(cast(void*)&filter) : null;
     GDestroyNotify _filterDestroyCB = filter ? &thawDelegate : null;
-    soup_auth_domain_set_filter(cast(SoupAuthDomain*)cPtr, _filterCB, _filter, _filterDestroyCB);
+    soup_auth_domain_set_filter(cast(SoupAuthDomain*)this._cPtr, _filterCB, _filter, _filterDestroyCB);
   }
 
   /**
@@ -329,13 +329,13 @@ class AuthDomain : gobject.object.ObjectWrap
       auto _dlg = cast(soup.types.AuthDomainGenericAuthCallback*)userData;
       string _username = username.fromCString(No.Free);
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap.getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(soup.auth_domain.AuthDomain)(cast(void*)domain, No.Take), gobject.object.ObjectWrap._getDObject!(soup.server_message.ServerMessage)(cast(void*)msg, No.Take), _username);
       return _retval;
     }
     auto _authCallbackCB = authCallback ? &_authCallbackCallback : null;
 
     auto _authCallback = authCallback ? freezeDelegate(cast(void*)&authCallback) : null;
     GDestroyNotify _authCallbackDestroyCB = authCallback ? &thawDelegate : null;
-    soup_auth_domain_set_generic_auth_callback(cast(SoupAuthDomain*)cPtr, _authCallbackCB, _authCallback, _authCallbackDestroyCB);
+    soup_auth_domain_set_generic_auth_callback(cast(SoupAuthDomain*)this._cPtr, _authCallbackCB, _authCallback, _authCallbackDestroyCB);
   }
 }

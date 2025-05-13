@@ -87,16 +87,16 @@ class AccelLabel : gtk.label.Label
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_label_get_type != &gidSymbolNotFound ? gtk_accel_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -154,7 +154,7 @@ class AccelLabel : gtk.label.Label
   */
   void getAccel(out uint acceleratorKey, out gdk.types.ModifierType acceleratorMods)
   {
-    gtk_accel_label_get_accel(cast(GtkAccelLabel*)cPtr, cast(uint*)&acceleratorKey, &acceleratorMods);
+    gtk_accel_label_get_accel(cast(GtkAccelLabel*)this._cPtr, cast(uint*)&acceleratorKey, &acceleratorMods);
   }
 
   /**
@@ -165,8 +165,8 @@ class AccelLabel : gtk.label.Label
   gtk.widget.Widget getAccelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_accel_label_get_accel_widget(cast(GtkAccelLabel*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_accel_label_get_accel_widget(cast(GtkAccelLabel*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class AccelLabel : gtk.label.Label
   uint getAccelWidth()
   {
     uint _retval;
-    _retval = gtk_accel_label_get_accel_width(cast(GtkAccelLabel*)cPtr);
+    _retval = gtk_accel_label_get_accel_width(cast(GtkAccelLabel*)this._cPtr);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class AccelLabel : gtk.label.Label
   bool refetch()
   {
     bool _retval;
-    _retval = gtk_accel_label_refetch(cast(GtkAccelLabel*)cPtr);
+    _retval = gtk_accel_label_refetch(cast(GtkAccelLabel*)this._cPtr);
     return _retval;
   }
 
@@ -211,7 +211,7 @@ class AccelLabel : gtk.label.Label
   */
   void setAccel(uint acceleratorKey, gdk.types.ModifierType acceleratorMods)
   {
-    gtk_accel_label_set_accel(cast(GtkAccelLabel*)cPtr, acceleratorKey, acceleratorMods);
+    gtk_accel_label_set_accel(cast(GtkAccelLabel*)this._cPtr, acceleratorKey, acceleratorMods);
   }
 
   /**
@@ -226,7 +226,7 @@ class AccelLabel : gtk.label.Label
   */
   void setAccelClosure(gobject.closure.Closure accelClosure = null)
   {
-    gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)cPtr, accelClosure ? cast(GClosure*)accelClosure.cPtr(No.Dup) : null);
+    gtk_accel_label_set_accel_closure(cast(GtkAccelLabel*)this._cPtr, accelClosure ? cast(GClosure*)accelClosure._cPtr(No.Dup) : null);
   }
 
   /**
@@ -238,6 +238,6 @@ class AccelLabel : gtk.label.Label
   */
   void setAccelWidget(gtk.widget.Widget accelWidget = null)
   {
-    gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)cPtr, accelWidget ? cast(GtkWidget*)accelWidget.cPtr(No.Dup) : null);
+    gtk_accel_label_set_accel_widget(cast(GtkAccelLabel*)this._cPtr, accelWidget ? cast(GtkWidget*)accelWidget._cPtr(No.Dup) : null);
   }
 }

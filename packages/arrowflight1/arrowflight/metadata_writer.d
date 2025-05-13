@@ -20,16 +20,16 @@ class MetadataWriter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gaflight_metadata_writer_get_type != &gidSymbolNotFound ? gaflight_metadata_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,7 +50,7 @@ class MetadataWriter : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)cPtr, metadata ? cast(GArrowBuffer*)metadata.cPtr(No.Dup) : null, &_err);
+    _retval = gaflight_metadata_writer_write(cast(GAFlightMetadataWriter*)this._cPtr, metadata ? cast(GArrowBuffer*)metadata._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

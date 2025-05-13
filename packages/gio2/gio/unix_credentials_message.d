@@ -40,16 +40,16 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_credentials_message_get_type != &gidSymbolNotFound ? g_unix_credentials_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -79,8 +79,8 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   static gio.unix_credentials_message.UnixCredentialsMessage newWithCredentials(gio.credentials.Credentials credentials)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    _cretval = g_unix_credentials_message_new_with_credentials(credentials ? cast(GCredentials*)credentials._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_credentials_message.UnixCredentialsMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -102,8 +102,8 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
   gio.credentials.Credentials getCredentials()
   {
     GCredentials* _cretval;
-    _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
+    _cretval = g_unix_credentials_message_get_credentials(cast(GUnixCredentialsMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.credentials.Credentials)(cast(GCredentials*)_cretval, No.Take);
     return _retval;
   }
 }

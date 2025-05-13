@@ -59,22 +59,22 @@ class VideoCodecFrame : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_codec_frame_get_type != &gidSymbolNotFound ? gst_video_codec_frame_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -92,7 +92,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property uint systemFrameNumber()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).systemFrameNumber;
+    return (cast(GstVideoCodecFrame*)this._cPtr).systemFrameNumber;
   }
 
   /**
@@ -105,7 +105,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void systemFrameNumber(uint propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).systemFrameNumber = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).systemFrameNumber = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.types.ClockTime dts()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).dts;
+    return (cast(GstVideoCodecFrame*)this._cPtr).dts;
   }
 
   /**
@@ -124,7 +124,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void dts(gst.types.ClockTime propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).dts = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).dts = propval;
   }
 
   /**
@@ -133,7 +133,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.types.ClockTime pts()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).pts;
+    return (cast(GstVideoCodecFrame*)this._cPtr).pts;
   }
 
   /**
@@ -143,7 +143,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void pts(gst.types.ClockTime propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).pts = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).pts = propval;
   }
 
   /**
@@ -152,7 +152,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.types.ClockTime duration()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).duration;
+    return (cast(GstVideoCodecFrame*)this._cPtr).duration;
   }
 
   /**
@@ -162,7 +162,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void duration(gst.types.ClockTime propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).duration = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).duration = propval;
   }
 
   /**
@@ -171,7 +171,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property int distanceFromSync()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).distanceFromSync;
+    return (cast(GstVideoCodecFrame*)this._cPtr).distanceFromSync;
   }
 
   /**
@@ -181,7 +181,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void distanceFromSync(int propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).distanceFromSync = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).distanceFromSync = propval;
   }
 
   /**
@@ -192,7 +192,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.buffer.Buffer inputBuffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
   }
 
   /**
@@ -204,8 +204,8 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void inputBuffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).inputBuffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)this._cPtr).inputBuffer);
   }
 
   /**
@@ -219,7 +219,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.buffer.Buffer outputBuffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
   }
 
   /**
@@ -234,8 +234,8 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void outputBuffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
-    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)cPtr).outputBuffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
+    dToC(propval, cast(void*)&(cast(GstVideoCodecFrame*)this._cPtr).outputBuffer);
   }
 
   /**
@@ -244,7 +244,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property gst.types.ClockTime deadline()
   {
-    return (cast(GstVideoCodecFrame*)cPtr).deadline;
+    return (cast(GstVideoCodecFrame*)this._cPtr).deadline;
   }
 
   /**
@@ -254,7 +254,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   @property void deadline(gst.types.ClockTime propval)
   {
-    (cast(GstVideoCodecFrame*)cPtr).deadline = propval;
+    (cast(GstVideoCodecFrame*)this._cPtr).deadline = propval;
   }
 
   /**
@@ -264,7 +264,7 @@ class VideoCodecFrame : gobject.boxed.Boxed
   */
   void* getUserData()
   {
-    auto _retval = gst_video_codec_frame_get_user_data(cast(GstVideoCodecFrame*)cPtr);
+    auto _retval = gst_video_codec_frame_get_user_data(cast(GstVideoCodecFrame*)this._cPtr);
     return _retval;
   }
 
@@ -290,6 +290,6 @@ class VideoCodecFrame : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     auto _notify = notify ? freezeDelegate(cast(void*)&notify) : null;
-    gst_video_codec_frame_set_user_data(cast(GstVideoCodecFrame*)cPtr, _notify, _notifyCB);
+    gst_video_codec_frame_set_user_data(cast(GstVideoCodecFrame*)this._cPtr, _notify, _notifyCB);
   }
 }

@@ -37,7 +37,7 @@ template DocumentT()
   {
     const(char)* _cretval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
-    _cretval = atk_document_get_attribute_value(cast(AtkDocument*)cPtr, _attributeName);
+    _cretval = atk_document_get_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -50,7 +50,7 @@ template DocumentT()
   override int getCurrentPageNumber()
   {
     int _retval;
-    _retval = atk_document_get_current_page_number(cast(AtkDocument*)cPtr);
+    _retval = atk_document_get_current_page_number(cast(AtkDocument*)this._cPtr);
     return _retval;
   }
 
@@ -66,7 +66,7 @@ template DocumentT()
   */
   override void* getDocument()
   {
-    auto _retval = atk_document_get_document(cast(AtkDocument*)cPtr);
+    auto _retval = atk_document_get_document(cast(AtkDocument*)this._cPtr);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ template DocumentT()
   override string getDocumentType()
   {
     const(char)* _cretval;
-    _cretval = atk_document_get_document_type(cast(AtkDocument*)cPtr);
+    _cretval = atk_document_get_document_type(cast(AtkDocument*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -100,7 +100,7 @@ template DocumentT()
   override string getLocale()
   {
     const(char)* _cretval;
-    _cretval = atk_document_get_locale(cast(AtkDocument*)cPtr);
+    _cretval = atk_document_get_locale(cast(AtkDocument*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -113,7 +113,7 @@ template DocumentT()
   override int getPageCount()
   {
     int _retval;
-    _retval = atk_document_get_page_count(cast(AtkDocument*)cPtr);
+    _retval = atk_document_get_page_count(cast(AtkDocument*)this._cPtr);
     return _retval;
   }
 
@@ -133,7 +133,7 @@ template DocumentT()
     bool _retval;
     const(char)* _attributeName = attributeName.toCString(No.Alloc);
     const(char)* _attributeValue = attributeValue.toCString(No.Alloc);
-    _retval = atk_document_set_attribute_value(cast(AtkDocument*)cPtr, _attributeName, _attributeValue);
+    _retval = atk_document_set_attribute_value(cast(AtkDocument*)this._cPtr, _attributeName, _attributeValue);
     return _retval;
   }
 

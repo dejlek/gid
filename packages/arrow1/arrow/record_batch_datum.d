@@ -19,16 +19,16 @@ class RecordBatchDatum : arrow.datum.Datum
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_datum_get_type != &gidSymbolNotFound ? garrow_record_batch_datum_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class RecordBatchDatum : arrow.datum.Datum
   this(arrow.record_batch.RecordBatch value)
   {
     GArrowRecordBatchDatum* _cretval;
-    _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value.cPtr(No.Dup) : null);
+    _cretval = garrow_record_batch_datum_new(value ? cast(GArrowRecordBatch*)value._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

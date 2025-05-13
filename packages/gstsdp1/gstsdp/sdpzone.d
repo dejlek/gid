@@ -28,7 +28,7 @@ class SDPZone
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class SDPZone
   */
   @property string time()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
   }
 
   /**
@@ -49,8 +49,8 @@ class SDPZone
   */
   @property void time(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).time);
-    dToC(propval, cast(void*)&(cast(GstSDPZone*)cPtr).time);
+    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).time);
+    dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).time);
   }
 
   /**
@@ -59,7 +59,7 @@ class SDPZone
   */
   @property string typedTime()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
+    return cToD!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
   }
 
   /**
@@ -69,8 +69,8 @@ class SDPZone
   */
   @property void typedTime(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)cPtr).typedTime);
-    dToC(propval, cast(void*)&(cast(GstSDPZone*)cPtr).typedTime);
+    cValueFree!(string)(cast(void*)(cast(GstSDPZone*)this._cPtr).typedTime);
+    dToC(propval, cast(void*)&(cast(GstSDPZone*)this._cPtr).typedTime);
   }
 
   /**
@@ -80,7 +80,7 @@ class SDPZone
   gstsdp.types.SDPResult clear()
   {
     GstSDPResult _cretval;
-    _cretval = gst_sdp_zone_clear(cast(GstSDPZone*)cPtr);
+    _cretval = gst_sdp_zone_clear(cast(GstSDPZone*)this._cPtr);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }
@@ -98,7 +98,7 @@ class SDPZone
     GstSDPResult _cretval;
     const(char)* _adjTime = adjTime.toCString(No.Alloc);
     const(char)* _typedTime = typedTime.toCString(No.Alloc);
-    _cretval = gst_sdp_zone_set(cast(GstSDPZone*)cPtr, _adjTime, _typedTime);
+    _cretval = gst_sdp_zone_set(cast(GstSDPZone*)this._cPtr, _adjTime, _typedTime);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
     return _retval;
   }

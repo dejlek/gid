@@ -28,16 +28,16 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblemed_icon_get_type != &gidSymbolNotFound ? g_emblemed_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -59,7 +59,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   this(gio.icon.Icon icon, gio.emblem.Emblem emblem = null)
   {
     GIcon* _cretval;
-    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
+    _cretval = g_emblemed_icon_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, emblem ? cast(GEmblem*)emblem._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,7 +71,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   */
   void addEmblem(gio.emblem.Emblem emblem)
   {
-    g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)cPtr, emblem ? cast(GEmblem*)emblem.cPtr(No.Dup) : null);
+    g_emblemed_icon_add_emblem(cast(GEmblemedIcon*)this._cPtr, emblem ? cast(GEmblem*)emblem._cPtr(No.Dup) : null);
   }
 
   /**
@@ -79,7 +79,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   */
   void clearEmblems()
   {
-    g_emblemed_icon_clear_emblems(cast(GEmblemedIcon*)cPtr);
+    g_emblemed_icon_clear_emblems(cast(GEmblemedIcon*)this._cPtr);
   }
 
   /**
@@ -90,7 +90,7 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   gio.emblem.Emblem[] getEmblems()
   {
     GList* _cretval;
-    _cretval = g_emblemed_icon_get_emblems(cast(GEmblemedIcon*)cPtr);
+    _cretval = g_emblemed_icon_get_emblems(cast(GEmblemedIcon*)this._cPtr);
     auto _retval = gListToD!(gio.emblem.Emblem, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -102,8 +102,8 @@ class EmblemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = g_emblemed_icon_get_icon(cast(GEmblemedIcon*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 }

@@ -19,16 +19,16 @@ class LiteralExpression : arrow.expression.Expression
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_literal_expression_get_type != &gidSymbolNotFound ? garrow_literal_expression_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class LiteralExpression : arrow.expression.Expression
   this(arrow.datum.Datum datum)
   {
     GArrowLiteralExpression* _cretval;
-    _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum.cPtr(No.Dup) : null);
+    _cretval = garrow_literal_expression_new(datum ? cast(GArrowDatum*)datum._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

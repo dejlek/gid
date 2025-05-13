@@ -46,16 +46,16 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_dbus_server_get_type != &gidSymbolNotFound ? g_dbus_server_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -122,10 +122,10 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
     const(char)* _address = address.toCString(No.Alloc);
     const(char)* _guid = guid.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_dbus_server_new_sync(_address, flags, _guid, observer ? cast(GDBusAuthObserver*)observer._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.dbus_server.DBusServer)(cast(GDBusServer*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   string getClientAddress()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)cPtr);
+    _cretval = g_dbus_server_get_client_address(cast(GDBusServer*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -153,7 +153,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   gio.types.DBusServerFlags getFlags()
   {
     GDBusServerFlags _cretval;
-    _cretval = g_dbus_server_get_flags(cast(GDBusServer*)cPtr);
+    _cretval = g_dbus_server_get_flags(cast(GDBusServer*)this._cPtr);
     gio.types.DBusServerFlags _retval = cast(gio.types.DBusServerFlags)_cretval;
     return _retval;
   }
@@ -165,7 +165,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   string getGuid()
   {
     const(char)* _cretval;
-    _cretval = g_dbus_server_get_guid(cast(GDBusServer*)cPtr);
+    _cretval = g_dbus_server_get_guid(cast(GDBusServer*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -177,7 +177,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   bool isActive()
   {
     bool _retval;
-    _retval = g_dbus_server_is_active(cast(GDBusServer*)cPtr);
+    _retval = g_dbus_server_is_active(cast(GDBusServer*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   */
   void start()
   {
-    g_dbus_server_start(cast(GDBusServer*)cPtr);
+    g_dbus_server_start(cast(GDBusServer*)this._cPtr);
   }
 
   /**
@@ -194,7 +194,7 @@ class DBusServer : gobject.object.ObjectWrap, gio.initable.Initable
   */
   void stop()
   {
-    g_dbus_server_stop(cast(GDBusServer*)cPtr);
+    g_dbus_server_stop(cast(GDBusServer*)this._cPtr);
   }
 
   /**

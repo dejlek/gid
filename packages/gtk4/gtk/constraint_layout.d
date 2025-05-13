@@ -194,16 +194,16 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_constraint_layout_get_type != &gidSymbolNotFound ? gtk_constraint_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -247,7 +247,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   */
   void addConstraint(gtk.constraint.Constraint constraint)
   {
-    gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(Yes.Dup) : null);
+    gtk_constraint_layout_add_constraint(cast(GtkConstraintLayout*)this._cPtr, constraint ? cast(GtkConstraint*)constraint._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -357,7 +357,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
     auto _views = gHashTableFromD!(string, gtk.constraint_target.ConstraintTarget)(views);
     scope(exit) containerFree!(GHashTable*, string, GidOwnership.None)(_views);
     GError *_err;
-    _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
+    _cretval = gtk_constraint_layout_add_constraints_from_descriptionv(cast(GtkConstraintLayout*)this._cPtr, _lines, _nLines, hspacing, vspacing, _views, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(gtk.constraint.Constraint, GidOwnership.Container)(cast(GList*)_cretval);
@@ -378,7 +378,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   */
   void addGuide(gtk.constraint_guide.ConstraintGuide guide)
   {
-    gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(Yes.Dup) : null);
+    gtk_constraint_layout_add_guide(cast(GtkConstraintLayout*)this._cPtr, guide ? cast(GtkConstraintGuide*)guide._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -397,8 +397,8 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   gio.list_model.ListModel observeConstraints()
   {
     GListModel* _cretval;
-    _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = gtk_constraint_layout_observe_constraints(cast(GtkConstraintLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -418,8 +418,8 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   gio.list_model.ListModel observeGuides()
   {
     GListModel* _cretval;
-    _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = gtk_constraint_layout_observe_guides(cast(GtkConstraintLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -428,7 +428,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   */
   void removeAllConstraints()
   {
-    gtk_constraint_layout_remove_all_constraints(cast(GtkConstraintLayout*)cPtr);
+    gtk_constraint_layout_remove_all_constraints(cast(GtkConstraintLayout*)this._cPtr);
   }
 
   /**
@@ -440,7 +440,7 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   */
   void removeConstraint(gtk.constraint.Constraint constraint)
   {
-    gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)cPtr, constraint ? cast(GtkConstraint*)constraint.cPtr(No.Dup) : null);
+    gtk_constraint_layout_remove_constraint(cast(GtkConstraintLayout*)this._cPtr, constraint ? cast(GtkConstraint*)constraint._cPtr(No.Dup) : null);
   }
 
   /**
@@ -452,6 +452,6 @@ class ConstraintLayout : gtk.layout_manager.LayoutManager, gtk.buildable.Buildab
   */
   void removeGuide(gtk.constraint_guide.ConstraintGuide guide)
   {
-    gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)cPtr, guide ? cast(GtkConstraintGuide*)guide.cPtr(No.Dup) : null);
+    gtk_constraint_layout_remove_guide(cast(GtkConstraintLayout*)this._cPtr, guide ? cast(GtkConstraintGuide*)guide._cPtr(No.Dup) : null);
   }
 }

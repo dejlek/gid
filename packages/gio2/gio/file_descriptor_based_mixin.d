@@ -27,7 +27,7 @@ template FileDescriptorBasedT()
   override int getFd()
   {
     int _retval;
-    _retval = g_file_descriptor_based_get_fd(cast(GFileDescriptorBased*)cPtr);
+    _retval = g_file_descriptor_based_get_fd(cast(GFileDescriptorBased*)this._cPtr);
     return _retval;
   }
 }

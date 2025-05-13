@@ -24,16 +24,16 @@ class CompletionInfo : gtk.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_completion_info_get_type != &gidSymbolNotFound ? gtk_source_completion_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -62,6 +62,6 @@ class CompletionInfo : gtk.window.Window
   */
   void moveToIter(gtk.text_view.TextView view, gtk.text_iter.TextIter iter = null)
   {
-    gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)cPtr, view ? cast(GtkTextView*)view.cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter.cPtr(No.Dup) : null);
+    gtk_source_completion_info_move_to_iter(cast(GtkSourceCompletionInfo*)this._cPtr, view ? cast(GtkTextView*)view._cPtr(No.Dup) : null, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null);
   }
 }

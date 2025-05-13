@@ -63,16 +63,16 @@ class DisplayManager : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_display_manager_get_type != &gidSymbolNotFound ? gdk_display_manager_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -116,7 +116,7 @@ class DisplayManager : gobject.object.ObjectWrap
   {
     GdkDisplayManager* _cretval;
     _cretval = gdk_display_manager_get();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display_manager.DisplayManager)(cast(GdkDisplayManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -127,8 +127,8 @@ class DisplayManager : gobject.object.ObjectWrap
   gdk.display.Display getDefaultDisplay()
   {
     GdkDisplay* _cretval;
-    _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_display_manager_get_default_display(cast(GdkDisplayManager*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class DisplayManager : gobject.object.ObjectWrap
   gdk.display.Display[] listDisplays()
   {
     GSList* _cretval;
-    _cretval = gdk_display_manager_list_displays(cast(GdkDisplayManager*)cPtr);
+    _cretval = gdk_display_manager_list_displays(cast(GdkDisplayManager*)this._cPtr);
     auto _retval = gSListToD!(gdk.display.Display, GidOwnership.Container)(cast(GSList*)_cretval);
     return _retval;
   }
@@ -157,8 +157,8 @@ class DisplayManager : gobject.object.ObjectWrap
   {
     GdkDisplay* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)cPtr, _name);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
+    _cretval = gdk_display_manager_open_display(cast(GdkDisplayManager*)this._cPtr, _name);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.display.Display)(cast(GdkDisplay*)_cretval, No.Take);
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class DisplayManager : gobject.object.ObjectWrap
   */
   void setDefaultDisplay(gdk.display.Display display)
   {
-    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)cPtr, display ? cast(GdkDisplay*)display.cPtr(No.Dup) : null);
+    gdk_display_manager_set_default_display(cast(GdkDisplayManager*)this._cPtr, display ? cast(GdkDisplay*)display._cPtr(No.Dup) : null);
   }
 
   /**

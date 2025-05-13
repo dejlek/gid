@@ -27,7 +27,7 @@ class Atom
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -41,7 +41,7 @@ class Atom
   string name()
   {
     char* _cretval;
-    _cretval = gdk_atom_name(cast(GdkAtom)cPtr);
+    _cretval = gdk_atom_name(cast(GdkAtom)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

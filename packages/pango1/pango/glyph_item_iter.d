@@ -85,22 +85,22 @@ class GlyphItemIter : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_glyph_item_iter_get_type != &gidSymbolNotFound ? pango_glyph_item_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,99 +112,99 @@ class GlyphItemIter : gobject.boxed.Boxed
   /** */
   @property pango.glyph_item.GlyphItem glyphItem()
   {
-    return cToD!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
+    return cToD!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
   }
 
   /** */
   @property void glyphItem(pango.glyph_item.GlyphItem propval)
   {
-    cValueFree!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).glyphItem);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)cPtr).glyphItem);
+    cValueFree!(pango.glyph_item.GlyphItem)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).glyphItem);
   }
 
   /** */
   @property string text()
   {
-    return cToD!(string)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).text);
+    return cToD!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
   }
 
   /** */
   @property void text(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(PangoGlyphItemIter*)cPtr).text);
-    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)cPtr).text);
+    cValueFree!(string)(cast(void*)(cast(PangoGlyphItemIter*)this._cPtr).text);
+    dToC(propval, cast(void*)&(cast(PangoGlyphItemIter*)this._cPtr).text);
   }
 
   /** */
   @property int startGlyph()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).startGlyph;
+    return (cast(PangoGlyphItemIter*)this._cPtr).startGlyph;
   }
 
   /** */
   @property void startGlyph(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).startGlyph = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).startGlyph = propval;
   }
 
   /** */
   @property int startIndex()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).startIndex;
+    return (cast(PangoGlyphItemIter*)this._cPtr).startIndex;
   }
 
   /** */
   @property void startIndex(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).startIndex = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).startIndex = propval;
   }
 
   /** */
   @property int startChar()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).startChar;
+    return (cast(PangoGlyphItemIter*)this._cPtr).startChar;
   }
 
   /** */
   @property void startChar(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).startChar = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).startChar = propval;
   }
 
   /** */
   @property int endGlyph()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).endGlyph;
+    return (cast(PangoGlyphItemIter*)this._cPtr).endGlyph;
   }
 
   /** */
   @property void endGlyph(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).endGlyph = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).endGlyph = propval;
   }
 
   /** */
   @property int endIndex()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).endIndex;
+    return (cast(PangoGlyphItemIter*)this._cPtr).endIndex;
   }
 
   /** */
   @property void endIndex(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).endIndex = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).endIndex = propval;
   }
 
   /** */
   @property int endChar()
   {
-    return (cast(PangoGlyphItemIter*)cPtr).endChar;
+    return (cast(PangoGlyphItemIter*)this._cPtr).endChar;
   }
 
   /** */
   @property void endChar(int propval)
   {
-    (cast(PangoGlyphItemIter*)cPtr).endChar = propval;
+    (cast(PangoGlyphItemIter*)this._cPtr).endChar = propval;
   }
 
   /**
@@ -214,7 +214,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   pango.glyph_item_iter.GlyphItemIter copy()
   {
     PangoGlyphItemIter* _cretval;
-    _cretval = pango_glyph_item_iter_copy(cast(PangoGlyphItemIter*)cPtr);
+    _cretval = pango_glyph_item_iter_copy(cast(PangoGlyphItemIter*)this._cPtr);
     auto _retval = _cretval ? new pango.glyph_item_iter.GlyphItemIter(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -234,7 +234,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, _text);
+    _retval = pango_glyph_item_iter_init_end(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   {
     bool _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem.cPtr(No.Dup) : null, _text);
+    _retval = pango_glyph_item_iter_init_start(cast(PangoGlyphItemIter*)this._cPtr, glyphItem ? cast(PangoGlyphItem*)glyphItem._cPtr(No.Dup) : null, _text);
     return _retval;
   }
 
@@ -267,7 +267,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool nextCluster()
   {
     bool _retval;
-    _retval = pango_glyph_item_iter_next_cluster(cast(PangoGlyphItemIter*)cPtr);
+    _retval = pango_glyph_item_iter_next_cluster(cast(PangoGlyphItemIter*)this._cPtr);
     return _retval;
   }
 
@@ -280,7 +280,7 @@ class GlyphItemIter : gobject.boxed.Boxed
   bool prevCluster()
   {
     bool _retval;
-    _retval = pango_glyph_item_iter_prev_cluster(cast(PangoGlyphItemIter*)cPtr);
+    _retval = pango_glyph_item_iter_prev_cluster(cast(PangoGlyphItemIter*)this._cPtr);
     return _retval;
   }
 }

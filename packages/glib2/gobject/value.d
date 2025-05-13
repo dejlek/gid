@@ -50,22 +50,22 @@ class Value : Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_value_get_type != &gidSymbolNotFound ? g_value_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -95,7 +95,16 @@ class Value : Boxed
   */
   void init_(T)()
   {
-    initVal!T(cast(GValue*)cPtr);
+    initVal!T(cast(GValue*)_cPtr);
+  }
+
+  /**
+  * Get the GType of the data stored in the value.
+  * Returns: The GType of the value
+  */
+  @property GType valType()
+  {
+    return (cast(GValue*)_cPtr).gType;
   }
 
   /**
@@ -106,7 +115,7 @@ class Value : Boxed
   */
   T get(T)()
   {
-    return getVal!T(cast(GValue*)cPtr);
+    return getVal!T(cast(GValue*)_cPtr);
   }
 
   /**
@@ -117,7 +126,7 @@ class Value : Boxed
   */
   void set(T)(T val)
   {
-    setVal!T(cast(GValue*)cPtr, val);
+    setVal!T(cast(GValue*)_cPtr, val);
   }
 
   /**
@@ -128,7 +137,7 @@ class Value : Boxed
   */
   void copy(gobject.value.Value destValue)
   {
-    g_value_copy(cast(const(GValue)*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
+    g_value_copy(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
   }
 
   /**
@@ -140,9 +149,9 @@ class Value : Boxed
   */
   gobject.object.ObjectWrap dupObject()
   {
-    ObjectC* _cretval;
-    _cretval = g_value_dup_object(cast(const(GValue)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_value_dup_object(cast(const(GValue)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,7 +162,7 @@ class Value : Boxed
   string dupString()
   {
     char* _cretval;
-    _cretval = g_value_dup_string(cast(const(GValue)*)cPtr);
+    _cretval = g_value_dup_string(cast(const(GValue)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -167,7 +176,7 @@ class Value : Boxed
   glib.variant.Variant dupVariant()
   {
     GVariant* _cretval;
-    _cretval = g_value_dup_variant(cast(const(GValue)*)cPtr);
+    _cretval = g_value_dup_variant(cast(const(GValue)*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -180,7 +189,7 @@ class Value : Boxed
   bool fitsPointer()
   {
     bool _retval;
-    _retval = g_value_fits_pointer(cast(const(GValue)*)cPtr);
+    _retval = g_value_fits_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -191,7 +200,7 @@ class Value : Boxed
   bool getBoolean()
   {
     bool _retval;
-    _retval = g_value_get_boolean(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_boolean(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -201,7 +210,7 @@ class Value : Boxed
   */
   void* getBoxed()
   {
-    auto _retval = g_value_get_boxed(cast(const(GValue)*)cPtr);
+    auto _retval = g_value_get_boxed(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -217,7 +226,7 @@ class Value : Boxed
   char getChar()
   {
     char _retval;
-    _retval = g_value_get_char(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_char(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -228,7 +237,7 @@ class Value : Boxed
   double getDouble()
   {
     double _retval;
-    _retval = g_value_get_double(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_double(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +248,7 @@ class Value : Boxed
   int getEnum()
   {
     int _retval;
-    _retval = g_value_get_enum(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_enum(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -250,7 +259,7 @@ class Value : Boxed
   uint getFlags()
   {
     uint _retval;
-    _retval = g_value_get_flags(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_flags(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -261,7 +270,7 @@ class Value : Boxed
   float getFloat()
   {
     float _retval;
-    _retval = g_value_get_float(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_float(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -272,7 +281,7 @@ class Value : Boxed
   gobject.types.GType getGtype()
   {
     gobject.types.GType _retval;
-    _retval = g_value_get_gtype(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_gtype(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +292,7 @@ class Value : Boxed
   int getInt()
   {
     int _retval;
-    _retval = g_value_get_int(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_int(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -294,7 +303,7 @@ class Value : Boxed
   long getInt64()
   {
     long _retval;
-    _retval = g_value_get_int64(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_int64(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +314,7 @@ class Value : Boxed
   glong getLong()
   {
     glong _retval;
-    _retval = g_value_get_long(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_long(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -315,9 +324,9 @@ class Value : Boxed
   */
   gobject.object.ObjectWrap getObject()
   {
-    ObjectC* _cretval;
-    _cretval = g_value_get_object(cast(const(GValue)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_value_get_object(cast(const(GValue)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -328,7 +337,7 @@ class Value : Boxed
   gobject.param_spec.ParamSpec getParam()
   {
     GParamSpec* _cretval;
-    _cretval = g_value_get_param(cast(const(GValue)*)cPtr);
+    _cretval = g_value_get_param(cast(const(GValue)*)this._cPtr);
     auto _retval = _cretval ? new gobject.param_spec.ParamSpec(cast(GParamSpec*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -339,7 +348,7 @@ class Value : Boxed
   */
   void* getPointer()
   {
-    auto _retval = g_value_get_pointer(cast(const(GValue)*)cPtr);
+    auto _retval = g_value_get_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -350,7 +359,7 @@ class Value : Boxed
   byte getSchar()
   {
     byte _retval;
-    _retval = g_value_get_schar(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_schar(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -361,7 +370,7 @@ class Value : Boxed
   string getString()
   {
     const(char)* _cretval;
-    _cretval = g_value_get_string(cast(const(GValue)*)cPtr);
+    _cretval = g_value_get_string(cast(const(GValue)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -373,7 +382,7 @@ class Value : Boxed
   ubyte getUchar()
   {
     ubyte _retval;
-    _retval = g_value_get_uchar(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_uchar(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -384,7 +393,7 @@ class Value : Boxed
   uint getUint()
   {
     uint _retval;
-    _retval = g_value_get_uint(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_uint(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -395,7 +404,7 @@ class Value : Boxed
   ulong getUint64()
   {
     ulong _retval;
-    _retval = g_value_get_uint64(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_uint64(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -406,7 +415,7 @@ class Value : Boxed
   gulong getUlong()
   {
     gulong _retval;
-    _retval = g_value_get_ulong(cast(const(GValue)*)cPtr);
+    _retval = g_value_get_ulong(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -417,7 +426,7 @@ class Value : Boxed
   glib.variant.Variant getVariant()
   {
     GVariant* _cretval;
-    _cretval = g_value_get_variant(cast(const(GValue)*)cPtr);
+    _cretval = g_value_get_variant(cast(const(GValue)*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -432,7 +441,7 @@ class Value : Boxed
   gobject.value.Value init_(gobject.types.GType gType)
   {
     GValue* _cretval;
-    _cretval = g_value_init(cast(GValue*)cPtr, gType);
+    _cretval = g_value_init(cast(GValue*)this._cPtr, gType);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -451,7 +460,7 @@ class Value : Boxed
   */
   void initFromInstance(gobject.type_instance.TypeInstance instance)
   {
-    g_value_init_from_instance(cast(GValue*)cPtr, instance ? cast(GTypeInstance*)instance.cPtr : null);
+    g_value_init_from_instance(cast(GValue*)this._cPtr, instance ? cast(GTypeInstance*)instance._cPtr : null);
   }
 
   /**
@@ -462,7 +471,7 @@ class Value : Boxed
   */
   void* peekPointer()
   {
-    auto _retval = g_value_peek_pointer(cast(const(GValue)*)cPtr);
+    auto _retval = g_value_peek_pointer(cast(const(GValue)*)this._cPtr);
     return _retval;
   }
 
@@ -474,7 +483,7 @@ class Value : Boxed
   gobject.value.Value reset()
   {
     GValue* _cretval;
-    _cretval = g_value_reset(cast(GValue*)cPtr);
+    _cretval = g_value_reset(cast(GValue*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -487,7 +496,7 @@ class Value : Boxed
   */
   void setBoolean(bool vBoolean)
   {
-    g_value_set_boolean(cast(GValue*)cPtr, vBoolean);
+    g_value_set_boolean(cast(GValue*)this._cPtr, vBoolean);
   }
 
   /**
@@ -498,7 +507,7 @@ class Value : Boxed
   */
   void setBoxed(const(void)* vBoxed = null)
   {
-    g_value_set_boxed(cast(GValue*)cPtr, vBoxed);
+    g_value_set_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
 
   /**
@@ -511,7 +520,7 @@ class Value : Boxed
   */
   void setBoxedTakeOwnership(const(void)* vBoxed = null)
   {
-    g_value_set_boxed_take_ownership(cast(GValue*)cPtr, vBoxed);
+    g_value_set_boxed_take_ownership(cast(GValue*)this._cPtr, vBoxed);
   }
 
   /**
@@ -524,7 +533,7 @@ class Value : Boxed
   */
   void setChar(char vChar)
   {
-    g_value_set_char(cast(GValue*)cPtr, vChar);
+    g_value_set_char(cast(GValue*)this._cPtr, vChar);
   }
 
   /**
@@ -535,7 +544,7 @@ class Value : Boxed
   */
   void setDouble(double vDouble)
   {
-    g_value_set_double(cast(GValue*)cPtr, vDouble);
+    g_value_set_double(cast(GValue*)this._cPtr, vDouble);
   }
 
   /**
@@ -546,7 +555,7 @@ class Value : Boxed
   */
   void setEnum(int vEnum)
   {
-    g_value_set_enum(cast(GValue*)cPtr, vEnum);
+    g_value_set_enum(cast(GValue*)this._cPtr, vEnum);
   }
 
   /**
@@ -557,7 +566,7 @@ class Value : Boxed
   */
   void setFlags(uint vFlags)
   {
-    g_value_set_flags(cast(GValue*)cPtr, vFlags);
+    g_value_set_flags(cast(GValue*)this._cPtr, vFlags);
   }
 
   /**
@@ -568,7 +577,7 @@ class Value : Boxed
   */
   void setFloat(float vFloat)
   {
-    g_value_set_float(cast(GValue*)cPtr, vFloat);
+    g_value_set_float(cast(GValue*)this._cPtr, vFloat);
   }
 
   /**
@@ -579,7 +588,7 @@ class Value : Boxed
   */
   void setGtype(gobject.types.GType vGtype)
   {
-    g_value_set_gtype(cast(GValue*)cPtr, vGtype);
+    g_value_set_gtype(cast(GValue*)this._cPtr, vGtype);
   }
 
   /**
@@ -591,7 +600,7 @@ class Value : Boxed
   */
   void setInstance(void* instance = null)
   {
-    g_value_set_instance(cast(GValue*)cPtr, instance);
+    g_value_set_instance(cast(GValue*)this._cPtr, instance);
   }
 
   /**
@@ -602,7 +611,7 @@ class Value : Boxed
   */
   void setInt(int vInt)
   {
-    g_value_set_int(cast(GValue*)cPtr, vInt);
+    g_value_set_int(cast(GValue*)this._cPtr, vInt);
   }
 
   /**
@@ -613,7 +622,7 @@ class Value : Boxed
   */
   void setInt64(long vInt64)
   {
-    g_value_set_int64(cast(GValue*)cPtr, vInt64);
+    g_value_set_int64(cast(GValue*)this._cPtr, vInt64);
   }
 
   /**
@@ -627,7 +636,7 @@ class Value : Boxed
   void setInternedString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
-    g_value_set_interned_string(cast(GValue*)cPtr, _vString);
+    g_value_set_interned_string(cast(GValue*)this._cPtr, _vString);
   }
 
   /**
@@ -638,7 +647,7 @@ class Value : Boxed
   */
   void setLong(glong vLong)
   {
-    g_value_set_long(cast(GValue*)cPtr, vLong);
+    g_value_set_long(cast(GValue*)this._cPtr, vLong);
   }
 
   /**
@@ -659,7 +668,7 @@ class Value : Boxed
   */
   void setObject(gobject.object.ObjectWrap vObject = null)
   {
-    g_value_set_object(cast(GValue*)cPtr, vObject ? cast(ObjectC*)vObject.cPtr(No.Dup) : null);
+    g_value_set_object(cast(GValue*)this._cPtr, vObject ? cast(GObject*)vObject._cPtr(No.Dup) : null);
   }
 
   /**
@@ -670,7 +679,7 @@ class Value : Boxed
   */
   void setParam(gobject.param_spec.ParamSpec param = null)
   {
-    g_value_set_param(cast(GValue*)cPtr, param ? cast(GParamSpec*)param.cPtr(No.Dup) : null);
+    g_value_set_param(cast(GValue*)this._cPtr, param ? cast(GParamSpec*)param._cPtr(No.Dup) : null);
   }
 
   /**
@@ -681,7 +690,7 @@ class Value : Boxed
   */
   void setPointer(void* vPointer = null)
   {
-    g_value_set_pointer(cast(GValue*)cPtr, vPointer);
+    g_value_set_pointer(cast(GValue*)this._cPtr, vPointer);
   }
 
   /**
@@ -692,7 +701,7 @@ class Value : Boxed
   */
   void setSchar(byte vChar)
   {
-    g_value_set_schar(cast(GValue*)cPtr, vChar);
+    g_value_set_schar(cast(GValue*)this._cPtr, vChar);
   }
 
   /**
@@ -706,7 +715,7 @@ class Value : Boxed
   */
   void setStaticBoxed(const(void)* vBoxed = null)
   {
-    g_value_set_static_boxed(cast(GValue*)cPtr, vBoxed);
+    g_value_set_static_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
 
   /**
@@ -723,7 +732,7 @@ class Value : Boxed
   void setStaticString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
-    g_value_set_static_string(cast(GValue*)cPtr, _vString);
+    g_value_set_static_string(cast(GValue*)this._cPtr, _vString);
   }
 
   /**
@@ -735,7 +744,7 @@ class Value : Boxed
   void setString(string vString = null)
   {
     const(char)* _vString = vString.toCString(No.Alloc);
-    g_value_set_string(cast(GValue*)cPtr, _vString);
+    g_value_set_string(cast(GValue*)this._cPtr, _vString);
   }
 
   /**
@@ -749,7 +758,7 @@ class Value : Boxed
   void setStringTakeOwnership(string vString = null)
   {
     char* _vString = vString.toCString(No.Alloc);
-    g_value_set_string_take_ownership(cast(GValue*)cPtr, _vString);
+    g_value_set_string_take_ownership(cast(GValue*)this._cPtr, _vString);
   }
 
   /**
@@ -760,7 +769,7 @@ class Value : Boxed
   */
   void setUchar(ubyte vUchar)
   {
-    g_value_set_uchar(cast(GValue*)cPtr, vUchar);
+    g_value_set_uchar(cast(GValue*)this._cPtr, vUchar);
   }
 
   /**
@@ -771,7 +780,7 @@ class Value : Boxed
   */
   void setUint(uint vUint)
   {
-    g_value_set_uint(cast(GValue*)cPtr, vUint);
+    g_value_set_uint(cast(GValue*)this._cPtr, vUint);
   }
 
   /**
@@ -782,7 +791,7 @@ class Value : Boxed
   */
   void setUint64(ulong vUint64)
   {
-    g_value_set_uint64(cast(GValue*)cPtr, vUint64);
+    g_value_set_uint64(cast(GValue*)this._cPtr, vUint64);
   }
 
   /**
@@ -793,7 +802,7 @@ class Value : Boxed
   */
   void setUlong(gulong vUlong)
   {
-    g_value_set_ulong(cast(GValue*)cPtr, vUlong);
+    g_value_set_ulong(cast(GValue*)this._cPtr, vUlong);
   }
 
   /**
@@ -805,7 +814,7 @@ class Value : Boxed
   */
   void setVariant(glib.variant.Variant variant = null)
   {
-    g_value_set_variant(cast(GValue*)cPtr, variant ? cast(GVariant*)variant.cPtr(No.Dup) : null);
+    g_value_set_variant(cast(GValue*)this._cPtr, variant ? cast(GVariant*)variant._cPtr(No.Dup) : null);
   }
 
   /**
@@ -824,7 +833,7 @@ class Value : Boxed
   string stealString()
   {
     char* _cretval;
-    _cretval = g_value_steal_string(cast(GValue*)cPtr);
+    _cretval = g_value_steal_string(cast(GValue*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -839,7 +848,7 @@ class Value : Boxed
   */
   void takeBoxed(const(void)* vBoxed = null)
   {
-    g_value_take_boxed(cast(GValue*)cPtr, vBoxed);
+    g_value_take_boxed(cast(GValue*)this._cPtr, vBoxed);
   }
 
   /**
@@ -851,7 +860,7 @@ class Value : Boxed
   void takeString(string vString = null)
   {
     char* _vString = vString.toCString(Yes.Alloc);
-    g_value_take_string(cast(GValue*)cPtr, _vString);
+    g_value_take_string(cast(GValue*)this._cPtr, _vString);
   }
 
   /**
@@ -873,7 +882,7 @@ class Value : Boxed
   */
   void takeVariant(glib.variant.Variant variant = null)
   {
-    g_value_take_variant(cast(GValue*)cPtr, variant ? cast(GVariant*)variant.cPtr(Yes.Dup) : null);
+    g_value_take_variant(cast(GValue*)this._cPtr, variant ? cast(GVariant*)variant._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -893,7 +902,7 @@ class Value : Boxed
   bool transform(gobject.value.Value destValue)
   {
     bool _retval;
-    _retval = g_value_transform(cast(const(GValue)*)cPtr, destValue ? cast(GValue*)destValue.cPtr(No.Dup) : null);
+    _retval = g_value_transform(cast(const(GValue)*)this._cPtr, destValue ? cast(GValue*)destValue._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -905,7 +914,7 @@ class Value : Boxed
   */
   void unset()
   {
-    g_value_unset(cast(GValue*)cPtr);
+    g_value_unset(cast(GValue*)this._cPtr);
   }
 
   /**
@@ -1037,7 +1046,7 @@ T getVal(T)(const(GValue)* gval)
   else static if (is(T : gobject.object.ObjectWrap) || is(T == interface))
   {
     auto v = g_value_get_object(gval);
-    return gobject.object.ObjectWrap.getDObject!T(v, No.Take);
+    return gobject.object.ObjectWrap._getDObject!T(v, No.Take);
   }
   else static if (is(T : Object) || isPointer!T)
     return cast(T)g_value_get_pointer(gval);
@@ -1082,20 +1091,20 @@ void setVal(T)(GValue* gval, T v)
   else static if (is(T == string))
     g_value_take_string(gval, v.toCString(Yes.Alloc));
   else static if (is(T == glib.variant.Variant))
-    g_value_set_variant(gval, cast(GVariant*)v.cPtr);
+    g_value_set_variant(gval, cast(GVariant*)v._cPtr);
   else static if (is(T : ParamSpec))
-    g_value_set_param(gval, cast(GParamSpec*)v.cPtr);
+    g_value_set_param(gval, cast(GParamSpec*)v._cPtr);
   else static if (is(T : Boxed))
   {
-    g_value_init(gval, v.gType); // Have to initialize the specific boxed type here rather than in initVal
+    g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, v.cInstancePtr);
   }
   else static if (is(T : gobject.object.ObjectWrap))
-    g_value_set_object(gval, cast(ObjectC*)v.cPtr(No.Dup));
+    g_value_set_object(gval, cast(GObject*)v._cPtr(No.Dup));
   else static if (is(T == interface))
   {
     if (auto objG = cast(gobject.object.ObjectWrap)v)
-      g_value_set_object(gval, cast(ObjectC*)objG.cPtr(No.Dup));
+      g_value_set_object(gval, cast(GObject*)objG._cPtr(No.Dup));
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }

@@ -99,16 +99,16 @@ class DropTarget : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_target_get_type != &gidSymbolNotFound ? gtk_drop_target_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -241,7 +241,7 @@ class DropTarget : gtk.event_controller.EventController
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
-    _cretval = gtk_drop_target_get_actions(cast(GtkDropTarget*)cPtr);
+    _cretval = gtk_drop_target_get_actions(cast(GtkDropTarget*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -255,8 +255,8 @@ class DropTarget : gtk.event_controller.EventController
   gdk.drop.Drop getCurrentDrop()
   {
     GdkDrop* _cretval;
-    _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    _cretval = gtk_drop_target_get_current_drop(cast(GtkDropTarget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -271,8 +271,8 @@ class DropTarget : gtk.event_controller.EventController
   gdk.drop.Drop getDrop()
   {
     GdkDrop* _cretval;
-    _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
+    _cretval = gtk_drop_target_get_drop(cast(GtkDropTarget*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.drop.Drop)(cast(GdkDrop*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class DropTarget : gtk.event_controller.EventController
   gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
-    _cretval = gtk_drop_target_get_formats(cast(GtkDropTarget*)cPtr);
+    _cretval = gtk_drop_target_get_formats(cast(GtkDropTarget*)this._cPtr);
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -301,7 +301,7 @@ class DropTarget : gtk.event_controller.EventController
   {
     const(GType)* _cretval;
     size_t _cretlength;
-    _cretval = gtk_drop_target_get_gtypes(cast(GtkDropTarget*)cPtr, &_cretlength);
+    _cretval = gtk_drop_target_get_gtypes(cast(GtkDropTarget*)this._cPtr, &_cretlength);
     gobject.types.GType[] _retval;
 
     if (_cretval)
@@ -318,7 +318,7 @@ class DropTarget : gtk.event_controller.EventController
   bool getPreload()
   {
     bool _retval;
-    _retval = gtk_drop_target_get_preload(cast(GtkDropTarget*)cPtr);
+    _retval = gtk_drop_target_get_preload(cast(GtkDropTarget*)this._cPtr);
     return _retval;
   }
 
@@ -329,7 +329,7 @@ class DropTarget : gtk.event_controller.EventController
   gobject.value.Value getValue()
   {
     const(GValue)* _cretval;
-    _cretval = gtk_drop_target_get_value(cast(GtkDropTarget*)cPtr);
+    _cretval = gtk_drop_target_get_value(cast(GtkDropTarget*)this._cPtr);
     auto _retval = _cretval ? new gobject.value.Value(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -346,7 +346,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   void reject()
   {
-    gtk_drop_target_reject(cast(GtkDropTarget*)cPtr);
+    gtk_drop_target_reject(cast(GtkDropTarget*)this._cPtr);
   }
 
   /**
@@ -357,7 +357,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   void setActions(gdk.types.DragAction actions)
   {
-    gtk_drop_target_set_actions(cast(GtkDropTarget*)cPtr, actions);
+    gtk_drop_target_set_actions(cast(GtkDropTarget*)this._cPtr, actions);
   }
 
   /**
@@ -374,7 +374,7 @@ class DropTarget : gtk.event_controller.EventController
       _nTypes = cast(size_t)types.length;
 
     auto _types = cast(GType*)types.ptr;
-    gtk_drop_target_set_gtypes(cast(GtkDropTarget*)cPtr, _types, _nTypes);
+    gtk_drop_target_set_gtypes(cast(GtkDropTarget*)this._cPtr, _types, _nTypes);
   }
 
   /**
@@ -385,7 +385,7 @@ class DropTarget : gtk.event_controller.EventController
   */
   void setPreload(bool preload)
   {
-    gtk_drop_target_set_preload(cast(GtkDropTarget*)cPtr, preload);
+    gtk_drop_target_set_preload(cast(GtkDropTarget*)this._cPtr, preload);
   }
 
   /**

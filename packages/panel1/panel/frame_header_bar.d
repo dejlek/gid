@@ -34,16 +34,16 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_frame_header_bar_get_type != &gidSymbolNotFound ? panel_frame_header_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,8 +91,8 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   gtk.popover_menu.PopoverMenu getMenuPopover()
   {
     GtkPopoverMenu* _cretval;
-    _cretval = panel_frame_header_bar_get_menu_popover(cast(PanelFrameHeaderBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkPopoverMenu*)_cretval, No.Take);
+    _cretval = panel_frame_header_bar_get_menu_popover(cast(PanelFrameHeaderBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover_menu.PopoverMenu)(cast(GtkPopoverMenu*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,7 +103,7 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   bool getShowIcon()
   {
     bool _retval;
-    _retval = panel_frame_header_bar_get_show_icon(cast(PanelFrameHeaderBar*)cPtr);
+    _retval = panel_frame_header_bar_get_show_icon(cast(PanelFrameHeaderBar*)this._cPtr);
     return _retval;
   }
 
@@ -115,6 +115,6 @@ class FrameHeaderBar : gtk.widget.Widget, panel.frame_header.FrameHeader
   */
   void setShowIcon(bool showIcon)
   {
-    panel_frame_header_bar_set_show_icon(cast(PanelFrameHeaderBar*)cPtr, showIcon);
+    panel_frame_header_bar_set_show_icon(cast(PanelFrameHeaderBar*)this._cPtr, showIcon);
   }
 }

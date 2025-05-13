@@ -36,16 +36,16 @@ class NativeDialog : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_native_dialog_get_type != &gidSymbolNotFound ? gtk_native_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -143,7 +143,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void destroy()
   {
-    gtk_native_dialog_destroy(cast(GtkNativeDialog*)cPtr);
+    gtk_native_dialog_destroy(cast(GtkNativeDialog*)this._cPtr);
   }
 
   /**
@@ -153,7 +153,7 @@ class NativeDialog : gobject.object.ObjectWrap
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_native_dialog_get_modal(cast(GtkNativeDialog*)cPtr);
+    _retval = gtk_native_dialog_get_modal(cast(GtkNativeDialog*)this._cPtr);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class NativeDialog : gobject.object.ObjectWrap
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)cPtr);
+    _cretval = gtk_native_dialog_get_title(cast(GtkNativeDialog*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -180,8 +180,8 @@ class NativeDialog : gobject.object.ObjectWrap
   gtk.window.Window getTransientFor()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_native_dialog_get_transient_for(cast(GtkNativeDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class NativeDialog : gobject.object.ObjectWrap
   bool getVisible()
   {
     bool _retval;
-    _retval = gtk_native_dialog_get_visible(cast(GtkNativeDialog*)cPtr);
+    _retval = gtk_native_dialog_get_visible(cast(GtkNativeDialog*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void hide()
   {
-    gtk_native_dialog_hide(cast(GtkNativeDialog*)cPtr);
+    gtk_native_dialog_hide(cast(GtkNativeDialog*)this._cPtr);
   }
 
   /**
@@ -243,7 +243,7 @@ class NativeDialog : gobject.object.ObjectWrap
   int run()
   {
     int _retval;
-    _retval = gtk_native_dialog_run(cast(GtkNativeDialog*)cPtr);
+    _retval = gtk_native_dialog_run(cast(GtkNativeDialog*)this._cPtr);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void setModal(bool modal)
   {
-    gtk_native_dialog_set_modal(cast(GtkNativeDialog*)cPtr, modal);
+    gtk_native_dialog_set_modal(cast(GtkNativeDialog*)this._cPtr, modal);
   }
 
   /**
@@ -272,7 +272,7 @@ class NativeDialog : gobject.object.ObjectWrap
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_native_dialog_set_title(cast(GtkNativeDialog*)cPtr, _title);
+    gtk_native_dialog_set_title(cast(GtkNativeDialog*)this._cPtr, _title);
   }
 
   /**
@@ -289,7 +289,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_native_dialog_set_transient_for(cast(GtkNativeDialog*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -302,7 +302,7 @@ class NativeDialog : gobject.object.ObjectWrap
   */
   void show()
   {
-    gtk_native_dialog_show(cast(GtkNativeDialog*)cPtr);
+    gtk_native_dialog_show(cast(GtkNativeDialog*)this._cPtr);
   }
 
   /**

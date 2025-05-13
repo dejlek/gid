@@ -30,16 +30,16 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_themed_icon_get_type != &gidSymbolNotFound ? g_themed_icon_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -84,7 +84,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
       _tmpiconnames ~= s.toCString(No.Alloc);
     char** _iconnames = _tmpiconnames.ptr;
     _cretval = g_themed_icon_new_from_names(_iconnames, _len);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
     GIcon* _cretval;
     const(char)* _iconname = iconname.toCString(No.Alloc);
     _cretval = g_themed_icon_new_with_default_fallbacks(_iconname);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.themed_icon.ThemedIcon)(cast(GIcon*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -130,7 +130,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   void appendName(string iconname)
   {
     const(char)* _iconname = iconname.toCString(No.Alloc);
-    g_themed_icon_append_name(cast(GThemedIcon*)cPtr, _iconname);
+    g_themed_icon_append_name(cast(GThemedIcon*)this._cPtr, _iconname);
   }
 
   /**
@@ -140,7 +140,7 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   string[] getNames()
   {
     const(char*)* _cretval;
-    _cretval = g_themed_icon_get_names(cast(GThemedIcon*)cPtr);
+    _cretval = g_themed_icon_get_names(cast(GThemedIcon*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -167,6 +167,6 @@ class ThemedIcon : gobject.object.ObjectWrap, gio.icon.Icon
   void prependName(string iconname)
   {
     const(char)* _iconname = iconname.toCString(No.Alloc);
-    g_themed_icon_prepend_name(cast(GThemedIcon*)cPtr, _iconname);
+    g_themed_icon_prepend_name(cast(GThemedIcon*)this._cPtr, _iconname);
   }
 }

@@ -24,22 +24,22 @@ class Encoding : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_encoding_get_type != &gidSymbolNotFound ? gtk_source_encoding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -55,7 +55,7 @@ class Encoding : gobject.boxed.Boxed
   gtksource.encoding.Encoding copy()
   {
     GtkSourceEncoding* _cretval;
-    _cretval = gtk_source_encoding_copy(cast(const(GtkSourceEncoding)*)cPtr);
+    _cretval = gtk_source_encoding_copy(cast(const(GtkSourceEncoding)*)this._cPtr);
     auto _retval = _cretval ? new gtksource.encoding.Encoding(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -68,7 +68,7 @@ class Encoding : gobject.boxed.Boxed
   string getCharset()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)cPtr);
+    _cretval = gtk_source_encoding_get_charset(cast(const(GtkSourceEncoding)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -80,7 +80,7 @@ class Encoding : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)cPtr);
+    _cretval = gtk_source_encoding_get_name(cast(const(GtkSourceEncoding)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -89,7 +89,7 @@ class Encoding : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)cPtr);
+    _cretval = gtk_source_encoding_to_string(cast(const(GtkSourceEncoding)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

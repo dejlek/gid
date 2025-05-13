@@ -27,16 +27,16 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_emblem_get_type != &gidSymbolNotFound ? g_emblem_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   this(gio.icon.Icon icon)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    _cretval = g_emblem_new(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -72,8 +72,8 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   static gio.emblem.Emblem newWithOrigin(gio.icon.Icon icon, gio.types.EmblemOrigin origin)
   {
     GEmblem* _cretval;
-    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null, origin);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.Take);
+    _cretval = g_emblem_new_with_origin(icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null, origin);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.emblem.Emblem)(cast(GEmblem*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -85,8 +85,8 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = g_emblem_get_icon(cast(GEmblem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = g_emblem_get_icon(cast(GEmblem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -97,7 +97,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
   gio.types.EmblemOrigin getOrigin()
   {
     GEmblemOrigin _cretval;
-    _cretval = g_emblem_get_origin(cast(GEmblem*)cPtr);
+    _cretval = g_emblem_get_origin(cast(GEmblem*)this._cPtr);
     gio.types.EmblemOrigin _retval = cast(gio.types.EmblemOrigin)_cretval;
     return _retval;
   }

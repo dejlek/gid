@@ -35,7 +35,7 @@ class OptionContext
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -50,7 +50,7 @@ class OptionContext
   */
   void addGroup(glib.option_group.OptionGroup group)
   {
-    g_option_context_add_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
+    g_option_context_add_group(cast(GOptionContext*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -67,7 +67,7 @@ class OptionContext
   {
     auto _entries = cast(const(GOptionEntry)*)(entries ~ GOptionEntry.init).ptr;
     const(char)* _translationDomain = translationDomain.toCString(No.Alloc);
-    g_option_context_add_main_entries(cast(GOptionContext*)cPtr, _entries, _translationDomain);
+    g_option_context_add_main_entries(cast(GOptionContext*)this._cPtr, _entries, _translationDomain);
   }
 
   /**
@@ -77,7 +77,7 @@ class OptionContext
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = g_option_context_get_description(cast(GOptionContext*)cPtr);
+    _cretval = g_option_context_get_description(cast(GOptionContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -99,7 +99,7 @@ class OptionContext
   string getHelp(bool mainHelp, glib.option_group.OptionGroup group = null)
   {
     char* _cretval;
-    _cretval = g_option_context_get_help(cast(GOptionContext*)cPtr, mainHelp, group ? cast(GOptionGroup*)group.cPtr(No.Dup) : null);
+    _cretval = g_option_context_get_help(cast(GOptionContext*)this._cPtr, mainHelp, group ? cast(GOptionGroup*)group._cPtr(No.Dup) : null);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }
@@ -112,7 +112,7 @@ class OptionContext
   bool getHelpEnabled()
   {
     bool _retval;
-    _retval = g_option_context_get_help_enabled(cast(GOptionContext*)cPtr);
+    _retval = g_option_context_get_help_enabled(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 
@@ -124,7 +124,7 @@ class OptionContext
   bool getIgnoreUnknownOptions()
   {
     bool _retval;
-    _retval = g_option_context_get_ignore_unknown_options(cast(GOptionContext*)cPtr);
+    _retval = g_option_context_get_ignore_unknown_options(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 
@@ -137,7 +137,7 @@ class OptionContext
   glib.option_group.OptionGroup getMainGroup()
   {
     GOptionGroup* _cretval;
-    _cretval = g_option_context_get_main_group(cast(GOptionContext*)cPtr);
+    _cretval = g_option_context_get_main_group(cast(GOptionContext*)this._cPtr);
     auto _retval = _cretval ? new glib.option_group.OptionGroup(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -151,7 +151,7 @@ class OptionContext
   bool getStrictPosix()
   {
     bool _retval;
-    _retval = g_option_context_get_strict_posix(cast(GOptionContext*)cPtr);
+    _retval = g_option_context_get_strict_posix(cast(GOptionContext*)this._cPtr);
     return _retval;
   }
 
@@ -162,7 +162,7 @@ class OptionContext
   string getSummary()
   {
     const(char)* _cretval;
-    _cretval = g_option_context_get_summary(cast(GOptionContext*)cPtr);
+    _cretval = g_option_context_get_summary(cast(GOptionContext*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -181,7 +181,7 @@ class OptionContext
   void setDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    g_option_context_set_description(cast(GOptionContext*)cPtr, _description);
+    g_option_context_set_description(cast(GOptionContext*)this._cPtr, _description);
   }
 
   /**
@@ -195,7 +195,7 @@ class OptionContext
   */
   void setHelpEnabled(bool helpEnabled)
   {
-    g_option_context_set_help_enabled(cast(GOptionContext*)cPtr, helpEnabled);
+    g_option_context_set_help_enabled(cast(GOptionContext*)this._cPtr, helpEnabled);
   }
 
   /**
@@ -213,7 +213,7 @@ class OptionContext
   */
   void setIgnoreUnknownOptions(bool ignoreUnknown)
   {
-    g_option_context_set_ignore_unknown_options(cast(GOptionContext*)cPtr, ignoreUnknown);
+    g_option_context_set_ignore_unknown_options(cast(GOptionContext*)this._cPtr, ignoreUnknown);
   }
 
   /**
@@ -227,7 +227,7 @@ class OptionContext
   */
   void setMainGroup(glib.option_group.OptionGroup group)
   {
-    g_option_context_set_main_group(cast(GOptionContext*)cPtr, group ? cast(GOptionGroup*)group.cPtr(Yes.Dup) : null);
+    g_option_context_set_main_group(cast(GOptionContext*)this._cPtr, group ? cast(GOptionGroup*)group._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -261,7 +261,7 @@ class OptionContext
   */
   void setStrictPosix(bool strictPosix)
   {
-    g_option_context_set_strict_posix(cast(GOptionContext*)cPtr, strictPosix);
+    g_option_context_set_strict_posix(cast(GOptionContext*)this._cPtr, strictPosix);
   }
 
   /**
@@ -279,7 +279,7 @@ class OptionContext
   void setSummary(string summary = null)
   {
     const(char)* _summary = summary.toCString(No.Alloc);
-    g_option_context_set_summary(cast(GOptionContext*)cPtr, _summary);
+    g_option_context_set_summary(cast(GOptionContext*)this._cPtr, _summary);
   }
 
   /**
@@ -315,7 +315,7 @@ class OptionContext
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    g_option_context_set_translate_func(cast(GOptionContext*)cPtr, _funcCB, _func, _funcDestroyCB);
+    g_option_context_set_translate_func(cast(GOptionContext*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   /**
@@ -328,6 +328,6 @@ class OptionContext
   void setTranslationDomain(string domain)
   {
     const(char)* _domain = domain.toCString(No.Alloc);
-    g_option_context_set_translation_domain(cast(GOptionContext*)cPtr, _domain);
+    g_option_context_set_translation_domain(cast(GOptionContext*)this._cPtr, _domain);
   }
 }

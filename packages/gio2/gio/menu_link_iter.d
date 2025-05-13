@@ -22,16 +22,16 @@ class MenuLinkIter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_menu_link_iter_get_type != &gidSymbolNotFound ? g_menu_link_iter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -49,7 +49,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)cPtr);
+    _cretval = g_menu_link_iter_get_name(cast(GMenuLinkIter*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -80,7 +80,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
     bool _retval;
     char* _outLink;
     GMenuModel* _value;
-    _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)cPtr, &_outLink, &_value);
+    _retval = g_menu_link_iter_get_next(cast(GMenuLinkIter*)this._cPtr, &_outLink, &_value);
     outLink = _outLink.fromCString(No.Free);
     value = new gio.menu_model.MenuModel(cast(void*)_value, Yes.Take);
     return _retval;
@@ -95,8 +95,8 @@ class MenuLinkIter : gobject.object.ObjectWrap
   gio.menu_model.MenuModel getValue()
   {
     GMenuModel* _cretval;
-    _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
+    _cretval = g_menu_link_iter_get_value(cast(GMenuLinkIter*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -114,7 +114,7 @@ class MenuLinkIter : gobject.object.ObjectWrap
   bool next()
   {
     bool _retval;
-    _retval = g_menu_link_iter_next(cast(GMenuLinkIter*)cPtr);
+    _retval = g_menu_link_iter_next(cast(GMenuLinkIter*)this._cPtr);
     return _retval;
   }
 }

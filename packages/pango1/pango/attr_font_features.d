@@ -28,7 +28,7 @@ class AttrFontFeatures
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class AttrFontFeatures
   */
   @property pango.attribute.Attribute attr()
   {
-    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)cPtr).attr);
+    return cToD!(pango.attribute.Attribute)(cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).attr);
   }
 
   /**
@@ -48,7 +48,7 @@ class AttrFontFeatures
   */
   @property string features()
   {
-    return cToD!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
+    return cToD!(string)(cast(void*)(cast(PangoAttrFontFeatures*)this._cPtr).features);
   }
 
   /**
@@ -58,8 +58,8 @@ class AttrFontFeatures
   */
   @property void features(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)cPtr).features);
-    dToC(propval, cast(void*)&(cast(PangoAttrFontFeatures*)cPtr).features);
+    cValueFree!(string)(cast(void*)(cast(PangoAttrFontFeatures*)this._cPtr).features);
+    dToC(propval, cast(void*)&(cast(PangoAttrFontFeatures*)this._cPtr).features);
   }
 
   /**

@@ -24,7 +24,7 @@ class DebugMessage
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -37,7 +37,7 @@ class DebugMessage
   string get()
   {
     const(char)* _cretval;
-    _cretval = gst_debug_message_get(cast(GstDebugMessage*)cPtr);
+    _cretval = gst_debug_message_get(cast(GstDebugMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -50,7 +50,7 @@ class DebugMessage
   string getId()
   {
     const(char)* _cretval;
-    _cretval = gst_debug_message_get_id(cast(GstDebugMessage*)cPtr);
+    _cretval = gst_debug_message_get_id(cast(GstDebugMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

@@ -34,7 +34,7 @@ class Sequence
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -49,7 +49,7 @@ class Sequence
   glib.sequence_iter.SequenceIter append(void* data = null)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_append(cast(GSequence*)cPtr, data);
+    _cretval = g_sequence_append(cast(GSequence*)this._cPtr, data);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -72,7 +72,7 @@ class Sequence
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_sequence_foreach(cast(GSequence*)cPtr, _funcCB, _func);
+    g_sequence_foreach(cast(GSequence*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -82,7 +82,7 @@ class Sequence
   glib.sequence_iter.SequenceIter getBeginIter()
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_get_begin_iter(cast(GSequence*)cPtr);
+    _cretval = g_sequence_get_begin_iter(cast(GSequence*)this._cPtr);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -94,7 +94,7 @@ class Sequence
   glib.sequence_iter.SequenceIter getEndIter()
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_get_end_iter(cast(GSequence*)cPtr);
+    _cretval = g_sequence_get_end_iter(cast(GSequence*)this._cPtr);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -110,7 +110,7 @@ class Sequence
   glib.sequence_iter.SequenceIter getIterAtPos(int pos)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_get_iter_at_pos(cast(GSequence*)cPtr, pos);
+    _cretval = g_sequence_get_iter_at_pos(cast(GSequence*)this._cPtr, pos);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -124,7 +124,7 @@ class Sequence
   int getLength()
   {
     int _retval;
-    _retval = g_sequence_get_length(cast(GSequence*)cPtr);
+    _retval = g_sequence_get_length(cast(GSequence*)this._cPtr);
     return _retval;
   }
 
@@ -160,7 +160,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    _cretval = g_sequence_insert_sorted(cast(GSequence*)cPtr, data, _cmpFuncCB, _cmpFunc);
+    _cretval = g_sequence_insert_sorted(cast(GSequence*)this._cPtr, data, _cmpFuncCB, _cmpFunc);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -197,7 +197,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _iterCmp = iterCmp ? cast(void*)&(iterCmp) : null;
-    _cretval = g_sequence_insert_sorted_iter(cast(GSequence*)cPtr, data, _iterCmpCB, _iterCmp);
+    _cretval = g_sequence_insert_sorted_iter(cast(GSequence*)this._cPtr, data, _iterCmpCB, _iterCmp);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -213,7 +213,7 @@ class Sequence
   bool isEmpty()
   {
     bool _retval;
-    _retval = g_sequence_is_empty(cast(GSequence*)cPtr);
+    _retval = g_sequence_is_empty(cast(GSequence*)this._cPtr);
     return _retval;
   }
 
@@ -252,7 +252,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    _cretval = g_sequence_lookup(cast(GSequence*)cPtr, data, _cmpFuncCB, _cmpFunc);
+    _cretval = g_sequence_lookup(cast(GSequence*)this._cPtr, data, _cmpFuncCB, _cmpFunc);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -289,7 +289,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _iterCmp = iterCmp ? cast(void*)&(iterCmp) : null;
-    _cretval = g_sequence_lookup_iter(cast(GSequence*)cPtr, data, _iterCmpCB, _iterCmp);
+    _cretval = g_sequence_lookup_iter(cast(GSequence*)this._cPtr, data, _iterCmpCB, _iterCmp);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -304,7 +304,7 @@ class Sequence
   glib.sequence_iter.SequenceIter prepend(void* data = null)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_prepend(cast(GSequence*)cPtr, data);
+    _cretval = g_sequence_prepend(cast(GSequence*)this._cPtr, data);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -343,7 +343,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    _cretval = g_sequence_search(cast(GSequence*)cPtr, data, _cmpFuncCB, _cmpFunc);
+    _cretval = g_sequence_search(cast(GSequence*)this._cPtr, data, _cmpFuncCB, _cmpFunc);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -383,7 +383,7 @@ class Sequence
 
     GSequenceIter* _cretval;
     auto _iterCmp = iterCmp ? cast(void*)&(iterCmp) : null;
-    _cretval = g_sequence_search_iter(cast(GSequence*)cPtr, data, _iterCmpCB, _iterCmp);
+    _cretval = g_sequence_search_iter(cast(GSequence*)this._cPtr, data, _iterCmpCB, _iterCmp);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -411,7 +411,7 @@ class Sequence
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
 
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    g_sequence_sort(cast(GSequence*)cPtr, _cmpFuncCB, _cmpFunc);
+    g_sequence_sort(cast(GSequence*)this._cPtr, _cmpFuncCB, _cmpFunc);
   }
 
   /**
@@ -438,7 +438,7 @@ class Sequence
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
 
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    g_sequence_sort_iter(cast(GSequence*)cPtr, _cmpFuncCB, _cmpFunc);
+    g_sequence_sort_iter(cast(GSequence*)this._cPtr, _cmpFuncCB, _cmpFunc);
   }
 
   /**
@@ -462,7 +462,7 @@ class Sequence
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_sequence_foreach_range(begin ? cast(GSequenceIter*)begin.cPtr : null, end ? cast(GSequenceIter*)end.cPtr : null, _funcCB, _func);
+    g_sequence_foreach_range(begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null, _funcCB, _func);
   }
 
   /**
@@ -474,7 +474,7 @@ class Sequence
   */
   static void* get(glib.sequence_iter.SequenceIter iter)
   {
-    auto _retval = g_sequence_get(iter ? cast(GSequenceIter*)iter.cPtr : null);
+    auto _retval = g_sequence_get(iter ? cast(GSequenceIter*)iter._cPtr : null);
     return _retval;
   }
 
@@ -489,7 +489,7 @@ class Sequence
   static glib.sequence_iter.SequenceIter insertBefore(glib.sequence_iter.SequenceIter iter, void* data = null)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_insert_before(iter ? cast(GSequenceIter*)iter.cPtr : null, data);
+    _cretval = g_sequence_insert_before(iter ? cast(GSequenceIter*)iter._cPtr : null, data);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -507,7 +507,7 @@ class Sequence
   */
   static void move(glib.sequence_iter.SequenceIter src, glib.sequence_iter.SequenceIter dest)
   {
-    g_sequence_move(src ? cast(GSequenceIter*)src.cPtr : null, dest ? cast(GSequenceIter*)dest.cPtr : null);
+    g_sequence_move(src ? cast(GSequenceIter*)src._cPtr : null, dest ? cast(GSequenceIter*)dest._cPtr : null);
   }
 
   /**
@@ -527,7 +527,7 @@ class Sequence
   */
   static void moveRange(glib.sequence_iter.SequenceIter dest, glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
   {
-    g_sequence_move_range(dest ? cast(GSequenceIter*)dest.cPtr : null, begin ? cast(GSequenceIter*)begin.cPtr : null, end ? cast(GSequenceIter*)end.cPtr : null);
+    g_sequence_move_range(dest ? cast(GSequenceIter*)dest._cPtr : null, begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
   }
 
   /**
@@ -547,7 +547,7 @@ class Sequence
   static glib.sequence_iter.SequenceIter rangeGetMidpoint(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
   {
     GSequenceIter* _cretval;
-    _cretval = g_sequence_range_get_midpoint(begin ? cast(GSequenceIter*)begin.cPtr : null, end ? cast(GSequenceIter*)end.cPtr : null);
+    _cretval = g_sequence_range_get_midpoint(begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
     auto _retval = _cretval ? new glib.sequence_iter.SequenceIter(cast(GSequenceIter*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -564,7 +564,7 @@ class Sequence
   */
   static void remove(glib.sequence_iter.SequenceIter iter)
   {
-    g_sequence_remove(iter ? cast(GSequenceIter*)iter.cPtr : null);
+    g_sequence_remove(iter ? cast(GSequenceIter*)iter._cPtr : null);
   }
 
   /**
@@ -579,7 +579,7 @@ class Sequence
   */
   static void removeRange(glib.sequence_iter.SequenceIter begin, glib.sequence_iter.SequenceIter end)
   {
-    g_sequence_remove_range(begin ? cast(GSequenceIter*)begin.cPtr : null, end ? cast(GSequenceIter*)end.cPtr : null);
+    g_sequence_remove_range(begin ? cast(GSequenceIter*)begin._cPtr : null, end ? cast(GSequenceIter*)end._cPtr : null);
   }
 
   /**
@@ -593,7 +593,7 @@ class Sequence
   */
   static void set(glib.sequence_iter.SequenceIter iter, void* data = null)
   {
-    g_sequence_set(iter ? cast(GSequenceIter*)iter.cPtr : null, data);
+    g_sequence_set(iter ? cast(GSequenceIter*)iter._cPtr : null, data);
   }
 
   /**
@@ -624,7 +624,7 @@ class Sequence
     auto _cmpFuncCB = cmpFunc ? &_cmpFuncCallback : null;
 
     auto _cmpFunc = cmpFunc ? cast(void*)&(cmpFunc) : null;
-    g_sequence_sort_changed(iter ? cast(GSequenceIter*)iter.cPtr : null, _cmpFuncCB, _cmpFunc);
+    g_sequence_sort_changed(iter ? cast(GSequenceIter*)iter._cPtr : null, _cmpFuncCB, _cmpFunc);
   }
 
   /**
@@ -654,7 +654,7 @@ class Sequence
     auto _iterCmpCB = iterCmp ? &_iterCmpCallback : null;
 
     auto _iterCmp = iterCmp ? cast(void*)&(iterCmp) : null;
-    g_sequence_sort_changed_iter(iter ? cast(GSequenceIter*)iter.cPtr : null, _iterCmpCB, _iterCmp);
+    g_sequence_sort_changed_iter(iter ? cast(GSequenceIter*)iter._cPtr : null, _iterCmpCB, _iterCmp);
   }
 
   /**
@@ -667,6 +667,6 @@ class Sequence
   */
   static void swap(glib.sequence_iter.SequenceIter a, glib.sequence_iter.SequenceIter b)
   {
-    g_sequence_swap(a ? cast(GSequenceIter*)a.cPtr : null, b ? cast(GSequenceIter*)b.cPtr : null);
+    g_sequence_swap(a ? cast(GSequenceIter*)a._cPtr : null, b ? cast(GSequenceIter*)b._cPtr : null);
   }
 }

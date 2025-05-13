@@ -32,22 +32,22 @@ class TextureDownloader : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_texture_downloader_get_type != &gidSymbolNotFound ? gdk_texture_downloader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class TextureDownloader : gobject.boxed.Boxed
   this(gdk.texture.Texture texture)
   {
     GdkTextureDownloader* _cretval;
-    _cretval = gdk_texture_downloader_new(texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
+    _cretval = gdk_texture_downloader_new(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -79,7 +79,7 @@ class TextureDownloader : gobject.boxed.Boxed
   gdk.texture_downloader.TextureDownloader copy()
   {
     GdkTextureDownloader* _cretval;
-    _cretval = gdk_texture_downloader_copy(cast(const(GdkTextureDownloader)*)cPtr);
+    _cretval = gdk_texture_downloader_copy(cast(const(GdkTextureDownloader)*)this._cPtr);
     auto _retval = _cretval ? new gdk.texture_downloader.TextureDownloader(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -100,7 +100,7 @@ class TextureDownloader : gobject.boxed.Boxed
   glib.bytes.Bytes downloadBytes(out size_t outStride)
   {
     GBytes* _cretval;
-    _cretval = gdk_texture_downloader_download_bytes(cast(const(GdkTextureDownloader)*)cPtr, cast(size_t*)&outStride);
+    _cretval = gdk_texture_downloader_download_bytes(cast(const(GdkTextureDownloader)*)this._cPtr, cast(size_t*)&outStride);
     auto _retval = _cretval ? new glib.bytes.Bytes(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -112,7 +112,7 @@ class TextureDownloader : gobject.boxed.Boxed
   gdk.types.MemoryFormat getFormat()
   {
     GdkMemoryFormat _cretval;
-    _cretval = gdk_texture_downloader_get_format(cast(const(GdkTextureDownloader)*)cPtr);
+    _cretval = gdk_texture_downloader_get_format(cast(const(GdkTextureDownloader)*)this._cPtr);
     gdk.types.MemoryFormat _retval = cast(gdk.types.MemoryFormat)_cretval;
     return _retval;
   }
@@ -124,8 +124,8 @@ class TextureDownloader : gobject.boxed.Boxed
   gdk.texture.Texture getTexture()
   {
     GdkTexture* _cretval;
-    _cretval = gdk_texture_downloader_get_texture(cast(const(GdkTextureDownloader)*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
+    _cretval = gdk_texture_downloader_get_texture(cast(const(GdkTextureDownloader)*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, No.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class TextureDownloader : gobject.boxed.Boxed
   */
   void setFormat(gdk.types.MemoryFormat format)
   {
-    gdk_texture_downloader_set_format(cast(GdkTextureDownloader*)cPtr, format);
+    gdk_texture_downloader_set_format(cast(GdkTextureDownloader*)this._cPtr, format);
   }
 
   /**
@@ -150,6 +150,6 @@ class TextureDownloader : gobject.boxed.Boxed
   */
   void setTexture(gdk.texture.Texture texture)
   {
-    gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)cPtr, texture ? cast(GdkTexture*)texture.cPtr(No.Dup) : null);
+    gdk_texture_downloader_set_texture(cast(GdkTextureDownloader*)this._cPtr, texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
   }
 }

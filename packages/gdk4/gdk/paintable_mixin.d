@@ -87,7 +87,7 @@ template PaintableT()
   */
   override void computeConcreteSize(double specifiedWidth, double specifiedHeight, double defaultWidth, double defaultHeight, out double concreteWidth, out double concreteHeight)
   {
-    gdk_paintable_compute_concrete_size(cast(GdkPaintable*)cPtr, specifiedWidth, specifiedHeight, defaultWidth, defaultHeight, cast(double*)&concreteWidth, cast(double*)&concreteHeight);
+    gdk_paintable_compute_concrete_size(cast(GdkPaintable*)this._cPtr, specifiedWidth, specifiedHeight, defaultWidth, defaultHeight, cast(double*)&concreteWidth, cast(double*)&concreteHeight);
   }
 
   /**
@@ -103,8 +103,8 @@ template PaintableT()
   override gdk.paintable.Paintable getCurrentImage()
   {
     GdkPaintable* _cretval;
-    _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
+    _cretval = gdk_paintable_get_current_image(cast(GdkPaintable*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.paintable.Paintable)(cast(GdkPaintable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -119,7 +119,7 @@ template PaintableT()
   override gdk.types.PaintableFlags getFlags()
   {
     GdkPaintableFlags _cretval;
-    _cretval = gdk_paintable_get_flags(cast(GdkPaintable*)cPtr);
+    _cretval = gdk_paintable_get_flags(cast(GdkPaintable*)this._cPtr);
     gdk.types.PaintableFlags _retval = cast(gdk.types.PaintableFlags)_cretval;
     return _retval;
   }
@@ -147,7 +147,7 @@ template PaintableT()
   override double getIntrinsicAspectRatio()
   {
     double _retval;
-    _retval = gdk_paintable_get_intrinsic_aspect_ratio(cast(GdkPaintable*)cPtr);
+    _retval = gdk_paintable_get_intrinsic_aspect_ratio(cast(GdkPaintable*)this._cPtr);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ template PaintableT()
   override int getIntrinsicHeight()
   {
     int _retval;
-    _retval = gdk_paintable_get_intrinsic_height(cast(GdkPaintable*)cPtr);
+    _retval = gdk_paintable_get_intrinsic_height(cast(GdkPaintable*)this._cPtr);
     return _retval;
   }
 
@@ -187,7 +187,7 @@ template PaintableT()
   override int getIntrinsicWidth()
   {
     int _retval;
-    _retval = gdk_paintable_get_intrinsic_width(cast(GdkPaintable*)cPtr);
+    _retval = gdk_paintable_get_intrinsic_width(cast(GdkPaintable*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ template PaintableT()
   */
   override void invalidateContents()
   {
-    gdk_paintable_invalidate_contents(cast(GdkPaintable*)cPtr);
+    gdk_paintable_invalidate_contents(cast(GdkPaintable*)this._cPtr);
   }
 
   /**
@@ -222,7 +222,7 @@ template PaintableT()
   */
   override void invalidateSize()
   {
-    gdk_paintable_invalidate_size(cast(GdkPaintable*)cPtr);
+    gdk_paintable_invalidate_size(cast(GdkPaintable*)this._cPtr);
   }
 
   /**
@@ -239,7 +239,7 @@ template PaintableT()
   */
   override void snapshot(gdk.snapshot.Snapshot snapshot, double width, double height)
   {
-    gdk_paintable_snapshot(cast(GdkPaintable*)cPtr, snapshot ? cast(GdkSnapshot*)snapshot.cPtr(No.Dup) : null, width, height);
+    gdk_paintable_snapshot(cast(GdkPaintable*)this._cPtr, snapshot ? cast(GdkSnapshot*)snapshot._cPtr(No.Dup) : null, width, height);
   }
 
   /**

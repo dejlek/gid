@@ -731,7 +731,7 @@ struct GstGLAsyncDebug
   int line;
 
   /** */
-  ObjectC* object;
+  GObject* object;
 
   /** */
   char* debugMsg;

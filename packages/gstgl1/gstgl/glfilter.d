@@ -25,16 +25,16 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_filter_get_type != &gidSymbolNotFound ? gst_gl_filter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,7 +51,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   */
   void drawFullscreenQuad()
   {
-    gst_gl_filter_draw_fullscreen_quad(cast(GstGLFilter*)cPtr);
+    gst_gl_filter_draw_fullscreen_quad(cast(GstGLFilter*)this._cPtr);
   }
 
   /**
@@ -65,7 +65,7 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   bool filterTexture(gst.buffer.Buffer input, gst.buffer.Buffer output)
   {
     bool _retval;
-    _retval = gst_gl_filter_filter_texture(cast(GstGLFilter*)cPtr, input ? cast(GstBuffer*)input.cPtr(No.Dup) : null, output ? cast(GstBuffer*)output.cPtr(No.Dup) : null);
+    _retval = gst_gl_filter_filter_texture(cast(GstGLFilter*)this._cPtr, input ? cast(GstBuffer*)input._cPtr(No.Dup) : null, output ? cast(GstBuffer*)output._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -84,14 +84,14 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
     {
       auto _dlg = cast(gstgl.types.GLFilterRenderFunc*)userData;
 
-      bool _retval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
+      bool _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gstgl.glfilter.GLFilter)(cast(void*)filter, No.Take), inTex ? new gstgl.glmemory.GLMemory(cast(void*)inTex, No.Take) : null);
       return _retval;
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     bool _retval;
     auto _func = func ? cast(void*)&(func) : null;
-    _retval = gst_gl_filter_render_to_target(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.Dup) : null, _funcCB, _func);
+    _retval = gst_gl_filter_render_to_target(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, _funcCB, _func);
     return _retval;
   }
 
@@ -107,6 +107,6 @@ class GLFilter : gstgl.glbase_filter.GLBaseFilter
   */
   void renderToTargetWithShader(gstgl.glmemory.GLMemory input, gstgl.glmemory.GLMemory output, gstgl.glshader.GLShader shader)
   {
-    gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)cPtr, input ? cast(GstGLMemory*)input.cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output.cPtr(No.Dup) : null, shader ? cast(GstGLShader*)shader.cPtr(No.Dup) : null);
+    gst_gl_filter_render_to_target_with_shader(cast(GstGLFilter*)this._cPtr, input ? cast(GstGLMemory*)input._cPtr(No.Dup) : null, output ? cast(GstGLMemory*)output._cPtr(No.Dup) : null, shader ? cast(GstGLShader*)shader._cPtr(No.Dup) : null);
   }
 }

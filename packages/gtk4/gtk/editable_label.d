@@ -56,16 +56,16 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_editable_label_get_type != &gidSymbolNotFound ? gtk_editable_label_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,7 +117,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   bool getEditing()
   {
     bool _retval;
-    _retval = gtk_editable_label_get_editing(cast(GtkEditableLabel*)cPtr);
+    _retval = gtk_editable_label_get_editing(cast(GtkEditableLabel*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   */
   void startEditing()
   {
-    gtk_editable_label_start_editing(cast(GtkEditableLabel*)cPtr);
+    gtk_editable_label_start_editing(cast(GtkEditableLabel*)this._cPtr);
   }
 
   /**
@@ -142,6 +142,6 @@ class EditableLabel : gtk.widget.Widget, gtk.editable.Editable
   */
   void stopEditing(bool commit)
   {
-    gtk_editable_label_stop_editing(cast(GtkEditableLabel*)cPtr, commit);
+    gtk_editable_label_stop_editing(cast(GtkEditableLabel*)this._cPtr, commit);
   }
 }

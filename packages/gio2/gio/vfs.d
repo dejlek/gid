@@ -21,16 +21,16 @@ class Vfs : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_vfs_get_type != &gidSymbolNotFound ? g_vfs_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -48,7 +48,7 @@ class Vfs : gobject.object.ObjectWrap
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -60,7 +60,7 @@ class Vfs : gobject.object.ObjectWrap
   {
     GVfs* _cretval;
     _cretval = g_vfs_get_local();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(GVfs*)_cretval, No.Take);
     return _retval;
   }
 
@@ -76,8 +76,8 @@ class Vfs : gobject.object.ObjectWrap
   {
     GFile* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
-    _cretval = g_vfs_get_file_for_path(cast(GVfs*)cPtr, _path);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_vfs_get_file_for_path(cast(GVfs*)this._cPtr, _path);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -97,8 +97,8 @@ class Vfs : gobject.object.ObjectWrap
   {
     GFile* _cretval;
     const(char)* _uri = uri.toCString(No.Alloc);
-    _cretval = g_vfs_get_file_for_uri(cast(GVfs*)cPtr, _uri);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_vfs_get_file_for_uri(cast(GVfs*)this._cPtr, _uri);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -111,7 +111,7 @@ class Vfs : gobject.object.ObjectWrap
   string[] getSupportedUriSchemes()
   {
     const(char*)* _cretval;
-    _cretval = g_vfs_get_supported_uri_schemes(cast(GVfs*)cPtr);
+    _cretval = g_vfs_get_supported_uri_schemes(cast(GVfs*)this._cPtr);
     string[] _retval;
 
     if (_cretval)
@@ -134,7 +134,7 @@ class Vfs : gobject.object.ObjectWrap
   bool isActive()
   {
     bool _retval;
-    _retval = g_vfs_is_active(cast(GVfs*)cPtr);
+    _retval = g_vfs_is_active(cast(GVfs*)this._cPtr);
     return _retval;
   }
 
@@ -152,8 +152,8 @@ class Vfs : gobject.object.ObjectWrap
   {
     GFile* _cretval;
     const(char)* _parseName = parseName.toCString(No.Alloc);
-    _cretval = g_vfs_parse_name(cast(GVfs*)cPtr, _parseName);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_vfs_parse_name(cast(GVfs*)this._cPtr, _parseName);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -194,8 +194,8 @@ class Vfs : gobject.object.ObjectWrap
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval).cPtr(Yes.Dup);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -207,8 +207,8 @@ class Vfs : gobject.object.ObjectWrap
       auto _dlg = cast(gio.types.VfsFileLookupFunc*)userData;
       string _identifier = identifier.fromCString(No.Free);
 
-      _dretval = (*_dlg)(gobject.object.ObjectWrap.getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
-      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval).cPtr(Yes.Dup);
+      _dretval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gio.vfs.Vfs)(cast(void*)vfs, No.Take), _identifier);
+      GFile* _retval = cast(GFile*)(cast(gobject.object.ObjectWrap)_dretval)._cPtr(Yes.Dup);
 
       return _retval;
     }
@@ -220,7 +220,7 @@ class Vfs : gobject.object.ObjectWrap
     GDestroyNotify _uriFuncDestroyCB = uriFunc ? &thawDelegate : null;
     auto _parseNameFunc = parseNameFunc ? freezeDelegate(cast(void*)&parseNameFunc) : null;
     GDestroyNotify _parseNameFuncDestroyCB = parseNameFunc ? &thawDelegate : null;
-    _retval = g_vfs_register_uri_scheme(cast(GVfs*)cPtr, _scheme, _uriFuncCB, _uriFunc, _uriFuncDestroyCB, _parseNameFuncCB, _parseNameFunc, _parseNameFuncDestroyCB);
+    _retval = g_vfs_register_uri_scheme(cast(GVfs*)this._cPtr, _scheme, _uriFuncCB, _uriFunc, _uriFuncDestroyCB, _parseNameFuncCB, _parseNameFunc, _parseNameFuncDestroyCB);
     return _retval;
   }
 
@@ -237,7 +237,7 @@ class Vfs : gobject.object.ObjectWrap
   {
     bool _retval;
     const(char)* _scheme = scheme.toCString(No.Alloc);
-    _retval = g_vfs_unregister_uri_scheme(cast(GVfs*)cPtr, _scheme);
+    _retval = g_vfs_unregister_uri_scheme(cast(GVfs*)this._cPtr, _scheme);
     return _retval;
   }
 }

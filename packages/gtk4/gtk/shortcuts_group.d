@@ -46,16 +46,16 @@ class ShortcutsGroup : gtk.box.Box
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_shortcuts_group_get_type != &gidSymbolNotFound ? gtk_shortcuts_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -159,6 +159,6 @@ class ShortcutsGroup : gtk.box.Box
   */
   void addShortcut(gtk.shortcuts_shortcut.ShortcutsShortcut shortcut)
   {
-    gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut.cPtr(No.Dup) : null);
+    gtk_shortcuts_group_add_shortcut(cast(GtkShortcutsGroup*)this._cPtr, shortcut ? cast(GtkShortcutsShortcut*)shortcut._cPtr(No.Dup) : null);
   }
 }

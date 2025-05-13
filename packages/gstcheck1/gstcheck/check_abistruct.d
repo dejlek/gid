@@ -24,7 +24,7 @@ class CheckABIStruct
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -35,7 +35,7 @@ class CheckABIStruct
   */
   @property string name()
   {
-    return cToD!(string)(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
+    return cToD!(string)(cast(void*)(cast(GstCheckABIStruct*)this._cPtr).name);
   }
 
   /**
@@ -45,8 +45,8 @@ class CheckABIStruct
   */
   @property void name(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstCheckABIStruct*)cPtr).name);
-    dToC(propval, cast(void*)&(cast(GstCheckABIStruct*)cPtr).name);
+    cValueFree!(string)(cast(void*)(cast(GstCheckABIStruct*)this._cPtr).name);
+    dToC(propval, cast(void*)&(cast(GstCheckABIStruct*)this._cPtr).name);
   }
 
   /**
@@ -55,7 +55,7 @@ class CheckABIStruct
   */
   @property int size()
   {
-    return (cast(GstCheckABIStruct*)cPtr).size;
+    return (cast(GstCheckABIStruct*)this._cPtr).size;
   }
 
   /**
@@ -65,7 +65,7 @@ class CheckABIStruct
   */
   @property void size(int propval)
   {
-    (cast(GstCheckABIStruct*)cPtr).size = propval;
+    (cast(GstCheckABIStruct*)this._cPtr).size = propval;
   }
 
   /**
@@ -74,7 +74,7 @@ class CheckABIStruct
   */
   @property int abiSize()
   {
-    return (cast(GstCheckABIStruct*)cPtr).abiSize;
+    return (cast(GstCheckABIStruct*)this._cPtr).abiSize;
   }
 
   /**
@@ -84,6 +84,6 @@ class CheckABIStruct
   */
   @property void abiSize(int propval)
   {
-    (cast(GstCheckABIStruct*)cPtr).abiSize = propval;
+    (cast(GstCheckABIStruct*)this._cPtr).abiSize = propval;
   }
 }

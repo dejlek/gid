@@ -37,16 +37,16 @@ class FileLauncher : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_file_launcher_get_type != &gidSymbolNotFound ? gtk_file_launcher_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class FileLauncher : gobject.object.ObjectWrap
   this(gio.file.File file = null)
   {
     GtkFileLauncher* _cretval;
-    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    _cretval = gtk_file_launcher_new(file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -135,7 +135,7 @@ class FileLauncher : gobject.object.ObjectWrap
   bool getAlwaysAsk()
   {
     bool _retval;
-    _retval = gtk_file_launcher_get_always_ask(cast(GtkFileLauncher*)cPtr);
+    _retval = gtk_file_launcher_get_always_ask(cast(GtkFileLauncher*)this._cPtr);
     return _retval;
   }
 
@@ -146,8 +146,8 @@ class FileLauncher : gobject.object.ObjectWrap
   gio.file.File getFile()
   {
     GFile* _cretval;
-    _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = gtk_file_launcher_get_file(cast(GtkFileLauncher*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -158,7 +158,7 @@ class FileLauncher : gobject.object.ObjectWrap
   bool getWritable()
   {
     bool _retval;
-    _retval = gtk_file_launcher_get_writable(cast(GtkFileLauncher*)cPtr);
+    _retval = gtk_file_launcher_get_writable(cast(GtkFileLauncher*)this._cPtr);
     return _retval;
   }
 
@@ -178,17 +178,17 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   void launch(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_launcher_launch(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_launcher_launch(cast(GtkFileLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -205,7 +205,7 @@ class FileLauncher : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_launcher_launch_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -228,17 +228,17 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   void openContainingFolder(gtk.window.Window parent = null, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    gtk_file_launcher_open_containing_folder(cast(GtkFileLauncher*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    gtk_file_launcher_open_containing_folder(cast(GtkFileLauncher*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -255,7 +255,7 @@ class FileLauncher : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = gtk_file_launcher_open_containing_folder_finish(cast(GtkFileLauncher*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -270,7 +270,7 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   void setAlwaysAsk(bool alwaysAsk)
   {
-    gtk_file_launcher_set_always_ask(cast(GtkFileLauncher*)cPtr, alwaysAsk);
+    gtk_file_launcher_set_always_ask(cast(GtkFileLauncher*)this._cPtr, alwaysAsk);
   }
 
   /**
@@ -281,7 +281,7 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   void setFile(gio.file.File file = null)
   {
-    gtk_file_launcher_set_file(cast(GtkFileLauncher*)cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file).cPtr(No.Dup) : null);
+    gtk_file_launcher_set_file(cast(GtkFileLauncher*)this._cPtr, file ? cast(GFile*)(cast(gobject.object.ObjectWrap)file)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -292,6 +292,6 @@ class FileLauncher : gobject.object.ObjectWrap
   */
   void setWritable(bool writable)
   {
-    gtk_file_launcher_set_writable(cast(GtkFileLauncher*)cPtr, writable);
+    gtk_file_launcher_set_writable(cast(GtkFileLauncher*)this._cPtr, writable);
   }
 }

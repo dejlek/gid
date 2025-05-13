@@ -27,16 +27,16 @@ class OptionMenu : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_option_menu_get_type != &gidSymbolNotFound ? webkit_option_menu_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class OptionMenu : gobject.object.ObjectWrap
   */
   void activateItem(uint index)
   {
-    webkit_option_menu_activate_item(cast(WebKitOptionMenu*)cPtr, index);
+    webkit_option_menu_activate_item(cast(WebKitOptionMenu*)this._cPtr, index);
   }
 
   /**
@@ -72,7 +72,7 @@ class OptionMenu : gobject.object.ObjectWrap
   */
   void close()
   {
-    webkit_option_menu_close(cast(WebKitOptionMenu*)cPtr);
+    webkit_option_menu_close(cast(WebKitOptionMenu*)this._cPtr);
   }
 
   /**
@@ -84,7 +84,7 @@ class OptionMenu : gobject.object.ObjectWrap
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;
-    _cretval = webkit_option_menu_get_event(cast(WebKitOptionMenu*)cPtr);
+    _cretval = webkit_option_menu_get_event(cast(WebKitOptionMenu*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -99,7 +99,7 @@ class OptionMenu : gobject.object.ObjectWrap
   webkit.option_menu_item.OptionMenuItem getItem(uint index)
   {
     WebKitOptionMenuItem* _cretval;
-    _cretval = webkit_option_menu_get_item(cast(WebKitOptionMenu*)cPtr, index);
+    _cretval = webkit_option_menu_get_item(cast(WebKitOptionMenu*)this._cPtr, index);
     auto _retval = _cretval ? new webkit.option_menu_item.OptionMenuItem(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -111,7 +111,7 @@ class OptionMenu : gobject.object.ObjectWrap
   uint getNItems()
   {
     uint _retval;
-    _retval = webkit_option_menu_get_n_items(cast(WebKitOptionMenu*)cPtr);
+    _retval = webkit_option_menu_get_n_items(cast(WebKitOptionMenu*)this._cPtr);
     return _retval;
   }
 
@@ -128,7 +128,7 @@ class OptionMenu : gobject.object.ObjectWrap
   */
   void selectItem(uint index)
   {
-    webkit_option_menu_select_item(cast(WebKitOptionMenu*)cPtr, index);
+    webkit_option_menu_select_item(cast(WebKitOptionMenu*)this._cPtr, index);
   }
 
   /**

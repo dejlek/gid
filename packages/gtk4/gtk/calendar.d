@@ -76,16 +76,16 @@ class Calendar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_calendar_get_type != &gidSymbolNotFound ? gtk_calendar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -232,7 +232,7 @@ class Calendar : gtk.widget.Widget
   */
   void clearMarks()
   {
-    gtk_calendar_clear_marks(cast(GtkCalendar*)cPtr);
+    gtk_calendar_clear_marks(cast(GtkCalendar*)this._cPtr);
   }
 
   /**
@@ -245,7 +245,7 @@ class Calendar : gtk.widget.Widget
   glib.date_time.DateTime getDate()
   {
     GDateTime* _cretval;
-    _cretval = gtk_calendar_get_date(cast(GtkCalendar*)cPtr);
+    _cretval = gtk_calendar_get_date(cast(GtkCalendar*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -257,7 +257,7 @@ class Calendar : gtk.widget.Widget
   int getDay()
   {
     int _retval;
-    _retval = gtk_calendar_get_day(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_day(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -271,7 +271,7 @@ class Calendar : gtk.widget.Widget
   bool getDayIsMarked(uint day)
   {
     bool _retval;
-    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)cPtr, day);
+    _retval = gtk_calendar_get_day_is_marked(cast(GtkCalendar*)this._cPtr, day);
     return _retval;
   }
 
@@ -282,7 +282,7 @@ class Calendar : gtk.widget.Widget
   int getMonth()
   {
     int _retval;
-    _retval = gtk_calendar_get_month(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_month(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -297,7 +297,7 @@ class Calendar : gtk.widget.Widget
   bool getShowDayNames()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_day_names(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_show_day_names(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -311,7 +311,7 @@ class Calendar : gtk.widget.Widget
   bool getShowHeading()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_heading(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_show_heading(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Calendar : gtk.widget.Widget
   bool getShowWeekNumbers()
   {
     bool _retval;
-    _retval = gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_show_week_numbers(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -337,7 +337,7 @@ class Calendar : gtk.widget.Widget
   int getYear()
   {
     int _retval;
-    _retval = gtk_calendar_get_year(cast(GtkCalendar*)cPtr);
+    _retval = gtk_calendar_get_year(cast(GtkCalendar*)this._cPtr);
     return _retval;
   }
 
@@ -349,7 +349,7 @@ class Calendar : gtk.widget.Widget
   */
   void markDay(uint day)
   {
-    gtk_calendar_mark_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_mark_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**
@@ -360,7 +360,7 @@ class Calendar : gtk.widget.Widget
   */
   void selectDay(glib.date_time.DateTime date)
   {
-    gtk_calendar_select_day(cast(GtkCalendar*)cPtr, date ? cast(GDateTime*)date.cPtr(No.Dup) : null);
+    gtk_calendar_select_day(cast(GtkCalendar*)this._cPtr, date ? cast(GDateTime*)date._cPtr(No.Dup) : null);
   }
 
   /**
@@ -374,7 +374,7 @@ class Calendar : gtk.widget.Widget
   */
   void setDay(int day)
   {
-    gtk_calendar_set_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_set_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**
@@ -388,7 +388,7 @@ class Calendar : gtk.widget.Widget
   */
   void setMonth(int month)
   {
-    gtk_calendar_set_month(cast(GtkCalendar*)cPtr, month);
+    gtk_calendar_set_month(cast(GtkCalendar*)this._cPtr, month);
   }
 
   /**
@@ -399,7 +399,7 @@ class Calendar : gtk.widget.Widget
   */
   void setShowDayNames(bool value)
   {
-    gtk_calendar_set_show_day_names(cast(GtkCalendar*)cPtr, value);
+    gtk_calendar_set_show_day_names(cast(GtkCalendar*)this._cPtr, value);
   }
 
   /**
@@ -413,7 +413,7 @@ class Calendar : gtk.widget.Widget
   */
   void setShowHeading(bool value)
   {
-    gtk_calendar_set_show_heading(cast(GtkCalendar*)cPtr, value);
+    gtk_calendar_set_show_heading(cast(GtkCalendar*)this._cPtr, value);
   }
 
   /**
@@ -424,7 +424,7 @@ class Calendar : gtk.widget.Widget
   */
   void setShowWeekNumbers(bool value)
   {
-    gtk_calendar_set_show_week_numbers(cast(GtkCalendar*)cPtr, value);
+    gtk_calendar_set_show_week_numbers(cast(GtkCalendar*)this._cPtr, value);
   }
 
   /**
@@ -439,7 +439,7 @@ class Calendar : gtk.widget.Widget
   */
   void setYear(int year)
   {
-    gtk_calendar_set_year(cast(GtkCalendar*)cPtr, year);
+    gtk_calendar_set_year(cast(GtkCalendar*)this._cPtr, year);
   }
 
   /**
@@ -450,7 +450,7 @@ class Calendar : gtk.widget.Widget
   */
   void unmarkDay(uint day)
   {
-    gtk_calendar_unmark_day(cast(GtkCalendar*)cPtr, day);
+    gtk_calendar_unmark_day(cast(GtkCalendar*)this._cPtr, day);
   }
 
   /**

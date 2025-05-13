@@ -36,7 +36,7 @@ class TouchpadEvent : gdk.event.Event
   */
   void getDeltas(out double dx, out double dy)
   {
-    gdk_touchpad_event_get_deltas(cast(GdkEvent*)cPtr, cast(double*)&dx, cast(double*)&dy);
+    gdk_touchpad_event_get_deltas(cast(GdkEvent*)this._cPtr, cast(double*)&dx, cast(double*)&dy);
   }
 
   /**
@@ -46,7 +46,7 @@ class TouchpadEvent : gdk.event.Event
   gdk.types.TouchpadGesturePhase getGesturePhase()
   {
     GdkTouchpadGesturePhase _cretval;
-    _cretval = gdk_touchpad_event_get_gesture_phase(cast(GdkEvent*)cPtr);
+    _cretval = gdk_touchpad_event_get_gesture_phase(cast(GdkEvent*)this._cPtr);
     gdk.types.TouchpadGesturePhase _retval = cast(gdk.types.TouchpadGesturePhase)_cretval;
     return _retval;
   }
@@ -58,7 +58,7 @@ class TouchpadEvent : gdk.event.Event
   uint getNFingers()
   {
     uint _retval;
-    _retval = gdk_touchpad_event_get_n_fingers(cast(GdkEvent*)cPtr);
+    _retval = gdk_touchpad_event_get_n_fingers(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -69,7 +69,7 @@ class TouchpadEvent : gdk.event.Event
   double getPinchAngleDelta()
   {
     double _retval;
-    _retval = gdk_touchpad_event_get_pinch_angle_delta(cast(GdkEvent*)cPtr);
+    _retval = gdk_touchpad_event_get_pinch_angle_delta(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 
@@ -80,7 +80,7 @@ class TouchpadEvent : gdk.event.Event
   double getPinchScale()
   {
     double _retval;
-    _retval = gdk_touchpad_event_get_pinch_scale(cast(GdkEvent*)cPtr);
+    _retval = gdk_touchpad_event_get_pinch_scale(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

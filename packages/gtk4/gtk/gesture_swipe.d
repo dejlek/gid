@@ -32,16 +32,16 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_swipe_get_type != &gidSymbolNotFound ? gtk_gesture_swipe_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -76,7 +76,7 @@ class GestureSwipe : gtk.gesture_single.GestureSingle
   bool getVelocity(out double velocityX, out double velocityY)
   {
     bool _retval;
-    _retval = gtk_gesture_swipe_get_velocity(cast(GtkGestureSwipe*)cPtr, cast(double*)&velocityX, cast(double*)&velocityY);
+    _retval = gtk_gesture_swipe_get_velocity(cast(GtkGestureSwipe*)this._cPtr, cast(double*)&velocityX, cast(double*)&velocityY);
     return _retval;
   }
 

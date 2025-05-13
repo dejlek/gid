@@ -29,7 +29,7 @@ class ClockEntry
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class ClockEntry
   */
   @property int refcount()
   {
-    return (cast(GstClockEntry*)cPtr).refcount;
+    return (cast(GstClockEntry*)this._cPtr).refcount;
   }
 
   /**
@@ -50,6 +50,6 @@ class ClockEntry
   */
   @property void refcount(int propval)
   {
-    (cast(GstClockEntry*)cPtr).refcount = propval;
+    (cast(GstClockEntry*)this._cPtr).refcount = propval;
   }
 }

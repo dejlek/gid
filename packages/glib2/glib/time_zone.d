@@ -45,22 +45,22 @@ class TimeZone : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_time_zone_get_type != &gidSymbolNotFound ? g_time_zone_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -262,7 +262,7 @@ class TimeZone : gobject.boxed.Boxed
   int adjustTime(glib.types.TimeType type, ref long time)
   {
     int _retval;
-    _retval = g_time_zone_adjust_time(cast(GTimeZone*)cPtr, type, cast(long*)&time);
+    _retval = g_time_zone_adjust_time(cast(GTimeZone*)this._cPtr, type, cast(long*)&time);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class TimeZone : gobject.boxed.Boxed
   int findInterval(glib.types.TimeType type, long time)
   {
     int _retval;
-    _retval = g_time_zone_find_interval(cast(GTimeZone*)cPtr, type, time);
+    _retval = g_time_zone_find_interval(cast(GTimeZone*)this._cPtr, type, time);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class TimeZone : gobject.boxed.Boxed
   string getAbbreviation(int interval)
   {
     const(char)* _cretval;
-    _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)cPtr, interval);
+    _cretval = g_time_zone_get_abbreviation(cast(GTimeZone*)this._cPtr, interval);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -332,7 +332,7 @@ class TimeZone : gobject.boxed.Boxed
   string getIdentifier()
   {
     const(char)* _cretval;
-    _cretval = g_time_zone_get_identifier(cast(GTimeZone*)cPtr);
+    _cretval = g_time_zone_get_identifier(cast(GTimeZone*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -353,7 +353,7 @@ class TimeZone : gobject.boxed.Boxed
   int getOffset(int interval)
   {
     int _retval;
-    _retval = g_time_zone_get_offset(cast(GTimeZone*)cPtr, interval);
+    _retval = g_time_zone_get_offset(cast(GTimeZone*)this._cPtr, interval);
     return _retval;
   }
 
@@ -368,7 +368,7 @@ class TimeZone : gobject.boxed.Boxed
   bool isDst(int interval)
   {
     bool _retval;
-    _retval = g_time_zone_is_dst(cast(GTimeZone*)cPtr, interval);
+    _retval = g_time_zone_is_dst(cast(GTimeZone*)this._cPtr, interval);
     return _retval;
   }
 }

@@ -54,7 +54,7 @@ bool checkVersion(uint major, uint minor, uint micro)
 soup.cookie.Cookie[] cookiesFromRequest(soup.message.Message msg)
 {
   GSList* _cretval;
-  _cretval = soup_cookies_from_request(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+  _cretval = soup_cookies_from_request(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
   auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
   return _retval;
 }
@@ -74,7 +74,7 @@ soup.cookie.Cookie[] cookiesFromRequest(soup.message.Message msg)
 soup.cookie.Cookie[] cookiesFromResponse(soup.message.Message msg)
 {
   GSList* _cretval;
-  _cretval = soup_cookies_from_response(msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+  _cretval = soup_cookies_from_response(msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
   auto _retval = gSListToD!(soup.cookie.Cookie, GidOwnership.Full)(cast(GSList*)_cretval);
   return _retval;
 }
@@ -113,7 +113,7 @@ void cookiesToRequest(soup.cookie.Cookie[] cookies, soup.message.Message msg)
 {
   auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
   scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
-  soup_cookies_to_request(_cookies, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+  soup_cookies_to_request(_cookies, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
 }
 
 /**
@@ -131,7 +131,7 @@ void cookiesToResponse(soup.cookie.Cookie[] cookies, soup.message.Message msg)
 {
   auto _cookies = gSListFromD!(soup.cookie.Cookie)(cookies);
   scope(exit) containerFree!(GSList*, soup.cookie.Cookie, GidOwnership.None)(_cookies);
-  soup_cookies_to_response(_cookies, msg ? cast(SoupMessage*)msg.cPtr(No.Dup) : null);
+  soup_cookies_to_response(_cookies, msg ? cast(SoupMessage*)msg._cPtr(No.Dup) : null);
 }
 
 /**
@@ -166,7 +166,7 @@ glib.date_time.DateTime dateTimeNewFromHttpString(string dateString)
 string dateTimeToString(glib.date_time.DateTime date, soup.types.DateFormat format)
 {
   char* _cretval;
-  _cretval = soup_date_time_to_string(date ? cast(GDateTime*)date.cPtr(No.Dup) : null, format);
+  _cretval = soup_date_time_to_string(date ? cast(GDateTime*)date._cPtr(No.Dup) : null, format);
   string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
@@ -229,7 +229,7 @@ string[string] formDecodeMultipart(soup.multipart.Multipart multipart, string fi
   char* _filename;
   char* _contentType;
   GBytes* _file;
-  _cretval = soup_form_decode_multipart(multipart ? cast(SoupMultipart*)multipart.cPtr(No.Dup) : null, _fileControlName, &_filename, &_contentType, &_file);
+  _cretval = soup_form_decode_multipart(multipart ? cast(SoupMultipart*)multipart._cPtr(No.Dup) : null, _fileControlName, &_filename, &_contentType, &_file);
   auto _retval = gHashTableToD!(string, string, GidOwnership.Container)(cast(GHashTable*)_cretval);
   filename = _filename.fromCString(Yes.Free);
   contentType = _contentType.fromCString(Yes.Free);
@@ -375,7 +375,7 @@ void headerGStringAppendParam(glib.string_.String string_, string name, string v
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  soup_header_g_string_append_param(string_ ? cast(GString*)string_.cPtr(No.Dup) : null, _name, _value);
+  soup_header_g_string_append_param(string_ ? cast(GString*)string_._cPtr(No.Dup) : null, _name, _value);
 }
 
 /**
@@ -394,7 +394,7 @@ void headerGStringAppendParamQuoted(glib.string_.String string_, string name, st
 {
   const(char)* _name = name.toCString(No.Alloc);
   const(char)* _value = value.toCString(No.Alloc);
-  soup_header_g_string_append_param_quoted(string_ ? cast(GString*)string_.cPtr(No.Dup) : null, _name, _value);
+  soup_header_g_string_append_param_quoted(string_ ? cast(GString*)string_._cPtr(No.Dup) : null, _name, _value);
 }
 
 /**
@@ -565,7 +565,7 @@ bool headersParse(string str, int len, soup.message_headers.MessageHeaders dest)
 {
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
-  _retval = soup_headers_parse(_str, len, dest ? cast(SoupMessageHeaders*)dest.cPtr(No.Dup) : null);
+  _retval = soup_headers_parse(_str, len, dest ? cast(SoupMessageHeaders*)dest._cPtr(No.Dup) : null);
   return _retval;
 }
 
@@ -594,7 +594,7 @@ uint headersParseRequest(string str, int len, soup.message_headers.MessageHeader
   const(char)* _str = str.toCString(No.Alloc);
   char* _reqMethod;
   char* _reqPath;
-  _retval = soup_headers_parse_request(_str, len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders.cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
+  _retval = soup_headers_parse_request(_str, len, reqHeaders ? cast(SoupMessageHeaders*)reqHeaders._cPtr(No.Dup) : null, &_reqMethod, &_reqPath, &ver);
   reqMethod = _reqMethod.fromCString(Yes.Free);
   reqPath = _reqPath.fromCString(Yes.Free);
   return _retval;
@@ -623,7 +623,7 @@ bool headersParseResponse(string str, int len, soup.message_headers.MessageHeade
   bool _retval;
   const(char)* _str = str.toCString(No.Alloc);
   char* _reasonPhrase;
-  _retval = soup_headers_parse_response(_str, len, headers ? cast(SoupMessageHeaders*)headers.cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
+  _retval = soup_headers_parse_response(_str, len, headers ? cast(SoupMessageHeaders*)headers._cPtr(No.Dup) : null, &ver, cast(uint*)&statusCode, &_reasonPhrase);
   reasonPhrase = _reasonPhrase.fromCString(Yes.Free);
   return _retval;
 }
@@ -739,6 +739,6 @@ glib.bytes.Bytes uriDecodeDataUri(string uri, out string contentType)
 bool uriEqual(glib.uri.Uri uri1, glib.uri.Uri uri2)
 {
   bool _retval;
-  _retval = soup_uri_equal(uri1 ? cast(GUri*)uri1.cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2.cPtr(No.Dup) : null);
+  _retval = soup_uri_equal(uri1 ? cast(GUri*)uri1._cPtr(No.Dup) : null, uri2 ? cast(GUri*)uri2._cPtr(No.Dup) : null);
   return _retval;
 }

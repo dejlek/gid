@@ -72,16 +72,16 @@ class PixbufLoader : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gdk_pixbuf_loader_get_type != &gidSymbolNotFound ? gdk_pixbuf_loader_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -131,7 +131,7 @@ class PixbufLoader : gobject.object.ObjectWrap
     _cretval = gdk_pixbuf_loader_new_with_mime_type(_mimeType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -164,7 +164,7 @@ class PixbufLoader : gobject.object.ObjectWrap
     _cretval = gdk_pixbuf_loader_new_with_type(_imageType, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_loader.PixbufLoader)(cast(GdkPixbufLoader*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_loader_close(cast(GdkPixbufLoader*)cPtr, &_err);
+    _retval = gdk_pixbuf_loader_close(cast(GdkPixbufLoader*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -213,8 +213,8 @@ class PixbufLoader : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf_animation.PixbufAnimation getAnimation()
   {
     GdkPixbufAnimation* _cretval;
-    _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
+    _cretval = gdk_pixbuf_loader_get_animation(cast(GdkPixbufLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf_animation.PixbufAnimation)(cast(GdkPixbufAnimation*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,7 +226,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf_format.PixbufFormat getFormat()
   {
     GdkPixbufFormat* _cretval;
-    _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)cPtr);
+    _cretval = gdk_pixbuf_loader_get_format(cast(GdkPixbufLoader*)this._cPtr);
     auto _retval = _cretval ? new gdkpixbuf.pixbuf_format.PixbufFormat(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -253,8 +253,8 @@ class PixbufLoader : gobject.object.ObjectWrap
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
     PixbufC* _cretval;
-    _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   void setSize(int width, int height)
   {
-    gdk_pixbuf_loader_set_size(cast(GdkPixbufLoader*)cPtr, width, height);
+    gdk_pixbuf_loader_set_size(cast(GdkPixbufLoader*)this._cPtr, width, height);
   }
 
   /**
@@ -295,7 +295,7 @@ class PixbufLoader : gobject.object.ObjectWrap
 
     auto _buf = cast(const(ubyte)*)buf.ptr;
     GError *_err;
-    _retval = gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)cPtr, _buf, _count, &_err);
+    _retval = gdk_pixbuf_loader_write(cast(GdkPixbufLoader*)this._cPtr, _buf, _count, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -314,7 +314,7 @@ class PixbufLoader : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)cPtr, buffer ? cast(GBytes*)buffer.cPtr(No.Dup) : null, &_err);
+    _retval = gdk_pixbuf_loader_write_bytes(cast(GdkPixbufLoader*)this._cPtr, buffer ? cast(GBytes*)buffer._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

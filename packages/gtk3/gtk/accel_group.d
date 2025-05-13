@@ -38,16 +38,16 @@ class AccelGroup : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_accel_group_get_type != &gidSymbolNotFound ? gtk_accel_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,8 +91,8 @@ class AccelGroup : gobject.object.ObjectWrap
   static gtk.accel_group.AccelGroup fromAccelClosure(gobject.closure.Closure closure)
   {
     GtkAccelGroup* _cretval;
-    _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
+    _cretval = gtk_accel_group_from_accel_closure(closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.accel_group.AccelGroup)(cast(GtkAccelGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -112,7 +112,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool activate(glib.types.Quark accelQuark, gobject.object.ObjectWrap acceleratable, uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)cPtr, accelQuark, acceleratable ? cast(ObjectC*)acceleratable.cPtr(No.Dup) : null, accelKey, accelMods);
+    _retval = gtk_accel_group_activate(cast(GtkAccelGroup*)this._cPtr, accelQuark, acceleratable ? cast(GObject*)acceleratable._cPtr(No.Dup) : null, accelKey, accelMods);
     return _retval;
   }
 
@@ -135,7 +135,7 @@ class AccelGroup : gobject.object.ObjectWrap
   */
   void connect(uint accelKey, gdk.types.ModifierType accelMods, gtk.types.AccelFlags accelFlags, gobject.closure.Closure closure)
   {
-    gtk_accel_group_connect(cast(GtkAccelGroup*)cPtr, accelKey, accelMods, accelFlags, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    gtk_accel_group_connect(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods, accelFlags, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
 
   /**
@@ -159,7 +159,7 @@ class AccelGroup : gobject.object.ObjectWrap
   void connectByPath(string accelPath, gobject.closure.Closure closure)
   {
     const(char)* _accelPath = accelPath.toCString(No.Alloc);
-    gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)cPtr, _accelPath, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    gtk_accel_group_connect_by_path(cast(GtkAccelGroup*)this._cPtr, _accelPath, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
   }
 
   /**
@@ -176,7 +176,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool disconnect(gobject.closure.Closure closure = null)
   {
     bool _retval;
-    _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)cPtr, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null);
+    _retval = gtk_accel_group_disconnect(cast(GtkAccelGroup*)this._cPtr, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -193,7 +193,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool disconnectKey(uint accelKey, gdk.types.ModifierType accelMods)
   {
     bool _retval;
-    _retval = gtk_accel_group_disconnect_key(cast(GtkAccelGroup*)cPtr, accelKey, accelMods);
+    _retval = gtk_accel_group_disconnect_key(cast(GtkAccelGroup*)this._cPtr, accelKey, accelMods);
     return _retval;
   }
 
@@ -220,7 +220,7 @@ class AccelGroup : gobject.object.ObjectWrap
 
     GtkAccelKey* _cretval;
     auto _findFunc = findFunc ? cast(void*)&(findFunc) : null;
-    _cretval = gtk_accel_group_find(cast(GtkAccelGroup*)cPtr, _findFuncCB, _findFunc);
+    _cretval = gtk_accel_group_find(cast(GtkAccelGroup*)this._cPtr, _findFuncCB, _findFunc);
     gtk.types.AccelKey _retval;
     if (_cretval)
       _retval = *cast(gtk.types.AccelKey*)_cretval;
@@ -236,7 +236,7 @@ class AccelGroup : gobject.object.ObjectWrap
   bool getIsLocked()
   {
     bool _retval;
-    _retval = gtk_accel_group_get_is_locked(cast(GtkAccelGroup*)cPtr);
+    _retval = gtk_accel_group_get_is_locked(cast(GtkAccelGroup*)this._cPtr);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class AccelGroup : gobject.object.ObjectWrap
   gdk.types.ModifierType getModifierMask()
   {
     GdkModifierType _cretval;
-    _cretval = gtk_accel_group_get_modifier_mask(cast(GtkAccelGroup*)cPtr);
+    _cretval = gtk_accel_group_get_modifier_mask(cast(GtkAccelGroup*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -266,7 +266,7 @@ class AccelGroup : gobject.object.ObjectWrap
   */
   void lock()
   {
-    gtk_accel_group_lock(cast(GtkAccelGroup*)cPtr);
+    gtk_accel_group_lock(cast(GtkAccelGroup*)this._cPtr);
   }
 
   /**
@@ -274,7 +274,7 @@ class AccelGroup : gobject.object.ObjectWrap
   */
   void unlock()
   {
-    gtk_accel_group_unlock(cast(GtkAccelGroup*)cPtr);
+    gtk_accel_group_unlock(cast(GtkAccelGroup*)this._cPtr);
   }
 
   /**

@@ -24,16 +24,16 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_container_cell_accessible_get_type != &gidSymbolNotFound ? gtk_container_cell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   /** */
   void addChild(gtk.cell_accessible.CellAccessible child)
   {
-    gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);
+    gtk_container_cell_accessible_add_child(cast(GtkContainerCellAccessible*)this._cPtr, child ? cast(GtkCellAccessible*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -63,7 +63,7 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   gtk.cell_accessible.CellAccessible[] getChildren()
   {
     GList* _cretval;
-    _cretval = gtk_container_cell_accessible_get_children(cast(GtkContainerCellAccessible*)cPtr);
+    _cretval = gtk_container_cell_accessible_get_children(cast(GtkContainerCellAccessible*)this._cPtr);
     auto _retval = gListToD!(gtk.cell_accessible.CellAccessible, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }
@@ -71,6 +71,6 @@ class ContainerCellAccessible : gtk.cell_accessible.CellAccessible
   /** */
   void removeChild(gtk.cell_accessible.CellAccessible child)
   {
-    gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)cPtr, child ? cast(GtkCellAccessible*)child.cPtr(No.Dup) : null);
+    gtk_container_cell_accessible_remove_child(cast(GtkContainerCellAccessible*)this._cPtr, child ? cast(GtkCellAccessible*)child._cPtr(No.Dup) : null);
   }
 }

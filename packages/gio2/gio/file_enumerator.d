@@ -50,16 +50,16 @@ class FileEnumerator : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_file_enumerator_get_type != &gidSymbolNotFound ? g_file_enumerator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -85,7 +85,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_file_enumerator_close(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -107,17 +107,17 @@ class FileEnumerator : gobject.object.ObjectWrap
   */
   void closeAsync(int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_enumerator_close_async(cast(GFileEnumerator*)cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_file_enumerator_close_async(cast(GFileEnumerator*)this._cPtr, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -141,7 +141,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     bool _retval;
     GError *_err;
-    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _retval = g_file_enumerator_close_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -170,8 +170,8 @@ class FileEnumerator : gobject.object.ObjectWrap
   gio.file.File getChild(gio.file_info.FileInfo info)
   {
     GFile* _cretval;
-    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)cPtr, info ? cast(GFileInfo*)info.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
+    _cretval = g_file_enumerator_get_child(cast(GFileEnumerator*)this._cPtr, info ? cast(GFileInfo*)info._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -182,8 +182,8 @@ class FileEnumerator : gobject.object.ObjectWrap
   gio.file.File getContainer()
   {
     GFile* _cretval;
-    _cretval = g_file_enumerator_get_container(cast(GFileEnumerator*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
+    _cretval = g_file_enumerator_get_container(cast(GFileEnumerator*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file.File)(cast(GFile*)_cretval, No.Take);
     return _retval;
   }
 
@@ -194,7 +194,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   bool hasPending()
   {
     bool _retval;
-    _retval = g_file_enumerator_has_pending(cast(GFileEnumerator*)cPtr);
+    _retval = g_file_enumerator_has_pending(cast(GFileEnumerator*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   bool isClosed()
   {
     bool _retval;
-    _retval = g_file_enumerator_is_closed(cast(GFileEnumerator*)cPtr);
+    _retval = g_file_enumerator_is_closed(cast(GFileEnumerator*)this._cPtr);
     return _retval;
   }
 
@@ -262,11 +262,11 @@ class FileEnumerator : gobject.object.ObjectWrap
     GFileInfo* _outInfo;
     GFile* _outChild;
     GError *_err;
-    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _retval = g_file_enumerator_iterate(cast(GFileEnumerator*)this._cPtr, &_outInfo, &_outChild, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     outInfo = new gio.file_info.FileInfo(cast(void*)_outInfo, No.Take);
-    outChild = gobject.object.ObjectWrap.getDObject!(gio.file.File)(_outChild, No.Take);
+    outChild = gobject.object.ObjectWrap._getDObject!(gio.file.File)(_outChild, No.Take);
     return _retval;
   }
 
@@ -294,10 +294,10 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     GFileInfo* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)cPtr, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_enumerator_next_file(cast(GFileEnumerator*)this._cPtr, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.file_info.FileInfo)(cast(GFileInfo*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -376,17 +376,17 @@ class FileEnumerator : gobject.object.ObjectWrap
   */
   void nextFilesAsync(int numFiles, int ioPriority, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    g_file_enumerator_next_files_async(cast(GFileEnumerator*)cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    g_file_enumerator_next_files_async(cast(GFileEnumerator*)this._cPtr, numFiles, ioPriority, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -403,7 +403,7 @@ class FileEnumerator : gobject.object.ObjectWrap
   {
     GList* _cretval;
     GError *_err;
-    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = g_file_enumerator_next_files_finish(cast(GFileEnumerator*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = gListToD!(gio.file_info.FileInfo, GidOwnership.Full)(cast(GList*)_cretval);
@@ -418,6 +418,6 @@ class FileEnumerator : gobject.object.ObjectWrap
   */
   void setPending(bool pending)
   {
-    g_file_enumerator_set_pending(cast(GFileEnumerator*)cPtr, pending);
+    g_file_enumerator_set_pending(cast(GFileEnumerator*)this._cPtr, pending);
   }
 }

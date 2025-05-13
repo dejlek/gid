@@ -64,16 +64,16 @@ class ActionBar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_action_bar_get_type != &gidSymbolNotFound ? gtk_action_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -119,8 +119,8 @@ class ActionBar : gtk.widget.Widget
   gtk.widget.Widget getCenterWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_action_bar_get_center_widget(cast(GtkActionBar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ class ActionBar : gtk.widget.Widget
   bool getRevealed()
   {
     bool _retval;
-    _retval = gtk_action_bar_get_revealed(cast(GtkActionBar*)cPtr);
+    _retval = gtk_action_bar_get_revealed(cast(GtkActionBar*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class ActionBar : gtk.widget.Widget
   */
   void packEnd(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_end(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_end(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -157,7 +157,7 @@ class ActionBar : gtk.widget.Widget
   */
   void packStart(gtk.widget.Widget child)
   {
-    gtk_action_bar_pack_start(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_pack_start(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -168,7 +168,7 @@ class ActionBar : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget child)
   {
-    gtk_action_bar_remove(cast(GtkActionBar*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_action_bar_remove(cast(GtkActionBar*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -179,7 +179,7 @@ class ActionBar : gtk.widget.Widget
   */
   void setCenterWidget(gtk.widget.Widget centerWidget = null)
   {
-    gtk_action_bar_set_center_widget(cast(GtkActionBar*)cPtr, centerWidget ? cast(GtkWidget*)centerWidget.cPtr(No.Dup) : null);
+    gtk_action_bar_set_center_widget(cast(GtkActionBar*)this._cPtr, centerWidget ? cast(GtkWidget*)centerWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -194,6 +194,6 @@ class ActionBar : gtk.widget.Widget
   */
   void setRevealed(bool revealed)
   {
-    gtk_action_bar_set_revealed(cast(GtkActionBar*)cPtr, revealed);
+    gtk_action_bar_set_revealed(cast(GtkActionBar*)this._cPtr, revealed);
   }
 }

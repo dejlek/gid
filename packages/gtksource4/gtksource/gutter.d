@@ -21,16 +21,16 @@ class Gutter : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_source_gutter_get_type != &gidSymbolNotFound ? gtk_source_gutter_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -50,8 +50,8 @@ class Gutter : gobject.object.ObjectWrap
   gtksource.gutter_renderer.GutterRenderer getRendererAtPos(int x, int y)
   {
     GtkSourceGutterRenderer* _cretval;
-    _cretval = gtk_source_gutter_get_renderer_at_pos(cast(GtkSourceGutter*)cPtr, x, y);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_get_renderer_at_pos(cast(GtkSourceGutter*)this._cPtr, x, y);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.gutter_renderer.GutterRenderer)(cast(GtkSourceGutterRenderer*)_cretval, No.Take);
     return _retval;
   }
 
@@ -59,8 +59,8 @@ class Gutter : gobject.object.ObjectWrap
   gtksource.view.View getView()
   {
     GtkSourceView* _cretval;
-    _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
+    _cretval = gtk_source_gutter_get_view(cast(GtkSourceGutter*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtksource.view.View)(cast(GtkSourceView*)_cretval, No.Take);
     return _retval;
   }
 
@@ -68,7 +68,7 @@ class Gutter : gobject.object.ObjectWrap
   gtk.types.TextWindowType getWindowType()
   {
     GtkTextWindowType _cretval;
-    _cretval = gtk_source_gutter_get_window_type(cast(GtkSourceGutter*)cPtr);
+    _cretval = gtk_source_gutter_get_window_type(cast(GtkSourceGutter*)this._cPtr);
     gtk.types.TextWindowType _retval = cast(gtk.types.TextWindowType)_cretval;
     return _retval;
   }
@@ -86,7 +86,7 @@ class Gutter : gobject.object.ObjectWrap
   bool insert(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
     bool _retval;
-    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
+    _retval = gtk_source_gutter_insert(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class Gutter : gobject.object.ObjectWrap
   */
   void queueDraw()
   {
-    gtk_source_gutter_queue_draw(cast(GtkSourceGutter*)cPtr);
+    gtk_source_gutter_queue_draw(cast(GtkSourceGutter*)this._cPtr);
   }
 
   /**
@@ -107,7 +107,7 @@ class Gutter : gobject.object.ObjectWrap
   */
   void remove(gtksource.gutter_renderer.GutterRenderer renderer)
   {
-    gtk_source_gutter_remove(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null);
+    gtk_source_gutter_remove(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null);
   }
 
   /**
@@ -119,6 +119,6 @@ class Gutter : gobject.object.ObjectWrap
   */
   void reorder(gtksource.gutter_renderer.GutterRenderer renderer, int position)
   {
-    gtk_source_gutter_reorder(cast(GtkSourceGutter*)cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer.cPtr(No.Dup) : null, position);
+    gtk_source_gutter_reorder(cast(GtkSourceGutter*)this._cPtr, renderer ? cast(GtkSourceGutterRenderer*)renderer._cPtr(No.Dup) : null, position);
   }
 }

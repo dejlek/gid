@@ -26,16 +26,16 @@ class GridColumn : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_grid_column_get_type != &gidSymbolNotFound ? panel_grid_column_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -64,19 +64,19 @@ class GridColumn : gtk.widget.Widget
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? cast(void*)&(callback) : null;
-    panel_grid_column_foreach_frame(cast(PanelGridColumn*)cPtr, _callbackCB, _callback);
+    panel_grid_column_foreach_frame(cast(PanelGridColumn*)this._cPtr, _callbackCB, _callback);
   }
 
   /** */
   bool getEmpty()
   {
     bool _retval;
-    _retval = panel_grid_column_get_empty(cast(PanelGridColumn*)cPtr);
+    _retval = panel_grid_column_get_empty(cast(PanelGridColumn*)this._cPtr);
     return _retval;
   }
 
@@ -87,8 +87,8 @@ class GridColumn : gtk.widget.Widget
   panel.frame.Frame getMostRecentFrame()
   {
     PanelFrame* _cretval;
-    _cretval = panel_grid_column_get_most_recent_frame(cast(PanelGridColumn*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    _cretval = panel_grid_column_get_most_recent_frame(cast(PanelGridColumn*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class GridColumn : gtk.widget.Widget
   uint getNRows()
   {
     uint _retval;
-    _retval = panel_grid_column_get_n_rows(cast(PanelGridColumn*)cPtr);
+    _retval = panel_grid_column_get_n_rows(cast(PanelGridColumn*)this._cPtr);
     return _retval;
   }
 
@@ -110,8 +110,8 @@ class GridColumn : gtk.widget.Widget
   panel.frame.Frame getRow(uint row)
   {
     PanelFrame* _cretval;
-    _cretval = panel_grid_column_get_row(cast(PanelGridColumn*)cPtr, row);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
+    _cretval = panel_grid_column_get_row(cast(PanelGridColumn*)this._cPtr, row);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(PanelFrame*)_cretval, No.Take);
     return _retval;
   }
 }

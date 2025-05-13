@@ -29,7 +29,7 @@ class ButtonEvent : gdk.event.Event
   uint getButton()
   {
     uint _retval;
-    _retval = gdk_button_event_get_button(cast(GdkEvent*)cPtr);
+    _retval = gdk_button_event_get_button(cast(GdkEvent*)this._cPtr);
     return _retval;
   }
 }

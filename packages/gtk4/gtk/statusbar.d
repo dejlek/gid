@@ -64,16 +64,16 @@ class Statusbar : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_statusbar_get_type != &gidSymbolNotFound ? gtk_statusbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -112,7 +112,7 @@ class Statusbar : gtk.widget.Widget
   {
     uint _retval;
     const(char)* _contextDescription = contextDescription.toCString(No.Alloc);
-    _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)cPtr, _contextDescription);
+    _retval = gtk_statusbar_get_context_id(cast(GtkStatusbar*)this._cPtr, _contextDescription);
     return _retval;
   }
 
@@ -131,7 +131,7 @@ class Statusbar : gtk.widget.Widget
   */
   void pop(uint contextId)
   {
-    gtk_statusbar_pop(cast(GtkStatusbar*)cPtr, contextId);
+    gtk_statusbar_pop(cast(GtkStatusbar*)this._cPtr, contextId);
   }
 
   /**
@@ -150,7 +150,7 @@ class Statusbar : gtk.widget.Widget
   {
     uint _retval;
     const(char)* _text = text.toCString(No.Alloc);
-    _retval = gtk_statusbar_push(cast(GtkStatusbar*)cPtr, contextId, _text);
+    _retval = gtk_statusbar_push(cast(GtkStatusbar*)this._cPtr, contextId, _text);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class Statusbar : gtk.widget.Widget
   */
   void remove(uint contextId, uint messageId)
   {
-    gtk_statusbar_remove(cast(GtkStatusbar*)cPtr, contextId, messageId);
+    gtk_statusbar_remove(cast(GtkStatusbar*)this._cPtr, contextId, messageId);
   }
 
   /**
@@ -180,7 +180,7 @@ class Statusbar : gtk.widget.Widget
   */
   void removeAll(uint contextId)
   {
-    gtk_statusbar_remove_all(cast(GtkStatusbar*)cPtr, contextId);
+    gtk_statusbar_remove_all(cast(GtkStatusbar*)this._cPtr, contextId);
   }
 
   /**

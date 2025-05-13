@@ -42,7 +42,7 @@ template ActionT()
   override bool doAction(int i)
   {
     bool _retval;
-    _retval = atk_action_do_action(cast(AtkAction*)cPtr, i);
+    _retval = atk_action_do_action(cast(AtkAction*)this._cPtr, i);
     return _retval;
   }
 
@@ -57,7 +57,7 @@ template ActionT()
   override string getDescription(int i)
   {
     const(char)* _cretval;
-    _cretval = atk_action_get_description(cast(AtkAction*)cPtr, i);
+    _cretval = atk_action_get_description(cast(AtkAction*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -96,7 +96,7 @@ template ActionT()
   override string getKeybinding(int i)
   {
     const(char)* _cretval;
-    _cretval = atk_action_get_keybinding(cast(AtkAction*)cPtr, i);
+    _cretval = atk_action_get_keybinding(cast(AtkAction*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -112,7 +112,7 @@ template ActionT()
   override string getLocalizedName(int i)
   {
     const(char)* _cretval;
-    _cretval = atk_action_get_localized_name(cast(AtkAction*)cPtr, i);
+    _cretval = atk_action_get_localized_name(cast(AtkAction*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -127,7 +127,7 @@ template ActionT()
   override int getNActions()
   {
     int _retval;
-    _retval = atk_action_get_n_actions(cast(AtkAction*)cPtr);
+    _retval = atk_action_get_n_actions(cast(AtkAction*)this._cPtr);
     return _retval;
   }
 
@@ -155,7 +155,7 @@ template ActionT()
   override string getName(int i)
   {
     const(char)* _cretval;
-    _cretval = atk_action_get_name(cast(AtkAction*)cPtr, i);
+    _cretval = atk_action_get_name(cast(AtkAction*)this._cPtr, i);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -172,7 +172,7 @@ template ActionT()
   {
     bool _retval;
     const(char)* _desc = desc.toCString(No.Alloc);
-    _retval = atk_action_set_description(cast(AtkAction*)cPtr, i, _desc);
+    _retval = atk_action_set_description(cast(AtkAction*)this._cPtr, i, _desc);
     return _retval;
   }
 }

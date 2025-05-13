@@ -48,7 +48,7 @@ template ComponentT()
   override bool contains(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_contains(cast(AtkComponent*)cPtr, x, y, coordType);
+    _retval = atk_component_contains(cast(AtkComponent*)this._cPtr, x, y, coordType);
     return _retval;
   }
 
@@ -61,7 +61,7 @@ template ComponentT()
   override double getAlpha()
   {
     double _retval;
-    _retval = atk_component_get_alpha(cast(AtkComponent*)cPtr);
+    _retval = atk_component_get_alpha(cast(AtkComponent*)this._cPtr);
     return _retval;
   }
 
@@ -81,7 +81,7 @@ template ComponentT()
   */
   override void getExtents(out int x, out int y, out int width, out int height, atk.types.CoordType coordType)
   {
-    atk_component_get_extents(cast(AtkComponent*)cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coordType);
+    atk_component_get_extents(cast(AtkComponent*)this._cPtr, cast(int*)&x, cast(int*)&y, cast(int*)&width, cast(int*)&height, coordType);
   }
 
   /**
@@ -91,7 +91,7 @@ template ComponentT()
   override atk.types.Layer getLayer()
   {
     AtkLayer _cretval;
-    _cretval = atk_component_get_layer(cast(AtkComponent*)cPtr);
+    _cretval = atk_component_get_layer(cast(AtkComponent*)this._cPtr);
     atk.types.Layer _retval = cast(atk.types.Layer)_cretval;
     return _retval;
   }
@@ -106,7 +106,7 @@ template ComponentT()
   override int getMdiZorder()
   {
     int _retval;
-    _retval = atk_component_get_mdi_zorder(cast(AtkComponent*)cPtr);
+    _retval = atk_component_get_mdi_zorder(cast(AtkComponent*)this._cPtr);
     return _retval;
   }
 
@@ -127,7 +127,7 @@ template ComponentT()
   */
   override void getPosition(out int x, out int y, atk.types.CoordType coordType)
   {
-    atk_component_get_position(cast(AtkComponent*)cPtr, cast(int*)&x, cast(int*)&y, coordType);
+    atk_component_get_position(cast(AtkComponent*)this._cPtr, cast(int*)&x, cast(int*)&y, coordType);
   }
 
   /**
@@ -144,7 +144,7 @@ template ComponentT()
   */
   override void getSize(out int width, out int height)
   {
-    atk_component_get_size(cast(AtkComponent*)cPtr, cast(int*)&width, cast(int*)&height);
+    atk_component_get_size(cast(AtkComponent*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -154,7 +154,7 @@ template ComponentT()
   override bool grabFocus()
   {
     bool _retval;
-    _retval = atk_component_grab_focus(cast(AtkComponent*)cPtr);
+    _retval = atk_component_grab_focus(cast(AtkComponent*)this._cPtr);
     return _retval;
   }
 
@@ -173,8 +173,8 @@ template ComponentT()
   override atk.object.ObjectWrap refAccessibleAtPoint(int x, int y, atk.types.CoordType coordType)
   {
     AtkObject* _cretval;
-    _cretval = atk_component_ref_accessible_at_point(cast(AtkComponent*)cPtr, x, y, coordType);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
+    _cretval = atk_component_ref_accessible_at_point(cast(AtkComponent*)this._cPtr, x, y, coordType);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(atk.object.ObjectWrap)(cast(AtkObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -192,7 +192,7 @@ template ComponentT()
   */
   override void removeFocusHandler(uint handlerId)
   {
-    atk_component_remove_focus_handler(cast(AtkComponent*)cPtr, handlerId);
+    atk_component_remove_focus_handler(cast(AtkComponent*)this._cPtr, handlerId);
   }
 
   /**
@@ -209,7 +209,7 @@ template ComponentT()
   override bool scrollTo(atk.types.ScrollType type)
   {
     bool _retval;
-    _retval = atk_component_scroll_to(cast(AtkComponent*)cPtr, type);
+    _retval = atk_component_scroll_to(cast(AtkComponent*)this._cPtr, type);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ template ComponentT()
   override bool scrollToPoint(atk.types.CoordType coords, int x, int y)
   {
     bool _retval;
-    _retval = atk_component_scroll_to_point(cast(AtkComponent*)cPtr, coords, x, y);
+    _retval = atk_component_scroll_to_point(cast(AtkComponent*)this._cPtr, coords, x, y);
     return _retval;
   }
 
@@ -246,7 +246,7 @@ template ComponentT()
   override bool setExtents(int x, int y, int width, int height, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_set_extents(cast(AtkComponent*)cPtr, x, y, width, height, coordType);
+    _retval = atk_component_set_extents(cast(AtkComponent*)this._cPtr, x, y, width, height, coordType);
     return _retval;
   }
 
@@ -266,7 +266,7 @@ template ComponentT()
   override bool setPosition(int x, int y, atk.types.CoordType coordType)
   {
     bool _retval;
-    _retval = atk_component_set_position(cast(AtkComponent*)cPtr, x, y, coordType);
+    _retval = atk_component_set_position(cast(AtkComponent*)this._cPtr, x, y, coordType);
     return _retval;
   }
 
@@ -281,7 +281,7 @@ template ComponentT()
   override bool setSize(int width, int height)
   {
     bool _retval;
-    _retval = atk_component_set_size(cast(AtkComponent*)cPtr, width, height);
+    _retval = atk_component_set_size(cast(AtkComponent*)this._cPtr, width, height);
     return _retval;
   }
 

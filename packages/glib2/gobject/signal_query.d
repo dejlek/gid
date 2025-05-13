@@ -28,7 +28,7 @@ class SignalQuery
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class SignalQuery
   */
   @property uint signalId()
   {
-    return (cast(GSignalQuery*)cPtr).signalId;
+    return (cast(GSignalQuery*)this._cPtr).signalId;
   }
 
   /**
@@ -51,7 +51,7 @@ class SignalQuery
   */
   @property void signalId(uint propval)
   {
-    (cast(GSignalQuery*)cPtr).signalId = propval;
+    (cast(GSignalQuery*)this._cPtr).signalId = propval;
   }
 
   /**
@@ -60,7 +60,7 @@ class SignalQuery
   */
   @property string signalName()
   {
-    return cToD!(string)(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
+    return cToD!(string)(cast(void*)(cast(GSignalQuery*)this._cPtr).signalName);
   }
 
   /**
@@ -70,8 +70,8 @@ class SignalQuery
   */
   @property void signalName(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GSignalQuery*)cPtr).signalName);
-    dToC(propval, cast(void*)&(cast(GSignalQuery*)cPtr).signalName);
+    cValueFree!(string)(cast(void*)(cast(GSignalQuery*)this._cPtr).signalName);
+    dToC(propval, cast(void*)&(cast(GSignalQuery*)this._cPtr).signalName);
   }
 
   /**
@@ -80,7 +80,7 @@ class SignalQuery
   */
   @property gobject.types.GType itype()
   {
-    return (cast(GSignalQuery*)cPtr).itype;
+    return (cast(GSignalQuery*)this._cPtr).itype;
   }
 
   /**
@@ -90,7 +90,7 @@ class SignalQuery
   */
   @property void itype(gobject.types.GType propval)
   {
-    (cast(GSignalQuery*)cPtr).itype = propval;
+    (cast(GSignalQuery*)this._cPtr).itype = propval;
   }
 
   /**
@@ -99,7 +99,7 @@ class SignalQuery
   */
   @property gobject.types.SignalFlags signalFlags()
   {
-    return cast(gobject.types.SignalFlags)(cast(GSignalQuery*)cPtr).signalFlags;
+    return cast(gobject.types.SignalFlags)(cast(GSignalQuery*)this._cPtr).signalFlags;
   }
 
   /**
@@ -109,7 +109,7 @@ class SignalQuery
   */
   @property void signalFlags(gobject.types.SignalFlags propval)
   {
-    (cast(GSignalQuery*)cPtr).signalFlags = cast(GSignalFlags)propval;
+    (cast(GSignalQuery*)this._cPtr).signalFlags = cast(GSignalFlags)propval;
   }
 
   /**
@@ -118,7 +118,7 @@ class SignalQuery
   */
   @property gobject.types.GType returnType()
   {
-    return (cast(GSignalQuery*)cPtr).returnType;
+    return (cast(GSignalQuery*)this._cPtr).returnType;
   }
 
   /**
@@ -128,7 +128,7 @@ class SignalQuery
   */
   @property void returnType(gobject.types.GType propval)
   {
-    (cast(GSignalQuery*)cPtr).returnType = propval;
+    (cast(GSignalQuery*)this._cPtr).returnType = propval;
   }
 
   /**
@@ -137,7 +137,7 @@ class SignalQuery
   */
   @property uint nParams()
   {
-    return (cast(GSignalQuery*)cPtr).nParams;
+    return (cast(GSignalQuery*)this._cPtr).nParams;
   }
 
   /**
@@ -147,6 +147,6 @@ class SignalQuery
   */
   @property void nParams(uint propval)
   {
-    (cast(GSignalQuery*)cPtr).nParams = propval;
+    (cast(GSignalQuery*)this._cPtr).nParams = propval;
   }
 }

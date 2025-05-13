@@ -22,22 +22,22 @@ class Stroke : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gsk_stroke_get_type != &gidSymbolNotFound ? gsk_stroke_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -67,7 +67,7 @@ class Stroke : gobject.boxed.Boxed
   gsk.stroke.Stroke copy()
   {
     GskStroke* _cretval;
-    _cretval = gsk_stroke_copy(cast(const(GskStroke)*)cPtr);
+    _cretval = gsk_stroke_copy(cast(const(GskStroke)*)this._cPtr);
     auto _retval = _cretval ? new gsk.stroke.Stroke(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -80,7 +80,7 @@ class Stroke : gobject.boxed.Boxed
   {
     const(float)* _cretval;
     size_t _cretlength;
-    _cretval = gsk_stroke_get_dash(cast(const(GskStroke)*)cPtr, &_cretlength);
+    _cretval = gsk_stroke_get_dash(cast(const(GskStroke)*)this._cPtr, &_cretlength);
     float[] _retval;
 
     if (_cretval)
@@ -97,7 +97,7 @@ class Stroke : gobject.boxed.Boxed
   float getDashOffset()
   {
     float _retval;
-    _retval = gsk_stroke_get_dash_offset(cast(const(GskStroke)*)cPtr);
+    _retval = gsk_stroke_get_dash_offset(cast(const(GskStroke)*)this._cPtr);
     return _retval;
   }
 
@@ -110,7 +110,7 @@ class Stroke : gobject.boxed.Boxed
   gsk.types.LineCap getLineCap()
   {
     GskLineCap _cretval;
-    _cretval = gsk_stroke_get_line_cap(cast(const(GskStroke)*)cPtr);
+    _cretval = gsk_stroke_get_line_cap(cast(const(GskStroke)*)this._cPtr);
     gsk.types.LineCap _retval = cast(gsk.types.LineCap)_cretval;
     return _retval;
   }
@@ -124,7 +124,7 @@ class Stroke : gobject.boxed.Boxed
   gsk.types.LineJoin getLineJoin()
   {
     GskLineJoin _cretval;
-    _cretval = gsk_stroke_get_line_join(cast(const(GskStroke)*)cPtr);
+    _cretval = gsk_stroke_get_line_join(cast(const(GskStroke)*)this._cPtr);
     gsk.types.LineJoin _retval = cast(gsk.types.LineJoin)_cretval;
     return _retval;
   }
@@ -136,7 +136,7 @@ class Stroke : gobject.boxed.Boxed
   float getLineWidth()
   {
     float _retval;
-    _retval = gsk_stroke_get_line_width(cast(const(GskStroke)*)cPtr);
+    _retval = gsk_stroke_get_line_width(cast(const(GskStroke)*)this._cPtr);
     return _retval;
   }
 
@@ -147,7 +147,7 @@ class Stroke : gobject.boxed.Boxed
   float getMiterLimit()
   {
     float _retval;
-    _retval = gsk_stroke_get_miter_limit(cast(const(GskStroke)*)cPtr);
+    _retval = gsk_stroke_get_miter_limit(cast(const(GskStroke)*)this._cPtr);
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class Stroke : gobject.boxed.Boxed
       _nDash = cast(size_t)dash.length;
 
     auto _dash = cast(const(float)*)dash.ptr;
-    gsk_stroke_set_dash(cast(GskStroke*)cPtr, _dash, _nDash);
+    gsk_stroke_set_dash(cast(GskStroke*)this._cPtr, _dash, _nDash);
   }
 
   /**
@@ -202,7 +202,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void setDashOffset(float offset)
   {
-    gsk_stroke_set_dash_offset(cast(GskStroke*)cPtr, offset);
+    gsk_stroke_set_dash_offset(cast(GskStroke*)this._cPtr, offset);
   }
 
   /**
@@ -215,7 +215,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void setLineCap(gsk.types.LineCap lineCap)
   {
-    gsk_stroke_set_line_cap(cast(GskStroke*)cPtr, lineCap);
+    gsk_stroke_set_line_cap(cast(GskStroke*)this._cPtr, lineCap);
   }
 
   /**
@@ -228,7 +228,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void setLineJoin(gsk.types.LineJoin lineJoin)
   {
-    gsk_stroke_set_line_join(cast(GskStroke*)cPtr, lineJoin);
+    gsk_stroke_set_line_join(cast(GskStroke*)this._cPtr, lineJoin);
   }
 
   /**
@@ -241,7 +241,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void setLineWidth(float lineWidth)
   {
-    gsk_stroke_set_line_width(cast(GskStroke*)cPtr, lineWidth);
+    gsk_stroke_set_line_width(cast(GskStroke*)this._cPtr, lineWidth);
   }
 
   /**
@@ -259,7 +259,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void setMiterLimit(float limit)
   {
-    gsk_stroke_set_miter_limit(cast(GskStroke*)cPtr, limit);
+    gsk_stroke_set_miter_limit(cast(GskStroke*)this._cPtr, limit);
   }
 
   /**
@@ -271,7 +271,7 @@ class Stroke : gobject.boxed.Boxed
   */
   void toCairo(cairo.context.Context cr)
   {
-    gsk_stroke_to_cairo(cast(const(GskStroke)*)cPtr, cr ? cast(cairo_t*)cr.cPtr(No.Dup) : null);
+    gsk_stroke_to_cairo(cast(const(GskStroke)*)this._cPtr, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null);
   }
 
   /**

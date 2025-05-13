@@ -24,16 +24,16 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_tab_page_get_type != &gidSymbolNotFound ? adw_tab_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -479,8 +479,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_tab_page_get_child(cast(AdwTabPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_tab_page_get_child(cast(AdwTabPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -491,8 +491,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   gio.icon.Icon getIcon()
   {
     GIcon* _cretval;
-    _cretval = adw_tab_page_get_icon(cast(AdwTabPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = adw_tab_page_get_icon(cast(AdwTabPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -503,7 +503,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getIndicatorActivatable()
   {
     bool _retval;
-    _retval = adw_tab_page_get_indicator_activatable(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_indicator_activatable(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -514,8 +514,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   gio.icon.Icon getIndicatorIcon()
   {
     GIcon* _cretval;
-    _cretval = adw_tab_page_get_indicator_icon(cast(AdwTabPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
+    _cretval = adw_tab_page_get_indicator_icon(cast(AdwTabPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.icon.Icon)(cast(GIcon*)_cretval, No.Take);
     return _retval;
   }
 
@@ -526,7 +526,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getIndicatorTooltip()
   {
     const(char)* _cretval;
-    _cretval = adw_tab_page_get_indicator_tooltip(cast(AdwTabPage*)cPtr);
+    _cretval = adw_tab_page_get_indicator_tooltip(cast(AdwTabPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -538,7 +538,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getKeyword()
   {
     const(char)* _cretval;
-    _cretval = adw_tab_page_get_keyword(cast(AdwTabPage*)cPtr);
+    _cretval = adw_tab_page_get_keyword(cast(AdwTabPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -550,7 +550,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getLiveThumbnail()
   {
     bool _retval;
-    _retval = adw_tab_page_get_live_thumbnail(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_live_thumbnail(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -561,7 +561,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getLoading()
   {
     bool _retval;
-    _retval = adw_tab_page_get_loading(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_loading(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -572,7 +572,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getNeedsAttention()
   {
     bool _retval;
-    _retval = adw_tab_page_get_needs_attention(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_needs_attention(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -585,8 +585,8 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   adw.tab_page.TabPage getParent()
   {
     AdwTabPage* _cretval;
-    _cretval = adw_tab_page_get_parent(cast(AdwTabPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
+    _cretval = adw_tab_page_get_parent(cast(AdwTabPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.tab_page.TabPage)(cast(AdwTabPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -599,7 +599,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getPinned()
   {
     bool _retval;
-    _retval = adw_tab_page_get_pinned(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_pinned(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -610,7 +610,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   bool getSelected()
   {
     bool _retval;
-    _retval = adw_tab_page_get_selected(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_selected(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -621,7 +621,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   float getThumbnailXalign()
   {
     float _retval;
-    _retval = adw_tab_page_get_thumbnail_xalign(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_thumbnail_xalign(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -632,7 +632,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   float getThumbnailYalign()
   {
     float _retval;
-    _retval = adw_tab_page_get_thumbnail_yalign(cast(AdwTabPage*)cPtr);
+    _retval = adw_tab_page_get_thumbnail_yalign(cast(AdwTabPage*)this._cPtr);
     return _retval;
   }
 
@@ -643,7 +643,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_tab_page_get_title(cast(AdwTabPage*)cPtr);
+    _cretval = adw_tab_page_get_title(cast(AdwTabPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -655,7 +655,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   string getTooltip()
   {
     const(char)* _cretval;
-    _cretval = adw_tab_page_get_tooltip(cast(AdwTabPage*)cPtr);
+    _cretval = adw_tab_page_get_tooltip(cast(AdwTabPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -672,7 +672,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void invalidateThumbnail()
   {
-    adw_tab_page_invalidate_thumbnail(cast(AdwTabPage*)cPtr);
+    adw_tab_page_invalidate_thumbnail(cast(AdwTabPage*)this._cPtr);
   }
 
   /**
@@ -689,7 +689,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIcon(gio.icon.Icon icon = null)
   {
-    adw_tab_page_set_icon(cast(AdwTabPage*)cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon).cPtr(No.Dup) : null);
+    adw_tab_page_set_icon(cast(AdwTabPage*)this._cPtr, icon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)icon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -705,7 +705,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIndicatorActivatable(bool activatable)
   {
-    adw_tab_page_set_indicator_activatable(cast(AdwTabPage*)cPtr, activatable);
+    adw_tab_page_set_indicator_activatable(cast(AdwTabPage*)this._cPtr, activatable);
   }
 
   /**
@@ -732,7 +732,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setIndicatorIcon(gio.icon.Icon indicatorIcon = null)
   {
-    adw_tab_page_set_indicator_icon(cast(AdwTabPage*)cPtr, indicatorIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)indicatorIcon).cPtr(No.Dup) : null);
+    adw_tab_page_set_indicator_icon(cast(AdwTabPage*)this._cPtr, indicatorIcon ? cast(GIcon*)(cast(gobject.object.ObjectWrap)indicatorIcon)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -748,7 +748,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setIndicatorTooltip(string tooltip)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    adw_tab_page_set_indicator_tooltip(cast(AdwTabPage*)cPtr, _tooltip);
+    adw_tab_page_set_indicator_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
   }
 
   /**
@@ -765,7 +765,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setKeyword(string keyword)
   {
     const(char)* _keyword = keyword.toCString(No.Alloc);
-    adw_tab_page_set_keyword(cast(AdwTabPage*)cPtr, _keyword);
+    adw_tab_page_set_keyword(cast(AdwTabPage*)this._cPtr, _keyword);
   }
 
   /**
@@ -784,7 +784,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setLiveThumbnail(bool liveThumbnail)
   {
-    adw_tab_page_set_live_thumbnail(cast(AdwTabPage*)cPtr, liveThumbnail);
+    adw_tab_page_set_live_thumbnail(cast(AdwTabPage*)this._cPtr, liveThumbnail);
   }
 
   /**
@@ -801,7 +801,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setLoading(bool loading)
   {
-    adw_tab_page_set_loading(cast(AdwTabPage*)cPtr, loading);
+    adw_tab_page_set_loading(cast(AdwTabPage*)this._cPtr, loading);
   }
 
   /**
@@ -822,7 +822,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setNeedsAttention(bool needsAttention)
   {
-    adw_tab_page_set_needs_attention(cast(AdwTabPage*)cPtr, needsAttention);
+    adw_tab_page_set_needs_attention(cast(AdwTabPage*)this._cPtr, needsAttention);
   }
 
   /**
@@ -842,7 +842,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setThumbnailXalign(float xalign)
   {
-    adw_tab_page_set_thumbnail_xalign(cast(AdwTabPage*)cPtr, xalign);
+    adw_tab_page_set_thumbnail_xalign(cast(AdwTabPage*)this._cPtr, xalign);
   }
 
   /**
@@ -862,7 +862,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   */
   void setThumbnailYalign(float yalign)
   {
-    adw_tab_page_set_thumbnail_yalign(cast(AdwTabPage*)cPtr, yalign);
+    adw_tab_page_set_thumbnail_yalign(cast(AdwTabPage*)this._cPtr, yalign);
   }
 
   /**
@@ -881,7 +881,7 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_tab_page_set_title(cast(AdwTabPage*)cPtr, _title);
+    adw_tab_page_set_title(cast(AdwTabPage*)this._cPtr, _title);
   }
 
   /**
@@ -898,6 +898,6 @@ class TabPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
   void setTooltip(string tooltip)
   {
     const(char)* _tooltip = tooltip.toCString(No.Alloc);
-    adw_tab_page_set_tooltip(cast(AdwTabPage*)cPtr, _tooltip);
+    adw_tab_page_set_tooltip(cast(AdwTabPage*)this._cPtr, _tooltip);
   }
 }

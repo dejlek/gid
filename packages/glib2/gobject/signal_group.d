@@ -42,16 +42,16 @@ class SignalGroup : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_signal_group_get_type != &gidSymbolNotFound ? g_signal_group_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,7 +102,7 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   void block()
   {
-    g_signal_group_block(cast(GSignalGroup*)cPtr);
+    g_signal_group_block(cast(GSignalGroup*)this._cPtr);
   }
 
   /**
@@ -119,7 +119,7 @@ class SignalGroup : gobject.object.ObjectWrap
   void connectClosure(string detailedSignal, gobject.closure.Closure closure, bool after)
   {
     const(char)* _detailedSignal = detailedSignal.toCString(No.Alloc);
-    g_signal_group_connect_closure(cast(GSignalGroup*)cPtr, _detailedSignal, closure ? cast(GClosure*)closure.cPtr(No.Dup) : null, after);
+    g_signal_group_connect_closure(cast(GSignalGroup*)this._cPtr, _detailedSignal, closure ? cast(GClosure*)closure._cPtr(No.Dup) : null, after);
   }
 
   /**
@@ -128,9 +128,9 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap dupTarget()
   {
-    ObjectC* _cretval;
-    _cretval = g_signal_group_dup_target(cast(GSignalGroup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_signal_group_dup_target(cast(GSignalGroup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -148,7 +148,7 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   void setTarget(gobject.object.ObjectWrap target = null)
   {
-    g_signal_group_set_target(cast(GSignalGroup*)cPtr, target ? cast(ObjectC*)target.cPtr(No.Dup) : null);
+    g_signal_group_set_target(cast(GSignalGroup*)this._cPtr, target ? cast(GObject*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -159,7 +159,7 @@ class SignalGroup : gobject.object.ObjectWrap
   */
   void unblock()
   {
-    g_signal_group_unblock(cast(GSignalGroup*)cPtr);
+    g_signal_group_unblock(cast(GSignalGroup*)this._cPtr);
   }
 
   /**

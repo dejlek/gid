@@ -35,7 +35,7 @@ class Cache
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -50,7 +50,7 @@ class Cache
   */
   void destroy()
   {
-    g_cache_destroy(cast(GCache*)cPtr);
+    g_cache_destroy(cast(GCache*)this._cPtr);
   }
 
   /**
@@ -71,7 +71,7 @@ class Cache
   */
   void* insert(void* key = null)
   {
-    auto _retval = g_cache_insert(cast(GCache*)cPtr, key);
+    auto _retval = g_cache_insert(cast(GCache*)this._cPtr, key);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class Cache
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_cache_key_foreach(cast(GCache*)cPtr, _funcCB, _func);
+    g_cache_key_foreach(cast(GCache*)this._cPtr, _funcCB, _func);
   }
 
   /**
@@ -114,7 +114,7 @@ class Cache
   */
   void remove(const(void)* value = null)
   {
-    g_cache_remove(cast(GCache*)cPtr, value);
+    g_cache_remove(cast(GCache*)this._cPtr, value);
   }
 
   /**
@@ -137,6 +137,6 @@ class Cache
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? cast(void*)&(func) : null;
-    g_cache_value_foreach(cast(GCache*)cPtr, _funcCB, _func);
+    g_cache_value_foreach(cast(GCache*)this._cPtr, _funcCB, _func);
   }
 }

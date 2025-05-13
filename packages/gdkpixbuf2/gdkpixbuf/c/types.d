@@ -358,7 +358,7 @@ struct PixbufC;
 struct GdkPixbufAnimation
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -401,7 +401,7 @@ struct GdkPixbufAnimationClass
 struct GdkPixbufAnimationIter
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**
@@ -549,7 +549,7 @@ struct GdkPixbufFormat
 struct GdkPixbufLoader
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   void* priv;

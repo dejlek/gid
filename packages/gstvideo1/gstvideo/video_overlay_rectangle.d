@@ -22,22 +22,22 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_overlay_rectangle_get_type != &gidSymbolNotFound ? gst_video_overlay_rectangle_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   static gstvideo.video_overlay_rectangle.VideoOverlayRectangle newRaw(gst.buffer.Buffer pixels, int renderX, int renderY, uint renderWidth, uint renderHeight, gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstVideoOverlayRectangle* _cretval;
-    _cretval = gst_video_overlay_rectangle_new_raw(pixels ? cast(GstBuffer*)pixels.cPtr(No.Dup) : null, renderX, renderY, renderWidth, renderHeight, flags);
+    _cretval = gst_video_overlay_rectangle_new_raw(pixels ? cast(GstBuffer*)pixels._cPtr(No.Dup) : null, renderX, renderY, renderWidth, renderHeight, flags);
     auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -90,7 +90,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gstvideo.video_overlay_rectangle.VideoOverlayRectangle copy()
   {
     GstVideoOverlayRectangle* _cretval;
-    _cretval = gst_video_overlay_rectangle_copy(cast(GstVideoOverlayRectangle*)cPtr);
+    _cretval = gst_video_overlay_rectangle_copy(cast(GstVideoOverlayRectangle*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_overlay_rectangle.VideoOverlayRectangle(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -106,7 +106,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gstvideo.types.VideoOverlayFormatFlags getFlags()
   {
     GstVideoOverlayFormatFlags _cretval;
-    _cretval = gst_video_overlay_rectangle_get_flags(cast(GstVideoOverlayRectangle*)cPtr);
+    _cretval = gst_video_overlay_rectangle_get_flags(cast(GstVideoOverlayRectangle*)this._cPtr);
     gstvideo.types.VideoOverlayFormatFlags _retval = cast(gstvideo.types.VideoOverlayFormatFlags)_cretval;
     return _retval;
   }
@@ -118,7 +118,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   float getGlobalAlpha()
   {
     float _retval;
-    _retval = gst_video_overlay_rectangle_get_global_alpha(cast(GstVideoOverlayRectangle*)cPtr);
+    _retval = gst_video_overlay_rectangle_get_global_alpha(cast(GstVideoOverlayRectangle*)this._cPtr);
     return _retval;
   }
 
@@ -126,7 +126,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsArgb(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_argb(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_argb(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -135,7 +135,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsAyuv(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_ayuv(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_ayuv(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -144,7 +144,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsRaw(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_raw(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_raw(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -168,7 +168,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsUnscaledArgb(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_argb(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_argb(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -192,7 +192,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsUnscaledAyuv(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_ayuv(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_ayuv(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -216,7 +216,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   gst.buffer.Buffer getPixelsUnscaledRaw(gstvideo.types.VideoOverlayFormatFlags flags)
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_raw(cast(GstVideoOverlayRectangle*)cPtr, flags);
+    _cretval = gst_video_overlay_rectangle_get_pixels_unscaled_raw(cast(GstVideoOverlayRectangle*)this._cPtr, flags);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -235,7 +235,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   bool getRenderRectangle(out int renderX, out int renderY, out uint renderWidth, out uint renderHeight)
   {
     bool _retval;
-    _retval = gst_video_overlay_rectangle_get_render_rectangle(cast(GstVideoOverlayRectangle*)cPtr, cast(int*)&renderX, cast(int*)&renderY, cast(uint*)&renderWidth, cast(uint*)&renderHeight);
+    _retval = gst_video_overlay_rectangle_get_render_rectangle(cast(GstVideoOverlayRectangle*)this._cPtr, cast(int*)&renderX, cast(int*)&renderY, cast(uint*)&renderWidth, cast(uint*)&renderHeight);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   uint getSeqnum()
   {
     uint _retval;
-    _retval = gst_video_overlay_rectangle_get_seqnum(cast(GstVideoOverlayRectangle*)cPtr);
+    _retval = gst_video_overlay_rectangle_get_seqnum(cast(GstVideoOverlayRectangle*)this._cPtr);
     return _retval;
   }
 
@@ -278,7 +278,7 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   */
   void setGlobalAlpha(float globalAlpha)
   {
-    gst_video_overlay_rectangle_set_global_alpha(cast(GstVideoOverlayRectangle*)cPtr, globalAlpha);
+    gst_video_overlay_rectangle_set_global_alpha(cast(GstVideoOverlayRectangle*)this._cPtr, globalAlpha);
   }
 
   /**
@@ -300,6 +300,6 @@ class VideoOverlayRectangle : gobject.boxed.Boxed
   */
   void setRenderRectangle(int renderX, int renderY, uint renderWidth, uint renderHeight)
   {
-    gst_video_overlay_rectangle_set_render_rectangle(cast(GstVideoOverlayRectangle*)cPtr, renderX, renderY, renderWidth, renderHeight);
+    gst_video_overlay_rectangle_set_render_rectangle(cast(GstVideoOverlayRectangle*)this._cPtr, renderX, renderY, renderWidth, renderHeight);
   }
 }

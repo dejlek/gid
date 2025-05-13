@@ -54,16 +54,16 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_squeezer_get_type != &gidSymbolNotFound ? adw_squeezer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -391,8 +391,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   adw.squeezer_page.SqueezerPage add(gtk.widget.Widget child)
   {
     AdwSqueezerPage* _cretval;
-    _cretval = adw_squeezer_add(cast(AdwSqueezer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.squeezer_page.SqueezerPage)(cast(AdwSqueezerPage*)_cretval, No.Take);
+    _cretval = adw_squeezer_add(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.squeezer_page.SqueezerPage)(cast(AdwSqueezerPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getAllowNone()
   {
     bool _retval;
-    _retval = adw_squeezer_get_allow_none(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_allow_none(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -418,7 +418,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = adw_squeezer_get_homogeneous(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_homogeneous(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -431,7 +431,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getInterpolateSize()
   {
     bool _retval;
-    _retval = adw_squeezer_get_interpolate_size(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_interpolate_size(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -447,8 +447,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   adw.squeezer_page.SqueezerPage getPage(gtk.widget.Widget child)
   {
     AdwSqueezerPage* _cretval;
-    _cretval = adw_squeezer_get_page(cast(AdwSqueezer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.squeezer_page.SqueezerPage)(cast(AdwSqueezerPage*)_cretval, No.Take);
+    _cretval = adw_squeezer_get_page(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.squeezer_page.SqueezerPage)(cast(AdwSqueezerPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -464,8 +464,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.selection_model.SelectionModel getPages()
   {
     GtkSelectionModel* _cretval;
-    _cretval = adw_squeezer_get_pages(cast(AdwSqueezer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
+    _cretval = adw_squeezer_get_pages(cast(AdwSqueezer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.selection_model.SelectionModel)(cast(GtkSelectionModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -478,7 +478,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   adw.types.FoldThresholdPolicy getSwitchThresholdPolicy()
   {
     AdwFoldThresholdPolicy _cretval;
-    _cretval = adw_squeezer_get_switch_threshold_policy(cast(AdwSqueezer*)cPtr);
+    _cretval = adw_squeezer_get_switch_threshold_policy(cast(AdwSqueezer*)this._cPtr);
     adw.types.FoldThresholdPolicy _retval = cast(adw.types.FoldThresholdPolicy)_cretval;
     return _retval;
   }
@@ -492,7 +492,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   uint getTransitionDuration()
   {
     uint _retval;
-    _retval = adw_squeezer_get_transition_duration(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_transition_duration(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -509,7 +509,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   bool getTransitionRunning()
   {
     bool _retval;
-    _retval = adw_squeezer_get_transition_running(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_transition_running(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -522,7 +522,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   adw.types.SqueezerTransitionType getTransitionType()
   {
     AdwSqueezerTransitionType _cretval;
-    _cretval = adw_squeezer_get_transition_type(cast(AdwSqueezer*)cPtr);
+    _cretval = adw_squeezer_get_transition_type(cast(AdwSqueezer*)this._cPtr);
     adw.types.SqueezerTransitionType _retval = cast(adw.types.SqueezerTransitionType)_cretval;
     return _retval;
   }
@@ -536,8 +536,8 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.widget.Widget getVisibleChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_squeezer_get_visible_child(cast(AdwSqueezer*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_squeezer_get_visible_child(cast(AdwSqueezer*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -550,7 +550,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   float getXalign()
   {
     float _retval;
-    _retval = adw_squeezer_get_xalign(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_xalign(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -563,7 +563,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   float getYalign()
   {
     float _retval;
-    _retval = adw_squeezer_get_yalign(cast(AdwSqueezer*)cPtr);
+    _retval = adw_squeezer_get_yalign(cast(AdwSqueezer*)this._cPtr);
     return _retval;
   }
 
@@ -577,7 +577,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void remove(gtk.widget.Widget child)
   {
-    adw_squeezer_remove(cast(AdwSqueezer*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_squeezer_remove(cast(AdwSqueezer*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -594,7 +594,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setAllowNone(bool allowNone)
   {
-    adw_squeezer_set_allow_none(cast(AdwSqueezer*)cPtr, allowNone);
+    adw_squeezer_set_allow_none(cast(AdwSqueezer*)this._cPtr, allowNone);
   }
 
   /**
@@ -611,7 +611,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setHomogeneous(bool homogeneous)
   {
-    adw_squeezer_set_homogeneous(cast(AdwSqueezer*)cPtr, homogeneous);
+    adw_squeezer_set_homogeneous(cast(AdwSqueezer*)this._cPtr, homogeneous);
   }
 
   /**
@@ -629,7 +629,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setInterpolateSize(bool interpolateSize)
   {
-    adw_squeezer_set_interpolate_size(cast(AdwSqueezer*)cPtr, interpolateSize);
+    adw_squeezer_set_interpolate_size(cast(AdwSqueezer*)this._cPtr, interpolateSize);
   }
 
   /**
@@ -651,7 +651,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setSwitchThresholdPolicy(adw.types.FoldThresholdPolicy policy)
   {
-    adw_squeezer_set_switch_threshold_policy(cast(AdwSqueezer*)cPtr, policy);
+    adw_squeezer_set_switch_threshold_policy(cast(AdwSqueezer*)this._cPtr, policy);
   }
 
   /**
@@ -664,7 +664,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setTransitionDuration(uint duration)
   {
-    adw_squeezer_set_transition_duration(cast(AdwSqueezer*)cPtr, duration);
+    adw_squeezer_set_transition_duration(cast(AdwSqueezer*)this._cPtr, duration);
   }
 
   /**
@@ -677,7 +677,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setTransitionType(adw.types.SqueezerTransitionType transition)
   {
-    adw_squeezer_set_transition_type(cast(AdwSqueezer*)cPtr, transition);
+    adw_squeezer_set_transition_type(cast(AdwSqueezer*)this._cPtr, transition);
   }
 
   /**
@@ -696,7 +696,7 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setXalign(float xalign)
   {
-    adw_squeezer_set_xalign(cast(AdwSqueezer*)cPtr, xalign);
+    adw_squeezer_set_xalign(cast(AdwSqueezer*)this._cPtr, xalign);
   }
 
   /**
@@ -715,6 +715,6 @@ class Squeezer : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setYalign(float yalign)
   {
-    adw_squeezer_set_yalign(cast(AdwSqueezer*)cPtr, yalign);
+    adw_squeezer_set_yalign(cast(AdwSqueezer*)this._cPtr, yalign);
   }
 }

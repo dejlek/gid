@@ -30,22 +30,22 @@ class VideoTimeCode : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_time_code_get_type != &gidSymbolNotFound ? gst_video_time_code_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property gstvideo.video_time_code_config.VideoTimeCodeConfig config()
   {
-    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)cPtr).config);
+    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config);
   }
 
   /**
@@ -69,7 +69,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property uint hours()
   {
-    return (cast(GstVideoTimeCode*)cPtr).hours;
+    return (cast(GstVideoTimeCode*)this._cPtr).hours;
   }
 
   /**
@@ -79,7 +79,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property void hours(uint propval)
   {
-    (cast(GstVideoTimeCode*)cPtr).hours = propval;
+    (cast(GstVideoTimeCode*)this._cPtr).hours = propval;
   }
 
   /**
@@ -88,7 +88,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property uint minutes()
   {
-    return (cast(GstVideoTimeCode*)cPtr).minutes;
+    return (cast(GstVideoTimeCode*)this._cPtr).minutes;
   }
 
   /**
@@ -98,7 +98,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property void minutes(uint propval)
   {
-    (cast(GstVideoTimeCode*)cPtr).minutes = propval;
+    (cast(GstVideoTimeCode*)this._cPtr).minutes = propval;
   }
 
   /**
@@ -107,7 +107,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property uint seconds()
   {
-    return (cast(GstVideoTimeCode*)cPtr).seconds;
+    return (cast(GstVideoTimeCode*)this._cPtr).seconds;
   }
 
   /**
@@ -117,7 +117,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property void seconds(uint propval)
   {
-    (cast(GstVideoTimeCode*)cPtr).seconds = propval;
+    (cast(GstVideoTimeCode*)this._cPtr).seconds = propval;
   }
 
   /**
@@ -126,7 +126,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property uint frames()
   {
-    return (cast(GstVideoTimeCode*)cPtr).frames;
+    return (cast(GstVideoTimeCode*)this._cPtr).frames;
   }
 
   /**
@@ -136,7 +136,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property void frames(uint propval)
   {
-    (cast(GstVideoTimeCode*)cPtr).frames = propval;
+    (cast(GstVideoTimeCode*)this._cPtr).frames = propval;
   }
 
   /**
@@ -145,7 +145,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property uint fieldCount()
   {
-    return (cast(GstVideoTimeCode*)cPtr).fieldCount;
+    return (cast(GstVideoTimeCode*)this._cPtr).fieldCount;
   }
 
   /**
@@ -155,7 +155,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property void fieldCount(uint propval)
   {
-    (cast(GstVideoTimeCode*)cPtr).fieldCount = propval;
+    (cast(GstVideoTimeCode*)this._cPtr).fieldCount = propval;
   }
 
   /**
@@ -179,7 +179,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   this(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_new(fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam.cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
+    _cretval = gst_video_time_code_new(fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
     this(_cretval, Yes.Take);
   }
 
@@ -211,7 +211,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   static gstvideo.video_time_code.VideoTimeCode newFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_new_from_date_time(fpsN, fpsD, dt ? cast(GDateTime*)dt.cPtr(No.Dup) : null, flags, fieldCount);
+    _cretval = gst_video_time_code_new_from_date_time(fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -232,7 +232,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   static gstvideo.video_time_code.VideoTimeCode newFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_new_from_date_time_full(fpsN, fpsD, dt ? cast(GDateTime*)dt.cPtr(No.Dup) : null, flags, fieldCount);
+    _cretval = gst_video_time_code_new_from_date_time_full(fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -256,7 +256,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   void addFrames(long frames)
   {
-    gst_video_time_code_add_frames(cast(GstVideoTimeCode*)cPtr, frames);
+    gst_video_time_code_add_frames(cast(GstVideoTimeCode*)this._cPtr, frames);
   }
 
   /**
@@ -279,7 +279,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   gstvideo.video_time_code.VideoTimeCode addInterval(gstvideo.video_time_code_interval.VideoTimeCodeInterval tcInter)
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_add_interval(cast(const(GstVideoTimeCode)*)cPtr, tcInter ? cast(const(GstVideoTimeCodeInterval)*)tcInter.cPtr(No.Dup) : null);
+    _cretval = gst_video_time_code_add_interval(cast(const(GstVideoTimeCode)*)this._cPtr, tcInter ? cast(const(GstVideoTimeCodeInterval)*)tcInter._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -290,7 +290,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   void clear()
   {
-    gst_video_time_code_clear(cast(GstVideoTimeCode*)cPtr);
+    gst_video_time_code_clear(cast(GstVideoTimeCode*)this._cPtr);
   }
 
   /**
@@ -305,7 +305,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   int compare(gstvideo.video_time_code.VideoTimeCode tc2)
   {
     int _retval;
-    _retval = gst_video_time_code_compare(cast(const(GstVideoTimeCode)*)cPtr, tc2 ? cast(const(GstVideoTimeCode)*)tc2.cPtr(No.Dup) : null);
+    _retval = gst_video_time_code_compare(cast(const(GstVideoTimeCode)*)this._cPtr, tc2 ? cast(const(GstVideoTimeCode)*)tc2._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -313,7 +313,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   gstvideo.video_time_code.VideoTimeCode copy()
   {
     GstVideoTimeCode* _cretval;
-    _cretval = gst_video_time_code_copy(cast(const(GstVideoTimeCode)*)cPtr);
+    _cretval = gst_video_time_code_copy(cast(const(GstVideoTimeCode)*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_time_code.VideoTimeCode(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -322,7 +322,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   ulong framesSinceDailyJam()
   {
     ulong _retval;
-    _retval = gst_video_time_code_frames_since_daily_jam(cast(const(GstVideoTimeCode)*)cPtr);
+    _retval = gst_video_time_code_frames_since_daily_jam(cast(const(GstVideoTimeCode)*)this._cPtr);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   void incrementFrame()
   {
-    gst_video_time_code_increment_frame(cast(GstVideoTimeCode*)cPtr);
+    gst_video_time_code_increment_frame(cast(GstVideoTimeCode*)this._cPtr);
   }
 
   /**
@@ -355,7 +355,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   void init_(uint fpsN, uint fpsD, glib.date_time.DateTime latestDailyJam, gstvideo.types.VideoTimeCodeFlags flags, uint hours, uint minutes, uint seconds, uint frames, uint fieldCount)
   {
-    gst_video_time_code_init(cast(GstVideoTimeCode*)cPtr, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam.cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
+    gst_video_time_code_init(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, latestDailyJam ? cast(GDateTime*)latestDailyJam._cPtr(No.Dup) : null, flags, hours, minutes, seconds, frames, fieldCount);
   }
 
   /**
@@ -374,7 +374,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   void initFromDateTime(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
   {
-    gst_video_time_code_init_from_date_time(cast(GstVideoTimeCode*)cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt.cPtr(No.Dup) : null, flags, fieldCount);
+    gst_video_time_code_init_from_date_time(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
   }
 
   /**
@@ -392,7 +392,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   bool initFromDateTimeFull(uint fpsN, uint fpsD, glib.date_time.DateTime dt, gstvideo.types.VideoTimeCodeFlags flags, uint fieldCount)
   {
     bool _retval;
-    _retval = gst_video_time_code_init_from_date_time_full(cast(GstVideoTimeCode*)cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt.cPtr(No.Dup) : null, flags, fieldCount);
+    _retval = gst_video_time_code_init_from_date_time_full(cast(GstVideoTimeCode*)this._cPtr, fpsN, fpsD, dt ? cast(GDateTime*)dt._cPtr(No.Dup) : null, flags, fieldCount);
     return _retval;
   }
 
@@ -400,7 +400,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   bool isValid()
   {
     bool _retval;
-    _retval = gst_video_time_code_is_valid(cast(const(GstVideoTimeCode)*)cPtr);
+    _retval = gst_video_time_code_is_valid(cast(const(GstVideoTimeCode)*)this._cPtr);
     return _retval;
   }
 
@@ -408,7 +408,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   ulong nsecSinceDailyJam()
   {
     ulong _retval;
-    _retval = gst_video_time_code_nsec_since_daily_jam(cast(const(GstVideoTimeCode)*)cPtr);
+    _retval = gst_video_time_code_nsec_since_daily_jam(cast(const(GstVideoTimeCode)*)this._cPtr);
     return _retval;
   }
 
@@ -420,7 +420,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   glib.date_time.DateTime toDateTime()
   {
     GDateTime* _cretval;
-    _cretval = gst_video_time_code_to_date_time(cast(const(GstVideoTimeCode)*)cPtr);
+    _cretval = gst_video_time_code_to_date_time(cast(const(GstVideoTimeCode)*)this._cPtr);
     auto _retval = _cretval ? new glib.date_time.DateTime(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -429,7 +429,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = gst_video_time_code_to_string(cast(const(GstVideoTimeCode)*)cPtr);
+    _cretval = gst_video_time_code_to_string(cast(const(GstVideoTimeCode)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

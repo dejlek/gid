@@ -162,16 +162,16 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_overlay_split_view_get_type != &gidSymbolNotFound ? adw_overlay_split_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -500,7 +500,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getCollapsed()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_collapsed(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_collapsed(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -511,8 +511,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   gtk.widget.Widget getContent()
   {
     GtkWidget* _cretval;
-    _cretval = adw_overlay_split_view_get_content(cast(AdwOverlaySplitView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_overlay_split_view_get_content(cast(AdwOverlaySplitView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -523,7 +523,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getEnableHideGesture()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_enable_hide_gesture(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -534,7 +534,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getEnableShowGesture()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_enable_show_gesture(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -545,7 +545,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   double getMaxSidebarWidth()
   {
     double _retval;
-    _retval = adw_overlay_split_view_get_max_sidebar_width(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_max_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -556,7 +556,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   double getMinSidebarWidth()
   {
     double _retval;
-    _retval = adw_overlay_split_view_get_min_sidebar_width(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_min_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -567,7 +567,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getPinSidebar()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_pin_sidebar(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -578,7 +578,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getShowSidebar()
   {
     bool _retval;
-    _retval = adw_overlay_split_view_get_show_sidebar(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -589,8 +589,8 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   gtk.widget.Widget getSidebar()
   {
     GtkWidget* _cretval;
-    _cretval = adw_overlay_split_view_get_sidebar(cast(AdwOverlaySplitView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_overlay_split_view_get_sidebar(cast(AdwOverlaySplitView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -601,7 +601,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   gtk.types.PackType getSidebarPosition()
   {
     GtkPackType _cretval;
-    _cretval = adw_overlay_split_view_get_sidebar_position(cast(AdwOverlaySplitView*)cPtr);
+    _cretval = adw_overlay_split_view_get_sidebar_position(cast(AdwOverlaySplitView*)this._cPtr);
     gtk.types.PackType _retval = cast(gtk.types.PackType)_cretval;
     return _retval;
   }
@@ -613,7 +613,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   double getSidebarWidthFraction()
   {
     double _retval;
-    _retval = adw_overlay_split_view_get_sidebar_width_fraction(cast(AdwOverlaySplitView*)cPtr);
+    _retval = adw_overlay_split_view_get_sidebar_width_fraction(cast(AdwOverlaySplitView*)this._cPtr);
     return _retval;
   }
 
@@ -624,7 +624,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   adw.types.LengthUnit getSidebarWidthUnit()
   {
     AdwLengthUnit _cretval;
-    _cretval = adw_overlay_split_view_get_sidebar_width_unit(cast(AdwOverlaySplitView*)cPtr);
+    _cretval = adw_overlay_split_view_get_sidebar_width_unit(cast(AdwOverlaySplitView*)this._cPtr);
     adw.types.LengthUnit _retval = cast(adw.types.LengthUnit)_cretval;
     return _retval;
   }
@@ -640,7 +640,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setCollapsed(bool collapsed)
   {
-    adw_overlay_split_view_set_collapsed(cast(AdwOverlaySplitView*)cPtr, collapsed);
+    adw_overlay_split_view_set_collapsed(cast(AdwOverlaySplitView*)this._cPtr, collapsed);
   }
 
   /**
@@ -651,7 +651,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setContent(gtk.widget.Widget content = null)
   {
-    adw_overlay_split_view_set_content(cast(AdwOverlaySplitView*)cPtr, content ? cast(GtkWidget*)content.cPtr(No.Dup) : null);
+    adw_overlay_split_view_set_content(cast(AdwOverlaySplitView*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -664,7 +664,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setEnableHideGesture(bool enableHideGesture)
   {
-    adw_overlay_split_view_set_enable_hide_gesture(cast(AdwOverlaySplitView*)cPtr, enableHideGesture);
+    adw_overlay_split_view_set_enable_hide_gesture(cast(AdwOverlaySplitView*)this._cPtr, enableHideGesture);
   }
 
   /**
@@ -677,7 +677,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setEnableShowGesture(bool enableShowGesture)
   {
-    adw_overlay_split_view_set_enable_show_gesture(cast(AdwOverlaySplitView*)cPtr, enableShowGesture);
+    adw_overlay_split_view_set_enable_show_gesture(cast(AdwOverlaySplitView*)this._cPtr, enableShowGesture);
   }
 
   /**
@@ -693,7 +693,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setMaxSidebarWidth(double width)
   {
-    adw_overlay_split_view_set_max_sidebar_width(cast(AdwOverlaySplitView*)cPtr, width);
+    adw_overlay_split_view_set_max_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr, width);
   }
 
   /**
@@ -709,7 +709,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setMinSidebarWidth(double width)
   {
-    adw_overlay_split_view_set_min_sidebar_width(cast(AdwOverlaySplitView*)cPtr, width);
+    adw_overlay_split_view_set_min_sidebar_width(cast(AdwOverlaySplitView*)this._cPtr, width);
   }
 
   /**
@@ -724,7 +724,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setPinSidebar(bool pinSidebar)
   {
-    adw_overlay_split_view_set_pin_sidebar(cast(AdwOverlaySplitView*)cPtr, pinSidebar);
+    adw_overlay_split_view_set_pin_sidebar(cast(AdwOverlaySplitView*)this._cPtr, pinSidebar);
   }
 
   /**
@@ -735,7 +735,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setShowSidebar(bool showSidebar)
   {
-    adw_overlay_split_view_set_show_sidebar(cast(AdwOverlaySplitView*)cPtr, showSidebar);
+    adw_overlay_split_view_set_show_sidebar(cast(AdwOverlaySplitView*)this._cPtr, showSidebar);
   }
 
   /**
@@ -746,7 +746,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setSidebar(gtk.widget.Widget sidebar = null)
   {
-    adw_overlay_split_view_set_sidebar(cast(AdwOverlaySplitView*)cPtr, sidebar ? cast(GtkWidget*)sidebar.cPtr(No.Dup) : null);
+    adw_overlay_split_view_set_sidebar(cast(AdwOverlaySplitView*)this._cPtr, sidebar ? cast(GtkWidget*)sidebar._cPtr(No.Dup) : null);
   }
 
   /**
@@ -760,7 +760,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setSidebarPosition(gtk.types.PackType position)
   {
-    adw_overlay_split_view_set_sidebar_position(cast(AdwOverlaySplitView*)cPtr, position);
+    adw_overlay_split_view_set_sidebar_position(cast(AdwOverlaySplitView*)this._cPtr, position);
   }
 
   /**
@@ -778,7 +778,7 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setSidebarWidthFraction(double fraction)
   {
-    adw_overlay_split_view_set_sidebar_width_fraction(cast(AdwOverlaySplitView*)cPtr, fraction);
+    adw_overlay_split_view_set_sidebar_width_fraction(cast(AdwOverlaySplitView*)this._cPtr, fraction);
   }
 
   /**
@@ -792,6 +792,6 @@ class OverlaySplitView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setSidebarWidthUnit(adw.types.LengthUnit unit)
   {
-    adw_overlay_split_view_set_sidebar_width_unit(cast(AdwOverlaySplitView*)cPtr, unit);
+    adw_overlay_split_view_set_sidebar_width_unit(cast(AdwOverlaySplitView*)this._cPtr, unit);
   }
 }

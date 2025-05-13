@@ -35,16 +35,16 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_unix_fd_message_get_type != &gidSymbolNotFound ? g_unix_fd_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -75,8 +75,8 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   static gio.unix_fdmessage.UnixFDMessage newWithFdList(gio.unix_fdlist.UnixFDList fdList)
   {
     GSocketControlMessage* _cretval;
-    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
+    _cretval = g_unix_fd_message_new_with_fd_list(fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdmessage.UnixFDMessage)(cast(GSocketControlMessage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -99,7 +99,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     bool _retval;
     GError *_err;
-    _retval = g_unix_fd_message_append_fd(cast(GUnixFDMessage*)cPtr, fd, &_err);
+    _retval = g_unix_fd_message_append_fd(cast(GUnixFDMessage*)this._cPtr, fd, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -114,8 +114,8 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   gio.unix_fdlist.UnixFDList getFdList()
   {
     GUnixFDList* _cretval;
-    _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    _cretval = g_unix_fd_message_get_fd_list(cast(GUnixFDMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -144,7 +144,7 @@ class UnixFDMessage : gio.socket_control_message.SocketControlMessage
   {
     int* _cretval;
     int _cretlength;
-    _cretval = g_unix_fd_message_steal_fds(cast(GUnixFDMessage*)cPtr, &_cretlength);
+    _cretval = g_unix_fd_message_steal_fds(cast(GUnixFDMessage*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)

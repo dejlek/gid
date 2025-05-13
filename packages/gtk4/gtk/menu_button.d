@@ -91,16 +91,16 @@ class MenuButton : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_button_get_type != &gidSymbolNotFound ? gtk_menu_button_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -373,7 +373,7 @@ class MenuButton : gtk.widget.Widget
   bool getActive()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_active(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_active(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -386,7 +386,7 @@ class MenuButton : gtk.widget.Widget
   bool getAlwaysShowArrow()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_always_show_arrow(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_always_show_arrow(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -398,7 +398,7 @@ class MenuButton : gtk.widget.Widget
   bool getCanShrink()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_can_shrink(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_can_shrink(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -409,8 +409,8 @@ class MenuButton : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_menu_button_get_child(cast(GtkMenuButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class MenuButton : gtk.widget.Widget
   gtk.types.ArrowType getDirection()
   {
     GtkArrowType _cretval;
-    _cretval = gtk_menu_button_get_direction(cast(GtkMenuButton*)cPtr);
+    _cretval = gtk_menu_button_get_direction(cast(GtkMenuButton*)this._cPtr);
     gtk.types.ArrowType _retval = cast(gtk.types.ArrowType)_cretval;
     return _retval;
   }
@@ -435,7 +435,7 @@ class MenuButton : gtk.widget.Widget
   bool getHasFrame()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_has_frame(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_has_frame(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -446,7 +446,7 @@ class MenuButton : gtk.widget.Widget
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)cPtr);
+    _cretval = gtk_menu_button_get_icon_name(cast(GtkMenuButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -458,7 +458,7 @@ class MenuButton : gtk.widget.Widget
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)cPtr);
+    _cretval = gtk_menu_button_get_label(cast(GtkMenuButton*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -470,8 +470,8 @@ class MenuButton : gtk.widget.Widget
   gio.menu_model.MenuModel getMenuModel()
   {
     GMenuModel* _cretval;
-    _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
+    _cretval = gtk_menu_button_get_menu_model(cast(GtkMenuButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.menu_model.MenuModel)(cast(GMenuModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -485,8 +485,8 @@ class MenuButton : gtk.widget.Widget
   gtk.popover.Popover getPopover()
   {
     GtkPopover* _cretval;
-    _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
+    _cretval = gtk_menu_button_get_popover(cast(GtkMenuButton*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.popover.Popover)(cast(GtkPopover*)_cretval, No.Take);
     return _retval;
   }
 
@@ -497,7 +497,7 @@ class MenuButton : gtk.widget.Widget
   bool getPrimary()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_primary(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_primary(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -510,7 +510,7 @@ class MenuButton : gtk.widget.Widget
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_menu_button_get_use_underline(cast(GtkMenuButton*)cPtr);
+    _retval = gtk_menu_button_get_use_underline(cast(GtkMenuButton*)this._cPtr);
     return _retval;
   }
 
@@ -519,7 +519,7 @@ class MenuButton : gtk.widget.Widget
   */
   void popdown()
   {
-    gtk_menu_button_popdown(cast(GtkMenuButton*)cPtr);
+    gtk_menu_button_popdown(cast(GtkMenuButton*)this._cPtr);
   }
 
   /**
@@ -527,7 +527,7 @@ class MenuButton : gtk.widget.Widget
   */
   void popup()
   {
-    gtk_menu_button_popup(cast(GtkMenuButton*)cPtr);
+    gtk_menu_button_popup(cast(GtkMenuButton*)this._cPtr);
   }
 
   /**
@@ -538,7 +538,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setActive(bool active)
   {
-    gtk_menu_button_set_active(cast(GtkMenuButton*)cPtr, active);
+    gtk_menu_button_set_active(cast(GtkMenuButton*)this._cPtr, active);
   }
 
   /**
@@ -551,7 +551,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setAlwaysShowArrow(bool alwaysShowArrow)
   {
-    gtk_menu_button_set_always_show_arrow(cast(GtkMenuButton*)cPtr, alwaysShowArrow);
+    gtk_menu_button_set_always_show_arrow(cast(GtkMenuButton*)this._cPtr, alwaysShowArrow);
   }
 
   /**
@@ -567,7 +567,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setCanShrink(bool canShrink)
   {
-    gtk_menu_button_set_can_shrink(cast(GtkMenuButton*)cPtr, canShrink);
+    gtk_menu_button_set_can_shrink(cast(GtkMenuButton*)this._cPtr, canShrink);
   }
 
   /**
@@ -585,7 +585,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    gtk_menu_button_set_child(cast(GtkMenuButton*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_menu_button_set_child(cast(GtkMenuButton*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -615,13 +615,13 @@ class MenuButton : gtk.widget.Widget
     {
       auto _dlg = cast(gtk.types.MenuButtonCreatePopupFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gtk.menu_button.MenuButton)(cast(void*)menuButton, No.Take));
     }
     auto _funcCB = func ? &_funcCallback : null;
 
     auto _func = func ? freezeDelegate(cast(void*)&func) : null;
     GDestroyNotify _funcDestroyCB = func ? &thawDelegate : null;
-    gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)cPtr, _funcCB, _func, _funcDestroyCB);
+    gtk_menu_button_set_create_popup_func(cast(GtkMenuButton*)this._cPtr, _funcCB, _func, _funcDestroyCB);
   }
 
   alias setDirection = gtk.widget.Widget.setDirection;
@@ -643,7 +643,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setDirection(gtk.types.ArrowType direction)
   {
-    gtk_menu_button_set_direction(cast(GtkMenuButton*)cPtr, direction);
+    gtk_menu_button_set_direction(cast(GtkMenuButton*)this._cPtr, direction);
   }
 
   /**
@@ -654,7 +654,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setHasFrame(bool hasFrame)
   {
-    gtk_menu_button_set_has_frame(cast(GtkMenuButton*)cPtr, hasFrame);
+    gtk_menu_button_set_has_frame(cast(GtkMenuButton*)this._cPtr, hasFrame);
   }
 
   /**
@@ -673,7 +673,7 @@ class MenuButton : gtk.widget.Widget
   void setIconName(string iconName)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_menu_button_set_icon_name(cast(GtkMenuButton*)cPtr, _iconName);
+    gtk_menu_button_set_icon_name(cast(GtkMenuButton*)this._cPtr, _iconName);
   }
 
   /**
@@ -691,7 +691,7 @@ class MenuButton : gtk.widget.Widget
   void setLabel(string label)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_menu_button_set_label(cast(GtkMenuButton*)cPtr, _label);
+    gtk_menu_button_set_label(cast(GtkMenuButton*)this._cPtr, _label);
   }
 
   /**
@@ -712,7 +712,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setMenuModel(gio.menu_model.MenuModel menuModel = null)
   {
-    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)cPtr, menuModel ? cast(GMenuModel*)menuModel.cPtr(No.Dup) : null);
+    gtk_menu_button_set_menu_model(cast(GtkMenuButton*)this._cPtr, menuModel ? cast(GMenuModel*)menuModel._cPtr(No.Dup) : null);
   }
 
   /**
@@ -728,7 +728,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setPopover(gtk.widget.Widget popover = null)
   {
-    gtk_menu_button_set_popover(cast(GtkMenuButton*)cPtr, popover ? cast(GtkWidget*)popover.cPtr(No.Dup) : null);
+    gtk_menu_button_set_popover(cast(GtkMenuButton*)this._cPtr, popover ? cast(GtkWidget*)popover._cPtr(No.Dup) : null);
   }
 
   /**
@@ -741,7 +741,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setPrimary(bool primary)
   {
-    gtk_menu_button_set_primary(cast(GtkMenuButton*)cPtr, primary);
+    gtk_menu_button_set_primary(cast(GtkMenuButton*)this._cPtr, primary);
   }
 
   /**
@@ -752,7 +752,7 @@ class MenuButton : gtk.widget.Widget
   */
   void setUseUnderline(bool useUnderline)
   {
-    gtk_menu_button_set_use_underline(cast(GtkMenuButton*)cPtr, useUnderline);
+    gtk_menu_button_set_use_underline(cast(GtkMenuButton*)this._cPtr, useUnderline);
   }
 
   /**

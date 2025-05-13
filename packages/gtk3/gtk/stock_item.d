@@ -25,7 +25,7 @@ class StockItem
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -36,7 +36,7 @@ class StockItem
   */
   @property string stockId()
   {
-    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).stockId);
   }
 
   /**
@@ -46,8 +46,8 @@ class StockItem
   */
   @property void stockId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).stockId);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).stockId);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).stockId);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).stockId);
   }
 
   /**
@@ -56,7 +56,7 @@ class StockItem
   */
   @property string label()
   {
-    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).label);
   }
 
   /**
@@ -66,8 +66,8 @@ class StockItem
   */
   @property void label(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).label);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).label);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).label);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).label);
   }
 
   /**
@@ -76,7 +76,7 @@ class StockItem
   */
   @property gdk.types.ModifierType modifier()
   {
-    return cast(gdk.types.ModifierType)(cast(GtkStockItem*)cPtr).modifier;
+    return cast(gdk.types.ModifierType)(cast(GtkStockItem*)this._cPtr).modifier;
   }
 
   /**
@@ -86,7 +86,7 @@ class StockItem
   */
   @property void modifier(gdk.types.ModifierType propval)
   {
-    (cast(GtkStockItem*)cPtr).modifier = cast(GdkModifierType)propval;
+    (cast(GtkStockItem*)this._cPtr).modifier = cast(GdkModifierType)propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class StockItem
   */
   @property uint keyval()
   {
-    return (cast(GtkStockItem*)cPtr).keyval;
+    return (cast(GtkStockItem*)this._cPtr).keyval;
   }
 
   /**
@@ -105,7 +105,7 @@ class StockItem
   */
   @property void keyval(uint propval)
   {
-    (cast(GtkStockItem*)cPtr).keyval = propval;
+    (cast(GtkStockItem*)this._cPtr).keyval = propval;
   }
 
   /**
@@ -114,7 +114,7 @@ class StockItem
   */
   @property string translationDomain()
   {
-    return cToD!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
+    return cToD!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).translationDomain);
   }
 
   /**
@@ -124,7 +124,7 @@ class StockItem
   */
   @property void translationDomain(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)cPtr).translationDomain);
-    dToC(propval, cast(void*)&(cast(GtkStockItem*)cPtr).translationDomain);
+    cValueFree!(string)(cast(void*)(cast(GtkStockItem*)this._cPtr).translationDomain);
+    dToC(propval, cast(void*)&(cast(GtkStockItem*)this._cPtr).translationDomain);
   }
 }

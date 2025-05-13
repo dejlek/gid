@@ -27,16 +27,16 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_simple_action_get_type != &gidSymbolNotFound ? g_simple_action_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,7 +117,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_simple_action_new(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null);
+    _cretval = g_simple_action_new(_name, parameterType ? cast(const(GVariantType)*)parameterType._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -140,8 +140,8 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   {
     GSimpleAction* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType.cPtr(No.Dup) : null, state ? cast(GVariant*)state.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
+    _cretval = g_simple_action_new_stateful(_name, parameterType ? cast(const(GVariantType)*)parameterType._cPtr(No.Dup) : null, state ? cast(GVariant*)state._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.simple_action.SimpleAction)(cast(GSimpleAction*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -159,7 +159,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   void setEnabled(bool enabled)
   {
-    g_simple_action_set_enabled(cast(GSimpleAction*)cPtr, enabled);
+    g_simple_action_set_enabled(cast(GSimpleAction*)this._cPtr, enabled);
   }
 
   /**
@@ -179,7 +179,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   void setState(glib.variant.Variant value)
   {
-    g_simple_action_set_state(cast(GSimpleAction*)cPtr, value ? cast(GVariant*)value.cPtr(No.Dup) : null);
+    g_simple_action_set_state(cast(GSimpleAction*)this._cPtr, value ? cast(GVariant*)value._cPtr(No.Dup) : null);
   }
 
   /**
@@ -193,7 +193,7 @@ class SimpleAction : gobject.object.ObjectWrap, gio.action.Action
   */
   void setStateHint(glib.variant.Variant stateHint = null)
   {
-    g_simple_action_set_state_hint(cast(GSimpleAction*)cPtr, stateHint ? cast(GVariant*)stateHint.cPtr(No.Dup) : null);
+    g_simple_action_set_state_hint(cast(GSimpleAction*)this._cPtr, stateHint ? cast(GVariant*)stateHint._cPtr(No.Dup) : null);
   }
 
   /**

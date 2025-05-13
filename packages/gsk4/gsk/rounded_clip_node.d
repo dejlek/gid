@@ -35,7 +35,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
   this(gsk.render_node.RenderNode child, gsk.rounded_rect.RoundedRect clip)
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, clip ? cast(const(GskRoundedRect)*)clip.cPtr : null);
+    _cretval = gsk_rounded_clip_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, clip ? cast(const(GskRoundedRect)*)clip._cPtr : null);
     this(_cretval, Yes.Take);
   }
 
@@ -46,7 +46,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_rounded_clip_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_rounded_clip_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -58,7 +58,7 @@ class RoundedClipNode : gsk.render_node.RenderNode
   gsk.rounded_rect.RoundedRect getClip()
   {
     const(GskRoundedRect)* _cretval;
-    _cretval = gsk_rounded_clip_node_get_clip(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_rounded_clip_node_get_clip(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
     return _retval;
   }

@@ -29,7 +29,7 @@ template PopupT()
   override bool getAutohide()
   {
     bool _retval;
-    _retval = gdk_popup_get_autohide(cast(GdkPopup*)cPtr);
+    _retval = gdk_popup_get_autohide(cast(GdkPopup*)this._cPtr);
     return _retval;
   }
 
@@ -40,8 +40,8 @@ template PopupT()
   override gdk.surface.Surface getParent()
   {
     GdkSurface* _cretval;
-    _cretval = gdk_popup_get_parent(cast(GdkPopup*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
+    _cretval = gdk_popup_get_parent(cast(GdkPopup*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.surface.Surface)(cast(GdkSurface*)_cretval, No.Take);
     return _retval;
   }
 
@@ -52,7 +52,7 @@ template PopupT()
   override int getPositionX()
   {
     int _retval;
-    _retval = gdk_popup_get_position_x(cast(GdkPopup*)cPtr);
+    _retval = gdk_popup_get_position_x(cast(GdkPopup*)this._cPtr);
     return _retval;
   }
 
@@ -63,7 +63,7 @@ template PopupT()
   override int getPositionY()
   {
     int _retval;
-    _retval = gdk_popup_get_position_y(cast(GdkPopup*)cPtr);
+    _retval = gdk_popup_get_position_y(cast(GdkPopup*)this._cPtr);
     return _retval;
   }
 
@@ -77,7 +77,7 @@ template PopupT()
   override gdk.types.Gravity getRectAnchor()
   {
     GdkGravity _cretval;
-    _cretval = gdk_popup_get_rect_anchor(cast(GdkPopup*)cPtr);
+    _cretval = gdk_popup_get_rect_anchor(cast(GdkPopup*)this._cPtr);
     gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
     return _retval;
   }
@@ -92,7 +92,7 @@ template PopupT()
   override gdk.types.Gravity getSurfaceAnchor()
   {
     GdkGravity _cretval;
-    _cretval = gdk_popup_get_surface_anchor(cast(GdkPopup*)cPtr);
+    _cretval = gdk_popup_get_surface_anchor(cast(GdkPopup*)this._cPtr);
     gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
     return _retval;
   }
@@ -123,7 +123,7 @@ template PopupT()
   override bool present(int width, int height, gdk.popup_layout.PopupLayout layout)
   {
     bool _retval;
-    _retval = gdk_popup_present(cast(GdkPopup*)cPtr, width, height, layout ? cast(GdkPopupLayout*)layout.cPtr(No.Dup) : null);
+    _retval = gdk_popup_present(cast(GdkPopup*)this._cPtr, width, height, layout ? cast(GdkPopupLayout*)layout._cPtr(No.Dup) : null);
     return _retval;
   }
 }

@@ -27,7 +27,7 @@ class EventCrossing
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventCrossing
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventCrossing*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventCrossing*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventCrossing
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventCrossing*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventCrossing*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventCrossing
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventCrossing
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventCrossing
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventCrossing*)cPtr).sendEvent;
+    return (cast(GdkEventCrossing*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventCrossing
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventCrossing*)cPtr).sendEvent = propval;
+    (cast(GdkEventCrossing*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventCrossing
   */
   @property gdk.window.Window subwindow()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).subwindow);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).subwindow);
   }
 
   /**
@@ -106,8 +106,8 @@ class EventCrossing
   */
   @property void subwindow(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)cPtr).subwindow);
-    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)cPtr).subwindow);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventCrossing*)this._cPtr).subwindow);
+    dToC(propval, cast(void*)&(cast(GdkEventCrossing*)this._cPtr).subwindow);
   }
 
   /**
@@ -116,7 +116,7 @@ class EventCrossing
   */
   @property uint time()
   {
-    return (cast(GdkEventCrossing*)cPtr).time;
+    return (cast(GdkEventCrossing*)this._cPtr).time;
   }
 
   /**
@@ -126,7 +126,7 @@ class EventCrossing
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventCrossing*)cPtr).time = propval;
+    (cast(GdkEventCrossing*)this._cPtr).time = propval;
   }
 
   /**
@@ -135,7 +135,7 @@ class EventCrossing
   */
   @property double x()
   {
-    return (cast(GdkEventCrossing*)cPtr).x;
+    return (cast(GdkEventCrossing*)this._cPtr).x;
   }
 
   /**
@@ -145,7 +145,7 @@ class EventCrossing
   */
   @property void x(double propval)
   {
-    (cast(GdkEventCrossing*)cPtr).x = propval;
+    (cast(GdkEventCrossing*)this._cPtr).x = propval;
   }
 
   /**
@@ -154,7 +154,7 @@ class EventCrossing
   */
   @property double y()
   {
-    return (cast(GdkEventCrossing*)cPtr).y;
+    return (cast(GdkEventCrossing*)this._cPtr).y;
   }
 
   /**
@@ -164,7 +164,7 @@ class EventCrossing
   */
   @property void y(double propval)
   {
-    (cast(GdkEventCrossing*)cPtr).y = propval;
+    (cast(GdkEventCrossing*)this._cPtr).y = propval;
   }
 
   /**
@@ -173,7 +173,7 @@ class EventCrossing
   */
   @property double xRoot()
   {
-    return (cast(GdkEventCrossing*)cPtr).xRoot;
+    return (cast(GdkEventCrossing*)this._cPtr).xRoot;
   }
 
   /**
@@ -183,7 +183,7 @@ class EventCrossing
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventCrossing*)cPtr).xRoot = propval;
+    (cast(GdkEventCrossing*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -192,7 +192,7 @@ class EventCrossing
   */
   @property double yRoot()
   {
-    return (cast(GdkEventCrossing*)cPtr).yRoot;
+    return (cast(GdkEventCrossing*)this._cPtr).yRoot;
   }
 
   /**
@@ -202,7 +202,7 @@ class EventCrossing
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventCrossing*)cPtr).yRoot = propval;
+    (cast(GdkEventCrossing*)this._cPtr).yRoot = propval;
   }
 
   /**
@@ -215,7 +215,7 @@ class EventCrossing
   */
   @property gdk.types.CrossingMode mode()
   {
-    return cast(gdk.types.CrossingMode)(cast(GdkEventCrossing*)cPtr).mode;
+    return cast(gdk.types.CrossingMode)(cast(GdkEventCrossing*)this._cPtr).mode;
   }
 
   /**
@@ -229,7 +229,7 @@ class EventCrossing
   */
   @property void mode(gdk.types.CrossingMode propval)
   {
-    (cast(GdkEventCrossing*)cPtr).mode = cast(GdkCrossingMode)propval;
+    (cast(GdkEventCrossing*)this._cPtr).mode = cast(GdkCrossingMode)propval;
   }
 
   /**
@@ -240,7 +240,7 @@ class EventCrossing
   */
   @property gdk.types.NotifyType detail()
   {
-    return cast(gdk.types.NotifyType)(cast(GdkEventCrossing*)cPtr).detail;
+    return cast(gdk.types.NotifyType)(cast(GdkEventCrossing*)this._cPtr).detail;
   }
 
   /**
@@ -252,7 +252,7 @@ class EventCrossing
   */
   @property void detail(gdk.types.NotifyType propval)
   {
-    (cast(GdkEventCrossing*)cPtr).detail = cast(GdkNotifyType)propval;
+    (cast(GdkEventCrossing*)this._cPtr).detail = cast(GdkNotifyType)propval;
   }
 
   /**
@@ -261,7 +261,7 @@ class EventCrossing
   */
   @property bool focus()
   {
-    return (cast(GdkEventCrossing*)cPtr).focus;
+    return (cast(GdkEventCrossing*)this._cPtr).focus;
   }
 
   /**
@@ -271,7 +271,7 @@ class EventCrossing
   */
   @property void focus(bool propval)
   {
-    (cast(GdkEventCrossing*)cPtr).focus = propval;
+    (cast(GdkEventCrossing*)this._cPtr).focus = propval;
   }
 
   /**
@@ -282,7 +282,7 @@ class EventCrossing
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventCrossing*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventCrossing*)this._cPtr).state;
   }
 
   /**
@@ -294,6 +294,6 @@ class EventCrossing
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventCrossing*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventCrossing*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 }

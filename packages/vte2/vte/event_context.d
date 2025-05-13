@@ -27,7 +27,7 @@ class EventContext
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)cInstancePtr;
   }
@@ -36,7 +36,7 @@ class EventContext
   gdk.event.Event getEvent()
   {
     GdkEvent* _cretval;
-    _cretval = vte_event_context_get_event(cast(const(VteEventContext)*)cPtr);
+    _cretval = vte_event_context_get_event(cast(const(VteEventContext)*)this._cPtr);
     auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
     return _retval;
   }

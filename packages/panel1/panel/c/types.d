@@ -381,7 +381,7 @@ struct PanelPositionClass
 struct PanelSaveDelegate
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /** */

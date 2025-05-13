@@ -126,16 +126,16 @@ class GLArea : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gl_area_get_type != &gidSymbolNotFound ? gtk_gl_area_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -310,7 +310,7 @@ class GLArea : gtk.widget.Widget
   */
   void attachBuffers()
   {
-    gtk_gl_area_attach_buffers(cast(GtkGLArea*)cPtr);
+    gtk_gl_area_attach_buffers(cast(GtkGLArea*)this._cPtr);
   }
 
   /**
@@ -320,7 +320,7 @@ class GLArea : gtk.widget.Widget
   bool getAutoRender()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_auto_render(cast(GtkGLArea*)cPtr);
+    _retval = gtk_gl_area_get_auto_render(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -331,8 +331,8 @@ class GLArea : gtk.widget.Widget
   gdk.glcontext.GLContext getContext()
   {
     GdkGLContext* _cretval;
-    _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
+    _cretval = gtk_gl_area_get_context(cast(GtkGLArea*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.glcontext.GLContext)(cast(GdkGLContext*)_cretval, No.Take);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class GLArea : gtk.widget.Widget
   glib.error.ErrorWrap getError()
   {
     GError* _cretval;
-    _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)cPtr);
+    _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)this._cPtr);
     auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
     return _retval;
   }
@@ -355,7 +355,7 @@ class GLArea : gtk.widget.Widget
   bool getHasAlpha()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_has_alpha(cast(GtkGLArea*)cPtr);
+    _retval = gtk_gl_area_get_has_alpha(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class GLArea : gtk.widget.Widget
   bool getHasDepthBuffer()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_has_depth_buffer(cast(GtkGLArea*)cPtr);
+    _retval = gtk_gl_area_get_has_depth_buffer(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -377,7 +377,7 @@ class GLArea : gtk.widget.Widget
   bool getHasStencilBuffer()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_has_stencil_buffer(cast(GtkGLArea*)cPtr);
+    _retval = gtk_gl_area_get_has_stencil_buffer(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -391,7 +391,7 @@ class GLArea : gtk.widget.Widget
   */
   void getRequiredVersion(out int major, out int minor)
   {
-    gtk_gl_area_get_required_version(cast(GtkGLArea*)cPtr, cast(int*)&major, cast(int*)&minor);
+    gtk_gl_area_get_required_version(cast(GtkGLArea*)this._cPtr, cast(int*)&major, cast(int*)&minor);
   }
 
   /**
@@ -402,7 +402,7 @@ class GLArea : gtk.widget.Widget
   bool getUseEs()
   {
     bool _retval;
-    _retval = gtk_gl_area_get_use_es(cast(GtkGLArea*)cPtr);
+    _retval = gtk_gl_area_get_use_es(cast(GtkGLArea*)this._cPtr);
     return _retval;
   }
 
@@ -416,7 +416,7 @@ class GLArea : gtk.widget.Widget
   */
   void makeCurrent()
   {
-    gtk_gl_area_make_current(cast(GtkGLArea*)cPtr);
+    gtk_gl_area_make_current(cast(GtkGLArea*)this._cPtr);
   }
 
   /**
@@ -430,7 +430,7 @@ class GLArea : gtk.widget.Widget
   */
   void queueRender()
   {
-    gtk_gl_area_queue_render(cast(GtkGLArea*)cPtr);
+    gtk_gl_area_queue_render(cast(GtkGLArea*)this._cPtr);
   }
 
   /**
@@ -449,7 +449,7 @@ class GLArea : gtk.widget.Widget
   */
   void setAutoRender(bool autoRender)
   {
-    gtk_gl_area_set_auto_render(cast(GtkGLArea*)cPtr, autoRender);
+    gtk_gl_area_set_auto_render(cast(GtkGLArea*)this._cPtr, autoRender);
   }
 
   /**
@@ -462,7 +462,7 @@ class GLArea : gtk.widget.Widget
   */
   void setError(glib.error.ErrorWrap error = null)
   {
-    gtk_gl_area_set_error(cast(GtkGLArea*)cPtr, error ? cast(const(GError)*)error.cPtr : null);
+    gtk_gl_area_set_error(cast(GtkGLArea*)this._cPtr, error ? cast(const(GError)*)error._cPtr : null);
   }
 
   /**
@@ -478,7 +478,7 @@ class GLArea : gtk.widget.Widget
   */
   void setHasAlpha(bool hasAlpha)
   {
-    gtk_gl_area_set_has_alpha(cast(GtkGLArea*)cPtr, hasAlpha);
+    gtk_gl_area_set_has_alpha(cast(GtkGLArea*)this._cPtr, hasAlpha);
   }
 
   /**
@@ -491,7 +491,7 @@ class GLArea : gtk.widget.Widget
   */
   void setHasDepthBuffer(bool hasDepthBuffer)
   {
-    gtk_gl_area_set_has_depth_buffer(cast(GtkGLArea*)cPtr, hasDepthBuffer);
+    gtk_gl_area_set_has_depth_buffer(cast(GtkGLArea*)this._cPtr, hasDepthBuffer);
   }
 
   /**
@@ -504,7 +504,7 @@ class GLArea : gtk.widget.Widget
   */
   void setHasStencilBuffer(bool hasStencilBuffer)
   {
-    gtk_gl_area_set_has_stencil_buffer(cast(GtkGLArea*)cPtr, hasStencilBuffer);
+    gtk_gl_area_set_has_stencil_buffer(cast(GtkGLArea*)this._cPtr, hasStencilBuffer);
   }
 
   /**
@@ -519,7 +519,7 @@ class GLArea : gtk.widget.Widget
   */
   void setRequiredVersion(int major, int minor)
   {
-    gtk_gl_area_set_required_version(cast(GtkGLArea*)cPtr, major, minor);
+    gtk_gl_area_set_required_version(cast(GtkGLArea*)this._cPtr, major, minor);
   }
 
   /**
@@ -533,7 +533,7 @@ class GLArea : gtk.widget.Widget
   */
   void setUseEs(bool useEs)
   {
-    gtk_gl_area_set_use_es(cast(GtkGLArea*)cPtr, useEs);
+    gtk_gl_area_set_use_es(cast(GtkGLArea*)this._cPtr, useEs);
   }
 
   /**

@@ -24,16 +24,16 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_selection_dialog_get_type != &gidSymbolNotFound ? gtk_color_selection_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,8 +88,8 @@ class ColorSelectionDialog : gtk.dialog.Dialog
   gtk.widget.Widget getColorSelection()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_color_selection_dialog_get_color_selection(cast(GtkColorSelectionDialog*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_color_selection_dialog_get_color_selection(cast(GtkColorSelectionDialog*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 }

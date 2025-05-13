@@ -29,16 +29,16 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_converter_output_stream_get_type != &gidSymbolNotFound ? g_converter_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   this(gio.output_stream.OutputStream baseStream, gio.converter.Converter converter)
   {
     GOutputStream* _cretval;
-    _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream.cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gobject.object.ObjectWrap)converter).cPtr(No.Dup) : null);
+    _cretval = g_converter_output_stream_new(baseStream ? cast(GOutputStream*)baseStream._cPtr(No.Dup) : null, converter ? cast(GConverter*)(cast(gobject.object.ObjectWrap)converter)._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -71,8 +71,8 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
   gio.converter.Converter getConverter()
   {
     GConverter* _cretval;
-    _cretval = g_converter_output_stream_get_converter(cast(GConverterOutputStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
+    _cretval = g_converter_output_stream_get_converter(cast(GConverterOutputStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.converter.Converter)(cast(GConverter*)_cretval, No.Take);
     return _retval;
   }
 }

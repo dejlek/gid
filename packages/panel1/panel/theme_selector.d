@@ -35,16 +35,16 @@ class ThemeSelector : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_theme_selector_get_type != &gidSymbolNotFound ? panel_theme_selector_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -90,7 +90,7 @@ class ThemeSelector : gtk.widget.Widget
   string getActionName()
   {
     const(char)* _cretval;
-    _cretval = panel_theme_selector_get_action_name(cast(PanelThemeSelector*)cPtr);
+    _cretval = panel_theme_selector_get_action_name(cast(PanelThemeSelector*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -104,6 +104,6 @@ class ThemeSelector : gtk.widget.Widget
   void setActionName(string actionName)
   {
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    panel_theme_selector_set_action_name(cast(PanelThemeSelector*)cPtr, _actionName);
+    panel_theme_selector_set_action_name(cast(PanelThemeSelector*)this._cPtr, _actionName);
   }
 }

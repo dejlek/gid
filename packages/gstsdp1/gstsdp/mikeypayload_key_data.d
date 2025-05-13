@@ -28,7 +28,7 @@ class MIKEYPayloadKeyData
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class MIKEYPayloadKeyData
   */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKeyData*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadKeyData*)this._cPtr).pt);
   }
 
   /**
@@ -48,7 +48,7 @@ class MIKEYPayloadKeyData
   */
   @property gstsdp.types.MIKEYKeyDataType keyType()
   {
-    return cast(gstsdp.types.MIKEYKeyDataType)(cast(GstMIKEYPayloadKeyData*)cPtr).keyType;
+    return cast(gstsdp.types.MIKEYKeyDataType)(cast(GstMIKEYPayloadKeyData*)this._cPtr).keyType;
   }
 
   /**
@@ -58,7 +58,7 @@ class MIKEYPayloadKeyData
   */
   @property void keyType(gstsdp.types.MIKEYKeyDataType propval)
   {
-    (cast(GstMIKEYPayloadKeyData*)cPtr).keyType = cast(GstMIKEYKeyDataType)propval;
+    (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyType = cast(GstMIKEYKeyDataType)propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class MIKEYPayloadKeyData
   */
   @property ushort keyLen()
   {
-    return (cast(GstMIKEYPayloadKeyData*)cPtr).keyLen;
+    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen;
   }
 
   /**
@@ -77,7 +77,7 @@ class MIKEYPayloadKeyData
   */
   @property void keyLen(ushort propval)
   {
-    (cast(GstMIKEYPayloadKeyData*)cPtr).keyLen = propval;
+    (cast(GstMIKEYPayloadKeyData*)this._cPtr).keyLen = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class MIKEYPayloadKeyData
   */
   @property ushort saltLen()
   {
-    return (cast(GstMIKEYPayloadKeyData*)cPtr).saltLen;
+    return (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen;
   }
 
   /**
@@ -96,7 +96,7 @@ class MIKEYPayloadKeyData
   */
   @property void saltLen(ushort propval)
   {
-    (cast(GstMIKEYPayloadKeyData*)cPtr).saltLen = propval;
+    (cast(GstMIKEYPayloadKeyData*)this._cPtr).saltLen = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class MIKEYPayloadKeyData
   */
   @property gstsdp.types.MIKEYKVType kvType()
   {
-    return cast(gstsdp.types.MIKEYKVType)(cast(GstMIKEYPayloadKeyData*)cPtr).kvType;
+    return cast(gstsdp.types.MIKEYKVType)(cast(GstMIKEYPayloadKeyData*)this._cPtr).kvType;
   }
 
   /**
@@ -115,6 +115,6 @@ class MIKEYPayloadKeyData
   */
   @property void kvType(gstsdp.types.MIKEYKVType propval)
   {
-    (cast(GstMIKEYPayloadKeyData*)cPtr).kvType = cast(GstMIKEYKVType)propval;
+    (cast(GstMIKEYPayloadKeyData*)this._cPtr).kvType = cast(GstMIKEYKVType)propval;
   }
 }

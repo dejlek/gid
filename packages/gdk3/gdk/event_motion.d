@@ -28,7 +28,7 @@ class EventMotion
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class EventMotion
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventMotion*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventMotion*)this._cPtr).type;
   }
 
   /**
@@ -49,7 +49,7 @@ class EventMotion
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventMotion*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventMotion*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -58,7 +58,7 @@ class EventMotion
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)this._cPtr).window);
   }
 
   /**
@@ -68,8 +68,8 @@ class EventMotion
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventMotion*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventMotion*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventMotion*)this._cPtr).window);
   }
 
   /**
@@ -78,7 +78,7 @@ class EventMotion
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventMotion*)cPtr).sendEvent;
+    return (cast(GdkEventMotion*)this._cPtr).sendEvent;
   }
 
   /**
@@ -88,7 +88,7 @@ class EventMotion
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventMotion*)cPtr).sendEvent = propval;
+    (cast(GdkEventMotion*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -97,7 +97,7 @@ class EventMotion
   */
   @property uint time()
   {
-    return (cast(GdkEventMotion*)cPtr).time;
+    return (cast(GdkEventMotion*)this._cPtr).time;
   }
 
   /**
@@ -107,7 +107,7 @@ class EventMotion
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventMotion*)cPtr).time = propval;
+    (cast(GdkEventMotion*)this._cPtr).time = propval;
   }
 
   /**
@@ -116,7 +116,7 @@ class EventMotion
   */
   @property double x()
   {
-    return (cast(GdkEventMotion*)cPtr).x;
+    return (cast(GdkEventMotion*)this._cPtr).x;
   }
 
   /**
@@ -126,7 +126,7 @@ class EventMotion
   */
   @property void x(double propval)
   {
-    (cast(GdkEventMotion*)cPtr).x = propval;
+    (cast(GdkEventMotion*)this._cPtr).x = propval;
   }
 
   /**
@@ -135,7 +135,7 @@ class EventMotion
   */
   @property double y()
   {
-    return (cast(GdkEventMotion*)cPtr).y;
+    return (cast(GdkEventMotion*)this._cPtr).y;
   }
 
   /**
@@ -145,7 +145,7 @@ class EventMotion
   */
   @property void y(double propval)
   {
-    (cast(GdkEventMotion*)cPtr).y = propval;
+    (cast(GdkEventMotion*)this._cPtr).y = propval;
   }
 
   /**
@@ -156,7 +156,7 @@ class EventMotion
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventMotion*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventMotion*)this._cPtr).state;
   }
 
   /**
@@ -168,7 +168,7 @@ class EventMotion
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventMotion*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventMotion*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 
   /**
@@ -178,7 +178,7 @@ class EventMotion
   */
   @property short isHint()
   {
-    return (cast(GdkEventMotion*)cPtr).isHint;
+    return (cast(GdkEventMotion*)this._cPtr).isHint;
   }
 
   /**
@@ -189,7 +189,7 @@ class EventMotion
   */
   @property void isHint(short propval)
   {
-    (cast(GdkEventMotion*)cPtr).isHint = propval;
+    (cast(GdkEventMotion*)this._cPtr).isHint = propval;
   }
 
   /**
@@ -199,7 +199,7 @@ class EventMotion
   */
   @property gdk.device.Device device()
   {
-    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)cPtr).device);
+    return cToD!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)this._cPtr).device);
   }
 
   /**
@@ -210,8 +210,8 @@ class EventMotion
   */
   @property void device(gdk.device.Device propval)
   {
-    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)cPtr).device);
-    dToC(propval, cast(void*)&(cast(GdkEventMotion*)cPtr).device);
+    cValueFree!(gdk.device.Device)(cast(void*)(cast(GdkEventMotion*)this._cPtr).device);
+    dToC(propval, cast(void*)&(cast(GdkEventMotion*)this._cPtr).device);
   }
 
   /**
@@ -221,7 +221,7 @@ class EventMotion
   */
   @property double xRoot()
   {
-    return (cast(GdkEventMotion*)cPtr).xRoot;
+    return (cast(GdkEventMotion*)this._cPtr).xRoot;
   }
 
   /**
@@ -232,7 +232,7 @@ class EventMotion
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventMotion*)cPtr).xRoot = propval;
+    (cast(GdkEventMotion*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -242,7 +242,7 @@ class EventMotion
   */
   @property double yRoot()
   {
-    return (cast(GdkEventMotion*)cPtr).yRoot;
+    return (cast(GdkEventMotion*)this._cPtr).yRoot;
   }
 
   /**
@@ -253,6 +253,6 @@ class EventMotion
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventMotion*)cPtr).yRoot = propval;
+    (cast(GdkEventMotion*)this._cPtr).yRoot = propval;
   }
 }

@@ -30,7 +30,7 @@ class MIKEYPayloadPKE
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -41,7 +41,7 @@ class MIKEYPayloadPKE
   */
   @property gstsdp.mikeypayload.MIKEYPayload pt()
   {
-    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadPKE*)cPtr).pt);
+    return cToD!(gstsdp.mikeypayload.MIKEYPayload)(cast(void*)&(cast(GstMIKEYPayloadPKE*)this._cPtr).pt);
   }
 
   /**
@@ -50,7 +50,7 @@ class MIKEYPayloadPKE
   */
   @property gstsdp.types.MIKEYCacheType C()
   {
-    return cast(gstsdp.types.MIKEYCacheType)(cast(GstMIKEYPayloadPKE*)cPtr).C;
+    return cast(gstsdp.types.MIKEYCacheType)(cast(GstMIKEYPayloadPKE*)this._cPtr).C;
   }
 
   /**
@@ -60,7 +60,7 @@ class MIKEYPayloadPKE
   */
   @property void C(gstsdp.types.MIKEYCacheType propval)
   {
-    (cast(GstMIKEYPayloadPKE*)cPtr).C = cast(GstMIKEYCacheType)propval;
+    (cast(GstMIKEYPayloadPKE*)this._cPtr).C = cast(GstMIKEYCacheType)propval;
   }
 
   /**
@@ -69,7 +69,7 @@ class MIKEYPayloadPKE
   */
   @property ushort dataLen()
   {
-    return (cast(GstMIKEYPayloadPKE*)cPtr).dataLen;
+    return (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen;
   }
 
   /**
@@ -79,6 +79,6 @@ class MIKEYPayloadPKE
   */
   @property void dataLen(ushort propval)
   {
-    (cast(GstMIKEYPayloadPKE*)cPtr).dataLen = propval;
+    (cast(GstMIKEYPayloadPKE*)this._cPtr).dataLen = propval;
   }
 }

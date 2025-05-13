@@ -62,16 +62,16 @@ class Task : gst.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_task_get_type != &gidSymbolNotFound ? gst_task_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -140,8 +140,8 @@ class Task : gst.object.ObjectWrap
   gst.task_pool.TaskPool getPool()
   {
     GstTaskPool* _cretval;
-    _cretval = gst_task_get_pool(cast(GstTask*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
+    _cretval = gst_task_get_pool(cast(GstTask*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gst.task_pool.TaskPool)(cast(GstTaskPool*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -154,7 +154,7 @@ class Task : gst.object.ObjectWrap
   gst.types.TaskState getState()
   {
     GstTaskState _cretval;
-    _cretval = gst_task_get_state(cast(GstTask*)cPtr);
+    _cretval = gst_task_get_state(cast(GstTask*)this._cPtr);
     gst.types.TaskState _retval = cast(gst.types.TaskState)_cretval;
     return _retval;
   }
@@ -175,7 +175,7 @@ class Task : gst.object.ObjectWrap
   bool join()
   {
     bool _retval;
-    _retval = gst_task_join(cast(GstTask*)cPtr);
+    _retval = gst_task_join(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ class Task : gst.object.ObjectWrap
   bool pause()
   {
     bool _retval;
-    _retval = gst_task_pause(cast(GstTask*)cPtr);
+    _retval = gst_task_pause(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -205,7 +205,7 @@ class Task : gst.object.ObjectWrap
   bool resume()
   {
     bool _retval;
-    _retval = gst_task_resume(cast(GstTask*)cPtr);
+    _retval = gst_task_resume(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -223,13 +223,13 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _enterFuncCB = enterFunc ? &_enterFuncCallback : null;
 
     auto _enterFunc = enterFunc ? freezeDelegate(cast(void*)&enterFunc) : null;
     GDestroyNotify _enterFuncDestroyCB = enterFunc ? &thawDelegate : null;
-    gst_task_set_enter_callback(cast(GstTask*)cPtr, _enterFuncCB, _enterFunc, _enterFuncDestroyCB);
+    gst_task_set_enter_callback(cast(GstTask*)this._cPtr, _enterFuncCB, _enterFunc, _enterFuncDestroyCB);
   }
 
   /**
@@ -246,13 +246,13 @@ class Task : gst.object.ObjectWrap
     {
       auto _dlg = cast(gst.types.TaskThreadFunc*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gst.task.Task)(cast(void*)task, No.Take), thread ? new glib.thread.Thread(cast(void*)thread, No.Take) : null);
     }
     auto _leaveFuncCB = leaveFunc ? &_leaveFuncCallback : null;
 
     auto _leaveFunc = leaveFunc ? freezeDelegate(cast(void*)&leaveFunc) : null;
     GDestroyNotify _leaveFuncDestroyCB = leaveFunc ? &thawDelegate : null;
-    gst_task_set_leave_callback(cast(GstTask*)cPtr, _leaveFuncCB, _leaveFunc, _leaveFuncDestroyCB);
+    gst_task_set_leave_callback(cast(GstTask*)this._cPtr, _leaveFuncCB, _leaveFunc, _leaveFuncDestroyCB);
   }
 
   /**
@@ -269,7 +269,7 @@ class Task : gst.object.ObjectWrap
   */
   void setLock(glib.rec_mutex.RecMutex mutex)
   {
-    gst_task_set_lock(cast(GstTask*)cPtr, mutex ? cast(GRecMutex*)mutex.cPtr : null);
+    gst_task_set_lock(cast(GstTask*)this._cPtr, mutex ? cast(GRecMutex*)mutex._cPtr : null);
   }
 
   /**
@@ -283,7 +283,7 @@ class Task : gst.object.ObjectWrap
   */
   void setPool(gst.task_pool.TaskPool pool)
   {
-    gst_task_set_pool(cast(GstTask*)cPtr, pool ? cast(GstTaskPool*)pool.cPtr(No.Dup) : null);
+    gst_task_set_pool(cast(GstTask*)this._cPtr, pool ? cast(GstTaskPool*)pool._cPtr(No.Dup) : null);
   }
 
   /**
@@ -302,7 +302,7 @@ class Task : gst.object.ObjectWrap
   bool setState(gst.types.TaskState state)
   {
     bool _retval;
-    _retval = gst_task_set_state(cast(GstTask*)cPtr, state);
+    _retval = gst_task_set_state(cast(GstTask*)this._cPtr, state);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Task : gst.object.ObjectWrap
   bool start()
   {
     bool _retval;
-    _retval = gst_task_start(cast(GstTask*)cPtr);
+    _retval = gst_task_start(cast(GstTask*)this._cPtr);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class Task : gst.object.ObjectWrap
   bool stop()
   {
     bool _retval;
-    _retval = gst_task_stop(cast(GstTask*)cPtr);
+    _retval = gst_task_stop(cast(GstTask*)this._cPtr);
     return _retval;
   }
 }

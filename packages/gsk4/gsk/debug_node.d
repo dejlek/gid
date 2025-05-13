@@ -38,7 +38,7 @@ class DebugNode : gsk.render_node.RenderNode
   {
     GskRenderNode* _cretval;
     char* _message = message.toCString(Yes.Alloc);
-    _cretval = gsk_debug_node_new(child ? cast(GskRenderNode*)child.cPtr(No.Dup) : null, _message);
+    _cretval = gsk_debug_node_new(child ? cast(GskRenderNode*)child._cPtr(No.Dup) : null, _message);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class DebugNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_debug_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_debug_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -61,7 +61,7 @@ class DebugNode : gsk.render_node.RenderNode
   string getMessage()
   {
     const(char)* _cretval;
-    _cretval = gsk_debug_node_get_message(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_debug_node_get_message(cast(const(GskRenderNode)*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

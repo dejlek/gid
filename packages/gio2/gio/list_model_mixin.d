@@ -97,8 +97,8 @@ template ListModelT()
   */
   T getItem(T)(uint position)
   {
-    auto gobj = cast(ObjectC*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this).cPtr, position);
-    return gobject.object.ObjectWrap.getDObject!T(gobj, Yes.Take);
+    auto gobj = cast(GObject*)g_list_model_get_object(cast(GListModel*)(cast(gobject.object.ObjectWrap)this)._cPtr, position);
+    return gobject.object.ObjectWrap._getDObject!T(gobj, Yes.Take);
   }
 
 
@@ -117,7 +117,7 @@ template ListModelT()
   override gobject.types.GType getItemType()
   {
     gobject.types.GType _retval;
-    _retval = g_list_model_get_item_type(cast(GListModel*)cPtr);
+    _retval = g_list_model_get_item_type(cast(GListModel*)this._cPtr);
     return _retval;
   }
 
@@ -132,7 +132,7 @@ template ListModelT()
   override uint getNItems()
   {
     uint _retval;
-    _retval = g_list_model_get_n_items(cast(GListModel*)cPtr);
+    _retval = g_list_model_get_n_items(cast(GListModel*)this._cPtr);
     return _retval;
   }
 
@@ -156,9 +156,9 @@ template ListModelT()
   */
   override gobject.object.ObjectWrap getItem(uint position)
   {
-    ObjectC* _cretval;
-    _cretval = g_list_model_get_object(cast(GListModel*)cPtr, position);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_list_model_get_object(cast(GListModel*)this._cPtr, position);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -191,7 +191,7 @@ template ListModelT()
   */
   override void itemsChanged(uint position, uint removed, uint added)
   {
-    g_list_model_items_changed(cast(GListModel*)cPtr, position, removed, added);
+    g_list_model_items_changed(cast(GListModel*)this._cPtr, position, removed, added);
   }
 
   /**

@@ -91,16 +91,16 @@ class Window : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_window_get_type != &gidSymbolNotFound ? gtk_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -716,7 +716,7 @@ class Window : gtk.bin.Bin
   */
   static void setDefaultIcon(gdkpixbuf.pixbuf.Pixbuf icon)
   {
-    gtk_window_set_default_icon(icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    gtk_window_set_default_icon(icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
   }
 
   /**
@@ -777,7 +777,7 @@ class Window : gtk.bin.Bin
   bool activateDefault()
   {
     bool _retval;
-    _retval = gtk_window_activate_default(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_activate_default(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -788,7 +788,7 @@ class Window : gtk.bin.Bin
   bool activateFocus()
   {
     bool _retval;
-    _retval = gtk_window_activate_focus(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_activate_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -805,7 +805,7 @@ class Window : gtk.bin.Bin
   bool activateKey(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_window_activate_key(cast(GtkWindow*)cPtr, event ? cast(GdkEventKey*)event.cPtr : null);
+    _retval = gtk_window_activate_key(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class Window : gtk.bin.Bin
   */
   void addAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_window_add_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_window_add_accel_group(cast(GtkWindow*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -831,7 +831,7 @@ class Window : gtk.bin.Bin
   */
   void addMnemonic(uint keyval, gtk.widget.Widget target)
   {
-    gtk_window_add_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null);
+    gtk_window_add_mnemonic(cast(GtkWindow*)this._cPtr, keyval, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -850,7 +850,7 @@ class Window : gtk.bin.Bin
   */
   void beginMoveDrag(int button, int rootX, int rootY, uint timestamp)
   {
-    gtk_window_begin_move_drag(cast(GtkWindow*)cPtr, button, rootX, rootY, timestamp);
+    gtk_window_begin_move_drag(cast(GtkWindow*)this._cPtr, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -870,7 +870,7 @@ class Window : gtk.bin.Bin
   */
   void beginResizeDrag(gdk.types.WindowEdge edge, int button, int rootX, int rootY, uint timestamp)
   {
-    gtk_window_begin_resize_drag(cast(GtkWindow*)cPtr, edge, button, rootX, rootY, timestamp);
+    gtk_window_begin_resize_drag(cast(GtkWindow*)this._cPtr, edge, button, rootX, rootY, timestamp);
   }
 
   /**
@@ -882,7 +882,7 @@ class Window : gtk.bin.Bin
   */
   void close()
   {
-    gtk_window_close(cast(GtkWindow*)cPtr);
+    gtk_window_close(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -897,7 +897,7 @@ class Window : gtk.bin.Bin
   */
   void deiconify()
   {
-    gtk_window_deiconify(cast(GtkWindow*)cPtr);
+    gtk_window_deiconify(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -914,7 +914,7 @@ class Window : gtk.bin.Bin
   */
   void fullscreen()
   {
-    gtk_window_fullscreen(cast(GtkWindow*)cPtr);
+    gtk_window_fullscreen(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -930,7 +930,7 @@ class Window : gtk.bin.Bin
   */
   void fullscreenOnMonitor(gdk.screen.Screen screen, int monitor)
   {
-    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null, monitor);
+    gtk_window_fullscreen_on_monitor(cast(GtkWindow*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null, monitor);
   }
 
   /**
@@ -940,7 +940,7 @@ class Window : gtk.bin.Bin
   bool getAcceptFocus()
   {
     bool _retval;
-    _retval = gtk_window_get_accept_focus(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_accept_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -951,8 +951,8 @@ class Window : gtk.bin.Bin
   gtk.application.Application getApplication()
   {
     GtkApplication* _cretval;
-    _cretval = gtk_window_get_application(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
+    _cretval = gtk_window_get_application(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.application.Application)(cast(GtkApplication*)_cretval, No.Take);
     return _retval;
   }
 
@@ -965,8 +965,8 @@ class Window : gtk.bin.Bin
   gtk.widget.Widget getAttachedTo()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_attached_to(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_attached_to(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -978,7 +978,7 @@ class Window : gtk.bin.Bin
   bool getDecorated()
   {
     bool _retval;
-    _retval = gtk_window_get_decorated(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_decorated(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -994,7 +994,7 @@ class Window : gtk.bin.Bin
   */
   void getDefaultSize(out int width, out int height)
   {
-    gtk_window_get_default_size(cast(GtkWindow*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_window_get_default_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -1006,8 +1006,8 @@ class Window : gtk.bin.Bin
   gtk.widget.Widget getDefaultWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_default_widget(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_default_widget(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1019,7 +1019,7 @@ class Window : gtk.bin.Bin
   bool getDeletable()
   {
     bool _retval;
-    _retval = gtk_window_get_deletable(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_deletable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1031,7 +1031,7 @@ class Window : gtk.bin.Bin
   bool getDestroyWithParent()
   {
     bool _retval;
-    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_destroy_with_parent(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1047,8 +1047,8 @@ class Window : gtk.bin.Bin
   gtk.widget.Widget getFocus()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_focus(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_focus(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1060,7 +1060,7 @@ class Window : gtk.bin.Bin
   bool getFocusOnMap()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_on_map(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_focus_on_map(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1072,7 +1072,7 @@ class Window : gtk.bin.Bin
   bool getFocusVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_focus_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1083,7 +1083,7 @@ class Window : gtk.bin.Bin
   gdk.types.Gravity getGravity()
   {
     GdkGravity _cretval;
-    _cretval = gtk_window_get_gravity(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_gravity(cast(GtkWindow*)this._cPtr);
     gdk.types.Gravity _retval = cast(gdk.types.Gravity)_cretval;
     return _retval;
   }
@@ -1097,8 +1097,8 @@ class Window : gtk.bin.Bin
   gtk.window_group.WindowGroup getGroup()
   {
     GtkWindowGroup* _cretval;
-    _cretval = gtk_window_get_group(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
+    _cretval = gtk_window_get_group(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window_group.WindowGroup)(cast(GtkWindowGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1111,7 +1111,7 @@ class Window : gtk.bin.Bin
   bool getHasResizeGrip()
   {
     bool _retval;
-    _retval = gtk_window_get_has_resize_grip(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_has_resize_grip(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1124,7 +1124,7 @@ class Window : gtk.bin.Bin
   bool getHideTitlebarWhenMaximized()
   {
     bool _retval;
-    _retval = gtk_window_get_hide_titlebar_when_maximized(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1137,8 +1137,8 @@ class Window : gtk.bin.Bin
   gdkpixbuf.pixbuf.Pixbuf getIcon()
   {
     PixbufC* _cretval;
-    _cretval = gtk_window_get_icon(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    _cretval = gtk_window_get_icon(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1151,7 +1151,7 @@ class Window : gtk.bin.Bin
   gdkpixbuf.pixbuf.Pixbuf[] getIconList()
   {
     GList* _cretval;
-    _cretval = gtk_window_get_icon_list(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_icon_list(cast(GtkWindow*)this._cPtr);
     auto _retval = gListToD!(gdkpixbuf.pixbuf.Pixbuf, GidOwnership.Container)(cast(GList*)_cretval);
     return _retval;
   }
@@ -1165,7 +1165,7 @@ class Window : gtk.bin.Bin
   string getIconName()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_get_icon_name(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_icon_name(cast(GtkWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1179,7 +1179,7 @@ class Window : gtk.bin.Bin
   gdk.types.ModifierType getMnemonicModifier()
   {
     GdkModifierType _cretval;
-    _cretval = gtk_window_get_mnemonic_modifier(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_mnemonic_modifier(cast(GtkWindow*)this._cPtr);
     gdk.types.ModifierType _retval = cast(gdk.types.ModifierType)_cretval;
     return _retval;
   }
@@ -1192,7 +1192,7 @@ class Window : gtk.bin.Bin
   bool getMnemonicsVisible()
   {
     bool _retval;
-    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_mnemonics_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1204,7 +1204,7 @@ class Window : gtk.bin.Bin
   bool getModal()
   {
     bool _retval;
-    _retval = gtk_window_get_modal(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_modal(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1218,7 +1218,7 @@ class Window : gtk.bin.Bin
   override double getOpacity()
   {
     double _retval;
-    _retval = gtk_window_get_opacity(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_opacity(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1268,7 +1268,7 @@ class Window : gtk.bin.Bin
   */
   void getPosition(out int rootX, out int rootY)
   {
-    gtk_window_get_position(cast(GtkWindow*)cPtr, cast(int*)&rootX, cast(int*)&rootY);
+    gtk_window_get_position(cast(GtkWindow*)this._cPtr, cast(int*)&rootX, cast(int*)&rootY);
   }
 
   /**
@@ -1278,7 +1278,7 @@ class Window : gtk.bin.Bin
   bool getResizable()
   {
     bool _retval;
-    _retval = gtk_window_get_resizable(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_resizable(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1297,7 +1297,7 @@ class Window : gtk.bin.Bin
   {
     bool _retval;
     GdkRectangle _rect;
-    _retval = gtk_window_get_resize_grip_area(cast(GtkWindow*)cPtr, &_rect);
+    _retval = gtk_window_get_resize_grip_area(cast(GtkWindow*)this._cPtr, &_rect);
     rect = new gdk.rectangle.Rectangle(cast(void*)&_rect, No.Take);
     return _retval;
   }
@@ -1311,7 +1311,7 @@ class Window : gtk.bin.Bin
   string getRole()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_get_role(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_role(cast(GtkWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1323,8 +1323,8 @@ class Window : gtk.bin.Bin
   override gdk.screen.Screen getScreen()
   {
     GdkScreen* _cretval;
-    _cretval = gtk_window_get_screen(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
+    _cretval = gtk_window_get_screen(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.screen.Screen)(cast(GdkScreen*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1408,7 +1408,7 @@ class Window : gtk.bin.Bin
   */
   void getSize(out int width, out int height)
   {
-    gtk_window_get_size(cast(GtkWindow*)cPtr, cast(int*)&width, cast(int*)&height);
+    gtk_window_get_size(cast(GtkWindow*)this._cPtr, cast(int*)&width, cast(int*)&height);
   }
 
   /**
@@ -1418,7 +1418,7 @@ class Window : gtk.bin.Bin
   bool getSkipPagerHint()
   {
     bool _retval;
-    _retval = gtk_window_get_skip_pager_hint(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_skip_pager_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1429,7 +1429,7 @@ class Window : gtk.bin.Bin
   bool getSkipTaskbarHint()
   {
     bool _retval;
-    _retval = gtk_window_get_skip_taskbar_hint(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_skip_taskbar_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1442,7 +1442,7 @@ class Window : gtk.bin.Bin
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = gtk_window_get_title(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_title(cast(GtkWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -1455,8 +1455,8 @@ class Window : gtk.bin.Bin
   gtk.widget.Widget getTitlebar()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_window_get_titlebar(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_window_get_titlebar(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1469,8 +1469,8 @@ class Window : gtk.bin.Bin
   gtk.window.Window getTransientFor()
   {
     GtkWindow* _cretval;
-    _cretval = gtk_window_get_transient_for(cast(GtkWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
+    _cretval = gtk_window_get_transient_for(cast(GtkWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.window.Window)(cast(GtkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1481,7 +1481,7 @@ class Window : gtk.bin.Bin
   gdk.types.WindowTypeHint getTypeHint()
   {
     GdkWindowTypeHint _cretval;
-    _cretval = gtk_window_get_type_hint(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_type_hint(cast(GtkWindow*)this._cPtr);
     gdk.types.WindowTypeHint _retval = cast(gdk.types.WindowTypeHint)_cretval;
     return _retval;
   }
@@ -1493,7 +1493,7 @@ class Window : gtk.bin.Bin
   bool getUrgencyHint()
   {
     bool _retval;
-    _retval = gtk_window_get_urgency_hint(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_get_urgency_hint(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1504,7 +1504,7 @@ class Window : gtk.bin.Bin
   gtk.types.WindowType getWindowType()
   {
     GtkWindowType _cretval;
-    _cretval = gtk_window_get_window_type(cast(GtkWindow*)cPtr);
+    _cretval = gtk_window_get_window_type(cast(GtkWindow*)this._cPtr);
     gtk.types.WindowType _retval = cast(gtk.types.WindowType)_cretval;
     return _retval;
   }
@@ -1518,7 +1518,7 @@ class Window : gtk.bin.Bin
   bool hasGroup()
   {
     bool _retval;
-    _retval = gtk_window_has_group(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_has_group(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1531,7 +1531,7 @@ class Window : gtk.bin.Bin
   bool hasToplevelFocus()
   {
     bool _retval;
-    _retval = gtk_window_has_toplevel_focus(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_has_toplevel_focus(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1553,7 +1553,7 @@ class Window : gtk.bin.Bin
   */
   void iconify()
   {
-    gtk_window_iconify(cast(GtkWindow*)cPtr);
+    gtk_window_iconify(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1569,7 +1569,7 @@ class Window : gtk.bin.Bin
   bool isActive()
   {
     bool _retval;
-    _retval = gtk_window_is_active(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_active(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1586,7 +1586,7 @@ class Window : gtk.bin.Bin
   bool isMaximized()
   {
     bool _retval;
-    _retval = gtk_window_is_maximized(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_is_maximized(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1609,7 +1609,7 @@ class Window : gtk.bin.Bin
   */
   void maximize()
   {
-    gtk_window_maximize(cast(GtkWindow*)cPtr);
+    gtk_window_maximize(cast(GtkWindow*)this._cPtr);
   }
 
   alias mnemonicActivate = gtk.widget.Widget.mnemonicActivate;
@@ -1625,7 +1625,7 @@ class Window : gtk.bin.Bin
   bool mnemonicActivate(uint keyval, gdk.types.ModifierType modifier)
   {
     bool _retval;
-    _retval = gtk_window_mnemonic_activate(cast(GtkWindow*)cPtr, keyval, modifier);
+    _retval = gtk_window_mnemonic_activate(cast(GtkWindow*)this._cPtr, keyval, modifier);
     return _retval;
   }
 
@@ -1670,7 +1670,7 @@ class Window : gtk.bin.Bin
   */
   void move(int x, int y)
   {
-    gtk_window_move(cast(GtkWindow*)cPtr, x, y);
+    gtk_window_move(cast(GtkWindow*)this._cPtr, x, y);
   }
 
   /**
@@ -1756,7 +1756,7 @@ class Window : gtk.bin.Bin
   {
     bool _retval;
     const(char)* _geometry = geometry.toCString(No.Alloc);
-    _retval = gtk_window_parse_geometry(cast(GtkWindow*)cPtr, _geometry);
+    _retval = gtk_window_parse_geometry(cast(GtkWindow*)this._cPtr, _geometry);
     return _retval;
   }
 
@@ -1767,7 +1767,7 @@ class Window : gtk.bin.Bin
   */
   void present()
   {
-    gtk_window_present(cast(GtkWindow*)cPtr);
+    gtk_window_present(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1796,7 +1796,7 @@ class Window : gtk.bin.Bin
   */
   void presentWithTime(uint timestamp)
   {
-    gtk_window_present_with_time(cast(GtkWindow*)cPtr, timestamp);
+    gtk_window_present_with_time(cast(GtkWindow*)this._cPtr, timestamp);
   }
 
   /**
@@ -1814,7 +1814,7 @@ class Window : gtk.bin.Bin
   bool propagateKeyEvent(gdk.event_key.EventKey event)
   {
     bool _retval;
-    _retval = gtk_window_propagate_key_event(cast(GtkWindow*)cPtr, event ? cast(GdkEventKey*)event.cPtr : null);
+    _retval = gtk_window_propagate_key_event(cast(GtkWindow*)this._cPtr, event ? cast(GdkEventKey*)event._cPtr : null);
     return _retval;
   }
 
@@ -1826,7 +1826,7 @@ class Window : gtk.bin.Bin
   */
   void removeAccelGroup(gtk.accel_group.AccelGroup accelGroup)
   {
-    gtk_window_remove_accel_group(cast(GtkWindow*)cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup.cPtr(No.Dup) : null);
+    gtk_window_remove_accel_group(cast(GtkWindow*)this._cPtr, accelGroup ? cast(GtkAccelGroup*)accelGroup._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1838,7 +1838,7 @@ class Window : gtk.bin.Bin
   */
   void removeMnemonic(uint keyval, gtk.widget.Widget target)
   {
-    gtk_window_remove_mnemonic(cast(GtkWindow*)cPtr, keyval, target ? cast(GtkWidget*)target.cPtr(No.Dup) : null);
+    gtk_window_remove_mnemonic(cast(GtkWindow*)this._cPtr, keyval, target ? cast(GtkWidget*)target._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1852,7 +1852,7 @@ class Window : gtk.bin.Bin
   */
   void reshowWithInitialSize()
   {
-    gtk_window_reshow_with_initial_size(cast(GtkWindow*)cPtr);
+    gtk_window_reshow_with_initial_size(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -1891,7 +1891,7 @@ class Window : gtk.bin.Bin
   */
   void resize(int width, int height)
   {
-    gtk_window_resize(cast(GtkWindow*)cPtr, width, height);
+    gtk_window_resize(cast(GtkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -1903,7 +1903,7 @@ class Window : gtk.bin.Bin
   bool resizeGripIsVisible()
   {
     bool _retval;
-    _retval = gtk_window_resize_grip_is_visible(cast(GtkWindow*)cPtr);
+    _retval = gtk_window_resize_grip_is_visible(cast(GtkWindow*)this._cPtr);
     return _retval;
   }
 
@@ -1921,7 +1921,7 @@ class Window : gtk.bin.Bin
   */
   void resizeToGeometry(int width, int height)
   {
-    gtk_window_resize_to_geometry(cast(GtkWindow*)cPtr, width, height);
+    gtk_window_resize_to_geometry(cast(GtkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -1933,7 +1933,7 @@ class Window : gtk.bin.Bin
   */
   void setAcceptFocus(bool setting)
   {
-    gtk_window_set_accept_focus(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_accept_focus(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -1955,7 +1955,7 @@ class Window : gtk.bin.Bin
   */
   void setApplication(gtk.application.Application application = null)
   {
-    gtk_window_set_application(cast(GtkWindow*)cPtr, application ? cast(GtkApplication*)application.cPtr(No.Dup) : null);
+    gtk_window_set_application(cast(GtkWindow*)this._cPtr, application ? cast(GtkApplication*)application._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1979,7 +1979,7 @@ class Window : gtk.bin.Bin
   */
   void setAttachedTo(gtk.widget.Widget attachWidget = null)
   {
-    gtk_window_set_attached_to(cast(GtkWindow*)cPtr, attachWidget ? cast(GtkWidget*)attachWidget.cPtr(No.Dup) : null);
+    gtk_window_set_attached_to(cast(GtkWindow*)this._cPtr, attachWidget ? cast(GtkWidget*)attachWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2000,7 +2000,7 @@ class Window : gtk.bin.Bin
   */
   void setDecorated(bool setting)
   {
-    gtk_window_set_decorated(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_decorated(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2018,7 +2018,7 @@ class Window : gtk.bin.Bin
   */
   void setDefault(gtk.widget.Widget defaultWidget = null)
   {
-    gtk_window_set_default(cast(GtkWindow*)cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget.cPtr(No.Dup) : null);
+    gtk_window_set_default(cast(GtkWindow*)this._cPtr, defaultWidget ? cast(GtkWidget*)defaultWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2035,7 +2035,7 @@ class Window : gtk.bin.Bin
   */
   void setDefaultGeometry(int width, int height)
   {
-    gtk_window_set_default_geometry(cast(GtkWindow*)cPtr, width, height);
+    gtk_window_set_default_geometry(cast(GtkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -2079,7 +2079,7 @@ class Window : gtk.bin.Bin
   */
   void setDefaultSize(int width, int height)
   {
-    gtk_window_set_default_size(cast(GtkWindow*)cPtr, width, height);
+    gtk_window_set_default_size(cast(GtkWindow*)this._cPtr, width, height);
   }
 
   /**
@@ -2099,7 +2099,7 @@ class Window : gtk.bin.Bin
   */
   void setDeletable(bool setting)
   {
-    gtk_window_set_deletable(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_deletable(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2113,7 +2113,7 @@ class Window : gtk.bin.Bin
   */
   void setDestroyWithParent(bool setting)
   {
-    gtk_window_set_destroy_with_parent(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_destroy_with_parent(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2129,7 +2129,7 @@ class Window : gtk.bin.Bin
   */
   void setFocus(gtk.widget.Widget focus = null)
   {
-    gtk_window_set_focus(cast(GtkWindow*)cPtr, focus ? cast(GtkWidget*)focus.cPtr(No.Dup) : null);
+    gtk_window_set_focus(cast(GtkWindow*)this._cPtr, focus ? cast(GtkWidget*)focus._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2142,7 +2142,7 @@ class Window : gtk.bin.Bin
   */
   void setFocusOnMap(bool setting)
   {
-    gtk_window_set_focus_on_map(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_focus_on_map(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2153,7 +2153,7 @@ class Window : gtk.bin.Bin
   */
   void setFocusVisible(bool setting)
   {
-    gtk_window_set_focus_visible(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_focus_visible(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2171,7 +2171,7 @@ class Window : gtk.bin.Bin
   */
   void setGeometryHints(gtk.widget.Widget geometryWidget, gdk.types.Geometry geometry, gdk.types.WindowHints geomMask)
   {
-    gtk_window_set_geometry_hints(cast(GtkWindow*)cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget.cPtr(No.Dup) : null, &geometry, geomMask);
+    gtk_window_set_geometry_hints(cast(GtkWindow*)this._cPtr, geometryWidget ? cast(GtkWidget*)geometryWidget._cPtr(No.Dup) : null, &geometry, geomMask);
   }
 
   /**
@@ -2187,7 +2187,7 @@ class Window : gtk.bin.Bin
   */
   void setGravity(gdk.types.Gravity gravity)
   {
-    gtk_window_set_gravity(cast(GtkWindow*)cPtr, gravity);
+    gtk_window_set_gravity(cast(GtkWindow*)this._cPtr, gravity);
   }
 
   /**
@@ -2205,7 +2205,7 @@ class Window : gtk.bin.Bin
   */
   void setHasResizeGrip(bool value)
   {
-    gtk_window_set_has_resize_grip(cast(GtkWindow*)cPtr, value);
+    gtk_window_set_has_resize_grip(cast(GtkWindow*)this._cPtr, value);
   }
 
   /**
@@ -2222,7 +2222,7 @@ class Window : gtk.bin.Bin
   */
   void setHasUserRefCount(bool setting)
   {
-    gtk_window_set_has_user_ref_count(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_has_user_ref_count(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2242,7 +2242,7 @@ class Window : gtk.bin.Bin
   */
   void setHideTitlebarWhenMaximized(bool setting)
   {
-    gtk_window_set_hide_titlebar_when_maximized(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_hide_titlebar_when_maximized(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2271,7 +2271,7 @@ class Window : gtk.bin.Bin
   */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
-    gtk_window_set_icon(cast(GtkWindow*)cPtr, icon ? cast(PixbufC*)icon.cPtr(No.Dup) : null);
+    gtk_window_set_icon(cast(GtkWindow*)this._cPtr, icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2291,7 +2291,7 @@ class Window : gtk.bin.Bin
     bool _retval;
     const(char)* _filename = filename.toCString(No.Alloc);
     GError *_err;
-    _retval = gtk_window_set_icon_from_file(cast(GtkWindow*)cPtr, _filename, &_err);
+    _retval = gtk_window_set_icon_from_file(cast(GtkWindow*)this._cPtr, _filename, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -2331,7 +2331,7 @@ class Window : gtk.bin.Bin
   {
     auto _list = gListFromD!(gdkpixbuf.pixbuf.Pixbuf)(list);
     scope(exit) containerFree!(GList*, gdkpixbuf.pixbuf.Pixbuf, GidOwnership.None)(_list);
-    gtk_window_set_icon_list(cast(GtkWindow*)cPtr, _list);
+    gtk_window_set_icon_list(cast(GtkWindow*)this._cPtr, _list);
   }
 
   /**
@@ -2348,7 +2348,7 @@ class Window : gtk.bin.Bin
   void setIconName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_window_set_icon_name(cast(GtkWindow*)cPtr, _name);
+    gtk_window_set_icon_name(cast(GtkWindow*)this._cPtr, _name);
   }
 
   /**
@@ -2378,7 +2378,7 @@ class Window : gtk.bin.Bin
   */
   void setKeepAbove(bool setting)
   {
-    gtk_window_set_keep_above(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_keep_above(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2408,7 +2408,7 @@ class Window : gtk.bin.Bin
   */
   void setKeepBelow(bool setting)
   {
-    gtk_window_set_keep_below(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_keep_below(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2420,7 +2420,7 @@ class Window : gtk.bin.Bin
   */
   void setMnemonicModifier(gdk.types.ModifierType modifier)
   {
-    gtk_window_set_mnemonic_modifier(cast(GtkWindow*)cPtr, modifier);
+    gtk_window_set_mnemonic_modifier(cast(GtkWindow*)this._cPtr, modifier);
   }
 
   /**
@@ -2431,7 +2431,7 @@ class Window : gtk.bin.Bin
   */
   void setMnemonicsVisible(bool setting)
   {
-    gtk_window_set_mnemonics_visible(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_mnemonics_visible(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2447,7 +2447,7 @@ class Window : gtk.bin.Bin
   */
   void setModal(bool modal)
   {
-    gtk_window_set_modal(cast(GtkWindow*)cPtr, modal);
+    gtk_window_set_modal(cast(GtkWindow*)this._cPtr, modal);
   }
 
   /**
@@ -2468,7 +2468,7 @@ class Window : gtk.bin.Bin
   */
   override void setOpacity(double opacity)
   {
-    gtk_window_set_opacity(cast(GtkWindow*)cPtr, opacity);
+    gtk_window_set_opacity(cast(GtkWindow*)this._cPtr, opacity);
   }
 
   /**
@@ -2481,7 +2481,7 @@ class Window : gtk.bin.Bin
   */
   void setPosition(gtk.types.WindowPosition position)
   {
-    gtk_window_set_position(cast(GtkWindow*)cPtr, position);
+    gtk_window_set_position(cast(GtkWindow*)this._cPtr, position);
   }
 
   /**
@@ -2493,7 +2493,7 @@ class Window : gtk.bin.Bin
   */
   void setResizable(bool resizable)
   {
-    gtk_window_set_resizable(cast(GtkWindow*)cPtr, resizable);
+    gtk_window_set_resizable(cast(GtkWindow*)this._cPtr, resizable);
   }
 
   /**
@@ -2516,7 +2516,7 @@ class Window : gtk.bin.Bin
   void setRole(string role)
   {
     const(char)* _role = role.toCString(No.Alloc);
-    gtk_window_set_role(cast(GtkWindow*)cPtr, _role);
+    gtk_window_set_role(cast(GtkWindow*)this._cPtr, _role);
   }
 
   /**
@@ -2529,7 +2529,7 @@ class Window : gtk.bin.Bin
   */
   void setScreen(gdk.screen.Screen screen)
   {
-    gtk_window_set_screen(cast(GtkWindow*)cPtr, screen ? cast(GdkScreen*)screen.cPtr(No.Dup) : null);
+    gtk_window_set_screen(cast(GtkWindow*)this._cPtr, screen ? cast(GdkScreen*)screen._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2544,7 +2544,7 @@ class Window : gtk.bin.Bin
   */
   void setSkipPagerHint(bool setting)
   {
-    gtk_window_set_skip_pager_hint(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_skip_pager_hint(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2556,7 +2556,7 @@ class Window : gtk.bin.Bin
   */
   void setSkipTaskbarHint(bool setting)
   {
-    gtk_window_set_skip_taskbar_hint(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_skip_taskbar_hint(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2577,7 +2577,7 @@ class Window : gtk.bin.Bin
   void setStartupId(string startupId)
   {
     const(char)* _startupId = startupId.toCString(No.Alloc);
-    gtk_window_set_startup_id(cast(GtkWindow*)cPtr, _startupId);
+    gtk_window_set_startup_id(cast(GtkWindow*)this._cPtr, _startupId);
   }
 
   /**
@@ -2596,7 +2596,7 @@ class Window : gtk.bin.Bin
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    gtk_window_set_title(cast(GtkWindow*)cPtr, _title);
+    gtk_window_set_title(cast(GtkWindow*)this._cPtr, _title);
   }
 
   /**
@@ -2616,7 +2616,7 @@ class Window : gtk.bin.Bin
   */
   void setTitlebar(gtk.widget.Widget titlebar = null)
   {
-    gtk_window_set_titlebar(cast(GtkWindow*)cPtr, titlebar ? cast(GtkWidget*)titlebar.cPtr(No.Dup) : null);
+    gtk_window_set_titlebar(cast(GtkWindow*)this._cPtr, titlebar ? cast(GtkWidget*)titlebar._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2644,7 +2644,7 @@ class Window : gtk.bin.Bin
   */
   void setTransientFor(gtk.window.Window parent = null)
   {
-    gtk_window_set_transient_for(cast(GtkWindow*)cPtr, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    gtk_window_set_transient_for(cast(GtkWindow*)this._cPtr, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
   }
 
   /**
@@ -2662,7 +2662,7 @@ class Window : gtk.bin.Bin
   */
   void setTypeHint(gdk.types.WindowTypeHint hint)
   {
-    gtk_window_set_type_hint(cast(GtkWindow*)cPtr, hint);
+    gtk_window_set_type_hint(cast(GtkWindow*)this._cPtr, hint);
   }
 
   /**
@@ -2674,7 +2674,7 @@ class Window : gtk.bin.Bin
   */
   void setUrgencyHint(bool setting)
   {
-    gtk_window_set_urgency_hint(cast(GtkWindow*)cPtr, setting);
+    gtk_window_set_urgency_hint(cast(GtkWindow*)this._cPtr, setting);
   }
 
   /**
@@ -2695,7 +2695,7 @@ class Window : gtk.bin.Bin
   {
     const(char)* _wmclassName = wmclassName.toCString(No.Alloc);
     const(char)* _wmclassClass = wmclassClass.toCString(No.Alloc);
-    gtk_window_set_wmclass(cast(GtkWindow*)cPtr, _wmclassName, _wmclassClass);
+    gtk_window_set_wmclass(cast(GtkWindow*)this._cPtr, _wmclassName, _wmclassClass);
   }
 
   /**
@@ -2714,7 +2714,7 @@ class Window : gtk.bin.Bin
   */
   void stick()
   {
-    gtk_window_stick(cast(GtkWindow*)cPtr);
+    gtk_window_stick(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -2731,7 +2731,7 @@ class Window : gtk.bin.Bin
   */
   void unfullscreen()
   {
-    gtk_window_unfullscreen(cast(GtkWindow*)cPtr);
+    gtk_window_unfullscreen(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -2747,7 +2747,7 @@ class Window : gtk.bin.Bin
   */
   void unmaximize()
   {
-    gtk_window_unmaximize(cast(GtkWindow*)cPtr);
+    gtk_window_unmaximize(cast(GtkWindow*)this._cPtr);
   }
 
   /**
@@ -2763,7 +2763,7 @@ class Window : gtk.bin.Bin
   */
   void unstick()
   {
-    gtk_window_unstick(cast(GtkWindow*)cPtr);
+    gtk_window_unstick(cast(GtkWindow*)this._cPtr);
   }
 
   /**

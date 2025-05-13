@@ -108,16 +108,16 @@ class Expander : gtk.bin.Bin
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_expander_get_type != &gidSymbolNotFound ? gtk_expander_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -290,7 +290,7 @@ class Expander : gtk.bin.Bin
     GtkWidget* _cretval;
     const(char)* _label = label.toCString(No.Alloc);
     _cretval = gtk_expander_new_with_mnemonic(_label);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.expander.Expander)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -304,7 +304,7 @@ class Expander : gtk.bin.Bin
   bool getExpanded()
   {
     bool _retval;
-    _retval = gtk_expander_get_expanded(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_expanded(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -326,7 +326,7 @@ class Expander : gtk.bin.Bin
   string getLabel()
   {
     const(char)* _cretval;
-    _cretval = gtk_expander_get_label(cast(GtkExpander*)cPtr);
+    _cretval = gtk_expander_get_label(cast(GtkExpander*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -340,7 +340,7 @@ class Expander : gtk.bin.Bin
   bool getLabelFill()
   {
     bool _retval;
-    _retval = gtk_expander_get_label_fill(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_label_fill(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -353,8 +353,8 @@ class Expander : gtk.bin.Bin
   gtk.widget.Widget getLabelWidget()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_expander_get_label_widget(cast(GtkExpander*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class Expander : gtk.bin.Bin
   bool getResizeToplevel()
   {
     bool _retval;
-    _retval = gtk_expander_get_resize_toplevel(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_resize_toplevel(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -379,7 +379,7 @@ class Expander : gtk.bin.Bin
   int getSpacing()
   {
     int _retval;
-    _retval = gtk_expander_get_spacing(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_spacing(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -392,7 +392,7 @@ class Expander : gtk.bin.Bin
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = gtk_expander_get_use_markup(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_use_markup(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -405,7 +405,7 @@ class Expander : gtk.bin.Bin
   bool getUseUnderline()
   {
     bool _retval;
-    _retval = gtk_expander_get_use_underline(cast(GtkExpander*)cPtr);
+    _retval = gtk_expander_get_use_underline(cast(GtkExpander*)this._cPtr);
     return _retval;
   }
 
@@ -419,7 +419,7 @@ class Expander : gtk.bin.Bin
   */
   void setExpanded(bool expanded)
   {
-    gtk_expander_set_expanded(cast(GtkExpander*)cPtr, expanded);
+    gtk_expander_set_expanded(cast(GtkExpander*)this._cPtr, expanded);
   }
 
   /**
@@ -433,7 +433,7 @@ class Expander : gtk.bin.Bin
   void setLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    gtk_expander_set_label(cast(GtkExpander*)cPtr, _label);
+    gtk_expander_set_label(cast(GtkExpander*)this._cPtr, _label);
   }
 
   /**
@@ -448,7 +448,7 @@ class Expander : gtk.bin.Bin
   */
   void setLabelFill(bool labelFill)
   {
-    gtk_expander_set_label_fill(cast(GtkExpander*)cPtr, labelFill);
+    gtk_expander_set_label_fill(cast(GtkExpander*)this._cPtr, labelFill);
   }
 
   /**
@@ -460,7 +460,7 @@ class Expander : gtk.bin.Bin
   */
   void setLabelWidget(gtk.widget.Widget labelWidget = null)
   {
-    gtk_expander_set_label_widget(cast(GtkExpander*)cPtr, labelWidget ? cast(GtkWidget*)labelWidget.cPtr(No.Dup) : null);
+    gtk_expander_set_label_widget(cast(GtkExpander*)this._cPtr, labelWidget ? cast(GtkWidget*)labelWidget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -472,7 +472,7 @@ class Expander : gtk.bin.Bin
   */
   void setResizeToplevel(bool resizeToplevel)
   {
-    gtk_expander_set_resize_toplevel(cast(GtkExpander*)cPtr, resizeToplevel);
+    gtk_expander_set_resize_toplevel(cast(GtkExpander*)this._cPtr, resizeToplevel);
   }
 
   /**
@@ -486,7 +486,7 @@ class Expander : gtk.bin.Bin
   */
   void setSpacing(int spacing)
   {
-    gtk_expander_set_spacing(cast(GtkExpander*)cPtr, spacing);
+    gtk_expander_set_spacing(cast(GtkExpander*)this._cPtr, spacing);
   }
 
   /**
@@ -499,7 +499,7 @@ class Expander : gtk.bin.Bin
   */
   void setUseMarkup(bool useMarkup)
   {
-    gtk_expander_set_use_markup(cast(GtkExpander*)cPtr, useMarkup);
+    gtk_expander_set_use_markup(cast(GtkExpander*)this._cPtr, useMarkup);
   }
 
   /**
@@ -511,7 +511,7 @@ class Expander : gtk.bin.Bin
   */
   void setUseUnderline(bool useUnderline)
   {
-    gtk_expander_set_use_underline(cast(GtkExpander*)cPtr, useUnderline);
+    gtk_expander_set_use_underline(cast(GtkExpander*)this._cPtr, useUnderline);
   }
 
   /**

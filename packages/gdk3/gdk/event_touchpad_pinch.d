@@ -27,7 +27,7 @@ class EventTouchpadPinch
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventTouchpadPinch
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventTouchpadPinch*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventTouchpadPinch*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventTouchpadPinch
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventTouchpadPinch
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventTouchpadPinch
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventTouchpadPinch*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventTouchpadPinch*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventTouchpadPinch*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventTouchpadPinch
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).sendEvent;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventTouchpadPinch
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).sendEvent = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventTouchpadPinch
   */
   @property byte phase()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).phase;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).phase;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventTouchpadPinch
   */
   @property void phase(byte propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).phase = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).phase = propval;
   }
 
   /**
@@ -115,7 +115,7 @@ class EventTouchpadPinch
   */
   @property byte nFingers()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).nFingers;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).nFingers;
   }
 
   /**
@@ -125,7 +125,7 @@ class EventTouchpadPinch
   */
   @property void nFingers(byte propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).nFingers = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).nFingers = propval;
   }
 
   /**
@@ -134,7 +134,7 @@ class EventTouchpadPinch
   */
   @property uint time()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).time;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).time;
   }
 
   /**
@@ -144,7 +144,7 @@ class EventTouchpadPinch
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).time = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).time = propval;
   }
 
   /**
@@ -153,7 +153,7 @@ class EventTouchpadPinch
   */
   @property double x()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).x;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).x;
   }
 
   /**
@@ -163,7 +163,7 @@ class EventTouchpadPinch
   */
   @property void x(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).x = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).x = propval;
   }
 
   /**
@@ -172,7 +172,7 @@ class EventTouchpadPinch
   */
   @property double y()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).y;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).y;
   }
 
   /**
@@ -182,7 +182,7 @@ class EventTouchpadPinch
   */
   @property void y(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).y = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).y = propval;
   }
 
   /**
@@ -191,7 +191,7 @@ class EventTouchpadPinch
   */
   @property double dx()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).dx;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).dx;
   }
 
   /**
@@ -201,7 +201,7 @@ class EventTouchpadPinch
   */
   @property void dx(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).dx = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).dx = propval;
   }
 
   /**
@@ -210,7 +210,7 @@ class EventTouchpadPinch
   */
   @property double dy()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).dy;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).dy;
   }
 
   /**
@@ -220,7 +220,7 @@ class EventTouchpadPinch
   */
   @property void dy(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).dy = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).dy = propval;
   }
 
   /**
@@ -230,7 +230,7 @@ class EventTouchpadPinch
   */
   @property double angleDelta()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).angleDelta;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).angleDelta;
   }
 
   /**
@@ -241,7 +241,7 @@ class EventTouchpadPinch
   */
   @property void angleDelta(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).angleDelta = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).angleDelta = propval;
   }
 
   /**
@@ -251,7 +251,7 @@ class EventTouchpadPinch
   */
   @property double scale()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).scale;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).scale;
   }
 
   /**
@@ -262,7 +262,7 @@ class EventTouchpadPinch
   */
   @property void scale(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).scale = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).scale = propval;
   }
 
   /**
@@ -272,7 +272,7 @@ class EventTouchpadPinch
   */
   @property double xRoot()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).xRoot;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).xRoot;
   }
 
   /**
@@ -283,7 +283,7 @@ class EventTouchpadPinch
   */
   @property void xRoot(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).xRoot = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).xRoot = propval;
   }
 
   /**
@@ -293,7 +293,7 @@ class EventTouchpadPinch
   */
   @property double yRoot()
   {
-    return (cast(GdkEventTouchpadPinch*)cPtr).yRoot;
+    return (cast(GdkEventTouchpadPinch*)this._cPtr).yRoot;
   }
 
   /**
@@ -304,7 +304,7 @@ class EventTouchpadPinch
   */
   @property void yRoot(double propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).yRoot = propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).yRoot = propval;
   }
 
   /**
@@ -315,7 +315,7 @@ class EventTouchpadPinch
   */
   @property gdk.types.ModifierType state()
   {
-    return cast(gdk.types.ModifierType)(cast(GdkEventTouchpadPinch*)cPtr).state;
+    return cast(gdk.types.ModifierType)(cast(GdkEventTouchpadPinch*)this._cPtr).state;
   }
 
   /**
@@ -327,6 +327,6 @@ class EventTouchpadPinch
   */
   @property void state(gdk.types.ModifierType propval)
   {
-    (cast(GdkEventTouchpadPinch*)cPtr).state = cast(GdkModifierType)propval;
+    (cast(GdkEventTouchpadPinch*)this._cPtr).state = cast(GdkModifierType)propval;
   }
 }

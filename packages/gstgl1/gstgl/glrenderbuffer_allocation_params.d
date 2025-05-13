@@ -23,22 +23,22 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_renderbuffer_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_renderbuffer_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property gstgl.types.GLFormat renderbufferFormat()
   {
-    return cast(gstgl.types.GLFormat)(cast(GstGLRenderbufferAllocationParams*)cPtr).renderbufferFormat;
+    return cast(gstgl.types.GLFormat)(cast(GstGLRenderbufferAllocationParams*)this._cPtr).renderbufferFormat;
   }
 
   /**
@@ -63,7 +63,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property void renderbufferFormat(gstgl.types.GLFormat propval)
   {
-    (cast(GstGLRenderbufferAllocationParams*)cPtr).renderbufferFormat = cast(GstGLFormat)propval;
+    (cast(GstGLRenderbufferAllocationParams*)this._cPtr).renderbufferFormat = cast(GstGLFormat)propval;
   }
 
   /**
@@ -72,7 +72,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property uint width()
   {
-    return (cast(GstGLRenderbufferAllocationParams*)cPtr).width;
+    return (cast(GstGLRenderbufferAllocationParams*)this._cPtr).width;
   }
 
   /**
@@ -82,7 +82,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property void width(uint propval)
   {
-    (cast(GstGLRenderbufferAllocationParams*)cPtr).width = propval;
+    (cast(GstGLRenderbufferAllocationParams*)this._cPtr).width = propval;
   }
 
   /**
@@ -91,7 +91,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property uint height()
   {
-    return (cast(GstGLRenderbufferAllocationParams*)cPtr).height;
+    return (cast(GstGLRenderbufferAllocationParams*)this._cPtr).height;
   }
 
   /**
@@ -101,14 +101,14 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
   */
   @property void height(uint propval)
   {
-    (cast(GstGLRenderbufferAllocationParams*)cPtr).height = propval;
+    (cast(GstGLRenderbufferAllocationParams*)this._cPtr).height = propval;
   }
 
   /** */
   this(gstgl.glcontext.GLContext context, gst.allocation_params.AllocationParams allocParams, gstgl.types.GLFormat renderbufferFormat, uint width, uint height)
   {
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, renderbufferFormat, width, height);
+    _cretval = gst_gl_renderbuffer_allocation_params_new(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, renderbufferFormat, width, height);
     this(_cretval, Yes.Take);
   }
 
@@ -125,7 +125,7 @@ class GLRenderbufferAllocationParams : gobject.boxed.Boxed
     auto _notifyCB = notify ? &_notifyCallback : null;
 
     GstGLRenderbufferAllocationParams* _cretval;
-    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams.cPtr(No.Dup) : null, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
+    _cretval = gst_gl_renderbuffer_allocation_params_new_wrapped(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, allocParams ? cast(const(GstAllocationParams)*)allocParams._cPtr(No.Dup) : null, renderbufferFormat, width, height, glHandle, userData, _notifyCB);
     auto _retval = _cretval ? new gstgl.glrenderbuffer_allocation_params.GLRenderbufferAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

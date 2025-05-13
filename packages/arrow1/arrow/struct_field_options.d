@@ -20,16 +20,16 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_struct_field_options_get_type != &gidSymbolNotFound ? garrow_struct_field_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class StructFieldOptions : arrow.function_options.FunctionOptions
   {
     const(char)* _fieldRef = fieldRef.toCString(No.Alloc);
     GError *_err;
-    garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)cPtr, _fieldRef, &_err);
+    garrow_struct_field_options_set_field_ref(cast(GArrowStructFieldOptions*)this._cPtr, _fieldRef, &_err);
     if (_err)
       throw new ErrorWrap(_err);
   }

@@ -50,16 +50,16 @@ class PreferencesWindow : adw.window.Window
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_preferences_window_get_type != &gidSymbolNotFound ? adw_preferences_window_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -203,7 +203,7 @@ class PreferencesWindow : adw.window.Window
   */
   void add(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_window_add(cast(AdwPreferencesWindow*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_window_add(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -216,7 +216,7 @@ class PreferencesWindow : adw.window.Window
   */
   void addToast(adw.toast.Toast toast)
   {
-    adw_preferences_window_add_toast(cast(AdwPreferencesWindow*)cPtr, toast ? cast(AdwToast*)toast.cPtr(Yes.Dup) : null);
+    adw_preferences_window_add_toast(cast(AdwPreferencesWindow*)this._cPtr, toast ? cast(AdwToast*)toast._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -228,7 +228,7 @@ class PreferencesWindow : adw.window.Window
   */
   void closeSubpage()
   {
-    adw_preferences_window_close_subpage(cast(AdwPreferencesWindow*)cPtr);
+    adw_preferences_window_close_subpage(cast(AdwPreferencesWindow*)this._cPtr);
   }
 
   /**
@@ -240,7 +240,7 @@ class PreferencesWindow : adw.window.Window
   bool getCanNavigateBack()
   {
     bool _retval;
-    _retval = adw_preferences_window_get_can_navigate_back(cast(AdwPreferencesWindow*)cPtr);
+    _retval = adw_preferences_window_get_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 
@@ -251,7 +251,7 @@ class PreferencesWindow : adw.window.Window
   bool getSearchEnabled()
   {
     bool _retval;
-    _retval = adw_preferences_window_get_search_enabled(cast(AdwPreferencesWindow*)cPtr);
+    _retval = adw_preferences_window_get_search_enabled(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 
@@ -262,8 +262,8 @@ class PreferencesWindow : adw.window.Window
   adw.preferences_page.PreferencesPage getVisiblePage()
   {
     AdwPreferencesPage* _cretval;
-    _cretval = adw_preferences_window_get_visible_page(cast(AdwPreferencesWindow*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
+    _cretval = adw_preferences_window_get_visible_page(cast(AdwPreferencesWindow*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.preferences_page.PreferencesPage)(cast(AdwPreferencesPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class PreferencesWindow : adw.window.Window
   string getVisiblePageName()
   {
     const(char)* _cretval;
-    _cretval = adw_preferences_window_get_visible_page_name(cast(AdwPreferencesWindow*)cPtr);
+    _cretval = adw_preferences_window_get_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -286,7 +286,7 @@ class PreferencesWindow : adw.window.Window
   bool popSubpage()
   {
     bool _retval;
-    _retval = adw_preferences_window_pop_subpage(cast(AdwPreferencesWindow*)cPtr);
+    _retval = adw_preferences_window_pop_subpage(cast(AdwPreferencesWindow*)this._cPtr);
     return _retval;
   }
 
@@ -303,7 +303,7 @@ class PreferencesWindow : adw.window.Window
   */
   void presentSubpage(gtk.widget.Widget subpage)
   {
-    adw_preferences_window_present_subpage(cast(AdwPreferencesWindow*)cPtr, subpage ? cast(GtkWidget*)subpage.cPtr(No.Dup) : null);
+    adw_preferences_window_present_subpage(cast(AdwPreferencesWindow*)this._cPtr, subpage ? cast(GtkWidget*)subpage._cPtr(No.Dup) : null);
   }
 
   /**
@@ -316,7 +316,7 @@ class PreferencesWindow : adw.window.Window
   */
   void pushSubpage(adw.navigation_page.NavigationPage page)
   {
-    adw_preferences_window_push_subpage(cast(AdwPreferencesWindow*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_window_push_subpage(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -327,7 +327,7 @@ class PreferencesWindow : adw.window.Window
   */
   void remove(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_window_remove(cast(AdwPreferencesWindow*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_window_remove(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -355,7 +355,7 @@ class PreferencesWindow : adw.window.Window
   */
   void setCanNavigateBack(bool canNavigateBack)
   {
-    adw_preferences_window_set_can_navigate_back(cast(AdwPreferencesWindow*)cPtr, canNavigateBack);
+    adw_preferences_window_set_can_navigate_back(cast(AdwPreferencesWindow*)this._cPtr, canNavigateBack);
   }
 
   /**
@@ -366,7 +366,7 @@ class PreferencesWindow : adw.window.Window
   */
   void setSearchEnabled(bool searchEnabled)
   {
-    adw_preferences_window_set_search_enabled(cast(AdwPreferencesWindow*)cPtr, searchEnabled);
+    adw_preferences_window_set_search_enabled(cast(AdwPreferencesWindow*)this._cPtr, searchEnabled);
   }
 
   /**
@@ -377,7 +377,7 @@ class PreferencesWindow : adw.window.Window
   */
   void setVisiblePage(adw.preferences_page.PreferencesPage page)
   {
-    adw_preferences_window_set_visible_page(cast(AdwPreferencesWindow*)cPtr, page ? cast(AdwPreferencesPage*)page.cPtr(No.Dup) : null);
+    adw_preferences_window_set_visible_page(cast(AdwPreferencesWindow*)this._cPtr, page ? cast(AdwPreferencesPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -391,6 +391,6 @@ class PreferencesWindow : adw.window.Window
   void setVisiblePageName(string name)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    adw_preferences_window_set_visible_page_name(cast(AdwPreferencesWindow*)cPtr, _name);
+    adw_preferences_window_set_visible_page_name(cast(AdwPreferencesWindow*)this._cPtr, _name);
   }
 }

@@ -21,22 +21,22 @@ class ITPThirdParty : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_itp_third_party_get_type != &gidSymbolNotFound ? webkit_itp_third_party_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -52,7 +52,7 @@ class ITPThirdParty : gobject.boxed.Boxed
   string getDomain()
   {
     const(char)* _cretval;
-    _cretval = webkit_itp_third_party_get_domain(cast(WebKitITPThirdParty*)cPtr);
+    _cretval = webkit_itp_third_party_get_domain(cast(WebKitITPThirdParty*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -64,7 +64,7 @@ class ITPThirdParty : gobject.boxed.Boxed
   webkit.itpfirst_party.ITPFirstParty[] getFirstParties()
   {
     GList* _cretval;
-    _cretval = webkit_itp_third_party_get_first_parties(cast(WebKitITPThirdParty*)cPtr);
+    _cretval = webkit_itp_third_party_get_first_parties(cast(WebKitITPThirdParty*)this._cPtr);
     auto _retval = gListToD!(webkit.itpfirst_party.ITPFirstParty, GidOwnership.None)(cast(GList*)_cretval);
     return _retval;
   }

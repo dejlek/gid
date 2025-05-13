@@ -27,7 +27,7 @@ class EventPadAxis
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class EventPadAxis
   */
   @property gdk.types.EventType type()
   {
-    return cast(gdk.types.EventType)(cast(GdkEventPadAxis*)cPtr).type;
+    return cast(gdk.types.EventType)(cast(GdkEventPadAxis*)this._cPtr).type;
   }
 
   /**
@@ -48,7 +48,7 @@ class EventPadAxis
   */
   @property void type(gdk.types.EventType propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).type = cast(GdkEventType)propval;
+    (cast(GdkEventPadAxis*)this._cPtr).type = cast(GdkEventType)propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class EventPadAxis
   */
   @property gdk.window.Window window()
   {
-    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)cPtr).window);
+    return cToD!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)this._cPtr).window);
   }
 
   /**
@@ -67,8 +67,8 @@ class EventPadAxis
   */
   @property void window(gdk.window.Window propval)
   {
-    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)cPtr).window);
-    dToC(propval, cast(void*)&(cast(GdkEventPadAxis*)cPtr).window);
+    cValueFree!(gdk.window.Window)(cast(void*)(cast(GdkEventPadAxis*)this._cPtr).window);
+    dToC(propval, cast(void*)&(cast(GdkEventPadAxis*)this._cPtr).window);
   }
 
   /**
@@ -77,7 +77,7 @@ class EventPadAxis
   */
   @property byte sendEvent()
   {
-    return (cast(GdkEventPadAxis*)cPtr).sendEvent;
+    return (cast(GdkEventPadAxis*)this._cPtr).sendEvent;
   }
 
   /**
@@ -87,7 +87,7 @@ class EventPadAxis
   */
   @property void sendEvent(byte propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).sendEvent = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).sendEvent = propval;
   }
 
   /**
@@ -96,7 +96,7 @@ class EventPadAxis
   */
   @property uint time()
   {
-    return (cast(GdkEventPadAxis*)cPtr).time;
+    return (cast(GdkEventPadAxis*)this._cPtr).time;
   }
 
   /**
@@ -106,7 +106,7 @@ class EventPadAxis
   */
   @property void time(uint propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).time = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).time = propval;
   }
 
   /**
@@ -117,7 +117,7 @@ class EventPadAxis
   */
   @property uint group()
   {
-    return (cast(GdkEventPadAxis*)cPtr).group;
+    return (cast(GdkEventPadAxis*)this._cPtr).group;
   }
 
   /**
@@ -129,7 +129,7 @@ class EventPadAxis
   */
   @property void group(uint propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).group = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).group = propval;
   }
 
   /**
@@ -138,7 +138,7 @@ class EventPadAxis
   */
   @property uint index()
   {
-    return (cast(GdkEventPadAxis*)cPtr).index;
+    return (cast(GdkEventPadAxis*)this._cPtr).index;
   }
 
   /**
@@ -148,7 +148,7 @@ class EventPadAxis
   */
   @property void index(uint propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).index = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).index = propval;
   }
 
   /**
@@ -158,7 +158,7 @@ class EventPadAxis
   */
   @property uint mode()
   {
-    return (cast(GdkEventPadAxis*)cPtr).mode;
+    return (cast(GdkEventPadAxis*)this._cPtr).mode;
   }
 
   /**
@@ -169,7 +169,7 @@ class EventPadAxis
   */
   @property void mode(uint propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).mode = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).mode = propval;
   }
 
   /**
@@ -178,7 +178,7 @@ class EventPadAxis
   */
   @property double value()
   {
-    return (cast(GdkEventPadAxis*)cPtr).value;
+    return (cast(GdkEventPadAxis*)this._cPtr).value;
   }
 
   /**
@@ -188,6 +188,6 @@ class EventPadAxis
   */
   @property void value(double propval)
   {
-    (cast(GdkEventPadAxis*)cPtr).value = propval;
+    (cast(GdkEventPadAxis*)this._cPtr).value = propval;
   }
 }

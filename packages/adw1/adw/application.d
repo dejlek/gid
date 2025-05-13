@@ -56,16 +56,16 @@ class Application : gtk.application.Application
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_application_get_type != &gidSymbolNotFound ? adw_application_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -118,8 +118,8 @@ class Application : gtk.application.Application
   adw.style_manager.StyleManager getStyleManager()
   {
     AdwStyleManager* _cretval;
-    _cretval = adw_application_get_style_manager(cast(AdwApplication*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
+    _cretval = adw_application_get_style_manager(cast(AdwApplication*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.style_manager.StyleManager)(cast(AdwStyleManager*)_cretval, No.Take);
     return _retval;
   }
 }

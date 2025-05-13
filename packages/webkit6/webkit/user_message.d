@@ -30,16 +30,16 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_user_message_get_type != &gidSymbolNotFound ? webkit_user_message_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -60,7 +60,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null);
+    _cretval = webkit_user_message_new(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -77,8 +77,8 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   {
     WebKitUserMessage* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = webkit_user_message_new_with_fd_list(_name, parameters ? cast(GVariant*)parameters.cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, No.Take);
+    _cretval = webkit_user_message_new_with_fd_list(_name, parameters ? cast(GVariant*)parameters._cPtr(No.Dup) : null, fdList ? cast(GUnixFDList*)fdList._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkit.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,8 +89,8 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   gio.unix_fdlist.UnixFDList getFdList()
   {
     GUnixFDList* _cretval;
-    _cretval = webkit_user_message_get_fd_list(cast(WebKitUserMessage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
+    _cretval = webkit_user_message_get_fd_list(cast(WebKitUserMessage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.unix_fdlist.UnixFDList)(cast(GUnixFDList*)_cretval, No.Take);
     return _retval;
   }
 
@@ -101,7 +101,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_user_message_get_name(cast(WebKitUserMessage*)cPtr);
+    _cretval = webkit_user_message_get_name(cast(WebKitUserMessage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -113,7 +113,7 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   glib.variant.Variant getParameters()
   {
     GVariant* _cretval;
-    _cretval = webkit_user_message_get_parameters(cast(WebKitUserMessage*)cPtr);
+    _cretval = webkit_user_message_get_parameters(cast(WebKitUserMessage*)this._cPtr);
     auto _retval = _cretval ? new glib.variant.Variant(cast(GVariant*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -130,6 +130,6 @@ class UserMessage : gobject.initially_unowned.InitiallyUnowned
   */
   void sendReply(webkit.user_message.UserMessage reply)
   {
-    webkit_user_message_send_reply(cast(WebKitUserMessage*)cPtr, reply ? cast(WebKitUserMessage*)reply.cPtr(No.Dup) : null);
+    webkit_user_message_send_reply(cast(WebKitUserMessage*)this._cPtr, reply ? cast(WebKitUserMessage*)reply._cPtr(No.Dup) : null);
   }
 }

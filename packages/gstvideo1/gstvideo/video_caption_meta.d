@@ -28,7 +28,7 @@ class VideoCaptionMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class VideoCaptionMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCaptionMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCaptionMeta*)this._cPtr).meta);
   }
 
   /**
@@ -48,7 +48,7 @@ class VideoCaptionMeta
   */
   @property gstvideo.types.VideoCaptionType captionType()
   {
-    return cast(gstvideo.types.VideoCaptionType)(cast(GstVideoCaptionMeta*)cPtr).captionType;
+    return cast(gstvideo.types.VideoCaptionType)(cast(GstVideoCaptionMeta*)this._cPtr).captionType;
   }
 
   /**
@@ -58,7 +58,7 @@ class VideoCaptionMeta
   */
   @property void captionType(gstvideo.types.VideoCaptionType propval)
   {
-    (cast(GstVideoCaptionMeta*)cPtr).captionType = cast(GstVideoCaptionType)propval;
+    (cast(GstVideoCaptionMeta*)this._cPtr).captionType = cast(GstVideoCaptionType)propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class VideoCaptionMeta
   */
   @property size_t size()
   {
-    return (cast(GstVideoCaptionMeta*)cPtr).size;
+    return (cast(GstVideoCaptionMeta*)this._cPtr).size;
   }
 
   /**
@@ -77,7 +77,7 @@ class VideoCaptionMeta
   */
   @property void size(size_t propval)
   {
-    (cast(GstVideoCaptionMeta*)cPtr).size = propval;
+    (cast(GstVideoCaptionMeta*)this._cPtr).size = propval;
   }
 
   /** */

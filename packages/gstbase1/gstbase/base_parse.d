@@ -168,16 +168,16 @@ class BaseParse : gst.element.Element
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_base_parse_get_type != &gidSymbolNotFound ? gst_base_parse_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -231,7 +231,7 @@ class BaseParse : gst.element.Element
   bool addIndexEntry(ulong offset, gst.types.ClockTime ts, bool key, bool force)
   {
     bool _retval;
-    _retval = gst_base_parse_add_index_entry(cast(GstBaseParse*)cPtr, offset, ts, key, force);
+    _retval = gst_base_parse_add_index_entry(cast(GstBaseParse*)this._cPtr, offset, ts, key, force);
     return _retval;
   }
 
@@ -248,7 +248,7 @@ class BaseParse : gst.element.Element
   bool convertDefault(gst.types.Format srcFormat, long srcValue, gst.types.Format destFormat, out long destValue)
   {
     bool _retval;
-    _retval = gst_base_parse_convert_default(cast(GstBaseParse*)cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
+    _retval = gst_base_parse_convert_default(cast(GstBaseParse*)this._cPtr, srcFormat, srcValue, destFormat, cast(long*)&destValue);
     return _retval;
   }
 
@@ -259,7 +259,7 @@ class BaseParse : gst.element.Element
   */
   void drain()
   {
-    gst_base_parse_drain(cast(GstBaseParse*)cPtr);
+    gst_base_parse_drain(cast(GstBaseParse*)this._cPtr);
   }
 
   /**
@@ -286,7 +286,7 @@ class BaseParse : gst.element.Element
   gst.types.FlowReturn finishFrame(gstbase.base_parse_frame.BaseParseFrame frame, int size)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_parse_finish_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.Dup) : null, size);
+    _cretval = gst_base_parse_finish_frame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null, size);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -306,7 +306,7 @@ class BaseParse : gst.element.Element
   */
   void mergeTags(gst.tag_list.TagList tags, gst.types.TagMergeMode mode)
   {
-    gst_base_parse_merge_tags(cast(GstBaseParse*)cPtr, tags ? cast(GstTagList*)tags.cPtr(No.Dup) : null, mode);
+    gst_base_parse_merge_tags(cast(GstBaseParse*)this._cPtr, tags ? cast(GstTagList*)tags._cPtr(No.Dup) : null, mode);
   }
 
   /**
@@ -323,7 +323,7 @@ class BaseParse : gst.element.Element
   gst.types.FlowReturn pushFrame(gstbase.base_parse_frame.BaseParseFrame frame)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_base_parse_push_frame(cast(GstBaseParse*)cPtr, frame ? cast(GstBaseParseFrame*)frame.cPtr(No.Dup) : null);
+    _cretval = gst_base_parse_push_frame(cast(GstBaseParse*)this._cPtr, frame ? cast(GstBaseParseFrame*)frame._cPtr(No.Dup) : null);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -342,7 +342,7 @@ class BaseParse : gst.element.Element
   */
   void setAverageBitrate(uint bitrate)
   {
-    gst_base_parse_set_average_bitrate(cast(GstBaseParse*)cPtr, bitrate);
+    gst_base_parse_set_average_bitrate(cast(GstBaseParse*)this._cPtr, bitrate);
   }
 
   /**
@@ -359,7 +359,7 @@ class BaseParse : gst.element.Element
   */
   void setDuration(gst.types.Format fmt, long duration, int interval)
   {
-    gst_base_parse_set_duration(cast(GstBaseParse*)cPtr, fmt, duration, interval);
+    gst_base_parse_set_duration(cast(GstBaseParse*)this._cPtr, fmt, duration, interval);
   }
 
   /**
@@ -377,7 +377,7 @@ class BaseParse : gst.element.Element
   */
   void setFrameRate(uint fpsNum, uint fpsDen, uint leadIn, uint leadOut)
   {
-    gst_base_parse_set_frame_rate(cast(GstBaseParse*)cPtr, fpsNum, fpsDen, leadIn, leadOut);
+    gst_base_parse_set_frame_rate(cast(GstBaseParse*)this._cPtr, fpsNum, fpsDen, leadIn, leadOut);
   }
 
   /**
@@ -390,7 +390,7 @@ class BaseParse : gst.element.Element
   */
   void setHasTimingInfo(bool hasTiming)
   {
-    gst_base_parse_set_has_timing_info(cast(GstBaseParse*)cPtr, hasTiming);
+    gst_base_parse_set_has_timing_info(cast(GstBaseParse*)this._cPtr, hasTiming);
   }
 
   /**
@@ -404,7 +404,7 @@ class BaseParse : gst.element.Element
   */
   void setInferTs(bool inferTs)
   {
-    gst_base_parse_set_infer_ts(cast(GstBaseParse*)cPtr, inferTs);
+    gst_base_parse_set_infer_ts(cast(GstBaseParse*)this._cPtr, inferTs);
   }
 
   /**
@@ -422,7 +422,7 @@ class BaseParse : gst.element.Element
   */
   void setLatency(gst.types.ClockTime minLatency, gst.types.ClockTime maxLatency)
   {
-    gst_base_parse_set_latency(cast(GstBaseParse*)cPtr, minLatency, maxLatency);
+    gst_base_parse_set_latency(cast(GstBaseParse*)this._cPtr, minLatency, maxLatency);
   }
 
   /**
@@ -435,7 +435,7 @@ class BaseParse : gst.element.Element
   */
   void setMinFrameSize(uint minSize)
   {
-    gst_base_parse_set_min_frame_size(cast(GstBaseParse*)cPtr, minSize);
+    gst_base_parse_set_min_frame_size(cast(GstBaseParse*)this._cPtr, minSize);
   }
 
   /**
@@ -452,7 +452,7 @@ class BaseParse : gst.element.Element
   */
   void setPassthrough(bool passthrough)
   {
-    gst_base_parse_set_passthrough(cast(GstBaseParse*)cPtr, passthrough);
+    gst_base_parse_set_passthrough(cast(GstBaseParse*)this._cPtr, passthrough);
   }
 
   /**
@@ -466,7 +466,7 @@ class BaseParse : gst.element.Element
   */
   void setPtsInterpolation(bool ptsInterpolate)
   {
-    gst_base_parse_set_pts_interpolation(cast(GstBaseParse*)cPtr, ptsInterpolate);
+    gst_base_parse_set_pts_interpolation(cast(GstBaseParse*)this._cPtr, ptsInterpolate);
   }
 
   /**
@@ -479,7 +479,7 @@ class BaseParse : gst.element.Element
   */
   void setSyncable(bool syncable)
   {
-    gst_base_parse_set_syncable(cast(GstBaseParse*)cPtr, syncable);
+    gst_base_parse_set_syncable(cast(GstBaseParse*)this._cPtr, syncable);
   }
 
   /**
@@ -497,6 +497,6 @@ class BaseParse : gst.element.Element
   */
   void setTsAtOffset(size_t offset)
   {
-    gst_base_parse_set_ts_at_offset(cast(GstBaseParse*)cPtr, offset);
+    gst_base_parse_set_ts_at_offset(cast(GstBaseParse*)this._cPtr, offset);
   }
 }

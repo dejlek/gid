@@ -22,16 +22,16 @@ class MenuShellAccessible : gtk.container_accessible.ContainerAccessible, atk.se
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_menu_shell_accessible_get_type != &gidSymbolNotFound ? gtk_menu_shell_accessible_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */

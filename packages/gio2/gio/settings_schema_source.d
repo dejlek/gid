@@ -22,22 +22,22 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_schema_source_get_type != &gidSymbolNotFound ? g_settings_schema_source_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -91,7 +91,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
     GSettingsSchemaSource* _cretval;
     const(char)* _directory = directory.toCString(No.Alloc);
     GError *_err;
-    _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent.cPtr(No.Dup) : null, trusted, &_err);
+    _cretval = g_settings_schema_source_new_from_directory(_directory, parent ? cast(GSettingsSchemaSource*)parent._cPtr(No.Dup) : null, trusted, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     auto _retval = _cretval ? new gio.settings_schema_source.SettingsSchemaSource(cast(void*)_cretval, Yes.Take) : null;
@@ -123,7 +123,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   {
     char** _nonRelocatable;
     char** _relocatable;
-    g_settings_schema_source_list_schemas(cast(GSettingsSchemaSource*)cPtr, recursive, &_nonRelocatable, &_relocatable);
+    g_settings_schema_source_list_schemas(cast(GSettingsSchemaSource*)this._cPtr, recursive, &_nonRelocatable, &_relocatable);
     uint _lennonRelocatable;
     if (_nonRelocatable)
     {
@@ -169,7 +169,7 @@ class SettingsSchemaSource : gobject.boxed.Boxed
   {
     GSettingsSchema* _cretval;
     const(char)* _schemaId = schemaId.toCString(No.Alloc);
-    _cretval = g_settings_schema_source_lookup(cast(GSettingsSchemaSource*)cPtr, _schemaId, recursive);
+    _cretval = g_settings_schema_source_lookup(cast(GSettingsSchemaSource*)this._cPtr, _schemaId, recursive);
     auto _retval = _cretval ? new gio.settings_schema.SettingsSchema(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

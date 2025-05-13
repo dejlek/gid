@@ -21,16 +21,16 @@ class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_record_batch_stream_writer_get_type != &gidSymbolNotFound ? garrow_record_batch_stream_writer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
   {
     GArrowRecordBatchStreamWriter* _cretval;
     GError *_err;
-    _cretval = garrow_record_batch_stream_writer_new(sink ? cast(GArrowOutputStream*)sink.cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_record_batch_stream_writer_new(sink ? cast(GArrowOutputStream*)sink._cPtr(No.Dup) : null, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     this(_cretval, Yes.Take);

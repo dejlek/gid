@@ -27,16 +27,16 @@ class Coverage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())pango_coverage_get_type != &gidSymbolNotFound ? pango_coverage_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -78,7 +78,7 @@ class Coverage : gobject.object.ObjectWrap
 
     auto _bytes = cast(ubyte*)bytes.ptr;
     _cretval = pango_coverage_from_bytes(_bytes, _nBytes);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,8 +91,8 @@ class Coverage : gobject.object.ObjectWrap
   pango.coverage.Coverage copy()
   {
     PangoCoverage* _cretval;
-    _cretval = pango_coverage_copy(cast(PangoCoverage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
+    _cretval = pango_coverage_copy(cast(PangoCoverage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(pango.coverage.Coverage)(cast(PangoCoverage*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -106,7 +106,7 @@ class Coverage : gobject.object.ObjectWrap
   pango.types.CoverageLevel get(int index)
   {
     PangoCoverageLevel _cretval;
-    _cretval = pango_coverage_get(cast(PangoCoverage*)cPtr, index);
+    _cretval = pango_coverage_get(cast(PangoCoverage*)this._cPtr, index);
     pango.types.CoverageLevel _retval = cast(pango.types.CoverageLevel)_cretval;
     return _retval;
   }
@@ -123,7 +123,7 @@ class Coverage : gobject.object.ObjectWrap
   */
   void max(pango.coverage.Coverage other)
   {
-    pango_coverage_max(cast(PangoCoverage*)cPtr, other ? cast(PangoCoverage*)other.cPtr(No.Dup) : null);
+    pango_coverage_max(cast(PangoCoverage*)this._cPtr, other ? cast(PangoCoverage*)other._cPtr(No.Dup) : null);
   }
 
   /**
@@ -135,7 +135,7 @@ class Coverage : gobject.object.ObjectWrap
   */
   void set(int index, pango.types.CoverageLevel level)
   {
-    pango_coverage_set(cast(PangoCoverage*)cPtr, index, level);
+    pango_coverage_set(cast(PangoCoverage*)this._cPtr, index, level);
   }
 
   /**
@@ -150,7 +150,7 @@ class Coverage : gobject.object.ObjectWrap
   {
     int _nBytes;
     ubyte* _bytes;
-    pango_coverage_to_bytes(cast(PangoCoverage*)cPtr, &_bytes, &_nBytes);
+    pango_coverage_to_bytes(cast(PangoCoverage*)this._cPtr, &_bytes, &_nBytes);
     bytes.length = _nBytes;
     bytes[0 .. $] = (cast(ubyte*)_bytes)[0 .. _nBytes];
     gFree(cast(void*)_bytes);

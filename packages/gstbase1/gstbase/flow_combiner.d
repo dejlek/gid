@@ -54,22 +54,22 @@ class FlowCombiner : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_flow_combiner_get_type != &gidSymbolNotFound ? gst_flow_combiner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void addPad(gst.pad.Pad pad)
   {
-    gst_flow_combiner_add_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_flow_combiner_add_pad(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
 
   /**
@@ -105,7 +105,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void clear()
   {
-    gst_flow_combiner_clear(cast(GstFlowCombiner*)cPtr);
+    gst_flow_combiner_clear(cast(GstFlowCombiner*)this._cPtr);
   }
 
   /**
@@ -116,7 +116,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void removePad(gst.pad.Pad pad)
   {
-    gst_flow_combiner_remove_pad(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null);
+    gst_flow_combiner_remove_pad(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null);
   }
 
   /**
@@ -124,7 +124,7 @@ class FlowCombiner : gobject.boxed.Boxed
   */
   void reset()
   {
-    gst_flow_combiner_reset(cast(GstFlowCombiner*)cPtr);
+    gst_flow_combiner_reset(cast(GstFlowCombiner*)this._cPtr);
   }
 
   /**
@@ -142,7 +142,7 @@ class FlowCombiner : gobject.boxed.Boxed
   gst.types.FlowReturn updateFlow(gst.types.FlowReturn fret)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_flow_combiner_update_flow(cast(GstFlowCombiner*)cPtr, fret);
+    _cretval = gst_flow_combiner_update_flow(cast(GstFlowCombiner*)this._cPtr, fret);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }
@@ -164,7 +164,7 @@ class FlowCombiner : gobject.boxed.Boxed
   gst.types.FlowReturn updatePadFlow(gst.pad.Pad pad, gst.types.FlowReturn fret)
   {
     GstFlowReturn _cretval;
-    _cretval = gst_flow_combiner_update_pad_flow(cast(GstFlowCombiner*)cPtr, pad ? cast(GstPad*)pad.cPtr(No.Dup) : null, fret);
+    _cretval = gst_flow_combiner_update_pad_flow(cast(GstFlowCombiner*)this._cPtr, pad ? cast(GstPad*)pad._cPtr(No.Dup) : null, fret);
     gst.types.FlowReturn _retval = cast(gst.types.FlowReturn)_cretval;
     return _retval;
   }

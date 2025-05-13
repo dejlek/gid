@@ -54,22 +54,22 @@ class Feature : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_feature_get_type != &gidSymbolNotFound ? webkit_feature_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,7 +88,7 @@ class Feature : gobject.boxed.Boxed
   string getCategory()
   {
     const(char)* _cretval;
-    _cretval = webkit_feature_get_category(cast(WebKitFeature*)cPtr);
+    _cretval = webkit_feature_get_category(cast(WebKitFeature*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -105,7 +105,7 @@ class Feature : gobject.boxed.Boxed
   bool getDefaultValue()
   {
     bool _retval;
-    _retval = webkit_feature_get_default_value(cast(WebKitFeature*)cPtr);
+    _retval = webkit_feature_get_default_value(cast(WebKitFeature*)this._cPtr);
     return _retval;
   }
 
@@ -125,7 +125,7 @@ class Feature : gobject.boxed.Boxed
   string getDetails()
   {
     const(char)* _cretval;
-    _cretval = webkit_feature_get_details(cast(WebKitFeature*)cPtr);
+    _cretval = webkit_feature_get_details(cast(WebKitFeature*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -137,7 +137,7 @@ class Feature : gobject.boxed.Boxed
   string getIdentifier()
   {
     const(char)* _cretval;
-    _cretval = webkit_feature_get_identifier(cast(WebKitFeature*)cPtr);
+    _cretval = webkit_feature_get_identifier(cast(WebKitFeature*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -155,7 +155,7 @@ class Feature : gobject.boxed.Boxed
   string getName()
   {
     const(char)* _cretval;
-    _cretval = webkit_feature_get_name(cast(WebKitFeature*)cPtr);
+    _cretval = webkit_feature_get_name(cast(WebKitFeature*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -167,7 +167,7 @@ class Feature : gobject.boxed.Boxed
   webkit.types.FeatureStatus getStatus()
   {
     WebKitFeatureStatus _cretval;
-    _cretval = webkit_feature_get_status(cast(WebKitFeature*)cPtr);
+    _cretval = webkit_feature_get_status(cast(WebKitFeature*)this._cPtr);
     webkit.types.FeatureStatus _retval = cast(webkit.types.FeatureStatus)_cretval;
     return _retval;
   }

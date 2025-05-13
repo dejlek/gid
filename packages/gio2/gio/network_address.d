@@ -32,16 +32,16 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_network_address_get_type != &gidSymbolNotFound ? g_network_address_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -97,7 +97,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   {
     GSocketConnectable* _cretval;
     _cretval = g_network_address_new_loopback(port);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -139,7 +139,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     _cretval = g_network_address_parse(_hostAndPort, defaultPort, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -166,7 +166,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
     _cretval = g_network_address_parse_uri(_uri, defaultPort, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.network_address.NetworkAddress)(cast(GSocketConnectable*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getHostname()
   {
     const(char)* _cretval;
-    _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)cPtr);
+    _cretval = g_network_address_get_hostname(cast(GNetworkAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -190,7 +190,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   ushort getPort()
   {
     ushort _retval;
-    _retval = g_network_address_get_port(cast(GNetworkAddress*)cPtr);
+    _retval = g_network_address_get_port(cast(GNetworkAddress*)this._cPtr);
     return _retval;
   }
 
@@ -201,7 +201,7 @@ class NetworkAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketC
   string getScheme()
   {
     const(char)* _cretval;
-    _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)cPtr);
+    _cretval = g_network_address_get_scheme(cast(GNetworkAddress*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

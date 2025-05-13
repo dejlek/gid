@@ -35,16 +35,16 @@ class WebPage : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_web_page_get_type != &gidSymbolNotFound ? webkit_web_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -69,8 +69,8 @@ class WebPage : gobject.object.ObjectWrap
   webkitwebprocessextension.web_editor.WebEditor getEditor()
   {
     WebKitWebEditor* _cretval;
-    _cretval = webkit_web_page_get_editor(cast(WebKitWebPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_editor.WebEditor)(cast(WebKitWebEditor*)_cretval, No.Take);
+    _cretval = webkit_web_page_get_editor(cast(WebKitWebPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.web_editor.WebEditor)(cast(WebKitWebEditor*)_cretval, No.Take);
     return _retval;
   }
 
@@ -84,8 +84,8 @@ class WebPage : gobject.object.ObjectWrap
   webkitwebprocessextension.web_form_manager.WebFormManager getFormManager(webkitwebprocessextension.script_world.ScriptWorld world = null)
   {
     WebKitWebFormManager* _cretval;
-    _cretval = webkit_web_page_get_form_manager(cast(WebKitWebPage*)cPtr, world ? cast(WebKitScriptWorld*)world.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.web_form_manager.WebFormManager)(cast(WebKitWebFormManager*)_cretval, No.Take);
+    _cretval = webkit_web_page_get_form_manager(cast(WebKitWebPage*)this._cPtr, world ? cast(WebKitScriptWorld*)world._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.web_form_manager.WebFormManager)(cast(WebKitWebFormManager*)_cretval, No.Take);
     return _retval;
   }
 
@@ -96,7 +96,7 @@ class WebPage : gobject.object.ObjectWrap
   ulong getId()
   {
     ulong _retval;
-    _retval = webkit_web_page_get_id(cast(WebKitWebPage*)cPtr);
+    _retval = webkit_web_page_get_id(cast(WebKitWebPage*)this._cPtr);
     return _retval;
   }
 
@@ -107,8 +107,8 @@ class WebPage : gobject.object.ObjectWrap
   webkitwebprocessextension.frame.Frame getMainFrame()
   {
     WebKitFrame* _cretval;
-    _cretval = webkit_web_page_get_main_frame(cast(WebKitWebPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.frame.Frame)(cast(WebKitFrame*)_cretval, No.Take);
+    _cretval = webkit_web_page_get_main_frame(cast(WebKitWebPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.frame.Frame)(cast(WebKitFrame*)_cretval, No.Take);
     return _retval;
   }
 
@@ -123,7 +123,7 @@ class WebPage : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_web_page_get_uri(cast(WebKitWebPage*)cPtr);
+    _cretval = webkit_web_page_get_uri(cast(WebKitWebPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -142,17 +142,17 @@ class WebPage : gobject.object.ObjectWrap
   */
   void sendMessageToView(webkitwebprocessextension.user_message.UserMessage message, gio.cancellable.Cancellable cancellable = null, gio.types.AsyncReadyCallback callback = null)
   {
-    extern(C) void _callbackCallback(ObjectC* sourceObject, GAsyncResult* res, void* data)
+    extern(C) void _callbackCallback(GObject* sourceObject, GAsyncResult* res, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gio.types.AsyncReadyCallback*)data;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap.getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)sourceObject, No.Take), gobject.object.ObjectWrap._getDObject!(gio.async_result.AsyncResult)(cast(void*)res, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? freezeDelegate(cast(void*)&callback) : null;
-    webkit_web_page_send_message_to_view(cast(WebKitWebPage*)cPtr, message ? cast(WebKitUserMessage*)message.cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable.cPtr(No.Dup) : null, _callbackCB, _callback);
+    webkit_web_page_send_message_to_view(cast(WebKitWebPage*)this._cPtr, message ? cast(WebKitUserMessage*)message._cPtr(No.Dup) : null, cancellable ? cast(GCancellable*)cancellable._cPtr(No.Dup) : null, _callbackCB, _callback);
   }
 
   /**
@@ -167,10 +167,10 @@ class WebPage : gobject.object.ObjectWrap
   {
     WebKitUserMessage* _cretval;
     GError *_err;
-    _cretval = webkit_web_page_send_message_to_view_finish(cast(WebKitWebPage*)cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result).cPtr(No.Dup) : null, &_err);
+    _cretval = webkit_web_page_send_message_to_view_finish(cast(WebKitWebPage*)this._cPtr, result ? cast(GAsyncResult*)(cast(gobject.object.ObjectWrap)result)._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(webkitwebprocessextension.user_message.UserMessage)(cast(WebKitUserMessage*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -27,7 +27,7 @@ class HookList
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -38,7 +38,7 @@ class HookList
   */
   @property gulong seqId()
   {
-    return (cast(GHookList*)cPtr).seqId;
+    return (cast(GHookList*)this._cPtr).seqId;
   }
 
   /**
@@ -48,7 +48,7 @@ class HookList
   */
   @property void seqId(gulong propval)
   {
-    (cast(GHookList*)cPtr).seqId = propval;
+    (cast(GHookList*)this._cPtr).seqId = propval;
   }
 
   /**
@@ -57,7 +57,7 @@ class HookList
   */
   @property uint hookSize()
   {
-    return (cast(GHookList*)cPtr).hookSize;
+    return (cast(GHookList*)this._cPtr).hookSize;
   }
 
   /**
@@ -67,7 +67,7 @@ class HookList
   */
   @property void hookSize(uint propval)
   {
-    (cast(GHookList*)cPtr).hookSize = propval;
+    (cast(GHookList*)this._cPtr).hookSize = propval;
   }
 
   /**
@@ -76,7 +76,7 @@ class HookList
   */
   @property uint isSetup()
   {
-    return (cast(GHookList*)cPtr).isSetup;
+    return (cast(GHookList*)this._cPtr).isSetup;
   }
 
   /**
@@ -86,7 +86,7 @@ class HookList
   */
   @property void isSetup(uint propval)
   {
-    (cast(GHookList*)cPtr).isSetup = propval;
+    (cast(GHookList*)this._cPtr).isSetup = propval;
   }
 
   /**
@@ -95,7 +95,7 @@ class HookList
   */
   @property glib.hook.Hook hooks()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)cPtr).hooks);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks);
   }
 
   /**
@@ -105,7 +105,7 @@ class HookList
   */
   @property GHookFinalizeFunc finalizeHook()
   {
-    return (cast(GHookList*)cPtr).finalizeHook;
+    return (cast(GHookList*)this._cPtr).finalizeHook;
   }
 
   /**
@@ -117,7 +117,7 @@ class HookList
 
   @property void finalizeHook(GHookFinalizeFunc propval)
   {
-    (cast(GHookList*)cPtr).finalizeHook = propval;
+    (cast(GHookList*)this._cPtr).finalizeHook = propval;
   }
 
   /**
@@ -125,7 +125,7 @@ class HookList
   */
   void clear()
   {
-    g_hook_list_clear(cast(GHookList*)cPtr);
+    g_hook_list_clear(cast(GHookList*)this._cPtr);
   }
 
   /**
@@ -138,7 +138,7 @@ class HookList
   */
   void init_(uint hookSize)
   {
-    g_hook_list_init(cast(GHookList*)cPtr, hookSize);
+    g_hook_list_init(cast(GHookList*)this._cPtr, hookSize);
   }
 
   /**
@@ -151,7 +151,7 @@ class HookList
   */
   void invoke(bool mayRecurse)
   {
-    g_hook_list_invoke(cast(GHookList*)cPtr, mayRecurse);
+    g_hook_list_invoke(cast(GHookList*)this._cPtr, mayRecurse);
   }
 
   /**
@@ -165,7 +165,7 @@ class HookList
   */
   void invokeCheck(bool mayRecurse)
   {
-    g_hook_list_invoke_check(cast(GHookList*)cPtr, mayRecurse);
+    g_hook_list_invoke_check(cast(GHookList*)this._cPtr, mayRecurse);
   }
 
   /**
@@ -188,7 +188,7 @@ class HookList
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
     auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
-    g_hook_list_marshal(cast(GHookList*)cPtr, mayRecurse, _marshallerCB, _marshaller);
+    g_hook_list_marshal(cast(GHookList*)this._cPtr, mayRecurse, _marshallerCB, _marshaller);
   }
 
   /**
@@ -213,6 +213,6 @@ class HookList
     auto _marshallerCB = marshaller ? &_marshallerCallback : null;
 
     auto _marshaller = marshaller ? cast(void*)&(marshaller) : null;
-    g_hook_list_marshal_check(cast(GHookList*)cPtr, mayRecurse, _marshallerCB, _marshaller);
+    g_hook_list_marshal_check(cast(GHookList*)this._cPtr, mayRecurse, _marshallerCB, _marshaller);
   }
 }

@@ -86,16 +86,16 @@ class DropDown : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_down_get_type != &gidSymbolNotFound ? gtk_drop_down_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -324,7 +324,7 @@ class DropDown : gtk.widget.Widget
   this(gio.list_model.ListModel model = null, gtk.expression.Expression expression = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression.cPtr(Yes.Dup) : null);
+    _cretval = gtk_drop_down_new(model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(Yes.Dup) : null, expression ? cast(GtkExpression*)expression._cPtr(Yes.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -345,7 +345,7 @@ class DropDown : gtk.widget.Widget
     _tmpstrings ~= null;
     const(char*)* _strings = _tmpstrings.ptr;
     _cretval = gtk_drop_down_new_from_strings(_strings);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.drop_down.DropDown)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -356,7 +356,7 @@ class DropDown : gtk.widget.Widget
   bool getEnableSearch()
   {
     bool _retval;
-    _retval = gtk_drop_down_get_enable_search(cast(GtkDropDown*)cPtr);
+    _retval = gtk_drop_down_get_enable_search(cast(GtkDropDown*)this._cPtr);
     return _retval;
   }
 
@@ -369,7 +369,7 @@ class DropDown : gtk.widget.Widget
   gtk.expression.Expression getExpression()
   {
     GtkExpression* _cretval;
-    _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)cPtr);
+    _cretval = gtk_drop_down_get_expression(cast(GtkDropDown*)this._cPtr);
     auto _retval = _cretval ? new gtk.expression.Expression(cast(GtkExpression*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -385,8 +385,8 @@ class DropDown : gtk.widget.Widget
   gtk.list_item_factory.ListItemFactory getFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_drop_down_get_factory(cast(GtkDropDown*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -397,8 +397,8 @@ class DropDown : gtk.widget.Widget
   gtk.list_item_factory.ListItemFactory getHeaderFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_drop_down_get_header_factory(cast(GtkDropDown*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -409,8 +409,8 @@ class DropDown : gtk.widget.Widget
   gtk.list_item_factory.ListItemFactory getListFactory()
   {
     GtkListItemFactory* _cretval;
-    _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
+    _cretval = gtk_drop_down_get_list_factory(cast(GtkDropDown*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.list_item_factory.ListItemFactory)(cast(GtkListItemFactory*)_cretval, No.Take);
     return _retval;
   }
 
@@ -421,8 +421,8 @@ class DropDown : gtk.widget.Widget
   gio.list_model.ListModel getModel()
   {
     GListModel* _cretval;
-    _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
+    _cretval = gtk_drop_down_get_model(cast(GtkDropDown*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -433,7 +433,7 @@ class DropDown : gtk.widget.Widget
   gtk.types.StringFilterMatchMode getSearchMatchMode()
   {
     GtkStringFilterMatchMode _cretval;
-    _cretval = gtk_drop_down_get_search_match_mode(cast(GtkDropDown*)cPtr);
+    _cretval = gtk_drop_down_get_search_match_mode(cast(GtkDropDown*)this._cPtr);
     gtk.types.StringFilterMatchMode _retval = cast(gtk.types.StringFilterMatchMode)_cretval;
     return _retval;
   }
@@ -446,7 +446,7 @@ class DropDown : gtk.widget.Widget
   uint getSelected()
   {
     uint _retval;
-    _retval = gtk_drop_down_get_selected(cast(GtkDropDown*)cPtr);
+    _retval = gtk_drop_down_get_selected(cast(GtkDropDown*)this._cPtr);
     return _retval;
   }
 
@@ -456,9 +456,9 @@ class DropDown : gtk.widget.Widget
   */
   gobject.object.ObjectWrap getSelectedItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_drop_down_get_selected_item(cast(GtkDropDown*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -469,7 +469,7 @@ class DropDown : gtk.widget.Widget
   bool getShowArrow()
   {
     bool _retval;
-    _retval = gtk_drop_down_get_show_arrow(cast(GtkDropDown*)cPtr);
+    _retval = gtk_drop_down_get_show_arrow(cast(GtkDropDown*)this._cPtr);
     return _retval;
   }
 
@@ -485,7 +485,7 @@ class DropDown : gtk.widget.Widget
   */
   void setEnableSearch(bool enableSearch)
   {
-    gtk_drop_down_set_enable_search(cast(GtkDropDown*)cPtr, enableSearch);
+    gtk_drop_down_set_enable_search(cast(GtkDropDown*)this._cPtr, enableSearch);
   }
 
   /**
@@ -499,7 +499,7 @@ class DropDown : gtk.widget.Widget
   */
   void setExpression(gtk.expression.Expression expression = null)
   {
-    gtk_drop_down_set_expression(cast(GtkDropDown*)cPtr, expression ? cast(GtkExpression*)expression.cPtr(No.Dup) : null);
+    gtk_drop_down_set_expression(cast(GtkDropDown*)this._cPtr, expression ? cast(GtkExpression*)expression._cPtr(No.Dup) : null);
   }
 
   /**
@@ -510,7 +510,7 @@ class DropDown : gtk.widget.Widget
   */
   void setFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -521,7 +521,7 @@ class DropDown : gtk.widget.Widget
   */
   void setHeaderFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_header_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_header_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -532,7 +532,7 @@ class DropDown : gtk.widget.Widget
   */
   void setListFactory(gtk.list_item_factory.ListItemFactory factory = null)
   {
-    gtk_drop_down_set_list_factory(cast(GtkDropDown*)cPtr, factory ? cast(GtkListItemFactory*)factory.cPtr(No.Dup) : null);
+    gtk_drop_down_set_list_factory(cast(GtkDropDown*)this._cPtr, factory ? cast(GtkListItemFactory*)factory._cPtr(No.Dup) : null);
   }
 
   /**
@@ -543,7 +543,7 @@ class DropDown : gtk.widget.Widget
   */
   void setModel(gio.list_model.ListModel model = null)
   {
-    gtk_drop_down_set_model(cast(GtkDropDown*)cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null);
+    gtk_drop_down_set_model(cast(GtkDropDown*)this._cPtr, model ? cast(GListModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null);
   }
 
   /**
@@ -554,7 +554,7 @@ class DropDown : gtk.widget.Widget
   */
   void setSearchMatchMode(gtk.types.StringFilterMatchMode searchMatchMode)
   {
-    gtk_drop_down_set_search_match_mode(cast(GtkDropDown*)cPtr, searchMatchMode);
+    gtk_drop_down_set_search_match_mode(cast(GtkDropDown*)this._cPtr, searchMatchMode);
   }
 
   /**
@@ -565,7 +565,7 @@ class DropDown : gtk.widget.Widget
   */
   void setSelected(uint position)
   {
-    gtk_drop_down_set_selected(cast(GtkDropDown*)cPtr, position);
+    gtk_drop_down_set_selected(cast(GtkDropDown*)this._cPtr, position);
   }
 
   /**
@@ -576,7 +576,7 @@ class DropDown : gtk.widget.Widget
   */
   void setShowArrow(bool showArrow)
   {
-    gtk_drop_down_set_show_arrow(cast(GtkDropDown*)cPtr, showArrow);
+    gtk_drop_down_set_show_arrow(cast(GtkDropDown*)this._cPtr, showArrow);
   }
 
   /**

@@ -31,16 +31,16 @@ class PolicyDecision : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_policy_decision_get_type != &gidSymbolNotFound ? webkit_policy_decision_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -54,7 +54,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   */
   void download()
   {
-    webkit_policy_decision_download(cast(WebKitPolicyDecision*)cPtr);
+    webkit_policy_decision_download(cast(WebKitPolicyDecision*)this._cPtr);
   }
 
   /**
@@ -65,7 +65,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   */
   void ignore()
   {
-    webkit_policy_decision_ignore(cast(WebKitPolicyDecision*)cPtr);
+    webkit_policy_decision_ignore(cast(WebKitPolicyDecision*)this._cPtr);
   }
 
   /**
@@ -73,7 +73,7 @@ class PolicyDecision : gobject.object.ObjectWrap
   */
   void use()
   {
-    webkit_policy_decision_use(cast(WebKitPolicyDecision*)cPtr);
+    webkit_policy_decision_use(cast(WebKitPolicyDecision*)this._cPtr);
   }
 
   /**
@@ -92,6 +92,6 @@ class PolicyDecision : gobject.object.ObjectWrap
   */
   void useWithPolicies(webkit.website_policies.WebsitePolicies policies)
   {
-    webkit_policy_decision_use_with_policies(cast(WebKitPolicyDecision*)cPtr, policies ? cast(WebKitWebsitePolicies*)policies.cPtr(No.Dup) : null);
+    webkit_policy_decision_use_with_policies(cast(WebKitPolicyDecision*)this._cPtr, policies ? cast(WebKitWebsitePolicies*)policies._cPtr(No.Dup) : null);
   }
 }

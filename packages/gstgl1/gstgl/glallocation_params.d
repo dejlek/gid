@@ -44,22 +44,22 @@ class GLAllocationParams : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_allocation_params_get_type != &gidSymbolNotFound ? gst_gl_allocation_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property size_t structSize()
   {
-    return (cast(GstGLAllocationParams*)cPtr).structSize;
+    return (cast(GstGLAllocationParams*)this._cPtr).structSize;
   }
 
   /**
@@ -84,7 +84,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property void structSize(size_t propval)
   {
-    (cast(GstGLAllocationParams*)cPtr).structSize = propval;
+    (cast(GstGLAllocationParams*)this._cPtr).structSize = propval;
   }
 
   /**
@@ -93,7 +93,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property GstGLAllocationParamsFreeFunc free()
   {
-    return (cast(GstGLAllocationParams*)cPtr).free;
+    return (cast(GstGLAllocationParams*)this._cPtr).free;
   }
 
   /**
@@ -104,7 +104,7 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   @property void free(GstGLAllocationParamsFreeFunc propval)
   {
-    (cast(GstGLAllocationParams*)cPtr).free = propval;
+    (cast(GstGLAllocationParams*)this._cPtr).free = propval;
   }
 
   /**
@@ -113,7 +113,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property uint allocFlags()
   {
-    return (cast(GstGLAllocationParams*)cPtr).allocFlags;
+    return (cast(GstGLAllocationParams*)this._cPtr).allocFlags;
   }
 
   /**
@@ -123,7 +123,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property void allocFlags(uint propval)
   {
-    (cast(GstGLAllocationParams*)cPtr).allocFlags = propval;
+    (cast(GstGLAllocationParams*)this._cPtr).allocFlags = propval;
   }
 
   /**
@@ -132,7 +132,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property size_t allocSize()
   {
-    return (cast(GstGLAllocationParams*)cPtr).allocSize;
+    return (cast(GstGLAllocationParams*)this._cPtr).allocSize;
   }
 
   /**
@@ -142,7 +142,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property void allocSize(size_t propval)
   {
-    (cast(GstGLAllocationParams*)cPtr).allocSize = propval;
+    (cast(GstGLAllocationParams*)this._cPtr).allocSize = propval;
   }
 
   /**
@@ -151,7 +151,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property gst.allocation_params.AllocationParams allocParams()
   {
-    return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
+    return cToD!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).allocParams);
   }
 
   /**
@@ -161,8 +161,8 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property void allocParams(gst.allocation_params.AllocationParams propval)
   {
-    cValueFree!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)cPtr).allocParams);
-    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).allocParams);
+    cValueFree!(gst.allocation_params.AllocationParams)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).allocParams);
+    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)this._cPtr).allocParams);
   }
 
   /**
@@ -171,7 +171,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property gstgl.glcontext.GLContext context()
   {
-    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
+    return cToD!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
   }
 
   /**
@@ -181,8 +181,8 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property void context(gstgl.glcontext.GLContext propval)
   {
-    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)cPtr).context);
-    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)cPtr).context);
+    cValueFree!(gstgl.glcontext.GLContext)(cast(void*)(cast(GstGLAllocationParams*)this._cPtr).context);
+    dToC(propval, cast(void*)&(cast(GstGLAllocationParams*)this._cPtr).context);
   }
 
   /**
@@ -191,7 +191,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   @property GDestroyNotify notify()
   {
-    return (cast(GstGLAllocationParams*)cPtr).notify;
+    return (cast(GstGLAllocationParams*)this._cPtr).notify;
   }
 
   /**
@@ -202,14 +202,14 @@ class GLAllocationParams : gobject.boxed.Boxed
 
   @property void notify(GDestroyNotify propval)
   {
-    (cast(GstGLAllocationParams*)cPtr).notify = propval;
+    (cast(GstGLAllocationParams*)this._cPtr).notify = propval;
   }
 
   /** */
   gstgl.glallocation_params.GLAllocationParams copy()
   {
     GstGLAllocationParams* _cretval;
-    _cretval = gst_gl_allocation_params_copy(cast(GstGLAllocationParams*)cPtr);
+    _cretval = gst_gl_allocation_params_copy(cast(GstGLAllocationParams*)this._cPtr);
     auto _retval = _cretval ? new gstgl.glallocation_params.GLAllocationParams(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -223,7 +223,7 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   void copyData(gstgl.glallocation_params.GLAllocationParams dest)
   {
-    gst_gl_allocation_params_copy_data(cast(GstGLAllocationParams*)cPtr, dest ? cast(GstGLAllocationParams*)dest.cPtr(No.Dup) : null);
+    gst_gl_allocation_params_copy_data(cast(GstGLAllocationParams*)this._cPtr, dest ? cast(GstGLAllocationParams*)dest._cPtr(No.Dup) : null);
   }
 
   /**
@@ -232,6 +232,6 @@ class GLAllocationParams : gobject.boxed.Boxed
   */
   void freeData()
   {
-    gst_gl_allocation_params_free_data(cast(GstGLAllocationParams*)cPtr);
+    gst_gl_allocation_params_free_data(cast(GstGLAllocationParams*)this._cPtr);
   }
 }

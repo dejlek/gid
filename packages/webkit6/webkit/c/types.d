@@ -1961,7 +1961,7 @@ struct WebKitITPThirdParty;
 struct WebKitInputMethodContext
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   WebKitInputMethodContextPrivate* priv;
@@ -2324,7 +2324,7 @@ struct WebKitPointerLockPermissionRequestClass
 struct WebKitPolicyDecision
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 
   /** */
   WebKitPolicyDecisionPrivate* priv;

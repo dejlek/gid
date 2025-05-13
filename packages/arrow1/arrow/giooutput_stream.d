@@ -24,16 +24,16 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_gio_output_stream_get_type != &gidSymbolNotFound ? garrow_gio_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -46,7 +46,7 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   this(gio.output_stream.OutputStream gioOutputStream)
   {
     GArrowGIOOutputStream* _cretval;
-    _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream.cPtr(No.Dup) : null);
+    _cretval = garrow_gio_output_stream_new(gioOutputStream ? cast(GOutputStream*)gioOutputStream._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -54,8 +54,8 @@ class GIOOutputStream : arrow.output_stream.OutputStream
   gio.output_stream.OutputStream getRaw()
   {
     GOutputStream* _cretval;
-    _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
+    _cretval = garrow_gio_output_stream_get_raw(cast(GArrowGIOOutputStream*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.output_stream.OutputStream)(cast(GOutputStream*)_cretval, No.Take);
     return _retval;
   }
 }

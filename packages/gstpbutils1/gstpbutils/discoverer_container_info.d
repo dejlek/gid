@@ -21,16 +21,16 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_discoverer_container_info_get_type != &gidSymbolNotFound ? gst_discoverer_container_info_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -43,7 +43,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   gstpbutils.discoverer_stream_info.DiscovererStreamInfo[] getStreams()
   {
     GList* _cretval;
-    _cretval = gst_discoverer_container_info_get_streams(cast(GstDiscovererContainerInfo*)cPtr);
+    _cretval = gst_discoverer_container_info_get_streams(cast(GstDiscovererContainerInfo*)this._cPtr);
     auto _retval = gListToD!(gstpbutils.discoverer_stream_info.DiscovererStreamInfo, GidOwnership.Full)(cast(GList*)_cretval);
     return _retval;
   }
@@ -52,7 +52,7 @@ class DiscovererContainerInfo : gstpbutils.discoverer_stream_info.DiscovererStre
   override gst.tag_list.TagList getTags()
   {
     const(GstTagList)* _cretval;
-    _cretval = gst_discoverer_container_info_get_tags(cast(const(GstDiscovererContainerInfo)*)cPtr);
+    _cretval = gst_discoverer_container_info_get_tags(cast(const(GstDiscovererContainerInfo)*)this._cPtr);
     auto _retval = _cretval ? new gst.tag_list.TagList(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }

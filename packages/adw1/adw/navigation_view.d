@@ -198,16 +198,16 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_view_get_type != &gidSymbolNotFound ? adw_navigation_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -315,7 +315,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void add(adw.navigation_page.NavigationPage page)
   {
-    adw_navigation_view_add(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    adw_navigation_view_add(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -331,8 +331,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     AdwNavigationPage* _cretval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _cretval = adw_navigation_view_find_page(cast(AdwNavigationView*)cPtr, _tag);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_view_find_page(cast(AdwNavigationView*)this._cPtr, _tag);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -343,7 +343,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getAnimateTransitions()
   {
     bool _retval;
-    _retval = adw_navigation_view_get_animate_transitions(cast(AdwNavigationView*)cPtr);
+    _retval = adw_navigation_view_get_animate_transitions(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -358,8 +358,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   gio.list_model.ListModel getNavigationStack()
   {
     GListModel* _cretval;
-    _cretval = adw_navigation_view_get_navigation_stack(cast(AdwNavigationView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
+    _cretval = adw_navigation_view_get_navigation_stack(cast(AdwNavigationView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.list_model.ListModel)(cast(GListModel*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -370,7 +370,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool getPopOnEscape()
   {
     bool _retval;
-    _retval = adw_navigation_view_get_pop_on_escape(cast(AdwNavigationView*)cPtr);
+    _retval = adw_navigation_view_get_pop_on_escape(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -389,8 +389,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   adw.navigation_page.NavigationPage getPreviousPage(adw.navigation_page.NavigationPage page)
   {
     AdwNavigationPage* _cretval;
-    _cretval = adw_navigation_view_get_previous_page(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_view_get_previous_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -401,8 +401,8 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   adw.navigation_page.NavigationPage getVisiblePage()
   {
     AdwNavigationPage* _cretval;
-    _cretval = adw_navigation_view_get_visible_page(cast(AdwNavigationView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_view_get_visible_page(cast(AdwNavigationView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -423,7 +423,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool pop()
   {
     bool _retval;
-    _retval = adw_navigation_view_pop(cast(AdwNavigationView*)cPtr);
+    _retval = adw_navigation_view_pop(cast(AdwNavigationView*)this._cPtr);
     return _retval;
   }
 
@@ -447,7 +447,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   bool popToPage(adw.navigation_page.NavigationPage page)
   {
     bool _retval;
-    _retval = adw_navigation_view_pop_to_page(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    _retval = adw_navigation_view_pop_to_page(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -471,7 +471,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   {
     bool _retval;
     const(char)* _tag = tag.toCString(No.Alloc);
-    _retval = adw_navigation_view_pop_to_tag(cast(AdwNavigationView*)cPtr, _tag);
+    _retval = adw_navigation_view_pop_to_tag(cast(AdwNavigationView*)this._cPtr, _tag);
     return _retval;
   }
 
@@ -490,7 +490,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void push(adw.navigation_page.NavigationPage page)
   {
-    adw_navigation_view_push(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    adw_navigation_view_push(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -509,7 +509,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   void pushByTag(string tag)
   {
     const(char)* _tag = tag.toCString(No.Alloc);
-    adw_navigation_view_push_by_tag(cast(AdwNavigationView*)cPtr, _tag);
+    adw_navigation_view_push_by_tag(cast(AdwNavigationView*)this._cPtr, _tag);
   }
 
   /**
@@ -525,7 +525,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void remove(adw.navigation_page.NavigationPage page)
   {
-    adw_navigation_view_remove(cast(AdwNavigationView*)cPtr, page ? cast(AdwNavigationPage*)page.cPtr(No.Dup) : null);
+    adw_navigation_view_remove(cast(AdwNavigationView*)this._cPtr, page ? cast(AdwNavigationPage*)page._cPtr(No.Dup) : null);
   }
 
   /**
@@ -556,9 +556,9 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
 
     AdwNavigationPage*[] _tmppages;
     foreach (obj; pages)
-      _tmppages ~= obj ? cast(AdwNavigationPage*)obj.cPtr : null;
+      _tmppages ~= obj ? cast(AdwNavigationPage*)obj._cPtr : null;
     AdwNavigationPage** _pages = cast(AdwNavigationPage**)_tmppages.ptr;
-    adw_navigation_view_replace(cast(AdwNavigationView*)cPtr, _pages, _nPages);
+    adw_navigation_view_replace(cast(AdwNavigationView*)this._cPtr, _pages, _nPages);
   }
 
   /**
@@ -592,7 +592,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
     foreach (s; tags)
       _tmptags ~= s.toCString(No.Alloc);
     const(char*)* _tags = _tmptags.ptr;
-    adw_navigation_view_replace_with_tags(cast(AdwNavigationView*)cPtr, _tags, _nTags);
+    adw_navigation_view_replace_with_tags(cast(AdwNavigationView*)this._cPtr, _tags, _nTags);
   }
 
   /**
@@ -605,7 +605,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setAnimateTransitions(bool animateTransitions)
   {
-    adw_navigation_view_set_animate_transitions(cast(AdwNavigationView*)cPtr, animateTransitions);
+    adw_navigation_view_set_animate_transitions(cast(AdwNavigationView*)this._cPtr, animateTransitions);
   }
 
   /**
@@ -619,7 +619,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
   */
   void setPopOnEscape(bool popOnEscape)
   {
-    adw_navigation_view_set_pop_on_escape(cast(AdwNavigationView*)cPtr, popOnEscape);
+    adw_navigation_view_set_pop_on_escape(cast(AdwNavigationView*)this._cPtr, popOnEscape);
   }
 
   /**

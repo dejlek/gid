@@ -98,16 +98,16 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_paned_get_type != &gidSymbolNotFound ? gtk_paned_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -351,8 +351,8 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   gtk.widget.Widget getEndChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_paned_get_end_child(cast(GtkPaned*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_paned_get_end_child(cast(GtkPaned*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -363,7 +363,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   int getPosition()
   {
     int _retval;
-    _retval = gtk_paned_get_position(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_position(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getResizeEndChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_resize_end_child(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_resize_end_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getResizeStartChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_resize_start_child(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_resize_start_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -396,7 +396,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShrinkEndChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_shrink_end_child(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_shrink_end_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -407,7 +407,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getShrinkStartChild()
   {
     bool _retval;
-    _retval = gtk_paned_get_shrink_start_child(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_shrink_start_child(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -418,8 +418,8 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   gtk.widget.Widget getStartChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_paned_get_start_child(cast(GtkPaned*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_paned_get_start_child(cast(GtkPaned*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   bool getWideHandle()
   {
     bool _retval;
-    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)cPtr);
+    _retval = gtk_paned_get_wide_handle(cast(GtkPaned*)this._cPtr);
     return _retval;
   }
 
@@ -444,7 +444,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setEndChild(gtk.widget.Widget child = null)
   {
-    gtk_paned_set_end_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_set_end_child(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -456,7 +456,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setPosition(int position)
   {
-    gtk_paned_set_position(cast(GtkPaned*)cPtr, position);
+    gtk_paned_set_position(cast(GtkPaned*)this._cPtr, position);
   }
 
   /**
@@ -467,7 +467,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setResizeEndChild(bool resize)
   {
-    gtk_paned_set_resize_end_child(cast(GtkPaned*)cPtr, resize);
+    gtk_paned_set_resize_end_child(cast(GtkPaned*)this._cPtr, resize);
   }
 
   /**
@@ -478,7 +478,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setResizeStartChild(bool resize)
   {
-    gtk_paned_set_resize_start_child(cast(GtkPaned*)cPtr, resize);
+    gtk_paned_set_resize_start_child(cast(GtkPaned*)this._cPtr, resize);
   }
 
   /**
@@ -489,7 +489,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setShrinkEndChild(bool resize)
   {
-    gtk_paned_set_shrink_end_child(cast(GtkPaned*)cPtr, resize);
+    gtk_paned_set_shrink_end_child(cast(GtkPaned*)this._cPtr, resize);
   }
 
   /**
@@ -500,7 +500,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setShrinkStartChild(bool resize)
   {
-    gtk_paned_set_shrink_start_child(cast(GtkPaned*)cPtr, resize);
+    gtk_paned_set_shrink_start_child(cast(GtkPaned*)this._cPtr, resize);
   }
 
   /**
@@ -513,7 +513,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setStartChild(gtk.widget.Widget child = null)
   {
-    gtk_paned_set_start_child(cast(GtkPaned*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_paned_set_start_child(cast(GtkPaned*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -524,7 +524,7 @@ class Paned : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
   */
   void setWideHandle(bool wide)
   {
-    gtk_paned_set_wide_handle(cast(GtkPaned*)cPtr, wide);
+    gtk_paned_set_wide_handle(cast(GtkPaned*)this._cPtr, wide);
   }
 
   /**

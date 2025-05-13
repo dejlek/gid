@@ -30,7 +30,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   graphene.point.Point getCenter()
   {
     const(graphene_point_t)* _cretval;
-    _cretval = gsk_radial_gradient_node_get_center(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_radial_gradient_node_get_center(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new graphene.point.Point(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -42,7 +42,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   float getEnd()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_end(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_radial_gradient_node_get_end(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -53,7 +53,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   float getHradius()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_hradius(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_radial_gradient_node_get_hradius(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -64,7 +64,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   size_t getNColorStops()
   {
     size_t _retval;
-    _retval = gsk_radial_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_radial_gradient_node_get_n_color_stops(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -75,7 +75,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   float getStart()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_start(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_radial_gradient_node_get_start(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -86,7 +86,7 @@ class RadialGradientNode : gsk.render_node.RenderNode
   float getVradius()
   {
     float _retval;
-    _retval = gsk_radial_gradient_node_get_vradius(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_radial_gradient_node_get_vradius(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 }

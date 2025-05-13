@@ -51,22 +51,22 @@ class SpringParams : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_spring_params_get_type != &gidSymbolNotFound ? adw_spring_params_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -134,7 +134,7 @@ class SpringParams : gobject.boxed.Boxed
   double getDamping()
   {
     double _retval;
-    _retval = adw_spring_params_get_damping(cast(AdwSpringParams*)cPtr);
+    _retval = adw_spring_params_get_damping(cast(AdwSpringParams*)this._cPtr);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class SpringParams : gobject.boxed.Boxed
   double getDampingRatio()
   {
     double _retval;
-    _retval = adw_spring_params_get_damping_ratio(cast(AdwSpringParams*)cPtr);
+    _retval = adw_spring_params_get_damping_ratio(cast(AdwSpringParams*)this._cPtr);
     return _retval;
   }
 
@@ -156,7 +156,7 @@ class SpringParams : gobject.boxed.Boxed
   double getMass()
   {
     double _retval;
-    _retval = adw_spring_params_get_mass(cast(AdwSpringParams*)cPtr);
+    _retval = adw_spring_params_get_mass(cast(AdwSpringParams*)this._cPtr);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class SpringParams : gobject.boxed.Boxed
   double getStiffness()
   {
     double _retval;
-    _retval = adw_spring_params_get_stiffness(cast(AdwSpringParams*)cPtr);
+    _retval = adw_spring_params_get_stiffness(cast(AdwSpringParams*)this._cPtr);
     return _retval;
   }
 }

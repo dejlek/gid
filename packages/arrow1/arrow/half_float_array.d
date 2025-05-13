@@ -19,16 +19,16 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_half_float_array_get_type != &gidSymbolNotFound ? garrow_half_float_array_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -41,7 +41,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   this(long length, arrow.buffer.Buffer data, arrow.buffer.Buffer nullBitmap, long nNulls)
   {
     GArrowHalfFloatArray* _cretval;
-    _cretval = garrow_half_float_array_new(length, data ? cast(GArrowBuffer*)data.cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap.cPtr(No.Dup) : null, nNulls);
+    _cretval = garrow_half_float_array_new(length, data ? cast(GArrowBuffer*)data._cPtr(No.Dup) : null, nullBitmap ? cast(GArrowBuffer*)nullBitmap._cPtr(No.Dup) : null, nNulls);
     this(_cretval, Yes.Take);
   }
 
@@ -49,7 +49,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   ushort getValue(long i)
   {
     ushort _retval;
-    _retval = garrow_half_float_array_get_value(cast(GArrowHalfFloatArray*)cPtr, i);
+    _retval = garrow_half_float_array_get_value(cast(GArrowHalfFloatArray*)this._cPtr, i);
     return _retval;
   }
 
@@ -58,7 +58,7 @@ class HalfFloatArray : arrow.numeric_array.NumericArray
   {
     const(ushort)* _cretval;
     long _cretlength;
-    _cretval = garrow_half_float_array_get_values(cast(GArrowHalfFloatArray*)cPtr, &_cretlength);
+    _cretval = garrow_half_float_array_get_values(cast(GArrowHalfFloatArray*)this._cPtr, &_cretlength);
     ushort[] _retval;
 
     if (_cretval)

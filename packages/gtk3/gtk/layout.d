@@ -41,16 +41,16 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_layout_get_type != &gidSymbolNotFound ? gtk_layout_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -98,7 +98,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   this(gtk.adjustment.Adjustment hadjustment = null, gtk.adjustment.Adjustment vadjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment.cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_layout_new(hadjustment ? cast(GtkAdjustment*)hadjustment._cPtr(No.Dup) : null, vadjustment ? cast(GtkAdjustment*)vadjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -109,8 +109,8 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   gdk.window.Window getBinWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_layout_get_bin_window(cast(GtkLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_layout_get_bin_window(cast(GtkLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 
@@ -128,8 +128,8 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   gtk.adjustment.Adjustment getHadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_layout_get_hadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_layout_get_hadjustment(cast(GtkLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,7 +146,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void getSize(out uint width, out uint height)
   {
-    gtk_layout_get_size(cast(GtkLayout*)cPtr, cast(uint*)&width, cast(uint*)&height);
+    gtk_layout_get_size(cast(GtkLayout*)this._cPtr, cast(uint*)&width, cast(uint*)&height);
   }
 
   /**
@@ -163,8 +163,8 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   gtk.adjustment.Adjustment getVadjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_layout_get_vadjustment(cast(GtkLayout*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_layout_get_vadjustment(cast(GtkLayout*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -178,7 +178,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void move(gtk.widget.Widget childWidget, int x, int y)
   {
-    gtk_layout_move(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.Dup) : null, x, y);
+    gtk_layout_move(cast(GtkLayout*)this._cPtr, childWidget ? cast(GtkWidget*)childWidget._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -192,7 +192,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void put(gtk.widget.Widget childWidget, int x, int y)
   {
-    gtk_layout_put(cast(GtkLayout*)cPtr, childWidget ? cast(GtkWidget*)childWidget.cPtr(No.Dup) : null, x, y);
+    gtk_layout_put(cast(GtkLayout*)this._cPtr, childWidget ? cast(GtkWidget*)childWidget._cPtr(No.Dup) : null, x, y);
   }
 
   /**
@@ -207,7 +207,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setHadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_layout_set_hadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_layout_set_hadjustment(cast(GtkLayout*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 
   /**
@@ -219,7 +219,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setSize(uint width, uint height)
   {
-    gtk_layout_set_size(cast(GtkLayout*)cPtr, width, height);
+    gtk_layout_set_size(cast(GtkLayout*)this._cPtr, width, height);
   }
 
   /**
@@ -234,6 +234,6 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
   */
   void setVadjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_layout_set_vadjustment(cast(GtkLayout*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_layout_set_vadjustment(cast(GtkLayout*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 }

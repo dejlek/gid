@@ -22,16 +22,16 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_dmabuf_allocator_get_type != &gidSymbolNotFound ? gst_dmabuf_allocator_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -66,7 +66,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   static gst.memory.Memory alloc(gst.allocator.Allocator allocator, int fd, size_t size)
   {
     GstMemory* _cretval;
-    _cretval = gst_dmabuf_allocator_alloc(allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, fd, size);
+    _cretval = gst_dmabuf_allocator_alloc(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -88,7 +88,7 @@ class DmaBufAllocator : gstallocators.fd_allocator.FdAllocator
   static gst.memory.Memory allocWithFlags(gst.allocator.Allocator allocator, int fd, size_t size, gstallocators.types.FdMemoryFlags flags)
   {
     GstMemory* _cretval;
-    _cretval = gst_dmabuf_allocator_alloc_with_flags(allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, fd, size, flags);
+    _cretval = gst_dmabuf_allocator_alloc_with_flags(allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, fd, size, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

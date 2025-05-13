@@ -36,16 +36,16 @@ class ColumnViewCell : gtk.list_item.ListItem
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_column_view_cell_get_type != &gidSymbolNotFound ? gtk_column_view_cell_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -127,8 +127,8 @@ class ColumnViewCell : gtk.list_item.ListItem
   override gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_column_view_cell_get_child(cast(GtkColumnViewCell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   override bool getFocusable()
   {
     bool _retval;
-    _retval = gtk_column_view_cell_get_focusable(cast(GtkColumnViewCell*)cPtr);
+    _retval = gtk_column_view_cell_get_focusable(cast(GtkColumnViewCell*)this._cPtr);
     return _retval;
   }
 
@@ -152,9 +152,9 @@ class ColumnViewCell : gtk.list_item.ListItem
   */
   override gobject.object.ObjectWrap getItem()
   {
-    ObjectC* _cretval;
-    _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = gtk_column_view_cell_get_item(cast(GtkColumnViewCell*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -167,7 +167,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   override uint getPosition()
   {
     uint _retval;
-    _retval = gtk_column_view_cell_get_position(cast(GtkColumnViewCell*)cPtr);
+    _retval = gtk_column_view_cell_get_position(cast(GtkColumnViewCell*)this._cPtr);
     return _retval;
   }
 
@@ -181,7 +181,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   override bool getSelected()
   {
     bool _retval;
-    _retval = gtk_column_view_cell_get_selected(cast(GtkColumnViewCell*)cPtr);
+    _retval = gtk_column_view_cell_get_selected(cast(GtkColumnViewCell*)this._cPtr);
     return _retval;
   }
 
@@ -197,7 +197,7 @@ class ColumnViewCell : gtk.list_item.ListItem
   */
   override void setChild(gtk.widget.Widget child = null)
   {
-    gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    gtk_column_view_cell_set_child(cast(GtkColumnViewCell*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -216,6 +216,6 @@ class ColumnViewCell : gtk.list_item.ListItem
   */
   override void setFocusable(bool focusable)
   {
-    gtk_column_view_cell_set_focusable(cast(GtkColumnViewCell*)cPtr, focusable);
+    gtk_column_view_cell_set_focusable(cast(GtkColumnViewCell*)this._cPtr, focusable);
   }
 }

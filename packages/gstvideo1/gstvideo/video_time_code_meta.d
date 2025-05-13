@@ -32,7 +32,7 @@ class VideoTimeCodeMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -43,7 +43,7 @@ class VideoTimeCodeMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).meta);
   }
 
   /**
@@ -52,7 +52,7 @@ class VideoTimeCodeMeta
   */
   @property gstvideo.video_time_code.VideoTimeCode tc()
   {
-    return cToD!(gstvideo.video_time_code.VideoTimeCode)(cast(void*)&(cast(GstVideoTimeCodeMeta*)cPtr).tc);
+    return cToD!(gstvideo.video_time_code.VideoTimeCode)(cast(void*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).tc);
   }
 
   /** */

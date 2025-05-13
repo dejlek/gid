@@ -50,16 +50,16 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_banner_get_type != &gidSymbolNotFound ? adw_banner_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -186,7 +186,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   string getButtonLabel()
   {
     const(char)* _cretval;
-    _cretval = adw_banner_get_button_label(cast(AdwBanner*)cPtr);
+    _cretval = adw_banner_get_button_label(cast(AdwBanner*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -198,7 +198,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   bool getRevealed()
   {
     bool _retval;
-    _retval = adw_banner_get_revealed(cast(AdwBanner*)cPtr);
+    _retval = adw_banner_get_revealed(cast(AdwBanner*)this._cPtr);
     return _retval;
   }
 
@@ -209,7 +209,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_banner_get_title(cast(AdwBanner*)cPtr);
+    _cretval = adw_banner_get_title(cast(AdwBanner*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -221,7 +221,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   bool getUseMarkup()
   {
     bool _retval;
-    _retval = adw_banner_get_use_markup(cast(AdwBanner*)cPtr);
+    _retval = adw_banner_get_use_markup(cast(AdwBanner*)this._cPtr);
     return _retval;
   }
 
@@ -239,7 +239,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   void setButtonLabel(string label = null)
   {
     const(char)* _label = label.toCString(No.Alloc);
-    adw_banner_set_button_label(cast(AdwBanner*)cPtr, _label);
+    adw_banner_set_button_label(cast(AdwBanner*)this._cPtr, _label);
   }
 
   /**
@@ -250,7 +250,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setRevealed(bool revealed)
   {
-    adw_banner_set_revealed(cast(AdwBanner*)cPtr, revealed);
+    adw_banner_set_revealed(cast(AdwBanner*)this._cPtr, revealed);
   }
 
   /**
@@ -264,7 +264,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_banner_set_title(cast(AdwBanner*)cPtr, _title);
+    adw_banner_set_title(cast(AdwBanner*)this._cPtr, _title);
   }
 
   /**
@@ -277,7 +277,7 @@ class Banner : gtk.widget.Widget, gtk.actionable.Actionable
   */
   void setUseMarkup(bool useMarkup)
   {
-    adw_banner_set_use_markup(cast(AdwBanner*)cPtr, useMarkup);
+    adw_banner_set_use_markup(cast(AdwBanner*)this._cPtr, useMarkup);
   }
 
   /**

@@ -28,16 +28,16 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_input_stream_get_type != &gidSymbolNotFound ? garrow_input_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -57,7 +57,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_input_stream_advance(cast(GArrowInputStream*)cPtr, nBytes, &_err);
+    _retval = garrow_input_stream_advance(cast(GArrowInputStream*)this._cPtr, nBytes, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -68,7 +68,7 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_input_stream_align(cast(GArrowInputStream*)cPtr, alignment, &_err);
+    _retval = garrow_input_stream_align(cast(GArrowInputStream*)this._cPtr, alignment, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -79,10 +79,10 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     GArrowRecordBatch* _cretval;
     GError *_err;
-    _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options.cPtr(No.Dup) : null, &_err);
+    _cretval = garrow_input_stream_read_record_batch(cast(GArrowInputStream*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null, options ? cast(GArrowReadOptions*)options._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch.RecordBatch)(cast(GArrowRecordBatch*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -91,10 +91,10 @@ class InputStream : gio.input_stream.InputStream, arrow.file.File, arrow.readabl
   {
     GArrowTensor* _cretval;
     GError *_err;
-    _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)cPtr, &_err);
+    _cretval = garrow_input_stream_read_tensor(cast(GArrowInputStream*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.tensor.Tensor)(cast(GArrowTensor*)_cretval, Yes.Take);
     return _retval;
   }
 }

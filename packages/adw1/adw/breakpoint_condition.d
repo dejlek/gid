@@ -20,22 +20,22 @@ class BreakpointCondition : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_breakpoint_condition_get_type != &gidSymbolNotFound ? adw_breakpoint_condition_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -56,7 +56,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   static adw.breakpoint_condition.BreakpointCondition newAnd(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
   {
     AdwBreakpointCondition* _cretval;
-    _cretval = adw_breakpoint_condition_new_and(condition1 ? cast(AdwBreakpointCondition*)condition1.cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2.cPtr(Yes.Dup) : null);
+    _cretval = adw_breakpoint_condition_new_and(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new adw.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -90,7 +90,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   static adw.breakpoint_condition.BreakpointCondition newOr(adw.breakpoint_condition.BreakpointCondition condition1, adw.breakpoint_condition.BreakpointCondition condition2)
   {
     AdwBreakpointCondition* _cretval;
-    _cretval = adw_breakpoint_condition_new_or(condition1 ? cast(AdwBreakpointCondition*)condition1.cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2.cPtr(Yes.Dup) : null);
+    _cretval = adw_breakpoint_condition_new_or(condition1 ? cast(AdwBreakpointCondition*)condition1._cPtr(Yes.Dup) : null, condition2 ? cast(AdwBreakpointCondition*)condition2._cPtr(Yes.Dup) : null);
     auto _retval = _cretval ? new adw.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -121,7 +121,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   adw.breakpoint_condition.BreakpointCondition copy()
   {
     AdwBreakpointCondition* _cretval;
-    _cretval = adw_breakpoint_condition_copy(cast(AdwBreakpointCondition*)cPtr);
+    _cretval = adw_breakpoint_condition_copy(cast(AdwBreakpointCondition*)this._cPtr);
     auto _retval = _cretval ? new adw.breakpoint_condition.BreakpointCondition(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -135,7 +135,7 @@ class BreakpointCondition : gobject.boxed.Boxed
   string toString_()
   {
     char* _cretval;
-    _cretval = adw_breakpoint_condition_to_string(cast(AdwBreakpointCondition*)cPtr);
+    _cretval = adw_breakpoint_condition_to_string(cast(AdwBreakpointCondition*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
     return _retval;
   }

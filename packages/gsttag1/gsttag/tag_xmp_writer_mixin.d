@@ -26,7 +26,7 @@ template TagXmpWriterT()
   */
   override void addAllSchemas()
   {
-    gst_tag_xmp_writer_add_all_schemas(cast(GstTagXmpWriter*)cPtr);
+    gst_tag_xmp_writer_add_all_schemas(cast(GstTagXmpWriter*)this._cPtr);
   }
 
   /**
@@ -38,7 +38,7 @@ template TagXmpWriterT()
   override void addSchema(string schema)
   {
     const(char)* _schema = schema.toCString(No.Alloc);
-    gst_tag_xmp_writer_add_schema(cast(GstTagXmpWriter*)cPtr, _schema);
+    gst_tag_xmp_writer_add_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
   }
 
   /**
@@ -52,7 +52,7 @@ template TagXmpWriterT()
   {
     bool _retval;
     const(char)* _schema = schema.toCString(No.Alloc);
-    _retval = gst_tag_xmp_writer_has_schema(cast(GstTagXmpWriter*)cPtr, _schema);
+    _retval = gst_tag_xmp_writer_has_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
     return _retval;
   }
 
@@ -62,7 +62,7 @@ template TagXmpWriterT()
   */
   override void removeAllSchemas()
   {
-    gst_tag_xmp_writer_remove_all_schemas(cast(GstTagXmpWriter*)cPtr);
+    gst_tag_xmp_writer_remove_all_schemas(cast(GstTagXmpWriter*)this._cPtr);
   }
 
   /**
@@ -75,14 +75,14 @@ template TagXmpWriterT()
   override void removeSchema(string schema)
   {
     const(char)* _schema = schema.toCString(No.Alloc);
-    gst_tag_xmp_writer_remove_schema(cast(GstTagXmpWriter*)cPtr, _schema);
+    gst_tag_xmp_writer_remove_schema(cast(GstTagXmpWriter*)this._cPtr, _schema);
   }
 
   /** */
   override gst.buffer.Buffer tagListToXmpBuffer(gst.tag_list.TagList taglist, bool readOnly)
   {
     GstBuffer* _cretval;
-    _cretval = gst_tag_xmp_writer_tag_list_to_xmp_buffer(cast(GstTagXmpWriter*)cPtr, taglist ? cast(const(GstTagList)*)taglist.cPtr(No.Dup) : null, readOnly);
+    _cretval = gst_tag_xmp_writer_tag_list_to_xmp_buffer(cast(GstTagXmpWriter*)this._cPtr, taglist ? cast(const(GstTagList)*)taglist._cPtr(No.Dup) : null, readOnly);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }

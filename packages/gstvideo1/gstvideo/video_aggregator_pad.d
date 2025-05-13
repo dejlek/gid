@@ -21,16 +21,16 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_video_aggregator_pad_get_type != &gidSymbolNotFound ? gst_video_aggregator_pad_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -89,7 +89,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   gst.buffer.Buffer getCurrentBuffer()
   {
     GstBuffer* _cretval;
-    _cretval = gst_video_aggregator_pad_get_current_buffer(cast(GstVideoAggregatorPad*)cPtr);
+    _cretval = gst_video_aggregator_pad_get_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
     auto _retval = _cretval ? new gst.buffer.Buffer(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -108,7 +108,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   gstvideo.video_frame.VideoFrame getPreparedFrame()
   {
     GstVideoFrame* _cretval;
-    _cretval = gst_video_aggregator_pad_get_prepared_frame(cast(GstVideoAggregatorPad*)cPtr);
+    _cretval = gst_video_aggregator_pad_get_prepared_frame(cast(GstVideoAggregatorPad*)this._cPtr);
     auto _retval = _cretval ? new gstvideo.video_frame.VideoFrame(cast(GstVideoFrame*)_cretval) : null;
     return _retval;
   }
@@ -124,7 +124,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   bool hasCurrentBuffer()
   {
     bool _retval;
-    _retval = gst_video_aggregator_pad_has_current_buffer(cast(GstVideoAggregatorPad*)cPtr);
+    _retval = gst_video_aggregator_pad_has_current_buffer(cast(GstVideoAggregatorPad*)this._cPtr);
     return _retval;
   }
 
@@ -136,6 +136,6 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   */
   void setNeedsAlpha(bool needsAlpha)
   {
-    gst_video_aggregator_pad_set_needs_alpha(cast(GstVideoAggregatorPad*)cPtr, needsAlpha);
+    gst_video_aggregator_pad_set_needs_alpha(cast(GstVideoAggregatorPad*)this._cPtr, needsAlpha);
   }
 }

@@ -2853,7 +2853,7 @@ struct GstColorBalance;
 struct GstColorBalanceChannel
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 
   /**
       A string containing a descriptive name for this channel

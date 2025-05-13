@@ -1118,307 +1118,309 @@ alias gst_dsd_plane_offset_meta_api_get_type = c_gst_dsd_plane_offset_meta_api_g
 
 shared static this()
 {
+  auto libs = gidResolveLibs(LIBS);
+
   // AudioAggregator
-  gidLink(cast(void**)&gst_audio_aggregator_get_type, "gst_audio_aggregator_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_aggregator_set_sink_caps, "gst_audio_aggregator_set_sink_caps", LIBS);
+  gidLink(cast(void**)&gst_audio_aggregator_get_type, "gst_audio_aggregator_get_type", libs);
+  gidLink(cast(void**)&gst_audio_aggregator_set_sink_caps, "gst_audio_aggregator_set_sink_caps", libs);
 
   // AudioAggregatorConvertPad
-  gidLink(cast(void**)&gst_audio_aggregator_convert_pad_get_type, "gst_audio_aggregator_convert_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_aggregator_convert_pad_get_type, "gst_audio_aggregator_convert_pad_get_type", libs);
 
   // AudioAggregatorPad
-  gidLink(cast(void**)&gst_audio_aggregator_pad_get_type, "gst_audio_aggregator_pad_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_aggregator_pad_get_type, "gst_audio_aggregator_pad_get_type", libs);
 
   // AudioBaseSink
-  gidLink(cast(void**)&gst_audio_base_sink_get_type, "gst_audio_base_sink_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_create_ringbuffer, "gst_audio_base_sink_create_ringbuffer", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_get_alignment_threshold, "gst_audio_base_sink_get_alignment_threshold", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_get_discont_wait, "gst_audio_base_sink_get_discont_wait", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_get_drift_tolerance, "gst_audio_base_sink_get_drift_tolerance", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_get_provide_clock, "gst_audio_base_sink_get_provide_clock", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_get_slave_method, "gst_audio_base_sink_get_slave_method", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_report_device_failure, "gst_audio_base_sink_report_device_failure", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_alignment_threshold, "gst_audio_base_sink_set_alignment_threshold", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_custom_slaving_callback, "gst_audio_base_sink_set_custom_slaving_callback", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_discont_wait, "gst_audio_base_sink_set_discont_wait", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_drift_tolerance, "gst_audio_base_sink_set_drift_tolerance", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_provide_clock, "gst_audio_base_sink_set_provide_clock", LIBS);
-  gidLink(cast(void**)&gst_audio_base_sink_set_slave_method, "gst_audio_base_sink_set_slave_method", LIBS);
+  gidLink(cast(void**)&gst_audio_base_sink_get_type, "gst_audio_base_sink_get_type", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_create_ringbuffer, "gst_audio_base_sink_create_ringbuffer", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_get_alignment_threshold, "gst_audio_base_sink_get_alignment_threshold", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_get_discont_wait, "gst_audio_base_sink_get_discont_wait", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_get_drift_tolerance, "gst_audio_base_sink_get_drift_tolerance", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_get_provide_clock, "gst_audio_base_sink_get_provide_clock", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_get_slave_method, "gst_audio_base_sink_get_slave_method", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_report_device_failure, "gst_audio_base_sink_report_device_failure", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_alignment_threshold, "gst_audio_base_sink_set_alignment_threshold", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_custom_slaving_callback, "gst_audio_base_sink_set_custom_slaving_callback", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_discont_wait, "gst_audio_base_sink_set_discont_wait", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_drift_tolerance, "gst_audio_base_sink_set_drift_tolerance", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_provide_clock, "gst_audio_base_sink_set_provide_clock", libs);
+  gidLink(cast(void**)&gst_audio_base_sink_set_slave_method, "gst_audio_base_sink_set_slave_method", libs);
 
   // AudioBaseSrc
-  gidLink(cast(void**)&gst_audio_base_src_get_type, "gst_audio_base_src_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_base_src_create_ringbuffer, "gst_audio_base_src_create_ringbuffer", LIBS);
-  gidLink(cast(void**)&gst_audio_base_src_get_provide_clock, "gst_audio_base_src_get_provide_clock", LIBS);
-  gidLink(cast(void**)&gst_audio_base_src_get_slave_method, "gst_audio_base_src_get_slave_method", LIBS);
-  gidLink(cast(void**)&gst_audio_base_src_set_provide_clock, "gst_audio_base_src_set_provide_clock", LIBS);
-  gidLink(cast(void**)&gst_audio_base_src_set_slave_method, "gst_audio_base_src_set_slave_method", LIBS);
+  gidLink(cast(void**)&gst_audio_base_src_get_type, "gst_audio_base_src_get_type", libs);
+  gidLink(cast(void**)&gst_audio_base_src_create_ringbuffer, "gst_audio_base_src_create_ringbuffer", libs);
+  gidLink(cast(void**)&gst_audio_base_src_get_provide_clock, "gst_audio_base_src_get_provide_clock", libs);
+  gidLink(cast(void**)&gst_audio_base_src_get_slave_method, "gst_audio_base_src_get_slave_method", libs);
+  gidLink(cast(void**)&gst_audio_base_src_set_provide_clock, "gst_audio_base_src_set_provide_clock", libs);
+  gidLink(cast(void**)&gst_audio_base_src_set_slave_method, "gst_audio_base_src_set_slave_method", libs);
 
   // AudioBuffer
-  gidLink(cast(void**)&gst_audio_buffer_unmap, "gst_audio_buffer_unmap", LIBS);
-  gidLink(cast(void**)&gst_audio_buffer_clip, "gst_audio_buffer_clip", LIBS);
-  gidLink(cast(void**)&gst_audio_buffer_map, "gst_audio_buffer_map", LIBS);
-  gidLink(cast(void**)&gst_audio_buffer_reorder_channels, "gst_audio_buffer_reorder_channels", LIBS);
-  gidLink(cast(void**)&gst_audio_buffer_truncate, "gst_audio_buffer_truncate", LIBS);
+  gidLink(cast(void**)&gst_audio_buffer_unmap, "gst_audio_buffer_unmap", libs);
+  gidLink(cast(void**)&gst_audio_buffer_clip, "gst_audio_buffer_clip", libs);
+  gidLink(cast(void**)&gst_audio_buffer_map, "gst_audio_buffer_map", libs);
+  gidLink(cast(void**)&gst_audio_buffer_reorder_channels, "gst_audio_buffer_reorder_channels", libs);
+  gidLink(cast(void**)&gst_audio_buffer_truncate, "gst_audio_buffer_truncate", libs);
 
   // AudioCdSrc
-  gidLink(cast(void**)&gst_audio_cd_src_get_type, "gst_audio_cd_src_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_cd_src_add_track, "gst_audio_cd_src_add_track", LIBS);
+  gidLink(cast(void**)&gst_audio_cd_src_get_type, "gst_audio_cd_src_get_type", libs);
+  gidLink(cast(void**)&gst_audio_cd_src_add_track, "gst_audio_cd_src_add_track", libs);
 
   // AudioChannelMixer
-  gidLink(cast(void**)&gst_audio_channel_mixer_free, "gst_audio_channel_mixer_free", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_mixer_is_passthrough, "gst_audio_channel_mixer_is_passthrough", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_mixer_samples, "gst_audio_channel_mixer_samples", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_mixer_new, "gst_audio_channel_mixer_new", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_mixer_new_with_matrix, "gst_audio_channel_mixer_new_with_matrix", LIBS);
+  gidLink(cast(void**)&gst_audio_channel_mixer_free, "gst_audio_channel_mixer_free", libs);
+  gidLink(cast(void**)&gst_audio_channel_mixer_is_passthrough, "gst_audio_channel_mixer_is_passthrough", libs);
+  gidLink(cast(void**)&gst_audio_channel_mixer_samples, "gst_audio_channel_mixer_samples", libs);
+  gidLink(cast(void**)&gst_audio_channel_mixer_new, "gst_audio_channel_mixer_new", libs);
+  gidLink(cast(void**)&gst_audio_channel_mixer_new_with_matrix, "gst_audio_channel_mixer_new_with_matrix", libs);
 
   // AudioClippingMeta
-  gidLink(cast(void**)&gst_audio_clipping_meta_get_info, "gst_audio_clipping_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_audio_clipping_meta_get_info, "gst_audio_clipping_meta_get_info", libs);
 
   // AudioClock
-  gidLink(cast(void**)&gst_audio_clock_get_type, "gst_audio_clock_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_clock_new, "gst_audio_clock_new", LIBS);
-  gidLink(cast(void**)&gst_audio_clock_adjust, "gst_audio_clock_adjust", LIBS);
-  gidLink(cast(void**)&gst_audio_clock_get_time, "gst_audio_clock_get_time", LIBS);
-  gidLink(cast(void**)&gst_audio_clock_invalidate, "gst_audio_clock_invalidate", LIBS);
-  gidLink(cast(void**)&gst_audio_clock_reset, "gst_audio_clock_reset", LIBS);
+  gidLink(cast(void**)&gst_audio_clock_get_type, "gst_audio_clock_get_type", libs);
+  gidLink(cast(void**)&gst_audio_clock_new, "gst_audio_clock_new", libs);
+  gidLink(cast(void**)&gst_audio_clock_adjust, "gst_audio_clock_adjust", libs);
+  gidLink(cast(void**)&gst_audio_clock_get_time, "gst_audio_clock_get_time", libs);
+  gidLink(cast(void**)&gst_audio_clock_invalidate, "gst_audio_clock_invalidate", libs);
+  gidLink(cast(void**)&gst_audio_clock_reset, "gst_audio_clock_reset", libs);
 
   // AudioConverter
-  gidLink(cast(void**)&gst_audio_converter_get_type, "gst_audio_converter_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_new, "gst_audio_converter_new", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_convert, "gst_audio_converter_convert", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_free, "gst_audio_converter_free", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_get_config, "gst_audio_converter_get_config", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_get_in_frames, "gst_audio_converter_get_in_frames", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_get_max_latency, "gst_audio_converter_get_max_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_get_out_frames, "gst_audio_converter_get_out_frames", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_is_passthrough, "gst_audio_converter_is_passthrough", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_reset, "gst_audio_converter_reset", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_samples, "gst_audio_converter_samples", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_supports_inplace, "gst_audio_converter_supports_inplace", LIBS);
-  gidLink(cast(void**)&gst_audio_converter_update_config, "gst_audio_converter_update_config", LIBS);
+  gidLink(cast(void**)&gst_audio_converter_get_type, "gst_audio_converter_get_type", libs);
+  gidLink(cast(void**)&gst_audio_converter_new, "gst_audio_converter_new", libs);
+  gidLink(cast(void**)&gst_audio_converter_convert, "gst_audio_converter_convert", libs);
+  gidLink(cast(void**)&gst_audio_converter_free, "gst_audio_converter_free", libs);
+  gidLink(cast(void**)&gst_audio_converter_get_config, "gst_audio_converter_get_config", libs);
+  gidLink(cast(void**)&gst_audio_converter_get_in_frames, "gst_audio_converter_get_in_frames", libs);
+  gidLink(cast(void**)&gst_audio_converter_get_max_latency, "gst_audio_converter_get_max_latency", libs);
+  gidLink(cast(void**)&gst_audio_converter_get_out_frames, "gst_audio_converter_get_out_frames", libs);
+  gidLink(cast(void**)&gst_audio_converter_is_passthrough, "gst_audio_converter_is_passthrough", libs);
+  gidLink(cast(void**)&gst_audio_converter_reset, "gst_audio_converter_reset", libs);
+  gidLink(cast(void**)&gst_audio_converter_samples, "gst_audio_converter_samples", libs);
+  gidLink(cast(void**)&gst_audio_converter_supports_inplace, "gst_audio_converter_supports_inplace", libs);
+  gidLink(cast(void**)&gst_audio_converter_update_config, "gst_audio_converter_update_config", libs);
 
   // AudioDecoder
-  gidLink(cast(void**)&gst_audio_decoder_get_type, "gst_audio_decoder_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_allocate_output_buffer, "gst_audio_decoder_allocate_output_buffer", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_finish_frame, "gst_audio_decoder_finish_frame", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_finish_subframe, "gst_audio_decoder_finish_subframe", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_allocator, "gst_audio_decoder_get_allocator", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_audio_info, "gst_audio_decoder_get_audio_info", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_delay, "gst_audio_decoder_get_delay", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_drainable, "gst_audio_decoder_get_drainable", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_estimate_rate, "gst_audio_decoder_get_estimate_rate", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_latency, "gst_audio_decoder_get_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_max_errors, "gst_audio_decoder_get_max_errors", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_min_latency, "gst_audio_decoder_get_min_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_needs_format, "gst_audio_decoder_get_needs_format", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_parse_state, "gst_audio_decoder_get_parse_state", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_plc, "gst_audio_decoder_get_plc", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_plc_aware, "gst_audio_decoder_get_plc_aware", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_get_tolerance, "gst_audio_decoder_get_tolerance", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_merge_tags, "gst_audio_decoder_merge_tags", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_negotiate, "gst_audio_decoder_negotiate", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_proxy_getcaps, "gst_audio_decoder_proxy_getcaps", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_allocation_caps, "gst_audio_decoder_set_allocation_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_drainable, "gst_audio_decoder_set_drainable", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_estimate_rate, "gst_audio_decoder_set_estimate_rate", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_latency, "gst_audio_decoder_set_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_max_errors, "gst_audio_decoder_set_max_errors", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_min_latency, "gst_audio_decoder_set_min_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_needs_format, "gst_audio_decoder_set_needs_format", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_output_caps, "gst_audio_decoder_set_output_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_output_format, "gst_audio_decoder_set_output_format", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_plc, "gst_audio_decoder_set_plc", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_plc_aware, "gst_audio_decoder_set_plc_aware", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_tolerance, "gst_audio_decoder_set_tolerance", LIBS);
-  gidLink(cast(void**)&gst_audio_decoder_set_use_default_pad_acceptcaps, "gst_audio_decoder_set_use_default_pad_acceptcaps", LIBS);
+  gidLink(cast(void**)&gst_audio_decoder_get_type, "gst_audio_decoder_get_type", libs);
+  gidLink(cast(void**)&gst_audio_decoder_allocate_output_buffer, "gst_audio_decoder_allocate_output_buffer", libs);
+  gidLink(cast(void**)&gst_audio_decoder_finish_frame, "gst_audio_decoder_finish_frame", libs);
+  gidLink(cast(void**)&gst_audio_decoder_finish_subframe, "gst_audio_decoder_finish_subframe", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_allocator, "gst_audio_decoder_get_allocator", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_audio_info, "gst_audio_decoder_get_audio_info", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_delay, "gst_audio_decoder_get_delay", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_drainable, "gst_audio_decoder_get_drainable", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_estimate_rate, "gst_audio_decoder_get_estimate_rate", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_latency, "gst_audio_decoder_get_latency", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_max_errors, "gst_audio_decoder_get_max_errors", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_min_latency, "gst_audio_decoder_get_min_latency", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_needs_format, "gst_audio_decoder_get_needs_format", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_parse_state, "gst_audio_decoder_get_parse_state", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_plc, "gst_audio_decoder_get_plc", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_plc_aware, "gst_audio_decoder_get_plc_aware", libs);
+  gidLink(cast(void**)&gst_audio_decoder_get_tolerance, "gst_audio_decoder_get_tolerance", libs);
+  gidLink(cast(void**)&gst_audio_decoder_merge_tags, "gst_audio_decoder_merge_tags", libs);
+  gidLink(cast(void**)&gst_audio_decoder_negotiate, "gst_audio_decoder_negotiate", libs);
+  gidLink(cast(void**)&gst_audio_decoder_proxy_getcaps, "gst_audio_decoder_proxy_getcaps", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_allocation_caps, "gst_audio_decoder_set_allocation_caps", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_drainable, "gst_audio_decoder_set_drainable", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_estimate_rate, "gst_audio_decoder_set_estimate_rate", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_latency, "gst_audio_decoder_set_latency", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_max_errors, "gst_audio_decoder_set_max_errors", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_min_latency, "gst_audio_decoder_set_min_latency", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_needs_format, "gst_audio_decoder_set_needs_format", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_output_caps, "gst_audio_decoder_set_output_caps", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_output_format, "gst_audio_decoder_set_output_format", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_plc, "gst_audio_decoder_set_plc", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_plc_aware, "gst_audio_decoder_set_plc_aware", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_tolerance, "gst_audio_decoder_set_tolerance", libs);
+  gidLink(cast(void**)&gst_audio_decoder_set_use_default_pad_acceptcaps, "gst_audio_decoder_set_use_default_pad_acceptcaps", libs);
 
   // AudioDownmixMeta
-  gidLink(cast(void**)&gst_audio_downmix_meta_get_info, "gst_audio_downmix_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_audio_downmix_meta_get_info, "gst_audio_downmix_meta_get_info", libs);
 
   // AudioEncoder
-  gidLink(cast(void**)&gst_audio_encoder_get_type, "gst_audio_encoder_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_allocate_output_buffer, "gst_audio_encoder_allocate_output_buffer", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_finish_frame, "gst_audio_encoder_finish_frame", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_allocator, "gst_audio_encoder_get_allocator", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_audio_info, "gst_audio_encoder_get_audio_info", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_drainable, "gst_audio_encoder_get_drainable", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_frame_max, "gst_audio_encoder_get_frame_max", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_frame_samples_max, "gst_audio_encoder_get_frame_samples_max", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_frame_samples_min, "gst_audio_encoder_get_frame_samples_min", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_hard_min, "gst_audio_encoder_get_hard_min", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_hard_resync, "gst_audio_encoder_get_hard_resync", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_latency, "gst_audio_encoder_get_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_lookahead, "gst_audio_encoder_get_lookahead", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_mark_granule, "gst_audio_encoder_get_mark_granule", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_perfect_timestamp, "gst_audio_encoder_get_perfect_timestamp", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_get_tolerance, "gst_audio_encoder_get_tolerance", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_merge_tags, "gst_audio_encoder_merge_tags", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_negotiate, "gst_audio_encoder_negotiate", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_proxy_getcaps, "gst_audio_encoder_proxy_getcaps", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_allocation_caps, "gst_audio_encoder_set_allocation_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_drainable, "gst_audio_encoder_set_drainable", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_frame_max, "gst_audio_encoder_set_frame_max", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_frame_samples_max, "gst_audio_encoder_set_frame_samples_max", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_frame_samples_min, "gst_audio_encoder_set_frame_samples_min", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_hard_min, "gst_audio_encoder_set_hard_min", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_hard_resync, "gst_audio_encoder_set_hard_resync", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_headers, "gst_audio_encoder_set_headers", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_latency, "gst_audio_encoder_set_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_lookahead, "gst_audio_encoder_set_lookahead", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_mark_granule, "gst_audio_encoder_set_mark_granule", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_output_format, "gst_audio_encoder_set_output_format", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_perfect_timestamp, "gst_audio_encoder_set_perfect_timestamp", LIBS);
-  gidLink(cast(void**)&gst_audio_encoder_set_tolerance, "gst_audio_encoder_set_tolerance", LIBS);
+  gidLink(cast(void**)&gst_audio_encoder_get_type, "gst_audio_encoder_get_type", libs);
+  gidLink(cast(void**)&gst_audio_encoder_allocate_output_buffer, "gst_audio_encoder_allocate_output_buffer", libs);
+  gidLink(cast(void**)&gst_audio_encoder_finish_frame, "gst_audio_encoder_finish_frame", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_allocator, "gst_audio_encoder_get_allocator", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_audio_info, "gst_audio_encoder_get_audio_info", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_drainable, "gst_audio_encoder_get_drainable", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_frame_max, "gst_audio_encoder_get_frame_max", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_frame_samples_max, "gst_audio_encoder_get_frame_samples_max", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_frame_samples_min, "gst_audio_encoder_get_frame_samples_min", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_hard_min, "gst_audio_encoder_get_hard_min", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_hard_resync, "gst_audio_encoder_get_hard_resync", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_latency, "gst_audio_encoder_get_latency", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_lookahead, "gst_audio_encoder_get_lookahead", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_mark_granule, "gst_audio_encoder_get_mark_granule", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_perfect_timestamp, "gst_audio_encoder_get_perfect_timestamp", libs);
+  gidLink(cast(void**)&gst_audio_encoder_get_tolerance, "gst_audio_encoder_get_tolerance", libs);
+  gidLink(cast(void**)&gst_audio_encoder_merge_tags, "gst_audio_encoder_merge_tags", libs);
+  gidLink(cast(void**)&gst_audio_encoder_negotiate, "gst_audio_encoder_negotiate", libs);
+  gidLink(cast(void**)&gst_audio_encoder_proxy_getcaps, "gst_audio_encoder_proxy_getcaps", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_allocation_caps, "gst_audio_encoder_set_allocation_caps", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_drainable, "gst_audio_encoder_set_drainable", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_frame_max, "gst_audio_encoder_set_frame_max", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_frame_samples_max, "gst_audio_encoder_set_frame_samples_max", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_frame_samples_min, "gst_audio_encoder_set_frame_samples_min", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_hard_min, "gst_audio_encoder_set_hard_min", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_hard_resync, "gst_audio_encoder_set_hard_resync", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_headers, "gst_audio_encoder_set_headers", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_latency, "gst_audio_encoder_set_latency", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_lookahead, "gst_audio_encoder_set_lookahead", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_mark_granule, "gst_audio_encoder_set_mark_granule", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_output_format, "gst_audio_encoder_set_output_format", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_perfect_timestamp, "gst_audio_encoder_set_perfect_timestamp", libs);
+  gidLink(cast(void**)&gst_audio_encoder_set_tolerance, "gst_audio_encoder_set_tolerance", libs);
 
   // AudioFilter
-  gidLink(cast(void**)&gst_audio_filter_get_type, "gst_audio_filter_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_filter_get_type, "gst_audio_filter_get_type", libs);
 
   // AudioFilterClass
-  gidLink(cast(void**)&gst_audio_filter_class_add_pad_templates, "gst_audio_filter_class_add_pad_templates", LIBS);
+  gidLink(cast(void**)&gst_audio_filter_class_add_pad_templates, "gst_audio_filter_class_add_pad_templates", libs);
 
   // AudioFormatInfo
-  gidLink(cast(void**)&gst_audio_format_info_fill_silence, "gst_audio_format_info_fill_silence", LIBS);
+  gidLink(cast(void**)&gst_audio_format_info_fill_silence, "gst_audio_format_info_fill_silence", libs);
 
   // AudioInfo
-  gidLink(cast(void**)&gst_audio_info_get_type, "gst_audio_info_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_info_new, "gst_audio_info_new", LIBS);
-  gidLink(cast(void**)&gst_audio_info_new_from_caps, "gst_audio_info_new_from_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_info_convert, "gst_audio_info_convert", LIBS);
-  gidLink(cast(void**)&gst_audio_info_copy, "gst_audio_info_copy", LIBS);
-  gidLink(cast(void**)&gst_audio_info_free, "gst_audio_info_free", LIBS);
-  gidLink(cast(void**)&gst_audio_info_is_equal, "gst_audio_info_is_equal", LIBS);
-  gidLink(cast(void**)&gst_audio_info_set_format, "gst_audio_info_set_format", LIBS);
-  gidLink(cast(void**)&gst_audio_info_to_caps, "gst_audio_info_to_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_info_from_caps, "gst_audio_info_from_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_info_init, "gst_audio_info_init", LIBS);
+  gidLink(cast(void**)&gst_audio_info_get_type, "gst_audio_info_get_type", libs);
+  gidLink(cast(void**)&gst_audio_info_new, "gst_audio_info_new", libs);
+  gidLink(cast(void**)&gst_audio_info_new_from_caps, "gst_audio_info_new_from_caps", libs);
+  gidLink(cast(void**)&gst_audio_info_convert, "gst_audio_info_convert", libs);
+  gidLink(cast(void**)&gst_audio_info_copy, "gst_audio_info_copy", libs);
+  gidLink(cast(void**)&gst_audio_info_free, "gst_audio_info_free", libs);
+  gidLink(cast(void**)&gst_audio_info_is_equal, "gst_audio_info_is_equal", libs);
+  gidLink(cast(void**)&gst_audio_info_set_format, "gst_audio_info_set_format", libs);
+  gidLink(cast(void**)&gst_audio_info_to_caps, "gst_audio_info_to_caps", libs);
+  gidLink(cast(void**)&gst_audio_info_from_caps, "gst_audio_info_from_caps", libs);
+  gidLink(cast(void**)&gst_audio_info_init, "gst_audio_info_init", libs);
 
   // AudioLevelMeta
-  gidLink(cast(void**)&gst_audio_level_meta_get_info, "gst_audio_level_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_audio_level_meta_get_info, "gst_audio_level_meta_get_info", libs);
 
   // AudioMeta
-  gidLink(cast(void**)&gst_audio_meta_get_info, "gst_audio_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_audio_meta_get_info, "gst_audio_meta_get_info", libs);
 
   // AudioQuantize
-  gidLink(cast(void**)&gst_audio_quantize_free, "gst_audio_quantize_free", LIBS);
-  gidLink(cast(void**)&gst_audio_quantize_reset, "gst_audio_quantize_reset", LIBS);
-  gidLink(cast(void**)&gst_audio_quantize_samples, "gst_audio_quantize_samples", LIBS);
-  gidLink(cast(void**)&gst_audio_quantize_new, "gst_audio_quantize_new", LIBS);
+  gidLink(cast(void**)&gst_audio_quantize_free, "gst_audio_quantize_free", libs);
+  gidLink(cast(void**)&gst_audio_quantize_reset, "gst_audio_quantize_reset", libs);
+  gidLink(cast(void**)&gst_audio_quantize_samples, "gst_audio_quantize_samples", libs);
+  gidLink(cast(void**)&gst_audio_quantize_new, "gst_audio_quantize_new", libs);
 
   // AudioResampler
-  gidLink(cast(void**)&gst_audio_resampler_free, "gst_audio_resampler_free", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_get_in_frames, "gst_audio_resampler_get_in_frames", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_get_max_latency, "gst_audio_resampler_get_max_latency", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_get_out_frames, "gst_audio_resampler_get_out_frames", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_resample, "gst_audio_resampler_resample", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_reset, "gst_audio_resampler_reset", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_update, "gst_audio_resampler_update", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_new, "gst_audio_resampler_new", LIBS);
-  gidLink(cast(void**)&gst_audio_resampler_options_set_quality, "gst_audio_resampler_options_set_quality", LIBS);
+  gidLink(cast(void**)&gst_audio_resampler_free, "gst_audio_resampler_free", libs);
+  gidLink(cast(void**)&gst_audio_resampler_get_in_frames, "gst_audio_resampler_get_in_frames", libs);
+  gidLink(cast(void**)&gst_audio_resampler_get_max_latency, "gst_audio_resampler_get_max_latency", libs);
+  gidLink(cast(void**)&gst_audio_resampler_get_out_frames, "gst_audio_resampler_get_out_frames", libs);
+  gidLink(cast(void**)&gst_audio_resampler_resample, "gst_audio_resampler_resample", libs);
+  gidLink(cast(void**)&gst_audio_resampler_reset, "gst_audio_resampler_reset", libs);
+  gidLink(cast(void**)&gst_audio_resampler_update, "gst_audio_resampler_update", libs);
+  gidLink(cast(void**)&gst_audio_resampler_new, "gst_audio_resampler_new", libs);
+  gidLink(cast(void**)&gst_audio_resampler_options_set_quality, "gst_audio_resampler_options_set_quality", libs);
 
   // AudioRingBuffer
-  gidLink(cast(void**)&gst_audio_ring_buffer_get_type, "gst_audio_ring_buffer_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_debug_spec_buff, "gst_audio_ring_buffer_debug_spec_buff", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_debug_spec_caps, "gst_audio_ring_buffer_debug_spec_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_parse_caps, "gst_audio_ring_buffer_parse_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_acquire, "gst_audio_ring_buffer_acquire", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_activate, "gst_audio_ring_buffer_activate", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_advance, "gst_audio_ring_buffer_advance", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_clear, "gst_audio_ring_buffer_clear", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_clear_all, "gst_audio_ring_buffer_clear_all", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_close_device, "gst_audio_ring_buffer_close_device", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_commit, "gst_audio_ring_buffer_commit", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_convert, "gst_audio_ring_buffer_convert", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_delay, "gst_audio_ring_buffer_delay", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_device_is_open, "gst_audio_ring_buffer_device_is_open", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_is_acquired, "gst_audio_ring_buffer_is_acquired", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_is_active, "gst_audio_ring_buffer_is_active", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_is_flushing, "gst_audio_ring_buffer_is_flushing", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_may_start, "gst_audio_ring_buffer_may_start", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_open_device, "gst_audio_ring_buffer_open_device", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_pause, "gst_audio_ring_buffer_pause", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_prepare_read, "gst_audio_ring_buffer_prepare_read", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_read, "gst_audio_ring_buffer_read", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_release, "gst_audio_ring_buffer_release", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_samples_done, "gst_audio_ring_buffer_samples_done", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_callback, "gst_audio_ring_buffer_set_callback", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_callback_full, "gst_audio_ring_buffer_set_callback_full", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_channel_positions, "gst_audio_ring_buffer_set_channel_positions", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_errored, "gst_audio_ring_buffer_set_errored", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_flushing, "gst_audio_ring_buffer_set_flushing", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_sample, "gst_audio_ring_buffer_set_sample", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_set_timestamp, "gst_audio_ring_buffer_set_timestamp", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_start, "gst_audio_ring_buffer_start", LIBS);
-  gidLink(cast(void**)&gst_audio_ring_buffer_stop, "gst_audio_ring_buffer_stop", LIBS);
+  gidLink(cast(void**)&gst_audio_ring_buffer_get_type, "gst_audio_ring_buffer_get_type", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_debug_spec_buff, "gst_audio_ring_buffer_debug_spec_buff", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_debug_spec_caps, "gst_audio_ring_buffer_debug_spec_caps", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_parse_caps, "gst_audio_ring_buffer_parse_caps", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_acquire, "gst_audio_ring_buffer_acquire", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_activate, "gst_audio_ring_buffer_activate", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_advance, "gst_audio_ring_buffer_advance", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_clear, "gst_audio_ring_buffer_clear", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_clear_all, "gst_audio_ring_buffer_clear_all", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_close_device, "gst_audio_ring_buffer_close_device", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_commit, "gst_audio_ring_buffer_commit", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_convert, "gst_audio_ring_buffer_convert", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_delay, "gst_audio_ring_buffer_delay", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_device_is_open, "gst_audio_ring_buffer_device_is_open", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_is_acquired, "gst_audio_ring_buffer_is_acquired", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_is_active, "gst_audio_ring_buffer_is_active", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_is_flushing, "gst_audio_ring_buffer_is_flushing", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_may_start, "gst_audio_ring_buffer_may_start", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_open_device, "gst_audio_ring_buffer_open_device", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_pause, "gst_audio_ring_buffer_pause", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_prepare_read, "gst_audio_ring_buffer_prepare_read", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_read, "gst_audio_ring_buffer_read", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_release, "gst_audio_ring_buffer_release", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_samples_done, "gst_audio_ring_buffer_samples_done", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_callback, "gst_audio_ring_buffer_set_callback", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_callback_full, "gst_audio_ring_buffer_set_callback_full", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_channel_positions, "gst_audio_ring_buffer_set_channel_positions", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_errored, "gst_audio_ring_buffer_set_errored", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_flushing, "gst_audio_ring_buffer_set_flushing", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_sample, "gst_audio_ring_buffer_set_sample", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_set_timestamp, "gst_audio_ring_buffer_set_timestamp", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_start, "gst_audio_ring_buffer_start", libs);
+  gidLink(cast(void**)&gst_audio_ring_buffer_stop, "gst_audio_ring_buffer_stop", libs);
 
   // AudioSink
-  gidLink(cast(void**)&gst_audio_sink_get_type, "gst_audio_sink_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_sink_get_type, "gst_audio_sink_get_type", libs);
 
   // AudioSrc
-  gidLink(cast(void**)&gst_audio_src_get_type, "gst_audio_src_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_src_get_type, "gst_audio_src_get_type", libs);
 
   // AudioStreamAlign
-  gidLink(cast(void**)&gst_audio_stream_align_get_type, "gst_audio_stream_align_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_new, "gst_audio_stream_align_new", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_copy, "gst_audio_stream_align_copy", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_free, "gst_audio_stream_align_free", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_get_alignment_threshold, "gst_audio_stream_align_get_alignment_threshold", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_get_discont_wait, "gst_audio_stream_align_get_discont_wait", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_get_rate, "gst_audio_stream_align_get_rate", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_get_samples_since_discont, "gst_audio_stream_align_get_samples_since_discont", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_get_timestamp_at_discont, "gst_audio_stream_align_get_timestamp_at_discont", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_mark_discont, "gst_audio_stream_align_mark_discont", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_process, "gst_audio_stream_align_process", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_set_alignment_threshold, "gst_audio_stream_align_set_alignment_threshold", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_set_discont_wait, "gst_audio_stream_align_set_discont_wait", LIBS);
-  gidLink(cast(void**)&gst_audio_stream_align_set_rate, "gst_audio_stream_align_set_rate", LIBS);
+  gidLink(cast(void**)&gst_audio_stream_align_get_type, "gst_audio_stream_align_get_type", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_new, "gst_audio_stream_align_new", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_copy, "gst_audio_stream_align_copy", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_free, "gst_audio_stream_align_free", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_get_alignment_threshold, "gst_audio_stream_align_get_alignment_threshold", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_get_discont_wait, "gst_audio_stream_align_get_discont_wait", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_get_rate, "gst_audio_stream_align_get_rate", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_get_samples_since_discont, "gst_audio_stream_align_get_samples_since_discont", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_get_timestamp_at_discont, "gst_audio_stream_align_get_timestamp_at_discont", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_mark_discont, "gst_audio_stream_align_mark_discont", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_process, "gst_audio_stream_align_process", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_set_alignment_threshold, "gst_audio_stream_align_set_alignment_threshold", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_set_discont_wait, "gst_audio_stream_align_set_discont_wait", libs);
+  gidLink(cast(void**)&gst_audio_stream_align_set_rate, "gst_audio_stream_align_set_rate", libs);
 
   // DsdInfo
-  gidLink(cast(void**)&gst_dsd_info_get_type, "gst_dsd_info_get_type", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_new, "gst_dsd_info_new", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_new_from_caps, "gst_dsd_info_new_from_caps", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_copy, "gst_dsd_info_copy", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_free, "gst_dsd_info_free", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_is_equal, "gst_dsd_info_is_equal", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_set_format, "gst_dsd_info_set_format", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_to_caps, "gst_dsd_info_to_caps", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_from_caps, "gst_dsd_info_from_caps", LIBS);
-  gidLink(cast(void**)&gst_dsd_info_init, "gst_dsd_info_init", LIBS);
+  gidLink(cast(void**)&gst_dsd_info_get_type, "gst_dsd_info_get_type", libs);
+  gidLink(cast(void**)&gst_dsd_info_new, "gst_dsd_info_new", libs);
+  gidLink(cast(void**)&gst_dsd_info_new_from_caps, "gst_dsd_info_new_from_caps", libs);
+  gidLink(cast(void**)&gst_dsd_info_copy, "gst_dsd_info_copy", libs);
+  gidLink(cast(void**)&gst_dsd_info_free, "gst_dsd_info_free", libs);
+  gidLink(cast(void**)&gst_dsd_info_is_equal, "gst_dsd_info_is_equal", libs);
+  gidLink(cast(void**)&gst_dsd_info_set_format, "gst_dsd_info_set_format", libs);
+  gidLink(cast(void**)&gst_dsd_info_to_caps, "gst_dsd_info_to_caps", libs);
+  gidLink(cast(void**)&gst_dsd_info_from_caps, "gst_dsd_info_from_caps", libs);
+  gidLink(cast(void**)&gst_dsd_info_init, "gst_dsd_info_init", libs);
 
   // DsdPlaneOffsetMeta
-  gidLink(cast(void**)&gst_dsd_plane_offset_meta_get_info, "gst_dsd_plane_offset_meta_get_info", LIBS);
+  gidLink(cast(void**)&gst_dsd_plane_offset_meta_get_info, "gst_dsd_plane_offset_meta_get_info", libs);
 
   // StreamVolume
-  gidLink(cast(void**)&gst_stream_volume_get_type, "gst_stream_volume_get_type", LIBS);
-  gidLink(cast(void**)&gst_stream_volume_convert_volume, "gst_stream_volume_convert_volume", LIBS);
-  gidLink(cast(void**)&gst_stream_volume_get_mute, "gst_stream_volume_get_mute", LIBS);
-  gidLink(cast(void**)&gst_stream_volume_get_volume, "gst_stream_volume_get_volume", LIBS);
-  gidLink(cast(void**)&gst_stream_volume_set_mute, "gst_stream_volume_set_mute", LIBS);
-  gidLink(cast(void**)&gst_stream_volume_set_volume, "gst_stream_volume_set_volume", LIBS);
+  gidLink(cast(void**)&gst_stream_volume_get_type, "gst_stream_volume_get_type", libs);
+  gidLink(cast(void**)&gst_stream_volume_convert_volume, "gst_stream_volume_convert_volume", libs);
+  gidLink(cast(void**)&gst_stream_volume_get_mute, "gst_stream_volume_get_mute", libs);
+  gidLink(cast(void**)&gst_stream_volume_get_volume, "gst_stream_volume_get_volume", libs);
+  gidLink(cast(void**)&gst_stream_volume_set_mute, "gst_stream_volume_set_mute", libs);
+  gidLink(cast(void**)&gst_stream_volume_set_volume, "gst_stream_volume_set_volume", libs);
 
   // global
-  gidLink(cast(void**)&gst_audio_channel_get_fallback_mask, "gst_audio_channel_get_fallback_mask", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_positions_from_mask, "gst_audio_channel_positions_from_mask", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_positions_to_mask, "gst_audio_channel_positions_to_mask", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_positions_to_string, "gst_audio_channel_positions_to_string", LIBS);
-  gidLink(cast(void**)&gst_audio_channel_positions_to_valid_order, "gst_audio_channel_positions_to_valid_order", LIBS);
-  gidLink(cast(void**)&gst_audio_check_valid_channel_positions, "gst_audio_check_valid_channel_positions", LIBS);
-  gidLink(cast(void**)&gst_audio_clipping_meta_api_get_type, "gst_audio_clipping_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_downmix_meta_api_get_type, "gst_audio_downmix_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_format_info_get_type, "gst_audio_format_info_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_formats_raw, "gst_audio_formats_raw", LIBS);
-  gidLink(cast(void**)&gst_audio_get_channel_reorder_map, "gst_audio_get_channel_reorder_map", LIBS);
-  gidLink(cast(void**)&gst_audio_iec61937_frame_size, "gst_audio_iec61937_frame_size", LIBS);
-  gidLink(cast(void**)&gst_audio_iec61937_payload, "gst_audio_iec61937_payload", LIBS);
-  gidLink(cast(void**)&gst_audio_level_meta_api_get_type, "gst_audio_level_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_make_raw_caps, "gst_audio_make_raw_caps", LIBS);
-  gidLink(cast(void**)&gst_audio_meta_api_get_type, "gst_audio_meta_api_get_type", LIBS);
-  gidLink(cast(void**)&gst_audio_reorder_channels, "gst_audio_reorder_channels", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_audio_clipping_meta, "gst_buffer_add_audio_clipping_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_audio_downmix_meta, "gst_buffer_add_audio_downmix_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_audio_level_meta, "gst_buffer_add_audio_level_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_audio_meta, "gst_buffer_add_audio_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_add_dsd_plane_offset_meta, "gst_buffer_add_dsd_plane_offset_meta", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_audio_downmix_meta_for_channels, "gst_buffer_get_audio_downmix_meta_for_channels", LIBS);
-  gidLink(cast(void**)&gst_buffer_get_audio_level_meta, "gst_buffer_get_audio_level_meta", LIBS);
-  gidLink(cast(void**)&gst_dsd_convert, "gst_dsd_convert", LIBS);
-  gidLink(cast(void**)&gst_dsd_plane_offset_meta_api_get_type, "gst_dsd_plane_offset_meta_api_get_type", LIBS);
+  gidLink(cast(void**)&gst_audio_channel_get_fallback_mask, "gst_audio_channel_get_fallback_mask", libs);
+  gidLink(cast(void**)&gst_audio_channel_positions_from_mask, "gst_audio_channel_positions_from_mask", libs);
+  gidLink(cast(void**)&gst_audio_channel_positions_to_mask, "gst_audio_channel_positions_to_mask", libs);
+  gidLink(cast(void**)&gst_audio_channel_positions_to_string, "gst_audio_channel_positions_to_string", libs);
+  gidLink(cast(void**)&gst_audio_channel_positions_to_valid_order, "gst_audio_channel_positions_to_valid_order", libs);
+  gidLink(cast(void**)&gst_audio_check_valid_channel_positions, "gst_audio_check_valid_channel_positions", libs);
+  gidLink(cast(void**)&gst_audio_clipping_meta_api_get_type, "gst_audio_clipping_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_audio_downmix_meta_api_get_type, "gst_audio_downmix_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_audio_format_info_get_type, "gst_audio_format_info_get_type", libs);
+  gidLink(cast(void**)&gst_audio_formats_raw, "gst_audio_formats_raw", libs);
+  gidLink(cast(void**)&gst_audio_get_channel_reorder_map, "gst_audio_get_channel_reorder_map", libs);
+  gidLink(cast(void**)&gst_audio_iec61937_frame_size, "gst_audio_iec61937_frame_size", libs);
+  gidLink(cast(void**)&gst_audio_iec61937_payload, "gst_audio_iec61937_payload", libs);
+  gidLink(cast(void**)&gst_audio_level_meta_api_get_type, "gst_audio_level_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_audio_make_raw_caps, "gst_audio_make_raw_caps", libs);
+  gidLink(cast(void**)&gst_audio_meta_api_get_type, "gst_audio_meta_api_get_type", libs);
+  gidLink(cast(void**)&gst_audio_reorder_channels, "gst_audio_reorder_channels", libs);
+  gidLink(cast(void**)&gst_buffer_add_audio_clipping_meta, "gst_buffer_add_audio_clipping_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_audio_downmix_meta, "gst_buffer_add_audio_downmix_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_audio_level_meta, "gst_buffer_add_audio_level_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_audio_meta, "gst_buffer_add_audio_meta", libs);
+  gidLink(cast(void**)&gst_buffer_add_dsd_plane_offset_meta, "gst_buffer_add_dsd_plane_offset_meta", libs);
+  gidLink(cast(void**)&gst_buffer_get_audio_downmix_meta_for_channels, "gst_buffer_get_audio_downmix_meta_for_channels", libs);
+  gidLink(cast(void**)&gst_buffer_get_audio_level_meta, "gst_buffer_get_audio_level_meta", libs);
+  gidLink(cast(void**)&gst_dsd_convert, "gst_dsd_convert", libs);
+  gidLink(cast(void**)&gst_dsd_plane_offset_meta_api_get_type, "gst_dsd_plane_offset_meta_api_get_type", libs);
 }

@@ -25,16 +25,16 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_alternative_trigger_get_type != &gidSymbolNotFound ? gtk_alternative_trigger_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -58,7 +58,7 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   this(gtk.shortcut_trigger.ShortcutTrigger first, gtk.shortcut_trigger.ShortcutTrigger second)
   {
     GtkShortcutTrigger* _cretval;
-    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first.cPtr(Yes.Dup) : null, second ? cast(GtkShortcutTrigger*)second.cPtr(Yes.Dup) : null);
+    _cretval = gtk_alternative_trigger_new(first ? cast(GtkShortcutTrigger*)first._cPtr(Yes.Dup) : null, second ? cast(GtkShortcutTrigger*)second._cPtr(Yes.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -73,8 +73,8 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   gtk.shortcut_trigger.ShortcutTrigger getFirst()
   {
     GtkShortcutTrigger* _cretval;
-    _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    _cretval = gtk_alternative_trigger_get_first(cast(GtkAlternativeTrigger*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 
@@ -89,8 +89,8 @@ class AlternativeTrigger : gtk.shortcut_trigger.ShortcutTrigger
   gtk.shortcut_trigger.ShortcutTrigger getSecond()
   {
     GtkShortcutTrigger* _cretval;
-    _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
+    _cretval = gtk_alternative_trigger_get_second(cast(GtkAlternativeTrigger*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.shortcut_trigger.ShortcutTrigger)(cast(GtkShortcutTrigger*)_cretval, No.Take);
     return _retval;
   }
 }

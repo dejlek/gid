@@ -17,7 +17,7 @@ template FileT()
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_file_close(cast(GArrowFile*)cPtr, &_err);
+    _retval = garrow_file_close(cast(GArrowFile*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -27,7 +27,7 @@ template FileT()
   override arrow.types.FileMode getMode()
   {
     GArrowFileMode _cretval;
-    _cretval = garrow_file_get_mode(cast(GArrowFile*)cPtr);
+    _cretval = garrow_file_get_mode(cast(GArrowFile*)this._cPtr);
     arrow.types.FileMode _retval = cast(arrow.types.FileMode)_cretval;
     return _retval;
   }
@@ -36,7 +36,7 @@ template FileT()
   override bool isClosed()
   {
     bool _retval;
-    _retval = garrow_file_is_closed(cast(GArrowFile*)cPtr);
+    _retval = garrow_file_is_closed(cast(GArrowFile*)this._cPtr);
     return _retval;
   }
 
@@ -45,7 +45,7 @@ template FileT()
   {
     long _retval;
     GError *_err;
-    _retval = garrow_file_tell(cast(GArrowFile*)cPtr, &_err);
+    _retval = garrow_file_tell(cast(GArrowFile*)this._cPtr, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

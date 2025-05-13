@@ -19,16 +19,16 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_resizable_buffer_get_type != &gidSymbolNotFound ? garrow_resizable_buffer_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -53,7 +53,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_resizable_buffer_reserve(cast(GArrowResizableBuffer*)cPtr, newCapacity, &_err);
+    _retval = garrow_resizable_buffer_reserve(cast(GArrowResizableBuffer*)this._cPtr, newCapacity, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;
@@ -64,7 +64,7 @@ class ResizableBuffer : arrow.mutable_buffer.MutableBuffer
   {
     bool _retval;
     GError *_err;
-    _retval = garrow_resizable_buffer_resize(cast(GArrowResizableBuffer*)cPtr, newSize, &_err);
+    _retval = garrow_resizable_buffer_resize(cast(GArrowResizableBuffer*)this._cPtr, newSize, &_err);
     if (_err)
       throw new ErrorWrap(_err);
     return _retval;

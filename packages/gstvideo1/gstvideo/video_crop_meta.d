@@ -28,7 +28,7 @@ class VideoCropMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -39,7 +39,7 @@ class VideoCropMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCropMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCropMeta*)this._cPtr).meta);
   }
 
   /**
@@ -48,7 +48,7 @@ class VideoCropMeta
   */
   @property uint x()
   {
-    return (cast(GstVideoCropMeta*)cPtr).x;
+    return (cast(GstVideoCropMeta*)this._cPtr).x;
   }
 
   /**
@@ -58,7 +58,7 @@ class VideoCropMeta
   */
   @property void x(uint propval)
   {
-    (cast(GstVideoCropMeta*)cPtr).x = propval;
+    (cast(GstVideoCropMeta*)this._cPtr).x = propval;
   }
 
   /**
@@ -67,7 +67,7 @@ class VideoCropMeta
   */
   @property uint y()
   {
-    return (cast(GstVideoCropMeta*)cPtr).y;
+    return (cast(GstVideoCropMeta*)this._cPtr).y;
   }
 
   /**
@@ -77,7 +77,7 @@ class VideoCropMeta
   */
   @property void y(uint propval)
   {
-    (cast(GstVideoCropMeta*)cPtr).y = propval;
+    (cast(GstVideoCropMeta*)this._cPtr).y = propval;
   }
 
   /**
@@ -86,7 +86,7 @@ class VideoCropMeta
   */
   @property uint width()
   {
-    return (cast(GstVideoCropMeta*)cPtr).width;
+    return (cast(GstVideoCropMeta*)this._cPtr).width;
   }
 
   /**
@@ -96,7 +96,7 @@ class VideoCropMeta
   */
   @property void width(uint propval)
   {
-    (cast(GstVideoCropMeta*)cPtr).width = propval;
+    (cast(GstVideoCropMeta*)this._cPtr).width = propval;
   }
 
   /**
@@ -105,7 +105,7 @@ class VideoCropMeta
   */
   @property uint height()
   {
-    return (cast(GstVideoCropMeta*)cPtr).height;
+    return (cast(GstVideoCropMeta*)this._cPtr).height;
   }
 
   /**
@@ -115,7 +115,7 @@ class VideoCropMeta
   */
   @property void height(uint propval)
   {
-    (cast(GstVideoCropMeta*)cPtr).height = propval;
+    (cast(GstVideoCropMeta*)this._cPtr).height = propval;
   }
 
   /** */

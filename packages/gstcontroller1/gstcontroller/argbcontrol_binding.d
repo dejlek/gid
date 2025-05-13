@@ -25,16 +25,16 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_argb_control_binding_get_type != &gidSymbolNotFound ? gst_argb_control_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -108,7 +108,7 @@ class ARGBControlBinding : gst.control_binding.ControlBinding
   {
     GstControlBinding* _cretval;
     const(char)* _propertyName = propertyName.toCString(No.Alloc);
-    _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object.cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA.cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR.cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG.cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB.cPtr(No.Dup) : null);
+    _cretval = gst_argb_control_binding_new(object ? cast(GstObject*)object._cPtr(No.Dup) : null, _propertyName, csA ? cast(GstControlSource*)csA._cPtr(No.Dup) : null, csR ? cast(GstControlSource*)csR._cPtr(No.Dup) : null, csG ? cast(GstControlSource*)csG._cPtr(No.Dup) : null, csB ? cast(GstControlSource*)csB._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 }

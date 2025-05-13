@@ -57,16 +57,16 @@ class DropTargetAsync : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_drop_target_async_get_type != &gidSymbolNotFound ? gtk_drop_target_async_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -124,7 +124,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   this(gdk.content_formats.ContentFormats formats, gdk.types.DragAction actions)
   {
     GtkDropTargetAsync* _cretval;
-    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats.cPtr(Yes.Dup) : null, actions);
+    _cretval = gtk_drop_target_async_new(formats ? cast(GdkContentFormats*)formats._cPtr(Yes.Dup) : null, actions);
     this(_cretval, Yes.Take);
   }
 
@@ -135,7 +135,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   gdk.types.DragAction getActions()
   {
     GdkDragAction _cretval;
-    _cretval = gtk_drop_target_async_get_actions(cast(GtkDropTargetAsync*)cPtr);
+    _cretval = gtk_drop_target_async_get_actions(cast(GtkDropTargetAsync*)this._cPtr);
     gdk.types.DragAction _retval = cast(gdk.types.DragAction)_cretval;
     return _retval;
   }
@@ -149,7 +149,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   gdk.content_formats.ContentFormats getFormats()
   {
     GdkContentFormats* _cretval;
-    _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)cPtr);
+    _cretval = gtk_drop_target_async_get_formats(cast(GtkDropTargetAsync*)this._cPtr);
     auto _retval = _cretval ? new gdk.content_formats.ContentFormats(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -166,7 +166,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   void rejectDrop(gdk.drop.Drop drop)
   {
-    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)cPtr, drop ? cast(GdkDrop*)drop.cPtr(No.Dup) : null);
+    gtk_drop_target_async_reject_drop(cast(GtkDropTargetAsync*)this._cPtr, drop ? cast(GdkDrop*)drop._cPtr(No.Dup) : null);
   }
 
   /**
@@ -177,7 +177,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   void setActions(gdk.types.DragAction actions)
   {
-    gtk_drop_target_async_set_actions(cast(GtkDropTargetAsync*)cPtr, actions);
+    gtk_drop_target_async_set_actions(cast(GtkDropTargetAsync*)this._cPtr, actions);
   }
 
   /**
@@ -188,7 +188,7 @@ class DropTargetAsync : gtk.event_controller.EventController
   */
   void setFormats(gdk.content_formats.ContentFormats formats = null)
   {
-    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)cPtr, formats ? cast(GdkContentFormats*)formats.cPtr(No.Dup) : null);
+    gtk_drop_target_async_set_formats(cast(GtkDropTargetAsync*)this._cPtr, formats ? cast(GdkContentFormats*)formats._cPtr(No.Dup) : null);
   }
 
   /**

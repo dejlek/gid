@@ -21,16 +21,16 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_sink_node_options_get_type != &gidSymbolNotFound ? garrow_sink_node_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -51,8 +51,8 @@ class SinkNodeOptions : arrow.execute_node_options.ExecuteNodeOptions
   arrow.record_batch_reader.RecordBatchReader getReader(arrow.schema.Schema schema)
   {
     GArrowRecordBatchReader* _cretval;
-    _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)cPtr, schema ? cast(GArrowSchema*)schema.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
+    _cretval = garrow_sink_node_options_get_reader(cast(GArrowSinkNodeOptions*)this._cPtr, schema ? cast(GArrowSchema*)schema._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(arrow.record_batch_reader.RecordBatchReader)(cast(GArrowRecordBatchReader*)_cretval, Yes.Take);
     return _retval;
   }
 }

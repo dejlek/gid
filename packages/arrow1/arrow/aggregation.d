@@ -19,16 +19,16 @@ class Aggregation : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_aggregation_get_type != &gidSymbolNotFound ? garrow_aggregation_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -44,7 +44,7 @@ class Aggregation : gobject.object.ObjectWrap
     const(char)* _function_ = function_.toCString(No.Alloc);
     const(char)* _input = input.toCString(No.Alloc);
     const(char)* _output = output.toCString(No.Alloc);
-    _cretval = garrow_aggregation_new(_function_, options ? cast(GArrowFunctionOptions*)options.cPtr(No.Dup) : null, _input, _output);
+    _cretval = garrow_aggregation_new(_function_, options ? cast(GArrowFunctionOptions*)options._cPtr(No.Dup) : null, _input, _output);
     this(_cretval, Yes.Take);
   }
 }

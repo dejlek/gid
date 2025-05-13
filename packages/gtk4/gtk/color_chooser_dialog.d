@@ -56,16 +56,16 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_color_chooser_dialog_get_type != &gidSymbolNotFound ? gtk_color_chooser_dialog_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -102,7 +102,7 @@ class ColorChooserDialog : gtk.dialog.Dialog, gtk.color_chooser.ColorChooser
   {
     GtkWidget* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent.cPtr(No.Dup) : null);
+    _cretval = gtk_color_chooser_dialog_new(_title, parent ? cast(GtkWindow*)parent._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 }

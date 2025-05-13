@@ -53,16 +53,16 @@ class NavigationPage : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_navigation_page_get_type != &gidSymbolNotFound ? adw_navigation_page_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -201,7 +201,7 @@ class NavigationPage : gtk.widget.Widget
   {
     AdwNavigationPage* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
-    _cretval = adw_navigation_page_new(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _title);
+    _cretval = adw_navigation_page_new(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title);
     this(_cretval, No.Take);
   }
 
@@ -219,8 +219,8 @@ class NavigationPage : gtk.widget.Widget
     AdwNavigationPage* _cretval;
     const(char)* _title = title.toCString(No.Alloc);
     const(char)* _tag = tag.toCString(No.Alloc);
-    _cretval = adw_navigation_page_new_with_tag(child ? cast(GtkWidget*)child.cPtr(No.Dup) : null, _title, _tag);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
+    _cretval = adw_navigation_page_new_with_tag(child ? cast(GtkWidget*)child._cPtr(No.Dup) : null, _title, _tag);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.navigation_page.NavigationPage)(cast(AdwNavigationPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -231,7 +231,7 @@ class NavigationPage : gtk.widget.Widget
   bool getCanPop()
   {
     bool _retval;
-    _retval = adw_navigation_page_get_can_pop(cast(AdwNavigationPage*)cPtr);
+    _retval = adw_navigation_page_get_can_pop(cast(AdwNavigationPage*)this._cPtr);
     return _retval;
   }
 
@@ -242,8 +242,8 @@ class NavigationPage : gtk.widget.Widget
   gtk.widget.Widget getChild()
   {
     GtkWidget* _cretval;
-    _cretval = adw_navigation_page_get_child(cast(AdwNavigationPage*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_navigation_page_get_child(cast(AdwNavigationPage*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class NavigationPage : gtk.widget.Widget
   string getTag()
   {
     const(char)* _cretval;
-    _cretval = adw_navigation_page_get_tag(cast(AdwNavigationPage*)cPtr);
+    _cretval = adw_navigation_page_get_tag(cast(AdwNavigationPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -266,7 +266,7 @@ class NavigationPage : gtk.widget.Widget
   string getTitle()
   {
     const(char)* _cretval;
-    _cretval = adw_navigation_page_get_title(cast(AdwNavigationPage*)cPtr);
+    _cretval = adw_navigation_page_get_title(cast(AdwNavigationPage*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -288,7 +288,7 @@ class NavigationPage : gtk.widget.Widget
   */
   void setCanPop(bool canPop)
   {
-    adw_navigation_page_set_can_pop(cast(AdwNavigationPage*)cPtr, canPop);
+    adw_navigation_page_set_can_pop(cast(AdwNavigationPage*)this._cPtr, canPop);
   }
 
   /**
@@ -299,7 +299,7 @@ class NavigationPage : gtk.widget.Widget
   */
   void setChild(gtk.widget.Widget child = null)
   {
-    adw_navigation_page_set_child(cast(AdwNavigationPage*)cPtr, child ? cast(GtkWidget*)child.cPtr(No.Dup) : null);
+    adw_navigation_page_set_child(cast(AdwNavigationPage*)this._cPtr, child ? cast(GtkWidget*)child._cPtr(No.Dup) : null);
   }
 
   /**
@@ -320,7 +320,7 @@ class NavigationPage : gtk.widget.Widget
   void setTag(string tag = null)
   {
     const(char)* _tag = tag.toCString(No.Alloc);
-    adw_navigation_page_set_tag(cast(AdwNavigationPage*)cPtr, _tag);
+    adw_navigation_page_set_tag(cast(AdwNavigationPage*)this._cPtr, _tag);
   }
 
   /**
@@ -335,7 +335,7 @@ class NavigationPage : gtk.widget.Widget
   void setTitle(string title)
   {
     const(char)* _title = title.toCString(No.Alloc);
-    adw_navigation_page_set_title(cast(AdwNavigationPage*)cPtr, _title);
+    adw_navigation_page_set_title(cast(AdwNavigationPage*)this._cPtr, _title);
   }
 
   /**

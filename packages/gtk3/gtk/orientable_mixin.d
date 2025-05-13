@@ -46,7 +46,7 @@ template OrientableT()
   override gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_orientable_get_orientation(cast(GtkOrientable*)cPtr);
+    _cretval = gtk_orientable_get_orientation(cast(GtkOrientable*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -59,6 +59,6 @@ template OrientableT()
   */
   override void setOrientation(gtk.types.Orientation orientation)
   {
-    gtk_orientable_set_orientation(cast(GtkOrientable*)cPtr, orientation);
+    gtk_orientable_set_orientation(cast(GtkOrientable*)this._cPtr, orientation);
   }
 }

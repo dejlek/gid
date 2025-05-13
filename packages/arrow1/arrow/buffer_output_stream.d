@@ -23,16 +23,16 @@ class BufferOutputStream : arrow.output_stream.OutputStream
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_buffer_output_stream_get_type != &gidSymbolNotFound ? garrow_buffer_output_stream_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -45,7 +45,7 @@ class BufferOutputStream : arrow.output_stream.OutputStream
   this(arrow.resizable_buffer.ResizableBuffer buffer)
   {
     GArrowBufferOutputStream* _cretval;
-    _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer.cPtr(No.Dup) : null);
+    _cretval = garrow_buffer_output_stream_new(buffer ? cast(GArrowResizableBuffer*)buffer._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

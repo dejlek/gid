@@ -25,22 +25,22 @@ class TreeRowReference : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tree_row_reference_get_type != &gidSymbolNotFound ? gtk_tree_row_reference_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -65,7 +65,7 @@ class TreeRowReference : gobject.boxed.Boxed
   this(gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
   {
     GtkTreeRowReference* _cretval;
-    _cretval = gtk_tree_row_reference_new(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _cretval = gtk_tree_row_reference_new(model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -104,7 +104,7 @@ class TreeRowReference : gobject.boxed.Boxed
   static gtk.tree_row_reference.TreeRowReference newProxy(gobject.object.ObjectWrap proxy, gtk.tree_model.TreeModel model, gtk.tree_path.TreePath path)
   {
     GtkTreeRowReference* _cretval;
-    _cretval = gtk_tree_row_reference_new_proxy(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model).cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    _cretval = gtk_tree_row_reference_new_proxy(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, model ? cast(GtkTreeModel*)(cast(gobject.object.ObjectWrap)model)._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.tree_row_reference.TreeRowReference(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -116,7 +116,7 @@ class TreeRowReference : gobject.boxed.Boxed
   gtk.tree_row_reference.TreeRowReference copy()
   {
     GtkTreeRowReference* _cretval;
-    _cretval = gtk_tree_row_reference_copy(cast(GtkTreeRowReference*)cPtr);
+    _cretval = gtk_tree_row_reference_copy(cast(GtkTreeRowReference*)this._cPtr);
     auto _retval = _cretval ? new gtk.tree_row_reference.TreeRowReference(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -128,8 +128,8 @@ class TreeRowReference : gobject.boxed.Boxed
   gtk.tree_model.TreeModel getModel()
   {
     GtkTreeModel* _cretval;
-    _cretval = gtk_tree_row_reference_get_model(cast(GtkTreeRowReference*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
+    _cretval = gtk_tree_row_reference_get_model(cast(GtkTreeRowReference*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.tree_model.TreeModel)(cast(GtkTreeModel*)_cretval, No.Take);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class TreeRowReference : gobject.boxed.Boxed
   gtk.tree_path.TreePath getPath()
   {
     GtkTreePath* _cretval;
-    _cretval = gtk_tree_row_reference_get_path(cast(GtkTreeRowReference*)cPtr);
+    _cretval = gtk_tree_row_reference_get_path(cast(GtkTreeRowReference*)this._cPtr);
     auto _retval = _cretval ? new gtk.tree_path.TreePath(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -154,7 +154,7 @@ class TreeRowReference : gobject.boxed.Boxed
   bool valid()
   {
     bool _retval;
-    _retval = gtk_tree_row_reference_valid(cast(GtkTreeRowReference*)cPtr);
+    _retval = gtk_tree_row_reference_valid(cast(GtkTreeRowReference*)this._cPtr);
     return _retval;
   }
 
@@ -169,7 +169,7 @@ class TreeRowReference : gobject.boxed.Boxed
   */
   static void deleted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path)
   {
-    gtk_tree_row_reference_deleted(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_row_reference_deleted(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 
   /**
@@ -183,6 +183,6 @@ class TreeRowReference : gobject.boxed.Boxed
   */
   static void inserted(gobject.object.ObjectWrap proxy, gtk.tree_path.TreePath path)
   {
-    gtk_tree_row_reference_inserted(proxy ? cast(ObjectC*)proxy.cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path.cPtr(No.Dup) : null);
+    gtk_tree_row_reference_inserted(proxy ? cast(GObject*)proxy._cPtr(No.Dup) : null, path ? cast(GtkTreePath*)path._cPtr(No.Dup) : null);
   }
 }

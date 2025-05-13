@@ -27,16 +27,16 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_view_stack_pages_get_type != &gidSymbolNotFound ? adw_view_stack_pages_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -88,8 +88,8 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   adw.view_stack_page.ViewStackPage getSelectedPage()
   {
     AdwViewStackPage* _cretval;
-    _cretval = adw_view_stack_pages_get_selected_page(cast(AdwViewStackPages*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
+    _cretval = adw_view_stack_pages_get_selected_page(cast(AdwViewStackPages*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(adw.view_stack_page.ViewStackPage)(cast(AdwViewStackPage*)_cretval, No.Take);
     return _retval;
   }
 
@@ -103,6 +103,6 @@ class ViewStackPages : gobject.object.ObjectWrap, gio.list_model.ListModel, gtk.
   */
   void setSelectedPage(adw.view_stack_page.ViewStackPage page)
   {
-    adw_view_stack_pages_set_selected_page(cast(AdwViewStackPages*)cPtr, page ? cast(AdwViewStackPage*)page.cPtr(No.Dup) : null);
+    adw_view_stack_pages_set_selected_page(cast(AdwViewStackPages*)this._cPtr, page ? cast(AdwViewStackPage*)page._cPtr(No.Dup) : null);
   }
 }

@@ -40,16 +40,16 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_tool_item_get_type != &gidSymbolNotFound ? gtk_tool_item_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,7 +117,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   pango.types.EllipsizeMode getEllipsizeMode()
   {
     PangoEllipsizeMode _cretval;
-    _cretval = gtk_tool_item_get_ellipsize_mode(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_ellipsize_mode(cast(GtkToolItem*)this._cPtr);
     pango.types.EllipsizeMode _retval = cast(pango.types.EllipsizeMode)_cretval;
     return _retval;
   }
@@ -130,7 +130,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getExpand()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_expand(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_expand(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -143,7 +143,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getHomogeneous()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_homogeneous(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_homogeneous(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -157,7 +157,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.types.IconSize getIconSize()
   {
     GtkIconSize _cretval;
-    _cretval = gtk_tool_item_get_icon_size(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_icon_size(cast(GtkToolItem*)this._cPtr);
     gtk.types.IconSize _retval = cast(gtk.types.IconSize)_cretval;
     return _retval;
   }
@@ -170,7 +170,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getIsImportant()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_is_important(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_is_important(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -184,7 +184,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.types.Orientation getOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_tool_item_get_orientation(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_orientation(cast(GtkToolItem*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -208,8 +208,8 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   {
     GtkWidget* _cretval;
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
-    _cretval = gtk_tool_item_get_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_item_get_proxy_menu_item(cast(GtkToolItem*)this._cPtr, _menuItemId);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -224,7 +224,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.types.ReliefStyle getReliefStyle()
   {
     GtkReliefStyle _cretval;
-    _cretval = gtk_tool_item_get_relief_style(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_relief_style(cast(GtkToolItem*)this._cPtr);
     gtk.types.ReliefStyle _retval = cast(gtk.types.ReliefStyle)_cretval;
     return _retval;
   }
@@ -239,7 +239,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   float getTextAlignment()
   {
     float _retval;
-    _retval = gtk_tool_item_get_text_alignment(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_text_alignment(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -253,7 +253,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.types.Orientation getTextOrientation()
   {
     GtkOrientation _cretval;
-    _cretval = gtk_tool_item_get_text_orientation(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_text_orientation(cast(GtkToolItem*)this._cPtr);
     gtk.types.Orientation _retval = cast(gtk.types.Orientation)_cretval;
     return _retval;
   }
@@ -267,8 +267,8 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.size_group.SizeGroup getTextSizeGroup()
   {
     GtkSizeGroup* _cretval;
-    _cretval = gtk_tool_item_get_text_size_group(cast(GtkToolItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
+    _cretval = gtk_tool_item_get_text_size_group(cast(GtkToolItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.size_group.SizeGroup)(cast(GtkSizeGroup*)_cretval, No.Take);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.types.ToolbarStyle getToolbarStyle()
   {
     GtkToolbarStyle _cretval;
-    _cretval = gtk_tool_item_get_toolbar_style(cast(GtkToolItem*)cPtr);
+    _cretval = gtk_tool_item_get_toolbar_style(cast(GtkToolItem*)this._cPtr);
     gtk.types.ToolbarStyle _retval = cast(gtk.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -306,7 +306,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getUseDragWindow()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_use_drag_window(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_use_drag_window(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -319,7 +319,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getVisibleHorizontal()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_visible_horizontal(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_visible_horizontal(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -331,7 +331,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   bool getVisibleVertical()
   {
     bool _retval;
-    _retval = gtk_tool_item_get_visible_vertical(cast(GtkToolItem*)cPtr);
+    _retval = gtk_tool_item_get_visible_vertical(cast(GtkToolItem*)this._cPtr);
     return _retval;
   }
 
@@ -346,7 +346,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void rebuildMenu()
   {
-    gtk_tool_item_rebuild_menu(cast(GtkToolItem*)cPtr);
+    gtk_tool_item_rebuild_menu(cast(GtkToolItem*)this._cPtr);
   }
 
   /**
@@ -359,8 +359,8 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   gtk.widget.Widget retrieveProxyMenuItem()
   {
     GtkWidget* _cretval;
-    _cretval = gtk_tool_item_retrieve_proxy_menu_item(cast(GtkToolItem*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = gtk_tool_item_retrieve_proxy_menu_item(cast(GtkToolItem*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -375,7 +375,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setExpand(bool expand)
   {
-    gtk_tool_item_set_expand(cast(GtkToolItem*)cPtr, expand);
+    gtk_tool_item_set_expand(cast(GtkToolItem*)this._cPtr, expand);
   }
 
   /**
@@ -388,7 +388,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setHomogeneous(bool homogeneous)
   {
-    gtk_tool_item_set_homogeneous(cast(GtkToolItem*)cPtr, homogeneous);
+    gtk_tool_item_set_homogeneous(cast(GtkToolItem*)this._cPtr, homogeneous);
   }
 
   /**
@@ -403,7 +403,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setIsImportant(bool isImportant)
   {
-    gtk_tool_item_set_is_important(cast(GtkToolItem*)cPtr, isImportant);
+    gtk_tool_item_set_is_important(cast(GtkToolItem*)this._cPtr, isImportant);
   }
 
   /**
@@ -420,7 +420,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   void setProxyMenuItem(string menuItemId, gtk.widget.Widget menuItem = null)
   {
     const(char)* _menuItemId = menuItemId.toCString(No.Alloc);
-    gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem.cPtr(No.Dup) : null);
+    gtk_tool_item_set_proxy_menu_item(cast(GtkToolItem*)this._cPtr, _menuItemId, menuItem ? cast(GtkWidget*)menuItem._cPtr(No.Dup) : null);
   }
 
   /**
@@ -433,7 +433,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   override void setTooltipMarkup(string markup)
   {
     const(char)* _markup = markup.toCString(No.Alloc);
-    gtk_tool_item_set_tooltip_markup(cast(GtkToolItem*)cPtr, _markup);
+    gtk_tool_item_set_tooltip_markup(cast(GtkToolItem*)this._cPtr, _markup);
   }
 
   /**
@@ -446,7 +446,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   override void setTooltipText(string text)
   {
     const(char)* _text = text.toCString(No.Alloc);
-    gtk_tool_item_set_tooltip_text(cast(GtkToolItem*)cPtr, _text);
+    gtk_tool_item_set_tooltip_text(cast(GtkToolItem*)this._cPtr, _text);
   }
 
   /**
@@ -460,7 +460,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setUseDragWindow(bool useDragWindow)
   {
-    gtk_tool_item_set_use_drag_window(cast(GtkToolItem*)cPtr, useDragWindow);
+    gtk_tool_item_set_use_drag_window(cast(GtkToolItem*)this._cPtr, useDragWindow);
   }
 
   /**
@@ -471,7 +471,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setVisibleHorizontal(bool visibleHorizontal)
   {
-    gtk_tool_item_set_visible_horizontal(cast(GtkToolItem*)cPtr, visibleHorizontal);
+    gtk_tool_item_set_visible_horizontal(cast(GtkToolItem*)this._cPtr, visibleHorizontal);
   }
 
   /**
@@ -486,7 +486,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void setVisibleVertical(bool visibleVertical)
   {
-    gtk_tool_item_set_visible_vertical(cast(GtkToolItem*)cPtr, visibleVertical);
+    gtk_tool_item_set_visible_vertical(cast(GtkToolItem*)this._cPtr, visibleVertical);
   }
 
   /**
@@ -496,7 +496,7 @@ class ToolItem : gtk.bin.Bin, gtk.activatable.Activatable
   */
   void toolbarReconfigured()
   {
-    gtk_tool_item_toolbar_reconfigured(cast(GtkToolItem*)cPtr);
+    gtk_tool_item_toolbar_reconfigured(cast(GtkToolItem*)this._cPtr);
   }
 
   /**

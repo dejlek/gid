@@ -23,16 +23,16 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_display_egl_get_type != &gidSymbolNotFound ? gst_gl_display_egl_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -61,7 +61,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_surfaceless();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -70,7 +70,7 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   {
     GstGLDisplayEGL* _cretval;
     _cretval = gst_gl_display_egl_new_with_egl_display(display);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, No.Take);
     return _retval;
   }
 
@@ -87,8 +87,8 @@ class GLDisplayEGL : gstgl.gldisplay.GLDisplay
   static gstglegl.gldisplay_egl.GLDisplayEGL fromGlDisplay(gstgl.gldisplay.GLDisplay display)
   {
     GstGLDisplayEGL* _cretval;
-    _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
+    _cretval = gst_gl_display_egl_from_gl_display(display ? cast(GstGLDisplay*)display._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstglegl.gldisplay_egl.GLDisplayEGL)(cast(GstGLDisplayEGL*)_cretval, Yes.Take);
     return _retval;
   }
 

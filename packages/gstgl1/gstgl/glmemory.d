@@ -63,22 +63,22 @@ class GLMemory : gobject.boxed.Boxed
   }
 
   /** */
-  void* cPtr(Flag!"Dup" dup = No.Dup)
+  void* _cPtr(Flag!"Dup" dup = No.Dup)
   {
     return dup ? copy_ : cInstancePtr;
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_gl_memory_get_type != &gidSymbolNotFound ? gst_gl_memory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -93,7 +93,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstgl.glbase_memory.GLBaseMemory mem()
   {
-    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLMemory*)cPtr).mem);
+    return cToD!(gstgl.glbase_memory.GLBaseMemory)(cast(void*)&(cast(GstGLMemory*)this._cPtr).mem);
   }
 
   /**
@@ -102,7 +102,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property uint texId()
   {
-    return (cast(GstGLMemory*)cPtr).texId;
+    return (cast(GstGLMemory*)this._cPtr).texId;
   }
 
   /**
@@ -112,7 +112,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property void texId(uint propval)
   {
-    (cast(GstGLMemory*)cPtr).texId = propval;
+    (cast(GstGLMemory*)this._cPtr).texId = propval;
   }
 
   /**
@@ -121,7 +121,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstgl.types.GLTextureTarget texTarget()
   {
-    return cast(gstgl.types.GLTextureTarget)(cast(GstGLMemory*)cPtr).texTarget;
+    return cast(gstgl.types.GLTextureTarget)(cast(GstGLMemory*)this._cPtr).texTarget;
   }
 
   /**
@@ -131,7 +131,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property void texTarget(gstgl.types.GLTextureTarget propval)
   {
-    (cast(GstGLMemory*)cPtr).texTarget = cast(GstGLTextureTarget)propval;
+    (cast(GstGLMemory*)this._cPtr).texTarget = cast(GstGLTextureTarget)propval;
   }
 
   /**
@@ -140,7 +140,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstgl.types.GLFormat texFormat()
   {
-    return cast(gstgl.types.GLFormat)(cast(GstGLMemory*)cPtr).texFormat;
+    return cast(gstgl.types.GLFormat)(cast(GstGLMemory*)this._cPtr).texFormat;
   }
 
   /**
@@ -150,7 +150,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property void texFormat(gstgl.types.GLFormat propval)
   {
-    (cast(GstGLMemory*)cPtr).texFormat = cast(GstGLFormat)propval;
+    (cast(GstGLMemory*)this._cPtr).texFormat = cast(GstGLFormat)propval;
   }
 
   /**
@@ -159,7 +159,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstvideo.video_info.VideoInfo info()
   {
-    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstGLMemory*)cPtr).info);
+    return cToD!(gstvideo.video_info.VideoInfo)(cast(void*)&(cast(GstGLMemory*)this._cPtr).info);
   }
 
   /**
@@ -168,7 +168,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)cPtr).valign);
+    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)this._cPtr).valign);
   }
 
   /**
@@ -177,7 +177,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property uint plane()
   {
-    return (cast(GstGLMemory*)cPtr).plane;
+    return (cast(GstGLMemory*)this._cPtr).plane;
   }
 
   /**
@@ -187,43 +187,43 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property void plane(uint propval)
   {
-    (cast(GstGLMemory*)cPtr).plane = propval;
+    (cast(GstGLMemory*)this._cPtr).plane = propval;
   }
 
   /** */
   @property bool textureWrapped()
   {
-    return (cast(GstGLMemory*)cPtr).textureWrapped;
+    return (cast(GstGLMemory*)this._cPtr).textureWrapped;
   }
 
   /** */
   @property void textureWrapped(bool propval)
   {
-    (cast(GstGLMemory*)cPtr).textureWrapped = propval;
+    (cast(GstGLMemory*)this._cPtr).textureWrapped = propval;
   }
 
   /** */
   @property uint unpackLength()
   {
-    return (cast(GstGLMemory*)cPtr).unpackLength;
+    return (cast(GstGLMemory*)this._cPtr).unpackLength;
   }
 
   /** */
   @property void unpackLength(uint propval)
   {
-    (cast(GstGLMemory*)cPtr).unpackLength = propval;
+    (cast(GstGLMemory*)this._cPtr).unpackLength = propval;
   }
 
   /** */
   @property uint texWidth()
   {
-    return (cast(GstGLMemory*)cPtr).texWidth;
+    return (cast(GstGLMemory*)this._cPtr).texWidth;
   }
 
   /** */
   @property void texWidth(uint propval)
   {
-    (cast(GstGLMemory*)cPtr).texWidth = propval;
+    (cast(GstGLMemory*)this._cPtr).texWidth = propval;
   }
 
   /**
@@ -241,7 +241,7 @@ class GLMemory : gobject.boxed.Boxed
   bool copyInto(uint texId, gstgl.types.GLTextureTarget target, gstgl.types.GLFormat texFormat, int width, int height)
   {
     bool _retval;
-    _retval = gst_gl_memory_copy_into(cast(GstGLMemory*)cPtr, texId, target, texFormat, width, height);
+    _retval = gst_gl_memory_copy_into(cast(GstGLMemory*)this._cPtr, texId, target, texFormat, width, height);
     return _retval;
   }
 
@@ -260,7 +260,7 @@ class GLMemory : gobject.boxed.Boxed
   bool copyTeximage(uint texId, gstgl.types.GLTextureTarget outTarget, gstgl.types.GLFormat outTexFormat, int outWidth, int outHeight)
   {
     bool _retval;
-    _retval = gst_gl_memory_copy_teximage(cast(GstGLMemory*)cPtr, texId, outTarget, outTexFormat, outWidth, outHeight);
+    _retval = gst_gl_memory_copy_teximage(cast(GstGLMemory*)this._cPtr, texId, outTarget, outTexFormat, outWidth, outHeight);
     return _retval;
   }
 
@@ -268,7 +268,7 @@ class GLMemory : gobject.boxed.Boxed
   gstgl.types.GLFormat getTextureFormat()
   {
     GstGLFormat _cretval;
-    _cretval = gst_gl_memory_get_texture_format(cast(GstGLMemory*)cPtr);
+    _cretval = gst_gl_memory_get_texture_format(cast(GstGLMemory*)this._cPtr);
     gstgl.types.GLFormat _retval = cast(gstgl.types.GLFormat)_cretval;
     return _retval;
   }
@@ -277,7 +277,7 @@ class GLMemory : gobject.boxed.Boxed
   int getTextureHeight()
   {
     int _retval;
-    _retval = gst_gl_memory_get_texture_height(cast(GstGLMemory*)cPtr);
+    _retval = gst_gl_memory_get_texture_height(cast(GstGLMemory*)this._cPtr);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class GLMemory : gobject.boxed.Boxed
   uint getTextureId()
   {
     uint _retval;
-    _retval = gst_gl_memory_get_texture_id(cast(GstGLMemory*)cPtr);
+    _retval = gst_gl_memory_get_texture_id(cast(GstGLMemory*)this._cPtr);
     return _retval;
   }
 
@@ -293,7 +293,7 @@ class GLMemory : gobject.boxed.Boxed
   gstgl.types.GLTextureTarget getTextureTarget()
   {
     GstGLTextureTarget _cretval;
-    _cretval = gst_gl_memory_get_texture_target(cast(GstGLMemory*)cPtr);
+    _cretval = gst_gl_memory_get_texture_target(cast(GstGLMemory*)this._cPtr);
     gstgl.types.GLTextureTarget _retval = cast(gstgl.types.GLTextureTarget)_cretval;
     return _retval;
   }
@@ -302,7 +302,7 @@ class GLMemory : gobject.boxed.Boxed
   int getTextureWidth()
   {
     int _retval;
-    _retval = gst_gl_memory_get_texture_width(cast(GstGLMemory*)cPtr);
+    _retval = gst_gl_memory_get_texture_width(cast(GstGLMemory*)this._cPtr);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class GLMemory : gobject.boxed.Boxed
       (*_dlg)();
     }
     auto _notifyCB = notify ? &_notifyCallback : null;
-    gst_gl_memory_init(cast(GstGLMemory*)cPtr, allocator ? cast(GstAllocator*)allocator.cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent.cPtr(No.Dup) : null, context ? cast(GstGLContext*)context.cPtr(No.Dup) : null, target, texFormat, params ? cast(const(GstAllocationParams)*)params.cPtr(No.Dup) : null, info ? cast(const(GstVideoInfo)*)info.cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign.cPtr : null, userData, _notifyCB);
+    gst_gl_memory_init(cast(GstGLMemory*)this._cPtr, allocator ? cast(GstAllocator*)allocator._cPtr(No.Dup) : null, parent ? cast(GstMemory*)parent._cPtr(No.Dup) : null, context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, target, texFormat, params ? cast(const(GstAllocationParams)*)params._cPtr(No.Dup) : null, info ? cast(const(GstVideoInfo)*)info._cPtr(No.Dup) : null, plane, valign ? cast(const(GstVideoAlignment)*)valign._cPtr : null, userData, _notifyCB);
   }
 
   /**
@@ -350,7 +350,7 @@ class GLMemory : gobject.boxed.Boxed
   bool readPixels(void* writePointer = null)
   {
     bool _retval;
-    _retval = gst_gl_memory_read_pixels(cast(GstGLMemory*)cPtr, writePointer);
+    _retval = gst_gl_memory_read_pixels(cast(GstGLMemory*)this._cPtr, writePointer);
     return _retval;
   }
 
@@ -364,7 +364,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   void texsubimage(void* readPointer = null)
   {
-    gst_gl_memory_texsubimage(cast(GstGLMemory*)cPtr, readPointer);
+    gst_gl_memory_texsubimage(cast(GstGLMemory*)this._cPtr, readPointer);
   }
 
   /**

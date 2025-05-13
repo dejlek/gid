@@ -126,16 +126,16 @@ class ToolbarView : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())adw_toolbar_view_get_type != &gidSymbolNotFound ? adw_toolbar_view_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -470,7 +470,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void addBottomBar(gtk.widget.Widget widget)
   {
-    adw_toolbar_view_add_bottom_bar(cast(AdwToolbarView*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_toolbar_view_add_bottom_bar(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -481,7 +481,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void addTopBar(gtk.widget.Widget widget)
   {
-    adw_toolbar_view_add_top_bar(cast(AdwToolbarView*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_toolbar_view_add_top_bar(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -496,7 +496,7 @@ class ToolbarView : gtk.widget.Widget
   int getBottomBarHeight()
   {
     int _retval;
-    _retval = adw_toolbar_view_get_bottom_bar_height(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_bottom_bar_height(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -507,7 +507,7 @@ class ToolbarView : gtk.widget.Widget
   adw.types.ToolbarStyle getBottomBarStyle()
   {
     AdwToolbarStyle _cretval;
-    _cretval = adw_toolbar_view_get_bottom_bar_style(cast(AdwToolbarView*)cPtr);
+    _cretval = adw_toolbar_view_get_bottom_bar_style(cast(AdwToolbarView*)this._cPtr);
     adw.types.ToolbarStyle _retval = cast(adw.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -519,8 +519,8 @@ class ToolbarView : gtk.widget.Widget
   gtk.widget.Widget getContent()
   {
     GtkWidget* _cretval;
-    _cretval = adw_toolbar_view_get_content(cast(AdwToolbarView*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
+    _cretval = adw_toolbar_view_get_content(cast(AdwToolbarView*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.widget.Widget)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -531,7 +531,7 @@ class ToolbarView : gtk.widget.Widget
   bool getExtendContentToBottomEdge()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_extend_content_to_bottom_edge(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -542,7 +542,7 @@ class ToolbarView : gtk.widget.Widget
   bool getExtendContentToTopEdge()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_extend_content_to_top_edge(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -553,7 +553,7 @@ class ToolbarView : gtk.widget.Widget
   bool getRevealBottomBars()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_reveal_bottom_bars(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -564,7 +564,7 @@ class ToolbarView : gtk.widget.Widget
   bool getRevealTopBars()
   {
     bool _retval;
-    _retval = adw_toolbar_view_get_reveal_top_bars(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_reveal_top_bars(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -580,7 +580,7 @@ class ToolbarView : gtk.widget.Widget
   int getTopBarHeight()
   {
     int _retval;
-    _retval = adw_toolbar_view_get_top_bar_height(cast(AdwToolbarView*)cPtr);
+    _retval = adw_toolbar_view_get_top_bar_height(cast(AdwToolbarView*)this._cPtr);
     return _retval;
   }
 
@@ -591,7 +591,7 @@ class ToolbarView : gtk.widget.Widget
   adw.types.ToolbarStyle getTopBarStyle()
   {
     AdwToolbarStyle _cretval;
-    _cretval = adw_toolbar_view_get_top_bar_style(cast(AdwToolbarView*)cPtr);
+    _cretval = adw_toolbar_view_get_top_bar_style(cast(AdwToolbarView*)this._cPtr);
     adw.types.ToolbarStyle _retval = cast(adw.types.ToolbarStyle)_cretval;
     return _retval;
   }
@@ -604,7 +604,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    adw_toolbar_view_remove(cast(AdwToolbarView*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    adw_toolbar_view_remove(cast(AdwToolbarView*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -638,7 +638,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setBottomBarStyle(adw.types.ToolbarStyle style)
   {
-    adw_toolbar_view_set_bottom_bar_style(cast(AdwToolbarView*)cPtr, style);
+    adw_toolbar_view_set_bottom_bar_style(cast(AdwToolbarView*)this._cPtr, style);
   }
 
   /**
@@ -649,7 +649,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setContent(gtk.widget.Widget content = null)
   {
-    adw_toolbar_view_set_content(cast(AdwToolbarView*)cPtr, content ? cast(GtkWidget*)content.cPtr(No.Dup) : null);
+    adw_toolbar_view_set_content(cast(AdwToolbarView*)this._cPtr, content ? cast(GtkWidget*)content._cPtr(No.Dup) : null);
   }
 
   /**
@@ -665,7 +665,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setExtendContentToBottomEdge(bool extend)
   {
-    adw_toolbar_view_set_extend_content_to_bottom_edge(cast(AdwToolbarView*)cPtr, extend);
+    adw_toolbar_view_set_extend_content_to_bottom_edge(cast(AdwToolbarView*)this._cPtr, extend);
   }
 
   /**
@@ -681,7 +681,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setExtendContentToTopEdge(bool extend)
   {
-    adw_toolbar_view_set_extend_content_to_top_edge(cast(AdwToolbarView*)cPtr, extend);
+    adw_toolbar_view_set_extend_content_to_top_edge(cast(AdwToolbarView*)this._cPtr, extend);
   }
 
   /**
@@ -700,7 +700,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setRevealBottomBars(bool reveal)
   {
-    adw_toolbar_view_set_reveal_bottom_bars(cast(AdwToolbarView*)cPtr, reveal);
+    adw_toolbar_view_set_reveal_bottom_bars(cast(AdwToolbarView*)this._cPtr, reveal);
   }
 
   /**
@@ -719,7 +719,7 @@ class ToolbarView : gtk.widget.Widget
   */
   void setRevealTopBars(bool reveal)
   {
-    adw_toolbar_view_set_reveal_top_bars(cast(AdwToolbarView*)cPtr, reveal);
+    adw_toolbar_view_set_reveal_top_bars(cast(AdwToolbarView*)this._cPtr, reveal);
   }
 
   /**
@@ -753,6 +753,6 @@ class ToolbarView : gtk.widget.Widget
   */
   void setTopBarStyle(adw.types.ToolbarStyle style)
   {
-    adw_toolbar_view_set_top_bar_style(cast(AdwToolbarView*)cPtr, style);
+    adw_toolbar_view_set_top_bar_style(cast(AdwToolbarView*)this._cPtr, style);
   }
 }

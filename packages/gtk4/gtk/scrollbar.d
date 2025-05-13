@@ -71,16 +71,16 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_scrollbar_get_type != &gidSymbolNotFound ? gtk_scrollbar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -122,7 +122,7 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   this(gtk.types.Orientation orientation, gtk.adjustment.Adjustment adjustment = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    _cretval = gtk_scrollbar_new(orientation, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
     this(_cretval, No.Take);
   }
 
@@ -133,8 +133,8 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.adjustment.Adjustment getAdjustment()
   {
     GtkAdjustment* _cretval;
-    _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
+    _cretval = gtk_scrollbar_get_adjustment(cast(GtkScrollbar*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.adjustment.Adjustment)(cast(GtkAdjustment*)_cretval, No.Take);
     return _retval;
   }
 
@@ -146,6 +146,6 @@ class Scrollbar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setAdjustment(gtk.adjustment.Adjustment adjustment = null)
   {
-    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)cPtr, adjustment ? cast(GtkAdjustment*)adjustment.cPtr(No.Dup) : null);
+    gtk_scrollbar_set_adjustment(cast(GtkScrollbar*)this._cPtr, adjustment ? cast(GtkAdjustment*)adjustment._cPtr(No.Dup) : null);
   }
 }

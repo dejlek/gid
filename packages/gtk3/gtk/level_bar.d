@@ -120,16 +120,16 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_level_bar_get_type != &gidSymbolNotFound ? gtk_level_bar_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -281,7 +281,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     GtkWidget* _cretval;
     _cretval = gtk_level_bar_new_for_interval(minValue, maxValue);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.level_bar.LevelBar)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
 
@@ -301,7 +301,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   void addOffsetValue(string name, double value)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_level_bar_add_offset_value(cast(GtkLevelBar*)cPtr, _name, value);
+    gtk_level_bar_add_offset_value(cast(GtkLevelBar*)this._cPtr, _name, value);
   }
 
   /**
@@ -311,7 +311,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   bool getInverted()
   {
     bool _retval;
-    _retval = gtk_level_bar_get_inverted(cast(GtkLevelBar*)cPtr);
+    _retval = gtk_level_bar_get_inverted(cast(GtkLevelBar*)this._cPtr);
     return _retval;
   }
 
@@ -322,7 +322,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   double getMaxValue()
   {
     double _retval;
-    _retval = gtk_level_bar_get_max_value(cast(GtkLevelBar*)cPtr);
+    _retval = gtk_level_bar_get_max_value(cast(GtkLevelBar*)this._cPtr);
     return _retval;
   }
 
@@ -333,7 +333,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   double getMinValue()
   {
     double _retval;
-    _retval = gtk_level_bar_get_min_value(cast(GtkLevelBar*)cPtr);
+    _retval = gtk_level_bar_get_min_value(cast(GtkLevelBar*)this._cPtr);
     return _retval;
   }
 
@@ -344,7 +344,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   gtk.types.LevelBarMode getMode()
   {
     GtkLevelBarMode _cretval;
-    _cretval = gtk_level_bar_get_mode(cast(GtkLevelBar*)cPtr);
+    _cretval = gtk_level_bar_get_mode(cast(GtkLevelBar*)this._cPtr);
     gtk.types.LevelBarMode _retval = cast(gtk.types.LevelBarMode)_cretval;
     return _retval;
   }
@@ -362,7 +362,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   {
     bool _retval;
     const(char)* _name = name.toCString(No.Alloc);
-    _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)cPtr, _name, cast(double*)&value);
+    _retval = gtk_level_bar_get_offset_value(cast(GtkLevelBar*)this._cPtr, _name, cast(double*)&value);
     return _retval;
   }
 
@@ -374,7 +374,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   double getValue()
   {
     double _retval;
-    _retval = gtk_level_bar_get_value(cast(GtkLevelBar*)cPtr);
+    _retval = gtk_level_bar_get_value(cast(GtkLevelBar*)this._cPtr);
     return _retval;
   }
 
@@ -388,7 +388,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   void removeOffsetValue(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)cPtr, _name);
+    gtk_level_bar_remove_offset_value(cast(GtkLevelBar*)this._cPtr, _name);
   }
 
   /**
@@ -399,7 +399,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setInverted(bool inverted)
   {
-    gtk_level_bar_set_inverted(cast(GtkLevelBar*)cPtr, inverted);
+    gtk_level_bar_set_inverted(cast(GtkLevelBar*)this._cPtr, inverted);
   }
 
   /**
@@ -413,7 +413,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setMaxValue(double value)
   {
-    gtk_level_bar_set_max_value(cast(GtkLevelBar*)cPtr, value);
+    gtk_level_bar_set_max_value(cast(GtkLevelBar*)this._cPtr, value);
   }
 
   /**
@@ -427,7 +427,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setMinValue(double value)
   {
-    gtk_level_bar_set_min_value(cast(GtkLevelBar*)cPtr, value);
+    gtk_level_bar_set_min_value(cast(GtkLevelBar*)this._cPtr, value);
   }
 
   /**
@@ -438,7 +438,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setMode(gtk.types.LevelBarMode mode)
   {
-    gtk_level_bar_set_mode(cast(GtkLevelBar*)cPtr, mode);
+    gtk_level_bar_set_mode(cast(GtkLevelBar*)this._cPtr, mode);
   }
 
   /**
@@ -450,7 +450,7 @@ class LevelBar : gtk.widget.Widget, gtk.orientable.Orientable
   */
   void setValue(double value)
   {
-    gtk_level_bar_set_value(cast(GtkLevelBar*)cPtr, value);
+    gtk_level_bar_set_value(cast(GtkLevelBar*)this._cPtr, value);
   }
 
   /**

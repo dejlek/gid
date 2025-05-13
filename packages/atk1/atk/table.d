@@ -46,7 +46,7 @@ interface Table
 {
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())atk_table_get_type != &gidSymbolNotFound ? atk_table_get_type() : cast(GType)0;

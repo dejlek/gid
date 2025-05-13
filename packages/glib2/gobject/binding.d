@@ -94,16 +94,16 @@ class Binding : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_binding_get_type != &gidSymbolNotFound ? g_binding_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -123,9 +123,9 @@ class Binding : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap dupSource()
   {
-    ObjectC* _cretval;
-    _cretval = g_binding_dup_source(cast(GBinding*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_binding_dup_source(cast(GBinding*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -140,9 +140,9 @@ class Binding : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap dupTarget()
   {
-    ObjectC* _cretval;
-    _cretval = g_binding_dup_target(cast(GBinding*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, Yes.Take);
+    GObject* _cretval;
+    _cretval = g_binding_dup_target(cast(GBinding*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class Binding : gobject.object.ObjectWrap
   gobject.types.BindingFlags getFlags()
   {
     GBindingFlags _cretval;
-    _cretval = g_binding_get_flags(cast(GBinding*)cPtr);
+    _cretval = g_binding_get_flags(cast(GBinding*)this._cPtr);
     gobject.types.BindingFlags _retval = cast(gobject.types.BindingFlags)_cretval;
     return _retval;
   }
@@ -176,9 +176,9 @@ class Binding : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getSource()
   {
-    ObjectC* _cretval;
-    _cretval = g_binding_get_source(cast(GBinding*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_binding_get_source(cast(GBinding*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -190,7 +190,7 @@ class Binding : gobject.object.ObjectWrap
   string getSourceProperty()
   {
     const(char)* _cretval;
-    _cretval = g_binding_get_source_property(cast(GBinding*)cPtr);
+    _cretval = g_binding_get_source_property(cast(GBinding*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -213,9 +213,9 @@ class Binding : gobject.object.ObjectWrap
   */
   gobject.object.ObjectWrap getTarget()
   {
-    ObjectC* _cretval;
-    _cretval = g_binding_get_target(cast(GBinding*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gobject.object.ObjectWrap)(cast(ObjectC*)_cretval, No.Take);
+    GObject* _cretval;
+    _cretval = g_binding_get_target(cast(GBinding*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(GObject*)_cretval, No.Take);
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class Binding : gobject.object.ObjectWrap
   string getTargetProperty()
   {
     const(char)* _cretval;
-    _cretval = g_binding_get_target_property(cast(GBinding*)cPtr);
+    _cretval = g_binding_get_target_property(cast(GBinding*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -247,6 +247,6 @@ class Binding : gobject.object.ObjectWrap
   */
   void unbind()
   {
-    g_binding_unbind(cast(GBinding*)cPtr);
+    g_binding_unbind(cast(GBinding*)this._cPtr);
   }
 }

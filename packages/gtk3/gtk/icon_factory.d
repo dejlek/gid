@@ -94,16 +94,16 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_icon_factory_get_type != &gidSymbolNotFound ? gtk_icon_factory_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -182,7 +182,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   void add(string stockId, gtk.icon_set.IconSet iconSet)
   {
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    gtk_icon_factory_add(cast(GtkIconFactory*)cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet.cPtr(No.Dup) : null);
+    gtk_icon_factory_add(cast(GtkIconFactory*)this._cPtr, _stockId, iconSet ? cast(GtkIconSet*)iconSet._cPtr(No.Dup) : null);
   }
 
   /**
@@ -197,7 +197,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void addDefault()
   {
-    gtk_icon_factory_add_default(cast(GtkIconFactory*)cPtr);
+    gtk_icon_factory_add_default(cast(GtkIconFactory*)this._cPtr);
   }
 
   /**
@@ -217,7 +217,7 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   {
     GtkIconSet* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
-    _cretval = gtk_icon_factory_lookup(cast(GtkIconFactory*)cPtr, _stockId);
+    _cretval = gtk_icon_factory_lookup(cast(GtkIconFactory*)this._cPtr, _stockId);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -231,6 +231,6 @@ class IconFactory : gobject.object.ObjectWrap, gtk.buildable.Buildable
   */
   void removeDefault()
   {
-    gtk_icon_factory_remove_default(cast(GtkIconFactory*)cPtr);
+    gtk_icon_factory_remove_default(cast(GtkIconFactory*)this._cPtr);
   }
 }

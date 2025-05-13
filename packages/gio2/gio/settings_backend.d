@@ -42,16 +42,16 @@ class SettingsBackend : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())g_settings_backend_get_type != &gidSymbolNotFound ? g_settings_backend_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -74,7 +74,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   {
     GSettingsBackend* _cretval;
     _cretval = g_settings_backend_get_default();
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gio.settings_backend.SettingsBackend)(cast(GSettingsBackend*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -109,7 +109,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   void changed(string key, void* originTag = null)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    g_settings_backend_changed(cast(GSettingsBackend*)cPtr, _key, originTag);
+    g_settings_backend_changed(cast(GSettingsBackend*)this._cPtr, _key, originTag);
   }
 
   /**
@@ -148,7 +148,7 @@ class SettingsBackend : gobject.object.ObjectWrap
       _tmpitems ~= s.toCString(No.Alloc);
     _tmpitems ~= null;
     const(char*)* _items = _tmpitems.ptr;
-    g_settings_backend_keys_changed(cast(GSettingsBackend*)cPtr, _path, _items, originTag);
+    g_settings_backend_keys_changed(cast(GSettingsBackend*)this._cPtr, _path, _items, originTag);
   }
 
   /**
@@ -181,7 +181,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   void pathChanged(string path, void* originTag = null)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_settings_backend_path_changed(cast(GSettingsBackend*)cPtr, _path, originTag);
+    g_settings_backend_path_changed(cast(GSettingsBackend*)this._cPtr, _path, originTag);
   }
 
   /**
@@ -197,7 +197,7 @@ class SettingsBackend : gobject.object.ObjectWrap
   void pathWritableChanged(string path)
   {
     const(char)* _path = path.toCString(No.Alloc);
-    g_settings_backend_path_writable_changed(cast(GSettingsBackend*)cPtr, _path);
+    g_settings_backend_path_writable_changed(cast(GSettingsBackend*)this._cPtr, _path);
   }
 
   /**
@@ -212,6 +212,6 @@ class SettingsBackend : gobject.object.ObjectWrap
   void writableChanged(string key)
   {
     const(char)* _key = key.toCString(No.Alloc);
-    g_settings_backend_writable_changed(cast(GSettingsBackend*)cPtr, _key);
+    g_settings_backend_writable_changed(cast(GSettingsBackend*)this._cPtr, _key);
   }
 }

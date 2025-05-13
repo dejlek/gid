@@ -25,16 +25,16 @@ class URIRequest : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())webkit_uri_request_get_type != &gidSymbolNotFound ? webkit_uri_request_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -85,7 +85,7 @@ class URIRequest : gobject.object.ObjectWrap
   soup.message_headers.MessageHeaders getHttpHeaders()
   {
     SoupMessageHeaders* _cretval;
-    _cretval = webkit_uri_request_get_http_headers(cast(WebKitURIRequest*)cPtr);
+    _cretval = webkit_uri_request_get_http_headers(cast(WebKitURIRequest*)this._cPtr);
     auto _retval = _cretval ? new soup.message_headers.MessageHeaders(cast(void*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -98,7 +98,7 @@ class URIRequest : gobject.object.ObjectWrap
   string getHttpMethod()
   {
     const(char)* _cretval;
-    _cretval = webkit_uri_request_get_http_method(cast(WebKitURIRequest*)cPtr);
+    _cretval = webkit_uri_request_get_http_method(cast(WebKitURIRequest*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -110,7 +110,7 @@ class URIRequest : gobject.object.ObjectWrap
   string getUri()
   {
     const(char)* _cretval;
-    _cretval = webkit_uri_request_get_uri(cast(WebKitURIRequest*)cPtr);
+    _cretval = webkit_uri_request_get_uri(cast(WebKitURIRequest*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -124,6 +124,6 @@ class URIRequest : gobject.object.ObjectWrap
   void setUri(string uri)
   {
     const(char)* _uri = uri.toCString(No.Alloc);
-    webkit_uri_request_set_uri(cast(WebKitURIRequest*)cPtr, _uri);
+    webkit_uri_request_set_uri(cast(WebKitURIRequest*)this._cPtr, _uri);
   }
 }

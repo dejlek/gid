@@ -18,16 +18,16 @@ class ReadOptions : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())garrow_read_options_get_type != &gidSymbolNotFound ? garrow_read_options_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -87,7 +87,7 @@ class ReadOptions : gobject.object.ObjectWrap
   {
     int* _cretval;
     size_t _cretlength;
-    _cretval = garrow_read_options_get_included_fields(cast(GArrowReadOptions*)cPtr, &_cretlength);
+    _cretval = garrow_read_options_get_included_fields(cast(GArrowReadOptions*)this._cPtr, &_cretlength);
     int[] _retval;
 
     if (_cretval)
@@ -105,6 +105,6 @@ class ReadOptions : gobject.object.ObjectWrap
       _nFields = cast(size_t)fields.length;
 
     auto _fields = cast(int*)fields.ptr;
-    garrow_read_options_set_included_fields(cast(GArrowReadOptions*)cPtr, _fields, _nFields);
+    garrow_read_options_set_included_fields(cast(GArrowReadOptions*)this._cPtr, _fields, _nFields);
   }
 }

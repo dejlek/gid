@@ -32,16 +32,16 @@ class GestureSingle : gtk.gesture.Gesture
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_gesture_single_get_type != &gidSymbolNotFound ? gtk_gesture_single_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -117,7 +117,7 @@ class GestureSingle : gtk.gesture.Gesture
   uint getButton()
   {
     uint _retval;
-    _retval = gtk_gesture_single_get_button(cast(GtkGestureSingle*)cPtr);
+    _retval = gtk_gesture_single_get_button(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class GestureSingle : gtk.gesture.Gesture
   uint getCurrentButton()
   {
     uint _retval;
-    _retval = gtk_gesture_single_get_current_button(cast(GtkGestureSingle*)cPtr);
+    _retval = gtk_gesture_single_get_current_button(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 
@@ -141,7 +141,7 @@ class GestureSingle : gtk.gesture.Gesture
   gdk.event_sequence.EventSequence getCurrentSequence()
   {
     GdkEventSequence* _cretval;
-    _cretval = gtk_gesture_single_get_current_sequence(cast(GtkGestureSingle*)cPtr);
+    _cretval = gtk_gesture_single_get_current_sequence(cast(GtkGestureSingle*)this._cPtr);
     auto _retval = _cretval ? new gdk.event_sequence.EventSequence(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -154,7 +154,7 @@ class GestureSingle : gtk.gesture.Gesture
   bool getExclusive()
   {
     bool _retval;
-    _retval = gtk_gesture_single_get_exclusive(cast(GtkGestureSingle*)cPtr);
+    _retval = gtk_gesture_single_get_exclusive(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 
@@ -165,7 +165,7 @@ class GestureSingle : gtk.gesture.Gesture
   bool getTouchOnly()
   {
     bool _retval;
-    _retval = gtk_gesture_single_get_touch_only(cast(GtkGestureSingle*)cPtr);
+    _retval = gtk_gesture_single_get_touch_only(cast(GtkGestureSingle*)this._cPtr);
     return _retval;
   }
 
@@ -179,7 +179,7 @@ class GestureSingle : gtk.gesture.Gesture
   */
   void setButton(uint button)
   {
-    gtk_gesture_single_set_button(cast(GtkGestureSingle*)cPtr, button);
+    gtk_gesture_single_set_button(cast(GtkGestureSingle*)this._cPtr, button);
   }
 
   /**
@@ -193,7 +193,7 @@ class GestureSingle : gtk.gesture.Gesture
   */
   void setExclusive(bool exclusive)
   {
-    gtk_gesture_single_set_exclusive(cast(GtkGestureSingle*)cPtr, exclusive);
+    gtk_gesture_single_set_exclusive(cast(GtkGestureSingle*)this._cPtr, exclusive);
   }
 
   /**
@@ -206,6 +206,6 @@ class GestureSingle : gtk.gesture.Gesture
   */
   void setTouchOnly(bool touchOnly)
   {
-    gtk_gesture_single_set_touch_only(cast(GtkGestureSingle*)cPtr, touchOnly);
+    gtk_gesture_single_set_touch_only(cast(GtkGestureSingle*)this._cPtr, touchOnly);
   }
 }

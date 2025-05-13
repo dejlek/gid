@@ -78,16 +78,16 @@ class Socket : gtk.container.Container
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_socket_get_type != &gidSymbolNotFound ? gtk_socket_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -126,7 +126,7 @@ class Socket : gtk.container.Container
   */
   void addId(xlib.types.Window window)
   {
-    gtk_socket_add_id(cast(GtkSocket*)cPtr, window);
+    gtk_socket_add_id(cast(GtkSocket*)this._cPtr, window);
   }
 
   /**
@@ -141,7 +141,7 @@ class Socket : gtk.container.Container
   xlib.types.Window getId()
   {
     xlib.types.Window _retval;
-    _retval = gtk_socket_get_id(cast(GtkSocket*)cPtr);
+    _retval = gtk_socket_get_id(cast(GtkSocket*)this._cPtr);
     return _retval;
   }
 
@@ -154,8 +154,8 @@ class Socket : gtk.container.Container
   gdk.window.Window getPlugWindow()
   {
     GdkWindow* _cretval;
-    _cretval = gtk_socket_get_plug_window(cast(GtkSocket*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
+    _cretval = gtk_socket_get_plug_window(cast(GtkSocket*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.window.Window)(cast(GdkWindow*)_cretval, No.Take);
     return _retval;
   }
 

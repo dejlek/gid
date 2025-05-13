@@ -24,16 +24,16 @@ class EncodingProfile : gobject.object.ObjectWrap
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gst_encoding_profile_get_type != &gidSymbolNotFound ? gst_encoding_profile_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -104,7 +104,7 @@ class EncodingProfile : gobject.object.ObjectWrap
     const(char)* _profilename = profilename.toCString(No.Alloc);
     const(char)* _category = category.toCString(No.Alloc);
     _cretval = gst_encoding_profile_find(_targetname, _profilename, _category);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -120,8 +120,8 @@ class EncodingProfile : gobject.object.ObjectWrap
   static gstpbutils.encoding_profile.EncodingProfile fromDiscoverer(gstpbutils.discoverer_info.DiscovererInfo info)
   {
     GstEncodingProfile* _cretval;
-    _cretval = gst_encoding_profile_from_discoverer(info ? cast(GstDiscovererInfo*)info.cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    _cretval = gst_encoding_profile_from_discoverer(info ? cast(GstDiscovererInfo*)info._cPtr(No.Dup) : null);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -132,8 +132,8 @@ class EncodingProfile : gobject.object.ObjectWrap
   gstpbutils.encoding_profile.EncodingProfile copy()
   {
     GstEncodingProfile* _cretval;
-    _cretval = gst_encoding_profile_copy(cast(GstEncodingProfile*)cPtr);
-    auto _retval = gobject.object.ObjectWrap.getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
+    _cretval = gst_encoding_profile_copy(cast(GstEncodingProfile*)this._cPtr);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gstpbutils.encoding_profile.EncodingProfile)(cast(GstEncodingProfile*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -145,7 +145,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool getAllowDynamicOutput()
   {
     bool _retval;
-    _retval = gst_encoding_profile_get_allow_dynamic_output(cast(GstEncodingProfile*)cPtr);
+    _retval = gst_encoding_profile_get_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -153,7 +153,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getDescription()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_description(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_description(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -162,7 +162,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   gst.structure.Structure getElementProperties()
   {
     GstStructure* _cretval;
-    _cretval = gst_encoding_profile_get_element_properties(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_element_properties(cast(GstEncodingProfile*)this._cPtr);
     auto _retval = _cretval ? new gst.structure.Structure(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -171,7 +171,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getFileExtension()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_file_extension(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_file_extension(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -180,7 +180,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   gst.caps.Caps getFormat()
   {
     GstCaps* _cretval;
-    _cretval = gst_encoding_profile_get_format(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_format(cast(GstEncodingProfile*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -193,7 +193,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   gst.caps.Caps getInputCaps()
   {
     GstCaps* _cretval;
-    _cretval = gst_encoding_profile_get_input_caps(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_input_caps(cast(GstEncodingProfile*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -202,7 +202,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getName()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_name(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_name(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -211,7 +211,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   uint getPresence()
   {
     uint _retval;
-    _retval = gst_encoding_profile_get_presence(cast(GstEncodingProfile*)cPtr);
+    _retval = gst_encoding_profile_get_presence(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -219,7 +219,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getPreset()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_preset(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_preset(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -228,7 +228,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getPresetName()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_preset_name(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_preset_name(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -237,7 +237,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   gst.caps.Caps getRestriction()
   {
     GstCaps* _cretval;
-    _cretval = gst_encoding_profile_get_restriction(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_restriction(cast(GstEncodingProfile*)this._cPtr);
     auto _retval = _cretval ? new gst.caps.Caps(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -246,7 +246,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool getSingleSegment()
   {
     bool _retval;
-    _retval = gst_encoding_profile_get_single_segment(cast(GstEncodingProfile*)cPtr);
+    _retval = gst_encoding_profile_get_single_segment(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -254,7 +254,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   string getTypeNick()
   {
     const(char)* _cretval;
-    _cretval = gst_encoding_profile_get_type_nick(cast(GstEncodingProfile*)cPtr);
+    _cretval = gst_encoding_profile_get_type_nick(cast(GstEncodingProfile*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }
@@ -263,7 +263,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool isEnabled()
   {
     bool _retval;
-    _retval = gst_encoding_profile_is_enabled(cast(GstEncodingProfile*)cPtr);
+    _retval = gst_encoding_profile_is_enabled(cast(GstEncodingProfile*)this._cPtr);
     return _retval;
   }
 
@@ -277,7 +277,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   bool isEqual(gstpbutils.encoding_profile.EncodingProfile b)
   {
     bool _retval;
-    _retval = gst_encoding_profile_is_equal(cast(GstEncodingProfile*)cPtr, b ? cast(GstEncodingProfile*)b.cPtr(No.Dup) : null);
+    _retval = gst_encoding_profile_is_equal(cast(GstEncodingProfile*)this._cPtr, b ? cast(GstEncodingProfile*)b._cPtr(No.Dup) : null);
     return _retval;
   }
 
@@ -291,7 +291,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setAllowDynamicOutput(bool allowDynamicOutput)
   {
-    gst_encoding_profile_set_allow_dynamic_output(cast(GstEncodingProfile*)cPtr, allowDynamicOutput);
+    gst_encoding_profile_set_allow_dynamic_output(cast(GstEncodingProfile*)this._cPtr, allowDynamicOutput);
   }
 
   /**
@@ -304,7 +304,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setDescription(string description = null)
   {
     const(char)* _description = description.toCString(No.Alloc);
-    gst_encoding_profile_set_description(cast(GstEncodingProfile*)cPtr, _description);
+    gst_encoding_profile_set_description(cast(GstEncodingProfile*)this._cPtr, _description);
   }
 
   /**
@@ -331,7 +331,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setElementProperties(gst.structure.Structure elementProperties)
   {
-    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)cPtr, elementProperties ? cast(GstStructure*)elementProperties.cPtr(Yes.Dup) : null);
+    gst_encoding_profile_set_element_properties(cast(GstEncodingProfile*)this._cPtr, elementProperties ? cast(GstStructure*)elementProperties._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -342,7 +342,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setEnabled(bool enabled)
   {
-    gst_encoding_profile_set_enabled(cast(GstEncodingProfile*)cPtr, enabled);
+    gst_encoding_profile_set_enabled(cast(GstEncodingProfile*)this._cPtr, enabled);
   }
 
   /**
@@ -353,7 +353,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setFormat(gst.caps.Caps format)
   {
-    gst_encoding_profile_set_format(cast(GstEncodingProfile*)cPtr, format ? cast(GstCaps*)format.cPtr(No.Dup) : null);
+    gst_encoding_profile_set_format(cast(GstEncodingProfile*)this._cPtr, format ? cast(GstCaps*)format._cPtr(No.Dup) : null);
   }
 
   /**
@@ -366,7 +366,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setName(string name = null)
   {
     const(char)* _name = name.toCString(No.Alloc);
-    gst_encoding_profile_set_name(cast(GstEncodingProfile*)cPtr, _name);
+    gst_encoding_profile_set_name(cast(GstEncodingProfile*)this._cPtr, _name);
   }
 
   /**
@@ -378,7 +378,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setPresence(uint presence)
   {
-    gst_encoding_profile_set_presence(cast(GstEncodingProfile*)cPtr, presence);
+    gst_encoding_profile_set_presence(cast(GstEncodingProfile*)this._cPtr, presence);
   }
 
   /**
@@ -392,7 +392,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setPreset(string preset = null)
   {
     const(char)* _preset = preset.toCString(No.Alloc);
-    gst_encoding_profile_set_preset(cast(GstEncodingProfile*)cPtr, _preset);
+    gst_encoding_profile_set_preset(cast(GstEncodingProfile*)this._cPtr, _preset);
   }
 
   /**
@@ -404,7 +404,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   void setPresetName(string presetName = null)
   {
     const(char)* _presetName = presetName.toCString(No.Alloc);
-    gst_encoding_profile_set_preset_name(cast(GstEncodingProfile*)cPtr, _presetName);
+    gst_encoding_profile_set_preset_name(cast(GstEncodingProfile*)this._cPtr, _presetName);
   }
 
   /**
@@ -417,7 +417,7 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setRestriction(gst.caps.Caps restriction = null)
   {
-    gst_encoding_profile_set_restriction(cast(GstEncodingProfile*)cPtr, restriction ? cast(GstCaps*)restriction.cPtr(Yes.Dup) : null);
+    gst_encoding_profile_set_restriction(cast(GstEncodingProfile*)this._cPtr, restriction ? cast(GstCaps*)restriction._cPtr(Yes.Dup) : null);
   }
 
   /**
@@ -433,6 +433,6 @@ class EncodingProfile : gobject.object.ObjectWrap
   */
   void setSingleSegment(bool singleSegment)
   {
-    gst_encoding_profile_set_single_segment(cast(GstEncodingProfile*)cPtr, singleSegment);
+    gst_encoding_profile_set_single_segment(cast(GstEncodingProfile*)this._cPtr, singleSegment);
   }
 }

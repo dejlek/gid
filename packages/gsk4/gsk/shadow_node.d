@@ -30,7 +30,7 @@ class ShadowNode : gsk.render_node.RenderNode
   gsk.render_node.RenderNode getChild()
   {
     GskRenderNode* _cretval;
-    _cretval = gsk_shadow_node_get_child(cast(const(GskRenderNode)*)cPtr);
+    _cretval = gsk_shadow_node_get_child(cast(const(GskRenderNode)*)this._cPtr);
     auto _retval = _cretval ? new gsk.render_node.RenderNode(cast(GskRenderNode*)_cretval, No.Take) : null;
     return _retval;
   }
@@ -42,7 +42,7 @@ class ShadowNode : gsk.render_node.RenderNode
   size_t getNShadows()
   {
     size_t _retval;
-    _retval = gsk_shadow_node_get_n_shadows(cast(const(GskRenderNode)*)cPtr);
+    _retval = gsk_shadow_node_get_n_shadows(cast(const(GskRenderNode)*)this._cPtr);
     return _retval;
   }
 
@@ -56,7 +56,7 @@ class ShadowNode : gsk.render_node.RenderNode
   gsk.shadow.Shadow getShadow(size_t i)
   {
     const(GskShadow)* _cretval;
-    _cretval = gsk_shadow_node_get_shadow(cast(const(GskRenderNode)*)cPtr, i);
+    _cretval = gsk_shadow_node_get_shadow(cast(const(GskRenderNode)*)this._cPtr, i);
     auto _retval = _cretval ? new gsk.shadow.Shadow(cast(GskShadow*)_cretval) : null;
     return _retval;
   }

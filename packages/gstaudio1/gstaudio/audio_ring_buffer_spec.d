@@ -32,7 +32,7 @@ class AudioRingBufferSpec
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -43,7 +43,7 @@ class AudioRingBufferSpec
   */
   @property gst.caps.Caps caps()
   {
-    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
+    return cToD!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)this._cPtr).caps);
   }
 
   /**
@@ -53,8 +53,8 @@ class AudioRingBufferSpec
   */
   @property void caps(gst.caps.Caps propval)
   {
-    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)cPtr).caps);
-    dToC(propval, cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).caps);
+    cValueFree!(gst.caps.Caps)(cast(void*)(cast(GstAudioRingBufferSpec*)this._cPtr).caps);
+    dToC(propval, cast(void*)&(cast(GstAudioRingBufferSpec*)this._cPtr).caps);
   }
 
   /**
@@ -63,7 +63,7 @@ class AudioRingBufferSpec
   */
   @property gstaudio.types.AudioRingBufferFormatType type()
   {
-    return cast(gstaudio.types.AudioRingBufferFormatType)(cast(GstAudioRingBufferSpec*)cPtr).type;
+    return cast(gstaudio.types.AudioRingBufferFormatType)(cast(GstAudioRingBufferSpec*)this._cPtr).type;
   }
 
   /**
@@ -73,7 +73,7 @@ class AudioRingBufferSpec
   */
   @property void type(gstaudio.types.AudioRingBufferFormatType propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).type = cast(GstAudioRingBufferFormatType)propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).type = cast(GstAudioRingBufferFormatType)propval;
   }
 
   /**
@@ -82,7 +82,7 @@ class AudioRingBufferSpec
   */
   @property gstaudio.audio_info.AudioInfo info()
   {
-    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioRingBufferSpec*)cPtr).info);
+    return cToD!(gstaudio.audio_info.AudioInfo)(cast(void*)&(cast(GstAudioRingBufferSpec*)this._cPtr).info);
   }
 
   /**
@@ -91,7 +91,7 @@ class AudioRingBufferSpec
   */
   @property ulong latencyTime()
   {
-    return (cast(GstAudioRingBufferSpec*)cPtr).latencyTime;
+    return (cast(GstAudioRingBufferSpec*)this._cPtr).latencyTime;
   }
 
   /**
@@ -101,7 +101,7 @@ class AudioRingBufferSpec
   */
   @property void latencyTime(ulong propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).latencyTime = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).latencyTime = propval;
   }
 
   /**
@@ -110,7 +110,7 @@ class AudioRingBufferSpec
   */
   @property ulong bufferTime()
   {
-    return (cast(GstAudioRingBufferSpec*)cPtr).bufferTime;
+    return (cast(GstAudioRingBufferSpec*)this._cPtr).bufferTime;
   }
 
   /**
@@ -120,7 +120,7 @@ class AudioRingBufferSpec
   */
   @property void bufferTime(ulong propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).bufferTime = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).bufferTime = propval;
   }
 
   /**
@@ -129,7 +129,7 @@ class AudioRingBufferSpec
   */
   @property int segsize()
   {
-    return (cast(GstAudioRingBufferSpec*)cPtr).segsize;
+    return (cast(GstAudioRingBufferSpec*)this._cPtr).segsize;
   }
 
   /**
@@ -139,7 +139,7 @@ class AudioRingBufferSpec
   */
   @property void segsize(int propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).segsize = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).segsize = propval;
   }
 
   /**
@@ -148,7 +148,7 @@ class AudioRingBufferSpec
   */
   @property int segtotal()
   {
-    return (cast(GstAudioRingBufferSpec*)cPtr).segtotal;
+    return (cast(GstAudioRingBufferSpec*)this._cPtr).segtotal;
   }
 
   /**
@@ -158,7 +158,7 @@ class AudioRingBufferSpec
   */
   @property void segtotal(int propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).segtotal = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).segtotal = propval;
   }
 
   /**
@@ -168,7 +168,7 @@ class AudioRingBufferSpec
   */
   @property int seglatency()
   {
-    return (cast(GstAudioRingBufferSpec*)cPtr).seglatency;
+    return (cast(GstAudioRingBufferSpec*)this._cPtr).seglatency;
   }
 
   /**
@@ -179,6 +179,6 @@ class AudioRingBufferSpec
   */
   @property void seglatency(int propval)
   {
-    (cast(GstAudioRingBufferSpec*)cPtr).seglatency = propval;
+    (cast(GstAudioRingBufferSpec*)this._cPtr).seglatency = propval;
   }
 }

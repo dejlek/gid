@@ -52,7 +52,7 @@ class VideoMeta
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -63,7 +63,7 @@ class VideoMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoMeta*)this._cPtr).meta);
   }
 
   /**
@@ -72,7 +72,7 @@ class VideoMeta
   */
   @property gst.buffer.Buffer buffer()
   {
-    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
+    return cToD!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)this._cPtr).buffer);
   }
 
   /**
@@ -82,8 +82,8 @@ class VideoMeta
   */
   @property void buffer(gst.buffer.Buffer propval)
   {
-    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)cPtr).buffer);
-    dToC(propval, cast(void*)&(cast(GstVideoMeta*)cPtr).buffer);
+    cValueFree!(gst.buffer.Buffer)(cast(void*)(cast(GstVideoMeta*)this._cPtr).buffer);
+    dToC(propval, cast(void*)&(cast(GstVideoMeta*)this._cPtr).buffer);
   }
 
   /**
@@ -92,7 +92,7 @@ class VideoMeta
   */
   @property gstvideo.types.VideoFrameFlags flags()
   {
-    return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoMeta*)cPtr).flags;
+    return cast(gstvideo.types.VideoFrameFlags)(cast(GstVideoMeta*)this._cPtr).flags;
   }
 
   /**
@@ -102,7 +102,7 @@ class VideoMeta
   */
   @property void flags(gstvideo.types.VideoFrameFlags propval)
   {
-    (cast(GstVideoMeta*)cPtr).flags = cast(GstVideoFrameFlags)propval;
+    (cast(GstVideoMeta*)this._cPtr).flags = cast(GstVideoFrameFlags)propval;
   }
 
   /**
@@ -111,7 +111,7 @@ class VideoMeta
   */
   @property gstvideo.types.VideoFormat format()
   {
-    return cast(gstvideo.types.VideoFormat)(cast(GstVideoMeta*)cPtr).format;
+    return cast(gstvideo.types.VideoFormat)(cast(GstVideoMeta*)this._cPtr).format;
   }
 
   /**
@@ -121,7 +121,7 @@ class VideoMeta
   */
   @property void format(gstvideo.types.VideoFormat propval)
   {
-    (cast(GstVideoMeta*)cPtr).format = cast(GstVideoFormat)propval;
+    (cast(GstVideoMeta*)this._cPtr).format = cast(GstVideoFormat)propval;
   }
 
   /**
@@ -130,7 +130,7 @@ class VideoMeta
   */
   @property int id()
   {
-    return (cast(GstVideoMeta*)cPtr).id;
+    return (cast(GstVideoMeta*)this._cPtr).id;
   }
 
   /**
@@ -140,7 +140,7 @@ class VideoMeta
   */
   @property void id(int propval)
   {
-    (cast(GstVideoMeta*)cPtr).id = propval;
+    (cast(GstVideoMeta*)this._cPtr).id = propval;
   }
 
   /**
@@ -149,7 +149,7 @@ class VideoMeta
   */
   @property uint width()
   {
-    return (cast(GstVideoMeta*)cPtr).width;
+    return (cast(GstVideoMeta*)this._cPtr).width;
   }
 
   /**
@@ -159,7 +159,7 @@ class VideoMeta
   */
   @property void width(uint propval)
   {
-    (cast(GstVideoMeta*)cPtr).width = propval;
+    (cast(GstVideoMeta*)this._cPtr).width = propval;
   }
 
   /**
@@ -168,7 +168,7 @@ class VideoMeta
   */
   @property uint height()
   {
-    return (cast(GstVideoMeta*)cPtr).height;
+    return (cast(GstVideoMeta*)this._cPtr).height;
   }
 
   /**
@@ -178,7 +178,7 @@ class VideoMeta
   */
   @property void height(uint propval)
   {
-    (cast(GstVideoMeta*)cPtr).height = propval;
+    (cast(GstVideoMeta*)this._cPtr).height = propval;
   }
 
   /**
@@ -187,7 +187,7 @@ class VideoMeta
   */
   @property uint nPlanes()
   {
-    return (cast(GstVideoMeta*)cPtr).nPlanes;
+    return (cast(GstVideoMeta*)this._cPtr).nPlanes;
   }
 
   /**
@@ -197,7 +197,7 @@ class VideoMeta
   */
   @property void nPlanes(uint propval)
   {
-    (cast(GstVideoMeta*)cPtr).nPlanes = propval;
+    (cast(GstVideoMeta*)this._cPtr).nPlanes = propval;
   }
 
   /** Function alias for field `unmap` */
@@ -209,7 +209,7 @@ class VideoMeta
   */
   @property UnmapFuncType unmap()
   {
-    return (cast(GstVideoMeta*)cPtr).unmap;
+    return (cast(GstVideoMeta*)this._cPtr).unmap;
   }
 
   /**
@@ -221,7 +221,7 @@ class VideoMeta
   */
   @property gstvideo.video_alignment.VideoAlignment alignment()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstVideoMeta*)cPtr).alignment);
+    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstVideoMeta*)this._cPtr).alignment);
   }
 
   /**
@@ -239,7 +239,7 @@ class VideoMeta
   bool getPlaneHeight(ref uint[] planeHeight)
   {
     bool _retval;
-    _retval = gst_video_meta_get_plane_height(cast(GstVideoMeta*)cPtr, planeHeight.ptr);
+    _retval = gst_video_meta_get_plane_height(cast(GstVideoMeta*)this._cPtr, planeHeight.ptr);
     return _retval;
   }
 
@@ -255,7 +255,7 @@ class VideoMeta
   bool getPlaneSize(ref size_t[] planeSize)
   {
     bool _retval;
-    _retval = gst_video_meta_get_plane_size(cast(GstVideoMeta*)cPtr, planeSize.ptr);
+    _retval = gst_video_meta_get_plane_size(cast(GstVideoMeta*)this._cPtr, planeSize.ptr);
     return _retval;
   }
 
@@ -274,7 +274,7 @@ class VideoMeta
   bool map(uint plane, gst.map_info.MapInfo info, out void* data, out int stride, gst.types.MapFlags flags)
   {
     bool _retval;
-    _retval = gst_video_meta_map(cast(GstVideoMeta*)cPtr, plane, info ? cast(GstMapInfo*)info.cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
+    _retval = gst_video_meta_map(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null, cast(void**)&data, cast(int*)&stride, flags);
     return _retval;
   }
 
@@ -289,7 +289,7 @@ class VideoMeta
   bool unmap(uint plane, gst.map_info.MapInfo info)
   {
     bool _retval;
-    _retval = gst_video_meta_unmap(cast(GstVideoMeta*)cPtr, plane, info ? cast(GstMapInfo*)info.cPtr : null);
+    _retval = gst_video_meta_unmap(cast(GstVideoMeta*)this._cPtr, plane, info ? cast(GstMapInfo*)info._cPtr : null);
     return _retval;
   }
 

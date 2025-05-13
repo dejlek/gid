@@ -41,16 +41,16 @@ class Dock : gtk.widget.Widget
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())panel_dock_get_type != &gidSymbolNotFound ? panel_dock_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -202,12 +202,12 @@ class Dock : gtk.widget.Widget
     {
       auto _dlg = cast(panel.types.FrameCallback*)userData;
 
-      (*_dlg)(gobject.object.ObjectWrap.getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
+      (*_dlg)(gobject.object.ObjectWrap._getDObject!(panel.frame.Frame)(cast(void*)frame, No.Take));
     }
     auto _callbackCB = callback ? &_callbackCallback : null;
 
     auto _callback = callback ? cast(void*)&(callback) : null;
-    panel_dock_foreach_frame(cast(PanelDock*)cPtr, _callbackCB, _callback);
+    panel_dock_foreach_frame(cast(PanelDock*)this._cPtr, _callbackCB, _callback);
   }
 
   /**
@@ -221,7 +221,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealArea(panel.types.Area area)
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_area(cast(PanelDock*)cPtr, area);
+    _retval = panel_dock_get_can_reveal_area(cast(PanelDock*)this._cPtr, area);
     return _retval;
   }
 
@@ -233,7 +233,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealBottom()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_bottom(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_can_reveal_bottom(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealEnd()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_end(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_can_reveal_end(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -257,7 +257,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealStart()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_start(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_can_reveal_start(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -269,7 +269,7 @@ class Dock : gtk.widget.Widget
   bool getCanRevealTop()
   {
     bool _retval;
-    _retval = panel_dock_get_can_reveal_top(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_can_reveal_top(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -283,7 +283,7 @@ class Dock : gtk.widget.Widget
   bool getRevealArea(panel.types.Area area)
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_area(cast(PanelDock*)cPtr, area);
+    _retval = panel_dock_get_reveal_area(cast(PanelDock*)this._cPtr, area);
     return _retval;
   }
 
@@ -294,7 +294,7 @@ class Dock : gtk.widget.Widget
   bool getRevealBottom()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_bottom(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_reveal_bottom(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -305,7 +305,7 @@ class Dock : gtk.widget.Widget
   bool getRevealEnd()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_end(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_reveal_end(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -316,7 +316,7 @@ class Dock : gtk.widget.Widget
   bool getRevealStart()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_start(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_reveal_start(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -327,7 +327,7 @@ class Dock : gtk.widget.Widget
   bool getRevealTop()
   {
     bool _retval;
-    _retval = panel_dock_get_reveal_top(cast(PanelDock*)cPtr);
+    _retval = panel_dock_get_reveal_top(cast(PanelDock*)this._cPtr);
     return _retval;
   }
 
@@ -340,7 +340,7 @@ class Dock : gtk.widget.Widget
   */
   void remove(gtk.widget.Widget widget)
   {
-    panel_dock_remove(cast(PanelDock*)cPtr, widget ? cast(GtkWidget*)widget.cPtr(No.Dup) : null);
+    panel_dock_remove(cast(PanelDock*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null);
   }
 
   /**
@@ -351,7 +351,7 @@ class Dock : gtk.widget.Widget
   */
   void setBottomHeight(int height)
   {
-    panel_dock_set_bottom_height(cast(PanelDock*)cPtr, height);
+    panel_dock_set_bottom_height(cast(PanelDock*)this._cPtr, height);
   }
 
   /**
@@ -362,7 +362,7 @@ class Dock : gtk.widget.Widget
   */
   void setEndWidth(int width)
   {
-    panel_dock_set_end_width(cast(PanelDock*)cPtr, width);
+    panel_dock_set_end_width(cast(PanelDock*)this._cPtr, width);
   }
 
   /**
@@ -374,7 +374,7 @@ class Dock : gtk.widget.Widget
   */
   void setRevealArea(panel.types.Area area, bool reveal)
   {
-    panel_dock_set_reveal_area(cast(PanelDock*)cPtr, area, reveal);
+    panel_dock_set_reveal_area(cast(PanelDock*)this._cPtr, area, reveal);
   }
 
   /**
@@ -385,7 +385,7 @@ class Dock : gtk.widget.Widget
   */
   void setRevealBottom(bool revealBottom)
   {
-    panel_dock_set_reveal_bottom(cast(PanelDock*)cPtr, revealBottom);
+    panel_dock_set_reveal_bottom(cast(PanelDock*)this._cPtr, revealBottom);
   }
 
   /**
@@ -396,7 +396,7 @@ class Dock : gtk.widget.Widget
   */
   void setRevealEnd(bool revealEnd)
   {
-    panel_dock_set_reveal_end(cast(PanelDock*)cPtr, revealEnd);
+    panel_dock_set_reveal_end(cast(PanelDock*)this._cPtr, revealEnd);
   }
 
   /**
@@ -407,7 +407,7 @@ class Dock : gtk.widget.Widget
   */
   void setRevealStart(bool revealStart)
   {
-    panel_dock_set_reveal_start(cast(PanelDock*)cPtr, revealStart);
+    panel_dock_set_reveal_start(cast(PanelDock*)this._cPtr, revealStart);
   }
 
   /**
@@ -418,7 +418,7 @@ class Dock : gtk.widget.Widget
   */
   void setRevealTop(bool revealTop)
   {
-    panel_dock_set_reveal_top(cast(PanelDock*)cPtr, revealTop);
+    panel_dock_set_reveal_top(cast(PanelDock*)this._cPtr, revealTop);
   }
 
   /**
@@ -429,7 +429,7 @@ class Dock : gtk.widget.Widget
   */
   void setStartWidth(int width)
   {
-    panel_dock_set_start_width(cast(PanelDock*)cPtr, width);
+    panel_dock_set_start_width(cast(PanelDock*)this._cPtr, width);
   }
 
   /**
@@ -440,7 +440,7 @@ class Dock : gtk.widget.Widget
   */
   void setTopHeight(int height)
   {
-    panel_dock_set_top_height(cast(PanelDock*)cPtr, height);
+    panel_dock_set_top_height(cast(PanelDock*)this._cPtr, height);
   }
 
   /**

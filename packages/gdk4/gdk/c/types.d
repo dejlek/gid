@@ -1676,7 +1676,7 @@ struct GdkContentFormatsBuilder;
 struct GdkContentProvider
 {
   /** */
-  ObjectC parent;
+  GObject parent;
 }
 
 /**
@@ -2540,7 +2540,7 @@ struct GdkScrollEvent;
 struct GdkSeat
 {
   /** */
-  ObjectC parentInstance;
+  GObject parentInstance;
 }
 
 /**

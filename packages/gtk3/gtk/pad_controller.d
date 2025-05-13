@@ -65,16 +65,16 @@ class PadController : gtk.event_controller.EventController
   }
 
   /** */
-  static GType getGType()
+  static GType _getGType()
   {
     import gid.loader : gidSymbolNotFound;
     return cast(void function())gtk_pad_controller_get_type != &gidSymbolNotFound ? gtk_pad_controller_get_type() : cast(GType)0;
   }
 
   /** */
-  override @property GType gType()
+  override @property GType _gType()
   {
-    return getGType();
+    return _getGType();
   }
 
   /** Returns `this`, for use in `with` statements. */
@@ -103,7 +103,7 @@ class PadController : gtk.event_controller.EventController
   this(gtk.window.Window window, gio.action_group.ActionGroup group, gdk.device.Device pad = null)
   {
     GtkPadController* _cretval;
-    _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window.cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group).cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad.cPtr(No.Dup) : null);
+    _cretval = gtk_pad_controller_new(window ? cast(GtkWindow*)window._cPtr(No.Dup) : null, group ? cast(GActionGroup*)(cast(gobject.object.ObjectWrap)group)._cPtr(No.Dup) : null, pad ? cast(GdkDevice*)pad._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 
@@ -129,6 +129,6 @@ class PadController : gtk.event_controller.EventController
   {
     const(char)* _label = label.toCString(No.Alloc);
     const(char)* _actionName = actionName.toCString(No.Alloc);
-    gtk_pad_controller_set_action(cast(GtkPadController*)cPtr, type, index, mode, _label, _actionName);
+    gtk_pad_controller_set_action(cast(GtkPadController*)this._cPtr, type, index, mode, _label, _actionName);
   }
 }

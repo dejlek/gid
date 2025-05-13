@@ -35,7 +35,7 @@ template BuildableT()
   override string getBuildableId()
   {
     const(char)* _cretval;
-    _cretval = gtk_buildable_get_buildable_id(cast(GtkBuildable*)cPtr);
+    _cretval = gtk_buildable_get_buildable_id(cast(GtkBuildable*)this._cPtr);
     string _retval = (cast(const(char)*)_cretval).fromCString(No.Free);
     return _retval;
   }

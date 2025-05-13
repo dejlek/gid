@@ -28,7 +28,7 @@ class SDPOrigin
   }
 
   /** */
-  void* cPtr()
+  void* _cPtr()
   {
     return cast(void*)&cInstance;
   }
@@ -40,7 +40,7 @@ class SDPOrigin
   */
   @property string username()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).username);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).username);
   }
 
   /**
@@ -51,8 +51,8 @@ class SDPOrigin
   */
   @property void username(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).username);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).username);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).username);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).username);
   }
 
   /**
@@ -63,7 +63,7 @@ class SDPOrigin
   */
   @property string sessId()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessId);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessId);
   }
 
   /**
@@ -75,8 +75,8 @@ class SDPOrigin
   */
   @property void sessId(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessId);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).sessId);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessId);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessId);
   }
 
   /**
@@ -85,7 +85,7 @@ class SDPOrigin
   */
   @property string sessVersion()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessVersion);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessVersion);
   }
 
   /**
@@ -95,8 +95,8 @@ class SDPOrigin
   */
   @property void sessVersion(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).sessVersion);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).sessVersion);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).sessVersion);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).sessVersion);
   }
 
   /**
@@ -106,7 +106,7 @@ class SDPOrigin
   */
   @property string nettype()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).nettype);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).nettype);
   }
 
   /**
@@ -117,8 +117,8 @@ class SDPOrigin
   */
   @property void nettype(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).nettype);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).nettype);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).nettype);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).nettype);
   }
 
   /**
@@ -127,7 +127,7 @@ class SDPOrigin
   */
   @property string addrtype()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addrtype);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addrtype);
   }
 
   /**
@@ -137,8 +137,8 @@ class SDPOrigin
   */
   @property void addrtype(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addrtype);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).addrtype);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addrtype);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addrtype);
   }
 
   /**
@@ -148,7 +148,7 @@ class SDPOrigin
   */
   @property string addr()
   {
-    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addr);
+    return cToD!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addr);
   }
 
   /**
@@ -159,7 +159,7 @@ class SDPOrigin
   */
   @property void addr(string propval)
   {
-    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)cPtr).addr);
-    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)cPtr).addr);
+    cValueFree!(string)(cast(void*)(cast(GstSDPOrigin*)this._cPtr).addr);
+    dToC(propval, cast(void*)&(cast(GstSDPOrigin*)this._cPtr).addr);
   }
 }
