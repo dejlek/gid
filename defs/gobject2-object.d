@@ -44,7 +44,7 @@ __gshared bool classMapsInitialized;
 string objectMixin()
 {
   return
-`  this(void* cObj, Flag!"Take" take = No.Take)
+`  this(void* cObj, Flag!"Take" take)
   {
     super(cObj, take);
   }
@@ -71,9 +71,9 @@ class ObjectWrap
    * Constructor to wrap a C GObject with a D proxy object.
    * Params:
    *   cObj = Pointer to the GObject
-   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
    */
-  final this(void* cObj, Flag!"Take" take = No.Take)
+  final this(void* cObj, Flag!"Take" take)
   {
     if (!cObj)
       throw new GidConstructException("Null instance pointer for " ~ typeid(this).name);
@@ -94,9 +94,9 @@ class ObjectWrap
    * Set the GObject of a D ObjectWrap wrapper.
    * Params:
    *   cObj = Pointer to the GObject
-   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference (default)
+   *   take = Yes.Take if the D object should take ownership of the passed reference, No.Take to add a new reference
    */
-  final void _setGObject(void* cObj, Flag!"Take" take = No.Take)
+  final void _setGObject(void* cObj, Flag!"Take" take)
   {
     assert(!cInstancePtr);
 
@@ -213,10 +213,10 @@ class ObjectWrap
    * Params:
    *   T = The D object type
    *   cInstance = The C GObject (can be null, in which case null is returned)
-   *   take = If Yes.Take then the D object will consume a GObject reference (No.Take by default).
+   *   take = If Yes.Take then the D object will consume a GObject reference.
    * Returns: The D object (which may be a new object if the GObject wasn't already wrapped)
    */
-  static T _getDObject(T)(void* cptr, Flag!"Take" take = No.Take)
+  static T _getDObject(T)(void* cptr, Flag!"Take" take)
   {
     if (!cptr)
       return null;
@@ -419,7 +419,7 @@ class ObjectWrap
  */
 abstract class IfaceProxy : ObjectWrap
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(ptr, take);
   }

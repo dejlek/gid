@@ -58,8 +58,8 @@
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
       return _retval;
     }
 
@@ -87,8 +87,8 @@
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
-        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+        gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
       return _retval;
     }
 
