@@ -1,4 +1,8 @@
 //!gir Atk-1.0
+//!info description "D binding for the Atk library - the accessibility toolkit"
+//!info website https://gtk.org
+//!info docs https://www.kymorphia.com/gid/atk.html
+//!info capi https://docs.gtk.org/atk/
 
 //!subdtype Object ObjectWrap
 

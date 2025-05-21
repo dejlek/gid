@@ -1,4 +1,8 @@
 //!gir GstGLEGL-1.0
+//!info description "D binding for the GstGLEGL library - OpenGL EGL library or the GStreamer multimedia framework"
+//!info website https://gstreamer.freedesktop.org
+//!info docs https://www.kymorphia.com/gid/gstglegl.html
+//!info capi https://gstreamer.freedesktop.org/documentation/gl-egl/index.html
 
 //!subctype EGLint int
 

@@ -1,4 +1,8 @@
 //!gir Vte-3.91
+//!info description "D binding for the Vte 3.91 library - Virtual TErminal widget for Gtk4"
+//!info website https://wiki.gnome.org/Apps/Terminal
+//!info docs https://www.kymorphia.com/gid/vte.html
+//!info capi https://gnome.pages.gitlab.gnome.org/vte/gtk4/index.html
 
 //# Change package name to just vte3 rather than vte3-91
 //!info name vte3

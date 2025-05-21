@@ -1,4 +1,8 @@
 //!gir GstVideo-1.0
+//!info description "D binding for the GstVideo library - Video library for the GStreamer multimedia framework"
+//!info website https://gstreamer.freedesktop.org
+//!info docs https://www.kymorphia.com/gid/gstvideo.html
+//!info capi https://gstreamer.freedesktop.org/documentation/video/index.html
 
 //# Ignore this type which is derived from Gst.FlagSet which is a fundamental type with limited usage and no clear way to bind it
 //!set class[VideoMultiviewFlagsSet][ignore] 1

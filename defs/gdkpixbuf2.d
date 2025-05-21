@@ -1,5 +1,8 @@
 //!gir GdkPixbuf-2.0
-//!subctype GdkPixbuf PixbufC
+//!info description "D binding for the GdkPixbuf library - Image loading library"
+//!info website https://gtk.org
+//!info docs https://www.kymorphia.com/gid/gdkpixbuf.html
+//!info capi https://docs.gtk.org/gdk-pixbuf/
 
 //# Set basic parameters to out
 //!set callback[PixbufModuleSizeFunc].parameters.parameter[width][direction] out

@@ -1,4 +1,8 @@
 //!gir HarfBuzz-0.0
+//!info description "D binding for the Harfbuzz library - Text shaping engine"
+//!info website https://github.com/harfbuzz/harfbuzz
+//!info docs https://www.kymorphia.com/gid/harfbuzz.html
+//!info capi https://harfbuzz.github.io
 
 //!subtype face_t Face
 //!subtype language_t Language

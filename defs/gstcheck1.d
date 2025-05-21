@@ -1,4 +1,8 @@
 //!gir GstCheck-1.0
+//!info description "D binding for the GstCheck library - Check Unit Testing for the GStreamer multimedia framework"
+//!info website https://gstreamer.freedesktop.org
+//!info docs https://www.kymorphia.com/gid/gstcheck.html
+//!info capi https://gstreamer.freedesktop.org/documentation/check/index.html
 
 //# This function is missing its C type "Suite", remove it from the XML
 //!del function[check_run_suite]
