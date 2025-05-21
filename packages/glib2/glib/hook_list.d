@@ -15,7 +15,7 @@ class HookList
   GHookList cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.hook_list.HookList");
@@ -95,7 +95,7 @@ class HookList
   */
   @property glib.hook.Hook hooks()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHookList*)this._cPtr).hooks, No.Take);
   }
 
   /**

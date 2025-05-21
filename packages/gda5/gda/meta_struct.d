@@ -17,7 +17,7 @@ class MetaStruct : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -102,7 +102,7 @@ class MetaStruct : gobject.object.ObjectWrap
     _cretval = gda_meta_struct_complement(cast(GdaMetaStruct*)this._cPtr, type, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, name ? cast(const(GValue)*)name._cPtr(No.Dup) : null, &_err);
     if (_err)
       throw new MetaStructException(_err);
-    auto _retval = _cretval ? new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)_cretval) : null;
+    auto _retval = _cretval ? new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -225,7 +225,7 @@ class MetaStruct : gobject.object.ObjectWrap
   {
     GdaMetaDbObject* _cretval;
     _cretval = gda_meta_struct_get_db_object(cast(GdaMetaStruct*)this._cPtr, catalog ? cast(const(GValue)*)catalog._cPtr(No.Dup) : null, schema ? cast(const(GValue)*)schema._cPtr(No.Dup) : null, name ? cast(const(GValue)*)name._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)_cretval) : null;
+    auto _retval = _cretval ? new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -442,7 +442,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, gtk.accessible.Access
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

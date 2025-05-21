@@ -66,7 +66,7 @@ class PixbufLoader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -252,9 +252,9 @@ class PixbufLoader : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_loader_get_pixbuf(cast(GdkPixbufLoader*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 

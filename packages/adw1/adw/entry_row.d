@@ -61,7 +61,7 @@ class EntryRow : adw.preferences_row.PreferencesRow, gtk.editable.Editable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

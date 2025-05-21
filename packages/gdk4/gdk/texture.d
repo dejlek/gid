@@ -38,7 +38,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -80,7 +80,7 @@ class Texture : gobject.object.ObjectWrap, gdk.paintable.Paintable, gio.icon.Ico
   static gdk.texture.Texture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkTexture* _cretval;
-    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gdk_texture_new_for_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gdk.texture.Texture)(cast(GdkTexture*)_cretval, Yes.Take);
     return _retval;
   }

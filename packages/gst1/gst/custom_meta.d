@@ -21,7 +21,7 @@ class CustomMeta
   GstCustomMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.custom_meta.CustomMeta");
@@ -44,7 +44,7 @@ class CustomMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstCustomMeta*)this._cPtr).meta, No.Take);
   }
 
   /**

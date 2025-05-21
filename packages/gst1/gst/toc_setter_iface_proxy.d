@@ -8,7 +8,7 @@ import gst.toc_setter_mixin;
 /// Proxy object for [gst.toc_setter.TocSetter] interface when a GObject has no applicable D binding
 class TocSetterIfaceProxy : IfaceProxy, gst.toc_setter.TocSetter
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

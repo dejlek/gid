@@ -8,7 +8,7 @@ import gst.child_proxy_mixin;
 /// Proxy object for [gst.child_proxy.ChildProxy] interface when a GObject has no applicable D binding
 class ChildProxyIfaceProxy : IfaceProxy, gst.child_proxy.ChildProxy
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

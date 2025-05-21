@@ -57,7 +57,7 @@ class AboutDialog : gtk.dialog.Dialog
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -530,9 +530,9 @@ class AboutDialog : gtk.dialog.Dialog
   */
   gdkpixbuf.pixbuf.Pixbuf getLogo()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_about_dialog_get_logo(cast(GtkAboutDialog*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -744,7 +744,7 @@ class AboutDialog : gtk.dialog.Dialog
   */
   void setLogo(gdkpixbuf.pixbuf.Pixbuf logo = null)
   {
-    gtk_about_dialog_set_logo(cast(GtkAboutDialog*)this._cPtr, logo ? cast(PixbufC*)logo._cPtr(No.Dup) : null);
+    gtk_about_dialog_set_logo(cast(GtkAboutDialog*)this._cPtr, logo ? cast(GdkPixbuf*)logo._cPtr(No.Dup) : null);
   }
 
   /**

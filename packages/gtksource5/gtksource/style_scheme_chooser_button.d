@@ -32,7 +32,7 @@ class StyleSchemeChooserButton : gtk.button.Button, gtksource.style_scheme_choos
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

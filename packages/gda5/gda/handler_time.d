@@ -17,7 +17,7 @@ class HandlerTime : gobject.object.ObjectWrap, gda.data_handler.DataHandler
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

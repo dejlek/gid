@@ -24,7 +24,7 @@ class MultiSorter : gtk.sorter.Sorter, gio.list_model.ListModel, gtk.buildable.B
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

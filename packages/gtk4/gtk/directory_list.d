@@ -40,7 +40,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -225,7 +225,7 @@ class DirectoryList : gobject.object.ObjectWrap, gio.list_model.ListModel
   {
     const(GError)* _cretval;
     _cretval = gtk_directory_list_get_error(cast(GtkDirectoryList*)this._cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
     return _retval;
   }
 

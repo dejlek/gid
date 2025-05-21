@@ -34,7 +34,7 @@ class DsdPlaneOffsetMeta
   GstDsdPlaneOffsetMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.dsd_plane_offset_meta.DsdPlaneOffsetMeta");
@@ -57,7 +57,7 @@ class DsdPlaneOffsetMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstDsdPlaneOffsetMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -103,7 +103,7 @@ class DsdPlaneOffsetMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_dsd_plane_offset_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -58,7 +58,7 @@ class Region : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -158,7 +158,7 @@ class Region : gobject.object.ObjectWrap
   {
     GtkSourceRegionIter _iter;
     gtk_source_region_get_start_region_iter(cast(GtkSourceRegion*)this._cPtr, &_iter);
-    iter = new gtksource.region_iter.RegionIter(cast(void*)&_iter);
+    iter = new gtksource.region_iter.RegionIter(cast(void*)&_iter, No.Take);
   }
 
   /**

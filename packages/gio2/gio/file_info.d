@@ -53,7 +53,7 @@ class FileInfo : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -612,7 +612,7 @@ class FileInfo : gobject.object.ObjectWrap
   {
     GTimeVal _result;
     g_file_info_get_modification_time(cast(GFileInfo*)this._cPtr, &_result);
-    result = new glib.time_val.TimeVal(cast(void*)&_result);
+    result = new glib.time_val.TimeVal(cast(void*)&_result, No.Take);
   }
 
   /**

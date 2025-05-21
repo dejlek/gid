@@ -17,7 +17,7 @@ class TargetPair
   GtkTargetPair cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.target_pair.TargetPair");
@@ -40,7 +40,7 @@ class TargetPair
   */
   @property gdk.atom.Atom target()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)this._cPtr).target);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GtkTargetPair*)this._cPtr).target, No.Take);
   }
 
   /**

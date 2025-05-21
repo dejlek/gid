@@ -17,7 +17,7 @@ class MnemonicTrigger : gtk.shortcut_trigger.ShortcutTrigger
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -18,7 +18,7 @@ class CheckMenuItemAccessible : gtk.menu_item_accessible.MenuItemAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

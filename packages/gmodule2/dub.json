@@ -1,9 +1,10 @@
 {
   "name": "gmodule2",
-  "description": "GModule library D binding",
+  "description": "D binding for the GModule library - Portable API for dynamically loading modules",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gtk.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["gmodule"],

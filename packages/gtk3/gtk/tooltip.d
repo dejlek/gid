@@ -56,7 +56,7 @@ class Tooltip : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -119,7 +119,7 @@ class Tooltip : gobject.object.ObjectWrap
   */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_tooltip_set_icon(cast(GtkTooltip*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_tooltip_set_icon(cast(GtkTooltip*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

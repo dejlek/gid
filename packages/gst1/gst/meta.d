@@ -37,7 +37,7 @@ class Meta
   GstMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.meta.Meta");
@@ -79,7 +79,7 @@ class Meta
   */
   @property gst.meta_info.MetaInfo info()
   {
-    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)this._cPtr).info);
+    return new gst.meta_info.MetaInfo(cast(GstMetaInfo*)(cast(GstMeta*)this._cPtr).info, No.Take);
   }
 
   /**
@@ -209,7 +209,7 @@ class Meta
 
     auto _data = cast(const(ubyte)*)data.ptr;
     _cretval = gst_meta_deserialize(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, _data, _size, cast(uint*)&consumed);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -227,7 +227,7 @@ class Meta
     const(GstMetaInfo)* _cretval;
     const(char)* _impl = impl.toCString(No.Alloc);
     _cretval = gst_meta_get_info(_impl);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -275,7 +275,7 @@ class Meta
     auto _transformFunc = transformFunc ? freezeDelegate(cast(void*)&transformFunc) : null;
     GDestroyNotify _transformFuncDestroyCB = transformFunc ? &thawDelegate : null;
     _cretval = gst_meta_register_custom(_name, _tags, _transformFuncCB, _transformFunc, _transformFuncDestroyCB);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -292,7 +292,7 @@ class Meta
     const(GstMetaInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_meta_register_custom_simple(_name);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

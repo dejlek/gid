@@ -8,7 +8,7 @@ import gtk.accessible_range_mixin;
 /// Proxy object for [gtk.accessible_range.AccessibleRange] interface when a GObject has no applicable D binding
 class AccessibleRangeIfaceProxy : IfaceProxy, gtk.accessible_range.AccessibleRange
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

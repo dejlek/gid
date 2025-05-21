@@ -20,7 +20,7 @@ class SDPMedia
   GstSDPMedia cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.sdpmedia.SDPMedia");
@@ -141,7 +141,7 @@ class SDPMedia
   */
   @property gstsdp.sdpkey.SDPKey key()
   {
-    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key);
+    return new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)&(cast(GstSDPMedia*)this._cPtr).key, No.Take);
   }
 
   /**
@@ -292,7 +292,7 @@ class SDPMedia
     GstSDPMedia* _copy;
     _cretval = gst_sdp_media_copy(cast(const(GstSDPMedia)*)this._cPtr, &_copy);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy);
+    copy = new gstsdp.sdpmedia.SDPMedia(cast(void*)_copy, Yes.Take);
     return _retval;
   }
 
@@ -318,7 +318,7 @@ class SDPMedia
   {
     const(GstSDPAttribute)* _cretval;
     _cretval = gst_sdp_media_get_attribute(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval) : null;
+    auto _retval = _cretval ? new gstsdp.sdpattribute.SDPAttribute(cast(GstSDPAttribute*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -366,7 +366,7 @@ class SDPMedia
   {
     const(GstSDPBandwidth)* _cretval;
     _cretval = gst_sdp_media_get_bandwidth(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval) : null;
+    auto _retval = _cretval ? new gstsdp.sdpbandwidth.SDPBandwidth(cast(GstSDPBandwidth*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -404,7 +404,7 @@ class SDPMedia
   {
     const(GstSDPConnection)* _cretval;
     _cretval = gst_sdp_media_get_connection(cast(const(GstSDPMedia)*)this._cPtr, idx);
-    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval) : null;
+    auto _retval = _cretval ? new gstsdp.sdpconnection.SDPConnection(cast(GstSDPConnection*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -443,7 +443,7 @@ class SDPMedia
   {
     const(GstSDPKey)* _cretval;
     _cretval = gst_sdp_media_get_key(cast(const(GstSDPMedia)*)this._cPtr);
-    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval) : null;
+    auto _retval = _cretval ? new gstsdp.sdpkey.SDPKey(cast(GstSDPKey*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -819,7 +819,7 @@ class SDPMedia
     GstSDPMedia _media;
     _cretval = gst_sdp_media_init(&_media);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media);
+    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
     return _retval;
   }
 
@@ -836,7 +836,7 @@ class SDPMedia
     GstSDPMedia* _media;
     _cretval = gst_sdp_media_new(&_media);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media);
+    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)_media, Yes.Take);
     return _retval;
   }
 
@@ -864,7 +864,7 @@ class SDPMedia
     GstSDPMedia _media;
     _cretval = gst_sdp_media_set_media_from_caps(caps ? cast(const(GstCaps)*)caps._cPtr(No.Dup) : null, &_media);
     gstsdp.types.SDPResult _retval = cast(gstsdp.types.SDPResult)_cretval;
-    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media);
+    media = new gstsdp.sdpmedia.SDPMedia(cast(void*)&_media, No.Take);
     return _retval;
   }
 }

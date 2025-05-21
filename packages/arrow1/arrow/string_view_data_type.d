@@ -12,7 +12,7 @@ class StringViewDataType : arrow.binary_view_data_type.BinaryViewDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

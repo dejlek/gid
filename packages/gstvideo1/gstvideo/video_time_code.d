@@ -24,7 +24,7 @@ class VideoTimeCode : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class VideoTimeCode : gobject.boxed.Boxed
   */
   @property gstvideo.video_time_code_config.VideoTimeCodeConfig config()
   {
-    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config);
+    return new gstvideo.video_time_code_config.VideoTimeCodeConfig(cast(GstVideoTimeCodeConfig*)&(cast(GstVideoTimeCode*)this._cPtr).config, No.Take);
   }
 
   /**

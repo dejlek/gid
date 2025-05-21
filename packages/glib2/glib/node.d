@@ -14,7 +14,7 @@ class Node
   GNode cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.node.Node");
@@ -38,7 +38,7 @@ class Node
   */
   @property glib.node.Node next()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).next);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).next, No.Take);
   }
 
   /**
@@ -47,7 +47,7 @@ class Node
   */
   @property glib.node.Node prev()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).prev);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).prev, No.Take);
   }
 
   /**
@@ -57,7 +57,7 @@ class Node
   */
   @property glib.node.Node parent()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).parent);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).parent, No.Take);
   }
 
   /**
@@ -68,7 +68,7 @@ class Node
   */
   @property glib.node.Node children()
   {
-    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).children);
+    return new glib.node.Node(cast(GNode*)(cast(GNode*)this._cPtr).children, No.Take);
   }
 
   /**

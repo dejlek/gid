@@ -28,7 +28,7 @@ class FontChooserDialog : gtk.dialog.Dialog, gtk.font_chooser.FontChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

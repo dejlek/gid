@@ -91,7 +91,7 @@ class IconTheme : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -157,7 +157,7 @@ class IconTheme : gobject.object.ObjectWrap
   static void addBuiltinIcon(string iconName, int size, gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     const(char)* _iconName = iconName.toCString(No.Alloc);
-    gtk_icon_theme_add_builtin_icon(_iconName, size, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_icon_theme_add_builtin_icon(_iconName, size, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -455,13 +455,13 @@ class IconTheme : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf loadIcon(string iconName, int size, gtk.types.IconLookupFlags flags)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_icon_theme_load_icon(cast(GtkIconTheme*)this._cPtr, _iconName, size, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -494,13 +494,13 @@ class IconTheme : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf loadIconForScale(string iconName, int size, int scale, gtk.types.IconLookupFlags flags)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _iconName = iconName.toCString(No.Alloc);
     GError *_err;
     _cretval = gtk_icon_theme_load_icon_for_scale(cast(GtkIconTheme*)this._cPtr, _iconName, size, scale, flags, &_err);
     if (_err)
       throw new ErrorWrap(_err);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -16,7 +16,7 @@ class EventProperty
   GdkEventProperty cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_property.EventProperty");
@@ -97,7 +97,7 @@ class EventProperty
   */
   @property gdk.atom.Atom atom()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventProperty*)this._cPtr).atom);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventProperty*)this._cPtr).atom, No.Take);
   }
 
   /**

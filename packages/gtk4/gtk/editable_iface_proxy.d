@@ -8,7 +8,7 @@ import gtk.editable_mixin;
 /// Proxy object for [gtk.editable.Editable] interface when a GObject has no applicable D binding
 class EditableIfaceProxy : IfaceProxy, gtk.editable.Editable
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

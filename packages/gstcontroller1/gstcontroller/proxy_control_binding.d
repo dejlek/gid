@@ -15,7 +15,7 @@ class ProxyControlBinding : gst.control_binding.ControlBinding
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -20,7 +20,7 @@ class CompletionSnippets : gobject.object.ObjectWrap, gtksource.completion_provi
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

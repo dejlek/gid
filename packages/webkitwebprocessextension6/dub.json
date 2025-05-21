@@ -1,9 +1,10 @@
 {
   "name": "webkitwebprocessextension6",
-  "description": "WebKitWebProcessExtension library D binding",
+  "description": "D binding for the WebKit 6 library - WebKit web extension and DOM library",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://webkit.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["webkitwebprocessextension"],

@@ -23,7 +23,7 @@ class FrameTabBar : gtk.widget.Widget, panel.frame_header.FrameHeader
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

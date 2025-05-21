@@ -39,7 +39,7 @@ class Style : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -201,10 +201,10 @@ class Style : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.icon_source.IconSource source, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_style_render_icon(cast(GtkStyle*)this._cPtr, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

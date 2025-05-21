@@ -16,7 +16,7 @@ class DirectoryPartitioning : arrowdataset.key_value_partitioning.KeyValuePartit
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

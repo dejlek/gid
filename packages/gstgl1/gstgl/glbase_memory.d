@@ -44,7 +44,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -106,7 +106,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   /** */
   @property glib.mutex.Mutex lock()
   {
-    return new glib.mutex.Mutex(cast(GMutex*)&(cast(GstGLBaseMemory*)this._cPtr).lock);
+    return new glib.mutex.Mutex(cast(GMutex*)&(cast(GstGLBaseMemory*)this._cPtr).lock, No.Take);
   }
 
   /** */
@@ -148,7 +148,7 @@ class GLBaseMemory : gobject.boxed.Boxed
   /** */
   @property gstgl.glquery.GLQuery query()
   {
-    return new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)this._cPtr).query);
+    return new gstgl.glquery.GLQuery(cast(GstGLQuery*)(cast(GstGLBaseMemory*)this._cPtr).query, No.Take);
   }
 
   /**

@@ -8,7 +8,7 @@ import gtk.cell_layout_mixin;
 /// Proxy object for [gtk.cell_layout.CellLayout] interface when a GObject has no applicable D binding
 class CellLayoutIfaceProxy : IfaceProxy, gtk.cell_layout.CellLayout
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

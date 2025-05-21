@@ -21,7 +21,7 @@ class TextAttributes : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -57,7 +57,7 @@ class TextAttributes : gobject.boxed.Boxed
   */
   @property gtk.text_appearance.TextAppearance appearance()
   {
-    return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)this._cPtr).appearance);
+    return new gtk.text_appearance.TextAppearance(cast(GtkTextAppearance*)&(cast(GtkTextAttributes*)this._cPtr).appearance, No.Take);
   }
 
   /**

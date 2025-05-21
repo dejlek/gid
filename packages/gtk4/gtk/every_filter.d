@@ -20,7 +20,7 @@ class EveryFilter : gtk.multi_filter.MultiFilter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -20,7 +20,7 @@ class LinkButtonAccessible : gtk.button_accessible.ButtonAccessible, atk.hyperli
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

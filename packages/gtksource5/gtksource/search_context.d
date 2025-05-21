@@ -74,7 +74,7 @@ class SearchContext : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -436,7 +436,7 @@ class SearchContext : gobject.object.ObjectWrap
   {
     GError* _cretval;
     _cretval = gtk_source_search_context_get_regex_error(cast(GtkSourceSearchContext*)this._cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

@@ -47,7 +47,7 @@ class MenuToolButton : gtk.tool_button.ToolButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

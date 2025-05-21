@@ -16,7 +16,7 @@ class BindingSignal
   GtkBindingSignal cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_signal.BindingSignal");
@@ -39,7 +39,7 @@ class BindingSignal
   */
   @property gtk.binding_signal.BindingSignal next()
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next);
+    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingSignal*)this._cPtr).next, No.Take);
   }
 
   /**

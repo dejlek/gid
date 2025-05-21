@@ -8,7 +8,7 @@ import gstallocators.phys_memory_allocator_mixin;
 /// Proxy object for [gstallocators.phys_memory_allocator.PhysMemoryAllocator] interface when a GObject has no applicable D binding
 class PhysMemoryAllocatorIfaceProxy : IfaceProxy, gstallocators.phys_memory_allocator.PhysMemoryAllocator
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

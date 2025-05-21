@@ -1,9 +1,10 @@
 {
   "name": "adw1",
-  "description": "Adw library D binding",
+  "description": "D binding for the Adw (Adwaita) library - Building blocks for modern GNOME applications",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gitlab.gnome.org/GNOME/libadwaita",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["adw"],

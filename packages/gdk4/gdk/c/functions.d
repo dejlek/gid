@@ -585,7 +585,7 @@ __gshared extern(C)
 
   // Texture
   GType function() c_gdk_texture_get_type; ///
-  GdkTexture* function(PixbufC* pixbuf) c_gdk_texture_new_for_pixbuf; ///
+  GdkTexture* function(GdkPixbuf* pixbuf) c_gdk_texture_new_for_pixbuf; ///
   GdkTexture* function(GBytes* bytes, GError** _err) c_gdk_texture_new_from_bytes; ///
   GdkTexture* function(GFile* file, GError** _err) c_gdk_texture_new_from_file; ///
   GdkTexture* function(const(char)* path, GError** _err) c_gdk_texture_new_from_filename; ///
@@ -674,7 +674,7 @@ __gshared extern(C)
   void function(cairo_t* cr, const(GdkRectangle)* rectangle) c_gdk_cairo_rectangle; ///
   void function(cairo_t* cr, const(cairo_region_t)* region) c_gdk_cairo_region; ///
   cairo_region_t* function(cairo_surface_t* surface) c_gdk_cairo_region_create_from_surface; ///
-  void function(cairo_t* cr, const(PixbufC)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf; ///
+  void function(cairo_t* cr, const(GdkPixbuf)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf; ///
   void function(cairo_t* cr, const(GdkRGBA)* rgba) c_gdk_cairo_set_source_rgba; ///
   void function(GInputStream* stream, const(char)* mimeType, GType type, int ioPriority, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gdk_content_deserialize_async; ///
   bool function(GAsyncResult* result, GValue* value, GError** _err) c_gdk_content_deserialize_finish; ///
@@ -697,8 +697,8 @@ __gshared extern(C)
   uint function(uint keyval) c_gdk_keyval_to_upper; ///
   cairo_region_t* function(PangoLayout* layout, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_get_clip_region; ///
   cairo_region_t* function(PangoLayoutLine* line, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_line_get_clip_region; ///
-  PixbufC* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface; ///
-  PixbufC* function(GdkTexture* texture) c_gdk_pixbuf_get_from_texture; ///
+  GdkPixbuf* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface; ///
+  GdkPixbuf* function(GdkTexture* texture) c_gdk_pixbuf_get_from_texture; ///
   void function(const(char)* backends) c_gdk_set_allowed_backends; ///
   GType function() c_gdk_toplevel_size_get_type; ///
   uint function(uint wc) c_gdk_unicode_to_keyval; ///

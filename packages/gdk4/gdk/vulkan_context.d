@@ -25,7 +25,7 @@ class VulkanContext : gdk.draw_context.DrawContext, gio.initable.Initable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

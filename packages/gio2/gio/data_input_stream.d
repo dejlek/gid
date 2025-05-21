@@ -22,7 +22,7 @@ class DataInputStream : gio.buffered_input_stream.BufferedInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -1,9 +1,10 @@
 {
   "name": "cairo1",
-  "description": "cairo library D binding",
+  "description": "D binding for the Cairo library - 2D graphics library with support for multiple output devices",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://cairographics.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["cairo"],

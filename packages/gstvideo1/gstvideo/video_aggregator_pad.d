@@ -15,7 +15,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -109,7 +109,7 @@ class VideoAggregatorPad : gstbase.aggregator_pad.AggregatorPad
   {
     GstVideoFrame* _cretval;
     _cretval = gst_video_aggregator_pad_get_prepared_frame(cast(GstVideoAggregatorPad*)this._cPtr);
-    auto _retval = _cretval ? new gstvideo.video_frame.VideoFrame(cast(GstVideoFrame*)_cretval) : null;
+    auto _retval = _cretval ? new gstvideo.video_frame.VideoFrame(cast(GstVideoFrame*)_cretval, No.Take) : null;
     return _retval;
   }
 

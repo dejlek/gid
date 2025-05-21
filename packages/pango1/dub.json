@@ -1,9 +1,10 @@
 {
   "name": "pango1",
-  "description": "Pango library D binding",
+  "description": "D binding for the Pango library - internationalized text layout and rendering",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gitlab.gnome.org/GNOME/pango",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["pango"],

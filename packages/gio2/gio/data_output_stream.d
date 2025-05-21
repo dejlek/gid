@@ -20,7 +20,7 @@ class DataOutputStream : gio.filter_output_stream.FilterOutputStream, gio.seekab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

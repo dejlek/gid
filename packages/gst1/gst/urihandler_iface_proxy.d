@@ -8,7 +8,7 @@ import gst.urihandler_mixin;
 /// Proxy object for [gst.urihandler.URIHandler] interface when a GObject has no applicable D binding
 class URIHandlerIfaceProxy : IfaceProxy, gst.urihandler.URIHandler
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

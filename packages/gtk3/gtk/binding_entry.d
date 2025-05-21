@@ -19,7 +19,7 @@ class BindingEntry
   GtkBindingEntry cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_entry.BindingEntry");
@@ -80,7 +80,7 @@ class BindingEntry
   */
   @property gtk.binding_set.BindingSet bindingSet()
   {
-    return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet);
+    return new gtk.binding_set.BindingSet(cast(GtkBindingSet*)(cast(GtkBindingEntry*)this._cPtr).bindingSet, No.Take);
   }
 
   /**
@@ -146,7 +146,7 @@ class BindingEntry
   */
   @property gtk.binding_entry.BindingEntry setNext()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).setNext, No.Take);
   }
 
   /**
@@ -155,7 +155,7 @@ class BindingEntry
   */
   @property gtk.binding_entry.BindingEntry hashNext()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingEntry*)this._cPtr).hashNext, No.Take);
   }
 
   /**
@@ -164,7 +164,7 @@ class BindingEntry
   */
   @property gtk.binding_signal.BindingSignal signals()
   {
-    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals);
+    return new gtk.binding_signal.BindingSignal(cast(GtkBindingSignal*)(cast(GtkBindingEntry*)this._cPtr).signals, No.Take);
   }
 
   /**

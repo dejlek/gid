@@ -74,7 +74,7 @@ class Reader : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -230,7 +230,7 @@ class Reader : gobject.object.ObjectWrap
   {
     const(GError)* _cretval;
     _cretval = json_reader_get_error(cast(JsonReader*)this._cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
     return _retval;
   }
 

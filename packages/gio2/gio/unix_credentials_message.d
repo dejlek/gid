@@ -34,7 +34,7 @@ class UnixCredentialsMessage : gio.socket_control_message.SocketControlMessage
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

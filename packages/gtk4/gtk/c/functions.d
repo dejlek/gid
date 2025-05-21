@@ -1939,7 +1939,7 @@ __gshared extern(C)
   GtkWidget* function(GIcon* icon) c_gtk_image_new_from_gicon; ///
   GtkWidget* function(const(char)* iconName) c_gtk_image_new_from_icon_name; ///
   GtkWidget* function(GdkPaintable* paintable) c_gtk_image_new_from_paintable; ///
-  GtkWidget* function(PixbufC* pixbuf) c_gtk_image_new_from_pixbuf; ///
+  GtkWidget* function(GdkPixbuf* pixbuf) c_gtk_image_new_from_pixbuf; ///
   GtkWidget* function(const(char)* resourcePath) c_gtk_image_new_from_resource; ///
   void function(GtkImage* image) c_gtk_image_clear; ///
   GIcon* function(GtkImage* image) c_gtk_image_get_gicon; ///
@@ -1952,7 +1952,7 @@ __gshared extern(C)
   void function(GtkImage* image, GIcon* icon) c_gtk_image_set_from_gicon; ///
   void function(GtkImage* image, const(char)* iconName) c_gtk_image_set_from_icon_name; ///
   void function(GtkImage* image, GdkPaintable* paintable) c_gtk_image_set_from_paintable; ///
-  void function(GtkImage* image, PixbufC* pixbuf) c_gtk_image_set_from_pixbuf; ///
+  void function(GtkImage* image, GdkPixbuf* pixbuf) c_gtk_image_set_from_pixbuf; ///
   void function(GtkImage* image, const(char)* resourcePath) c_gtk_image_set_from_resource; ///
   void function(GtkImage* image, GtkIconSize iconSize) c_gtk_image_set_icon_size; ///
   void function(GtkImage* image, int pixelSize) c_gtk_image_set_pixel_size; ///
@@ -2624,7 +2624,7 @@ __gshared extern(C)
   GtkWidget* function(GFile* file) c_gtk_picture_new_for_file; ///
   GtkWidget* function(const(char)* filename) c_gtk_picture_new_for_filename; ///
   GtkWidget* function(GdkPaintable* paintable) c_gtk_picture_new_for_paintable; ///
-  GtkWidget* function(PixbufC* pixbuf) c_gtk_picture_new_for_pixbuf; ///
+  GtkWidget* function(GdkPixbuf* pixbuf) c_gtk_picture_new_for_pixbuf; ///
   GtkWidget* function(const(char)* resourcePath) c_gtk_picture_new_for_resource; ///
   const(char)* function(GtkPicture* self) c_gtk_picture_get_alternative_text; ///
   bool function(GtkPicture* self) c_gtk_picture_get_can_shrink; ///
@@ -2639,7 +2639,7 @@ __gshared extern(C)
   void function(GtkPicture* self, const(char)* filename) c_gtk_picture_set_filename; ///
   void function(GtkPicture* self, bool keepAspectRatio) c_gtk_picture_set_keep_aspect_ratio; ///
   void function(GtkPicture* self, GdkPaintable* paintable) c_gtk_picture_set_paintable; ///
-  void function(GtkPicture* self, PixbufC* pixbuf) c_gtk_picture_set_pixbuf; ///
+  void function(GtkPicture* self, GdkPixbuf* pixbuf) c_gtk_picture_set_pixbuf; ///
   void function(GtkPicture* self, const(char)* resourcePath) c_gtk_picture_set_resource; ///
 
   // Popover

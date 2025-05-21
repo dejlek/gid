@@ -28,7 +28,7 @@ class TextBuffer : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -998,7 +998,7 @@ class TextBuffer : gobject.object.ObjectWrap
   */
   void insertPixbuf(gtk.text_iter.TextIter iter, gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_text_buffer_insert_pixbuf(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_text_buffer_insert_pixbuf(cast(GtkTextBuffer*)this._cPtr, iter ? cast(GtkTextIter*)iter._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

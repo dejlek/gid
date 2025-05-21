@@ -57,7 +57,7 @@ class GLMemory : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -168,7 +168,7 @@ class GLMemory : gobject.boxed.Boxed
   */
   @property gstvideo.video_alignment.VideoAlignment valign()
   {
-    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)this._cPtr).valign);
+    return new gstvideo.video_alignment.VideoAlignment(cast(GstVideoAlignment*)&(cast(GstGLMemory*)this._cPtr).valign, No.Take);
   }
 
   /**

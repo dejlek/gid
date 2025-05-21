@@ -16,7 +16,7 @@ class SqlAnyPart
   GdaSqlAnyPart cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_any_part.SqlAnyPart");
@@ -58,7 +58,7 @@ class SqlAnyPart
   */
   @property gda.sql_any_part.SqlAnyPart parent()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlAnyPart*)this._cPtr).parent);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlAnyPart*)this._cPtr).parent, No.Take);
   }
 
   /** */

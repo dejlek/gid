@@ -16,7 +16,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -150,7 +150,7 @@ class CompletionWords : gobject.object.ObjectWrap, gtksource.completion_provider
   {
     GtkSourceCompletionWords* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
-    _cretval = gtk_source_completion_words_new(_name, icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
+    _cretval = gtk_source_completion_words_new(_name, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 

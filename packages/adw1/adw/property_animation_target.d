@@ -17,7 +17,7 @@ class PropertyAnimationTarget : adw.animation_target.AnimationTarget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

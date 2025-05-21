@@ -41,7 +41,7 @@ class Socket : atk.object.ObjectWrap, atk.component.Component
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

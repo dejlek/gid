@@ -163,7 +163,7 @@ class ListStore : gobject.object.ObjectWrap, gtk.buildable.Buildable, gtk.tree_d
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

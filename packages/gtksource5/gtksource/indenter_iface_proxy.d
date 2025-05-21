@@ -8,7 +8,7 @@ import gtksource.indenter_mixin;
 /// Proxy object for [gtksource.indenter.Indenter] interface when a GObject has no applicable D binding
 class IndenterIfaceProxy : IfaceProxy, gtksource.indenter.Indenter
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

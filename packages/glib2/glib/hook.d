@@ -15,7 +15,7 @@ class Hook
   GHook cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.hook.Hook");
@@ -38,7 +38,7 @@ class Hook
   */
   @property glib.hook.Hook next()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).next, No.Take);
   }
 
   /**
@@ -47,7 +47,7 @@ class Hook
   */
   @property glib.hook.Hook prev()
   {
-    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev);
+    return new glib.hook.Hook(cast(GHook*)(cast(GHook*)this._cPtr).prev, No.Take);
   }
 
   /**

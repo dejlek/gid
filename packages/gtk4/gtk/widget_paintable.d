@@ -36,7 +36,7 @@ class WidgetPaintable : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

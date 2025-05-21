@@ -19,7 +19,7 @@ class RendererCellAccessible : gtk.cell_accessible.CellAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

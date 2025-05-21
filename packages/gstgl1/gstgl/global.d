@@ -27,7 +27,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMeta(gstgl.glcontext.GLContext conte
 {
   GstGLSyncMeta* _cretval;
   _cretval = gst_buffer_add_gl_sync_meta(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null);
-  auto _retval = _cretval ? new gstgl.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval) : null;
+  auto _retval = _cretval ? new gstgl.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -36,7 +36,7 @@ gstgl.glsync_meta.GLSyncMeta bufferAddGlSyncMetaFull(gstgl.glcontext.GLContext c
 {
   GstGLSyncMeta* _cretval;
   _cretval = gst_buffer_add_gl_sync_meta_full(context ? cast(GstGLContext*)context._cPtr(No.Dup) : null, buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, data);
-  auto _retval = _cretval ? new gstgl.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval) : null;
+  auto _retval = _cretval ? new gstgl.glsync_meta.GLSyncMeta(cast(GstGLSyncMeta*)_cretval, No.Take) : null;
   return _retval;
 }
 

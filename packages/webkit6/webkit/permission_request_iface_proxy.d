@@ -8,7 +8,7 @@ import webkit.permission_request_mixin;
 /// Proxy object for [webkit.permission_request.PermissionRequest] interface when a GObject has no applicable D binding
 class PermissionRequestIfaceProxy : IfaceProxy, webkit.permission_request.PermissionRequest
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

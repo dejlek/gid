@@ -17,7 +17,7 @@ class AncillaryMeta
   GstAncillaryMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.ancillary_meta.AncillaryMeta");
@@ -40,7 +40,7 @@ class AncillaryMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstAncillaryMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -220,7 +220,7 @@ class AncillaryMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_ancillary_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -14,7 +14,7 @@ class Decimal32Array : arrow.fixed_size_binary_array.FixedSizeBinaryArray
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

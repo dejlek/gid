@@ -16,7 +16,7 @@ class VideoAggregatorParallelConvertPad : gstvideo.video_aggregator_convert_pad.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -12,7 +12,7 @@ class XaTransactionId
   GdaXaTransactionId cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.xa_transaction_id.XaTransactionId");

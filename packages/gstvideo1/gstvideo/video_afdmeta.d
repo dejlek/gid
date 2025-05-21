@@ -29,7 +29,7 @@ class VideoAFDMeta
   GstVideoAFDMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_afdmeta.VideoAFDMeta");
@@ -52,7 +52,7 @@ class VideoAFDMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoAFDMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -117,7 +117,7 @@ class VideoAFDMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_afd_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

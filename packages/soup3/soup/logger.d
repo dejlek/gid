@@ -74,7 +74,7 @@ class Logger : gobject.object.ObjectWrap, soup.session_feature.SessionFeature
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

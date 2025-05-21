@@ -21,7 +21,7 @@ class ByteWriter
   GstByteWriter cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstbase.byte_writer.ByteWriter");
@@ -44,7 +44,7 @@ class ByteWriter
   */
   @property gstbase.byte_reader.ByteReader parent()
   {
-    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent);
+    return new gstbase.byte_reader.ByteReader(cast(GstByteReader*)&(cast(GstByteWriter*)this._cPtr).parent, No.Take);
   }
 
   /**

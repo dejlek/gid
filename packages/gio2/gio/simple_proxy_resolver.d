@@ -23,7 +23,7 @@ class SimpleProxyResolver : gobject.object.ObjectWrap, gio.proxy_resolver.ProxyR
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

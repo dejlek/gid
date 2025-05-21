@@ -13,7 +13,7 @@ class DecimalDataType : arrow.fixed_size_binary_data_type.FixedSizeBinaryDataTyp
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

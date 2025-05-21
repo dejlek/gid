@@ -17,7 +17,7 @@ class FlagsClass
   GFlagsClass cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.flags_class.FlagsClass");
@@ -40,7 +40,7 @@ class FlagsClass
   */
   @property gobject.type_class.TypeClass gTypeClass()
   {
-    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)this._cPtr).gTypeClass);
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GFlagsClass*)this._cPtr).gTypeClass, No.Take);
   }
 
   /**
@@ -88,6 +88,6 @@ class FlagsClass
   */
   @property gobject.flags_value.FlagsValue values()
   {
-    return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)this._cPtr).values);
+    return new gobject.flags_value.FlagsValue(cast(GFlagsValue*)(cast(GFlagsClass*)this._cPtr).values, No.Take);
   }
 }

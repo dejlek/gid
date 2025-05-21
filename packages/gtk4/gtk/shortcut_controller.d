@@ -61,7 +61,7 @@ class ShortcutController : gtk.event_controller.EventController, gio.list_model.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

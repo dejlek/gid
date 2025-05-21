@@ -18,7 +18,7 @@ class VButtonBox : gtk.button_box.ButtonBox
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

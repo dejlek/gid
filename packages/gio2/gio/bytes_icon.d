@@ -20,7 +20,7 @@ class BytesIcon : gobject.object.ObjectWrap, gio.icon.Icon, gio.loadable_icon.Lo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

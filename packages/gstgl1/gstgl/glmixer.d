@@ -17,7 +17,7 @@ class GLMixer : gstgl.glbase_mixer.GLBaseMixer
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

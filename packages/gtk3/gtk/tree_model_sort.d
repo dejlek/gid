@@ -115,7 +115,7 @@ class TreeModelSort : gobject.object.ObjectWrap, gtk.tree_drag_source.TreeDragSo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

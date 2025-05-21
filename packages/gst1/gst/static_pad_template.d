@@ -18,7 +18,7 @@ class StaticPadTemplate
   GstStaticPadTemplate cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.static_pad_template.StaticPadTemplate");
@@ -99,7 +99,7 @@ class StaticPadTemplate
   */
   @property gst.static_caps.StaticCaps staticCaps()
   {
-    return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps);
+    return new gst.static_caps.StaticCaps(cast(GstStaticCaps*)&(cast(GstStaticPadTemplate*)this._cPtr).staticCaps, No.Take);
   }
 
   /**

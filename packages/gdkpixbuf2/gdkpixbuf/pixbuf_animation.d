@@ -34,7 +34,7 @@ class PixbufAnimation : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -265,9 +265,9 @@ class PixbufAnimation : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getStaticImage()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gdk_pixbuf_animation_get_static_image(cast(GdkPixbufAnimation*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 

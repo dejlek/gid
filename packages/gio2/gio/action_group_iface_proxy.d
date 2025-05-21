@@ -8,7 +8,7 @@ import gio.action_group_mixin;
 /// Proxy object for [gio.action_group.ActionGroup] interface when a GObject has no applicable D binding
 class ActionGroupIfaceProxy : IfaceProxy, gio.action_group.ActionGroup
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -14,7 +14,7 @@ class SqlParamSpec
   GdaSqlParamSpec cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_param_spec.SqlParamSpec");

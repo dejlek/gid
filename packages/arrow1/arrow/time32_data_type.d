@@ -13,7 +13,7 @@ class Time32DataType : arrow.time_data_type.TimeDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

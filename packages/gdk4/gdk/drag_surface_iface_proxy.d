@@ -8,7 +8,7 @@ import gdk.drag_surface_mixin;
 /// Proxy object for [gdk.drag_surface.DragSurface] interface when a GObject has no applicable D binding
 class DragSurfaceIfaceProxy : IfaceProxy, gdk.drag_surface.DragSurface
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

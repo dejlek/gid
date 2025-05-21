@@ -14,7 +14,7 @@ class DBusErrorEntry
   GDBusErrorEntry cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gio.dbus_error_entry.DBusErrorEntry");

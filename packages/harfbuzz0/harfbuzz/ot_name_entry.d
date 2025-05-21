@@ -14,7 +14,7 @@ class OtNameEntry
   hb_ot_name_entry_t cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for harfbuzz.ot_name_entry.OtNameEntry");

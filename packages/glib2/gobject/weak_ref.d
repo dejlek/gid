@@ -37,7 +37,7 @@ class WeakRef
   GWeakRef cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.weak_ref.WeakRef");

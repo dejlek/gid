@@ -620,7 +620,7 @@ void dragSetIconName(gdk.drag_context.DragContext context, string iconName, int 
 */
 void dragSetIconPixbuf(gdk.drag_context.DragContext context, gdkpixbuf.pixbuf.Pixbuf pixbuf, int hotX, int hotY)
 {
-  gtk_drag_set_icon_pixbuf(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null, hotX, hotY);
+  gtk_drag_set_icon_pixbuf(context ? cast(GdkDragContext*)context._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null, hotX, hotY);
 }
 
 /**
@@ -765,7 +765,7 @@ gdk.event.Event getCurrentEvent()
 {
   GdkEvent* _cretval;
   _cretval = gtk_get_current_event();
-  auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
+  auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
   return _retval;
 }
 
@@ -2369,7 +2369,7 @@ void renderHandle(gtk.style_context.StyleContext context, cairo.context.Context 
 */
 void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double x, double y)
 {
-  gtk_render_icon(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null, x, y);
+  gtk_render_icon(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null, x, y);
 }
 
 /**
@@ -2388,9 +2388,9 @@ void renderIcon(gtk.style_context.StyleContext context, cairo.context.Context cr
 */
 gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.icon_source.IconSource source, gtk.types.IconSize size)
 {
-  PixbufC* _cretval;
+  GdkPixbuf* _cretval;
   _cretval = gtk_render_icon_pixbuf(context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, source ? cast(const(GtkIconSource)*)source._cPtr(No.Dup) : null, size);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -2748,7 +2748,7 @@ bool stockLookup(string stockId, out gtk.stock_item.StockItem item)
   const(char)* _stockId = stockId.toCString(No.Alloc);
   GtkStockItem _item;
   _retval = gtk_stock_lookup(_stockId, &_item);
-  item = new gtk.stock_item.StockItem(cast(void*)&_item);
+  item = new gtk.stock_item.StockItem(cast(void*)&_item, No.Take);
   return _retval;
 }
 

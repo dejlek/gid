@@ -14,7 +14,7 @@ class SocketAccessible : gtk.container_accessible.ContainerAccessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

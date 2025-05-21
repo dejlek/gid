@@ -19,7 +19,7 @@ class Item : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -112,7 +112,7 @@ class Item : gobject.boxed.Boxed
   */
   @property pango.analysis.Analysis analysis()
   {
-    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis);
+    return new pango.analysis.Analysis(cast(PangoAnalysis*)&(cast(PangoItem*)this._cPtr).analysis, No.Take);
   }
 
   /**

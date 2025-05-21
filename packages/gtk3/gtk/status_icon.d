@@ -55,7 +55,7 @@ class StatusIcon : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -437,7 +437,7 @@ class StatusIcon : gobject.object.ObjectWrap
   static gtk.status_icon.StatusIcon newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkStatusIcon* _cretval;
-    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gtk_status_icon_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.status_icon.StatusIcon)(cast(GtkStatusIcon*)_cretval, Yes.Take);
     return _retval;
   }
@@ -601,9 +601,9 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_status_icon_get_pixbuf(cast(GtkStatusIcon*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -859,7 +859,7 @@ class StatusIcon : gobject.object.ObjectWrap
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_status_icon_set_from_pixbuf(cast(GtkStatusIcon*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

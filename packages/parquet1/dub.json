@@ -1,9 +1,10 @@
 {
   "name": "parquet1",
-  "description": "Parquet library D binding",
+  "description": "D binding for the Apache Parquet library - column-oriented data file format",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://github.com/red-data-tools/parquet-glib",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["parquet"],

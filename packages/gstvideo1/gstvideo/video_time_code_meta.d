@@ -20,7 +20,7 @@ class VideoTimeCodeMeta
   GstVideoTimeCodeMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_time_code_meta.VideoTimeCodeMeta");
@@ -43,7 +43,7 @@ class VideoTimeCodeMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoTimeCodeMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -60,7 +60,7 @@ class VideoTimeCodeMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_time_code_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

@@ -209,7 +209,7 @@ class Label : gtk.widget.Widget, gtk.accessible_text.AccessibleText
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

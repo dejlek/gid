@@ -192,7 +192,7 @@ class NavigationView : gtk.widget.Widget, adw.swipeable.Swipeable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

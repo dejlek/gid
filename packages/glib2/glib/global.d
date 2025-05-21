@@ -5825,7 +5825,7 @@ void propagateError(out glib.error.ErrorWrap dest, glib.error.ErrorWrap src)
 {
   GError* _dest;
   g_propagate_error(&_dest, src ? cast(GError*)src._cPtr : null);
-  dest = new glib.error.ErrorWrap(cast(void*)_dest);
+  dest = new glib.error.ErrorWrap(cast(void*)_dest, Yes.Take);
 }
 
 /**
@@ -6466,7 +6466,7 @@ void setErrorLiteral(out glib.error.ErrorWrap err, glib.types.Quark domain, int 
   GError* _err;
   const(char)* _message = message.toCString(No.Alloc);
   g_set_error_literal(&_err, domain, code, _message);
-  err = new glib.error.ErrorWrap(cast(void*)_err);
+  err = new glib.error.ErrorWrap(cast(void*)_err, Yes.Take);
 }
 
 /**

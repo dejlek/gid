@@ -12,7 +12,7 @@ class StrptimeTimestampParser : arrow.timestamp_parser.TimestampParser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

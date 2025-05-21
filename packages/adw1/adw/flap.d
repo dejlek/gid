@@ -85,7 +85,7 @@ class Flap : gtk.widget.Widget, adw.swipeable.Swipeable, gtk.orientable.Orientab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

@@ -44,7 +44,7 @@ class VideoCodecState : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -153,7 +153,7 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo masteringDisplayInfo()
   {
-    return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)this._cPtr).masteringDisplayInfo);
+    return new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(GstVideoMasteringDisplayInfo*)(cast(GstVideoCodecState*)this._cPtr).masteringDisplayInfo, No.Take);
   }
 
   /**
@@ -162,6 +162,6 @@ class VideoCodecState : gobject.boxed.Boxed
   */
   @property gstvideo.video_content_light_level.VideoContentLightLevel contentLightLevel()
   {
-    return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel);
+    return new gstvideo.video_content_light_level.VideoContentLightLevel(cast(GstVideoContentLightLevel*)(cast(GstVideoCodecState*)this._cPtr).contentLightLevel, No.Take);
   }
 }

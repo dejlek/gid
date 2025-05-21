@@ -15,7 +15,7 @@ class RTSPTransport
   GstRTSPTransport cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtsptransport.RTSPTransport");
@@ -211,7 +211,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange interleaved()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).interleaved);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).interleaved, No.Take);
   }
 
   /**
@@ -239,7 +239,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange port()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).port);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).port, No.Take);
   }
 
   /**
@@ -250,7 +250,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange clientPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).clientPort);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).clientPort, No.Take);
   }
 
   /**
@@ -261,7 +261,7 @@ class RTSPTransport
   */
   @property gstrtsp.rtsprange.RTSPRange serverPort()
   {
-    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).serverPort);
+    return new gstrtsp.rtsprange.RTSPRange(cast(GstRTSPRange*)&(cast(GstRTSPTransport*)this._cPtr).serverPort, No.Take);
   }
 
   /**
@@ -376,7 +376,7 @@ class RTSPTransport
     GstRTSPTransport _transport;
     _cretval = gst_rtsp_transport_init(&_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)&_transport);
+    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)&_transport, No.Take);
     return _retval;
   }
 
@@ -394,7 +394,7 @@ class RTSPTransport
     GstRTSPTransport* _transport;
     _cretval = gst_rtsp_transport_new(&_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport);
+    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)_transport, Yes.Take);
     return _retval;
   }
 
@@ -413,7 +413,7 @@ class RTSPTransport
     GstRTSPTransport _transport;
     _cretval = gst_rtsp_transport_parse(_str, &_transport);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)&_transport);
+    transport = new gstrtsp.rtsptransport.RTSPTransport(cast(void*)&_transport, No.Take);
     return _retval;
   }
 }

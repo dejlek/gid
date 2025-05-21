@@ -26,7 +26,7 @@ class UnixOutputStream : gio.output_stream.OutputStream, gio.file_descriptor_bas
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

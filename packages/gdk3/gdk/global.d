@@ -222,7 +222,7 @@ void cairoSetSourceColor(cairo.context.Context cr, gdk.color.Color color)
 */
 void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
 {
-  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
+  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
 }
 
 /**
@@ -271,7 +271,7 @@ void cairoSetSourceWindow(cairo.context.Context cr, gdk.window.Window window, do
 cairo.surface.Surface cairoSurfaceCreateFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf, int scale, gdk.window.Window forWindow = null)
 {
   cairo_surface_t* _cretval;
-  _cretval = gdk_cairo_surface_create_from_pixbuf(pixbuf ? cast(const(PixbufC)*)pixbuf._cPtr(No.Dup) : null, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null);
+  _cretval = gdk_cairo_surface_create_from_pixbuf(pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null, scale, forWindow ? cast(GdkWindow*)forWindow._cPtr(No.Dup) : null);
   auto _retval = _cretval ? new cairo.surface.Surface(cast(void*)_cretval, Yes.Take) : null;
   return _retval;
 }
@@ -1071,9 +1071,9 @@ pango.context.Context pangoContextGetForScreen(gdk.screen.Screen screen)
 */
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
 {
-  PixbufC* _cretval;
+  GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -1121,9 +1121,9 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 */
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromWindow(gdk.window.Window window, int srcX, int srcY, int width, int height)
 {
-  PixbufC* _cretval;
+  GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_window(window ? cast(GdkWindow*)window._cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
   return _retval;
 }
 

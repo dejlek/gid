@@ -25,7 +25,7 @@ class DesktopAppInfo : gobject.object.ObjectWrap, gio.app_info.AppInfo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

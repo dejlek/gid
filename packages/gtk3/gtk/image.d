@@ -107,7 +107,7 @@ class Image : gtk.misc.Misc
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -481,7 +481,7 @@ class Image : gtk.misc.Misc
   static gtk.image.Image newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gtk_image_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.image.Image)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
@@ -655,9 +655,9 @@ class Image : gtk.misc.Misc
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_image_get_pixbuf(cast(GtkImage*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -779,7 +779,7 @@ class Image : gtk.misc.Misc
   */
   void setFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_image_set_from_pixbuf(cast(GtkImage*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_image_set_from_pixbuf(cast(GtkImage*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

@@ -8,7 +8,7 @@ import atk.editable_text_mixin;
 /// Proxy object for [atk.editable_text.EditableText] interface when a GObject has no applicable D binding
 class EditableTextIfaceProxy : IfaceProxy, atk.editable_text.EditableText
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

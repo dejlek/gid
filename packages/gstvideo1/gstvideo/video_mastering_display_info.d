@@ -16,7 +16,7 @@ class VideoMasteringDisplayInfo
   GstVideoMasteringDisplayInfo cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo");
@@ -172,7 +172,7 @@ class VideoMasteringDisplayInfo
     GstVideoMasteringDisplayInfo _minfo;
     const(char)* _mastering = mastering.toCString(No.Alloc);
     _retval = gst_video_mastering_display_info_from_string(&_minfo, _mastering);
-    minfo = new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(void*)&_minfo);
+    minfo = new gstvideo.video_mastering_display_info.VideoMasteringDisplayInfo(cast(void*)&_minfo, No.Take);
     return _retval;
   }
 }

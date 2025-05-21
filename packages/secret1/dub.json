@@ -1,9 +1,10 @@
 {
   "name": "secret1",
-  "description": "Secret library D binding",
+  "description": "D binding for the libsecret library - GObject-based library for storing and receiving secrets",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gitlab.gnome.org/GNOME/libsecret",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["secret"],

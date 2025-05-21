@@ -74,7 +74,7 @@ class Memory : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -355,7 +355,7 @@ class Memory : gobject.boxed.Boxed
     GstMapInfo _info;
     _cretval = gst_memory_make_mapped(cast(GstMemory*)this._cPtr, &_info, flags);
     auto _retval = _cretval ? new gst.memory.Memory(cast(void*)_cretval, Yes.Take) : null;
-    info = new gst.map_info.MapInfo(cast(void*)&_info);
+    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 
@@ -385,7 +385,7 @@ class Memory : gobject.boxed.Boxed
     bool _retval;
     GstMapInfo _info;
     _retval = gst_memory_map(cast(GstMemory*)this._cPtr, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info);
+    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 

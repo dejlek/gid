@@ -15,7 +15,7 @@ class ActionEntry
   GtkActionEntry cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.action_entry.ActionEntry");

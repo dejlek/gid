@@ -8,7 +8,7 @@ import gtk.tree_drag_source_mixin;
 /// Proxy object for [gtk.tree_drag_source.TreeDragSource] interface when a GObject has no applicable D binding
 class TreeDragSourceIfaceProxy : IfaceProxy, gtk.tree_drag_source.TreeDragSource
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

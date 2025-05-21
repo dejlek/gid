@@ -19,7 +19,7 @@ class NetAddressMeta
   GstNetAddressMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstnet.net_address_meta.NetAddressMeta");
@@ -42,7 +42,7 @@ class NetAddressMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstNetAddressMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -70,7 +70,7 @@ class NetAddressMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_net_address_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

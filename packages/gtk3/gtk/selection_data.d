@@ -17,7 +17,7 @@ class SelectionData : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -133,9 +133,9 @@ class SelectionData : gobject.boxed.Boxed
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_selection_data_get_pixbuf(cast(const(GtkSelectionData)*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -240,7 +240,7 @@ class SelectionData : gobject.boxed.Boxed
   bool setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     bool _retval;
-    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _retval = gtk_selection_data_set_pixbuf(cast(GtkSelectionData*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     return _retval;
   }
 

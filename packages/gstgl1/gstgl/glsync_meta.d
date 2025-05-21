@@ -18,7 +18,7 @@ class GLSyncMeta
   GstGLSyncMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstgl.glsync_meta.GLSyncMeta");
@@ -41,7 +41,7 @@ class GLSyncMeta
   */
   @property gst.meta.Meta parent()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstGLSyncMeta*)this._cPtr).parent, No.Take);
   }
 
   /**
@@ -213,7 +213,7 @@ class GLSyncMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_gl_sync_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

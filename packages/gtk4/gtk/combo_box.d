@@ -90,7 +90,7 @@ class ComboBox : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.cell_lay
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

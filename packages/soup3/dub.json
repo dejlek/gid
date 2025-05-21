@@ -1,9 +1,10 @@
 {
   "name": "soup3",
-  "description": "Soup library D binding",
+  "description": "D binding for the libsoup library - HTTP client/server library",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gitlab.gnome.org/GNOME/libsoup",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["soup"],

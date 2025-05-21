@@ -19,7 +19,7 @@ class VideoGLTextureUploadMeta
   GstVideoGLTextureUploadMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_gltexture_upload_meta.VideoGLTextureUploadMeta");
@@ -42,7 +42,7 @@ class VideoGLTextureUploadMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoGLTextureUploadMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoGLTextureUploadMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -104,7 +104,7 @@ class VideoGLTextureUploadMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_gl_texture_upload_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

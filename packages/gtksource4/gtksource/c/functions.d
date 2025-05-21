@@ -84,7 +84,7 @@ __gshared extern(C)
   GType function() c_gtk_source_completion_item_get_type; ///
   GtkSourceCompletionItem* function() c_gtk_source_completion_item_new; ///
   void function(GtkSourceCompletionItem* item, GIcon* gicon) c_gtk_source_completion_item_set_gicon; ///
-  void function(GtkSourceCompletionItem* item, PixbufC* icon) c_gtk_source_completion_item_set_icon; ///
+  void function(GtkSourceCompletionItem* item, GdkPixbuf* icon) c_gtk_source_completion_item_set_icon; ///
   void function(GtkSourceCompletionItem* item, const(char)* iconName) c_gtk_source_completion_item_set_icon_name; ///
   void function(GtkSourceCompletionItem* item, const(char)* info) c_gtk_source_completion_item_set_info; ///
   void function(GtkSourceCompletionItem* item, const(char)* label) c_gtk_source_completion_item_set_label; ///
@@ -96,7 +96,7 @@ __gshared extern(C)
   void function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_changed; ///
   bool function(GtkSourceCompletionProposal* proposal, GtkSourceCompletionProposal* other) c_gtk_source_completion_proposal_equal; ///
   GIcon* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_gicon; ///
-  PixbufC* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_icon; ///
+  GdkPixbuf* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_icon; ///
   const(char)* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_icon_name; ///
   char* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_info; ///
   char* function(GtkSourceCompletionProposal* proposal) c_gtk_source_completion_proposal_get_label; ///
@@ -109,7 +109,7 @@ __gshared extern(C)
   bool function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal, GtkTextIter* iter) c_gtk_source_completion_provider_activate_proposal; ///
   GtkSourceCompletionActivation function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_activation; ///
   GIcon* function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_gicon; ///
-  PixbufC* function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_icon; ///
+  GdkPixbuf* function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_icon; ///
   const(char)* function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_icon_name; ///
   GtkWidget* function(GtkSourceCompletionProvider* provider, GtkSourceCompletionProposal* proposal) c_gtk_source_completion_provider_get_info_widget; ///
   int function(GtkSourceCompletionProvider* provider) c_gtk_source_completion_provider_get_interactive_delay; ///
@@ -122,7 +122,7 @@ __gshared extern(C)
 
   // CompletionWords
   GType function() c_gtk_source_completion_words_get_type; ///
-  GtkSourceCompletionWords* function(const(char)* name, PixbufC* icon) c_gtk_source_completion_words_new; ///
+  GtkSourceCompletionWords* function(const(char)* name, GdkPixbuf* icon) c_gtk_source_completion_words_new; ///
   void function(GtkSourceCompletionWords* words, GtkTextBuffer* buffer) c_gtk_source_completion_words_register; ///
   void function(GtkSourceCompletionWords* words, GtkTextBuffer* buffer) c_gtk_source_completion_words_unregister; ///
 
@@ -227,10 +227,10 @@ __gshared extern(C)
   GtkSourceGutterRenderer* function() c_gtk_source_gutter_renderer_pixbuf_new; ///
   GIcon* function(GtkSourceGutterRendererPixbuf* renderer) c_gtk_source_gutter_renderer_pixbuf_get_gicon; ///
   const(char)* function(GtkSourceGutterRendererPixbuf* renderer) c_gtk_source_gutter_renderer_pixbuf_get_icon_name; ///
-  PixbufC* function(GtkSourceGutterRendererPixbuf* renderer) c_gtk_source_gutter_renderer_pixbuf_get_pixbuf; ///
+  GdkPixbuf* function(GtkSourceGutterRendererPixbuf* renderer) c_gtk_source_gutter_renderer_pixbuf_get_pixbuf; ///
   void function(GtkSourceGutterRendererPixbuf* renderer, GIcon* icon) c_gtk_source_gutter_renderer_pixbuf_set_gicon; ///
   void function(GtkSourceGutterRendererPixbuf* renderer, const(char)* iconName) c_gtk_source_gutter_renderer_pixbuf_set_icon_name; ///
-  void function(GtkSourceGutterRendererPixbuf* renderer, PixbufC* pixbuf) c_gtk_source_gutter_renderer_pixbuf_set_pixbuf; ///
+  void function(GtkSourceGutterRendererPixbuf* renderer, GdkPixbuf* pixbuf) c_gtk_source_gutter_renderer_pixbuf_set_pixbuf; ///
 
   // GutterRendererText
   GType function() c_gtk_source_gutter_renderer_text_get_type; ///
@@ -282,14 +282,14 @@ __gshared extern(C)
   bool function(GtkSourceMarkAttributes* attributes, GdkRGBA* background) c_gtk_source_mark_attributes_get_background; ///
   GIcon* function(GtkSourceMarkAttributes* attributes) c_gtk_source_mark_attributes_get_gicon; ///
   const(char)* function(GtkSourceMarkAttributes* attributes) c_gtk_source_mark_attributes_get_icon_name; ///
-  const(PixbufC)* function(GtkSourceMarkAttributes* attributes) c_gtk_source_mark_attributes_get_pixbuf; ///
+  const(GdkPixbuf)* function(GtkSourceMarkAttributes* attributes) c_gtk_source_mark_attributes_get_pixbuf; ///
   char* function(GtkSourceMarkAttributes* attributes, GtkSourceMark* mark) c_gtk_source_mark_attributes_get_tooltip_markup; ///
   char* function(GtkSourceMarkAttributes* attributes, GtkSourceMark* mark) c_gtk_source_mark_attributes_get_tooltip_text; ///
-  const(PixbufC)* function(GtkSourceMarkAttributes* attributes, GtkWidget* widget, int size) c_gtk_source_mark_attributes_render_icon; ///
+  const(GdkPixbuf)* function(GtkSourceMarkAttributes* attributes, GtkWidget* widget, int size) c_gtk_source_mark_attributes_render_icon; ///
   void function(GtkSourceMarkAttributes* attributes, const(GdkRGBA)* background) c_gtk_source_mark_attributes_set_background; ///
   void function(GtkSourceMarkAttributes* attributes, GIcon* gicon) c_gtk_source_mark_attributes_set_gicon; ///
   void function(GtkSourceMarkAttributes* attributes, const(char)* iconName) c_gtk_source_mark_attributes_set_icon_name; ///
-  void function(GtkSourceMarkAttributes* attributes, const(PixbufC)* pixbuf) c_gtk_source_mark_attributes_set_pixbuf; ///
+  void function(GtkSourceMarkAttributes* attributes, const(GdkPixbuf)* pixbuf) c_gtk_source_mark_attributes_set_pixbuf; ///
 
   // PrintCompositor
   GType function() c_gtk_source_print_compositor_get_type; ///

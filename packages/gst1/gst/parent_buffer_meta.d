@@ -24,7 +24,7 @@ class ParentBufferMeta
   GstParentBufferMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.parent_buffer_meta.ParentBufferMeta");
@@ -47,7 +47,7 @@ class ParentBufferMeta
   */
   @property gst.meta.Meta parent()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstParentBufferMeta*)this._cPtr).parent, No.Take);
   }
 
   /**
@@ -78,7 +78,7 @@ class ParentBufferMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_parent_buffer_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

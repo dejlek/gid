@@ -120,7 +120,7 @@ class GLArea : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -344,7 +344,7 @@ class GLArea : gtk.widget.Widget
   {
     GError* _cretval;
     _cretval = gtk_gl_area_get_error(cast(GtkGLArea*)this._cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
     return _retval;
   }
 

@@ -55,7 +55,7 @@ class SignalListItemFactory : gtk.list_item_factory.ListItemFactory
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

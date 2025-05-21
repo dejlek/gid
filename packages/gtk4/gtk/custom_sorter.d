@@ -15,7 +15,7 @@ class CustomSorter : gtk.sorter.Sorter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -59,8 +59,8 @@ class CustomSorter : gtk.sorter.Sorter
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
       return _retval;
     }
 
@@ -88,8 +88,8 @@ class CustomSorter : gtk.sorter.Sorter
       auto aObj = cast(GObject*)a;
       auto bObj = cast(GObject*)b;
 
-      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj));
+      int _retval = (*_dlg)(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(aObj, No.Take),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(bObj, No.Take));
       return _retval;
     }
 

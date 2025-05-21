@@ -16,7 +16,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -52,7 +52,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
   */
   @property gio.file_attribute_info.FileAttributeInfo infos()
   {
-    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos);
+    return new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)(cast(GFileAttributeInfoList*)this._cPtr).infos, No.Take);
   }
 
   /**
@@ -125,7 +125,7 @@ class FileAttributeInfoList : gobject.boxed.Boxed
     const(GFileAttributeInfo)* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = g_file_attribute_info_list_lookup(cast(GFileAttributeInfoList*)this._cPtr, _name);
-    auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gio.file_attribute_info.FileAttributeInfo(cast(GFileAttributeInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

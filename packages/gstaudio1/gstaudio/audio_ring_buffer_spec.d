@@ -20,7 +20,7 @@ class AudioRingBufferSpec
   GstAudioRingBufferSpec cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_ring_buffer_spec.AudioRingBufferSpec");

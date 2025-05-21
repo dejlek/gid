@@ -23,7 +23,7 @@ class RecentInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -239,9 +239,9 @@ class RecentInfo : gobject.boxed.Boxed
   */
   gdkpixbuf.pixbuf.Pixbuf getIcon(int size)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_recent_info_get_icon(cast(GtkRecentInfo*)this._cPtr, size);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

@@ -103,7 +103,7 @@ class Popover : gtk.widget.Widget, gtk.native.Native, gtk.shortcut_manager.Short
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

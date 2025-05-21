@@ -73,7 +73,7 @@ class MenuItem : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

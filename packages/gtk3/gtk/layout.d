@@ -35,7 +35,7 @@ class Layout : gtk.container.Container, gtk.scrollable.Scrollable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

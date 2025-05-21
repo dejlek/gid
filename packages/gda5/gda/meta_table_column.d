@@ -17,7 +17,7 @@ class MetaTableColumn
   GdaMetaTableColumn cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_table_column.MetaTableColumn");

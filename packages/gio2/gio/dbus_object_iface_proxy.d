@@ -8,7 +8,7 @@ import gio.dbus_object_mixin;
 /// Proxy object for [gio.dbus_object.DBusObject] interface when a GObject has no applicable D binding
 class DBusObjectIfaceProxy : IfaceProxy, gio.dbus_object.DBusObject
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

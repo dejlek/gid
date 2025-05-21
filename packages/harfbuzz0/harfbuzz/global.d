@@ -7598,6 +7598,6 @@ harfbuzz.types.Bool variationFromString(ubyte[] str, out harfbuzz.variation.Vari
   auto _str = cast(const(ubyte)*)str.ptr;
   hb_variation_t _variation;
   _retval = hb_variation_from_string(_str, _len, &_variation);
-  variation = new harfbuzz.variation.Variation(cast(void*)&_variation);
+  variation = new harfbuzz.variation.Variation(cast(void*)&_variation, No.Take);
   return _retval;
 }

@@ -16,7 +16,7 @@ class RTSPRange
   GstRTSPRange cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtsp.rtsprange.RTSPRange");
@@ -136,7 +136,7 @@ class RTSPRange
     GstRTSPTimeRange* _range;
     _cretval = gst_rtsp_range_parse(_rangestr, &_range);
     gstrtsp.types.RTSPResult _retval = cast(gstrtsp.types.RTSPResult)_cretval;
-    range = new gstrtsp.rtsptime_range.RTSPTimeRange(cast(void*)_range);
+    range = new gstrtsp.rtsptime_range.RTSPTimeRange(cast(void*)_range, Yes.Take);
     return _retval;
   }
 

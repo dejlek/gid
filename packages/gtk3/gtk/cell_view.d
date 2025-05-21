@@ -47,7 +47,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -275,7 +275,7 @@ class CellView : gtk.widget.Widget, gtk.cell_layout.CellLayout, gtk.orientable.O
   static gtk.cell_view.CellView newWithPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_cell_view_new_with_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gtk_cell_view_new_with_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.cell_view.CellView)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }

@@ -41,7 +41,7 @@ class PixbufFormat : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -97,7 +97,7 @@ class PixbufFormat : gobject.boxed.Boxed
   */
   @property gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern signature()
   {
-    return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature);
+    return new gdkpixbuf.pixbuf_module_pattern.PixbufModulePattern(cast(GdkPixbufModulePattern*)(cast(GdkPixbufFormat*)this._cPtr).signature, No.Take);
   }
 
   /**

@@ -18,7 +18,7 @@ class EventOwnerChange
   GdkEventOwnerChange cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_owner_change.EventOwnerChange");
@@ -138,7 +138,7 @@ class EventOwnerChange
   */
   @property gdk.atom.Atom selection()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)this._cPtr).selection);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventOwnerChange*)this._cPtr).selection, No.Take);
   }
 
   /**

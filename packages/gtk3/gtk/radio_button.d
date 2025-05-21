@@ -107,7 +107,7 @@ class RadioButton : gtk.check_button.CheckButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

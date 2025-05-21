@@ -33,7 +33,7 @@ class SqlExpr : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -69,7 +69,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_any_part.SqlAnyPart any()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlExpr*)this._cPtr).any);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlExpr*)this._cPtr).any, No.Take);
   }
 
   /**
@@ -98,7 +98,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_param_spec.SqlParamSpec paramSpec()
   {
-    return new gda.sql_param_spec.SqlParamSpec(cast(GdaSqlParamSpec*)(cast(GdaSqlExpr*)this._cPtr).paramSpec);
+    return new gda.sql_param_spec.SqlParamSpec(cast(GdaSqlParamSpec*)(cast(GdaSqlExpr*)this._cPtr).paramSpec, No.Take);
   }
 
   /**
@@ -107,7 +107,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_function.SqlFunction func()
   {
-    return new gda.sql_function.SqlFunction(cast(GdaSqlFunction*)(cast(GdaSqlExpr*)this._cPtr).func);
+    return new gda.sql_function.SqlFunction(cast(GdaSqlFunction*)(cast(GdaSqlExpr*)this._cPtr).func, No.Take);
   }
 
   /**
@@ -116,7 +116,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_operation.SqlOperation cond()
   {
-    return new gda.sql_operation.SqlOperation(cast(GdaSqlOperation*)(cast(GdaSqlExpr*)this._cPtr).cond);
+    return new gda.sql_operation.SqlOperation(cast(GdaSqlOperation*)(cast(GdaSqlExpr*)this._cPtr).cond, No.Take);
   }
 
   /**
@@ -125,7 +125,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_any_part.SqlAnyPart select()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlExpr*)this._cPtr).select);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlExpr*)this._cPtr).select, No.Take);
   }
 
   /**
@@ -134,7 +134,7 @@ class SqlExpr : gobject.boxed.Boxed
   */
   @property gda.sql_case.SqlCase caseS()
   {
-    return new gda.sql_case.SqlCase(cast(GdaSqlCase*)(cast(GdaSqlExpr*)this._cPtr).caseS);
+    return new gda.sql_case.SqlCase(cast(GdaSqlCase*)(cast(GdaSqlExpr*)this._cPtr).caseS, No.Take);
   }
 
   /**

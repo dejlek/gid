@@ -20,7 +20,7 @@ class IconSet : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -87,7 +87,7 @@ class IconSet : gobject.boxed.Boxed
   static gtk.icon_set.IconSet newFromPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GtkIconSet* _cretval;
-    _cretval = gtk_icon_set_new_from_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gtk_icon_set_new_from_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = _cretval ? new gtk.icon_set.IconSet(cast(void*)_cretval, Yes.Take) : null;
     return _retval;
   }
@@ -189,10 +189,10 @@ class IconSet : gobject.boxed.Boxed
   */
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.style.Style style, gtk.types.TextDirection direction, gtk.types.StateType state, gtk.types.IconSize size, gtk.widget.Widget widget = null, string detail = null)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_icon_set_render_icon(cast(GtkIconSet*)this._cPtr, style ? cast(GtkStyle*)style._cPtr(No.Dup) : null, direction, state, size, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, _detail);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -214,9 +214,9 @@ class IconSet : gobject.boxed.Boxed
   */
   gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(gtk.style_context.StyleContext context, gtk.types.IconSize size)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_icon_set_render_icon_pixbuf(cast(GtkIconSet*)this._cPtr, context ? cast(GtkStyleContext*)context._cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

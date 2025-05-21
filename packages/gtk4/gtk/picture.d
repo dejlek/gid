@@ -69,7 +69,7 @@ class Picture : gtk.widget.Widget
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -301,7 +301,7 @@ class Picture : gtk.widget.Widget
   static gtk.picture.Picture newForPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
     GtkWidget* _cretval;
-    _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gtk_picture_new_for_pixbuf(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     auto _retval = gobject.object.ObjectWrap._getDObject!(gtk.picture.Picture)(cast(GtkWidget*)_cretval, No.Take);
     return _retval;
   }
@@ -536,7 +536,7 @@ class Picture : gtk.widget.Widget
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_picture_set_pixbuf(cast(GtkPicture*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_picture_set_pixbuf(cast(GtkPicture*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

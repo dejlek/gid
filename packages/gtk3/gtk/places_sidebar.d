@@ -59,7 +59,7 @@ class PlacesSidebar : gtk.scrolled_window.ScrolledWindow
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

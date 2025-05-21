@@ -115,7 +115,7 @@ class Gesture : gtk.event_controller.EventController
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -244,7 +244,7 @@ class Gesture : gtk.event_controller.EventController
   {
     const(GdkEvent)* _cretval;
     _cretval = gtk_gesture_get_last_event(cast(GtkGesture*)this._cPtr, sequence ? cast(GdkEventSequence*)sequence._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
 

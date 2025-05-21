@@ -179,7 +179,7 @@ class Handle : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -871,9 +871,9 @@ class Handle : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = rsvg_handle_get_pixbuf(cast(RsvgHandle*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -906,10 +906,10 @@ class Handle : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbufSub(string id = null)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _id = id.toCString(No.Alloc);
     _cretval = rsvg_handle_get_pixbuf_sub(cast(RsvgHandle*)this._cPtr, _id);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

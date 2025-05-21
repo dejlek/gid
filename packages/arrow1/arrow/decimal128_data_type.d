@@ -13,7 +13,7 @@ class Decimal128DataType : arrow.decimal_data_type.DecimalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

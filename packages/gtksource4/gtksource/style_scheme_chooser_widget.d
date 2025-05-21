@@ -18,7 +18,7 @@ class StyleSchemeChooserWidget : gtk.bin.Bin, gtksource.style_scheme_chooser.Sty
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

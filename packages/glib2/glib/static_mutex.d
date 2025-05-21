@@ -60,7 +60,7 @@ class StaticMutex
   GStaticMutex cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.static_mutex.StaticMutex");
@@ -80,7 +80,7 @@ class StaticMutex
   /** */
   @property glib.mutex.Mutex mutex()
   {
-    return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)this._cPtr).mutex);
+    return new glib.mutex.Mutex(cast(GMutex*)(cast(GStaticMutex*)this._cPtr).mutex, No.Take);
   }
 
   /** */
@@ -88,7 +88,7 @@ class StaticMutex
   {
     GMutex* _cretval;
     _cretval = g_static_mutex_get_mutex_impl(cast(GStaticMutex*)this._cPtr);
-    auto _retval = _cretval ? new glib.mutex.Mutex(cast(GMutex*)_cretval) : null;
+    auto _retval = _cretval ? new glib.mutex.Mutex(cast(GMutex*)_cretval, No.Take) : null;
     return _retval;
   }
 }

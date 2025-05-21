@@ -85,7 +85,7 @@ class Window : gtk.bin.Bin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -716,7 +716,7 @@ class Window : gtk.bin.Bin
   */
   static void setDefaultIcon(gdkpixbuf.pixbuf.Pixbuf icon)
   {
-    gtk_window_set_default_icon(icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
+    gtk_window_set_default_icon(icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
 
   /**
@@ -1136,9 +1136,9 @@ class Window : gtk.bin.Bin
   */
   gdkpixbuf.pixbuf.Pixbuf getIcon()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_window_get_icon(cast(GtkWindow*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -2271,7 +2271,7 @@ class Window : gtk.bin.Bin
   */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
-    gtk_window_set_icon(cast(GtkWindow*)this._cPtr, icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
+    gtk_window_set_icon(cast(GtkWindow*)this._cPtr, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
 
   /**

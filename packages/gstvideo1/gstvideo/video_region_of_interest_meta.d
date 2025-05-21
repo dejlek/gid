@@ -18,7 +18,7 @@ class VideoRegionOfInterestMeta
   GstVideoRegionOfInterestMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_region_of_interest_meta.VideoRegionOfInterestMeta");
@@ -41,7 +41,7 @@ class VideoRegionOfInterestMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoRegionOfInterestMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -220,7 +220,7 @@ class VideoRegionOfInterestMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_region_of_interest_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

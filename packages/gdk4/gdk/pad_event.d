@@ -14,7 +14,7 @@ class PadEvent : gdk.event.Event
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.pad_event.PadEvent");

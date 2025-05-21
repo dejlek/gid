@@ -23,7 +23,7 @@ class ConverterOutputStream : gio.filter_output_stream.FilterOutputStream, gio.p
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

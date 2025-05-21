@@ -14,7 +14,7 @@ class TypeClass
   GTypeClass cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.type_class.TypeClass");
@@ -129,7 +129,7 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek_parent(cast(GTypeClass*)this._cPtr);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval) : null;
+    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -150,7 +150,7 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval) : null;
+    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -168,7 +168,7 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_peek_static(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval) : null;
+    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -186,7 +186,7 @@ class TypeClass
   {
     GTypeClass* _cretval;
     _cretval = g_type_class_ref(type);
-    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval) : null;
+    auto _retval = _cretval ? new gobject.type_class.TypeClass(cast(GTypeClass*)_cretval, No.Take) : null;
     return _retval;
   }
 }

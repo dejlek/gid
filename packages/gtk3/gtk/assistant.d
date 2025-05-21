@@ -49,7 +49,7 @@ class Assistant : gtk.window.Window
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -207,9 +207,9 @@ class Assistant : gtk.window.Window
   */
   gdkpixbuf.pixbuf.Pixbuf getPageHeaderImage(gtk.widget.Widget page)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_assistant_get_page_header_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -226,9 +226,9 @@ class Assistant : gtk.window.Window
   */
   gdkpixbuf.pixbuf.Pixbuf getPageSideImage(gtk.widget.Widget page)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_assistant_get_page_side_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -430,7 +430,7 @@ class Assistant : gtk.window.Window
   */
   void setPageHeaderImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_assistant_set_page_header_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_assistant_set_page_header_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -448,7 +448,7 @@ class Assistant : gtk.window.Window
   */
   void setPageSideImage(gtk.widget.Widget page, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_assistant_set_page_side_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_assistant_set_page_side_image(cast(GtkAssistant*)this._cPtr, page ? cast(GtkWidget*)page._cPtr(No.Dup) : null, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

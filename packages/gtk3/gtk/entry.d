@@ -109,7 +109,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -1359,9 +1359,9 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   gdkpixbuf.pixbuf.Pixbuf getIconPixbuf(gtk.types.EntryIconPosition iconPos)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_entry_get_icon_pixbuf(cast(GtkEntry*)this._cPtr, iconPos);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -1980,7 +1980,7 @@ class Entry : gtk.widget.Widget, gtk.cell_editable.CellEditable, gtk.editable.Ed
   */
   void setIconFromPixbuf(gtk.types.EntryIconPosition iconPos, gdkpixbuf.pixbuf.Pixbuf pixbuf = null)
   {
-    gtk_entry_set_icon_from_pixbuf(cast(GtkEntry*)this._cPtr, iconPos, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_entry_set_icon_from_pixbuf(cast(GtkEntry*)this._cPtr, iconPos, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

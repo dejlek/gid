@@ -13,7 +13,7 @@ class SqlStatementCompound
   GdaSqlStatementCompound cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_statement_compound.SqlStatementCompound");
@@ -33,7 +33,7 @@ class SqlStatementCompound
   /** */
   @property gda.sql_any_part.SqlAnyPart any()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlStatementCompound*)this._cPtr).any);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlStatementCompound*)this._cPtr).any, No.Take);
   }
 
   /** */

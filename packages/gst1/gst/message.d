@@ -59,7 +59,7 @@ class Message : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -1385,7 +1385,7 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_error(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
+    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString(Yes.Free);
   }
 
@@ -1452,7 +1452,7 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_info(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
+    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString(Yes.Free);
   }
 
@@ -1893,7 +1893,7 @@ class Message : gobject.boxed.Boxed
     GError* _gerror;
     char* _debug_;
     gst_message_parse_warning(cast(GstMessage*)this._cPtr, &_gerror, &_debug_);
-    gerror = new glib.error.ErrorWrap(cast(void*)_gerror);
+    gerror = new glib.error.ErrorWrap(cast(void*)_gerror, Yes.Take);
     debug_ = _debug_.fromCString(Yes.Free);
   }
 

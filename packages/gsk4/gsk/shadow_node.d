@@ -15,7 +15,7 @@ class ShadowNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.shadow_node.ShadowNode");
@@ -57,7 +57,7 @@ class ShadowNode : gsk.render_node.RenderNode
   {
     const(GskShadow)* _cretval;
     _cretval = gsk_shadow_node_get_shadow(cast(const(GskRenderNode)*)this._cPtr, i);
-    auto _retval = _cretval ? new gsk.shadow.Shadow(cast(GskShadow*)_cretval) : null;
+    auto _retval = _cretval ? new gsk.shadow.Shadow(cast(GskShadow*)_cretval, No.Take) : null;
     return _retval;
   }
 }

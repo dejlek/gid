@@ -25,7 +25,7 @@ class AudioBuffer
   GstAudioBuffer cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstaudio.audio_buffer.AudioBuffer");
@@ -183,7 +183,7 @@ class AudioBuffer
     bool _retval;
     GstAudioBuffer _buffer;
     _retval = gst_audio_buffer_map(&_buffer, info ? cast(const(GstAudioInfo)*)info._cPtr(No.Dup) : null, gstbuffer ? cast(GstBuffer*)gstbuffer._cPtr(No.Dup) : null, flags);
-    buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer);
+    buffer = new gstaudio.audio_buffer.AudioBuffer(cast(void*)&_buffer, No.Take);
     return _retval;
   }
 

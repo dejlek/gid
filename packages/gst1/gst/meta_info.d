@@ -16,7 +16,7 @@ class MetaInfo
   GstMetaInfo cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gst.meta_info.MetaInfo");
@@ -216,7 +216,7 @@ class MetaInfo
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_meta_info_register(cast(GstMetaInfo*)this._cPtr);
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

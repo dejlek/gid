@@ -30,7 +30,7 @@ class BufferedOutputStream : gio.filter_output_stream.FilterOutputStream, gio.se
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

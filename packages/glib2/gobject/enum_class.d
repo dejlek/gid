@@ -17,7 +17,7 @@ class EnumClass
   GEnumClass cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gobject.enum_class.EnumClass");
@@ -40,7 +40,7 @@ class EnumClass
   */
   @property gobject.type_class.TypeClass gTypeClass()
   {
-    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)this._cPtr).gTypeClass);
+    return new gobject.type_class.TypeClass(cast(GTypeClass*)&(cast(GEnumClass*)this._cPtr).gTypeClass, No.Take);
   }
 
   /**
@@ -107,6 +107,6 @@ class EnumClass
   */
   @property gobject.enum_value.EnumValue values()
   {
-    return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)this._cPtr).values);
+    return new gobject.enum_value.EnumValue(cast(GEnumValue*)(cast(GEnumClass*)this._cPtr).values, No.Take);
   }
 }

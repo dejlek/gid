@@ -28,7 +28,7 @@ class SeparatorMenuItem : gtk.menu_item.MenuItem
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

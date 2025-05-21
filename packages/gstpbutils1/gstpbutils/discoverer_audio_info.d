@@ -14,7 +14,7 @@ class DiscovererAudioInfo : gstpbutils.discoverer_stream_info.DiscovererStreamIn
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

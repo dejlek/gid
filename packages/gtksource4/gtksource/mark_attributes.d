@@ -18,7 +18,7 @@ class MarkAttributes : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -181,9 +181,9 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf getPixbuf()
   {
-    const(PixbufC)* _cretval;
+    const(GdkPixbuf)* _cretval;
     _cretval = gtk_source_mark_attributes_get_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -237,9 +237,9 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf renderIcon(gtk.widget.Widget widget, int size)
   {
-    const(PixbufC)* _cretval;
+    const(GdkPixbuf)* _cretval;
     _cretval = gtk_source_mark_attributes_render_icon(cast(GtkSourceMarkAttributes*)this._cPtr, widget ? cast(GtkWidget*)widget._cPtr(No.Dup) : null, size);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, No.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, No.Take);
     return _retval;
   }
 
@@ -285,7 +285,7 @@ class MarkAttributes : gobject.object.ObjectWrap
   */
   void setPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr, pixbuf ? cast(const(PixbufC)*)pixbuf._cPtr(No.Dup) : null);
+    gtk_source_mark_attributes_set_pixbuf(cast(GtkSourceMarkAttributes*)this._cPtr, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

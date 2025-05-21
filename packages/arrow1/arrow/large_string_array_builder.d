@@ -13,7 +13,7 @@ class LargeStringArrayBuilder : arrow.large_binary_array_builder.LargeBinaryArra
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

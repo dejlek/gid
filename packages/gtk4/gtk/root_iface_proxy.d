@@ -8,7 +8,7 @@ import gtk.root_mixin;
 /// Proxy object for [gtk.root.Root] interface when a GObject has no applicable D binding
 class RootIfaceProxy : IfaceProxy, gtk.root.Root
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

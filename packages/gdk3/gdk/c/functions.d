@@ -47,11 +47,11 @@ __gshared extern(C)
   GdkCursor* function(GdkCursorType cursorType) c_gdk_cursor_new; ///
   GdkCursor* function(GdkDisplay* display, GdkCursorType cursorType) c_gdk_cursor_new_for_display; ///
   GdkCursor* function(GdkDisplay* display, const(char)* name) c_gdk_cursor_new_from_name; ///
-  GdkCursor* function(GdkDisplay* display, PixbufC* pixbuf, int x, int y) c_gdk_cursor_new_from_pixbuf; ///
+  GdkCursor* function(GdkDisplay* display, GdkPixbuf* pixbuf, int x, int y) c_gdk_cursor_new_from_pixbuf; ///
   GdkCursor* function(GdkDisplay* display, cairo_surface_t* surface, double x, double y) c_gdk_cursor_new_from_surface; ///
   GdkCursorType function(GdkCursor* cursor) c_gdk_cursor_get_cursor_type; ///
   GdkDisplay* function(GdkCursor* cursor) c_gdk_cursor_get_display; ///
-  PixbufC* function(GdkCursor* cursor) c_gdk_cursor_get_image; ///
+  GdkPixbuf* function(GdkCursor* cursor) c_gdk_cursor_get_image; ///
   cairo_surface_t* function(GdkCursor* cursor, double* xHot, double* yHot) c_gdk_cursor_get_surface; ///
   GdkCursor* function(GdkCursor* cursor) c_gdk_cursor_ref; ///
   void function(GdkCursor* cursor) c_gdk_cursor_unref; ///
@@ -567,10 +567,10 @@ __gshared extern(C)
   void function(cairo_t* cr, const(cairo_region_t)* region) c_gdk_cairo_region; ///
   cairo_region_t* function(cairo_surface_t* surface) c_gdk_cairo_region_create_from_surface; ///
   void function(cairo_t* cr, const(GdkColor)* color) c_gdk_cairo_set_source_color; ///
-  void function(cairo_t* cr, const(PixbufC)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf; ///
+  void function(cairo_t* cr, const(GdkPixbuf)* pixbuf, double pixbufX, double pixbufY) c_gdk_cairo_set_source_pixbuf; ///
   void function(cairo_t* cr, const(GdkRGBA)* rgba) c_gdk_cairo_set_source_rgba; ///
   void function(cairo_t* cr, GdkWindow* window, double x, double y) c_gdk_cairo_set_source_window; ///
-  cairo_surface_t* function(const(PixbufC)* pixbuf, int scale, GdkWindow* forWindow) c_gdk_cairo_surface_create_from_pixbuf; ///
+  cairo_surface_t* function(const(GdkPixbuf)* pixbuf, int scale, GdkWindow* forWindow) c_gdk_cairo_surface_create_from_pixbuf; ///
   void function() c_gdk_disable_multidevice; ///
   void function(GdkDragContext* context, uint time) c_gdk_drag_abort; ///
   GdkDragContext* function(GdkWindow* window, GList* targets) c_gdk_drag_begin; ///
@@ -622,8 +622,8 @@ __gshared extern(C)
   cairo_region_t* function(PangoLayout* layout, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_get_clip_region; ///
   cairo_region_t* function(PangoLayoutLine* line, int xOrigin, int yOrigin, const(int)* indexRanges, int nRanges) c_gdk_pango_layout_line_get_clip_region; ///
   void function(int* argc, char*** argv) c_gdk_parse_args; ///
-  PixbufC* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface; ///
-  PixbufC* function(GdkWindow* window, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_window; ///
+  GdkPixbuf* function(cairo_surface_t* surface, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_surface; ///
+  GdkPixbuf* function(GdkWindow* window, int srcX, int srcY, int width, int height) c_gdk_pixbuf_get_from_window; ///
   GdkGrabStatus function(GdkWindow* window, bool ownerEvents, GdkEventMask eventMask, GdkWindow* confineTo, GdkCursor* cursor, uint time) c_gdk_pointer_grab; ///
   bool function() c_gdk_pointer_is_grabbed; ///
   void function(uint time) c_gdk_pointer_ungrab; ///

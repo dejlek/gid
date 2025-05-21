@@ -15,7 +15,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -84,7 +84,7 @@ class PixbufSimpleAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   */
   void addFrame(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gdk_pixbuf_simple_anim_add_frame(cast(GdkPixbufSimpleAnim*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**

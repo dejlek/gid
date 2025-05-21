@@ -8,7 +8,7 @@ import gda.lockable_mixin;
 /// Proxy object for [gda.lockable.Lockable] interface when a GObject has no applicable D binding
 class LockableIfaceProxy : IfaceProxy, gda.lockable.Lockable
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

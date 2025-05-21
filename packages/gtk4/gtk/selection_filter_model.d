@@ -19,7 +19,7 @@ class SelectionFilterModel : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

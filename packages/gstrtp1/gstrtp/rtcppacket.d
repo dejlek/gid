@@ -16,7 +16,7 @@ class RTCPPacket
   GstRTCPPacket cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtcppacket.RTCPPacket");
@@ -39,7 +39,7 @@ class RTCPPacket
   */
   @property gstrtp.rtcpbuffer.RTCPBuffer rtcp()
   {
-    return new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)this._cPtr).rtcp);
+    return new gstrtp.rtcpbuffer.RTCPBuffer(cast(GstRTCPBuffer*)(cast(GstRTCPPacket*)this._cPtr).rtcp, No.Take);
   }
 
   /**

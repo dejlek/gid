@@ -104,7 +104,7 @@ class ApplicationWindow : gtk.window.Window, gio.action_group.ActionGroup, gio.a
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

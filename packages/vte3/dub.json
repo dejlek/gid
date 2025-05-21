@@ -1,9 +1,10 @@
 {
   "name": "vte3",
-  "description": "Vte library D binding",
+  "description": "D binding for the Vte 3.91 library - Virtual TErminal widget for Gtk4",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://wiki.gnome.org/Apps/Terminal",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["vte"],

@@ -20,7 +20,7 @@ class DBusObjectProxy : gobject.object.ObjectWrap, gio.dbus_object.DBusObject
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

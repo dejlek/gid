@@ -19,7 +19,7 @@ class RTPBuffer
   GstRTPBuffer cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtpbuffer.RTPBuffer");
@@ -716,7 +716,7 @@ class RTPBuffer
     bool _retval;
     GstRTPBuffer _rtp;
     _retval = gst_rtp_buffer_map(buffer ? cast(GstBuffer*)buffer._cPtr(No.Dup) : null, flags, &_rtp);
-    rtp = new gstrtp.rtpbuffer.RTPBuffer(cast(void*)&_rtp);
+    rtp = new gstrtp.rtpbuffer.RTPBuffer(cast(void*)&_rtp, No.Take);
     return _retval;
   }
 

@@ -84,7 +84,7 @@ class PrintOperation : gobject.object.ObjectWrap, gtk.print_operation_preview.Pr
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

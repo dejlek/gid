@@ -15,7 +15,7 @@ class RecordBatchStreamWriter : arrow.record_batch_writer.RecordBatchWriter
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

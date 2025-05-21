@@ -8,7 +8,7 @@ import secret.retrievable_mixin;
 /// Proxy object for [secret.retrievable.Retrievable] interface when a GObject has no applicable D binding
 class RetrievableIfaceProxy : IfaceProxy, secret.retrievable.Retrievable
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

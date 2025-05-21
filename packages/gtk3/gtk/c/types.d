@@ -19978,7 +19978,7 @@ struct GtkStyleClass
   extern(C) void function(GtkStyle* style, GdkWindow* window, GtkStateType stateType) setBackground;
 
   /** */
-  extern(C) PixbufC* function(GtkStyle* style, const(GtkIconSource)* source, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) renderIcon;
+  extern(C) GdkPixbuf* function(GtkStyle* style, const(GtkIconSource)* source, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) renderIcon;
 
   /** */
   extern(C) void function(GtkStyle* style, cairo_t* cr, GtkStateType stateType, GtkWidget* widget, const(char)* detail, int x1, int x2, int y) drawHline;
@@ -20805,7 +20805,7 @@ struct GtkTextBufferClass
       The class handler for the #GtkTextBuffer::insert-pixbuf
         signal.
   */
-  extern(C) void function(GtkTextBuffer* buffer, GtkTextIter* iter, PixbufC* pixbuf) insertPixbuf;
+  extern(C) void function(GtkTextBuffer* buffer, GtkTextIter* iter, GdkPixbuf* pixbuf) insertPixbuf;
 
   /**
       The class handler for the
@@ -21435,12 +21435,12 @@ struct GtkThemingEngineClass
   /**
       Renders an icon as a #GdkPixbuf.
   */
-  extern(C) PixbufC* function(GtkThemingEngine* engine, const(GtkIconSource)* source, GtkIconSize size) renderIconPixbuf;
+  extern(C) GdkPixbuf* function(GtkThemingEngine* engine, const(GtkIconSource)* source, GtkIconSize size) renderIconPixbuf;
 
   /**
       Renders an icon given as a #GdkPixbuf.
   */
-  extern(C) void function(GtkThemingEngine* engine, cairo_t* cr, PixbufC* pixbuf, double x, double y) renderIcon;
+  extern(C) void function(GtkThemingEngine* engine, cairo_t* cr, GdkPixbuf* pixbuf, double x, double y) renderIcon;
 
   /**
       Renders an icon given as a #cairo_surface_t.
@@ -24972,7 +24972,7 @@ alias extern(C) void function(GtkClipboard* clipboard, void* userDataOrOwner) Gt
 
 alias extern(C) void function(GtkClipboard* clipboard, GtkSelectionData* selectionData, uint info, void* userDataOrOwner) GtkClipboardGetFunc;
 
-alias extern(C) void function(GtkClipboard* clipboard, PixbufC* pixbuf, void* data) GtkClipboardImageReceivedFunc;
+alias extern(C) void function(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data) GtkClipboardImageReceivedFunc;
 
 alias extern(C) void function(GtkClipboard* clipboard, GtkSelectionData* selectionData, void* data) GtkClipboardReceivedFunc;
 

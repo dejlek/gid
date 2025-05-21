@@ -573,7 +573,7 @@ struct GtkSourceCompletionProposalIface
   extern(C) char* function(GtkSourceCompletionProposal* proposal) getText;
 
   /** */
-  extern(C) PixbufC* function(GtkSourceCompletionProposal* proposal) getIcon;
+  extern(C) GdkPixbuf* function(GtkSourceCompletionProposal* proposal) getIcon;
 
   /** */
   extern(C) const(char)* function(GtkSourceCompletionProposal* proposal) getIconName;
@@ -611,7 +611,7 @@ struct GtkSourceCompletionProviderIface
   extern(C) char* function(GtkSourceCompletionProvider* provider) getName;
 
   /** */
-  extern(C) PixbufC* function(GtkSourceCompletionProvider* provider) getIcon;
+  extern(C) GdkPixbuf* function(GtkSourceCompletionProvider* provider) getIcon;
 
   /** */
   extern(C) const(char)* function(GtkSourceCompletionProvider* provider) getIconName;

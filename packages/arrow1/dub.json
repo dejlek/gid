@@ -1,9 +1,10 @@
 {
   "name": "arrow1",
-  "description": "Arrow library D binding",
+  "description": "D binding for the Apache Arrow library - Universal columnar format and multi-language toolbox",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://arrow.apache.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["arrow"],

@@ -42,7 +42,7 @@ class FontButton : gtk.widget.Widget, gtk.font_chooser.FontChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

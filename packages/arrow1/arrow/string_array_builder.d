@@ -13,7 +13,7 @@ class StringArrayBuilder : arrow.binary_array_builder.BinaryArrayBuilder
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

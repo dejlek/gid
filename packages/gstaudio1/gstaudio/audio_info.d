@@ -20,7 +20,7 @@ class AudioInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -56,7 +56,7 @@ class AudioInfo : gobject.boxed.Boxed
   */
   @property gstaudio.audio_format_info.AudioFormatInfo finfo()
   {
-    return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)this._cPtr).finfo);
+    return new gstaudio.audio_format_info.AudioFormatInfo(cast(GstAudioFormatInfo*)(cast(GstAudioInfo*)this._cPtr).finfo, No.Take);
   }
 
   /**

@@ -43,7 +43,7 @@ class ScaleButton : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

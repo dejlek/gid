@@ -1,9 +1,10 @@
 {
   "name": "xlib2",
-  "description": "xlib library D binding",
+  "description": "D binding for the xlib library - small X11 type support library for Gtk3",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gid.dub.pm",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["xlib"],

@@ -36,7 +36,7 @@ class Range : gtk.widget.Widget, gtk.accessible_range.AccessibleRange, gtk.orien
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

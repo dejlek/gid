@@ -8,7 +8,7 @@ import gtk.activatable_mixin;
 /// Proxy object for [gtk.activatable.Activatable] interface when a GObject has no applicable D binding
 class ActivatableIfaceProxy : IfaceProxy, gtk.activatable.Activatable
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

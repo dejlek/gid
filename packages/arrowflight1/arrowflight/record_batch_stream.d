@@ -14,7 +14,7 @@ class RecordBatchStream : arrowflight.data_stream.DataStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

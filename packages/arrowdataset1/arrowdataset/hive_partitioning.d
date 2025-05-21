@@ -16,7 +16,7 @@ class HivePartitioning : arrowdataset.key_value_partitioning.KeyValuePartitionin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

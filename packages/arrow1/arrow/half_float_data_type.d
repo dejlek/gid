@@ -12,7 +12,7 @@ class HalfFloatDataType : arrow.floating_point_data_type.FloatingPointDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

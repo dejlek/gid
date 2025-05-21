@@ -31,7 +31,7 @@ class BuilderCScope : gobject.object.ObjectWrap, gtk.builder_scope.BuilderScope
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

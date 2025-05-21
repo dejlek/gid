@@ -15,7 +15,7 @@ class MetaTableForeignKey
   GdaMetaTableForeignKey cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_table_foreign_key.MetaTableForeignKey");
@@ -38,7 +38,7 @@ class MetaTableForeignKey
   */
   @property gda.meta_db_object.MetaDbObject metaTable()
   {
-    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).metaTable);
+    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).metaTable, No.Take);
   }
 
   /**
@@ -47,7 +47,7 @@ class MetaTableForeignKey
   */
   @property gda.meta_db_object.MetaDbObject dependOn()
   {
-    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).dependOn);
+    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaMetaTableForeignKey*)this._cPtr).dependOn, No.Take);
   }
 
   /**

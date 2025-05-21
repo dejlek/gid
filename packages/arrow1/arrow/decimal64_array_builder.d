@@ -16,7 +16,7 @@ class Decimal64ArrayBuilder : arrow.fixed_size_binary_array_builder.FixedSizeBin
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

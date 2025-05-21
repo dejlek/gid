@@ -43,7 +43,7 @@ class Display : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -257,7 +257,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkEvent* _cretval;
     _cretval = gdk_display_get_event(cast(GdkDisplay*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
     return _retval;
   }
 
@@ -539,7 +539,7 @@ class Display : gobject.object.ObjectWrap
   {
     GdkEvent* _cretval;
     _cretval = gdk_display_peek_event(cast(GdkDisplay*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, Yes.Take) : null;
     return _retval;
   }
 

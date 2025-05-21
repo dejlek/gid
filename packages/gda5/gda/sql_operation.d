@@ -15,7 +15,7 @@ class SqlOperation
   GdaSqlOperation cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_operation.SqlOperation");
@@ -38,7 +38,7 @@ class SqlOperation
   */
   @property gda.sql_any_part.SqlAnyPart any()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlOperation*)this._cPtr).any);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlOperation*)this._cPtr).any, No.Take);
   }
 
   /** */

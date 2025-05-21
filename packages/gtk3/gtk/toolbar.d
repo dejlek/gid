@@ -48,7 +48,7 @@ class Toolbar : gtk.container.Container, gtk.orientable.Orientable, gtk.tool_she
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

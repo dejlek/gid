@@ -8,7 +8,7 @@ import gstvideo.video_direction_mixin;
 /// Proxy object for [gstvideo.video_direction.VideoDirection] interface when a GObject has no applicable D binding
 class VideoDirectionIfaceProxy : IfaceProxy, gstvideo.video_direction.VideoDirection
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

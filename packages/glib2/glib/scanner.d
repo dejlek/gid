@@ -29,7 +29,7 @@ class Scanner
   GScanner cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.scanner.Scanner");
@@ -134,7 +134,7 @@ class Scanner
   */
   @property glib.scanner_config.ScannerConfig config()
   {
-    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)this._cPtr).config);
+    return new glib.scanner_config.ScannerConfig(cast(GScannerConfig*)(cast(GScanner*)this._cPtr).config, No.Take);
   }
 
   /**
@@ -162,7 +162,7 @@ class Scanner
   */
   @property glib.token_value.TokenValue value()
   {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).value);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).value, No.Take);
   }
 
   /**
@@ -228,7 +228,7 @@ class Scanner
   */
   @property glib.token_value.TokenValue nextValue()
   {
-    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).nextValue);
+    return new glib.token_value.TokenValue(cast(GTokenValue*)&(cast(GScanner*)this._cPtr).nextValue, No.Take);
   }
 
   /**

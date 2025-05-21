@@ -151,7 +151,7 @@ gobject.enum_value.EnumValue enumGetValue(gobject.enum_class.EnumClass enumClass
 {
   GEnumValue* _cretval;
   _cretval = g_enum_get_value(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, value);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -170,7 +170,7 @@ gobject.enum_value.EnumValue enumGetValueByName(gobject.enum_class.EnumClass enu
   GEnumValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
   _cretval = g_enum_get_value_by_name(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _name);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -189,7 +189,7 @@ gobject.enum_value.EnumValue enumGetValueByNick(gobject.enum_class.EnumClass enu
   GEnumValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
   _cretval = g_enum_get_value_by_nick(enumClass ? cast(GEnumClass*)enumClass._cPtr : null, _nick);
-  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.enum_value.EnumValue(cast(GEnumValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -248,7 +248,7 @@ gobject.flags_value.FlagsValue flagsGetFirstValue(gobject.flags_class.FlagsClass
 {
   GFlagsValue* _cretval;
   _cretval = g_flags_get_first_value(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, value);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -266,7 +266,7 @@ gobject.flags_value.FlagsValue flagsGetValueByName(gobject.flags_class.FlagsClas
   GFlagsValue* _cretval;
   const(char)* _name = name.toCString(No.Alloc);
   _cretval = g_flags_get_value_by_name(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _name);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -284,7 +284,7 @@ gobject.flags_value.FlagsValue flagsGetValueByNick(gobject.flags_class.FlagsClas
   GFlagsValue* _cretval;
   const(char)* _nick = nick.toCString(No.Alloc);
   _cretval = g_flags_get_value_by_nick(flagsClass ? cast(GFlagsClass*)flagsClass._cPtr : null, _nick);
-  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval) : null;
+  auto _retval = _cretval ? new gobject.flags_value.FlagsValue(cast(GFlagsValue*)_cretval, No.Take) : null;
   return _retval;
 }
 
@@ -1597,7 +1597,7 @@ void signalQuery(uint signalId, out gobject.signal_query.SignalQuery query)
 {
   GSignalQuery _query;
   g_signal_query(signalId, &_query);
-  query = new gobject.signal_query.SignalQuery(cast(void*)&_query);
+  query = new gobject.signal_query.SignalQuery(cast(void*)&_query, No.Take);
 }
 
 /**
@@ -2115,7 +2115,7 @@ void typeQuery(gobject.types.GType type, out gobject.type_query.TypeQuery query)
 {
   GTypeQuery _query;
   g_type_query(type, &_query);
-  query = new gobject.type_query.TypeQuery(cast(void*)&_query);
+  query = new gobject.type_query.TypeQuery(cast(void*)&_query, No.Take);
 }
 
 /**

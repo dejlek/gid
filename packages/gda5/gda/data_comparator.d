@@ -17,7 +17,7 @@ class DataComparator : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -120,7 +120,7 @@ class DataComparator : gobject.object.ObjectWrap
   {
     const(GdaDiff)* _cretval;
     _cretval = gda_data_comparator_get_diff(cast(GdaDataComparator*)this._cPtr, pos);
-    auto _retval = _cretval ? new gda.diff.Diff(cast(GdaDiff*)_cretval) : null;
+    auto _retval = _cretval ? new gda.diff.Diff(cast(GdaDiff*)_cretval, No.Take) : null;
     return _retval;
   }
 

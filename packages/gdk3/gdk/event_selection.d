@@ -17,7 +17,7 @@ class EventSelection
   GdkEventSelection cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdk.event_selection.EventSelection");
@@ -100,7 +100,7 @@ class EventSelection
   */
   @property gdk.atom.Atom selection()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).selection);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).selection, No.Take);
   }
 
   /**
@@ -109,7 +109,7 @@ class EventSelection
   */
   @property gdk.atom.Atom target()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).target);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).target, No.Take);
   }
 
   /**
@@ -118,7 +118,7 @@ class EventSelection
   */
   @property gdk.atom.Atom property()
   {
-    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).property);
+    return new gdk.atom.Atom(cast(GdkAtom*)&(cast(GdkEventSelection*)this._cPtr).property, No.Take);
   }
 
   /**

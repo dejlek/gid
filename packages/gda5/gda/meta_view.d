@@ -16,7 +16,7 @@ class MetaView
   GdaMetaView cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.meta_view.MetaView");
@@ -39,7 +39,7 @@ class MetaView
   */
   @property gda.meta_table.MetaTable table()
   {
-    return new gda.meta_table.MetaTable(cast(GdaMetaTable*)&(cast(GdaMetaView*)this._cPtr).table);
+    return new gda.meta_table.MetaTable(cast(GdaMetaTable*)&(cast(GdaMetaView*)this._cPtr).table, No.Take);
   }
 
   /**

@@ -18,7 +18,7 @@ class FileInputStream : arrow.seekable_input_stream.SeekableInputStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

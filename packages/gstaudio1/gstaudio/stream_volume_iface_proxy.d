@@ -8,7 +8,7 @@ import gstaudio.stream_volume_mixin;
 /// Proxy object for [gstaudio.stream_volume.StreamVolume] interface when a GObject has no applicable D binding
 class StreamVolumeIfaceProxy : IfaceProxy, gstaudio.stream_volume.StreamVolume
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

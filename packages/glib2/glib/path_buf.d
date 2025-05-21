@@ -43,7 +43,7 @@ class PathBuf
   GPathBuf cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.path_buf.PathBuf");
@@ -113,7 +113,7 @@ class PathBuf
   {
     GPathBuf* _cretval;
     _cretval = g_path_buf_init(cast(GPathBuf*)this._cPtr);
-    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -129,7 +129,7 @@ class PathBuf
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_init_from_path(cast(GPathBuf*)this._cPtr, _path);
-    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -204,7 +204,7 @@ class PathBuf
     GPathBuf* _cretval;
     const(char)* _path = path.toCString(No.Alloc);
     _cretval = g_path_buf_push(cast(GPathBuf*)this._cPtr, _path);
-    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval) : null;
+    auto _retval = _cretval ? new glib.path_buf.PathBuf(cast(GPathBuf*)_cretval, No.Take) : null;
     return _retval;
   }
 

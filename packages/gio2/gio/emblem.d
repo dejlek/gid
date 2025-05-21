@@ -21,7 +21,7 @@ class Emblem : gobject.object.ObjectWrap, gio.icon.Icon
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

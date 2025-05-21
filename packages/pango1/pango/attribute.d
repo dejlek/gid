@@ -44,7 +44,7 @@ class Attribute : gobject.boxed.Boxed
   }
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -125,7 +125,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrColor* _cretval;
     _cretval = pango_attribute_as_color(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_color.AttrColor(cast(PangoAttrColor*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_color.AttrColor(cast(PangoAttrColor*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -140,7 +140,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrFloat* _cretval;
     _cretval = pango_attribute_as_float(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_float.AttrFloat(cast(PangoAttrFloat*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_float.AttrFloat(cast(PangoAttrFloat*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -155,7 +155,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrFontDesc* _cretval;
     _cretval = pango_attribute_as_font_desc(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_font_desc.AttrFontDesc(cast(PangoAttrFontDesc*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_font_desc.AttrFontDesc(cast(PangoAttrFontDesc*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -170,7 +170,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrFontFeatures* _cretval;
     _cretval = pango_attribute_as_font_features(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_font_features.AttrFontFeatures(cast(PangoAttrFontFeatures*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_font_features.AttrFontFeatures(cast(PangoAttrFontFeatures*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -185,7 +185,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrInt* _cretval;
     _cretval = pango_attribute_as_int(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_int.AttrInt(cast(PangoAttrInt*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_int.AttrInt(cast(PangoAttrInt*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -200,7 +200,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrLanguage* _cretval;
     _cretval = pango_attribute_as_language(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_language.AttrLanguage(cast(PangoAttrLanguage*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_language.AttrLanguage(cast(PangoAttrLanguage*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -215,7 +215,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrShape* _cretval;
     _cretval = pango_attribute_as_shape(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_shape.AttrShape(cast(PangoAttrShape*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_shape.AttrShape(cast(PangoAttrShape*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -230,7 +230,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrSize* _cretval;
     _cretval = pango_attribute_as_size(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_size.AttrSize(cast(PangoAttrSize*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_size.AttrSize(cast(PangoAttrSize*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -245,7 +245,7 @@ class Attribute : gobject.boxed.Boxed
   {
     PangoAttrString* _cretval;
     _cretval = pango_attribute_as_string(cast(PangoAttribute*)this._cPtr);
-    auto _retval = _cretval ? new pango.attr_string.AttrString(cast(PangoAttrString*)_cretval) : null;
+    auto _retval = _cretval ? new pango.attr_string.AttrString(cast(PangoAttrString*)_cretval, No.Take) : null;
     return _retval;
   }
 

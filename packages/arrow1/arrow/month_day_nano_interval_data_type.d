@@ -12,7 +12,7 @@ class MonthDayNanoIntervalDataType : arrow.interval_data_type.IntervalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

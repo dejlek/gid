@@ -85,7 +85,7 @@ class DBusConnection : gobject.object.ObjectWrap, gio.async_initable.AsyncInitab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

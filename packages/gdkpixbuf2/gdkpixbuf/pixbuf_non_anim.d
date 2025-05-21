@@ -13,7 +13,7 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -41,7 +41,7 @@ class PixbufNonAnim : gdkpixbuf.pixbuf_animation.PixbufAnimation
   this(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
     GdkPixbufAnimation* _cretval;
-    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    _cretval = gdk_pixbuf_non_anim_new(pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
     this(_cretval, Yes.Take);
   }
 }

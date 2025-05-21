@@ -8,7 +8,7 @@ import gtk.selection_model_mixin;
 /// Proxy object for [gtk.selection_model.SelectionModel] interface when a GObject has no applicable D binding
 class SelectionModelIfaceProxy : IfaceProxy, gtk.selection_model.SelectionModel
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

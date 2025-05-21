@@ -1,9 +1,10 @@
 {
   "name": "json1",
-  "description": "Json library D binding",
+  "description": "D binding for the json-glib library - JSON parsing and generating library",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gitlab.gnome.org/GNOME/json-glib",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["json"],

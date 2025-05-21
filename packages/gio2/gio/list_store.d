@@ -21,7 +21,7 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -76,8 +76,8 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) bool _equalFuncCallback(const(void)* a, const(void)* b)
     {
-      bool _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      bool _retval = _static_equalFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
       return _retval;
     }
 
@@ -106,8 +106,8 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
       return _retval;
     }
 
@@ -129,8 +129,8 @@ class ListStore : gobject.object.ObjectWrap, gio.list_model.ListModel
 
     extern(C) int _compareFuncCallback(const(void)* a, const(void)* b, void* userData)
     {
-      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a),
-      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b));
+      int _retval = _static_compareFunc(gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)a, No.Take),
+      gobject.object.ObjectWrap._getDObject!(gobject.object.ObjectWrap)(cast(void*)b, No.Take));
       return _retval;
     }
 

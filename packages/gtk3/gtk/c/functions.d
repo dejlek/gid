@@ -28,7 +28,7 @@ __gshared extern(C)
   const(char*)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_documenters; ///
   const(char)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_license; ///
   GtkLicense function(GtkAboutDialog* about) c_gtk_about_dialog_get_license_type; ///
-  PixbufC* function(GtkAboutDialog* about) c_gtk_about_dialog_get_logo; ///
+  GdkPixbuf* function(GtkAboutDialog* about) c_gtk_about_dialog_get_logo; ///
   const(char)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_logo_icon_name; ///
   const(char)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_program_name; ///
   const(char)* function(GtkAboutDialog* about) c_gtk_about_dialog_get_translator_credits; ///
@@ -43,7 +43,7 @@ __gshared extern(C)
   void function(GtkAboutDialog* about, const(char*)* documenters) c_gtk_about_dialog_set_documenters; ///
   void function(GtkAboutDialog* about, const(char)* license) c_gtk_about_dialog_set_license; ///
   void function(GtkAboutDialog* about, GtkLicense licenseType) c_gtk_about_dialog_set_license_type; ///
-  void function(GtkAboutDialog* about, PixbufC* logo) c_gtk_about_dialog_set_logo; ///
+  void function(GtkAboutDialog* about, GdkPixbuf* logo) c_gtk_about_dialog_set_logo; ///
   void function(GtkAboutDialog* about, const(char)* iconName) c_gtk_about_dialog_set_logo_icon_name; ///
   void function(GtkAboutDialog* about, const(char)* name) c_gtk_about_dialog_set_program_name; ///
   void function(GtkAboutDialog* about, const(char)* translatorCredits) c_gtk_about_dialog_set_translator_credits; ///
@@ -326,8 +326,8 @@ __gshared extern(C)
   GtkWidget* function(GtkAssistant* assistant, int pageNum) c_gtk_assistant_get_nth_page; ///
   bool function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_complete; ///
   bool function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_has_padding; ///
-  PixbufC* function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_header_image; ///
-  PixbufC* function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_side_image; ///
+  GdkPixbuf* function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_header_image; ///
+  GdkPixbuf* function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_side_image; ///
   const(char)* function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_title; ///
   GtkAssistantPageType function(GtkAssistant* assistant, GtkWidget* page) c_gtk_assistant_get_page_type; ///
   int function(GtkAssistant* assistant, GtkWidget* page, int position) c_gtk_assistant_insert_page; ///
@@ -340,8 +340,8 @@ __gshared extern(C)
   void function(GtkAssistant* assistant, GtkAssistantPageFunc pageFunc, void* data, GDestroyNotify destroy) c_gtk_assistant_set_forward_page_func; ///
   void function(GtkAssistant* assistant, GtkWidget* page, bool complete) c_gtk_assistant_set_page_complete; ///
   void function(GtkAssistant* assistant, GtkWidget* page, bool hasPadding) c_gtk_assistant_set_page_has_padding; ///
-  void function(GtkAssistant* assistant, GtkWidget* page, PixbufC* pixbuf) c_gtk_assistant_set_page_header_image; ///
-  void function(GtkAssistant* assistant, GtkWidget* page, PixbufC* pixbuf) c_gtk_assistant_set_page_side_image; ///
+  void function(GtkAssistant* assistant, GtkWidget* page, GdkPixbuf* pixbuf) c_gtk_assistant_set_page_header_image; ///
+  void function(GtkAssistant* assistant, GtkWidget* page, GdkPixbuf* pixbuf) c_gtk_assistant_set_page_side_image; ///
   void function(GtkAssistant* assistant, GtkWidget* page, const(char)* title) c_gtk_assistant_set_page_title; ///
   void function(GtkAssistant* assistant, GtkWidget* page, GtkAssistantPageType type) c_gtk_assistant_set_page_type; ///
   void function(GtkAssistant* assistant) c_gtk_assistant_update_buttons_state; ///
@@ -679,7 +679,7 @@ __gshared extern(C)
   GtkWidget* function() c_gtk_cell_view_new; ///
   GtkWidget* function(GtkCellArea* area, GtkCellAreaContext* context) c_gtk_cell_view_new_with_context; ///
   GtkWidget* function(const(char)* markup) c_gtk_cell_view_new_with_markup; ///
-  GtkWidget* function(PixbufC* pixbuf) c_gtk_cell_view_new_with_pixbuf; ///
+  GtkWidget* function(GdkPixbuf* pixbuf) c_gtk_cell_view_new_with_pixbuf; ///
   GtkWidget* function(const(char)* text) c_gtk_cell_view_new_with_text; ///
   GtkTreePath* function(GtkCellView* cellView) c_gtk_cell_view_get_displayed_row; ///
   bool function(GtkCellView* cellView) c_gtk_cell_view_get_draw_sensitive; ///
@@ -731,13 +731,13 @@ __gshared extern(C)
   void function(GtkClipboard* clipboard, GtkClipboardTextReceivedFunc callback, void* userData) c_gtk_clipboard_request_text; ///
   void function(GtkClipboard* clipboard, GtkClipboardURIReceivedFunc callback, void* userData) c_gtk_clipboard_request_uris; ///
   void function(GtkClipboard* clipboard, const(GtkTargetEntry)* targets, int nTargets) c_gtk_clipboard_set_can_store; ///
-  void function(GtkClipboard* clipboard, PixbufC* pixbuf) c_gtk_clipboard_set_image; ///
+  void function(GtkClipboard* clipboard, GdkPixbuf* pixbuf) c_gtk_clipboard_set_image; ///
   void function(GtkClipboard* clipboard, const(char)* text, int len) c_gtk_clipboard_set_text; ///
   bool function(GtkClipboard* clipboard, const(GtkTargetEntry)* targets, uint nTargets, GtkClipboardGetFunc getFunc, GtkClipboardClearFunc clearFunc, void* userData) c_gtk_clipboard_set_with_data; ///
   bool function(GtkClipboard* clipboard, const(GtkTargetEntry)* targets, uint nTargets, GtkClipboardGetFunc getFunc, GtkClipboardClearFunc clearFunc, GObject* owner) c_gtk_clipboard_set_with_owner; ///
   void function(GtkClipboard* clipboard) c_gtk_clipboard_store; ///
   GtkSelectionData* function(GtkClipboard* clipboard, GdkAtom target) c_gtk_clipboard_wait_for_contents; ///
-  PixbufC* function(GtkClipboard* clipboard) c_gtk_clipboard_wait_for_image; ///
+  GdkPixbuf* function(GtkClipboard* clipboard) c_gtk_clipboard_wait_for_image; ///
   ubyte* function(GtkClipboard* clipboard, GtkTextBuffer* buffer, GdkAtom* format, size_t* length) c_gtk_clipboard_wait_for_rich_text; ///
   bool function(GtkClipboard* clipboard, GdkAtom** targets, int* nTargets) c_gtk_clipboard_wait_for_targets; ///
   char* function(GtkClipboard* clipboard) c_gtk_clipboard_wait_for_text; ///
@@ -1002,7 +1002,7 @@ __gshared extern(C)
   int function(GtkEntry* entry, int x, int y) c_gtk_entry_get_icon_at_pos; ///
   GIcon* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_gicon; ///
   const(char)* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_name; ///
-  PixbufC* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_pixbuf; ///
+  GdkPixbuf* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_pixbuf; ///
   bool function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_sensitive; ///
   const(char)* function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_stock; ///
   GtkImageType function(GtkEntry* entry, GtkEntryIconPosition iconPos) c_gtk_entry_get_icon_storage_type; ///
@@ -1042,7 +1042,7 @@ __gshared extern(C)
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, GtkTargetList* targetList, GdkDragAction actions) c_gtk_entry_set_icon_drag_source; ///
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, GIcon* icon) c_gtk_entry_set_icon_from_gicon; ///
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, const(char)* iconName) c_gtk_entry_set_icon_from_icon_name; ///
-  void function(GtkEntry* entry, GtkEntryIconPosition iconPos, PixbufC* pixbuf) c_gtk_entry_set_icon_from_pixbuf; ///
+  void function(GtkEntry* entry, GtkEntryIconPosition iconPos, GdkPixbuf* pixbuf) c_gtk_entry_set_icon_from_pixbuf; ///
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, const(char)* stockId) c_gtk_entry_set_icon_from_stock; ///
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, bool sensitive) c_gtk_entry_set_icon_sensitive; ///
   void function(GtkEntry* entry, GtkEntryIconPosition iconPos, const(char)* tooltip) c_gtk_entry_set_icon_tooltip_markup; ///
@@ -1663,40 +1663,40 @@ __gshared extern(C)
 
   // IconInfo
   GType function() c_gtk_icon_info_get_type; ///
-  GtkIconInfo* function(GtkIconTheme* iconTheme, PixbufC* pixbuf) c_gtk_icon_info_new_for_pixbuf; ///
+  GtkIconInfo* function(GtkIconTheme* iconTheme, GdkPixbuf* pixbuf) c_gtk_icon_info_new_for_pixbuf; ///
   GtkIconInfo* function(GtkIconInfo* iconInfo) c_gtk_icon_info_copy; ///
   void function(GtkIconInfo* iconInfo) c_gtk_icon_info_free; ///
   bool function(GtkIconInfo* iconInfo, GdkPoint** points, int* nPoints) c_gtk_icon_info_get_attach_points; ///
   int function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_base_scale; ///
   int function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_base_size; ///
-  PixbufC* function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_builtin_pixbuf; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_builtin_pixbuf; ///
   const(char)* function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_display_name; ///
   bool function(GtkIconInfo* iconInfo, GdkRectangle* rectangle) c_gtk_icon_info_get_embedded_rect; ///
   const(char)* function(GtkIconInfo* iconInfo) c_gtk_icon_info_get_filename; ///
   bool function(GtkIconInfo* iconInfo) c_gtk_icon_info_is_symbolic; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GError** _err) c_gtk_icon_info_load_icon; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GError** _err) c_gtk_icon_info_load_icon; ///
   void function(GtkIconInfo* iconInfo, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_icon_info_load_icon_async; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GAsyncResult* res, GError** _err) c_gtk_icon_info_load_icon_finish; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GAsyncResult* res, GError** _err) c_gtk_icon_info_load_icon_finish; ///
   cairo_surface_t* function(GtkIconInfo* iconInfo, GdkWindow* forWindow, GError** _err) c_gtk_icon_info_load_surface; ///
-  PixbufC* function(GtkIconInfo* iconInfo, const(GdkRGBA)* fg, const(GdkRGBA)* successColor, const(GdkRGBA)* warningColor, const(GdkRGBA)* errorColor, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, const(GdkRGBA)* fg, const(GdkRGBA)* successColor, const(GdkRGBA)* warningColor, const(GdkRGBA)* errorColor, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic; ///
   void function(GtkIconInfo* iconInfo, const(GdkRGBA)* fg, const(GdkRGBA)* successColor, const(GdkRGBA)* warningColor, const(GdkRGBA)* errorColor, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_icon_info_load_symbolic_async; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GAsyncResult* res, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_finish; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GtkStyleContext* context, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_context; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GAsyncResult* res, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_finish; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GtkStyleContext* context, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_context; ///
   void function(GtkIconInfo* iconInfo, GtkStyleContext* context, GCancellable* cancellable, GAsyncReadyCallback callback, void* userData) c_gtk_icon_info_load_symbolic_for_context_async; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GAsyncResult* res, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_context_finish; ///
-  PixbufC* function(GtkIconInfo* iconInfo, GtkStyle* style, GtkStateType state, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_style; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GAsyncResult* res, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_context_finish; ///
+  GdkPixbuf* function(GtkIconInfo* iconInfo, GtkStyle* style, GtkStateType state, bool* wasSymbolic, GError** _err) c_gtk_icon_info_load_symbolic_for_style; ///
   void function(GtkIconInfo* iconInfo, bool rawCoordinates) c_gtk_icon_info_set_raw_coordinates; ///
 
   // IconSet
   GType function() c_gtk_icon_set_get_type; ///
   GtkIconSet* function() c_gtk_icon_set_new; ///
-  GtkIconSet* function(PixbufC* pixbuf) c_gtk_icon_set_new_from_pixbuf; ///
+  GtkIconSet* function(GdkPixbuf* pixbuf) c_gtk_icon_set_new_from_pixbuf; ///
   void function(GtkIconSet* iconSet, const(GtkIconSource)* source) c_gtk_icon_set_add_source; ///
   GtkIconSet* function(GtkIconSet* iconSet) c_gtk_icon_set_copy; ///
   void function(GtkIconSet* iconSet, GtkIconSize** sizes, int* nSizes) c_gtk_icon_set_get_sizes; ///
   GtkIconSet* function(GtkIconSet* iconSet) c_gtk_icon_set_ref; ///
-  PixbufC* function(GtkIconSet* iconSet, GtkStyle* style, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) c_gtk_icon_set_render_icon; ///
-  PixbufC* function(GtkIconSet* iconSet, GtkStyleContext* context, GtkIconSize size) c_gtk_icon_set_render_icon_pixbuf; ///
+  GdkPixbuf* function(GtkIconSet* iconSet, GtkStyle* style, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) c_gtk_icon_set_render_icon; ///
+  GdkPixbuf* function(GtkIconSet* iconSet, GtkStyleContext* context, GtkIconSize size) c_gtk_icon_set_render_icon_pixbuf; ///
   cairo_surface_t* function(GtkIconSet* iconSet, GtkStyleContext* context, GtkIconSize size, int scale, GdkWindow* forWindow) c_gtk_icon_set_render_icon_surface; ///
   void function(GtkIconSet* iconSet) c_gtk_icon_set_unref; ///
 
@@ -1709,7 +1709,7 @@ __gshared extern(C)
   bool function(const(GtkIconSource)* source) c_gtk_icon_source_get_direction_wildcarded; ///
   const(char)* function(const(GtkIconSource)* source) c_gtk_icon_source_get_filename; ///
   const(char)* function(const(GtkIconSource)* source) c_gtk_icon_source_get_icon_name; ///
-  PixbufC* function(const(GtkIconSource)* source) c_gtk_icon_source_get_pixbuf; ///
+  GdkPixbuf* function(const(GtkIconSource)* source) c_gtk_icon_source_get_pixbuf; ///
   GtkIconSize function(const(GtkIconSource)* source) c_gtk_icon_source_get_size; ///
   bool function(const(GtkIconSource)* source) c_gtk_icon_source_get_size_wildcarded; ///
   GtkStateType function(const(GtkIconSource)* source) c_gtk_icon_source_get_state; ///
@@ -1718,7 +1718,7 @@ __gshared extern(C)
   void function(GtkIconSource* source, bool setting) c_gtk_icon_source_set_direction_wildcarded; ///
   void function(GtkIconSource* source, const(char)* filename) c_gtk_icon_source_set_filename; ///
   void function(GtkIconSource* source, const(char)* iconName) c_gtk_icon_source_set_icon_name; ///
-  void function(GtkIconSource* source, PixbufC* pixbuf) c_gtk_icon_source_set_pixbuf; ///
+  void function(GtkIconSource* source, GdkPixbuf* pixbuf) c_gtk_icon_source_set_pixbuf; ///
   void function(GtkIconSource* source, GtkIconSize size) c_gtk_icon_source_set_size; ///
   void function(GtkIconSource* source, bool setting) c_gtk_icon_source_set_size_wildcarded; ///
   void function(GtkIconSource* source, GtkStateType state) c_gtk_icon_source_set_state; ///
@@ -1727,7 +1727,7 @@ __gshared extern(C)
   // IconTheme
   GType function() c_gtk_icon_theme_get_type; ///
   GtkIconTheme* function() c_gtk_icon_theme_new; ///
-  void function(const(char)* iconName, int size, PixbufC* pixbuf) c_gtk_icon_theme_add_builtin_icon; ///
+  void function(const(char)* iconName, int size, GdkPixbuf* pixbuf) c_gtk_icon_theme_add_builtin_icon; ///
   GtkIconTheme* function() c_gtk_icon_theme_get_default; ///
   GtkIconTheme* function(GdkScreen* screen) c_gtk_icon_theme_get_for_screen; ///
   void function(GtkIconTheme* iconTheme, const(char)* path) c_gtk_icon_theme_add_resource_path; ///
@@ -1740,8 +1740,8 @@ __gshared extern(C)
   bool function(GtkIconTheme* iconTheme, const(char)* iconName) c_gtk_icon_theme_has_icon; ///
   GList* function(GtkIconTheme* iconTheme) c_gtk_icon_theme_list_contexts; ///
   GList* function(GtkIconTheme* iconTheme, const(char)* context) c_gtk_icon_theme_list_icons; ///
-  PixbufC* function(GtkIconTheme* iconTheme, const(char)* iconName, int size, GtkIconLookupFlags flags, GError** _err) c_gtk_icon_theme_load_icon; ///
-  PixbufC* function(GtkIconTheme* iconTheme, const(char)* iconName, int size, int scale, GtkIconLookupFlags flags, GError** _err) c_gtk_icon_theme_load_icon_for_scale; ///
+  GdkPixbuf* function(GtkIconTheme* iconTheme, const(char)* iconName, int size, GtkIconLookupFlags flags, GError** _err) c_gtk_icon_theme_load_icon; ///
+  GdkPixbuf* function(GtkIconTheme* iconTheme, const(char)* iconName, int size, int scale, GtkIconLookupFlags flags, GError** _err) c_gtk_icon_theme_load_icon_for_scale; ///
   cairo_surface_t* function(GtkIconTheme* iconTheme, const(char)* iconName, int size, int scale, GdkWindow* forWindow, GtkIconLookupFlags flags, GError** _err) c_gtk_icon_theme_load_surface; ///
   GtkIconInfo* function(GtkIconTheme* iconTheme, GIcon* icon, int size, GtkIconLookupFlags flags) c_gtk_icon_theme_lookup_by_gicon; ///
   GtkIconInfo* function(GtkIconTheme* iconTheme, GIcon* icon, int size, int scale, GtkIconLookupFlags flags) c_gtk_icon_theme_lookup_by_gicon_for_scale; ///
@@ -1831,7 +1831,7 @@ __gshared extern(C)
   GtkWidget* function(GIcon* icon, GtkIconSize size) c_gtk_image_new_from_gicon; ///
   GtkWidget* function(const(char)* iconName, GtkIconSize size) c_gtk_image_new_from_icon_name; ///
   GtkWidget* function(GtkIconSet* iconSet, GtkIconSize size) c_gtk_image_new_from_icon_set; ///
-  GtkWidget* function(PixbufC* pixbuf) c_gtk_image_new_from_pixbuf; ///
+  GtkWidget* function(GdkPixbuf* pixbuf) c_gtk_image_new_from_pixbuf; ///
   GtkWidget* function(const(char)* resourcePath) c_gtk_image_new_from_resource; ///
   GtkWidget* function(const(char)* stockId, GtkIconSize size) c_gtk_image_new_from_stock; ///
   GtkWidget* function(cairo_surface_t* surface) c_gtk_image_new_from_surface; ///
@@ -1840,7 +1840,7 @@ __gshared extern(C)
   void function(GtkImage* image, GIcon** gicon, GtkIconSize* size) c_gtk_image_get_gicon; ///
   void function(GtkImage* image, const(char*)* iconName, GtkIconSize* size) c_gtk_image_get_icon_name; ///
   void function(GtkImage* image, GtkIconSet** iconSet, GtkIconSize* size) c_gtk_image_get_icon_set; ///
-  PixbufC* function(GtkImage* image) c_gtk_image_get_pixbuf; ///
+  GdkPixbuf* function(GtkImage* image) c_gtk_image_get_pixbuf; ///
   int function(GtkImage* image) c_gtk_image_get_pixel_size; ///
   void function(GtkImage* image, char** stockId, GtkIconSize* size) c_gtk_image_get_stock; ///
   GtkImageType function(GtkImage* image) c_gtk_image_get_storage_type; ///
@@ -1849,7 +1849,7 @@ __gshared extern(C)
   void function(GtkImage* image, GIcon* icon, GtkIconSize size) c_gtk_image_set_from_gicon; ///
   void function(GtkImage* image, const(char)* iconName, GtkIconSize size) c_gtk_image_set_from_icon_name; ///
   void function(GtkImage* image, GtkIconSet* iconSet, GtkIconSize size) c_gtk_image_set_from_icon_set; ///
-  void function(GtkImage* image, PixbufC* pixbuf) c_gtk_image_set_from_pixbuf; ///
+  void function(GtkImage* image, GdkPixbuf* pixbuf) c_gtk_image_set_from_pixbuf; ///
   void function(GtkImage* image, const(char)* resourcePath) c_gtk_image_set_from_resource; ///
   void function(GtkImage* image, const(char)* stockId, GtkIconSize size) c_gtk_image_set_from_stock; ///
   void function(GtkImage* image, cairo_surface_t* surface) c_gtk_image_set_from_surface; ///
@@ -2325,7 +2325,7 @@ __gshared extern(C)
   // OffscreenWindow
   GType function() c_gtk_offscreen_window_get_type; ///
   GtkWidget* function() c_gtk_offscreen_window_new; ///
-  PixbufC* function(GtkOffscreenWindow* offscreen) c_gtk_offscreen_window_get_pixbuf; ///
+  GdkPixbuf* function(GtkOffscreenWindow* offscreen) c_gtk_offscreen_window_get_pixbuf; ///
   cairo_surface_t* function(GtkOffscreenWindow* offscreen) c_gtk_offscreen_window_get_surface; ///
 
   // Orientable
@@ -2827,7 +2827,7 @@ __gshared extern(C)
   const(char)* function(GtkRecentInfo* info) c_gtk_recent_info_get_display_name; ///
   GIcon* function(GtkRecentInfo* info) c_gtk_recent_info_get_gicon; ///
   char** function(GtkRecentInfo* info, size_t* length) c_gtk_recent_info_get_groups; ///
-  PixbufC* function(GtkRecentInfo* info, int size) c_gtk_recent_info_get_icon; ///
+  GdkPixbuf* function(GtkRecentInfo* info, int size) c_gtk_recent_info_get_icon; ///
   const(char)* function(GtkRecentInfo* info) c_gtk_recent_info_get_mime_type; ///
   long function(GtkRecentInfo* info) c_gtk_recent_info_get_modified; ///
   bool function(GtkRecentInfo* info) c_gtk_recent_info_get_private_hint; ///
@@ -2992,14 +2992,14 @@ __gshared extern(C)
   GdkDisplay* function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_display; ///
   int function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_format; ///
   int function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_length; ///
-  PixbufC* function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_pixbuf; ///
+  GdkPixbuf* function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_pixbuf; ///
   GdkAtom function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_selection; ///
   GdkAtom function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_target; ///
   bool function(const(GtkSelectionData)* selectionData, GdkAtom** targets, int* nAtoms) c_gtk_selection_data_get_targets; ///
   ubyte* function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_text; ///
   char** function(const(GtkSelectionData)* selectionData) c_gtk_selection_data_get_uris; ///
   void function(GtkSelectionData* selectionData, GdkAtom type, int format, const(ubyte)* data, int length) c_gtk_selection_data_set; ///
-  bool function(GtkSelectionData* selectionData, PixbufC* pixbuf) c_gtk_selection_data_set_pixbuf; ///
+  bool function(GtkSelectionData* selectionData, GdkPixbuf* pixbuf) c_gtk_selection_data_set_pixbuf; ///
   bool function(GtkSelectionData* selectionData, const(char)* str, int len) c_gtk_selection_data_set_text; ///
   bool function(GtkSelectionData* selectionData, char** uris) c_gtk_selection_data_set_uris; ///
   bool function(const(GtkSelectionData)* selectionData, bool writable) c_gtk_selection_data_targets_include_image; ///
@@ -3160,14 +3160,14 @@ __gshared extern(C)
   GtkStatusIcon* function(const(char)* filename) c_gtk_status_icon_new_from_file; ///
   GtkStatusIcon* function(GIcon* icon) c_gtk_status_icon_new_from_gicon; ///
   GtkStatusIcon* function(const(char)* iconName) c_gtk_status_icon_new_from_icon_name; ///
-  GtkStatusIcon* function(PixbufC* pixbuf) c_gtk_status_icon_new_from_pixbuf; ///
+  GtkStatusIcon* function(GdkPixbuf* pixbuf) c_gtk_status_icon_new_from_pixbuf; ///
   GtkStatusIcon* function(const(char)* stockId) c_gtk_status_icon_new_from_stock; ///
   void function(GtkMenu* menu, int* x, int* y, bool* pushIn, GtkStatusIcon* userData) c_gtk_status_icon_position_menu; ///
   bool function(GtkStatusIcon* statusIcon, GdkScreen** screen, GdkRectangle* area, GtkOrientation* orientation) c_gtk_status_icon_get_geometry; ///
   GIcon* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_gicon; ///
   bool function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_has_tooltip; ///
   const(char)* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_icon_name; ///
-  PixbufC* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_pixbuf; ///
+  GdkPixbuf* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_pixbuf; ///
   GdkScreen* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_screen; ///
   int function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_size; ///
   const(char)* function(GtkStatusIcon* statusIcon) c_gtk_status_icon_get_stock; ///
@@ -3181,7 +3181,7 @@ __gshared extern(C)
   void function(GtkStatusIcon* statusIcon, const(char)* filename) c_gtk_status_icon_set_from_file; ///
   void function(GtkStatusIcon* statusIcon, GIcon* icon) c_gtk_status_icon_set_from_gicon; ///
   void function(GtkStatusIcon* statusIcon, const(char)* iconName) c_gtk_status_icon_set_from_icon_name; ///
-  void function(GtkStatusIcon* statusIcon, PixbufC* pixbuf) c_gtk_status_icon_set_from_pixbuf; ///
+  void function(GtkStatusIcon* statusIcon, GdkPixbuf* pixbuf) c_gtk_status_icon_set_from_pixbuf; ///
   void function(GtkStatusIcon* statusIcon, const(char)* stockId) c_gtk_status_icon_set_from_stock; ///
   void function(GtkStatusIcon* statusIcon, bool hasTooltip) c_gtk_status_icon_set_has_tooltip; ///
   void function(GtkStatusIcon* statusIcon, const(char)* name) c_gtk_status_icon_set_name; ///
@@ -3221,7 +3221,7 @@ __gshared extern(C)
   bool function(GtkStyle* style) c_gtk_style_has_context; ///
   bool function(GtkStyle* style, const(char)* colorName, GdkColor* color) c_gtk_style_lookup_color; ///
   GtkIconSet* function(GtkStyle* style, const(char)* stockId) c_gtk_style_lookup_icon_set; ///
-  PixbufC* function(GtkStyle* style, const(GtkIconSource)* source, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) c_gtk_style_render_icon; ///
+  GdkPixbuf* function(GtkStyle* style, const(GtkIconSource)* source, GtkTextDirection direction, GtkStateType state, GtkIconSize size, GtkWidget* widget, const(char)* detail) c_gtk_style_render_icon; ///
   void function(GtkStyle* style, GdkWindow* window, GtkStateType stateType) c_gtk_style_set_background; ///
 
   // StyleContext
@@ -3434,7 +3434,7 @@ __gshared extern(C)
   bool function(GtkTextBuffer* buffer, GtkTextIter* iter, const(char)* text, int len, bool defaultEditable) c_gtk_text_buffer_insert_interactive; ///
   bool function(GtkTextBuffer* buffer, const(char)* text, int len, bool defaultEditable) c_gtk_text_buffer_insert_interactive_at_cursor; ///
   void function(GtkTextBuffer* buffer, GtkTextIter* iter, const(char)* markup, int len) c_gtk_text_buffer_insert_markup; ///
-  void function(GtkTextBuffer* buffer, GtkTextIter* iter, PixbufC* pixbuf) c_gtk_text_buffer_insert_pixbuf; ///
+  void function(GtkTextBuffer* buffer, GtkTextIter* iter, GdkPixbuf* pixbuf) c_gtk_text_buffer_insert_pixbuf; ///
   void function(GtkTextBuffer* buffer, GtkTextIter* iter, const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_buffer_insert_range; ///
   bool function(GtkTextBuffer* buffer, GtkTextIter* iter, const(GtkTextIter)* start, const(GtkTextIter)* end, bool defaultEditable) c_gtk_text_buffer_insert_range_interactive; ///
   void function(GtkTextBuffer* buffer, GtkTextIter* iter, const(char)* text, int len, GtkTextTag* firstTag,  ...) c_gtk_text_buffer_insert_with_tags; ///
@@ -3533,7 +3533,7 @@ __gshared extern(C)
   int function(const(GtkTextIter)* iter) c_gtk_text_iter_get_line_offset; ///
   GSList* function(const(GtkTextIter)* iter) c_gtk_text_iter_get_marks; ///
   int function(const(GtkTextIter)* iter) c_gtk_text_iter_get_offset; ///
-  PixbufC* function(const(GtkTextIter)* iter) c_gtk_text_iter_get_pixbuf; ///
+  GdkPixbuf* function(const(GtkTextIter)* iter) c_gtk_text_iter_get_pixbuf; ///
   char* function(const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_iter_get_slice; ///
   GSList* function(const(GtkTextIter)* iter) c_gtk_text_iter_get_tags; ///
   char* function(const(GtkTextIter)* start, const(GtkTextIter)* end) c_gtk_text_iter_get_text; ///
@@ -3855,7 +3855,7 @@ __gshared extern(C)
   GType function() c_gtk_tooltip_get_type; ///
   void function(GdkDisplay* display) c_gtk_tooltip_trigger_tooltip_query; ///
   void function(GtkTooltip* tooltip, GtkWidget* customWidget) c_gtk_tooltip_set_custom; ///
-  void function(GtkTooltip* tooltip, PixbufC* pixbuf) c_gtk_tooltip_set_icon; ///
+  void function(GtkTooltip* tooltip, GdkPixbuf* pixbuf) c_gtk_tooltip_set_icon; ///
   void function(GtkTooltip* tooltip, GIcon* gicon, GtkIconSize size) c_gtk_tooltip_set_icon_from_gicon; ///
   void function(GtkTooltip* tooltip, const(char)* iconName, GtkIconSize size) c_gtk_tooltip_set_icon_from_icon_name; ///
   void function(GtkTooltip* tooltip, const(char)* stockId, GtkIconSize size) c_gtk_tooltip_set_icon_from_stock; ///
@@ -4305,7 +4305,7 @@ __gshared extern(C)
   void function(GtkWidget* widget, GdkModifierType startButtonMask, const(GtkTargetEntry)* targets, int nTargets, GdkDragAction actions) c_gtk_drag_source_set; ///
   void function(GtkWidget* widget, GIcon* icon) c_gtk_drag_source_set_icon_gicon; ///
   void function(GtkWidget* widget, const(char)* iconName) c_gtk_drag_source_set_icon_name; ///
-  void function(GtkWidget* widget, PixbufC* pixbuf) c_gtk_drag_source_set_icon_pixbuf; ///
+  void function(GtkWidget* widget, GdkPixbuf* pixbuf) c_gtk_drag_source_set_icon_pixbuf; ///
   void function(GtkWidget* widget, const(char)* stockId) c_gtk_drag_source_set_icon_stock; ///
   void function(GtkWidget* widget, GtkTargetList* targetList) c_gtk_drag_source_set_target_list; ///
   void function(GtkWidget* widget) c_gtk_drag_source_unset; ///
@@ -4452,8 +4452,8 @@ __gshared extern(C)
   bool function(GtkWidget* widget, GtkAccelGroup* accelGroup, uint accelKey, GdkModifierType accelMods) c_gtk_widget_remove_accelerator; ///
   void function(GtkWidget* widget, GtkWidget* label) c_gtk_widget_remove_mnemonic_label; ///
   void function(GtkWidget* widget, uint id) c_gtk_widget_remove_tick_callback; ///
-  PixbufC* function(GtkWidget* widget, const(char)* stockId, GtkIconSize size, const(char)* detail) c_gtk_widget_render_icon; ///
-  PixbufC* function(GtkWidget* widget, const(char)* stockId, GtkIconSize size) c_gtk_widget_render_icon_pixbuf; ///
+  GdkPixbuf* function(GtkWidget* widget, const(char)* stockId, GtkIconSize size, const(char)* detail) c_gtk_widget_render_icon; ///
+  GdkPixbuf* function(GtkWidget* widget, const(char)* stockId, GtkIconSize size) c_gtk_widget_render_icon_pixbuf; ///
   void function(GtkWidget* widget, GtkWidget* newParent) c_gtk_widget_reparent; ///
   void function(GtkWidget* widget) c_gtk_widget_reset_rc_styles; ///
   void function(GtkWidget* widget) c_gtk_widget_reset_style; ///
@@ -4596,7 +4596,7 @@ __gshared extern(C)
   const(char)* function() c_gtk_window_get_default_icon_name; ///
   GList* function() c_gtk_window_list_toplevels; ///
   void function(bool setting) c_gtk_window_set_auto_startup_notification; ///
-  void function(PixbufC* icon) c_gtk_window_set_default_icon; ///
+  void function(GdkPixbuf* icon) c_gtk_window_set_default_icon; ///
   bool function(const(char)* filename, GError** _err) c_gtk_window_set_default_icon_from_file; ///
   void function(GList* list) c_gtk_window_set_default_icon_list; ///
   void function(const(char)* name) c_gtk_window_set_default_icon_name; ///
@@ -4627,7 +4627,7 @@ __gshared extern(C)
   GtkWindowGroup* function(GtkWindow* window) c_gtk_window_get_group; ///
   bool function(GtkWindow* window) c_gtk_window_get_has_resize_grip; ///
   bool function(GtkWindow* window) c_gtk_window_get_hide_titlebar_when_maximized; ///
-  PixbufC* function(GtkWindow* window) c_gtk_window_get_icon; ///
+  GdkPixbuf* function(GtkWindow* window) c_gtk_window_get_icon; ///
   GList* function(GtkWindow* window) c_gtk_window_get_icon_list; ///
   const(char)* function(GtkWindow* window) c_gtk_window_get_icon_name; ///
   GdkModifierType function(GtkWindow* window) c_gtk_window_get_mnemonic_modifier; ///
@@ -4683,7 +4683,7 @@ __gshared extern(C)
   void function(GtkWindow* window, bool value) c_gtk_window_set_has_resize_grip; ///
   void function(GtkWindow* window, bool setting) c_gtk_window_set_has_user_ref_count; ///
   void function(GtkWindow* window, bool setting) c_gtk_window_set_hide_titlebar_when_maximized; ///
-  void function(GtkWindow* window, PixbufC* icon) c_gtk_window_set_icon; ///
+  void function(GtkWindow* window, GdkPixbuf* icon) c_gtk_window_set_icon; ///
   bool function(GtkWindow* window, const(char)* filename, GError** _err) c_gtk_window_set_icon_from_file; ///
   void function(GtkWindow* window, GList* list) c_gtk_window_set_icon_list; ///
   void function(GtkWindow* window, const(char)* name) c_gtk_window_set_icon_name; ///
@@ -4751,7 +4751,7 @@ __gshared extern(C)
   void function(GdkDragContext* context) c_gtk_drag_set_icon_default; ///
   void function(GdkDragContext* context, GIcon* icon, int hotX, int hotY) c_gtk_drag_set_icon_gicon; ///
   void function(GdkDragContext* context, const(char)* iconName, int hotX, int hotY) c_gtk_drag_set_icon_name; ///
-  void function(GdkDragContext* context, PixbufC* pixbuf, int hotX, int hotY) c_gtk_drag_set_icon_pixbuf; ///
+  void function(GdkDragContext* context, GdkPixbuf* pixbuf, int hotX, int hotY) c_gtk_drag_set_icon_pixbuf; ///
   void function(GdkDragContext* context, const(char)* stockId, int hotX, int hotY) c_gtk_drag_set_icon_stock; ///
   void function(GdkDragContext* context, cairo_surface_t* surface) c_gtk_drag_set_icon_surface; ///
   void function(GdkDragContext* context, GtkWidget* widget, int hotX, int hotY) c_gtk_drag_set_icon_widget; ///
@@ -4840,8 +4840,8 @@ __gshared extern(C)
   void function(GtkStyleContext* context, cairo_t* cr, double x, double y, double width, double height) c_gtk_render_frame; ///
   void function(GtkStyleContext* context, cairo_t* cr, double x, double y, double width, double height, GtkPositionType gapSide, double xy0Gap, double xy1Gap) c_gtk_render_frame_gap; ///
   void function(GtkStyleContext* context, cairo_t* cr, double x, double y, double width, double height) c_gtk_render_handle; ///
-  void function(GtkStyleContext* context, cairo_t* cr, PixbufC* pixbuf, double x, double y) c_gtk_render_icon; ///
-  PixbufC* function(GtkStyleContext* context, const(GtkIconSource)* source, GtkIconSize size) c_gtk_render_icon_pixbuf; ///
+  void function(GtkStyleContext* context, cairo_t* cr, GdkPixbuf* pixbuf, double x, double y) c_gtk_render_icon; ///
+  GdkPixbuf* function(GtkStyleContext* context, const(GtkIconSource)* source, GtkIconSize size) c_gtk_render_icon_pixbuf; ///
   void function(GtkStyleContext* context, cairo_t* cr, cairo_surface_t* surface, double x, double y) c_gtk_render_icon_surface; ///
   void function(GtkStyleContext* context, cairo_t* cr, double x, double y, PangoLayout* layout, int index, PangoDirection direction) c_gtk_render_insertion_cursor; ///
   void function(GtkStyleContext* context, cairo_t* cr, double x, double y, PangoLayout* layout) c_gtk_render_layout; ///

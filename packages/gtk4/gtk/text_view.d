@@ -68,7 +68,7 @@ class TextView : gtk.widget.Widget, gtk.accessible_text.AccessibleText, gtk.scro
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

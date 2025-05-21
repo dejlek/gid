@@ -14,7 +14,7 @@ class RTPPayloadInfo
   GstRTPPayloadInfo cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtppayload_info.RTPPayloadInfo");
@@ -170,7 +170,7 @@ class RTPPayloadInfo
     const(char)* _media = media.toCString(No.Alloc);
     const(char)* _encodingName = encodingName.toCString(No.Alloc);
     _cretval = gst_rtp_payload_info_for_name(_media, _encodingName);
-    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -187,7 +187,7 @@ class RTPPayloadInfo
   {
     const(GstRTPPayloadInfo)* _cretval;
     _cretval = gst_rtp_payload_info_for_pt(payloadType);
-    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gstrtp.rtppayload_info.RTPPayloadInfo(cast(GstRTPPayloadInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

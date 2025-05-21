@@ -16,7 +16,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gsk.inset_shadow_node.InsetShadowNode");
@@ -97,7 +97,7 @@ class InsetShadowNode : gsk.render_node.RenderNode
   {
     const(GskRoundedRect)* _cretval;
     _cretval = gsk_inset_shadow_node_get_outline(cast(const(GskRenderNode)*)this._cPtr);
-    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval) : null;
+    auto _retval = _cretval ? new gsk.rounded_rect.RoundedRect(cast(GskRoundedRect*)_cretval, No.Take) : null;
     return _retval;
   }
 

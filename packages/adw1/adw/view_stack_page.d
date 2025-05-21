@@ -17,7 +17,7 @@ class ViewStackPage : gobject.object.ObjectWrap, gtk.accessible.Accessible
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

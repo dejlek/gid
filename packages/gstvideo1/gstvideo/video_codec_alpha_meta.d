@@ -22,7 +22,7 @@ class VideoCodecAlphaMeta
   GstVideoCodecAlphaMeta cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstvideo.video_codec_alpha_meta.VideoCodecAlphaMeta");
@@ -45,7 +45,7 @@ class VideoCodecAlphaMeta
   */
   @property gst.meta.Meta meta()
   {
-    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta);
+    return new gst.meta.Meta(cast(GstMeta*)&(cast(GstVideoCodecAlphaMeta*)this._cPtr).meta, No.Take);
   }
 
   /**
@@ -73,7 +73,7 @@ class VideoCodecAlphaMeta
   {
     const(GstMetaInfo)* _cretval;
     _cretval = gst_video_codec_alpha_meta_get_info();
-    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta_info.MetaInfo(cast(GstMetaInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 }

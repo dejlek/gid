@@ -15,7 +15,7 @@ class FileSystemDataset : arrowdataset.dataset.Dataset
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

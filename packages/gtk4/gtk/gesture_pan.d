@@ -28,7 +28,7 @@ class GesturePan : gtk.gesture_drag.GestureDrag
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

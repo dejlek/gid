@@ -26,7 +26,7 @@ class MediaFile : gtk.media_stream.MediaStream
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

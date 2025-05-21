@@ -8,7 +8,7 @@ import gtksource.completion_proposal_mixin;
 /// Proxy object for [gtksource.completion_proposal.CompletionProposal] interface when a GObject has no applicable D binding
 class CompletionProposalIfaceProxy : IfaceProxy, gtksource.completion_proposal.CompletionProposal
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

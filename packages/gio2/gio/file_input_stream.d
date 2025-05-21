@@ -29,7 +29,7 @@ class FileInputStream : gio.input_stream.InputStream, gio.seekable.Seekable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

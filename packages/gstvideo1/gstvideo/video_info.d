@@ -24,7 +24,7 @@ class VideoInfo : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -60,7 +60,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.video_format_info.VideoFormatInfo finfo()
   {
-    return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo);
+    return new gstvideo.video_format_info.VideoFormatInfo(cast(GstVideoFormatInfo*)(cast(GstVideoInfo*)this._cPtr).finfo, No.Take);
   }
 
   /**
@@ -202,7 +202,7 @@ class VideoInfo : gobject.boxed.Boxed
   */
   @property gstvideo.video_colorimetry.VideoColorimetry colorimetry()
   {
-    return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)this._cPtr).colorimetry);
+    return new gstvideo.video_colorimetry.VideoColorimetry(cast(GstVideoColorimetry*)&(cast(GstVideoInfo*)this._cPtr).colorimetry, No.Take);
   }
 
   /**

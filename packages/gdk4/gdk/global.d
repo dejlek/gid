@@ -124,7 +124,7 @@ cairo.region.Region cairoRegionCreateFromSurface(cairo.surface.Surface surface)
 */
 void cairoSetSourcePixbuf(cairo.context.Context cr, gdkpixbuf.pixbuf.Pixbuf pixbuf, double pixbufX, double pixbufY)
 {
-  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(PixbufC)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
+  gdk_cairo_set_source_pixbuf(cr ? cast(cairo_t*)cr._cPtr(No.Dup) : null, pixbuf ? cast(const(GdkPixbuf)*)pixbuf._cPtr(No.Dup) : null, pixbufX, pixbufY);
 }
 
 /**
@@ -495,9 +495,9 @@ uint keyvalToUpper(uint keyval)
 */
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int srcX, int srcY, int width, int height)
 {
-  PixbufC* _cretval;
+  GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_surface(surface ? cast(cairo_surface_t*)surface._cPtr(No.Dup) : null, srcX, srcY, width, height);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
   return _retval;
 }
 
@@ -517,9 +517,9 @@ gdkpixbuf.pixbuf.Pixbuf pixbufGetFromSurface(cairo.surface.Surface surface, int 
 */
 gdkpixbuf.pixbuf.Pixbuf pixbufGetFromTexture(gdk.texture.Texture texture)
 {
-  PixbufC* _cretval;
+  GdkPixbuf* _cretval;
   _cretval = gdk_pixbuf_get_from_texture(texture ? cast(GdkTexture*)texture._cPtr(No.Dup) : null);
-  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+  auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
   return _retval;
 }
 

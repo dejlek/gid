@@ -39,7 +39,7 @@ class HSTSEnforcer : gobject.object.ObjectWrap, soup.session_feature.SessionFeat
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

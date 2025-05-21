@@ -27,7 +27,7 @@ class RTCPBuffer
   GstRTCPBuffer cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstrtp.rtcpbuffer.RTCPBuffer");
@@ -60,7 +60,7 @@ class RTCPBuffer
   /** */
   @property gst.map_info.MapInfo map()
   {
-    return new gst.map_info.MapInfo(cast(GstMapInfo*)&(cast(GstRTCPBuffer*)this._cPtr).map);
+    return new gst.map_info.MapInfo(cast(GstMapInfo*)&(cast(GstRTCPBuffer*)this._cPtr).map, No.Take);
   }
 
   /**

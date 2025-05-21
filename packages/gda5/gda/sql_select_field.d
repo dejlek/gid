@@ -22,7 +22,7 @@ class SqlSelectField
   GdaSqlSelectField cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gda.sql_select_field.SqlSelectField");
@@ -45,7 +45,7 @@ class SqlSelectField
   */
   @property gda.sql_any_part.SqlAnyPart any()
   {
-    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectField*)this._cPtr).any);
+    return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectField*)this._cPtr).any, No.Take);
   }
 
   /**
@@ -131,13 +131,13 @@ class SqlSelectField
   /** */
   @property gda.meta_db_object.MetaDbObject validityMetaObject()
   {
-    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaObject);
+    return new gda.meta_db_object.MetaDbObject(cast(GdaMetaDbObject*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaObject, No.Take);
   }
 
   /** */
   @property gda.meta_table_column.MetaTableColumn validityMetaTableColumn()
   {
-    return new gda.meta_table_column.MetaTableColumn(cast(GdaMetaTableColumn*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaTableColumn);
+    return new gda.meta_table_column.MetaTableColumn(cast(GdaMetaTableColumn*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaTableColumn, No.Take);
   }
 
   /** */

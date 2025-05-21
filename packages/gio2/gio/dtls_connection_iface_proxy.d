@@ -8,7 +8,7 @@ import gio.dtls_connection_mixin;
 /// Proxy object for [gio.dtls_connection.DtlsConnection] interface when a GObject has no applicable D binding
 class DtlsConnectionIfaceProxy : IfaceProxy, gio.dtls_connection.DtlsConnection
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

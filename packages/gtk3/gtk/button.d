@@ -47,7 +47,7 @@ class Button : gtk.bin.Bin, gtk.actionable.Actionable, gtk.activatable.Activatab
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

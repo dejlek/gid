@@ -1,9 +1,10 @@
 {
   "name": "gstpbutils1",
-  "description": "GstPbutils library D binding",
+  "description": "D binding for the GstPbutils library - Base utils library for the GStreamer multimedia framework",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://gstreamer.freedesktop.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["gstpbutils"],

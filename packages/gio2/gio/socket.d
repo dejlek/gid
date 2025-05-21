@@ -96,7 +96,7 @@ class Socket : gobject.object.ObjectWrap, gio.datagram_based.DatagramBased, gio.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

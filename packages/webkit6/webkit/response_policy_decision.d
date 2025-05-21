@@ -23,7 +23,7 @@ class ResponsePolicyDecision : webkit.policy_decision.PolicyDecision
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

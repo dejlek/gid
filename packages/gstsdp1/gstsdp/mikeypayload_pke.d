@@ -18,7 +18,7 @@ class MIKEYPayloadPKE
   GstMIKEYPayloadPKE cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gstsdp.mikeypayload_pke.MIKEYPayloadPKE");

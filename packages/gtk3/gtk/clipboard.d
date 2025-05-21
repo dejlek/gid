@@ -78,7 +78,7 @@ class Clipboard : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -277,7 +277,7 @@ class Clipboard : gobject.object.ObjectWrap
   */
   void requestImage(gtk.types.ClipboardImageReceivedFunc callback)
   {
-    extern(C) void _callbackCallback(GtkClipboard* clipboard, PixbufC* pixbuf, void* data)
+    extern(C) void _callbackCallback(GtkClipboard* clipboard, GdkPixbuf* pixbuf, void* data)
     {
       ptrThawGC(data);
       auto _dlg = cast(gtk.types.ClipboardImageReceivedFunc*)data;
@@ -426,7 +426,7 @@ class Clipboard : gobject.object.ObjectWrap
   */
   void setImage(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_clipboard_set_image(cast(GtkClipboard*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_clipboard_set_image(cast(GtkClipboard*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -490,9 +490,9 @@ class Clipboard : gobject.object.ObjectWrap
   */
   gdkpixbuf.pixbuf.Pixbuf waitForImage()
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     _cretval = gtk_clipboard_wait_for_image(cast(GtkClipboard*)this._cPtr);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 

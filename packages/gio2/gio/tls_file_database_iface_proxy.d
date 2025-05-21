@@ -8,7 +8,7 @@ import gio.tls_file_database_mixin;
 /// Proxy object for [gio.tls_file_database.TlsFileDatabase] interface when a GObject has no applicable D binding
 class TlsFileDatabaseIfaceProxy : IfaceProxy, gio.tls_file_database.TlsFileDatabase
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

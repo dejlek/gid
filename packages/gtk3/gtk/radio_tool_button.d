@@ -34,7 +34,7 @@ class RadioToolButton : gtk.toggle_tool_button.ToggleToolButton
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

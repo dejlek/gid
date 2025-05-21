@@ -18,7 +18,7 @@ class GLBaseMixer : gstvideo.video_aggregator.VideoAggregator
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

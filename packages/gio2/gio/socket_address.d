@@ -20,7 +20,7 @@ class SocketAddress : gobject.object.ObjectWrap, gio.socket_connectable.SocketCo
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

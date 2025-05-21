@@ -119,7 +119,7 @@ class Buffer : gobject.boxed.Boxed
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -418,7 +418,7 @@ class Buffer : gobject.boxed.Boxed
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_buffer_add_custom_meta(cast(GstBuffer*)this._cPtr, _name);
-    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -434,7 +434,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_add_meta(cast(GstBuffer*)this._cPtr, info ? cast(const(GstMetaInfo)*)info._cPtr : null, params);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -450,7 +450,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstParentBufferMeta* _cretval;
     _cretval = gst_buffer_add_parent_buffer_meta(cast(GstBuffer*)this._cPtr, ref_ ? cast(GstBuffer*)ref_._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.parent_buffer_meta.ParentBufferMeta(cast(GstParentBufferMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.parent_buffer_meta.ParentBufferMeta(cast(GstParentBufferMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -467,7 +467,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstProtectionMeta* _cretval;
     _cretval = gst_buffer_add_protection_meta(cast(GstBuffer*)this._cPtr, info ? cast(GstStructure*)info._cPtr(Yes.Dup) : null);
-    auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.protection_meta.ProtectionMeta(cast(GstProtectionMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -486,7 +486,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_add_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null, timestamp, duration);
-    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -729,7 +729,7 @@ class Buffer : gobject.boxed.Boxed
     GstCustomMeta* _cretval;
     const(char)* _name = name.toCString(No.Alloc);
     _cretval = gst_buffer_get_custom_meta(cast(GstBuffer*)this._cPtr, _name);
-    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.custom_meta.CustomMeta(cast(GstCustomMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -796,7 +796,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstMeta* _cretval;
     _cretval = gst_buffer_get_meta(cast(GstBuffer*)this._cPtr, api);
-    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.meta.Meta(cast(GstMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -824,7 +824,7 @@ class Buffer : gobject.boxed.Boxed
   {
     GstReferenceTimestampMeta* _cretval;
     _cretval = gst_buffer_get_reference_timestamp_meta(cast(GstBuffer*)this._cPtr, reference ? cast(GstCaps*)reference._cPtr(No.Dup) : null);
-    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval) : null;
+    auto _retval = _cretval ? new gst.reference_timestamp_meta.ReferenceTimestampMeta(cast(GstReferenceTimestampMeta*)_cretval, No.Take) : null;
     return _retval;
   }
 
@@ -973,7 +973,7 @@ class Buffer : gobject.boxed.Boxed
     bool _retval;
     GstMapInfo _info;
     _retval = gst_buffer_map(cast(GstBuffer*)this._cPtr, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info);
+    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 
@@ -1005,7 +1005,7 @@ class Buffer : gobject.boxed.Boxed
     bool _retval;
     GstMapInfo _info;
     _retval = gst_buffer_map_range(cast(GstBuffer*)this._cPtr, idx, length, &_info, flags);
-    info = new gst.map_info.MapInfo(cast(void*)&_info);
+    info = new gst.map_info.MapInfo(cast(void*)&_info, No.Take);
     return _retval;
   }
 

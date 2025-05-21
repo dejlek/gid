@@ -1,9 +1,10 @@
 {
   "name": "freetype2",
-  "description": "freetype2 library D binding",
+  "description": "D binding for the FreeType library - font rendering library",
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "website": "https://freetype.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["freetype2"],

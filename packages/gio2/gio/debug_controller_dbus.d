@@ -132,7 +132,7 @@ class DebugControllerDBus : gobject.object.ObjectWrap, gio.debug_controller.Debu
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

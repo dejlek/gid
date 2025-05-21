@@ -62,7 +62,7 @@ class PixbufModule
   GdkPixbufModule cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gdkpixbuf.pixbuf_module.PixbufModule");
@@ -127,7 +127,7 @@ class PixbufModule
   */
   @property gmodule.module_.Module module_()
   {
-    return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)this._cPtr).module_);
+    return new gmodule.module_.Module(cast(ModuleC*)(cast(GdkPixbufModule*)this._cPtr).module_, No.Take);
   }
 
   /**

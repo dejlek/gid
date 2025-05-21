@@ -25,7 +25,7 @@ class TimeVal
   GTimeVal cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for glib.time_val.TimeVal");
@@ -177,7 +177,7 @@ class TimeVal
     const(char)* _isoDate = isoDate.toCString(No.Alloc);
     GTimeVal _time;
     _retval = g_time_val_from_iso8601(_isoDate, &_time);
-    time = new glib.time_val.TimeVal(cast(void*)&_time);
+    time = new glib.time_val.TimeVal(cast(void*)&_time, No.Take);
     return _retval;
   }
 }

@@ -18,7 +18,7 @@ class LabelAccessible : gtk.widget_accessible.WidgetAccessible, atk.hypertext.Hy
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

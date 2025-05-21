@@ -58,7 +58,7 @@ class FileChooserButton : gtk.box.Box, gtk.file_chooser.FileChooser
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

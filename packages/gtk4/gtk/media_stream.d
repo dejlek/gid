@@ -34,7 +34,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -240,7 +240,7 @@ class MediaStream : gobject.object.ObjectWrap, gdk.paintable.Paintable
   {
     const(GError)* _cretval;
     _cretval = gtk_media_stream_get_error(cast(GtkMediaStream*)this._cPtr);
-    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval) : null;
+    auto _retval = _cretval ? new glib.error.ErrorWrap(cast(GError*)_cretval, No.Take) : null;
     return _retval;
   }
 

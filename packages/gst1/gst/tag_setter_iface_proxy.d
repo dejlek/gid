@@ -8,7 +8,7 @@ import gst.tag_setter_mixin;
 /// Proxy object for [gst.tag_setter.TagSetter] interface when a GObject has no applicable D binding
 class TagSetterIfaceProxy : IfaceProxy, gst.tag_setter.TagSetter
 {
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

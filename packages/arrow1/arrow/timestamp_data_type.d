@@ -13,7 +13,7 @@ class TimestampDataType : arrow.temporal_data_type.TemporalDataType
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

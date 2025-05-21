@@ -22,7 +22,7 @@ class BindingSet
   GtkBindingSet cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.binding_set.BindingSet");
@@ -84,7 +84,7 @@ class BindingSet
   */
   @property gtk.binding_entry.BindingEntry entries()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).entries, No.Take);
   }
 
   /**
@@ -93,7 +93,7 @@ class BindingSet
   */
   @property gtk.binding_entry.BindingEntry current()
   {
-    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current);
+    return new gtk.binding_entry.BindingEntry(cast(GtkBindingEntry*)(cast(GtkBindingSet*)this._cPtr).current, No.Take);
   }
 
   /**
@@ -164,7 +164,7 @@ class BindingSet
     GtkBindingSet* _cretval;
     const(char)* _setName = setName.toCString(No.Alloc);
     _cretval = gtk_binding_set_find(_setName);
-    auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval) : null;
+    auto _retval = _cretval ? new gtk.binding_set.BindingSet(cast(GtkBindingSet*)_cretval, No.Take) : null;
     return _retval;
   }
 }

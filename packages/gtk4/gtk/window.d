@@ -91,7 +91,7 @@ class Window : gtk.widget.Widget, gtk.native.Native, gtk.root.Root, gtk.shortcut
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

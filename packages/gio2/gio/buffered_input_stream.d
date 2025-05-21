@@ -33,7 +33,7 @@ class BufferedInputStream : gio.filter_input_stream.FilterInputStream, gio.seeka
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

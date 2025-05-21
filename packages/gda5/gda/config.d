@@ -19,7 +19,7 @@ class Config : gobject.object.ObjectWrap
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -247,7 +247,7 @@ class Config : gobject.object.ObjectWrap
     GdaProviderInfo* _cretval;
     const(char)* _providerName = providerName.toCString(No.Alloc);
     _cretval = gda_config_get_provider_info(_providerName);
-    auto _retval = _cretval ? new gda.provider_info.ProviderInfo(cast(GdaProviderInfo*)_cretval) : null;
+    auto _retval = _cretval ? new gda.provider_info.ProviderInfo(cast(GdaProviderInfo*)_cretval, No.Take) : null;
     return _retval;
   }
 

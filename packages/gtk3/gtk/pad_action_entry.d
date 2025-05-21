@@ -14,7 +14,7 @@ class PadActionEntry
   GtkPadActionEntry cInstance;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for gtk.pad_action_entry.PadActionEntry");

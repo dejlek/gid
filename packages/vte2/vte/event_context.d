@@ -16,7 +16,7 @@ class EventContext
   bool owned;
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     if (!ptr)
       throw new GidConstructException("Null instance pointer for vte.event_context.EventContext");
@@ -37,7 +37,7 @@ class EventContext
   {
     GdkEvent* _cretval;
     _cretval = vte_event_context_get_event(cast(const(VteEventContext)*)this._cPtr);
-    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval) : null;
+    auto _retval = _cretval ? new gdk.event.Event(cast(GdkEvent*)_cretval, No.Take) : null;
     return _retval;
   }
 }

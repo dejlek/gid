@@ -38,8 +38,8 @@ __gshared extern(C)
   void function(RsvgHandle* handle, bool* outHasWidth, RsvgLength* outWidth, bool* outHasHeight, RsvgLength* outHeight, bool* outHasViewbox, RsvgRectangle* outViewbox) c_rsvg_handle_get_intrinsic_dimensions; ///
   bool function(RsvgHandle* handle, double* outWidth, double* outHeight) c_rsvg_handle_get_intrinsic_size_in_pixels; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_metadata; ///
-  PixbufC* function(RsvgHandle* handle) c_rsvg_handle_get_pixbuf; ///
-  PixbufC* function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_get_pixbuf_sub; ///
+  GdkPixbuf* function(RsvgHandle* handle) c_rsvg_handle_get_pixbuf; ///
+  GdkPixbuf* function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_get_pixbuf_sub; ///
   bool function(RsvgHandle* handle, RsvgPositionData* positionData, const(char)* id) c_rsvg_handle_get_position_sub; ///
   const(char)* function(RsvgHandle* handle) c_rsvg_handle_get_title; ///
   bool function(RsvgHandle* handle, const(char)* id) c_rsvg_handle_has_sub; ///
@@ -61,11 +61,11 @@ __gshared extern(C)
   // global
   void function() c_rsvg_cleanup; ///
   void function() c_rsvg_init; ///
-  PixbufC* function(const(char)* filename, GError** _err) c_rsvg_pixbuf_from_file; ///
-  PixbufC* function(const(char)* filename, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_max_size; ///
-  PixbufC* function(const(char)* filename, int width, int height, GError** _err) c_rsvg_pixbuf_from_file_at_size; ///
-  PixbufC* function(const(char)* filename, double xZoom, double yZoom, GError** _err) c_rsvg_pixbuf_from_file_at_zoom; ///
-  PixbufC* function(const(char)* filename, double xZoom, double yZoom, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_zoom_with_max; ///
+  GdkPixbuf* function(const(char)* filename, GError** _err) c_rsvg_pixbuf_from_file; ///
+  GdkPixbuf* function(const(char)* filename, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_max_size; ///
+  GdkPixbuf* function(const(char)* filename, int width, int height, GError** _err) c_rsvg_pixbuf_from_file_at_size; ///
+  GdkPixbuf* function(const(char)* filename, double xZoom, double yZoom, GError** _err) c_rsvg_pixbuf_from_file_at_zoom; ///
+  GdkPixbuf* function(const(char)* filename, double xZoom, double yZoom, int maxWidth, int maxHeight, GError** _err) c_rsvg_pixbuf_from_file_at_zoom_with_max; ///
   void function(double dpi) c_rsvg_set_default_dpi; ///
   void function(double dpiX, double dpiY) c_rsvg_set_default_dpi_x_y; ///
   void function() c_rsvg_term; ///

@@ -41,7 +41,7 @@ class RecentChooserMenu : gtk.menu.Menu, gtk.activatable.Activatable, gtk.recent
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }

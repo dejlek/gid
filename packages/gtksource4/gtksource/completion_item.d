@@ -16,7 +16,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -196,7 +196,7 @@ class CompletionItem : gobject.object.ObjectWrap, gtksource.completion_proposal.
   /** */
   void setIcon(gdkpixbuf.pixbuf.Pixbuf icon = null)
   {
-    gtk_source_completion_item_set_icon(cast(GtkSourceCompletionItem*)this._cPtr, icon ? cast(PixbufC*)icon._cPtr(No.Dup) : null);
+    gtk_source_completion_item_set_icon(cast(GtkSourceCompletionItem*)this._cPtr, icon ? cast(GdkPixbuf*)icon._cPtr(No.Dup) : null);
   }
 
   /** */

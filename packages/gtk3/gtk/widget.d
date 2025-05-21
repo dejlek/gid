@@ -461,7 +461,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
 {
 
   /** */
-  this(void* ptr, Flag!"Take" take = No.Take)
+  this(void* ptr, Flag!"Take" take)
   {
     super(cast(void*)ptr, take);
   }
@@ -2062,7 +2062,7 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   void dragSourceSetIconPixbuf(gdkpixbuf.pixbuf.Pixbuf pixbuf)
   {
-    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)this._cPtr, pixbuf ? cast(PixbufC*)pixbuf._cPtr(No.Dup) : null);
+    gtk_drag_source_set_icon_pixbuf(cast(GtkWidget*)this._cPtr, pixbuf ? cast(GdkPixbuf*)pixbuf._cPtr(No.Dup) : null);
   }
 
   /**
@@ -4582,11 +4582,11 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gdkpixbuf.pixbuf.Pixbuf renderIcon(string stockId, gtk.types.IconSize size, string detail = null)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     const(char)* _detail = detail.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon(cast(GtkWidget*)this._cPtr, _stockId, size, _detail);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
@@ -4613,10 +4613,10 @@ class Widget : gobject.initially_unowned.InitiallyUnowned, atk.implementor_iface
   */
   gdkpixbuf.pixbuf.Pixbuf renderIconPixbuf(string stockId, gtk.types.IconSize size)
   {
-    PixbufC* _cretval;
+    GdkPixbuf* _cretval;
     const(char)* _stockId = stockId.toCString(No.Alloc);
     _cretval = gtk_widget_render_icon_pixbuf(cast(GtkWidget*)this._cPtr, _stockId, size);
-    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(PixbufC*)_cretval, Yes.Take);
+    auto _retval = gobject.object.ObjectWrap._getDObject!(gdkpixbuf.pixbuf.Pixbuf)(cast(GdkPixbuf*)_cretval, Yes.Take);
     return _retval;
   }
 
