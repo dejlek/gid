@@ -20,6 +20,7 @@ This package repository currently contains bindings for the following libraries:
  * [Vte](https://github.com/GNOME/vte) - Virtual terminal widget library for Gtk (supports versions for Gtk3 and Gtk4)
  * [GtkSource](https://gitlab.gnome.org/GNOME/gtksourceview/) - Source code viewer widget for Gtk (supports versions for Gtk3 and Gtk4)
  * [Apache Arrow](https://arrow.apache.org/) - The universal columnar format and multi-language toolbox for fast data interchange and in-memory analytics
+ * [libgda](https://gitlab.gnome.org/GNOME/libgda) - GNU Data Access (GDA) library for accessing databases and other data sources
  * [libsoup](https://github.com/GNOME/libsoup) - An HTTP client/server library
  * [Rsvg](https://github.com/GNOME/librsvg) - SVG graphics rendering library
  * [json-glib](https://github.com/GNOME/json-glib) - JSON library
@@ -60,16 +61,13 @@ Once v1.0.0 is released, an increment in the micro version will be backwards com
 
 Documentation is now being generated with [adrdox](https://github.com/adamdruppe/adrdox) and can be found at [https://www.kymorphia.com/gid/](https://www.kymorphia.com/gid/).
 
+The generated top-level [packages README.md](packages) also contains a list of the sub-package library bindings and links to the project's websites, D, and C API documentation.
+
 **NOTE:** Currently only the newest versions of the following libraries are generated: gtk4, gdk4, vte3, and gtksource5.
 This is due to existing limitations with adrdox with multiple versions of libraries using the same module path.
 
 The C API reference docs can also be used with some added understanding of the D binding differences.
 And finally the D binding source code itself can be used as a reference.
-
-
-### C API Library Reference
-
-See the [doc/C_API_Library_Reference.md](doc/C_API_Library_Reference.md) file for the comprehensive list.
 
 
 ## Dub Packages
@@ -106,7 +104,7 @@ Example `dub.json file` for a Gtk4 project:
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
   "dependencies": {
-    "gid:gtk4": "==0.9.6"
+    "gid:gtk4": "==0.9.7"
   }
 }
 ```
