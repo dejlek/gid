@@ -61,7 +61,13 @@ class SqlAnyPart
     return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)(cast(GdaSqlAnyPart*)this._cPtr).parent, No.Take);
   }
 
-  /** */
+  /**
+      Checks for any error in node's structure to make sure it is valid. This
+      is the same as [gda.sql_statement.SqlStatement.checkStructure] but for individual #GdaSqlAnyPart
+      parts. This function is mainly for database provider's implementations
+      Returns: TRUE if no error occurred
+      Throws: [ErrorWrap]
+  */
   bool checkStructure()
   {
     bool _retval;

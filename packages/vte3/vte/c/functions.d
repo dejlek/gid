@@ -196,6 +196,12 @@ __gshared extern(C)
   uint function() c_vte_get_minor_version; ///
   char* function() c_vte_get_user_shell; ///
   void function(ulong flags) c_vte_set_test_flags; ///
+
+  // PtyError
+  GQuark function() c_vte_pty_error_quark; ///
+
+  // RegexError
+  GQuark function() c_vte_regex_error_quark; ///
 }
 
 // EventContext
@@ -709,6 +715,16 @@ alias vte_get_user_shell = c_vte_get_user_shell;
 /** */
 alias vte_set_test_flags = c_vte_set_test_flags;
 
+// PtyError
+
+/** */
+alias vte_pty_error_quark = c_vte_pty_error_quark;
+
+// RegexError
+
+/** */
+alias vte_regex_error_quark = c_vte_regex_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -889,4 +905,10 @@ shared static this()
   gidLink(cast(void**)&vte_get_minor_version, "vte_get_minor_version", libs);
   gidLink(cast(void**)&vte_get_user_shell, "vte_get_user_shell", libs);
   gidLink(cast(void**)&vte_set_test_flags, "vte_set_test_flags", libs);
+
+  // PtyError
+  gidLink(cast(void**)&vte_pty_error_quark, "vte_pty_error_quark", libs);
+
+  // RegexError
+  gidLink(cast(void**)&vte_regex_error_quark, "vte_regex_error_quark", libs);
 }

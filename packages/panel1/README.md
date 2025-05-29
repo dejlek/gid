@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:panel1](https://code.dlang.org/packages/gid%3Apanel1)                       |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/libpanel                                          |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/libpanel                                          |
 | **D API Reference**      | https://www.kymorphia.com/gid/panel.html                                         |
 | **C API Reference**      | https://gnome.pages.gitlab.gnome.org/libpanel/panel-1.0                          |
 

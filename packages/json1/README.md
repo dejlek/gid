@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:json1](https://code.dlang.org/packages/gid%3Ajson1)                         |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/json-glib                                         |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/json-glib                                         |
 | **D API Reference**      | https://www.kymorphia.com/gid/json.html                                          |
 | **C API Reference**      | https://gnome.pages.gitlab.gnome.org/json-glib                                   |
 

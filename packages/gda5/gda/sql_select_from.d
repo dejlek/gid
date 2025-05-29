@@ -41,7 +41,10 @@ class SqlSelectFrom
     return new gda.sql_any_part.SqlAnyPart(cast(GdaSqlAnyPart*)&(cast(GdaSqlSelectFrom*)this._cPtr).any, No.Take);
   }
 
-  /** */
+  /**
+      Creates a new string description of the FROM clause used in a SELECT statement.
+      Returns: a new string with the description of the FROM or "null" in case from is invalid.
+  */
   string serialize()
   {
     char* _cretval;

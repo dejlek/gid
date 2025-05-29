@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gstpbutils1](https://code.dlang.org/packages/gid%3Agstpbutils1)             |
-| **Library Website**      | https://gstreamer.freedesktop.org                                                |
+| **Library Homepage**     | https://gstreamer.freedesktop.org                                                |
 | **D API Reference**      | https://www.kymorphia.com/gid/gstpbutils.html                                    |
 | **C API Reference**      | https://gstreamer.freedesktop.org/documentation/pbutils/index.html               |
 

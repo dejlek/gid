@@ -93,7 +93,10 @@ class SqlParamSpec
     (cast(GdaSqlParamSpec*)this._cPtr).gType = propval;
   }
 
-  /** */
+  /**
+      Creates a new string representing pspec.
+      Returns: a new string.
+  */
   string serialize()
   {
     char* _cretval;
@@ -102,27 +105,55 @@ class SqlParamSpec
     return _retval;
   }
 
-  /** */
+  /**
+      Sets pspec's description. value's ownership is transferred to
+      pspec (which means pspec is then responsible for freeing it when no longer needed).
+  
+      Params:
+        value = a G_TYPE_STRING #GValue
+  */
   void takeDescr(gobject.value.Value value)
   {
-    gda_sql_param_spec_take_descr(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_param_spec_take_descr(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 
-  /** */
+  /**
+      Sets pspec's name. value's ownership is transferred to
+      pspec (which means pspec is then responsible for freeing it when no longer needed).
+  
+      Params:
+        value = a G_TYPE_STRING #GValue
+  */
   void takeName(gobject.value.Value value)
   {
-    gda_sql_param_spec_take_name(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_param_spec_take_name(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 
-  /** */
+  /**
+      Sets pspec's ability of being NULL. value's ownership is transferred to
+      pspec (which means pspec is then responsible for freeing it when no longer needed).
+      
+      If value's string starts by 't' or 'T' then pspec will be allowed to be null
+  
+      Params:
+        value = a G_TYPE_STRING #GValue.
+  */
   void takeNullok(gobject.value.Value value)
   {
-    gda_sql_param_spec_take_nullok(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_param_spec_take_nullok(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 
-  /** */
+  /**
+      Sets pspec's data type. value's ownership is transferred to
+      pspec (which means pspec is then responsible for freeing it when no longer needed).
+      
+      value must represent a data type, as understood by [gda.global.gTypeFromString].
+  
+      Params:
+        value = a G_TYPE_STRING #GValue
+  */
   void takeType(gobject.value.Value value)
   {
-    gda_sql_param_spec_take_type(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_param_spec_take_type(cast(GdaSqlParamSpec*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 }

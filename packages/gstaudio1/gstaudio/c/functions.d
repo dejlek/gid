@@ -322,6 +322,18 @@ __gshared extern(C)
   GstAudioLevelMeta* function(GstBuffer* buffer) c_gst_buffer_get_audio_level_meta; ///
   void function(const(ubyte)* inputData, ubyte* outputData, GstDsdFormat inputFormat, GstDsdFormat outputFormat, GstAudioLayout inputLayout, GstAudioLayout outputLayout, const(size_t)* inputPlaneOffsets, const(size_t)* outputPlaneOffsets, size_t numDsdBytes, int numChannels, bool reverseByteBits) c_gst_dsd_convert; ///
   GType function() c_gst_dsd_plane_offset_meta_api_get_type; ///
+
+  // AudioFormat
+  GstAudioFormat function(bool sign, int endianness, int width, int depth) c_gst_audio_format_build_integer; ///
+  void function(const(GstAudioFormatInfo)* info, void* dest, size_t length) c_gst_audio_format_fill_silence; ///
+  GstAudioFormat function(const(char)* format) c_gst_audio_format_from_string; ///
+  const(GstAudioFormatInfo)* function(GstAudioFormat format) c_gst_audio_format_get_info; ///
+  const(char)* function(GstAudioFormat format) c_gst_audio_format_to_string; ///
+
+  // DsdFormat
+  GstDsdFormat function(const(char)* str) c_gst_dsd_format_from_string; ///
+  uint function(GstDsdFormat format) c_gst_dsd_format_get_width; ///
+  const(char)* function(GstDsdFormat format) c_gst_dsd_format_to_string; ///
 }
 
 // AudioAggregator
@@ -1116,6 +1128,34 @@ alias gst_dsd_convert = c_gst_dsd_convert;
 /** */
 alias gst_dsd_plane_offset_meta_api_get_type = c_gst_dsd_plane_offset_meta_api_get_type;
 
+// AudioFormat
+
+/** */
+alias gst_audio_format_build_integer = c_gst_audio_format_build_integer;
+
+/** */
+alias gst_audio_format_fill_silence = c_gst_audio_format_fill_silence;
+
+/** */
+alias gst_audio_format_from_string = c_gst_audio_format_from_string;
+
+/** */
+alias gst_audio_format_get_info = c_gst_audio_format_get_info;
+
+/** */
+alias gst_audio_format_to_string = c_gst_audio_format_to_string;
+
+// DsdFormat
+
+/** */
+alias gst_dsd_format_from_string = c_gst_dsd_format_from_string;
+
+/** */
+alias gst_dsd_format_get_width = c_gst_dsd_format_get_width;
+
+/** */
+alias gst_dsd_format_to_string = c_gst_dsd_format_to_string;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1423,4 +1463,16 @@ shared static this()
   gidLink(cast(void**)&gst_buffer_get_audio_level_meta, "gst_buffer_get_audio_level_meta", libs);
   gidLink(cast(void**)&gst_dsd_convert, "gst_dsd_convert", libs);
   gidLink(cast(void**)&gst_dsd_plane_offset_meta_api_get_type, "gst_dsd_plane_offset_meta_api_get_type", libs);
+
+  // AudioFormat
+  gidLink(cast(void**)&gst_audio_format_build_integer, "gst_audio_format_build_integer", libs);
+  gidLink(cast(void**)&gst_audio_format_fill_silence, "gst_audio_format_fill_silence", libs);
+  gidLink(cast(void**)&gst_audio_format_from_string, "gst_audio_format_from_string", libs);
+  gidLink(cast(void**)&gst_audio_format_get_info, "gst_audio_format_get_info", libs);
+  gidLink(cast(void**)&gst_audio_format_to_string, "gst_audio_format_to_string", libs);
+
+  // DsdFormat
+  gidLink(cast(void**)&gst_dsd_format_from_string, "gst_dsd_format_from_string", libs);
+  gidLink(cast(void**)&gst_dsd_format_get_width, "gst_dsd_format_get_width", libs);
+  gidLink(cast(void**)&gst_dsd_format_to_string, "gst_dsd_format_to_string", libs);
 }

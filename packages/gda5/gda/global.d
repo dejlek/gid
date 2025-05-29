@@ -557,6 +557,56 @@ glib.types.Quark sqlErrorQuark()
 }
 
 /**
+    Add double quotes around the str identifier. This function is normally used only by database provider's
+    implementation. Any double quote character is replaced by two double quote characters.
+    
+    For other uses, see [gda.global.sqlIdentifierQuote].
+
+    Params:
+      str = an SQL identifier
+    Returns: 
+*/
+string sqlIdentifierForceQuotes(string str)
+{
+  char* _cretval;
+  const(char)* _str = str.toCString(No.Alloc);
+  _cretval = gda_sql_identifier_force_quotes(_str);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  return _retval;
+}
+
+/**
+    Prepares str to be compared:
+    <itemizedlist>
+    <listitem><para>if surrounded by double quotes or single quotes, then just remove the quotes</para></listitem>
+    <listitem><para>otherwise convert to lower case</para></listitem>
+    </itemizedlist>
+    
+    The quoted string:
+    <itemizedlist>
+      <listitem><para>must start and finish with the same single or double quotes character</para></listitem>
+      <listitem><para>can contain the delimiter character (the single or double quotes) in the string if every instance
+        of it is preceeded with a backslash character or with the delimiter character itself</para></listitem>
+    </itemizedlist>
+    
+    This function is normally used only by database provider's implementation.
+    
+    WARNING: str must NOT be a composed identifier (&lt;part1&gt;."&lt;part2&gt;" for example)
+
+    Params:
+      str = a quoted string
+    Returns: str
+*/
+string sqlIdentifierPrepareForCompare(string str)
+{
+  char* _cretval;
+  char* _str = str.toCString(No.Alloc);
+  _cretval = gda_sql_identifier_prepare_for_compare(_str);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
+  return _retval;
+}
+
+/**
     Use this function for any SQL identifier to make sure that:
     <itemizedlist>
       <listitem>
@@ -773,6 +823,21 @@ string[] sqlIdentifierSplit(string id)
     foreach (i; 0 .. _cretlength)
       _retval[i] = _cretval[i].fromCString(Yes.Free);
   }
+  return _retval;
+}
+
+/**
+    Simplified version of [gda.global.valueStringify].
+
+    Params:
+      value = a #GValue pointer
+    Returns: a new string
+*/
+string sqlValueStringify(gobject.value.Value value)
+{
+  char* _cretval;
+  _cretval = gda_sql_value_stringify(value ? cast(const(GValue)*)value._cPtr(No.Dup) : null);
+  string _retval = (cast(const(char)*)_cretval).fromCString(Yes.Free);
   return _retval;
 }
 

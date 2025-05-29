@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gtksource4](https://code.dlang.org/packages/gid%3Agtksource4)               |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/gtksourceview                                     |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/gtksourceview                                     |
 | **D API Reference**      | https://www.kymorphia.com/gid-old/gtksource.html                                 |
 | **C API Reference**      | https://lazka.github.io/pgi-docs/GtkSource-4/index.html                          |
 

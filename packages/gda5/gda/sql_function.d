@@ -68,7 +68,11 @@ class SqlFunction
     gda_sql_function_check_clean(cast(GdaSqlFunction*)this._cPtr);
   }
 
-  /** */
+  /**
+      Creates a new string representing a function. You need to free the returned string
+      using [glib.global.gfree];
+      Returns: a new string with the description of the function or "null" in case function is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -77,17 +81,15 @@ class SqlFunction
     return _retval;
   }
 
-  /** */
-  void takeArgsList(void*[] args)
-  {
-    auto _args = gSListFromD!(void*)(args);
-    scope(exit) containerFree!(GSList*, void*, GidOwnership.None)(_args);
-    gda_sql_function_take_args_list(cast(GdaSqlFunction*)this._cPtr, _args);
-  }
-
-  /** */
+  /**
+      Sets the function's name using the string held by value. When call, value is freed using
+      #[gda.global.valueFree].
+  
+      Params:
+        value = a #GValue holding a string to take from
+  */
   void takeName(gobject.value.Value value)
   {
-    gda_sql_function_take_name(cast(GdaSqlFunction*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_function_take_name(cast(GdaSqlFunction*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 }

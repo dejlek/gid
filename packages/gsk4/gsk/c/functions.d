@@ -444,6 +444,9 @@ __gshared extern(C)
   GskRenderNode* function(const(GValue)* value) c_gsk_value_get_render_node; ///
   void function(GValue* value, GskRenderNode* node) c_gsk_value_set_render_node; ///
   void function(GValue* value, GskRenderNode* node) c_gsk_value_take_render_node; ///
+
+  // SerializationError
+  GQuark function() c_gsk_serialization_error_quark; ///
 }
 
 // BlendNode
@@ -1545,6 +1548,11 @@ alias gsk_value_set_render_node = c_gsk_value_set_render_node;
 /** */
 alias gsk_value_take_render_node = c_gsk_value_take_render_node;
 
+// SerializationError
+
+/** */
+alias gsk_serialization_error_quark = c_gsk_serialization_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1977,4 +1985,7 @@ shared static this()
   gidLink(cast(void**)&gsk_value_get_render_node, "gsk_value_get_render_node", libs);
   gidLink(cast(void**)&gsk_value_set_render_node, "gsk_value_set_render_node", libs);
   gidLink(cast(void**)&gsk_value_take_render_node, "gsk_value_take_render_node", libs);
+
+  // SerializationError
+  gidLink(cast(void**)&gsk_serialization_error_quark, "gsk_serialization_error_quark", libs);
 }

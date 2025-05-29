@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:pangocairo1](https://code.dlang.org/packages/gid%3Apangocairo1)             |
-| **Library Website**      | https://www.pango.org                                                            |
+| **Library Homepage**     | https://www.pango.org                                                            |
 | **D API Reference**      | https://www.kymorphia.com/gid/pangocairo.html                                    |
 | **C API Reference**      | https://docs.gtk.org/PangoCairo                                                  |
 

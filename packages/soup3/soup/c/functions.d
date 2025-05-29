@@ -513,6 +513,18 @@ __gshared extern(C)
   bool function(SoupMessage* msg, GPtrArray* supportedExtensions, GList** acceptedExtensions, GError** _err) c_soup_websocket_client_verify_handshake; ///
   bool function(SoupServerMessage* msg, const(char)* origin, char** protocols, GPtrArray* supportedExtensions, GError** _err) c_soup_websocket_server_check_handshake; ///
   bool function(SoupServerMessage* msg, const(char)* expectedOrigin, char** protocols, GPtrArray* supportedExtensions, GList** acceptedExtensions) c_soup_websocket_server_process_handshake; ///
+
+  // SessionError
+  GQuark function() c_soup_session_error_quark; ///
+
+  // Status
+  const(char)* function(uint statusCode) c_soup_status_get_phrase; ///
+
+  // TLDError
+  GQuark function() c_soup_tld_error_quark; ///
+
+  // WebsocketError
+  GQuark function() c_soup_websocket_error_quark; ///
 }
 
 // Auth
@@ -1868,6 +1880,26 @@ alias soup_websocket_server_check_handshake = c_soup_websocket_server_check_hand
 /** */
 alias soup_websocket_server_process_handshake = c_soup_websocket_server_process_handshake;
 
+// SessionError
+
+/** */
+alias soup_session_error_quark = c_soup_session_error_quark;
+
+// Status
+
+/** */
+alias soup_status_get_phrase = c_soup_status_get_phrase;
+
+// TLDError
+
+/** */
+alias soup_tld_error_quark = c_soup_tld_error_quark;
+
+// WebsocketError
+
+/** */
+alias soup_websocket_error_quark = c_soup_websocket_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -2370,4 +2402,16 @@ shared static this()
   gidLink(cast(void**)&soup_websocket_client_verify_handshake, "soup_websocket_client_verify_handshake", libs);
   gidLink(cast(void**)&soup_websocket_server_check_handshake, "soup_websocket_server_check_handshake", libs);
   gidLink(cast(void**)&soup_websocket_server_process_handshake, "soup_websocket_server_process_handshake", libs);
+
+  // SessionError
+  gidLink(cast(void**)&soup_session_error_quark, "soup_session_error_quark", libs);
+
+  // Status
+  gidLink(cast(void**)&soup_status_get_phrase, "soup_status_get_phrase", libs);
+
+  // TLDError
+  gidLink(cast(void**)&soup_tld_error_quark, "soup_tld_error_quark", libs);
+
+  // WebsocketError
+  gidLink(cast(void**)&soup_websocket_error_quark, "soup_websocket_error_quark", libs);
 }

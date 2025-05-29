@@ -101,7 +101,10 @@ class SqlSelectOrder
     dToC(propval, cast(void*)&(cast(GdaSqlSelectOrder*)this._cPtr).collationName);
   }
 
-  /** */
+  /**
+      Creates a new string description of the ORDER BY clause used in a SELECT statement.
+      Returns: a new string with the description of the ORDER BY or "null" in case order is invalid.
+  */
   string serialize()
   {
     char* _cretval;

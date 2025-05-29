@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:arrowdataset1](https://code.dlang.org/packages/gid%3Aarrowdataset1)         |
-| **Library Website**      | https://arrow.apache.org                                                         |
+| **Library Homepage**     | https://arrow.apache.org                                                         |
 | **D API Reference**      | https://www.kymorphia.com/gid/arrowdataset.html                                  |
 | **C API Reference**      | https://arrow.apache.org/docs/c_glib/arrow-dataset-glib/index.html               |
 

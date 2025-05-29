@@ -2361,6 +2361,31 @@ __gshared extern(C)
   GList* function(ulong* timeRead) c_g_unix_mount_points_get; ///
   bool function(ulong time) c_g_unix_mounts_changed_since; ///
   GList* function(ulong* timeRead) c_g_unix_mounts_get; ///
+
+  // DBusError
+  char* function(const(GError)* error) c_g_dbus_error_encode_gerror; ///
+  char* function(const(GError)* error) c_g_dbus_error_get_remote_error; ///
+  bool function(const(GError)* error) c_g_dbus_error_is_remote_error; ///
+  GError* function(const(char)* dbusErrorName, const(char)* dbusErrorMessage) c_g_dbus_error_new_for_dbus_error; ///
+  GQuark function() c_g_dbus_error_quark; ///
+  bool function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) c_g_dbus_error_register_error; ///
+  void function(const(char)* errorDomainQuarkName, size_t* quarkVolatile, const(GDBusErrorEntry)* entries, uint numEntries) c_g_dbus_error_register_error_domain; ///
+  void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format,  ...) c_g_dbus_error_set_dbus_error; ///
+  void function(GError** error, const(char)* dbusErrorName, const(char)* dbusErrorMessage, const(char)* format, void* varArgs) c_g_dbus_error_set_dbus_error_valist; ///
+  bool function(GError* error) c_g_dbus_error_strip_remote_error; ///
+  bool function(GQuark errorDomain, int errorCode, const(char)* dbusErrorName) c_g_dbus_error_unregister_error; ///
+
+  // ResolverError
+  GQuark function() c_g_resolver_error_quark; ///
+
+  // ResourceError
+  GQuark function() c_g_resource_error_quark; ///
+
+  // TlsChannelBindingError
+  GQuark function() c_g_tls_channel_binding_error_quark; ///
+
+  // TlsError
+  GQuark function() c_g_tls_error_quark; ///
 }
 
 // Action
@@ -8718,6 +8743,61 @@ alias g_unix_mounts_changed_since = c_g_unix_mounts_changed_since;
 /** */
 alias g_unix_mounts_get = c_g_unix_mounts_get;
 
+// DBusError
+
+/** */
+alias g_dbus_error_encode_gerror = c_g_dbus_error_encode_gerror;
+
+/** */
+alias g_dbus_error_get_remote_error = c_g_dbus_error_get_remote_error;
+
+/** */
+alias g_dbus_error_is_remote_error = c_g_dbus_error_is_remote_error;
+
+/** */
+alias g_dbus_error_new_for_dbus_error = c_g_dbus_error_new_for_dbus_error;
+
+/** */
+alias g_dbus_error_quark = c_g_dbus_error_quark;
+
+/** */
+alias g_dbus_error_register_error = c_g_dbus_error_register_error;
+
+/** */
+alias g_dbus_error_register_error_domain = c_g_dbus_error_register_error_domain;
+
+/** */
+alias g_dbus_error_set_dbus_error = c_g_dbus_error_set_dbus_error;
+
+/** */
+alias g_dbus_error_set_dbus_error_valist = c_g_dbus_error_set_dbus_error_valist;
+
+/** */
+alias g_dbus_error_strip_remote_error = c_g_dbus_error_strip_remote_error;
+
+/** */
+alias g_dbus_error_unregister_error = c_g_dbus_error_unregister_error;
+
+// ResolverError
+
+/** */
+alias g_resolver_error_quark = c_g_resolver_error_quark;
+
+// ResourceError
+
+/** */
+alias g_resource_error_quark = c_g_resource_error_quark;
+
+// TlsChannelBindingError
+
+/** */
+alias g_tls_channel_binding_error_quark = c_g_tls_channel_binding_error_quark;
+
+// TlsError
+
+/** */
+alias g_tls_error_quark = c_g_tls_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -11066,4 +11146,29 @@ shared static this()
   gidLink(cast(void**)&g_unix_mount_points_get, "g_unix_mount_points_get", libs);
   gidLink(cast(void**)&g_unix_mounts_changed_since, "g_unix_mounts_changed_since", libs);
   gidLink(cast(void**)&g_unix_mounts_get, "g_unix_mounts_get", libs);
+
+  // DBusError
+  gidLink(cast(void**)&g_dbus_error_encode_gerror, "g_dbus_error_encode_gerror", libs);
+  gidLink(cast(void**)&g_dbus_error_get_remote_error, "g_dbus_error_get_remote_error", libs);
+  gidLink(cast(void**)&g_dbus_error_is_remote_error, "g_dbus_error_is_remote_error", libs);
+  gidLink(cast(void**)&g_dbus_error_new_for_dbus_error, "g_dbus_error_new_for_dbus_error", libs);
+  gidLink(cast(void**)&g_dbus_error_quark, "g_dbus_error_quark", libs);
+  gidLink(cast(void**)&g_dbus_error_register_error, "g_dbus_error_register_error", libs);
+  gidLink(cast(void**)&g_dbus_error_register_error_domain, "g_dbus_error_register_error_domain", libs);
+  gidLink(cast(void**)&g_dbus_error_set_dbus_error, "g_dbus_error_set_dbus_error", libs);
+  gidLink(cast(void**)&g_dbus_error_set_dbus_error_valist, "g_dbus_error_set_dbus_error_valist", libs);
+  gidLink(cast(void**)&g_dbus_error_strip_remote_error, "g_dbus_error_strip_remote_error", libs);
+  gidLink(cast(void**)&g_dbus_error_unregister_error, "g_dbus_error_unregister_error", libs);
+
+  // ResolverError
+  gidLink(cast(void**)&g_resolver_error_quark, "g_resolver_error_quark", libs);
+
+  // ResourceError
+  gidLink(cast(void**)&g_resource_error_quark, "g_resource_error_quark", libs);
+
+  // TlsChannelBindingError
+  gidLink(cast(void**)&g_tls_channel_binding_error_quark, "g_tls_channel_binding_error_quark", libs);
+
+  // TlsError
+  gidLink(cast(void**)&g_tls_error_quark, "g_tls_error_quark", libs);
 }

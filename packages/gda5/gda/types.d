@@ -240,24 +240,6 @@ alias ServerProviderMeta = GdaServerProviderMeta;
 alias ServerProviderXa = GdaServerProviderXa;
 
 /** */
-alias SqlStatementDelete = GdaSqlStatementDelete*;
-
-/** */
-alias SqlStatementInsert = GdaSqlStatementInsert*;
-
-/** */
-alias SqlStatementSelect = GdaSqlStatementSelect*;
-
-/** */
-alias SqlStatementTransaction = GdaSqlStatementTransaction*;
-
-/** */
-alias SqlStatementUnknown = GdaSqlStatementUnknown*;
-
-/** */
-alias SqlStatementUpdate = GdaSqlStatementUpdate*;
-
-/** */
 alias ThreadNotification = GdaThreadNotification;
 
 /** */

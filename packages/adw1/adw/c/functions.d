@@ -1231,6 +1231,13 @@ __gshared extern(C)
   void function(GtkWidget* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_dialog_from_appdata; ///
   void function(GtkWindow* parent, const(char)* firstPropertyName,  ...) c_adw_show_about_window; ///
   void function(GtkWindow* parent, const(char)* resourcePath, const(char)* releaseNotesVersion, const(char)* firstPropertyName,  ...) c_adw_show_about_window_from_appdata; ///
+
+  // Easing
+  double function(AdwEasing self, double value) c_adw_easing_ease; ///
+
+  // LengthUnit
+  double function(AdwLengthUnit unit, double value, GtkSettings* settings) c_adw_length_unit_from_px; ///
+  double function(AdwLengthUnit unit, double value, GtkSettings* settings) c_adw_length_unit_to_px; ///
 }
 
 // AboutDialog
@@ -4589,6 +4596,19 @@ alias adw_show_about_window = c_adw_show_about_window;
 /** */
 alias adw_show_about_window_from_appdata = c_adw_show_about_window_from_appdata;
 
+// Easing
+
+/** */
+alias adw_easing_ease = c_adw_easing_ease;
+
+// LengthUnit
+
+/** */
+alias adw_length_unit_from_px = c_adw_length_unit_from_px;
+
+/** */
+alias adw_length_unit_to_px = c_adw_length_unit_to_px;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -5808,4 +5828,11 @@ shared static this()
   gidLink(cast(void**)&adw_show_about_dialog_from_appdata, "adw_show_about_dialog_from_appdata", libs);
   gidLink(cast(void**)&adw_show_about_window, "adw_show_about_window", libs);
   gidLink(cast(void**)&adw_show_about_window_from_appdata, "adw_show_about_window_from_appdata", libs);
+
+  // Easing
+  gidLink(cast(void**)&adw_easing_ease, "adw_easing_ease", libs);
+
+  // LengthUnit
+  gidLink(cast(void**)&adw_length_unit_from_px, "adw_length_unit_from_px", libs);
+  gidLink(cast(void**)&adw_length_unit_to_px, "adw_length_unit_to_px", libs);
 }

@@ -4,7 +4,7 @@
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
-  "website": "https://webkit.org",
+  "homepage": "https://webkit.org",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["javascriptcore"],

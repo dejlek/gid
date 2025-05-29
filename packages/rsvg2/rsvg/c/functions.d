@@ -69,6 +69,9 @@ __gshared extern(C)
   void function(double dpi) c_rsvg_set_default_dpi; ///
   void function(double dpiX, double dpiY) c_rsvg_set_default_dpi_x_y; ///
   void function() c_rsvg_term; ///
+
+  // Error
+  GQuark function() c_rsvg_error_quark; ///
 }
 
 // Handle
@@ -216,6 +219,11 @@ alias rsvg_set_default_dpi_x_y = c_rsvg_set_default_dpi_x_y;
 /** */
 alias rsvg_term = c_rsvg_term;
 
+// Error
+
+/** */
+alias rsvg_error_quark = c_rsvg_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -270,4 +278,7 @@ shared static this()
   gidLink(cast(void**)&rsvg_set_default_dpi, "rsvg_set_default_dpi", libs);
   gidLink(cast(void**)&rsvg_set_default_dpi_x_y, "rsvg_set_default_dpi_x_y", libs);
   gidLink(cast(void**)&rsvg_term, "rsvg_term", libs);
+
+  // Error
+  gidLink(cast(void**)&rsvg_error_quark, "rsvg_error_quark", libs);
 }

@@ -4,55 +4,55 @@
 [Summary]
 Package                    |       Structs        |        Funcs         |       Signals        |        Fields        |
                            |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |  Act  Dis  Uns  Perc |
-adw1                       |   74    0    0   100 |  977   22    0   100 |   46    0    1  97.9 |    0    0    0   100 |
-arrow1                     |  296    0    0   100 |  972   54    0   100 |    0    0    0   100 |    0    0    0   100 |
+adw1                       |   74    0    0   100 |  980   22    0   100 |   46    0    1  97.9 |    0    0    0   100 |
+arrow1                     |  296    0    0   100 |  973   54    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowdataset1              |   25    0    0   100 |   38    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 arrowflight1               |   32    0    0   100 |   61    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-atk1                       |   40    0    0   100 |  220   24    7  96.9 |   41    0    0   100 |   25    0    0   100 |
-glib2                      |   80    0    0   100 | 1274  405    5  99.6 |    0    0    0   100 |   88    0    8  91.7 |
+atk1                       |   40    0    0   100 |  236   24    7  97.1 |   41    0    0   100 |   25    0    0   100 |
+glib2                      |   80    0    0   100 | 1276  405    5  99.6 |    0    0    0   100 |   88    0    8  91.7 |
 gmodule2                   |    3    0    0   100 |    8    6    0   100 |    0    0    0   100 |    0    0    0   100 |
 gobject2                   |   55    0    0   100 |  266  150    2  99.3 |    3    0    0   100 |   43    0    2  95.6 |
-gda5                       |  113    0    2  98.3 |  648  155   18  97.3 |   53    0    1  98.1 |  147    0   33  81.7 |
-gdk3                       |   57    0    0   100 |  538   27    9  98.4 |   37    0    2  94.9 |  246    0    3  98.8 |
-gdk4                       |   63    0    0   100 |  478   18    5  99.0 |   35    0    0   100 |    8    0    0   100 |
-gdkpixbuf2                 |   12    0    0   100 |   96   11    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
-gio2                       |  178    0    0   100 | 1712  126   18  99.0 |   81    0    0   100 |   38    0   20  65.5 |
+gda5                       |  113    0    2  98.3 |  669  174   19  97.2 |   53    0    1  98.1 |  156    0   42  78.8 |
+gdk3                       |   57    0    0   100 |  539   27    9  98.4 |   37    0    2  94.9 |  246    0    3  98.8 |
+gdk4                       |   63    0    0   100 |  483   18    5  99.0 |   35    0    0   100 |    8    0    0   100 |
+gdkpixbuf2                 |   12    0    0   100 |   97   11    1  99.0 |    4    0    0   100 |   21    0    2  91.3 |
+gio2                       |  178    0    0   100 | 1725  128   18  99.0 |   81    0    0   100 |   38    0   20  65.5 |
 graphene1                  |   21    0    0   100 |  367   26    0   100 |    0    0    0   100 |    9    0    0   100 |
-gsk4                       |   51    0    0   100 |  256   10   14  94.8 |    0    0    0   100 |    7    0    2  77.8 |
-gst1                       |   89    0    0   100 | 1370  158   22  98.4 |   23    0    0   100 |  111    0    5  95.7 |
+gsk4                       |   51    0    0   100 |  257   10   14  94.8 |    0    0    0   100 |    7    0    2  77.8 |
+gst1                       |   89    0    0   100 | 1397  158   22  98.4 |   23    0    0   100 |  111    0    5  95.7 |
 gstallocators1             |    7    0    0   100 |   20    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstapp1                    |    6    0    0   100 |   48    4    0   100 |   17    0    0   100 |    0    0    0   100 |
-gstaudio1                  |   33    0    0   100 |  204   31   10  95.3 |    0    0    0   100 |   53    0   12  81.5 |
+gstaudio1                  |   33    0    0   100 |  212   31   10  95.5 |    0    0    0   100 |   53    0   12  81.5 |
 gstbase1                   |   23    0    0   100 |  305   66   10  96.8 |    2    2    0   100 |   25    0    4  86.2 |
 gstcheck1                  |    8    0    0   100 |  110   33    2  98.2 |    0    0    0   100 |    8    0    0   100 |
 gstcontroller1             |   10    0    0   100 |   16    0    0   100 |    3    0    0   100 |    2    0    1  66.7 |
-gstgl1                     |   38    0    0   100 |  257   47   12  95.5 |    5    0    0   100 |   56    0    6  90.3 |
+gstgl1                     |   38    0    0   100 |  283   47   12  95.9 |    5    0    0   100 |   56    0    6  90.3 |
 gstglegl1                  |    7    0    0   100 |   14    6    6  70.0 |    0    0    0   100 |    0    0    0   100 |
 gstglwayland1              |    3    0    0   100 |    2    0    0   100 |    0    0    0   100 |    0    0    0   100 |
 gstnet1                    |    9    0    0   100 |   24    3    0   100 |    0    0    0   100 |    6    0    0   100 |
-gstpbutils1                |   16    0    0   100 |  166    1    4  97.6 |    5    0    0   100 |    0    0    0   100 |
+gstpbutils1                |   16    0    0   100 |  167    1    4  97.7 |    5    0    0   100 |    0    0    0   100 |
 gstrtp1                    |   11    0    0   100 |  196   27    2  99.0 |    6    0    0   100 |   16    0    4  80.0 |
-gstrtsp1                   |   15    0    0   100 |  136   18    2  98.6 |    1    0    0   100 |   35    0    2  94.6 |
+gstrtsp1                   |   15    0    0   100 |  138   18    2  98.6 |    1    0    0   100 |   35    0    2  94.6 |
 gstsdp1                    |   23    0    0   100 |  168    9    2  98.8 |    0    0    0   100 |   60    0   23  72.3 |
 gsttag1                    |    5    0    0   100 |   46    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-gstvideo1                  |   58    0    0   100 |  341  107    8  97.7 |    2    0    0   100 |  135    0   33  80.4 |
-gtk3                       |  344    0    1  99.7 | 3749  129   25  99.3 |  444    1    3  99.3 |  132    0   12  91.7 |
-gtk4                       |  320    0    0   100 | 3568   89   13  99.6 |  342    1    3  99.1 |   18    0    4  81.8 |
-gtksource4                 |   38    0    0   100 |  368   10    0   100 |   33    0    0   100 |    0    0    0   100 |
-gtksource5                 |   49    0    0   100 |  446    9    0   100 |   29    0    1  96.7 |    0    0    0   100 |
+gstvideo1                  |   58    0    0   100 |  371  107    8  97.9 |    2    0    0   100 |  135    0   33  80.4 |
+gtk3                       |  344    0    1  99.7 | 3762  129   25  99.3 |  444    1    3  99.3 |  132    0   12  91.7 |
+gtk4                       |  320    0    0   100 | 3578   90   13  99.6 |  342    1    3  99.1 |   18    0    4  81.8 |
+gtksource4                 |   38    0    0   100 |  371   10    0   100 |   33    0    0   100 |    0    0    0   100 |
+gtksource5                 |   49    0    0   100 |  448    9    0   100 |   29    0    1  96.7 |    0    0    0   100 |
 harfbuzz0                  |   35    0    0   100 |  407   52   42  90.6 |    0    0    0   100 |   41    0    3  93.2 |
 javascriptcore6            |   10    0    0   100 |  104   13    9  92.0 |    1    0    0   100 |    0    0    1   0.0 |
-json1                      |   12    0    0   100 |  197    5    0   100 |    9    0    0   100 |    0    0    0   100 |
+json1                      |   12    0    0   100 |  200    5    0   100 |    9    0    0   100 |    0    0    0   100 |
 panel1                     |   33    0    0   100 |  311    4    0   100 |   17    0    0   100 |    0    0    0   100 |
-pango1                     |   43    0    0   100 |  387   25   12  97.0 |    0    0    0   100 |   65    0    8  89.0 |
+pango1                     |   43    0    0   100 |  397   25   12  97.1 |    0    0    0   100 |   65    0    8  89.0 |
 pangocairo1                |    4    0    0   100 |   26    5    0   100 |    0    0    0   100 |    0    0    0   100 |
 parquet1                   |   16    0    0   100 |   77    0    0   100 |    0    0    0   100 |    0    0    0   100 |
-rsvg2                      |    7    0    0   100 |   45    1    0   100 |    0    0    0   100 |    0    0    0   100 |
-secret1                    |   11    0    0   100 |  132   64    8  94.3 |    0    0    0   100 |    4    0    1  80.0 |
-soup3                      |   38    0    0   100 |  364   19    7  98.1 |   42    0    0   100 |    1    0    1  50.0 |
-vte2                       |    7    0    0   100 |  167    4    4  97.7 |   35    0    0   100 |    0    0    0   100 |
-vte3                       |    7    0    0   100 |  157    4    0   100 |   28    0    0   100 |    0    0    0   100 |
-webkit6                    |   74    0    0   100 |  637   14    0   100 |   72    0    0   100 |    0    0    0   100 |
+rsvg2                      |    7    0    0   100 |   46    1    0   100 |    0    0    0   100 |    0    0    0   100 |
+secret1                    |   11    0    0   100 |  133   64    8  94.3 |    0    0    0   100 |    4    0    1  80.0 |
+soup3                      |   38    0    0   100 |  368   19    7  98.1 |   42    0    0   100 |    1    0    1  50.0 |
+vte2                       |    7    0    0   100 |  169    4    4  97.7 |   35    0    0   100 |    0    0    0   100 |
+vte3                       |    7    0    0   100 |  159    4    0   100 |   28    0    0   100 |    0    0    0   100 |
+webkit6                    |   74    0    0   100 |  648   14    0   100 |   72    0    0   100 |    0    0    0   100 |
 webkitwebprocessextension6 |   16    0    0   100 |   97    0    0   100 |   12    0    0   100 |    0    0    0   100 |
 cairo1                     |   20    0    1  95.2 |  328   54    2  99.4 |    0    0    0   100 |   24    0    1  96.0 |
 freetype2                  |    5    0    0   100 |    0    0    0   100 |    0    0    0   100 |    0    0    0   100 |
@@ -97,6 +97,7 @@ gda.meta_context.MetaContext.setColumns
 gda.meta_store.MetaStore.extractV
 gda.meta_struct.MetaStruct.getAllDbObjects
 gda.server_operation.ServerOperation.getNodeType
+gda.sql_function.SqlFunction.takeArgsList
 gda.thread_wrapper.ThreadWrapper.execute
 gda.thread_wrapper.ThreadWrapper.executeVoid
 gdk.device.Device.listAxes
@@ -401,9 +402,18 @@ gda.sql_rendering_context.SqlRenderingContext.paramsUsed
 gda.sql_select_from.SqlSelectFrom.targets
 gda.sql_select_from.SqlSelectFrom.joins
 gda.sql_select_join.SqlSelectJoin.use
+gda.sql_statement.SqlStatement.contents
 gda.sql_statement_compound.SqlStatementCompound.stmtList
 gda.sql_statement_contents_info.SqlStatementContentsInfo.checkStructureFunc
 gda.sql_statement_contents_info.SqlStatementContentsInfo.checkValidityFunc
+gda.sql_statement_insert.SqlStatementInsert.fieldsList
+gda.sql_statement_insert.SqlStatementInsert.valuesList
+gda.sql_statement_select.SqlStatementSelect.exprList
+gda.sql_statement_select.SqlStatementSelect.groupBy
+gda.sql_statement_select.SqlStatementSelect.orderBy
+gda.sql_statement_unknown.SqlStatementUnknown.expressions
+gda.sql_statement_update.SqlStatementUpdate.fieldsList
+gda.sql_statement_update.SqlStatementUpdate.exprList
 gda.transaction_status_event.TransactionStatusEvent.pl
 gda.xa_transaction_id.XaTransactionId.data
 gdk.event_button.EventButton.axes

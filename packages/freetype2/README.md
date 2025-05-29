@@ -7,6 +7,6 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:freetype2](https://code.dlang.org/packages/gid%3Afreetype2)                 |
-| **Library Website**      | https://freetype.org                                                             |
+| **Library Homepage**     | https://freetype.org                                                             |
 
 Consult the [giD README](https://github.com/Kymorphia/gid) for more information on programming with giD and links to examples.

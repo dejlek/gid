@@ -95,7 +95,7 @@ class Statement : gobject.object.ObjectWrap
       
       If cnc is null, then cleans anything related to cnc in stmt.
       
-      See gda_sql_statement_check_validity() for more information.
+      See [gda.sql_statement.SqlStatement.checkValidity] for more information.
   
       Params:
         cnc = a #GdaConnection object, or null
@@ -173,7 +173,7 @@ class Statement : gobject.object.ObjectWrap
   }
 
   /**
-      "Normalizes" some parts of stmt, see gda_sql_statement_normalize() for more
+      "Normalizes" some parts of stmt, see [gda.sql_statement.SqlStatement.normalize] for more
       information.
   
       Params:

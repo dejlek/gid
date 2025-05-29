@@ -702,6 +702,21 @@ __gshared extern(C)
   void function(const(char)* backends) c_gdk_set_allowed_backends; ///
   GType function() c_gdk_toplevel_size_get_type; ///
   uint function(uint wc) c_gdk_unicode_to_keyval; ///
+
+  // DmabufError
+  GQuark function() c_gdk_dmabuf_error_quark; ///
+
+  // DragAction
+  bool function(GdkDragAction action) c_gdk_drag_action_is_unique; ///
+
+  // GLError
+  GQuark function() c_gdk_gl_error_quark; ///
+
+  // TextureError
+  GQuark function() c_gdk_texture_error_quark; ///
+
+  // VulkanError
+  GQuark function() c_gdk_vulkan_error_quark; ///
 }
 
 // AppLaunchContext
@@ -2516,6 +2531,31 @@ alias gdk_toplevel_size_get_type = c_gdk_toplevel_size_get_type;
 /** */
 alias gdk_unicode_to_keyval = c_gdk_unicode_to_keyval;
 
+// DmabufError
+
+/** */
+alias gdk_dmabuf_error_quark = c_gdk_dmabuf_error_quark;
+
+// DragAction
+
+/** */
+alias gdk_drag_action_is_unique = c_gdk_drag_action_is_unique;
+
+// GLError
+
+/** */
+alias gdk_gl_error_quark = c_gdk_gl_error_quark;
+
+// TextureError
+
+/** */
+alias gdk_texture_error_quark = c_gdk_texture_error_quark;
+
+// VulkanError
+
+/** */
+alias gdk_vulkan_error_quark = c_gdk_vulkan_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -3203,4 +3243,19 @@ shared static this()
   gidLink(cast(void**)&gdk_set_allowed_backends, "gdk_set_allowed_backends", libs);
   gidLink(cast(void**)&gdk_toplevel_size_get_type, "gdk_toplevel_size_get_type", libs);
   gidLink(cast(void**)&gdk_unicode_to_keyval, "gdk_unicode_to_keyval", libs);
+
+  // DmabufError
+  gidLink(cast(void**)&gdk_dmabuf_error_quark, "gdk_dmabuf_error_quark", libs);
+
+  // DragAction
+  gidLink(cast(void**)&gdk_drag_action_is_unique, "gdk_drag_action_is_unique", libs);
+
+  // GLError
+  gidLink(cast(void**)&gdk_gl_error_quark, "gdk_gl_error_quark", libs);
+
+  // TextureError
+  gidLink(cast(void**)&gdk_texture_error_quark, "gdk_texture_error_quark", libs);
+
+  // VulkanError
+  gidLink(cast(void**)&gdk_vulkan_error_quark, "gdk_vulkan_error_quark", libs);
 }

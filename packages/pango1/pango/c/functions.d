@@ -528,6 +528,26 @@ __gshared extern(C)
   int function() c_pango_version; ///
   const(char)* function(int requiredMajor, int requiredMinor, int requiredMicro) c_pango_version_check; ///
   const(char)* function() c_pango_version_string; ///
+
+  // AttrType
+  const(char)* function(PangoAttrType type) c_pango_attr_type_get_name; ///
+  PangoAttrType function(const(char)* name) c_pango_attr_type_register; ///
+
+  // BidiType
+  PangoBidiType function(dchar ch) c_pango_bidi_type_for_unichar; ///
+
+  // Gravity
+  PangoGravity function(const(PangoMatrix)* matrix) c_pango_gravity_get_for_matrix; ///
+  PangoGravity function(PangoScript script, PangoGravity baseGravity, PangoGravityHint hint) c_pango_gravity_get_for_script; ///
+  PangoGravity function(PangoScript script, bool wide, PangoGravity baseGravity, PangoGravityHint hint) c_pango_gravity_get_for_script_and_width; ///
+  double function(PangoGravity gravity) c_pango_gravity_to_rotation; ///
+
+  // LayoutDeserializeError
+  GQuark function() c_pango_layout_deserialize_error_quark; ///
+
+  // Script
+  PangoScript function(dchar ch) c_pango_script_for_unichar; ///
+  PangoLanguage* function(PangoScript script) c_pango_script_get_sample_language; ///
 }
 
 // AttrFontDesc
@@ -1935,6 +1955,46 @@ alias pango_version_check = c_pango_version_check;
 /** */
 alias pango_version_string = c_pango_version_string;
 
+// AttrType
+
+/** */
+alias pango_attr_type_get_name = c_pango_attr_type_get_name;
+
+/** */
+alias pango_attr_type_register = c_pango_attr_type_register;
+
+// BidiType
+
+/** */
+alias pango_bidi_type_for_unichar = c_pango_bidi_type_for_unichar;
+
+// Gravity
+
+/** */
+alias pango_gravity_get_for_matrix = c_pango_gravity_get_for_matrix;
+
+/** */
+alias pango_gravity_get_for_script = c_pango_gravity_get_for_script;
+
+/** */
+alias pango_gravity_get_for_script_and_width = c_pango_gravity_get_for_script_and_width;
+
+/** */
+alias pango_gravity_to_rotation = c_pango_gravity_to_rotation;
+
+// LayoutDeserializeError
+
+/** */
+alias pango_layout_deserialize_error_quark = c_pango_layout_deserialize_error_quark;
+
+// Script
+
+/** */
+alias pango_script_for_unichar = c_pango_script_for_unichar;
+
+/** */
+alias pango_script_get_sample_language = c_pango_script_get_sample_language;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -2449,4 +2509,24 @@ shared static this()
   gidLink(cast(void**)&pango_version, "pango_version", libs);
   gidLink(cast(void**)&pango_version_check, "pango_version_check", libs);
   gidLink(cast(void**)&pango_version_string, "pango_version_string", libs);
+
+  // AttrType
+  gidLink(cast(void**)&pango_attr_type_get_name, "pango_attr_type_get_name", libs);
+  gidLink(cast(void**)&pango_attr_type_register, "pango_attr_type_register", libs);
+
+  // BidiType
+  gidLink(cast(void**)&pango_bidi_type_for_unichar, "pango_bidi_type_for_unichar", libs);
+
+  // Gravity
+  gidLink(cast(void**)&pango_gravity_get_for_matrix, "pango_gravity_get_for_matrix", libs);
+  gidLink(cast(void**)&pango_gravity_get_for_script, "pango_gravity_get_for_script", libs);
+  gidLink(cast(void**)&pango_gravity_get_for_script_and_width, "pango_gravity_get_for_script_and_width", libs);
+  gidLink(cast(void**)&pango_gravity_to_rotation, "pango_gravity_to_rotation", libs);
+
+  // LayoutDeserializeError
+  gidLink(cast(void**)&pango_layout_deserialize_error_quark, "pango_layout_deserialize_error_quark", libs);
+
+  // Script
+  gidLink(cast(void**)&pango_script_for_unichar, "pango_script_for_unichar", libs);
+  gidLink(cast(void**)&pango_script_get_sample_language, "pango_script_get_sample_language", libs);
 }

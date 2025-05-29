@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gdk3](https://code.dlang.org/packages/gid%3Agdk3)                           |
-| **Library Website**      | https://gtk.org                                                                  |
+| **Library Homepage**     | https://gtk.org                                                                  |
 | **D API Reference**      | https://www.kymorphia.com/gid-old/gdk.html                                       |
 | **C API Reference**      | https://docs.gtk.org/gdk3/                                                       |
 

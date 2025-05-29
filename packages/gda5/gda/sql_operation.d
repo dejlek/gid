@@ -53,7 +53,11 @@ class SqlOperation
     (cast(GdaSqlOperation*)this._cPtr).operatorType = cast(GdaSqlOperatorType)propval;
   }
 
-  /** */
+  /**
+      Creates a new string representing an operator. You need to free the returned string
+      using [glib.global.gfree];
+      Returns: a new string with the description of the operator or "null" in case operation is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -62,7 +66,13 @@ class SqlOperation
     return _retval;
   }
 
-  /** */
+  /**
+      Returns #GdaSqlOperatorType that correspond with the string op.
+  
+      Params:
+        op = a #GdaSqlOperation structure
+      Returns: #GdaSqlOperatorType
+  */
   static gda.types.SqlOperatorType operatorFromString(string op)
   {
     GdaSqlOperatorType _cretval;
@@ -72,7 +82,14 @@ class SqlOperation
     return _retval;
   }
 
-  /** */
+  /**
+      Returns a constant string representing a operator name. You don't need to free
+      the returned string.
+  
+      Params:
+        op = a #GdaSqlOperation structure
+      Returns: a string with the operator's name or NULL in case op is invalid.
+  */
   static string operatorToString(gda.types.SqlOperatorType op)
   {
     const(char)* _cretval;

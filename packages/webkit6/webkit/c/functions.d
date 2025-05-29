@@ -910,6 +910,39 @@ __gshared extern(C)
   bool function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_audio_device; ///
   bool function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_display_device; ///
   bool function(WebKitUserMediaPermissionRequest* request) c_webkit_user_media_permission_is_for_video_device; ///
+
+  // DownloadError
+  GQuark function() c_webkit_download_error_quark; ///
+
+  // FaviconDatabaseError
+  GQuark function() c_webkit_favicon_database_error_quark; ///
+
+  // JavascriptError
+  GQuark function() c_webkit_javascript_error_quark; ///
+
+  // MediaError
+  GQuark function() c_webkit_media_error_quark; ///
+
+  // NetworkError
+  GQuark function() c_webkit_network_error_quark; ///
+
+  // PolicyError
+  GQuark function() c_webkit_policy_error_quark; ///
+
+  // PrintError
+  GQuark function() c_webkit_print_error_quark; ///
+
+  // SnapshotError
+  GQuark function() c_webkit_snapshot_error_quark; ///
+
+  // UserContentFilterError
+  GQuark function() c_webkit_user_content_filter_error_quark; ///
+
+  // UserMessageError
+  GQuark function() c_webkit_user_message_error_quark; ///
+
+  // WebExtensionMatchPatternError
+  GQuark function() c_webkit_web_extension_match_pattern_error_quark; ///
 }
 
 // ApplicationInfo
@@ -3302,6 +3335,61 @@ alias webkit_user_media_permission_is_for_display_device = c_webkit_user_media_p
 /** */
 alias webkit_user_media_permission_is_for_video_device = c_webkit_user_media_permission_is_for_video_device;
 
+// DownloadError
+
+/** */
+alias webkit_download_error_quark = c_webkit_download_error_quark;
+
+// FaviconDatabaseError
+
+/** */
+alias webkit_favicon_database_error_quark = c_webkit_favicon_database_error_quark;
+
+// JavascriptError
+
+/** */
+alias webkit_javascript_error_quark = c_webkit_javascript_error_quark;
+
+// MediaError
+
+/** */
+alias webkit_media_error_quark = c_webkit_media_error_quark;
+
+// NetworkError
+
+/** */
+alias webkit_network_error_quark = c_webkit_network_error_quark;
+
+// PolicyError
+
+/** */
+alias webkit_policy_error_quark = c_webkit_policy_error_quark;
+
+// PrintError
+
+/** */
+alias webkit_print_error_quark = c_webkit_print_error_quark;
+
+// SnapshotError
+
+/** */
+alias webkit_snapshot_error_quark = c_webkit_snapshot_error_quark;
+
+// UserContentFilterError
+
+/** */
+alias webkit_user_content_filter_error_quark = c_webkit_user_content_filter_error_quark;
+
+// UserMessageError
+
+/** */
+alias webkit_user_message_error_quark = c_webkit_user_message_error_quark;
+
+// WebExtensionMatchPatternError
+
+/** */
+alias webkit_web_extension_match_pattern_error_quark = c_webkit_web_extension_match_pattern_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -4199,4 +4287,37 @@ shared static this()
   gidLink(cast(void**)&webkit_user_media_permission_is_for_audio_device, "webkit_user_media_permission_is_for_audio_device", libs);
   gidLink(cast(void**)&webkit_user_media_permission_is_for_display_device, "webkit_user_media_permission_is_for_display_device", libs);
   gidLink(cast(void**)&webkit_user_media_permission_is_for_video_device, "webkit_user_media_permission_is_for_video_device", libs);
+
+  // DownloadError
+  gidLink(cast(void**)&webkit_download_error_quark, "webkit_download_error_quark", libs);
+
+  // FaviconDatabaseError
+  gidLink(cast(void**)&webkit_favicon_database_error_quark, "webkit_favicon_database_error_quark", libs);
+
+  // JavascriptError
+  gidLink(cast(void**)&webkit_javascript_error_quark, "webkit_javascript_error_quark", libs);
+
+  // MediaError
+  gidLink(cast(void**)&webkit_media_error_quark, "webkit_media_error_quark", libs);
+
+  // NetworkError
+  gidLink(cast(void**)&webkit_network_error_quark, "webkit_network_error_quark", libs);
+
+  // PolicyError
+  gidLink(cast(void**)&webkit_policy_error_quark, "webkit_policy_error_quark", libs);
+
+  // PrintError
+  gidLink(cast(void**)&webkit_print_error_quark, "webkit_print_error_quark", libs);
+
+  // SnapshotError
+  gidLink(cast(void**)&webkit_snapshot_error_quark, "webkit_snapshot_error_quark", libs);
+
+  // UserContentFilterError
+  gidLink(cast(void**)&webkit_user_content_filter_error_quark, "webkit_user_content_filter_error_quark", libs);
+
+  // UserMessageError
+  gidLink(cast(void**)&webkit_user_message_error_quark, "webkit_user_message_error_quark", libs);
+
+  // WebExtensionMatchPatternError
+  gidLink(cast(void**)&webkit_web_extension_match_pattern_error_quark, "webkit_web_extension_match_pattern_error_quark", libs);
 }

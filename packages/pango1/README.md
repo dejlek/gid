@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:pango1](https://code.dlang.org/packages/gid%3Apango1)                       |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/pango                                             |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/pango                                             |
 | **D API Reference**      | https://www.kymorphia.com/gid/pango.html                                         |
 | **C API Reference**      | https://docs.gtk.org/Pango                                                       |
 

@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:parquet1](https://code.dlang.org/packages/gid%3Aparquet1)                   |
-| **Library Website**      | https://github.com/red-data-tools/parquet-glib                                   |
+| **Library Homepage**     | https://github.com/red-data-tools/parquet-glib                                   |
 | **D API Reference**      | https://www.kymorphia.com/gid/parquet.html                                       |
 | **C API Reference**      | https://arrow.apache.org/docs/c_glib/parquet-glib                                |
 

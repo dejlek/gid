@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:secret1](https://code.dlang.org/packages/gid%3Asecret1)                     |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/libsecret                                         |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/libsecret                                         |
 | **D API Reference**      | https://www.kymorphia.com/gid/secret.html                                        |
 | **C API Reference**      | https://gnome.pages.gitlab.gnome.org/libsecret                                   |
 

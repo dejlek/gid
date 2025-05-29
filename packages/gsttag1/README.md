@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gsttag1](https://code.dlang.org/packages/gid%3Agsttag1)                     |
-| **Library Website**      | https://gstreamer.freedesktop.org                                                |
+| **Library Homepage**     | https://gstreamer.freedesktop.org                                                |
 | **D API Reference**      | https://www.kymorphia.com/gid/gsttag.html                                        |
 | **C API Reference**      | https://gstreamer.freedesktop.org/documentation/tag/index.html                   |
 

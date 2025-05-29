@@ -663,6 +663,9 @@ __gshared extern(C)
   void function(GCallback enterFn, GCallback leaveFn) c_gdk_threads_set_lock_functions; ///
   uint function(uint wc) c_gdk_unicode_to_keyval; ///
   char* function(const(char)* str) c_gdk_utf8_to_string_target; ///
+
+  // GLError
+  GQuark function() c_gdk_gl_error_quark; ///
 }
 
 // AppLaunchContext
@@ -2499,6 +2502,11 @@ alias gdk_unicode_to_keyval = c_gdk_unicode_to_keyval;
 /** */
 alias gdk_utf8_to_string_target = c_gdk_utf8_to_string_target;
 
+// GLError
+
+/** */
+alias gdk_gl_error_quark = c_gdk_gl_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -3148,4 +3156,7 @@ shared static this()
   gidLink(cast(void**)&gdk_threads_set_lock_functions, "gdk_threads_set_lock_functions", libs);
   gidLink(cast(void**)&gdk_unicode_to_keyval, "gdk_unicode_to_keyval", libs);
   gidLink(cast(void**)&gdk_utf8_to_string_target, "gdk_utf8_to_string_target", libs);
+
+  // GLError
+  gidLink(cast(void**)&gdk_gl_error_quark, "gdk_gl_error_quark", libs);
 }

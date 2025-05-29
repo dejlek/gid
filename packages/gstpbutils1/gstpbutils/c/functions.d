@@ -232,6 +232,9 @@ __gshared extern(C)
   void function() c_gst_pb_utils_init; ///
   void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_plugins_base_version; ///
   char* function() c_gst_plugins_base_version_string; ///
+
+  // InstallPluginsReturn
+  const(char)* function(GstInstallPluginsReturn ret) c_gst_install_plugins_return_get_name; ///
 }
 
 // AudioVisualizer
@@ -819,6 +822,11 @@ alias gst_plugins_base_version = c_gst_plugins_base_version;
 /** */
 alias gst_plugins_base_version_string = c_gst_plugins_base_version_string;
 
+// InstallPluginsReturn
+
+/** */
+alias gst_install_plugins_return_get_name = c_gst_install_plugins_return_get_name;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1037,4 +1045,7 @@ shared static this()
   gidLink(cast(void**)&gst_pb_utils_init, "gst_pb_utils_init", libs);
   gidLink(cast(void**)&gst_plugins_base_version, "gst_plugins_base_version", libs);
   gidLink(cast(void**)&gst_plugins_base_version_string, "gst_plugins_base_version_string", libs);
+
+  // InstallPluginsReturn
+  gidLink(cast(void**)&gst_install_plugins_return_get_name, "gst_install_plugins_return_get_name", libs);
 }

@@ -4642,6 +4642,39 @@ __gshared extern(C)
   GtkExpression* function(const(GValue)* value) c_gtk_value_get_expression; ///
   void function(GValue* value, GtkExpression* expression) c_gtk_value_set_expression; ///
   void function(GValue* value, GtkExpression* expression) c_gtk_value_take_expression; ///
+
+  // AccessibleProperty
+  void function(GtkAccessibleProperty property, GValue* value) c_gtk_accessible_property_init_value; ///
+
+  // AccessibleRelation
+  void function(GtkAccessibleRelation relation, GValue* value) c_gtk_accessible_relation_init_value; ///
+
+  // AccessibleState
+  void function(GtkAccessibleState state, GValue* value) c_gtk_accessible_state_init_value; ///
+
+  // BuilderError
+  GQuark function() c_gtk_builder_error_quark; ///
+
+  // ConstraintVflParserError
+  GQuark function() c_gtk_constraint_vfl_parser_error_quark; ///
+
+  // DialogError
+  GQuark function() c_gtk_dialog_error_quark; ///
+
+  // FileChooserError
+  GQuark function() c_gtk_file_chooser_error_quark; ///
+
+  // IconThemeError
+  GQuark function() c_gtk_icon_theme_error_quark; ///
+
+  // Ordering
+  GtkOrdering function(int cmpfuncResult) c_gtk_ordering_from_cmpfunc; ///
+
+  // PrintError
+  GQuark function() c_gtk_print_error_quark; ///
+
+  // RecentManagerError
+  GQuark function() c_gtk_recent_manager_error_quark; ///
 }
 
 // ATContext
@@ -17277,6 +17310,61 @@ alias gtk_value_set_expression = c_gtk_value_set_expression;
 /** */
 alias gtk_value_take_expression = c_gtk_value_take_expression;
 
+// AccessibleProperty
+
+/** */
+alias gtk_accessible_property_init_value = c_gtk_accessible_property_init_value;
+
+// AccessibleRelation
+
+/** */
+alias gtk_accessible_relation_init_value = c_gtk_accessible_relation_init_value;
+
+// AccessibleState
+
+/** */
+alias gtk_accessible_state_init_value = c_gtk_accessible_state_init_value;
+
+// BuilderError
+
+/** */
+alias gtk_builder_error_quark = c_gtk_builder_error_quark;
+
+// ConstraintVflParserError
+
+/** */
+alias gtk_constraint_vfl_parser_error_quark = c_gtk_constraint_vfl_parser_error_quark;
+
+// DialogError
+
+/** */
+alias gtk_dialog_error_quark = c_gtk_dialog_error_quark;
+
+// FileChooserError
+
+/** */
+alias gtk_file_chooser_error_quark = c_gtk_file_chooser_error_quark;
+
+// IconThemeError
+
+/** */
+alias gtk_icon_theme_error_quark = c_gtk_icon_theme_error_quark;
+
+// Ordering
+
+/** */
+alias gtk_ordering_from_cmpfunc = c_gtk_ordering_from_cmpfunc;
+
+// PrintError
+
+/** */
+alias gtk_print_error_quark = c_gtk_print_error_quark;
+
+// RecentManagerError
+
+/** */
+alias gtk_recent_manager_error_quark = c_gtk_recent_manager_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -21907,4 +21995,37 @@ shared static this()
   gidLink(cast(void**)&gtk_value_get_expression, "gtk_value_get_expression", libs);
   gidLink(cast(void**)&gtk_value_set_expression, "gtk_value_set_expression", libs);
   gidLink(cast(void**)&gtk_value_take_expression, "gtk_value_take_expression", libs);
+
+  // AccessibleProperty
+  gidLink(cast(void**)&gtk_accessible_property_init_value, "gtk_accessible_property_init_value", libs);
+
+  // AccessibleRelation
+  gidLink(cast(void**)&gtk_accessible_relation_init_value, "gtk_accessible_relation_init_value", libs);
+
+  // AccessibleState
+  gidLink(cast(void**)&gtk_accessible_state_init_value, "gtk_accessible_state_init_value", libs);
+
+  // BuilderError
+  gidLink(cast(void**)&gtk_builder_error_quark, "gtk_builder_error_quark", libs);
+
+  // ConstraintVflParserError
+  gidLink(cast(void**)&gtk_constraint_vfl_parser_error_quark, "gtk_constraint_vfl_parser_error_quark", libs);
+
+  // DialogError
+  gidLink(cast(void**)&gtk_dialog_error_quark, "gtk_dialog_error_quark", libs);
+
+  // FileChooserError
+  gidLink(cast(void**)&gtk_file_chooser_error_quark, "gtk_file_chooser_error_quark", libs);
+
+  // IconThemeError
+  gidLink(cast(void**)&gtk_icon_theme_error_quark, "gtk_icon_theme_error_quark", libs);
+
+  // Ordering
+  gidLink(cast(void**)&gtk_ordering_from_cmpfunc, "gtk_ordering_from_cmpfunc", libs);
+
+  // PrintError
+  gidLink(cast(void**)&gtk_print_error_quark, "gtk_print_error_quark", libs);
+
+  // RecentManagerError
+  gidLink(cast(void**)&gtk_recent_manager_error_quark, "gtk_recent_manager_error_quark", libs);
 }

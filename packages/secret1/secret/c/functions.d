@@ -249,6 +249,9 @@ __gshared extern(C)
   bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, SecretValue* value, GCancellable* cancellable, GError** _err) c_secret_password_storev_binary_sync; ///
   bool function(const(SecretSchema)* schema, GHashTable* attributes, const(char)* collection, const(char)* label, const(char)* password, GCancellable* cancellable, GError** _err) c_secret_password_storev_sync; ///
   void function(char* password) c_secret_password_wipe; ///
+
+  // Error
+  GQuark function() c_secret_error_get_quark; ///
 }
 
 // Backend
@@ -913,6 +916,11 @@ alias secret_password_storev_sync = c_secret_password_storev_sync;
 /** */
 alias secret_password_wipe = c_secret_password_wipe;
 
+// Error
+
+/** */
+alias secret_error_get_quark = c_secret_error_get_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1150,4 +1158,7 @@ shared static this()
   gidLink(cast(void**)&secret_password_storev_binary_sync, "secret_password_storev_binary_sync", libs);
   gidLink(cast(void**)&secret_password_storev_sync, "secret_password_storev_sync", libs);
   gidLink(cast(void**)&secret_password_wipe, "secret_password_wipe", libs);
+
+  // Error
+  gidLink(cast(void**)&secret_error_get_quark, "secret_error_get_quark", libs);
 }

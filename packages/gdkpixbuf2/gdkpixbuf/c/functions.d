@@ -147,6 +147,9 @@ __gshared extern(C)
 
   // PixbufSimpleAnimIter
   GType function() c_gdk_pixbuf_simple_anim_iter_get_type; ///
+
+  // PixbufError
+  GQuark function() c_gdk_pixbuf_error_quark; ///
 }
 
 // Pixbuf
@@ -513,6 +516,11 @@ alias gdk_pixbuf_simple_anim_set_loop = c_gdk_pixbuf_simple_anim_set_loop;
 /** */
 alias gdk_pixbuf_simple_anim_iter_get_type = c_gdk_pixbuf_simple_anim_iter_get_type;
 
+// PixbufError
+
+/** */
+alias gdk_pixbuf_error_quark = c_gdk_pixbuf_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -648,4 +656,7 @@ shared static this()
 
   // PixbufSimpleAnimIter
   gidLink(cast(void**)&gdk_pixbuf_simple_anim_iter_get_type, "gdk_pixbuf_simple_anim_iter_get_type", libs);
+
+  // PixbufError
+  gidLink(cast(void**)&gdk_pixbuf_error_quark, "gdk_pixbuf_error_quark", libs);
 }

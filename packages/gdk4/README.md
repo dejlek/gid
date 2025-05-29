@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gdk4](https://code.dlang.org/packages/gid%3Agdk4)                           |
-| **Library Website**      | https://gtk.org                                                                  |
+| **Library Homepage**     | https://gtk.org                                                                  |
 | **D API Reference**      | https://www.kymorphia.com/gid/gdk.html                                           |
 | **C API Reference**      | https://docs.gtk.org/gdk4/                                                       |
 

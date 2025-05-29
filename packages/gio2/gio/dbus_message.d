@@ -772,7 +772,7 @@ class DBusMessage : gobject.object.ObjectWrap
       nothing and returns false.
       
       Otherwise this method encodes the error in message as a #GError
-      using g_dbus_error_set_dbus_error() using the information in the
+      using [gio.dbus_error.DBusError.setDbusError] using the information in the
       [gio.types.DBusMessageHeaderField.ErrorName] header field of message as
       well as the first string item in message's body.
       Returns: true if error was set, false otherwise.

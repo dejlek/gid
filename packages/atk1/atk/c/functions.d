@@ -352,6 +352,32 @@ __gshared extern(C)
   void function(uint trackerId) c_atk_remove_focus_tracker; ///
   void function(uint listenerId) c_atk_remove_global_event_listener; ///
   void function(uint listenerId) c_atk_remove_key_event_listener; ///
+
+  // RelationType
+  AtkRelationType function(const(char)* name) c_atk_relation_type_for_name; ///
+  const(char)* function(AtkRelationType type) c_atk_relation_type_get_name; ///
+  AtkRelationType function(const(char)* name) c_atk_relation_type_register; ///
+
+  // Role
+  AtkRole function(const(char)* name) c_atk_role_for_name; ///
+  const(char)* function(AtkRole role) c_atk_role_get_localized_name; ///
+  const(char)* function(AtkRole role) c_atk_role_get_name; ///
+  AtkRole function(const(char)* name) c_atk_role_register; ///
+
+  // StateType
+  AtkStateType function(const(char)* name) c_atk_state_type_for_name; ///
+  const(char)* function(AtkStateType type) c_atk_state_type_get_name; ///
+  AtkStateType function(const(char)* name) c_atk_state_type_register; ///
+
+  // TextAttribute
+  AtkTextAttribute function(const(char)* name) c_atk_text_attribute_for_name; ///
+  const(char)* function(AtkTextAttribute attr) c_atk_text_attribute_get_name; ///
+  const(char)* function(AtkTextAttribute attr, int index) c_atk_text_attribute_get_value; ///
+  AtkTextAttribute function(const(char)* name) c_atk_text_attribute_register; ///
+
+  // ValueType
+  const(char)* function(AtkValueType valueType) c_atk_value_type_get_localized_name; ///
+  const(char)* function(AtkValueType valueType) c_atk_value_type_get_name; ///
 }
 
 // Action
@@ -1228,6 +1254,64 @@ alias atk_remove_global_event_listener = c_atk_remove_global_event_listener;
 /** */
 alias atk_remove_key_event_listener = c_atk_remove_key_event_listener;
 
+// RelationType
+
+/** */
+alias atk_relation_type_for_name = c_atk_relation_type_for_name;
+
+/** */
+alias atk_relation_type_get_name = c_atk_relation_type_get_name;
+
+/** */
+alias atk_relation_type_register = c_atk_relation_type_register;
+
+// Role
+
+/** */
+alias atk_role_for_name = c_atk_role_for_name;
+
+/** */
+alias atk_role_get_localized_name = c_atk_role_get_localized_name;
+
+/** */
+alias atk_role_get_name = c_atk_role_get_name;
+
+/** */
+alias atk_role_register = c_atk_role_register;
+
+// StateType
+
+/** */
+alias atk_state_type_for_name = c_atk_state_type_for_name;
+
+/** */
+alias atk_state_type_get_name = c_atk_state_type_get_name;
+
+/** */
+alias atk_state_type_register = c_atk_state_type_register;
+
+// TextAttribute
+
+/** */
+alias atk_text_attribute_for_name = c_atk_text_attribute_for_name;
+
+/** */
+alias atk_text_attribute_get_name = c_atk_text_attribute_get_name;
+
+/** */
+alias atk_text_attribute_get_value = c_atk_text_attribute_get_value;
+
+/** */
+alias atk_text_attribute_register = c_atk_text_attribute_register;
+
+// ValueType
+
+/** */
+alias atk_value_type_get_localized_name = c_atk_value_type_get_localized_name;
+
+/** */
+alias atk_value_type_get_name = c_atk_value_type_get_name;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1569,4 +1653,30 @@ shared static this()
   gidLink(cast(void**)&atk_remove_focus_tracker, "atk_remove_focus_tracker", libs);
   gidLink(cast(void**)&atk_remove_global_event_listener, "atk_remove_global_event_listener", libs);
   gidLink(cast(void**)&atk_remove_key_event_listener, "atk_remove_key_event_listener", libs);
+
+  // RelationType
+  gidLink(cast(void**)&atk_relation_type_for_name, "atk_relation_type_for_name", libs);
+  gidLink(cast(void**)&atk_relation_type_get_name, "atk_relation_type_get_name", libs);
+  gidLink(cast(void**)&atk_relation_type_register, "atk_relation_type_register", libs);
+
+  // Role
+  gidLink(cast(void**)&atk_role_for_name, "atk_role_for_name", libs);
+  gidLink(cast(void**)&atk_role_get_localized_name, "atk_role_get_localized_name", libs);
+  gidLink(cast(void**)&atk_role_get_name, "atk_role_get_name", libs);
+  gidLink(cast(void**)&atk_role_register, "atk_role_register", libs);
+
+  // StateType
+  gidLink(cast(void**)&atk_state_type_for_name, "atk_state_type_for_name", libs);
+  gidLink(cast(void**)&atk_state_type_get_name, "atk_state_type_get_name", libs);
+  gidLink(cast(void**)&atk_state_type_register, "atk_state_type_register", libs);
+
+  // TextAttribute
+  gidLink(cast(void**)&atk_text_attribute_for_name, "atk_text_attribute_for_name", libs);
+  gidLink(cast(void**)&atk_text_attribute_get_name, "atk_text_attribute_get_name", libs);
+  gidLink(cast(void**)&atk_text_attribute_get_value, "atk_text_attribute_get_value", libs);
+  gidLink(cast(void**)&atk_text_attribute_register, "atk_text_attribute_register", libs);
+
+  // ValueType
+  gidLink(cast(void**)&atk_value_type_get_localized_name, "atk_value_type_get_localized_name", libs);
+  gidLink(cast(void**)&atk_value_type_get_name, "atk_value_type_get_name", libs);
 }

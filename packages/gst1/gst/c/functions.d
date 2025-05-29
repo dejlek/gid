@@ -1802,6 +1802,65 @@ __gshared extern(C)
   bool function(GValue* dest, const(GValue)* value1, const(GValue)* value2) c_gst_value_union; ///
   void function(uint* major, uint* minor, uint* micro, uint* nano) c_gst_version; ///
   char* function() c_gst_version_string; ///
+
+  // CoreError
+  GQuark function() c_gst_core_error_quark; ///
+
+  // DebugLevel
+  const(char)* function(GstDebugLevel level) c_gst_debug_level_get_name; ///
+
+  // EventType
+  GstEventTypeFlags function(GstEventType type) c_gst_event_type_get_flags; ///
+  const(char)* function(GstEventType type) c_gst_event_type_get_name; ///
+  GQuark function(GstEventType type) c_gst_event_type_to_quark; ///
+  uint function(GstEventType type) c_gst_event_type_to_sticky_ordering; ///
+
+  // Format
+  GstFormat function(const(char)* nick) c_gst_format_get_by_nick; ///
+  const(GstFormatDefinition)* function(GstFormat format) c_gst_format_get_details; ///
+  const(char)* function(GstFormat format) c_gst_format_get_name; ///
+  GstIterator* function() c_gst_format_iterate_definitions; ///
+  GstFormat function(const(char)* nick, const(char)* description) c_gst_format_register; ///
+  GQuark function(GstFormat format) c_gst_format_to_quark; ///
+
+  // LibraryError
+  GQuark function() c_gst_library_error_quark; ///
+
+  // MessageType
+  const(char)* function(GstMessageType type) c_gst_message_type_get_name; ///
+  GQuark function(GstMessageType type) c_gst_message_type_to_quark; ///
+
+  // PadMode
+  const(char)* function(GstPadMode mode) c_gst_pad_mode_get_name; ///
+
+  // ParseError
+  GQuark function() c_gst_parse_error_quark; ///
+
+  // PluginError
+  GQuark function() c_gst_plugin_error_quark; ///
+
+  // QueryType
+  GstQueryTypeFlags function(GstQueryType type) c_gst_query_type_get_flags; ///
+  const(char)* function(GstQueryType type) c_gst_query_type_get_name; ///
+  GQuark function(GstQueryType type) c_gst_query_type_to_quark; ///
+
+  // ResourceError
+  GQuark function() c_gst_resource_error_quark; ///
+
+  // StateChange
+  const(char)* function(GstStateChange transition) c_gst_state_change_get_name; ///
+
+  // StreamError
+  GQuark function() c_gst_stream_error_quark; ///
+
+  // StreamType
+  const(char)* function(GstStreamType stype) c_gst_stream_type_get_name; ///
+
+  // TocEntryType
+  const(char)* function(GstTocEntryType type) c_gst_toc_entry_type_get_nick; ///
+
+  // URIError
+  GQuark function() c_gst_uri_error_quark; ///
 }
 
 // AllocationParams
@@ -6806,6 +6865,119 @@ alias gst_version = c_gst_version;
 /** */
 alias gst_version_string = c_gst_version_string;
 
+// CoreError
+
+/** */
+alias gst_core_error_quark = c_gst_core_error_quark;
+
+// DebugLevel
+
+/** */
+alias gst_debug_level_get_name = c_gst_debug_level_get_name;
+
+// EventType
+
+/** */
+alias gst_event_type_get_flags = c_gst_event_type_get_flags;
+
+/** */
+alias gst_event_type_get_name = c_gst_event_type_get_name;
+
+/** */
+alias gst_event_type_to_quark = c_gst_event_type_to_quark;
+
+/** */
+alias gst_event_type_to_sticky_ordering = c_gst_event_type_to_sticky_ordering;
+
+// Format
+
+/** */
+alias gst_format_get_by_nick = c_gst_format_get_by_nick;
+
+/** */
+alias gst_format_get_details = c_gst_format_get_details;
+
+/** */
+alias gst_format_get_name = c_gst_format_get_name;
+
+/** */
+alias gst_format_iterate_definitions = c_gst_format_iterate_definitions;
+
+/** */
+alias gst_format_register = c_gst_format_register;
+
+/** */
+alias gst_format_to_quark = c_gst_format_to_quark;
+
+// LibraryError
+
+/** */
+alias gst_library_error_quark = c_gst_library_error_quark;
+
+// MessageType
+
+/** */
+alias gst_message_type_get_name = c_gst_message_type_get_name;
+
+/** */
+alias gst_message_type_to_quark = c_gst_message_type_to_quark;
+
+// PadMode
+
+/** */
+alias gst_pad_mode_get_name = c_gst_pad_mode_get_name;
+
+// ParseError
+
+/** */
+alias gst_parse_error_quark = c_gst_parse_error_quark;
+
+// PluginError
+
+/** */
+alias gst_plugin_error_quark = c_gst_plugin_error_quark;
+
+// QueryType
+
+/** */
+alias gst_query_type_get_flags = c_gst_query_type_get_flags;
+
+/** */
+alias gst_query_type_get_name = c_gst_query_type_get_name;
+
+/** */
+alias gst_query_type_to_quark = c_gst_query_type_to_quark;
+
+// ResourceError
+
+/** */
+alias gst_resource_error_quark = c_gst_resource_error_quark;
+
+// StateChange
+
+/** */
+alias gst_state_change_get_name = c_gst_state_change_get_name;
+
+// StreamError
+
+/** */
+alias gst_stream_error_quark = c_gst_stream_error_quark;
+
+// StreamType
+
+/** */
+alias gst_stream_type_get_name = c_gst_stream_type_get_name;
+
+// TocEntryType
+
+/** */
+alias gst_toc_entry_type_get_nick = c_gst_toc_entry_type_get_nick;
+
+// URIError
+
+/** */
+alias gst_uri_error_quark = c_gst_uri_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -8595,4 +8767,63 @@ shared static this()
   gidLink(cast(void**)&gst_value_union, "gst_value_union", libs);
   gidLink(cast(void**)&gst_version, "gst_version", libs);
   gidLink(cast(void**)&gst_version_string, "gst_version_string", libs);
+
+  // CoreError
+  gidLink(cast(void**)&gst_core_error_quark, "gst_core_error_quark", libs);
+
+  // DebugLevel
+  gidLink(cast(void**)&gst_debug_level_get_name, "gst_debug_level_get_name", libs);
+
+  // EventType
+  gidLink(cast(void**)&gst_event_type_get_flags, "gst_event_type_get_flags", libs);
+  gidLink(cast(void**)&gst_event_type_get_name, "gst_event_type_get_name", libs);
+  gidLink(cast(void**)&gst_event_type_to_quark, "gst_event_type_to_quark", libs);
+  gidLink(cast(void**)&gst_event_type_to_sticky_ordering, "gst_event_type_to_sticky_ordering", libs);
+
+  // Format
+  gidLink(cast(void**)&gst_format_get_by_nick, "gst_format_get_by_nick", libs);
+  gidLink(cast(void**)&gst_format_get_details, "gst_format_get_details", libs);
+  gidLink(cast(void**)&gst_format_get_name, "gst_format_get_name", libs);
+  gidLink(cast(void**)&gst_format_iterate_definitions, "gst_format_iterate_definitions", libs);
+  gidLink(cast(void**)&gst_format_register, "gst_format_register", libs);
+  gidLink(cast(void**)&gst_format_to_quark, "gst_format_to_quark", libs);
+
+  // LibraryError
+  gidLink(cast(void**)&gst_library_error_quark, "gst_library_error_quark", libs);
+
+  // MessageType
+  gidLink(cast(void**)&gst_message_type_get_name, "gst_message_type_get_name", libs);
+  gidLink(cast(void**)&gst_message_type_to_quark, "gst_message_type_to_quark", libs);
+
+  // PadMode
+  gidLink(cast(void**)&gst_pad_mode_get_name, "gst_pad_mode_get_name", libs);
+
+  // ParseError
+  gidLink(cast(void**)&gst_parse_error_quark, "gst_parse_error_quark", libs);
+
+  // PluginError
+  gidLink(cast(void**)&gst_plugin_error_quark, "gst_plugin_error_quark", libs);
+
+  // QueryType
+  gidLink(cast(void**)&gst_query_type_get_flags, "gst_query_type_get_flags", libs);
+  gidLink(cast(void**)&gst_query_type_get_name, "gst_query_type_get_name", libs);
+  gidLink(cast(void**)&gst_query_type_to_quark, "gst_query_type_to_quark", libs);
+
+  // ResourceError
+  gidLink(cast(void**)&gst_resource_error_quark, "gst_resource_error_quark", libs);
+
+  // StateChange
+  gidLink(cast(void**)&gst_state_change_get_name, "gst_state_change_get_name", libs);
+
+  // StreamError
+  gidLink(cast(void**)&gst_stream_error_quark, "gst_stream_error_quark", libs);
+
+  // StreamType
+  gidLink(cast(void**)&gst_stream_type_get_name, "gst_stream_type_get_name", libs);
+
+  // TocEntryType
+  gidLink(cast(void**)&gst_toc_entry_type_get_nick, "gst_toc_entry_type_get_nick", libs);
+
+  // URIError
+  gidLink(cast(void**)&gst_uri_error_quark, "gst_uri_error_quark", libs);
 }

@@ -406,6 +406,56 @@ __gshared extern(C)
   bool function(GstMemory* mem) c_gst_is_gl_memory; ///
   bool function(GstMemory* mem) c_gst_is_gl_memory_pbo; ///
   bool function(GstMemory* mem) c_gst_is_gl_renderbuffer; ///
+
+  // GLAPI
+  GstGLAPI function(const(char)* apiS) c_gst_gl_api_from_string; ///
+  char* function(GstGLAPI api) c_gst_gl_api_to_string; ///
+
+  // GLBaseMemoryError
+  GQuark function() c_gst_gl_base_memory_error_quark; ///
+
+  // GLConfigCaveat
+  const(char)* function(GstGLConfigCaveat caveat) c_gst_gl_config_caveat_to_string; ///
+
+  // GLConfigSurfaceType
+  const(char)* function(GstGLConfigSurfaceType surfaceType) c_gst_gl_config_surface_type_to_string; ///
+
+  // GLContextError
+  GQuark function() c_gst_gl_context_error_quark; ///
+
+  // GLFormat
+  GstGLFormat function(GstGLContext* context, const(GstVideoInfo)* vinfo, uint plane) c_gst_gl_format_from_video_info; ///
+  bool function(GstGLContext* context, GstGLFormat format) c_gst_gl_format_is_supported; ///
+  uint function(GstGLFormat glFormat) c_gst_gl_format_n_components; ///
+  void function(GstGLFormat format, GstGLFormat* unsizedFormat, uint* glType) c_gst_gl_format_type_from_sized_gl_format; ///
+  uint function(uint format, uint type) c_gst_gl_format_type_n_bytes; ///
+
+  // GLPlatform
+  GstGLPlatform function(const(char)* platformS) c_gst_gl_platform_from_string; ///
+  char* function(GstGLPlatform platform) c_gst_gl_platform_to_string; ///
+
+  // GLSLError
+  GQuark function() c_gst_glsl_error_quark; ///
+
+  // GLSLProfile
+  GstGLSLProfile function(const(char)* string_) c_gst_glsl_profile_from_string; ///
+  const(char)* function(GstGLSLProfile profile) c_gst_glsl_profile_to_string; ///
+
+  // GLSLVersion
+  GstGLSLVersion function(const(char)* string_) c_gst_glsl_version_from_string; ///
+  bool function(const(char)* string_, GstGLSLVersion* versionRet, GstGLSLProfile* profileRet) c_gst_glsl_version_profile_from_string; ///
+  char* function(GstGLSLVersion version_, GstGLSLProfile profile) c_gst_glsl_version_profile_to_string; ///
+  const(char)* function(GstGLSLVersion version_) c_gst_glsl_version_to_string; ///
+
+  // GLTextureTarget
+  GstGLTextureTarget function(uint target) c_gst_gl_texture_target_from_gl; ///
+  GstGLTextureTarget function(const(char)* str) c_gst_gl_texture_target_from_string; ///
+  const(char)* function(GstGLTextureTarget target) c_gst_gl_texture_target_to_buffer_pool_option; ///
+  uint function(GstGLTextureTarget target) c_gst_gl_texture_target_to_gl; ///
+  const(char)* function(GstGLTextureTarget target) c_gst_gl_texture_target_to_string; ///
+
+  // GLWindowError
+  GQuark function() c_gst_gl_window_error_quark; ///
 }
 
 // GLAllocationParams
@@ -1430,6 +1480,108 @@ alias gst_is_gl_memory_pbo = c_gst_is_gl_memory_pbo;
 /** */
 alias gst_is_gl_renderbuffer = c_gst_is_gl_renderbuffer;
 
+// GLAPI
+
+/** */
+alias gst_gl_api_from_string = c_gst_gl_api_from_string;
+
+/** */
+alias gst_gl_api_to_string = c_gst_gl_api_to_string;
+
+// GLBaseMemoryError
+
+/** */
+alias gst_gl_base_memory_error_quark = c_gst_gl_base_memory_error_quark;
+
+// GLConfigCaveat
+
+/** */
+alias gst_gl_config_caveat_to_string = c_gst_gl_config_caveat_to_string;
+
+// GLConfigSurfaceType
+
+/** */
+alias gst_gl_config_surface_type_to_string = c_gst_gl_config_surface_type_to_string;
+
+// GLContextError
+
+/** */
+alias gst_gl_context_error_quark = c_gst_gl_context_error_quark;
+
+// GLFormat
+
+/** */
+alias gst_gl_format_from_video_info = c_gst_gl_format_from_video_info;
+
+/** */
+alias gst_gl_format_is_supported = c_gst_gl_format_is_supported;
+
+/** */
+alias gst_gl_format_n_components = c_gst_gl_format_n_components;
+
+/** */
+alias gst_gl_format_type_from_sized_gl_format = c_gst_gl_format_type_from_sized_gl_format;
+
+/** */
+alias gst_gl_format_type_n_bytes = c_gst_gl_format_type_n_bytes;
+
+// GLPlatform
+
+/** */
+alias gst_gl_platform_from_string = c_gst_gl_platform_from_string;
+
+/** */
+alias gst_gl_platform_to_string = c_gst_gl_platform_to_string;
+
+// GLSLError
+
+/** */
+alias gst_glsl_error_quark = c_gst_glsl_error_quark;
+
+// GLSLProfile
+
+/** */
+alias gst_glsl_profile_from_string = c_gst_glsl_profile_from_string;
+
+/** */
+alias gst_glsl_profile_to_string = c_gst_glsl_profile_to_string;
+
+// GLSLVersion
+
+/** */
+alias gst_glsl_version_from_string = c_gst_glsl_version_from_string;
+
+/** */
+alias gst_glsl_version_profile_from_string = c_gst_glsl_version_profile_from_string;
+
+/** */
+alias gst_glsl_version_profile_to_string = c_gst_glsl_version_profile_to_string;
+
+/** */
+alias gst_glsl_version_to_string = c_gst_glsl_version_to_string;
+
+// GLTextureTarget
+
+/** */
+alias gst_gl_texture_target_from_gl = c_gst_gl_texture_target_from_gl;
+
+/** */
+alias gst_gl_texture_target_from_string = c_gst_gl_texture_target_from_string;
+
+/** */
+alias gst_gl_texture_target_to_buffer_pool_option = c_gst_gl_texture_target_to_buffer_pool_option;
+
+/** */
+alias gst_gl_texture_target_to_gl = c_gst_gl_texture_target_to_gl;
+
+/** */
+alias gst_gl_texture_target_to_string = c_gst_gl_texture_target_to_string;
+
+// GLWindowError
+
+/** */
+alias gst_gl_window_error_quark = c_gst_gl_window_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1823,4 +1975,54 @@ shared static this()
   gidLink(cast(void**)&gst_is_gl_memory, "gst_is_gl_memory", libs);
   gidLink(cast(void**)&gst_is_gl_memory_pbo, "gst_is_gl_memory_pbo", libs);
   gidLink(cast(void**)&gst_is_gl_renderbuffer, "gst_is_gl_renderbuffer", libs);
+
+  // GLAPI
+  gidLink(cast(void**)&gst_gl_api_from_string, "gst_gl_api_from_string", libs);
+  gidLink(cast(void**)&gst_gl_api_to_string, "gst_gl_api_to_string", libs);
+
+  // GLBaseMemoryError
+  gidLink(cast(void**)&gst_gl_base_memory_error_quark, "gst_gl_base_memory_error_quark", libs);
+
+  // GLConfigCaveat
+  gidLink(cast(void**)&gst_gl_config_caveat_to_string, "gst_gl_config_caveat_to_string", libs);
+
+  // GLConfigSurfaceType
+  gidLink(cast(void**)&gst_gl_config_surface_type_to_string, "gst_gl_config_surface_type_to_string", libs);
+
+  // GLContextError
+  gidLink(cast(void**)&gst_gl_context_error_quark, "gst_gl_context_error_quark", libs);
+
+  // GLFormat
+  gidLink(cast(void**)&gst_gl_format_from_video_info, "gst_gl_format_from_video_info", libs);
+  gidLink(cast(void**)&gst_gl_format_is_supported, "gst_gl_format_is_supported", libs);
+  gidLink(cast(void**)&gst_gl_format_n_components, "gst_gl_format_n_components", libs);
+  gidLink(cast(void**)&gst_gl_format_type_from_sized_gl_format, "gst_gl_format_type_from_sized_gl_format", libs);
+  gidLink(cast(void**)&gst_gl_format_type_n_bytes, "gst_gl_format_type_n_bytes", libs);
+
+  // GLPlatform
+  gidLink(cast(void**)&gst_gl_platform_from_string, "gst_gl_platform_from_string", libs);
+  gidLink(cast(void**)&gst_gl_platform_to_string, "gst_gl_platform_to_string", libs);
+
+  // GLSLError
+  gidLink(cast(void**)&gst_glsl_error_quark, "gst_glsl_error_quark", libs);
+
+  // GLSLProfile
+  gidLink(cast(void**)&gst_glsl_profile_from_string, "gst_glsl_profile_from_string", libs);
+  gidLink(cast(void**)&gst_glsl_profile_to_string, "gst_glsl_profile_to_string", libs);
+
+  // GLSLVersion
+  gidLink(cast(void**)&gst_glsl_version_from_string, "gst_glsl_version_from_string", libs);
+  gidLink(cast(void**)&gst_glsl_version_profile_from_string, "gst_glsl_version_profile_from_string", libs);
+  gidLink(cast(void**)&gst_glsl_version_profile_to_string, "gst_glsl_version_profile_to_string", libs);
+  gidLink(cast(void**)&gst_glsl_version_to_string, "gst_glsl_version_to_string", libs);
+
+  // GLTextureTarget
+  gidLink(cast(void**)&gst_gl_texture_target_from_gl, "gst_gl_texture_target_from_gl", libs);
+  gidLink(cast(void**)&gst_gl_texture_target_from_string, "gst_gl_texture_target_from_string", libs);
+  gidLink(cast(void**)&gst_gl_texture_target_to_buffer_pool_option, "gst_gl_texture_target_to_buffer_pool_option", libs);
+  gidLink(cast(void**)&gst_gl_texture_target_to_gl, "gst_gl_texture_target_to_gl", libs);
+  gidLink(cast(void**)&gst_gl_texture_target_to_string, "gst_gl_texture_target_to_string", libs);
+
+  // GLWindowError
+  gidLink(cast(void**)&gst_gl_window_error_quark, "gst_gl_window_error_quark", libs);
 }

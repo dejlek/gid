@@ -4891,6 +4891,35 @@ __gshared extern(C)
   bool function(GtkSelectionData* selectionData, GtkTreeModel** treeModel, GtkTreePath** path) c_gtk_tree_get_row_drag_data; ///
   bool function(GtkSelectionData* selectionData, GtkTreeModel* treeModel, GtkTreePath* path) c_gtk_tree_set_row_drag_data; ///
   bool function() c_gtk_true; ///
+
+  // BuilderError
+  GQuark function() c_gtk_builder_error_quark; ///
+
+  // CssProviderError
+  GQuark function() c_gtk_css_provider_error_quark; ///
+
+  // FileChooserError
+  GQuark function() c_gtk_file_chooser_error_quark; ///
+
+  // IconSize
+  GtkIconSize function(const(char)* name) c_gtk_icon_size_from_name; ///
+  const(char)* function(GtkIconSize size) c_gtk_icon_size_get_name; ///
+  bool function(GtkIconSize size, int* width, int* height) c_gtk_icon_size_lookup; ///
+  bool function(GtkSettings* settings, GtkIconSize size, int* width, int* height) c_gtk_icon_size_lookup_for_settings; ///
+  GtkIconSize function(const(char)* name, int width, int height) c_gtk_icon_size_register; ///
+  void function(const(char)* alias_, GtkIconSize target) c_gtk_icon_size_register_alias; ///
+
+  // IconThemeError
+  GQuark function() c_gtk_icon_theme_error_quark; ///
+
+  // PrintError
+  GQuark function() c_gtk_print_error_quark; ///
+
+  // RecentChooserError
+  GQuark function() c_gtk_recent_chooser_error_quark; ///
+
+  // RecentManagerError
+  GQuark function() c_gtk_recent_manager_error_quark; ///
 }
 
 // AboutDialog
@@ -18238,6 +18267,61 @@ alias gtk_tree_set_row_drag_data = c_gtk_tree_set_row_drag_data;
 /** */
 alias gtk_true = c_gtk_true;
 
+// BuilderError
+
+/** */
+alias gtk_builder_error_quark = c_gtk_builder_error_quark;
+
+// CssProviderError
+
+/** */
+alias gtk_css_provider_error_quark = c_gtk_css_provider_error_quark;
+
+// FileChooserError
+
+/** */
+alias gtk_file_chooser_error_quark = c_gtk_file_chooser_error_quark;
+
+// IconSize
+
+/** */
+alias gtk_icon_size_from_name = c_gtk_icon_size_from_name;
+
+/** */
+alias gtk_icon_size_get_name = c_gtk_icon_size_get_name;
+
+/** */
+alias gtk_icon_size_lookup = c_gtk_icon_size_lookup;
+
+/** */
+alias gtk_icon_size_lookup_for_settings = c_gtk_icon_size_lookup_for_settings;
+
+/** */
+alias gtk_icon_size_register = c_gtk_icon_size_register;
+
+/** */
+alias gtk_icon_size_register_alias = c_gtk_icon_size_register_alias;
+
+// IconThemeError
+
+/** */
+alias gtk_icon_theme_error_quark = c_gtk_icon_theme_error_quark;
+
+// PrintError
+
+/** */
+alias gtk_print_error_quark = c_gtk_print_error_quark;
+
+// RecentChooserError
+
+/** */
+alias gtk_recent_chooser_error_quark = c_gtk_recent_chooser_error_quark;
+
+// RecentManagerError
+
+/** */
+alias gtk_recent_manager_error_quark = c_gtk_recent_manager_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -23116,4 +23200,33 @@ shared static this()
   gidLink(cast(void**)&gtk_tree_get_row_drag_data, "gtk_tree_get_row_drag_data", libs);
   gidLink(cast(void**)&gtk_tree_set_row_drag_data, "gtk_tree_set_row_drag_data", libs);
   gidLink(cast(void**)&gtk_true, "gtk_true", libs);
+
+  // BuilderError
+  gidLink(cast(void**)&gtk_builder_error_quark, "gtk_builder_error_quark", libs);
+
+  // CssProviderError
+  gidLink(cast(void**)&gtk_css_provider_error_quark, "gtk_css_provider_error_quark", libs);
+
+  // FileChooserError
+  gidLink(cast(void**)&gtk_file_chooser_error_quark, "gtk_file_chooser_error_quark", libs);
+
+  // IconSize
+  gidLink(cast(void**)&gtk_icon_size_from_name, "gtk_icon_size_from_name", libs);
+  gidLink(cast(void**)&gtk_icon_size_get_name, "gtk_icon_size_get_name", libs);
+  gidLink(cast(void**)&gtk_icon_size_lookup, "gtk_icon_size_lookup", libs);
+  gidLink(cast(void**)&gtk_icon_size_lookup_for_settings, "gtk_icon_size_lookup_for_settings", libs);
+  gidLink(cast(void**)&gtk_icon_size_register, "gtk_icon_size_register", libs);
+  gidLink(cast(void**)&gtk_icon_size_register_alias, "gtk_icon_size_register_alias", libs);
+
+  // IconThemeError
+  gidLink(cast(void**)&gtk_icon_theme_error_quark, "gtk_icon_theme_error_quark", libs);
+
+  // PrintError
+  gidLink(cast(void**)&gtk_print_error_quark, "gtk_print_error_quark", libs);
+
+  // RecentChooserError
+  gidLink(cast(void**)&gtk_recent_chooser_error_quark, "gtk_recent_chooser_error_quark", libs);
+
+  // RecentManagerError
+  gidLink(cast(void**)&gtk_recent_manager_error_quark, "gtk_recent_manager_error_quark", libs);
 }

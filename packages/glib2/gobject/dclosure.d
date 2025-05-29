@@ -8,8 +8,11 @@ import gobject.closure;
 import gobject.types;
 
 
+import std.conv : to;
+
 import gobject.closure;
 public import gobject.value;
+import glib.variant;
 
 /**
 * Closure used for D delegates.
@@ -34,6 +37,51 @@ class DClosure : Closure
     g_closure_set_marshal(closure, cMarshal);
     super(closure, Yes.Take);
   }
+
+  /** */
+  this(T, Flag!"Swap" swap = No.Swap)(T cb)
+  {
+    this(cb, &_cmarshal!(T, swap));
+  }
+
+  private static extern(C) void _cmarshal(T, Flag!"Swap" swap)(GClosure* closure, GValue* returnValue, uint nParams,
+  const(GValue)* paramVals, void* invocHint, void* marshalData)
+  {
+    auto dClosure = cast(DGClosure!T*)closure;
+
+    if (Parameters!T.length > nParams)
+      throw new Exception("DClosure has " ~ nParams.to!string ~ ", expected at least " ~ Parameters!T.length.to!string);
+
+    GValue[] swapParams;
+
+    static if (swap) // Move the first argument to the end?
+    {
+      swapParams = paramVals[1 .. nParams] ~ paramVals[0];
+      paramVals = swapParams.ptr;
+    }
+
+    mixin(callbackMixin!T);
+  }
+
+  private static string callbackMixin(T)()
+  {
+    string cb;
+
+    static if (!is(ReturnType!T == void))
+      cb = "auto ret = ";
+
+    cb ~= "dClosure.cb(";
+
+    foreach (i, param; Parameters!T)
+      cb ~= (i > 0 ? ", " : "") ~ "getVal!(Parameters!T[" ~ i.to!string ~ "])(&paramVals[" ~ i.to!string ~ "])";
+
+    cb ~= ");\n";
+
+    static if (!is(ReturnType!T == void))
+      cb ~= "setVal!(" ~ ReturnType!T.stringof ~ ")(returnValue, ret);\n";
+
+    return cb;
+  }
 }
 
 /**
@@ -43,4 +91,5 @@ struct DGClosure(T)
 {
   GClosure closure;
   T cb;
+  bool swap;
 }

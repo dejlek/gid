@@ -252,6 +252,15 @@ __gshared extern(C)
   bool function(const(void)* a, const(void)* b) c_json_string_equal; ///
   uint function(const(void)* key) c_json_string_hash; ///
   char* function(JsonNode* node, bool pretty) c_json_to_string; ///
+
+  // ParserError
+  GQuark function() c_json_parser_error_quark; ///
+
+  // PathError
+  GQuark function() c_json_path_error_quark; ///
+
+  // ReaderError
+  GQuark function() c_json_reader_error_quark; ///
 }
 
 // Array
@@ -921,6 +930,21 @@ alias json_string_hash = c_json_string_hash;
 /** */
 alias json_to_string = c_json_to_string;
 
+// ParserError
+
+/** */
+alias json_parser_error_quark = c_json_parser_error_quark;
+
+// PathError
+
+/** */
+alias json_path_error_quark = c_json_path_error_quark;
+
+// ReaderError
+
+/** */
+alias json_reader_error_quark = c_json_reader_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -1161,4 +1185,13 @@ shared static this()
   gidLink(cast(void**)&json_string_equal, "json_string_equal", libs);
   gidLink(cast(void**)&json_string_hash, "json_string_hash", libs);
   gidLink(cast(void**)&json_to_string, "json_to_string", libs);
+
+  // ParserError
+  gidLink(cast(void**)&json_parser_error_quark, "json_parser_error_quark", libs);
+
+  // PathError
+  gidLink(cast(void**)&json_path_error_quark, "json_path_error_quark", libs);
+
+  // ReaderError
+  gidLink(cast(void**)&json_reader_error_quark, "json_reader_error_quark", libs);
 }

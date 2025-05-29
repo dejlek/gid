@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:javascriptcore6](https://code.dlang.org/packages/gid%3Ajavascriptcore6)     |
-| **Library Website**      | https://webkit.org                                                               |
+| **Library Homepage**     | https://webkit.org                                                               |
 | **D API Reference**      | https://www.kymorphia.com/gid/javascriptcore.html                                |
 | **C API Reference**      | https://webkitgtk.org/reference/jsc-glib/stable/index.html                       |
 

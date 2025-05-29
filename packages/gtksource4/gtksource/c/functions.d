@@ -495,6 +495,15 @@ __gshared extern(C)
   void function() c_gtk_source_init; ///
   char* function(const(char)* text) c_gtk_source_utils_escape_search_text; ///
   char* function(const(char)* text) c_gtk_source_utils_unescape_search_text; ///
+
+  // CompletionError
+  GQuark function() c_gtk_source_completion_error_quark; ///
+
+  // FileLoaderError
+  GQuark function() c_gtk_source_file_loader_error_quark; ///
+
+  // FileSaverError
+  GQuark function() c_gtk_source_file_saver_error_quark; ///
 }
 
 // Buffer
@@ -1789,6 +1798,21 @@ alias gtk_source_utils_escape_search_text = c_gtk_source_utils_escape_search_tex
 /** */
 alias gtk_source_utils_unescape_search_text = c_gtk_source_utils_unescape_search_text;
 
+// CompletionError
+
+/** */
+alias gtk_source_completion_error_quark = c_gtk_source_completion_error_quark;
+
+// FileLoaderError
+
+/** */
+alias gtk_source_file_loader_error_quark = c_gtk_source_file_loader_error_quark;
+
+// FileSaverError
+
+/** */
+alias gtk_source_file_saver_error_quark = c_gtk_source_file_saver_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -2272,4 +2296,13 @@ shared static this()
   gidLink(cast(void**)&gtk_source_init, "gtk_source_init", libs);
   gidLink(cast(void**)&gtk_source_utils_escape_search_text, "gtk_source_utils_escape_search_text", libs);
   gidLink(cast(void**)&gtk_source_utils_unescape_search_text, "gtk_source_utils_unescape_search_text", libs);
+
+  // CompletionError
+  gidLink(cast(void**)&gtk_source_completion_error_quark, "gtk_source_completion_error_quark", libs);
+
+  // FileLoaderError
+  gidLink(cast(void**)&gtk_source_file_loader_error_quark, "gtk_source_file_loader_error_quark", libs);
+
+  // FileSaverError
+  gidLink(cast(void**)&gtk_source_file_saver_error_quark, "gtk_source_file_saver_error_quark", libs);
 }

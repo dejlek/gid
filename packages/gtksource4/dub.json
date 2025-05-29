@@ -4,7 +4,7 @@
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
-  "website": "https://gitlab.gnome.org/GNOME/gtksourceview",
+  "homepage": "https://gitlab.gnome.org/GNOME/gtksourceview",
   "targetType": "library",
   "importPaths": [".", ".."],
   "sourcePaths": ["gtksource"],

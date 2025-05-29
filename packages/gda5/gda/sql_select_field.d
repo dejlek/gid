@@ -140,7 +140,11 @@ class SqlSelectField
     return new gda.meta_table_column.MetaTableColumn(cast(GdaMetaTableColumn*)(cast(GdaSqlSelectField*)this._cPtr).validityMetaTableColumn, No.Take);
   }
 
-  /** */
+  /**
+      Creates a new string representing an expression used as field in a SELECT statement
+      before the FROM clause.
+      Returns: a new string with the description of the expression or "null" in case field is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -149,15 +153,27 @@ class SqlSelectField
     return _retval;
   }
 
-  /** */
+  /**
+      Sets the 'as' field's string in the #GdaSqlSelectField structure. alias is freed
+      after call this function.
+  
+      Params:
+        alias_ = a #GValue to take from
+  */
   void takeAlias(gobject.value.Value alias_)
   {
-    gda_sql_select_field_take_alias(cast(GdaSqlSelectField*)this._cPtr, alias_ ? cast(GValue*)alias_._cPtr(No.Dup) : null);
+    gda_sql_select_field_take_alias(cast(GdaSqlSelectField*)this._cPtr, alias_ ? cast(GValue*)alias_._cPtr(Yes.Dup) : null);
   }
 
-  /** */
+  /**
+      Sets the expression field's value in the #GdaSqlSelectField structure to point to value;
+      after this field is the owner of value.
+  
+      Params:
+        value = a #GValue to take from
+  */
   void takeStarValue(gobject.value.Value value)
   {
-    gda_sql_select_field_take_star_value(cast(GdaSqlSelectField*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_select_field_take_star_value(cast(GdaSqlSelectField*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 }

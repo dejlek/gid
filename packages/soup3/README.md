@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:soup3](https://code.dlang.org/packages/gid%3Asoup3)                         |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/libsoup                                           |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/libsoup                                           |
 | **D API Reference**      | https://www.kymorphia.com/gid/soup.html                                          |
 | **C API Reference**      | https://libsoup.gnome.org/libsoup-3.0/index.html                                 |
 

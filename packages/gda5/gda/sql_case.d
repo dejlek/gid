@@ -82,7 +82,11 @@ class SqlCase
     dToC(propval, cast(void*)&(cast(GdaSqlCase*)this._cPtr).elseExpr);
   }
 
-  /** */
+  /**
+      Creates a new string representing a CASE clause. You need to free the returned string
+      using [glib.global.gfree];
+      Returns: a new string with the description of the CASE clause or "null" in case sc is invalid.
+  */
   string serialize()
   {
     char* _cretval;

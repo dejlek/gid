@@ -2025,6 +2025,10 @@ __gshared extern(C)
   int function(char* string_, gulong n, const(char)* format, void* args) c_g_vsnprintf; ///
   int function(char* string_, const(char)* format, void* args) c_g_vsprintf; ///
   void function(const(char)* domain, const(char)* file, int line, const(char)* func, const(char)* warnexpr) c_g_warn_message; ///
+
+  // UnicodeScript
+  GUnicodeScript function(uint iso15924) c_g_unicode_script_from_iso15924; ///
+  uint function(GUnicodeScript script) c_g_unicode_script_to_iso15924; ///
 }
 
 // Allocator
@@ -7752,6 +7756,14 @@ alias g_vsprintf = c_g_vsprintf;
 /** */
 alias g_warn_message = c_g_warn_message;
 
+// UnicodeScript
+
+/** */
+alias g_unicode_script_from_iso15924 = c_g_unicode_script_from_iso15924;
+
+/** */
+alias g_unicode_script_to_iso15924 = c_g_unicode_script_to_iso15924;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -9766,4 +9778,8 @@ shared static this()
   gidLink(cast(void**)&g_vsnprintf, "g_vsnprintf", libs);
   gidLink(cast(void**)&g_vsprintf, "g_vsprintf", libs);
   gidLink(cast(void**)&g_warn_message, "g_warn_message", libs);
+
+  // UnicodeScript
+  gidLink(cast(void**)&g_unicode_script_from_iso15924, "g_unicode_script_from_iso15924", libs);
+  gidLink(cast(void**)&g_unicode_script_to_iso15924, "g_unicode_script_to_iso15924", libs);
 }

@@ -60,7 +60,11 @@ class SqlField
     return new gda.meta_table_column.MetaTableColumn(cast(GdaMetaTableColumn*)(cast(GdaSqlField*)this._cPtr).validityMetaTableColumn, No.Take);
   }
 
-  /** */
+  /**
+      Creates a new string representing a field. You need to free the returned string
+      using [glib.global.gfree];
+      Returns: a new string with the name of the field or "null" in case field is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -69,9 +73,15 @@ class SqlField
     return _retval;
   }
 
-  /** */
+  /**
+      Sets the field's name using the string held by value. When call, value is freed using
+      #[gda.global.valueFree].
+  
+      Params:
+        value = a #GValue holding a string to take from
+  */
   void takeName(gobject.value.Value value)
   {
-    gda_sql_field_take_name(cast(GdaSqlField*)this._cPtr, value ? cast(GValue*)value._cPtr(No.Dup) : null);
+    gda_sql_field_take_name(cast(GdaSqlField*)this._cPtr, value ? cast(GValue*)value._cPtr(Yes.Dup) : null);
   }
 }

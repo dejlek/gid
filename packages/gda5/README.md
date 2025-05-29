@@ -7,7 +7,7 @@ This [Dub](https://dub.pm/) sub-package of [giD](https://gid.dub.pm) provides a 
 |     |     |
 | --- | --- |
 | **Dub Package**          | [gid:gda5](https://code.dlang.org/packages/gid%3Agda5)                           |
-| **Library Website**      | https://gitlab.gnome.org/GNOME/libgda                                            |
+| **Library Homepage**     | https://gitlab.gnome.org/GNOME/libgda                                            |
 | **D API Reference**      | https://www.kymorphia.com/gid/gda.html                                           |
 | **C API Reference**      | https://gnome.pages.gitlab.gnome.org/libgda/C/libgda                             |
 

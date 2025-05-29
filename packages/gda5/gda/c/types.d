@@ -4621,8 +4621,33 @@ struct GdaSqlSelectTarget
   void* GdaReserved2;
 }
 
-/** */
-struct GdaSqlStatement;
+/**
+    This structure is the top level structure encapsulating several type of statements.
+*/
+struct GdaSqlStatement
+{
+  /** */
+  char* sql;
+
+  /**
+      type of statement
+  */
+  GdaSqlStatementType stmtType;
+
+  /**
+      contents, cast it depending on @stmt_type (for example to a #GdaSqlStatementSelect).
+  */
+  void* contents;
+
+  /** */
+  GdaMetaStruct* validityMetaStruct;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
 
 /**
     Validation against a dictionary
@@ -4713,22 +4738,215 @@ struct GdaSqlStatementContentsInfo
 }
 
 /** */
-struct GdaSqlStatementDelete;
+struct GdaSqlStatementDelete
+{
+  /** */
+  GdaSqlAnyPart any;
+
+  /** */
+  GdaSqlTable* table;
+
+  /** */
+  GdaSqlExpr* cond;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
+
+/**
+    The statement is an INSERT statement, any kind of INSERT statement can be represented using this structure
+    (if this is not the case
+    then report a bug).
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="stmt-insert1.png" format="PNG"/>
+      </imageobject>
+      <caption>
+        <para>
+    Example of a #GdaSqlStatement having a #GdaSqlStatementInsert as its contents with 2 lists of values
+    to insert.
+        </para>
+      </caption>
+    </mediaobject>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="stmt-insert2.png" format="PNG"/>
+      </imageobject>
+      <caption>
+        <para>
+    Another example of a #GdaSqlStatement having a #GdaSqlStatementInsert as its contents, using a SELECT
+    to express the values to insert.
+        </para>
+      </caption>
+    </mediaobject>
+*/
+struct GdaSqlStatementInsert
+{
+  /**
+      inheritance structure
+  */
+  GdaSqlAnyPart any;
+
+  /**
+      conflict resolution clause if there is one (such as "OR REPLACE")
+  */
+  char* onConflict;
+
+  /**
+      name of the table to which data is inserted
+  */
+  GdaSqlTable* table;
+
+  /**
+      list of #GdaSqlField fields which are valued for insertion
+  */
+  GSList* fieldsList;
+
+  /**
+      list of list of #GdaSqlExpr expressions (this is a list of list, not a simple list)
+  */
+  GSList* valuesList;
+
+  /**
+      a #GdaSqlStatementSelect or #GdaSqlStatementCompound structure representing the values to insert
+  */
+  GdaSqlAnyPart* select;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
 
 /** */
-struct GdaSqlStatementInsert;
+struct GdaSqlStatementSelect
+{
+  /** */
+  GdaSqlAnyPart any;
+
+  /** */
+  bool distinct;
+
+  /** */
+  GdaSqlExpr* distinctExpr;
+
+  /** */
+  GSList* exprList;
+
+  /** */
+  GdaSqlSelectFrom* from;
+
+  /** */
+  GdaSqlExpr* whereCond;
+
+  /** */
+  GSList* groupBy;
+
+  /** */
+  GdaSqlExpr* havingCond;
+
+  /** */
+  GSList* orderBy;
+
+  /** */
+  GdaSqlExpr* limitCount;
+
+  /** */
+  GdaSqlExpr* limitOffset;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
+
+/**
+    The statement is a transaction management related statement (BEGIN, ROLLBACK, etc). The #GdaSqlStatementTransaction structure
+    does not hold enough information to reconstruct the complete SQL statement (some information may be missing) - the aim of this
+    structure is to identify a minimum set of information in the transaction statement. Note that the complete SQL which created the
+    statement should be available in the #GdaSqlStatement structure which encapsulates this structure.
+*/
+struct GdaSqlStatementTransaction
+{
+  /**
+      inheritance structure
+  */
+  GdaSqlAnyPart any;
+
+  /**
+      isolation level as a #GdaTransactionIsolation
+  */
+  GdaTransactionIsolation isolationLevel;
+
+  /**
+      transaction mode (DEFERRED, IMMEDIATE, EXCLUSIVE, READ_WRITE, READ_ONLY)
+  */
+  char* transMode;
+
+  /**
+      transaction name
+  */
+  char* transName;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
+
+/**
+    Represents any statement which type is not identified (any DDL statement or database specific dialect)
+*/
+struct GdaSqlStatementUnknown
+{
+  /** */
+  GdaSqlAnyPart any;
+
+  /**
+      a list of #GdaSqlExpr pointers
+  */
+  GSList* expressions;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
 
 /** */
-struct GdaSqlStatementSelect;
+struct GdaSqlStatementUpdate
+{
+  /** */
+  GdaSqlAnyPart any;
 
-/** */
-struct GdaSqlStatementTransaction;
+  /** */
+  char* onConflict;
 
-/** */
-struct GdaSqlStatementUnknown;
+  /** */
+  GdaSqlTable* table;
 
-/** */
-struct GdaSqlStatementUpdate;
+  /** */
+  GSList* fieldsList;
+
+  /** */
+  GSList* exprList;
+
+  /** */
+  GdaSqlExpr* cond;
+
+  /** */
+  void* GdaReserved1;
+
+  /** */
+  void* GdaReserved2;
+}
 
 /**
     This structure represents the name of a table.

@@ -100,7 +100,10 @@ class SqlSelectJoin
     dToC(propval, cast(void*)&(cast(GdaSqlSelectJoin*)this._cPtr).expr);
   }
 
-  /** */
+  /**
+      Creates a new string description of the join used in a SELECT statement.
+      Returns: a new string with the description of the join or "null" in case join is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -109,7 +112,13 @@ class SqlSelectJoin
     return _retval;
   }
 
-  /** */
+  /**
+      Creates a new string representing the join type.
+  
+      Params:
+        type = a #GdaSqlSelectJoinType structure to be copied
+      Returns: a string representing the Join type.
+  */
   static string typeToString(gda.types.SqlSelectJoinType type)
   {
     const(char)* _cretval;

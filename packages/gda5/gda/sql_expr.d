@@ -176,7 +176,11 @@ class SqlExpr : gobject.boxed.Boxed
     (cast(GdaSqlExpr*)this._cPtr).valueIsIdent = propval;
   }
 
-  /** */
+  /**
+      Creates a new string representation of the SQL expression. You need to free the returned string
+      using [glib.global.gfree];
+      Returns: a new string with the SQL expression or "null" in case expr is invalid.
+  */
   string serialize()
   {
     char* _cretval;
@@ -185,9 +189,15 @@ class SqlExpr : gobject.boxed.Boxed
     return _retval;
   }
 
-  /** */
+  /**
+      Sets the expression's parent to the #GdaSqlStatementSelect held by stmt. After
+      calling this function stmt is freed.
+  
+      Params:
+        stmt = a #GdaSqlStatement holding the #GdaSqlStatementSelect to take from
+  */
   void takeSelect(gda.sql_statement.SqlStatement stmt)
   {
-    gda_sql_expr_take_select(cast(GdaSqlExpr*)this._cPtr, stmt ? cast(GdaSqlStatement*)stmt._cPtr : null);
+    gda_sql_expr_take_select(cast(GdaSqlExpr*)this._cPtr, stmt ? cast(GdaSqlStatement*)stmt._cPtr(Yes.Dup) : null);
   }
 }

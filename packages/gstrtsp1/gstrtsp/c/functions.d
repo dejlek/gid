@@ -187,6 +187,12 @@ __gshared extern(C)
   GstRTSPMethod function(const(char)* options) c_gst_rtsp_options_from_text; ///
   const(char)* function(GstRTSPStatusCode code) c_gst_rtsp_status_as_text; ///
   char* function(GstRTSPResult result) c_gst_rtsp_strresult; ///
+
+  // RTSPMethod
+  const(char)* function(GstRTSPMethod method) c_gst_rtsp_method_as_text; ///
+
+  // RTSPVersion
+  const(char)* function(GstRTSPVersion version_) c_gst_rtsp_version_as_text; ///
 }
 
 // RTSPAuthCredential
@@ -659,6 +665,16 @@ alias gst_rtsp_status_as_text = c_gst_rtsp_status_as_text;
 /** */
 alias gst_rtsp_strresult = c_gst_rtsp_strresult;
 
+// RTSPMethod
+
+/** */
+alias gst_rtsp_method_as_text = c_gst_rtsp_method_as_text;
+
+// RTSPVersion
+
+/** */
+alias gst_rtsp_version_as_text = c_gst_rtsp_version_as_text;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -832,4 +848,10 @@ shared static this()
   gidLink(cast(void**)&gst_rtsp_options_from_text, "gst_rtsp_options_from_text", libs);
   gidLink(cast(void**)&gst_rtsp_status_as_text, "gst_rtsp_status_as_text", libs);
   gidLink(cast(void**)&gst_rtsp_strresult, "gst_rtsp_strresult", libs);
+
+  // RTSPMethod
+  gidLink(cast(void**)&gst_rtsp_method_as_text, "gst_rtsp_method_as_text", libs);
+
+  // RTSPVersion
+  gidLink(cast(void**)&gst_rtsp_version_as_text, "gst_rtsp_version_as_text", libs);
 }

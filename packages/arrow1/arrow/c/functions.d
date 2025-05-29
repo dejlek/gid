@@ -1924,6 +1924,9 @@ __gshared extern(C)
   bool function(GError** _err) c_garrow_s3_finalize; ///
   bool function(GArrowS3GlobalOptions* options, GError** _err) c_garrow_s3_initialize; ///
   bool function() c_garrow_s3_is_enabled; ///
+
+  // Error
+  GQuark function() c_garrow_error_quark; ///
 }
 
 // AggregateNodeOptions
@@ -6473,6 +6476,11 @@ alias garrow_s3_initialize = c_garrow_s3_initialize;
 /** */
 alias garrow_s3_is_enabled = c_garrow_s3_is_enabled;
 
+// Error
+
+/** */
+alias garrow_error_quark = c_garrow_error_quark;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -8385,4 +8393,7 @@ shared static this()
   gidLink(cast(void**)&garrow_s3_finalize, "garrow_s3_finalize", libs);
   gidLink(cast(void**)&garrow_s3_initialize, "garrow_s3_initialize", libs);
   gidLink(cast(void**)&garrow_s3_is_enabled, "garrow_s3_is_enabled", libs);
+
+  // Error
+  gidLink(cast(void**)&garrow_error_quark, "garrow_error_quark", libs);
 }

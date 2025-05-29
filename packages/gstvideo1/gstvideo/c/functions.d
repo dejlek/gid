@@ -516,6 +516,56 @@ __gshared extern(C)
   bool function(GstVideoSEIUserDataUnregisteredMeta* userData, ubyte* status, ulong* precisionTimeStamp) c_gst_video_sei_user_data_unregistered_parse_precision_time_stamp; ///
   uint function(GstVideoTileMode mode, int x, int y, int xTiles, int yTiles) c_gst_video_tile_get_index; ///
   GType function() c_gst_video_time_code_meta_api_get_type; ///
+
+  // VideoCaptionType
+  GstVideoCaptionType function(const(GstCaps)* caps) c_gst_video_caption_type_from_caps; ///
+  GstCaps* function(GstVideoCaptionType type) c_gst_video_caption_type_to_caps; ///
+
+  // VideoChromaSite
+  GstVideoChromaSite function(const(char)* s) c_gst_video_chroma_site_from_string; ///
+  char* function(GstVideoChromaSite site) c_gst_video_chroma_site_to_string; ///
+
+  // VideoColorMatrix
+  GstVideoColorMatrix function(uint value) c_gst_video_color_matrix_from_iso; ///
+  bool function(GstVideoColorMatrix matrix, double* Kr, double* Kb) c_gst_video_color_matrix_get_Kr_Kb; ///
+  uint function(GstVideoColorMatrix matrix) c_gst_video_color_matrix_to_iso; ///
+
+  // VideoColorPrimaries
+  GstVideoColorPrimaries function(uint value) c_gst_video_color_primaries_from_iso; ///
+  const(GstVideoColorPrimariesInfo)* function(GstVideoColorPrimaries primaries) c_gst_video_color_primaries_get_info; ///
+  bool function(GstVideoColorPrimaries primaries, GstVideoColorPrimaries other) c_gst_video_color_primaries_is_equivalent; ///
+  uint function(GstVideoColorPrimaries primaries) c_gst_video_color_primaries_to_iso; ///
+
+  // VideoColorRange
+  void function(GstVideoColorRange range, const(GstVideoFormatInfo)* info, int* offset, int* scale) c_gst_video_color_range_offsets; ///
+
+  // VideoFieldOrder
+  GstVideoFieldOrder function(const(char)* order) c_gst_video_field_order_from_string; ///
+  const(char)* function(GstVideoFieldOrder order) c_gst_video_field_order_to_string; ///
+
+  // VideoFormat
+  GstVideoFormat function(uint fourcc) c_gst_video_format_from_fourcc; ///
+  GstVideoFormat function(int depth, int bpp, int endianness, uint redMask, uint greenMask, uint blueMask, uint alphaMask) c_gst_video_format_from_masks; ///
+  GstVideoFormat function(const(char)* format) c_gst_video_format_from_string; ///
+  const(GstVideoFormatInfo)* function(GstVideoFormat format) c_gst_video_format_get_info; ///
+  const(void)* function(GstVideoFormat format, size_t* size) c_gst_video_format_get_palette; ///
+  uint function(GstVideoFormat format) c_gst_video_format_to_fourcc; ///
+  const(char)* function(GstVideoFormat format) c_gst_video_format_to_string; ///
+
+  // VideoInterlaceMode
+  GstVideoInterlaceMode function(const(char)* mode) c_gst_video_interlace_mode_from_string; ///
+  const(char)* function(GstVideoInterlaceMode mode) c_gst_video_interlace_mode_to_string; ///
+
+  // VideoMultiviewMode
+  GstVideoMultiviewMode function(const(char)* capsMviewMode) c_gst_video_multiview_mode_from_caps_string; ///
+  const(char)* function(GstVideoMultiviewMode mviewMode) c_gst_video_multiview_mode_to_caps_string; ///
+
+  // VideoTransferFunction
+  double function(GstVideoTransferFunction func, double val) c_gst_video_transfer_function_decode; ///
+  double function(GstVideoTransferFunction func, double val) c_gst_video_transfer_function_encode; ///
+  GstVideoTransferFunction function(uint value) c_gst_video_transfer_function_from_iso; ///
+  bool function(GstVideoTransferFunction fromFunc, uint fromBpp, GstVideoTransferFunction toFunc, uint toBpp) c_gst_video_transfer_function_is_equivalent; ///
+  uint function(GstVideoTransferFunction func) c_gst_video_transfer_function_to_iso; ///
 }
 
 // AncillaryMeta
@@ -1813,6 +1863,116 @@ alias gst_video_tile_get_index = c_gst_video_tile_get_index;
 /** */
 alias gst_video_time_code_meta_api_get_type = c_gst_video_time_code_meta_api_get_type;
 
+// VideoCaptionType
+
+/** */
+alias gst_video_caption_type_from_caps = c_gst_video_caption_type_from_caps;
+
+/** */
+alias gst_video_caption_type_to_caps = c_gst_video_caption_type_to_caps;
+
+// VideoChromaSite
+
+/** */
+alias gst_video_chroma_site_from_string = c_gst_video_chroma_site_from_string;
+
+/** */
+alias gst_video_chroma_site_to_string = c_gst_video_chroma_site_to_string;
+
+// VideoColorMatrix
+
+/** */
+alias gst_video_color_matrix_from_iso = c_gst_video_color_matrix_from_iso;
+
+/** */
+alias gst_video_color_matrix_get_Kr_Kb = c_gst_video_color_matrix_get_Kr_Kb;
+
+/** */
+alias gst_video_color_matrix_to_iso = c_gst_video_color_matrix_to_iso;
+
+// VideoColorPrimaries
+
+/** */
+alias gst_video_color_primaries_from_iso = c_gst_video_color_primaries_from_iso;
+
+/** */
+alias gst_video_color_primaries_get_info = c_gst_video_color_primaries_get_info;
+
+/** */
+alias gst_video_color_primaries_is_equivalent = c_gst_video_color_primaries_is_equivalent;
+
+/** */
+alias gst_video_color_primaries_to_iso = c_gst_video_color_primaries_to_iso;
+
+// VideoColorRange
+
+/** */
+alias gst_video_color_range_offsets = c_gst_video_color_range_offsets;
+
+// VideoFieldOrder
+
+/** */
+alias gst_video_field_order_from_string = c_gst_video_field_order_from_string;
+
+/** */
+alias gst_video_field_order_to_string = c_gst_video_field_order_to_string;
+
+// VideoFormat
+
+/** */
+alias gst_video_format_from_fourcc = c_gst_video_format_from_fourcc;
+
+/** */
+alias gst_video_format_from_masks = c_gst_video_format_from_masks;
+
+/** */
+alias gst_video_format_from_string = c_gst_video_format_from_string;
+
+/** */
+alias gst_video_format_get_info = c_gst_video_format_get_info;
+
+/** */
+alias gst_video_format_get_palette = c_gst_video_format_get_palette;
+
+/** */
+alias gst_video_format_to_fourcc = c_gst_video_format_to_fourcc;
+
+/** */
+alias gst_video_format_to_string = c_gst_video_format_to_string;
+
+// VideoInterlaceMode
+
+/** */
+alias gst_video_interlace_mode_from_string = c_gst_video_interlace_mode_from_string;
+
+/** */
+alias gst_video_interlace_mode_to_string = c_gst_video_interlace_mode_to_string;
+
+// VideoMultiviewMode
+
+/** */
+alias gst_video_multiview_mode_from_caps_string = c_gst_video_multiview_mode_from_caps_string;
+
+/** */
+alias gst_video_multiview_mode_to_caps_string = c_gst_video_multiview_mode_to_caps_string;
+
+// VideoTransferFunction
+
+/** */
+alias gst_video_transfer_function_decode = c_gst_video_transfer_function_decode;
+
+/** */
+alias gst_video_transfer_function_encode = c_gst_video_transfer_function_encode;
+
+/** */
+alias gst_video_transfer_function_from_iso = c_gst_video_transfer_function_from_iso;
+
+/** */
+alias gst_video_transfer_function_is_equivalent = c_gst_video_transfer_function_is_equivalent;
+
+/** */
+alias gst_video_transfer_function_to_iso = c_gst_video_transfer_function_to_iso;
+
 shared static this()
 {
   auto libs = gidResolveLibs(LIBS);
@@ -2317,4 +2477,54 @@ shared static this()
   gidLink(cast(void**)&gst_video_sei_user_data_unregistered_parse_precision_time_stamp, "gst_video_sei_user_data_unregistered_parse_precision_time_stamp", libs);
   gidLink(cast(void**)&gst_video_tile_get_index, "gst_video_tile_get_index", libs);
   gidLink(cast(void**)&gst_video_time_code_meta_api_get_type, "gst_video_time_code_meta_api_get_type", libs);
+
+  // VideoCaptionType
+  gidLink(cast(void**)&gst_video_caption_type_from_caps, "gst_video_caption_type_from_caps", libs);
+  gidLink(cast(void**)&gst_video_caption_type_to_caps, "gst_video_caption_type_to_caps", libs);
+
+  // VideoChromaSite
+  gidLink(cast(void**)&gst_video_chroma_site_from_string, "gst_video_chroma_site_from_string", libs);
+  gidLink(cast(void**)&gst_video_chroma_site_to_string, "gst_video_chroma_site_to_string", libs);
+
+  // VideoColorMatrix
+  gidLink(cast(void**)&gst_video_color_matrix_from_iso, "gst_video_color_matrix_from_iso", libs);
+  gidLink(cast(void**)&gst_video_color_matrix_get_Kr_Kb, "gst_video_color_matrix_get_Kr_Kb", libs);
+  gidLink(cast(void**)&gst_video_color_matrix_to_iso, "gst_video_color_matrix_to_iso", libs);
+
+  // VideoColorPrimaries
+  gidLink(cast(void**)&gst_video_color_primaries_from_iso, "gst_video_color_primaries_from_iso", libs);
+  gidLink(cast(void**)&gst_video_color_primaries_get_info, "gst_video_color_primaries_get_info", libs);
+  gidLink(cast(void**)&gst_video_color_primaries_is_equivalent, "gst_video_color_primaries_is_equivalent", libs);
+  gidLink(cast(void**)&gst_video_color_primaries_to_iso, "gst_video_color_primaries_to_iso", libs);
+
+  // VideoColorRange
+  gidLink(cast(void**)&gst_video_color_range_offsets, "gst_video_color_range_offsets", libs);
+
+  // VideoFieldOrder
+  gidLink(cast(void**)&gst_video_field_order_from_string, "gst_video_field_order_from_string", libs);
+  gidLink(cast(void**)&gst_video_field_order_to_string, "gst_video_field_order_to_string", libs);
+
+  // VideoFormat
+  gidLink(cast(void**)&gst_video_format_from_fourcc, "gst_video_format_from_fourcc", libs);
+  gidLink(cast(void**)&gst_video_format_from_masks, "gst_video_format_from_masks", libs);
+  gidLink(cast(void**)&gst_video_format_from_string, "gst_video_format_from_string", libs);
+  gidLink(cast(void**)&gst_video_format_get_info, "gst_video_format_get_info", libs);
+  gidLink(cast(void**)&gst_video_format_get_palette, "gst_video_format_get_palette", libs);
+  gidLink(cast(void**)&gst_video_format_to_fourcc, "gst_video_format_to_fourcc", libs);
+  gidLink(cast(void**)&gst_video_format_to_string, "gst_video_format_to_string", libs);
+
+  // VideoInterlaceMode
+  gidLink(cast(void**)&gst_video_interlace_mode_from_string, "gst_video_interlace_mode_from_string", libs);
+  gidLink(cast(void**)&gst_video_interlace_mode_to_string, "gst_video_interlace_mode_to_string", libs);
+
+  // VideoMultiviewMode
+  gidLink(cast(void**)&gst_video_multiview_mode_from_caps_string, "gst_video_multiview_mode_from_caps_string", libs);
+  gidLink(cast(void**)&gst_video_multiview_mode_to_caps_string, "gst_video_multiview_mode_to_caps_string", libs);
+
+  // VideoTransferFunction
+  gidLink(cast(void**)&gst_video_transfer_function_decode, "gst_video_transfer_function_decode", libs);
+  gidLink(cast(void**)&gst_video_transfer_function_encode, "gst_video_transfer_function_encode", libs);
+  gidLink(cast(void**)&gst_video_transfer_function_from_iso, "gst_video_transfer_function_from_iso", libs);
+  gidLink(cast(void**)&gst_video_transfer_function_is_equivalent, "gst_video_transfer_function_is_equivalent", libs);
+  gidLink(cast(void**)&gst_video_transfer_function_to_iso, "gst_video_transfer_function_to_iso", libs);
 }

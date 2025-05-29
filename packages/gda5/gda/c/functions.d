@@ -817,8 +817,45 @@ __gshared extern(C)
   GdaSqlSelectTarget* function(GdaSqlAnyPart* parent) c_gda_sql_select_target_new; ///
 
   // SqlStatement
+  GType function() c_gda_sql_statement_get_type; ///
+  GdaSqlStatement* function(GdaSqlStatementType type) c_gda_sql_statement_new; ///
+  void function(GdaSqlStatement* stmt) c_gda_sql_statement_check_clean; ///
+  bool function(GdaSqlStatement* stmt, GError** _err) c_gda_sql_statement_check_structure; ///
+  bool function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_check_validity; ///
+  bool function(GdaSqlStatement* stmt, GdaMetaStruct* mstruct, GError** _err) c_gda_sql_statement_check_validity_m; ///
   void function(GdaSqlStatement* stmt, GdaSqlStatementCompoundType type) c_gda_sql_statement_compound_set_type; ///
   void function(GdaSqlStatement* stmt, GdaSqlStatement* s) c_gda_sql_statement_compound_take_stmt; ///
+  GdaSqlStatement* function(GdaSqlStatement* stmt) c_gda_sql_statement_copy; ///
+  void function(GdaSqlStatement* stmt, GdaSqlExpr* cond) c_gda_sql_statement_delete_take_condition; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_delete_take_table_name; ///
+  void function(GdaSqlStatement* stmt) c_gda_sql_statement_free; ///
+  void function(GdaSqlStatement* stmt, GSList* list) c_gda_sql_statement_insert_take_1_values_list; ///
+  void function(GdaSqlStatement* stmt, GSList* list) c_gda_sql_statement_insert_take_extra_values_list; ///
+  void function(GdaSqlStatement* stmt, GSList* list) c_gda_sql_statement_insert_take_fields_list; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_insert_take_on_conflict; ///
+  void function(GdaSqlStatement* stmt, GdaSqlStatement* select) c_gda_sql_statement_insert_take_select; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_insert_take_table_name; ///
+  bool function(GdaSqlStatement* stmt, GdaConnection* cnc, GError** _err) c_gda_sql_statement_normalize; ///
+  void function(GdaSqlStatement* stmt, bool distinct, GdaSqlExpr* distinctExpr) c_gda_sql_statement_select_take_distinct; ///
+  void function(GdaSqlStatement* stmt, GSList* exprList) c_gda_sql_statement_select_take_expr_list; ///
+  void function(GdaSqlStatement* stmt, GdaSqlSelectFrom* from) c_gda_sql_statement_select_take_from; ///
+  void function(GdaSqlStatement* stmt, GSList* groupBy) c_gda_sql_statement_select_take_group_by; ///
+  void function(GdaSqlStatement* stmt, GdaSqlExpr* expr) c_gda_sql_statement_select_take_having_cond; ///
+  void function(GdaSqlStatement* stmt, GdaSqlExpr* count, GdaSqlExpr* offset) c_gda_sql_statement_select_take_limits; ///
+  void function(GdaSqlStatement* stmt, GSList* orderBy) c_gda_sql_statement_select_take_order_by; ///
+  void function(GdaSqlStatement* stmt, GdaSqlExpr* expr) c_gda_sql_statement_select_take_where_cond; ///
+  char* function(GdaSqlStatement* stmt) c_gda_sql_statement_serialize; ///
+  void function(GdaSqlStatement* stmt, GdaTransactionIsolation level) c_gda_sql_statement_trans_set_isol_level; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_trans_take_mode; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_trans_take_name; ///
+  void function(GdaSqlStatement* stmt, GSList* expressions) c_gda_sql_statement_unknown_take_expressions; ///
+  void function(GdaSqlStatement* stmt, GdaSqlExpr* cond) c_gda_sql_statement_update_take_condition; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_update_take_on_conflict; ///
+  void function(GdaSqlStatement* stmt, GValue* fname, GdaSqlExpr* expr) c_gda_sql_statement_update_take_set_value; ///
+  void function(GdaSqlStatement* stmt, GValue* value) c_gda_sql_statement_update_take_table_name; ///
+  GdaSqlStatementContentsInfo* function(GdaSqlStatementType type) c_gda_sql_statement_get_contents_infos; ///
+  GdaSqlStatementType function(const(char)* type) c_gda_sql_statement_string_to_type; ///
+  const(char)* function(GdaSqlStatementType type) c_gda_sql_statement_type_to_string; ///
 
   // SqlTable
   GdaSqlTable* function(GdaSqlTable* table) c_gda_sql_table_copy; ///
@@ -999,8 +1036,11 @@ __gshared extern(C)
   char* function(const(char)* string_) c_gda_rfc1738_encode; ///
   GdaStatement* function(GdaStatement* stmt, GError** _err) c_gda_select_alter_select_for_empty; ///
   GQuark function() c_gda_sql_error_quark; ///
+  char* function(const(char)* str) c_gda_sql_identifier_force_quotes; ///
+  char* function(char* str) c_gda_sql_identifier_prepare_for_compare; ///
   char* function(const(char)* id, GdaConnection* cnc, GdaServerProvider* prov, bool metaStoreConvention, bool forceQuotes) c_gda_sql_identifier_quote; ///
   char** function(const(char)* id) c_gda_sql_identifier_split; ///
+  char* function(const(GValue)* value) c_gda_sql_value_stringify; ///
   GdaBinary* function(const(char)* str) c_gda_string_to_binary; ///
   GdaBlob* function(const(char)* str) c_gda_string_to_blob; ///
   char* function(const(char)* text) c_gda_text_to_alphanum; ///
@@ -3213,10 +3253,121 @@ alias gda_sql_select_target_new = c_gda_sql_select_target_new;
 // SqlStatement
 
 /** */
+alias gda_sql_statement_get_type = c_gda_sql_statement_get_type;
+
+/** */
+alias gda_sql_statement_new = c_gda_sql_statement_new;
+
+/** */
+alias gda_sql_statement_check_clean = c_gda_sql_statement_check_clean;
+
+/** */
+alias gda_sql_statement_check_structure = c_gda_sql_statement_check_structure;
+
+/** */
+alias gda_sql_statement_check_validity = c_gda_sql_statement_check_validity;
+
+/** */
+alias gda_sql_statement_check_validity_m = c_gda_sql_statement_check_validity_m;
+
+/** */
 alias gda_sql_statement_compound_set_type = c_gda_sql_statement_compound_set_type;
 
 /** */
 alias gda_sql_statement_compound_take_stmt = c_gda_sql_statement_compound_take_stmt;
+
+/** */
+alias gda_sql_statement_copy = c_gda_sql_statement_copy;
+
+/** */
+alias gda_sql_statement_delete_take_condition = c_gda_sql_statement_delete_take_condition;
+
+/** */
+alias gda_sql_statement_delete_take_table_name = c_gda_sql_statement_delete_take_table_name;
+
+/** */
+alias gda_sql_statement_free = c_gda_sql_statement_free;
+
+/** */
+alias gda_sql_statement_insert_take_1_values_list = c_gda_sql_statement_insert_take_1_values_list;
+
+/** */
+alias gda_sql_statement_insert_take_extra_values_list = c_gda_sql_statement_insert_take_extra_values_list;
+
+/** */
+alias gda_sql_statement_insert_take_fields_list = c_gda_sql_statement_insert_take_fields_list;
+
+/** */
+alias gda_sql_statement_insert_take_on_conflict = c_gda_sql_statement_insert_take_on_conflict;
+
+/** */
+alias gda_sql_statement_insert_take_select = c_gda_sql_statement_insert_take_select;
+
+/** */
+alias gda_sql_statement_insert_take_table_name = c_gda_sql_statement_insert_take_table_name;
+
+/** */
+alias gda_sql_statement_normalize = c_gda_sql_statement_normalize;
+
+/** */
+alias gda_sql_statement_select_take_distinct = c_gda_sql_statement_select_take_distinct;
+
+/** */
+alias gda_sql_statement_select_take_expr_list = c_gda_sql_statement_select_take_expr_list;
+
+/** */
+alias gda_sql_statement_select_take_from = c_gda_sql_statement_select_take_from;
+
+/** */
+alias gda_sql_statement_select_take_group_by = c_gda_sql_statement_select_take_group_by;
+
+/** */
+alias gda_sql_statement_select_take_having_cond = c_gda_sql_statement_select_take_having_cond;
+
+/** */
+alias gda_sql_statement_select_take_limits = c_gda_sql_statement_select_take_limits;
+
+/** */
+alias gda_sql_statement_select_take_order_by = c_gda_sql_statement_select_take_order_by;
+
+/** */
+alias gda_sql_statement_select_take_where_cond = c_gda_sql_statement_select_take_where_cond;
+
+/** */
+alias gda_sql_statement_serialize = c_gda_sql_statement_serialize;
+
+/** */
+alias gda_sql_statement_trans_set_isol_level = c_gda_sql_statement_trans_set_isol_level;
+
+/** */
+alias gda_sql_statement_trans_take_mode = c_gda_sql_statement_trans_take_mode;
+
+/** */
+alias gda_sql_statement_trans_take_name = c_gda_sql_statement_trans_take_name;
+
+/** */
+alias gda_sql_statement_unknown_take_expressions = c_gda_sql_statement_unknown_take_expressions;
+
+/** */
+alias gda_sql_statement_update_take_condition = c_gda_sql_statement_update_take_condition;
+
+/** */
+alias gda_sql_statement_update_take_on_conflict = c_gda_sql_statement_update_take_on_conflict;
+
+/** */
+alias gda_sql_statement_update_take_set_value = c_gda_sql_statement_update_take_set_value;
+
+/** */
+alias gda_sql_statement_update_take_table_name = c_gda_sql_statement_update_take_table_name;
+
+/** */
+alias gda_sql_statement_get_contents_infos = c_gda_sql_statement_get_contents_infos;
+
+/** */
+alias gda_sql_statement_string_to_type = c_gda_sql_statement_string_to_type;
+
+/** */
+alias gda_sql_statement_type_to_string = c_gda_sql_statement_type_to_string;
 
 // SqlTable
 
@@ -3687,10 +3838,19 @@ alias gda_select_alter_select_for_empty = c_gda_select_alter_select_for_empty;
 alias gda_sql_error_quark = c_gda_sql_error_quark;
 
 /** */
+alias gda_sql_identifier_force_quotes = c_gda_sql_identifier_force_quotes;
+
+/** */
+alias gda_sql_identifier_prepare_for_compare = c_gda_sql_identifier_prepare_for_compare;
+
+/** */
 alias gda_sql_identifier_quote = c_gda_sql_identifier_quote;
 
 /** */
 alias gda_sql_identifier_split = c_gda_sql_identifier_split;
+
+/** */
+alias gda_sql_value_stringify = c_gda_sql_value_stringify;
 
 /** */
 alias gda_string_to_binary = c_gda_string_to_binary;
@@ -4638,8 +4798,45 @@ shared static this()
   gidLink(cast(void**)&gda_sql_select_target_new, "gda_sql_select_target_new", libs);
 
   // SqlStatement
+  gidLink(cast(void**)&gda_sql_statement_get_type, "gda_sql_statement_get_type", libs);
+  gidLink(cast(void**)&gda_sql_statement_new, "gda_sql_statement_new", libs);
+  gidLink(cast(void**)&gda_sql_statement_check_clean, "gda_sql_statement_check_clean", libs);
+  gidLink(cast(void**)&gda_sql_statement_check_structure, "gda_sql_statement_check_structure", libs);
+  gidLink(cast(void**)&gda_sql_statement_check_validity, "gda_sql_statement_check_validity", libs);
+  gidLink(cast(void**)&gda_sql_statement_check_validity_m, "gda_sql_statement_check_validity_m", libs);
   gidLink(cast(void**)&gda_sql_statement_compound_set_type, "gda_sql_statement_compound_set_type", libs);
   gidLink(cast(void**)&gda_sql_statement_compound_take_stmt, "gda_sql_statement_compound_take_stmt", libs);
+  gidLink(cast(void**)&gda_sql_statement_copy, "gda_sql_statement_copy", libs);
+  gidLink(cast(void**)&gda_sql_statement_delete_take_condition, "gda_sql_statement_delete_take_condition", libs);
+  gidLink(cast(void**)&gda_sql_statement_delete_take_table_name, "gda_sql_statement_delete_take_table_name", libs);
+  gidLink(cast(void**)&gda_sql_statement_free, "gda_sql_statement_free", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_1_values_list, "gda_sql_statement_insert_take_1_values_list", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_extra_values_list, "gda_sql_statement_insert_take_extra_values_list", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_fields_list, "gda_sql_statement_insert_take_fields_list", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_on_conflict, "gda_sql_statement_insert_take_on_conflict", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_select, "gda_sql_statement_insert_take_select", libs);
+  gidLink(cast(void**)&gda_sql_statement_insert_take_table_name, "gda_sql_statement_insert_take_table_name", libs);
+  gidLink(cast(void**)&gda_sql_statement_normalize, "gda_sql_statement_normalize", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_distinct, "gda_sql_statement_select_take_distinct", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_expr_list, "gda_sql_statement_select_take_expr_list", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_from, "gda_sql_statement_select_take_from", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_group_by, "gda_sql_statement_select_take_group_by", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_having_cond, "gda_sql_statement_select_take_having_cond", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_limits, "gda_sql_statement_select_take_limits", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_order_by, "gda_sql_statement_select_take_order_by", libs);
+  gidLink(cast(void**)&gda_sql_statement_select_take_where_cond, "gda_sql_statement_select_take_where_cond", libs);
+  gidLink(cast(void**)&gda_sql_statement_serialize, "gda_sql_statement_serialize", libs);
+  gidLink(cast(void**)&gda_sql_statement_trans_set_isol_level, "gda_sql_statement_trans_set_isol_level", libs);
+  gidLink(cast(void**)&gda_sql_statement_trans_take_mode, "gda_sql_statement_trans_take_mode", libs);
+  gidLink(cast(void**)&gda_sql_statement_trans_take_name, "gda_sql_statement_trans_take_name", libs);
+  gidLink(cast(void**)&gda_sql_statement_unknown_take_expressions, "gda_sql_statement_unknown_take_expressions", libs);
+  gidLink(cast(void**)&gda_sql_statement_update_take_condition, "gda_sql_statement_update_take_condition", libs);
+  gidLink(cast(void**)&gda_sql_statement_update_take_on_conflict, "gda_sql_statement_update_take_on_conflict", libs);
+  gidLink(cast(void**)&gda_sql_statement_update_take_set_value, "gda_sql_statement_update_take_set_value", libs);
+  gidLink(cast(void**)&gda_sql_statement_update_take_table_name, "gda_sql_statement_update_take_table_name", libs);
+  gidLink(cast(void**)&gda_sql_statement_get_contents_infos, "gda_sql_statement_get_contents_infos", libs);
+  gidLink(cast(void**)&gda_sql_statement_string_to_type, "gda_sql_statement_string_to_type", libs);
+  gidLink(cast(void**)&gda_sql_statement_type_to_string, "gda_sql_statement_type_to_string", libs);
 
   // SqlTable
   gidLink(cast(void**)&gda_sql_table_copy, "gda_sql_table_copy", libs);
@@ -4820,8 +5017,11 @@ shared static this()
   gidLink(cast(void**)&gda_rfc1738_encode, "gda_rfc1738_encode", libs);
   gidLink(cast(void**)&gda_select_alter_select_for_empty, "gda_select_alter_select_for_empty", libs);
   gidLink(cast(void**)&gda_sql_error_quark, "gda_sql_error_quark", libs);
+  gidLink(cast(void**)&gda_sql_identifier_force_quotes, "gda_sql_identifier_force_quotes", libs);
+  gidLink(cast(void**)&gda_sql_identifier_prepare_for_compare, "gda_sql_identifier_prepare_for_compare", libs);
   gidLink(cast(void**)&gda_sql_identifier_quote, "gda_sql_identifier_quote", libs);
   gidLink(cast(void**)&gda_sql_identifier_split, "gda_sql_identifier_split", libs);
+  gidLink(cast(void**)&gda_sql_value_stringify, "gda_sql_value_stringify", libs);
   gidLink(cast(void**)&gda_string_to_binary, "gda_string_to_binary", libs);
   gidLink(cast(void**)&gda_string_to_blob, "gda_string_to_blob", libs);
   gidLink(cast(void**)&gda_text_to_alphanum, "gda_text_to_alphanum", libs);
