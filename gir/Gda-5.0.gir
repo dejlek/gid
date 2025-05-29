@@ -23822,9 +23822,9 @@ the operation; to actually perform the operation, use gda_server_provider_perfor
           </parameter>
         </parameters>
       </virtual-method>
-      <virtual-method name="statement_rewrite" introspectable="0" throws="1">
+      <virtual-method name="statement_rewrite" throws="1">
         <source-position filename="gda-server-provider.h" line="410"/>
-        <return-value>
+        <return-value transfer-ownership="full">
           <type name="SqlStatement" c:type="GdaSqlStatement*"/>
         </return-value>
         <parameters>
@@ -25636,10 +25636,10 @@ otherwise.</doc>
           </parameters>
         </callback>
       </field>
-      <field name="statement_rewrite" introspectable="0">
-        <callback name="statement_rewrite" introspectable="0" throws="1">
+      <field name="statement_rewrite">
+        <callback name="statement_rewrite" throws="1">
           <source-position filename="gda-server-provider.h" line="410"/>
-          <return-value>
+          <return-value transfer-ownership="full">
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </return-value>
           <parameters>
@@ -29024,13 +29024,24 @@ its type and its parent in the structure hierarchy.</doc>
       <method name="check_structure"
               c:identifier="gda_sql_any_part_check_structure"
               throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="959">Checks for any error in @node's structure to make sure it is valid. This
+is the same as gda_sql_statement_check_structure() but for individual #GdaSqlAnyPart
+parts. This function is mainly for database provider's implementations</doc>
         <source-position filename="sql-parser/gda-statement-struct-decl.h"
                          line="241"/>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="968">TRUE if no error occurred</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="961">a #GdaSqlAnyPart pointer</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </instance-parameter>
         </parameters>
@@ -29039,22 +29050,41 @@ its type and its parent in the structure hierarchy.</doc>
               c:identifier="gda_sql_any_part_foreach"
               introspectable="0"
               throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="1192">Calls a function for each element of a #GdaSqlAnyPart node</doc>
         <source-position filename="sql-parser/gda-statement-struct-decl.h"
                          line="236"/>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="1201">TRUE if @func has been called for any sub node of @node and always returned TRUE, or FALSE
+otherwise.</doc>
           <type name="gboolean" c:type="gboolean"/>
         </return-value>
         <parameters>
           <instance-parameter name="node" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="1194">the stat node</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </instance-parameter>
-          <parameter name="func" transfer-ownership="none" closure="1">
+          <parameter name="func"
+                     transfer-ownership="none"
+                     scope="call"
+                     closure="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="1195">function to call for each sub node</doc>
             <type name="SqlForeachFunc" c:type="GdaSqlForeachFunc"/>
           </parameter>
           <parameter name="data"
                      transfer-ownership="none"
                      nullable="1"
                      allow-none="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="1196">data to pass to @func each time it is called</doc>
             <type name="gpointer" c:type="gpointer"/>
           </parameter>
         </parameters>
@@ -30729,18 +30759,30 @@ or GDA_SQL_STATEMENT_DELETE</doc>
         <type name="gpointer" c:type="gpointer"/>
       </field>
       <method name="copy" c:identifier="gda_sql_case_copy" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="907">Creates a new #GdaSqlCase structure initiated with the values stored in @sc.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="377"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="913">a new #GdaSqlCase structure.</doc>
           <type name="SqlCase" c:type="GdaSqlCase*"/>
         </return-value>
         <parameters>
           <instance-parameter name="sc" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="909">a #GdaSqlCase structure to be copied</doc>
             <type name="SqlCase" c:type="GdaSqlCase*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_case_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="883">Frees a #GdaSqlCase structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="376"/>
         <return-value transfer-ownership="none">
@@ -30748,30 +30790,52 @@ or GDA_SQL_STATEMENT_DELETE</doc>
         </return-value>
         <parameters>
           <instance-parameter name="sc" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="885">a #GdaSqlCase structure to be freed</doc>
             <type name="SqlCase" c:type="GdaSqlCase*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_case_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="946">Creates a new string representing a CASE clause. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="378"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="953">a new string with the description of the CASE clause or "null" in case @sc is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="sc" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="948">a #GdaSqlCase structure</doc>
             <type name="SqlCase" c:type="GdaSqlCase*"/>
           </instance-parameter>
         </parameters>
       </method>
       <function name="new" c:identifier="gda_sql_case_new" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="865">Creates a new #GdaSqlCase structure and sets its parent to @parent.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="375"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="871">a new #GdaSqlCase structure.</doc>
           <type name="SqlCase" c:type="GdaSqlCase*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="867">a #GdaSqlAnyPart structure</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -30891,30 +30955,51 @@ are case sensitive.</doc>
       <constructor name="new"
                    c:identifier="gda_sql_expr_new"
                    introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="51">Creates a new #GdaSqlField structure, using @parent as its parent part.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="142"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="57">a new #GdaSqlField structure.</doc>
           <type name="SqlExpr" c:type="GdaSqlExpr*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="53">a #GdaSqlStatementInsert, #GdaSqlStatementUpdate, #GdaSqlSelectField, #GdaSqlSelectTarget, #GdaSqlOperation</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
       </constructor>
       <method name="copy" c:identifier="gda_sql_expr_copy" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="99">Creates a new #GdaSqlExpr structure initiated with the values stored in @expr.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="144"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="105">a new #GdaSqlExpr structure.</doc>
           <type name="SqlExpr" c:type="GdaSqlExpr*"/>
         </return-value>
         <parameters>
           <instance-parameter name="expr" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="101">a #GdaSqlExpr</doc>
             <type name="SqlExpr" c:type="GdaSqlExpr*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_expr_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="69">Frees a #GdaSqlExpr structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="143"/>
         <return-value transfer-ownership="none">
@@ -30922,23 +31007,40 @@ are case sensitive.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="expr" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="71">a #GdaSqlExpr to be freed.</doc>
             <type name="SqlExpr" c:type="GdaSqlExpr*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_expr_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="150">Creates a new string representation of the SQL expression. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="145"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="157">a new string with the SQL expression or "null" in case @expr is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="expr" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="152">a #GdaSqlExpr structure</doc>
             <type name="SqlExpr" c:type="GdaSqlExpr*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_select" c:identifier="gda_sql_expr_take_select">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="229">Sets the expression's parent to the #GdaSqlStatementSelect held by @stmt. After
+calling this function @stmt is freed.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="147"/>
         <return-value transfer-ownership="none">
@@ -30946,9 +31048,15 @@ are case sensitive.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="expr" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="231">a #GdaSqlExpr structure</doc>
             <type name="SqlExpr" c:type="GdaSqlExpr*"/>
           </instance-parameter>
-          <parameter name="stmt" transfer-ownership="none">
+          <parameter name="stmt" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="232">a #GdaSqlStatement holding the #GdaSqlStatementSelect to take from</doc>
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </parameter>
         </parameters>
@@ -30977,18 +31085,30 @@ This structure represents the name of a table's field.</doc>
         <type name="gpointer" c:type="gpointer"/>
       </field>
       <method name="copy" c:identifier="gda_sql_field_copy" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="286">Creates a new GdaSqlField structure initiated with the values stored in @field.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="175"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="292">a new #GdaSqlField structure.</doc>
           <type name="SqlField" c:type="GdaSqlField*"/>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="288">a #GdaSqlAnyPart</doc>
             <type name="SqlField" c:type="GdaSqlField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_field_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="269">Frees a #GdaSqlField structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="174"/>
         <return-value transfer-ownership="none">
@@ -30996,23 +31116,40 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="271">a #GdaSqlField to be freed.</doc>
             <type name="SqlField" c:type="GdaSqlField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_field_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="308">Creates a new string representing a field. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="176"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="315">a new string with the name of the field or "null" in case @field is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="310">a #GdaSqlField structure</doc>
             <type name="SqlField" c:type="GdaSqlField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_name" c:identifier="gda_sql_field_take_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="326">Sets the field's name using the string held by @value. When call, @value is freed using
+#gda_value_free().</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="179"/>
         <return-value transfer-ownership="none">
@@ -31020,21 +31157,36 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="328">a #GdaSqlField structure</doc>
             <type name="SqlField" c:type="GdaSqlField*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="329">a #GValue holding a string to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <function name="new" c:identifier="gda_sql_field_new" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="251">Creates a new #GdaSqlField structure, using @parent as its parent part.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="173"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="257">a new #GdaSqlField structure.</doc>
           <type name="SqlField" c:type="GdaSqlField*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="253">a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -31120,18 +31272,30 @@ This structure represents the name of a table's field.</doc>
       <method name="copy"
               c:identifier="gda_sql_function_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="473">Creates a new #GdaSqlFunction structure initiated with the values stored in @function.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="238"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="479">a new #GdaSqlFunction structure.</doc>
           <type name="SqlFunction" c:type="GdaSqlFunction*"/>
         </return-value>
         <parameters>
           <instance-parameter name="function" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="475">a #GdaSqlFunction structure to be copied</doc>
             <type name="SqlFunction" c:type="GdaSqlFunction*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_function_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="454">Frees a #GdaSqlFunction structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="237"/>
         <return-value transfer-ownership="none">
@@ -31139,24 +31303,41 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="function" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="456">a #GdaSqlFunction structure to be freed</doc>
             <type name="SqlFunction" c:type="GdaSqlFunction*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_function_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="505">Creates a new string representing a function. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="239"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="512">a new string with the description of the function or "null" in case @function is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="function" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="507">a #GdaSqlFunction structure</doc>
             <type name="SqlFunction" c:type="GdaSqlFunction*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_args_list"
               c:identifier="gda_sql_function_take_args_list">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="569">Sets the function's arguments to point to @args, then sets the
+list's data elements' parent to @function.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="243"/>
         <return-value transfer-ownership="none">
@@ -31164,9 +31345,15 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="function" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="571">a #GdaSqlFunction structure</doc>
             <type name="SqlFunction" c:type="GdaSqlFunction*"/>
           </instance-parameter>
-          <parameter name="args" transfer-ownership="none">
+          <parameter name="args" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="572">a #GSList to take from</doc>
             <type name="GLib.SList" c:type="GSList*">
               <type name="gpointer" c:type="gpointer"/>
             </type>
@@ -31174,6 +31361,10 @@ This structure represents the name of a table's field.</doc>
         </parameters>
       </method>
       <method name="take_name" c:identifier="gda_sql_function_take_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="552">Sets the function's name using the string held by @value. When call, @value is freed using
+#gda_value_free().</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="242"/>
         <return-value transfer-ownership="none">
@@ -31181,9 +31372,15 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="function" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="554">a #GdaSqlFunction structure</doc>
             <type name="SqlFunction" c:type="GdaSqlFunction*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="555">a #GValue holding a string to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -31191,13 +31388,22 @@ This structure represents the name of a table's field.</doc>
       <function name="new"
                 c:identifier="gda_sql_function_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="436">Creates a new #GdaSqlFunction structure initiated.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="236"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="442">a new #GdaSqlFunction structure.</doc>
           <type name="SqlFunction" c:type="GdaSqlFunction*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="438">a #GdaSqlAnyPart structure</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -31255,18 +31461,30 @@ This structure represents the name of a table's field.</doc>
       <method name="copy"
               c:identifier="gda_sql_operation_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="624">Creates a new #GdaSqlOperation structure initiated with the values stored in @operation.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="343"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="630">a new #GdaSqlOperation structure.</doc>
           <type name="SqlOperation" c:type="GdaSqlOperation*"/>
         </return-value>
         <parameters>
           <instance-parameter name="operation" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="626">a #GdaSqlOperation structure to be copied</doc>
             <type name="SqlOperation" c:type="GdaSqlOperation*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_operation_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="606">Frees a #GdaSqlOperation structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="342"/>
         <return-value transfer-ownership="none">
@@ -31274,18 +31492,31 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="operation" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="608">a #GdaSqlOperation structure to be freed</doc>
             <type name="SqlOperation" c:type="GdaSqlOperation*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_operation_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="653">Creates a new string representing an operator. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="344"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="660">a new string with the description of the operator or "null" in case @operation is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="operation" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="655">a #GdaSqlOperation structure</doc>
             <type name="SqlOperation" c:type="GdaSqlOperation*"/>
           </instance-parameter>
         </parameters>
@@ -31293,39 +31524,67 @@ This structure represents the name of a table's field.</doc>
       <function name="new"
                 c:identifier="gda_sql_operation_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="588">Creates a new #GdaSqlOperation structure and sets its parent to @parent.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="341"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="594">a new #GdaSqlOperation structure.</doc>
           <type name="SqlOperation" c:type="GdaSqlOperation*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="590">a #GdaSqlAnyPart structure</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
       </function>
       <function name="operator_from_string"
                 c:identifier="gda_sql_operation_operator_from_string">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="786">Returns #GdaSqlOperatorType that correspond with the string @op.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="346"/>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="792">#GdaSqlOperatorType</doc>
           <type name="SqlOperatorType" c:type="GdaSqlOperatorType"/>
         </return-value>
         <parameters>
           <parameter name="op" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="788">a #GdaSqlOperation structure</doc>
             <type name="utf8" c:type="const gchar*"/>
           </parameter>
         </parameters>
       </function>
       <function name="operator_to_string"
                 c:identifier="gda_sql_operation_operator_to_string">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="698">Returns a constant string representing a operator name. You don't need to free
+the returned string.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="345"/>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="705">a string with the operator's name or NULL in case @op is invalid.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <parameter name="op" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="700">a #GdaSqlOperation structure</doc>
             <type name="SqlOperatorType" c:type="GdaSqlOperatorType"/>
           </parameter>
         </parameters>
@@ -31467,18 +31726,30 @@ This structure represents the name of a table's field.</doc>
       <method name="copy"
               c:identifier="gda_sql_param_spec_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="178">Creates a copy of @pspec.</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="49"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-pspec.c"
+               line="184">a new #GdaSqlParamSpec</doc>
           <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="180">#GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_param_spec_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="204">Destroys @pspec.</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="55"/>
         <return-value transfer-ownership="none">
@@ -31486,23 +31757,39 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="206">#GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_param_spec_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="220">Creates a new string representing @pspec.</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="56"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-pspec.c"
+               line="226">a new string.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="222">a #GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_descr" c:identifier="gda_sql_param_spec_take_descr">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="49">Sets @pspec's description. @value's ownership is transferred to
+@pspec (which means @pspec is then responsible for freeing it when no longer needed).</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="52"/>
         <return-value transfer-ownership="none">
@@ -31510,14 +31797,24 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="51">a #GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="52">a G_TYPE_STRING #GValue</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_name" c:identifier="gda_sql_param_spec_take_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="28">Sets @pspec's name. @value's ownership is transferred to
+@pspec (which means @pspec is then responsible for freeing it when no longer needed).</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="50"/>
         <return-value transfer-ownership="none">
@@ -31525,14 +31822,26 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="30">a #GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="31">a G_TYPE_STRING #GValue</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_nullok" c:identifier="gda_sql_param_spec_take_nullok">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="70">Sets @pspec's ability of being NULL. @value's ownership is transferred to
+@pspec (which means @pspec is then responsible for freeing it when no longer needed).
+
+If @value's string starts by 't' or 'T' then @pspec will be allowed to be %NULL</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="53"/>
         <return-value transfer-ownership="none">
@@ -31540,14 +31849,26 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="72">a #GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="73">a G_TYPE_STRING #GValue.</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_type" c:identifier="gda_sql_param_spec_take_type">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="95">Sets @pspec's data type. @value's ownership is transferred to
+@pspec (which means @pspec is then responsible for freeing it when no longer needed).
+
+@value must represent a data type, as understood by gda_g_type_from_string().</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="51"/>
         <return-value transfer-ownership="none">
@@ -31555,9 +31876,15 @@ This structure represents the name of a table's field.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="pspec" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="97">a #GdaSqlParamSpec pointer</doc>
             <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-pspec.c"
+                 line="98">a G_TYPE_STRING #GValue</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -31565,9 +31892,18 @@ This structure represents the name of a table's field.</doc>
       <function name="new"
                 c:identifier="gda_sql_param_spec_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-pspec.c"
+             line="121">@value must contain a string representing a variable, see the documentation associated to the
+#GdaSqlParser object.
+
+@value is destroyed by this function.</doc>
         <source-position filename="sql-parser/gda-statement-struct-pspec.h"
                          line="48"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-pspec.c"
+               line="130">a new #GdaSqlParamSpec</doc>
           <type name="SqlParamSpec" c:type="GdaSqlParamSpec*"/>
         </return-value>
         <parameters>
@@ -32495,18 +32831,30 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="copy"
               c:identifier="gda_sql_select_field_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1042">Creates a new #GdaSqlSelectField structure initiated with the values stored in @field.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="418"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1048">a new #GdaSqlSelectField structure.</doc>
           <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1044">a #GdaSqlSelectField structure to be copied</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_select_field_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1022">Frees a #GdaSqlSelectField structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="417"/>
         <return-value transfer-ownership="none">
@@ -32514,23 +32862,40 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1024">a #GdaSqlSelectField structure to be freed</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_select_field_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1074">Creates a new string representing an expression used as field in a SELECT statement
+before the FROM clause.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="419"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1081">a new string with the description of the expression or "null" in case @field is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1076">a #GdaSqlSelectField structure</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_alias" c:identifier="gda_sql_select_field_take_alias">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1166">Sets the 'as' field's string in the #GdaSqlSelectField structure. @alias is freed
+after call this function.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="424"/>
         <return-value transfer-ownership="none">
@@ -32538,9 +32903,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1168">a #GdaSqlSelectField structure</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
-          <parameter name="alias" transfer-ownership="none">
+          <parameter name="alias" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1169">a #GValue to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -32548,6 +32919,10 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="take_expr"
               c:identifier="gda_sql_select_field_take_expr"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1125">Sets the expression field in the #GdaSqlSelectField structure to point to @expr
+and modify it to sets its parent to @field.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="423"/>
         <return-value transfer-ownership="none">
@@ -32555,15 +32930,25 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1127">a #GdaSqlSelectField structure</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
-          <parameter name="expr" transfer-ownership="none">
+          <parameter name="expr" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1128">a #GdaSqlExpr to take from</doc>
             <type name="SqlExpr" c:type="GdaSqlExpr*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_star_value"
               c:identifier="gda_sql_select_field_take_star_value">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1148">Sets the expression field's value in the #GdaSqlSelectField structure to point to @value;
+after this @field is the owner of @value.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="422"/>
         <return-value transfer-ownership="none">
@@ -32571,9 +32956,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="field" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1150">a #GdaSqlSelectField structure</doc>
             <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1151">a #GValue to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -32581,13 +32972,23 @@ set the value of @expr-&gt;value instead.</doc>
       <function name="new"
                 c:identifier="gda_sql_select_field_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1003">Creates a new #GdaSqlSelectField structure and sets its parent to @parent. A
+#GdaSqlSelectField is any expression in SELECT statements before the FROM clause.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="416"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1010">a new #GdaSqlSelectField structure.</doc>
           <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1005">a #GdaSqlStatementSelect structure</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -32630,18 +33031,30 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="copy"
               c:identifier="gda_sql_select_from_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1554">Creates a new #GdaSqlSelectFrom structure initiated with the values stored in @from.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="546"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1560">a new #GdaSqlSelectFrom structure.</doc>
           <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
         </return-value>
         <parameters>
           <instance-parameter name="from" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1556">a #GdaSqlSelectFrom structure to be copied</doc>
             <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_select_from_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1531">Frees a #GdaSqlSelectFrom structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="545"/>
         <return-value transfer-ownership="none">
@@ -32649,18 +33062,30 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="from" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1533">a #GdaSqlSelectFrom structure to be freed</doc>
             <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_select_from_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1588">Creates a new string description of the FROM clause used in a SELECT statement.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="547"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1594">a new string with the description of the FROM or "null" in case @from is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="from" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1590">a #GdaSqlSelectFrom structure</doc>
             <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
           </instance-parameter>
         </parameters>
@@ -32668,6 +33093,10 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="take_new_join"
               c:identifier="gda_sql_select_from_take_new_join"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1658">Append @join to the joins in the FROM clause and set @join's parent to
+@from; after call this function @from owns @join then you must not free it.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="550"/>
         <return-value transfer-ownership="none">
@@ -32675,9 +33104,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="from" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1660">a #GdaSqlSelectFrom structure</doc>
             <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
           </instance-parameter>
-          <parameter name="join" transfer-ownership="none">
+          <parameter name="join" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1661">a #GdaSqlSelectJoin to take from</doc>
             <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
           </parameter>
         </parameters>
@@ -32685,6 +33120,10 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="take_new_target"
               c:identifier="gda_sql_select_from_take_new_target"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1643">Append @target to the targets in the FROM clause and set @target's parent to
+@from; after call this function @from owns @target then you must not free it.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="549"/>
         <return-value transfer-ownership="none">
@@ -32692,9 +33131,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="from" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1645">a #GdaSqlSelectFrom structure</doc>
             <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
           </instance-parameter>
-          <parameter name="target" transfer-ownership="none">
+          <parameter name="target" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1646">a #GdaSqlSelectTarget to take from</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </parameter>
         </parameters>
@@ -32702,13 +33147,22 @@ set the value of @expr-&gt;value instead.</doc>
       <function name="new"
                 c:identifier="gda_sql_select_from_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1513">Creates a new #GdaSqlSelectFrom structure and sets its parent to @parent.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="544"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1519">a new #GdaSqlSelectFrom structure</doc>
           <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1515">a #GdaSqlStatementSelect</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -32761,18 +33215,30 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="copy"
               c:identifier="gda_sql_select_join_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1389">Creates a new #GdaSqlSelectJoin structure initiated with the values stored in @join.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="515"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1395">a new #GdaSqlSelectJoin structure.</doc>
           <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
         </return-value>
         <parameters>
           <instance-parameter name="join" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1391">a #GdaSqlSelectJoin structure to be copied</doc>
             <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_select_join_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1371">Frees a #GdaSqlSelectJoin structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="514"/>
         <return-value transfer-ownership="none">
@@ -32780,18 +33246,30 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="join" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1373">a #GdaSqlSelectJoin structure to be freed</doc>
             <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_select_join_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1452">Creates a new string description of the join used in a SELECT statement.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="516"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1458">a new string with the description of the join or "null" in case @join is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="join" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1454">a #GdaSqlSelectJoin structure</doc>
             <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
           </instance-parameter>
         </parameters>
@@ -32799,26 +33277,44 @@ set the value of @expr-&gt;value instead.</doc>
       <function name="new"
                 c:identifier="gda_sql_select_join_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1353">Creates a new #GdaSqlSelectJoin structure and sets its parent to @parent.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="513"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1359">a new #GdaSqlSelectJoin structure</doc>
           <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1355">a #GdaSqlSelectFrom</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
       </function>
       <function name="type_to_string"
                 c:identifier="gda_sql_select_join_type_to_string">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1422">Creates a new string representing the join type.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="518"/>
         <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1428">a string representing the Join type.</doc>
           <type name="utf8" c:type="const gchar*"/>
         </return-value>
         <parameters>
           <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1424">a #GdaSqlSelectJoinType structure to be copied</doc>
             <type name="SqlSelectJoinType" c:type="GdaSqlSelectJoinType"/>
           </parameter>
         </parameters>
@@ -32883,18 +33379,30 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="copy"
               c:identifier="gda_sql_select_order_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1712">Creates a new #GdaSqlSelectOrder structure initiated with the values stored in @order.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="579"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1718">a new #GdaSqlSelectOrder structure.</doc>
           <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
         </return-value>
         <parameters>
           <instance-parameter name="order" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1714">a #GdaSqlSelectOrder structure to be copied</doc>
             <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_select_order_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1695">Frees a #GdaSqlSelectOrder structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="578"/>
         <return-value transfer-ownership="none">
@@ -32902,18 +33410,30 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="order" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1697">a #GdaSqlSelectOrder structure to be freed</doc>
             <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_select_order_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1738">Creates a new string description of the ORDER BY clause used in a SELECT statement.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="580"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1744">a new string with the description of the ORDER BY or "null" in case @order is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="order" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1740">a #GdaSqlSelectOrder structure</doc>
             <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
           </instance-parameter>
         </parameters>
@@ -32921,13 +33441,22 @@ set the value of @expr-&gt;value instead.</doc>
       <function name="new"
                 c:identifier="gda_sql_select_order_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1677">Creates a new #GdaSqlSelectOrder structure and sets its parent to @parent.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="577"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1683">a new #GdaSqlSelectOrder structure</doc>
           <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1679">a #GdaSqlStatementSelect</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -32980,18 +33509,30 @@ set the value of @expr-&gt;value instead.</doc>
       <method name="copy"
               c:identifier="gda_sql_select_target_copy"
               introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1222">Creates a new #GdaSqlSelectTarget structure initiated with the values stored in @target.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="460"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1228">a new #GdaSqlSelectTarget structure.</doc>
           <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1224">a #GdaSqlSelectTarget structure to be copied</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_select_target_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1203">Frees a #GdaSqlSelectTarget structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="459"/>
         <return-value transfer-ownership="none">
@@ -32999,24 +33540,41 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1205">a #GdaSqlSelectTarget structure to be freed</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_select_target_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1251">Creates a new string representing a target used in a SELECT statement
+after the FROM clause.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="461"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1258">a new string with the description of the expression or "null" in case @field is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1253">a #GdaSqlSelectTarget structure</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="take_alias"
               c:identifier="gda_sql_select_target_take_alias">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1332">Sets the target alias (AS) to the string held by @alias; after call
+this function @alias is freed.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="466"/>
         <return-value transfer-ownership="none">
@@ -33024,15 +33582,25 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1334">a #GdaSqlSelectTarget structure</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
-          <parameter name="alias" transfer-ownership="none">
+          <parameter name="alias" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1335">a #GValue holding the alias string to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_select"
               c:identifier="gda_sql_select_target_take_select">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1315">Sets the target to be a SELECT subquery setting target's expression to use
+@stmt; after call this function the target owns @stmt, then you must not free it.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="465"/>
         <return-value transfer-ownership="none">
@@ -33040,15 +33608,26 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1317">a #GdaSqlSelectTarget structure</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
-          <parameter name="stmt" transfer-ownership="none">
+          <parameter name="stmt" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1318">a #GdaSqlStatement to take</doc>
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </parameter>
         </parameters>
       </method>
       <method name="take_table_name"
               c:identifier="gda_sql_select_target_take_table_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1296">Sets the target's name using the string stored in @value and the expression
+to set its value to point to value; after call this function the target owns
+@value, then you must not free it.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="464"/>
         <return-value transfer-ownership="none">
@@ -33056,9 +33635,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="target" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1298">a #GdaSqlSelectTarget structure</doc>
             <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1299">a #GValue to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
@@ -33066,13 +33651,23 @@ set the value of @expr-&gt;value instead.</doc>
       <function name="new"
                 c:identifier="gda_sql_select_target_new"
                 introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1184">Creates a new #GdaSqlSelectTarget structure and sets its parent to @parent. A
+#GdaSqlSelectTarget is the table in a SELECT statement.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="458"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1191">a new #GdaSqlSelectTarget structure.</doc>
           <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="1186">a #GdaSqlSelectFrom</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -33080,12 +33675,189 @@ set the value of @expr-&gt;value instead.</doc>
     </record>
     <record name="SqlStatement"
             c:type="GdaSqlStatement"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="64"/>
+            glib:type-name="GdaSqlStatement"
+            glib:get-type="gda_sql_statement_get_type"
+            c:symbol-prefix="sql_statement">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct.h"
+           line="31">This structure is the top level structure encapsulating several type of statements.</doc>
+      <source-position filename="sql-parser/gda-statement-struct.h" line="50"/>
+      <field name="sql" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="stmt_type" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.h"
+             line="34">type of statement</doc>
+        <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+      </field>
+      <field name="contents" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.h"
+             line="35">contents, cast it depending on @stmt_type (for example to a #GdaSqlStatementSelect).</doc>
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="validity_meta_struct" writable="1">
+        <type name="MetaStruct" c:type="GdaMetaStruct*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <constructor name="new" c:identifier="gda_sql_statement_new">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="95">Use this function to create a #GdaSqlStatement of the specified @type type.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="55"/>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="101">a new #GdaSqlStatement</doc>
+          <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="97">type of statement to create</doc>
+            <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+          </parameter>
+        </parameters>
+      </constructor>
+      <method name="check_clean" c:identifier="gda_sql_statement_check_clean">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="884">Cleans any data set by a previous call to gda_sql_statement_check_validity().</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="69"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="886">a pinter to a #GdaSqlStatement structure</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="check_structure"
+              c:identifier="gda_sql_statement_check_structure"
+              throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="933">Checks for any error in @stmt's structure to make sure the statement is valid
+(for example a SELECT statement must at least return a column, a DELETE statement must specify which table
+is targeted).</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="63"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="942">TRUE if no error occurred</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="935">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="check_validity"
+              c:identifier="gda_sql_statement_check_validity"
+              throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="310">If @cnc is not %NULL, then checks that all the database objects referenced in the statement actually
+exist in the connection's database (for example the table being updated in a UPDATE statement must exist in the
+connection's database for the check to succeed). This method fills the @stmt-&amp;gt;validity_meta_struct attribute.
+
+If @cnc is %NULL, then remove any information from a previous call to this method stored in @stmt. In this case,
+the @stmt-&amp;gt;validity_meta_struct attribute is cleared.
+
+Also note that some parts of @stmt may be modified: for example leading and trailing spaces in aliases or
+objects names will be removed.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="64"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="326">TRUE if no error occurred</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="312">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="cnc"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="313">a #GdaConnection object, or %NULL</doc>
+            <type name="Connection" c:type="GdaConnection*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="check_validity_m"
+              c:identifier="gda_sql_statement_check_validity_m"
+              version="4.2"
+              throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="360">If @mstruct is not %NULL, then checks that all the database objects referenced in the statement i
+actually referenced in @mstruct
+ (for example the table being updated in a UPDATE statement must exist in the
+connection's database for the check to succeed).
+This method sets the @stmt-&amp;gt;validity_meta_struct attribute to @mstruct.
+
+If @mstruct is %NULL, then remove any information from a previous call to this method stored in @stmt. In this case,
+the @stmt-&amp;gt;validity_meta_struct attribute is cleared.
+
+Also note that some parts of @stmt may be modified: for example leading and trailing spaces in aliases or
+objects names will be removed.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="65"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="378">TRUE if no error occurred</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="362">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="mstruct"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="363">a #GdaMetaStruct object, or %NULL</doc>
+            <type name="MetaStruct" c:type="GdaMetaStruct*"/>
+          </parameter>
+        </parameters>
+      </method>
       <method name="compound_set_type"
               c:identifier="gda_sql_statement_compound_set_type">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-compound.c"
+             line="215">Specifies @stmt's type of compound</doc>
         <source-position filename="sql-parser/gda-statement-struct-compound.h"
                          line="90"/>
         <return-value transfer-ownership="none">
@@ -33093,9 +33865,15 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-compound.c"
+                 line="217">a #GdaSqlStatement pointer</doc>
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </instance-parameter>
           <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-compound.c"
+                 line="218">a #GdaSqlStatementCompoundType value</doc>
             <type name="SqlStatementCompoundType"
                   c:type="GdaSqlStatementCompoundType"/>
           </parameter>
@@ -33103,6 +33881,10 @@ set the value of @expr-&gt;value instead.</doc>
       </method>
       <method name="compound_take_stmt"
               c:identifier="gda_sql_statement_compound_take_stmt">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-compound.c"
+             line="146">Adds the @s sub-statement to the @stmt compound statement. @s's reference is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
         <source-position filename="sql-parser/gda-statement-struct-compound.h"
                          line="91"/>
         <return-value transfer-ownership="none">
@@ -33110,13 +33892,870 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-compound.c"
+                 line="148">a #GdaSqlStatement pointer</doc>
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </instance-parameter>
-          <parameter name="s" transfer-ownership="none">
+          <parameter name="s" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-compound.c"
+                 line="149">a #GdaSqlStatement pointer</doc>
             <type name="SqlStatement" c:type="GdaSqlStatement*"/>
           </parameter>
         </parameters>
       </method>
+      <method name="copy" c:identifier="gda_sql_statement_copy">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="121">Creates a copy of @stmt.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="56"/>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="127">a new #GdaSqlStatement</doc>
+          <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="123">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="delete_take_condition"
+              c:identifier="gda_sql_statement_delete_take_condition"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-delete.c"
+             line="145">Sets the WHERE condition of @stmt. @cond's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-delete.h"
+                         line="64"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-delete.c"
+                 line="147">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="cond" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-delete.c"
+                 line="148">the WHERE condition of the DELETE statement, as a #GdaSqlExpr</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="delete_take_table_name"
+              c:identifier="gda_sql_statement_delete_take_table_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-delete.c"
+             line="127">Sets the name of the table to delete from in @stmt. @value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-delete.h"
+                         line="63"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-delete.c"
+                 line="129">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-delete.c"
+                 line="130">a table name as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="free" c:identifier="gda_sql_statement_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="162">Releases any memory associated to @stmt.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="57"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="164">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_1_values_list"
+              c:identifier="gda_sql_statement_insert_take_1_values_list"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="284">Sets a list of values to be inserted by @stmt. @list's
+ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="95"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="286">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="list" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="287">a list of #GdaSqlExpr pointers</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_extra_values_list"
+              c:identifier="gda_sql_statement_insert_take_extra_values_list"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="304">Sets a list of list of values to be inserted by @stmt. @list's
+ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="96"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="306">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="list" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="307">a list of #GSList of #GdaSqlExpr pointers</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_fields_list"
+              c:identifier="gda_sql_statement_insert_take_fields_list"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="264">Sets the list of fields for which values will be specified in @stmt. @list's
+ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="94"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="266">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="list" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="267">a list of #GdaSqlField pointers</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_on_conflict"
+              c:identifier="gda_sql_statement_insert_take_on_conflict">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="245">Sets the name of the resolution conflict algorithm used by @stmt. @value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="93"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="247">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="248">name of the resolution conflict algorithm, as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_select"
+              c:identifier="gda_sql_statement_insert_take_select">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="326">Specifies a SELECT statement, the values inserted will be the result set of @select. @select's
+ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="98"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="328">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="select" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="329">a SELECT or COMPOUND #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="insert_take_table_name"
+              c:identifier="gda_sql_statement_insert_take_table_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.c"
+             line="227">Sets the name of the table to insert into in @stmt. @value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                         line="92"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="229">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-insert.c"
+                 line="230">name of the table to insert into, as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="normalize"
+              c:identifier="gda_sql_statement_normalize"
+              throws="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="1392">"Normalizes" (in place) some parts of @stmt, which means @stmt may be modified.
+At the moment any "*" field in a SELECT statement will be replaced by one
+#GdaSqlSelectField structure for each field in the referenced table.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="70"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="1402">TRUE if no error occurred</doc>
+          <type name="gboolean" c:type="gboolean"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="1394">a pointer to a #GdaSqlStatement structure</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="cnc"
+                     transfer-ownership="none"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="1395">a #GdaConnection object, or %NULL</doc>
+            <type name="Connection" c:type="GdaConnection*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_distinct"
+              c:identifier="gda_sql_statement_select_take_distinct"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="246">Sets the DISTINCT clause of @stmt.
+
+@distinct_expr's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="81"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="248">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="distinct" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="249">a TRUE/FALSE value</doc>
+            <type name="gboolean" c:type="gboolean"/>
+          </parameter>
+          <parameter name="distinct_expr"
+                     transfer-ownership="full"
+                     nullable="1"
+                     allow-none="1">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="250">a #GdaSqlExpr pointer representing what the DISTINCT is on, or %NULL</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_expr_list"
+              c:identifier="gda_sql_statement_select_take_expr_list"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="266">Sets list of expressions selected by @stmt
+
+@expr_list's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="82"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="268">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="expr_list" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="269">a list of #GdaSqlSelectField pointers</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_from"
+              c:identifier="gda_sql_statement_select_take_from"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="286">Sets the FROM clause of @stmt
+
+@from's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="83"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="288">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="from" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="289">a #GdaSqlSelectFrom pointer</doc>
+            <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_group_by"
+              c:identifier="gda_sql_statement_select_take_group_by"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="322">Sets the GROUP BY clause of @stmt
+
+@group_by's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="85"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="324">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="group_by" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="325">a list of #GdaSqlExpr pointer</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_having_cond"
+              c:identifier="gda_sql_statement_select_take_having_cond"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="342">Sets the HAVING clause of @stmt
+
+@expr's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="86"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="344">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="expr" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="345">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_limits"
+              c:identifier="gda_sql_statement_select_take_limits"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="380">Sets the LIMIT clause of @stmt
+
+@count and @offset's responsibility are transferred to
+@stmt (which means @stmt is then responsible for freeing them when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="88"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="382">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="count" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="383">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+          <parameter name="offset" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="384">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_order_by"
+              c:identifier="gda_sql_statement_select_take_order_by"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="360">Sets the ORDER BY clause of @stmt
+
+@order_by's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="87"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="362">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="order_by" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="363">a list of #GdaSqlSelectOrder pointer</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="select_take_where_cond"
+              c:identifier="gda_sql_statement_select_take_where_cond"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-select.c"
+             line="304">Sets the WHERE clause of @stmt
+
+@expr's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-select.h"
+                         line="84"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="306">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="expr" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-select.c"
+                 line="307">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="serialize" c:identifier="gda_sql_statement_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="257">Creates a string representation of @stmt.</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="58"/>
+        <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="263">a new string</doc>
+          <type name="utf8" c:type="gchar*"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="259">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+        </parameters>
+      </method>
+      <method name="trans_set_isol_level"
+              c:identifier="gda_sql_statement_trans_set_isol_level">
+        <source-position filename="sql-parser/gda-statement-struct-trans.h"
+                         line="74"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="level" transfer-ownership="none">
+            <type name="TransactionIsolation"
+                  c:type="GdaTransactionIsolation"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="trans_take_mode"
+              c:identifier="gda_sql_statement_trans_take_mode">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.c"
+             line="276">Sets the model of the transaction
+
+@value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-trans.h"
+                         line="73"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-trans.c"
+                 line="278">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-trans.c"
+                 line="279">a G_TYPE_STRING value</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="trans_take_name"
+              c:identifier="gda_sql_statement_trans_take_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.c"
+             line="252">Sets the name of the transaction
+
+@value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-trans.h"
+                         line="75"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-trans.c"
+                 line="254">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-trans.c"
+                 line="255">a G_TYPE_STRING value</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="unknown_take_expressions"
+              c:identifier="gda_sql_statement_unknown_take_expressions"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-unknown.c"
+             line="114">Sets @stmt's list of expressions
+
+@expressions's
+ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-unknown.h"
+                         line="63"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-unknown.c"
+                 line="116">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="expressions" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-unknown.c"
+                 line="117">a list of #GdaSqlExpr pointers</doc>
+            <type name="GLib.SList" c:type="GSList*">
+              <type name="gpointer" c:type="gpointer"/>
+            </type>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="update_take_condition"
+              c:identifier="gda_sql_statement_update_take_condition"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-update.c"
+             line="239">Sets the WHERE clause of @stmt
+
+@expr's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-update.h"
+                         line="68"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="241">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="cond" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="242">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="update_take_on_conflict"
+              c:identifier="gda_sql_statement_update_take_on_conflict">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-update.c"
+             line="220">Sets the name of the resolution conflict algorithm used by @stmt. @value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-update.h"
+                         line="67"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="222">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="223">name of the resolution conflict algorithm, as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="update_take_set_value"
+              c:identifier="gda_sql_statement_update_take_set_value"
+              introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-update.c"
+             line="258">Specifies that the field named @fname will be updated with the expression @expr.
+
+@fname and @expr's responsibility are transferred to
+@stmt (which means @stmt is then responsible for freeing them when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-update.h"
+                         line="69"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="260">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="fname" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="261">a field name, as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+          <parameter name="expr" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="262">a #GdaSqlExpr pointer</doc>
+            <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <method name="update_take_table_name"
+              c:identifier="gda_sql_statement_update_take_table_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-update.c"
+             line="200">Sets the name of the table to delete from in @stmt.
+
+@value's ownership is transferred to
+@stmt (which means @stmt is then responsible for freeing it when no longer needed).</doc>
+        <source-position filename="sql-parser/gda-statement-struct-update.h"
+                         line="66"/>
+        <return-value transfer-ownership="none">
+          <type name="none" c:type="void"/>
+        </return-value>
+        <parameters>
+          <instance-parameter name="stmt" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="202">a #GdaSqlStatement pointer</doc>
+            <type name="SqlStatement" c:type="GdaSqlStatement*"/>
+          </instance-parameter>
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-update.c"
+                 line="203">a table name, as a G_TYPE_STRING #GValue</doc>
+            <type name="GObject.Value" c:type="GValue*"/>
+          </parameter>
+        </parameters>
+      </method>
+      <function name="get_contents_infos"
+                c:identifier="gda_sql_statement_get_contents_infos"
+                introspectable="0">
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="72"/>
+        <return-value>
+          <type name="SqlStatementContentsInfo"
+                c:type="GdaSqlStatementContentsInfo*"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="string_to_type"
+                c:identifier="gda_sql_statement_string_to_type">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="207">Converts a string to a #GdaSqlStatementType value, see also gda_sql_statement_type_to_string()</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="61"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="213">a #GdaSqlStatementType value</doc>
+          <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="209">a string representing a #GdaSqlStatementType type</doc>
+            <type name="utf8" c:type="const gchar*"/>
+          </parameter>
+        </parameters>
+      </function>
+      <function name="type_to_string"
+                c:identifier="gda_sql_statement_type_to_string">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="188">Converts a #GdaSqlStatementType to a string, see also gda_sql_statement_string_to_type()</doc>
+        <source-position filename="sql-parser/gda-statement-struct.h"
+                         line="60"/>
+        <return-value transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="194">a constant string</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </return-value>
+        <parameters>
+          <parameter name="type" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct.c"
+                 line="190">a #GdaSqlStatementType value</doc>
+            <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+          </parameter>
+        </parameters>
+      </function>
     </record>
     <record name="SqlStatementCheckValidityData"
             c:type="GdaSqlStatementCheckValidityData"
@@ -33285,33 +34924,190 @@ set the value of @expr-&gt;value instead.</doc>
         <type name="gpointer" c:type="gpointer"/>
       </field>
     </record>
-    <record name="SqlStatementDelete"
-            c:type="GdaSqlStatementDelete"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="89"/>
+    <record name="SqlStatementDelete" c:type="GdaSqlStatementDelete">
+      <source-position filename="sql-parser/gda-statement-struct-delete.h"
+                       line="53"/>
+      <field name="any" introspectable="0" writable="1">
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="table" introspectable="0" writable="1">
+        <type name="SqlTable" c:type="GdaSqlTable*"/>
+      </field>
+      <field name="cond" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
-    <record name="SqlStatementInsert"
-            c:type="GdaSqlStatementInsert"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="84"/>
+    <record name="SqlStatementInsert" c:type="GdaSqlStatementInsert">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-insert.h"
+           line="35">The statement is an INSERT statement, any kind of INSERT statement can be represented using this structure
+(if this is not the case
+then report a bug).
+&lt;mediaobject&gt;
+  &lt;imageobject role="html"&gt;
+    &lt;imagedata fileref="stmt-insert1.png" format="PNG"/&gt;
+  &lt;/imageobject&gt;
+  &lt;caption&gt;
+    &lt;para&gt;
+Example of a #GdaSqlStatement having a #GdaSqlStatementInsert as its contents with 2 lists of values
+to insert.
+    &lt;/para&gt;
+  &lt;/caption&gt;
+&lt;/mediaobject&gt;
+&lt;mediaobject&gt;
+  &lt;imageobject role="html"&gt;
+    &lt;imagedata fileref="stmt-insert2.png" format="PNG"/&gt;
+  &lt;/imageobject&gt;
+  &lt;caption&gt;
+    &lt;para&gt;
+Another example of a #GdaSqlStatement having a #GdaSqlStatementInsert as its contents, using a SELECT
+to express the values to insert.
+    &lt;/para&gt;
+  &lt;/caption&gt;
+&lt;/mediaobject&gt;</doc>
+      <source-position filename="sql-parser/gda-statement-struct-insert.h"
+                       line="82"/>
+      <field name="any" introspectable="0" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="37">inheritance structure</doc>
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="on_conflict" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="38">conflict resolution clause if there is one (such as "OR REPLACE")</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="table" introspectable="0" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="39">name of the table to which data is inserted</doc>
+        <type name="SqlTable" c:type="GdaSqlTable*"/>
+      </field>
+      <field name="fields_list" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="40">list of #GdaSqlField fields which are valued for insertion</doc>
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="values_list" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="41">list of list of #GdaSqlExpr expressions (this is a list of list, not a simple list)</doc>
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="select" introspectable="0" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-insert.h"
+             line="42">a #GdaSqlStatementSelect or #GdaSqlStatementCompound structure representing the values to insert</doc>
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
-    <record name="SqlStatementSelect"
-            c:type="GdaSqlStatementSelect"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="79"/>
+    <record name="SqlStatementSelect" c:type="GdaSqlStatementSelect">
+      <source-position filename="sql-parser/gda-statement-struct-select.h"
+                       line="68"/>
+      <field name="any" introspectable="0" writable="1">
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="distinct" writable="1">
+        <type name="gboolean" c:type="gboolean"/>
+      </field>
+      <field name="distinct_expr" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="expr_list" writable="1">
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="from" introspectable="0" writable="1">
+        <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
+      </field>
+      <field name="where_cond" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="group_by" writable="1">
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="having_cond" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="order_by" writable="1">
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="limit_count" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="limit_offset" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
-    <record name="SqlStatementTransaction"
-            c:type="GdaSqlStatementTransaction"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="74"/>
+    <record name="SqlStatementTransaction" c:type="GdaSqlStatementTransaction">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-trans.h"
+           line="35">The statement is a transaction management related statement (BEGIN, ROLLBACK, etc). The #GdaSqlStatementTransaction structure
+does not hold enough information to reconstruct the complete SQL statement (some information may be missing) - the aim of this
+structure is to identify a minimum set of information in the transaction statement. Note that the complete SQL which created the
+statement should be available in the #GdaSqlStatement structure which encapsulates this structure.</doc>
+      <source-position filename="sql-parser/gda-statement-struct-trans.h"
+                       line="57"/>
+      <field name="any" introspectable="0" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.h"
+             line="37">inheritance structure</doc>
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="isolation_level" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.h"
+             line="38">isolation level as a #GdaTransactionIsolation</doc>
+        <type name="TransactionIsolation" c:type="GdaTransactionIsolation"/>
+      </field>
+      <field name="trans_mode" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.h"
+             line="39">transaction mode (DEFERRED, IMMEDIATE, EXCLUSIVE, READ_WRITE, READ_ONLY)</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="trans_name" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-trans.h"
+             line="40">transaction name</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
     <enumeration name="SqlStatementType" c:type="GdaSqlStatementType">
       <doc xml:space="preserve"
@@ -33397,19 +35193,61 @@ set the value of @expr-&gt;value instead.</doc>
              line="118">not used</doc>
       </member>
     </enumeration>
-    <record name="SqlStatementUnknown"
-            c:type="GdaSqlStatementUnknown"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="69"/>
+    <record name="SqlStatementUnknown" c:type="GdaSqlStatementUnknown">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-unknown.h"
+           line="38">Represents any statement which type is not identified (any DDL statement or database specific dialect)</doc>
+      <source-position filename="sql-parser/gda-statement-struct-unknown.h"
+                       line="53"/>
+      <field name="any" introspectable="0" writable="1">
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="expressions" writable="1">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-unknown.h"
+             line="41">a list of #GdaSqlExpr pointers</doc>
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
-    <record name="SqlStatementUpdate"
-            c:type="GdaSqlStatementUpdate"
-            disguised="1"
-            opaque="1">
-      <source-position filename="sql-parser/gda-statement-struct-decl.h"
-                       line="94"/>
+    <record name="SqlStatementUpdate" c:type="GdaSqlStatementUpdate">
+      <source-position filename="sql-parser/gda-statement-struct-update.h"
+                       line="56"/>
+      <field name="any" introspectable="0" writable="1">
+        <type name="SqlAnyPart" c:type="GdaSqlAnyPart"/>
+      </field>
+      <field name="on_conflict" writable="1">
+        <type name="utf8" c:type="gchar*"/>
+      </field>
+      <field name="table" introspectable="0" writable="1">
+        <type name="SqlTable" c:type="GdaSqlTable*"/>
+      </field>
+      <field name="fields_list" writable="1">
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="expr_list" writable="1">
+        <type name="GLib.SList" c:type="GSList*">
+          <type name="gpointer" c:type="gpointer"/>
+        </type>
+      </field>
+      <field name="cond" introspectable="0" writable="1">
+        <type name="SqlExpr" c:type="GdaSqlExpr*"/>
+      </field>
+      <field name="_gda_reserved1" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
+      <field name="_gda_reserved2" readable="0" private="1">
+        <type name="gpointer" c:type="gpointer"/>
+      </field>
     </record>
     <record name="SqlTable" c:type="GdaSqlTable" introspectable="0">
       <doc xml:space="preserve"
@@ -33433,18 +35271,30 @@ set the value of @expr-&gt;value instead.</doc>
         <type name="gpointer" c:type="gpointer"/>
       </field>
       <method name="copy" c:identifier="gda_sql_table_copy" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="378">Creates a new #GdaSqlTable structure initiated with the values stored in @table.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="208"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="384">a new #GdaSqlTable structure.</doc>
           <type name="SqlTable" c:type="GdaSqlTable*"/>
         </return-value>
         <parameters>
           <instance-parameter name="table" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="380">a #GdaSqlTable structure to be copied</doc>
             <type name="SqlTable" c:type="GdaSqlTable*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="free" c:identifier="gda_sql_table_free">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="362">Frees a #GdaSqlTable structure and its members.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="207"/>
         <return-value transfer-ownership="none">
@@ -33452,14 +35302,24 @@ set the value of @expr-&gt;value instead.</doc>
         </return-value>
         <parameters>
           <instance-parameter name="table" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="364">a #GdaSqlTable structure to be freed</doc>
             <type name="SqlTable" c:type="GdaSqlTable*"/>
           </instance-parameter>
         </parameters>
       </method>
       <method name="serialize" c:identifier="gda_sql_table_serialize">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="400">Creates a new string representing a table. You need to free the returned string
+using g_free();</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="209"/>
         <return-value transfer-ownership="full">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="407">a new string with the name of the field or "null" in case @table is invalid.</doc>
           <type name="utf8" c:type="gchar*"/>
         </return-value>
         <parameters>
@@ -33469,6 +35329,10 @@ set the value of @expr-&gt;value instead.</doc>
         </parameters>
       </method>
       <method name="take_name" c:identifier="gda_sql_table_take_name">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="418">Sets the table's name using the string held by @value. When call, @value is freed using
+gda_value_free().</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="212"/>
         <return-value transfer-ownership="none">
@@ -33478,19 +35342,31 @@ set the value of @expr-&gt;value instead.</doc>
           <instance-parameter name="table" transfer-ownership="none">
             <type name="SqlTable" c:type="GdaSqlTable*"/>
           </instance-parameter>
-          <parameter name="value" transfer-ownership="none">
+          <parameter name="value" transfer-ownership="full">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="421">a #GValue holding a string to take from</doc>
             <type name="GObject.Value" c:type="GValue*"/>
           </parameter>
         </parameters>
       </method>
       <function name="new" c:identifier="gda_sql_table_new" introspectable="0">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="344">Creates a new #GdaSqlTable structure, using @parent as its parent part.</doc>
         <source-position filename="sql-parser/gda-statement-struct-parts.h"
                          line="206"/>
         <return-value>
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="350">a new #GdaSqlTable structure.</doc>
           <type name="SqlTable" c:type="GdaSqlTable*"/>
         </return-value>
         <parameters>
           <parameter name="parent" transfer-ownership="none">
+            <doc xml:space="preserve"
+                 filename="sql-parser/gda-statement-struct-parts.c"
+                 line="346">a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate</doc>
             <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
           </parameter>
         </parameters>
@@ -33755,7 +35631,7 @@ is re-written into &lt;programlisting&gt;&lt;![CDATA[INSERT INTO mytable (id, na
 if @remove is %FALSE and into &lt;programlisting&gt;&lt;![CDATA[INSERT INTO mytable (id) VALUES (23)]]&gt;&lt;/programlisting&gt;
 if @remove is %TRUE.</doc>
         <source-position filename="gda-util.h" line="78"/>
-        <return-value>
+        <return-value transfer-ownership="full">
           <doc xml:space="preserve"
                filename="gda-util.c"
                line="1695">a new #GdaSqlStatement, or %NULL if an error occurred</doc>
@@ -38564,7 +40440,7 @@ the corresponding place to store the created statement is not %NULL.</doc>
 however that this #GdaSqlStatement does not select anything (ie it would be rendered as "SELECT FROM ... WHERE ...")
 and before being usable, one needs to add some fields to actually select.</doc>
       <source-position filename="gda-util.h" line="100"/>
-      <return-value>
+      <return-value transfer-ownership="full">
         <doc xml:space="preserve"
              filename="gda-util.c"
              line="1350">a new #GdaStatement if no error occurred, or %NULL otherwise</doc>
@@ -40799,13 +42675,22 @@ empty (no row) data model. This is use dy database providers' implementations.</
               c:identifier="gda_sql_case_new"
               moved-to="SqlCase.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="865">Creates a new #GdaSqlCase structure and sets its parent to @parent.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="375"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="871">a new #GdaSqlCase structure.</doc>
         <type name="SqlCase" c:type="GdaSqlCase*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="867">a #GdaSqlAnyPart structure</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -40819,13 +42704,22 @@ empty (no row) data model. This is use dy database providers' implementations.</
               c:identifier="gda_sql_field_new"
               moved-to="SqlField.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="251">Creates a new #GdaSqlField structure, using @parent as its parent part.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="173"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="257">a new #GdaSqlField structure.</doc>
         <type name="SqlField" c:type="GdaSqlField*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="253">a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -40834,14 +42728,84 @@ empty (no row) data model. This is use dy database providers' implementations.</
               c:identifier="gda_sql_function_new"
               moved-to="SqlFunction.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="436">Creates a new #GdaSqlFunction structure initiated.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="236"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="442">a new #GdaSqlFunction structure.</doc>
         <type name="SqlFunction" c:type="GdaSqlFunction*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="438">a #GdaSqlAnyPart structure</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_identifier_force_quotes"
+              c:identifier="gda_sql_identifier_force_quotes"
+              version="5.0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-util.c"
+           line="150">Add double quotes around the @str identifier. This function is normally used only by database provider's
+implementation. Any double quote character is replaced by two double quote characters.
+
+For other uses, see gda_sql_identifier_quote().</doc>
+      <source-position filename="sql-parser/gda-statement-struct-util.h"
+                       line="37"/>
+      <return-value transfer-ownership="full">
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-util.c"
+               line="152">an SQL identifier</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_identifier_prepare_for_compare"
+              c:identifier="gda_sql_identifier_prepare_for_compare"
+              version="5.0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-util.c"
+           line="310">Prepares @str to be compared:
+&lt;itemizedlist&gt;
+&lt;listitem&gt;&lt;para&gt;if surrounded by double quotes or single quotes, then just remove the quotes&lt;/para&gt;&lt;/listitem&gt;
+&lt;listitem&gt;&lt;para&gt;otherwise convert to lower case&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+
+The quoted string:
+&lt;itemizedlist&gt;
+  &lt;listitem&gt;&lt;para&gt;must start and finish with the same single or double quotes character&lt;/para&gt;&lt;/listitem&gt;
+  &lt;listitem&gt;&lt;para&gt;can contain the delimiter character (the single or double quotes) in the string if every instance
+    of it is preceeded with a backslash character or with the delimiter character itself&lt;/para&gt;&lt;/listitem&gt;
+&lt;/itemizedlist&gt;
+
+This function is normally used only by database provider's implementation.
+
+WARNING: @str must NOT be a composed identifier (&amp;lt;part1&amp;gt;."&amp;lt;part2&amp;gt;" for example)</doc>
+      <source-position filename="sql-parser/gda-statement-struct-util.h"
+                       line="38"/>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-util.c"
+             line="331">@str</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="str" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-util.c"
+               line="312">a quoted string</doc>
+          <type name="utf8" c:type="gchar*"/>
         </parameter>
       </parameters>
     </function>
@@ -41095,13 +43059,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_operation_new"
               moved-to="SqlOperation.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="588">Creates a new #GdaSqlOperation structure and sets its parent to @parent.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="341"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="594">a new #GdaSqlOperation structure.</doc>
         <type name="SqlOperation" c:type="GdaSqlOperation*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="590">a #GdaSqlAnyPart structure</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -41109,13 +43082,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
     <function name="sql_operation_operator_from_string"
               c:identifier="gda_sql_operation_operator_from_string"
               moved-to="SqlOperation.operator_from_string">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="786">Returns #GdaSqlOperatorType that correspond with the string @op.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="346"/>
       <return-value transfer-ownership="none">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="792">#GdaSqlOperatorType</doc>
         <type name="SqlOperatorType" c:type="GdaSqlOperatorType"/>
       </return-value>
       <parameters>
         <parameter name="op" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="788">a #GdaSqlOperation structure</doc>
           <type name="utf8" c:type="const gchar*"/>
         </parameter>
       </parameters>
@@ -41123,13 +43105,23 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
     <function name="sql_operation_operator_to_string"
               c:identifier="gda_sql_operation_operator_to_string"
               moved-to="SqlOperation.operator_to_string">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="698">Returns a constant string representing a operator name. You don't need to free
+the returned string.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="345"/>
       <return-value transfer-ownership="none">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="705">a string with the operator's name or NULL in case @op is invalid.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>
         <parameter name="op" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="700">a #GdaSqlOperation structure</doc>
           <type name="SqlOperatorType" c:type="GdaSqlOperatorType"/>
         </parameter>
       </parameters>
@@ -41138,13 +43130,23 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_select_field_new"
               moved-to="SqlSelectField.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1003">Creates a new #GdaSqlSelectField structure and sets its parent to @parent. A
+#GdaSqlSelectField is any expression in SELECT statements before the FROM clause.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="416"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1010">a new #GdaSqlSelectField structure.</doc>
         <type name="SqlSelectField" c:type="GdaSqlSelectField*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1005">a #GdaSqlStatementSelect structure</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -41153,13 +43155,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_select_from_new"
               moved-to="SqlSelectFrom.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1513">Creates a new #GdaSqlSelectFrom structure and sets its parent to @parent.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="544"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1519">a new #GdaSqlSelectFrom structure</doc>
         <type name="SqlSelectFrom" c:type="GdaSqlSelectFrom*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1515">a #GdaSqlStatementSelect</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -41168,13 +43179,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_select_join_new"
               moved-to="SqlSelectJoin.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1353">Creates a new #GdaSqlSelectJoin structure and sets its parent to @parent.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="513"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1359">a new #GdaSqlSelectJoin structure</doc>
         <type name="SqlSelectJoin" c:type="GdaSqlSelectJoin*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1355">a #GdaSqlSelectFrom</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -41182,13 +43202,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
     <function name="sql_select_join_type_to_string"
               c:identifier="gda_sql_select_join_type_to_string"
               moved-to="SqlSelectJoin.type_to_string">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1422">Creates a new string representing the join type.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="518"/>
       <return-value transfer-ownership="none">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1428">a string representing the Join type.</doc>
         <type name="utf8" c:type="const gchar*"/>
       </return-value>
       <parameters>
         <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1424">a #GdaSqlSelectJoinType structure to be copied</doc>
           <type name="SqlSelectJoinType" c:type="GdaSqlSelectJoinType"/>
         </parameter>
       </parameters>
@@ -41197,13 +43226,22 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_select_order_new"
               moved-to="SqlSelectOrder.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1677">Creates a new #GdaSqlSelectOrder structure and sets its parent to @parent.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="577"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1683">a new #GdaSqlSelectOrder structure</doc>
         <type name="SqlSelectOrder" c:type="GdaSqlSelectOrder*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1679">a #GdaSqlStatementSelect</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
         </parameter>
       </parameters>
@@ -41212,14 +43250,83 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_select_target_new"
               moved-to="SqlSelectTarget.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="1184">Creates a new #GdaSqlSelectTarget structure and sets its parent to @parent. A
+#GdaSqlSelectTarget is the table in a SELECT statement.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="458"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="1191">a new #GdaSqlSelectTarget structure.</doc>
         <type name="SqlSelectTarget" c:type="GdaSqlSelectTarget*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="1186">a #GdaSqlSelectFrom</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_statement_get_contents_infos"
+              c:identifier="gda_sql_statement_get_contents_infos"
+              moved-to="SqlStatement.get_contents_infos"
+              introspectable="0">
+      <source-position filename="sql-parser/gda-statement-struct.h" line="72"/>
+      <return-value>
+        <type name="SqlStatementContentsInfo"
+              c:type="GdaSqlStatementContentsInfo*"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_statement_string_to_type"
+              c:identifier="gda_sql_statement_string_to_type"
+              moved-to="SqlStatement.string_to_type">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct.c"
+           line="207">Converts a string to a #GdaSqlStatementType value, see also gda_sql_statement_type_to_string()</doc>
+      <source-position filename="sql-parser/gda-statement-struct.h" line="61"/>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="213">a #GdaSqlStatementType value</doc>
+        <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="209">a string representing a #GdaSqlStatementType type</doc>
+          <type name="utf8" c:type="const gchar*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_statement_type_to_string"
+              c:identifier="gda_sql_statement_type_to_string"
+              moved-to="SqlStatement.type_to_string">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct.c"
+           line="188">Converts a #GdaSqlStatementType to a string, see also gda_sql_statement_string_to_type()</doc>
+      <source-position filename="sql-parser/gda-statement-struct.h" line="60"/>
+      <return-value transfer-ownership="none">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct.c"
+             line="194">a constant string</doc>
+        <type name="utf8" c:type="const gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="type" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct.c"
+               line="190">a #GdaSqlStatementType value</doc>
+          <type name="SqlStatementType" c:type="GdaSqlStatementType"/>
         </parameter>
       </parameters>
     </function>
@@ -41227,14 +43334,45 @@ For example the &lt;![CDATA["test.\"ATable\""]]&gt; string will result in the ar
               c:identifier="gda_sql_table_new"
               moved-to="SqlTable.new"
               introspectable="0">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-parts.c"
+           line="344">Creates a new #GdaSqlTable structure, using @parent as its parent part.</doc>
       <source-position filename="sql-parser/gda-statement-struct-parts.h"
                        line="206"/>
       <return-value>
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-parts.c"
+             line="350">a new #GdaSqlTable structure.</doc>
         <type name="SqlTable" c:type="GdaSqlTable*"/>
       </return-value>
       <parameters>
         <parameter name="parent" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-parts.c"
+               line="346">a #GdaSqlStatementSelect, #GdaSqlStatementInsert, #GdaSqlStatementDelete, #GdaSqlStatementUpdate</doc>
           <type name="SqlAnyPart" c:type="GdaSqlAnyPart*"/>
+        </parameter>
+      </parameters>
+    </function>
+    <function name="sql_value_stringify"
+              c:identifier="gda_sql_value_stringify">
+      <doc xml:space="preserve"
+           filename="sql-parser/gda-statement-struct-util.c"
+           line="25">Simplified version of gda_value_stringify().</doc>
+      <source-position filename="sql-parser/gda-statement-struct-util.h"
+                       line="41"/>
+      <return-value transfer-ownership="full">
+        <doc xml:space="preserve"
+             filename="sql-parser/gda-statement-struct-util.c"
+             line="31">a new string</doc>
+        <type name="utf8" c:type="gchar*"/>
+      </return-value>
+      <parameters>
+        <parameter name="value" transfer-ownership="none">
+          <doc xml:space="preserve"
+               filename="sql-parser/gda-statement-struct-util.c"
+               line="27">a #GValue pointer</doc>
+          <type name="GObject.Value" c:type="const GValue*"/>
         </parameter>
       </parameters>
     </function>
