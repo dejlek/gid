@@ -50,6 +50,7 @@
 
 //# Set parameters to out
 //!set callback[DBusSubtreeDispatchFunc].parameters.parameter[out_user_data][direction] out
+//!set enumeration[DBusError].function[register_error_domain].parameters.parameter[quark_volatile][direction] out
 
 //!class ListModel
 

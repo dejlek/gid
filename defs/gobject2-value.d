@@ -206,20 +206,22 @@ void setVal(T)(GValue* gval, T v)
   else static if (is(T == string))
     g_value_take_string(gval, v.toCString(Yes.Alloc));
   else static if (is(T == glib.variant.Variant))
-    g_value_set_variant(gval, cast(GVariant*)v._cPtr);
+    g_value_set_variant(gval, v ? cast(GVariant*)v._cPtr : null);
   else static if (is(T : ParamSpec))
-    g_value_set_param(gval, cast(GParamSpec*)v._cPtr);
+    g_value_set_param(gval, v ? cast(GParamSpec*)v._cPtr : null);
   else static if (is(T : Boxed))
   {
     g_value_init(gval, v._gType); // Have to initialize the specific boxed type here rather than in initVal
     g_value_set_boxed(gval, v.cInstancePtr);
   }
   else static if (is(T : gobject.object.ObjectWrap))
-    g_value_set_object(gval, cast(GObject*)v._cPtr(No.Dup));
+    g_value_set_object(gval, v ? cast(GObject*)v._cPtr(No.Dup) : null);
   else static if (is(T == interface))
   {
     if (auto objG = cast(gobject.object.ObjectWrap)v)
       g_value_set_object(gval, cast(GObject*)objG._cPtr(No.Dup));
+    else if (!v)
+      g_value_set_object(gval, null);
     else
       assert(0, "Object type " ~ typeid(v).toString ~ " is not an ObjectWrap in Value.setVal");
   }
