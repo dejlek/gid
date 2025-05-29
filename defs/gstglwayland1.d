@@ -1,6 +1,6 @@
 //!gir GstGLWayland-1.0
 //!info description "D binding for the GstGLWayland library - Wayland OpenGL library for the GStreamer multimedia framework"
-//!info website https://gstreamer.freedesktop.org
+//!info homepage https://gstreamer.freedesktop.org
 //!info docs https://www.kymorphia.com/gid/gstglwayland.html
 //!info capi https://gstreamer.freedesktop.org/documentation/gl-wayland/index.html
 

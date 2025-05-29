@@ -1,6 +1,6 @@
 //!gir GdkPixbuf-2.0
 //!info description "D binding for the GdkPixbuf library - Image loading library"
-//!info website https://gtk.org
+//!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gdkpixbuf.html
 //!info capi https://docs.gtk.org/gdk-pixbuf/
 

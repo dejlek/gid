@@ -1,6 +1,6 @@
 //!gir GstAudio-1.0
 //!info description "D binding for the GstAudio library - Audio library for the GStreamer multimedia framework"
-//!info website https://gstreamer.freedesktop.org
+//!info homepage https://gstreamer.freedesktop.org
 //!info docs https://www.kymorphia.com/gid/gstaudio.html
 //!info capi https://gstreamer.freedesktop.org/documentation/audio/index.html
 

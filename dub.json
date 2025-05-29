@@ -4,6 +4,7 @@
   "copyright": "Copyright © 2024-2025, Kymorphia, PBC",
   "authors": ["Element Green <element@kymorphia.com>"],
   "license": "MIT",
+  "homepage": "https://gid.dub.pm",
   "targetType": "none",
   "dependencies": {
     ":adw1": "*",

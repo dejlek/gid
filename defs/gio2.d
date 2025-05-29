@@ -1,6 +1,6 @@
 //!gir Gio-2.0
 //!info description "D binding for the Gio library - General purpose I/O library which is part of glib"
-//!info website https://gtk.org
+//!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gio.html
 //!info capi https://docs.gtk.org/gio/
 

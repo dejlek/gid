@@ -1,6 +1,6 @@
 //!gir Gsk-4.0
 //!info description "D binding for the Gsk4 library - GTK rendering abstraction library"
-//!info website https://gtk.org
+//!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gsk.html
 //!info capi https://docs.gtk.org/gsk4/
 

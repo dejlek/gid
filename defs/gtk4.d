@@ -1,6 +1,6 @@
 //!gir Gtk-4.0
 //!info description "D binding for the Gtk4 library - Gtk4 graphics toolkit library"
-//!info website https://gtk.org
+//!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gtk.html
 //!info capi https://docs.gtk.org/gtk4/
 

@@ -1,6 +1,6 @@
 //!gir GstBase-1.0
 //!info description "D binding for the GstBase library - Base and Utility classes for the GStreamer multimedia framework"
-//!info website https://gstreamer.freedesktop.org
+//!info homepage https://gstreamer.freedesktop.org
 //!info docs https://www.kymorphia.com/gid/gstbase.html
 //!info capi https://gstreamer.freedesktop.org/documentation/base/index.html
 

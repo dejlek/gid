@@ -1,6 +1,6 @@
 //!gir Pango-1.0
 //!info description "D binding for the Pango library - internationalized text layout and rendering"
-//!info website https://gitlab.gnome.org/GNOME/pango
+//!info homepage https://gitlab.gnome.org/GNOME/pango
 //!info docs https://www.kymorphia.com/gid/pango.html
 //!info capi https://docs.gtk.org/Pango
 

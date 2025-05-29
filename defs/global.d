@@ -2,7 +2,7 @@
 //!info description "GObject introspection D binding package repository"
 //!info copyright "Copyright © 2024-2025, Kymorphia, PBC"
 //!info authors "Element Green <element@kymorphia.com>"
-//!info website https://gid.dub.pm
+//!info homepage https://gid.dub.pm
 //!info license MIT
 
 //# Dlang reserved words

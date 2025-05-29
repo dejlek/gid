@@ -1,6 +1,6 @@
 //!gir GstVideo-1.0
 //!info description "D binding for the GstVideo library - Video library for the GStreamer multimedia framework"
-//!info website https://gstreamer.freedesktop.org
+//!info homepage https://gstreamer.freedesktop.org
 //!info docs https://www.kymorphia.com/gid/gstvideo.html
 //!info capi https://gstreamer.freedesktop.org/documentation/video/index.html
 

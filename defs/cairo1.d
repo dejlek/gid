@@ -1,6 +1,6 @@
 //!gir cairo-1.0
 //!info description "D binding for the Cairo library - 2D graphics library with support for multiple output devices"
-//!info website https://cairographics.org
+//!info homepage https://cairographics.org
 //!info docs https://www.kymorphia.com/gid/cairo.html
 //!info capi https://www.cairographics.org/manual/
 

@@ -1,6 +1,6 @@
 //!gir GstSdp-1.0
 //!info description "D binding for the GstSdp library - SDP library for the GStreamer multimedia framework"
-//!info website https://gstreamer.freedesktop.org
+//!info homepage https://gstreamer.freedesktop.org
 //!info docs https://www.kymorphia.com/gid/gstsdp.html
 //!info capi https://gstreamer.freedesktop.org/documentation/sdp/index.html
 

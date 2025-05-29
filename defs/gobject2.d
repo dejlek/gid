@@ -1,6 +1,6 @@
 //!gir GObject-2.0
 //!info description "D binding for the GObject library - C library for object oriented type system and object class"
-//!info website https://gtk.org
+//!info homepage https://gtk.org
 //!info docs https://www.kymorphia.com/gid/gobject.html
 //!info capi https://docs.gtk.org/gobject/
 

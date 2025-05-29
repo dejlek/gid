@@ -1,6 +1,6 @@
 //!gir freetype2-2.0
 //!info description "D binding for the FreeType library - font rendering library"
-//!info website https://freetype.org
+//!info homepage https://freetype.org
 
 //# Change package name to just freetype2 rather than freetype22
 //!info name freetype2

@@ -1,6 +1,6 @@
 //!gir Gda-5.0
 //!info description "D binding for the Gda5 library - GNU Data Access database library"
-//!info website https://gitlab.gnome.org/GNOME/libgda
+//!info homepage https://gitlab.gnome.org/GNOME/libgda
 //!info docs https://www.kymorphia.com/gid/gda.html
 //!info capi https://gnome.pages.gitlab.gnome.org/libgda/C/libgda
 
