@@ -14,8 +14,8 @@ import glib.variant_builder;
 import glib.variant_type;
 
 import std.conv : to;
-import std.traits : isSomeString;
-import std.typecons : isTuple, Tuple;
+import std.traits : isSomeString, isTypeTuple;
+import std.typecons : Tuple;
 import std.variant : StdVariant = Variant;
 
 /**
@@ -301,13 +301,9 @@ class Variant
   *   val = The value to assign
   */
   this(T)(T val)
-  if (!is(T == void*))
-  {
-    // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
-    static if (is(T : Variant)) // A variant (wrap it)
-      this(cast(void*)createVariant(cast(GVariant*)val._cPtr), No.Take);
-    else
-      this(cast(void*)createVariant(val), No.Take);
+  if (isTypeTuple!T && !is(T == void*))
+  { // Somewhat counter-intuitive.. We don't "own" a reference, it is floating, so pass false to sink it.
+    this(cast(void*)createVariant(val), No.Take);
   }
 
   /**
@@ -317,22 +313,21 @@ class Variant
   *   vals = The values to assign
   */
   this(T...)(T vals)
-  if (vals.length > 1 && !is(T[0] == void*))
+  if (isTypeTuple!T && vals.length > 1 && !is(T[0] == void*))
   {
-    auto variantType = g_variant_type_new("r"); // ++ new
-    GVariantBuilder builder;
-    g_variant_builder_init(&builder, variantType);
-    g_variant_type_free(variantType); // -- free
+    this(createVariant!T(vals), No.Take);
+  }
 
-    foreach (v; vals)
-    {
-      static if (is(T : Variant)) // A variant (wrap it)
-        g_variant_builder_add_value(&builder, createVariant(cast(GVariant*)v._cPtr)); // !! takes over floating reference of new GVariant
-      else
-        g_variant_builder_add_value(&builder, createVariant(v)); // !! takes over floating reference of new GVariant
-    }
-
-    this(g_variant_builder_end(&builder), No.Take);
+  /**
+  * Template to create a new tuple Variant from one or more values.
+  * Params:
+  *   T = The D types to create the tuple variant from
+  *   vals = The values to assign
+  */
+  static Variant newTuple(T...)(T vals)
+  if (isTypeTuple!T)
+  {
+    return new Variant(createVariantTuple!T(vals), No.Take);
   }
 
   /** */
@@ -367,20 +362,28 @@ class Variant
   */
   T get(T)()
   {
-    static if (is(T : Variant)) // A variant (unwrap it)
-      return getVariant;
-    else
-      return getVal!T(cast(GVariant*)_cPtr);
+    return getVal!T(cast(GVariant*)_cPtr);
   }
 
   /**
-  * Template to get multiple values from a Variant
+  * Template to get multiple values from a container Variant.
   * Params:
   *   T = The D types of the values to get
   * Returns: A tuple containing the values from the Variant of the specified types
   */
   auto get(T...)()
   if (T.length > 1)
+  {
+    return getItems!T;
+  }
+
+  /**
+  * Template to get one or more values from a container Variant.
+  * Params:
+  *   T = The D types of the values to get
+  * Returns: A tuple containing the values from the Variant of the specified types
+  */
+  auto getItems(T...)()
   {
     Tuple!T vals;
 
@@ -2059,6 +2062,8 @@ GVariant* createVariant(T)(T val)
 
     return g_variant_builder_end(&builder);
   }
+  else static if (is(T : Variant))
+    return g_variant_new_variant(cast(GVariant*)val._cPtr);
   else static if (is(T == GVariant*))
     return g_variant_new_variant(val);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
@@ -2086,14 +2091,14 @@ GVariant* createVariant(T)(T val)
     else
       assert(false, "Variant.createVariant does not support D Variant type " ~ val.type.to!string);
   }
-  else static if (isTuple!T)
+  else static if (isTypeTuple!T)
     return createVariant(val.expand);
   else
     static assert(false, "Unsupported type for Variant.createVariant: " ~ T.stringof);
 }
 
 /**
-* Template to create a new GVariant from multiple D values.
+* Template to create a new tuple GVariant from multiple D values.
 * Params:
 *   T = The D types to create the variant from
 *   vals = The values to assign
@@ -2101,6 +2106,18 @@ GVariant* createVariant(T)(T val)
 */
 GVariant* createVariant(T...)(T vals)
 if (vals.length > 1)
+{
+  return createVariantTuple!T(vals);
+}
+
+/**
+* Template to create a new tuple GVariant from one or more D values.
+* Params:
+*   T = The D types to create the variant from
+*   vals = The values to assign
+* Returns: New variant C instance with floating reference
+*/
+GVariant* createVariantTuple(T...)(T vals)
 {
   auto variantType = g_variant_type_new("r"); // ++ new
   GVariantBuilder builder;
@@ -2164,6 +2181,8 @@ T getVal(T)(GVariant* v)
 
     return dict;
   }
+  else static if ((is(T : Variant)))
+    return new Variant(v, No.Take);
   else static if ((is(T == GVariant*)))
     return g_variant_get_variant(v);
   else static if (is(T == StdVariant)) // std.variant.Variant (only basic types supported currently)
@@ -2197,7 +2216,7 @@ T getVal(T)(GVariant* v)
       }
     }
   }
-  else static if (isTuple!T)
+  else static if (isTypeTuple!T)
     return getVal(val.expand);
   else
     static assert(false, "Unsupported type for Variant.getVal: " ~ T.stringof);
@@ -2212,6 +2231,18 @@ T getVal(T)(GVariant* v)
 */
 auto getVal(T...)(GVariant* v)
 if (T.length > 1)
+{
+  return getValTuple!T(v);
+}
+
+/**
+* Template to get one or more values from a container GVariant
+* Params:
+*   T = D types of the values to get
+*   v = GVariant struct pointer
+* Returns: A tuple containing the values from the container Variant of the specified types
+*/
+auto getValTuple(T...)(GVariant* v)
 {
   Tuple!T vals;
 
